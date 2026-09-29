@@ -1,0 +1,4 @@
+Contact: https://nolankido.com/contact/
+Canonical: https://nolankido.com/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-09-28T00:00:00Z
