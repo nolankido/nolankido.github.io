@@ -1245,3 +1245,26 @@ footer {
     height: 92px;
   }
 }
+
+
+/* Cloudflare Turnstile */
+
+.turnstile-wrap {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 18px 0 4px;
+  border-top: 1px solid var(--line);
+}
+
+.turnstile-wrap p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: .76rem;
+  line-height: 1.5;
+}
+
+.cf-turnstile {
+  max-width: 100%;
+}
