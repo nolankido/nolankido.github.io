@@ -12,6 +12,8 @@
   <meta property="og:url" content="https://nolankido.com/contact/">
   <link rel="canonical" href="https://nolankido.com/contact/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://challenges.cloudflare.com">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -126,6 +128,18 @@
               ></textarea>
             </label>
 
+            <div class="turnstile-wrap">
+              <div
+                class="cf-turnstile"
+                data-sitekey="0x4AAAAAAFI2X8NC1cauc_zz"
+                data-action="contact"
+                data-theme="light"
+                data-size="flexible"
+                data-appearance="interaction-only"
+              ></div>
+              <p>Automated abuse protection is provided by Cloudflare Turnstile.</p>
+            </div>
+
             <div class="form-footer">
               <p>
                 Please do not send passwords, financial account information, medical records, identity documents, or other sensitive material.
@@ -185,6 +199,7 @@
         event.preventDefault();
 
         error.hidden = true;
+        error.textContent = "The message could not be sent. Please check the fields and try again.";
 
         if (!form.reportValidity()) {
           return;
@@ -198,6 +213,13 @@
         button.textContent = "Sending…";
 
         const data = Object.fromEntries(new FormData(form).entries());
+        const turnstileToken = data["cf-turnstile-response"] || "";
+
+        if (!turnstileToken) {
+          error.textContent = "Please complete the anti-spam check and try again.";
+          error.hidden = false;
+          return;
+        }
 
         const payload = {
           name: data.name,
@@ -208,6 +230,7 @@
           response_timeframe: data.response_timeframe || "",
           message: data.message,
           _honeypot: data._honeypot || "",
+          "cf-turnstile-response": turnstileToken,
           _email: {
             from: "Nolan Kido Website",
             subject: "[NK Contact] New website message",
@@ -240,6 +263,10 @@
           error.hidden = false;
           button.disabled = false;
           button.textContent = "Send message";
+
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
         }
       });
     })();
