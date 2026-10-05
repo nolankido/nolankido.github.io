@@ -1,10 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Nolan Kido — Notes</title>
+    <title>Nolan Kido Notes</title>
     <link>https://nolankido.com/notes/</link>
-    <description>Selected public notes and writing from Nolan Kido.</description>
+    <description>Occasional notes on tools, decisions, and learning.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://nolankido.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A working tool is not the same as a trustworthy one.</title>
+      <link>https://nolankido.com/notes/trustworthy-tools/</link>
+      <description>A useful distinction between a convincing demonstration and evidence that a tool can be relied on.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/trustworthy-tools/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Good decisions, imperfect outcomes.</title>
+      <link>https://nolankido.com/notes/decision-quality/</link>
+      <description>A practical way to separate the quality of a decision from the result of a single uncertain outcome.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/decision-quality/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Learning something difficult from the beginning.</title>
+      <link>https://nolankido.com/notes/learning-from-the-beginning/</link>
+      <description>Start with a concrete capability, identify the missing foundations, and make progress visible through practice.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/learning-from-the-beginning/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
   </channel>
 </rss>
