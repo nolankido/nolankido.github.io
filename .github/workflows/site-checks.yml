@@ -27,4 +27,6 @@ jobs:
           python -m pip install -r requirements-test.txt
           python -m playwright install --with-deps chromium
       - name: Offline browser regressions
-        run: python _tests/browser.py
+        run: |
+          python _tests/browser.py
+          python _tests/design_browser.py
