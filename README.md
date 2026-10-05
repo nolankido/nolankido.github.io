@@ -47,3 +47,9 @@ Provider references:
 ## Release checklist
 
 Review every change for public suitability. Run the build check and tests. Preview core pages and the contact form. Check the current branch head before merging to avoid replacing another contributor's work. Wait for the Pages deployment to finish and inspect the live pages. A regression can be rolled back by reverting its commit; do not rewrite public history for ordinary changes.
+
+## Editorial maintenance
+
+See `EDITORIAL_GUIDE.md` for public-content boundaries, owner approval, revision handling, and a small manual review practice. `_source/selection.json` controls curated homepage links and reading order independently of RSS dates. Resource examples are in `_source/examples/`; the blank downloads are their single source of truth. Add a note to both the manifest and reading order. Do not commit private drafts.
+
+The 2026-10-05 content revision preserves the visual stylesheets and contact JavaScript byte-for-byte. The contact topic is now optional; only name, email, and message are required. Keep existing URLs stable. No visitor analytics, newsletter, login, or new background automation is introduced.

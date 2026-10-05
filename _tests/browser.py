@@ -188,6 +188,17 @@ class BrowserTests(unittest.TestCase):
                 expect(self.page.locator('#contact-submit')).to_be_enabled()
                 expect(self.page.locator('#form-success')).to_be_hidden()
 
+    def test_general_hello_needs_no_topic_or_context(self):
+        self.contact(); self.verify()
+        self.page.locator('#contact-name').fill('Example Visitor')
+        self.page.locator('#contact-email').fill('visitor@example.com')
+        self.page.locator('#contact-message').fill('A simple hello, used only in a mocked test.')
+        self.page.locator('#contact-submit').click()
+        expect(self.page.locator('#form-success')).to_be_visible()
+        self.assertEqual(len(self.posts), 1)
+        self.assertEqual(self.posts[0]['reason'], '')
+        self.assertEqual(self.posts[0]['context'], '')
+
     def test_duplicate_submit_prevention(self):
         self.service = 'hang'
         self.contact(); self.fill(); self.verify()
@@ -230,7 +241,7 @@ class BrowserTests(unittest.TestCase):
         expect(page.locator('#contact-name')).to_be_disabled()
         expect(page.locator('#form-success')).to_be_hidden()
         page.set_content(html_for('/notes/'))
-        self.assertEqual(page.locator('.note-entry').count(), 3)
+        self.assertEqual(page.locator('.note-entry').count(), sum(bool(p.get('note')) for p in json.loads((ROOT / '_source/pages.json').read_text())))
         context.close()
 
     def test_mobile_tablet_desktop_layout_and_keyboard(self):

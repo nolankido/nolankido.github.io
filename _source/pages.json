@@ -3,45 +3,50 @@
     "id": "home",
     "path": "/",
     "title": "Nolan Kido",
-    "seo_title": "Nolan Kido | Technology, Strategy & Creative Work",
-    "description": "The personal website of Nolan Kido. Ideas about useful tools, better decisions, learning, and creative work.",
-    "source": "home.html"
+    "seo_title": "Nolan Kido | Useful Things & Clear Ideas",
+    "description": "Nolan Kido is an independent builder and writer. Worked explanations, practical resources, and reflections on technology, learning, and creative work.",
+    "source": "home.html",
+    "updated": "2026-10-05"
   },
   {
     "id": "about",
     "path": "/about/",
-    "title": "Curiosity, put to work.",
+    "title": "A little about me.",
     "seo_title": "About | Nolan Kido",
-    "description": "An introduction to Nolan Kido: technology, decision-making, creative work, and an interest in making complicated ideas useful.",
+    "description": "Meet Nolan Kido: an independent builder and writer interested in useful tools, clear explanations, creative work, and life beyond projects.",
     "kicker": "About",
-    "source": "about.html"
+    "source": "about.html",
+    "updated": "2026-10-05"
   },
   {
     "id": "notes",
     "path": "/notes/",
     "title": "Ideas worth keeping.",
     "seo_title": "Notes | Nolan Kido",
-    "description": "Occasional notes on trustworthy tools, decision-making, and learning. A small collection of ideas to return to.",
+    "description": "Worked examples and reflections on trust, decisions, learning, communication, and knowing when to finish. Selected writing by Nolan Kido.",
     "kicker": "Notes",
-    "source": "notes.html"
+    "source": "notes.html",
+    "updated": "2026-10-05"
   },
   {
     "id": "resources",
     "path": "/resources/",
-    "title": "Put an idea to work.",
+    "title": "Use what helps.",
     "seo_title": "Resources | Nolan Kido",
-    "description": "Editable worksheets for decision-making, checking tools, and learning. Read a preview or download a copy without an account.",
+    "description": "Private-use worksheets for decisions, tool checks, and learning. Blank editable copies, completed fictional examples, and clear limits.",
     "kicker": "Resources",
-    "source": "resources.html"
+    "source": "resources.html",
+    "updated": "2026-10-05"
   },
   {
     "id": "contact",
     "path": "/contact/",
     "title": "Get in touch.",
     "seo_title": "Contact | Nolan Kido",
-    "description": "Start a conversation with Nolan Kido about technology, learning, creative work, or something you have in common.",
+    "description": "Write to Nolan Kido with a shared interest, a different perspective, a collaboration idea, or a simple hello. No pitch required.",
     "kicker": "Contact",
-    "source": "contact.html"
+    "source": "contact.html",
+    "updated": "2026-10-05"
   },
   {
     "id": "bio",
@@ -85,31 +90,59 @@
     "path": "/notes/trustworthy-tools/",
     "title": "A working tool is not the same as a trustworthy one.",
     "seo_title": "A Working Tool Is Not the Same as a Trustworthy One | Nolan Kido",
-    "description": "A useful distinction between a convincing demonstration and evidence that a tool can be relied on.",
+    "description": "Two calculations agree. Both are wrong. A small worked example of the difference between a convincing demonstration and independent evidence.",
     "kicker": "Tools & technology",
     "source": "notes/trustworthy-tools.html",
     "note": true,
-    "date": "2026-10-05"
+    "date": "2026-10-05",
+    "revision": "Reworked around a checkable median-versus-mean example; added input boundaries, shared-assumption failures, and interpretation limits.",
+    "updated": "2026-10-05"
   },
   {
     "id": "decision-quality",
     "path": "/notes/decision-quality/",
     "title": "Good decisions, imperfect outcomes.",
     "seo_title": "Good Decisions, Imperfect Outcomes | Nolan Kido",
-    "description": "A practical way to separate the quality of a decision from the result of a single uncertain outcome.",
+    "description": "A fictional gathering, an uncertain forecast, and a $30 choice. Separate the calculation from the people and assumptions it leaves out.",
     "kicker": "Decisions & learning",
     "source": "notes/decision-quality.html",
     "note": true,
-    "date": "2026-10-05"
+    "date": "2026-10-05",
+    "revision": "Added an explicit expected-cost example, the assumptions behind it, and a distinction between uncertain outcomes and avoidable omissions.",
+    "updated": "2026-10-05"
   },
   {
     "id": "learning-from-the-beginning",
     "path": "/notes/learning-from-the-beginning/",
     "title": "Learning something difficult from the beginning.",
     "seo_title": "Learning Something Difficult from the Beginning | Nolan Kido",
-    "description": "Start with a concrete capability, identify the missing foundations, and make progress visible through practice.",
+    "description": "A fractions example, a smaller-week option, and a learning loop that leaves most of the effort for practice rather than planning.",
     "kicker": "Decisions & learning",
     "source": "notes/learning-from-the-beginning.html",
+    "note": true,
+    "date": "2026-10-05",
+    "revision": "Added a concrete fractions example, a smaller-week option, and clearer boundaries around the retrieval-practice research.",
+    "updated": "2026-10-05"
+  },
+  {
+    "id": "generous-explanations",
+    "path": "/notes/generous-explanations/",
+    "title": "What makes an explanation feel generous.",
+    "seo_title": "What Makes an Explanation Feel Generous | Nolan Kido",
+    "description": "Two versions of the same instruction show how writing can save the reader effort without simplifying away what matters.",
+    "kicker": "Creative work & communication",
+    "source": "notes/generous-explanations.html",
+    "note": true,
+    "date": "2026-10-05"
+  },
+  {
+    "id": "finishing-is-a-decision",
+    "path": "/notes/finishing-is-a-decision/",
+    "title": "Finishing is a decision.",
+    "seo_title": "Finishing Is a Decision | Nolan Kido",
+    "description": "Distinguish a necessary repair from another possible improvement, define done, and leave room for the rest of the day.",
+    "kicker": "Making things & making room",
+    "source": "notes/finishing-is-a-decision.html",
     "note": true,
     "date": "2026-10-05"
   }
