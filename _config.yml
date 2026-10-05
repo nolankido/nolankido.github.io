@@ -8,3 +8,8 @@ exclude:
   - README.md
   - DESIGN_HANDOFF.md
   - requirements-test.txt
+  - DESIGN_IMPLEMENTATION.md
+
+# Keep editable Markdown worksheets as static downloads.
+optional_front_matter:
+  enabled: false

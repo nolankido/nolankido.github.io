@@ -19,7 +19,7 @@ For a new note, write its public body, add a manifest entry with a unique ID/pat
 
 ## Visual design handoff
 
-See `DESIGN_HANDOFF.md`. The original `styles.css` remains the visual foundation. Functional additions and styles for new content are isolated in `assets/site.css`. The contact script is independent of both. Preserve accessibility and form behavior during redesign.
+See `DESIGN_HANDOFF.md`. The approved editorial design is implemented in `styles.css`. State and accessibility rules are isolated in `assets/site.css`. The resource catalog is in `_scripts/catalog.py` and the downloadable worksheets are in `downloads/`. See `DESIGN_IMPLEMENTATION.md` for the design decisions. The contact script is independent of both. Preserve accessibility and form behavior during redesign.
 
 ## Tests
 

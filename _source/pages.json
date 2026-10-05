@@ -26,6 +26,15 @@
     "source": "notes.html"
   },
   {
+    "id": "resources",
+    "path": "/resources/",
+    "title": "Put an idea to work.",
+    "seo_title": "Resources | Nolan Kido",
+    "description": "Editable worksheets for decision-making, checking tools, and learning. Read a preview or download a copy without an account.",
+    "kicker": "Resources",
+    "source": "resources.html"
+  },
+  {
     "id": "contact",
     "path": "/contact/",
     "title": "Get in touch.",
