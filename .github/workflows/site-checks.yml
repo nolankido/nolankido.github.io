@@ -35,3 +35,15 @@ jobs:
         env:
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
         run: python _tests/review_browser.py
+      - name: Verify published main release
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          current=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          if [ "$current" != "$GITHUB_SHA" ]; then
+            echo 'A newer main commit will receive its own live check.'
+            exit 0
+          fi
+          python _scripts/check_live.py --attempts 10 --interval 10
+          echo "LIVE_VERIFIED_COMMIT=$GITHUB_SHA"

@@ -55,12 +55,12 @@ Provider references:
 
 ## Release verification
 
-Check the current main head before merging, run the tests, and retain the existing branch-based Pages configuration. The `Site checks` workflow uses read-only permissions. `Verify published website` runs after a successful main-branch Pages deployment and compares the actual public files with the deployed commit. Both workflows read and report; neither changes code or hosting settings.
+Check the current main head before merging, run the tests, and retain the existing branch-based Pages configuration. The `Site checks` workflow uses read-only permissions and does not modify code or hosting settings. On main-branch pushes it runs a bounded public-byte check after local tests, allowing time for Pages propagation. Pull-request checks never query a release as though it were deployed. Superseded commits defer to the newer release's check.
 
 ```sh
 python _scripts/check_live.py --attempts 10 --interval 10
 ```
 
-The live verifier makes GET requests to nolankido.com only. It checks public pages, assets, downloads, the custom 404, and excluded source paths. It does not send form messages. A successful build or artifact upload is not a completed deployment. Revert faulty changes rather than rewriting history.
+The live verifier makes GET requests to nolankido.com only. It checks public pages, assets, downloads, the custom 404, and excluded source paths. It does not send form messages. A successful build or artifact upload is not a completed deployment: check Pages job status as well as the live bytes. If the bounded live check times out during a provider delay, inspect the deployment before retrying; do not automatically rewrite or roll back working code.
 
-See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs.
+See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs. Revert faulty changes rather than rewriting history.
