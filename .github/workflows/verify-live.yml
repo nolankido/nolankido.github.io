@@ -1,0 +1,49 @@
+name: Verify deployed files
+on:
+  push:
+    branches: [site-content-completion-20261005]
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Compare public live files with the verified release
+        shell: python
+        run: |
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor
+          import hashlib, json, time, urllib.request
+          root = Path.cwd()
+          manifest = json.loads((root / '_source/pages.json').read_text())
+          routes = [p['path'] for p in manifest if not p.get('noindex')]
+          routes += ['/assets/contact.js', '/assets/site.css', '/styles.css', '/feed.xml', '/sitemap.xml', '/nolan-kido.vcf']
+          nonce = str(time.time_ns())
+          def check(route):
+              rel = route.lstrip('/') + ('index.html' if route.endswith('/') else '')
+              expected = (root / rel).read_bytes()
+              expected_sha = hashlib.sha256(expected).hexdigest()
+              for attempt in range(3):
+                  try:
+                      req = urllib.request.Request('https://nolankido.com' + route + '?release-check=' + nonce + '-' + str(attempt), headers={'Cache-Control':'no-cache', 'Accept-Encoding':'identity', 'User-Agent':'NolanKidoSiteReleaseCheck/1.0'})
+                      with urllib.request.urlopen(req, timeout=15) as response:
+                          actual = response.read(2097152)
+                          actual_sha = hashlib.sha256(actual).hexdigest()
+                          if response.status == 200 and actual_sha == expected_sha:
+                              return True, route + ' HTTP 200, exact release content matched'
+                          error = route + ': expected ' + expected_sha + ', received ' + actual_sha
+                  except Exception as exc:
+                      error = route + ': ' + str(exc)
+                  time.sleep(2)
+              return False, error
+          with ThreadPoolExecutor(max_workers=4) as pool:
+              results = list(pool.map(check, routes))
+          for ok, message in results:
+              print(('PASS ' if ok else 'FAIL ') + message)
+          print(str(sum(ok for ok, _ in results)) + '/' + str(len(results)) + ' live files matched the verified release. No form submissions were sent.')
+          if not all(ok for ok, _ in results):
+              raise SystemExit(1)
