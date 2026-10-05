@@ -10,6 +10,9 @@ import sys
 from datetime import datetime, timezone
 from email.utils import format_datetime
 from xml.etree import ElementTree as ET
+# Also supports importlib-based build checks.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from catalog import supplement
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -52,6 +55,7 @@ def build_outputs() -> dict[Path, str]:
     notes_list = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values = {k: text(v) for k, v in site.items()}
     values['notes_list'] = notes_list
+    values.update(supplement(ROOT, notes))
     outputs = {}
     for p in pages:
         source = (SOURCE / p['source']).resolve()
@@ -60,7 +64,7 @@ def build_outputs() -> dict[Path, str]:
         body = fill(source.read_text(encoding='utf-8'), values)
         section = 'notes' if p.get('note') else p['id']
         nav = ''.join(f'<li><a href="/{name}/"' + (' aria-current="page"' if section == name else '')
-                      + f'>{name.title()}</a></li>' for name in ['about', 'notes', 'contact'])
+                      + f'>{name.title()}</a></li>' for name in ['about', 'notes', 'resources', 'contact'])
         canonical = site['url'] + p['path']
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
