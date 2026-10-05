@@ -1,0 +1,63 @@
+name: Verify deployed editorial release
+on:
+  push:
+    branches: [editorial-design-20261005]
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 29413b527dc0df8d0716d167cb4f84b3faa4bbe1
+          persist-credentials: false
+      - name: Compare live pages, assets and downloads to the tested commit
+        shell: python
+        run: |
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor
+          import hashlib, json, time, urllib.request, urllib.error
+          root = Path.cwd()
+          pages = json.loads((root / '_source/pages.json').read_text())
+          routes = [p['path'] for p in pages if not p.get('noindex')]
+          routes += ['/assets/contact.js', '/assets/site.css', '/styles.css', '/favicon.svg', '/feed.xml', '/sitemap.xml', '/nolan-kido.vcf']
+          routes += ['/downloads/decision-record.md', '/downloads/tool-trust-check.md', '/downloads/learning-loop.md']
+          def check(route):
+              relative = route.lstrip('/') + ('index.html' if route.endswith('/') else '')
+              expected = (root / relative).read_bytes()
+              try:
+                  nonce = str(time.time_ns())
+                  request = urllib.request.Request('https://nolankido.com' + route + '?release-check=' + nonce, headers={'Cache-Control':'no-cache', 'Accept-Encoding':'identity', 'User-Agent':'NolanKidoReleaseCheck/1.0'})
+                  with urllib.request.urlopen(request, timeout=15) as response:
+                      actual = response.read(2097152)
+                      ok = response.status == 200 and actual == expected
+                      return route, ok, response.status
+              except Exception as error:
+                  return route, False, str(error)
+          pending = routes[:]
+          for attempt in range(20):
+              with ThreadPoolExecutor(max_workers=4) as pool:
+                  results = list(pool.map(check, pending))
+              for route, ok, status in results:
+                  if ok:
+                      print('PASS ' + route + ': HTTP 200 and exact release bytes matched', flush=True)
+              pending = [route for route, ok, status in results if not ok]
+              if not pending:
+                  break
+              print('Awaiting deployment for ' + str(len(pending)) + ' files; round ' + str(attempt + 1), flush=True)
+              time.sleep(15)
+          if pending:
+              print('FAIL: ' + ', '.join(pending))
+              raise SystemExit(1)
+          print(str(len(routes)) + '/' + str(len(routes)) + ' live files match release 29413b527dc0df8d0716d167cb4f84b3faa4bbe1. No form submissions were sent.', flush=True)
+          missing_url = 'https://nolankido.com/release-check-no-such-page-29413b5/'
+          try:
+              urllib.request.urlopen(missing_url, timeout=15)
+              raise RuntimeError('Missing route did not return HTTP 404')
+          except urllib.error.HTTPError as error:
+              body = error.read().decode('utf-8')
+              assert error.code == 404
+              assert 'class="ledger"' in body and 'This page is not here.' in body
+              print('PASS custom 404: new editorial layout and HTTP 404', flush=True)
