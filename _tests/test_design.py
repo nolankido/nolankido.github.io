@@ -1,5 +1,8 @@
-"""Contracts for the approved editorial design and public resource catalog."""
+"""Contracts for the preserved visual design and revised public content."""
 from pathlib import Path
+from html import unescape
+import hashlib
+import json
 import re
 import sys
 import unittest
@@ -24,30 +27,39 @@ class DesignTests(unittest.TestCase):
 
     def test_resource_previews_match_downloads(self):
         content = build.build_outputs()[Path('resources/index.html')]
-        from html import unescape
         previews = [unescape(v) for v in re.findall(r'<pre>(.*?)</pre>', content, re.S)]
-        self.assertEqual(len(previews), 3)
+        self.assertEqual(len(previews), len(RESOURCES))
         for (slug, title, description, note), preview in zip(RESOURCES, previews):
             self.assertEqual(preview, (ROOT / 'downloads' / (slug + '.md')).read_text())
             self.assertIn('id="' + slug + '"', content)
             self.assertIn('/notes/' + note + '/', content)
+            self.assertIn((ROOT / '_source/examples' / (slug + '.html')).read_text(), content)
+        self.assertEqual(content.count('class="worked-example"'), len(RESOURCES))
+        for label in ['Who it is for:', 'How to use it:', 'When not to use it:']:
+            self.assertEqual(content.count(label), len(RESOURCES))
 
-    def test_homepage_uses_real_catalog_counts(self):
+    def test_homepage_is_curated_not_a_statistics_display(self):
         content = build.build_outputs()[Path('index.html')]
-        self.assertEqual(content.count('<tr>'), 4)
-        self.assertIn('03 notes in the collection', content)
-        self.assertIn('03 practical templates', content)
+        selection = json.loads((ROOT / '_source/selection.json').read_text())
+        self.assertEqual(content.count('<tr>'), len(selection['selected_notes']) + 1)
+        self.assertNotIn('stat-strip', content)
+        self.assertNotIn('notes in the collection', content)
+        self.assertNotIn('practical templates</span>', content)
+        self.assertNotIn('class="resource-list"', content)
+        for slug in [selection['featured_note']] + selection['selected_notes']:
+            self.assertIn('/notes/' + slug + '/', content)
         for section in ['interests', 'selected-notes', 'resources']:
             self.assertIn('id="' + section + '"', content)
 
-    def test_fonts_disclosed_and_contact_script_unchanged(self):
+    def test_fonts_disclosed_and_visual_and_form_code_unchanged(self):
         privacy = build.build_outputs()[Path('privacy/index.html')]
         self.assertIn('Google Fonts', privacy)
         self.assertIn('fallback fonts', privacy)
-        import hashlib
-        raw = (ROOT / 'assets/contact.js').read_bytes()
-        blob = b'blob ' + str(len(raw)).encode() + b'\0' + raw
-        self.assertEqual(hashlib.sha1(blob).hexdigest(), '78838b313bc176b3c06ef7a9d3070746f5cbcd03')
+        expected = {'styles.css': 'aa3896d2168bd26cb4d1ac233e71429002bcc1ea', 'assets/site.css': '0a7e1961fc1d7465bcb95b1d7df4f5d4fdd57059', 'assets/contact.js': '78838b313bc176b3c06ef7a9d3070746f5cbcd03'}
+        for path, sha in expected.items():
+            raw = (ROOT / path).read_bytes()
+            blob = b'blob ' + str(len(raw)).encode() + b'\0' + raw
+            self.assertEqual(hashlib.sha1(blob).hexdigest(), sha, path)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
