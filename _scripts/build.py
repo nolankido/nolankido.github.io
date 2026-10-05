@@ -2,6 +2,7 @@
 """Build the public static site. Python 3.10+, no third-party dependencies."""
 from __future__ import annotations
 import argparse
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -80,6 +81,7 @@ def build_outputs() -> dict[Path, str]:
     values = {k: text(v) for k, v in site.items()}
     values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
+    values['site_css_version'] = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
     featured = by_id[selection['featured_note']]
     values.update({'featured_note_title': text(featured['title']), 'featured_note_url': text(featured['path']), 'featured_note_description': text(featured['description'])})
     outputs = {}
@@ -123,7 +125,8 @@ def build_outputs() -> dict[Path, str]:
         if p.get('updated'):
             schema['dateModified'] = p['updated']
         if p['id'] == 'contact':
-            extra += '\n  <script src="/assets/contact.js?v=20261005" defer></script>'
+            contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
         data = {**values, 'body': body, 'primary_nav': nav, 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
                 'og_type': 'article' if p.get('note') else 'website', 'extra_head': extra,

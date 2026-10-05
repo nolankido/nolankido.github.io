@@ -1,4 +1,4 @@
-/* State and accessibility rules, kept independent from decorative styling. */
+/* State and accessibility rules, independent from the approved decorative styling. */
 [hidden] { display: none !important; }
 :where(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .site-bar a:focus-visible, .contact-block a:focus-visible, .nav-links li:last-child a:focus-visible { outline-color: #50715b; }
@@ -8,6 +8,14 @@ main:focus { outline: none; }
 .honeypot { pointer-events: none; }
 .skip-link { position: fixed; top: 8px; left: 8px; transform: translateY(-180%); z-index: 100; background: var(--basalt); color: white; padding: 12px 18px; }
 .skip-link:focus { transform: none; }
+/* Preserve content when readers enlarge text or override spacing. */
+.hero h1, .contact-block h2 { overflow-wrap: anywhere; }
+.hero-details > *, .work-copy, .work-facts, .at-glance dd, .form-grid > * { min-width: 0; overflow-wrap: anywhere; }
+.site-bar .shell { flex-wrap: wrap; }
+.contact-form fieldset { min-inline-size: 0; }
+.worksheet .worked-example > .prose { padding: 18px; border-top: 1px solid var(--line); }
+.worksheet .worked-example > .prose > :last-child, .article-takeaway > :last-child { margin-bottom: 0; }
+.worksheet > .link-row { margin-top: 20px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

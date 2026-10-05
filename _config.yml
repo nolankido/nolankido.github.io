@@ -10,6 +10,7 @@ exclude:
   - DESIGN_IMPLEMENTATION.md
   - EDITORIAL_GUIDE.md
   - CONTENT_RELEASE.md
+  - SITE_REVIEW.md
   - requirements-test.txt
 
 # Keep editable Markdown worksheets as static downloads.

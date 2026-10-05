@@ -1,10 +1,10 @@
 # Nolan Kido personal website
 
-A small static website for introductions and occasional notes. GitHub Pages serves the committed HTML. No application server, database, runtime package installation, analytics, or advertising scripts are needed.
+A small static website for introductions, selected writing, and practical resources. GitHub Pages serves committed HTML. There is no runtime application server, database, advertising, or analytics dependency.
 
 ## Edit and publish
 
-Use Python 3.10 or later. Edit public copy in `_source/*.html`, article bodies in `_source/notes/`, shared structure in `_source/layout.html`, and page metadata in `_source/pages.json`. Shared public identity and the existing contact endpoint are in `_source/site.json`.
+Use Python 3.10 or later. Public page bodies are in `_source/`; shared markup is in `_source/layout.html`; routes, descriptions, and explicit dates are in `_source/pages.json`. `_source/selection.json` controls featured reading independently of publication order. Shared approved identity and the existing contact endpoint are in `_source/site.json`.
 
 ```sh
 python _scripts/build.py
@@ -13,43 +13,54 @@ python -m unittest discover -s _tests -p "test_*.py" -v
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000` for a local preview. Commit both source files and regenerated output. Do not edit generated root or route HTML directly: the next build replaces it. The build also updates the sitemap, RSS feed, and minimal contact card. It never fetches private data.
+Open `http://localhost:8000` for a local preview. Commit source and generated output together. Do not edit generated HTML directly. The build also generates RSS, sitemap, and the minimal contact card. New notes need both a manifest entry and a reading-order entry. Publication dates are explicit; substantive revisions use `updated` and `revision` rather than resetting publication dates. Changed contact JS and supporting CSS automatically get content-derived cache versions.
 
-For a new note, write its public body, add a manifest entry with a unique ID/path and an explicit publication date, then rebuild. Do not commit unpublished or private drafts here. The public repository is not private storage, even for files excluded from the rendered website.
+## Design and content
 
-## Visual design handoff
+The approved editorial design remains in `styles.css`. Functional state, focus, reflow, print, and accessibility adjustments are in `assets/site.css`. The contact script is separate in `assets/contact.js`. Preserve the form contract and accessibility when editing the design. See `DESIGN_HANDOFF.md`, `DESIGN_IMPLEMENTATION.md`, and `EDITORIAL_GUIDE.md`.
 
-See `DESIGN_HANDOFF.md`. The approved editorial design is implemented in `styles.css`. State and accessibility rules are isolated in `assets/site.css`. The resource catalog is in `_scripts/catalog.py` and the downloadable worksheets are in `downloads/`. See `DESIGN_IMPLEMENTATION.md` for the design decisions. The contact script is independent of both. Preserve accessibility and form behavior during redesign.
+Blank resources live in `downloads/`, completed fictional examples in `_source/examples/`, and intended-use guidance in `_scripts/catalog.py`. The preview and download use the same blank file. Never add private worksheet answers, unpublished drafts, credentials, or private records to this public repository. Excluded or unlinked source files are still public in GitHub.
 
 ## Tests
 
-The dependency-free tests cover generated output, links, fragments, metadata, structured data, RSS, sitemap, and public-data boundaries. Browser tests render the same committed pages and CSS offline, using mocked service responses. They cover validation, missing/expired verification, retries, network errors, request timeouts, duplicate prevention, no-JavaScript behavior, keyboard navigation, and layout at five viewport widths.
+The dependency-free suite checks output determinism, metadata, links, fragments, dates, feeds, examples, reviewed assets, and the live-checker's simulated responses. Browser suites use blocked external traffic or mocked form services and never deliberately submit a real message.
 
 ```sh
 python -m pip install -r requirements-test.txt
 python -m playwright install chromium
 python _tests/browser.py
+python _tests/design_browser.py
 ```
 
-Set `CHROMIUM_PATH` to use an installed Chromium executable. Set `SCREENSHOT_DIR` to a directory outside the repository to save review screenshots. Tests never send real contact messages. CI runs these checks with read-only repository permissions and does not modify or deploy code. The existing GitHub Pages branch deployment remains in place.
+Set `CHROMIUM_PATH` to use an installed Chromium binary. Set `SCREENSHOT_DIR` outside the repository for optional screenshots. Set `ALLOW_WEB_FONTS=1` on a separate `design_browser.py` run to verify the three real font families. Default browser checks use fallbacks.
 
-## Contact service boundaries
+The comprehensive audit additionally uses axe-core. Install it outside the repository:
 
-The existing Formspark endpoint and public Turnstile site key are retained. Only the contact page loads Turnstile. The receiving service must validate the token with the matching secret configured in Formspark's Spam Protection settings. Never put a secret key into this repository.
+```sh
+npm install --prefix /tmp/nk-qa --no-audit --no-fund axe-core@4.10.3
+AXE_PATH=/tmp/nk-qa/node_modules/axe-core/axe.min.js python _tests/review_browser.py
+```
 
-Local tests prove client behavior against simulated responses, not delivery to an inbox or the provider's dashboard settings. After service configuration changes, an owner should send a clearly labelled test through the live form and confirm its arrival. The success screen confirms service acceptance, not that a message was read. Failed or ambiguous requests are never automatically resent.
+For Windows, choose a temporary folder and set the `AXE_PATH` environment variable to its `node_modules/axe-core/axe.min.js` file. The audit checks HTML5 parsing, seven viewport widths, user text-spacing overrides, automated accessibility, and additional contact recovery failures. `--report-only` is for diagnosis, not a passing release gate. Inconclusive automated checks are reported for human review; passing automation is not an accessibility certification.
+
+## Contact boundaries
+
+Only name, email, and message are required; topic (`reason`) and context are optional. Keep all form IDs, the existing Formspark endpoint, and the public Turnstile site key. The provider must separately validate verification tokens with its secret setting. Never put that secret here.
+
+Verification failures must offer a usable retry. Failed or ambiguous submissions preserve text in the open form but not in browser storage. The form never resubmits automatically. Network/server errors do not establish non-delivery; a retry may duplicate a submission. The success screen confirms service acceptance, not inbox arrival or that a message was read. Actual inbox delivery and provider configuration require a separate authorized live test.
 
 Provider references:
-- https://documentation.formspark.io/setup/spam-protection.html
+- https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/
 - https://documentation.formspark.io/examples/ajax.html
-- https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/
 
-## Release checklist
+## Release verification
 
-Review every change for public suitability. Run the build check and tests. Preview core pages and the contact form. Check the current branch head before merging to avoid replacing another contributor's work. Wait for the Pages deployment to finish and inspect the live pages. A regression can be rolled back by reverting its commit; do not rewrite public history for ordinary changes.
+Check the current main head before merging, run the tests, and retain the existing branch-based Pages configuration. The `Site checks` workflow uses read-only permissions. `Verify published website` runs after a successful main-branch Pages deployment and compares the actual public files with the deployed commit. Both workflows read and report; neither changes code or hosting settings.
 
-## Editorial maintenance
+```sh
+python _scripts/check_live.py --attempts 10 --interval 10
+```
 
-See `EDITORIAL_GUIDE.md` for public-content boundaries, owner approval, revision handling, and a small manual review practice. `_source/selection.json` controls curated homepage links and reading order independently of RSS dates. Resource examples are in `_source/examples/`; the blank downloads are their single source of truth. Add a note to both the manifest and reading order. Do not commit private drafts.
+The live verifier makes GET requests to nolankido.com only. It checks public pages, assets, downloads, the custom 404, and excluded source paths. It does not send form messages. A successful build or artifact upload is not a completed deployment. Revert faulty changes rather than rewriting history.
 
-The 2026-10-05 content revision preserves the visual stylesheets and contact JavaScript byte-for-byte. The contact topic is now optional; only name, email, and message are required. Keep existing URLs stable. No visitor analytics, newsletter, login, or new background automation is introduced.
+See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs.

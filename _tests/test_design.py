@@ -51,11 +51,11 @@ class DesignTests(unittest.TestCase):
         for section in ['interests', 'selected-notes', 'resources']:
             self.assertIn('id="' + section + '"', content)
 
-    def test_fonts_disclosed_and_visual_and_form_code_unchanged(self):
+    def test_fonts_disclosed_and_reviewed_asset_contracts(self):
         privacy = build.build_outputs()[Path('privacy/index.html')]
         self.assertIn('Google Fonts', privacy)
         self.assertIn('fallback fonts', privacy)
-        expected = {'styles.css': 'aa3896d2168bd26cb4d1ac233e71429002bcc1ea', 'assets/site.css': '0a7e1961fc1d7465bcb95b1d7df4f5d4fdd57059', 'assets/contact.js': '78838b313bc176b3c06ef7a9d3070746f5cbcd03'}
+        expected = {'styles.css': 'aa3896d2168bd26cb4d1ac233e71429002bcc1ea', 'assets/site.css': '0f3af161751edadf1e0f552c226484309370dc49', 'assets/contact.js': '65663ddee4a515c63a9f1d7e35e7ef47b3d21f8a'}
         for path, sha in expected.items():
             raw = (ROOT / path).read_bytes()
             blob = b'blob ' + str(len(raw)).encode() + b'\0' + raw
