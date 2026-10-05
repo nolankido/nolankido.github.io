@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build plain HTML from public content and shared templates. Python 3.10+, no dependencies."""
+"""Build the public static site. Python 3.10+, no third-party dependencies."""
 from __future__ import annotations
 import argparse
 import html
@@ -10,7 +10,6 @@ import sys
 from datetime import datetime, timezone
 from email.utils import format_datetime
 from xml.etree import ElementTree as ET
-# Also supports importlib-based build checks.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from catalog import supplement
 
@@ -34,10 +33,21 @@ def fill(template: str, values: dict) -> str:
 
 
 def output_path(route: str) -> Path:
-    if not route.startswith('/') or '..' in route.split('/') or '?' in route or '#' in route:
+    if not isinstance(route, str) or not re.fullmatch(r'/(?:[a-z0-9-]+/)*|/[a-z0-9-]+\.html', route):
         raise ValueError(f'Invalid page route: {route}')
     relative = route.lstrip('/')
     return Path(relative + 'index.html' if route.endswith('/') else relative)
+
+
+def date_value(value: str) -> datetime:
+    if not isinstance(value, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', value):
+        raise ValueError('Dates must use YYYY-MM-DD')
+    return datetime.strptime(value, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+
+
+def date_label(value: str) -> str:
+    dt = date_value(value)
+    return f'{dt.strftime("%B")} {dt.day}, {dt.year}'
 
 
 def build_outputs() -> dict[Path, str]:
@@ -45,17 +55,33 @@ def build_outputs() -> dict[Path, str]:
     pages = json.loads((SOURCE / 'pages.json').read_text(encoding='utf-8'))
     if len({p['path'] for p in pages}) != len(pages) or len({p['id'] for p in pages}) != len(pages):
         raise ValueError('Page routes and IDs must be unique')
-    notes = sorted((p for p in pages if p.get('note')), key=lambda p: p['date'], reverse=True)
+    for p in pages:
+        output_path(p['path'])
+        if p.get('note'):
+            date_value(p['date'])
+        if p.get('updated'):
+            updated = date_value(p['updated'])
+            if p.get('note') and updated < date_value(p['date']):
+                raise ValueError('An update cannot precede publication')
+        if p.get('revision') and not p.get('updated'):
+            raise ValueError('Substantive revisions need an explicit update date')
+    notes = sorted((p for p in pages if p.get('note')), key=lambda p: (p['date'], p['id']), reverse=True)
+    selection = json.loads((SOURCE / 'selection.json').read_text(encoding='utf-8'))
+    order = selection['note_order']
+    by_id = {p['id']: p for p in notes}
+    if len(order) != len(set(order)) or set(order) != set(by_id):
+        raise ValueError('Reading order must contain every public note exactly once')
     template = (SOURCE / 'layout.html').read_text(encoding='utf-8')
     articles = []
-    for p in notes:
+    for p in [by_id[slug] for slug in order]:
         articles.append(f'<article class="note-entry"><p class="note-category">{text(p["kicker"])}</p>'
                         f'<h3><a href="{text(p["path"])}">{text(p["title"])}</a></h3>'
                         f'<p>{text(p["description"])}</p></article>')
-    notes_list = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values = {k: text(v) for k, v in site.items()}
-    values['notes_list'] = notes_list
+    values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
+    featured = by_id[selection['featured_note']]
+    values.update({'featured_note_title': text(featured['title']), 'featured_note_url': text(featured['path']), 'featured_note_description': text(featured['description'])})
     outputs = {}
     for p in pages:
         source = (SOURCE / p['source']).resolve()
@@ -69,18 +95,22 @@ def build_outputs() -> dict[Path, str]:
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
         if p['id'] != 'home':
-            heading = ('<a href="/notes/" class="breadcrumb">All notes</a>' if p.get('note') else '')
+            heading = '<a href="/notes/" class="breadcrumb">All notes</a>' if p.get('note') else ''
             heading += f'<p class="page-kicker">{text(p["kicker"])}</p><h1 class="page-title">{text(p["title"])}</h1>'
             if p.get('note'):
-                dt = datetime.strptime(p['date'], '%Y-%m-%d')
-                heading += f'<p class="note-meta"><time datetime="{p["date"]}">{dt.strftime("%B")} {dt.day}, {dt.year}</time> · Nolan Kido</p>'
+                heading += f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · Nolan Kido</p>'
+                revision = ''
+                if p.get('revision'):
+                    revision = f'<p class="editorial-note"><strong>Revision, <time datetime="{p["updated"]}">{date_label(p["updated"])}</time>:</strong> {text(p["revision"])}</p>'
                 body = ('    <article class="note-article" aria-label="Note">\n'
                         f'      <header class="page-hero shell">{heading}</header>\n'
-                        f'      <div class="article-body shell prose">{body}'
-                        '<p class="editorial-note">Prepared with AI assistance. Examples are illustrative unless a source is identified.</p>'
+                        f'      <div class="article-body shell prose">{body}{revision}'
+                        '<p class="editorial-note">Prepared with AI assistance. Worked scenarios are fictional; research is linked where used. These essays do not describe private projects or personal events.</p>'
                         '<nav class="article-navigation" aria-label="After the note"><a href="/notes/">All notes</a>'
                         '<a href="/contact/">Send a thought or correction</a></nav></div>\n    </article>')
                 extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
+                if p.get('updated'):
+                    extra += f'\n  <meta property="article:modified_time" content="{p["updated"]}">'
             else:
                 header = f'    <section class="page-hero shell">{heading}</section>'
         schema = {'@context': 'https://schema.org', '@type': 'WebPage', 'name': p['seo_title'], 'url': canonical,
@@ -90,22 +120,22 @@ def build_outputs() -> dict[Path, str]:
         if p.get('note'):
             schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date'],
                            'author': {'@type': 'Person', 'name': site['name'], 'url': site['url'] + '/about/'}})
+        if p.get('updated'):
+            schema['dateModified'] = p['updated']
         if p['id'] == 'contact':
             extra += '\n  <script src="/assets/contact.js?v=20261005" defer></script>'
         data = {**values, 'body': body, 'primary_nav': nav, 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
                 'og_type': 'article' if p.get('note') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
-        rendered = fill(template, data)
-        rendered = rendered.replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
+        rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
         outputs[output_path(p['path'])] = rendered
 
-    # A real feed and sitemap, generated from the same public page manifest.
     ET.register_namespace('atom', 'http://www.w3.org/2005/Atom')
     rss = ET.Element('rss', {'version': '2.0'})
     channel = ET.SubElement(rss, 'channel')
     for key, value in [('title', 'Nolan Kido Notes'), ('link', site['url'] + '/notes/'),
-                       ('description', 'Occasional notes on tools, decisions, and learning.'), ('language', 'en-us')]:
+                       ('description', 'Worked explanations and reflections on tools, decisions, learning, and creative work.'), ('language', 'en-us')]:
         ET.SubElement(channel, key).text = value
     ET.SubElement(channel, '{http://www.w3.org/2005/Atom}link', {'href': site['url'] + '/feed.xml', 'rel': 'self', 'type': 'application/rss+xml'})
     for p in notes:
@@ -113,9 +143,7 @@ def build_outputs() -> dict[Path, str]:
         for key, value in [('title', p['title']), ('link', site['url'] + p['path']), ('description', p['description'])]:
             ET.SubElement(item, key).text = value
         ET.SubElement(item, 'guid', {'isPermaLink': 'true'}).text = site['url'] + p['path']
-        # Publication date is explicit, not rebuilt from the current time.
-        dt = datetime.strptime(p['date'], '%Y-%m-%d').replace(tzinfo=timezone.utc)
-        ET.SubElement(item, 'pubDate').text = format_datetime(dt, usegmt=True)
+        ET.SubElement(item, 'pubDate').text = format_datetime(date_value(p['date']), usegmt=True)
     ET.indent(rss, space='  ')
     outputs[Path('feed.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(rss, encoding='unicode') + '\n'
     sitemap = ET.Element('urlset', {'xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9'})
@@ -123,6 +151,8 @@ def build_outputs() -> dict[Path, str]:
         if not p.get('noindex'):
             item = ET.SubElement(sitemap, 'url')
             ET.SubElement(item, 'loc').text = site['url'] + p['path']
+            if p.get('updated') or p.get('date'):
+                ET.SubElement(item, 'lastmod').text = p.get('updated', p.get('date'))
     ET.indent(sitemap, space='  ')
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
@@ -131,7 +161,7 @@ def build_outputs() -> dict[Path, str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--check', action='store_true', help='Fail if committed pages differ from the source')
+    parser.add_argument('--check', action='store_true', help='Fail if committed pages differ from source')
     args = parser.parse_args()
     try:
         outputs = build_outputs()
@@ -148,7 +178,7 @@ def main() -> int:
             return 1
         print(f'{len(outputs)} generated files {"checked" if args.check else "built"}; {len(differences)} changes.')
         return 0
-    except (OSError, ValueError, KeyError) as exc:
+    except (OSError, ValueError, KeyError, TypeError) as exc:
         print(f'Build failed: {exc}', file=sys.stderr)
         return 1
 

@@ -1,16 +1,24 @@
-<p class="article-lead">A demonstration answers one question: can this tool produce a convincing result here? Trust requires a different question: what evidence supports relying on it elsewhere?</p>
-<h2 id="define-the-claim">Start with a claim small enough to check</h2>
-<p>“It works” is an unusually broad statement. A more useful claim describes the task, the conditions, and the expected result. A program might correctly total a list of ordinary numbers, for example, while behaving badly when an entry is missing or a value uses an unexpected format.</p>
-<p>That does not make the successful demonstration worthless. It means the demonstration supports a narrower conclusion than it first appears to. Naming that conclusion makes it easier to decide what to test next.</p>
-<h2 id="look-for-failure">Ask what would reveal a mistake</h2>
-<p>A useful test starts with an expectation that does not depend entirely on the tool being tested. For a small calculation, work out the answer independently. For a transformation, check a property that should survive the change. For a form, test a failed submission as carefully as a successful one.</p>
-<p>The Python <a href="https://docs.python.org/3/library/unittest.html">unit-testing documentation</a> describes a test case as a check of a specific response to particular inputs. That is a helpful reminder of scope: passing the checks that exist does not settle the cases no one has considered.</p>
-<p>It is also worth asking whether two apparently independent checks share the same assumption. Copying the same formula into a second program may reproduce a mistake rather than detect it.</p>
-<h2 id="make-limits-visible">Make limitations part of the result</h2>
-<p>Consider an illustrative tool that estimates how long a task will take. Reporting “three hours” without context hides important questions. Which tasks informed the estimate? Was setup time included? How much variation was observed? Has this kind of task been seen before?</p>
-<p>A more useful result might say that the estimate applies to a defined category and that unusual cases have not been evaluated. This is not an excuse for weak work. It helps the person using the result decide whether it fits the decision in front of them.</p>
-<h2 id="earn-reliance">Earn reliance in stages</h2>
-<p>A practical sequence is to define the claim, check small cases independently, test likely failure conditions, and expand the claim only when the evidence supports doing so. The level of scrutiny should reflect the consequences of being wrong.</p>
-<p>A tool used to arrange a draft can tolerate different mistakes from one used to make an irreversible decision. The same impressive interface should not make those standards interchangeable.</p>
-<p>The distinction to keep is simple: a result can be useful before it is thoroughly validated, but its presentation should not imply that the validation has already happened.</p>
+<p class="article-lead">Two calculations can agree and still make the same mistake. Agreement becomes evidence only after asking what, exactly, is being checked.</p>
+<h2 id="a-small-claim">A claim small enough to check</h2>
+<p>Consider a fictional tool that summarizes how long a task takes. Its stated job is to report the <strong>median</strong>: sort the observations and take the middle one, or average the two middle values when there is an even number. The interface calls this the typical duration.</p>
+<p>For observations of 2, 4, and 6 minutes, it reports 4. That looks right. A second implementation reports 4 too. It is tempting to call the result independently verified.</p>
+<p>Now give both implementations a different input: 2, 2, 2, 2, and 22 minutes. Both report 6.</p>
+<div class="article-takeaway"><p><strong>Input:</strong> 2, 2, 2, 2, 22.</p><p><strong>Median:</strong> 2, the middle observation.</p><p><strong>Arithmetic mean:</strong> (2 + 2 + 2 + 2 + 22) / 5 = 6.</p><p><strong>What happened:</strong> both implementations computed the mean and labelled it the median.</p></div>
+<p>Neither statistic is inherently wrong. They answer different questions. The defect is reporting one as the other. Agreement on the first input hid the defect because the mean and median happened to coincide.</p>
+<h2 id="independence">Independent code is not always an independent check</h2>
+<p>A second program written in a different language would not solve this problem if its author copied the same mistaken definition. Two implementations can be separate while sharing the assumption that matters most.</p>
+<p>The useful independent check here is a definition and a small example worked out without relying on either implementation. Sort five values, find the third, and compare that answer with the displayed result.</p>
+<p>This distinction also applies to explanations. Rephrasing a claim, asking another system to endorse it, or obtaining the same answer twice does not automatically add new evidence. Ask whether the second route could fail for the same reason as the first.</p>
+<h2 id="test-the-boundary">Test a boundary, not just another comfortable example</h2>
+<p>Once the median calculation is corrected, several questions remain. Does it sort its input? What happens with four observations, such as 2, 4, 6, and 8? Does an empty list produce a clear refusal rather than a made-up duration? Are missing observations rejected, ignored, or represented explicitly?</p>
+<p>For this illustrative specification, valid inputs are nonnegative whole-minute observations. Missing entries, text, negative durations, and an empty list are rejected. Other specifications are possible; what matters is choosing one before interpreting the result.</p>
+<p>The <a href="https://docs.python.org/3/library/unittest.html">Python unit-testing documentation</a> describes a test case in terms of a particular response to particular inputs. That narrowness is useful. A passing test establishes something about the behavior tested, not everything the interface might lead a reader to assume.</p>
+<h2 id="what-the-test-does-not-show">A correct calculation can still support the wrong conclusion</h2>
+<p>Suppose the corrected tool reports a median of 2 minutes for the five observations. The calculation is now right. It still does not establish that a new task will take 2 minutes, that the observations are representative, or that the occasional 22-minute task can safely be ignored.</p>
+<p>The long task may matter more than the middle task when making a promise. If it is a data error, that needs its own justification. A correct formula cannot decide those questions on its own.</p>
+<p>A report worth relying on would identify the statistic, show how many observations it summarizes, and make important exclusions visible. A decision might require a different summary altogether.</p>
+<h2 id="match-the-consequence">Make the evidence fit the consequence</h2>
+<p>A rough estimate for arranging a draft can be useful before every uncertainty has been resolved. A system used to make an expensive or irreversible promise deserves a different standard. The display should not make those standards look interchangeable.</p>
+<p>Start with the claim, find a small case that could expose a mistake, and separate the calculation from the interpretation. The aim is not endless checking. It is knowing which conclusion the evidence actually supports.</p>
+<p><a href="/resources/#tool-trust-check">Use the tool trust worksheet</a> to record a claim, an independent example, and the limits that remain.</p>
 <p class="article-takeaway">The next useful question is not just “Does it work?” It is “What, exactly, have we established?”</p>

@@ -65,7 +65,7 @@ try:
             assert download.suggested_filename == slug + '.md'
             assert Path(download.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
         page.goto(base)
-        page.get_by_role('link', name='Explore the notes').click()
+        page.get_by_role('link', name='Start reading').click()
         assert page.url.endswith('#selected-notes')
         page.goto(base)
         page.keyboard.press('Tab'); page.keyboard.press('Enter')

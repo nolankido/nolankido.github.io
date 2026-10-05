@@ -3,28 +3,42 @@
   <channel>
     <title>Nolan Kido Notes</title>
     <link>https://nolankido.com/notes/</link>
-    <description>Occasional notes on tools, decisions, and learning.</description>
+    <description>Worked explanations and reflections on tools, decisions, learning, and creative work.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A working tool is not the same as a trustworthy one.</title>
       <link>https://nolankido.com/notes/trustworthy-tools/</link>
-      <description>A useful distinction between a convincing demonstration and evidence that a tool can be relied on.</description>
+      <description>Two calculations agree. Both are wrong. A small worked example of the difference between a convincing demonstration and independent evidence.</description>
       <guid isPermaLink="true">https://nolankido.com/notes/trustworthy-tools/</guid>
-      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>Good decisions, imperfect outcomes.</title>
-      <link>https://nolankido.com/notes/decision-quality/</link>
-      <description>A practical way to separate the quality of a decision from the result of a single uncertain outcome.</description>
-      <guid isPermaLink="true">https://nolankido.com/notes/decision-quality/</guid>
       <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>Learning something difficult from the beginning.</title>
       <link>https://nolankido.com/notes/learning-from-the-beginning/</link>
-      <description>Start with a concrete capability, identify the missing foundations, and make progress visible through practice.</description>
+      <description>A fractions example, a smaller-week option, and a learning loop that leaves most of the effort for practice rather than planning.</description>
       <guid isPermaLink="true">https://nolankido.com/notes/learning-from-the-beginning/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>What makes an explanation feel generous.</title>
+      <link>https://nolankido.com/notes/generous-explanations/</link>
+      <description>Two versions of the same instruction show how writing can save the reader effort without simplifying away what matters.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/generous-explanations/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Finishing is a decision.</title>
+      <link>https://nolankido.com/notes/finishing-is-a-decision/</link>
+      <description>Distinguish a necessary repair from another possible improvement, define done, and leave room for the rest of the day.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/finishing-is-a-decision/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Good decisions, imperfect outcomes.</title>
+      <link>https://nolankido.com/notes/decision-quality/</link>
+      <description>A fictional gathering, an uncertain forecast, and a $30 choice. Separate the calculation from the people and assumptions it leaves out.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/decision-quality/</guid>
       <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
     </item>
   </channel>

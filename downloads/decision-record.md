@@ -1,29 +1,32 @@
 # Decision record
 
-A short worksheet to complete before an uncertain outcome is known.
-Source note: https://nolankido.com/notes/decision-quality/
+A short thinking aid, not a validated assessment. Complete a private copy before deciding. Leave that reasoning intact when adding the later review. Skip fields that do not help.
 
-## Before deciding
-Date:
-Decision to make:
-What matters most:
-Options considered, including doing nothing:
-Information available now:
-Important uncertainties:
-Consequences of being wrong:
-How reversible is this choice?
-Chosen option and reasons:
-What evidence would make me change course?
-Review date or trigger:
+## Before the decision
+
+Date and decision: ____________________
+What matters here, beyond a number? ____________________
+Who is affected, and what conversation or consent is needed? ____________________
+Options genuinely available, including waiting: ____________________
+Evidence available now and its source: ____________________
+Assumptions, uncertainties, and anything not checked: ____________________
+Consequences of being wrong; what is reversible? ____________________
+Choice and why it is preferable to the alternatives: ____________________
+What new information would change the choice? ____________________
+When or under what condition should this be reviewed? ____________________
 
 ## After the outcome
-What happened?
-What was knowable at the time?
-What did I overlook?
-Which assumptions held up, and which changed?
-Was the original choice reasonable given the information then available?
-What will I change in the next decision?
 
-Keep the original reasoning intact. Add the review separately.
-This is a thinking aid, not a guarantee of a good outcome.
-Prepared with AI assistance for nolankido.com. Copy and adapt for your own use.
+Review date and what happened: ____________________
+Was the earlier reasoning reasonable given what was knowable? ____________________
+What was an uncertain outcome, and what was an avoidable omission? ____________________
+What should change next time? ____________________
+What remains uncertain? ____________________
+
+## When to stop using the worksheet
+
+Do not turn another person's preferences into scores they never agreed to. A conversation, consent, or qualified advice may matter more than completing this page. Use a smaller process for a reversible, low-consequence choice. Numbers do not make untested assumptions reliable.
+
+Worked fictional example and guidance: https://nolankido.com/resources/#decision-record
+Related note: https://nolankido.com/notes/decision-quality/
+Keep completed copies private; this website does not collect your answers.

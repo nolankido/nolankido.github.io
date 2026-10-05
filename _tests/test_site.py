@@ -86,7 +86,7 @@ class SiteTests(unittest.TestCase):
         feed = ET.fromstring(self.outputs[Path('feed.xml')])
         links = [i.findtext('link') for i in feed.findall('./channel/item')]
         self.assertEqual(set(links), {'https://nolankido.com' + p['path'] for p in notes})
-        self.assertEqual(len(links), 3)
+        self.assertEqual(len(links), len(notes))
         sitemap = ET.fromstring(self.outputs[Path('sitemap.xml')])
         urls = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
         self.assertEqual(set(urls), {'https://nolankido.com' + p['path'] for p in self.manifest if not p.get('noindex')})
@@ -97,7 +97,7 @@ class SiteTests(unittest.TestCase):
         form = contact.tags('form')[0]
         self.assertEqual(form['action'], 'https://submit-form.com/uPlTgRTAR')
         required = {a['name'] for _, a in contact.elements if 'required' in a}
-        self.assertEqual(required, {'name', 'email', 'reason', 'message'})
+        self.assertEqual(required, {'name', 'email', 'message'})
         self.assertIn('disabled', contact.tags('fieldset')[0])
         self.assertTrue(any(a.get('id') == 'form-success' and 'hidden' in a for _, a in contact.elements))
         vcard = self.outputs[Path('nolan-kido.vcf')]
