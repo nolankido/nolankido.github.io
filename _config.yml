@@ -1,0 +1,10 @@
+# Existing branch-based GitHub Pages publishing remains unchanged.
+include:
+  - .well-known
+exclude:
+  - _source
+  - _scripts
+  - _tests
+  - README.md
+  - DESIGN_HANDOFF.md
+  - requirements-test.txt

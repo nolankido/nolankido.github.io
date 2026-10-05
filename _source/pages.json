@@ -1,0 +1,107 @@
+[
+  {
+    "id": "home",
+    "path": "/",
+    "title": "Nolan Kido",
+    "seo_title": "Nolan Kido | Technology, Strategy & Creative Work",
+    "description": "The personal website of Nolan Kido. Ideas about useful tools, better decisions, learning, and creative work.",
+    "source": "home.html"
+  },
+  {
+    "id": "about",
+    "path": "/about/",
+    "title": "Curiosity, put to work.",
+    "seo_title": "About | Nolan Kido",
+    "description": "An introduction to Nolan Kido: technology, decision-making, creative work, and an interest in making complicated ideas useful.",
+    "kicker": "About",
+    "source": "about.html"
+  },
+  {
+    "id": "notes",
+    "path": "/notes/",
+    "title": "Ideas worth keeping.",
+    "seo_title": "Notes | Nolan Kido",
+    "description": "Occasional notes on trustworthy tools, decision-making, and learning. A small collection of ideas to return to.",
+    "kicker": "Notes",
+    "source": "notes.html"
+  },
+  {
+    "id": "contact",
+    "path": "/contact/",
+    "title": "Get in touch.",
+    "seo_title": "Contact | Nolan Kido",
+    "description": "Start a conversation with Nolan Kido about technology, learning, creative work, or something you have in common.",
+    "kicker": "Contact",
+    "source": "contact.html"
+  },
+  {
+    "id": "bio",
+    "path": "/bio/",
+    "title": "A brief introduction.",
+    "seo_title": "Short Biography | Nolan Kido",
+    "description": "Short public biographies of Nolan Kido for introductions and profiles.",
+    "kicker": "Biography",
+    "source": "bio.html"
+  },
+  {
+    "id": "card",
+    "path": "/card/",
+    "title": "Nolan Kido",
+    "seo_title": "Contact Card | Nolan Kido",
+    "description": "A simple way to save Nolan Kido’s website and get in touch.",
+    "kicker": "Contact card",
+    "source": "card.html"
+  },
+  {
+    "id": "privacy",
+    "path": "/privacy/",
+    "title": "Privacy, in plain language.",
+    "seo_title": "Privacy | Nolan Kido",
+    "description": "How nolankido.com handles website visits and contact-form messages.",
+    "kicker": "Privacy",
+    "source": "privacy.html"
+  },
+  {
+    "id": "404",
+    "path": "/404.html",
+    "title": "This page is not here.",
+    "seo_title": "Page Not Found | Nolan Kido",
+    "description": "Find your way back to Nolan Kido’s homepage, notes, or contact page.",
+    "kicker": "Page not found",
+    "source": "404.html",
+    "noindex": true
+  },
+  {
+    "id": "trustworthy-tools",
+    "path": "/notes/trustworthy-tools/",
+    "title": "A working tool is not the same as a trustworthy one.",
+    "seo_title": "A Working Tool Is Not the Same as a Trustworthy One | Nolan Kido",
+    "description": "A useful distinction between a convincing demonstration and evidence that a tool can be relied on.",
+    "kicker": "Tools & technology",
+    "source": "notes/trustworthy-tools.html",
+    "note": true,
+    "date": "2026-10-05"
+  },
+  {
+    "id": "decision-quality",
+    "path": "/notes/decision-quality/",
+    "title": "Good decisions, imperfect outcomes.",
+    "seo_title": "Good Decisions, Imperfect Outcomes | Nolan Kido",
+    "description": "A practical way to separate the quality of a decision from the result of a single uncertain outcome.",
+    "kicker": "Decisions & learning",
+    "source": "notes/decision-quality.html",
+    "note": true,
+    "date": "2026-10-05"
+  },
+  {
+    "id": "learning-from-the-beginning",
+    "path": "/notes/learning-from-the-beginning/",
+    "title": "Learning something difficult from the beginning.",
+    "seo_title": "Learning Something Difficult from the Beginning | Nolan Kido",
+    "description": "Start with a concrete capability, identify the missing foundations, and make progress visible through practice.",
+    "kicker": "Decisions & learning",
+    "source": "notes/learning-from-the-beginning.html",
+    "note": true,
+    "date": "2026-10-05"
+  }
+]

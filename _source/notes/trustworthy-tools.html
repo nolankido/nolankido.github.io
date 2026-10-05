@@ -1,0 +1,16 @@
+<p class="article-lead">A demonstration answers one question: can this tool produce a convincing result here? Trust requires a different question: what evidence supports relying on it elsewhere?</p>
+<h2 id="define-the-claim">Start with a claim small enough to check</h2>
+<p>“It works” is an unusually broad statement. A more useful claim describes the task, the conditions, and the expected result. A program might correctly total a list of ordinary numbers, for example, while behaving badly when an entry is missing or a value uses an unexpected format.</p>
+<p>That does not make the successful demonstration worthless. It means the demonstration supports a narrower conclusion than it first appears to. Naming that conclusion makes it easier to decide what to test next.</p>
+<h2 id="look-for-failure">Ask what would reveal a mistake</h2>
+<p>A useful test starts with an expectation that does not depend entirely on the tool being tested. For a small calculation, work out the answer independently. For a transformation, check a property that should survive the change. For a form, test a failed submission as carefully as a successful one.</p>
+<p>The Python <a href="https://docs.python.org/3/library/unittest.html">unit-testing documentation</a> describes a test case as a check of a specific response to particular inputs. That is a helpful reminder of scope: passing the checks that exist does not settle the cases no one has considered.</p>
+<p>It is also worth asking whether two apparently independent checks share the same assumption. Copying the same formula into a second program may reproduce a mistake rather than detect it.</p>
+<h2 id="make-limits-visible">Make limitations part of the result</h2>
+<p>Consider an illustrative tool that estimates how long a task will take. Reporting “three hours” without context hides important questions. Which tasks informed the estimate? Was setup time included? How much variation was observed? Has this kind of task been seen before?</p>
+<p>A more useful result might say that the estimate applies to a defined category and that unusual cases have not been evaluated. This is not an excuse for weak work. It helps the person using the result decide whether it fits the decision in front of them.</p>
+<h2 id="earn-reliance">Earn reliance in stages</h2>
+<p>A practical sequence is to define the claim, check small cases independently, test likely failure conditions, and expand the claim only when the evidence supports doing so. The level of scrutiny should reflect the consequences of being wrong.</p>
+<p>A tool used to arrange a draft can tolerate different mistakes from one used to make an irreversible decision. The same impressive interface should not make those standards interchangeable.</p>
+<p>The distinction to keep is simple: a result can be useful before it is thoroughly validated, but its presentation should not imply that the validation has already happened.</p>
+<p class="article-takeaway">The next useful question is not just “Does it work?” It is “What, exactly, have we established?”</p>
