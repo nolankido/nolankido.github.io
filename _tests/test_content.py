@@ -2,6 +2,7 @@
 from fractions import Fraction
 from html import unescape
 import json
+import hashlib
 from pathlib import Path
 import re
 from statistics import mean, median
@@ -71,7 +72,7 @@ class ContentTests(unittest.TestCase):
             if path.suffix != '.html':
                 continue
             sources = re.findall(r'<script[^>]+src="([^"]+)"', content)
-            self.assertEqual(sources, ['/assets/contact.js?v=20261005'] if path == Path('contact/index.html') else [])
+            self.assertEqual(sources, ['/assets/contact.js?v=' + hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]] if path == Path('contact/index.html') else [])
         self.assertNotIn('<form', outputs[Path('resources/index.html')])
         self.assertNotIn('reason for contact, and your message', outputs[Path('privacy/index.html')])
         self.assertIn('Topic and additional context are optional.', outputs[Path('privacy/index.html')])
