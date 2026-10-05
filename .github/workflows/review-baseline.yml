@@ -1,0 +1,30 @@
+name: Comprehensive site baseline audit
+on:
+  push:
+    branches: [site-review-20261005]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Existing regression suite
+        run: |
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p 'test_*.py' -v
+          python -m pip install -r requirements-test.txt html5lib==1.1
+          python -m playwright install --with-deps chromium
+          npm install --prefix "$RUNNER_TEMP/nk-qa" --no-audit --no-fund axe-core@4.10.3
+          python _tests/browser.py
+          python _tests/design_browser.py
+      - name: Record comprehensive baseline
+        env:
+          AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
+        run: python _tests/review_browser.py --report-only
