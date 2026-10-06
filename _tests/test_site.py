@@ -108,7 +108,12 @@ class SiteTests(unittest.TestCase):
             self.assertNotRegex(content, r'(?i)(mailto:|-----BEGIN .*PRIVATE KEY|gh[pousr]_[A-Za-z0-9]{20,})')
         for path, page in self.pages.items():
             scripts = [a['src'] for a in page.tags('script') if 'src' in a]
-            self.assertEqual(len(scripts), 1 if path == Path('contact/index.html') else 0)
+            self.assertEqual(scripts.count('https://cloud.umami.is/script.js'), 1)
+            other_scripts = [src for src in scripts if src != 'https://cloud.umami.is/script.js']
+            self.assertEqual(len(other_scripts), 1 if path == Path('contact/index.html') else 0)
+            for src in other_scripts:
+                self.assertFalse(urlsplit(src).scheme or urlsplit(src).netloc)
+                self.assertEqual(urlsplit(src).path, '/assets/contact.js')
         js = (ROOT / 'assets/contact.js').read_text()
         for forbidden in ['console.log', 'localStorage', 'sessionStorage']:
             self.assertNotIn(forbidden, js)

@@ -66,13 +66,14 @@ class ContentTests(unittest.TestCase):
         for slug in ['decision-record', 'tool-trust-check', 'learning-loop']:
             self.assertIn('Fictional example', (ROOT / '_source/examples' / (slug + '.html')).read_text())
 
-    def test_no_new_tracking_scripts_and_no_private_worksheet_form(self):
+    def test_only_approved_scripts_and_no_private_worksheet_form(self):
         outputs = build.build_outputs()
         for path, content in outputs.items():
             if path.suffix != '.html':
                 continue
             sources = re.findall(r'<script[^>]+src="([^"]+)"', content)
-            self.assertEqual(sources, ['/assets/contact.js?v=' + hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]] if path == Path('contact/index.html') else [])
+            expected = (['/assets/contact.js?v=' + hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]] if path == Path('contact/index.html') else []) + ['https://cloud.umami.is/script.js']
+            self.assertEqual(sources, expected)
         self.assertNotIn('<form', outputs[Path('resources/index.html')])
         self.assertNotIn('reason for contact, and your message', outputs[Path('privacy/index.html')])
         self.assertIn('Topic and additional context are optional.', outputs[Path('privacy/index.html')])

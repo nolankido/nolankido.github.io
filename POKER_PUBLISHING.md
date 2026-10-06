@@ -112,7 +112,8 @@ illustrative hands. Do not call an analysis solver-verified without appropriate
 support. Resolve permissions and remove private information before review.
 
 Videos open on YouTube through normal links. No iframe, auto-play, remote thumbnail
-or analytics is added. Chapter links start playback at the recorded second. Syntax
+or YouTube analytics is added. Sitewide Umami pageview analytics is described in
+`ANALYTICS.md` and the public privacy page. Chapter links start playback at the recorded second. Syntax
 checks do not prove a video exists, is yours, or is public; the signed-out check is
 manual and remains part of owner approval. The website does not collect player data.
 

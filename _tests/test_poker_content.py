@@ -171,6 +171,7 @@ class PokerContentTests(unittest.TestCase):
         self.assertNotIn('/assets/poker.css',build.build_outputs()[Path('index.html')])
 
 BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html', '_source/site.json', 'about/index.html', 'assets/contact.js', 'assets/hubs.css', 'assets/site.css', 'bio/index.html', 'card/index.html', 'contact/index.html', 'creative/index.html', 'feed.xml', 'index.html', 'notes/decision-quality/index.html', 'notes/finishing-is-a-decision/index.html', 'notes/generous-explanations/index.html', 'notes/index.html', 'notes/learning-from-the-beginning/index.html', 'notes/trustworthy-tools/index.html', 'privacy/index.html', 'resources/index.html', 'styles.css', 'technology/index.html']
-BASELINE_DIGEST = '184aa81c86236e6ffeae71fb36d8aa87a1c1e39462d1ffdf69d8f908356c9c9a'
+# October 6: approved Umami tag and privacy disclosure; other page bytes verified unchanged.
+BASELINE_DIGEST = 'e542fb7aef01076db1a1cd3dfbe9a76dde579465d12e1e063febd82696087c25'
 
 if __name__=='__main__': unittest.main(verbosity=2)
