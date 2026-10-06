@@ -68,3 +68,7 @@ python _scripts/check_live.py --attempts 10 --interval 10
 The live verifier makes GET requests to nolankido.com only. It checks public pages, assets, downloads, the custom 404, and excluded source paths. It does not send form messages. A successful build or artifact upload is not a completed deployment: check Pages job status as well as the live bytes. If the bounded live check times out during a provider delay, inspect the deployment before retrying; do not automatically rewrite or roll back working code.
 
 See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs. Revert faulty changes rather than rewriting history.
+
+## Technology-first home
+
+The current gateway hierarchy is Technology, Poker, Creative Work. `/technology/` and `/creative/` are small, explicit introductions with existing reading; Notes remains the cross-subject archive. `TECHNOLOGY_RELEASE.md` supersedes the earlier poker-first ranking. The live checker covers 37 responses.

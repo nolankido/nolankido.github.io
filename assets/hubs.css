@@ -1,18 +1,46 @@
-/* Personal gateway and poker section. The approved base design stays unchanged. */
+/* Personal gateway and topic sections. The approved base design stays unchanged. */
 .brand-home { padding-bottom: 32px; }
 .brand-home .hero-heading { padding-bottom: 24px; }
 .brand-home .brand-statement { max-width: 800px; font-size: clamp(1.9rem, 3.5vw, 3rem); line-height: 1.2; margin-top: 4px; }
 .brand-home .hero-caption { max-width: 640px; margin-bottom: 0; }
 .destination-section { padding-block: 30px 42px; }
-.destination-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+.destination-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; }
 .destination { display: flex; flex-direction: column; min-width: 0; padding: 30px; border: 1px solid var(--line-dark); text-decoration: none; }
-.destination h3 { font-size: clamp(2rem, 4vw, 3.5rem); margin: 22px 0 16px; }
+.destination h3 { font-size: clamp(1.8rem, 3.3vw, 2.8rem); overflow-wrap: anywhere; margin: 22px 0 16px; }
 .destination p { font: 1.1rem/1.6 var(--serif); max-width: 33ch; margin-bottom: 28px; }
 .destination-label { font: .68rem/1.6 var(--mono); text-transform: uppercase; }
 .destination-action { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-top: auto; padding-top: 16px; border-top: 1px solid currentColor; font: 500 .9rem/1.5 var(--sans); }
 .destination-action > span { font-size: 1.4rem; }
-.destination-poker { background: var(--green); color: var(--paper-light); border-top: 4px solid var(--red); }
-.destination-notes { background: var(--panel); }
+.destination-technology { grid-column: 1 / -1; background: var(--green); color: var(--paper-light); border-top: 4px solid var(--red); padding: 30px 34px; }
+.destination-technology h3 { font-size: clamp(2.25rem, 5.7vw, 4.6rem); margin: 18px 0 14px; }
+.destination-technology p { max-width: 44ch; font-size: 1.2rem; }
+.technology-panel-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 30px; align-items: center; }
+.technology-topics { display: grid; align-content: center; gap: 12px; border-left: 1px solid #809489; padding-left: 28px; font: .8rem/1.65 var(--mono); }
+.technology-topics span { display: block; }
+.destination-poker { background: var(--panel); color: var(--basalt); }
+.destination-creative { background: var(--paper-light); }
+.topic-introduction { padding-top: 24px; }
+.topic-introduction .intro { font-family: var(--serif); font-weight: 400; }
+.destination-copy { min-width: 0; }
+.site-bar .shell { flex-wrap: wrap; }
+@media (max-width: 1050px) and (min-width: 761px) {
+  .technology-panel-body { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .technology-topics { display: none; }
+}
+@media (max-width: 620px) {
+  .nav { flex-wrap: wrap; padding-block: 8px; gap: 4px 14px; }
+  .nav-links { flex: 1; display: grid; grid-template-columns: auto auto auto; justify-content: end; gap: 2px 12px; }
+  .nav-links a { white-space: nowrap; }
+  .nav-links li:nth-child(4) { grid-column: 2; justify-self: end; }
+  .nav-links li:last-child { grid-column: 3; justify-self: end; }
+  .nav-links li:last-child a { padding: 0; background: transparent; color: var(--basalt); text-decoration: underline; }
+  .nav { align-items: flex-start; }
+  .nav .brand { margin-top: 5px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .destination { transition: border-color .15s ease; }
+}
+
 .destination:hover h3, .destination:focus-visible h3 { text-decoration: underline; text-underline-offset: .15em; }
 .destination:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .home-connection { padding-block: 28px 36px; }
@@ -49,6 +77,10 @@
 @media (max-width: 760px) {
   .destination-grid { grid-template-columns: minmax(0, 1fr); }
   .destination { padding: 24px; }
+  .technology-panel-body { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .technology-topics { display: none; }
+  .destination-technology h3 { font-size: clamp(1.85rem, 7.8vw, 3.5rem); }
+  .destination-technology p { font-size: 1.15rem; }
   .destination h3 { margin-top: 16px; }
   .destination p { max-width: 46ch; }
   .poker-principles { grid-template-columns: minmax(0, 1fr); gap: 22px; }

@@ -3,8 +3,8 @@
     "id": "home",
     "path": "/",
     "title": "Nolan Kido",
-    "seo_title": "Nolan Kido | Poker, Technology & Creative Work",
-    "description": "Nolan Kido: tournament poker, useful tools, and creative work. Explore the poker section or browse selected writing on technology, decisions, and learning.",
+    "seo_title": "Nolan Kido | Technology, Poker & Creative Work",
+    "description": "Nolan Kido builds useful tools, plays tournament poker, and explores ideas through writing and visual storytelling. Explore technology, poker, and creative work.",
     "source": "home.html",
     "updated": "2026-10-05"
   },
@@ -13,7 +13,7 @@
     "path": "/about/",
     "title": "A little about me.",
     "seo_title": "About | Nolan Kido",
-    "description": "About Nolan Kido: tournament poker, building tools, writing, and visual storytelling. A personal introduction and a few ways into the site.",
+    "description": "Meet Nolan Kido: building useful tools, playing tournament poker, and exploring writing, design, and visual storytelling.",
     "kicker": "About",
     "source": "about.html",
     "updated": "2026-10-05"
@@ -166,6 +166,26 @@
     "kicker": "Poker / Hand review",
     "source": "poker/reviewing-a-hand.html",
     "section": "poker",
+    "updated": "2026-10-05"
+  },
+  {
+    "id": "technology",
+    "path": "/technology/",
+    "title": "Technology",
+    "seo_title": "Technology | Nolan Kido",
+    "description": "Practical AI, useful software, and the work of making tools trustworthy. Selected reading and a practical resource from Nolan Kido.",
+    "kicker": "Nolan Kido / Technology",
+    "source": "technology/home.html",
+    "updated": "2026-10-05"
+  },
+  {
+    "id": "creative",
+    "path": "/creative/",
+    "title": "Creative Work",
+    "seo_title": "Creative Work | Nolan Kido",
+    "description": "Writing, design, and visual storytelling. Selected writing from Nolan Kido on explanation and finishing creative work.",
+    "kicker": "Nolan Kido / Creative Work",
+    "source": "creative/home.html",
     "updated": "2026-10-05"
   }
 ]

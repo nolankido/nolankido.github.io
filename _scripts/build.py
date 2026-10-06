@@ -94,7 +94,7 @@ def build_outputs() -> dict[Path, str]:
         body = fill(source.read_text(encoding='utf-8'), values)
         section = p.get('section') or ('notes' if p.get('note') else p['id'])
         nav = ''.join(f'<li><a href="/{name}/"' + ((' aria-current="page"' if p['path'] == '/' + name + '/' else ' aria-current="location"') if section == name else '')
-                      + f'>{name.title()}</a></li>' for name in ['poker', 'notes', 'about', 'contact'])
+                      + f'>{label}</a></li>' for name, label in [('technology', 'Technology'), ('poker', 'Poker'), ('creative', 'Creative Work'), ('about', 'About'), ('contact', 'Contact')])
         canonical = site['url'] + p['path']
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
