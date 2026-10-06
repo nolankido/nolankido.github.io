@@ -1,0 +1,22 @@
+name: Prepare Poker labs expansion
+on:
+  push:
+    branches: [poker-labs-expansion-20261006]
+    paths: ['.github/workflows/prepare-labs.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Export tracked source for local review
+        run: git archive --format=zip HEAD -o /tmp/poker-labs-source.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poker-labs-source
+          path: /tmp/poker-labs-source.zip
+          retention-days: 1
