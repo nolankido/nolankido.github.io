@@ -52,7 +52,7 @@ try:
                     assert page.evaluate('document.documentElement.scrollWidth') <= width
                     expect(page.locator('.worksheet pre').first).to_be_visible()
                 if entry.get('poker_guide'):
-                    details = page.locator('.viewer-question')
+                    details = page.locator('.viewer-question, .workshop-question')
                     if details.count():
                         summary = details.first.locator('summary')
                         summary.focus()
@@ -113,8 +113,32 @@ try:
         assert page.url.endswith('/poker/')
         page.get_by_role('link', name='Nolan Kido home', exact=True).click()
         assert page.url == base + '/'
+
+        # The beginner directory and after-play directory now partition the guides.
+        # Check actual link targets, not a count that could hide a missing article.
+        guide_routes = {entry['path'] for entry in manifest if entry.get('poker_guide')}
+        directories = [('/poker/start-here/', '.viewer-library-grid article'),
+                       ('/poker/study/', '#workshops .viewer-library-grid article')]
+        listed = set()
+        for directory, selector in directories:
+            page.goto(base + directory)
+            cards = page.locator(selector)
+            routes = cards.evaluate_all('(nodes) => nodes.map(n => n.querySelector("a")?.getAttribute("href"))')
+            assert routes and None not in routes, ('empty-or-unlinked-directory', directory)
+            assert len(routes) == len(set(routes)), ('duplicate-guide', directory, routes)
+            assert not listed.intersection(routes), ('guide-in-both-directories', directory)
+            assert set(routes) <= guide_routes, ('unexpected-guide', directory, routes)
+            listed.update(routes)
+        assert listed == guide_routes, ('missing-guide', guide_routes - listed)
+        expect(page.locator('#study-routes .viewer-learning-paths article')).to_have_count(3)
+        for slug in ['poker-study-cycle', 'poker-short-stack-record', 'poker-results-review', 'poker-episode-plan']:
+            with page.expect_download() as info:
+                page.locator(f'#creator-workbench a[href="/downloads/{slug}.md"]').click()
+            download = info.value
+            assert download.suggested_filename == slug + '.md'
+            assert Path(download.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
+
         page.goto(base + '/poker/start-here/')
-        expect(page.locator('.viewer-library-grid article')).to_have_count(sum(bool(p.get('poker_guide')) for p in manifest))
         page.locator('.viewer-library-grid a[href="/poker/hand-rankings/"]').click()
         assert page.url.endswith('/poker/hand-rankings/')
         with page.expect_download() as reference:
@@ -145,7 +169,7 @@ try:
         assert page.evaluate('document.activeElement.id') == 'main'
         assert not errors, errors
         assert not missing, missing
-        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 6 byte-matched downloads, expanded viewer answers and spacing, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
+        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 10 byte-matched downloads, complete guide discovery across both directories, expanded viewer/workshop answers and spacing, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
         browser.close()
 finally:
     server.shutdown()
