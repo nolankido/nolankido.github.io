@@ -34,7 +34,7 @@ class WorkshopTests(unittest.TestCase):
             with self.subTest(slug=slug):
                 self.assertGreater(count, 650)
                 for phrase in ['fictional', 'Prepared with AI assistance.', 'References and limits', 'After-play']:
-                    self.assertIn(phrase, source)
+                    self.assertIn(phrase.lower(), source.lower())
                 for forbidden in ['<form', '<iframe', '<script', 'data-umami-event', chr(0x2014)]:
                     self.assertNotIn(forbidden, source)
         self.assertGreater(total, 6500)

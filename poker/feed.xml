@@ -7,6 +7,55 @@
     <language>en-us</language>
     <atom:link href="https://nolankido.com/poker/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Results deserve context.</title>
+      <link>https://nolankido.com/poker/variance-and-results/</link>
+      <description>Separate tournament ROI, trip costs, sample uncertainty and decision evidence with worked accounting and probability examples.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/variance-and-results/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>When more chips are not enough.</title>
+      <link>https://nolankido.com/poker/tournament-equity/</link>
+      <description>A checkable three-player ICM example explains prize equity, risk premiums and why gaining chips can lower expected payout.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournament-equity/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A short stack is a situation, not a chart.</title>
+      <link>https://nolankido.com/poker/short-stack-decisions/</link>
+      <description>Record stacks, antes, action trees and tournament objectives before comparing short-stack decisions or push/fold references.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/short-stack-decisions/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>From possible hands to weighted ranges.</title>
+      <link>https://nolankido.com/poker/range-combinations/</link>
+      <description>Count physical combinations, remove known cards, weight betting frequencies and test a fictional river range.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/range-combinations/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Twelve checks. One useful repair.</title>
+      <link>https://nolankido.com/poker/practice-room/</link>
+      <description>Twelve answer-reveal exercises on pot odds, ranges, short stacks, ICM, results and honest poker storytelling.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/practice-room/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Pot odds, with the assumptions visible.</title>
+      <link>https://nolankido.com/poker/pot-odds-workshop/</link>
+      <description>Price calls and raises, distinguish draw probabilities from equity, and test the assumptions behind a bluff or call.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/pot-odds-workshop/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>From hand notes to a poker vlog.</title>
+      <link>https://nolankido.com/poker/hand-to-vlog/</link>
+      <description>An editing workbench for honest hand reconstruction, clear graphics, useful narration and poker episode companion pages.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/hand-to-vlog/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Questions new viewers ask.</title>
       <link>https://nolankido.com/poker/viewer-questions/</link>
       <description>A guide to reading the graphics, separating evidence from commentary, and enjoying a poker story without confusing the edit with the whole session.</description>

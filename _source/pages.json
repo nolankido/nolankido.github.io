@@ -152,11 +152,11 @@
     "path": "/poker/",
     "title": "Poker.",
     "seo_title": "Poker | Nolan Kido",
-    "description": "Tournament poker, vlog episode companions, hand reviews, and private-use study resources by Nolan Kido.",
+    "description": "Tournament poker, beginner viewer guides, after-play study workshops, hand reviews and a practical poker vlog workbench by Nolan Kido.",
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
-    "updated": "2026-10-05"
+    "updated": "2026-10-06"
   },
   {
     "id": "poker-hand-review",
@@ -200,18 +200,18 @@
     "kicker": "Poker / Start here",
     "source": "poker/start-here.html",
     "date": "2026-10-05",
-    "updated": "2026-10-05"
+    "updated": "2026-10-06"
   },
   {
     "id": "poker-study",
     "path": "/poker/study/",
     "title": "The study desk.",
     "seo_title": "Poker Study Desk | Nolan Kido",
-    "description": "Editable hand-review and session-debrief sheets with examples, previews, and practical instructions for use after play.",
+    "description": "Seven after-play workshops, twelve practice questions, a five-session study cycle and private-use records for tournament study and poker vlog planning.",
     "section": "poker",
     "kicker": "Poker / Between sessions",
     "source": "poker/study.html",
-    "updated": "2026-10-05"
+    "updated": "2026-10-06"
   },
   {
     "id": "poker-holdem-basics",
@@ -380,6 +380,97 @@
     "section": "poker",
     "date": "2026-10-05",
     "updated": "2026-10-05",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-pot-odds-workshop",
+    "path": "/poker/pot-odds-workshop/",
+    "title": "Pot odds, with the assumptions visible.",
+    "seo_title": "Pot Odds Workshop | Nolan Kido",
+    "description": "Price calls and raises, distinguish draw probabilities from equity, and test the assumptions behind a bluff or call.",
+    "kicker": "Poker / After-play study",
+    "source": "poker/pot-odds-workshop.html",
+    "section": "poker",
+    "date": "2026-10-06",
+    "updated": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-short-stack-decisions",
+    "path": "/poker/short-stack-decisions/",
+    "title": "A short stack is a situation, not a chart.",
+    "seo_title": "Short-Stack Study Workshop | Nolan Kido",
+    "description": "Record stacks, antes, action trees and tournament objectives before comparing short-stack decisions or push/fold references.",
+    "kicker": "Poker / After-play study",
+    "source": "poker/short-stack-decisions.html",
+    "section": "poker",
+    "date": "2026-10-06",
+    "updated": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-tournament-equity",
+    "path": "/poker/tournament-equity/",
+    "title": "When more chips are not enough.",
+    "seo_title": "Tournament Equity and ICM | Nolan Kido",
+    "description": "A checkable three-player ICM example explains prize equity, risk premiums and why gaining chips can lower expected payout.",
+    "kicker": "Poker / After-play study",
+    "source": "poker/tournament-equity.html",
+    "section": "poker",
+    "date": "2026-10-06",
+    "updated": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-range-combinations",
+    "path": "/poker/range-combinations/",
+    "title": "From possible hands to weighted ranges.",
+    "seo_title": "Range Combinations Workshop | Nolan Kido",
+    "description": "Count physical combinations, remove known cards, weight betting frequencies and test a fictional river range.",
+    "kicker": "Poker / After-play study",
+    "source": "poker/range-combinations.html",
+    "section": "poker",
+    "date": "2026-10-06",
+    "updated": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-variance-and-results",
+    "path": "/poker/variance-and-results/",
+    "title": "Results deserve context.",
+    "seo_title": "Tournament Variance and Results | Nolan Kido",
+    "description": "Separate tournament ROI, trip costs, sample uncertainty and decision evidence with worked accounting and probability examples.",
+    "kicker": "Poker / After-play study",
+    "source": "poker/variance-and-results.html",
+    "section": "poker",
+    "date": "2026-10-06",
+    "updated": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-hand-to-vlog",
+    "path": "/poker/hand-to-vlog/",
+    "title": "From hand notes to a poker vlog.",
+    "seo_title": "From Hand Notes to a Poker Vlog | Nolan Kido",
+    "description": "An editing workbench for honest hand reconstruction, clear graphics, useful narration and poker episode companion pages.",
+    "kicker": "Poker / After-play study",
+    "source": "poker/hand-to-vlog.html",
+    "section": "poker",
+    "date": "2026-10-06",
+    "updated": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-practice-room",
+    "path": "/poker/practice-room/",
+    "title": "Twelve checks. One useful repair.",
+    "seo_title": "Poker Study Practice Room | Nolan Kido",
+    "description": "Twelve answer-reveal exercises on pot odds, ranges, short stacks, ICM, results and honest poker storytelling.",
+    "kicker": "Poker / After-play study",
+    "source": "poker/practice-room.html",
+    "section": "poker",
+    "date": "2026-10-06",
+    "updated": "2026-10-06",
     "poker_guide": true
   }
 ]

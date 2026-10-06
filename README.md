@@ -94,3 +94,12 @@ on positions/stacks, board texture, ranges/bets, event formats, table context an
 worked viewing scenes. See `VIEWER_NEXT_RELEASE.md`. The directory, links, examples
 and download are covered by the existing CI suite and `test_viewer_next.py`.
 No changes to the Technology-first landing page are part of this release.
+
+## After-play workshops
+
+The Poker study desk now connects seven substantial workshops, twelve self-check
+exercises and four new private-use worksheets. See `POKER_WORKSHOPS_RELEASE.md`.
+All examples are fictional and the existing publishing approval workflow remains
+in place. Run `python _tests/workshops_browser.py` for the targeted disclosure and
+reading-flow checks. The Technology-first gateway and Umami configuration are
+unchanged.
