@@ -26,6 +26,10 @@ jobs:
           old="expected.append('/assets/poker-library.js?v='"
           assert text.count(old)==1
           p.write_text(text.replace(old,"expected.insert(0, '/assets/poker-library.js?v='"))
+          p=Path('_source/poker/home.html');text=p.read_text()
+          old='<nav class="poker-jump" aria-label="Viewer learning shortcuts">'
+          assert text.count(old)==1
+          p.write_text(text.replace(old,old+'<a href="/poker/follow-along/">Practice following a hand</a>'))
           PY
           python _scripts/build.py
           python _scripts/build.py --check
