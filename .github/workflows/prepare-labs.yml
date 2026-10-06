@@ -4,19 +4,57 @@ on:
     branches: [poker-labs-expansion-20261006]
     paths: ['.github/workflows/prepare-labs.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
-  snapshot:
+  prepare:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          persist-credentials: false
-      - name: Export tracked source for local review
-        run: git archive --format=zip HEAD -o /tmp/poker-labs-source.zip
+          ref: poker-labs-expansion-20261006
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Author, integrate and validate
+        run: |
+          python _scripts/author_labs_once.py
+          python _scripts/integrate_labs_once.py
+          python _scripts/build.py
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p 'test_*.py' -v
+          git diff --check
+      - name: Confirm preservation and commit on feature branch only
+        run: |
+          test "$GITHUB_REF_NAME" = 'poker-labs-expansion-20261006'
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+          base='f651f5a674c98e5ff7c2faeeb86ad9f04caa3122'
+          paths=subprocess.check_output(['git','ls-tree','-r','--name-only',base],text=True).splitlines()
+          allowed={'_source/poker/home.html','_source/poker/library.html','_source/poker/study.html','assets/poker-reader.css'}
+          protected=[]
+          for name in paths:
+              if name in allowed: continue
+              if name.startswith('assets/') or name in ['styles.css','_source/layout.html','_source/site.json','_source/poker/catalog.json','feed.xml','ANALYTICS.md']:
+                  protected.append(name)
+              elif name.endswith('.html') and not name.startswith('poker/'):
+                  protected.append(name)
+          for name in protected:
+              assert Path(name).read_bytes()==subprocess.check_output(['git','show',base+':'+name]),name
+          print('PROTECTED_FILES_UNCHANGED='+str(len(protected)))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add _source _scripts/build.py _scripts/poker_library.py assets/poker-reader.css poker sitemap.xml
+          git diff --cached --stat
+          git commit -m 'Publish editable Decision Lab sources, series index and reader improvements'
+          git push origin HEAD:refs/heads/poker-labs-expansion-20261006
+      - name: Export integrated sources for review
+        run: git archive --format=zip HEAD -o /tmp/poker-labs-reviewed.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: poker-labs-source
-          path: /tmp/poker-labs-source.zip
+          name: poker-labs-reviewed
+          path: /tmp/poker-labs-reviewed.zip
           retention-days: 1
