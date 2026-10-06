@@ -8,8 +8,8 @@ import tempfile
 
 root = Path(__file__).resolve().parents[1]
 parent = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], cwd=root, text=True).strip()
-if parent != '0cd27e76fbcba5f1d15b573fe62bf930693b9ba8':
-    raise SystemExit('Unexpected baseline. Review current main before applying.')
+if parent not in {'0cd27e76fbcba5f1d15b573fe62bf930693b9ba8', '3a2a5f75a51c70bc44cae48bb3b35281edd11a52'}:
+    raise SystemExit('Unexpected preparation parent. Review current main before applying.')
 parts = [root / '_scripts' / f'_viewer-library-{i}.bin' for i in range(1, 4)]
 patch = lzma.decompress(b''.join(path.read_bytes() for path in parts))
 if hashlib.sha256(patch).hexdigest() != 'bbf5617c2d8e201c55b1e29c5f12fffb5b81455bc345a40f61468cd0c74cc595':

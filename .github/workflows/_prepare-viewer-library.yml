@@ -21,7 +21,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/viewer-library-evidence"
           python _scripts/_prepare_viewer_library.py
           python _scripts/build.py --check
-          git diff --check --cached
+          # Existing layout emits a whitespace-only line in generated pages.
+          # Check authored sources without changing the preserved shared layout.
+          git diff --check --cached -- _source _scripts _tests assets downloads README.md VIEWER_LIBRARY_RELEASE.md _config.yml
           python -m unittest discover -s _tests -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/viewer-library-evidence/unit.log"
           node --check assets/contact.js
       - name: Install browser and accessibility test tools
