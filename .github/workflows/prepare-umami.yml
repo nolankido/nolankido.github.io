@@ -13,13 +13,15 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: install-umami-20261006
+          fetch-depth: 0
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
-      - name: Apply narrowly scoped source changes
+      - name: Apply the pinned installation and verify the exact change scope
         run: |
           python - <<'PY'
           from pathlib import Path
+          import subprocess
           import textwrap
 
           def replace_once(name, old, new):
@@ -29,142 +31,46 @@ jobs:
                   raise SystemExit(f'{name}: expected exactly one replacement target')
               path.write_text(content.replace(old, new), encoding='utf-8')
 
-          tracker = '''  <script defer src="https://cloud.umami.is/script.js" data-website-id="51bfd4d7-08ac-4299-924b-621af60fa7f1" data-domains="nolankido.com,www.nolankido.com" data-do-not-track="true" data-exclude-search="true" data-exclude-hash="true"></script>\n'''
-          replace_once('_source/layout.html', '</head>', tracker + '</head>')
-          replace_once('_source/privacy.html', 'Updated October 5, 2026', 'Updated October 6, 2026')
-          replace_once('_source/privacy.html', 'This website does not add advertising pixels, behavioral analytics, or a visitor-tracking dashboard.', 'This website uses Umami Cloud for pageview analytics. It does not add advertising pixels.')
-          privacy = '''          <h2>Website analytics</h2>
-                    <p>Umami Cloud helps me understand which pages people read and how they find this site. Its reports include pageviews, referring websites, browser and device information, and approximate location such as country. Umami describes its tracking code as cookie-free and does not track visitors across websites. See the <a href="https://docs.umami.is/docs/faq">Umami documentation</a> and <a href="https://umami.is/privacy">Umami privacy policy</a>.</p>
-                    <p>This installation records pageviews only. It does not send contact-form fields, names, email addresses, or message contents as analytics events. URL query strings and fragments are excluded from recorded page URLs, and the tracker is configured to respect your browser's Do Not Track setting. There are no session recordings or advertising profiles added by this site.</p>
-                    <p>Your browser contacts Umami to load the script and send analytics requests, which necessarily involves technical network information such as your IP address. The website and contact form remain usable when analytics is blocked. Hosting, font, and form providers have separate practices described on this page.</p>
-          '''
-          privacy = '\n'.join(line[10:] if line.startswith('          ') else line for line in privacy.split('\n'))
-          # Keep the existing source indentation and all unrelated policy sections.
-          privacy = '\n'.join('          ' + line if line else '' for line in privacy.split('\n'))
-          replace_once('_source/privacy.html', '          <h2>Typography</h2>', privacy + '          <h2>Typography</h2>')
-          replace_once('_source/pages.json', '    "source": "privacy.html"\n', '    "source": "privacy.html",\n    "updated": "2026-10-06"\n')
-          replace_once('README.md', 'There is no runtime application server, database, advertising, or analytics dependency.', 'There is no runtime application server or database. Optional, cookie-free Umami Cloud pageview analytics is installed through the shared layout; the site works when analytics is blocked. See `ANALYTICS.md`.')
-          replace_once('POKER_PUBLISHING.md', 'or analytics is added.', 'or YouTube analytics is added. Sitewide Umami pageview analytics is described in\n`ANALYTICS.md` and the public privacy page.')
-          replace_once('_tests/test_site.py', "            self.assertEqual(len(scripts), 1 if path == Path('contact/index.html') else 0)", "            self.assertEqual(scripts.count('https://cloud.umami.is/script.js'), 1)\n            other_scripts = [src for src in scripts if src != 'https://cloud.umami.is/script.js']\n            self.assertEqual(len(other_scripts), 1 if path == Path('contact/index.html') else 0)\n            for src in other_scripts:\n                self.assertFalse(urlsplit(src).scheme or urlsplit(src).netloc)\n                self.assertEqual(urlsplit(src).path, '/assets/contact.js')")
-          Path('_tests/test_analytics.py').write_text(textwrap.dedent('''\
-          """Umami installation contracts; these checks never contact analytics servers."""
-          from pathlib import Path
-          import unittest
-          from test_site import Page, ROOT, build
+          # Reuse the reviewed source patch from this feature branch's first commit.
+          # This workflow is temporary and will be removed before merging to main.
+          source = subprocess.check_output(['git', 'show', 'ea61cabe22284dc17183bc6baa262eb4d6bfa9f0:.github/workflows/prepare-umami.yml'], text=True)
+          start = '      - name: Apply narrowly scoped source changes\n        run: |\n'
+          end = '      - name: Generate and validate public files\n'
+          if source.count(start) != 1 or source.count(end) != 1:
+              raise SystemExit('Pinned installation boundaries changed')
+          script = textwrap.dedent(source.split(start, 1)[1].split(end, 1)[0])
+          paths = subprocess.check_output(['git', 'ls-files', '*.html'], text=True).splitlines()
+          before = {name: Path(name).read_bytes() for name in paths if not name.startswith(('_source/', '_tests/'))}
+          subprocess.run(['bash', '-e', '-c', script], check=True)
+          subprocess.run(['python', '_scripts/build.py'], check=True)
+          tracker = b'  <script defer src="https://cloud.umami.is/script.js" data-website-id="51bfd4d7-08ac-4299-924b-621af60fa7f1" data-domains="nolankido.com,www.nolankido.com" data-do-not-track="true" data-exclude-search="true" data-exclude-hash="true"></script>\n'
+          verified = 0
+          for name, old in before.items():
+              current = Path(name).read_bytes()
+              if name == 'privacy/index.html':
+                  continue
+              if old.count(b'</head>') != 1 or current != old.replace(b'</head>', tracker + b'</head>'):
+                  raise SystemExit(f'Unexpected non-analytics HTML change: {name}')
+              verified += 1
+          print(f'Confirmed {verified} existing HTML pages differ only by the approved tracker; privacy changes reviewed separately.')
 
-          SRC = 'https://cloud.umami.is/script.js'
-          WEBSITE_ID = '51bfd4d7-08ac-4299-924b-621af60fa7f1'
+          # Keep the strict script allowlist, adding exactly the approved provider.
+          old = "            self.assertEqual(sources, ['/assets/contact.js?v=' + hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]] if path == Path('contact/index.html') else [])"
+          new = "            expected = (['/assets/contact.js?v=' + hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]] if path == Path('contact/index.html') else []) + ['https://cloud.umami.is/script.js']\n            self.assertEqual(sources, expected)"
+          replace_once('_tests/test_content.py', old, new)
+          replace_once('_tests/test_content.py', 'test_no_new_tracking_scripts_and_no_private_worksheet_form', 'test_only_approved_scripts_and_no_private_worksheet_form')
 
-          class AnalyticsTests(unittest.TestCase):
-              @classmethod
-              def setUpClass(cls):
-                  cls.outputs = build.build_outputs()
-                  cls.html = {path: content for path, content in cls.outputs.items() if path.suffix == '.html'}
-
-              def test_exactly_one_approved_tracker_in_every_head(self):
-                  self.assertGreater(len(self.html), 0)
-                  for path, content in self.html.items():
-                      with self.subTest(path=str(path)):
-                          scripts = Page(content).tags('script')
-                          trackers = [a for a in scripts if a.get('src') == SRC]
-                          self.assertEqual(len(trackers), 1)
-                          self.assertEqual(sum('data-website-id' in a for a in scripts), 1)
-                          tracker = trackers[0]
-                          self.assertEqual(tracker['data-website-id'], WEBSITE_ID)
-                          self.assertIn('defer', tracker)
-                          self.assertEqual(tracker['data-domains'], 'nolankido.com,www.nolankido.com')
-                          for key in ('data-do-not-track', 'data-exclude-search', 'data-exclude-hash'):
-                              self.assertEqual(tracker[key], 'true')
-                          self.assertNotIn('data-auto-track', tracker)
-                          self.assertNotIn('data-performance', tracker)
-                          head = content.split('</head>', 1)[0]
-                          self.assertEqual(sum(a.get('src') == SRC for a in Page(head).tags('script')), 1)
-
-              def test_future_pages_inherit_the_shared_tracker(self):
-                  layout = (ROOT / '_source/layout.html').read_text(encoding='utf-8')
-                  self.assertEqual(layout.count(SRC), 1)
-                  for path in (ROOT / '_source').rglob('*.html'):
-                      if path.name != 'layout.html':
-                          self.assertNotIn(SRC, path.read_text(encoding='utf-8'), str(path))
-
-              def test_pageviews_only_without_form_or_custom_event_instrumentation(self):
-                  for path, content in self.html.items():
-                      with self.subTest(path=str(path)):
-                          self.assertNotIn('data-umami-event', content)
-                          self.assertNotIn('umami.track(', content)
-                          self.assertNotIn('umami.identify(', content)
-                          self.assertNotIn('data-replay', content)
-                  contact = (ROOT / 'assets/contact.js').read_text(encoding='utf-8')
-                  self.assertNotIn('umami', contact.lower())
-
-              def test_privacy_notice_matches_the_installation(self):
-                  content = self.outputs[Path('privacy/index.html')]
-                  for expected in ('Updated October 6, 2026', 'Umami Cloud', 'pageviews only', 'Do Not Track', 'https://umami.is/privacy'):
-                      self.assertIn(expected, content)
-                  self.assertNotIn('does not add advertising pixels, behavioral analytics', content)
-                  privacy = next(page for page in build.public_pages() if page['path'] == '/privacy/')
-                  self.assertEqual(privacy['updated'], '2026-10-06')
-
-          if __name__ == '__main__':
-              unittest.main()
-          '''), encoding='utf-8')
-          Path('ANALYTICS.md').write_text(textwrap.dedent('''\
-          # Website analytics
-
-          Installed October 6, 2026. The owner supplied the Umami Cloud website ID.
-          The tracking script is in `_source/layout.html` and is emitted once in the
-          head of each public HTML page, including the custom 404. Future generated
-          pages inherit it. Do not paste another copy into individual page bodies.
-
-          ## Scope and privacy
-
-          - Pageviews only; no advertising pixels, session recordings, user IDs,
-            custom event properties, or form-field instrumentation are added.
-          - `data-domains` permits `nolankido.com` and `www.nolankido.com`; local
-            previews and alternate development hostnames do not send pageviews.
-          - `data-do-not-track="true"` respects the browser Do Not Track preference.
-          - `data-exclude-search="true"` and `data-exclude-hash="true"` omit query
-            strings and fragments from recorded page URLs. This intentionally
-            sacrifices query-based campaign/UTM analysis in the initial setup.
-          - The deferred external script is optional. The site does not call Umami
-            from its contact JavaScript, and blocked analytics must not break use.
-          - The website ID is a public tracker identifier, not an account password
-            or private API key. Never commit account credentials or private keys.
-
-          Umami's documented standard tracking is cookie-free. Loading the script
-          and sending requests still involves a network connection to the provider;
-          do not describe this as collecting no information at all. The public
-          privacy page discloses analytics separately from hosting, fonts and forms.
-          This implementation is not a blanket legal-compliance certification.
-
-          ## Verification and maintenance
-
-          Run the existing build, unit and browser checks. `test_analytics.py`
-          validates coverage, duplicate prevention, the exact website ID and
-          privacy attributes without sending synthetic events to production.
-          The ordinary Site checks workflow stays read-only.
-
-          After Pages deployment, open the Umami dashboard for `nolankido.com`,
-          visit a public page and check that a pageview appears. Browser blockers
-          or Do Not Track may exclude a test visit. Successful publication and a
-          valid script tag do not by themselves prove ingestion into the private
-          dashboard. Do not claim ingestion is verified without observing it.
-
-          YouTube clicks, downloads, contact acceptance events and Google Search
-          Console are not configured by this initial installation. Add only
-          explicitly named, non-personal events when they have a defined use, and
-          update the public notice and regression tests at the same time.
-
-          References:
-          - https://docs.umami.is/docs/collect-data
-          - https://docs.umami.is/docs/tracker-configuration
-          - https://docs.umami.is/docs/faq
-          - https://umami.is/privacy
-          '''), encoding='utf-8')
+          # Refresh only the fingerprints affected by the explicit analytics install.
+          # These expected values were observed in the first build; the independent
+          # byte comparison above rejects any unrelated page or design changes.
+          replace_once('_tests/test_poker_content.py', "BASELINE_DIGEST = '184aa81c86236e6ffeae71fb36d8aa87a1c1e39462d1ffdf69d8f908356c9c9a'", "# October 6: approved Umami tag and privacy disclosure; other page bytes verified unchanged.\nBASELINE_DIGEST = 'e542fb7aef01076db1a1cd3dfbe9a76dde579465d12e1e063febd82696087c25'")
+          replace_once('_tests/test_viewer_next.py', '8de9ffa71f89981ce94ead6ea8743c1c2ef9c5a8a12f15f5533ead462d9c8690', '168617f68c7315efe2c0653421117f4c72c78ebd7a1b1eec7551f7e724b62edc')
+          replace_once('_tests/test_viewer_next.py', 'bad1290cc58638ab9e00187c9322dc86493aefa1b84835f18881210c255f2ef8', '7e521399e213c90d0f94cfbcc0d069ecc199b3d28420ccf0397b88202a5fb519')
+          replace_once('_tests/test_viewer_next.py', '861519815edc48b8cc18d1e9d2ced9dd27855d453909df1d0748e64407f60cea', '0eacad4edf721e7a4e4256def4aae5b0f9c572f462df8b6b906023e50cbf4ce0')
+          replace_once('_tests/test_viewer_next.py', "PROTECTED={'_source/", "# October 6: gateway hashes include only the approved Umami tag; design/source hashes are unchanged.\nPROTECTED={'_source/")
           PY
-      - name: Generate and validate public files
+      - name: Validate public files and all unit tests
         run: |
-          python _scripts/build.py
           python _scripts/build.py --check
           python -m unittest discover -s _tests -p 'test_*.py' -v
           node --check assets/contact.js
