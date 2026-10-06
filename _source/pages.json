@@ -151,7 +151,7 @@
     "path": "/poker/",
     "title": "Poker.",
     "seo_title": "Poker | Nolan Kido",
-    "description": "The poker side of Nolan Kido: tournament play, hand review, and the work between sessions. Start with a practical guide and a private-use review sheet.",
+    "description": "Tournament poker, vlog episode companions, hand reviews, and private-use study resources by Nolan Kido.",
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
@@ -166,7 +166,8 @@
     "kicker": "Poker / Hand review",
     "source": "poker/reviewing-a-hand.html",
     "section": "poker",
-    "updated": "2026-10-05"
+    "updated": "2026-10-05",
+    "date": "2026-10-05"
   },
   {
     "id": "technology",
@@ -186,6 +187,28 @@
     "description": "Writing, design, and visual storytelling. Selected writing from Nolan Kido on explanation and finishing creative work.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
+    "updated": "2026-10-05"
+  },
+  {
+    "id": "poker-start-here",
+    "path": "/poker/start-here/",
+    "title": "Follow the action.",
+    "seo_title": "Poker Viewer Guide | Nolan Kido",
+    "description": "A reader-friendly guide to positions, stacks, bet sizes, and the difference between recorded action and later analysis.",
+    "section": "poker",
+    "kicker": "Poker / Start here",
+    "source": "poker/start-here.html",
+    "date": "2026-10-05"
+  },
+  {
+    "id": "poker-study",
+    "path": "/poker/study/",
+    "title": "The study desk.",
+    "seo_title": "Poker Study Desk | Nolan Kido",
+    "description": "Editable hand-review and session-debrief sheets with examples, previews, and practical instructions for use after play.",
+    "section": "poker",
+    "kicker": "Poker / Between sessions",
+    "source": "poker/study.html",
     "updated": "2026-10-05"
   }
 ]

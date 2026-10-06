@@ -28,7 +28,7 @@ class SiteTests(unittest.TestCase):
     def setUpClass(cls):
         cls.outputs = build.build_outputs()
         cls.pages = {p: Page(s) for p, s in cls.outputs.items() if p.suffix == '.html'}
-        cls.manifest = json.loads((ROOT / '_source/pages.json').read_text())
+        cls.manifest = build.public_pages()
 
     def test_committed_output_matches_source(self):
         for path, content in self.outputs.items():

@@ -9,13 +9,16 @@ from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
+import sys
+sys.path.insert(0, str(ROOT / '_scripts'))
+import build
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
 server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(ROOT)))
 Thread(target=server.serve_forever, daemon=True).start()
 base = 'http://127.0.0.1:' + str(server.server_port)
-manifest = json.loads((ROOT / '_source/pages.json').read_text())
+manifest = build.public_pages()
 errors, missing = [], []
 with_fonts = os.environ.get('ALLOW_WEB_FONTS') == '1'
 try:
@@ -52,7 +55,7 @@ try:
                     expect(page.locator('#verification-retry')).to_be_visible()
                     expect(page.locator('#contact-submit')).to_be_enabled()
                     expect(page.locator('#form-success')).to_be_hidden()
-                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative']:
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study']:
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     page.screenshot(path=str(out / f'{entry["id"]}-{width}.png'), full_page=True)
             page.close()
@@ -88,7 +91,7 @@ try:
         page.goto(base)
         page.locator('.destination-poker').click()
         assert page.url.endswith('/poker/')
-        page.get_by_role('link', name='Read the hand-review guide').click()
+        page.locator('nav[aria-label="Poker section"] a[href="/poker/reviewing-a-hand/"]').click()
         assert page.url.endswith('/poker/reviewing-a-hand/')
         with page.expect_download() as info:
             page.get_by_role('link', name='Download the review sheet').click()

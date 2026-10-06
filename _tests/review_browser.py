@@ -14,6 +14,9 @@ import html5lib
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
+import sys
+sys.path.insert(0, str(ROOT / '_scripts'))
+import build
 WIDTHS = [320, 390, 520, 760, 768, 1024, 1440]
 SPACING = '* { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-bottom: 2em !important; }'
 STUB = r'''config => {
@@ -45,7 +48,7 @@ def run():
     args = parser.parse_args()
     axe_path = Path(os.environ['AXE_PATH'])
     assert axe_path.is_file(), 'A locally installed axe-core script is required'
-    pages = json.loads((ROOT / '_source/pages.json').read_text())
+    pages = build.public_pages()
     failures, notes = [], []
     def check(name, predicate):
         try:

@@ -5,6 +5,7 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import json
+import build
 import time
 import urllib.error
 import urllib.request
@@ -16,14 +17,16 @@ LIMIT = 2 * 1024 * 1024
 
 
 def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
-    pages = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
+    pages = json.loads((root / '_source/pages.json').read_text(encoding='utf-8')) + build.poker_content.manifest(build.poker_content.load(root))
     result = {}
     for page in pages:
         route = page['path']
         relative = route.lstrip('/') + ('index.html' if route.endswith('/') else '')
         result[route] = (200, (root / relative).read_bytes())
-    assets = ['assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
+    assets = ['assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['decision-record', 'tool-trust-check', 'learning-loop']]
+    catalog = build.poker_content.load(root)
+    assets += sorted({e['image']['src'].lstrip('/') for e in catalog['entries'] if e.get('image')})
     for path in assets:
         result['/' + path] = (200, (root / path).read_bytes())
     not_found = (root / '404.html').read_bytes()

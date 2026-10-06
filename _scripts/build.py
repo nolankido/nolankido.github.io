@@ -14,6 +14,7 @@ from xml.etree import ElementTree as ET
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from catalog import supplement
 from poker_navigation import section_navigation
+import poker_content
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -52,9 +53,17 @@ def date_label(value: str) -> str:
     return f'{dt.strftime("%B")} {dt.day}, {dt.year}'
 
 
+def public_pages() -> list[dict]:
+    """One manifest for rendering, link tests, sitemaps, and live verification."""
+    base = json.loads((ROOT / '_source/pages.json').read_text(encoding='utf-8'))
+    return base + poker_content.manifest(poker_content.load(ROOT))
+
+
 def build_outputs() -> dict[Path, str]:
     site = json.loads((SOURCE / 'site.json').read_text(encoding='utf-8'))
-    pages = json.loads((SOURCE / 'pages.json').read_text(encoding='utf-8'))
+    catalog = poker_content.load(ROOT)
+    pages = public_pages()
+    poker_entries = {e['slug']: e for e in catalog['entries']}
     if len({p['path'] for p in pages}) != len(pages) or len({p['id'] for p in pages}) != len(pages):
         raise ValueError('Page routes and IDs must be unique')
     for p in pages:
@@ -82,16 +91,20 @@ def build_outputs() -> dict[Path, str]:
     values = {k: text(v) for k, v in site.items()}
     values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
+    values.update(poker_content.supplement(catalog, ROOT))
     values['hubs_css_version'] = hashlib.sha256((ROOT / 'assets/hubs.css').read_bytes()).hexdigest()[:12]
     values['site_css_version'] = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
     featured = by_id[selection['featured_note']]
     values.update({'featured_note_title': text(featured['title']), 'featured_note_url': text(featured['path']), 'featured_note_description': text(featured['description'])})
     outputs = {}
     for p in pages:
-        source = (SOURCE / p['source']).resolve()
-        if not source.is_relative_to(SOURCE.resolve()):
-            raise ValueError('Content sources must remain within _source')
-        body = fill(source.read_text(encoding='utf-8'), values)
+        if p.get('poker_entry'):
+            body = poker_content.render(poker_entries[p['poker_entry']], catalog)
+        else:
+            source = (SOURCE / p['source']).resolve()
+            if not source.is_relative_to(SOURCE.resolve()):
+                raise ValueError('Content sources must remain within _source')
+            body = fill(source.read_text(encoding='utf-8'), values)
         section = p.get('section') or ('notes' if p.get('note') else p['id'])
         nav = ''.join(f'<li><a href="/{name}/"' + ((' aria-current="page"' if p['path'] == '/' + name + '/' else ' aria-current="location"') if section == name else '')
                       + f'>{label}</a></li>' for name, label in [('technology', 'Technology'), ('poker', 'Poker'), ('creative', 'Creative Work'), ('about', 'About'), ('contact', 'Contact')])
@@ -126,12 +139,22 @@ def build_outputs() -> dict[Path, str]:
                            'author': {'@type': 'Person', 'name': site['name'], 'url': site['url'] + '/about/'}})
         if p.get('updated'):
             schema['dateModified'] = p['updated']
+        if p['path'].startswith('/poker/'):
+            poker_version = hashlib.sha256((ROOT / 'assets/poker.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/poker.css?v={poker_version}">'
+            extra += '\n  <link rel="alternate" type="application/rss+xml" title="Nolan Kido Poker" href="/poker/feed.xml">'
+            if p.get('poker_entry'):
+                schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date'],
+                               'author': {'@type': 'Person', 'name': site['name'], 'url': site['url'] + '/about/'}})
+                extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
+                if p.get('updated'):
+                    extra += f'\n  <meta property="article:modified_time" content="{p["updated"]}">'
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
         data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
-                'og_type': 'article' if p.get('note') else 'website', 'extra_head': extra,
+                'og_type': 'article' if p.get('note') or p.get('poker_entry') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
         rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
         outputs[output_path(p['path'])] = rendered
@@ -160,6 +183,7 @@ def build_outputs() -> dict[Path, str]:
                 ET.SubElement(item, 'lastmod').text = p.get('updated', p.get('date'))
     ET.indent(sitemap, space='  ')
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
+    outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     return outputs
 
@@ -171,6 +195,11 @@ def main() -> int:
     try:
         outputs = build_outputs()
         differences = []
+        # Removing a record must never silently leave a formerly generated page live.
+        for family in ['episodes', 'hands', 'stories']:
+            for existing in (ROOT / 'poker' / family).glob('*/index.html'):
+                if existing.relative_to(ROOT) not in outputs and MARKER in existing.read_text(encoding='utf-8'):
+                    raise ValueError('Orphaned poker page: ' + str(existing.relative_to(ROOT)) + '. Review and remove the stale generated file before release.')
         for relative, content in outputs.items():
             target = ROOT / relative
             if not target.exists() or target.read_text(encoding='utf-8') != content:

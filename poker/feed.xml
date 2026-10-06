@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Nolan Kido Poker</title>
+    <link>https://nolankido.com/poker/</link>
+    <description>Poker episodes, hand reviews, stories, and reading guides.</description>
+    <language>en-us</language>
+    <atom:link href="https://nolankido.com/poker/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Follow the action.</title>
+      <link>https://nolankido.com/poker/start-here/</link>
+      <description>A reader-friendly guide to positions, stacks, bet sizes, and the difference between recorded action and later analysis.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/start-here/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Review a hand, not just the result.</title>
+      <link>https://nolankido.com/poker/reviewing-a-hand/</link>
+      <description>A practical method for reviewing a tournament poker decision, with a worked fictional hand, clear uncertainty labels, and a blank review sheet.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/reviewing-a-hand/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
