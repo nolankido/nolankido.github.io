@@ -209,11 +209,12 @@ def main() -> int:
     try:
         outputs = build_outputs()
         differences = []
-        # Removing a record must never silently leave a formerly generated page live.
-        for family in ['episodes', 'hands', 'stories']:
-            for existing in (ROOT / 'poker' / family).glob('*/index.html'):
-                if existing.relative_to(ROOT) not in outputs and MARKER in existing.read_text(encoding='utf-8'):
-                    raise ValueError('Orphaned poker page: ' + str(existing.relative_to(ROOT)) + '. Review and remove the stale generated file before release.')
+        # A removed guide or hub can remain publishable just like an old episode.
+        # Refuse all stale generated Poker HTML before writing any build outputs.
+        # Manual pages and other sections remain outside this ownership check.
+        for existing in sorted((ROOT / 'poker').rglob('*.html')):
+            if existing.relative_to(ROOT) not in outputs and MARKER in existing.read_text(encoding='utf-8'):
+                raise ValueError('Orphaned poker page: ' + str(existing.relative_to(ROOT)) + '. Review and remove the stale generated file before release.')
         for relative, content in outputs.items():
             target = ROOT / relative
             if not target.exists() or target.read_text(encoding='utf-8') != content:
