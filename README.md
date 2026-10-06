@@ -1,6 +1,6 @@
 # Nolan Kido personal website
 
-A small static website for introductions, selected writing, and practical resources. GitHub Pages serves committed HTML. There is no runtime application server, database, advertising, or analytics dependency.
+A small static website for introductions, selected writing, and practical resources. GitHub Pages serves committed HTML. There is no runtime application server or database. Optional, cookie-free Umami Cloud pageview analytics is installed through the shared layout; the site works when analytics is blocked. See `ANALYTICS.md`.
 
 ## Site architecture
 
