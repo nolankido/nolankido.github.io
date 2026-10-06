@@ -153,7 +153,7 @@ class ViewerGuidesTests(unittest.TestCase):
         text=(ROOT/'downloads/poker-viewer-reference.md').read_text()
         self.assertIn('call 10: final pot 40',text)
         self.assertIn('/downloads/poker-viewer-reference.md',check_live.targets())
-        total=sum(s.count('class="poker-details viewer-question"') for p,s in self.outputs.items() if str(p).startswith('poker/'))
+        total=sum(s.count('class="poker-details viewer-question"') for p,s in self.outputs.items() if p in {Path('poker') / slug / 'index.html' for slug in GUIDES})
         self.assertEqual(total,26)
         for p,s in self.outputs.items():
             if str(p).startswith('poker/') and p.suffix=='.html':

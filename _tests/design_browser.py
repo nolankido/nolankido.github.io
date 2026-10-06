@@ -114,7 +114,7 @@ try:
         page.get_by_role('link', name='Nolan Kido home', exact=True).click()
         assert page.url == base + '/'
         page.goto(base + '/poker/start-here/')
-        expect(page.locator('.viewer-library-grid article')).to_have_count(7)
+        expect(page.locator('.viewer-library-grid article')).to_have_count(sum(bool(p.get('poker_guide')) for p in manifest))
         page.locator('.viewer-library-grid a[href="/poker/hand-rankings/"]').click()
         assert page.url.endswith('/poker/hand-rankings/')
         with page.expect_download() as reference:
@@ -122,6 +122,22 @@ try:
         assert Path(reference.value.path()).read_bytes() == (ROOT / 'downloads/poker-viewer-reference.md').read_bytes()
         page.get_by_role('link', name='Next: bets, calls, and side pots', exact=True).click()
         assert page.url.endswith('/poker/betting-and-pots/')
+        page.goto(base + '/poker/start-here/')
+        expect(page.locator('.viewer-learning-paths article')).to_have_count(3)
+        page.locator('.viewer-learning-paths a[href="/poker/follow-along/"]').click()
+        assert page.url.endswith('/poker/follow-along/')
+        scene_answer = page.locator('#scene-2 details').last
+        scene_answer.locator('summary').focus()
+        page.keyboard.press('Enter')
+        expect(scene_answer).to_have_attribute('open', '')
+        expect(scene_answer.get_by_text('A wins with', exact=False)).to_be_visible()
+        with page.expect_download() as watching:
+            page.get_by_role('link', name='Save the watching checklist', exact=True).click()
+        assert Path(watching.value.path()).read_bytes() == (ROOT / 'downloads/poker-watch-along.md').read_bytes()
+        page.goto(base + '/poker/start-here/')
+        for shortcut in page.locator('.viewer-phrase-links a').evaluate_all('(nodes) => nodes.map(n => n.getAttribute("href"))'):
+            page.goto(base + shortcut)
+            expect(page.locator('#' + shortcut.split('#')[1])).to_be_visible()
         page.goto(base + '/poker/glossary/#effective-stack')
         expect(page.locator('#effective-stack')).to_be_visible()
         page.goto(base)
@@ -129,7 +145,7 @@ try:
         assert page.evaluate('document.activeElement.id') == 'main'
         assert not errors, errors
         assert not missing, missing
-        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 5 byte-matched downloads, expanded viewer answers and spacing, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
+        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 6 byte-matched downloads, expanded viewer answers and spacing, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
         browser.close()
 finally:
     server.shutdown()

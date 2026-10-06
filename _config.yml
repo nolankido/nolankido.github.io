@@ -15,6 +15,7 @@ exclude:
   - TECHNOLOGY_RELEASE.md
   - POKER_PUBLISHING.md
   - VIEWER_LIBRARY_RELEASE.md
+  - VIEWER_NEXT_RELEASE.md
   - POKER_GROWTH_RELEASE.md
   - requirements-test.txt
 

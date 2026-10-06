@@ -86,3 +86,11 @@ The beginner directory is `/poker/start-here/#viewer-library`. See
 `VIEWER_LIBRARY_RELEASE.md` for the seven new guides, the downloadable reference,
 and the regression coverage. Keep new viewer explanations separate from actual
 episode records, and preserve existing viewer-guide anchors when editing.
+
+## Follow-on viewer guides
+
+The Poker viewer library now includes three reading routes and six further guides
+on positions/stacks, board texture, ranges/bets, event formats, table context and
+worked viewing scenes. See `VIEWER_NEXT_RELEASE.md`. The directory, links, examples
+and download are covered by the existing CI suite and `test_viewer_next.py`.
+No changes to the Technology-first landing page are part of this release.
