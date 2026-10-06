@@ -52,7 +52,7 @@ try:
                     expect(page.locator('#verification-retry')).to_be_visible()
                     expect(page.locator('#contact-submit')).to_be_enabled()
                     expect(page.locator('#form-success')).to_be_hidden()
-                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and entry['id'] in ['home', 'poker', 'poker-hand-review', 'about', 'resources', 'contact', 'trustworthy-tools']:
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative']:
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     page.screenshot(path=str(out / f'{entry["id"]}-{width}.png'), full_page=True)
             page.close()
@@ -64,6 +64,27 @@ try:
             download = info.value
             assert download.suggested_filename == slug + '.md'
             assert Path(download.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
+        for width in [320, 390, 768, 1024, 1440]:
+            page.set_viewport_size({'width': width, 'height': 1000})
+            page.goto(base)
+            tech = page.locator('.destination-technology').bounding_box()
+            poker = page.locator('.destination-poker').bounding_box()
+            creative = page.locator('.destination-creative').bounding_box()
+            assert tech['y'] + tech['height'] <= poker['y'], ('technology-first', width)
+            if width > 760:
+                assert tech['width'] > poker['width'] > creative['width'], ('ranked-widths', width)
+                assert poker['x'] < creative['x'], ('secondary-order', width)
+            else:
+                assert poker['y'] + poker['height'] <= creative['y'], ('mobile-order', width)
+            page.locator('.destination-technology').click()
+            assert page.url.endswith('/technology/')
+            page.locator('a[href="/notes/trustworthy-tools/"]').click()
+            assert page.url.endswith('/notes/trustworthy-tools/')
+            page.goto(base)
+            page.locator('.destination-creative').click()
+            assert page.url.endswith('/creative/')
+            page.locator('a[href="/notes/generous-explanations/"]').click()
+            assert page.url.endswith('/notes/generous-explanations/')
         page.goto(base)
         page.locator('.destination-poker').click()
         assert page.url.endswith('/poker/')

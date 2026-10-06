@@ -31,3 +31,7 @@ For informal feedback, ask a few people from different backgrounds what the site
 ## Continuity
 
 Keep domain renewal, account recovery, backup checks, and access arrangements in the owner's private records. No credentials or recovery codes belong here. Maintain a private backup of the public source and a simple local build path. Changes go through a staging branch, regression tests, a non-forced update of main, and a live release check. Revert a faulty release rather than rewriting history. No private material becomes safe merely because it is excluded from navigation or marked noindex.
+
+## Technology-first hierarchy
+
+Technology, Poker, and Creative Work are the three permanent subject destinations, in that order. Technology leads by visual prominence even while its public collection is small. Introductory subject pages may curate existing public notes, but must state their present scope without implying a released portfolio. Notes remains a supporting cross-subject collection. This supersedes the earlier poker-first gateway ranking, not the privacy or approval requirements.
