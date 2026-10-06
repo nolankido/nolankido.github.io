@@ -1,0 +1,64 @@
+/* Personal gateway and poker section. The approved base design stays unchanged. */
+.brand-home { padding-bottom: 32px; }
+.brand-home .hero-heading { padding-bottom: 24px; }
+.brand-home .brand-statement { max-width: 800px; font-size: clamp(1.9rem, 3.5vw, 3rem); line-height: 1.2; margin-top: 4px; }
+.brand-home .hero-caption { max-width: 640px; margin-bottom: 0; }
+.destination-section { padding-block: 30px 42px; }
+.destination-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+.destination { display: flex; flex-direction: column; min-width: 0; padding: 30px; border: 1px solid var(--line-dark); text-decoration: none; }
+.destination h3 { font-size: clamp(2rem, 4vw, 3.5rem); margin: 22px 0 16px; }
+.destination p { font: 1.1rem/1.6 var(--serif); max-width: 33ch; margin-bottom: 28px; }
+.destination-label { font: .68rem/1.6 var(--mono); text-transform: uppercase; }
+.destination-action { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-top: auto; padding-top: 16px; border-top: 1px solid currentColor; font: 500 .9rem/1.5 var(--sans); }
+.destination-action > span { font-size: 1.4rem; }
+.destination-poker { background: var(--green); color: var(--paper-light); border-top: 4px solid var(--red); }
+.destination-notes { background: var(--panel); }
+.destination:hover h3, .destination:focus-visible h3 { text-decoration: underline; text-underline-offset: .15em; }
+.destination:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+.home-connection { padding-block: 28px 36px; }
+.home-connection p { font: 1.1rem/1.6 var(--serif); margin-bottom: 12px; }
+.subsite-bar { border-bottom: 1px solid var(--line); background: var(--panel); }
+.subsite-bar .shell { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding-block: 8px; }
+.subsite-name { font: 500 .7rem/1.5 var(--mono); text-transform: uppercase; }
+.subsite-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.subsite-links a { display: inline-flex; align-items: center; min-height: 44px; font: .8rem/1.5 var(--sans); }
+.subsite-links a[aria-current] { font-weight: 700; text-decoration-color: var(--red); }
+.poker-introduction { padding-top: 24px; }
+.poker-introduction .intro { font-family: var(--serif); font-weight: 400; }
+.poker-lede { max-width: 680px; font: 1.1rem/1.65 var(--serif); }
+.poker-principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+.poker-principles > div { border-top: 2px solid var(--line-dark); padding-top: 18px; min-width: 0; }
+.poker-principles h3 { font-size: 1.35rem; margin-bottom: 10px; }
+.poker-principles p { font: 1rem/1.65 var(--serif); margin: 0; }
+.poker-feature { padding: 30px; background: var(--panel); border-left: 3px solid var(--red); }
+.resource-help { margin-top: 18px; max-width: 640px; }
+.fictional-hand { margin-block: 28px; padding: 26px; background: var(--panel); border: 1px solid var(--line-dark); }
+.fictional-hand h3 { margin-bottom: 18px; }
+.hand-illustration { margin: 24px 0; }
+.card-groups { display: flex; flex-wrap: wrap; gap: 24px 32px; }
+.card-group-label { font: .7rem/1.5 var(--mono); text-transform: uppercase; margin-bottom: 10px; }
+.card-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.playing-card { display: grid; place-items: center; width: 52px; height: 72px; border: 1px solid var(--line-dark); border-radius: 3px; background: var(--paper-light); color: var(--basalt); font: 700 1.45rem/1.2 var(--sans); }
+.card-red { color: var(--red); }
+.hand-illustration figcaption { margin-top: 16px; font: .85rem/1.65 var(--sans); }
+.hand-facts { margin: 24px 0; }
+.hand-facts > div { border-top: 1px solid var(--line-dark); padding: 14px 0; }
+.hand-facts dt { font: 600 .85rem/1.5 var(--sans); margin-bottom: 5px; }
+.hand-facts dd { margin: 0; }
+.poker-guide .link-row { align-items: flex-start; }
+@media (max-width: 760px) {
+  .destination-grid { grid-template-columns: minmax(0, 1fr); }
+  .destination { padding: 24px; }
+  .destination h3 { margin-top: 16px; }
+  .destination p { max-width: 46ch; }
+  .poker-principles { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .poker-feature { padding: 24px; }
+  .subsite-bar .shell { align-items: flex-start; flex-direction: column; gap: 0; }
+  .subsite-links { gap: 6px 20px; }
+  .fictional-hand { padding: 18px; }
+}
+@media print {
+  .subsite-bar { display: none; }
+  .destination, .poker-feature, .fictional-hand { background: white; color: black; }
+  .playing-card { color: black; background: white; }
+}

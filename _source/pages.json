@@ -3,8 +3,8 @@
     "id": "home",
     "path": "/",
     "title": "Nolan Kido",
-    "seo_title": "Nolan Kido | Useful Things & Clear Ideas",
-    "description": "Nolan Kido is an independent builder and writer. Worked explanations, practical resources, and reflections on technology, learning, and creative work.",
+    "seo_title": "Nolan Kido | Poker, Technology & Creative Work",
+    "description": "Nolan Kido: tournament poker, useful tools, and creative work. Explore the poker section or browse selected writing on technology, decisions, and learning.",
     "source": "home.html",
     "updated": "2026-10-05"
   },
@@ -13,7 +13,7 @@
     "path": "/about/",
     "title": "A little about me.",
     "seo_title": "About | Nolan Kido",
-    "description": "Meet Nolan Kido: an independent builder and writer interested in useful tools, clear explanations, creative work, and life beyond projects.",
+    "description": "About Nolan Kido: tournament poker, building tools, writing, and visual storytelling. A personal introduction and a few ways into the site.",
     "kicker": "About",
     "source": "about.html",
     "updated": "2026-10-05"
@@ -145,5 +145,27 @@
     "source": "notes/finishing-is-a-decision.html",
     "note": true,
     "date": "2026-10-05"
+  },
+  {
+    "id": "poker",
+    "path": "/poker/",
+    "title": "Poker.",
+    "seo_title": "Poker | Nolan Kido",
+    "description": "The poker side of Nolan Kido: tournament play, hand review, and the work between sessions. Start with a practical guide and a private-use review sheet.",
+    "kicker": "Nolan Kido / Poker",
+    "source": "poker/home.html",
+    "section": "poker",
+    "updated": "2026-10-05"
+  },
+  {
+    "id": "poker-hand-review",
+    "path": "/poker/reviewing-a-hand/",
+    "title": "Review a hand, not just the result.",
+    "seo_title": "Review a Poker Hand, Not Just the Result | Nolan Kido",
+    "description": "A practical method for reviewing a tournament poker decision, with a worked fictional hand, clear uncertainty labels, and a blank review sheet.",
+    "kicker": "Poker / Hand review",
+    "source": "poker/reviewing-a-hand.html",
+    "section": "poker",
+    "updated": "2026-10-05"
   }
 ]

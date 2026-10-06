@@ -37,7 +37,7 @@ class LiveCheckTests(unittest.TestCase):
 
     def test_paths_and_excluded_source(self):
         values = check_live.targets()
-        self.assertEqual(len(values), 31)
+        self.assertEqual(len(values), 35)
         self.assertEqual(values['/_source/site.json'], (404, (ROOT / '404.html').read_bytes()))
         self.assertEqual(values['/contact/'][0], 200)
         for route in ['//another.example/', 'https://example.com/', '/?other=1']:

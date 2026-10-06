@@ -22,7 +22,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
         route = page['path']
         relative = route.lstrip('/') + ('index.html' if route.endswith('/') else '')
         result[route] = (200, (root / relative).read_bytes())
-    assets = ['assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
+    assets = ['assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['decision-record', 'tool-trust-check', 'learning-loop']]
     for path in assets:
         result['/' + path] = (200, (root / path).read_bytes())

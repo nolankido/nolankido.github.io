@@ -38,18 +38,14 @@ class DesignTests(unittest.TestCase):
         for label in ['Who it is for:', 'How to use it:', 'When not to use it:']:
             self.assertEqual(content.count(label), len(RESOURCES))
 
-    def test_homepage_is_curated_not_a_statistics_display(self):
+    def test_homepage_is_a_static_destination_selector(self):
         content = build.build_outputs()[Path('index.html')]
-        selection = json.loads((ROOT / '_source/selection.json').read_text())
-        self.assertEqual(content.count('<tr>'), len(selection['selected_notes']) + 1)
-        self.assertNotIn('stat-strip', content)
-        self.assertNotIn('notes in the collection', content)
-        self.assertNotIn('practical templates</span>', content)
-        self.assertNotIn('class="resource-list"', content)
-        for slug in [selection['featured_note']] + selection['selected_notes']:
-            self.assertIn('/notes/' + slug + '/', content)
-        for section in ['interests', 'selected-notes', 'resources']:
-            self.assertIn('id="' + section + '"', content)
+        for destination in ['/poker/', '/notes/', '/about/', '/contact/']:
+            self.assertIn(destination, content)
+        for obsolete in ['stat-strip', 'selected-notes', 'reading-table', 'class="resource-list"', 'featured_note', '<time']:
+            self.assertNotIn(obsolete, content)
+        self.assertEqual(content.count('class="destination destination-'), 2)
+        self.assertLess(content.index('destination-poker'), content.index('destination-notes'))
 
     def test_fonts_disclosed_and_reviewed_asset_contracts(self):
         privacy = build.build_outputs()[Path('privacy/index.html')]

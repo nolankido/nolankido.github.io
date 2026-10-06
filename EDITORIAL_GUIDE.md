@@ -4,6 +4,10 @@
 
 A personal home for useful work, clear ideas, and conversation. The visual identity is stable. Develop the substance instead of repeatedly redesigning the site. Public copy should be specific about ideas without disclosing private projects, finances, relationships, schedules, or other people's information.
 
+## Personal gateway and poker
+
+The root page is a relatively static identity and destination selector. Poker is the first major subject section; Notes remains a broader reading collection. Public poker material is now an intentional part of the site, but private project details and other people's information remain private. Add real stories, videos, and hands only from approved material. Do not invent results or publish placeholder media links. See `POKER_RELEASE.md`.
+
 ## What belongs
 
 Publish a worked explanation, a genuinely useful resource, a reflection the owner endorses, or a creative observation worth sharing. Do not invent experiences, favorite things, credentials, testimonials, or a past change of mind. Mark fictional examples. Link research where used and state what the research does not establish. A public statement of principle is not evidence of a biography or a specialist qualification.

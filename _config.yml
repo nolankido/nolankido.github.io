@@ -11,6 +11,7 @@ exclude:
   - EDITORIAL_GUIDE.md
   - CONTENT_RELEASE.md
   - SITE_REVIEW.md
+  - POKER_RELEASE.md
   - requirements-test.txt
 
 # Keep editable Markdown worksheets as static downloads.

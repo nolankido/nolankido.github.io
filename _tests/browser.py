@@ -23,7 +23,7 @@ def html_for(route):
     content = path.read_text(encoding='utf-8')
     content = re.sub(r'<link rel="stylesheet"[^>]*>', '', content)
     content = re.sub(r'<script src="/assets/contact.js[^>]*></script>', '', content)
-    css = (ROOT / 'styles.css').read_text() + '\n' + (ROOT / 'assets/site.css').read_text()
+    css = (ROOT / 'styles.css').read_text() + '\n' + (ROOT / 'assets/site.css').read_text() + '\n' + (ROOT / 'assets/hubs.css').read_text()
     content = content.replace('</head>', '<style>' + css + '</style></head>')
     for route_name in ['favicon.svg', 'card/qr.svg']:
         data = base64.b64encode((ROOT / route_name).read_bytes()).decode()

@@ -52,7 +52,7 @@ try:
                     expect(page.locator('#verification-retry')).to_be_visible()
                     expect(page.locator('#contact-submit')).to_be_enabled()
                     expect(page.locator('#form-success')).to_be_hidden()
-                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools']:
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and entry['id'] in ['home', 'poker', 'poker-hand-review', 'about', 'resources', 'contact', 'trustworthy-tools']:
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     page.screenshot(path=str(out / f'{entry["id"]}-{width}.png'), full_page=True)
             page.close()
@@ -65,14 +65,23 @@ try:
             assert download.suggested_filename == slug + '.md'
             assert Path(download.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
         page.goto(base)
-        page.get_by_role('link', name='Start reading').click()
-        assert page.url.endswith('#selected-notes')
+        page.locator('.destination-poker').click()
+        assert page.url.endswith('/poker/')
+        page.get_by_role('link', name='Read the hand-review guide').click()
+        assert page.url.endswith('/poker/reviewing-a-hand/')
+        with page.expect_download() as info:
+            page.get_by_role('link', name='Download the review sheet').click()
+        assert Path(info.value.path()).read_bytes() == (ROOT / 'downloads/poker-hand-review.md').read_bytes()
+        page.get_by_role('link', name='Back to poker', exact=True).click()
+        assert page.url.endswith('/poker/')
+        page.get_by_role('link', name='Nolan Kido home', exact=True).click()
+        assert page.url == base + '/'
         page.goto(base)
         page.keyboard.press('Tab'); page.keyboard.press('Enter')
         assert page.evaluate('document.activeElement.id') == 'main'
         assert not errors, errors
         assert not missing, missing
-        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 3 byte-matched downloads, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
+        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 4 byte-matched downloads, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
         browser.close()
 finally:
     server.shutdown()

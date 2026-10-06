@@ -2,6 +2,10 @@
 
 A small static website for introductions, selected writing, and practical resources. GitHub Pages serves committed HTML. There is no runtime application server, database, advertising, or analytics dependency.
 
+## Site architecture
+
+The main page is a static personal gateway. Poker at `/poker/` is the primary destination, with its guide at `/poker/reviewing-a-hand/`. Notes remains the general reading collection. New styles are isolated in `assets/hubs.css`; existing visual and contact assets are unchanged. See `POKER_RELEASE.md` for scope and publishing boundaries.
+
 ## Edit and publish
 
 Use Python 3.10 or later. Public page bodies are in `_source/`; shared markup is in `_source/layout.html`; routes, descriptions, and explicit dates are in `_source/pages.json`. `_source/selection.json` controls featured reading independently of publication order. Shared approved identity and the existing contact endpoint are in `_source/site.json`.
