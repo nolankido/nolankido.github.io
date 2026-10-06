@@ -207,7 +207,7 @@
     "path": "/poker/study/",
     "title": "The study desk.",
     "seo_title": "Poker Study Desk | Nolan Kido",
-    "description": "Seven after-play workshops, twelve practice questions, a five-session study cycle and private-use records for tournament study and poker vlog planning.",
+    "description": "After-play workshops, a visual Decision Lab, practice questions and private-use worksheets for tournament study and poker vlog planning.",
     "section": "poker",
     "kicker": "Poker / Between sessions",
     "source": "poker/study.html",
@@ -471,6 +471,30 @@
     "section": "poker",
     "date": "2026-10-06",
     "updated": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-library",
+    "path": "/poker/library/",
+    "title": "The Poker library.",
+    "seo_title": "The Poker library | Nolan Kido",
+    "description": "Find every Poker guide by topic, search its title and summary, and choose a next read with estimated reading times.",
+    "kicker": "Poker / Read, study, create",
+    "source": "poker/library.html",
+    "section": "poker",
+    "updated": "2026-10-06"
+  },
+  {
+    "id": "poker-decision-lab",
+    "path": "/poker/decision-lab/",
+    "title": "One river. Two different stories.",
+    "seo_title": "One river. Two different stories | Nolan Kido",
+    "description": "A visual, fictional river exercise: price a call, test the assumed range and reveal two endings without confusing the result with the decision.",
+    "kicker": "Poker / Decision Lab",
+    "source": "poker/decision-lab.html",
+    "section": "poker",
+    "updated": "2026-10-06",
+    "date": "2026-10-06",
     "poker_guide": true
   }
 ]
