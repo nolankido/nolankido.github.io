@@ -496,5 +496,42 @@
     "updated": "2026-10-06",
     "date": "2026-10-06",
     "poker_guide": true
+  },
+  {
+    "id": "poker-flush-and-redraw",
+    "path": "/poker/flush-and-redraw/",
+    "title": "The flush arrives. What can still change?",
+    "seo_title": "The flush arrives. What can still change? | Nolan Kido",
+    "description": "Follow a fictional flush through the turn and river, count all remaining cards, and distinguish improving from winning.",
+    "kicker": "Poker / Decision Labs",
+    "source": "poker/flush-and-redraw.html",
+    "section": "poker",
+    "updated": "2026-10-06",
+    "date": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-side-pot-lab",
+    "path": "/poker/side-pot-lab/",
+    "title": "Three all-ins. Two pots.",
+    "seo_title": "Three all-ins. Two pots | Nolan Kido",
+    "description": "Separate a fictional three-way all-in into a main pot, side pot and refund, then check the winners and final stacks.",
+    "kicker": "Poker / Decision Labs",
+    "source": "poker/side-pot-lab.html",
+    "section": "poker",
+    "updated": "2026-10-06",
+    "date": "2026-10-06",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-decision-labs",
+    "path": "/poker/decision-labs/",
+    "title": "The Decision Labs.",
+    "seo_title": "The Decision Labs | Nolan Kido",
+    "description": "Three visual, fictional poker cases: read a range, follow a runout and untangle side pots. Predict before revealing each explanation.",
+    "kicker": "Poker / Decision Labs",
+    "source": "poker/decision-labs.html",
+    "section": "poker",
+    "updated": "2026-10-06"
   }
 ]

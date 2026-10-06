@@ -6,6 +6,7 @@ from pathlib import Path
 from datetime import datetime
 import json
 import re
+from poker_reading import next_reads
 
 TOPICS = {'basics': 'Learn the basics', 'hands': 'Read a hand', 'tournaments': 'Tournament study',
           'practice': 'Try a decision', 'results': 'Results and review', 'creative': 'Make a vlog'}
@@ -93,10 +94,8 @@ def reader_meta(page, entries):
 def related(page, entries):
     item = next((e for e in entries if e['route'] == page['path']), None)
     if item is None: return ''
-    peers = [e for e in entries if e['route'] != item['route'] and e['topic'] == item['topic']]
-    if len(peers) < 2:
-        peers += [e for e in entries if e['route'] != item['route'] and e not in peers]
+    peers = next_reads(item, entries)
     return ('<aside class="shell reader-related" aria-labelledby="reader-next-heading"><p class="reader-eyebrow">Keep exploring</p>'
             '<h2 id="reader-next-heading">Take the next useful step.</h2><div class="reader-related-grid">' +
             ''.join(card(e) for e in peers[:2]) + '</div><nav class="reader-tools" aria-label="Reading tools">'
-            '<a href="/poker/library/">All Poker guides</a><a href="#main">Back to top</a></nav></aside>')
+            '<a href="/poker/library/">All Poker guides</a><a href="/poker/decision-labs/">All Decision Labs</a><a href="#main">Back to top</a></nav></aside>')
