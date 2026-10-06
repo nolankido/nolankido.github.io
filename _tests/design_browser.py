@@ -51,11 +51,24 @@ try:
                         details.locator('summary').click()
                     assert page.evaluate('document.documentElement.scrollWidth') <= width
                     expect(page.locator('.worksheet pre').first).to_be_visible()
+                if entry.get('poker_guide'):
+                    details = page.locator('.viewer-question')
+                    if details.count():
+                        summary = details.first.locator('summary')
+                        summary.focus()
+                        page.keyboard.press('Enter')
+                        expect(details.first).to_have_attribute('open', '')
+                        details.evaluate_all('(nodes) => nodes.forEach(n => n.open = true)')
+                    assert page.evaluate('document.documentElement.scrollWidth') <= width, ('expanded-guide', entry['path'], width)
+                    spacing = page.add_style_tag(content='* { line-height:1.5!important; letter-spacing:.12em!important; word-spacing:.16em!important; } p { margin-bottom:2em!important; }')
+                    assert page.evaluate('document.documentElement.scrollWidth') <= width, ('expanded-spacing', entry['path'], width)
+                    spacing.evaluate('(node) => node.remove()')
+                    details.evaluate_all('(nodes) => nodes.forEach(n => n.open = false)')
                 if entry['id'] == 'contact':
                     expect(page.locator('#verification-retry')).to_be_visible()
                     expect(page.locator('#contact-submit')).to_be_enabled()
                     expect(page.locator('#form-success')).to_be_hidden()
-                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study']:
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and (entry.get('poker_guide') or entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study']):
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     page.screenshot(path=str(out / f'{entry["id"]}-{width}.png'), full_page=True)
             page.close()
@@ -100,12 +113,23 @@ try:
         assert page.url.endswith('/poker/')
         page.get_by_role('link', name='Nolan Kido home', exact=True).click()
         assert page.url == base + '/'
+        page.goto(base + '/poker/start-here/')
+        expect(page.locator('.viewer-library-grid article')).to_have_count(7)
+        page.locator('.viewer-library-grid a[href="/poker/hand-rankings/"]').click()
+        assert page.url.endswith('/poker/hand-rankings/')
+        with page.expect_download() as reference:
+            page.get_by_role('link', name='Download the viewer reference', exact=True).click()
+        assert Path(reference.value.path()).read_bytes() == (ROOT / 'downloads/poker-viewer-reference.md').read_bytes()
+        page.get_by_role('link', name='Next: bets, calls, and side pots', exact=True).click()
+        assert page.url.endswith('/poker/betting-and-pots/')
+        page.goto(base + '/poker/glossary/#effective-stack')
+        expect(page.locator('#effective-stack')).to_be_visible()
         page.goto(base)
         page.keyboard.press('Tab'); page.keyboard.press('Enter')
         assert page.evaluate('document.activeElement.id') == 'main'
         assert not errors, errors
         assert not missing, missing
-        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 4 byte-matched downloads, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
+        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 5 byte-matched downloads, expanded viewer answers and spacing, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
         browser.close()
 finally:
     server.shutdown()

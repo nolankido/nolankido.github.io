@@ -36,3 +36,49 @@
 @media(max-width:1050px) { .poker-paths { grid-template-columns:minmax(0,1fr); } }
 @media(max-width:760px) { .poker-content-grid { grid-template-columns:minmax(0,1fr); } .poker-glossary > div { grid-template-columns:minmax(0,1fr); gap:8px; } .poker-first-read { padding:22px; } }
 @media print { .poker-paths,.poker-jump,.poker-watch,.poker-chapters { display:none; } .poker-content-card,.poker-first-read,.poker-details { background:white; color:black; break-inside:avoid; } }
+
+/* Viewer library: native HTML, no script, no personal data collection. */
+.viewer-breadcrumb { font:.85rem/1.6 var(--sans); padding-bottom:12px; }
+.viewer-breadcrumb a { display:inline-flex; align-items:center; min-height:44px; }
+.viewer-scope { font:.9rem/1.6 var(--sans); color:var(--ink-soft); border-left:3px solid var(--red); padding:12px 18px; background:var(--panel); }
+.viewer-library { margin-block:32px; }
+.viewer-library-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-block:24px; }
+.viewer-library-grid article { padding:22px; min-width:0; background:var(--paper-light); border:1px solid var(--line-dark); }
+.viewer-library-grid h3 { font:700 1.4rem/1.25 var(--sans); letter-spacing:-.03em; }
+.viewer-library-grid p:last-child { font:1rem/1.6 var(--serif); margin-bottom:0; }
+.viewer-library-grid article:first-child { border-top:3px solid var(--red); }
+.viewer-guide h2, .viewer-guide h3, .viewer-library, .viewer-glossary > div { scroll-margin-top:120px; }
+.viewer-example { padding:24px; margin-block:26px; background:var(--panel); border-left:3px solid var(--red); }
+.viewer-example h3 { margin-bottom:16px; font:700 1.2rem/1.35 var(--sans); }
+.viewer-example p:last-child { margin-bottom:0; }
+.viewer-cards { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 14px; }
+.viewer-card { display:inline-flex; justify-content:center; width:44px; min-height:62px; padding:5px 3px; border:1px solid var(--line-dark); border-radius:4px; background:var(--paper-light); color:var(--basalt); font:700 1.25rem/1.15 var(--sans); text-align:center; }
+.viewer-card small { display:block; font-size:1rem; margin-top:4px; }
+.viewer-card-red { color:var(--red); }
+.viewer-rankings { list-style:none; padding:0; counter-reset:hand-rank; }
+.viewer-rankings li { counter-increment:hand-rank; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px 24px; padding:20px 0; border-top:1px solid var(--line); align-items:center; }
+.viewer-rankings h3 { font:700 1.25rem/1.3 var(--sans); margin:0 0 8px; }
+.viewer-rankings h3::before { content:counter(hand-rank, decimal-leading-zero) ' / '; color:var(--red); font:.8rem var(--mono); }
+.viewer-rankings p { font:1rem/1.6 var(--serif); margin:0; }
+.viewer-rankings .viewer-cards { margin:0; }
+.viewer-matchup { padding:24px 0; border-top:1px solid var(--line-dark); }
+.viewer-matchup > h3 { font:700 1.4rem/1.3 var(--sans); }
+.viewer-matchup > p { font:.9rem/1.6 var(--sans); }
+.viewer-steps { padding-left:24px; }
+.viewer-steps > li { padding:8px 0 16px 8px; }
+.viewer-steps h3 { font:700 1.2rem/1.4 var(--sans); margin:0 0 10px; }
+.viewer-table { width:100%; table-layout:fixed; border-collapse:collapse; margin-block:24px; font:1rem/1.6 var(--serif); }
+.viewer-table caption { text-align:left; margin-bottom:12px; font:600 .9rem/1.5 var(--sans); }
+.viewer-table th, .viewer-table td { padding:12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line-dark); overflow-wrap:anywhere; }
+.viewer-table th { font:600 .9rem/1.5 var(--sans); }
+.viewer-table thead { color:var(--paper-light); background:var(--basalt); }
+.viewer-table tbody tr:nth-child(even) { background:var(--panel); }
+.viewer-key { margin:0; }
+.viewer-key > div { padding:12px 0; border-top:1px solid var(--line-dark); }
+.viewer-key dt { font:700 1rem/1.5 var(--sans); margin-bottom:6px; }
+.viewer-key dd { margin:0; font:1rem/1.6 var(--serif); }
+.viewer-sources { margin-top:40px; padding-top:20px; border-top:1px solid var(--line-dark); }
+.viewer-sources h2 { font:700 1.2rem/1.4 var(--sans); }
+.viewer-sources p { font:.85rem/1.7 var(--sans); }
+@media(max-width:760px) { .viewer-library-grid { grid-template-columns:minmax(0,1fr); } .viewer-rankings li { grid-template-columns:minmax(0,1fr); } .viewer-table th, .viewer-table td { padding:10px 6px; } .viewer-example { padding:18px; } }
+@media print { .viewer-breadcrumb,.viewer-library-grid,.viewer-scope { display:none; } .viewer-guide .poker-details > div { display:block!important; } .viewer-guide details::details-content { content-visibility:visible!important; } .viewer-card,.viewer-example { break-inside:avoid; } .viewer-table thead { background:white; color:black; } .viewer-table { font-size:10pt; } }

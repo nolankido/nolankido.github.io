@@ -7,6 +7,20 @@
     <language>en-us</language>
     <atom:link href="https://nolankido.com/poker/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Questions new viewers ask.</title>
+      <link>https://nolankido.com/poker/viewer-questions/</link>
+      <description>A guide to reading the graphics, separating evidence from commentary, and enjoying a poker story without confusing the edit with the whole session.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/viewer-questions/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>How a tournament unfolds.</title>
+      <link>https://nolankido.com/poker/tournaments/</link>
+      <description>Understand the changing blinds, the money bubble, re-entries, and the difference between a large chip stack and a cash result.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournaments/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Follow the action.</title>
       <link>https://nolankido.com/poker/start-here/</link>
       <description>A reader-friendly guide to positions, stacks, bet sizes, and the difference between recorded action and later analysis.</description>
@@ -14,10 +28,45 @@
       <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
+      <title>What the percentages mean.</title>
+      <link>https://nolankido.com/poker/poker-math/</link>
+      <description>Separate the price of a call, the chance of completing a draw, and the uncertainty in a hand review. They are not interchangeable numbers.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-math/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>One hand, from deal to showdown.</title>
+      <link>https://nolankido.com/poker/holdem-basics/</link>
+      <description>Follow a complete hand, learn who acts when, and see why winning the pot is different from winning the same amount in profit.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/holdem-basics/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Review a hand, not just the result.</title>
       <link>https://nolankido.com/poker/reviewing-a-hand/</link>
       <description>A practical method for reviewing a tournament poker decision, with a worked fictional hand, clear uncertainty labels, and a blank review sheet.</description>
       <guid isPermaLink="true">https://nolankido.com/poker/reviewing-a-hand/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Which hand wins?</title>
+      <link>https://nolankido.com/poker/hand-rankings/</link>
+      <description>A visual reference to the ten familiar hand labels, followed by the kicker, shared-board, and ace-low situations that often confuse new viewers.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/hand-rankings/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Poker terms, in plain language.</title>
+      <link>https://nolankido.com/poker/glossary/</link>
+      <description>Forty-eight short entries grouped by what you are trying to understand. Use the topic links, or your browser’s Find command, to look up a word without reading everything.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/glossary/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Bets, calls, and side pots.</title>
+      <link>https://nolankido.com/poker/betting-and-pots/</link>
+      <description>Read the amount a player actually adds, understand why a short stack can still win, and keep the pot separate from the size of a wager.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/betting-and-pots/</guid>
       <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
     </item>
   </channel>

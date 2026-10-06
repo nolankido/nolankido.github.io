@@ -68,11 +68,11 @@ def build_outputs() -> dict[Path, str]:
         raise ValueError('Page routes and IDs must be unique')
     for p in pages:
         output_path(p['path'])
-        if p.get('note'):
+        if p.get('note') or p.get('poker_guide'):
             date_value(p['date'])
         if p.get('updated'):
             updated = date_value(p['updated'])
-            if p.get('note') and updated < date_value(p['date']):
+            if (p.get('note') or p.get('poker_guide')) and updated < date_value(p['date']):
                 raise ValueError('An update cannot precede publication')
         if p.get('revision') and not p.get('updated'):
             raise ValueError('Substantive revisions need an explicit update date')
@@ -143,7 +143,7 @@ def build_outputs() -> dict[Path, str]:
             poker_version = hashlib.sha256((ROOT / 'assets/poker.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker.css?v={poker_version}">'
             extra += '\n  <link rel="alternate" type="application/rss+xml" title="Nolan Kido Poker" href="/poker/feed.xml">'
-            if p.get('poker_entry'):
+            if p.get('poker_entry') or p.get('poker_guide'):
                 schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date'],
                                'author': {'@type': 'Person', 'name': site['name'], 'url': site['url'] + '/about/'}})
                 extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
@@ -154,7 +154,7 @@ def build_outputs() -> dict[Path, str]:
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
         data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
-                'og_type': 'article' if p.get('note') or p.get('poker_entry') else 'website', 'extra_head': extra,
+                'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
         rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
         outputs[output_path(p['path'])] = rendered

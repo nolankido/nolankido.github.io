@@ -239,7 +239,7 @@ def render(e: dict, data: dict) -> str:
     parts.append('<p class="editorial-note">Prepared with AI assistance and approved for public release. '
                  'Estimates and later interpretations should be read in the context of the account, not as verified strategy advice.</p>'
                  '<nav class="article-navigation" aria-label="After this poker story"><a href="/poker/#watch">More from Poker</a>'
-                 '<a href="/poker/start-here/">Reading the action</a><a href="/contact/">Send a correction or thought</a></nav></div>')
+                 '<a href="/poker/start-here/">Reading the action</a><a href="/poker/glossary/">Poker glossary</a><a href="/contact/">Send a correction or thought</a></nav></div>')
     return ''.join(parts)
 
 def feed(pages: list, origin: str) -> str:

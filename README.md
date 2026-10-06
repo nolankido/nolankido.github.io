@@ -79,3 +79,10 @@ See `POKER_PUBLISHING.md` for the approved-content workflow, private draft helpe
 episode companions, hand reviews, chapter links, and Poker feed. The main landing
 page remains the Technology-first baseline. Run `python _tests/poker_browser.py`
 for the temporary-fixture publishing and reader-flow checks.
+
+## Poker viewer library
+
+The beginner directory is `/poker/start-here/#viewer-library`. See
+`VIEWER_LIBRARY_RELEASE.md` for the seven new guides, the downloadable reference,
+and the regression coverage. Keep new viewer explanations separate from actual
+episode records, and preserve existing viewer-guide anchors when editing.
