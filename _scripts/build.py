@@ -13,6 +13,7 @@ from email.utils import format_datetime
 from xml.etree import ElementTree as ET
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from catalog import supplement
+from poker_navigation import section_navigation
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -81,6 +82,7 @@ def build_outputs() -> dict[Path, str]:
     values = {k: text(v) for k, v in site.items()}
     values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
+    values['hubs_css_version'] = hashlib.sha256((ROOT / 'assets/hubs.css').read_bytes()).hexdigest()[:12]
     values['site_css_version'] = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
     featured = by_id[selection['featured_note']]
     values.update({'featured_note_title': text(featured['title']), 'featured_note_url': text(featured['path']), 'featured_note_description': text(featured['description'])})
@@ -90,9 +92,9 @@ def build_outputs() -> dict[Path, str]:
         if not source.is_relative_to(SOURCE.resolve()):
             raise ValueError('Content sources must remain within _source')
         body = fill(source.read_text(encoding='utf-8'), values)
-        section = 'notes' if p.get('note') else p['id']
-        nav = ''.join(f'<li><a href="/{name}/"' + (' aria-current="page"' if section == name else '')
-                      + f'>{name.title()}</a></li>' for name in ['about', 'notes', 'resources', 'contact'])
+        section = p.get('section') or ('notes' if p.get('note') else p['id'])
+        nav = ''.join(f'<li><a href="/{name}/"' + ((' aria-current="page"' if p['path'] == '/' + name + '/' else ' aria-current="location"') if section == name else '')
+                      + f'>{name.title()}</a></li>' for name in ['poker', 'notes', 'about', 'contact'])
         canonical = site['url'] + p['path']
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
@@ -127,7 +129,7 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
-        data = {**values, 'body': body, 'primary_nav': nav, 'page_header': header, 'page_id': text(p['id']),
+        data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
                 'og_type': 'article' if p.get('note') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
