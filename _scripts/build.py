@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from catalog import supplement
 from poker_navigation import section_navigation
 import poker_content
+import poker_library
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -63,6 +64,7 @@ def build_outputs() -> dict[Path, str]:
     site = json.loads((SOURCE / 'site.json').read_text(encoding='utf-8'))
     catalog = poker_content.load(ROOT)
     pages = public_pages()
+    reader_entries = poker_library.load(ROOT, pages)
     poker_entries = {e['slug']: e for e in catalog['entries']}
     if len({p['path'] for p in pages}) != len(pages) or len({p['id'] for p in pages}) != len(pages):
         raise ValueError('Page routes and IDs must be unique')
@@ -92,6 +94,7 @@ def build_outputs() -> dict[Path, str]:
     values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
     values.update(poker_content.supplement(catalog, ROOT))
+    values.update(poker_library.supplement(reader_entries))
     values['hubs_css_version'] = hashlib.sha256((ROOT / 'assets/hubs.css').read_bytes()).hexdigest()[:12]
     values['site_css_version'] = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
     featured = by_id[selection['featured_note']]
@@ -152,6 +155,16 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
+        if p['path'].startswith('/poker/'):
+            reader_version = hashlib.sha256((ROOT / 'assets/poker-reader.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/poker-reader.css?v={reader_version}">'
+            if p['id'] == 'poker-library':
+                library_version = hashlib.sha256((ROOT / 'assets/poker-library.js').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <script defer src="/assets/poker-library.js?v={library_version}"></script>'
+            reader_meta = poker_library.reader_meta(p, reader_entries)
+            if reader_meta:
+                header = header.replace('</section>', reader_meta + '</section>', 1)
+                body += poker_library.related(p, reader_entries)
         data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
                 'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') else 'website', 'extra_head': extra,

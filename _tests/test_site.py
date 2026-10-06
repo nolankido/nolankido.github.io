@@ -110,10 +110,11 @@ class SiteTests(unittest.TestCase):
             scripts = [a['src'] for a in page.tags('script') if 'src' in a]
             self.assertEqual(scripts.count('https://cloud.umami.is/script.js'), 1)
             other_scripts = [src for src in scripts if src != 'https://cloud.umami.is/script.js']
-            self.assertEqual(len(other_scripts), 1 if path == Path('contact/index.html') else 0)
+            allowed = {Path('contact/index.html'): '/assets/contact.js', Path('poker/library/index.html'): '/assets/poker-library.js'}
+            self.assertEqual(len(other_scripts), 1 if path in allowed else 0)
             for src in other_scripts:
                 self.assertFalse(urlsplit(src).scheme or urlsplit(src).netloc)
-                self.assertEqual(urlsplit(src).path, '/assets/contact.js')
+                self.assertEqual(urlsplit(src).path, allowed[path])
         js = (ROOT / 'assets/contact.js').read_text()
         for forbidden in ['console.log', 'localStorage', 'sessionStorage']:
             self.assertNotIn(forbidden, js)
