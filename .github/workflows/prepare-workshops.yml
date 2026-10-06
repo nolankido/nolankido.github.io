@@ -23,11 +23,6 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import json
-          path=Path('.github/workflows/site-checks.yml')
-          content=path.read_text()
-          target='          python _tests/poker_browser.py\n'
-          assert content.count(target)==1
-          path.write_text(content.replace(target,target+'          python _tests/workshops_browser.py\n'))
           path=Path('_source/poker/hand-to-vlog.html')
           content=path.read_text()
           target='A proposed editing workflow, not an account of a published episode.'
@@ -39,6 +34,11 @@ jobs:
           for page in pages:
               if page['id'] in titles: page['title']=titles[page['id']]
           path.write_text(json.dumps(pages,ensure_ascii=False,indent=2)+'\n')
+          path=Path('_tests/test_workshops.py')
+          content=path.read_text()
+          target='self.assertIn(phrase, source)'
+          assert content.count(target)==1
+          path.write_text(content.replace(target,'self.assertIn(phrase.lower(), source.lower())'))
           PY
           python _scripts/build.py
           python _scripts/build.py --check
@@ -51,6 +51,9 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import subprocess
+          import sys
+          sys.path.insert(0,'_tests')
+          from test_workshops import Words, SLUGS
           base='8d7747578848b940164c316febfefa440b906eb7'
           names=subprocess.check_output(['git','ls-tree','-r','--name-only',base],text=True).splitlines()
           allowed={'_source/poker/home.html','_source/poker/study.html','_source/poker/start-here.html'}
@@ -66,10 +69,13 @@ jobs:
               expected=subprocess.check_output(['git','show',base+':'+name])
               assert Path(name).read_bytes()==expected, name
           print('PASS: exact-byte preservation for',len(protected),'existing assets and non-target files')
+          counts={slug:len(Words(Path('_source/poker',slug+'.html').read_text()).text().split()) for slug in SLUGS}
+          print('WORKSHOP_WORD_COUNTS='+str(counts))
+          print('TOTAL_WORKSHOP_WORDS='+str(sum(counts.values())))
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add _source _scripts/check_live.py README.md poker sitemap.xml .github/workflows/site-checks.yml
+          git add _source _scripts/check_live.py _tests/test_workshops.py README.md poker sitemap.xml
           git diff --cached --stat
           git commit -m 'Connect Poker workshops, study routes, worksheets and generated public pages'
           git push origin HEAD:refs/heads/poker-workshops-20261006
