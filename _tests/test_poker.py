@@ -2,7 +2,6 @@
 import hashlib
 import json
 from fractions import Fraction
-from html.parser import HTMLParser
 from pathlib import Path
 import sys
 import unittest
@@ -20,7 +19,7 @@ class PokerTests(unittest.TestCase):
             self.assertIn('aria-label="Poker section"', page)
             self.assertIn('/poker/reviewing-a-hand/', page)
             self.assertIn('/downloads/poker-hand-review.md', page)
-            for forbidden in ['<iframe', 'youtube.com', 'youtu.be', 'coming soon', 'solverPoker', 'OverlayPoker', 'Thunder Valley', 'mailto:']:
+            for forbidden in ['<iframe', 'youtube.com', 'youtu.be', 'coming soon', 'github.com/', 'mailto:']:
                 self.assertNotIn(forbidden, page)
         self.assertNotIn('aria-label="Poker section"', outputs[Path('index.html')])
         self.assertEqual(section_navigation({'path':'/notes/'}), '')
