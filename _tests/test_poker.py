@@ -32,6 +32,7 @@ class PokerTests(unittest.TestCase):
         self.assertIn('fictional', text)
         self.assertIn('Prepared with AI assistance.', text)
         self.assertIn('Use it after play.', text)
+        self.assertIn('class="fictional-hand" role="group" aria-labelledby="example-title"', text)
         self.assertEqual(Fraction('2.5') * 2 + Fraction('0.5'), Fraction('5.5'))
         self.assertEqual(Fraction('5.5') + 2 + 7, Fraction('14.5'))
         self.assertEqual(7 - 2, 5)

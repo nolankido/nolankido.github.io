@@ -16,7 +16,7 @@
 .destination:hover h3, .destination:focus-visible h3 { text-decoration: underline; text-underline-offset: .15em; }
 .destination:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .home-connection { padding-block: 28px 36px; }
-.home-connection p { font: 1.1rem/1.6 var(--serif); margin-bottom: 12px; }
+.home-connection .section-content > p { font: 1.1rem/1.6 var(--serif); margin-bottom: 12px; }
 .subsite-bar { border-bottom: 1px solid var(--line); background: var(--panel); }
 .subsite-bar .shell { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding-block: 8px; }
 .subsite-name { font: 500 .7rem/1.5 var(--mono); text-transform: uppercase; }
