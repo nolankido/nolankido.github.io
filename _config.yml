@@ -13,6 +13,8 @@ exclude:
   - SITE_REVIEW.md
   - POKER_RELEASE.md
   - TECHNOLOGY_RELEASE.md
+  - POKER_PUBLISHING.md
+  - POKER_GROWTH_RELEASE.md
   - requirements-test.txt
 
 # Keep editable Markdown worksheets as static downloads.

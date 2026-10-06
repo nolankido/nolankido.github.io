@@ -72,3 +72,10 @@ See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and
 ## Technology-first home
 
 The current gateway hierarchy is Technology, Poker, Creative Work. `/technology/` and `/creative/` are small, explicit introductions with existing reading; Notes remains the cross-subject archive. `TECHNOLOGY_RELEASE.md` supersedes the earlier poker-first ranking. The live checker covers 37 responses.
+
+## Poker publishing
+
+See `POKER_PUBLISHING.md` for the approved-content workflow, private draft helper,
+episode companions, hand reviews, chapter links, and Poker feed. The main landing
+page remains the Technology-first baseline. Run `python _tests/poker_browser.py`
+for the temporary-fixture publishing and reader-flow checks.

@@ -17,7 +17,7 @@ import build
 class ContentTests(unittest.TestCase):
     def test_curated_links_and_archive_cover_published_notes(self):
         outputs = build.build_outputs()
-        pages = json.loads((ROOT / '_source/pages.json').read_text())
+        pages = build.public_pages()
         selection = json.loads((ROOT / '_source/selection.json').read_text())
         notes = [p for p in pages if p.get('note')]
         self.assertEqual(set(selection['note_order']), {p['id'] for p in notes})
@@ -30,7 +30,7 @@ class ContentTests(unittest.TestCase):
 
     def test_revisions_are_visible_and_machine_readable(self):
         outputs = build.build_outputs()
-        pages = json.loads((ROOT / '_source/pages.json').read_text())
+        pages = build.public_pages()
         for p in pages:
             if p.get('revision'):
                 content = outputs[build.output_path(p['path'])]

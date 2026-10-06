@@ -11,6 +11,9 @@ import unittest
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
+import sys
+sys.path.insert(0, str(ROOT / '_scripts'))
+import build
 STUB = """window.turnstile = {
  render(el, options) { window.challengeOptions = options; return 'test-widget'; },
  reset() { window.resetCount = (window.resetCount || 0) + 1; },
@@ -24,6 +27,8 @@ def html_for(route):
     content = re.sub(r'<link rel="stylesheet"[^>]*>', '', content)
     content = re.sub(r'<script src="/assets/contact.js[^>]*></script>', '', content)
     css = (ROOT / 'styles.css').read_text() + '\n' + (ROOT / 'assets/site.css').read_text() + '\n' + (ROOT / 'assets/hubs.css').read_text()
+    if route.startswith('/poker/'):
+        css += '\n' + (ROOT / 'assets/poker.css').read_text()
     content = content.replace('</head>', '<style>' + css + '</style></head>')
     for route_name in ['favicon.svg', 'card/qr.svg']:
         data = base64.b64encode((ROOT / route_name).read_bytes()).decode()
@@ -241,11 +246,11 @@ class BrowserTests(unittest.TestCase):
         expect(page.locator('#contact-name')).to_be_disabled()
         expect(page.locator('#form-success')).to_be_hidden()
         page.set_content(html_for('/notes/'))
-        self.assertEqual(page.locator('.note-entry').count(), sum(bool(p.get('note')) for p in json.loads((ROOT / '_source/pages.json').read_text())))
+        self.assertEqual(page.locator('.note-entry').count(), sum(bool(p.get('note')) for p in build.public_pages()))
         context.close()
 
     def test_mobile_tablet_desktop_layout_and_keyboard(self):
-        pages = json.loads((ROOT / '_source/pages.json').read_text())
+        pages = build.public_pages()
         for width in [320, 390, 768, 1024, 1440]:
             for p in pages:
                 with self.subTest(width=width, page=p['path']):

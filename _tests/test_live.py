@@ -37,7 +37,10 @@ class LiveCheckTests(unittest.TestCase):
 
     def test_paths_and_excluded_source(self):
         values = check_live.targets()
-        self.assertEqual(len(values), 37)
+        self.assertTrue(all(page['path'] in values for page in check_live.build.public_pages()))
+        for asset in ['/assets/poker.css', '/poker/feed.xml', '/downloads/poker-session-debrief.md']:
+            self.assertEqual(values[asset][0], 200)
+        self.assertEqual(sum(status == 404 for status, _ in values.values()), 4)
         self.assertEqual(values['/_source/site.json'], (404, (ROOT / '404.html').read_bytes()))
         self.assertEqual(values['/contact/'][0], 200)
         for route in ['//another.example/', 'https://example.com/', '/?other=1']:

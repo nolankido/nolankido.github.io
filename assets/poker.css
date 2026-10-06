@@ -1,0 +1,38 @@
+/* Poker-only additions. Do not attach this sheet to the main landing page. */
+.poker-paths { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:36px; }
+.poker-paths a { display:flex; flex-direction:column; gap:12px; padding:22px; background:var(--paper-light); border:1px solid var(--line-dark); text-decoration:none; min-width:0; }
+.poker-paths a:first-child { border-top:3px solid var(--red); }
+.poker-paths strong { font:700 1.3rem/1.25 var(--sans); letter-spacing:-.02em; }
+.poker-paths .note-category { margin:0; }
+.poker-paths a > span:last-child { font:1rem/1.6 var(--serif); }
+.poker-paths a:hover strong, .poker-paths a:focus-visible strong { text-decoration:underline; text-underline-offset:.2em; }
+.poker-first-read { padding:28px; background:var(--panel); border-left:3px solid var(--red); }
+.poker-first-read h3 { font-size:clamp(1.5rem,2.5vw,2.2rem); max-width:700px; }
+.poker-first-read > p { max-width:640px; }
+.poker-first-read p:not(.small-copy):not(.note-category) { font:1.12rem/1.6 var(--serif); }
+.poker-content-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.poker-content-card { border:1px solid var(--line-dark); padding:24px; background:var(--paper-light); min-width:0; }
+.poker-content-card h3 { font:700 1.5rem/1.25 var(--sans); overflow-wrap:anywhere; }
+.poker-content-card p { font:1.05rem/1.65 var(--serif); }
+.poker-content-card .note-category, .poker-content-card .small-copy { font: .75rem/1.6 var(--mono); }
+.poker-jump { display:flex; flex-wrap:wrap; gap:4px 22px; padding:16px 0; margin:26px 0; border-block:1px solid var(--line); font:.9rem/1.5 var(--sans); }
+.poker-jump a { display:inline-flex; align-items:center; min-height:44px; }
+.poker-glossary { margin:24px 0; }
+.poker-glossary > div { display:grid; grid-template-columns:minmax(100px,.45fr) minmax(0,1fr); gap:20px; padding:18px 0; border-top:1px solid var(--line); }
+.poker-glossary dt { font:650 1rem/1.5 var(--sans); }
+.poker-glossary dd { margin:0; }
+.poker-details { border:1px solid var(--line-dark); background:var(--paper-light); margin:24px 0; }
+.poker-details summary { cursor:pointer; padding:18px; font:600 .95rem/1.6 var(--sans); min-height:44px; }
+.poker-details > div { padding:0 22px 6px; }
+.poker-details pre { border-top:1px solid var(--line); margin:0; padding:22px; white-space:pre-wrap; overflow-wrap:anywhere; font:.85rem/1.7 var(--mono); }
+.poker-editorial-image { display:block; max-width:100%; height:auto; margin-block:28px; }
+.poker-watch { padding:24px; background:var(--panel); margin:24px 0; }
+.poker-watch .small-copy { margin:16px 0 0; }
+.poker-chapters ol { list-style:none; padding:0; }
+.poker-chapters a { display:flex; gap:16px; align-items:baseline; padding:12px 0; min-height:44px; border-bottom:1px solid var(--line); }
+.poker-chapters a span { font:.85rem/1.6 var(--mono); flex-shrink:0; }
+.poker-entry h2, .poker-glossary > div { scroll-margin-top:120px; }
+.poker-context { font: .9rem/1.6 var(--sans); padding:16px; border-left:3px solid var(--red); background:var(--panel); }
+@media(max-width:1050px) { .poker-paths { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:760px) { .poker-content-grid { grid-template-columns:minmax(0,1fr); } .poker-glossary > div { grid-template-columns:minmax(0,1fr); gap:8px; } .poker-first-read { padding:22px; } }
+@media print { .poker-paths,.poker-jump,.poker-watch,.poker-chapters { display:none; } .poker-content-card,.poker-first-read,.poker-details { background:white; color:black; break-inside:avoid; } }
