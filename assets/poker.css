@@ -82,3 +82,26 @@
 .viewer-sources p { font:.85rem/1.7 var(--sans); }
 @media(max-width:760px) { .viewer-library-grid { grid-template-columns:minmax(0,1fr); } .viewer-rankings li { grid-template-columns:minmax(0,1fr); } .viewer-table th, .viewer-table td { padding:10px 6px; } .viewer-example { padding:18px; } }
 @media print { .viewer-breadcrumb,.viewer-library-grid,.viewer-scope { display:none; } .viewer-guide .poker-details > div { display:block!important; } .viewer-guide details::details-content { content-visibility:visible!important; } .viewer-card,.viewer-example { break-inside:avoid; } .viewer-table thead { background:white; color:black; } .viewer-table { font-size:10pt; } }
+
+/* Follow-on viewer guides and curated reading routes. */
+.viewer-learning-paths { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:28px 0; }
+.viewer-learning-paths article { border-top:3px solid var(--red); padding:20px; background:var(--panel); min-width:0; }
+.viewer-learning-paths h3 { font:700 1.25rem/1.35 var(--sans); margin:0 0 14px; }
+.viewer-learning-paths p, .viewer-learning-paths ol { font:1rem/1.65 var(--serif); }
+.viewer-learning-paths ol { padding-left:20px; margin:12px 0 0; }
+.viewer-learning-paths a { display:inline; }
+.viewer-learning-paths li { padding:6px 0; }
+.viewer-phrase-links { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 30px; }
+.viewer-phrase-links a { display:inline-flex; align-items:center; min-height:44px; padding:10px 14px; border:1px solid var(--line-dark); font:.95rem/1.5 var(--sans); background:var(--paper-light); }
+.viewer-board-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:26px 0; }
+.viewer-board-grid .viewer-example { margin:0; min-width:0; }
+.viewer-card-label { margin:12px 0 4px; font:600 .9rem/1.5 var(--sans); }
+.viewer-citation { display:inline-block; font:.8rem/1.6 var(--sans); margin:0 0 18px; }
+.viewer-scene { margin-top:40px; padding-top:12px; border-top:2px solid var(--line-dark); scroll-margin-top:120px; }
+.viewer-home-next { background:var(--panel); border-left:3px solid var(--red); padding:24px; margin-top:28px; }
+.viewer-home-next h3 { font:700 1.35rem/1.4 var(--sans); margin:0 0 12px; }
+.viewer-home-next p { font:1.08rem/1.7 var(--serif); max-width:650px; }
+.viewer-library h3 { scroll-margin-top:120px; }
+@media(max-width:1050px) { .viewer-learning-paths { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:760px) { .viewer-board-grid { grid-template-columns:minmax(0,1fr); } }
+@media print { .viewer-phrase-links, .viewer-learning-paths, .viewer-home-next { display:none; } .viewer-board-grid { display:block; } .viewer-board-grid .viewer-example { margin:18px 0; } .viewer-scene { break-before:auto; } }
