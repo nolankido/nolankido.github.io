@@ -16,6 +16,7 @@ from catalog import supplement
 from poker_navigation import section_navigation
 import poker_content
 import poker_library
+import poker_reading
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -163,7 +164,7 @@ def build_outputs() -> dict[Path, str]:
                 extra += f'\n  <script defer src="/assets/poker-library.js?v={library_version}"></script>'
             reader_meta = poker_library.reader_meta(p, reader_entries)
             if reader_meta:
-                header = header.replace('</section>', reader_meta + '</section>', 1)
+                header = header.replace('</section>', reader_meta + poker_reading.section_outline(body) + '</section>', 1)
                 body += poker_library.related(p, reader_entries)
         data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
