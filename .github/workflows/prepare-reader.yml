@@ -1,0 +1,60 @@
+name: Prepare Poker reader release
+on:
+  push:
+    branches: [poker-reader-20261006]
+    paths: ['.github/workflows/prepare-reader.yml']
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: poker-reader-20261006
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Integrate, build and verify
+        run: |
+          python _scripts/prepare_reader.py
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('_tests/test_content.py');text=p.read_text()
+          old="expected.append('/assets/poker-library.js?v='"
+          assert text.count(old)==1
+          p.write_text(text.replace(old,"expected.insert(0, '/assets/poker-library.js?v='"))
+          PY
+          python _scripts/build.py
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p 'test_*.py' -v
+          node --check assets/poker-library.js
+          node --check assets/contact.js
+          git diff --check
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          base='af2da82f0c0447cd17a3c208edee5efbb1c151df'
+          names=subprocess.check_output(['git','ls-tree','-r','--name-only',base],text=True).splitlines()
+          protected=[]
+          for name in names:
+              if name.startswith('assets/') or name in ['styles.css','_source/layout.html','_source/site.json','feed.xml','ANALYTICS.md']:
+                  protected.append(name)
+              elif name.endswith('.html') and not name.startswith('poker/') and name not in ['_source/poker/home.html','_source/poker/study.html']:
+                  protected.append(name)
+          for name in protected:
+              expected=subprocess.check_output(['git','show',base+':'+name])
+              assert Path(name).read_bytes()==expected,name
+          print('PROTECTED_FILES_UNCHANGED='+str(len(protected)))
+          PY
+      - name: Commit generated release on feature branch only
+        run: |
+          test "$GITHUB_REF_NAME" = 'poker-reader-20261006'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add _scripts/build.py _scripts/check_live.py _scripts/poker_navigation.py _source _tests/test_site.py _tests/test_content.py _tests/browser.py _reports poker sitemap.xml
+          git diff --cached --stat
+          git commit -m 'Integrate Poker library, reader metadata and visual Decision Lab'
+          git push origin HEAD:refs/heads/poker-reader-20261006
