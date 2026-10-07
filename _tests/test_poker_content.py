@@ -1,6 +1,7 @@
 """Public catalog and baseline contracts. All invented records stay in temp files."""
 from contextlib import contextmanager
 from copy import deepcopy
+from datetime import date
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
@@ -119,6 +120,34 @@ class PokerContentTests(unittest.TestCase):
         e=fixture('hand','bad-hand'); e.pop('record_type')
         with catalog_root([e]) as root, self.assertRaises(ValueError): pc.load(root)
         with catalog_root([fixture(),fixture()]) as root, self.assertRaises(ValueError): pc.load(root)
+
+    def test_publication_dates_cannot_schedule_future_content(self):
+        as_of = date(2026, 10, 7)
+
+        future = fixture('story', 'future-story')
+        future['published'] = '2026-10-08'
+        with catalog_root([future]) as root, self.assertRaisesRegex(
+                ValueError, 'Publication date cannot be in the future'):
+            pc.load(root, as_of=as_of)
+
+        today = fixture('story', 'today-story')
+        today['published'] = '2026-10-07'
+        with catalog_root([today]) as root:
+            self.assertEqual(pc.load(root, as_of=as_of)['entries'][0]['published'], '2026-10-07')
+
+        future_update = fixture('story', 'future-update')
+        future_update.update(updated='2026-10-08', revision='Synthetic correction.')
+        with catalog_root([future_update]) as root, self.assertRaisesRegex(
+                ValueError, 'Update date cannot be in the future'):
+            pc.load(root, as_of=as_of)
+
+        today_update = fixture('story', 'today-update')
+        today_update.update(updated='2026-10-07', revision='Synthetic correction.')
+        with catalog_root([today_update]) as root:
+            self.assertEqual(pc.load(root, as_of=as_of)['entries'][0]['updated'], '2026-10-07')
+
+        with catalog_root([today]) as root, self.assertRaises(TypeError):
+            pc.load(root, as_of='2026-10-07')
 
     def test_more_than_six_entries_stay_reachable(self):
         entries=[fixture('story','test-'+str(i)) for i in range(9)]
