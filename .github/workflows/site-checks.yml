@@ -38,17 +38,20 @@ jobs:
         env:
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
         run: |
-          python _tests/review_browser.py
-          python _tests/poker_browser.py
-          python _tests/workshops_browser.py
-          python _tests/library_browser.py
-          python _tests/labs_browser.py
-      - name: Save Poker reading-path previews
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/poker-reading-previews"
+          for suite in review_browser poker_browser workshops_browser library_browser labs_browser; do
+            echo "Running $suite"
+            python "_tests/$suite.py" 2>&1 | tee "$RUNNER_TEMP/poker-reading-previews/$suite.log"
+          done
+      - name: Save Poker reading-path previews and diagnostics
+        if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: poker-reading-previews
           path: |
             ${{ runner.temp }}/poker-reading-previews/poker-*.png
+            ${{ runner.temp }}/poker-reading-previews/*.log
           retention-days: 1
           if-no-files-found: error
       - name: Verify published main release
