@@ -16,8 +16,9 @@ sys.path.insert(0,str(ROOT/'_scripts'))
 import build
 import check_live
 GUIDES=['position-and-stacks','reading-the-board','ranges-and-bets','tournament-formats','table-etiquette','follow-along']
-# October 6: gateway hashes include only the approved Umami tag; design/source hashes are unchanged.
-PROTECTED={'_source/poker/holdem-basics.html': 'a36851883f9398fa2e0e18fccf52aa1f0734e63f2f4e55d5ae7cc10a2b65684d', '_source/poker/hand-rankings.html': 'fb6be2d273a470e0be78defd14e46a7e8c4bed1a162bd70fb05d24bd57fcc1a5', '_source/poker/betting-and-pots.html': '9841e0e5121022a04b84cf2f1ef2005f670315a745b257b40efc24f7f717b95e', '_source/poker/tournaments.html': '15244efca170a8c0f954aba553465385a05f7fce2b9f871eb8c1546acfebeb00', '_source/poker/poker-math.html': '0ee78cede40c4b1c6f807dea051099f2660ffc4f6cddb86d57b5bfe016ed31bb', '_source/poker/glossary.html': '9cb6e49e10fc5bacade6a01f42b8d20acc380c8479259ad50a76cc66ad6daebd', '_source/poker/viewer-questions.html': 'c14b14bf74960cc067aa45a09d22c80f4a1ed625e5f302523a3c12a5ee10f6f5', 'index.html': '168617f68c7315efe2c0653421117f4c72c78ebd7a1b1eec7551f7e724b62edc', 'technology/index.html': '7e521399e213c90d0f94cfbcc0d069ecc199b3d28420ccf0397b88202a5fb519', 'creative/index.html': '0eacad4edf721e7a4e4256def4aae5b0f9c572f462df8b6b906023e50cbf4ce0', 'assets/contact.js': '65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858', 'styles.css': '44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef', 'assets/site.css': '784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6', 'assets/hubs.css': 'aab63ac0f415d1d6ff99e2c141979aaceeef8d77af0edeae33533c2ec9c5fb66', '_source/poker/catalog.json': '7c1051f6e2bc3943b7c1dbe4da229694455681b8875a346c99279e555edb733f', 'feed.xml': '9b3e05a7e14db5b1e751d18a7ff0c8cbaf47b7d60453c1e9c43424e8d57e223a'}
+# October 7: the owner-requested viewer-questions refresh advances only its source hash.
+# Gateway, design, other guide and privacy protections remain unchanged.
+PROTECTED={'_source/poker/holdem-basics.html': 'a36851883f9398fa2e0e18fccf52aa1f0734e63f2f4e55d5ae7cc10a2b65684d', '_source/poker/hand-rankings.html': 'fb6be2d273a470e0be78defd14e46a7e8c4bed1a162bd70fb05d24bd57fcc1a5', '_source/poker/betting-and-pots.html': '9841e0e5121022a04b84cf2f1ef2005f670315a745b257b40efc24f7f717b95e', '_source/poker/tournaments.html': '15244efca170a8c0f954aba553465385a05f7fce2b9f871eb8c1546acfebeb00', '_source/poker/poker-math.html': '0ee78cede40c4b1c6f807dea051099f2660ffc4f6cddb86d57b5bfe016ed31bb', '_source/poker/glossary.html': '9cb6e49e10fc5bacade6a01f42b8d20acc380c8479259ad50a76cc66ad6daebd', '_source/poker/viewer-questions.html': 'c7b35450dc792949002a27398ae73ea6913efce6adee470f287ce67bdc1da2b1', 'index.html': '168617f68c7315efe2c0653421117f4c72c78ebd7a1b1eec7551f7e724b62edc', 'technology/index.html': '7e521399e213c90d0f94cfbcc0d069ecc199b3d28420ccf0397b88202a5fb519', 'creative/index.html': '0eacad4edf721e7a4e4256def4aae5b0f9c572f462df8b6b906023e50cbf4ce0', 'assets/contact.js': '65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858', 'styles.css': '44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef', 'assets/site.css': '784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6', 'assets/hubs.css': 'aab63ac0f415d1d6ff99e2c141979aaceeef8d77af0edeae33533c2ec9c5fb66', '_source/poker/catalog.json': '7c1051f6e2bc3943b7c1dbe4da229694455681b8875a346c99279e555edb733f', 'feed.xml': '9b3e05a7e14db5b1e751d18a7ff0c8cbaf47b7d60453c1e9c43424e8d57e223a'}
 
 class ViewerNextTests(unittest.TestCase):
     @classmethod
@@ -154,9 +155,14 @@ class ViewerNextTests(unittest.TestCase):
         hub=self.output('start-here')
         for marker in ['viewer-essentials','viewer-next','heard-it','quick-start']:
             self.assertIn('id="'+marker+'"',hub)
-        self.assertEqual(hub.count('/ Viewer guide</p>'),13)
+        # The short viewer page keeps all topic routes without a second syllabus.
+        for slug in ['holdem-basics', 'hand-rankings', 'betting-and-pots', 'tournaments',
+                     'poker-math', 'glossary', 'viewer-questions'] + GUIDES:
+            self.assertIn('/poker/' + slug + '/', hub)
+        self.assertIn('/poker/library/', hub)
+        self.assertLess(hub.index('id="quick-start"'), hub.index('id="viewer-library"'))
         self.assertIn('aria-label="Commentary phrase shortcuts"',hub)
-        self.assertIn('three suggested reading routes',hub)
+        self.assertIn('condensed the topic directory into reference links',hub)
         self.assertIn('/poker/follow-along/',self.outputs[Path('poker/index.html')])
 
     def test_new_download_and_deployment_exclusion(self):

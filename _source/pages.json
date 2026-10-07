@@ -152,11 +152,11 @@
     "path": "/poker/",
     "title": "Poker.",
     "seo_title": "Poker | Nolan Kido",
-    "description": "Tournament poker, beginner viewer guides, after-play study workshops, hand reviews and a practical poker vlog workbench by Nolan Kido.",
+    "description": "Tournament stories, decisions worth revisiting, and after-session review. Follow a hand, find a published account, or look up one explanation.",
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
-    "updated": "2026-10-06"
+    "updated": "2026-10-07"
   },
   {
     "id": "poker-hand-review",
@@ -167,7 +167,7 @@
     "kicker": "Poker / Hand review",
     "source": "poker/reviewing-a-hand.html",
     "section": "poker",
-    "updated": "2026-10-05",
+    "updated": "2026-10-07",
     "date": "2026-10-05"
   },
   {
@@ -195,23 +195,23 @@
     "path": "/poker/start-here/",
     "title": "Follow the action.",
     "seo_title": "Poker Viewer Guide | Nolan Kido",
-    "description": "A beginner library for poker vlog viewers: rules, hand rankings, position, board texture, betting ideas, tournament formats and worked practice scenes.",
+    "description": "Follow your first poker hand without reading a full course. Find the player, the action, the amount to call, and a direct explanation when needed.",
     "section": "poker",
     "kicker": "Poker / Start here",
     "source": "poker/start-here.html",
     "date": "2026-10-05",
-    "updated": "2026-10-06"
+    "updated": "2026-10-07"
   },
   {
     "id": "poker-study",
     "path": "/poker/study/",
     "title": "The study desk.",
     "seo_title": "Poker Study Desk | Nolan Kido",
-    "description": "After-play workshops, a visual Decision Lab, practice questions and private-use worksheets for tournament study and poker vlog planning.",
+    "description": "Start an after-play review with one hand, one question, and a private worksheet. Find the explanation you need rather than a reading backlog.",
     "section": "poker",
     "kicker": "Poker / Between sessions",
     "source": "poker/study.html",
-    "updated": "2026-10-06"
+    "updated": "2026-10-07"
   },
   {
     "id": "poker-holdem-basics",
@@ -296,12 +296,12 @@
     "path": "/poker/viewer-questions/",
     "title": "Questions new viewers ask.",
     "seo_title": "Questions new viewers ask | Nolan Kido Poker",
-    "description": "A guide to reading the graphics, separating evidence from commentary, and enjoying a poker story without confusing the edit with the whole session.",
+    "description": "Read the player, action, pot, and call amount in a poker graphic. Find a specific hand or companion and keep later commentary separate from the record.",
     "kicker": "Poker / Viewer library",
     "source": "poker/viewer-questions.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-05",
+    "updated": "2026-10-07",
     "poker_guide": true
   },
   {
@@ -457,7 +457,7 @@
     "source": "poker/hand-to-vlog.html",
     "section": "poker",
     "date": "2026-10-06",
-    "updated": "2026-10-06",
+    "updated": "2026-10-07",
     "poker_guide": true
   },
   {
@@ -478,11 +478,11 @@
     "path": "/poker/library/",
     "title": "The Poker library.",
     "seo_title": "The Poker library | Nolan Kido",
-    "description": "Find every Poker guide by topic, search its title and summary, and choose a next read with estimated reading times.",
+    "description": "Look up the explanation a poker hand or story needs. Search all guides by topic, title, or term, then return to the account.",
     "kicker": "Poker / Read, study, create",
     "source": "poker/library.html",
     "section": "poker",
-    "updated": "2026-10-06"
+    "updated": "2026-10-07"
   },
   {
     "id": "poker-decision-lab",
