@@ -68,8 +68,10 @@ Required fields are `slug`, `kind`, `title`, `summary`, `published`, `approved`,
 `sections`. A section has exactly `heading` and `paragraphs` (a list of plain text).
 Titles are at most 140 characters; summaries at most 320. Publication dates use
 YYYY-MM-DD and must be the actual website publication date, not the session date.
-There is no scheduled-release mechanism. Only already-approved public material
-belongs here. All text is escaped. Raw HTML and embedded scripts are not supported.
+There is no scheduled-release mechanism. The catalog rejects publication and update
+dates after the current UTC date, so do not pre-stage a future-dated public record.
+Only already-approved public material belongs here. All text is escaped. Raw HTML
+and embedded scripts are not supported.
 
 Optional fields:
 

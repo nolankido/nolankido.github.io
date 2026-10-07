@@ -4,7 +4,7 @@ Unpublished drafts must live outside the repository, not in this catalog.
 No network calls, runtime database, remote thumbnails, or automatic publishing.
 """
 from __future__ import annotations
-from datetime import date
+from datetime import date, datetime, timezone
 from html import escape
 from pathlib import Path
 from urllib.parse import urlsplit, parse_qs
@@ -65,7 +65,11 @@ def paragraphs(values: list, label: str) -> None:
     for value in values:
         txt(value, label)
 
-def load(root: Path) -> dict:
+def load(root: Path, *, as_of: date | None = None) -> dict:
+    if as_of is None:
+        as_of = datetime.now(timezone.utc).date()
+    if type(as_of) is not date:
+        raise TypeError('as_of must be a date')
     path = root / '_source/poker/catalog.json'
     data = json.loads(path.read_text(encoding='utf-8'))
     if not isinstance(data, dict) or set(data) != {'version', 'entries'} or type(data['version']) is not int or data['version'] != 1:
@@ -85,9 +89,14 @@ def load(root: Path) -> dict:
             raise ValueError('Poker slugs must be unique across all content types')
         seen.add(e['slug'])
         txt(e['title'], 'Title', 140); txt(e['summary'], 'Summary', 320)
-        day(e['published'])
+        published = day(e['published'])
+        if published > as_of:
+            raise ValueError('Publication date cannot be in the future; this site does not schedule releases')
         if 'updated' in e:
-            if day(e['updated']) < day(e['published']):
+            updated = day(e['updated'])
+            if updated > as_of:
+                raise ValueError('Update date cannot be in the future; this site does not schedule releases')
+            if updated < published:
                 raise ValueError('An update cannot precede publication')
             txt(e.get('revision', ''), 'Revision', 500)
         elif 'revision' in e:

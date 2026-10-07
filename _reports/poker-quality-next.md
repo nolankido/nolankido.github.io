@@ -1,69 +1,74 @@
 # Poker quality: current handoff
 
-Updated October 6, 2026. This is a non-public-site maintenance record, not an
-article, a personal result, or a promise of future work. Check the current branch,
-open pull requests and actual authorization before starting another change.
+Updated October 7, 2026. This is a non-public-site maintenance record, not an
+article, a personal result, or a promise of future work. Check current refs, open
+pull requests and actual authorization before starting another change.
 
-## Completed in this change
+## Prepared in this change
 
-The stale-page check now covers every generated HTML file under `poker/`, not
-only episode, hand and story subdirectories. A removed study guide, library,
-series hub, deeply nested generated page or legacy HTML filename causes a clear
-build refusal. It does not silently remain eligible for the next release.
+The public Poker catalog now refuses a `published` or `updated` date later than
+the current UTC date. The catalog already documented that it has no scheduled
+release mechanism, but the validator previously accepted a future-dated approved
+record and the normal build would render it immediately. The new check makes the
+validator match that documented release model.
 
-The check runs before output writes and never deletes files. A maintainer must
-review and deliberately remove or restore an orphan. Manually maintained HTML
-without the generator marker and non-Poker sections are unchanged.
+The validator accepts today's date, rejects tomorrow's date, retains the existing
+rule that an update cannot precede publication, and rejects a non-date test clock.
+The injected `as_of` date exists so boundary tests are deterministic; normal builds
+use the current UTC date automatically. Existing catalog entries and generated
+site files are unchanged.
 
-## Observed local evidence
+## Executed evidence
 
-Source baseline: `09a4543ec142c0465d1ce4c35e13670d529b4c74`.
-The recovered source tree, after removing the three already-deleted temporary
-utilities, matched Git tree `722fc948f7ce3ef1a19ddcb8dadc00d1a57b8d7a` exactly.
+Reconstructed source tree before this change matched current main's Git tree
+`5b1a9088606ed1bfbe5d5b2436f09a9890ba2b3d`, corresponding to main commit
+`3c4f66032f5c50841106283907fe6454cc05ab02` at the start of this work.
 
-Before repair, an isolated copy with a fabricated stale generated study guide
-returned exit zero from `python _scripts/build.py --check`. The new seven-test
-suite failed on that baseline, including eight failing assertions/subtests.
-After repair, all 98 unit tests passed and all 49 generated files matched their
-committed bytes. No page, CSS, browser script, analytics setting, private record
-or publishing configuration was changed. Browser appearance is unchanged.
+Before the repair, a synthetic approved story dated one day in the future was
+accepted by `poker_content.load`. After the repair, the future publication and
+future update cases are rejected while same-day publication and update cases are
+accepted.
 
-Commands actually executed:
+Commands actually executed after the repair:
 
 ```
-python _scripts/build.py --check
-python -m unittest discover -s _tests -p 'test_poker_release_safety.py'
-python -m unittest discover -s _tests -p 'test_*.py'
 git diff --check
+python _scripts/build.py --check
+python -m unittest discover -s _tests -p 'test_poker_content.py' -v
+python -m unittest discover -s _tests -p 'test_*.py' -v
+python -m py_compile _scripts/poker_content.py _tests/test_poker_content.py
 ```
 
-PR checks, merge status and live verification must be read from GitHub. These
-local results are not a claim that a later remote commit was tested or deployed.
-This guard is not enforced on an unchecked direct push that bypasses the normal
-PR workflow. It does not certify that arbitrary unmarked files are publishable.
+Results: 49 generated files checked with zero changes; 13 focused catalog tests
+passed; all 99 unit tests passed; Python compilation and whitespace checks passed.
+No browser appearance changed, and no browser pass is claimed for this validator
+only change.
+
+## Previous release-safety repair
+
+Main already contains the stale-generated-page guard from PR #10. It refuses
+orphaned generated Poker HTML before any build output writes and does not delete
+files automatically. That earlier change is separate from this date validation.
 
 ## Next useful priorities
 
-1. Inspect the outstanding manual contrast flags from the existing whole-site
-   accessibility report in actual rendered Poker pages. Distinguish confirmed
-   defects from scanner uncertainty. Preserve the existing design and test any
-   narrowly scoped fix with phone and desktop screenshots.
-2. Exercise the current reader experience rather than creating another app:
-   keyboard focus, long outlines, expanded answers, print output, and search
-   recovery. Reproduce a concrete usability problem before altering behavior.
-3. Review the existing episode publishing workflow using fictional test data.
-   Check that missing media, chapter times, spoilers and empty catalog states
-   are understandable without inventing an actual episode or result.
+1. Publish this date-validation change only after rechecking current main, the
+   branch head and exact-head CI. Verify deployment separately after any merge.
+2. Exercise the existing episode publishing flow with fictional fixtures for
+   missing media, chapter times, spoiler placement and empty collection states.
+3. Inspect confirmed reader issues before changing presentation: mobile focus,
+   long outlines, answer disclosures, print output and local search recovery.
+4. Revisit manual contrast flags only when a rendered element can be identified
+   as an actual problem; do not change the palette from scanner uncertainty alone.
 
-Avoid expanding the library merely to raise its page count. Keep the 24 current
-guides, three Decision Labs, established URLs, Technology-first homepage,
-contact handling and Umami settings intact unless the selected fix requires a
-specific, reviewed Poker-only adjustment. Do not expose private notes or footage.
+Avoid expanding the library merely to raise its page count. Preserve the current
+guide set, Decision Labs, established URLs, Technology-first homepage, contact
+handling and Umami settings unless a specific reviewed Poker-only repair requires
+otherwise. Do not expose private notes or footage.
 
 ## Release procedure
 
-Use an isolated, narrowly scoped branch. Inspect current refs and existing PRs;
-do not compete with another writer. Run tests without weakening them. Require
-checks to pass for the exact head before merging, then verify Pages and live
-content separately. Leave a precise next step and factual evidence for the next
-session. Do not publish guessed test results or accessibility certifications.
+Use an isolated, narrowly scoped branch. Do not compete with another writer. Run
+checks without weakening them. Require passing checks for the exact submitted
+head before merging, then verify Pages and live content separately. Record actual
+evidence and limitations rather than inferred deployment state.
