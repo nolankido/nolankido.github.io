@@ -156,6 +156,31 @@ try:
         for shortcut in page.locator('.viewer-phrase-links a').evaluate_all('(nodes) => nodes.map(n => n.getAttribute("href"))'):
             page.goto(base + shortcut)
             expect(page.locator('#' + shortcut.split('#')[1])).to_be_visible()
+        # The actual editorial case is an existing-guide enhancement, not an
+        # invented episode. Follow its complete reader path at each breakpoint.
+        for width in [320, 390, 768, 1024, 1440]:
+            page.set_viewport_size({'width': width, 'height': 1000})
+            page.goto(base + '/poker/')
+            case_link = page.locator('a[href="/poker/hand-to-vlog/#behind-the-edit"]')
+            case_link.focus(); page.keyboard.press('Enter')
+            expect(page).to_have_url(base + '/poker/hand-to-vlog/#behind-the-edit')
+            expect(page.locator('#behind-the-edit')).to_be_visible()
+            expect(page.locator('#behind-the-edit')).to_contain_text('The page edit is real; the hand is fictional.')
+            expect(page.locator('#behind-the-edit .reader-verdicts > div')).to_have_count(2)
+            inspect = page.locator('#behind-the-edit a[href="/poker/reviewing-a-hand/#decision-summary"]').last
+            inspect.focus(); page.keyboard.press('Enter')
+            expect(page).to_have_url(base + '/poker/reviewing-a-hand/#decision-summary')
+            snapshot = page.locator('#decision-summary')
+            expect(snapshot).to_be_visible()
+            expect(snapshot.locator('dd')).to_have_text(['Button', '14.5 BB', '5 BB'])
+            assert snapshot.bounding_box()['y'] < page.locator('#pot-ledger').bounding_box()['y']
+            page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
+            assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), ('decision-snapshot-spacing', width)
+            page.emulate_media(media='print')
+            expect(snapshot.locator('dd').nth(1)).to_be_visible()
+            expect(page.locator('#pot-ledger')).to_be_visible()
+            page.emulate_media(media='screen')
+
         page.goto(base + '/poker/glossary/#effective-stack')
         expect(page.locator('#effective-stack')).to_be_visible()
         page.goto(base)
