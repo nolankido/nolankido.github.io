@@ -59,7 +59,8 @@ class WorkshopTests(unittest.TestCase):
                 self.assertEqual(schema['@type'], 'Article')
                 self.assertEqual(schema['datePublished'], '2026-10-06')
         home = self.outputs[Path('poker/index.html')]
-        for route in ['/poker/short-stack-decisions/', '/poker/practice-room/', '/poker/hand-to-vlog/']:
+        # The overview now links to focused routes, not a second workshop index.
+        for route in ['/poker/library/', '/poker/study/#hand-review', '/poker/hand-to-vlog/']:
             self.assertIn(route, home)
         self.assertNotIn('All seven guides', home)
         self.assertNotIn('Seven deeper guides', home)

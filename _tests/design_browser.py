@@ -114,22 +114,16 @@ try:
         page.get_by_role('link', name='Nolan Kido home', exact=True).click()
         assert page.url == base + '/'
 
-        # The beginner directory and after-play directory now partition the guides.
-        # Check actual link targets, not a count that could hide a missing article.
-        guide_routes = {entry['path'] for entry in manifest if entry.get('poker_guide')}
-        directories = [('/poker/start-here/', '.viewer-library-grid article'),
-                       ('/poker/study/', '#workshops .viewer-library-grid article')]
-        listed = set()
-        for directory, selector in directories:
-            page.goto(base + directory)
-            cards = page.locator(selector)
-            routes = cards.evaluate_all('(nodes) => nodes.map(n => n.querySelector("a")?.getAttribute("href"))')
-            assert routes and None not in routes, ('empty-or-unlinked-directory', directory)
-            assert len(routes) == len(set(routes)), ('duplicate-guide', directory, routes)
-            assert not listed.intersection(routes), ('guide-in-both-directories', directory)
-            assert set(routes) <= guide_routes, ('unexpected-guide', directory, routes)
-            listed.update(routes)
-        assert listed == guide_routes, ('missing-guide', guide_routes - listed)
+        # The canonical library owns the complete guide inventory. Start Here
+        # and the Study Desk provide task routes rather than duplicate catalogs.
+        guide_routes = {entry['route'] for entry in build.poker_library.load(ROOT, manifest)}
+        page.goto(base + '/poker/library/')
+        cards = page.locator('[data-library-card]')
+        routes = cards.evaluate_all('(nodes) => nodes.map(n => n.querySelector("a")?.getAttribute("href"))')
+        assert routes and None not in routes, 'empty-or-unlinked-library'
+        assert len(routes) == len(set(routes)), 'duplicate-guide'
+        assert set(routes) == guide_routes, ('missing-guide', guide_routes - set(routes))
+        page.goto(base + '/poker/study/')
         expect(page.locator('#study-routes .viewer-learning-paths article')).to_have_count(3)
         for slug in ['poker-study-cycle', 'poker-short-stack-record', 'poker-results-review', 'poker-episode-plan']:
             with page.expect_download() as info:
@@ -139,7 +133,7 @@ try:
             assert Path(download.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
 
         page.goto(base + '/poker/start-here/')
-        page.locator('.viewer-library-grid a[href="/poker/hand-rankings/"]').click()
+        page.locator('.viewer-library a[href="/poker/hand-rankings/"]').click()
         assert page.url.endswith('/poker/hand-rankings/')
         with page.expect_download() as reference:
             page.get_by_role('link', name='Download the viewer reference', exact=True).click()
@@ -169,7 +163,7 @@ try:
         assert page.evaluate('document.activeElement.id') == 'main'
         assert not errors, errors
         assert not missing, missing
-        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 10 byte-matched downloads, complete guide discovery across both directories, expanded viewer/workshop answers and spacing, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
+        print(f'PASS: {len(manifest) * 5} real HTTP page/viewport checks, expanded resource previews, 10 byte-matched downloads, complete guide discovery through the library, expanded viewer/workshop answers and spacing, navigation, keyboard access, blocked-service recovery. Web fonts enabled: {with_fonts}. No real submissions.')
         browser.close()
 finally:
     server.shutdown()

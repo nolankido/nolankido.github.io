@@ -13,10 +13,11 @@ here until its public video is playable and approved for this website.
 
 ## What readers get now
 
-- `/poker/`: introduction, current collection, reader routes, study links and RSS.
-- `/poker/start-here/`: viewer guide, notation and linked terminology.
+- `/poker/`: project introduction, an approved real-work feature when available,
+  three reader routes, the current collection, one fictional lab and RSS.
+- `/poker/start-here/`: a short first-hand path, notation and direct reference links.
 - `/poker/reviewing-a-hand/`: the existing fictional worked hand.
-- `/poker/study/`: hand-review and session-debrief sheets, examples and previews.
+- `/poker/study/`: hand-review and session-debrief sheets before optional workshops.
 - `/poker/feed.xml`: a separate Poker feed. The general Notes feed is unchanged.
 
 The catalog is deliberately empty until approved real content is supplied. There
@@ -41,6 +42,34 @@ inside a simple expandable collection. No search system is needed for this size.
 Changing a title does not change its slug. Keep published slugs and publication
 dates stable. For a substantive correction, add an explicit `updated` date and a
 short `revision`; neither the build nor a homepage selection changes dates.
+
+## Feature actual work and connect the explanation
+
+The overview features the newest approved episode, story or reconstructed hand,
+sorted by publication date and then slug. Illustrative hands never occupy the
+real-work feature. With no eligible account, the feature is absent and the
+introduction offers a fictional practice hand. There is no empty video tile,
+inferred channel, scheduled record or extra public archive.
+
+Use a descriptive title and summary: they are the feature's question and premise.
+An approved local image is reused when present. Results inside `spoiler` are not
+copied into the feature. The feature links to the companion page, not an embedded
+video. To change the editorial choice, publish only an actually ready account;
+do not falsify a date to change the order.
+
+To connect an account to an existing guide, add that guide's approved HTTPS URL to
+`sources`, including the exact section fragment when useful. The guide will show
+up to three recent real accounts that explicitly cite its exact path. This also
+works for Start Here and the Study Desk. Merely similar topics do not create a
+relationship. Related catalog records still use the existing `related` field.
+
+Keep one private input and approval packet per anchor package: the central
+question, verified facts, unknowns, actual remembered thoughts, approved public
+assets, public scope and final approval. A later review may use the headings
+"The question", "What I thought then", "What I checked afterward", "What changed"
+and "What I still cannot establish". Use only the parts the evidence supports.
+A small correction stays on the original page with `updated` and `revision`.
+No final public video means no `episode` record, even if a written story is ready.
 
 ## Draft privately
 

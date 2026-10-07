@@ -29,6 +29,8 @@ jobs:
           python -m playwright install --with-deps chromium
           npm install --prefix "$RUNNER_TEMP/nk-qa" --no-audit --no-fund axe-core@4.10.3
       - name: Offline browser regressions
+        env:
+          SCREENSHOT_DIR: ${{ runner.temp }}/poker-reading-previews
         run: |
           python _tests/browser.py
           python _tests/design_browser.py
@@ -41,6 +43,14 @@ jobs:
           python _tests/workshops_browser.py
           python _tests/library_browser.py
           python _tests/labs_browser.py
+      - name: Save Poker reading-path previews
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: poker-reading-previews
+          path: |
+            ${{ runner.temp }}/poker-reading-previews/poker-*.png
+          retention-days: 1
+          if-no-files-found: error
       - name: Verify published main release
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         env:

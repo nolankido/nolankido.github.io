@@ -26,6 +26,7 @@ def run():
         shutil.copytree(ROOT,root,ignore=shutil.ignore_patterns('.git','__pycache__'))
         episode=fixture(); hand=fixture('hand','test-hand'); story=fixture('story','test-story')
         episode['related']=['test-hand']; hand['related']=['test-story']
+        story['sources']=[{'label':'Review method','url':'https://nolankido.com/poker/reviewing-a-hand/#after-the-session'}]
         episode['sections'][0]['paragraphs']=['<script>window.unwanted = true</script>']
         (root/'_source/poker/catalog.json').write_text(json.dumps({'version':1,'entries':[episode,hand,story]}))
         subprocess.run([sys.executable,str(root/'_scripts/build.py')],cwd=root,check=True)
@@ -62,7 +63,18 @@ def run():
                         page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
                         assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(route,width,'spacing')
                 page.goto(base+'/poker/')
-                page.locator('a[href="/poker/episodes/test-episode/"]').click()
+                feature=page.locator('#featured-work .reader-feature-link')
+                expect(feature).to_have_attribute('href','/poker/stories/test-story/')
+                assert page.locator('#featured-work').bounding_box()['y'] < page.locator('.poker-paths').bounding_box()['y']
+                feature.focus(); page.keyboard.press('Enter')
+                assert page.url.endswith('/poker/stories/test-story/')
+                expect(page.locator('a[href="https://nolankido.com/poker/reviewing-a-hand/#after-the-session"]')).to_be_visible()
+                page.goto(base+'/poker/reviewing-a-hand/#after-the-session')
+                back=page.locator('[aria-labelledby="context-reading-title"] a[href="/poker/stories/test-story/"]')
+                back.focus(); page.keyboard.press('Enter')
+                assert page.url.endswith('/poker/stories/test-story/')
+                page.goto(base+'/poker/')
+                page.locator('.poker-content-grid a[href="/poker/episodes/test-episode/"]').click()
                 expect(page.locator('.poker-watch a')).to_have_attribute('href','https://www.youtube.com/watch?v=abcdefghijk')
                 expect(page.locator('.poker-chapters a').nth(1)).to_have_attribute('href','https://www.youtube.com/watch?v=abcdefghijk&t=150s')
                 expect(page.locator('.poker-details')).not_to_have_attribute('open','')
@@ -82,7 +94,7 @@ def run():
                 assert not media,media
                 assert not violations,violations
                 browser.close()
-            print('PASS: 35 populated-poker route/viewport checks; expanded disclosures, text-spacing, chapter URLs, reciprocal links, escaped text, keyboard spoilers, 2 exact downloads, and no video requests. Synthetic content stayed in a temporary directory. Accessibility scans enabled: '+str(bool(os.getenv('AXE_PATH'))))
+            print('PASS: 35 populated-poker route/viewport checks; expanded disclosures, text-spacing, chapter URLs, real-work feature, guide return links, escaped text, keyboard spoilers, 2 exact downloads, and no video requests. Synthetic content stayed in a temporary directory. Accessibility scans enabled: '+str(bool(os.getenv('AXE_PATH'))))
         finally:
             server.shutdown();server.server_close()
 

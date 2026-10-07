@@ -56,10 +56,12 @@ class LabsExpansionTests(unittest.TestCase):
             page = next(p for p in self.pages if p['path'] == route)
             self.assertEqual(page['date'], '2026-10-06')
             self.assertTrue(page['poker_guide'])
-            for directory in [study, hub, self.content('library'), self.outputs[Path('poker/index.html')]]:
+            for directory in [study, hub, self.content('library')]:
                 self.assertIn(route, directory)
             self.assertIn('https://nolankido.com' + route, links)
             self.assertIn(route, check_live.targets())
+        # The overview reaches each case through the complete lab directory.
+        self.assertIn('/poker/decision-labs/', self.outputs[Path('poker/index.html')])
         self.assertEqual(len(self.entries), 24)
         self.assertIn('/poker/decision-labs/', check_live.targets())
         self.assertIn('/poker/decision-lab/', hub)
