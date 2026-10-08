@@ -23,6 +23,7 @@ import poker_collections
 import poker_finder
 import poker_reference
 import poker_quality
+import poker_topics
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -61,10 +62,11 @@ def date_label(value: str) -> str:
     return f'{dt.strftime("%B")} {dt.day}, {dt.year}'
 
 
-def public_pages() -> list[dict]:
+def public_pages(root: Path | None = None) -> list[dict]:
     """One manifest for rendering, link tests, sitemaps, and live verification."""
-    base = json.loads((ROOT / '_source/pages.json').read_text(encoding='utf-8'))
-    return base + poker_content.manifest(poker_content.load(ROOT))
+    root = ROOT if root is None else root
+    base = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
+    return base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root)
 
 
 def build_outputs() -> dict[Path, str]:
@@ -108,7 +110,10 @@ def build_outputs() -> dict[Path, str]:
     values.update(poker_quality.supplement(resource_entries))
     values.update(poker_collections.supplement(collections, resource_entries))
     values.update(poker_library.supplement(reader_entries))
-    values.update(poker_finder.render(poker_finder.entries(ROOT, pages, reader_entries, resource_entries)))
+    topics = poker_topics.load(ROOT, pages, reader_entries, resource_entries)
+    values.update(poker_topics.supplement(topics))
+    finder_entries = poker_topics.annotate(poker_finder.entries(ROOT, pages, reader_entries, resource_entries), topics)
+    values.update(poker_finder.render(finder_entries))
     values.update(poker_reference.supplement())
     # The on-page and printable previews use the exact downloadable blank files.
     for slug in ("poker-event-planner", "poker-hand-capture", "poker-resource-check"):
@@ -125,7 +130,11 @@ def build_outputs() -> dict[Path, str]:
             source = (SOURCE / p['source']).resolve()
             if not source.is_relative_to(SOURCE.resolve()):
                 raise ValueError('Content sources must remain within _source')
-            body = fill(source.read_text(encoding='utf-8'), values)
+            page_values = values
+            if p.get('poker_topic'):
+                topic = next(t for t in topics if t['id'] == p['poker_topic'])
+                page_values = {**values, 'poker_topic_detail': poker_topics.detail(topic)}
+            body = fill(source.read_text(encoding='utf-8'), page_values)
         section = p.get('section') or ('notes' if p.get('note') else p['id'])
         nav = ''.join(f'<li><a href="/{name}/"' + ((' aria-current="page"' if p['path'] == '/' + name + '/' else ' aria-current="location"') if section == name else '')
                       + f'>{label}</a></li>' for name, label in [('technology', 'Technology'), ('poker', 'Poker'), ('creative', 'Creative Work'), ('about', 'About'), ('contact', 'Contact')])
@@ -134,6 +143,7 @@ def build_outputs() -> dict[Path, str]:
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
         if p['id'] != 'home':
             heading = '<a href="/notes/" class="breadcrumb">All notes</a>' if p.get('note') else ''
+            heading += poker_topics.breadcrumb(p, topics)
             heading += f'<p class="page-kicker">{text(p["kicker"])}</p><h1 class="page-title">{text(p["title"])}</h1>'
             if p.get('note'):
                 heading += f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · Nolan Kido</p>'
@@ -153,6 +163,8 @@ def build_outputs() -> dict[Path, str]:
                 header = f'    <section class="page-hero shell">{heading}</section>'
         schema = {'@context': 'https://schema.org', '@type': 'WebPage', 'name': p['seo_title'], 'url': canonical,
                   'description': p['description'], 'isPartOf': {'@type': 'WebSite', 'name': site['name'], 'url': site['url'] + '/'}}
+        if p.get('poker_topic') or p['id'] == 'poker-topics':
+            schema['@type'] = 'CollectionPage'
         if p['id'] == 'home':
             schema['about'] = {'@type': 'Person', 'name': site['name'], 'url': site['url'] + '/'}
         if p.get('note'):
@@ -161,6 +173,8 @@ def build_outputs() -> dict[Path, str]:
         if p.get('updated'):
             schema['dateModified'] = p['updated']
         if p['path'].startswith('/poker/'):
+            topics_version = hashlib.sha256((ROOT / 'assets/poker-topics.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/poker-topics.css?v={topics_version}">'
             poker_version = hashlib.sha256((ROOT / 'assets/poker.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker.css?v={poker_version}">'
             extra += '\n  <link rel="alternate" type="application/rss+xml" title="Nolan Kido Poker" href="/poker/feed.xml">'
@@ -199,6 +213,7 @@ def build_outputs() -> dict[Path, str]:
             reader_meta = poker_library.reader_meta(p, reader_entries)
             if reader_meta:
                 header = header.replace('</section>', reader_meta + poker_reading.section_outline(body) + '</section>', 1)
+                body += poker_topics.related_topic(p, topics)
                 body += poker_library.related(p, reader_entries)
         if p['path'].startswith('/poker/') and not p.get('poker_entry') and p['path'] != '/poker/':
             body += poker_experience.related_work(catalog, p['path'])

@@ -104,8 +104,14 @@ try:
         page.goto(base)
         page.locator('.destination-poker').click()
         assert page.url.endswith('/poker/')
-        page.locator('nav[aria-label="Poker section"] a[href="/poker/reviewing-a-hand/"]').click()
-        assert page.url.endswith('/poker/reviewing-a-hand/')
+        # Hand review now belongs to the homepage's Study task, not the
+        # subject navigation. Keep testing the real one-click reader route.
+        review_route = page.locator('.poker-paths a[href="/poker/reviewing-a-hand/"]')
+        expect(review_route).to_have_count(1)
+        expect(review_route).to_contain_text('I want to understand a decision')
+        review_route.focus()
+        page.keyboard.press('Enter')
+        expect(page).to_have_url(base + '/poker/reviewing-a-hand/')
         with page.expect_download() as info:
             page.get_by_role('link', name='Download the review sheet').click()
         assert Path(info.value.path()).read_bytes() == (ROOT / 'downloads/poker-hand-review.md').read_bytes()

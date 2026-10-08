@@ -40,3 +40,5 @@
 .finder-save, #finder-shelf-clear { min-height:44px; padding:8px 14px; margin-top:12px; white-space:normal; font:inherit; cursor:pointer; }
 #finder-shelf-list li { margin:12px 0; overflow-wrap:anywhere; }
 @media print { .finder-save, #finder-shelf-clear, #finder-shelf-download { display:none!important; } }
+.finder-refine > div { flex:1 1 190px; }
+#finder-topic { min-width:0; }

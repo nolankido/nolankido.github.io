@@ -5,7 +5,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 import unittest
-from urllib.parse import urlsplit, unquote
+from urllib.parse import urlsplit, unquote, parse_qsl
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,7 +79,18 @@ class SiteTests(unittest.TestCase):
                         self.assertTrue(target.is_file(), str(target))
                         if url.fragment and target.suffix == '.html':
                             ids = [a.get('id') for _, a in Page(target.read_text()).elements]
-                            self.assertIn(url.fragment, ids)
+                            if target == ROOT / 'poker/find/index.html' and '=' in url.fragment:
+                                # Finder fragments encode finite editorial filters, never queries.
+                                pairs = parse_qsl(url.fragment, keep_blank_values=True)
+                                self.assertEqual(len(pairs), len(dict(pairs)), 'Duplicate filter')
+                                topic_ids = {t['id'] for t in json.loads((ROOT / '_source/poker/topics.json').read_text())['entries']}
+                                allowed = {'topic': topic_ids, 'kind': {'guide', 'resource', 'glossary'}, 'free': {'1'}}
+                                self.assertTrue(pairs)
+                                for key, value in pairs:
+                                    self.assertIn(key, allowed)
+                                    self.assertIn(value, allowed[key])
+                            else:
+                                self.assertIn(url.fragment, ids)
 
     def test_feed_and_sitemap_agree_with_notes(self):
         notes = [p for p in self.manifest if p.get('note')]

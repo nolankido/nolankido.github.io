@@ -1,0 +1,63 @@
+/* Poker-only information architecture. No global stylesheet changes. */
+.poker-breadcrumb { margin:0 0 18px; font:.8rem/1.6 var(--sans); }
+.poker-breadcrumb ol { display:flex; flex-wrap:wrap; gap:8px; list-style:none; padding:0; margin:0; }
+.poker-breadcrumb li { display:flex; align-items:center; gap:8px; min-width:0; }
+.poker-breadcrumb li + li::before { content:"/"; color:var(--ink-soft); }
+.poker-breadcrumb a { display:inline-flex; align-items:center; min-height:32px; }
+.poker-quick-reference,.topic-return,.topic-jumps { display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:24px; }
+.poker-quick-reference a,.topic-return a,.topic-jumps a { display:inline-flex; align-items:center; min-height:44px; text-underline-offset:.2em; }
+.poker-quick-reference { font:.9rem/1.6 var(--sans); border-top:1px solid var(--line-dark); padding-top:12px; }
+.topic-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--line-dark); margin-top:28px; }
+.topic-card { min-width:0; padding:24px 26px 24px 0; border-bottom:1px solid var(--line-dark); }
+.topic-card:nth-child(even) { padding-left:26px; border-left:1px solid var(--line-dark); }
+.topic-number { font:.75rem/1.5 var(--mono); margin:0 0 12px; color:var(--ink-soft); }
+.topic-card h3 { font:700 clamp(1.25rem,2vw,1.6rem)/1.3 var(--sans); margin:0 0 12px; }
+.topic-card h3 a { color:var(--basalt); text-underline-offset:.16em; }
+.topic-card > p { margin-bottom:12px; }
+.topic-card .topic-start { margin-bottom:0; font:.9rem/1.6 var(--sans); }
+.topic-meta { font:.77rem/1.7 var(--sans); color:var(--ink-soft); }
+.topic-jumps { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 20px; margin-bottom:20px; }
+.topic-jumps a { border-bottom:1px solid var(--line-dark); padding:10px 0; font:600 .98rem/1.5 var(--sans); }
+.topic-columns { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:32px; }
+.topic-columns > div { min-width:0; }
+.topic-columns h3 { font:700 1.15rem/1.45 var(--sans); margin:0 0 16px; }
+.topic-steps { padding-left:22px; margin:0 0 24px; }
+.topic-steps li { padding-left:4px; margin-bottom:16px; }
+.topic-steps a { display:inline; line-height:1.7; }
+.topic-sources { list-style:none; padding:0; margin:0; }
+.topic-source { padding:20px 0; border-top:1px solid var(--line-dark); }
+.topic-source h4 { font:600 1rem/1.5 var(--sans); margin:0 0 10px; }
+.topic-source p { margin:0 0 10px; }
+.topic-source p:last-child { margin-bottom:0; }
+.topic-caution { font:.9rem/1.65 var(--sans); }
+.topic-support { padding:16px; border:1px solid var(--line-dark); margin:0 0 24px; }
+.topic-guides ul { margin:0; padding:0 20px 20px 32px; }
+.topic-guides li { margin-bottom:16px; }
+.topic-guides .topic-meta { display:block; margin-top:5px; }
+.topic-return { border-top:1px solid var(--line-dark); padding-top:12px; }
+.topic-section { scroll-margin-top:100px; }
+.topic-grid a,.topic-columns a,.poker-breadcrumb a { overflow-wrap:anywhere; }
+.topic-grid a:focus-visible,.topic-columns a:focus-visible,.poker-breadcrumb a:focus-visible,.topic-jumps a:focus-visible,.topic-return a:focus-visible,.poker-quick-reference a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+.page-poker .page-hero,.page-poker-topics .page-hero { padding-top:24px; padding-bottom:24px; }
+.page-poker .page-title,.page-poker-topics .page-title { font-size:clamp(1.9rem,4vw,3.2rem); line-height:1.2; }
+.page-poker .folio-row { padding-top:32px; padding-bottom:32px; }
+.page-poker .intro { font-size:clamp(2rem,4.5vw,3.7rem); }
+@media(max-width:760px) {
+  .topic-grid,.topic-columns,.topic-jumps { grid-template-columns:minmax(0,1fr); }
+  .topic-card,.topic-card:nth-child(even) { padding:20px 0; border-left:0; }
+  .topic-columns { gap:24px; }
+  .poker-breadcrumb { margin-bottom:12px; }
+  .page-poker .section-meta { margin-bottom:14px; }
+}
+@media print {
+  .poker-breadcrumb,.poker-quick-reference,.topic-return { display:none; }
+  .topic-grid,.topic-columns { display:block; }
+  .topic-card,.topic-card:nth-child(even) { padding:16px 0; border-left:0; }
+  .topic-source,.topic-card { break-inside:avoid; }
+  .topic-guides > ul { display:block!important; }
+  .topic-guides::details-content { content-visibility:visible!important; }
+}
+
+.topic-context { padding-top:24px; padding-bottom:12px; font:.95rem/1.8 var(--sans); }
+.topic-context p { max-width:76ch; }
+@media print { .topic-context { display:none; } }

@@ -80,7 +80,7 @@ class PokerContentTests(unittest.TestCase):
                 file=root/path; file.parent.mkdir(parents=True,exist_ok=True); file.write_text(content)
             import check_live
             self.assertIn(pc.route(e),check_live.targets(root))
-            self.assertEqual(len(build.public_pages()),len(json.loads((root/'_source/pages.json').read_text()))+1)
+            self.assertEqual(len(build.public_pages()),len(json.loads((root/'_source/pages.json').read_text()))+len(build.poker_topics.manifest(root))+1)
 
     def test_text_is_escaped_not_executed(self):
         e=fixture(); e['sections'][0]['paragraphs']=['<script>alert("test")</script>']

@@ -37,6 +37,8 @@ def main():
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),('spacing',slug,width)
         page.set_viewport_size({'width':1280,'height':900});page.goto(origin+'/poker/find/')
         original_url=page.url;initial=len(traffic)
+        page.locator('#finder-topic').select_option('cash-games')
+        assert page.url==original_url+'#topic=cash-games'
         search=page.locator('#finder-search');search.fill('conditional probabilities');search.press('Enter')
         card=page.locator('[data-id="poker-multiway-pot-workshop"]');expect(card).to_be_visible()
         expect(card.locator('.finder-jump a')).to_have_attribute('href','/poker/multiway-pot-workshop/#joint-folds')
@@ -56,7 +58,9 @@ def main():
             assert 'conditional probabilities' not in content
             assert '403' in content and 'Search index only' in content
             assert 'https://nolankido.com/poker/multiway-pot-workshop/' in content
-        assert len(traffic)==initial and page.url==original_url
+        assert len(traffic)==initial
+        assert page.url==original_url+'#kind=resource'
+        assert 'PRIVATE_SEARCH_TOKEN' not in page.url
         assert page.evaluate('localStorage.length===0 && sessionStorage.length===0')
         page.locator('#finder-shelf-clear').click();page.locator('#finder-reset').click()
         for button in page.locator('[data-finder-card]:visible .finder-save').all():button.click()

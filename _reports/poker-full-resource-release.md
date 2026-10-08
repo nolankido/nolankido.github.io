@@ -49,3 +49,19 @@ Expected production coverage is 115 public targets, including new pages and calc
 ## Further development boundaries
 
 Human usability research, an exhaustive worldwide jurisdiction map, independently tested paid products, full media reviews, original author hands and validated solved strategy ranges require their own evidence. This release does not claim those have happened. Expand based on actual reader tasks and reviewed sources rather than arbitrary page or link targets.
+
+## Integration with the concurrent topic architecture
+
+Main changed to ba25df088914971f0ed6b50c49feccc8bd0b6806 (PR #22) while
+this release was being prepared. The combined release retains the topic index,
+ten focused topic pages, topic breadcrumbs, simplified homepage and whitelisted
+filter-fragment navigation. Full-text passage matching and the portable study
+list now work alongside topic filtering. Every new guide has a primary topic;
+new utilities and media resources have explicit topic placements. Existing
+resource records and review dates are preserved. The resulting finder contains
+259 entries, including 66 on-site pages. Guide and external counts remain
+44 and 145. Search text and selections are not serialized; only the previously
+approved topic/type/free filters appear in fragments.
+
+The entire combined build and browser suites, including topics_browser, must
+pass before merging. Expected public-response coverage is 127 targets.

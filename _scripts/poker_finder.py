@@ -164,6 +164,7 @@ def render(items: list[dict]) -> dict[str, str]:
         passages = ''.join('<p data-finder-passage data-anchor="' + escape(s['anchor'], quote=True) + '" data-heading="' + escape(s['title'], quote=True) + '">' + escape(s['text']) + '</p>' for s in sections)
         cards.append(f'<article class="reader-card finder-card" data-finder-card data-id="{escape(e["id"], quote=True)}" '
                      f'data-kind="{e["kind"]}" data-free="{str(e["access"] == "Free").lower()}" '
+                     f'data-topics="{escape(" ".join(e.get("topics", [])), quote=True)}" '
                      f'data-search="{search}" tabindex="-1">'
                      f'<p class="reader-eyebrow">{escape(e["meta"])}</p>'
                      f'<h3><a href="{escape(e["url"], quote=True)}"' + (' rel="external"' if e['kind'] == 'resource' else '') + f'>{title}</a></h3>'

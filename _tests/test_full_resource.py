@@ -18,6 +18,21 @@ class FullResourceTests(unittest.TestCase):
         cls.outputs=build.build_outputs(); cls.pages=build.public_pages(); cls.resources=poker_resources.load(ROOT)
         cls.items=poker_finder.entries(ROOT,cls.pages,poker_library.load(ROOT,cls.pages),cls.resources)
 
+    def test_deeper_guides_and_utilities_keep_the_shared_topic_architecture(self):
+        import poker_topics
+        topics=poker_topics.load(ROOT,self.pages,poker_library.load(ROOT,self.pages),self.resources)
+        primary={slug:t['id'] for t in topics for slug in t['primary_guides']}
+        expected={'omaha-hi-lo-workshop':'variants','stud-and-lowball-workshop':'variants',
+                  'multiway-pot-workshop':'cash-games','poker-media-study':'poker-world',
+                  'poker-access-and-protection':'safer-play'}
+        for slug,topic in expected.items():self.assertEqual(primary[slug],topic)
+        annotated={e['url']:e for e in poker_topics.annotate(self.items,topics)}
+        item=annotated['/poker/multiway-pot-workshop/']
+        self.assertTrue({'cash-games','strategy'} <= set(item['topics']))
+        self.assertTrue(item['sections'])
+        self.assertIn('study',annotated['/poker/study-calculators/']['topics'])
+        self.assertIn('safer-play',annotated['/poker/resource-quality/']['topics'])
+
     def test_article_text_uses_visible_prose_and_existing_anchors(self):
         text='<nav>secret-navigation</nav><p>Intro text</p><h2 id="actual">Actual heading</h2><p>some <strong>bold</strong> words.</p><details><summary>Question</summary><p>hidden-answer</p></details><script>bad script</script><div hidden>private-hidden</div><p>Final public text.</p>'
         sections=poker_finder.GuideText(text).sections
