@@ -533,5 +533,16 @@
     "source": "poker/decision-labs.html",
     "section": "poker",
     "updated": "2026-10-06"
+  },
+  {
+    "id": "poker-resources",
+    "path": "/poker/resources/",
+    "title": "The wider poker web.",
+    "seo_title": "Poker Resource Directory | Nolan Kido",
+    "description": "Find external poker rules, strategy articles, study tools, tournament schedules, results, podcasts, communities, and research with clear access and review notes.",
+    "kicker": "Poker / External resources",
+    "source": "poker/resources.html",
+    "section": "poker",
+    "updated": "2026-10-07"
   }
 ]

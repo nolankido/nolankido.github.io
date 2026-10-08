@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "status": "Not loaded by the site builder; candidates are not published listings.",
+  "candidates": [
+    {
+      "id": "mit-theory",
+      "url": "https://ocw.mit.edu/courses/15-s50-poker-theory-and-analysis-january-iap-2015/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Confirm the canonical course URL and inspect accessible original course material.",
+      "observation": "Direct course reading was unavailable in this research pass."
+    },
+    {
+      "id": "mit-holdem",
+      "url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-hold-em-poker-january-iap-2016/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Confirm course identity, content and public access.",
+      "observation": "Direct course reading was unavailable; not counted among published resources."
+    },
+    {
+      "id": "triton",
+      "url": "https://triton-series.com/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Locate and read the current official series schedule or learning destination.",
+      "observation": "Direct page reading was unavailable; this does not establish an outage."
+    },
+    {
+      "id": "global-poker-index",
+      "url": "https://www.globalpokerindex.com/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Read the current rankings and methodology before describing the resource.",
+      "observation": "Direct page reading was unavailable."
+    },
+    {
+      "id": "cardschat",
+      "url": "https://www.cardschat.com/forum/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Review the redirected publisher identity and discussion destination before inclusion.",
+      "observation": "The supplied forum route redirected to https://www.casino.us/cardschat/. The changed destination needs editorial review, not automatic substitution."
+    }
+  ]
+}

@@ -93,4 +93,7 @@ def main():
         print(f'PASS: {total} searchable guides; topic/search intersections; empty/reset/XSS checks; no requests, storage, cookies or URL changes from filtering; {checks} reader viewports; five keyboard disclosures; blocked-script/no-JavaScript fallbacks.')
     finally:server.shutdown();server.server_close()
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    main()
+    from resources_browser import main as check_resources
+    check_resources()
