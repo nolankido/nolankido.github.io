@@ -1,0 +1,12 @@
+/* Page-scoped study controls. All examples remain readable without scripting. */
+.study-tool { margin:30px 0; padding:22px; border:1px solid var(--line-dark); }
+.study-tool fieldset { min-width:0; margin:18px 0; padding:0; border:0; }
+.study-tool legend { font-weight:600; margin-bottom:12px; }
+.study-fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:18px; }
+.study-fields label { display:block; }
+.study-fields input { display:block; width:100%; max-width:100%; box-sizing:border-box; min-height:44px; padding:10px; margin-top:8px; color:var(--basalt); background:var(--paper-light); border:1px solid var(--line-dark); font:inherit; }
+.study-tool button { min-height:44px; padding:10px 16px; margin:8px 12px 8px 0; white-space:normal; font:inherit; cursor:pointer; }
+.study-tool [role=status] { border-left:3px solid var(--line-dark); padding-left:14px; overflow-wrap:anywhere; }
+.study-tool input[aria-invalid=true] { outline:2px solid currentColor; }
+[data-tool-controls][hidden] { display:none!important; }
+@media print { [data-tool-controls] { display:none!important; } .study-tool { padding:0; border:0; } }

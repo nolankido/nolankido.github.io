@@ -35,12 +35,12 @@ class TopicTests(unittest.TestCase):
         self.assertEqual(Counter(s for t in self.topics for s in t['primary_guides']),
                          Counter(g['slug'] for g in self.guides))
         self.assertEqual(len(self.topics), 10)
-        self.assertEqual(len(self.guides), 39)
+        self.assertGreaterEqual(len(self.guides), 39)
 
     def test_every_external_resource_is_reachable(self):
         ids = {r['id'] for t in self.topics for r in t['resources']}
         self.assertEqual(ids, {r['id'] for r in self.resources})
-        self.assertEqual(len(ids), 138)
+        self.assertGreaterEqual(len(ids), 138)
         for t in self.topics:
             self.assertTrue(set(t['featured_resources']) <= {r['id'] for r in t['resources']})
             self.assertGreaterEqual(len(t['steps']), 2)

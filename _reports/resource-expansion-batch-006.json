@@ -1,0 +1,20 @@
+{
+  "review_date": "2026-10-08",
+  "accepted_ids": [
+    "multiway-tips",
+    "ukgc-register",
+    "nj-dge-information",
+    "ftc-phishing",
+    "mit-combo-lecture",
+    "mit-icm-lecture",
+    "recpoker-episode"
+  ],
+  "scope": "Six public page reads and one explicitly index-only regulator entry. Existing source records and dates retained unchanged. Video/transcript labels are not claims of complete media review.",
+  "held": [
+    {
+      "url": "https://www.nj.gov/oag/ge/internetgaming.html",
+      "reason": "404; replaced by the official njoag.gov information route, with index-only limitation."
+    }
+  ],
+  "not_added": "The PokerStars river lesson was not reused for general strategic guarantees; the original counterfeiting exercise is independently enumerated."
+}

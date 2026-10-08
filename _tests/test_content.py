@@ -77,6 +77,8 @@ class ContentTests(unittest.TestCase):
                 expected.insert(0, '/assets/poker-library.js?v=' + hashlib.sha256((ROOT / 'assets/poker-library.js').read_bytes()).hexdigest()[:12])
             if path == Path('poker/resources/index.html'):
                 expected.insert(0, '/assets/poker-resources.js?v=' + hashlib.sha256((ROOT / 'assets/poker-resources.js').read_bytes()).hexdigest()[:12])
+            if path == Path('poker/study-calculators/index.html'):
+                expected.insert(0, '/assets/poker-study-tools.js?v=' + hashlib.sha256((ROOT / 'assets/poker-study-tools.js').read_bytes()).hexdigest()[:12])
             if path == Path('poker/find/index.html'):
                 expected.insert(0, '/assets/poker-finder.js?v=' + hashlib.sha256((ROOT / 'assets/poker-finder.js').read_bytes()).hexdigest()[:12])
             self.assertEqual(sources, expected)

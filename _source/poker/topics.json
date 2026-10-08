@@ -52,7 +52,8 @@
       "title": "Cash games",
       "summary": "Stacks, rake, multiway pots and study material for cash-game decisions.",
       "primary_guides": [
-        "cash-game-study"
+        "cash-game-study",
+        "multiway-pot-workshop"
       ],
       "related_guides": [
         "position-and-stacks",
@@ -69,7 +70,8 @@
         "effective-stacks",
         "equilab",
         "flopzilla",
-        "pokerbank-implied-odds"
+        "pokerbank-implied-odds",
+        "multiway-tips"
       ],
       "featured_resources": [
         "pokerbank-strategy",
@@ -87,8 +89,8 @@
           "label": "Identify position and effective stacks"
         },
         {
-          "guide": "side-pot-lab",
-          "label": "Work through a multiway pot"
+          "guide": "multiway-pot-workshop",
+          "label": "Check a multiway call price and eligible pots"
         }
       ],
       "glossary_terms": [
@@ -178,7 +180,8 @@
       "related_guides": [
         "decision-lab",
         "flush-and-redraw",
-        "short-stack-decisions"
+        "short-stack-decisions",
+        "multiway-pot-workshop"
       ],
       "resource_categories": [
         "math",
@@ -222,14 +225,18 @@
         "check-raise",
         "effective-stack"
       ],
-      "overview_routes": []
+      "overview_routes": [
+        "/poker/study-calculators/"
+      ]
     },
     {
       "id": "variants",
       "title": "Omaha & mixed games",
       "summary": "PLO, hi-lo, stud, lowball, short deck and game rotations.",
       "primary_guides": [
-        "omaha-and-mixed-games"
+        "omaha-and-mixed-games",
+        "omaha-hi-lo-workshop",
+        "stud-and-lowball-workshop"
       ],
       "related_guides": [
         "hand-rankings",
@@ -254,8 +261,12 @@
           "label": "Check hand construction and low qualifiers"
         },
         {
-          "guide": "hand-rankings",
-          "label": "Review hand comparison before switching games"
+          "guide": "omaha-hi-lo-workshop",
+          "label": "Work through counterfeiting and split-pot shares"
+        },
+        {
+          "guide": "stud-and-lowball-workshop",
+          "label": "Compare stud, razz, deuce-to-seven and Badugi"
         }
       ],
       "glossary_terms": [],
@@ -278,7 +289,8 @@
       ],
       "related_guides": [
         "poker-research-guide",
-        "poker-math-reference"
+        "poker-math-reference",
+        "poker-media-study"
       ],
       "resource_categories": [
         "tools",
@@ -287,7 +299,10 @@
       "resource_ids": [
         "mit-holdem",
         "mit-theory",
-        "smart-poker-study"
+        "smart-poker-study",
+        "mit-combo-lecture",
+        "mit-icm-lecture",
+        "recpoker-episode"
       ],
       "featured_resources": [
         "wizard-study-docs",
@@ -315,7 +330,9 @@
       "overview_routes": [
         "/poker/study/",
         "/poker/decision-labs/",
-        "/poker/resource-collections/"
+        "/poker/resource-collections/",
+        "/poker/study-calculators/",
+        "/poker/resource-quality/"
       ]
     },
     {
@@ -327,7 +344,8 @@
         "first-live-tournament",
         "choosing-a-tournament",
         "table-etiquette",
-        "tournament-day"
+        "tournament-day",
+        "poker-access-and-protection"
       ],
       "resource_categories": [
         "events",
@@ -361,7 +379,8 @@
       "summary": "Reporting, result databases, broadcasts, podcasts and making a vlog.",
       "primary_guides": [
         "variance-and-results",
-        "hand-to-vlog"
+        "hand-to-vlog",
+        "poker-media-study"
       ],
       "related_guides": [
         "recording-hands",
@@ -386,6 +405,10 @@
         {
           "guide": "hand-to-vlog",
           "label": "Turn a hand record into an explanation"
+        },
+        {
+          "guide": "poker-media-study",
+          "label": "Turn a video or podcast into one useful lesson"
         }
       ],
       "glossary_terms": [
@@ -436,7 +459,8 @@
       "summary": "Gambling support, fair play, table procedures and software restrictions.",
       "primary_guides": [
         "poker-rules-and-fair-play",
-        "table-etiquette"
+        "table-etiquette",
+        "poker-access-and-protection"
       ],
       "related_guides": [
         "variance-and-results",
@@ -461,10 +485,16 @@
         {
           "guide": "table-etiquette",
           "label": "Handle table procedures without disrupting play"
+        },
+        {
+          "guide": "poker-access-and-protection",
+          "label": "Find official operator and player-protection information"
         }
       ],
       "glossary_terms": [],
-      "overview_routes": []
+      "overview_routes": [
+        "/poker/resource-quality/"
+      ]
     }
   ]
 }

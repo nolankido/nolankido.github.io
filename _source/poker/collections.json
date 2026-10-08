@@ -106,6 +106,64 @@
         "stars-tool-policy",
         "gg-security-policy"
       ]
+    },
+    {
+      "id": "omaha_hi_lo_workshop",
+      "slug": "omaha-hi-lo-workshop",
+      "title": "Omaha hi-lo: play for a share, not just a low.",
+      "description": "Work through legal hand selection, quartering, counterfeiting and pot-share equity with complete fictional examples.",
+      "resource_ids": [
+        "omaha-eight-rules",
+        "omaha-rules",
+        "stud-eight-rules"
+      ]
+    },
+    {
+      "id": "stud_and_lowball_workshop",
+      "slug": "stud-and-lowball-workshop",
+      "title": "Stud and lowball: change the rules before the strategy.",
+      "description": "Compare Stud8, razz, deuce-to-seven and Badugi, with worked hand comparisons and a rotation checklist.",
+      "resource_ids": [
+        "razz-rules",
+        "stud-eight-rules",
+        "deuce-seven-rules",
+        "pagat-badugi"
+      ]
+    },
+    {
+      "id": "multiway_pot_workshop",
+      "slug": "multiway-pot-workshop",
+      "title": "Multiway pots: count the opponents and the pots.",
+      "description": "Distinguish a better call price from a better hand, separate pot eligibility and avoid importing heads-up defense quotas.",
+      "resource_ids": [
+        "multiway-tips",
+        "pokerbank-ev",
+        "tda-rules"
+      ]
+    },
+    {
+      "id": "poker_media_study",
+      "slug": "poker-media-study",
+      "title": "Turn a poker video or podcast into one useful lesson.",
+      "description": "Use annotated media starting points, distinguish transcripts from show notes and build a short study record without copying copyrighted material.",
+      "resource_ids": [
+        "mit-combo-lecture",
+        "mit-icm-lecture",
+        "recpoker-episode",
+        "splitsuit-interview-transcript"
+      ]
+    },
+    {
+      "id": "poker_access_and_protection",
+      "slug": "poker-access-and-protection",
+      "title": "Check the room, the rules and your protections.",
+      "description": "Find regulator and operator information, protect account access, preserve complaint records and reach support without gambling-site rankings.",
+      "resource_ids": [
+        "ukgc-register",
+        "nj-dge-information",
+        "ftc-phishing",
+        "ncpg"
+      ]
     }
   ]
 }

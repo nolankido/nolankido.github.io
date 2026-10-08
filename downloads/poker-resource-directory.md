@@ -2,7 +2,7 @@
 
 Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.
 
-138 unique resources. Most recent individual listing review: 2026-10-08.
+145 unique resources. Most recent individual listing review: 2026-10-08.
 
 This is not a claim that all resources were rechecked on that date.
 
@@ -799,6 +799,19 @@ Before you use it: Check the rules for the actual event; another tour may handle
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-apt-rules
 
+## FTC: recognizing and avoiding phishing
+
+https://consumer.ftc.gov/articles/how-recognize-avoid-phishing-scams
+
+Federal Trade Commission | rules | Reference | Free | All levels
+
+Consumer guidance on suspicious account messages, verified contact routes and multi-factor authentication.
+
+Before you use it: Public guidance read. General account-security information, not a review of any poker operator or a guarantee against account compromise.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-ftc-phishing
+
 ## GGPoker: Security and Ecology Policy
 
 https://legal.ggpoker.com/network/security-ecology-policy/
@@ -811,6 +824,32 @@ Before you use it: Policy text read, not an audit of enforcement or operator saf
 
 Listing review: 2026-10-08 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-gg-security-policy
+
+## Great Britain: Gambling Commission business register
+
+https://www.gamblingcommission.gov.uk/public-register/businesses
+
+Gambling Commission | rules | Official rules | Free | All levels
+
+Official business register with status, activity, trading-name and domain lookup information.
+
+Before you use it: Register landing page read; no individual licence or eligibility check performed. Applies to its stated jurisdiction. The regulator cautions that business-supplied domain and trading-name data are not guaranteed.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-ukgc-register
+
+## New Jersey: Internet gaming information and dispute routes
+
+https://www.njoag.gov/about/divisions-and-offices/division-of-gaming-enforcement-home/internet-gaming-information/
+
+New Jersey Division of Gaming Enforcement | rules | Official rules | Free | All levels
+
+Official starting point for authorized Internet gaming sites, permit-holder information and dispute procedures.
+
+Before you use it: Search-index text inspected; direct retrieval returned 403. The older nj.gov address returned 404. No linked provider list, individual approval or personal eligibility was verified. Recheck the official page.
+
+Listing review: 2026-10-08 (index).
+Directory context: https://nolankido.com/poker/resources/#resource-nj-dge-information
 
 ## Pagat: betting, table stakes and showdown
 
@@ -941,6 +980,19 @@ Before you use it: Publisher information inspected, not the full book. Promotion
 
 Listing review: 2026-10-08 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-modern-poker-theory
+
+## Multiway pots: shared defense and positional context
+
+https://blog.gtowizard.com/10-tips-multiway-pots-in-poker/
+
+GTO Wizard / Tombos21 | strategy | Article | Free | Intermediate
+
+An original multiway discussion of shared defense, ranges, position and nut potential.
+
+Before you use it: Public text read. Simplified fold-rate products require appropriate conditional probabilities or an explicit independence assumption. Historical product plans are not current feature claims.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-multiway-tips
 
 ## Play Optimal Poker: author introduction
 
@@ -1683,6 +1735,32 @@ Before you use it: Public article index inspected, not every linked video. Coach
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-lexy-vlog-notes
 
+## MIT Lecture 6: Independent Chip Model
+
+https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/resources/lecture-6-independent-chip-model/
+
+MIT OpenCourseWare / Will Ma | watch-listen | Video companion | Free | Intermediate
+
+Individual archived lecture page on tournament chip values and equity, with transcript controls and a slides link.
+
+Before you use it: 2016 course. Page inspected, not the full lecture, linked slides or complete transcript. Historical teaching, not current software instructions or an ICM accuracy certification.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-mit-icm-lecture
+
+## MIT Lecture 7: combinatorial hand analysis
+
+https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/resources/lecture-7-an-in-depth-combinatorial-hand-analysis/
+
+MIT OpenCourseWare / Will Ma | watch-listen | Video companion | Free | Intermediate
+
+Individual archived lecture page for hand analysis, with a transcript interface and an authorized offline-video link.
+
+Before you use it: 2016 course. Public lecture page and format labels inspected; complete video and transcript were not reviewed or accuracy-tested. External media availability may change.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-mit-combo-lecture
+
 ## MIT: How to Win at Texas Hold'em Poker (2016)
 
 https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/
@@ -1786,6 +1864,19 @@ Before you use it: Archive inspected; a current release cadence is not establish
 
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-poker-guys-archive
+
+## Thinking Poker 466: recreational-player goals
+
+https://www.thinkingpoker.net/2025/03/episode-466-recpoker-featuring-jim-reid-loriann-persinger-and-rob-gardner/
+
+Thinking Poker | watch-listen | Podcast | Free | All levels
+
+Creator-owned episode page introducing a discussion with RecPoker participants about recreational players.
+
+Before you use it: Audio link and show notes inspected, not the complete recording. No full transcript verified. Page includes promotions; the listing is not an endorsement of promoted products.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-recpoker-episode
 
 ## Thinking Poker podcast
 
