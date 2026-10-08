@@ -9,7 +9,7 @@ import re
 from poker_reading import next_reads
 
 TOPICS = {'basics': 'Learn the basics', 'hands': 'Read a hand', 'tournaments': 'Tournament study',
-          'practice': 'Try a decision', 'results': 'Results and review', 'creative': 'Make a vlog'}
+          'live': 'Live tournament preparation', 'practice': 'Try a decision', 'results': 'Results and review', 'creative': 'Make a vlog'}
 LEVELS = {'Start here', 'Build understanding', 'Go deeper', 'Practice', 'Creator workflow'}
 
 class PlainText(HTMLParser):

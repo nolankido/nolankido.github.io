@@ -62,7 +62,7 @@ class LabsExpansionTests(unittest.TestCase):
             self.assertIn(route, check_live.targets())
         # The overview reaches each case through the complete lab directory.
         self.assertIn('/poker/decision-labs/', self.outputs[Path('poker/index.html')])
-        self.assertEqual(len(self.entries), 24)
+        self.assertEqual(len(self.entries), len([p for p in self.pages if p.get('poker_guide')]) + 1)
         self.assertIn('/poker/decision-labs/', check_live.targets())
         self.assertIn('/poker/decision-lab/', hub)
         self.assertIn('/poker/decision-labs/', self.content('decision-lab'))

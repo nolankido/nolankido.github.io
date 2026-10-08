@@ -156,7 +156,7 @@
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
-    "updated": "2026-10-07"
+    "updated": "2026-10-08"
   },
   {
     "id": "poker-hand-review",
@@ -200,7 +200,7 @@
     "kicker": "Poker / Start here",
     "source": "poker/start-here.html",
     "date": "2026-10-05",
-    "updated": "2026-10-07"
+    "updated": "2026-10-08"
   },
   {
     "id": "poker-study",
@@ -211,7 +211,7 @@
     "section": "poker",
     "kicker": "Poker / Between sessions",
     "source": "poker/study.html",
-    "updated": "2026-10-07"
+    "updated": "2026-10-08"
   },
   {
     "id": "poker-holdem-basics",
@@ -353,7 +353,7 @@
     "source": "poker/tournament-formats.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-05",
+    "updated": "2026-10-08",
     "poker_guide": true
   },
   {
@@ -366,7 +366,7 @@
     "source": "poker/table-etiquette.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-05",
+    "updated": "2026-10-08",
     "poker_guide": true
   },
   {
@@ -482,7 +482,7 @@
     "kicker": "Poker / Read, study, create",
     "source": "poker/library.html",
     "section": "poker",
-    "updated": "2026-10-07"
+    "updated": "2026-10-08"
   },
   {
     "id": "poker-decision-lab",
@@ -543,6 +543,121 @@
     "kicker": "Poker / External resources",
     "source": "poker/resources.html",
     "section": "poker",
-    "updated": "2026-10-07"
+    "updated": "2026-10-08"
+  },
+  {
+    "id": "poker-first-live-tournament",
+    "path": "/poker/first-live-tournament/",
+    "title": "Your first live tournament, without the guesswork.",
+    "seo_title": "Your first live tournament, without the guesswork | Nolan Kido Poker",
+    "description": "Prepare for registration, finding your seat, asking procedural questions, and leaving with one useful observation.",
+    "kicker": "Poker / Live tournament field guide",
+    "source": "poker/first-live-tournament.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-choosing-a-tournament",
+    "path": "/poker/choosing-a-tournament/",
+    "title": "Read the structure before choosing the tournament.",
+    "seo_title": "Read the structure before choosing the tournament | Nolan Kido Poker",
+    "description": "Compare total cost, starting big blinds, blind progression and time commitments using two fictional event structures.",
+    "kicker": "Poker / Live tournament field guide",
+    "source": "poker/choosing-a-tournament.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-registration-and-reentry",
+    "path": "/poker/registration-and-reentry/",
+    "title": "Registration, re-entry and the cost of another attempt.",
+    "seo_title": "Registration, re-entry and the cost of another attempt | Nolan Kido Poker",
+    "description": "Separate advance registration, starting flights, re-entry and rebuys, then account for each payment without treating previous losses as a reason to continue.",
+    "kicker": "Poker / Live tournament field guide",
+    "source": "poker/registration-and-reentry.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-tournament-day",
+    "path": "/poker/tournament-day/",
+    "title": "From the first seat to the end of the day.",
+    "seo_title": "From the first seat to the end of the day | Nolan Kido Poker",
+    "description": "Prepare for breaks, table moves, bagging chips and finishing a tournament day without treating each logistical step as a strategic problem.",
+    "kicker": "Poker / Live tournament field guide",
+    "source": "poker/tournament-day.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-recording-hands",
+    "path": "/poker/recording-hands/",
+    "title": "Keep a hand note you can actually review.",
+    "seo_title": "Keep a hand note you can actually review | Nolan Kido Poker",
+    "description": "Capture positions, stacks, actions and uncertainty after play, with a checked fictional pot ledger and a reusable private note template.",
+    "kicker": "Poker / Live tournament field guide",
+    "source": "poker/recording-hands.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-choosing-study-tools",
+    "path": "/poker/choosing-study-tools/",
+    "title": "Choose a study tool by the question it answers.",
+    "seo_title": "Choose a study tool by the question it answers | Nolan Kido Poker",
+    "description": "Distinguish equity calculators, ICM calculators, solvers, solution libraries and trainers before spending money or interpreting a result.",
+    "kicker": "Poker / Study resources",
+    "source": "poker/choosing-study-tools.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-evaluating-poker-advice",
+    "path": "/poker/evaluating-poker-advice/",
+    "title": "Read poker advice without borrowing its certainty.",
+    "seo_title": "Read poker advice without borrowing its certainty | Nolan Kido Poker",
+    "description": "Evaluate a video, chart, article or forum answer by its question, evidence and assumptions, then turn it into one checkable study task.",
+    "kicker": "Poker / Study resources",
+    "source": "poker/evaluating-poker-advice.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-live-tournament-guide",
+    "path": "/poker/live-tournament-guide/",
+    "title": "The live tournament field guide.",
+    "seo_title": "The live tournament field guide | Nolan Kido Poker",
+    "description": "Seven practical guides for choosing an event, preparing for tournament day, recording completed hands and evaluating study resources.",
+    "kicker": "Poker / Practical preparation",
+    "source": "poker/live-tournament-guide.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08"
+  },
+  {
+    "id": "poker-tournament-checklists",
+    "path": "/poker/tournament-checklists/",
+    "title": "Plan the day. Keep the hand. Check the source.",
+    "seo_title": "Plan the day. Keep the hand. Check the source | Nolan Kido Poker",
+    "description": "Three printable, copyable and downloadable private-use sheets for event planning, completed-hand capture and evaluating a poker resource.",
+    "kicker": "Poker / Practical preparation",
+    "source": "poker/tournament-checklists.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08"
   }
 ]
