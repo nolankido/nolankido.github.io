@@ -736,5 +736,56 @@
     "section": "poker",
     "date": "2026-10-08",
     "updated": "2026-10-08"
+  },
+  {
+    "id": "poker-poker-math-reference",
+    "path": "/poker/poker-math-reference/",
+    "title": "Poker math: the right number for the right question.",
+    "seo_title": "Poker math: the right number for the right question | Nolan Kido Poker",
+    "description": "Compare call prices, pure-bluff thresholds, minimum defense frequency and pot-limit raises with exact worked examples and a portable reference.",
+    "kicker": "Poker / Practical reference",
+    "source": "poker/poker-math-reference.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-reading-preflop-charts",
+    "path": "/poker/reading-preflop-charts/",
+    "title": "Read the preflop chart before trusting the colors.",
+    "seo_title": "Read the preflop chart before trusting the colors | Nolan Kido Poker",
+    "description": "Check game, position, stack convention, action history and combo weights before using a preflop chart as a study reference.",
+    "kicker": "Poker / Practical reference",
+    "source": "poker/reading-preflop-charts.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-poker-rules-and-fair-play",
+    "path": "/poker/poker-rules-and-fair-play/",
+    "title": "Poker rules and fair play: find the right authority.",
+    "seo_title": "Poker rules and fair play: find the right authority | Nolan Kido Poker",
+    "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
+    "kicker": "Poker / Practical reference",
+    "source": "poker/poker-rules-and-fair-play.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-find",
+    "path": "/poker/find/",
+    "title": "Find a useful poker answer.",
+    "seo_title": "Find poker guides, resources and definitions | Nolan Kido",
+    "description": "Search Poker guides, external resources and glossary definitions together, with local-only keyword search and free-resource filtering.",
+    "kicker": "Poker / Answer finder",
+    "source": "poker/find.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08"
   }
 ]

@@ -2,7 +2,7 @@
 
 Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.
 
-132 unique resources. Most recent individual listing review: 2026-10-08.
+138 unique resources. Most recent individual listing review: 2026-10-08.
 
 This is not a claim that all resources were rechecked on that date.
 
@@ -409,6 +409,19 @@ Before you use it: Check the current publisher terms.
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-pot-odds
 
+## Pot odds, bluff thresholds and MDF: mathematical misconceptions
+
+https://blog.gtowizard.com/mathematical-misconceptions-in-poker/
+
+GTO Wizard / Tombos21 | math | Article | Free | Intermediate
+
+Separates call-price, pure-bluff and defense-frequency calculations and explains why simplified formulas can mislead.
+
+Before you use it: Public article read. Examples are model-dependent; first-bet formulas are not universal instructions for raises, multiway pots or tournament prize equity.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-math-misconceptions
+
 ## What effective stack size means
 
 https://upswingpoker.com/effective-stack-size/
@@ -786,6 +799,19 @@ Before you use it: Check the rules for the actual event; another tour may handle
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-apt-rules
 
+## GGPoker: Security and Ecology Policy
+
+https://legal.ggpoker.com/network/security-ecology-policy/
+
+GGPoker Network | rules | Official rules | Free | All levels
+
+The network policy on game integrity, external assistance, player conduct and account responsibility.
+
+Before you use it: Policy text read, not an audit of enforcement or operator safety. Recheck the current version and applicable operator terms; inclusion does not establish local eligibility.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-gg-security-policy
+
 ## Pagat: betting, table stakes and showdown
 
 https://www.pagat.com/poker/rules/betting.html
@@ -851,6 +877,32 @@ Before you use it: These are this operator's rules, not permission to film or us
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-stars-live-rules
 
+## PokerStars: third-party tools and services policy
+
+https://www.pokerstars.com/poker/room/prohibited/
+
+PokerStars | rules | Official rules | Free | All levels
+
+Operator policy distinguishing permitted tools, tools prohibited at all times and tools restricted while its software is open.
+
+Before you use it: Policy text read, not independent enforcement testing. Applies to this operator and can change. This is not an endorsement, eligibility check or permission to use a specific tool.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-stars-tool-policy
+
+## TDA rule downloads and translation access
+
+https://www.pokertda.com/poker-tda-rules/
+
+Poker Tournament Directors Association | rules | Official rules | Free | All levels
+
+Official access point for longform and shortform tournament rules, illustrated material and translation links.
+
+Before you use it: Search-index description checked; direct page retrieval timed out. Downloads and translations were not individually reviewed. Check the document version and the event rules actually adopted.
+
+Listing review: 2026-10-08 (index).
+Directory context: https://nolankido.com/poker/resources/#resource-tda-rule-downloads
+
 ## D&B Poker book catalogue
 
 https://dandbpoker.com/
@@ -915,6 +967,19 @@ Before you use it: Free blog articles are distinct from paid training and solver
 
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-plo-mastermind-blog
+
+## Poker ranges: matrices, combinations and percentages
+
+https://www.splitsuit.com/poker-ranges-reading
+
+James Sweeney / SplitSuit | strategy | Article | Free | Beginner
+
+An author-written introduction to expressing ranges as matrices, combinations and percentages.
+
+Before you use it: Public written guide read, not every embedded video or promoted product tested. Suit placement and color legends should still be checked in the actual chart.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-splitsuit-range-reading
 
 ## PokerCoaching strategy blog
 
@@ -1682,6 +1747,19 @@ Before you use it: Public archive inspected, not every recording. Coaching, emai
 
 Listing review: 2026-10-07 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-smart-poker-study
+
+## SplitSuit: free poker video catalogue
+
+https://www.splitsuit.com/videos
+
+James Sweeney / SplitSuit | watch-listen | Video library | Free | All levels
+
+Creator-owned catalogue of free strategy videos covering ranges, bluffing, hand review and study routines.
+
+Before you use it: Public catalogue read; the complete videos were not watched and captions were not verified. Some adjacent offers are paid. Video titles and popularity are not independent evidence of quality.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-splitsuit-video-library
 
 ## The Poker Bank: archived strategy videos
 

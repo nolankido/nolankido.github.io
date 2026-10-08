@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-08",
+  "scope": "Five public pages or catalogues read; TDA downloads confirmed through its search-index description only after direct retrieval timed out. No full videos, software or enforcement tests.",
+  "accepted": [
+    {
+      "id": "math-misconceptions",
+      "url": "https://blog.gtowizard.com/mathematical-misconceptions-in-poker/",
+      "scope": "Public article read. Examples are model-dependent; first-bet formulas are not universal instructions for raises, multiway pots or tournament prize equity.",
+      "review_method": "page"
+    },
+    {
+      "id": "splitsuit-range-reading",
+      "url": "https://www.splitsuit.com/poker-ranges-reading",
+      "scope": "Public written guide read, not every embedded video or promoted product tested. Suit placement and color legends should still be checked in the actual chart.",
+      "review_method": "page"
+    },
+    {
+      "id": "stars-tool-policy",
+      "url": "https://www.pokerstars.com/poker/room/prohibited/",
+      "scope": "Policy text read, not independent enforcement testing. Applies to this operator and can change. This is not an endorsement, eligibility check or permission to use a specific tool.",
+      "review_method": "page"
+    },
+    {
+      "id": "gg-security-policy",
+      "url": "https://legal.ggpoker.com/network/security-ecology-policy/",
+      "scope": "Policy text read, not an audit of enforcement or operator safety. Recheck the current version and applicable operator terms; inclusion does not establish local eligibility.",
+      "review_method": "page"
+    },
+    {
+      "id": "tda-rule-downloads",
+      "url": "https://www.pokertda.com/poker-tda-rules/",
+      "scope": "Index only: direct page retrieval timed out; linked documents and translations not independently reviewed.",
+      "review_method": "index"
+    },
+    {
+      "id": "splitsuit-video-library",
+      "url": "https://www.splitsuit.com/videos",
+      "scope": "Public catalogue read; the complete videos were not watched and captions were not verified. Some adjacent offers are paid. Video titles and popularity are not independent evidence of quality.",
+      "review_method": "page"
+    }
+  ],
+  "deferred": [
+    {
+      "url": "https://help.gtowizard.com/gto-wizard-ai-roadmap/",
+      "reason": "Explicit September 2024 limitations are not suitable evidence of current product scope. Existing provider documentation retained without resetting its review date."
+    }
+  ]
+}

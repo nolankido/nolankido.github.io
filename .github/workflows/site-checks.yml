@@ -23,6 +23,7 @@ jobs:
           python -m unittest discover -s _tests -p 'test_*.py' -v
           node --check assets/contact.js
           node --check assets/poker-library.js
+          node --check assets/poker-finder.js
       - name: Install browser and accessibility test tools
         run: |
           python -m pip install -r requirements-test.txt
@@ -37,10 +38,11 @@ jobs:
       - name: Whole-site accessibility and failure recovery
         env:
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
+          SCREENSHOT_DIR: ${{ runner.temp }}/poker-reading-previews
         run: |
           set -o pipefail
           mkdir -p "$RUNNER_TEMP/poker-reading-previews"
-          for suite in review_browser poker_browser workshops_browser library_browser labs_browser field_guide_browser collections_browser; do
+          for suite in review_browser poker_browser workshops_browser library_browser labs_browser field_guide_browser collections_browser finder_browser; do
             echo "Running $suite"
             python "_tests/$suite.py" 2>&1 | tee "$RUNNER_TEMP/poker-reading-previews/$suite.log"
           done

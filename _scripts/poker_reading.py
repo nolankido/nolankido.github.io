@@ -8,6 +8,9 @@ from html.parser import HTMLParser
 import re
 
 NEXT_READS = {
+    'poker-math-reference': ('pot-odds-workshop', 'flush-and-redraw'),
+    'reading-preflop-charts': ('range-combinations', 'short-stack-decisions'),
+    'poker-rules-and-fair-play': ('table-etiquette', 'first-live-tournament'),
     'free-poker-learning-path': ('holdem-basics', 'pot-odds-workshop'),
     'cash-game-study': ('position-and-stacks', 'side-pot-lab'),
     'omaha-and-mixed-games': ('hand-rankings', 'betting-and-pots'),

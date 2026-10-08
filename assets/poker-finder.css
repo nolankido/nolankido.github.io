@@ -1,0 +1,31 @@
+/* Scoped to the answer finder. Existing editorial design remains unchanged. */
+.finder-list { display:grid; grid-template-columns:minmax(0, 1fr); gap:14px; }
+.finder-list .finder-card { min-width:0; padding:22px; }
+.finder-card h3 { font-size:1.3rem; line-height:1.35; margin-bottom:10px; }
+.finder-card p { max-width:76ch; margin-bottom:12px; }
+.finder-card p:last-child { margin-bottom:0; }
+.finder-card, .finder-card a { overflow-wrap:anywhere; }
+.finder-refine { display:flex; flex-wrap:wrap; align-items:end; gap:18px; margin-top:18px; }
+.finder-refine label { display:block; }
+.finder-refine select { max-width:100%; min-height:44px; padding:9px; font:inherit; color:var(--basalt); background:var(--paper-light); border:1px solid var(--line-dark); }
+.finder-refine .finder-checkbox { display:flex; align-items:center; gap:10px; min-height:44px; }
+.finder-checkbox input { width:20px; min-height:20px; padding:0; flex:0 0 20px; }
+.finder-card:focus { outline:3px solid var(--green); outline-offset:3px; }
+.finder-more { margin-top:24px; }
+#finder-controls[hidden], #finder-empty[hidden], #finder-more[hidden], .finder-card[hidden] { display:none !important; }
+@media print {
+  #finder-controls, #finder-more { display:none !important; }
+  .finder-card { break-inside:avoid; }
+}
+
+.finder-refine > div { min-width:0; max-width:100%; }
+.finder-refine select { width:100%; }
+
+/* Put the search task before the reference catalogue on small screens. */
+.page-poker-find .page-hero { padding-top:24px; padding-bottom:24px; }
+.page-poker-find .page-title { font-size:clamp(2rem,4vw,3.25rem); line-height:1.15; }
+.page-poker-find .folio-row { padding-top:28px; padding-bottom:28px; }
+.page-poker-find .section-deck { margin-bottom:16px; }
+#finder-controls { margin-top:20px; }
+.finder-scope { margin:20px 0; }
+@media(max-width:760px) { .page-poker-find .section-meta { margin-bottom:14px; } }
