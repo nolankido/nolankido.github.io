@@ -111,7 +111,7 @@ try:
         expect(review_route).to_contain_text('I want to understand a decision')
         review_route.focus()
         page.keyboard.press('Enter')
-        assert page.url.endswith('/poker/reviewing-a-hand/')
+        expect(page).to_have_url(base + '/poker/reviewing-a-hand/')
         with page.expect_download() as info:
             page.get_by_role('link', name='Download the review sheet').click()
         assert Path(info.value.path()).read_bytes() == (ROOT / 'downloads/poker-hand-review.md').read_bytes()
