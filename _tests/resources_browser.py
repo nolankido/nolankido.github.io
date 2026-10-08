@@ -107,8 +107,7 @@ def main():
                 if os.environ.get('RUNNER_TEMP') and width in [390, 1440]:
                     out = Path(os.environ['RUNNER_TEMP']) / 'poker-reading-previews'
                     out.mkdir(parents=True, exist_ok=True)
-                    page.screenshot(path=str(out / f'poker-resource-paths-{width}.png'),
-                                    clip={'x': 0, 'y': 0, 'width': width, 'height': 6000})
+                    page.locator('#directory-top').screenshot(path=str(out / f'poker-resource-paths-{width}.png'))
             search.fill('ICM'); expect(page.locator('#resource-omaha-rules')).to_be_hidden()
             page.evaluate('window.dispatchEvent(new Event("beforeprint"))')
             page.emulate_media(media='print')
