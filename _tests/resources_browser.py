@@ -54,6 +54,18 @@ def main():
             page.locator('#resource-reset').click()
             for query in ['  oMaHa  ', 'omaha']:
                 search.fill(query); expect(page.locator('#resource-omaha-rules')).to_be_visible()
+            # Newly covered subjects must be findable without visiting providers.
+            for query, ident in [('satellite', 'satellite-guide'), ('badugi', 'pagat-badugi'),
+                                 ('hand history', 'phh-format'), ('MIT', 'mit-theory')]:
+                search.fill(query)
+                expect(page.locator('#resource-' + ident)).to_be_visible()
+            search.fill('MIT'); expect(page.locator('#resource-mit-holdem')).to_be_visible()
+            search.fill('satellite')
+            page.locator('#resource-free').click()
+            expect(page.locator('#resource-free')).to_have_attribute('aria-pressed', 'true')
+            expect(page.locator('#resource-satellite-guide')).to_be_visible()
+            expect(page.locator('#resource-satellite-masterclass')).to_be_hidden()
+            page.locator('#resource-reset').click()
             search.fill('<img src=x onerror=alert(1)>')
             expect(page.locator('#resource-empty')).to_be_visible()
             assert page.locator('#poker-resources img').count() == 0
