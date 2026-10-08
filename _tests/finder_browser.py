@@ -38,7 +38,9 @@ def main():
                     assert response and response.status==200
                     expect(page.locator('h1')).to_have_count(1)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),(slug,width)
-                    if slug=='find':expect(page.locator('[data-finder-card]:visible')).to_have_count(12)
+                    if slug=='find':
+                        expect(page.locator('[data-finder-card]:visible')).to_have_count(12)
+                        assert page.locator('#finder-search').bounding_box()['y'] < 900,('Search below first viewport',width)
                     page.add_style_tag(content='* {line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important;} p {margin-bottom:2em!important;}')
                     if not page.evaluate('document.documentElement.scrollWidth <= innerWidth'):
                         print('OVERFLOW', slug, width, page.evaluate('Array.from(document.querySelectorAll("main *")).filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>({tag:e.tagName,cls:e.className,id:e.id,right:e.getBoundingClientRect().right,width:e.getBoundingClientRect().width}))'), flush=True)

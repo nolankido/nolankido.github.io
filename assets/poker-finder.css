@@ -20,3 +20,12 @@
 
 .finder-refine > div { min-width:0; max-width:100%; }
 .finder-refine select { width:100%; }
+
+/* Put the search task before the reference catalogue on small screens. */
+.page-poker-find .page-hero { padding-top:24px; padding-bottom:24px; }
+.page-poker-find .page-title { font-size:clamp(2rem,4vw,3.25rem); line-height:1.15; }
+.page-poker-find .folio-row { padding-top:28px; padding-bottom:28px; }
+.page-poker-find .section-deck { margin-bottom:16px; }
+#finder-controls { margin-top:20px; }
+.finder-scope { margin:20px 0; }
+@media(max-width:760px) { .page-poker-find .section-meta { margin-bottom:14px; } }
