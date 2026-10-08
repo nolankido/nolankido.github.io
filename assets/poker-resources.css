@@ -1,0 +1,44 @@
+/* Only the external directory. Retains the site's existing type, color and spacing tokens. */
+#poker-resources .reader-controls { margin-top:24px; }
+#poker-resources .resource-selects { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:20px; }
+#poker-resources .resource-selects label { font-size:.88rem; margin-bottom:6px; }
+#poker-resources select { width:100%; min-width:0; min-height:48px; padding:10px 30px 10px 12px; border:1px solid var(--line-dark); border-radius:0; background:var(--paper-light); color:var(--basalt); font:1rem/1.5 var(--sans); }
+#poker-resources .resource-quick { margin-top:18px; padding-top:12px; border-top:1px solid var(--line-dark); }
+#poker-resources .resource-quick .reader-filters { margin-top:10px; }
+#poker-resources #resource-active { margin:20px 0 0; overflow-wrap:anywhere; }
+#poker-resources .resource-topic-index { margin-block:20px; }
+#poker-resources .resource-topic-help { max-width:760px; font:1rem/1.7 var(--sans); margin:0 0 20px; }
+#poker-resources .reader-card { padding:22px; scroll-margin-top:120px; }
+#poker-resources .reader-card:target { border:2px solid var(--red); }
+#poker-resources .reader-card:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+#poker-resources .reader-card h3 { font-size:1.3rem; margin-bottom:14px; }
+#poker-resources .resource-domain { display:block; text-transform:none; letter-spacing:0; font-weight:400; overflow-wrap:anywhere; }
+#poker-resources .reader-card-meta { margin:0 0 14px; padding:8px 0; border-block:1px solid var(--line); }
+#poker-resources .reader-card > .resource-description { font:1rem/1.65 var(--serif); margin:0 0 14px; }
+#poker-resources .reader-card > .resource-caution { font:.86rem/1.65 var(--sans); margin:0 0 16px; }
+#poker-resources .reader-card > .resource-review { font:.76rem/1.7 var(--sans); margin:auto 0 0; }
+#poker-resources .resource-review a { display:inline-block; padding-block:8px; }
+#poker-resources.resource-compact .reader-grid { grid-template-columns:minmax(0,1fr); gap:0; }
+#poker-resources.resource-compact .reader-card { padding:18px 20px; border-bottom:0; }
+#poker-resources.resource-compact .reader-card:last-child { border-bottom:1px solid var(--line-dark); }
+#poker-resources.resource-compact .reader-eyebrow { margin-bottom:6px; }
+#poker-resources.resource-compact .resource-domain { display:inline; margin-left:10px; }
+#poker-resources.resource-compact .reader-card > p { max-width:100%; }
+#poker-resources.resource-compact .reader-card > .resource-caution { margin-bottom:8px; }
+#poker-resources.resource-compact .reader-card-meta { border:0; padding:0; margin-bottom:10px; }
+#poker-resources.resource-compact .reader-card > .resource-review { margin-top:0; }
+@media(max-width:600px) { #poker-resources .resource-selects { grid-template-columns:minmax(0,1fr); } }
+@media print {
+  #poker-resources [data-resource-section][hidden],#poker-resources [data-resource-card][hidden] { display:block!important; }
+  #poker-resources .reader-grid { display:block; }
+  #poker-resources .reader-card { display:block; break-inside:avoid; border:1px solid black!important; margin-bottom:14px; padding:12px; }
+  #poker-resources .resource-topic-index,#resource-starting-points { display:none; }
+  #poker-resources .resource-review a[data-resource-jump] { display:none; }
+  #poker-resources a[rel="external"]::after { content:" (" attr(href) ")"; display:block; font:10pt/1.4 sans-serif; overflow-wrap:anywhere; font-weight:400; }
+}
+
+#poker-resources .resource-refine { margin:16px 0; }
+#poker-resources .resource-quick .reader-filters { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+#poker-resources .resource-quick button { text-align:left; width:100%; }
+@media(min-width:900px) { #poker-resources .resource-quick .reader-filters { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media print { #resource-print,#resource-active { display:none!important; } }

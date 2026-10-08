@@ -91,6 +91,7 @@ def main():
             page.locator('#resource-reset').click()
             # A category jump recovers from a no-results filter before navigating.
             search.fill('no-match-zzzz'); expect(page.locator('#resource-empty')).to_be_visible()
+            page.locator('.resource-topic-index summary').click()
             page.locator('a[data-resource-jump][href="#events"]').click()
             expect(page).to_have_url(base + '/poker/resources/#events')
             expect(page.locator('#resource-wsop-schedule')).to_be_visible()
@@ -125,6 +126,7 @@ def main():
                 p.locator('#resource-starting-points summary').click()
                 p.locator('#resource-starting-points a[href="#resource-brad-owen-wpt-vlog"]').click()
                 expect(p.locator('#resource-brad-owen-wpt-vlog')).to_be_visible()
+                p.locator('.resource-topic-index summary').click()
                 p.locator('a[data-resource-jump][href="#math"]').click()
                 expect(p.locator('#resource-pot-odds')).to_be_visible()
                 fallback.close()
@@ -137,6 +139,21 @@ def main():
                     page.add_script_tag(path=os.environ['AXE_PATH'])
                     result = page.evaluate('async()=>await axe.run(document.querySelector("main"))')
                     assert not result['violations'], [(v['id'], v['help']) for v in result['violations']]
+            from resource_discovery_checks import check_discovery
+            page.goto(base + '/poker/resources/')
+            check_discovery(page, ROOT)
+            # Actual navigation, bookmarks and back/forward are checked over HTTP in CI.
+            page.goto(base + '/poker/resources/#resource-hrc-docs')
+            expect(page.locator('#resource-hrc-docs')).to_be_focused()
+            page.locator('#resource-search').fill('no-match-zzzz')
+            expect(page.locator('#resource-hrc-docs')).to_be_hidden()
+            page.locator('#directory-top a[href="#resource-ncpg"]').click()
+            expect(page.locator('#resource-ncpg')).to_be_focused()
+            page.go_back()
+            expect(page.locator('#resource-hrc-docs')).to_be_visible()
+            expect(page.locator('#resource-hrc-docs')).to_be_focused()
+            page.go_forward()
+            expect(page.locator('#resource-ncpg')).to_be_focused()
             assert not errors, errors
             context.close(); browser.close()
         print(f'PASS: {total} external resources, search/topic/free intersections, keyboard filters, empty/reset/XSS recovery, native category and six curated-path jumps, 5 widths with text spacing, print, blocked-script/no-JavaScript access, and no filtering requests, storage, cookies, or URL writes. Provider links were not visited.')
