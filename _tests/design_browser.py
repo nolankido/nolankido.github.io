@@ -68,7 +68,7 @@ try:
                     expect(page.locator('#verification-retry')).to_be_visible()
                     expect(page.locator('#contact-submit')).to_be_enabled()
                     expect(page.locator('#form-success')).to_be_hidden()
-                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and (entry.get('poker_guide') or entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study']):
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and (entry.get('poker_guide') or entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study', 'poker-resources']):
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     page.screenshot(path=str(out / f'{entry["id"]}-{width}.png'), full_page=True)
             page.close()

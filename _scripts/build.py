@@ -18,6 +18,7 @@ import poker_content
 import poker_library
 import poker_reading
 import poker_experience
+import poker_resources
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -97,6 +98,7 @@ def build_outputs() -> dict[Path, str]:
     values.update(supplement(ROOT, notes))
     values.update(poker_content.supplement(catalog, ROOT))
     values.update(poker_experience.supplement(catalog))
+    values.update(poker_resources.supplement(poker_resources.load(ROOT)))
     values.update(poker_library.supplement(reader_entries))
     values['hubs_css_version'] = hashlib.sha256((ROOT / 'assets/hubs.css').read_bytes()).hexdigest()[:12]
     values['site_css_version'] = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
@@ -161,6 +163,9 @@ def build_outputs() -> dict[Path, str]:
         if p['path'].startswith('/poker/'):
             reader_version = hashlib.sha256((ROOT / 'assets/poker-reader.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker-reader.css?v={reader_version}">'
+            if p['id'] == 'poker-resources':
+                resources_version = hashlib.sha256((ROOT / 'assets/poker-resources.js').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <script defer src="/assets/poker-resources.js?v={resources_version}"></script>'
             if p['id'] == 'poker-library':
                 library_version = hashlib.sha256((ROOT / 'assets/poker-library.js').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <script defer src="/assets/poker-library.js?v={library_version}"></script>'
