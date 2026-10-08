@@ -8,7 +8,7 @@ import json
 import re
 from poker_reading import next_reads
 
-TOPICS = {'basics': 'Learn the basics', 'hands': 'Read a hand', 'tournaments': 'Tournament study',
+TOPICS = {'study': 'Learning resources', 'cash': 'Cash-game study', 'variants': 'Other poker games', 'research': 'Poker research', 'basics': 'Learn the basics', 'hands': 'Read a hand', 'tournaments': 'Tournament study',
           'live': 'Live tournament preparation', 'practice': 'Try a decision', 'results': 'Results and review', 'creative': 'Make a vlog'}
 LEVELS = {'Start here', 'Build understanding', 'Go deeper', 'Practice', 'Creator workflow'}
 

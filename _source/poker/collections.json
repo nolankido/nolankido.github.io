@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "free",
+      "slug": "free-poker-learning-path",
+      "title": "Learn poker with a small, free study path.",
+      "description": "Five self-paced sessions that turn free explanations into a hand record, a pot calculation and a decision you can explain.",
+      "resource_ids": [
+        "holdem-rules",
+        "hand-rankings",
+        "pokerbank-ev",
+        "mit-holdem"
+      ]
+    },
+    {
+      "id": "cash",
+      "slug": "cash-game-study",
+      "title": "Study cash games without importing tournament assumptions.",
+      "description": "Separate cash-game costs, effective stacks and multiway decisions from tournament models, with a worked rake example.",
+      "resource_ids": [
+        "pokerbank-strategy",
+        "splitsuit",
+        "stars-rake",
+        "pokerbank-implied-odds",
+        "crush-live-videos"
+      ]
+    },
+    {
+      "id": "variants",
+      "slug": "omaha-and-mixed-games",
+      "title": "Omaha, lowball and mixed games: know which rules changed.",
+      "description": "Compare hand construction, low qualifiers and game rotations, then work through an Omaha hi-lo split-pot example.",
+      "resource_ids": [
+        "omaha-eight-rules",
+        "five-card-omaha-rules",
+        "stud-eight-rules",
+        "lucky-stud-rules",
+        "deuce-seven-rules",
+        "eight-game-rules",
+        "pagat-badugi",
+        "six-plus-rules"
+      ]
+    },
+    {
+      "id": "books",
+      "slug": "poker-books-and-courses",
+      "title": "Choose a poker book or course you will actually use.",
+      "description": "Match prerequisites, format and one study goal before buying; distinguish author descriptions, independent reviews and free course material.",
+      "resource_ids": [
+        "play-optimal-poker",
+        "modern-poker-theory",
+        "mathematics-book-review",
+        "mit-theory",
+        "mit-holdem"
+      ]
+    },
+    {
+      "id": "research",
+      "slug": "poker-research-guide",
+      "title": "A map of poker research, without the inflated claims.",
+      "description": "Find original research on regret, sampling, poker AI and evaluation, with explicit boundaries between game-solving results and playing strength.",
+      "resource_ids": [
+        "cfr-original",
+        "mccfr-original",
+        "alberta-publications",
+        "libratus-paper",
+        "pluribus-research",
+        "deepstack",
+        "aivat",
+        "openspiel"
+      ]
+    }
+  ]
+}

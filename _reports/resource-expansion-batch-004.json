@@ -1,0 +1,51 @@
+{
+  "batch": "004",
+  "reviewed_on": "2026-10-08",
+  "scope": "Public destination text, catalogue or abstract only. No paid product tests, video watching, purchases or computation claims. Previous 108 review dates are not refreshed.",
+  "accepted_ids": [
+    "omaha-eight-rules",
+    "stud-eight-rules",
+    "deuce-seven-rules",
+    "eight-game-rules",
+    "lucky-stud-rules",
+    "five-card-omaha-rules",
+    "six-plus-rules",
+    "cfr-original",
+    "mccfr-original",
+    "alberta-publications",
+    "libratus-paper",
+    "pluribus-research",
+    "play-optimal-poker",
+    "modern-poker-theory",
+    "mathematics-book-review",
+    "irish-open-official",
+    "appt-official",
+    "kings-poker-official",
+    "ga-support",
+    "pokerbank-strategy",
+    "pokerbank-implied-odds",
+    "pokerbank-ev",
+    "stars-rake",
+    "splitsuit-interview-transcript"
+  ],
+  "not_accepted": [
+    {
+      "url": "https://www.pokerology.com/poker/strategy/cash-games-vs-tournaments/",
+      "reason": "Inspected but not added: overbroad statements and conflation of pot amount with net gain."
+    },
+    {
+      "url": "https://triton-series.com/",
+      "reason": "Direct reading unavailable; does not establish an outage."
+    },
+    {
+      "url": "https://rec.poker/podcast/",
+      "reason": "Reader output still insufficient to inspect a useful public episode catalogue."
+    }
+  ],
+  "continuing_gaps": [
+    "More signed PLO8 strategy examples from independent authors",
+    "Direct creator-owned video catalogues with usable transcripts",
+    "Accessibility information from event organizers",
+    "Country-specific player-protection references"
+  ]
+}
