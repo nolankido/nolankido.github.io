@@ -14,8 +14,9 @@
   const cards = [...root.querySelectorAll('[data-resource-card]')];
   if (!controls || !input || !reset || !free || !count || !empty || !cards.length) return;
   const normalize = value => value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  // Index the visible listing once instead of sending a second copy in HTML attributes.
   const records = cards.map(node => ({node, category: node.dataset.category, access: node.dataset.access,
-    search: normalize(`${node.dataset.search} ${node.dataset.access} ${node.dataset.category}`)}));
+    search: normalize(`${[...node.children].map(child => child.textContent).join(' ')} ${node.dataset.access} ${node.dataset.category}`)}));
   let category = 'all';
   let freeOnly = false;
   let timer;

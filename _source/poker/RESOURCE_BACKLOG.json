@@ -25,6 +25,46 @@
       "status": "needs-review",
       "question": "Review the redirected publisher identity and discussion destination before inclusion.",
       "observation": "The supplied forum route redirected to https://www.casino.us/cardschat/. The changed destination needs editorial review, not automatic substitution."
+    },
+    {
+      "id": "chasing-poker-greatness",
+      "url": "https://chasingpokergreatness.com/chasing-poker-greatness-podcast/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Locate and inspect a useful original public destination.",
+      "observation": "Search identified a promising archive, but direct page retrieval timed out. Not accepted as a page-level review."
+    },
+    {
+      "id": "recpoker-archive",
+      "url": "https://rec.poker/podcast/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Locate and inspect a useful original public destination.",
+      "observation": "The reader returned navigation, login and shop elements rather than a usable public episode catalogue. Seek a better public destination."
+    },
+    {
+      "id": "brad-owen-channel",
+      "url": "https://www.youtube.com/@BradOwenPoker",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Locate and inspect a useful original public destination.",
+      "observation": "The channel read exposed no useful catalogue. The accepted WPT episode feature is a different, directly inspected destination."
+    },
+    {
+      "id": "bravo-poker-live",
+      "url": "https://www.bravopokerlive.com/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Locate and inspect a useful original public destination.",
+      "observation": "Direct retrieval was unavailable. This does not establish an outage or app quality."
+    },
+    {
+      "id": "single-board-bomb-pots",
+      "url": "https://upswingpoker.com/single-board-bomb-pots-the-complete-nlh-strategy-guide/",
+      "discovered_on": "2026-10-07",
+      "status": "needs-review",
+      "question": "Locate and inspect a useful original public destination.",
+      "observation": "Search discovery did not produce a successful direct article read in this pass."
     }
   ],
   "resolved": [
@@ -51,74 +91,87 @@
     {
       "id": "003-creators",
       "priority": 1,
-      "status": "planned",
+      "status": "partial",
       "question": "Where can a viewer find verified poker-vlog channels, understandable hand breakdowns, and current free video series?",
       "queries": [
         "poker vlog official website YouTube hand review",
         "poker beginner video series official free",
         "poker podcast official archive transcript"
       ],
-      "acceptance": "Confirm each creator destination through a creator-controlled page. Inspect a public catalogue or representative transcript. Do not claim videos were watched from a title alone."
+      "acceptance": "Confirm each creator destination through a creator-controlled page. Inspect a public catalogue or representative transcript. Do not claim videos were watched from a title alone.",
+      "last_batch": "003",
+      "remaining": "Verify current creator-owned channels or transcripts beyond the accepted article and podcast sources."
     },
     {
       "id": "004-live-events",
       "priority": 2,
-      "status": "planned",
+      "status": "partial",
       "question": "Where can a player find original cardroom schedules, structure sheets, and registration policies?",
       "queries": [
         "poker room official tournament schedule structure sheet",
         "poker festival official rules registration policy",
         "poker series official schedule calendar"
       ],
-      "acceptance": "Link directly to operators, retaining event-specific scope. Do not duplicate changing dates or turn this into a travel recommendation."
+      "acceptance": "Link directly to operators, retaining event-specific scope. Do not duplicate changing dates or turn this into a travel recommendation.",
+      "last_batch": "003",
+      "remaining": "Add official event information outside the US and resolve the blocked Triton destination."
     },
     {
       "id": "005-cash-and-plo",
       "priority": 3,
-      "status": "planned",
+      "status": "partial",
       "question": "Which sources add cash-game, live low-stakes, PLO, and Omaha eight-or-better depth beyond the existing library?",
       "queries": [
         "PLO strategy free article wraps redraws author",
         "Omaha eight or better scooping quartering strategy",
         "live cash poker multiway pots rake strategy article"
       ],
-      "acceptance": "Prefer signed worked explanations and multiple independent publishers. Distinguish four-card, five-card, and split-pot games."
+      "acceptance": "Prefer signed worked explanations and multiple independent publishers. Distinguish four-card, five-card, and split-pot games.",
+      "last_batch": "003",
+      "remaining": "Find signed Omaha hi-lo and cash-game worked examples from additional publishers."
     },
     {
       "id": "006-tools-and-data",
       "priority": 4,
-      "status": "planned",
+      "status": "partial",
       "question": "Which documented tools help with private post-session review, hand records, equity, and reproducible research?",
       "queries": [
         "poker hand history specification official documentation",
         "poker equity calculator documentation limitations",
         "computer poker benchmark dataset evaluation original paper"
       ],
-      "acceptance": "Read original documentation and licensing. Describe the actual game model, access requirements, and whether anything was executed; exclude prohibited live-assistance services."
+      "acceptance": "Read original documentation and licensing. Describe the actual game model, access requirements, and whether anything was executed; exclude prohibited live-assistance services.",
+      "last_batch": "003",
+      "remaining": "Review data provenance, licenses and documented model limits without implying execution."
     },
     {
       "id": "007-community-culture",
       "priority": 5,
-      "status": "planned",
+      "status": "partial",
       "question": "Which public communities, historical archives, interviews, and home-game references add useful context?",
       "queries": [
         "poker history archive original interviews",
         "home poker tournament rules structure guide",
         "poker community hand discussion public forum"
       ],
-      "acceptance": "Separate community opinions from authoritative rules. Check changed domains and original ownership; avoid deposit-bonus landing pages."
+      "acceptance": "Separate community opinions from authoritative rules. Check changed domains and original ownership; avoid deposit-bonus landing pages.",
+      "last_batch": "003",
+      "remaining": "Seek additional original history and public communities; resolve the CardsChat domain change."
     },
     {
       "id": "008-support-and-rules",
       "priority": 6,
-      "status": "planned",
+      "status": "partial",
       "question": "Which original sources cover player conduct, accessibility, responsible participation, and jurisdiction-specific consumer information?",
       "queries": [
         "poker tournament accessibility official policy",
         "problem gambling support official resources",
         "poker player consumer information gaming regulator official"
       ],
-      "acceptance": "Use current official or established support sources. Identify jurisdiction and date; do not write broad legal or medical conclusions from a link listing."
+      "acceptance": "Use current official or established support sources. Identify jurisdiction and date; do not write broad legal or medical conclusions from a link listing.",
+      "last_batch": "003",
+      "remaining": "Find explicit accessibility and player-conduct policies; do not infer them from general room pages."
     }
-  ]
+  ],
+  "last_completed_pass": "003"
 }
