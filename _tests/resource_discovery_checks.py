@@ -88,3 +88,5 @@ def check_discovery(page, root):
     expect(page.locator('#directory-top a[href="#resource-gamcare-support"]')).to_be_visible()
     page.locator('#resource-reset').click()
     print(f'PASS: {len(scenarios)} format/experience/free combinations with independent catalogue counts, facet counts, 6 starting choices, keyboard result focus, compact caution visibility, print restoration and always-available support links.')
+    from resource_navigation_checks import check_navigation
+    check_navigation(page, root)

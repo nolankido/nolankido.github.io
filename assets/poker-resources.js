@@ -102,7 +102,9 @@
     if (!goal) return;
     clear(); category = goal.category; level.value = goal.level || 'all'; freeOnly = Boolean(goal.free); update(); jumpToResults();
   }));
-  root.querySelectorAll('[data-resource-jump]').forEach(link => link.addEventListener('click', () => {
+  root.querySelectorAll('[data-resource-jump]').forEach(link => link.addEventListener('click', event => {
+    // A separate tab/window must not change this tab's filters, focus or position.
+    if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     const hash = link.getAttribute('href');
     if (!targetForHash(hash)) return;
     clear();

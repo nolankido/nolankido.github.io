@@ -42,3 +42,7 @@
 #poker-resources .resource-quick button { text-align:left; width:100%; }
 @media(min-width:900px) { #poker-resources .resource-quick .reader-filters { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 @media print { #resource-print,#resource-active { display:none!important; } }
+/* Result jumps must clear the wrapped sticky header, including enlarged text. */
+#poker-resources [data-resource-section] h2,
+#poker-resources #resource-count { scroll-margin-top:120px; }
+#poker-resources #resource-search-help { margin-top:12px; }
