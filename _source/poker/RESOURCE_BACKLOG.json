@@ -3,22 +3,6 @@
   "status": "Not loaded by the site builder; candidates are not published listings.",
   "candidates": [
     {
-      "id": "mit-theory",
-      "url": "https://ocw.mit.edu/courses/15-s50-poker-theory-and-analysis-january-iap-2015/",
-      "discovered_on": "2026-10-07",
-      "status": "needs-review",
-      "question": "Confirm the canonical course URL and inspect accessible original course material.",
-      "observation": "Direct course reading was unavailable in this research pass."
-    },
-    {
-      "id": "mit-holdem",
-      "url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-hold-em-poker-january-iap-2016/",
-      "discovered_on": "2026-10-07",
-      "status": "needs-review",
-      "question": "Confirm course identity, content and public access.",
-      "observation": "Direct course reading was unavailable; not counted among published resources."
-    },
-    {
       "id": "triton",
       "url": "https://triton-series.com/",
       "discovered_on": "2026-10-07",
@@ -41,6 +25,100 @@
       "status": "needs-review",
       "question": "Review the redirected publisher identity and discussion destination before inclusion.",
       "observation": "The supplied forum route redirected to https://www.casino.us/cardschat/. The changed destination needs editorial review, not automatic substitution."
+    }
+  ],
+  "resolved": [
+    {
+      "id": "mit-theory",
+      "previous_url": "https://ocw.mit.edu/courses/15-s50-poker-theory-and-analysis-january-iap-2015/",
+      "url": "https://ocw.mit.edu/courses/15-s50-poker-theory-and-analytics-january-iap-2015/",
+      "reviewed_on": "2026-10-07",
+      "status": "accepted",
+      "batch": "002",
+      "observation": "Canonical MIT course page read. Corrected the course slug rather than treating the original failed URL as an unavailable course."
+    },
+    {
+      "id": "mit-holdem",
+      "previous_url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-hold-em-poker-january-iap-2016/",
+      "url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/",
+      "reviewed_on": "2026-10-07",
+      "status": "accepted",
+      "batch": "002",
+      "observation": "Canonical MIT course page read. Corrected the course slug rather than treating the original failed URL as an unavailable course."
+    }
+  ],
+  "research_batches": [
+    {
+      "id": "003-creators",
+      "priority": 1,
+      "status": "planned",
+      "question": "Where can a viewer find verified poker-vlog channels, understandable hand breakdowns, and current free video series?",
+      "queries": [
+        "poker vlog official website YouTube hand review",
+        "poker beginner video series official free",
+        "poker podcast official archive transcript"
+      ],
+      "acceptance": "Confirm each creator destination through a creator-controlled page. Inspect a public catalogue or representative transcript. Do not claim videos were watched from a title alone."
+    },
+    {
+      "id": "004-live-events",
+      "priority": 2,
+      "status": "planned",
+      "question": "Where can a player find original cardroom schedules, structure sheets, and registration policies?",
+      "queries": [
+        "poker room official tournament schedule structure sheet",
+        "poker festival official rules registration policy",
+        "poker series official schedule calendar"
+      ],
+      "acceptance": "Link directly to operators, retaining event-specific scope. Do not duplicate changing dates or turn this into a travel recommendation."
+    },
+    {
+      "id": "005-cash-and-plo",
+      "priority": 3,
+      "status": "planned",
+      "question": "Which sources add cash-game, live low-stakes, PLO, and Omaha eight-or-better depth beyond the existing library?",
+      "queries": [
+        "PLO strategy free article wraps redraws author",
+        "Omaha eight or better scooping quartering strategy",
+        "live cash poker multiway pots rake strategy article"
+      ],
+      "acceptance": "Prefer signed worked explanations and multiple independent publishers. Distinguish four-card, five-card, and split-pot games."
+    },
+    {
+      "id": "006-tools-and-data",
+      "priority": 4,
+      "status": "planned",
+      "question": "Which documented tools help with private post-session review, hand records, equity, and reproducible research?",
+      "queries": [
+        "poker hand history specification official documentation",
+        "poker equity calculator documentation limitations",
+        "computer poker benchmark dataset evaluation original paper"
+      ],
+      "acceptance": "Read original documentation and licensing. Describe the actual game model, access requirements, and whether anything was executed; exclude prohibited live-assistance services."
+    },
+    {
+      "id": "007-community-culture",
+      "priority": 5,
+      "status": "planned",
+      "question": "Which public communities, historical archives, interviews, and home-game references add useful context?",
+      "queries": [
+        "poker history archive original interviews",
+        "home poker tournament rules structure guide",
+        "poker community hand discussion public forum"
+      ],
+      "acceptance": "Separate community opinions from authoritative rules. Check changed domains and original ownership; avoid deposit-bonus landing pages."
+    },
+    {
+      "id": "008-support-and-rules",
+      "priority": 6,
+      "status": "planned",
+      "question": "Which original sources cover player conduct, accessibility, responsible participation, and jurisdiction-specific consumer information?",
+      "queries": [
+        "poker tournament accessibility official policy",
+        "problem gambling support official resources",
+        "poker player consumer information gaming regulator official"
+      ],
+      "acceptance": "Use current official or established support sources. Identify jurisdiction and date; do not write broad legal or medical conclusions from a link listing."
     }
   ]
 }

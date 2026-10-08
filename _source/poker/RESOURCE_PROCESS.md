@@ -9,7 +9,7 @@ Use `/poker/resources/` for external destinations. Keep `/poker/library/` for th
 
 Aim for comprehensive useful coverage, not a raw link quota. Start with original sources and specific reader questions. Include different formats, levels, variants, and viewpoints when they add something. A second article about the same topic can earn a place when its treatment is meaningfully different; a second URL to the same material cannot.
 
-The initial release contains 62 listings in 13 categories. Public page text or the public catalogue was read for 61 destinations; the Poker TDA entry is explicitly marked as search-index-only because direct page reading was unavailable. A page read is not a full review of every article, a completed course, a tested software product, a watched video, or a guarantee of availability in every region.
+The initial release contained 62 listings in 13 categories, with 61 public-page or catalogue reads and one index-only TDA listing. Batch 002 adds 20 resources and directly reviews that TDA page, bringing the catalogue to 82 entries. This pass reads 20 new destinations plus TDA; it does not recheck the other 61. The dated batch record is `RESOURCE_BATCH_002.md`. A page read is not a full review of every article, a completed course, a tested software product, a watched video, or a guarantee of availability in every region.
 
 ## The working loop
 
@@ -85,7 +85,7 @@ Every listing provides a reason to open it, a publisher, an access label, a leve
 
 Use direct links with normal browser behavior. Do not introduce redirect tracking, affiliate codes, remote thumbnails, embedded players, cookies, local search history, or custom click analytics in this workstream. Existing pageview-only analytics stays unchanged. The site does not copy complete articles, PDFs, course text, images, or tables from the destinations.
 
-The overview, library, and Study Desk link to the directory. Category sections point back to relevant local explanations. Add a few exact deep links to a local guide only when they help that guide; do not append all 62 links to every page. Create category subpages only when a single directory becomes demonstrably hard to browse. Keep one catalogue as the source rather than copying lists across pages.
+The overview, library, and Study Desk link to the directory. Category sections point back to relevant local explanations. Add a few exact deep links to a local guide only when they help that guide; do not append the entire directory to every page. Create category subpages only when a single directory becomes demonstrably hard to browse. Keep one catalogue as the source rather than copying lists across pages.
 
 ## Batch size and expansion priorities
 
@@ -124,6 +124,27 @@ Review the source and generated output together, inspect phone and desktop previ
 
 ## Current measured scope and limitations
 
-Initial catalogue: 62 resources, 13 categories, 61 public-page or catalogue reads, one explicitly limited index-only listing. No complete paid course, software binary, subscription, or full broadcast was evaluated. Research-paper landing pages do not imply full-paper replication. No reader-comprehension study or traffic-growth result is claimed.
+After batch 002: 82 resources in 13 categories, with page-level review metadata for all 82. Twenty new destinations and TDA were read in this pass. Two MIT backlog items were resolved after correcting their canonical URLs; three older candidates still need review. Stored review metadata is not a claim that all links were rechecked simultaneously. No complete paid course, software binary, subscription, or full broadcast was evaluated. Research-paper landing pages do not imply full-paper replication. No reader-comprehension study or traffic-growth result is claimed.
 
 No recurring discovery run, automatic link check, publication job, or notification has been scheduled. A recurring research-and-review cadence can be authorized separately. New source discovery and final publication remain separate decisions.
+
+
+## Repeatable expansion brief
+
+There is no fixed ceiling on useful links. Expand through successive subject-focused batches, not a one-off list that stops at a round number. Coverage and source diversity matter alongside count. A library, a specific lesson, a format specification, and its dataset may be separate useful destinations; multiple aliases for the same material are not.
+
+Use `RESOURCE_BACKLOG.json` as the next-work handoff. `candidates` contains unresolved URLs, `resolved` records completed decisions, and `research_batches` contains ordered research questions, search queries, and acceptance criteria. Planned queries are instructions for future research, not verified links or scheduled work.
+
+For each pass, use this brief:
+
+> Read the current published resource catalogue, this process, the dated batch record, and the backlog. Recheck the current main commit. Choose the highest-priority unfinished subject batch and evaluate approximately 15 to 25 candidate destinations. Search outside the existing publisher list as well as following useful source references. Read original pages, inspect redirects and access, and deduplicate against published URLs. Write concise original descriptions, explicit limits, and actual review dates. Keep unresolved candidates out of the rendered directory. Record additions, corrections, unresolved items, and the next coverage gap. Run existing checks, inspect affected previews, and publish only a tested, supported change. Do not alter the personal-content catalogue, tracking, permissions, or scheduling.
+
+A practical pass has three outputs: accepted listing records, a short decision log including useful rejections or unresolved redirects, and the next specific research brief. Before ending, report the difference from the previous release rather than presenting old links as new.
+
+### Candidate lifecycle
+
+Discovered -> needs-review -> accepted -> published. A duplicate is closed with the existing destination identified. An unclear redirect, blocked page, unknown owner, or uninspected paywall stays needs-review. A published resource may later need correction or retirement. Neither a planned batch nor an accepted candidate is a publication promise. A completed batch record and the actual merged catalogue establish what was released.
+
+### When the directory becomes much larger
+
+Keep the single catalogue and stable resource IDs. Continue using topic and text filters. Introduce more precise tags or generated category pages only when specific browsing tasks justify them; derive them from the same records. Never maintain several hand-copied versions of the link list. Keep free, paid, historical, and not-yet-verified distinctions visible, and retain the no-JavaScript reading path.
