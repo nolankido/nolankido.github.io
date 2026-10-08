@@ -248,6 +248,46 @@
       "topic": "results",
       "level": "Build understanding",
       "keywords": "advice resources video vlog chart forum source evidence claim study critical review learning path"
+    },
+    {
+      "slug": "free-poker-learning-path",
+      "title": "Learn poker with a small, free study path.",
+      "description": "Five self-paced sessions that turn free explanations into a hand record, a pot calculation and a decision you can explain.",
+      "topic": "study",
+      "level": "Start here",
+      "keywords": "free beginner learn study course lessons worksheets practice"
+    },
+    {
+      "slug": "cash-game-study",
+      "title": "Study cash games without importing tournament assumptions.",
+      "description": "Separate cash-game costs, effective stacks and multiway decisions from tournament models, with a worked rake example.",
+      "topic": "cash",
+      "level": "Build understanding",
+      "keywords": "cash game live online stakes rake cap multiway implied odds chips results"
+    },
+    {
+      "slug": "omaha-and-mixed-games",
+      "title": "Omaha, lowball and mixed games: know which rules changed.",
+      "description": "Compare hand construction, low qualifiers and game rotations, then work through an Omaha hi-lo split-pot example.",
+      "topic": "variants",
+      "level": "Build understanding",
+      "keywords": "omaha plo plo8 hilo high low stud razz badugi triple draw deuce seven short deck mixed scoop quartered"
+    },
+    {
+      "slug": "poker-books-and-courses",
+      "title": "Choose a poker book or course you will actually use.",
+      "description": "Match prerequisites, format and one study goal before buying; distinguish author descriptions, independent reviews and free course material.",
+      "topic": "study",
+      "level": "Build understanding",
+      "keywords": "books reading course MIT syllabus Brokos Acevedo game theory modern optimal mathematics review"
+    },
+    {
+      "slug": "poker-research-guide",
+      "title": "A map of poker research, without the inflated claims.",
+      "description": "Find original research on regret, sampling, poker AI and evaluation, with explicit boundaries between game-solving results and playing strength.",
+      "topic": "research",
+      "level": "Go deeper",
+      "keywords": "research science cfr mccfr regret cepheus deepstack libratus pluribus evaluation proofs papers AI"
     }
   ]
 }

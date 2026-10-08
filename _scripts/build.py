@@ -19,6 +19,7 @@ import poker_library
 import poker_reading
 import poker_experience
 import poker_resources
+import poker_collections
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -98,7 +99,10 @@ def build_outputs() -> dict[Path, str]:
     values.update(supplement(ROOT, notes))
     values.update(poker_content.supplement(catalog, ROOT))
     values.update(poker_experience.supplement(catalog))
-    values.update(poker_resources.supplement(poker_resources.load(ROOT)))
+    resource_entries = poker_resources.load(ROOT)
+    collections = poker_collections.load(ROOT, resource_entries, pages)
+    values.update(poker_resources.supplement(resource_entries))
+    values.update(poker_collections.supplement(collections, resource_entries))
     values.update(poker_library.supplement(reader_entries))
     # The on-page and printable previews use the exact downloadable blank files.
     for slug in ("poker-event-planner", "poker-hand-capture", "poker-resource-check"):
@@ -214,6 +218,7 @@ def build_outputs() -> dict[Path, str]:
                 ET.SubElement(item, 'lastmod').text = p.get('updated', p.get('date'))
     ET.indent(sitemap, space='  ')
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
+    outputs.update(poker_collections.exports(resource_entries))
     outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     return outputs
