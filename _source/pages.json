@@ -150,9 +150,9 @@
   {
     "id": "poker",
     "path": "/poker/",
-    "title": "Poker.",
-    "seo_title": "Poker | Nolan Kido",
-    "description": "A growing poker resource guide: free learning paths, cash-game and tournament study, mixed games, books, tools and research, alongside a developing tournament vlog.",
+    "title": "Poker resources.",
+    "seo_title": "Poker Resource Guide: Rules, Strategy, Tools & More | Nolan Kido",
+    "description": "Find poker guides and external resources by topic: rules, cash games, tournaments, strategy, Omaha, tools, events, media, research and safer play.",
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
@@ -786,6 +786,17 @@
     "source": "poker/find.html",
     "section": "poker",
     "date": "2026-10-08",
+    "updated": "2026-10-08"
+  },
+  {
+    "id": "poker-topics",
+    "path": "/poker/topics/",
+    "title": "Explore poker by topic.",
+    "seo_title": "Poker Topics: Guides, Tools, Events & Resources | Nolan Kido",
+    "description": "One poker topic map connects learning guides, cash games, tournament study, poker math, Omaha, tools, events, media, research and safer-play sources.",
+    "kicker": "Poker / Topic map",
+    "source": "poker/topics.html",
+    "section": "poker",
     "updated": "2026-10-08"
   }
 ]

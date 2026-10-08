@@ -84,6 +84,7 @@ def render(items: list[dict]) -> dict[str, str]:
         search = escape(' '.join([e['title'], e['description'], e['keywords'], e['meta']]), quote=True)
         cards.append(f'<article class="reader-card finder-card" data-finder-card data-id="{escape(e["id"], quote=True)}" '
                      f'data-kind="{e["kind"]}" data-free="{str(e["access"] == "Free").lower()}" '
+                     f'data-topics="{escape(" ".join(e.get("topics", [])), quote=True)}" '
                      f'data-search="{search}" tabindex="-1">'
                      f'<p class="reader-eyebrow">{escape(e["meta"])}</p>'
                      f'<h3><a href="{escape(e["url"], quote=True)}"' + (' rel="external"' if e['kind'] == 'resource' else '') + f'>{title}</a></h3>'

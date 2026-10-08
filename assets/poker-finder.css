@@ -29,3 +29,6 @@
 #finder-controls { margin-top:20px; }
 .finder-scope { margin:20px 0; }
 @media(max-width:760px) { .page-poker-find .section-meta { margin-bottom:14px; } }
+
+.finder-refine > div { flex:1 1 190px; }
+#finder-topic { min-width:0; }

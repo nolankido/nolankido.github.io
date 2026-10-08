@@ -103,3 +103,17 @@ All examples are fictional and the existing publishing approval workflow remains
 in place. Run `python _tests/workshops_browser.py` for the targeted disclosure and
 reading-flow checks. The Technology-first gateway and Umami configuration are
 unchanged.
+
+## Poker subject architecture
+
+`/poker/topics/` is the shared subject map across original guides and outside
+sources. Ten focused subject pages are generated from `_source/poker/topics.json`.
+Every guide needs one primary topic; related placements are allowed. Every
+external source must be reachable through the map. The existing library and
+resource-directory categories remain available as more specialized filters.
+
+Run `python _tests/topics_browser.py` for deep-link, topic/source filtering,
+Back/Forward, keyboard, query-privacy and no-JavaScript checks. Search text is
+never serialized; only whitelisted editorial filters use URL fragments. See
+`_reports/poker-information-architecture.md` for the review, scope and next
+quality priorities. Topic pages are not counted as additional strategy guides.

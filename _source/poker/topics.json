@@ -1,0 +1,470 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "learn",
+      "title": "Learn poker",
+      "summary": "Rules, hand rankings, vocabulary and a first path through the game.",
+      "primary_guides": [
+        "holdem-basics",
+        "hand-rankings",
+        "betting-and-pots",
+        "glossary",
+        "viewer-questions",
+        "follow-along",
+        "free-poker-learning-path"
+      ],
+      "related_guides": [
+        "table-etiquette",
+        "poker-math"
+      ],
+      "resource_categories": [
+        "basics"
+      ],
+      "resource_ids": [],
+      "featured_resources": [
+        "holdem-rules",
+        "hand-rankings",
+        "pokerology-lessons"
+      ],
+      "start_label": "Five free lessons",
+      "steps": [
+        {
+          "guide": "free-poker-learning-path",
+          "label": "Start with a small, free learning path"
+        },
+        {
+          "guide": "holdem-basics",
+          "label": "Follow a hand from the deal to showdown"
+        },
+        {
+          "guide": "hand-rankings",
+          "label": "Check which hand wins"
+        }
+      ],
+      "glossary_terms": [],
+      "overview_routes": [
+        "/poker/start-here/"
+      ]
+    },
+    {
+      "id": "cash-games",
+      "title": "Cash games",
+      "summary": "Stacks, rake, multiway pots and study material for cash-game decisions.",
+      "primary_guides": [
+        "cash-game-study"
+      ],
+      "related_guides": [
+        "position-and-stacks",
+        "side-pot-lab",
+        "variance-and-results",
+        "choosing-study-tools"
+      ],
+      "resource_categories": [],
+      "resource_ids": [
+        "pokerbank-strategy",
+        "splitsuit",
+        "stars-rake",
+        "crush-live-videos",
+        "effective-stacks",
+        "equilab",
+        "flopzilla",
+        "pokerbank-implied-odds"
+      ],
+      "featured_resources": [
+        "pokerbank-strategy",
+        "stars-rake",
+        "crush-live-videos"
+      ],
+      "start_label": "Cash-game study guide",
+      "steps": [
+        {
+          "guide": "cash-game-study",
+          "label": "Separate cash-game costs from tournament assumptions"
+        },
+        {
+          "guide": "position-and-stacks",
+          "label": "Identify position and effective stacks"
+        },
+        {
+          "guide": "side-pot-lab",
+          "label": "Work through a multiway pot"
+        }
+      ],
+      "glossary_terms": [
+        "effective-stack",
+        "in-position",
+        "side-pot"
+      ],
+      "overview_routes": []
+    },
+    {
+      "id": "tournaments",
+      "title": "Tournaments",
+      "summary": "Formats, short stacks, ICM, registration and live-event preparation.",
+      "primary_guides": [
+        "tournaments",
+        "tournament-formats",
+        "short-stack-decisions",
+        "tournament-equity",
+        "first-live-tournament",
+        "choosing-a-tournament",
+        "registration-and-reentry",
+        "tournament-day"
+      ],
+      "related_guides": [
+        "reading-preflop-charts",
+        "recording-hands",
+        "poker-rules-and-fair-play"
+      ],
+      "resource_categories": [
+        "tournament-study"
+      ],
+      "resource_ids": [
+        "tda-rules",
+        "wsop-schedule",
+        "hrc-docs"
+      ],
+      "featured_resources": [
+        "icm-basics",
+        "satellite-guide",
+        "tda-rules"
+      ],
+      "start_label": "Prepare for a first event",
+      "steps": [
+        {
+          "guide": "first-live-tournament",
+          "label": "Prepare for a first live tournament"
+        },
+        {
+          "guide": "choosing-a-tournament",
+          "label": "Read the structure and total cost"
+        },
+        {
+          "guide": "tournament-equity",
+          "label": "Study how prizes change chip decisions"
+        }
+      ],
+      "glossary_terms": [
+        "ante",
+        "bubble",
+        "pay-jump",
+        "re-entry",
+        "freezeout",
+        "satellite",
+        "bounty",
+        "bagging",
+        "double-up"
+      ],
+      "overview_routes": [
+        "/poker/live-tournament-guide/",
+        "/poker/tournament-checklists/"
+      ]
+    },
+    {
+      "id": "strategy",
+      "title": "Strategy & math",
+      "summary": "Pot odds, ranges, preflop charts, board texture and worked calculations.",
+      "primary_guides": [
+        "position-and-stacks",
+        "reading-the-board",
+        "ranges-and-bets",
+        "poker-math",
+        "pot-odds-workshop",
+        "range-combinations",
+        "poker-math-reference",
+        "reading-preflop-charts"
+      ],
+      "related_guides": [
+        "decision-lab",
+        "flush-and-redraw",
+        "short-stack-decisions"
+      ],
+      "resource_categories": [
+        "math",
+        "strategy"
+      ],
+      "resource_ids": [
+        "splitsuit-range-reading",
+        "wizard-articles",
+        "upswing-articles"
+      ],
+      "featured_resources": [
+        "pot-odds",
+        "combinatorics",
+        "math-misconceptions"
+      ],
+      "start_label": "The poker math reference",
+      "steps": [
+        {
+          "guide": "poker-math-reference",
+          "label": "Look up the calculation and its assumptions"
+        },
+        {
+          "guide": "ranges-and-bets",
+          "label": "Describe a range instead of one guessed hand"
+        },
+        {
+          "guide": "reading-preflop-charts",
+          "label": "Read a chart before using its colors"
+        }
+      ],
+      "glossary_terms": [
+        "range",
+        "equity",
+        "pot-odds",
+        "blocker",
+        "c-bet",
+        "bluff",
+        "draw",
+        "gutshot",
+        "three-bet",
+        "check-raise",
+        "effective-stack"
+      ],
+      "overview_routes": []
+    },
+    {
+      "id": "variants",
+      "title": "Omaha & mixed games",
+      "summary": "PLO, hi-lo, stud, lowball, short deck and game rotations.",
+      "primary_guides": [
+        "omaha-and-mixed-games"
+      ],
+      "related_guides": [
+        "hand-rankings",
+        "betting-and-pots"
+      ],
+      "resource_categories": [
+        "variants"
+      ],
+      "resource_ids": [
+        "plo-mastermind-blog",
+        "plo-tournament-adjustments"
+      ],
+      "featured_resources": [
+        "omaha-eight-rules",
+        "eight-game-rules",
+        "pagat-badugi"
+      ],
+      "start_label": "Start with the rule differences",
+      "steps": [
+        {
+          "guide": "omaha-and-mixed-games",
+          "label": "Check hand construction and low qualifiers"
+        },
+        {
+          "guide": "hand-rankings",
+          "label": "Review hand comparison before switching games"
+        }
+      ],
+      "glossary_terms": [],
+      "overview_routes": []
+    },
+    {
+      "id": "study",
+      "title": "Study tools & training",
+      "summary": "Hand review, solvers, courses, books and practice away from play.",
+      "primary_guides": [
+        "decision-lab",
+        "flush-and-redraw",
+        "side-pot-lab",
+        "practice-room",
+        "reviewing-a-hand",
+        "recording-hands",
+        "choosing-study-tools",
+        "evaluating-poker-advice",
+        "poker-books-and-courses"
+      ],
+      "related_guides": [
+        "poker-research-guide",
+        "poker-math-reference"
+      ],
+      "resource_categories": [
+        "tools",
+        "strategy"
+      ],
+      "resource_ids": [
+        "mit-holdem",
+        "mit-theory",
+        "smart-poker-study"
+      ],
+      "featured_resources": [
+        "wizard-study-docs",
+        "pio-quick-start",
+        "mit-holdem"
+      ],
+      "start_label": "Choose a book or course",
+      "steps": [
+        {
+          "guide": "poker-books-and-courses",
+          "label": "Choose one book or course for a specific question"
+        },
+        {
+          "guide": "choosing-study-tools",
+          "label": "Match the tool to its job and limitations"
+        },
+        {
+          "guide": "reviewing-a-hand",
+          "label": "Separate the hand record from the later review"
+        }
+      ],
+      "glossary_terms": [
+        "reconstruction"
+      ],
+      "overview_routes": [
+        "/poker/study/",
+        "/poker/decision-labs/",
+        "/poker/resource-collections/"
+      ]
+    },
+    {
+      "id": "places-to-play",
+      "title": "Places to play & home games",
+      "summary": "Official event hubs, room finders, home-game setup and communities.",
+      "primary_guides": [],
+      "related_guides": [
+        "first-live-tournament",
+        "choosing-a-tournament",
+        "table-etiquette",
+        "tournament-day"
+      ],
+      "resource_categories": [
+        "events",
+        "community"
+      ],
+      "resource_ids": [
+        "pokeratlas-las-vegas"
+      ],
+      "featured_resources": [
+        "wsop-schedule",
+        "pokeratlas-las-vegas",
+        "hpt-rulebooks"
+      ],
+      "start_label": "Read the event structure",
+      "steps": [
+        {
+          "guide": "choosing-a-tournament",
+          "label": "Compare the published structure, not only the headline"
+        },
+        {
+          "guide": "table-etiquette",
+          "label": "Understand the room or home-game expectations"
+        }
+      ],
+      "glossary_terms": [],
+      "overview_routes": []
+    },
+    {
+      "id": "poker-world",
+      "title": "News, results & creators",
+      "summary": "Reporting, result databases, broadcasts, podcasts and making a vlog.",
+      "primary_guides": [
+        "variance-and-results",
+        "hand-to-vlog"
+      ],
+      "related_guides": [
+        "recording-hands",
+        "follow-along"
+      ],
+      "resource_categories": [
+        "results",
+        "watch-listen"
+      ],
+      "resource_ids": [],
+      "featured_resources": [
+        "hendon-results",
+        "pokernews-live",
+        "thinking-poker"
+      ],
+      "start_label": "Put results in context",
+      "steps": [
+        {
+          "guide": "variance-and-results",
+          "label": "Interpret results without inventing profitability"
+        },
+        {
+          "guide": "hand-to-vlog",
+          "label": "Turn a hand record into an explanation"
+        }
+      ],
+      "glossary_terms": [
+        "hero",
+        "cooler",
+        "tank",
+        "reconstruction"
+      ],
+      "overview_routes": []
+    },
+    {
+      "id": "research",
+      "title": "Research & development",
+      "summary": "Original papers, poker AI, open-source libraries and hand-history formats.",
+      "primary_guides": [
+        "poker-research-guide"
+      ],
+      "related_guides": [
+        "choosing-study-tools",
+        "evaluating-poker-advice"
+      ],
+      "resource_categories": [
+        "research"
+      ],
+      "resource_ids": [],
+      "featured_resources": [
+        "cfr-original",
+        "pokerkit",
+        "phh-format"
+      ],
+      "start_label": "Navigate the original research",
+      "steps": [
+        {
+          "guide": "poker-research-guide",
+          "label": "Start with the research map and its limits"
+        },
+        {
+          "guide": "evaluating-poker-advice",
+          "label": "Check what the evidence actually supports"
+        }
+      ],
+      "glossary_terms": [],
+      "overview_routes": []
+    },
+    {
+      "id": "safer-play",
+      "title": "Safer play & rules",
+      "summary": "Gambling support, fair play, table procedures and software restrictions.",
+      "primary_guides": [
+        "poker-rules-and-fair-play",
+        "table-etiquette"
+      ],
+      "related_guides": [
+        "variance-and-results",
+        "registration-and-reentry"
+      ],
+      "resource_categories": [
+        "rules",
+        "mental-game"
+      ],
+      "resource_ids": [],
+      "featured_resources": [
+        "ncpg",
+        "tda-rules",
+        "stars-tool-policy"
+      ],
+      "start_label": "Find the right rules authority",
+      "steps": [
+        {
+          "guide": "poker-rules-and-fair-play",
+          "label": "Find the authority for a rule or fair-play question"
+        },
+        {
+          "guide": "table-etiquette",
+          "label": "Handle table procedures without disrupting play"
+        }
+      ],
+      "glossary_terms": [],
+      "overview_routes": []
+    }
+  ]
+}
