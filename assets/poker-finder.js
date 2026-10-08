@@ -28,9 +28,57 @@
   };
   const includes = (text, phrase) => (' ' + text).includes(' ' + phrase);
   const cards = Array.from(grid.querySelectorAll('[data-finder-card]')).map((el, index) => ({
-    el, index, text: normalize(el.dataset.search || ''), title: normalize(el.querySelector('h3').textContent)
+    el, index, text: normalize(el.dataset.search || ''), body: normalize(Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => p.dataset.heading + ' ' + p.textContent).join(' ')), title: normalize(el.querySelector('h3').textContent),
+    passages: Array.from(el.querySelectorAll('[data-finder-passage]')),
+    url: el.querySelector('h3 a').getAttribute('href')
   }));
   if (!cards.length) return;
+  const shelf = document.getElementById('finder-shelf');
+  const shelfList = document.getElementById('finder-shelf-list');
+  const shelfCount = document.getElementById('finder-shelf-count');
+  const shelfDownload = document.getElementById('finder-shelf-download');
+  const chosen = new Set();
+  let exportURL;
+  function renderShelf() {
+    if (!shelf || !shelfList || !shelfCount || !shelfDownload) return;
+    shelfList.replaceChildren();
+    const lines = ['# My poker study list', '', 'Public links selected on Nolan Kido Poker. This is a snapshot, not a new source review.', ''];
+    for (const card of cards) {
+      const button = card.el.querySelector('.finder-save');
+      if (button) { button.setAttribute('aria-pressed', String(chosen.has(card.el.dataset.id))); button.textContent = chosen.has(card.el.dataset.id) ? 'Remove from study list' : 'Add to study list'; }
+      if (!chosen.has(card.el.dataset.id)) continue;
+      const sourceLink = card.el.querySelector('h3 a');
+      const li = document.createElement('li'), link = document.createElement('a');
+      link.textContent = sourceLink.textContent; link.setAttribute('href', card.url); li.appendChild(link); shelfList.appendChild(li);
+      const url = card.url.startsWith('/') ? 'https://nolankido.com' + card.url : card.url;
+      lines.push('## ' + sourceLink.textContent, '', url, '');
+      for (const para of Array.from(card.el.children).filter(el => el.tagName === 'P' && !el.classList.contains('finder-excerpt') && !el.classList.contains('finder-jump'))) lines.push(para.textContent, '');
+    }
+    shelfCount.textContent = chosen.size + ' of 12 places used. This list clears when the page reloads; download it to keep it.';
+    if (exportURL) URL.revokeObjectURL(exportURL);
+    shelfDownload.hidden = !chosen.size;
+    if (chosen.size) {
+      exportURL = URL.createObjectURL(new Blob([lines.join('\n')], {type: 'text/markdown;charset=utf-8'}));
+      shelfDownload.href = exportURL;
+    } else shelfDownload.removeAttribute('href');
+  }
+  if (shelf && shelfList && shelfCount && shelfDownload) {
+    shelf.hidden = false;
+    cards.forEach(card => {
+      const button = card.el.querySelector('.finder-save');
+      if (!button) return;
+      button.hidden = false;
+      button.addEventListener('click', () => {
+        const id = card.el.dataset.id;
+        if (chosen.has(id)) chosen.delete(id);
+        else if (chosen.size < 12) chosen.add(id);
+        else {shelfCount.textContent = 'The list has 12 items. Remove one before adding another.'; return;}
+        renderShelf();
+      });
+    });
+    document.getElementById('finder-shelf-clear').addEventListener('click', () => {chosen.clear(); renderShelf();});
+    renderShelf();
+  }
   let limit = 12;
   let matches = cards;
   let timer;
@@ -51,10 +99,29 @@
     const groups = query.map(word => aliases[word] || [word]);
     matches = cards.filter(card => (kind.value === 'all' || card.el.dataset.kind === kind.value)
       && (!free.checked || card.el.dataset.free === 'true')
-      && groups.every(group => group.some(term => includes(card.text, term))));
-    const score = card => groups.reduce((total, group) => total + (group.some(term => includes(card.title, term)) ? 10 : 1), 0)
+      && groups.every(group => group.some(term => includes(card.text + ' ' + card.body, term))));
+    const score = card => groups.reduce((total, group) => total + (group.some(term => includes(card.title, term)) ? 20 : group.some(term => includes(card.text, term)) ? 5 : 1), 0)
       + (query.length && card.title === query.join(' ') ? 50 : 0);
     matches.sort((a, b) => score(b) - score(a) || a.index - b.index);
+    for (const card of cards) {
+      const excerpt = card.el.querySelector('.finder-excerpt');
+      const jump = card.el.querySelector('.finder-jump');
+      if (!excerpt || !jump) continue;
+      const selected = card.passages.map(p => ({p, score: groups.reduce((n, g) => n + (g.some(t => includes(normalize(p.textContent + ' ' + p.dataset.heading), t)) ? 1 : 0), 0)}))
+        .sort((a, b) => b.score - a.score)[0];
+      const found = groups.length && selected && selected.score > 0;
+      excerpt.hidden = !found; jump.hidden = !found;
+      if (found) {
+        const text = selected.p.textContent.replace(/\s+/g, ' ').trim();
+        const hit = text.split(/(?<=[.!?])\s+/)
+          .map(sentence => ({sentence, score: groups.reduce((n, group) => n + (group.some(term => includes(normalize(sentence), term)) ? 1 : 0), 0)}))
+          .sort((a, b) => b.score - a.score)[0].sentence || text;
+        excerpt.textContent = 'In this guide: ' + hit.slice(0, 320) + (hit.length > 320 ? '…' : '');
+        const link = jump.querySelector('a');
+        link.setAttribute('href', card.url + (selected.p.dataset.anchor ? '#' + selected.p.dataset.anchor : ''));
+        link.textContent = 'Read: ' + selected.p.dataset.heading;
+      }
+    }
     // Reorder real nodes only; neither queries nor source text are parsed as HTML.
     for (const card of matches) grid.appendChild(card.el);
     if (resetPage) limit = 12;
@@ -81,5 +148,5 @@
   }));
   window.addEventListener('beforeprint', () => { printing = true; update(false); });
   window.addEventListener('afterprint', () => { printing = false; render(); });
-  update(); controls.hidden = false;
+  update(); controls.hidden = false; grid.classList.add('finder-enhanced');
 })();

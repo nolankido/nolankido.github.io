@@ -29,3 +29,14 @@
 #finder-controls { margin-top:20px; }
 .finder-scope { margin:20px 0; }
 @media(max-width:760px) { .page-poker-find .section-meta { margin-bottom:14px; } }
+
+.finder-enhanced .finder-text { display:none; }
+.finder-excerpt { border-left:3px solid var(--line-dark); padding-left:12px; }
+.finder-jump a { font-weight:600; }
+.finder-text { margin-top:12px; }
+.finder-text p { margin:12px 0; }
+
+#finder-shelf[hidden], #finder-shelf-download[hidden], .finder-save[hidden] { display:none!important; }
+.finder-save, #finder-shelf-clear { min-height:44px; padding:8px 14px; margin-top:12px; white-space:normal; font:inherit; cursor:pointer; }
+#finder-shelf-list li { margin:12px 0; overflow-wrap:anywhere; }
+@media print { .finder-save, #finder-shelf-clear, #finder-shelf-download { display:none!important; } }

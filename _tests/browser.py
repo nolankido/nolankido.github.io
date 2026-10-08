@@ -31,6 +31,8 @@ def html_for(route):
         css += '\n' + (ROOT / 'assets/poker.css').read_text()
         css += '\n' + (ROOT / 'assets/poker-reader.css').read_text()
     # This harness strips stylesheet links, so include the page-scoped sheet too.
+    if route == '/poker/study-calculators/':
+        css += '\n' + (ROOT / 'assets/poker-study-tools.css').read_text()
     if route == '/poker/tournament-checklists/':
         css += '\n' + (ROOT / 'assets/poker-fieldguide.css').read_text()
     if route == '/poker/find/':

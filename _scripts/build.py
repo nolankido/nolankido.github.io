@@ -22,6 +22,7 @@ import poker_resources
 import poker_collections
 import poker_finder
 import poker_reference
+import poker_quality
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -104,6 +105,7 @@ def build_outputs() -> dict[Path, str]:
     resource_entries = poker_resources.load(ROOT)
     collections = poker_collections.load(ROOT, resource_entries, pages)
     values.update(poker_resources.supplement(resource_entries))
+    values.update(poker_quality.supplement(resource_entries))
     values.update(poker_collections.supplement(collections, resource_entries))
     values.update(poker_library.supplement(reader_entries))
     values.update(poker_finder.render(poker_finder.entries(ROOT, pages, reader_entries, resource_entries)))
@@ -182,6 +184,10 @@ def build_outputs() -> dict[Path, str]:
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-resources.css?v={resources_css_version}">'
                 resources_version = hashlib.sha256((ROOT / 'assets/poker-resources.js').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <script defer src="/assets/poker-resources.js?v={resources_version}"></script>'
+            if p['id'] == 'poker-study-calculators':
+                for asset, kind in [('poker-study-tools.css', 'style'), ('poker-study-tools.js', 'script')]:
+                    version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                    extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style' else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
             if p['id'] == 'poker-find':
                 for asset, kind in [('poker-finder.css', 'style'), ('poker-finder.js', 'script')]:
                     version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]

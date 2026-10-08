@@ -859,6 +859,20 @@
       "review_method": "page"
     },
     {
+      "id": "ftc-phishing",
+      "title": "FTC: recognizing and avoiding phishing",
+      "url": "https://consumer.ftc.gov/articles/how-recognize-avoid-phishing-scams",
+      "publisher": "Federal Trade Commission",
+      "category": "rules",
+      "kind": "Reference",
+      "access": "Free",
+      "level": "All levels",
+      "description": "Consumer guidance on suspicious account messages, verified contact routes and multi-factor authentication.",
+      "notes": "Public guidance read. General account-security information, not a review of any poker operator or a guarantee against account compromise.",
+      "reviewed_on": "2026-10-08",
+      "review_method": "page"
+    },
+    {
       "id": "gg-security-policy",
       "title": "GGPoker: Security and Ecology Policy",
       "url": "https://legal.ggpoker.com/network/security-ecology-policy/",
@@ -871,6 +885,34 @@
       "access": "Free",
       "reviewed_on": "2026-10-08",
       "review_method": "page"
+    },
+    {
+      "id": "ukgc-register",
+      "title": "Great Britain: Gambling Commission business register",
+      "url": "https://www.gamblingcommission.gov.uk/public-register/businesses",
+      "publisher": "Gambling Commission",
+      "category": "rules",
+      "kind": "Official rules",
+      "access": "Free",
+      "level": "All levels",
+      "description": "Official business register with status, activity, trading-name and domain lookup information.",
+      "notes": "Register landing page read; no individual licence or eligibility check performed. Applies to its stated jurisdiction. The regulator cautions that business-supplied domain and trading-name data are not guaranteed.",
+      "reviewed_on": "2026-10-08",
+      "review_method": "page"
+    },
+    {
+      "id": "nj-dge-information",
+      "title": "New Jersey: Internet gaming information and dispute routes",
+      "url": "https://www.njoag.gov/about/divisions-and-offices/division-of-gaming-enforcement-home/internet-gaming-information/",
+      "publisher": "New Jersey Division of Gaming Enforcement",
+      "category": "rules",
+      "kind": "Official rules",
+      "access": "Free",
+      "level": "All levels",
+      "description": "Official starting point for authorized Internet gaming sites, permit-holder information and dispute procedures.",
+      "notes": "Search-index text inspected; direct retrieval returned 403. The older nj.gov address returned 404. No linked provider list, individual approval or personal eligibility was verified. Recheck the official page.",
+      "reviewed_on": "2026-10-08",
+      "review_method": "index"
     },
     {
       "id": "pagat-betting",
@@ -1009,6 +1051,20 @@
       "level": "Advanced",
       "description": "Publisher description of a no-limit hold'em text centered on GTO concepts and software-assisted analysis.",
       "notes": "Publisher information inspected, not the full book. Promotional claims are not independent evidence; check the edition and sample before buying.",
+      "reviewed_on": "2026-10-08",
+      "review_method": "page"
+    },
+    {
+      "id": "multiway-tips",
+      "title": "Multiway pots: shared defense and positional context",
+      "url": "https://blog.gtowizard.com/10-tips-multiway-pots-in-poker/",
+      "publisher": "GTO Wizard / Tombos21",
+      "category": "strategy",
+      "kind": "Article",
+      "access": "Free",
+      "level": "Intermediate",
+      "description": "An original multiway discussion of shared defense, ranges, position and nut potential.",
+      "notes": "Public text read. Simplified fold-rate products require appropriate conditional probabilities or an explicit independence assumption. Historical product plans are not current feature claims.",
       "reviewed_on": "2026-10-08",
       "review_method": "page"
     },
@@ -1811,6 +1867,34 @@
       "review_method": "page"
     },
     {
+      "id": "mit-icm-lecture",
+      "title": "MIT Lecture 6: Independent Chip Model",
+      "url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/resources/lecture-6-independent-chip-model/",
+      "publisher": "MIT OpenCourseWare / Will Ma",
+      "category": "watch-listen",
+      "kind": "Video companion",
+      "access": "Free",
+      "level": "Intermediate",
+      "description": "Individual archived lecture page on tournament chip values and equity, with transcript controls and a slides link.",
+      "notes": "2016 course. Page inspected, not the full lecture, linked slides or complete transcript. Historical teaching, not current software instructions or an ICM accuracy certification.",
+      "reviewed_on": "2026-10-08",
+      "review_method": "page"
+    },
+    {
+      "id": "mit-combo-lecture",
+      "title": "MIT Lecture 7: combinatorial hand analysis",
+      "url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/resources/lecture-7-an-in-depth-combinatorial-hand-analysis/",
+      "publisher": "MIT OpenCourseWare / Will Ma",
+      "category": "watch-listen",
+      "kind": "Video companion",
+      "access": "Free",
+      "level": "Intermediate",
+      "description": "Individual archived lecture page for hand analysis, with a transcript interface and an authorized offline-video link.",
+      "notes": "2016 course. Public lecture page and format labels inspected; complete video and transcript were not reviewed or accuracy-tested. External media availability may change.",
+      "reviewed_on": "2026-10-08",
+      "review_method": "page"
+    },
+    {
       "id": "mit-holdem",
       "title": "MIT: How to Win at Texas Hold'em Poker (2016)",
       "url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/",
@@ -1920,6 +2004,20 @@
       "description": "Episode descriptions and audio links for discussions of televised hands, difficult decisions and poker stories.",
       "notes": "Archive inspected; a current release cadence is not established. Episodes may include sponsorship or non-poker material.",
       "reviewed_on": "2026-10-07",
+      "review_method": "page"
+    },
+    {
+      "id": "recpoker-episode",
+      "title": "Thinking Poker 466: recreational-player goals",
+      "url": "https://www.thinkingpoker.net/2025/03/episode-466-recpoker-featuring-jim-reid-loriann-persinger-and-rob-gardner/",
+      "publisher": "Thinking Poker",
+      "category": "watch-listen",
+      "kind": "Podcast",
+      "access": "Free",
+      "level": "All levels",
+      "description": "Creator-owned episode page introducing a discussion with RecPoker participants about recreational players.",
+      "notes": "Audio link and show notes inspected, not the complete recording. No full transcript verified. Page includes promotions; the listing is not an endorsement of promoted products.",
+      "reviewed_on": "2026-10-08",
       "review_method": "page"
     },
     {

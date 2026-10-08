@@ -312,6 +312,46 @@
       "topic": "live",
       "level": "Start here",
       "keywords": "rules fair play integrity rta real time assistance hud cheating collusion tools policy accommodations minimum raise floor"
+    },
+    {
+      "slug": "omaha-hi-lo-workshop",
+      "title": "Omaha hi-lo: play for a share, not just a low.",
+      "description": "Work through legal hand selection, quartering, counterfeiting and pot-share equity with complete fictional examples.",
+      "topic": "variants",
+      "level": "Build understanding",
+      "keywords": "PLO8 O8 Omaha eight high low split scoop quarter counterfeiting protection"
+    },
+    {
+      "slug": "stud-and-lowball-workshop",
+      "title": "Stud and lowball: change the rules before the strategy.",
+      "description": "Compare Stud8, razz, deuce-to-seven and Badugi, with worked hand comparisons and a rotation checklist.",
+      "topic": "variants",
+      "level": "Build understanding",
+      "keywords": "stud eight razz deuce seven triple draw badugi ace low wheel lowball mixed rotation"
+    },
+    {
+      "slug": "multiway-pot-workshop",
+      "title": "Multiway pots: count the opponents and the pots.",
+      "description": "Distinguish a better call price from a better hand, separate pot eligibility and avoid importing heads-up defense quotas.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "multiway dry side pot overcall closing action shared defense joint probability"
+    },
+    {
+      "slug": "poker-media-study",
+      "title": "Turn a poker video or podcast into one useful lesson.",
+      "description": "Use annotated media starting points, distinguish transcripts from show notes and build a short study record without copying copyrighted material.",
+      "topic": "study",
+      "level": "Start here",
+      "keywords": "poker video podcast transcript captions listening studying media recreation"
+    },
+    {
+      "slug": "poker-access-and-protection",
+      "title": "Check the room, the rules and your protections.",
+      "description": "Find regulator and operator information, protect account access, preserve complaint records and reach support without gambling-site rankings.",
+      "topic": "live",
+      "level": "Start here",
+      "keywords": "legal licence license register jurisdiction location account phishing responsible gambling player protection help safety"
     }
   ]
 }
