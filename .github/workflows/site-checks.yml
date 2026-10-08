@@ -40,7 +40,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p "$RUNNER_TEMP/poker-reading-previews"
-          for suite in review_browser poker_browser workshops_browser library_browser labs_browser; do
+          for suite in review_browser poker_browser workshops_browser library_browser labs_browser field_guide_browser; do
             echo "Running $suite"
             python "_tests/$suite.py" 2>&1 | tee "$RUNNER_TEMP/poker-reading-previews/$suite.log"
           done
