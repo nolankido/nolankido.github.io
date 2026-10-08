@@ -1,0 +1,22 @@
+name: Poker content workspace
+on:
+  push:
+    branches: [poker-field-guide-20261008]
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Package public repository for content review
+        run: git archive --format=tar HEAD > "$RUNNER_TEMP/poker-content-workspace.tar"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: poker-content-workspace
+          path: ${{ runner.temp }}/poker-content-workspace.tar
+          retention-days: 1
+          if-no-files-found: error
