@@ -113,7 +113,9 @@
       const selected = card.passages.map(p => ({p, score: groups.reduce((n, g) => n + (g.some(t => includes(normalize(p.textContent + ' ' + p.dataset.heading), t)) ? 1 : 0), 0)}))
         .sort((a, b) => b.score - a.score)[0];
       const found = groups.length && selected && selected.score > 0;
-      excerpt.hidden = !found; jump.hidden = !found;
+      excerpt.hidden = !found;
+      // A matching passage without an anchor has no honest section jump.
+      jump.hidden = !found || !selected.p.dataset.anchor;
       if (found) {
         const text = selected.p.textContent.replace(/\s+/g, ' ').trim();
         const hit = text.split(/(?<=[.!?])\s+/)
@@ -121,8 +123,13 @@
           .sort((a, b) => b.score - a.score)[0].sentence || text;
         excerpt.textContent = 'In this guide: ' + hit.slice(0, 320) + (hit.length > 320 ? '…' : '');
         const link = jump.querySelector('a');
-        link.setAttribute('href', card.url + (selected.p.dataset.anchor ? '#' + selected.p.dataset.anchor : ''));
-        link.textContent = 'Read: ' + selected.p.dataset.heading;
+        if (selected.p.dataset.anchor) {
+          link.setAttribute('href', card.url + '#' + selected.p.dataset.anchor);
+          link.textContent = 'Read: ' + selected.p.dataset.heading;
+        } else {
+          link.removeAttribute('href');
+          link.textContent = '';
+        }
       }
     }
     // Reorder real nodes only; neither queries nor source text are parsed as HTML.

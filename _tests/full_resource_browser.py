@@ -37,6 +37,19 @@ def main():
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),('spacing',slug,width)
         page.set_viewport_size({'width':1280,'height':900});page.goto(origin+'/poker/find/')
         original_url=page.url;initial=len(traffic)
+        # A real unanchored h2 remains searchable, but must not promise a jump.
+        page.locator('#finder-search').fill('references limits')
+        page.locator('#finder-search').press('Enter')
+        unanchored=page.locator('[data-id="poker-pot-odds-workshop"]')
+        # This generic query can put the guide on a later native results page.
+        for _ in range(30):
+            if unanchored.is_visible() or not page.locator('#finder-more').is_visible():break
+            page.locator('#finder-more').click()
+        expect(unanchored).to_be_visible()
+        expect(unanchored.locator('.finder-excerpt')).to_be_visible()
+        expect(unanchored.locator('.finder-jump')).to_be_hidden()
+        assert unanchored.locator('.finder-jump a').get_attribute('href') is None
+        page.locator('#finder-reset').click()
         page.locator('#finder-topic').select_option('cash-games')
         assert page.url==original_url+'#topic=cash-games'
         search=page.locator('#finder-search');search.fill('conditional probabilities');search.press('Enter')
@@ -74,6 +87,15 @@ def main():
             panel=page.locator('[data-study-tool="'+mode+'"]');panel.locator('[data-tool-run]').click()
             expect(panel.locator('[data-tool-output]')).to_contain_text(needle)
         panel=page.locator('[data-study-tool="potlimit"]')
+        for committed,total in [('0','100'),('10','110')]:
+            for field,value in zip(panel.locator('input').all(),['100','0',committed]):field.fill(value)
+            panel.locator('[data-tool-run]').click()
+            expect(panel.locator('[data-tool-output]')).to_contain_text('Maximum new chips to put in: 100.')
+            expect(panel.locator('[data-tool-output]')).to_contain_text('including existing chips: '+total+'.')
+        for mode in ['call','bluff']:
+            other=page.locator('[data-study-tool="'+mode+'"]')
+            other.locator('input').nth(1).fill('0');other.locator('[data-tool-run]').click()
+            expect(other.locator('[data-tool-output]')).to_contain_text('Check the inputs')
         for field,value in zip(panel.locator('input').all(),['500','70','80']):field.fill(value)
         panel.locator('input').last.press('Enter');expect(panel.locator('[data-tool-output]')).to_contain_text('720')
         panel.locator('input').first.fill('<img>');panel.locator('[data-tool-run]').click()

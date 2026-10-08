@@ -10,7 +10,9 @@
   }
   function calculate(mode, first, second, committed = '0') {
     const a = amount(first), b = amount(second), w = amount(committed);
-    if (a <= 0 || b <= 0) throw new Error('The pot and call or risk must both be greater than zero.');
+    if (a <= 0) throw new Error('The pot must be greater than zero.');
+    // No outstanding wager is a valid pot-limit first bet or free option.
+    if ((mode === 'call' || mode === 'bluff') && b <= 0) throw new Error('The call or risk must be greater than zero.');
     if (mode === 'call') return {percent: 100 * b / (a + b), finalPot: a + b};
     if (mode === 'bluff') return {percent: 100 * b / (a + b), reward: a, risk: b};
     if (mode === 'potlimit') {

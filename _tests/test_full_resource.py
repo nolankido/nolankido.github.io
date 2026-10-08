@@ -110,7 +110,7 @@ class FullResourceTests(unittest.TestCase):
         for a in ('0.01','3.25','120','210','999999999'):
             for b in ('0.01','4.50','90'):
                 for mode in ('call','bluff','potlimit'):inputs.append([mode,a,b,'0'])
-        inputs.append(['potlimit','500','70','80'])
+        inputs.extend([['potlimit','500','70','80'], ['potlimit','100','0','0'], ['potlimit','100','0','10']])
         code='const m=require("./assets/poker-study-tools.js"); console.log(JSON.stringify('+json.dumps(inputs)+'.map(x=>m.calculate(...x))));'
         completed=subprocess.run(['node','-e',code],cwd=ROOT,text=True,capture_output=True,check=True)
         values=json.loads(completed.stdout)
@@ -123,7 +123,7 @@ class FullResourceTests(unittest.TestCase):
         invalid=['','-1','NaN','Infinity','1e3','1,000','1.001','1000000000','<img>']
         code='const m=require("./assets/poker-study-tools.js"); console.log(JSON.stringify('+json.dumps(invalid)+'.map(x=>{try{m.amount(x);return false;}catch(e){return true;}})));'
         self.assertTrue(all(json.loads(subprocess.run(['node','-e',code],cwd=ROOT,text=True,capture_output=True,check=True).stdout)))
-        for args in [['call','0','1'],['bluff','1','0'],['potlimit','10','1','11'],['wrong','1','2']]:
+        for args in [['call','0','1'],['call','100','0'],['bluff','1','0'],['potlimit','0','0','0'],['potlimit','10','1','11'],['wrong','1','2']]:
             code='const m=require("./assets/poker-study-tools.js");try{m.calculate(...'+json.dumps(args)+');process.exit(1);}catch(e){process.exit(0);}'
             self.assertEqual(subprocess.run(['node','-e',code],cwd=ROOT).returncode,0)
 
