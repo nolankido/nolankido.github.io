@@ -90,7 +90,10 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git branch --show-current)" = 'poker-resource-collections-20261008'
-          git add _source _scripts _tests _reports downloads poker sitemap.xml .github/workflows/site-checks.yml
+          # This runner may publish content but may not update workflow files.
+          # The normal CI addition is reviewed and applied separately.
+          git restore .github/workflows/site-checks.yml
+          git add _source _scripts _tests _reports downloads poker sitemap.xml
           git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Expand Poker resources with guided collections and portable exports'
           git push origin HEAD:refs/heads/poker-resource-collections-20261008
           git archive --format=tar HEAD > "$REVIEW_DIR/collections-reviewed.tar"
