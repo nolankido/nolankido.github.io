@@ -95,26 +95,69 @@ def load(root: Path, *, as_of: date | None = None) -> list[dict]:
     return data['entries']
 
 
+# The detailed publisher format remains visible. These broader buckets are for finding it.
+FORMATS = {
+    'reading': ('Articles and guides', {'Reference', 'Guide collection', 'Article collection', 'Article',
+        'Reference collection', 'Teaching material', 'Creator essay', 'Creator archive', 'Hand analysis',
+        'Lesson collection', 'Historical reference', 'Historical essay', 'Planning reference'}),
+    'watch': ('Videos and courses', {'Video library', 'Video course', 'Video archive', 'Video companion',
+        'Open course', 'Training library'}),
+    'listen': ('Podcasts', {'Podcast', 'Podcast archive'}),
+    'tools': ('Tools and documentation', {'Software', 'Calculator', 'Chart', 'Documentation', 'Specification'}),
+    'official': ('Rules, events and results', {'Official rules', 'Official schedule',
+        'Official event information', 'Official reporting', 'Reporting', 'Database', 'Regional directory'}),
+    'community': ('Communities and support', {'Forum', 'Support information', 'Support resource'}),
+    'books-research': ('Books, papers and data', {'Book information', 'Book catalogue', 'Research paper',
+        'Research preprint', 'Dataset', 'Open-source repository'}),
+}
+TOPIC_HELP = {
+    'basics': 'Start here for hand rankings, the betting sequence and unfamiliar poker terms.',
+    'rules': 'Check the governing rules first. House and event-specific rulings take precedence over general explainers.',
+    'strategy': 'Compare teaching perspectives. A free article library is different from a paid training subscription.',
+    'math': 'Understand the calculation before using its answer: pot odds, effective stacks, combinations and equity.',
+    'tournament-study': 'Match the format and model to the hand: regular tournaments, satellites and bounties are not interchangeable.',
+    'tools': 'Separate free documentation from the product it describes. Study after play; a listing is not an accuracy audit.',
+    'events': 'Use the organizer for dates, structures and registration. Recheck the individual event before making plans.',
+    'results': 'Find coverage and recorded finishes. Tournament cashes are not a record of net profit.',
+    'watch-listen': 'Choose video, audio or written creator commentary. A companion article is not a verified complete video archive.',
+    'community': 'Ask questions, compare experiences or plan a home game. Forum advice is not an official ruling.',
+    'variants': 'Read the rules for the exact game first, especially hole-card requirements and high-low hand selection.',
+    'research': 'Technical material for examining methods, code and data. A paper or repository is not a tested poker product.',
+    'mental-game': 'Distinguish performance study from help with gambling harm. Support does not require another study session.',
+}
+
+
+def resource_format(entry: dict) -> str:
+    matches = [key for key, (_, kinds) in FORMATS.items() if entry['kind'] in kinds]
+    if len(matches) != 1:
+        raise ValueError('Resource format needs exactly one explicit discovery bucket: ' + entry['kind'])
+    return matches[0]
+
+
 def card(entry: dict) -> str:
     metadata = ' · '.join([entry['kind'], entry['access'], entry['level']])
     method = 'Page read' if entry['review_method'] == 'page' else 'Search index only'
-    return (f'<article class="reader-card" id="resource-{entry["id"]}" data-resource-card '
-            f'data-category="{entry["category"]}" data-access="{entry["access"]}">'
-            f'<p class="reader-eyebrow">{escape(entry["publisher"])}</p>'
+    domain = urlsplit(entry['url']).hostname.removeprefix('www.')
+    return (f'<article class="reader-card" id="resource-{entry["id"]}" data-resource-card tabindex="-1" '
+            f'data-category="{entry["category"]}" data-access="{entry["access"]}" '
+            f'data-level="{entry["level"]}" data-format="{resource_format(entry)}">'
+            f'<p class="reader-eyebrow">{escape(entry["publisher"])} <span class="resource-domain">{escape(domain)}</span></p>'
             f'<h3><a href="{escape(entry["url"], quote=True)}" rel="external">{escape(entry["title"])}</a></h3>'
-            f'<p>{escape(entry["description"])}</p><p class="reader-card-meta">{escape(metadata)}</p>'
-            + (f'<p class="small-copy">{escape(entry["notes"])}</p>' if entry['notes'] else '')
-            + f'<p class="small-copy">Listing reviewed <time datetime="{entry["reviewed_on"]}">{entry["reviewed_on"]}</time>'
-            f' · <a href="#review-policy">{method}</a></p></article>')
+            f'<p class="reader-card-meta">{escape(metadata)}</p>'
+            f'<p class="resource-description">{escape(entry["description"])}</p>'
+            + (f'<p class="small-copy resource-caution"><strong>Before you use it:</strong> {escape(entry["notes"])}</p>' if entry['notes'] else '')
+            + f'<p class="small-copy resource-review">Listing reviewed <time datetime="{entry["reviewed_on"]}">{entry["reviewed_on"]}</time>'
+            f' · <a href="#review-policy">{method}</a>'
+            f' · <a href="#resource-{entry["id"]}" data-resource-jump aria-label="Link to listing: {escape(entry["title"], quote=True)}">Link to listing</a></p></article>')
 
 
 # Editorial starting points use existing IDs, not a second resource catalogue.
 STARTING_PATHS = (
-    ('Learn the game', 'Begin with the rules, then choose a lesson or a complete historical course.',
-     ('holdem-rules', 'pokerology-lessons', 'mit-holdem')),
+    ('Learn the game', 'Start with the deal, check hand rankings, then work through a lesson.',
+     ('holdem-rules', 'hand-rankings', 'pokerology-lessons')),
     ('Review a tournament decision', 'Check the call price, prize-equity model, and format before a verdict.',
      ('pot-odds', 'icm-basics', 'satellite-guide')),
-    ('Study cash games or Omaha', 'Compare different teaching perspectives; do not transfer ranges between formats.',
+    ('Compare cash-game and Omaha study', 'Choose the exact game you play. These are separate starting points, not one transferable set of ranges.',
      ('splitsuit', 'plo-mastermind-blog', 'equity-realization')),
     ('Watch the thinking behind a hand', 'Use a creator account and a separate hand breakdown, not results alone.',
      ('brad-owen-wpt-vlog', 'jaman-hand-breakdown', 'lexy-vlog-notes')),
@@ -154,16 +197,35 @@ def supplement(entries: list[dict]) -> dict[str, str]:
         groups.append(f'<section class="section folio-row" id="{category}" data-resource-section aria-labelledby="{category}-heading">'
                       f'<div class="section-meta"><p class="section-label">Elsewhere online</p></div><div class="section-content">'
                       f'<h2 class="section-title" id="{category}-heading">{escape(label)}</h2>'
+                      f'<p class="resource-topic-help">{escape(TOPIC_HELP[category])}</p>'
                       f'<p class="small-copy"><a href="{guide}">Related reading on this site</a> · <a href="#directory-top">Back to directory controls</a></p>'
                       f'<div class="reader-grid">{cards}</div></div></section>')
+    formats = ''.join(f'<option value="{key}">{escape(label)}</option>' for key, (label, _) in FORMATS.items())
+    levels = ''.join(f'<option value="{level}">{level}</option>' for level in ['Beginner', 'Intermediate', 'Advanced', 'Technical'])
+    goals = ''.join(f'<button type="button" data-resource-goal="{goal}">{label}</button>' for goal, label in [
+        ('beginner', 'New to poker + free'), ('tournament', 'Tournament study'), ('watch', 'Creators, video & audio'),
+        ('tools', 'Find a study tool'), ('events', 'Find official events'), ('variants', 'Omaha and mixed games')])
     controls = ('<div class="reader-controls" id="resource-controls" hidden>'
-                '<label for="resource-search">Search titles, publishers, and topics</label><div class="reader-search-row">'
-                '<input type="search" id="resource-search" maxlength="160" autocomplete="off" spellcheck="false" aria-describedby="resource-search-help">'
+                '<label for="resource-search">What are you looking for?</label><div class="reader-search-row">'
+                '<input type="search" id="resource-search" maxlength="160" autocomplete="off" spellcheck="false" '
+                'placeholder="Try ICM, Omaha, hand history or a publisher" aria-describedby="resource-search-help">'
                 '<button type="button" id="resource-reset">Clear filters</button></div>'
-                '<p class="reader-help" id="resource-search-help">Try ICM, Omaha, hand history, podcast, or free. Filtering stays on this page without search requests or saved answers.</p>'
-                '<div class="reader-filters"><button type="button" id="resource-free" aria-pressed="false">Free resources only</button></div>'
-                '<details class="poker-details"><summary>Filter by topic</summary><div class="reader-filters" role="group" aria-label="External resource topics">'
-                + buttons + '</div></details></div>')
+                '<p class="reader-help" id="resource-search-help">Search titles, publishers, topics and notes. All words must match; Enter jumps to results. '
+                'Nothing is sent or saved.</p>'
+                '<details class="poker-details resource-refine"><summary>Refine by format, experience or topic</summary>'
+                '<div class="resource-selects"><div><label for="resource-format">Resource type</label><select id="resource-format">'
+                '<option value="all">Any format</option>' + formats + '</select></div>'
+                '<div><label for="resource-level">Experience</label><select id="resource-level" aria-describedby="resource-level-help">'
+                '<option value="all">Any experience level</option>' + levels + '</select></div></div>'
+                '<p class="reader-help" id="resource-level-help">An experience filter also includes general resources marked All levels. '
+                'Resource type does not guarantee captions, transcripts or account-free access.</p>'
+                '<div class="reader-filters" role="group" aria-label="External resource topics">' + buttons + '</div></details>'
+                '<div class="reader-filters"><button type="button" id="resource-free" aria-pressed="false">Free resources only</button>'
+                '<button type="button" id="resource-compact" aria-pressed="false">Compact list</button>'
+                '</div>'
+                '<div class="resource-quick"><p class="reader-help"><strong>Not sure where to begin?</strong> A choice replaces filters and opens results below.</p>'
+                '<div class="reader-filters" role="group" aria-label="Starting choices">' + goals + '</div></div>'
+                '<p class="reader-help" id="resource-active">All topics. Any format. Any experience. Free, mixed and paid.</p></div>')
     return {'poker_resource_count': str(len(entries)), 'poker_resource_topic_count': str(sum(bool(n) for n in counts.values())),
             'poker_resource_controls': controls, 'poker_resource_paths': starting_paths(entries),
             'poker_resource_jumps': '<nav class="poker-jump" aria-label="Resource categories">' + ''.join(jumps) + '</nav>',

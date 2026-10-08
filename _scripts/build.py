@@ -164,6 +164,8 @@ def build_outputs() -> dict[Path, str]:
             reader_version = hashlib.sha256((ROOT / 'assets/poker-reader.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker-reader.css?v={reader_version}">'
             if p['id'] == 'poker-resources':
+                resources_css_version = hashlib.sha256((ROOT / 'assets/poker-resources.css').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <link rel="stylesheet" href="/assets/poker-resources.css?v={resources_css_version}">'
                 resources_version = hashlib.sha256((ROOT / 'assets/poker-resources.js').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <script defer src="/assets/poker-resources.js?v={resources_version}"></script>'
             if p['id'] == 'poker-library':

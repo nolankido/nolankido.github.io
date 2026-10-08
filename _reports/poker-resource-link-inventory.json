@@ -1,0 +1,942 @@
+{
+  "baseline_commit": "b537c507e3135cca40874c65177d18e13b7fa6e4",
+  "baseline_tree": "384a495af4645519073c6e2ddc6d1bfb850b23e1",
+  "prepared_date_pacific": "2026-10-07",
+  "poker_html_pages": 30,
+  "distinct_literal_main_body_destinations": 116,
+  "catalogue_records": 108,
+  "catalogue_file_sha256": "dff80c925634a55f2ed9cd1d77f31679bbdc8d90247834576aee4e1883473701",
+  "catalogue_changed": false,
+  "catalogue_review_dates_refreshed": false,
+  "selected_catalogue_page_reads": [
+    "tda-rules",
+    "stars-live-rules",
+    "pokerology-lessons",
+    "pot-odds",
+    "icm-basics",
+    "hu-push-fold",
+    "pio-quick-start",
+    "wsop-schedule",
+    "hendon-results",
+    "pokeratlas-las-vegas",
+    "pokerbank-videos",
+    "jaman-hand-breakdown",
+    "hpt-rulebooks",
+    "pagat-betting",
+    "plo-mastermind-blog",
+    "omaha-rules",
+    "phh-format",
+    "av-aivat",
+    "ncpg",
+    "gamcare-support"
+  ],
+  "read_scope": "Public text or abstract via web retrieval. May be cached. No uptime, playback, software, PDF, paid-course or replication certification.",
+  "contextual_references_outside_directory": [
+    {
+      "url": "https://www.playwsop.com/poker-hands/",
+      "pages": [
+        "poker/glossary/index.html",
+        "poker/hand-rankings/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pokerstars.com/help/articles/trn-knockout/",
+      "pages": [
+        "poker/tournament-formats/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/rules/hand-rankings/full-house/",
+      "pages": [
+        "poker/flush-and-redraw/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/lesson/position/",
+      "pages": [
+        "poker/position-and-stacks/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/lesson/pot-odds/",
+      "pages": [
+        "poker/decision-lab/index.html",
+        "poker/pot-odds-workshop/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/lesson/the-flop-and-your-hand/",
+      "pages": [
+        "poker/reading-the-board/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/strategies/combinatorics-an-introduction-to-the-study-of-card-combinations/",
+      "pages": [
+        "poker/follow-along/index.html",
+        "poker/ranges-and-bets/index.html"
+      ]
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/strategies/how-to-think-about-hand-ranges-in-poker/",
+      "pages": [
+        "poker/ranges-and-bets/index.html"
+      ]
+    }
+  ],
+  "all_external_main_body_links": [
+    {
+      "url": "https://arxiv.org/abs/1612.06915",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://arxiv.org/abs/1701.01724",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://arxiv.org/abs/1811.00164",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://arxiv.org/abs/2608.06362",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/a-beginners-guide-to-poker-combinatorics/",
+      "pages": [
+        "poker/decision-lab/index.html",
+        "poker/range-combinations/index.html",
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/bounty-models-explained-solving-knockout-tournaments/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/equity-realization/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/icm-basics/",
+      "pages": [
+        "poker/resources/index.html",
+        "poker/short-stack-decisions/index.html",
+        "poker/tournament-equity/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/mystery-bounty-guide/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/satellite-guide/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/variance-and-bankroll-management/",
+      "pages": [
+        "poker/resources/index.html",
+        "poker/variance-and-results/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://blog.gtowizard.com/what-is-the-bubble-factor-in-poker-tournaments/",
+      "pages": [
+        "poker/resources/index.html",
+        "poker/tournament-equity/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://crushlivepoker.com/videos",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://dandbpoker.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://forumserver.twoplustwo.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://github.com/ihendley/treys",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://gtowizard.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://help.gtowizard.com/study-mode/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://jaredtendler.com/books/the-mental-game-of-poker/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://jonathanlittlepoker.com/wph-428-how-to-destroy-recreational-poker-players-ft-jaman-burton%EF%BF%BC/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://lexygavinmather.com/blog/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://modelai.gettysburg.edu/2013/cfr/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://msptpoker.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://ocw.mit.edu/courses/15-s50-how-to-win-at-texas-holdem-poker-january-iap-2016/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://ocw.mit.edu/courses/15-s50-poker-theory-and-analytics-january-iap-2015/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://openspiel.readthedocs.io/en/latest/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://phh.readthedocs.io/en/stable/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://piosolver.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://piosolver.com/docs/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://plomastermind.com/blog/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/the-poker-guys-podcast/id1195190802",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://pokercoaching.com/blog/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://pokerkit.readthedocs.io/en/stable/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://redchippoker.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://redchippoker.com/podcast/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://rlcard.org/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://smartpokerstudy.com/podcast/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://upswingpoker.com/5-tips-for-plo-tournaments/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://upswingpoker.com/blog/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://upswingpoker.com/effective-stack-size/",
+      "pages": [
+        "poker/glossary/index.html",
+        "poker/resources/index.html",
+        "poker/start-here/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://upswingpoker.com/how-double-board-bomb-pots-actually-work/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://upswingpoker.com/pot-odds-step-by-step/",
+      "pages": [
+        "poker/glossary/index.html",
+        "poker/poker-math/index.html",
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.andrewneeme.com/what-im-studying/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.cardplayer.com/cardplayer-poker-magazines/66431-cppt-ocean-s-eleven-33-6/articles/23940-badugi-an-introduction",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.cardplayer.com/cardplayer-poker-magazines/66511-dan-zack-36-7/articles/24787-deuce-to-seven-triple-draw-breaking-on-the-turn",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.cardplayer.com/poker-news/24663-poker-strategy-with-kevin-haney-triple-draw-lowball-starting-hands",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.cardplayer.com/poker-tools/odds-calculator/texas-holdem",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.cardplayer.com/poker-tournaments",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.flopzilla.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.gamcare.org.uk/get-support/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.gtoplus.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.holdemresources.net/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.holdemresources.net/docs",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.holdemresources.net/hune",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.holdemresources.net/icmcalculator",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.homepokertourney.org/chips_needed.htm",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.homepokertourney.org/poker-rule-book.htm",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.icmizer.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.learnpropoker.com/dara-okearney-satellite-masterclass",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.mixedgames.net/the-games/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.ncpgambling.org/help-treatment/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pagat.com/poker/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pagat.com/poker/history.html",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pagat.com/poker/rules/betting.html",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pagat.com/poker/variants/badugi.html",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pagat.com/poker/variants/lowball.html",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pagat.com/poker/variants/omaha.html",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pgt.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.playwsop.com/poker-hands/",
+      "pages": [
+        "poker/glossary/index.html",
+        "poker/hand-rankings/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.poker.org/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokeratlas.com/las-vegas-nevada",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerchipforum.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokergo.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokernews.com/live-reporting/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokernews.com/podcast/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerology.com/lessons/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/help/articles/trn-knockout/",
+      "pages": [
+        "poker/tournament-formats/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/horse/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/omaha/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/razz/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/rules/",
+      "pages": [
+        "poker/betting-and-pots/index.html",
+        "poker/glossary/index.html",
+        "poker/resources/index.html",
+        "poker/side-pot-lab/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/rules/hand-rankings/",
+      "pages": [
+        "poker/hand-rankings/index.html",
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/rules/hand-rankings/full-house/",
+      "pages": [
+        "poker/flush-and-redraw/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/games/texas-holdem/",
+      "pages": [
+        "poker/follow-along/index.html",
+        "poker/holdem-basics/index.html",
+        "poker/reading-the-board/index.html",
+        "poker/resources/index.html",
+        "poker/viewer-questions/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/lesson/introduction-to-stack-to-pot-ratio-spr/",
+      "pages": [
+        "poker/position-and-stacks/index.html",
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/lesson/position/",
+      "pages": [
+        "poker/position-and-stacks/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/lesson/pot-odds/",
+      "pages": [
+        "poker/decision-lab/index.html",
+        "poker/pot-odds-workshop/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/lesson/the-flop-and-your-hand/",
+      "pages": [
+        "poker/reading-the-board/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/strategies/combinatorics-an-introduction-to-the-study-of-card-combinations/",
+      "pages": [
+        "poker/follow-along/index.html",
+        "poker/ranges-and-bets/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/strategies/how-to-think-about-hand-ranges-in-poker/",
+      "pages": [
+        "poker/ranges-and-bets/index.html"
+      ],
+      "in_directory": false
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/learn/strategies/poker-terms-glossary/",
+      "pages": [
+        "poker/glossary/index.html",
+        "poker/poker-math/index.html",
+        "poker/ranges-and-bets/index.html",
+        "poker/reading-the-board/index.html",
+        "poker/resources/index.html",
+        "poker/start-here/index.html",
+        "poker/table-etiquette/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/school/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstars.com/poker/tournaments/types/",
+      "pages": [
+        "poker/glossary/index.html",
+        "poker/resources/index.html",
+        "poker/tournament-formats/index.html",
+        "poker/tournaments/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstarslive.com/ept/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstarslive.com/poker/rules/",
+      "pages": [
+        "poker/resources/index.html",
+        "poker/table-etiquette/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokerstrategy.com/poker-software-tools/equilab-holdem/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokertda.com/forum/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokertda.com/view-poker-tda-rules/",
+      "pages": [
+        "poker/betting-and-pots/index.html",
+        "poker/follow-along/index.html",
+        "poker/hand-to-vlog/index.html",
+        "poker/holdem-basics/index.html",
+        "poker/position-and-stacks/index.html",
+        "poker/resources/index.html",
+        "poker/short-stack-decisions/index.html",
+        "poker/table-etiquette/index.html",
+        "poker/tournaments/index.html",
+        "poker/viewer-questions/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.pokertracker.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.runitonce.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.seminolehardrockpokeropen.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.splitsuit.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.theasianpokertour.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.theasianpokertour.com/info/tournament-rules",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.thehendonmob.com/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.thehendonmob.com/guide/index.php",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.thepokerbank.com/videos/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.thinkingpoker.net/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.thundervalleyresort.com/casino/poker",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.venetianlasvegas.com/resort/casino/poker/deepstack-extravaganza-poker-tournament.html",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.worldpokertour.com/article/brad-owens-must-see-vlog-takes-you-inside-wpt-world-championship",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.worldpokertour.com/event/schedule",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.wsop.com/schedule/",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://www.wynnlasvegas.com/casino/poker",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    },
+    {
+      "url": "https://zenodo.org/records/17136841",
+      "pages": [
+        "poker/resources/index.html"
+      ],
+      "in_directory": true
+    }
+  ]
+}
