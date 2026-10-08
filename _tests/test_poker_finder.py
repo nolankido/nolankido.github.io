@@ -88,8 +88,11 @@ class FinderTests(unittest.TestCase):
         js = (ROOT / 'assets/poker-finder.js').read_text()
         for token in ('fetch(', 'XMLHttpRequest', 'WebSocket', 'sendBeacon', 'localStorage', 'sessionStorage',
                       'document.cookie', 'innerHTML', 'outerHTML', 'insertAdjacentHTML', 'eval(', 'new Function',
-                      'history.', 'location.', 'umami', 'console.'):
+                      'umami', 'console.'):
             self.assertNotIn(token, js)
+        filter_writer = js.split('function saveFilters() {', 1)[1].split('function filtersChanged()', 1)[0]
+        self.assertNotIn('input.value', filter_writer)
+        self.assertEqual(set(re.findall(r"params.set\('([^']+)'", filter_writer)), {'topic', 'kind', 'free'})
         self.assertNotIn('<form', self.content)
         self.assertIn('maxlength="160"', self.content)
         self.assertIn('<noscript>', self.content)

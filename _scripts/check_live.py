@@ -17,13 +17,13 @@ LIMIT = 2 * 1024 * 1024
 
 
 def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
-    pages = json.loads((root / '_source/pages.json').read_text(encoding='utf-8')) + build.poker_content.manifest(build.poker_content.load(root))
+    pages = build.public_pages(root)
     result = {}
     for page in pages:
         route = page['path']
         relative = route.lstrip('/') + ('index.html' if route.endswith('/') else '')
         result[route] = (200, (root / relative).read_bytes())
-    assets = ['assets/poker-finder.css', 'assets/poker-finder.js', 'downloads/poker-math-reference.md', 'downloads/poker-resource-directory.md', 'downloads/poker-resource-directory.json', 'assets/poker-fieldguide.css', 'assets/poker-resources.css', 'assets/poker-resources.js', 'assets/poker-reader.css', 'assets/poker-library.js', 'downloads/poker-short-stack-record.md', 'downloads/poker-results-review.md', 'downloads/poker-episode-plan.md', 'downloads/poker-study-cycle.md', 'downloads/poker-watch-along.md', 'downloads/poker-viewer-reference.md', 'assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
+    assets = ['assets/poker-topics.css', 'assets/poker-finder.css', 'assets/poker-finder.js', 'downloads/poker-math-reference.md', 'downloads/poker-resource-directory.md', 'downloads/poker-resource-directory.json', 'assets/poker-fieldguide.css', 'assets/poker-resources.css', 'assets/poker-resources.js', 'assets/poker-reader.css', 'assets/poker-library.js', 'downloads/poker-short-stack-record.md', 'downloads/poker-results-review.md', 'downloads/poker-episode-plan.md', 'downloads/poker-study-cycle.md', 'downloads/poker-watch-along.md', 'downloads/poker-viewer-reference.md', 'assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['poker-event-planner', 'poker-hand-capture', 'poker-resource-check']]
     assets += ['downloads/' + name + '.md' for name in ['decision-record', 'tool-trust-check', 'learning-loop']]
     catalog = build.poker_content.load(root)
