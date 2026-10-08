@@ -1,0 +1,43 @@
+name: Poker integration review
+on:
+  push:
+    branches: [poker-full-resource-20261008]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: poker-full-resource-20261008
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Package source trees and merge diagnostics without publishing
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/integration-review"
+          mkdir -p "$out"
+          git rev-parse HEAD > "$out/feature-sha.txt"
+          git rev-parse origin/main > "$out/main-sha.txt"
+          base=$(git merge-base HEAD origin/main)
+          echo "$base" > "$out/base-sha.txt"
+          git archive --format=tar HEAD > "$out/feature.tar"
+          git archive --format=tar origin/main > "$out/main.tar"
+          git archive --format=tar "$base" > "$out/base.tar"
+          set +e
+          git -c user.name='Review only' -c user.email='review@example.invalid' merge --no-commit --no-ff origin/main > "$out/merge.log" 2>&1
+          code=$?
+          set -e
+          echo "$code" > "$out/merge-exit.txt"
+          git status --short > "$out/status.txt"
+          git diff --name-only --diff-filter=U > "$out/conflicts.txt"
+          git diff > "$out/merge.diff"
+          tar --exclude=.git -cf "$out/merged-working-tree.tar" .
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: poker-integration-review
+          path: ${{ runner.temp }}/integration-review/
+          retention-days: 1
+          if-no-files-found: error
