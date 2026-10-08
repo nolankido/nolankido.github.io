@@ -20,6 +20,8 @@ import poker_reading
 import poker_experience
 import poker_resources
 import poker_collections
+import poker_finder
+import poker_reference
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -104,6 +106,8 @@ def build_outputs() -> dict[Path, str]:
     values.update(poker_resources.supplement(resource_entries))
     values.update(poker_collections.supplement(collections, resource_entries))
     values.update(poker_library.supplement(reader_entries))
+    values.update(poker_finder.render(poker_finder.entries(ROOT, pages, reader_entries, resource_entries)))
+    values.update(poker_reference.supplement())
     # The on-page and printable previews use the exact downloadable blank files.
     for slug in ("poker-event-planner", "poker-hand-capture", "poker-resource-check"):
         values[slug.replace("-", "_")] = text((ROOT / "downloads" / (slug + ".md")).read_text(encoding="utf-8"))
@@ -178,6 +182,11 @@ def build_outputs() -> dict[Path, str]:
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-resources.css?v={resources_css_version}">'
                 resources_version = hashlib.sha256((ROOT / 'assets/poker-resources.js').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <script defer src="/assets/poker-resources.js?v={resources_version}"></script>'
+            if p['id'] == 'poker-find':
+                for asset, kind in [('poker-finder.css', 'style'), ('poker-finder.js', 'script')]:
+                    version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                    extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style'
+                              else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
             if p['id'] == 'poker-library':
                 library_version = hashlib.sha256((ROOT / 'assets/poker-library.js').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <script defer src="/assets/poker-library.js?v={library_version}"></script>'
@@ -219,6 +228,7 @@ def build_outputs() -> dict[Path, str]:
     ET.indent(sitemap, space='  ')
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
     outputs.update(poker_collections.exports(resource_entries))
+    outputs.update(poker_reference.exports())
     outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     return outputs

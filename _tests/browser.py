@@ -33,6 +33,8 @@ def html_for(route):
     # This harness strips stylesheet links, so include the page-scoped sheet too.
     if route == '/poker/tournament-checklists/':
         css += '\n' + (ROOT / 'assets/poker-fieldguide.css').read_text()
+    if route == '/poker/find/':
+        css += '\n' + (ROOT / 'assets/poker-finder.css').read_text()
     content = content.replace('</head>', '<style>' + css + '</style></head>')
     for route_name in ['favicon.svg', 'card/qr.svg']:
         data = base64.b64encode((ROOT / route_name).read_bytes()).decode()

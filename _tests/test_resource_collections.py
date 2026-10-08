@@ -167,7 +167,8 @@ class CollectionTests(unittest.TestCase):
             for term in ('<script', '<form', '<iframe', '<input', 'data-umami-event', chr(0x2014)):
                 self.assertNotIn(term, source)
         overview = self.outputs[Path('poker/index.html')]
-        self.assertIn('Search the resource directory', overview)
+        self.assertIn('href="/poker/resources/"', overview)
+        self.assertIn('Find a poker answer', overview)
         self.assertIn('building a vlog', overview)
         self.assertIn('id="watch"', overview)
 

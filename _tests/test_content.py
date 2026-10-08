@@ -77,6 +77,8 @@ class ContentTests(unittest.TestCase):
                 expected.insert(0, '/assets/poker-library.js?v=' + hashlib.sha256((ROOT / 'assets/poker-library.js').read_bytes()).hexdigest()[:12])
             if path == Path('poker/resources/index.html'):
                 expected.insert(0, '/assets/poker-resources.js?v=' + hashlib.sha256((ROOT / 'assets/poker-resources.js').read_bytes()).hexdigest()[:12])
+            if path == Path('poker/find/index.html'):
+                expected.insert(0, '/assets/poker-finder.js?v=' + hashlib.sha256((ROOT / 'assets/poker-finder.js').read_bytes()).hexdigest()[:12])
             self.assertEqual(sources, expected)
         self.assertNotIn('<form', outputs[Path('resources/index.html')])
         self.assertNotIn('reason for contact, and your message', outputs[Path('privacy/index.html')])

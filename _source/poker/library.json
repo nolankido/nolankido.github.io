@@ -288,6 +288,30 @@
       "topic": "research",
       "level": "Go deeper",
       "keywords": "research science cfr mccfr regret cepheus deepstack libratus pluribus evaluation proofs papers AI"
+    },
+    {
+      "slug": "poker-math-reference",
+      "title": "Poker math: the right number for the right question.",
+      "description": "Compare call prices, pure-bluff thresholds, minimum defense frequency and pot-limit raises with exact worked examples and a portable reference.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "pot odds mathematics mdf bluff frequency equity spr stack to pot ratio pot limit raise reference"
+    },
+    {
+      "slug": "reading-preflop-charts",
+      "title": "Read the preflop chart before trusting the colors.",
+      "description": "Check game, position, stack convention, action history and combo weights before using a preflop chart as a study reference.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "preflop charts ranges matrix 169 1326 combos mixing frequencies bb gto mtt push fold"
+    },
+    {
+      "slug": "poker-rules-and-fair-play",
+      "title": "Poker rules and fair play: find the right authority.",
+      "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
+      "topic": "live",
+      "level": "Start here",
+      "keywords": "rules fair play integrity rta real time assistance hud cheating collusion tools policy accommodations minimum raise floor"
     }
   ]
 }
