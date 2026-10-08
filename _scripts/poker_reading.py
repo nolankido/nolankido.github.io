@@ -8,6 +8,14 @@ from html.parser import HTMLParser
 import re
 
 NEXT_READS = {
+    'first-live-tournament': ('choosing-a-tournament', 'tournament-day'),
+    'choosing-a-tournament': ('registration-and-reentry', 'tournament-formats'),
+    'registration-and-reentry': ('tournament-day', 'variance-and-results'),
+    'tournament-day': ('recording-hands', 'table-etiquette'),
+    'recording-hands': ('reviewing-a-hand', 'pot-odds-workshop'),
+    'choosing-study-tools': ('evaluating-poker-advice', 'tournament-equity'),
+    'evaluating-poker-advice': ('choosing-study-tools', 'decision-lab'),
+
     'decision-lab': ('range-combinations', 'pot-odds-workshop'),
     'flush-and-redraw': ('reading-the-board', 'pot-odds-workshop'),
     'side-pot-lab': ('betting-and-pots', 'short-stack-decisions'),

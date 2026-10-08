@@ -46,7 +46,7 @@ class ResourceTests(unittest.TestCase):
 
     def test_existing_guide_and_real_account_catalogues_remain_separate(self):
         indexed = poker_library.load(ROOT, build.public_pages())
-        self.assertEqual(len(indexed), 24)
+        self.assertEqual(len(indexed), len([p for p in build.public_pages() if p.get('poker_guide')]) + 1)
         self.assertNotIn('resources', {entry['slug'] for entry in indexed})
         page = next(p for p in build.public_pages() if p['id'] == 'poker-resources')
         self.assertFalse(page.get('poker_guide'))

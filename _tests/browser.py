@@ -30,6 +30,9 @@ def html_for(route):
     if route.startswith('/poker/'):
         css += '\n' + (ROOT / 'assets/poker.css').read_text()
         css += '\n' + (ROOT / 'assets/poker-reader.css').read_text()
+    # This harness strips stylesheet links, so include the page-scoped sheet too.
+    if route == '/poker/tournament-checklists/':
+        css += '\n' + (ROOT / 'assets/poker-fieldguide.css').read_text()
     content = content.replace('</head>', '<style>' + css + '</style></head>')
     for route_name in ['favicon.svg', 'card/qr.svg']:
         data = base64.b64encode((ROOT / route_name).read_bytes()).decode()

@@ -1,29 +1,253 @@
 {
   "version": 1,
   "entries": [
-    {"slug":"decision-lab","title":"One river. Two different stories.","description":"Pause at a river bet, price the call, then reveal two possible endings. The outcome changes; the information available before the call does not.","topic":"practice","level":"Practice","keywords":"decision lab interactive river bluff catcher outcome hindsight ace queen cards"},
-    {"slug":"flush-and-redraw","title":"The flush arrives. What can still change?","description":"Follow a face-up replay, count all 44 possible rivers and see how a different opposing hand changes the answer.","topic":"practice","level":"Practice","keywords":"decision lab flush redraw runout full house outs equity probability board pair"},
-    {"slug":"side-pot-lab","title":"Three all-ins. Two pots.","description":"Separate matched chips, side-pot eligibility and uncalled refunds, then reconcile every final stack.","topic":"practice","level":"Practice","keywords":"decision lab all in side pots refund uncalled chips main pot eligibility accounting"},
-    {"slug":"holdem-basics","title":"A hand from start to finish","description":"Follow the blinds, deal, betting streets and showdown in one worked hand.","topic":"basics","level":"Start here","keywords":"holdem hold'em rules preflop flop turn river beginners"},
-    {"slug":"hand-rankings","title":"Which hand wins?","description":"Read the hand rankings, compare kickers and check worked showdowns.","topic":"basics","level":"Start here","keywords":"straight flush full house pair two pair kicker best five cards ties"},
-    {"slug":"betting-and-pots","title":"Bets, calls and side pots","description":"Track raises, extra chips owed, unequal all-ins and uncalled refunds.","topic":"basics","level":"Start here","keywords":"side pots sidepot raise to raise by all in all-in min raise call"},
-    {"slug":"glossary","title":"The Poker glossary","description":"Look up 48 terms, from effective stack and range to bubble and reconstruction.","topic":"basics","level":"Start here","keywords":"definitions terminology words dictionary abbreviations BB ICM"},
-    {"slug":"viewer-questions","title":"Questions a new viewer asks","description":"Read the acting player, pot, and call amount. Separate the graphic from the evidence, then return to the story.","topic":"basics","level":"Start here","keywords":"FAQ new viewer beginner questions why poker vlog"},
-    {"slug":"position-and-stacks","title":"Position changes the question","description":"Understand who acts last, effective stacks and why the same chip count can mean something different.","topic":"hands","level":"Build understanding","keywords":"button cutoff blinds in position out of position stack depth SPR"},
-    {"slug":"reading-the-board","title":"Read what changed on the board","description":"Notice which draws complete, which hands improve and which apparent scare cards need more context.","topic":"hands","level":"Build understanding","keywords":"board texture runout paired board draws turn river blockers"},
-    {"slug":"ranges-and-bets","title":"Think in ranges, not one hand","description":"Separate possible holdings from betting purpose and avoid explaining every bet with the same story.","topic":"hands","level":"Build understanding","keywords":"value bluff protection range bet sizing balance"},
-    {"slug":"poker-math","title":"The viewer's Poker math guide","description":"Work through simple pot odds, probability and expected-value examples.","topic":"hands","level":"Build understanding","keywords":"math equity expected value EV odds outs percentage probabilities"},
-    {"slug":"pot-odds-workshop","title":"Pot odds without double-counting","description":"Price a call or raise and distinguish a draw's hit probability from its showdown equity.","topic":"hands","level":"Go deeper","keywords":"pot odds call price bluff threshold implied odds reverse implied odds"},
-    {"slug":"range-combinations","title":"From possible hands to weighted ranges","description":"Remove known cards, count physical combinations and weight how often each hand takes a betting line.","topic":"hands","level":"Go deeper","keywords":"combos combinatorics blockers card removal frequencies weighted range"},
-    {"slug":"tournaments","title":"Understand the tournament context","description":"Follow changing blinds, the money bubble and why a chip count needs a blind level.","topic":"tournaments","level":"Start here","keywords":"tournament MTT bubble pay jump blind level antes field"},
-    {"slug":"tournament-formats","title":"Know which tournament you are watching","description":"Distinguish ordinary payouts, satellites and bounty incentives before interpreting a decision.","topic":"tournaments","level":"Build understanding","keywords":"satellite PKO mystery bounty progressive knockout re entry freezeout"},
-    {"slug":"table-etiquette","title":"Read the table without disrupting it","description":"Understand ordinary table procedures and the boundaries around recording or discussing a hand.","topic":"tournaments","level":"Start here","keywords":"etiquette live rules filming recording speech action dealer"},
-    {"slug":"short-stack-decisions","title":"Short stacks beyond the chart","description":"Match position, stacks, ante structure, available actions and tournament objective before comparing references.","topic":"tournaments","level":"Go deeper","keywords":"push fold shove short stack 5 BB 10 BB ante chart compatibility"},
-    {"slug":"tournament-equity","title":"Chips, prizes and ICM","description":"Audit a small example where gaining chips reduces modeled prize value.","topic":"tournaments","level":"Go deeper","keywords":"ICM independent chip model risk premium bubble factor expected payout prize equity"},
-    {"slug":"follow-along","title":"Pause three fictional hands","description":"Read the scene before revealing the next part of the action or its explanation.","topic":"practice","level":"Practice","keywords":"quiz practice scenes viewer follow along cards showdown"},
-    {"slug":"practice-room","title":"Twelve checks. One useful repair.","description":"Test call prices, combinations, chart inputs, ICM, results and honest storytelling.","topic":"practice","level":"Practice","keywords":"quiz exercise self check drills answers review"},
-    {"slug":"reviewing-a-hand","title":"Review a hand without rewriting it","description":"Separate recorded action, thinking at the table and later analysis using a worked hand and blank review sheet.","topic":"results","level":"Build understanding","keywords":"hand history reconstruction hand review worksheet debrief evidence"},
-    {"slug":"variance-and-results","title":"Results deserve context","description":"Separate tournament ROI from trip expenses, concentrated payouts and the quality of a decision.","topic":"results","level":"Go deeper","keywords":"variance ROI bankroll trip profit results losing streak sample accounting"},
-    {"slug":"hand-to-vlog","title":"From hand notes to a Poker vlog","description":"Turn one verified record into a readable hand and useful companion. Keep one private approval packet and use an honest fallback when a video is not ready.","topic":"creative","level":"Creator workflow","keywords":"vlog video editing narration captions subtitles graphics overlay story episode planning"}
+    {
+      "slug": "decision-lab",
+      "title": "One river. Two different stories.",
+      "description": "Pause at a river bet, price the call, then reveal two possible endings. The outcome changes; the information available before the call does not.",
+      "topic": "practice",
+      "level": "Practice",
+      "keywords": "decision lab interactive river bluff catcher outcome hindsight ace queen cards"
+    },
+    {
+      "slug": "flush-and-redraw",
+      "title": "The flush arrives. What can still change?",
+      "description": "Follow a face-up replay, count all 44 possible rivers and see how a different opposing hand changes the answer.",
+      "topic": "practice",
+      "level": "Practice",
+      "keywords": "decision lab flush redraw runout full house outs equity probability board pair"
+    },
+    {
+      "slug": "side-pot-lab",
+      "title": "Three all-ins. Two pots.",
+      "description": "Separate matched chips, side-pot eligibility and uncalled refunds, then reconcile every final stack.",
+      "topic": "practice",
+      "level": "Practice",
+      "keywords": "decision lab all in side pots refund uncalled chips main pot eligibility accounting"
+    },
+    {
+      "slug": "holdem-basics",
+      "title": "A hand from start to finish",
+      "description": "Follow the blinds, deal, betting streets and showdown in one worked hand.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "holdem hold'em rules preflop flop turn river beginners"
+    },
+    {
+      "slug": "hand-rankings",
+      "title": "Which hand wins?",
+      "description": "Read the hand rankings, compare kickers and check worked showdowns.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "straight flush full house pair two pair kicker best five cards ties"
+    },
+    {
+      "slug": "betting-and-pots",
+      "title": "Bets, calls and side pots",
+      "description": "Track raises, extra chips owed, unequal all-ins and uncalled refunds.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "side pots sidepot raise to raise by all in all-in min raise call"
+    },
+    {
+      "slug": "glossary",
+      "title": "The Poker glossary",
+      "description": "Look up 48 terms, from effective stack and range to bubble and reconstruction.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "definitions terminology words dictionary abbreviations BB ICM"
+    },
+    {
+      "slug": "viewer-questions",
+      "title": "Questions a new viewer asks",
+      "description": "Read the acting player, pot, and call amount. Separate the graphic from the evidence, then return to the story.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "FAQ new viewer beginner questions why poker vlog"
+    },
+    {
+      "slug": "position-and-stacks",
+      "title": "Position changes the question",
+      "description": "Understand who acts last, effective stacks and why the same chip count can mean something different.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "button cutoff blinds in position out of position stack depth SPR"
+    },
+    {
+      "slug": "reading-the-board",
+      "title": "Read what changed on the board",
+      "description": "Notice which draws complete, which hands improve and which apparent scare cards need more context.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "board texture runout paired board draws turn river blockers"
+    },
+    {
+      "slug": "ranges-and-bets",
+      "title": "Think in ranges, not one hand",
+      "description": "Separate possible holdings from betting purpose and avoid explaining every bet with the same story.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "value bluff protection range bet sizing balance"
+    },
+    {
+      "slug": "poker-math",
+      "title": "The viewer's Poker math guide",
+      "description": "Work through simple pot odds, probability and expected-value examples.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "math equity expected value EV odds outs percentage probabilities"
+    },
+    {
+      "slug": "pot-odds-workshop",
+      "title": "Pot odds without double-counting",
+      "description": "Price a call or raise and distinguish a draw's hit probability from its showdown equity.",
+      "topic": "hands",
+      "level": "Go deeper",
+      "keywords": "pot odds call price bluff threshold implied odds reverse implied odds"
+    },
+    {
+      "slug": "range-combinations",
+      "title": "From possible hands to weighted ranges",
+      "description": "Remove known cards, count physical combinations and weight how often each hand takes a betting line.",
+      "topic": "hands",
+      "level": "Go deeper",
+      "keywords": "combos combinatorics blockers card removal frequencies weighted range"
+    },
+    {
+      "slug": "tournaments",
+      "title": "Understand the tournament context",
+      "description": "Follow changing blinds, the money bubble and why a chip count needs a blind level.",
+      "topic": "tournaments",
+      "level": "Start here",
+      "keywords": "tournament MTT bubble pay jump blind level antes field"
+    },
+    {
+      "slug": "tournament-formats",
+      "title": "Know which tournament you are watching",
+      "description": "Distinguish ordinary payouts, satellites and bounty incentives before interpreting a decision.",
+      "topic": "tournaments",
+      "level": "Build understanding",
+      "keywords": "satellite PKO mystery bounty progressive knockout re entry freezeout"
+    },
+    {
+      "slug": "table-etiquette",
+      "title": "Read the table without disrupting it",
+      "description": "Understand ordinary table procedures and the boundaries around recording or discussing a hand.",
+      "topic": "tournaments",
+      "level": "Start here",
+      "keywords": "etiquette live rules filming recording speech action dealer"
+    },
+    {
+      "slug": "short-stack-decisions",
+      "title": "Short stacks beyond the chart",
+      "description": "Match position, stacks, ante structure, available actions and tournament objective before comparing references.",
+      "topic": "tournaments",
+      "level": "Go deeper",
+      "keywords": "push fold shove short stack 5 BB 10 BB ante chart compatibility"
+    },
+    {
+      "slug": "tournament-equity",
+      "title": "Chips, prizes and ICM",
+      "description": "Audit a small example where gaining chips reduces modeled prize value.",
+      "topic": "tournaments",
+      "level": "Go deeper",
+      "keywords": "ICM independent chip model risk premium bubble factor expected payout prize equity"
+    },
+    {
+      "slug": "follow-along",
+      "title": "Pause three fictional hands",
+      "description": "Read the scene before revealing the next part of the action or its explanation.",
+      "topic": "practice",
+      "level": "Practice",
+      "keywords": "quiz practice scenes viewer follow along cards showdown"
+    },
+    {
+      "slug": "practice-room",
+      "title": "Twelve checks. One useful repair.",
+      "description": "Test call prices, combinations, chart inputs, ICM, results and honest storytelling.",
+      "topic": "practice",
+      "level": "Practice",
+      "keywords": "quiz exercise self check drills answers review"
+    },
+    {
+      "slug": "reviewing-a-hand",
+      "title": "Review a hand without rewriting it",
+      "description": "Separate recorded action, thinking at the table and later analysis using a worked hand and blank review sheet.",
+      "topic": "results",
+      "level": "Build understanding",
+      "keywords": "hand history reconstruction hand review worksheet debrief evidence"
+    },
+    {
+      "slug": "variance-and-results",
+      "title": "Results deserve context",
+      "description": "Separate tournament ROI from trip expenses, concentrated payouts and the quality of a decision.",
+      "topic": "results",
+      "level": "Go deeper",
+      "keywords": "variance ROI bankroll trip profit results losing streak sample accounting"
+    },
+    {
+      "slug": "hand-to-vlog",
+      "title": "From hand notes to a Poker vlog",
+      "description": "Turn one verified record into a readable hand and useful companion. Keep one private approval packet and use an honest fallback when a video is not ready.",
+      "topic": "creative",
+      "level": "Creator workflow",
+      "keywords": "vlog video editing narration captions subtitles graphics overlay story episode planning"
+    },
+    {
+      "slug": "first-live-tournament",
+      "title": "Your first live tournament, without the guesswork.",
+      "description": "Prepare for registration, finding your seat, asking procedural questions, and leaving with one useful observation.",
+      "topic": "live",
+      "level": "Start here",
+      "keywords": "first live tournament beginner registration seat dealer floor preparation"
+    },
+    {
+      "slug": "choosing-a-tournament",
+      "title": "Read the structure before choosing the tournament.",
+      "description": "Compare total cost, starting big blinds, blind progression and time commitments using two fictional event structures.",
+      "topic": "live",
+      "level": "Start here",
+      "keywords": "structure sheet compare tournament event fees buy in big blinds deep stack levels schedule"
+    },
+    {
+      "slug": "registration-and-reentry",
+      "title": "Registration, re-entry and the cost of another attempt.",
+      "description": "Separate advance registration, starting flights, re-entry and rebuys, then account for each payment without treating previous losses as a reason to continue.",
+      "topic": "live",
+      "level": "Start here",
+      "keywords": "registration late entry reentry rebuy add on flight freezeout budget total cost tickets"
+    },
+    {
+      "slug": "tournament-day",
+      "title": "From the first seat to the end of the day.",
+      "description": "Prepare for breaks, table moves, bagging chips and finishing a tournament day without treating each logistical step as a strategic problem.",
+      "topic": "live",
+      "level": "Start here",
+      "keywords": "tournament day breaks table change bagging chips restart dinner break floor logistics checklist"
+    },
+    {
+      "slug": "recording-hands",
+      "title": "Keep a hand note you can actually review.",
+      "description": "Capture positions, stacks, actions and uncertainty after play, with a checked fictional pot ledger and a reusable private note template.",
+      "topic": "live",
+      "level": "Build understanding",
+      "keywords": "hand history record capture notes notation raise to amount pot ledger unknown reconstruction privacy"
+    },
+    {
+      "slug": "choosing-study-tools",
+      "title": "Choose a study tool by the question it answers.",
+      "description": "Distinguish equity calculators, ICM calculators, solvers, solution libraries and trainers before spending money or interpreting a result.",
+      "topic": "results",
+      "level": "Build understanding",
+      "keywords": "study tool software equity calculator ICM solver trainer library comparison free paid documentation"
+    },
+    {
+      "slug": "evaluating-poker-advice",
+      "title": "Read poker advice without borrowing its certainty.",
+      "description": "Evaluate a video, chart, article or forum answer by its question, evidence and assumptions, then turn it into one checkable study task.",
+      "topic": "results",
+      "level": "Build understanding",
+      "keywords": "advice resources video vlog chart forum source evidence claim study critical review learning path"
+    }
   ]
 }

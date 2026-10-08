@@ -100,6 +100,9 @@ def build_outputs() -> dict[Path, str]:
     values.update(poker_experience.supplement(catalog))
     values.update(poker_resources.supplement(poker_resources.load(ROOT)))
     values.update(poker_library.supplement(reader_entries))
+    # The on-page and printable previews use the exact downloadable blank files.
+    for slug in ("poker-event-planner", "poker-hand-capture", "poker-resource-check"):
+        values[slug.replace("-", "_")] = text((ROOT / "downloads" / (slug + ".md")).read_text(encoding="utf-8"))
     values['hubs_css_version'] = hashlib.sha256((ROOT / 'assets/hubs.css').read_bytes()).hexdigest()[:12]
     values['site_css_version'] = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
     featured = by_id[selection['featured_note']]
@@ -163,6 +166,9 @@ def build_outputs() -> dict[Path, str]:
         if p['path'].startswith('/poker/'):
             reader_version = hashlib.sha256((ROOT / 'assets/poker-reader.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker-reader.css?v={reader_version}">'
+            if p['id'] == 'poker-tournament-checklists':
+                sheets_version = hashlib.sha256((ROOT / 'assets/poker-fieldguide.css').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <link rel="stylesheet" href="/assets/poker-fieldguide.css?v={sheets_version}">'
             if p['id'] == 'poker-resources':
                 resources_css_version = hashlib.sha256((ROOT / 'assets/poker-resources.css').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-resources.css?v={resources_css_version}">'
