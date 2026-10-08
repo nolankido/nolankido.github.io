@@ -97,16 +97,47 @@ def load(root: Path, *, as_of: date | None = None) -> list[dict]:
 
 def card(entry: dict) -> str:
     metadata = ' · '.join([entry['kind'], entry['access'], entry['level']])
-    search = ' '.join(entry[key] for key in ['title', 'publisher', 'description', 'kind', 'notes', 'level'])
     method = 'Page read' if entry['review_method'] == 'page' else 'Search index only'
     return (f'<article class="reader-card" id="resource-{entry["id"]}" data-resource-card '
-            f'data-category="{entry["category"]}" data-access="{entry["access"]}" data-search="{escape(search, quote=True)}">'
+            f'data-category="{entry["category"]}" data-access="{entry["access"]}">'
             f'<p class="reader-eyebrow">{escape(entry["publisher"])}</p>'
             f'<h3><a href="{escape(entry["url"], quote=True)}" rel="external">{escape(entry["title"])}</a></h3>'
             f'<p>{escape(entry["description"])}</p><p class="reader-card-meta">{escape(metadata)}</p>'
             + (f'<p class="small-copy">{escape(entry["notes"])}</p>' if entry['notes'] else '')
             + f'<p class="small-copy">Listing reviewed <time datetime="{entry["reviewed_on"]}">{entry["reviewed_on"]}</time>'
             f' · <a href="#review-policy">{method}</a></p></article>')
+
+
+# Editorial starting points use existing IDs, not a second resource catalogue.
+STARTING_PATHS = (
+    ('Learn the game', 'Begin with the rules, then choose a lesson or a complete historical course.',
+     ('holdem-rules', 'pokerology-lessons', 'mit-holdem')),
+    ('Review a tournament decision', 'Check the call price, prize-equity model, and format before a verdict.',
+     ('pot-odds', 'icm-basics', 'satellite-guide')),
+    ('Study cash games or Omaha', 'Compare different teaching perspectives; do not transfer ranges between formats.',
+     ('splitsuit', 'plo-mastermind-blog', 'equity-realization')),
+    ('Watch the thinking behind a hand', 'Use a creator account and a separate hand breakdown, not results alone.',
+     ('brad-owen-wpt-vlog', 'jaman-hand-breakdown', 'lexy-vlog-notes')),
+    ('Find official event information', 'Start with the organizer, then check the specific schedule and structure.',
+     ('wsop-schedule', 'thunder-valley-poker', 'wynn-poker')),
+    ('Inspect tools and data', 'Read the manual, record format, or implementation before relying on outputs.',
+     ('pio-quick-start', 'phh-format', 'treys-evaluator')),
+)
+
+
+def starting_paths(entries: list[dict], paths=STARTING_PATHS) -> str:
+    by_id = {entry['id']: entry for entry in entries}
+    articles = []
+    for title, reason, ids in paths:
+        if not 2 <= len(ids) <= 4 or len(ids) != len(set(ids)) or any(ident not in by_id for ident in ids):
+            raise ValueError('Starting paths need distinct IDs from the reviewed resource catalogue')
+        links = ''.join(f'<li><a href="#resource-{ident}" data-resource-jump>{escape(by_id[ident]["title"])}</a>'
+                        f' <span class="small-copy">({escape(by_id[ident]["access"])})</span></li>' for ident in ids)
+        articles.append(f'<article><h3>{escape(title)}</h3><p>{escape(reason)}</p><ol>{links}</ol></article>')
+    return ('<details class="poker-details" id="resource-starting-points"><summary>Start with a question: six reading paths</summary>'
+            '<p>Editorial starting points, not rankings or required courses. Each link opens its listing below, '
+            'with access, context and limits. Starting-point links clear active filters.</p>'
+            '<div class="viewer-learning-paths">' + ''.join(articles) + '</div></details>')
 
 
 def supplement(entries: list[dict]) -> dict[str, str]:
@@ -134,7 +165,7 @@ def supplement(entries: list[dict]) -> dict[str, str]:
                 '<details class="poker-details"><summary>Filter by topic</summary><div class="reader-filters" role="group" aria-label="External resource topics">'
                 + buttons + '</div></details></div>')
     return {'poker_resource_count': str(len(entries)), 'poker_resource_topic_count': str(sum(bool(n) for n in counts.values())),
-            'poker_resource_controls': controls,
+            'poker_resource_controls': controls, 'poker_resource_paths': starting_paths(entries),
             'poker_resource_jumps': '<nav class="poker-jump" aria-label="Resource categories">' + ''.join(jumps) + '</nav>',
             'poker_resource_groups': '\n'.join(groups)}
 

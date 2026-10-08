@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "batch": "003",
+  "reviewed_on": "2026-10-07",
+  "timezone": "America/Los_Angeles",
+  "baseline_commit": "036ab0f996e4ea0c9625aa5586b83c7cf20fb2a8",
+  "baseline_resource_count": 82,
+  "accepted_ids": [
+    "andrew-neeme-study",
+    "lexy-vlog-notes",
+    "brad-owen-wpt-vlog",
+    "jaman-hand-breakdown",
+    "poker-guys-archive",
+    "smart-poker-study",
+    "thunder-valley-poker",
+    "wynn-poker",
+    "venetian-deepstack",
+    "mspt-events",
+    "hard-rock-hollywood",
+    "pokeratlas-las-vegas",
+    "pokerology-lessons",
+    "plo-mastermind-blog",
+    "equity-realization",
+    "double-board-bomb-pots",
+    "plo-tournament-adjustments",
+    "pio-quick-start",
+    "hpt-rulebooks",
+    "pagat-betting",
+    "tda-forum",
+    "cardplayer-equity",
+    "gamcare-support",
+    "pagat-history",
+    "treys-evaluator",
+    "hpt-chip-distribution"
+  ],
+  "prior_82_rechecked": false,
+  "scheduled": false,
+  "deferred": [
+    {
+      "id": "chasing-poker-greatness",
+      "url": "https://chasingpokergreatness.com/chasing-poker-greatness-podcast/",
+      "reason": "Search identified a promising archive, but direct page retrieval timed out. Not accepted as a page-level review."
+    },
+    {
+      "id": "recpoker-archive",
+      "url": "https://rec.poker/podcast/",
+      "reason": "The reader returned navigation, login and shop elements rather than a usable public episode catalogue. Seek a better public destination."
+    },
+    {
+      "id": "brad-owen-channel",
+      "url": "https://www.youtube.com/@BradOwenPoker",
+      "reason": "The channel read exposed no useful catalogue. The accepted WPT episode feature is a different, directly inspected destination."
+    },
+    {
+      "id": "bravo-poker-live",
+      "url": "https://www.bravopokerlive.com/",
+      "reason": "Direct retrieval was unavailable. This does not establish an outage or app quality."
+    },
+    {
+      "id": "single-board-bomb-pots",
+      "url": "https://upswingpoker.com/single-board-bomb-pots-the-complete-nlh-strategy-guide/",
+      "reason": "Search discovery did not produce a successful direct article read in this pass."
+    },
+    {
+      "id": "gripsed-home",
+      "url": "https://gripsed.com/",
+      "reason": "The inspected homepage emphasizes operator signup and home-game promotions. Seek a specific public teaching or creator archive rather than adding a generic commercial landing page."
+    },
+    {
+      "id": "pokerbank-pot-odds",
+      "url": "https://www.thepokerbank.com/strategy/mathematics/pot-odds/",
+      "reason": "Not added in this batch: the elementary draw examples need equity-versus-hit-probability context, and the directory already has a focused pot-odds entry. Reconsider only for a distinct reader need."
+    },
+    {
+      "id": "hpt-structures",
+      "url": "https://www.homepokertourney.org/structure.htm",
+      "reason": "Direct retrieval and the linked structure route were unavailable. The separate chip-distribution page was inspected and accepted."
+    }
+  ]
+}

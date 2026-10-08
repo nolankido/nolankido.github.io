@@ -75,6 +75,20 @@ def main():
             assert len(requests) == baseline, requests[baseline:]
             assert page.evaluate('localStorage.length===0 && sessionStorage.length===0')
             assert context.cookies() == []
+            # Curated routes must recover a hidden listing and work by keyboard.
+            page.locator('#resource-starting-points summary').click()
+            expect(page.locator('#resource-starting-points article')).to_have_count(6)
+            search.fill('no-match-zzzz'); expect(page.locator('#resource-empty')).to_be_visible()
+            destination = page.locator('#resource-starting-points a[href="#resource-pio-quick-start"]')
+            destination.focus(); page.keyboard.press('Enter')
+            expect(page).to_have_url(base + '/poker/resources/#resource-pio-quick-start')
+            expect(page.locator('#resource-pio-quick-start')).to_be_visible()
+            expect(cards).to_have_count(total)
+            for query, ident in [('Brad Owen', 'brad-owen-wpt-vlog'), ('Wynn', 'wynn-poker'),
+                                 ('PLO Mastermind', 'plo-mastermind-blog'), ('2013', 'hpt-rulebooks'),
+                                 ('executed', 'treys-evaluator')]:
+                search.fill(query); expect(page.locator('#resource-' + ident)).to_be_visible()
+            page.locator('#resource-reset').click()
             # A category jump recovers from a no-results filter before navigating.
             search.fill('no-match-zzzz'); expect(page.locator('#resource-empty')).to_be_visible()
             page.locator('a[data-resource-jump][href="#events"]').click()
@@ -84,11 +98,16 @@ def main():
             for width in [320, 390, 768, 1024, 1440]:
                 page.set_viewport_size({'width': width, 'height': 1000})
                 page.goto(base + '/poker/resources/')
-                page.locator('#resource-controls details').evaluate('(node)=>node.open=true')
+                page.locator('#resource-controls details, #resource-starting-points').evaluate_all('(nodes)=>nodes.forEach(node=>node.open=true)')
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), width
                 spacing = page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), ('spacing', width)
                 spacing.evaluate('(node)=>node.remove()')
+                # Save the expanded new routes using the existing CI artifact folder.
+                if os.environ.get('RUNNER_TEMP') and width in [390, 1440]:
+                    out = Path(os.environ['RUNNER_TEMP']) / 'poker-reading-previews'
+                    out.mkdir(parents=True, exist_ok=True)
+                    page.locator('#directory-top').screenshot(path=str(out / f'poker-resource-paths-{width}.png'))
             search.fill('ICM'); expect(page.locator('#resource-omaha-rules')).to_be_hidden()
             page.evaluate('window.dispatchEvent(new Event("beforeprint"))')
             page.emulate_media(media='print')
@@ -103,6 +122,9 @@ def main():
                 p = fallback.new_page(); p.goto(base + '/poker/resources/')
                 expect(p.locator('#resource-controls')).to_be_hidden()
                 expect(p.locator('[data-resource-card]:visible')).to_have_count(total)
+                p.locator('#resource-starting-points summary').click()
+                p.locator('#resource-starting-points a[href="#resource-brad-owen-wpt-vlog"]').click()
+                expect(p.locator('#resource-brad-owen-wpt-vlog')).to_be_visible()
                 p.locator('a[data-resource-jump][href="#math"]').click()
                 expect(p.locator('#resource-pot-odds')).to_be_visible()
                 fallback.close()
@@ -111,12 +133,13 @@ def main():
                     page.goto(base + '/poker/resources/')
                     page.locator('#resource-search').fill(query)
                     if query: expect(page.locator('#resource-empty')).to_be_visible()
+                    page.locator('#resource-starting-points summary').click()
                     page.add_script_tag(path=os.environ['AXE_PATH'])
                     result = page.evaluate('async()=>await axe.run(document.querySelector("main"))')
                     assert not result['violations'], [(v['id'], v['help']) for v in result['violations']]
             assert not errors, errors
             context.close(); browser.close()
-        print(f'PASS: {total} external resources, search/topic/free intersections, keyboard filters, empty/reset/XSS recovery, native category jumps, 5 widths with text spacing, print, blocked-script/no-JavaScript access, and no filtering requests, storage, cookies, or URL writes. Provider links were not visited.')
+        print(f'PASS: {total} external resources, search/topic/free intersections, keyboard filters, empty/reset/XSS recovery, native category and six curated-path jumps, 5 widths with text spacing, print, blocked-script/no-JavaScript access, and no filtering requests, storage, cookies, or URL writes. Provider links were not visited.')
     finally:
         server.shutdown(); server.server_close()
 

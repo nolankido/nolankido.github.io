@@ -148,3 +148,16 @@ Discovered -> needs-review -> accepted -> published. A duplicate is closed with 
 ### When the directory becomes much larger
 
 Keep the single catalogue and stable resource IDs. Continue using topic and text filters. Introduce more precise tags or generated category pages only when specific browsing tasks justify them; derive them from the same records. Never maintain several hand-copied versions of the link list. Keep free, paid, historical, and not-yet-verified distinctions visible, and retain the no-JavaScript reading path.
+
+
+## Batch 003: quality and recovery update
+
+The current catalogue has 108 listings: 91 Free, seven Mixed and ten Paid. Batch 003 added 26 page-reviewed destinations, preserving the earlier 82 records and dates rather than claiming a simultaneous recheck. Read `RESOURCE_BATCH_003.md` and its JSON decision log for accepted sources, deferrals, recovered work and limits. Earlier batch counts above are historical snapshots.
+
+Six expandable starting paths now answer practical reader questions using stable catalogue IDs. Titles and access labels are drawn from the catalogue. A retired linked resource must be replaced or removed from its starting path in the same checked release. Native anchor links clear filters and remain available without JavaScript. They are navigation aids, not additional external listings or a ranking system.
+
+The six research briefs in the backlog are now marked partial with a specific remaining question and evidence reference. Partial means a useful pass has shipped but the subject is not exhausted. Do not reopen the initial discovery brief unchanged or call a planned batch completed without a released result.
+
+The next pass should concentrate on verified creator-owned video catalogues or transcripts and non-US original event information, followed by Omaha hi-lo examples and accessibility policies. Prefer a few distinct sources with clear scope over another set of nearly identical vendor pages. Continue resolving weak or unavailable destinations as part of growth.
+
+No internet-wide best ranking, traffic gain or reader-comprehension improvement is claimed. No recurring execution, remote-link scan, scheduled publication or new analytics was enabled by this work.

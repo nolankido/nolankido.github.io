@@ -25,7 +25,11 @@ class ResourceBatchTests(unittest.TestCase):
     def test_research_briefs_are_actionable_plans_not_published_entries(self):
         priorities = []
         for item in self.backlog['research_batches']:
-            self.assertEqual(item['status'], 'planned')
+            self.assertIn(item['status'], {'planned', 'partial', 'completed'})
+            if item['status'] != 'planned':
+                self.assertTrue((ROOT / '_source/poker' / ('RESOURCE_BATCH_' + item['last_batch'] + '.md')).is_file())
+                if item['status'] == 'partial':
+                    self.assertTrue(item['remaining'])
             self.assertNotIn(item['id'], self.entries)
             self.assertTrue(item['question'] and item['acceptance'] and item['queries'])
             priorities.append(item['priority'])
