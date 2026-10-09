@@ -1,0 +1,22 @@
+name: Living Well expansion preview
+on:
+  push:
+    branches: [living-well-reading-expansion-20261009]
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Export source
+        run: git archive --format=tar HEAD > "$RUNNER_TEMP/living-well-expansion-source.tar"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: living-well-expansion-source
+          path: ${{ runner.temp }}/living-well-expansion-source.tar
+          retention-days: 1
+          if-no-files-found: error
