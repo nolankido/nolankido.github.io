@@ -61,3 +61,26 @@
 .topic-context { padding-top:24px; padding-bottom:12px; font:.95rem/1.8 var(--sans); }
 .topic-context p { max-width:76ch; }
 @media print { .topic-context { display:none; } }
+
+/* Task-fit notes and cash-game learning, scoped to Poker. */
+.resource-selection dl { margin:0; }
+.resource-selection dt { font-weight:700; margin-top:14px; }
+.resource-selection dd { margin:4px 0 12px; }
+.resource-selection > div,.task-shortlist > div { padding:0 18px 18px; }
+.selection-option { border-top:1px solid var(--line-dark); padding:20px 0; min-width:0; }
+.selection-option h3 { font:700 1.1rem/1.5 var(--sans); }
+.selection-option p { margin:12px 0; }
+.selection-option a,.resource-selection a { overflow-wrap:anywhere; }
+.cash-route-links { display:flex; flex-wrap:wrap; gap:10px 22px; margin:20px 0 30px; }
+.cash-route-links a { display:inline-flex; align-items:center; min-height:44px; }
+.cash-table-wrap { overflow-x:auto; margin:24px 0; }
+.cash-comparison { border-collapse:collapse; width:100%; font:.9rem/1.6 var(--sans); }
+.cash-comparison caption { font-weight:700; text-align:left; padding-bottom:12px; }
+.cash-comparison th,.cash-comparison td { text-align:left; padding:10px; border-bottom:1px solid var(--line-dark); }
+.cash-sheet pre { white-space:pre-wrap; overflow-wrap:anywhere; }
+@media print {
+  .resource-selection,.task-shortlist { break-inside:auto; }
+  .resource-selection > div,.task-shortlist > div,.cash-sheet > pre { display:block!important; }
+  .resource-selection::details-content,.task-shortlist::details-content,.cash-sheet::details-content { content-visibility:visible!important; }
+  .cash-table-wrap { overflow:visible; }
+}

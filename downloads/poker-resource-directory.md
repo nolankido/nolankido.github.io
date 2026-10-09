@@ -2,7 +2,7 @@
 
 Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.
 
-145 unique resources. Most recent individual listing review: 2026-10-08.
+146 unique resources. Most recent individual listing review: 2026-10-08.
 
 This is not a claim that all resources were rechecked on that date.
 
@@ -902,6 +902,19 @@ Before you use it: Rates vary with game, stakes, players and region. This is not
 
 Listing review: 2026-10-08 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-stars-rake
+
+## PokerStars Live cash-game house rules
+
+https://www.pokerstarslive.com/poker/cashgamerules/
+
+PokerStars Live | rules | Official rules | Free | All levels
+
+The operator's cash-game procedures for table stakes, buy-ins, entry, seating, breaks and conduct.
+
+Before you use it: Applies to this operator, not every room. Ask the actual venue about its current rules and charges. This is not a fee schedule or permission to play.
+
+Listing review: 2026-10-08 (page).
+Directory context: https://nolankido.com/poker/resources/#resource-stars-live-cash-rules
 
 ## PokerStars Live tournament rules
 

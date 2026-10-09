@@ -8,6 +8,9 @@ from html.parser import HTMLParser
 import re
 
 NEXT_READS = {
+    'first-live-cash-game': ('cash-game-costs', 'cash-game-study-path'),
+    'cash-game-costs': ('cash-game-study-path', 'variance-and-results'),
+    'cash-game-study-path': ('choosing-study-tools', 'reviewing-a-hand'),
 'omaha-hi-lo-workshop': ('stud-and-lowball-workshop', 'omaha-and-mixed-games'),
 'stud-and-lowball-workshop': ('omaha-hi-lo-workshop', 'poker-rules-and-fair-play'),
 'multiway-pot-workshop': ('side-pot-lab', 'pot-odds-workshop'),
@@ -18,7 +21,7 @@ NEXT_READS = {
     'reading-preflop-charts': ('range-combinations', 'short-stack-decisions'),
     'poker-rules-and-fair-play': ('table-etiquette', 'first-live-tournament'),
     'free-poker-learning-path': ('holdem-basics', 'pot-odds-workshop'),
-    'cash-game-study': ('position-and-stacks', 'side-pot-lab'),
+    'cash-game-study': ('cash-game-study-path', 'cash-game-costs'),
     'omaha-and-mixed-games': ('hand-rankings', 'betting-and-pots'),
     'poker-books-and-courses': ('free-poker-learning-path', 'evaluating-poker-advice'),
     'poker-research-guide': ('choosing-study-tools', 'tournament-equity'),

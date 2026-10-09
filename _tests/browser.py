@@ -8,6 +8,8 @@ import json
 import os
 from pathlib import Path
 import unittest
+from html.parser import HTMLParser
+from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,19 +26,32 @@ def html_for(route):
     relative = route.lstrip('/')
     path = ROOT / (relative + 'index.html' if route.endswith('/') else relative)
     content = path.read_text(encoding='utf-8')
+    # Mirror the generated page rather than a stale, handwritten CSS list.
+    # External fonts remain blocked; only checked-out local sheets are inlined.
+    class Stylesheets(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.hrefs = []
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if tag == 'link' and 'stylesheet' in attrs.get('rel', '').split():
+                self.hrefs.append(attrs.get('href', ''))
+    links = Stylesheets()
+    links.feed(content)
+    sheets = []
+    for href in links.hrefs:
+        parsed = urlsplit(href)
+        if parsed.scheme or parsed.netloc:
+            continue
+        sheet = (ROOT / parsed.path.lstrip('/')).resolve()
+        if not parsed.path.startswith('/') or not sheet.is_relative_to(ROOT.resolve()) or sheet.suffix != '.css':
+            raise ValueError('Unexpected local stylesheet: ' + href)
+        sheets.append(sheet.read_text(encoding='utf-8'))
+    if not sheets:
+        raise ValueError('Generated page has no local stylesheets: ' + route)
     content = re.sub(r'<link rel="stylesheet"[^>]*>', '', content)
     content = re.sub(r'<script src="/assets/contact.js[^>]*></script>', '', content)
-    css = (ROOT / 'styles.css').read_text() + '\n' + (ROOT / 'assets/site.css').read_text() + '\n' + (ROOT / 'assets/hubs.css').read_text()
-    if route.startswith('/poker/'):
-        css += '\n' + (ROOT / 'assets/poker.css').read_text()
-        css += '\n' + (ROOT / 'assets/poker-reader.css').read_text()
-    # This harness strips stylesheet links, so include the page-scoped sheet too.
-    if route == '/poker/study-calculators/':
-        css += '\n' + (ROOT / 'assets/poker-study-tools.css').read_text()
-    if route == '/poker/tournament-checklists/':
-        css += '\n' + (ROOT / 'assets/poker-fieldguide.css').read_text()
-    if route == '/poker/find/':
-        css += '\n' + (ROOT / 'assets/poker-finder.css').read_text()
+    css = '\n'.join(sheets)
     content = content.replace('</head>', '<style>' + css + '</style></head>')
     for route_name in ['favicon.svg', 'card/qr.svg']:
         data = base64.b64encode((ROOT / route_name).read_bytes()).decode()

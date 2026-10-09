@@ -615,13 +615,14 @@
     "path": "/poker/choosing-study-tools/",
     "title": "Choose a study tool by the question it answers.",
     "seo_title": "Choose a study tool by the question it answers | Nolan Kido Poker",
-    "description": "Distinguish equity calculators, ICM calculators, solvers, solution libraries and trainers before spending money or interpreting a result.",
+    "description": "Match a study question to free lessons, equity tools or solver documentation. Compare fit, first steps, limits and access without unsupported product rankings.",
     "kicker": "Poker / Study resources",
     "source": "poker/choosing-study-tools.html",
     "section": "poker",
     "date": "2026-10-08",
     "updated": "2026-10-08",
-    "poker_guide": true
+    "poker_guide": true,
+    "revision": "Added task-based resource shortlists and reconciled the guide with the shared study-topic navigation."
   },
   {
     "id": "poker-evaluating-poker-advice",
@@ -684,7 +685,8 @@
     "section": "poker",
     "date": "2026-10-08",
     "updated": "2026-10-08",
-    "poker_guide": true
+    "poker_guide": true,
+    "revision": "Connected first-session preparation, charging methods and a five-session cash-game study route."
   },
   {
     "id": "poker-omaha-and-mixed-games",
@@ -887,5 +889,44 @@
     "section": "poker",
     "date": "2026-10-08",
     "updated": "2026-10-08"
+  },
+  {
+    "id": "poker-first-live-cash-game",
+    "path": "/poker/first-live-cash-game/",
+    "title": "Your first live cash-game session.",
+    "seo_title": "Your first live cash-game session | Nolan Kido Poker",
+    "description": "Prepare for a live cash table: questions for the desk, buying chips, taking a seat, leaving and recording the session without double-counting costs.",
+    "kicker": "Poker / Cash games",
+    "source": "poker/first-live-cash-game.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-cash-game-costs",
+    "path": "/poker/cash-game-costs/",
+    "title": "Understand the cost of a cash game.",
+    "seo_title": "Understand the cost of a cash game | Nolan Kido Poker",
+    "description": "Compare rake, caps, fixed collections, extra drops and time charges with fictional schedules and a reconciled session ledger.",
+    "kicker": "Poker / Cash games",
+    "source": "poker/cash-game-costs.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-cash-game-study-path",
+    "path": "/poker/cash-game-study-path/",
+    "title": "A practical cash-game study route.",
+    "seo_title": "A practical cash-game study route | Nolan Kido Poker",
+    "description": "Five self-paced study sessions, free source shortlists and a private worksheet: describe the game, price a call, inspect ranges and finish one review.",
+    "kicker": "Poker / Cash games",
+    "source": "poker/cash-game-study-path.html",
+    "section": "poker",
+    "date": "2026-10-08",
+    "updated": "2026-10-08",
+    "poker_guide": true
   }
 ]

@@ -134,7 +134,7 @@ def resource_format(entry: dict) -> str:
     return matches[0]
 
 
-def card(entry: dict) -> str:
+def card(entry: dict, selection: str = '') -> str:
     metadata = ' · '.join([entry['kind'], entry['access'], entry['level']])
     method = 'Page read' if entry['review_method'] == 'page' else 'Search index only'
     domain = urlsplit(entry['url']).hostname.removeprefix('www.')
@@ -146,6 +146,7 @@ def card(entry: dict) -> str:
             f'<p class="reader-card-meta">{escape(metadata)}</p>'
             f'<p class="resource-description">{escape(entry["description"])}</p>'
             + (f'<p class="small-copy resource-caution"><strong>Before you use it:</strong> {escape(entry["notes"])}</p>' if entry['notes'] else '')
+            + selection
             + f'<p class="small-copy resource-review">Listing reviewed <time datetime="{entry["reviewed_on"]}">{entry["reviewed_on"]}</time>'
             f' · <a href="#review-policy">{method}</a>'
             f' · <a href="#resource-{entry["id"]}" data-resource-jump aria-label="Link to listing: {escape(entry["title"], quote=True)}">Link to listing</a></p></article>')
@@ -183,7 +184,7 @@ def starting_paths(entries: list[dict], paths=STARTING_PATHS) -> str:
             '<div class="viewer-learning-paths">' + ''.join(articles) + '</div></details>')
 
 
-def supplement(entries: list[dict]) -> dict[str, str]:
+def supplement(entries: list[dict], selection_details: dict[str, str] | None = None) -> dict[str, str]:
     counts = {category: sum(e['category'] == category for e in entries) for category in CATEGORIES}
     buttons = '<button type="button" data-resource-filter="all" aria-pressed="true">All topics</button>'
     jumps, groups = [], []
@@ -193,7 +194,7 @@ def supplement(entries: list[dict]) -> dict[str, str]:
         buttons += (f'<button type="button" data-resource-filter="{category}" aria-pressed="false">'
                     f'{escape(label)} ({counts[category]})</button>')
         jumps.append(f'<a href="#{category}" data-resource-jump>{escape(label)} ({counts[category]})</a>')
-        cards = ''.join(card(e) for e in sorted(entries, key=lambda e: e['title'].casefold()) if e['category'] == category)
+        cards = ''.join(card(e, (selection_details or {}).get(e['id'], '')) for e in sorted(entries, key=lambda e: e['title'].casefold()) if e['category'] == category)
         groups.append(f'<section class="section folio-row" id="{category}" data-resource-section aria-labelledby="{category}-heading">'
                       f'<div class="section-meta"><p class="section-label">Elsewhere online</p></div><div class="section-content">'
                       f'<h2 class="section-title" id="{category}-heading">{escape(label)}</h2>'

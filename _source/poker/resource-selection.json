@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "edited_on": "2026-10-08",
+  "entries": [
+    {
+      "resource_id": "pokerology-lessons",
+      "fits": "Learning the betting sequence before studying strategy.",
+      "why": "The lesson index gives a reading order instead of a product menu.",
+      "first_step": "Start with its rules and betting lessons; narrate one fictional hand.",
+      "choose_other": "For a quick hand-ranking lookup, use a reference rather than another lesson.",
+      "alternative_id": "hand-rankings"
+    },
+    {
+      "resource_id": "holdem-rules",
+      "fits": "Checking the order of a basic hold'em hand.",
+      "why": "An operator-written rules introduction identifies streets and betting structures.",
+      "first_step": "Read the blinds and betting sequence, then identify what happens after the flop.",
+      "choose_other": "For entry procedures in a live room, this online game introduction is not enough.",
+      "alternative_id": "stars-live-cash-rules"
+    },
+    {
+      "resource_id": "hand-rankings",
+      "fits": "Comparing traditional high hands without reading a course.",
+      "why": "The ordered reference is a direct lookup for hand categories and ties.",
+      "first_step": "Compare two invented two-pair hands using all five relevant cards.",
+      "choose_other": "For low qualifiers and split pots, high-hand rankings alone are incomplete.",
+      "alternative_id": "omaha-eight-rules"
+    },
+    {
+      "resource_id": "pokerbank-strategy",
+      "fits": "Finding a written explanation of one cash-game concept.",
+      "why": "The archive groups concepts by subject instead of requiring a subscription sequence.",
+      "first_step": "Open its mathematics category and choose expected value; reconstruct one example.",
+      "choose_other": "For a specific pot-odds question, use a direct lesson rather than browsing the archive.",
+      "alternative_id": "pot-odds"
+    },
+    {
+      "resource_id": "pot-odds",
+      "fits": "Converting a call price into a break-even percentage.",
+      "why": "Its step-by-step ledger makes the denominator easy to inspect.",
+      "first_step": "Rebuild the final pot in the calculation section before reading hand recommendations.",
+      "choose_other": "Raw equity above a price is not sufficient when later betting changes the value.",
+      "alternative_id": "equity-realization"
+    },
+    {
+      "resource_id": "effective-stacks",
+      "fits": "Identifying how much two players can contest.",
+      "why": "A focused stack explanation is a smaller starting task than a full strategy course.",
+      "first_step": "Write both stacks at the same point in a hand, then identify the smaller amount.",
+      "choose_other": "For several players and separate pots, use the multiway material.",
+      "alternative_id": "multiway-tips"
+    },
+    {
+      "resource_id": "spr",
+      "fits": "Understanding remaining stack relative to the flop pot.",
+      "why": "The lesson introduces a ratio that can describe the betting context.",
+      "first_step": "Calculate remaining effective stack divided by the pot before the next action.",
+      "choose_other": "A ratio is not a commitment rule; study future betting and range assumptions separately.",
+      "alternative_id": "equity-realization"
+    },
+    {
+      "resource_id": "combinatorics",
+      "fits": "Counting physical hands before assigning range weights.",
+      "why": "Worked counts make matrix labels such as suited and offsuit less abstract.",
+      "first_step": "Count a pocket pair, then repeat after one card of that rank is known.",
+      "choose_other": "For learning the notation before counting, use a range-reading introduction.",
+      "alternative_id": "splitsuit-range-reading"
+    },
+    {
+      "resource_id": "equity-realization",
+      "fits": "Understanding why showdown equity differs from decision value.",
+      "why": "The article explicitly connects equity, expected value and future play.",
+      "first_step": "Read the definitions and write one reason a hand may not realize its raw equity.",
+      "choose_other": "For a basic call-price denominator, start with the simpler accounting lesson.",
+      "alternative_id": "pot-odds"
+    },
+    {
+      "resource_id": "pokerbank-implied-odds",
+      "fits": "Separating a draw's current price from hoped-for later payments.",
+      "why": "A narrow written lesson introduces the future-money assumption directly.",
+      "first_step": "List a branch where a draw completes but receives no further payment.",
+      "choose_other": "For a river with no future betting, use a direct call-price calculation.",
+      "alternative_id": "pot-odds"
+    },
+    {
+      "resource_id": "pokerbank-ev",
+      "fits": "Learning expected value rather than judging one observed result.",
+      "why": "The coin example provides a small check before the poker example.",
+      "first_step": "Recalculate the coin example and state which probabilities are assumed.",
+      "choose_other": "For the rules of who wins a pot, a mathematics article is the wrong starting point.",
+      "alternative_id": "hand-rankings"
+    },
+    {
+      "resource_id": "stars-rake",
+      "fits": "Seeing how an operator documents rake, caps and exceptions.",
+      "why": "This is a primary source for that operator, not a copied comparison chart.",
+      "first_step": "Find the exact game, currency, stakes and dealt-player count in the applicable table.",
+      "choose_other": "For live-room charges, obtain that room's schedule; live house rules are a separate check.",
+      "alternative_id": "stars-live-cash-rules"
+    },
+    {
+      "resource_id": "multiway-tips",
+      "fits": "Questioning a heads-up lesson applied to several opponents.",
+      "why": "The discussion identifies shared defense and multiway considerations.",
+      "first_step": "Read the shared-defense discussion; write who can still act in one example.",
+      "choose_other": "For naming the relevant stacks first, use the smaller stack reference.",
+      "alternative_id": "effective-stacks"
+    },
+    {
+      "resource_id": "splitsuit-range-reading",
+      "fits": "Learning matrices, combinations and percentages as range notation.",
+      "why": "An author-written primer connects the different ways a range is expressed.",
+      "first_step": "Translate one matrix label into its specific card combinations.",
+      "choose_other": "Notation does not establish an opponent's actual range; use counting to check assumptions.",
+      "alternative_id": "combinatorics"
+    },
+    {
+      "resource_id": "equilab",
+      "fits": "Comparing showdown equity for explicitly entered hold'em ranges.",
+      "why": "The official introduction explains the inputs and a text-copy workflow.",
+      "first_step": "Read Getting started, specify both ranges and a board, then change one assumption.",
+      "choose_other": "For strategy across future actions, equity output is not a substitute for a game model.",
+      "alternative_id": "pio-quick-start"
+    },
+    {
+      "resource_id": "flopzilla",
+      "fits": "Inspecting how a proposed hold'em range connects with a board.",
+      "why": "The provider describes combination and hand-category displays for this task.",
+      "first_step": "Inspect its usage material and define one range/board exercise before considering payment.",
+      "choose_other": "For a basic hand-versus-range question, first consider a free equity tool.",
+      "alternative_id": "equilab"
+    },
+    {
+      "resource_id": "wizard-study-docs",
+      "fits": "Learning to navigate an existing solution before interpreting its colors.",
+      "why": "The manual explains spot selection and separates strategy, range and metric views.",
+      "first_step": "Read Navigation and identify the positions and action path for its example.",
+      "choose_other": "For building a different game tree, a stored spot may not fit; inspect solver setup.",
+      "alternative_id": "pio-quick-start"
+    },
+    {
+      "resource_id": "pio-quick-start",
+      "fits": "Understanding what goes into a hold'em solver configuration.",
+      "why": "The official quick start is a setup reference rather than an unexplained chart.",
+      "first_step": "Read the tree-building workflow and list the inputs you would need to reproduce it.",
+      "choose_other": "For an unexplained equity percentage, begin with simpler range-equity analysis.",
+      "alternative_id": "equilab"
+    },
+    {
+      "resource_id": "stars-tool-policy",
+      "fits": "Checking restrictions for tools used with PokerStars.",
+      "why": "The operator states its own policy, including restrictions while the client is open.",
+      "first_step": "Read the restrictions that apply to the exact tool; do not rely on a directory label.",
+      "choose_other": "For a live venue, verify its own rulebook; online software rules do not transfer automatically.",
+      "alternative_id": "stars-live-cash-rules"
+    },
+    {
+      "resource_id": "crush-live-videos",
+      "fits": "Finding a live-hand explanation after choosing a precise study question.",
+      "why": "The catalogue exposes topic and access context before a viewing commitment.",
+      "first_step": "Choose one relevant listing and check access; preserve the hand's stated assumptions.",
+      "choose_other": "For immediate free written study, use an article rather than assuming videos are unlocked.",
+      "alternative_id": "pokerbank-strategy"
+    }
+  ]
+}
