@@ -1,0 +1,87 @@
+name: Assemble reviewed Poker usability update
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  assemble:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/poker-whole-site-usability-20261008'
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Apply exact reviewed source delta
+        run: |
+          python - <<'PY'
+          from pathlib import Path, PurePosixPath
+          import hashlib, json, lzma
+          packed = Path('.github/overview-source-delta.json.xz').read_bytes()
+          assert hashlib.sha256(packed).hexdigest() == '348a54233cd953f70e4286ff7d8873e3e9c9e47eaff0062fe0494dc2ed9e8d0f'
+          raw = lzma.decompress(packed, memlimit=64 * 1024 * 1024)
+          assert len(raw) == 39419
+          changes = json.loads(raw)
+          assert isinstance(changes, dict) and len(changes) == 23
+          staged = {}
+          for name, change in changes.items():
+              p = PurePosixPath(name)
+              assert not p.is_absolute() and '..' not in p.parts
+              assert p.parts[0] in {'_scripts', '_source', '_tests', '_reports', 'assets'}
+              assert set(change) == {'before', 'after', 'edits'}
+              target = Path(name)
+              assert not target.is_symlink()
+              assert target.exists() == (change['before'] is not None), name
+              original = target.read_text(encoding='utf-8') if target.exists() else ''
+              if change['before'] is not None:
+                  assert hashlib.sha256(original.encode()).hexdigest() == change['before'], name
+              last = 0
+              for start, end, replacement in change['edits']:
+                  assert type(start) is int and type(end) is int and isinstance(replacement, str)
+                  assert 0 <= last <= start <= end <= len(original), name
+                  last = end
+              result = original
+              for start, end, replacement in reversed(change['edits']):
+                  result = result[:start] + replacement + result[end:]
+              assert hashlib.sha256(result.encode()).hexdigest() == change['after'], name
+              staged[target] = result
+          for target, result in staged.items():
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_text(result, encoding='utf-8')
+          print('Applied 23 source files with before/after integrity checks')
+          PY
+      - name: Build and validate exact output
+        run: |
+          python _scripts/build.py
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p 'test_*.py' -v
+          node --check assets/poker-finder.js
+          node --check assets/poker-library.js
+          python - <<'PY'
+          import hashlib, json, lzma, subprocess
+          from pathlib import Path
+          changes = json.loads(lzma.decompress(Path('.github/overview-source-delta.json.xz').read_bytes()))
+          paths = set(subprocess.check_output(['git', 'ls-files', '-z']).decode().strip('\0').split('\0')) | set(changes)
+          listing = {p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in sorted(paths) if not p.startswith('.github/')}
+          assert len(listing) == 317
+          digest = hashlib.sha256(json.dumps(listing, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+          assert digest == 'd3ce37b13f51cbc1514ca259d1dfde320aea08b1fb392f47fd377962f1903a56', digest
+          changed = subprocess.check_output(['git', 'diff', '--name-only']).decode().splitlines()
+          assert all(p in changes or p.startswith('poker/') for p in changed), changed
+          print('All 317 non-workflow files exactly match the locally checked release')
+          PY
+          git diff --exit-code -- .github index.html about contact technology creative privacy styles.css assets/site.css assets/hubs.css assets/contact.js _source/layout.html _source/poker/resources.json downloads
+      - name: Commit source and generated content to this branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- _scripts _source _tests _reports assets poker
+          git commit -m 'Build checked whole-Poker navigation and usability improvements'
+          git push origin HEAD:refs/heads/codex/poker-whole-site-usability-20261008
+          echo "ASSEMBLED_COMMIT=$(git rev-parse HEAD)"
