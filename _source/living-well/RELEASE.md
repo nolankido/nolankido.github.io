@@ -45,3 +45,7 @@ The final pull request must also pass the repository's retained whole-site brows
 ## Next content that requires real participation
 
 Publish firsthand field notes only after an experiment has actually been completed and reviewed. Add personal essays or conversations only from genuine supplied experiences and with appropriate permission. The launch material is usable without those later contributions; there are no empty promised interviews or invented findings to fill the gap.
+
+## Narrow-screen text-spacing correction
+
+The retained whole-site audit caught overflow in the shared closing heading on all five topic pages at 320 CSS pixels with user-defined text spacing. The heading was shortened, Living Well section and article headings gained safe wrapping, and the dedicated browser regression now applies text-spacing overrides at every tested width rather than only 390 pixels. All existing accessibility and whole-site regression gates remain required.

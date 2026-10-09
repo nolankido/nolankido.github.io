@@ -45,10 +45,10 @@ def run():
                     assert page.locator('h1').count() == 1
                     assert page.evaluate('document.documentElement.scrollWidth') <= width, (entry['path'], width)
                     expect(page.locator('nav[aria-label="Living Well section"]')).to_be_visible()
+                    spacing = page.add_style_tag(content='* { line-height:1.5!important; letter-spacing:.12em!important; word-spacing:.16em!important; } p { margin-bottom:2em!important; }')
+                    assert page.evaluate('document.documentElement.scrollWidth') <= width, ('text spacing', entry['path'])
+                    spacing.evaluate('(node) => node.remove()')
                     if width == 390:
-                        spacing = page.add_style_tag(content='* { line-height:1.5!important; letter-spacing:.12em!important; word-spacing:.16em!important; } p { margin-bottom:2em!important; }')
-                        assert page.evaluate('document.documentElement.scrollWidth') <= width, ('text spacing', entry['path'])
-                        spacing.evaluate('(node) => node.remove()')
                         if os.environ.get('AXE_PATH'):
                             page.add_script_tag(path=os.environ['AXE_PATH'])
                             result = page.evaluate("async () => await axe.run(document, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa']}})")
