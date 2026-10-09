@@ -153,13 +153,15 @@ def home(root: Path, entries: list[dict], section, cards, topic_cards) -> str:
     body += section('three-free-starts', 'Read · try · explore', 'A few worthwhile places to go.',
         '<div class="lw-cards lw-three">' + ''.join(resource_card(resources[i], True) for i in ['on-being','ucla-mindful','seek'])
         + '</div><p><a href="/living-well/free-resources/">Browse all 18 free resources and their access notes</a></p>')
-    body += section('choose-a-route', 'Read or try', 'One idea. One useful example.',
+    body += section('choose-a-route', 'Read or try', 'A short read. A place to begin.',
         '<div class="lw-routes lw-two"><article class="lw-route"><p class="lw-eyebrow">Explore an idea</p>'
         '<h3><a href="/living-well/ideas/">Essays &amp; reading paths</a></h3><p>Meaning, attention, and questions that '
         'do not need a quick answer.</p></article><article class="lw-route"><p class="lw-eyebrow">Try something</p>'
         '<h3><a href="/living-well/guides/">Practical guides</a></h3><p>Small examples, tools, and optional exercises '
         'for an ordinary day.</p></article></div>'
-        + '<span id="first-collection"></span>' + cards([by_slug['technology-that-helps-you-notice'], by_slug['weekly-reset']]))
+        + '<span id="first-collection"></span>' + cards([by_slug['read-a-poem-without-a-lesson'], by_slug['meditation-without-buying-a-lifestyle']])
+        + '<p><a href="/living-well/consciousness-which-question/">Explore consciousness</a> · '
+        '<a href="/living-well/learning-with-ai-without-skipping-understanding/">Try a worked AI-learning example</a></p>')
     body += section('five-subjects', 'Browse by subject', 'Follow what interests you.', topic_cards())
     body += section('a-small-invitation', 'Keep exploring', 'No program to keep up with.',
         '<p class="section-deck">Read, listen, try something, or close the page and take the question with you. '

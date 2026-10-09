@@ -53,7 +53,7 @@ def run():
                             page.add_script_tag(path=os.environ['AXE_PATH'])
                             result = page.evaluate("async () => await axe.run(document, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa']}})")
                             violations.extend({'path': entry['path'], 'id': v['id'], 'impact': v['impact'], 'nodes': [n['target'] for n in v['nodes']]} for v in result['violations'])
-                    if width in [390, 1440] and entry['id'] in {'living-well', 'living-well-weekly-reset', 'living-well-worksheets', 'living-well-field-notes', 'living-well-topics', 'living-well-free-resources', 'living-well-spiritual-curiosity-reading-path', 'living-well-technology-that-helps-you-notice'}:
+                    if width in [390, 1440] and entry['id'] in {'living-well', 'living-well-weekly-reset', 'living-well-worksheets', 'living-well-field-notes', 'living-well-topics', 'living-well-free-resources', 'living-well-spiritual-curiosity-reading-path', 'living-well-technology-that-helps-you-notice', 'living-well-meditation-without-buying-a-lifestyle', 'living-well-consciousness-which-question', 'living-well-read-a-poem-without-a-lesson', 'living-well-learning-with-ai-without-skipping-understanding', 'living-well-a-tool-you-can-put-down'}:
                         page.screenshot(path=str(out / (entry['id'] + '-' + str(width) + '.png')), full_page=True)
                 page.goto(base + '/')
                 boxes = [page.locator('.destination-' + slug).bounding_box() for slug in ['technology', 'living-well', 'poker', 'creative']]
@@ -87,6 +87,20 @@ def run():
                 page.keyboard.press('Enter')
                 expect(card.locator('.lw-resource-notes')).to_have_attribute('open', '')
                 expect(card.locator('.lw-access')).to_be_visible()
+            page.goto(base + '/living-well/ideas/')
+            page.locator('#short-reads').scroll_into_view_if_needed()
+            page.locator('a[href="/living-well/read-a-poem-without-a-lesson/"]').focus()
+            page.keyboard.press('Enter')
+            expect(page.locator('h1')).to_have_text('Read a poem without turning it into a lesson')
+            page.locator('.lw-outline summary').click()
+            page.locator('.lw-outline a[href="#sources-and-context"]').focus()
+            page.keyboard.press('Enter')
+            expect(page).to_have_url(base + '/living-well/read-a-poem-without-a-lesson/#sources-and-context')
+            page.goto(base + '/living-well/guides/')
+            page.locator('a[href="/living-well/meditation-without-buying-a-lifestyle/"]').focus()
+            page.keyboard.press('Enter')
+            expect(page.locator('h1')).to_have_text('Meditation without buying a lifestyle')
+            expect(page.locator('.lw-source-notes')).to_be_visible()
             page.goto(base + '/living-well/worksheets/')
             for slug, title, desc, guide, content in lw.SHEETS:
                 section = page.locator('section').filter(has=page.locator('h2#' + slug))
@@ -111,7 +125,7 @@ def run():
             nojs = browser.new_context(java_script_enabled=False, accept_downloads=True)
             nojs.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             plain = nojs.new_page()
-            for path in ['/living-well/', '/living-well/guides/', '/living-well/weekly-reset/', '/living-well/worksheets/', '/living-well/field-notes/', '/living-well/free-resources/', '/living-well/spiritual-curiosity-reading-path/', '/living-well/technology-that-helps-you-notice/']:
+            for path in ['/living-well/', '/living-well/guides/', '/living-well/weekly-reset/', '/living-well/worksheets/', '/living-well/field-notes/', '/living-well/free-resources/', '/living-well/spiritual-curiosity-reading-path/', '/living-well/technology-that-helps-you-notice/'] + ['/living-well/' + e['slug'] + '/' for e in json.loads((ROOT / '_source/living-well/expansion.json').read_text())['entries']]:
                 assert plain.goto(base + path).status == 200
                 expect(plain.locator('h1')).to_be_visible()
             plain.goto(base + '/living-well/free-resources/')

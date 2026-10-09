@@ -29,7 +29,7 @@ def date_label(value: str) -> str:
 HUBS = [
     ('', 'Living Well', 'Spirituality, practical wisdom, and technology for everyday life.'),
     ('free-resources', 'Free resources for a thoughtful ordinary life', '18 selected free resources, with a clear starting point and honest account, app, and library requirements.'),
-    ('ideas', 'Essays & reading paths', 'Essays about meaning, attention, relationships, and the kind of life our tools are meant to serve.'),
+    ('ideas', 'Essays, notes & reading paths', 'Essays about meaning, attention, relationships, and the kind of life our tools are meant to serve.'),
     ('guides', 'Try something useful', 'Practical guides with a simple starting point, an optional technology-assisted approach, and clear stopping rules.'),
     ('field-notes', 'Field notes & small experiments', 'Ready-to-try experiment plans, with proposed methods kept separate from completed personal findings.'),
     ('topics', 'Five ways into Living Well', 'Browse meaning, attention, everyday AI, relationships, and choices without needing a particular belief system.'),
@@ -153,7 +153,7 @@ A paper note is enough. No tracking app is required.
 
 def load(root: Path) -> list[dict]:
     entries = []
-    for name in ('launch.json', 'further.json', 'discovery.json'):
+    for name in ('launch.json', 'further.json', 'discovery.json', 'expansion.json'):
         data = json.loads((root / '_source/living-well' / name).read_text(encoding='utf-8'))
         entries.extend(data['entries'])
     seen = set()
@@ -175,10 +175,24 @@ def load(root: Path) -> list[dict]:
             raise ValueError('A Living Well revision needs an update date')
         if entry['topic'] not in topics or entry['kind'] not in KINDS:
             raise ValueError('Invalid Living Well topic or kind: ' + slug)
-        if entry.get('format') not in {None, 'reading-path'}:
+        if entry.get('format') not in {None, 'reading-path', 'practice-path', 'short-read'}:
             raise ValueError('Unknown Living Well reading format')
         if not entry['sections'] or not entry.get('question'):
             raise ValueError('Living Well entries need substance and a closing question')
+        if entry.get('format') == 'practice-path' and entry['kind'] != 'guide':
+            raise ValueError('Practice paths must be guides')
+        if entry.get('format') == 'short-read' and entry['kind'] != 'essay':
+            raise ValueError('Short reads must be essays')
+        if not isinstance(entry.get('sources', []), list):
+            raise ValueError('Living Well sources must be a list')
+        for citation in entry.get('sources', []):
+            if not isinstance(citation, dict):
+                raise ValueError('Living Well source must be an object')
+            for field in ('label', 'url', 'note', 'checked'):
+                if not isinstance(citation.get(field), str) or not citation[field].strip():
+                    raise ValueError('Missing Living Well source field: ' + field)
+            resources.safe_url(citation['url'])
+            date_label(citation['checked'])
         headings = [s['heading'] for s in entry['sections']]
         if len(headings) != len(set(headings)):
             raise ValueError('Duplicate Living Well section heading: ' + slug)
@@ -223,6 +237,7 @@ def manifest(root: Path) -> list[dict]:
 
 def minutes(entry: dict) -> int:
     text = entry['lead'] + ' '.join(s['heading'] + ' ' + ' '.join(s['paragraphs']) for s in entry['sections']) + entry.get('practice', '') + entry['question']
+    text += ' '.join(c['label'] + ' ' + c['note'] for c in entry.get('sources', []))
     return max(1, math.ceil(len(re.findall(r'\b[\w\'-]+\b', unescape(re.sub('<[^>]+>', ' ', text)))) / 220))
 
 
@@ -231,7 +246,7 @@ def link(slug: str, title: str) -> str:
 
 
 def entry_label(entry: dict) -> str:
-    return 'Reading path' if entry.get('format') == 'reading-path' else KINDS[entry['kind']]
+    return {'reading-path': 'Reading path', 'practice-path': 'Free practice path', 'short-read': 'Short read'}.get(entry.get('format'), KINDS[entry['kind']])
 
 
 def cards(entries: list[dict]) -> str:
@@ -253,6 +268,16 @@ def worksheet_exports() -> dict[Path, str]:
     return {Path('downloads/living-well-' + slug + '.md'): content for slug, title, desc, guide, content in SHEETS}
 
 
+def source_notes(entry: dict) -> str:
+    citations = entry.get('sources', [])
+    if not citations:
+        return ''
+    return ('<aside class="lw-source-notes" aria-labelledby="sources-and-context"><h2 id="sources-and-context">Sources and context</h2>'
+            + ''.join('<p>' + resources.external(c['url'], c['label']) + '. ' + escape(c['note'])
+                + ' <span class="small-copy">Source checked <time datetime="' + escape(c['checked'], quote=True) + '">'
+                + escape(date_label(c['checked'])) + '</time>.</span></p>' for c in citations) + '</aside>')
+
+
 def article(entry: dict, entries: list[dict]) -> str:
     by_slug = {e['slug']: e for e in entries}
     body = '<article class="lw-article" aria-label="' + escape(entry['title'], quote=True) + '"><div class="article-body shell prose"><p class="article-lead">' + entry['lead'] + '</p>'
@@ -268,6 +293,7 @@ def article(entry: dict, entries: list[dict]) -> str:
         body += '<span id="part-6"></span><span id="try-it"></span>'
     body += '<h2 id="one-question">One question to take with you</h2><p>' + entry['question'] + '</p>'
     body += '<p class="editorial-note">Prepared with AI assistance for this website. These are editorial reflections and practical thinking aids, not accounts of Nolan\'s personal experiences or professional care. Illustrative situations are hypothetical. Research and borrowed guidance are identified where used. <a href="/living-well/editorial-standards/">Read the editorial standards</a>.</p>'
+    body += source_notes(entry)
     if entry.get('related'):
         body += '<nav class="lw-next" aria-label="Related Living Well reading"><h2>Continue with a related question</h2>' + ''.join('<p>' + link(slug, by_slug[slug]['title']) + '</p>' for slug in entry['related'][:2]) + '</nav>'
     body += '<nav class="article-navigation" aria-label="After this article"><a href="/living-well/">Living Well home</a><a href="/living-well/topics/' + entry['topic'] + '/">More in this subject</a><a href="/contact/">Send a correction</a></nav></div></article>'
@@ -298,11 +324,15 @@ def render(page: dict, root: Path) -> str:
         collection = [e for e in entries if e['kind'] == kind]
         if kind == 'essay':
             paths = [e for e in collection if e.get('format') == 'reading-path']
-            essays = [e for e in collection if e.get('format') != 'reading-path']
+            short_reads = [e for e in collection if e.get('format') == 'short-read']
+            essays = [e for e in collection if e.get('format') not in {'reading-path', 'short-read'}]
             return (section('reading-paths', 'A few places to begin', 'Follow a question.',
                     '<p class="section-deck">Selected routes through a question, with reasons to explore the sources rather than a syllabus to finish.</p>' + cards(paths))
+                    + section('short-reads', 'A shorter visit', 'Worth a few minutes.', '<p class="section-deck">One specific thing to read or notice, without a program to complete.</p>' + cards(short_reads))
                     + section('reading-collection', 'Read at your pace', 'Essays to explore.', '<p class="section-deck">' + intro + '</p>' + cards(essays)))
-        return section('reading-collection', 'Try something', 'One useful change is enough.',
+        paths = [e for e in collection if e.get('format') == 'practice-path']
+        collection = [e for e in collection if e.get('format') != 'practice-path']
+        return section('free-practice-paths', 'No paid plan needed', 'Find a starting point.', '<p class="section-deck">Compare a few free ways to explore a practice before choosing whether to try one.</p>' + cards(paths)) + section('reading-collection', 'Try something', 'One useful change is enough.',
             '<p class="section-deck">' + intro + '</p><p><a href="/living-well/weekly-reset/#part-7">Start with a fictional worked example</a> · '
             '<a href="/living-well/worksheets/">Use a blank worksheet</a> · <a href="/living-well/free-resources/">Find a free outside resource</a></p>' + cards(collection))
     if hub == 'topics':
@@ -368,6 +398,8 @@ def decorate(page: dict, root: Path, header: str, schema: dict) -> tuple[str, st
         if page.get('revision'):
             meta += '<p class="editorial-note"><strong>Revision, <time datetime="' + page['updated'] + '">' + page['updated'] + '</time>:</strong> ' + escape(page['revision']) + '</p>'
         outline = '<details class="lw-outline"><summary>On this page</summary><nav aria-label="On this page"><ol>' + ''.join('<li><a href="#part-' + str(i) + '">' + escape(s['heading']) + '</a></li>' for i, s in enumerate(entry['sections'], 1)) + '<li><a href="#one-question">One question to take with you</a></li></ol></nav></details>'
+        if entry.get('sources'):
+            outline = outline.replace('</ol>', '<li><a href="#sources-and-context">Sources and context</a></li></ol>', 1)
         header = header.replace('</section>', meta + outline + '</section>', 1)
         schema.update({'@type': 'Article', 'headline': page['title'], 'datePublished': page['date'], 'author': {'@type': 'Person', 'name': 'Nolan Kido', 'url': 'https://nolankido.com/about/'}})
         extra += '\n  <meta property="article:published_time" content="' + page['date'] + '">'

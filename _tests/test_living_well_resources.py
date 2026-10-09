@@ -65,7 +65,7 @@ class ResourceTests(unittest.TestCase):
             self.assertLessEqual(primary.count('aria-current='), 1)
 
     def test_new_publication_and_honest_revision_dates(self):
-        new = {'spiritual-curiosity-reading-path', 'technology-that-helps-you-notice'}
+        new = {'spiritual-curiosity-reading-path', 'technology-that-helps-you-notice'} | {e['slug'] for e in json.loads((ROOT / '_source/living-well/expansion.json').read_text())['entries']}
         revised = {'what-i-mean-by-living-well', 'weekly-reset', 'preserve-family-story', 'free-afternoon'}
         for slug, e in self.entries.items():
             self.assertEqual(e['published'], '2026-10-09' if slug in new else '2026-10-08')
@@ -85,8 +85,8 @@ class ResourceTests(unittest.TestCase):
         items = feed.findall('./channel/item')
         dates = [parsedate_to_datetime(e.findtext('pubDate')) for e in items]
         self.assertEqual(dates, sorted(dates, reverse=True))
-        self.assertEqual(len(items), 18)
-        self.assertEqual(len({e.findtext('guid') for e in items}), 18)
+        self.assertEqual(len(items), 23)
+        self.assertEqual(len({e.findtext('guid') for e in items}), 23)
         self.assertIn('No completed personal field notes', self.outputs[Path('living-well/field-notes/index.html')])
 
     def test_worksheets_readable_without_download_or_javascript(self):
