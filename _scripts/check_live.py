@@ -26,6 +26,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets = ['downloads/poker-cash-study.md', 'assets/poker-topics.css', 'assets/poker-study-tools.css', 'assets/poker-study-tools.js', 'assets/poker-finder.css', 'assets/poker-finder.js', 'downloads/poker-math-reference.md', 'downloads/poker-resource-directory.md', 'downloads/poker-resource-directory.json', 'assets/poker-fieldguide.css', 'assets/poker-resources.css', 'assets/poker-resources.js', 'assets/poker-reader.css', 'assets/poker-library.js', 'downloads/poker-short-stack-record.md', 'downloads/poker-results-review.md', 'downloads/poker-episode-plan.md', 'downloads/poker-study-cycle.md', 'downloads/poker-watch-along.md', 'downloads/poker-viewer-reference.md', 'assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['poker-event-planner', 'poker-hand-capture', 'poker-resource-check']]
     assets += ['downloads/' + name + '.md' for name in ['decision-record', 'tool-trust-check', 'learning-loop']]
+    assets += ['assets/living-well.css', 'living-well/feed.xml']
+    assets += [str(path) for path in build.living_well.worksheet_exports()]
     catalog = build.poker_content.load(root)
     assets += sorted({e['image']['src'].lstrip('/') for e in catalog['entries'] if e.get('image')})
     for path in assets:

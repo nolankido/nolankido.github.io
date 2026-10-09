@@ -20,11 +20,11 @@ class Links(HTMLParser):
             self.destinations.append(values['href'])
 
 class GatewayTests(unittest.TestCase):
-    def test_three_real_destinations_in_reading_order(self):
+    def test_four_real_destinations_in_reading_order(self):
         outputs = build.build_outputs()
         home = outputs[Path('index.html')]
-        self.assertEqual(Links(home).destinations, ['/technology/', '/poker/', '/creative/'])
-        self.assertIn('Technology, poker,<br>and creative work.', home)
+        self.assertEqual(Links(home).destinations, ['/technology/', '/living-well/', '/poker/', '/creative/'])
+        self.assertIn('Technology, living well,<br>poker, and creative work.', home)
         self.assertNotIn('destination-notes', home)
         for route in Links(home).destinations:
             self.assertIn(build.output_path(route), outputs)

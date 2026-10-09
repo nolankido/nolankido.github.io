@@ -44,7 +44,7 @@ class DesignTests(unittest.TestCase):
             self.assertIn(destination, content)
         for obsolete in ['stat-strip', 'selected-notes', 'reading-table', 'class="resource-list"', 'featured_note', '<time']:
             self.assertNotIn(obsolete, content)
-        self.assertEqual(content.count('class="destination destination-'), 3)
+        self.assertEqual(content.count('class="destination destination-'), 4)
         self.assertLess(content.index('destination-technology'), content.index('destination-poker'))
         self.assertLess(content.index('destination-poker'), content.index('destination-creative'))
 

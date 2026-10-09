@@ -20,6 +20,11 @@ TOPICS = [
     ('choices', 'Choices & growth', 'Clarify values, make decisions, and improve without treating yourself as a defect.', 'Some decisions trade one worthwhile life for another. A useful method makes the tradeoffs easier to see without pretending that a score, a prompt, or a disappointing outcome settles everything.', ['decide-what-matters', 'growth-without-self-rejection', 'two-good-lives']),
 ]
 KINDS = {'essay': 'Essay', 'guide': 'Practical guide', 'experiment': 'Proposed experiment'}
+
+def date_label(value: str) -> str:
+    date = datetime.strptime(value, '%Y-%m-%d')
+    return f'{date.strftime("%B")} {date.day}, {date.year}'
+
 HUBS = [
     ('', 'Living Well', 'Spirituality, practical wisdom, and technology for everyday life.'),
     ('ideas', 'Explore an idea', 'Essays about meaning, attention, relationships, and the kind of life our tools are meant to serve.'),
@@ -156,6 +161,16 @@ def load(root: Path) -> list[dict]:
         if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', slug) or slug in seen:
             raise ValueError('Invalid or duplicate Living Well slug: ' + slug)
         seen.add(slug)
+        published = entry.get('published')
+        if not isinstance(published, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', published):
+            raise ValueError('Living Well needs an explicit publication date: ' + slug)
+        date_label(published)
+        if entry.get('updated'):
+            date_label(entry['updated'])
+            if entry['updated'] < published:
+                raise ValueError('A Living Well revision cannot precede publication')
+        if entry.get('revision') and not entry.get('updated'):
+            raise ValueError('A Living Well revision needs an update date')
         if entry['topic'] not in topics or entry['kind'] not in KINDS:
             raise ValueError('Invalid Living Well topic or kind: ' + slug)
         if not entry['sections'] or not entry.get('question'):
@@ -194,7 +209,8 @@ def manifest(root: Path) -> list[dict]:
                       'title': entry['title'], 'seo_title': entry.get('seo_title', entry['title'] + ' | Nolan Kido'),
                       'description': entry['description'], 'kicker': 'Living Well / ' + KINDS[entry['kind']],
                       'source': 'living-well/page.html', 'section': 'living-well',
-                      'living_well_entry': entry['slug'], 'date': DATE})
+                      'living_well_entry': entry['slug'], 'living_well_kind': entry['kind'], 'date': entry['published'],
+                      **{key: entry[key] for key in ('updated', 'revision') if entry.get(key)}})
     return pages
 
 
@@ -279,7 +295,7 @@ def render(page: dict, root: Path) -> str:
         body += section('reporting-method', 'What happened?', 'The field-note format', '<div class="prose"><p>A completed note should name the original problem, the actual dates and circumstances, the change tried, setup and maintenance effort, observations, competing explanations, and the decision to keep, modify, or stop. It should say what the experience cannot establish.</p><p>Observations from one person are not a controlled demonstration of a general benefit. Record departures from the plan rather than rewriting the plan to make the result look cleaner. Do not infer another person\'s feelings without asking them.</p><p>A future conversation or photograph will be published only with suitable permission. No testimonial, interview, or personal result has been invented to fill this collection.</p><p><a href="/downloads/living-well-small-experiment.md" download>Download the blank field-note worksheet</a> or <a href="/living-well/worksheets/#small-experiment">preview it before downloading</a>.</p></div>')
         return body
     if hub == 'worksheets':
-        body = section('keep-your-answers', 'Private by design', 'Use these away from the website.', '<p class="section-deck">Read a guide first, then use the blank page that fits. These are ordinary editable text files in Markdown format. Open one in a text editor, or print this page using your browser.</p><p>There are no answer fields or uploads here. This section does not collect worksheet responses. Ordinary page visits still follow the site\'s <a href="/privacy/">existing privacy notice</a>. A third-party AI service has its own data practices.</p>')
+        body = section('keep-your-answers', 'Private by design', 'Use these away from the website.', '<p class="section-deck">Read a guide first, then use the blank page that fits. These are ordinary editable text files in Markdown format. Open one in a text editor, or open the previews you need and print this page using your browser.</p><p>There are no answer fields or uploads here. This section does not collect worksheet responses. Ordinary page visits still follow the site\'s <a href="/privacy/">existing privacy notice</a>. A third-party AI service has its own data practices.</p>')
         for slug, title, desc, guide, content in SHEETS:
             body += section(slug, 'Blank worksheet', escape(title), '<p class="section-deck">' + escape(desc) + '</p><div class="link-row"><a href="/downloads/living-well-' + slug + '.md" download>Download the blank Markdown file</a>' + link(guide, 'Read the companion guide') + '</div><details class="lw-preview"><summary>Preview the complete blank worksheet</summary><pre>' + escape(content) + '</pre></details>')
         return body
@@ -298,6 +314,8 @@ def section_navigation(page: dict) -> str:
     active = page.get('living_well_hub')
     if page.get('living_well_topic'):
         active = 'topics'
+    if page.get('living_well_kind'):
+        active = {'essay': 'ideas', 'guide': 'guides', 'experiment': 'field-notes'}[page['living_well_kind']]
     items = []
     for slug, label in [('', 'Home'), ('ideas', 'Ideas'), ('guides', 'Guides'), ('field-notes', 'Field notes'), ('topics', 'Topics'), ('worksheets', 'Worksheets')]:
         route = PREFIX + (slug + '/' if slug else '')
@@ -315,7 +333,7 @@ def decorate(page: dict, root: Path, header: str, schema: dict) -> tuple[str, st
         entry = next(e for e in load(root) if e['slug'] == page['living_well_entry'])
         topic = next(t for t in TOPICS if t[0] == entry['topic'])
         crumbs += '<span aria-hidden="true"> / </span>' + link('topics/' + topic[0], topic[1])
-        meta = '<p class="note-meta">' + KINDS[entry['kind']] + ' · ' + str(minutes(entry)) + ' min read · Published <time datetime="' + page['date'] + '">October 8, 2026</time></p>'
+        meta = '<p class="note-meta">' + KINDS[entry['kind']] + ' · ' + str(minutes(entry)) + ' min read · Published <time datetime="' + page['date'] + '">' + date_label(page['date']) + '</time></p>'
         if page.get('revision'):
             meta += '<p class="editorial-note"><strong>Revision, <time datetime="' + page['updated'] + '">' + page['updated'] + '</time>:</strong> ' + escape(page['revision']) + '</p>'
         outline = '<details class="lw-outline"><summary>On this page</summary><nav aria-label="On this page"><ol>' + ''.join('<li><a href="#part-' + str(i) + '">' + escape(s['heading']) + '</a></li>' for i, s in enumerate(entry['sections'], 1)) + '<li><a href="#one-question">One question to take with you</a></li></ol></nav></details>'
@@ -347,7 +365,7 @@ def exports(root: Path, site_url: str) -> dict[Path, str]:
         for k, v in [('title', entry['title']), ('link', url), ('description', entry['description'])]:
             ET.SubElement(item, k).text = v
         ET.SubElement(item, 'guid', {'isPermaLink': 'true'}).text = url
-        ET.SubElement(item, 'pubDate').text = format_datetime(datetime.strptime(DATE, '%Y-%m-%d').replace(tzinfo=timezone.utc), usegmt=True)
+        ET.SubElement(item, 'pubDate').text = format_datetime(datetime.strptime(entry['published'], '%Y-%m-%d').replace(tzinfo=timezone.utc), usegmt=True)
     ET.indent(rss, space='  ')
     result[Path('living-well/feed.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(rss, encoding='unicode') + '\n'
     return result

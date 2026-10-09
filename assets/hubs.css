@@ -94,3 +94,16 @@
   .destination, .poker-feature, .fictional-hand { background: white; color: black; }
   .playing-card { color: black; background: white; }
 }
+
+/* Living Well major destination; retain Technology first and the existing Poker/Creative pair. */
+.destination-living-well { grid-column: 1 / -1; background: var(--paper-light); border-top: 3px solid var(--green); }
+.destination-living-well p { max-width: 64ch; }
+@media (max-width: 620px) {
+  .nav-links li:nth-child(4), .nav-links li:last-child { grid-column: auto; justify-self: auto; }
+  .nav-links { grid-template-columns: repeat(3, minmax(0, auto)); gap: 2px 12px; }
+}
+@media (max-width: 400px) {
+  .nav { flex-direction: column; align-items: stretch; }
+  .nav .brand { align-self: flex-start; }
+  .nav-links { width: 100%; justify-content: space-between; }
+}
