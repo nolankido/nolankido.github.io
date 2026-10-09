@@ -21,6 +21,7 @@ import poker_experience
 import poker_resources
 import poker_collections
 import poker_finder
+import poker_selection
 import poker_reference
 import poker_quality
 import poker_topics
@@ -106,14 +107,23 @@ def build_outputs() -> dict[Path, str]:
     values.update(poker_experience.supplement(catalog))
     resource_entries = poker_resources.load(ROOT)
     collections = poker_collections.load(ROOT, resource_entries, pages)
-    values.update(poker_resources.supplement(resource_entries))
+    resource_selection = poker_selection.load(ROOT, resource_entries)
+    values.update(poker_selection.supplement(resource_selection, resource_entries))
+    values.update(poker_resources.supplement(resource_entries, poker_selection.directory_details(resource_selection, resource_entries)))
+    values['poker_cash_study_sheet'] = text((ROOT / 'downloads/poker-cash-study.md').read_text(encoding='utf-8'))
     values.update(poker_quality.supplement(resource_entries))
     values.update(poker_collections.supplement(collections, resource_entries))
+    # Count the visible generated shortlist and worksheet content, including
+    # disclosure text, in the two guides expanded by this release.
+    for entry in reader_entries:
+        if entry['slug'] in {'choosing-study-tools', 'cash-game-study-path'}:
+            source = (SOURCE / 'poker' / (entry['slug'] + '.html')).read_text(encoding='utf-8')
+            entry['minutes'] = poker_library.minutes(fill(source, values))
     values.update(poker_library.supplement(reader_entries))
     topics = poker_topics.load(ROOT, pages, reader_entries, resource_entries)
     values.update(poker_topics.supplement(topics))
     finder_entries = poker_topics.annotate(poker_finder.entries(ROOT, pages, reader_entries, resource_entries), topics)
-    values.update(poker_finder.render(finder_entries))
+    values.update(poker_finder.render(poker_selection.annotate(finder_entries, resource_selection)))
     values.update(poker_reference.supplement())
     # The on-page and printable previews use the exact downloadable blank files.
     for slug in ("poker-event-planner", "poker-hand-capture", "poker-resource-check"):

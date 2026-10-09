@@ -50,10 +50,13 @@
     {
       "id": "cash-games",
       "title": "Cash games",
-      "summary": "Stacks, rake, multiway pots and study material for cash-game decisions.",
+      "summary": "First live sessions, game costs, multiway decisions and a practical cash-game study route.",
       "primary_guides": [
         "cash-game-study",
-        "multiway-pot-workshop"
+        "multiway-pot-workshop",
+        "first-live-cash-game",
+        "cash-game-costs",
+        "cash-game-study-path"
       ],
       "related_guides": [
         "position-and-stacks",
@@ -71,26 +74,32 @@
         "equilab",
         "flopzilla",
         "pokerbank-implied-odds",
-        "multiway-tips"
+        "multiway-tips",
+        "pot-odds",
+        "spr",
+        "combinatorics",
+        "equity-realization",
+        "pokerbank-ev",
+        "stars-live-cash-rules"
       ],
       "featured_resources": [
         "pokerbank-strategy",
         "stars-rake",
         "crush-live-videos"
       ],
-      "start_label": "Cash-game study guide",
+      "start_label": "Follow the cash-game study route",
       "steps": [
         {
-          "guide": "cash-game-study",
-          "label": "Separate cash-game costs from tournament assumptions"
+          "guide": "cash-game-study-path",
+          "label": "Follow five focused study sessions"
         },
         {
-          "guide": "position-and-stacks",
-          "label": "Identify position and effective stacks"
+          "guide": "first-live-cash-game",
+          "label": "Prepare for your first live cash table"
         },
         {
-          "guide": "multiway-pot-workshop",
-          "label": "Check a multiway call price and eligible pots"
+          "guide": "cash-game-costs",
+          "label": "Understand rake, collections and time charges"
         }
       ],
       "glossary_terms": [
@@ -290,7 +299,8 @@
       "related_guides": [
         "poker-research-guide",
         "poker-math-reference",
-        "poker-media-study"
+        "poker-media-study",
+        "cash-game-study-path"
       ],
       "resource_categories": [
         "tools",
@@ -345,7 +355,8 @@
         "choosing-a-tournament",
         "table-etiquette",
         "tournament-day",
-        "poker-access-and-protection"
+        "poker-access-and-protection",
+        "first-live-cash-game"
       ],
       "resource_categories": [
         "events",

@@ -971,6 +971,20 @@
       "review_method": "page"
     },
     {
+      "id": "stars-live-cash-rules",
+      "title": "PokerStars Live cash-game house rules",
+      "url": "https://www.pokerstarslive.com/poker/cashgamerules/",
+      "publisher": "PokerStars Live",
+      "category": "rules",
+      "kind": "Official rules",
+      "access": "Free",
+      "level": "All levels",
+      "description": "The operator's cash-game procedures for table stakes, buy-ins, entry, seating, breaks and conduct.",
+      "notes": "Applies to this operator, not every room. Ask the actual venue about its current rules and charges. This is not a fee schedule or permission to play.",
+      "reviewed_on": "2026-10-08",
+      "review_method": "page"
+    },
+    {
       "id": "stars-live-rules",
       "title": "PokerStars Live tournament rules",
       "url": "https://www.pokerstarslive.com/poker/rules/",

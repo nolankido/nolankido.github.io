@@ -352,6 +352,30 @@
       "topic": "live",
       "level": "Start here",
       "keywords": "legal licence license register jurisdiction location account phishing responsible gambling player protection help safety"
+    },
+    {
+      "slug": "first-live-cash-game",
+      "title": "Your first live cash-game session.",
+      "description": "Prepare for a live cash table: questions for the desk, buying chips, taking a seat, leaving and recording the session without double-counting costs.",
+      "topic": "cash",
+      "level": "Start here",
+      "keywords": "first live cash game beginner casino cardroom waiting list buy in top up leaving cash out table stakes"
+    },
+    {
+      "slug": "cash-game-costs",
+      "title": "Understand the cost of a cash game.",
+      "description": "Compare rake, caps, fixed collections, extra drops and time charges with fictional schedules and a reconciled session ledger.",
+      "topic": "cash",
+      "level": "Build understanding",
+      "keywords": "rake cap fixed collection jackpot drop time charge tips hourly cost wallet chip ledger double count"
+    },
+    {
+      "slug": "cash-game-study-path",
+      "title": "A practical cash-game study route.",
+      "description": "Five self-paced study sessions, free source shortlists and a private worksheet: describe the game, price a call, inspect ranges and finish one review.",
+      "topic": "cash",
+      "level": "Start here",
+      "keywords": "cash game study path free lessons hand review resource selection beginner no subscription worksheet"
     }
   ]
 }
