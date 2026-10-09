@@ -43,6 +43,7 @@
   let exportURL;
   function renderShelf() {
     if (!shelf || !shelfList || !shelfCount || !shelfDownload) return;
+    shelf.hidden = chosen.size === 0;
     shelfList.replaceChildren();
     const lines = ['# My poker study list', '', 'Public links selected on Nolan Kido Poker. This is a snapshot, not a new source review.', ''];
     for (const card of cards) {
@@ -65,7 +66,7 @@
     } else shelfDownload.removeAttribute('href');
   }
   if (shelf && shelfList && shelfCount && shelfDownload) {
-    shelf.hidden = false;
+    shelf.hidden = true;
     cards.forEach(card => {
       const button = card.el.querySelector('.finder-save');
       if (!button) return;
@@ -78,7 +79,7 @@
         renderShelf();
       });
     });
-    document.getElementById('finder-shelf-clear').addEventListener('click', () => {chosen.clear(); renderShelf();});
+    document.getElementById('finder-shelf-clear').addEventListener('click', () => {chosen.clear(); renderShelf(); input.focus();});
     renderShelf();
   }
   let limit = 12;
@@ -140,11 +141,13 @@
   // Read only whitelisted navigation state. Never serialize search input.
   const topicValues = new Set(Array.from(topic.options, option => option.value));
   const kindValues = new Set(Array.from(kind.options, option => option.value));
+  const filterPanel = document.getElementById('finder-options');
   function restoreFilters() {
     const params = new URLSearchParams(window.location.hash.slice(1));
     topic.value = topicValues.has(params.get('topic')) ? params.get('topic') : 'all';
     kind.value = kindValues.has(params.get('kind')) ? params.get('kind') : 'all';
     free.checked = params.get('free') === '1';
+    if (filterPanel) filterPanel.open = window.innerWidth > 760 || topic.value !== 'all' || kind.value !== 'all' || free.checked;
     input.value = '';
     update();
   }
@@ -168,6 +171,7 @@
     update(); saveFilters(); input.focus();
   }
   input.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(update, 120); });
+  input.addEventListener('search', () => update());
   input.addEventListener('keydown', event => {
     if (event.key === 'Enter') { event.preventDefault(); update(); heading.focus(); }
     if (event.key === 'Escape') { event.preventDefault(); clear(); }

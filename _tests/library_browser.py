@@ -35,9 +35,9 @@ def main():
             search=page.locator('#library-search')
             search.fill('ICM');expect(page.locator('#library-grid [data-library-card]:visible')).not_to_have_count(0)
             expect(page.locator('#library-grid a[href="/poker/tournament-equity/"]')).to_be_visible()
-            page.locator('[data-filter="creative"]').click()
+            page.locator('[data-filter="poker-world"]').click()
             expect(page.locator('#library-empty')).to_be_visible()
-            expect(page.locator('[data-filter="creative"]')).to_have_attribute('aria-pressed','true')
+            expect(page.locator('[data-filter="poker-world"]')).to_have_attribute('aria-pressed','true')
             page.locator('#library-reset').click();expect(search).to_be_focused()
             expect(page.locator('#library-grid [data-library-card]:visible')).to_have_count(total)
             for query in ['side-pots','  SIDE   POTS  ','side pots']:
@@ -46,8 +46,8 @@ def main():
             assert page.locator('#poker-library img').count()==0
             search.fill('zzzz-no-match');expect(page.locator('#library-empty')).to_be_visible()
             page.locator('#library-reset').click()
-            page.locator('[data-filter="creative"]').focus();page.keyboard.press('Space')
-            expect(page.locator('#library-grid [data-library-card]:visible')).to_have_count(1)
+            page.locator('[data-filter="poker-world"]').focus();page.keyboard.press('Space')
+            expect(page.locator('#library-grid [data-library-card]:visible')).to_have_count(page.locator('#library-grid [data-topics~="poker-world"]').count())
             expect(page.locator('#library-grid a[href="/poker/hand-to-vlog/"]')).to_be_visible()
             page.locator('#library-reset').click()
             assert page.url==url

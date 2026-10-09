@@ -148,6 +148,11 @@ def supplement(topics: list[dict]) -> dict[str, str]:
                    'You do not need to search, complete a lesson or sign in.</p>' if ident == 'safer-play' else '')
         caution = ('<p class="topic-caution">This is a source directory, not a live schedule, room-availability service or legal eligibility check. '
                    'Confirm current details directly with the organizer or room.</p>' if ident == 'places-to-play' else '')
+        source_index = ('<details class="poker-details topic-all-sources"><summary>All ' + str(len(topic['resources'])) + ' outside sources</summary>'
+                        '<div><p class="topic-meta">The complete topic list. Access labels describe the linked resource, not every product from the publisher.</p><ul>'
+                        + ''.join('<li><a href="' + escape(r['url'], quote=True) + '" rel="external">' + escape(r['title']) + '</a>'
+                                  '<span class="topic-meta">' + escape(r['publisher'] + ' · ' + r['access']) + ' · <a href="/poker/resources/#resource-' + r['id'] + '">Listing and review context</a></span></li>'
+                                  for r in sorted(topic['resources'], key=lambda r: r['title'].casefold())) + '</ul></div></details>')
         sections.append('<section class="section folio-row topic-section" id="' + ident + '" aria-labelledby="topic-' + ident + '">'
                         '<div class="section-meta"><p class="section-label">Browse / ' + f'{index:02}' + '</p></div>'
                         '<div class="section-content"><h2 class="section-title" id="topic-' + ident + '">' + title + '</h2>'
@@ -157,8 +162,8 @@ def supplement(topics: list[dict]) -> dict[str, str]:
                         '<ul>' + guides + '</ul></details><p><a href="' + escape(finder_url(topic, 'guide'), quote=True)
                         + '">Search on-site material in this topic</a></p></div>'
                         '<div><h3>Selected outside sources</h3><p class="topic-meta">Editorial starting points, not a ranking.</p><ul class="topic-sources">'
-                        + ''.join(source_card(r) for r in topic['featured']) + '</ul>'
-                        '<p><a href="' + escape(finder_url(topic, 'resource'), quote=True) + '">Browse all '
+                        + ''.join(source_card(r) for r in topic['featured']) + '</ul>' + source_index
+                        + '<p><a href="' + escape(finder_url(topic, 'resource'), quote=True) + '">Browse all '
                         + str(len(topic['resources'])) + ' outside sources in this topic</a></p></div></div>'
                         '<div class="topic-return"><a href="' + escape(finder_url(topic), quote=True) + '">Search this topic</a>'
                         '<a href="/poker/topics/">Back to all topics</a></div></div></section>')
@@ -189,8 +194,9 @@ def breadcrumb(page: dict, topics: list[dict]) -> str:
         links += '<li><a href="/poker/topics/">Topics</a></li><li><a href="/poker/topics/' + topic['id'] + '/">' + escape(topic['title']) + '</a></li>'
     else:
         labels = {'/poker/find/': 'Search', '/poker/topics/': 'Topic map', '/poker/library/': 'Guides',
-                  '/poker/resources/': 'External resources'}
-        links += '<li><span>' + escape(labels.get(page['path'], 'Stories and study')) + '</span></li>'
+                  '/poker/resources/': 'External resources', '/poker/resource-quality/': 'Resource review record',
+                  '/poker/study-calculators/': 'Study calculators', '/poker/tournament-checklists/': 'Planning sheets'}
+        links += '<li><span>' + escape(labels.get(page['path'], page['title'])) + '</span></li>'
     return '<nav class="poker-breadcrumb" aria-label="Breadcrumb"><ol>' + links + '</ol></nav>'
 
 

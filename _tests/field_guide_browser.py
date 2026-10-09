@@ -44,7 +44,7 @@ def main():
                     if width in [390, 1280] and slug in ['live-tournament-guide', 'choosing-a-tournament', 'tournament-checklists'] and screenshots:
                         page.screenshot(path=str(screenshots / f'poker-field-{slug}-{width}.png'), full_page=True)
             page.goto(origin + '/poker/library/')
-            page.locator('[data-filter="live"]').click()
+            page.locator('[data-filter="tournaments"]').click()
             expect(page.locator('#library-grid a[href="/poker/first-live-tournament/"]')).to_be_visible()
             page.locator('#library-search').fill('reentry')
             expect(page.locator('#library-grid a[href="/poker/registration-and-reentry/"]')).to_be_visible()

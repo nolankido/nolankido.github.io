@@ -144,7 +144,7 @@ class LabsExpansionTests(unittest.TestCase):
         self.assertIn('Second step', result)
         self.assertIn('href="#first"', result)
         self.assertNotIn('secret', result); self.assertNotIn('hidden', result)
-        self.assertNotIn('href="#intro"', result)
+        self.assertIn('href="#intro"', result)
         self.assertNotIn(' open', result)
         self.assertEqual(section_outline('<h2 id="one">One</h2>'), '')
         count = 0

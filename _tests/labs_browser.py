@@ -54,7 +54,10 @@ def main():
                         outline.locator('summary').focus(); page.keyboard.press('Enter')
                         expect(outline.locator('nav')).to_be_visible()
                         targets = outline.locator('a').evaluate_all('(nodes) => nodes.map(n => n.getAttribute("href"))')
-                        assert len(targets) == 5
+                        expected = page.locator('article.viewer-guide h2[id]').evaluate_all(
+                            '(nodes) => nodes.filter(n => !n.closest("details, nav, [hidden], [aria-hidden=true]")).map(n => "#" + n.id)')
+                        assert len(expected) >= 6 and expected[0] == '#lab-intro', (route, expected)
+                        assert targets == expected, (route, targets, expected)
                         for target in targets:
                             assert page.locator(target).count() == 1
                             assert page.locator(target).evaluate('(node) => !node.closest("details")')

@@ -42,3 +42,10 @@
 @media print { .finder-save, #finder-shelf-clear, #finder-shelf-download { display:none!important; } }
 .finder-refine > div { flex:1 1 190px; }
 #finder-topic { min-width:0; }
+
+.finder-options { margin-top:18px; }
+.finder-options > summary { font-size:.9rem; line-height:1.5; }
+.finder-options .finder-refine { margin:16px; }
+.finder-options .reader-filters { padding:0 16px 16px; }
+.page-poker-find #finder-intro { font-size:1.3rem; line-height:1.45; margin-bottom:14px; }
+@media(max-width:760px) { .page-poker-find .section-meta { display:none; } }
