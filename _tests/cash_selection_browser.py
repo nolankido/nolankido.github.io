@@ -92,8 +92,10 @@ def main():
         # to make a failed action pass.
         nojs=browser.new_context(java_script_enabled=False)
         nojs.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
-        p=nojs.new_page()
         for width in (390,1280):
+            # A fresh document also resets native disclosure state. Reusing the
+            # same fragment URL is a same-document navigation with no response.
+            p=nojs.new_page()
             p.set_viewport_size({'width':width,'height':900})
             response=p.goto(origin+'/poker/resources/#resource-equilab')
             assert response.status==200
@@ -117,6 +119,8 @@ def main():
                 if dest:p.screenshot(path=str(dest/f'poker-cash-nojs-failure-{width}.png'),full_page=True)
                 raise
             if dest:p.screenshot(path=str(dest/f'poker-cash-nojs-selection-{width}.png'))
+            p.close()
+        p=nojs.new_page()
         p.goto(origin+'/poker/choosing-study-tools/')
         p.locator('.task-shortlist').nth(1).locator(':scope > summary').click()
         expect(p.locator('.task-shortlist').nth(1).locator('.selection-option')).to_have_count(2)
