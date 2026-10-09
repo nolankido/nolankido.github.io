@@ -1,0 +1,22 @@
+name: Living Well branch verification
+on:
+  push:
+    branches: [living-well-initial-build-20261008]
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Export tracked source for isolated verification
+        run: git archive --format=tar HEAD > "$RUNNER_TEMP/living-well-source.tar"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: living-well-source
+          path: ${{ runner.temp }}/living-well-source.tar
+          retention-days: 1
+          if-no-files-found: error
