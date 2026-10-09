@@ -28,7 +28,7 @@ def date_label(value: str) -> str:
 
 HUBS = [
     ('', 'Living Well', 'Spirituality, practical wisdom, and technology for everyday life.'),
-    ('free-resources', 'Free resources for a thoughtful ordinary life', '18 selected free resources, with a clear starting point and honest account, app, and library requirements.'),
+    ('free-resources', 'Free resources for a thoughtful ordinary life', '66 selected resources in 12 collections, with useful starting points and clear free-access, account, app, and library requirements.'),
     ('ideas', 'Essays, notes & reading paths', 'Essays about meaning, attention, relationships, and the kind of life our tools are meant to serve.'),
     ('guides', 'Try something useful', 'Practical guides with a simple starting point, an optional technology-assisted approach, and clear stopping rules.'),
     ('field-notes', 'Field notes & small experiments', 'Ready-to-try experiment plans, with proposed methods kept separate from completed personal findings.'),
@@ -232,7 +232,7 @@ def manifest(root: Path) -> list[dict]:
                       'source': 'living-well/page.html', 'section': 'living-well',
                       'living_well_entry': entry['slug'], 'living_well_kind': entry['kind'], 'date': entry['published'],
                       **{key: entry[key] for key in ('updated', 'revision') if entry.get(key)}})
-    return pages
+    return pages + resources.manifest(root)
 
 
 def minutes(entry: dict) -> int:
@@ -292,7 +292,7 @@ def article(entry: dict, entries: list[dict]) -> str:
     if entry['slug'] == 'what-i-mean-by-living-well':
         body += '<span id="part-6"></span><span id="try-it"></span>'
     body += '<h2 id="one-question">One question to take with you</h2><p>' + entry['question'] + '</p>'
-    body += '<p class="editorial-note">Prepared with AI assistance for this website. These are editorial reflections and practical thinking aids, not accounts of Nolan\'s personal experiences or professional care. Illustrative situations are hypothetical. Research and borrowed guidance are identified where used. <a href="/living-well/editorial-standards/">Read the editorial standards</a>.</p>'
+    body += '<p class="editorial-note">Prepared with AI assistance. These are editorial reflections and practical guides, not accounts of Nolan\'s personal experiences. Illustrative examples are hypothetical; sources and their context are identified where used. <a href="/living-well/editorial-standards/">Read the editorial standards</a>.</p>'
     body += source_notes(entry)
     if entry.get('related'):
         body += '<nav class="lw-next" aria-label="Related Living Well reading"><h2>Continue with a related question</h2>' + ''.join('<p>' + link(slug, by_slug[slug]['title']) + '</p>' for slug in entry['related'][:2]) + '</nav>'
@@ -301,6 +301,8 @@ def article(entry: dict, entries: list[dict]) -> str:
 
 
 def render(page: dict, root: Path) -> str:
+    if page.get('living_well_collection'):
+        return resources.detail(root, page['living_well_collection'], section)
     entries = load(root)
     by_slug = {e['slug']: e for e in entries}
     if page.get('living_well_entry'):
@@ -361,7 +363,7 @@ def render(page: dict, root: Path) -> str:
 def section_navigation(page: dict) -> str:
     if not page['path'].startswith(PREFIX):
         return ''
-    active = page.get('living_well_hub')
+    active = 'free-resources' if page.get('living_well_collection') else page.get('living_well_hub')
     if page.get('living_well_entry') == 'what-i-mean-by-living-well':
         active = 'start'
     elif page.get('living_well_kind'):
@@ -406,7 +408,9 @@ def decorate(page: dict, root: Path, header: str, schema: dict) -> tuple[str, st
         if page.get('updated'):
             extra += '\n  <meta property="article:modified_time" content="' + page['updated'] + '">'
     else:
-        schema['@type'] = 'CollectionPage' if page.get('living_well_topic') or page.get('living_well_hub') in {'home', 'ideas', 'guides', 'topics', 'field-notes', 'free-resources'} else 'WebPage'
+        schema['@type'] = 'CollectionPage' if page.get('living_well_collection') or page.get('living_well_topic') or page.get('living_well_hub') in {'home', 'ideas', 'guides', 'topics', 'field-notes', 'free-resources'} else 'WebPage'
+    if page.get('living_well_collection'):
+        crumbs += '<span aria-hidden="true"> / </span><a href="/living-well/free-resources/">Free resources</a>'
     crumbs += '</nav>'
     if page['path'] != PREFIX:
         header = header.replace('<p class="page-kicker">', crumbs + '<p class="page-kicker">', 1)

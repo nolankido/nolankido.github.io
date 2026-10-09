@@ -24,12 +24,12 @@ class ResourceTests(unittest.TestCase):
         cls.outputs = build.build_outputs()
         cls.page = cls.outputs[Path('living-well/free-resources/index.html')]
 
-    def test_eighteen_selections_six_complete_collections(self):
-        self.assertEqual(len(self.catalog['resources']), 18)
-        self.assertEqual(len(self.catalog['shelves']), 6)
+    def test_sixtysix_selections_twelve_complete_collections(self):
+        self.assertEqual(len(self.catalog['resources']), 66)
+        self.assertEqual(len(self.catalog['shelves']), 12)
         for shelf in self.catalog['shelves']:
             entries = [e for e in self.catalog['resources'] if e['shelf'] == shelf['id']]
-            self.assertEqual(len(entries), 3)
+            self.assertGreaterEqual(len(entries), 4)
             self.assertIn(shelf['start_id'], {e['id'] for e in entries})
             self.assertIn('id="shelf-' + shelf['id'] + '"', self.page)
         for e in self.catalog['resources']:
