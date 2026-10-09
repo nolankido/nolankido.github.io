@@ -36,6 +36,7 @@ jobs:
         run: |
           python _tests/browser.py
           python _tests/design_browser.py
+          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/living_well_browser.py
       - name: Whole-site accessibility and failure recovery
         env:
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
@@ -55,6 +56,8 @@ jobs:
           path: |
             ${{ runner.temp }}/poker-reading-previews/poker-*.png
             ${{ runner.temp }}/poker-reading-previews/*.log
+            ${{ runner.temp }}/poker-reading-previews/living-well-*.png
+            ${{ runner.temp }}/poker-reading-previews/living-well-*.json
           retention-days: 1
           if-no-files-found: error
       - name: Verify published main release
