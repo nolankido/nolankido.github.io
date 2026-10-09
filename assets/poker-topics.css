@@ -84,3 +84,20 @@
   .resource-selection::details-content,.task-shortlist::details-content,.cash-sheet::details-content { content-visibility:visible!important; }
   .cash-table-wrap { overflow:visible; }
 }
+
+/* Whole-subsite wayfinding: retain targets, readable lists and visible focus. */
+.topic-all-sources { margin-top:20px; }
+.topic-all-sources ul { padding-left:22px; margin:16px 0; }
+.topic-all-sources li { margin-bottom:16px; }
+.topic-all-sources .topic-meta { display:block; margin-top:4px; }
+.topic-all-sources a { overflow-wrap:anywhere; }
+#library-count:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+.page-poker-find .page-hero, .page-poker-library .page-hero, .page-poker-study .page-hero { padding-block:28px; }
+.page-poker-find .folio-row, .page-poker-library .folio-row { padding-block:28px; }
+@media print { .topic-all-sources::details-content { content-visibility:visible!important; } .topic-all-sources > div { display:block!important; } }
+
+.page-poker .poker-paths + p { margin-top:18px; }
+.page-poker-library #library-intro { font-size:1.3rem; line-height:1.45; margin-bottom:14px; }
+.library-options { margin-top:18px; }
+.library-options .reader-filters { padding:0 16px 16px; }
+@media(max-width:760px) { .page-poker-library .section-meta { display:none; } }

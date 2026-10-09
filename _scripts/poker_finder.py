@@ -75,7 +75,7 @@ class GuideText(HTMLParser):
             if tag not in self.VOID:
                 self.skip += 1
             return
-        if tag in {'script', 'style', 'nav', 'details', 'noscript'} or 'hidden' in attrs:
+        if tag in {'script', 'style', 'nav', 'details', 'noscript'} or 'hidden' in attrs or attrs.get('aria-hidden') == 'true':
             if tag not in self.VOID:
                 self.skip = 1
             return

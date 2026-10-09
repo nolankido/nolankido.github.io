@@ -46,9 +46,9 @@ def main():
             for t in TOPICS:
                 page.goto(origin + '/poker/topics/' + t['id'] + '/')
                 group = page.locator('#' + t['id'])
-                summary = group.locator('details summary')
+                summary = group.locator('.topic-guides > summary')
                 summary.focus(); page.keyboard.press('Enter')
-                expect(group.locator('details ul')).to_be_visible()
+                expect(group.locator('.topic-guides ul')).to_be_visible()
                 group.locator('a[href$="kind=resource"]').click()
                 expect(page.locator('#finder-topic')).to_have_value(t['id'])
                 expect(page.locator('#finder-kind')).to_have_value('resource')
@@ -95,7 +95,7 @@ def main():
             expect(p.locator('.topic-card')).to_have_count(10)
             p.locator('h3 a[href="/poker/topics/learn/"]').click()
             expect(p.locator('.topic-source')).to_have_count(3)
-            p.locator('#learn summary').click(); expect(p.locator('#learn details ul')).to_be_visible()
+            p.locator('#learn .topic-guides > summary').click(); expect(p.locator('#learn .topic-guides ul')).to_be_visible()
             p.goto(origin + '/poker/find/#topic=learn')
             assert p.locator('[data-finder-card]:visible').count() > 200
             expect(p.locator('#finder-controls')).not_to_be_visible()

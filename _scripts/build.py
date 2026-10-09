@@ -13,7 +13,7 @@ from email.utils import format_datetime
 from xml.etree import ElementTree as ET
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from catalog import supplement
-from poker_navigation import section_navigation
+from poker_navigation import section_navigation, clean_body
 import poker_content
 import poker_library
 import poker_reading
@@ -119,8 +119,8 @@ def build_outputs() -> dict[Path, str]:
         if entry['slug'] in {'choosing-study-tools', 'cash-game-study-path'}:
             source = (SOURCE / 'poker' / (entry['slug'] + '.html')).read_text(encoding='utf-8')
             entry['minutes'] = poker_library.minutes(fill(source, values))
-    values.update(poker_library.supplement(reader_entries))
     topics = poker_topics.load(ROOT, pages, reader_entries, resource_entries)
+    values.update(poker_library.supplement(reader_entries, topics))
     values.update(poker_topics.supplement(topics))
     finder_entries = poker_topics.annotate(poker_finder.entries(ROOT, pages, reader_entries, resource_entries), topics)
     values.update(poker_finder.render(poker_selection.annotate(finder_entries, resource_selection)))
@@ -145,6 +145,8 @@ def build_outputs() -> dict[Path, str]:
                 topic = next(t for t in topics if t['id'] == p['poker_topic'])
                 page_values = {**values, 'poker_topic_detail': poker_topics.detail(topic)}
             body = fill(source.read_text(encoding='utf-8'), page_values)
+        if p['path'].startswith('/poker/'):
+            body = clean_body(body)
         section = p.get('section') or ('notes' if p.get('note') else p['id'])
         nav = ''.join(f'<li><a href="/{name}/"' + ((' aria-current="page"' if p['path'] == '/' + name + '/' else ' aria-current="location"') if section == name else '')
                       + f'>{label}</a></li>' for name, label in [('technology', 'Technology'), ('poker', 'Poker'), ('creative', 'Creative Work'), ('about', 'About'), ('contact', 'Contact')])

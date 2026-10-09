@@ -781,8 +781,8 @@
   {
     "id": "poker-find",
     "path": "/poker/find/",
-    "title": "Find a useful poker answer.",
-    "seo_title": "Find poker guides, resources and definitions | Nolan Kido",
+    "title": "Search Poker.",
+    "seo_title": "Search Poker guides and resources | Nolan Kido",
     "description": "Search on-site guide prose, resource listings and glossary definitions; jump to matching sections and export a private, temporary study list.",
     "kicker": "Poker / Answer finder",
     "source": "poker/find.html",

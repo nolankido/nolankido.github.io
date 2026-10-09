@@ -72,7 +72,7 @@ class VisibleHeadings(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-        blocked = (bool(self.stack and self.stack[-1][1]) or tag in {'details', 'script', 'style'}
+        blocked = (bool(self.stack and self.stack[-1][1]) or tag in {'details', 'script', 'style', 'nav', 'noscript'}
                    or 'hidden' in attrs or attrs.get('aria-hidden') == 'true')
         if tag not in self.VOID:
             self.stack.append((tag, blocked))
@@ -105,8 +105,8 @@ class VisibleHeadings(HTMLParser):
 
 
 def section_outline(source: str) -> str:
-    """Skip the opening heading and render existing major-section anchors only."""
-    headings = VisibleHeadings(source).headings[1:]
+    """Include every visible major section, including the first real section."""
+    headings = VisibleHeadings(source).headings
     if len(headings) < 2:
         return ''
     seen = set()
