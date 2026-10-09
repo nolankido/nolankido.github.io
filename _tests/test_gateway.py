@@ -48,10 +48,10 @@ class GatewayTests(unittest.TestCase):
         outputs = build.build_outputs()
         technology = outputs[Path('technology/index.html')]
         creative = outputs[Path('creative/index.html')]
-        self.assertIn('not yet a project portfolio', technology)
+        self.assertIn('Start with selected writing on useful tools', technology)
         self.assertIn('/notes/trustworthy-tools/', technology)
         self.assertIn('/resources/#tool-trust-check', technology)
-        self.assertIn('not yet a gallery', creative)
+        self.assertIn('Start with selected writing on explanation', creative)
         self.assertIn('/notes/generous-explanations/', creative)
         self.assertIn('/notes/finishing-is-a-decision/', creative)
         for page in [technology, creative]:

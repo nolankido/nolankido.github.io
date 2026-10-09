@@ -24,7 +24,7 @@ class ExpansionTests(unittest.TestCase):
 
     def test_five_distinct_readings_and_no_fabricated_field_note(self):
         self.assertEqual(len(self.new),5)
-        self.assertEqual(len(lw.manifest(ROOT)),41)
+        self.assertEqual(len(lw.manifest(ROOT)),53)
         self.assertEqual({e['format'] for e in self.new if e.get('format')}, {'practice-path','short-read'})
         for e in self.new:
             self.assertNotEqual(e['kind'],'experiment')

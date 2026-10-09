@@ -6,17 +6,17 @@
     "seo_title": "Nolan Kido | Technology, Living Well, Poker & Creative Work",
     "description": "Explore technology, Living Well, poker, and creative work: useful tools, spirituality, everyday life, thoughtful decisions, and visual storytelling.",
     "source": "home.html",
-    "updated": "2026-10-08"
+    "updated": "2026-10-09"
   },
   {
     "id": "about",
     "path": "/about/",
     "title": "A little about me.",
     "seo_title": "About | Nolan Kido",
-    "description": "Meet Nolan Kido: building useful tools, playing tournament poker, and exploring writing, design, and visual storytelling.",
+    "description": "An introduction to Nolan Kido and his interests in useful technology, Living Well, tournament poker, and creative work.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-05"
+    "updated": "2026-10-09"
   },
   {
     "id": "notes",
@@ -53,9 +53,10 @@
     "path": "/bio/",
     "title": "A brief introduction.",
     "seo_title": "Short Biography | Nolan Kido",
-    "description": "Short public biographies of Nolan Kido for introductions and profiles.",
+    "description": "Short public introductions to Nolan Kido: practical technology, thoughtful living, tournament poker, and creative work.",
     "kicker": "Biography",
-    "source": "bio.html"
+    "source": "bio.html",
+    "updated": "2026-10-09"
   },
   {
     "id": "card",
@@ -178,7 +179,7 @@
     "description": "Practical AI, useful software, and the work of making tools trustworthy. Selected reading and a practical resource from Nolan Kido.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-08"
+    "updated": "2026-10-09"
   },
   {
     "id": "creative",
@@ -188,7 +189,7 @@
     "description": "Writing, design, and visual storytelling. Selected writing from Nolan Kido on explanation and finishing creative work.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-10-05"
+    "updated": "2026-10-09"
   },
   {
     "id": "poker-start-here",
