@@ -77,7 +77,7 @@ def main():
         page.locator('[data-filter="cash-games"]').click()
         expect(page.locator('#library-grid a[href="/poker/cash-game-study-path/"]')).to_be_visible()
         page.locator('#library-search').focus();page.keyboard.press('Escape')
-        expect(page.locator('[data-library-card]:visible')).to_have_count(47)
+        expect(page.locator('[data-library-card]:visible')).to_have_count(len(build.poker_library.load(ROOT,build.public_pages())))
         page.set_viewport_size({'width':1280,'height':900})
         # All sources on every topic are now native, useful links without JS.
         nojs=browser.new_context(java_script_enabled=False)

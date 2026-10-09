@@ -1,6 +1,6 @@
 # Whole-Poker overview and reader-usability pass
 
-Review date: October 8, 2026 (Hawaii)
+Review date: October 8, 2026
 Production baseline: 094da26e8aba530da1f7cfc496ef9dabfca8a7de
 Scope: the complete 70-page Poker subsection; build integration and regression tests.
 
