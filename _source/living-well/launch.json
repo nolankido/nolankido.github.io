@@ -2,62 +2,56 @@
   "entries": [
     {
       "slug": "what-i-mean-by-living-well",
-      "title": "What I mean by Living Well",
-      "description": "A starting point for exploring meaning, practical wisdom, and technology without turning life into a permanent optimization project.",
+      "title": "Start here: the questions behind Living Well",
+      "description": "A short introduction to the interests behind this section, with one idea, one free resource, and one practical place to begin.",
       "topic": "meaning",
       "kind": "essay",
-      "lead": "A useful tool should make room for something worth doing. Living Well begins with the harder question: what, exactly, is that something?",
+      "lead": "I’m interested in spirituality, life improvement, and technology that makes ordinary life better. Living Well is a place to explore how those interests meet.",
       "sections": [
         {
-          "heading": "A life is more than a well-managed schedule",
+          "heading": "A place for curiosity",
           "paragraphs": [
-            "It is possible to make a day more efficient without making it more meaningful. The messages are answered, the calendar is tidy, and the tasks move along. Those things may genuinely help. They do not, by themselves, tell us whether we spent our attention on what matters.",
-            "This section asks what our methods and ambitions are for. The answer might involve time with another person, a difficult but worthwhile responsibility, an absorbing piece of work, a spiritual practice, or an afternoon with no visible achievement. There is no single arrangement that every reader should imitate."
+            "This is a part of my personal website, not a course you need to complete. It brings together questions about meaning, attention, relationships, and what our tools are actually for. You can come with a spiritual tradition, a secular outlook, or a question you do not yet know how to phrase.",
+            "Some writing explores an idea. Some pages point to useful material elsewhere. Others help make a small part of an ordinary day less complicated. You do not have to approach all of those things in the same way."
           ]
         },
         {
-          "heading": "Spirituality has room here without becoming a claim of certainty",
+          "heading": "The interests that connect",
           "paragraphs": [
-            "Spirituality can open questions about meaning, connection, wonder, compassion, mortality, and what lies beyond a narrow account of the self. People approach those questions through different traditions and experiences. Others prefer philosophical or secular language. This section is an invitation to examine the questions, not an entrance test based on the words you choose.",
-            "An experience can matter without settling its explanation. A ritual may help someone mark a transition without establishing a universal mechanism. Curiosity does not require accepting every claim; careful thought does not require dismissing everything that cannot be neatly measured. Where a piece moves from experience to interpretation, that move should stay visible."
+            "Building something useful raises the question of whom it serves. Making creative work raises questions about attention and expression. Decisions made under uncertainty raise questions about judgment and outcomes. Spirituality opens questions about meaning, wonder, and connection that need not become productivity techniques.",
+            "These are connections to explore, not a single system that explains everything. The <a href=\"/technology/\">Technology section</a> focuses on tools. <a href=\"/poker/\">Poker</a> and <a href=\"/creative/\">Creative Work</a> remain separate interests. Living Well asks how ideas and tools fit into the life around them."
           ]
         },
         {
-          "heading": "Improvement is not a verdict on your worth",
+          "heading": "You do not have to improve anything today",
           "paragraphs": [
-            "Some things are worth changing. An unreliable routine can be made simpler. A habit of postponing an important conversation can be examined. A recurring inconvenience can sometimes be removed. But a useful change is different from the belief that your present self is a problem to be solved.",
-            "The question here is specific: what would help in this situation, and what would it cost? Not every difficulty belongs to the individual. Money, work conditions, disability, care responsibilities, and other people's decisions can shape what is possible. A reflective exercise should not turn those constraints into evidence that someone is failing to think positively enough."
+            "A conversation, a poem, or a question can be worthwhile without becoming an assignment. A free afternoon does not need to produce an insight. There is room here for useful changes, but also for simply finding something interesting.",
+            "When a guide is helpful, use the smallest version that fits. A paper note or direct conversation may be better than an AI workflow. No resource on this website requires an AI subscription or asks you to upload your private reflections."
           ]
         },
         {
-          "heading": "Technology is a participant, not the center",
+          "heading": "Three places to begin",
           "paragraphs": [
-            "AI and other tools belong in this conversation when they help clarify a task, reduce avoidable friction, improve access, or preserve something valuable. They do not have to appear in every article. An essay about wonder can remain an essay about wonder. A family conversation does not need a digital assistant listening in.",
-            "The practical standard is modest. Define the human purpose first. Compare the proposed tool with the simplest adequate alternative. Include setup, checking, maintenance, privacy, and the effect on other people in the comparison. A notebook, a reminder, or a direct conversation is allowed to win."
+            "For an idea, start with <a href=\"/living-well/spiritually-curious/\">spiritual curiosity without pretending to be certain</a>. For something outside the site, browse <a href=\"/living-well/free-resources/\">18 selected free resources</a>. For a practical example, open <a href=\"/living-well/weekly-reset/#part-7\">the fictional weekly reset, with and without AI</a>.",
+            "Choose one that interests you. The topics and reading paths are there when you would like to explore further, not as a prerequisite for understanding the section."
           ]
         },
         {
-          "heading": "A useful idea should survive contact with ordinary life",
+          "heading": "A personal site without invented personal stories",
           "paragraphs": [
-            "A polished explanation is not the same as a workable method. A guide should help someone take a small next step and recognize when to stop. A field note should record what happened, including awkwardness, missed attempts, and results that did not match the expectation.",
-            "The initial collection contains essays, practical guides, and clearly labeled experiment plans. It does not contain invented personal trials. A future firsthand account will need actual observations. One person's experience can be interesting without being proof of a general benefit."
-          ]
-        },
-        {
-          "heading": "Choose a question rather than a complete new identity",
-          "paragraphs": [
-            "You do not need to adopt a philosophy of life to begin. Start with an ordinary question: what deserves a little more attention this week? What am I making unnecessarily complicated? What kind of person do I want to be in this particular interaction?",
-            "Read one piece, keep what is useful, and leave the rest. The intended outcome is not prolonged engagement with this website. It is a clearer thought, an honest conversation, a practical change, or more room for something you would otherwise have missed."
+            "The launch writing was prepared with AI assistance. It explores these interests without claiming experiences, experiments, or interviews that have not happened. Resources are selected for relevance; they are not automatically a list of things I have personally used or endorsed.",
+            "The <a href=\"/living-well/editorial-standards/\">editorial standards</a> explain how factual sources, interpretation, and personal experience are kept distinct. Firsthand field notes will need actual observations. In the meantime, the questions and free material are here to browse at your own pace."
           ]
         }
       ],
-      "practice": "Complete this sentence on paper or in your own notes: I would like technology to make more room for ____. Name something concrete enough to recognize in an ordinary day. Then ask whether the tool you are considering would actually serve it.",
-      "question": "What part of your life deserves attention even though it will never become a productivity metric?",
+      "question": "Which of these questions connects with something you already care about?",
       "related": [
-        "spiritually-curious",
-        "time-you-save"
+        "spiritual-curiosity-reading-path",
+        "technology-that-helps-you-notice"
       ],
-      "published": "2026-10-08"
+      "published": "2026-10-08",
+      "updated": "2026-10-09",
+      "revision": "A shorter introduction for casual visitors, with clear starting points and the new free-resource collection."
     },
     {
       "slug": "spiritually-curious",
@@ -220,6 +214,19 @@
             "The reset is finished when you can see the important commitments, understand the next action, and identify what you are deliberately leaving alone. More categories and a prettier layout are optional, not evidence of a better plan.",
             "At the end of the week, ask whether the page helped. Include the time spent creating it. If you repeatedly ignore it, shorten it or stop using it. If uncertainty concerns a consequential obligation, get clarification from the responsible person rather than trying to solve it through more planning."
           ]
+        },
+        {
+          "heading": "One fictional example, with and without AI",
+          "paragraphs": [
+            "<strong>Illustrative example:</strong> Everything in this example is invented. It is not Nolan’s calendar, private information, or output from a recorded model test.",
+            "<strong>The untidy starting note:</strong> Return a library book sometime this week. Appointment Thursday, maybe 2 or 3. Buy rice. Sort all the photos. Ask Jo about lunch. Reply to a neighbor. Read something not related to work.",
+            "<strong>Paper first:</strong> Draw three small headings: Check, Do, and Optional. Under Check, put the appointment time and book due date. Under Do, put the short reply and checking the cupboard before buying rice. Under Optional, put the photos, a lunch invitation, and some reading. Do not promote lunch into an appointment: nobody has agreed to it.",
+            "<strong>An ordinary note or calendar:</strong> Use the same headings in a plain note. Only add an event to a calendar after checking its original source. In this fictional example, suppose the appointment confirmation says Thursday at 3 and the loan record says Friday. Those facts come from checking, not from guessing a plausible week.",
+            "<strong>Optional AI request:</strong> <em>Sort this fictional list into facts to check, small actions, and optional ideas. Do not invent dates, assign priorities, send messages, or turn an invitation into a commitment. Keep uncertainty visible and suggest one thing that could be made smaller.</em>",
+            "<strong>One acceptable illustrative draft:</strong> Check the appointment and due date. Reply to the neighbor. Check rice before buying it. Offer Jo a time rather than schedule lunch. Make the photo project smaller, perhaps choosing one folder. Leave reading as something to enjoy, not another deadline. This is an editorial example of an output, not a claim about what a particular AI system returned.",
+            "<strong>What to check:</strong> The draft should not omit the book, invent the time, imply Jo accepted, or fill every free hour. Compare it with the original note. A neat table is not evidence that all the assumptions are right.",
+            "<strong>The final small plan:</strong> Keep the two verified commitments in their usual place, send the short reply, and leave the photo archive for another week. No new productivity system is required. The useful change is seeing what matters and what can wait."
+          ]
         }
       ],
       "practice": "Use the <a href=\"/downloads/living-well-weekly-reset.md\" download>blank weekly-reset file</a>. Fill only the prompts that help. Choose one practical action and one piece of breathing room, then close the page.",
@@ -228,7 +235,9 @@
         "time-you-save",
         "notebook-or-ai"
       ],
-      "published": "2026-10-08"
+      "published": "2026-10-08",
+      "updated": "2026-10-09",
+      "revision": "Added a clearly fictional paper-first and optional AI worked example, including the checks needed before using a draft."
     },
     {
       "slug": "decide-what-matters",
@@ -340,6 +349,15 @@
             "Then consider how the story will actually be encountered. A short excerpt shared with permission at a gathering, a simple printed page, or a recording someone knows how to find may be more useful than an elaborate archive nobody can navigate. Remembering a person also involves listening, retelling responsibly, and making room for what they cared about.",
             "Do not clone the person's voice or create new speech in their name as part of this process. Preserving a story is different from generating things the person never said. The <a href=\"https://blogs.loc.gov/families/2020/09/preserving-family-stories/\">Library of Congress introduction to preserving family stories</a> offers further prompts and examples of oral-history work."
           ]
+        },
+        {
+          "heading": "Start with one story, not an entire archive",
+          "paragraphs": [
+            "<strong>Hypothetical example:</strong> Someone in a family would like to tell the story of an object they have kept for years. The object and speaker are invented for this example. You ask whether they would enjoy a short conversation and whether they prefer notes, audio, or simply talking.",
+            "Agree on one audience, such as the people already in the conversation. Ask what they would like remembered about the object and follow the detail they choose. If they do not want a record, the conversation itself is enough. The public <a href=\"https://storycorps.org/participate/great-questions/\">StoryCorps question bank</a> offers other openings, but there is no requirement to ask anything intrusive.",
+            "With their agreement, make one simple record and let them check it. Name the file so a person can understand it later, keep the original separate from an edited copy, and save an agreed backup. The <a href=\"https://digitalpreservation.gov/personalarchiving/\">Library of Congress preservation guidance</a> provides a starting point; older software examples need checking against current instructions.",
+            "The first project can end with a single reviewed page or short recording. Permission to share it with one relative does not become permission to publish it on a website or upload it to an AI service. A story does not need a public audience to be worth preserving."
+          ]
         }
       ],
       "practice": "Invite someone to discuss one story they would like preserved. Start with permission and their preferred audience. A useful first outcome is agreement about the project, even if no recording is made that day.",
@@ -348,7 +366,9 @@
         "documenting-your-life",
         "thoughtful-friend"
       ],
-      "published": "2026-10-08"
+      "published": "2026-10-08",
+      "updated": "2026-10-09",
+      "revision": "Added a small hypothetical first project and linked free conversation and preservation resources."
     },
     {
       "slug": "what-to-decide-yourself",

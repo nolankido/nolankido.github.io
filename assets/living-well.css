@@ -40,3 +40,42 @@
 
 /* Long headings must remain readable with user-defined text spacing. */
 .lw-section h2, .lw-section h3, .lw-article h2 { overflow-wrap: anywhere; }
+
+/* Discovery release: concise entry points, clear access notes, no additional scripts. */
+.lw-primary-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 8px; }
+.lw-primary-links a { display: inline-flex; align-items: center; padding: 12px 18px; border: 1px solid var(--basalt); min-height: 48px; font: 600 .92rem/1.5 var(--sans); }
+.lw-primary-links a:first-child { background: var(--basalt); color: var(--paper-light); }
+.lw-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lw-two { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 30px; }
+.lw-secondary-links { display: flex; flex-wrap: wrap; gap: 6px 18px; width: 100%; padding-block: 5px; font: .75rem/1.6 var(--sans); }
+.lw-secondary-links a { display: inline-flex; align-items: center; min-height: 32px; }
+.lw-secondary-links a[aria-current] { font-weight: 700; text-decoration-thickness: 2px; }
+.lw-shelf-jumps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; margin-block: 24px; }
+.lw-shelf-jumps a { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line-dark); min-height: 44px; }
+.lw-resource .lw-creator { font: .83rem/1.5 var(--sans); color: var(--ink-soft); }
+.lw-access { padding: 12px; border-left: 2px solid var(--green); background: var(--panel); }
+.lw-resource-preview .lw-access { font: .78rem/1.5 var(--sans); }
+.lw-resource-notes { border-top: 1px solid var(--line); margin-top: 18px; }
+.lw-resource-notes summary { cursor: pointer; padding-block: 12px; min-height: 44px; font: 600 .85rem/1.5 var(--sans); }
+.lw-resource-notes p { font-size: .95rem; }
+.lw-back { margin-top: 24px; }
+.lw-resource { scroll-margin-top: 150px; }
+.lw-section .lw-resource h3 { overflow-wrap: anywhere; }
+@media (max-width: 1000px) { .lw-three { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 650px) { .lw-two, .lw-shelf-jumps { grid-template-columns: minmax(0, 1fr); } }
+@media print {
+  .lw-primary-links, .lw-secondary-links, .lw-shelf-jumps, .lw-back { display: none; }
+  .page-living-well-worksheets .page-hero, .page-living-well-worksheets .lw-worksheet-intro,
+  .page-living-well-worksheets .section-meta, .page-living-well-worksheets .link-row,
+  .page-living-well-worksheets .lw-preview summary { display: none; }
+  .page-living-well-worksheets .lw-section { break-before: page; padding: 0; margin: 0; display: block; }
+  .page-living-well-worksheets .lw-worksheet-first { break-before: auto; }
+  .page-living-well-worksheets .section-content { width: 100%; max-width: none; }
+  .page-living-well-worksheets .section-title { font-size: 18pt; }
+  .page-living-well-worksheets .section-deck { font-size: 10pt; }
+  .page-living-well-worksheets .lw-preview { border: 0; margin: 0; }
+  .page-living-well-worksheets .lw-preview pre { font-size: 10pt; line-height: 1.5; padding: 0; border: 0; }
+}
+@media print { .page-living-well-worksheets .lw-section.lw-worksheet-intro { display: none; } }
+
+@media (min-width: 1200px) { .lw-resource-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
