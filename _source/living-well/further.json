@@ -153,6 +153,14 @@
             "After trying the boundary on ordinary days, ask whether it made the start of the day more workable. Include any inconvenience, missed information, or added maintenance. A change that looks elegant but makes essential tasks harder deserves revision.",
             "Use the <a href=\"/living-well/worksheets/#attention-check\">attention-check worksheet</a> only if a note helps. You can stop without completing a trial, and you do not need to recover a broken streak. The useful outcome is a better fit between your attention and your life."
           ]
+        },
+        {
+          "heading": "A free practice, when that is what you want",
+          "paragraphs": [
+            "A quieter start need not include meditation. But when you would like to explore a guided recording, an outward-looking exercise, or a practice taught within a named tradition, the <a href=\"/living-well/meditation-without-buying-a-lifestyle/\">free meditation entry path</a> offers three specific places to begin.",
+            "Choose the format that fits your circumstances rather than adding a practice because a quiet morning is supposed to contain one. Text, audio, and an informal observation are different options, not levels of accomplishment. You can read about them without beginning a routine.",
+            "For a non-practice alternative, <a href=\"/living-well/read-a-poem-without-a-lesson/\">read one poem without turning it into a lesson</a>. The morning does not need to produce a result before it belongs to your life."
+          ]
         }
       ],
       "practice": "Choose one optional interruption to postpone or reduce. Keep essential functions available. After a few ordinary mornings, ask whether the change helped you begin the day more deliberately, then keep, alter, or reverse it.",
@@ -161,7 +169,9 @@
         "phone-simplification",
         "ordinary-moments"
       ],
-      "published": "2026-10-08"
+      "published": "2026-10-08",
+      "updated": "2026-10-09",
+      "revision": "Added free practice and poetry entry points, with no requirement to add meditation to a morning routine."
     },
     {
       "slug": "documenting-your-life",
@@ -432,6 +442,17 @@
             "Choosing one worthwhile possibility can involve a genuine loss of another. That loss does not necessarily mean the choice was wrong. You can acknowledge it without endlessly reopening the decision or pretending that every path would have led to the same life.",
             "Keep a brief record of your reasons and a sensible review point where appropriate. Revising a plan in response to real information is different from treating every difficult day as evidence that you chose the wrong identity."
           ]
+        },
+        {
+          "heading": "What poker can and cannot lend to this question",
+          "paragraphs": [
+            "A poker hand offers a compact example of the difference between choosing and receiving a result. In a fictional card game, you could make the better-informed choice available and still lose the hand. The result matters, but it does not travel backward in time to change what information was available when you acted.",
+            "Now consider a hypothetical, ordinary-life decision. You choose to attend a friend’s event because being there matters, make reasonable arrangements, and encounter an unexpected disruption. Disappointment deserves acknowledgment. It does not, by itself, establish that caring about the event was foolish or that the decision process was poor.",
+            "The other direction matters too. A plan that ignores a known commitment might work out by accident. A pleasant outcome would not make the ignored commitment disappear. Reviewing the process means asking what was known, what should have been checked, and what the choice reasonably risked, not just whether the ending felt good.",
+            "Do not stretch the comparison further than it can carry. In a game, the rules and possible rewards may be explicit. In life, probabilities can be unknown, other people have their own accounts, and values do not fit on a single scoreboard. A relationship is not an opponent to exploit. Honesty and care do not become dispensable because a tactic appears likely to produce the response you prefer.",
+            "A simple private review can separate three things: the reasons for the choice, the outcome that arrived, and any genuinely new information. Ask what you would repeat and what you would change. Do not use uncertainty as an excuse to avoid learning; do not use disappointment as proof that every earlier reason was false.",
+            "For a deliberately simplified model of cooperation, the <a href=\"/living-well/free-resources/#evolution-of-trust\">Evolution of Trust selection</a> is an optional interactive detour. It illustrates a model, not a universal rule for friendship. The <a href=\"/living-well/decide-what-matters/\">values-before-advice guide</a> brings the question back to your actual constraints and commitments."
+          ]
         }
       ],
       "practice": "Write one fair paragraph about each option, including what you value and what you would give up. Then describe one ordinary day under each plan. Check which details are facts and which are assumptions.",
@@ -440,7 +461,9 @@
         "decide-what-matters",
         "growth-without-self-rejection"
       ],
-      "published": "2026-10-08"
+      "published": "2026-10-08",
+      "updated": "2026-10-09",
+      "revision": "Added a hypothetical poker/life comparison that separates decision review from outcomes and makes the limits of the analogy explicit."
     },
     {
       "slug": "notebook-or-ai",

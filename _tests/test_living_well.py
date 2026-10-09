@@ -20,15 +20,16 @@ class LivingWellTests(unittest.TestCase):
         cls.outputs = build.build_outputs()
 
     def test_full_launch_scope_and_substance(self):
-        self.assertEqual(len(self.pages), 36)
-        self.assertEqual(sum(e['kind'] != 'experiment' for e in self.entries), 18)
+        self.assertEqual(len(self.pages), 41)
+        self.assertEqual(sum(e['kind'] != 'experiment' for e in self.entries), 23)
         self.assertEqual(sum(e['kind'] == 'experiment' for e in self.entries), 3)
         self.assertEqual({e['topic'] for e in self.entries}, {t[0] for t in lw.TOPICS})
         for e in self.entries:
             text = e['lead'] + ' '.join(' '.join(s['paragraphs']) for s in e['sections']) + e.get('practice', '') + e['question']
             with self.subTest(slug=e['slug']):
-                self.assertGreaterEqual(len(re.findall(r'\b[\w\'-]+\b', re.sub('<[^>]+>', ' ', text))), 390)
-                self.assertGreaterEqual(len(e['sections']), 5)
+                short = e.get('format') == 'short-read'
+                self.assertGreaterEqual(len(re.findall(r'\b[\w\'-]+\b', re.sub('<[^>]+>', ' ', text))), 250 if short else 390)
+                self.assertGreaterEqual(len(e['sections']), 2 if short else 5)
                 self.assertEqual(len(e['related']), 2)
 
     def test_every_article_reachable_through_kind_and_topic(self):

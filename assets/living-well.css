@@ -79,3 +79,8 @@
 @media print { .page-living-well-worksheets .lw-section.lw-worksheet-intro { display: none; } }
 
 @media (min-width: 1200px) { .lw-resource-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Annotated sources for the expanded readings. */
+.lw-source-notes { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 20px; }
+.lw-source-notes h2 { margin-top: 0; font-size: 1.25rem; }
+.lw-source-notes p { font-size: .98rem; line-height: 1.65; overflow-wrap: anywhere; }
