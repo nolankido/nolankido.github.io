@@ -106,6 +106,11 @@ class FinderTests(unittest.TestCase):
                 nav = re.search(r'<nav class="subsite-links".*?</nav>', content).group(0)
                 self.assertIn('href="/poker/find/"', nav)
                 self.assertIn('href="/poker/resources/"', nav)
+            elif p['path'].startswith('/living-well/'):
+                self.assertIn('aria-label="Living Well section"', content)
+                nav = re.search(r'<nav class="subsite-links".*?</nav>', content).group(0)
+                self.assertNotIn('href="/poker/find/"', nav)
+                self.assertNotIn('href="/poker/resources/"', nav)
             else:
                 self.assertNotIn('subsite-links', content)
         self.assertIn('id="watch"', self.outputs[Path('poker/index.html')])

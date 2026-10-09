@@ -117,3 +117,16 @@ Back/Forward, keyboard, query-privacy and no-JavaScript checks. Search text is
 never serialized; only whitelisted editorial filters use URL fragments. See
 `_reports/poker-information-architecture.md` for the review, scope and next
 quality priorities. Topic pages are not counted as additional strategy guides.
+
+## Living Well
+
+`/living-well/` is a major, publicly linked section between Technology and Poker.
+The two catalogs in `_source/living-well/` hold the authored launch content;
+`_scripts/living_well.py` validates them and renders the shared manifest, subject
+pages, reader routes, article metadata, separate RSS, and blank worksheets.
+The launch has 16 essays/guides, 3 proposed experiment protocols, 5 subject pages,
+and 9 supporting hubs. Proposed protocols are not completed field notes and are
+excluded from the editorial RSS feed. No private answers, new JavaScript, or
+new third-party services are introduced. The current contact and analytics
+configuration is preserved. Run `_tests/test_living_well.py` and
+`_tests/living_well_browser.py` alongside the existing full regression suite.

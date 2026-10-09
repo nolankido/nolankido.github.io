@@ -3,10 +3,10 @@
     "id": "home",
     "path": "/",
     "title": "Nolan Kido",
-    "seo_title": "Nolan Kido | Technology, Poker & Creative Work",
-    "description": "Nolan Kido builds useful tools, plays tournament poker, and explores ideas through writing and visual storytelling. Explore technology, poker, and creative work.",
+    "seo_title": "Nolan Kido | Technology, Living Well, Poker & Creative Work",
+    "description": "Explore technology, Living Well, poker, and creative work: useful tools, spirituality, everyday life, thoughtful decisions, and visual storytelling.",
     "source": "home.html",
-    "updated": "2026-10-05"
+    "updated": "2026-10-08"
   },
   {
     "id": "about",
@@ -26,7 +26,7 @@
     "description": "Worked examples and reflections on trust, decisions, learning, communication, and knowing when to finish. Selected writing by Nolan Kido.",
     "kicker": "Notes",
     "source": "notes.html",
-    "updated": "2026-10-05"
+    "updated": "2026-10-08"
   },
   {
     "id": "resources",
@@ -36,7 +36,7 @@
     "description": "Private-use worksheets for decisions, tool checks, and learning. Blank editable copies, completed fictional examples, and clear limits.",
     "kicker": "Resources",
     "source": "resources.html",
-    "updated": "2026-10-05"
+    "updated": "2026-10-08"
   },
   {
     "id": "contact",
@@ -178,7 +178,7 @@
     "description": "Practical AI, useful software, and the work of making tools trustworthy. Selected reading and a practical resource from Nolan Kido.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-05"
+    "updated": "2026-10-08"
   },
   {
     "id": "creative",

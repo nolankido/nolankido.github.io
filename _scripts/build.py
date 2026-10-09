@@ -25,6 +25,7 @@ import poker_selection
 import poker_reference
 import poker_quality
 import poker_topics
+import living_well
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -67,7 +68,7 @@ def public_pages(root: Path | None = None) -> list[dict]:
     """One manifest for rendering, link tests, sitemaps, and live verification."""
     root = ROOT if root is None else root
     base = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
-    return base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root)
+    return base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root)
 
 
 def build_outputs() -> dict[Path, str]:
@@ -80,11 +81,11 @@ def build_outputs() -> dict[Path, str]:
         raise ValueError('Page routes and IDs must be unique')
     for p in pages:
         output_path(p['path'])
-        if p.get('note') or p.get('poker_guide'):
+        if p.get('note') or p.get('poker_guide') or p.get('living_well_entry'):
             date_value(p['date'])
         if p.get('updated'):
             updated = date_value(p['updated'])
-            if (p.get('note') or p.get('poker_guide')) and updated < date_value(p['date']):
+            if (p.get('note') or p.get('poker_guide') or p.get('living_well_entry')) and updated < date_value(p['date']):
                 raise ValueError('An update cannot precede publication')
         if p.get('revision') and not p.get('updated'):
             raise ValueError('Substantive revisions need an explicit update date')
@@ -134,7 +135,9 @@ def build_outputs() -> dict[Path, str]:
     values.update({'featured_note_title': text(featured['title']), 'featured_note_url': text(featured['path']), 'featured_note_description': text(featured['description'])})
     outputs = {}
     for p in pages:
-        if p.get('poker_entry'):
+        if p['path'].startswith('/living-well/'):
+            body = living_well.render(p, ROOT)
+        elif p.get('poker_entry'):
             body = poker_content.render(poker_entries[p['poker_entry']], catalog)
         else:
             source = (SOURCE / p['source']).resolve()
@@ -149,7 +152,7 @@ def build_outputs() -> dict[Path, str]:
             body = clean_body(body)
         section = p.get('section') or ('notes' if p.get('note') else p['id'])
         nav = ''.join(f'<li><a href="/{name}/"' + ((' aria-current="page"' if p['path'] == '/' + name + '/' else ' aria-current="location"') if section == name else '')
-                      + f'>{label}</a></li>' for name, label in [('technology', 'Technology'), ('poker', 'Poker'), ('creative', 'Creative Work'), ('about', 'About'), ('contact', 'Contact')])
+                      + f'>{label}</a></li>' for name, label in [('technology', 'Technology'), ('living-well', 'Living Well'), ('poker', 'Poker'), ('creative', 'Creative Work'), ('about', 'About'), ('contact', 'Contact')])
         canonical = site['url'] + p['path']
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
@@ -229,9 +232,11 @@ def build_outputs() -> dict[Path, str]:
                 body += poker_library.related(p, reader_entries)
         if p['path'].startswith('/poker/') and not p.get('poker_entry') and p['path'] != '/poker/':
             body += poker_experience.related_work(catalog, p['path'])
-        data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
+        header, living_extra = living_well.decorate(p, ROOT, header, schema)
+        extra += living_extra
+        data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
-                'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') else 'website', 'extra_head': extra,
+                'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
         rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
         outputs[output_path(p['path'])] = rendered
@@ -263,6 +268,7 @@ def build_outputs() -> dict[Path, str]:
     outputs.update(poker_collections.exports(resource_entries))
     outputs.update(poker_reference.exports())
     outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
+    outputs.update(living_well.exports(ROOT, site['url']))
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     return outputs
 
@@ -277,9 +283,9 @@ def main() -> int:
         # A removed guide or hub can remain publishable just like an old episode.
         # Refuse all stale generated Poker HTML before writing any build outputs.
         # Manual pages and other sections remain outside this ownership check.
-        for existing in sorted((ROOT / 'poker').rglob('*.html')):
+        for existing in sorted([*(ROOT / 'poker').rglob('*.html'), *(ROOT / 'living-well').rglob('*.html')]):
             if existing.relative_to(ROOT) not in outputs and MARKER in existing.read_text(encoding='utf-8'):
-                raise ValueError('Orphaned poker page: ' + str(existing.relative_to(ROOT)) + '. Review and remove the stale generated file before release.')
+                raise ValueError(('Orphaned Living Well page: ' if existing.is_relative_to(ROOT / 'living-well') else 'Orphaned poker page: ') + str(existing.relative_to(ROOT)) + '. Review and remove the stale generated file before release.')
         for relative, content in outputs.items():
             target = ROOT / relative
             if not target.exists() or target.read_text(encoding='utf-8') != content:
