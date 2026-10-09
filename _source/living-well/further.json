@@ -257,6 +257,16 @@
             "Once one option is feasible and appealing enough, stop comparing unless new information changes the situation. Agree on a simple meeting point or practical boundary where needed, and leave the rest open.",
             "Afterwards, do not grade the afternoon against an idealized version. Ask whether the planning helped or became another task. A quiet, ordinary stretch of time can be worthwhile without producing a discovery, a photograph, or evidence that you used your freedom well."
           ]
+        },
+        {
+          "heading": "Four free ways to follow your curiosity",
+          "paragraphs": [
+            "<strong>Read or borrow:</strong> Return to a book you already have, or browse your library. <a href=\"https://help.libbyapp.com/en-us/6103.htm\">Libby</a> offers free borrowing with an eligible participating library card. Its selection and waiting lists depend on the library. A particular title does not need to become today’s mission.",
+            "<strong>Listen to a poem:</strong> Try the free audio or transcript of <a href=\"https://onbeing.org/programs/ada-limon-wonder-woman/\">Poetry Unbound’s episode on Ada Limón’s Wonder Woman</a>. It includes discussion of chronic pain and some strong language. You can listen without taking notes, extracting a lesson, or reading more afterwards.",
+            "<strong>Notice something nearby:</strong> A familiar room, a view, a sound, or a description can be enough. The <a href=\"/living-well/technology-that-helps-you-notice/\">noticing guide</a> offers an optional tool-assisted route and an equally valid route without an app. Neither requires a walk or a journey.",
+            "<strong>Talk, without recording:</strong> Ask someone available whether they would enjoy a conversation. The <a href=\"/living-well/conversations/\">conversation guide</a> offers questions, not an interview to extract. They can decline; time alone is also a reasonable plan.",
+            "Choose the option that fits your access, energy, and responsibilities today. None needs to fill the whole afternoon. Closing the browser and doing something familiar is a perfectly adequate next step."
+          ]
         }
       ],
       "practice": "Choose one feasible activity and one fallback. Verify only the practical details you need, leave some time unassigned, and stop searching once the plan is good enough to use.",
@@ -265,7 +275,9 @@
         "time-you-save",
         "documenting-your-life"
       ],
-      "published": "2026-10-08"
+      "published": "2026-10-08",
+      "updated": "2026-10-09",
+      "revision": "Added four free, accessible starting ideas with specific resources and no-device alternatives."
     },
     {
       "slug": "household-friction",

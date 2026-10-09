@@ -53,7 +53,7 @@ def run():
                             page.add_script_tag(path=os.environ['AXE_PATH'])
                             result = page.evaluate("async () => await axe.run(document, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa']}})")
                             violations.extend({'path': entry['path'], 'id': v['id'], 'impact': v['impact'], 'nodes': [n['target'] for n in v['nodes']]} for v in result['violations'])
-                    if width in [390, 1440] and entry['id'] in {'living-well', 'living-well-weekly-reset', 'living-well-worksheets', 'living-well-field-notes', 'living-well-topics'}:
+                    if width in [390, 1440] and entry['id'] in {'living-well', 'living-well-weekly-reset', 'living-well-worksheets', 'living-well-field-notes', 'living-well-topics', 'living-well-free-resources', 'living-well-spiritual-curiosity-reading-path', 'living-well-technology-that-helps-you-notice'}:
                         page.screenshot(path=str(out / (entry['id'] + '-' + str(width) + '.png')), full_page=True)
                 page.goto(base + '/')
                 boxes = [page.locator('.destination-' + slug).bounding_box() for slug in ['technology', 'living-well', 'poker', 'creative']]
@@ -73,10 +73,26 @@ def run():
             expect(page.locator('.lw-outline')).to_have_attribute('open', '')
             page.locator('.lw-outline a[href="#part-2"]').click()
             expect(page).to_have_url(base + '/living-well/weekly-reset/#part-2')
+            page.goto(base + '/living-well/')
+            page.locator('.lw-primary-links a[href="/living-well/free-resources/"]').focus()
+            page.keyboard.press('Enter')
+            expect(page).to_have_url(base + '/living-well/free-resources/')
+            expect(page.locator('.lw-resource')).to_have_count(18)
+            expect(page.locator('.lw-shelf-jumps a')).to_have_count(6)
+            page.locator('.lw-shelf-jumps a[href="#shelf-world"]').focus()
+            page.keyboard.press('Enter')
+            expect(page).to_have_url(base + '/living-well/free-resources/#shelf-world')
+            for card in page.locator('.lw-resource').all():
+                card.locator('summary').focus()
+                page.keyboard.press('Enter')
+                expect(card.locator('.lw-resource-notes')).to_have_attribute('open', '')
+                expect(card.locator('.lw-access')).to_be_visible()
             page.goto(base + '/living-well/worksheets/')
             for slug, title, desc, guide, content in lw.SHEETS:
                 section = page.locator('section').filter(has=page.locator('h2#' + slug))
                 section.locator('summary').focus()
+                page.keyboard.press('Enter')
+                expect(section.locator('pre')).not_to_be_visible()
                 page.keyboard.press('Enter')
                 expect(section.locator('pre')).to_be_visible()
                 assert section.locator('pre').text_content() == content
@@ -84,6 +100,7 @@ def run():
                     section.locator('a[download]').click()
                 assert Path(event.value.path()).read_bytes() == content.encode('utf-8')
             page.emulate_media(media='print')
+            expect(page.locator('.lw-worksheet-intro')).not_to_be_visible()
             assert page.locator('pre').count() == 5
             for pre in page.locator('pre').all():
                 expect(pre).to_be_visible()
@@ -94,10 +111,19 @@ def run():
             nojs = browser.new_context(java_script_enabled=False, accept_downloads=True)
             nojs.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             plain = nojs.new_page()
-            for path in ['/living-well/', '/living-well/guides/', '/living-well/weekly-reset/', '/living-well/worksheets/', '/living-well/field-notes/']:
+            for path in ['/living-well/', '/living-well/guides/', '/living-well/weekly-reset/', '/living-well/worksheets/', '/living-well/field-notes/', '/living-well/free-resources/', '/living-well/spiritual-curiosity-reading-path/', '/living-well/technology-that-helps-you-notice/']:
                 assert plain.goto(base + path).status == 200
                 expect(plain.locator('h1')).to_be_visible()
+            plain.goto(base + '/living-well/free-resources/')
+            expect(plain.locator('.lw-resource')).to_have_count(18)
+            plain.locator('#libby summary').click()
+            expect(plain.locator('#libby .lw-resource-notes')).to_have_attribute('open', '')
+            plain.locator('.lw-shelf-jumps a[href="#shelf-meaning"]').click()
+            expect(plain).to_have_url(base + '/living-well/free-resources/#shelf-meaning')
             plain.goto(base + '/living-well/worksheets/')
+            expect(plain.locator('pre').first).to_be_visible()
+            plain.locator('summary').first.click()
+            expect(plain.locator('pre').first).not_to_be_visible()
             plain.locator('summary').first.click()
             expect(plain.locator('pre').first).to_be_visible()
             with plain.expect_download() as event:
@@ -108,7 +134,7 @@ def run():
         report = {'pages': len(pages), 'viewport_widths': [320, 390, 620, 768, 1024, 1440], 'axe_enabled': bool(os.environ.get('AXE_PATH')), 'violations': violations, 'javascript_errors': errors, 'failed_local_responses': bad_responses, 'write_requests': writes}
         (out / 'living-well-browser.json').write_text(json.dumps(report, indent=2) + '\n')
         assert not (errors or bad_responses or writes or violations), report
-        print('PASS: 33 Living Well pages at 6 widths; keyboard paths, 5 exact downloads, print, storage and no-JS checks; axe=' + str(bool(os.environ.get('AXE_PATH'))))
+        print('PASS: ' + str(len(pages)) + ' Living Well pages at 6 widths; keyboard paths, 5 exact downloads, print, storage and no-JS checks; axe=' + str(bool(os.environ.get('AXE_PATH'))))
     finally:
         server.shutdown()
         server.server_close()
