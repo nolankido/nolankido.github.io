@@ -1,0 +1,73 @@
+name: Assemble cash-game source update
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  assemble:
+    if: github.head_ref == 'codex/cash-game-resource-selection-20261008' && github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Apply exact reviewed source patch
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          git merge-base --is-ancestor 2a625ce3e8c98373771246a20c0d90c20134522e HEAD
+          python - <<'PY'
+          from pathlib import Path, PurePosixPath
+          import hashlib, os, re, subprocess, zlib
+          parts = [Path(f'.github/cash-source/part-{i:02}.bin') for i in range(11)]
+          packed = b''.join(p.read_bytes() for p in parts)
+          assert len(packed) == 32242
+          assert hashlib.sha256(packed).hexdigest() == '830ec2a5f212b2559b3ab1b2a033eb4adaf44f0f907444244b5897582454bd59'
+          decoder = zlib.decompressobj()
+          patch = decoder.decompress(packed, 250000)
+          assert decoder.eof and not decoder.unused_data and not decoder.unconsumed_tail
+          assert len(patch) == 109646
+          assert hashlib.sha256(patch).hexdigest() == '37906154b260d6dc1ade7db191235905803f486bece1b8cd9b615b8c23f17aa3'
+          paths = re.findall(r'^diff --git a/(\S+) b/(\S+)$', patch.decode('utf-8'), re.M)
+          assert len(paths) == 24 and len({a for a, b in paths}) == 24
+          for a, b in paths:
+              assert a == b
+              path = PurePosixPath(a)
+              assert not path.is_absolute() and '..' not in path.parts
+              assert path.parts[0] in {'_source', '_scripts', '_tests', '_reports', 'assets'} or a in {'.github/workflows/site-checks.yml', 'downloads/poker-cash-study.md'}
+          target = Path(os.environ['RUNNER_TEMP']) / 'cash-source.patch'
+          target.write_bytes(patch)
+          subprocess.run(['git', 'apply', '--check', str(target)], check=True)
+          subprocess.run(['git', 'apply', str(target)], check=True)
+          target.unlink()
+          for part in parts: part.unlink()
+          parts[0].parent.rmdir()
+          Path('.github/workflows/cash-pass-review.yml').unlink()
+          print('Applied 24 integrity-checked source files; removed transfer payload and source snapshot workflow.')
+          PY
+      - name: Build and validate exact output
+        run: |
+          python _scripts/build.py
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p 'test_*.py' -v
+          node --check assets/contact.js
+          node --check assets/poker-library.js
+          node --check assets/poker-finder.js
+          node --check assets/poker-study-tools.js
+          git diff --exit-code -- index.html about contact technology creative privacy _source/layout.html _source/site.json styles.css assets/contact.js assets/site.css ANALYTICS.md CNAME
+      - name: Commit only to the isolated working branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Build and validate cash-game guides and resource-selection notes'
+          git push origin HEAD:refs/heads/codex/cash-game-resource-selection-20261008
+          echo "ASSEMBLED_COMMIT=$(git rev-parse HEAD)"
