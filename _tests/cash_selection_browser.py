@@ -86,12 +86,37 @@ def main():
         assert visible.evaluate_all('(els)=>els.every(e=>e.dataset.free==="true" && e.dataset.topics.split(" ").includes("cash-games"))')
         page.evaluate('dispatchEvent(new Event("afterprint"))')
         assert page.evaluate('localStorage.length===0 && sessionStorage.length===0')
-        # Details and the complete directory remain useful without any JavaScript.
+        # Use native focus to bring the disclosure itself into view. A deep-link
+        # targets the entire tall card, not its summary. Verify both keyboard
+        # toggles and an unforced pointer click; do not change CSS or JS settings
+        # to make a failed action pass.
         nojs=browser.new_context(java_script_enabled=False)
         nojs.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
-        p=nojs.new_page();p.goto(origin+'/poker/resources/#resource-equilab')
-        p.locator('#resource-equilab .resource-selection summary').click()
-        expect(p.locator('#resource-equilab .resource-selection dl')).to_be_visible()
+        p=nojs.new_page()
+        for width in (390,1280):
+            p.set_viewport_size({'width':width,'height':900})
+            response=p.goto(origin+'/poker/resources/#resource-equilab')
+            assert response.status==200
+            expect(p).to_have_url(origin+'/poker/resources/#resource-equilab')
+            detail=p.locator('#resource-equilab .resource-selection')
+            trigger=detail.locator(':scope > summary')
+            expect(trigger).to_have_count(1)
+            expect(detail).not_to_have_attribute('open','')
+            trigger.focus();expect(trigger).to_be_focused()
+            expect(trigger).to_be_in_viewport()
+            p.keyboard.press('Enter')
+            expect(detail).to_have_attribute('open','')
+            expect(detail.locator('dl')).to_be_visible()
+            p.keyboard.press('Enter')
+            expect(detail).not_to_have_attribute('open','')
+            try:
+                trigger.click()
+                expect(detail.locator('dl')).to_be_visible()
+            except Exception:
+                print('NOJS_DISCLOSURE_DIAGNOSTIC',width,p.url,trigger.bounding_box(),flush=True)
+                if dest:p.screenshot(path=str(dest/f'poker-cash-nojs-failure-{width}.png'),full_page=True)
+                raise
+            if dest:p.screenshot(path=str(dest/f'poker-cash-nojs-selection-{width}.png'))
         p.goto(origin+'/poker/choosing-study-tools/')
         p.locator('.task-shortlist').nth(1).locator(':scope > summary').click()
         expect(p.locator('.task-shortlist').nth(1).locator('.selection-option')).to_have_count(2)
@@ -110,6 +135,6 @@ def main():
         browser.close()
     finally:
         server.shutdown();server.server_close()
-    print('PASS: cash-game route, 24 viewport checks plus expanded/text spacing, task-fit panels, source alternatives, search, free filters, byte-matched worksheet, no-JS and print. No real submissions.')
+    print('PASS: cash-game route, 24 viewport checks plus expanded/text spacing, task-fit panels, source alternatives, search, free filters, byte-matched worksheet, mobile/desktop no-JS keyboard and pointer, print. No real submissions.')
 
 if __name__=='__main__':main()
