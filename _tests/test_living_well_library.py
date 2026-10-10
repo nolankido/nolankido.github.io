@@ -30,8 +30,8 @@ class LibraryTests(unittest.TestCase):
         cls.hub = cls.outputs[Path('living-well/free-resources/index.html')]
 
     def test_twelve_distinct_collection_pages_with_complete_context(self):
-        self.assertEqual(len(library.manifest(ROOT)), 12)
-        self.assertEqual(len(lw.manifest(ROOT)), 61)
+        self.assertEqual(len(library.manifest(ROOT)), 16)
+        self.assertEqual(len(lw.manifest(ROOT)), 75)
         live = check_live.targets()
         for shelf in self.data['shelves']:
             with self.subTest(shelf=shelf['id']):
@@ -54,7 +54,7 @@ class LibraryTests(unittest.TestCase):
     def test_every_selection_has_one_full_home_and_a_stable_index_anchor(self):
         ids = {e['id'] for e in self.data['resources']}
         self.assertTrue(OLD_IDS <= ids)
-        self.assertEqual(len(ids), 66)
+        self.assertEqual(len(ids), 98)
         all_details = ''.join(self.outputs[build.output_path(library.collection_route(s['id']))] for s in self.data['shelves'])
         for e in self.data['resources']:
             with self.subTest(resource=e['id']):
