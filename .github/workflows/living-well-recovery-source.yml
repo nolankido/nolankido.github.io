@@ -89,8 +89,6 @@ jobs:
                       finally:
                           plain.remove_listener('framenavigated', record_navigation)
           '''
-          lines = replacement.splitlines()
-          replacement = lines[0] + '\n' + '\n'.join(line[10:] if line.startswith('          ') else line for line in lines[1:])
           p.write_text(text[:start] + replacement + text[end:])
           assert hashlib.sha256(p.read_bytes()).hexdigest() == '4b7c805b56cdcb2859f81bcff0f0cc5bc5e6ac3ff96d713348932f1dddab4380', 'Navigation follow-up differs from local review'
           PY
