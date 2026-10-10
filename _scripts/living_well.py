@@ -1,4 +1,4 @@
-"""Living Well: static editorial pages, explicit evidence status, no visitor input."""
+"""Living Well: static editorial pages, explicit evidence status, and local resource discovery."""
 from __future__ import annotations
 from datetime import datetime, timezone
 from email.utils import format_datetime
@@ -10,6 +10,7 @@ import math
 import re
 from xml.etree import ElementTree as ET
 import living_well_resources as resources
+import living_well_directory as directory
 import living_well_utility as utility
 
 DATE = '2026-10-08'
@@ -29,7 +30,7 @@ def date_label(value: str) -> str:
 
 HUBS = [
     ('', 'Living Well', 'Spirituality, practical wisdom, and technology for everyday life.'),
-    ('free-resources', 'Free resources for a thoughtful ordinary life', '66 selected resources in 12 collections, with useful starting points and clear free-access, account, app, and library requirements.'),
+    ('free-resources', 'Free resources for a thoughtful ordinary life', 'A curated directory of useful tools, thoughtful reading, and free learning, with task-based choices and clear access requirements.'),
     ('ideas', 'Essays, notes & reading paths', 'Essays about meaning, attention, relationships, and the kind of life our tools are meant to serve.'),
     ('guides', 'Try something useful', 'Practical guides with a simple starting point, an optional technology-assisted approach, and clear stopping rules.'),
     ('field-notes', 'Field notes & small experiments', 'Ready-to-try experiment plans, with proposed methods kept separate from completed personal findings.'),
@@ -220,7 +221,7 @@ def manifest(root: Path) -> list[dict]:
         pages.append({'id': 'living-well' + ('-' + slug if slug else ''), 'path': route,
                       'title': title, 'seo_title': title + ' | Nolan Kido', 'description': description,
                       'kicker': 'Nolan Kido / Living Well', 'source': 'living-well/page.html',
-                      'section': 'living-well', 'living_well_hub': slug or 'home', 'updated': '2026-10-10' if slug in {'', 'guides'} else '2026-10-09'})
+                      'section': 'living-well', 'living_well_hub': slug or 'home', 'updated': '2026-10-10' if slug in {'', 'guides', 'free-resources'} else '2026-10-09'})
     for slug, title, description, introduction, sequence in TOPICS:
         pages.append({'id': 'living-well-topic-' + slug, 'path': PREFIX + 'topics/' + slug + '/',
                       'title': title, 'seo_title': title + ' | Living Well | Nolan Kido',
@@ -234,7 +235,7 @@ def manifest(root: Path) -> list[dict]:
                       'source': 'living-well/page.html', 'section': 'living-well',
                       'living_well_entry': entry['slug'], 'living_well_kind': entry['kind'], 'date': entry['published'],
                       **{key: entry[key] for key in ('updated', 'revision') if entry.get(key)}})
-    return pages + resources.manifest(root)
+    return pages + resources.manifest(root) + directory.manifest(root)
 
 
 def minutes(entry: dict) -> int:
@@ -308,6 +309,8 @@ def article(entry: dict, entries: list[dict]) -> str:
 
 
 def render(page: dict, root: Path) -> str:
+    if page.get('directory_kind'):
+        return directory.render(root, page, section)
     if page.get('living_well_collection'):
         return resources.detail(root, page['living_well_collection'], section)
     entries = load(root)
@@ -400,6 +403,8 @@ def decorate(page: dict, root: Path, header: str, schema: dict) -> tuple[str, st
     if not page['path'].startswith(PREFIX):
         return header, ''
     extra = '\n  <link rel="stylesheet" href="/assets/living-well.css?v=' + sha256((root / 'assets/living-well.css').read_bytes()).hexdigest()[:12] + '">\n  <link rel="alternate" type="application/rss+xml" title="Nolan Kido Living Well" href="/living-well/feed.xml">'
+    if page.get('directory_kind'):
+        extra += directory.header(root, page)
     crumbs = '<nav class="lw-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/living-well/">Living Well</a>'
     if page.get('living_well_entry'):
         entry = next(e for e in load(root) if e['slug'] == page['living_well_entry'])
@@ -419,7 +424,7 @@ def decorate(page: dict, root: Path, header: str, schema: dict) -> tuple[str, st
             extra += '\n  <meta property="article:modified_time" content="' + page['updated'] + '">'
     else:
         schema['@type'] = 'CollectionPage' if page.get('living_well_collection') or page.get('living_well_topic') or page.get('living_well_hub') in {'home', 'ideas', 'guides', 'topics', 'field-notes', 'free-resources'} else 'WebPage'
-    if page.get('living_well_collection'):
+    if page.get('living_well_collection') or page.get('directory_kind'):
         crumbs += '<span aria-hidden="true"> / </span><a href="/living-well/free-resources/">Free resources</a>'
     crumbs += '</nav>'
     if page['path'] != PREFIX:
