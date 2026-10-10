@@ -91,6 +91,10 @@ jobs:
           '''
           p.write_text(text[:start] + replacement + text[end:])
           assert hashlib.sha256(p.read_bytes()).hexdigest() == '4b7c805b56cdcb2859f81bcff0f0cc5bc5e6ac3ff96d713348932f1dddab4380', 'Navigation follow-up differs from local review'
+          p = Path('assets/living-well.css')
+          assert hashlib.sha256(p.read_bytes()).hexdigest() == '157b86504971e35897df924e7f767ef777446630ea90cdbeaed556586c56242f'
+          p.write_text(p.read_text() + '\n/* Keep long resource-index and article anchors stable, including without JavaScript. */\nhtml { scroll-behavior: auto; }\n')
+          assert hashlib.sha256(p.read_bytes()).hexdigest() == '4c219ca894421da4684ec3bdee337a4aafe6a81c64781106c7705355c8670c9e'
           PY
       - name: Build and run every unit regression
         run: |
@@ -128,6 +132,7 @@ jobs:
               '_source/living-well/REAL_LIFE_UTILITY_REVIEW.md', '_source/living-well/TECHNOLOGY_FOR_REAL_LIFE_PUBLISHING.md',
               '_tests/living_well_browser.py', '_tests/test_living_well_utility.py',
               '_tests/test_living_well_utility_completion.py', '_tests/test_living_well_resources.py', 'sitemap.xml',
+              'assets/living-well.css',
           }
           changed = set(subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines())
           changed.update(subprocess.check_output(['git', 'ls-files', '--others', '--exclude-standard'], text=True).splitlines())
