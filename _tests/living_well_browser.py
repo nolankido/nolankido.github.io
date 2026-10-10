@@ -77,8 +77,8 @@ def run():
             page.locator('.lw-primary-links a[href="/living-well/free-resources/"]').focus()
             page.keyboard.press('Enter')
             expect(page).to_have_url(base + '/living-well/free-resources/')
-            expect(page.locator('.lw-resource')).to_have_count(66)
-            expect(page.locator('.lw-shelf-jumps a')).to_have_count(12)
+            expect(page.locator('.lw-resource')).to_have_count(98)
+            expect(page.locator('.lw-shelf-jumps a')).to_have_count(16)
             page.locator('.lw-shelf-jumps a[href="#shelf-world"]').focus()
             page.keyboard.press('Enter')
             expect(page).to_have_url(base + '/living-well/free-resources/#shelf-world')
@@ -161,7 +161,7 @@ def run():
                 assert plain.goto(base + path).status == 200
                 expect(plain.locator('h1')).to_be_visible()
             plain.goto(base + '/living-well/free-resources/')
-            expect(plain.locator('.lw-resource')).to_have_count(66)
+            expect(plain.locator('.lw-resource')).to_have_count(98)
             plain.locator('.lw-shelf-jumps a[href="#shelf-meaning"]').click()
             expect(plain).to_have_url(base + '/living-well/free-resources/#shelf-meaning')
             # Wait for the destination document, not just the changed address.
@@ -214,6 +214,8 @@ def run():
                 expect(plain.locator('.lw-utility-starter pre')).not_to_be_visible()
                 plain.keyboard.press('Enter')
                 expect(plain.locator('.lw-utility-starter pre')).to_be_visible()
+            from living_well_directory_browser import check_directory
+            check_directory(context, nojs, base, ROOT, out)
             nojs.close()
             browser.close()
         report = {'pages': len(pages), 'viewport_widths': [320, 390, 620, 768, 1024, 1440], 'axe_enabled': bool(os.environ.get('AXE_PATH')), 'violations': violations, 'javascript_errors': errors, 'failed_local_responses': bad_responses, 'write_requests': writes}

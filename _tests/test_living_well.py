@@ -2,6 +2,7 @@
 from html import escape
 from pathlib import Path
 import json
+import hashlib
 import re
 import sys
 import unittest
@@ -20,7 +21,7 @@ class LivingWellTests(unittest.TestCase):
         cls.outputs = build.build_outputs()
 
     def test_full_launch_scope_and_substance(self):
-        self.assertEqual(len(self.pages), 61)
+        self.assertEqual(len(self.pages), 75)
         self.assertEqual(sum(e['kind'] != 'experiment' for e in self.entries), 31)
         self.assertEqual(sum(e['kind'] == 'experiment' for e in self.entries), 3)
         self.assertEqual({e['topic'] for e in self.entries}, {t[0] for t in lw.TOPICS})
@@ -47,9 +48,16 @@ class LivingWellTests(unittest.TestCase):
         self.assertIn('No completed personal field notes are published here yet', field)
         for p in self.pages:
             content = self.outputs[build.output_path(p['path'])]
-            self.assertNotRegex(content, r'<(?:form|input|textarea|iframe)\b')
+            self.assertNotRegex(content, r'<(?:form|textarea|iframe)\b')
             scripts = re.findall(r'<script[^>]+src="([^"]+)"', content)
-            self.assertEqual(scripts, ['https://cloud.umami.is/script.js'])
+            expected = ['https://cloud.umami.is/script.js']
+            if p['path'] == '/living-well/find/':
+                expected.insert(0, '/assets/living-well-directory.js?v=' + hashlib.sha256((ROOT / 'assets/living-well-directory.js').read_bytes()).hexdigest()[:12])
+                self.assertEqual(len(re.findall('<input ', content)), 1)
+                self.assertIn('type="search"', content)
+            else:
+                self.assertNotIn('<input', content)
+            self.assertEqual(scripts, expected)
             if p.get('living_well_entry'):
                 self.assertIn('Prepared with AI assistance', content)
                 self.assertIn('aria-label="On this page"', content)

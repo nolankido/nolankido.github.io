@@ -1,0 +1,22 @@
+/* Task comparisons and a progressive, local-only finder. Shared site tokens stay authoritative. */
+.lw-directory-nav { font: .9rem/1.8 var(--sans); }
+.lw-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.lw-choice { border: 1px solid var(--line-dark); padding: 24px; background: var(--paper-light); min-width: 0; }
+.lw-choice h3, .lw-finder-item h3 { font-size: 1.4rem; line-height: 1.35; overflow-wrap: anywhere; }
+.lw-choice p { font: 1rem/1.65 var(--serif); }
+.lw-choice p:last-child { margin-bottom: 0; }
+.lw-filters { padding: 24px; border: 1px solid var(--line-dark); background: var(--panel); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.lw-filters > div:first-child, #lw-filter-help { grid-column: 1 / -1; }
+.lw-filters label { display: block; font: .9rem/1.5 var(--sans); font-weight: 600; margin-bottom: 8px; }
+.lw-filters input, .lw-filters select, .lw-filters button { font: 1rem/1.5 var(--sans); min-height: 48px; padding: 10px 12px; border: 1px solid var(--ink-soft); background: var(--paper-light); color: var(--basalt); width: 100%; max-width: 100%; }
+.lw-filters button { cursor: pointer; width: auto; justify-self: start; }
+#lw-filter-help { font: .85rem/1.65 var(--sans); margin: 0; }
+#lw-result-count { font: .9rem/1.6 var(--mono); margin-top: 20px; }
+#lw-empty { border-left: 3px solid var(--red); padding-left: 18px; }
+#lw-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.lw-finder-item { border-top: 1px solid var(--line-dark); padding: 22px 0; min-width: 0; overflow-wrap: anywhere; }
+.lw-finder-item p { font: 1rem/1.65 var(--serif); }
+.lw-finder-item p:last-child { margin-bottom: 0; }
+.lw-filters[hidden], .lw-finder-item[hidden], #lw-empty[hidden] { display: none; }
+@media (max-width: 650px) { .lw-choices, #lw-results, .lw-filters { grid-template-columns: minmax(0, 1fr); } .lw-choice, .lw-filters { padding: 18px; } }
+@media print { .lw-filters, #lw-result-count, #lw-empty { display: none !important; } .lw-choices, #lw-results { display: block; } .lw-choice, .lw-finder-item { break-inside: avoid; margin-bottom: 18px; } }
