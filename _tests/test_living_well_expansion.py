@@ -24,7 +24,7 @@ class ExpansionTests(unittest.TestCase):
 
     def test_five_distinct_readings_and_no_fabricated_field_note(self):
         self.assertEqual(len(self.new),5)
-        self.assertEqual(len(lw.manifest(ROOT)),53)
+        self.assertEqual(len(lw.manifest(ROOT)),61)
         self.assertEqual({e['format'] for e in self.new if e.get('format')}, {'practice-path','short-read'})
         for e in self.new:
             self.assertNotEqual(e['kind'],'experiment')
@@ -105,6 +105,6 @@ class ExpansionTests(unittest.TestCase):
             for number in range(1,count+1):self.assertIn('id="part-'+str(number)+'"',body)
             self.assertIn('id="part-'+str(count+1)+'"',body)
         feed=ET.fromstring(self.outputs[Path('living-well/feed.xml')])
-        self.assertEqual(len(feed.findall('./channel/item')),23)
+        self.assertEqual(len(feed.findall('./channel/item')),31)
 
 if __name__=='__main__':unittest.main(verbosity=2)
