@@ -1,0 +1,21 @@
+name: Living Well recovery source
+on:
+  push:
+    branches: [living-well-real-life-utility-20261009]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: git archive --format=tar HEAD > "$RUNNER_TEMP/living-well-recovery-source.tar"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: living-well-recovery-source
+          path: ${{ runner.temp }}/living-well-recovery-source.tar
+          retention-days: 1
+          if-no-files-found: error
