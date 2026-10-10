@@ -36,3 +36,13 @@ Publishing more often is not the goal. An honest example with a usable result is
 ## Verification requirement
 
 This review describes the scope being implemented, not completed verification. Source and generated files must agree; all previous public routes and worksheet downloads must remain. New readings must be reachable through the existing guide and topic indexes, have valid source and related-reading links, and remain readable without JavaScript. Full retained site checks and actual deployment verification are required before reporting this release live.
+
+## Recovery and deeper integration, October 10, 2026
+
+The interrupted branch had not been published. Its original build and unit suite passed, but the browser suite timed out while opening a resource disclosure following no-JavaScript navigation. The recovery uses an exact exported current-branch tree rather than the older archive referenced in the first preparation. The test now explicitly waits for the destination document and confirms the target is in view before the normal pointer click; pointer testing is retained, not forced or skipped.
+
+The next editorial gap was that each guide's outcome was only internal metadata. The recovery makes inputs, outputs, the simplest approach and completion criteria visible above the prose. Seven original plain-text templates provide a usable takeaway directly in HTML, without requiring download, new software or disclosure of personal answers. A small validated renderer ensures these are escaped text and prevents worked-guide metadata from silently claiming firsthand results.
+
+Technology for Real Life now has a prominent entry on the Living Well homepage, its own group of seven guides within Try Something, and contextual links from four existing resource collections. The larger spiritual and creative library remains intact. The prior 26 source records and all 66 resource records are preserved, not rewritten to fit the new emphasis.
+
+The internal TECHNOLOGY_FOR_REAL_LIFE_PUBLISHING.md defines a repeatable article/video method for genuine future contributions, distinguishing worked guides, recorded demonstrations, firsthand observations and research explanations. It is not a collection of fabricated field reports or a promised schedule. The actual release date for the eight previously unpublished pieces is October 10, 2026; product-source checks were renewed on that date.

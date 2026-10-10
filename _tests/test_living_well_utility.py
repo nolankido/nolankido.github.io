@@ -35,7 +35,7 @@ class UtilityTests(unittest.TestCase):
         for slug,e in self.new.items():
             with self.subTest(slug=slug):
                 self.assertEqual(e['kind'], 'guide')
-                self.assertEqual(e['published'], '2026-10-09')
+                self.assertEqual(e['published'], '2026-10-10')
                 self.assertEqual(e['evidence_status'], 'worked-guide-not-firsthand-result')
                 self.assertTrue(e['outcome'].strip())
                 self.assertNotIn('updated', e)
@@ -79,7 +79,7 @@ class UtilityTests(unittest.TestCase):
             self.assertIn('Prepared with AI assistance', page)
             for s in e.get('sources', []):
                 self.assertTrue(s['url'].startswith('https://'))
-                self.assertEqual(s['checked'], '2026-10-09')
+                self.assertEqual(s['checked'], '2026-10-10')
                 self.assertIn('href="' + escape(s['url'], quote=True) + '"', page)
                 self.assertIn(escape(s['note']), page)
                 self.assertIn('href="#sources-and-context"', page)

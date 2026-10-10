@@ -68,7 +68,8 @@ class ResourceTests(unittest.TestCase):
         new = {e['slug'] for e in json.loads((ROOT / '_source/living-well/discovery.json').read_text())['entries']} | {e['slug'] for e in json.loads((ROOT / '_source/living-well/expansion.json').read_text())['entries']}
         revised = {'what-i-mean-by-living-well', 'weekly-reset', 'preserve-family-story', 'free-afternoon'}
         for slug, e in self.entries.items():
-            self.assertEqual(e['published'], '2026-10-09' if slug in new else '2026-10-08')
+            expected = '2026-10-10' if e.get('series') == 'technology-for-real-life' else ('2026-10-09' if slug in new else '2026-10-08')
+            self.assertEqual(e['published'], expected)
             if slug in revised:
                 self.assertEqual(e['updated'], '2026-10-09')
                 self.assertTrue(e['revision'])

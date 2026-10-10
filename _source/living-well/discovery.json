@@ -159,6 +159,14 @@
           ]
         },
         {
+          "heading": "What a real-life post should show",
+          "paragraphs": [
+            "A useful future post can start with a small, recognizable obstacle and end with the thing that now works: a plan other people can open, a document found again, an accessible passage, or a small piece of writing. The human purpose comes first; the product is part of the method rather than the story’s hero.",
+            "Whether the format is an article or a video, show the starting material, the simple alternative, the tool’s specific contribution, what needed correction, and the final result. Record setup and checking effort as well as any time saved. End with what the change made possible and who it may not suit.",
+            "A demonstration made with fictional material should say so. A firsthand account should use actual observations, dates, and permitted material, with private details removed before recording. There are no completed personal trials or videos claimed here yet. The worked guides are usable now; they are not placeholders for an invented success story."
+          ]
+        },
+        {
           "heading": "Return to the reason for doing it",
           "paragraphs": [
             "The larger questions remain: <a href=\"/living-well/time-you-save/\">what is the time you save for</a>, what deserves care, and what makes an ordinary moment meaningful? Removing a logistical obstacle can create room for a conversation, a creative afternoon, or an unhurried pause. It does not tell you which of those matters most.",
@@ -171,7 +179,7 @@
         "time-you-save",
         "what-i-mean-by-living-well"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "Choose one ordinary task and a guide with a clear finish.",
@@ -227,7 +235,7 @@
         "technology-for-real-life",
         "weekly-reset"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "One short working note and one deliberate next action.",
@@ -236,9 +244,15 @@
           "label": "Joplin: importing and exporting",
           "url": "https://joplinapp.org/help/apps/import_export/",
           "note": "Official export documentation supports the format example. No migration, restoration, or personal use was tested for this guide.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         }
-      ]
+      ],
+      "utility": {
+        "start": "A short set of your own non-sensitive notes, with an untouched copy.",
+        "simplest_route": "Use three headings in a paper or digital note. AI grouping is optional.",
+        "finish": "You can name one next action and trace it back to the original note without inventing a deadline.",
+        "starter": "ORIGINAL NOTES\n[Keep a copy here or record where they are.]\n\nNEXT ACTION\n[What I have actually decided to do.]\n\nKEEP FOR REFERENCE\n[The useful detail and where to find its source.]\n\nQUESTION TO RESOLVE\n[What is unknown, conditional, or still a possibility.]\n\nLEAVE FOR LATER\n[Something that does not need to become a task.]\n\nCHECK\nDid I keep every condition, uncertainty, and genuine commitment?\nCan I close this note and name the next step?\n"
+      }
     },
     {
       "slug": "shared-plan-people-can-use",
@@ -291,7 +305,7 @@
         "technology-for-real-life",
         "thoughtful-friend"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "One agreed plan that participants can access and correct.",
@@ -300,15 +314,21 @@
           "label": "Google Keep: share notes, lists and drawings",
           "url": "https://support.google.com/keep/answer/6101196?hl=en",
           "note": "Official documentation supports the editing and deletion distinctions. No account or invitation workflow was tested.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         },
         {
           "label": "Apple Notes: share and collaborate",
           "url": "https://support.apple.com/guide/iphone/share-and-collaborate-iphe4d04f674/ios",
           "note": "Official documentation supports the copy-versus-collaboration and account requirements. Check the guide for the software version you use.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         }
-      ]
+      ],
+      "utility": {
+        "start": "A modest activity and the facts each participant has actually confirmed.",
+        "simplest_route": "One ordinary message can be enough. Use a shared note only when everyone can access it.",
+        "finish": "Participants can open the current plan, correct it, and distinguish commitments from possibilities.",
+        "starter": "SHARED PLAN\nActivity:\nCurrent version and where to find it:\n\nAGREED\n[Confirmed detail, by whom, and when.]\n\nSTILL TO DECIDE\n[Unknowns and conditions, not invented answers.]\n\nWHO IS DOING WHAT\n[Only responsibilities the person has accepted.]\n\nNEXT CHECK-IN\n[An agreed update or the question to ask next.]\n\nACCESS CHECK\nCan the intended people open and correct this version?\nWho maintains it, and how will changes be communicated?\n"
+      }
     },
     {
       "slug": "find-the-document-you-need",
@@ -361,7 +381,7 @@
         "technology-for-real-life",
         "household-friction"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "A readable original copy that can be found and opened again.",
@@ -370,15 +390,21 @@
           "label": "Apple: scan documents on iPhone or iPad",
           "url": "https://support.apple.com/en-au/108963",
           "note": "Official instructions establish the Notes and Files scanning options. No device or captured file was tested for this article.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         },
         {
           "label": "Google Drive: scan documents",
           "url": "https://support.google.com/drive/answer/3145835?hl=en",
           "note": "Official mobile scanning instructions. Storage, recognition quality, sharing, and offline access must be checked in the reader's setup.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         }
-      ]
+      ],
+      "utility": {
+        "start": "One low-stakes document you want to find again, not your complete records archive.",
+        "simplest_route": "Use a readable copy, an ordinary filename, and one private index note.",
+        "finish": "You can find, open, and verify the right version on the device where you need it.",
+        "starter": "DOCUMENT INDEX\nWhat this document is:\nSubject, model, or version:\nUseful filename:\nSaved copy location:\nOriginal source or paper location:\nWho should have access:\n\nCOPY CHECK\nAll pages, edges, diagrams, small print, and reverse sides inspected:\nUnclear text to resolve from the original:\n\nRETRIEVAL CHECK\nWords I would naturally search for:\nFound and opened the correct version:\nOffline access tested, only if needed:\nSeparate backup or recovery arrangement:\n"
+      }
     },
     {
       "slug": "rough-idea-to-small-creation",
@@ -432,7 +458,7 @@
         "technology-for-real-life",
         "documenting-your-life"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "One small draft whose meaning and factual claims you can stand behind.",
@@ -441,9 +467,15 @@
           "label": "Apple: dictate text on iPhone",
           "url": "https://support.apple.com/guide/iphone/dictate-text-iph2c0651d2/ios",
           "note": "Official documentation supports dictation as an optional input method. Device behavior, transcription quality, and this fictional creative workflow were not tested.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         }
-      ]
+      ],
+      "utility": {
+        "start": "A few original sentences and a small intended audience or purpose.",
+        "simplest_route": "Write a short draft yourself. Use dictation or an outline suggestion only for a specific obstacle.",
+        "finish": "The finished piece says what you mean, uses no invented experiences, and is appropriate to share.",
+        "starter": "SMALL CREATIVE BRIEF\nOriginal thought in my words:\nWho this is for:\nOne thing I want to communicate:\nSmall finished form: paragraph / caption / sketch / video outline\n\nDRAFT SHAPE\nOpening:\nOne useful detail or question:\nEnding:\n\nREVIEW BEFORE SHARING\nWhat did I add that was not in the original?\nWhich factual claims need a source?\nWhose permission is needed?\nDoes this still express what I mean?\nShare privately, publish, or keep as practice:\n"
+      }
     },
     {
       "slug": "make-digital-reading-easier",
@@ -496,7 +528,7 @@
         "technology-for-real-life",
         "learning-with-ai-without-skipping-understanding"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "An access method that helps you use the original text without losing important meaning.",
@@ -505,15 +537,21 @@
           "label": "Google Chrome: use reading mode",
           "url": "https://support.google.com/chrome/answer/14218344?hl=en",
           "note": "Official desktop reading-mode guidance supports the access options and compatibility limits. No browser feature or assistive-technology setup was personally tested.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         },
         {
           "label": "Apple: hear screen content and selected text",
           "url": "https://support.apple.com/guide/iphone/hear-whats-on-the-screen-or-typed-iph96b214f0/ios",
           "note": "Official iPhone guidance supports the spoken-access example. Consult the version matching the device rather than assuming every menu or capability is identical.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         }
-      ]
+      ],
+      "utility": {
+        "start": "One article you want to read and a specific difficulty with its format.",
+        "simplest_route": "Try zoom, a readable version, a printout, or built-in read-aloud support before an AI summary.",
+        "finish": "You can use the material without losing a condition, exception, or important part of the original.",
+        "starter": "A READING SETUP THAT FITS\nOriginal source:\nWhat I came to understand or enjoy:\nThe format difficulty:\nOne adjustment to try:\n\nMEANING CHECK\nThe important passage in the original:\nConditions or exceptions I must keep:\nInformation still missing:\n\nKEEP OR CHANGE\nDid this make the material more usable?\nWhat support should remain available?\nWhat can I leave alone now?\n"
+      }
     },
     {
       "slug": "reflection-with-your-judgment-intact",
@@ -566,7 +604,7 @@
         "technology-for-real-life",
         "ai-generated-reflections"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "A private observation, an interpretation held with appropriate uncertainty, and an optional real-world choice.",
@@ -575,9 +613,15 @@
           "label": "NIST: Generative Artificial Intelligence Profile",
           "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
           "note": "Background on context-sensitive management of generative-AI risks. The public publication description was reviewed; it does not validate this reflective exercise or establish a wellbeing benefit.",
-          "checked": "2026-10-09"
+          "checked": "2026-10-10"
         }
-      ]
+      ],
+      "utility": {
+        "start": "One ordinary question, answered privately rather than a journal uploaded to a service.",
+        "simplest_route": "Use paper or a private note. An optional AI request can supply questions without receiving your answers.",
+        "finish": "You have a considered choice or an honestly open question, not a model-generated verdict about yourself.",
+        "starter": "PRIVATE REFLECTION\nMy question:\n\nWHAT I NOTICED\n[An observation, not an explanation of another person.]\n\nWHAT IT MIGHT MEAN\n[One interpretation and another possibility.]\n\nWHAT REMAINS MINE TO DECIDE\n[A value, choice, boundary, or question.]\n\nAN OPTIONAL NEXT STEP\n[A real-world action, conversation, or decision to leave it open.]\n\nSTOPPING POINT\nWould continuing help, or am I only seeking another reassurance?\nKeep this page private. No insight or completed answer is required.\n"
+      }
     },
     {
       "slug": "did-the-tool-actually-help",
@@ -631,10 +675,16 @@
         "technology-for-real-life",
         "time-you-save"
       ],
-      "published": "2026-10-09",
+      "published": "2026-10-10",
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
-      "outcome": "A defensible keep, simplify, stop, or still-unsure decision about one small change."
+      "outcome": "A defensible keep, simplify, stop, or still-unsure decision about one small change.",
+      "utility": {
+        "start": "One low-stakes change and a clear description of the earlier method.",
+        "simplest_route": "Keep a short before-and-after note. A score, tracking app, or AI verdict is unnecessary.",
+        "finish": "You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.",
+        "starter": "DID THIS HELP?\nTask and human purpose:\nWhat counts as finished:\nEarlier method:\nChange tried:\nActual dates and circumstances:\n\nTOTAL EFFORT\nSetup:\nPreparing input:\nDoing the task:\nChecking and correcting:\nMoving the result into use:\nOngoing maintenance:\nWork done by someone else:\n\nBEYOND TIME\nReliability and mistakes:\nAccess, privacy, cost, or permission tradeoffs:\nWhat became possible outside the tool:\nOther explanations for what changed:\n\nDECISION\nKeep / simplify / stop / still unsure:\nWhy:\nWhat this observation cannot establish:\n"
+      }
     }
   ]
 }

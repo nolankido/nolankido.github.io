@@ -10,6 +10,7 @@ import math
 import re
 from xml.etree import ElementTree as ET
 import living_well_resources as resources
+import living_well_utility as utility
 
 DATE = '2026-10-08'
 PREFIX = '/living-well/'
@@ -193,6 +194,7 @@ def load(root: Path) -> list[dict]:
                     raise ValueError('Missing Living Well source field: ' + field)
             resources.safe_url(citation['url'])
             date_label(citation['checked'])
+        utility.validate(entry)
         headings = [s['heading'] for s in entry['sections']]
         if len(headings) != len(set(headings)):
             raise ValueError('Duplicate Living Well section heading: ' + slug)
@@ -218,13 +220,13 @@ def manifest(root: Path) -> list[dict]:
         pages.append({'id': 'living-well' + ('-' + slug if slug else ''), 'path': route,
                       'title': title, 'seo_title': title + ' | Nolan Kido', 'description': description,
                       'kicker': 'Nolan Kido / Living Well', 'source': 'living-well/page.html',
-                      'section': 'living-well', 'living_well_hub': slug or 'home', 'updated': '2026-10-09'})
+                      'section': 'living-well', 'living_well_hub': slug or 'home', 'updated': '2026-10-10' if slug in {'', 'guides'} else '2026-10-09'})
     for slug, title, description, introduction, sequence in TOPICS:
         pages.append({'id': 'living-well-topic-' + slug, 'path': PREFIX + 'topics/' + slug + '/',
                       'title': title, 'seo_title': title + ' | Living Well | Nolan Kido',
                       'description': description, 'kicker': 'Living Well / Topics',
                       'source': 'living-well/page.html', 'section': 'living-well',
-                      'living_well_topic': slug, 'updated': '2026-10-09'})
+                      'living_well_topic': slug, 'updated': '2026-10-10'})
     for entry in load(root):
         pages.append({'id': 'living-well-' + entry['slug'], 'path': PREFIX + entry['slug'] + '/',
                       'title': entry['title'], 'seo_title': entry.get('seo_title', entry['title'] + ' | Nolan Kido'),
@@ -238,6 +240,7 @@ def manifest(root: Path) -> list[dict]:
 def minutes(entry: dict) -> int:
     text = entry['lead'] + ' '.join(s['heading'] + ' ' + ' '.join(s['paragraphs']) for s in entry['sections']) + entry.get('practice', '') + entry['question']
     text += ' '.join(c['label'] + ' ' + c['note'] for c in entry.get('sources', []))
+    text += ' ' + utility.reading_text(entry)
     return max(1, math.ceil(len(re.findall(r'\b[\w\'-]+\b', unescape(re.sub('<[^>]+>', ' ', text)))) / 220))
 
 
@@ -246,6 +249,8 @@ def link(slug: str, title: str) -> str:
 
 
 def entry_label(entry: dict) -> str:
+    if entry.get('series') == utility.SERIES and entry['slug'] == utility.SERIES:
+        return 'Practical starting point'
     return {'reading-path': 'Reading path', 'practice-path': 'Free practice path', 'short-read': 'Short read'}.get(entry.get('format'), KINDS[entry['kind']])
 
 
@@ -281,11 +286,13 @@ def source_notes(entry: dict) -> str:
 def article(entry: dict, entries: list[dict]) -> str:
     by_slug = {e['slug']: e for e in entries}
     body = '<article class="lw-article" aria-label="' + escape(entry['title'], quote=True) + '"><div class="article-body shell prose"><p class="article-lead">' + entry['lead'] + '</p>'
+    body += utility.brief(entry)
     if entry['kind'] == 'experiment':
         body += '<aside class="lw-callout"><p><strong>Status: proposed experiment.</strong> This is a ready-to-try plan, not a completed trial, personal result, or claim of effectiveness. No findings are being reported.</p></aside>'
     for number, s in enumerate(entry['sections'], 1):
         body += '<h2 id="part-' + str(number) + '">' + escape(s['heading']) + '</h2>'
         body += ''.join('<p>' + p + '</p>' for p in s['paragraphs'])
+    body += utility.starter(entry)
     if entry.get('practice'):
         body += '<aside class="lw-callout"><h2 id="try-it">One optional practice</h2><p>' + entry['practice'] + '</p><p class="small-copy">Keep any notes privately. Skip or adapt this exercise if it does not fit your circumstances.</p></aside>'
     # Preserve the introductory essay's original section/exercise bookmarks.
@@ -334,7 +341,9 @@ def render(page: dict, root: Path) -> str:
                     + section('reading-collection', 'Read at your pace', 'Essays to explore.', '<p class="section-deck">' + intro + '</p>' + cards(essays)))
         paths = [e for e in collection if e.get('format') == 'practice-path']
         collection = [e for e in collection if e.get('format') != 'practice-path']
-        return section('free-practice-paths', 'No paid plan needed', 'Find a starting point.', '<p class="section-deck">Compare a few free ways to explore a practice before choosing whether to try one.</p>' + cards(paths)) + section('reading-collection', 'Try something', 'One useful change is enough.',
+        projects = [e for e in collection if e.get('series') == utility.SERIES]
+        collection = [e for e in collection if e.get('series') != utility.SERIES]
+        return section('free-practice-paths', 'No paid plan needed', 'Find a starting point.', '<p class="section-deck">Start with an ordinary task or a low-pressure practice. Neither requires a new subscription.</p>' + cards(paths)) + section('real-life-guides', 'Technology for real life', 'Leave with something useful.', '<p class="section-deck">Seven worked guides with a simple starting point, a reusable text template, and a clear way to check the result. AI is optional.</p>' + cards(projects)) + section('reading-collection', 'Try something', 'One useful change is enough.',
             '<p class="section-deck">' + intro + '</p><p><a href="/living-well/weekly-reset/#part-7">Start with a fictional worked example</a> · '
             '<a href="/living-well/worksheets/">Use a blank worksheet</a> · <a href="/living-well/free-resources/">Find a free outside resource</a></p>' + cards(collection))
     if hub == 'topics':
@@ -400,6 +409,7 @@ def decorate(page: dict, root: Path, header: str, schema: dict) -> tuple[str, st
         if page.get('revision'):
             meta += '<p class="editorial-note"><strong>Revision, <time datetime="' + page['updated'] + '">' + page['updated'] + '</time>:</strong> ' + escape(page['revision']) + '</p>'
         outline = '<details class="lw-outline"><summary>On this page</summary><nav aria-label="On this page"><ol>' + ''.join('<li><a href="#part-' + str(i) + '">' + escape(s['heading']) + '</a></li>' for i, s in enumerate(entry['sections'], 1)) + '<li><a href="#one-question">One question to take with you</a></li></ol></nav></details>'
+        outline = utility.outline(entry, outline)
         if entry.get('sources'):
             outline = outline.replace('</ol>', '<li><a href="#sources-and-context">Sources and context</a></li></ol>', 1)
         header = header.replace('</section>', meta + outline + '</section>', 1)
