@@ -101,3 +101,6 @@
 .lw-directory-entry[id] { scroll-margin-top: 130px; }
 @media (max-width: 650px) { .lw-directory { grid-template-columns: minmax(0, 1fr); } }
 @media print { .lw-directory { display: block; } .lw-directory-entry { break-inside: avoid; } }
+
+/* Keep long resource-index and article anchors stable, including without JavaScript. */
+html { scroll-behavior: auto; }

@@ -65,10 +65,11 @@ class ResourceTests(unittest.TestCase):
             self.assertLessEqual(primary.count('aria-current='), 1)
 
     def test_new_publication_and_honest_revision_dates(self):
-        new = {'spiritual-curiosity-reading-path', 'technology-that-helps-you-notice'} | {e['slug'] for e in json.loads((ROOT / '_source/living-well/expansion.json').read_text())['entries']}
+        new = {e['slug'] for e in json.loads((ROOT / '_source/living-well/discovery.json').read_text())['entries']} | {e['slug'] for e in json.loads((ROOT / '_source/living-well/expansion.json').read_text())['entries']}
         revised = {'what-i-mean-by-living-well', 'weekly-reset', 'preserve-family-story', 'free-afternoon'}
         for slug, e in self.entries.items():
-            self.assertEqual(e['published'], '2026-10-09' if slug in new else '2026-10-08')
+            expected = '2026-10-10' if e.get('series') == 'technology-for-real-life' else ('2026-10-09' if slug in new else '2026-10-08')
+            self.assertEqual(e['published'], expected)
             if slug in revised:
                 self.assertEqual(e['updated'], '2026-10-09')
                 self.assertTrue(e['revision'])
@@ -85,8 +86,8 @@ class ResourceTests(unittest.TestCase):
         items = feed.findall('./channel/item')
         dates = [parsedate_to_datetime(e.findtext('pubDate')) for e in items]
         self.assertEqual(dates, sorted(dates, reverse=True))
-        self.assertEqual(len(items), 23)
-        self.assertEqual(len({e.findtext('guid') for e in items}), 23)
+        self.assertEqual(len(items), 31)
+        self.assertEqual(len({e.findtext('guid') for e in items}), 31)
         self.assertIn('No completed personal field notes', self.outputs[Path('living-well/field-notes/index.html')])
 
     def test_worksheets_readable_without_download_or_javascript(self):

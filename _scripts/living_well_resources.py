@@ -221,6 +221,10 @@ def detail(root: Path, ident: str, section) -> str:
             + escape(titles[slug]) + '</a></p>' for slug in shelf['companions']) + '</div>'
         + '<p><a href="/living-well/free-resources/">All 12 resource collections</a> · '
         '<a href="/living-well/topics/' + shelf['topic'] + '/">Explore the related subject</a></p>')
+    if ident in {'everyday-tools', 'everyday-ai', 'digital-life', 'care'}:
+        body += section('put-a-resource-to-use', 'From reading to doing', 'Use a resource for a real task.',
+            '<p class="section-deck">An app or article is a starting point. Choose a concrete result, keep the simplest adequate method, and check what actually worked.</p>'
+            '<p><a href="/living-well/technology-for-real-life/">Technology for real life: seven worked guides</a></p>')
     return body
 
 
@@ -236,6 +240,11 @@ def home(root: Path, entries: list[dict], section, cards, topic_cards) -> str:
         'project to begin. Start with something that interests you, and leave the rest for another time.</p>'
         '<div class="lw-primary-links"><a href="/living-well/what-i-mean-by-living-well/">Start here</a>'
         '<a href="/living-well/free-resources/">Explore free resources</a></div>')
+    body += section('technology-in-ordinary-life', 'Technology for real life', 'Make one part of life easier.',
+        '<p class="section-deck">Go from an interesting tool to something you can use. These worked guides show the input, a simple method, and a finish you can check.</p>'
+        + cards([by_slug[s] for s in ['scattered-notes-to-next-step', 'shared-plan-people-can-use', 'find-the-document-you-need']])
+        + '<p><a href="/living-well/technology-for-real-life/">Explore all seven practical guides</a> · '
+        '<a href="/living-well/did-the-tool-actually-help/">Decide whether a tool helped</a></p>')
     body += section('start-where-you-are', 'Questions to explore', 'Start with a question.',
         '<div class="lw-situations"><p><span>Can something matter before you can explain it?</span>'
         '<a href="/living-well/spiritual-curiosity-reading-path/">Explore spiritual curiosity</a></p>'

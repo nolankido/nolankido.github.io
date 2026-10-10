@@ -53,7 +53,7 @@ def run():
                             page.add_script_tag(path=os.environ['AXE_PATH'])
                             result = page.evaluate("async () => await axe.run(document, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa']}})")
                             violations.extend({'path': entry['path'], 'id': v['id'], 'impact': v['impact'], 'nodes': [n['target'] for n in v['nodes']]} for v in result['violations'])
-                    if width in [390, 1440] and entry['id'] in {'living-well', 'living-well-weekly-reset', 'living-well-worksheets', 'living-well-field-notes', 'living-well-topics', 'living-well-free-resources', 'living-well-spiritual-curiosity-reading-path', 'living-well-technology-that-helps-you-notice', 'living-well-meditation-without-buying-a-lifestyle', 'living-well-consciousness-which-question', 'living-well-read-a-poem-without-a-lesson', 'living-well-learning-with-ai-without-skipping-understanding', 'living-well-a-tool-you-can-put-down'}:
+                    if width in [390, 1440] and entry['id'] in {'living-well', 'living-well-weekly-reset', 'living-well-worksheets', 'living-well-field-notes', 'living-well-topics', 'living-well-free-resources', 'living-well-spiritual-curiosity-reading-path', 'living-well-technology-that-helps-you-notice', 'living-well-meditation-without-buying-a-lifestyle', 'living-well-consciousness-which-question', 'living-well-read-a-poem-without-a-lesson', 'living-well-learning-with-ai-without-skipping-understanding', 'living-well-a-tool-you-can-put-down', 'living-well-technology-for-real-life', 'living-well-scattered-notes-to-next-step', 'living-well-shared-plan-people-can-use', 'living-well-did-the-tool-actually-help'}:
                         page.screenshot(path=str(out / (entry['id'] + '-' + str(width) + '.png')), full_page=True)
                 page.goto(base + '/')
                 boxes = [page.locator('.destination-' + slug).bounding_box() for slug in ['technology', 'living-well', 'poker', 'creative']]
@@ -113,6 +113,26 @@ def run():
             page.keyboard.press('Enter')
             expect(page.locator('h1')).to_have_text('Meditation without buying a lifestyle')
             expect(page.locator('.lw-source-notes')).to_be_visible()
+            page.goto(base + '/living-well/')
+            page.locator('#technology-in-ordinary-life').scroll_into_view_if_needed()
+            page.locator('a[href="/living-well/technology-for-real-life/"]').focus()
+            page.keyboard.press('Enter')
+            expect(page.locator('h1')).to_have_text('Technology for real life')
+            page.wait_for_load_state('load')
+            utility_entries = [e for e in lw.load(ROOT) if e.get('utility')]
+            for entry in utility_entries:
+                page.goto(base + '/living-well/' + entry['slug'] + '/')
+                expect(page.locator('.lw-utility-brief')).to_be_visible()
+                expect(page.locator('.lw-utility-starter pre')).to_have_text(entry['utility']['starter'])
+                page.locator('.lw-outline summary').click()
+                page.locator('a[href="#plain-text-starter"]').focus()
+                page.keyboard.press('Enter')
+                expect(page).to_have_url(base + '/living-well/' + entry['slug'] + '/#plain-text-starter')
+                page.locator('.lw-utility-starter summary').focus()
+                page.keyboard.press('Enter')
+                expect(page.locator('.lw-utility-starter pre')).not_to_be_visible()
+                page.keyboard.press('Enter')
+                expect(page.locator('.lw-utility-starter pre')).to_be_visible()
             page.goto(base + '/living-well/worksheets/')
             for slug, title, desc, guide, content in lw.SHEETS:
                 section = page.locator('section').filter(has=page.locator('h2#' + slug))
@@ -144,10 +164,35 @@ def run():
             expect(plain.locator('.lw-resource')).to_have_count(66)
             plain.locator('.lw-shelf-jumps a[href="#shelf-meaning"]').click()
             expect(plain).to_have_url(base + '/living-well/free-resources/#shelf-meaning')
-            plain.locator('#libby .lw-directory-detail a').click()
-            expect(plain).to_have_url(base + '/living-well/free-resources/world/#libby')
-            plain.locator('#libby summary').click()
-            expect(plain.locator('#libby .lw-resource-notes')).to_have_attribute('open', '')
+            # Wait for the destination document, not just the changed address.
+            # Native focus brings the disclosure into view without altering its state.
+            # A real pointer click, with ordinary actionability checks, still opens it.
+            navigation_events = []
+            def record_navigation(frame):
+                if frame == plain.main_frame:
+                    navigation_events.append(frame.url)
+            plain.on('framenavigated', record_navigation)
+            try:
+                for attempt in range(3):
+                    if attempt:
+                        plain.goto(base + '/living-well/free-resources/#libby')
+                    plain.locator('#libby .lw-directory-detail a').click()
+                    plain.wait_for_url(base + '/living-well/free-resources/world/#libby', wait_until='load')
+                    expect(plain.locator('h1')).to_have_text(next(s['title'] for s in lw.resources.load(ROOT)['shelves'] if s['id'] == 'world'))
+                    disclosure = plain.locator('#libby summary')
+                    expect(disclosure).to_have_count(1)
+                    disclosure.focus()
+                    expect(disclosure).to_be_focused()
+                    expect(disclosure).to_be_in_viewport()
+                    disclosure.click()
+                    expect(plain.locator('#libby .lw-resource-notes')).to_have_attribute('open', '')
+                (out / 'living-well-nojs-navigation.json').write_text(json.dumps({'attempts': 3, 'status': 'passed', 'events': navigation_events}, indent=2) + '\n')
+            except Exception:
+                (out / 'living-well-nojs-navigation.json').write_text(json.dumps({'status': 'failed', 'url': plain.url, 'events': navigation_events, 'summary_count': plain.locator('#libby summary').count()}, indent=2) + '\n')
+                plain.screenshot(path=str(out / 'living-well-nojs-navigation-failure.png'), full_page=True)
+                raise
+            finally:
+                plain.remove_listener('framenavigated', record_navigation)
             for shelf in lw.resources.load(ROOT)['shelves']:
                 assert plain.goto(base + lw.resources.collection_route(shelf['id'])).status == 200
                 expect(plain.locator('h1')).to_have_text(shelf['title'])
@@ -160,6 +205,15 @@ def run():
             with plain.expect_download() as event:
                 plain.locator('a[download]').first.click()
             assert event.value.suggested_filename == 'living-well-weekly-reset.md'
+            for entry in utility_entries:
+                plain.goto(base + '/living-well/' + entry['slug'] + '/')
+                expect(plain.locator('.lw-utility-brief')).to_be_visible()
+                expect(plain.locator('.lw-utility-starter pre')).to_have_text(entry['utility']['starter'])
+                plain.locator('.lw-utility-starter summary').focus()
+                plain.keyboard.press('Enter')
+                expect(plain.locator('.lw-utility-starter pre')).not_to_be_visible()
+                plain.keyboard.press('Enter')
+                expect(plain.locator('.lw-utility-starter pre')).to_be_visible()
             nojs.close()
             browser.close()
         report = {'pages': len(pages), 'viewport_widths': [320, 390, 620, 768, 1024, 1440], 'axe_enabled': bool(os.environ.get('AXE_PATH')), 'violations': violations, 'javascript_errors': errors, 'failed_local_responses': bad_responses, 'write_requests': writes}

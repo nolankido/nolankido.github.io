@@ -112,6 +112,579 @@
         "ordinary-moments",
         "documenting-your-life"
       ]
+    },
+    {
+      "slug": "technology-for-real-life",
+      "title": "Technology for real life",
+      "description": "Seven practical guides connecting ordinary tasks, thoughtful choices, and useful technology, with clear examples and a simpler alternative.",
+      "topic": "everyday-ai",
+      "kind": "guide",
+      "lead": "A useful tool should leave you with something you can use and more attention for the life around it. Start with an ordinary task, not an app you feel obliged to adopt.",
+      "sections": [
+        {
+          "heading": "Choose what you would like to make easier",
+          "paragraphs": [
+            "This path connects the reflective questions in Living Well with concrete things to do: find a document, agree on a plan, develop an idea, read more comfortably, or turn a reflection into a considered next step. The point is not to automate being human. It is to remove avoidable friction while keeping the meaning, choices, and relationships with the people involved.",
+            "You can read one guide and stop. Each begins with a modest result, offers a route without generative AI, and shows what you still need to check. The worked examples are fictional and written for explanation. They are not reports of Nolan using a product or measurements of a benefit."
+          ]
+        },
+        {
+          "heading": "Less administration, clearer coordination",
+          "paragraphs": [
+            "<a href=\"/living-well/scattered-notes-to-next-step/\">Turn scattered notes into one useful next step</a>. Separate actions, references, and unanswered questions instead of asking a system to turn every thought into a task. Leave with one short note you can understand without reopening a conversation.",
+            "<a href=\"/living-well/shared-plan-people-can-use/\">Make a shared plan people can actually use</a>. Distinguish an agreed commitment from a suggestion, choose a place everyone can access, and check the plan with the people named in it.",
+            "<a href=\"/living-well/find-the-document-you-need/\">Find the document you need without uploading your whole life</a>. Start with one ordinary document, a readable copy, and an understandable name. Search and verify the original before considering a summary."
+          ]
+        },
+        {
+          "heading": "More access, expression, and attention",
+          "paragraphs": [
+            "<a href=\"/living-well/rough-idea-to-small-creation/\">Turn a rough idea into something you can share</a>. Keep an original note, develop a small draft, and use assistance without inventing a memory, quote, or experience.",
+            "<a href=\"/living-well/make-digital-reading-easier/\">Make digital reading easier before adding another AI tool</a>. Try text size, reading view, or read-aloud support while keeping access to the original. Assistance can make participation easier without replacing what you came to read.",
+            "<a href=\"/living-well/reflection-with-your-judgment-intact/\">Reflect with AI without handing over your judgment</a>. Use a notebook or a few optional questions to consider what matters. Keep private answers private and finish with a choice that remains yours."
+          ]
+        },
+        {
+          "heading": "Compare three levels of help",
+          "paragraphs": [
+            "<strong>A simple method:</strong> a conversation, a paper note, a named file, or a direct question may already solve the problem. <strong>An ordinary digital tool:</strong> search, dictation, a calendar, or an accessibility feature can support a specific step. <strong>Generative AI:</strong> an optional draft, grouping, or question can help when you can review what it produces.",
+            "These are alternatives, not levels of sophistication to climb. You do not need all three. Instructions on this site are free; devices, connectivity, cloud storage, and some third-party features may have requirements or costs. No guide requires buying a new AI subscription."
+          ]
+        },
+        {
+          "heading": "Ask whether it actually helped",
+          "paragraphs": [
+            "<a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a> gives you a small review method. Include setup, correction, maintenance, privacy, and work shifted to someone else. Speed can matter, but so can being able to participate, understand, or follow through.",
+            "A guide describes a method. A worked example illustrates it. A firsthand field note needs a real account of what happened. Future personal posts can connect those pieces without turning an illustration into evidence. There is no need to manufacture a successful experiment to keep a publishing schedule."
+          ]
+        },
+        {
+          "heading": "What a real-life post should show",
+          "paragraphs": [
+            "A useful future post can start with a small, recognizable obstacle and end with the thing that now works: a plan other people can open, a document found again, an accessible passage, or a small piece of writing. The human purpose comes first; the product is part of the method rather than the story’s hero.",
+            "Whether the format is an article or a video, show the starting material, the simple alternative, the tool’s specific contribution, what needed correction, and the final result. Record setup and checking effort as well as any time saved. End with what the change made possible and who it may not suit.",
+            "A demonstration made with fictional material should say so. A firsthand account should use actual observations, dates, and permitted material, with private details removed before recording. There are no completed personal trials or videos claimed here yet. The worked guides are usable now; they are not placeholders for an invented success story."
+          ]
+        },
+        {
+          "heading": "Return to the reason for doing it",
+          "paragraphs": [
+            "The larger questions remain: <a href=\"/living-well/time-you-save/\">what is the time you save for</a>, what deserves care, and what makes an ordinary moment meaningful? Removing a logistical obstacle can create room for a conversation, a creative afternoon, or an unhurried pause. It does not tell you which of those matters most.",
+            "For tools and background, browse <a href=\"/living-well/free-resources/everyday-tools/\">useful everyday tools</a>, <a href=\"/living-well/free-resources/digital-life/\">digital privacy</a>, and <a href=\"/living-well/free-resources/care/\">relationships and memory</a>. For a different kind of inquiry, the <a href=\"/living-well/topics/meaning/\">meaning and spirituality</a> collection remains its own invitation, not a productivity technique."
+          ]
+        }
+      ],
+      "question": "What would you like a tool to make possible outside the tool itself?",
+      "related": [
+        "time-you-save",
+        "what-i-mean-by-living-well"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "Choose one ordinary task and a guide with a clear finish.",
+      "format": "practice-path"
+    },
+    {
+      "slug": "scattered-notes-to-next-step",
+      "title": "Turn scattered notes into one useful next step",
+      "description": "Separate actions, references, and open questions in a small note, with an optional AI grouping step that does not invent obligations.",
+      "topic": "everyday-ai",
+      "kind": "guide",
+      "lead": "A useful note is not the one that captures everything. It is the one that lets you recognize what matters next, without turning every thought into an obligation.",
+      "sections": [
+        {
+          "heading": "Choose a small enough pile",
+          "paragraphs": [
+            "Begin with one set of low-stakes notes: a few ideas from a project, errands you have been carrying in your head, or things you meant to ask. Do not start by importing your entire inbox or years of journals. The intended result is a short working note, not a complete personal operating system.",
+            "Keep the original before changing it. A copy gives you something to check when a summary sounds plausible but misses a detail. Leave private correspondence, passwords, sensitive records, and other people's information out of an optional AI request."
+          ]
+        },
+        {
+          "heading": "Use three headings before adding a tool",
+          "paragraphs": [
+            "On paper or in a note you already know how to open, write <strong>Next action</strong>, <strong>Keep for reference</strong>, and <strong>Question to resolve</strong>. Move each item only when its meaning is clear. You can leave something unclassified or decide it no longer deserves attention.",
+            "<strong>Fictional example:</strong> a note says, \"Ask Lee whether the book swap is still happening. Bring a small box if it is. Save the article about repairing things. Maybe write about the pleasure of keeping an old object. Organize every folder someday.\" None of these details describes a real event or person in Nolan's life.",
+            "An adequate result is: <strong>Next action:</strong> ask whether the book swap is happening. <strong>Reference:</strong> save the article link. <strong>Question:</strong> decide whether the writing idea is worth developing. The box remains conditional. Organizing every folder can be left for later rather than promoted into a new commitment."
+          ]
+        },
+        {
+          "heading": "Give AI a bounded job, when useful",
+          "paragraphs": [
+            "For a longer non-sensitive list, an optional prompt is: <em>Group these notes under Next action, Reference, and Question to resolve. Preserve conditions and uncertainty. Do not add deadlines, priorities, promises, or tasks that are not in the notes. Flag ambiguous items instead of deciding what I meant.</em>",
+            "The example above is an editorial illustration, not an executed model response. A prompt expresses what you are requesting; it does not certify the result. Compare each proposed action with the original and remove invented urgency. A phrase such as \"maybe\" must not disappear merely because the output looks cleaner."
+          ]
+        },
+        {
+          "heading": "Put the result where you will actually use it",
+          "paragraphs": [
+            "Choose one familiar location rather than saving competing versions in a chat, a notebook, and three apps. Give the note an ordinary title you would search for later. When a real date is confirmed, enter it in the calendar or reminder system you already trust and check that it was saved correctly.",
+            "A portable copy can be useful. For example, <a href=\"https://joplinapp.org/help/apps/import_export/\">Joplin documents export options</a> including HTML and a re-importable JEX archive. That is an option for existing users, not a reason to move all your notes. Test an exported copy before relying on it; a format name alone does not establish that another person can use it."
+          ]
+        },
+        {
+          "heading": "Finish with an action, not another round of organizing",
+          "paragraphs": [
+            "Close the note and ask whether you can name the next step. Then either take that step, deliberately schedule it, or decide not to pursue it. For the fictional list, another generated plan is less useful than actually asking about the event.",
+            "Review the method after a few ordinary uses. Did it reduce repeated searching or just produce longer lists? Count the effort spent preparing and checking an AI request. A paper note or a simpler digital list is a successful choice when it does the job with less work."
+          ]
+        }
+      ],
+      "question": "Which item needs your attention, and which only needs a safe place to wait?",
+      "related": [
+        "technology-for-real-life",
+        "weekly-reset"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "One short working note and one deliberate next action.",
+      "sources": [
+        {
+          "label": "Joplin: importing and exporting",
+          "url": "https://joplinapp.org/help/apps/import_export/",
+          "note": "Official export documentation supports the format example. No migration, restoration, or personal use was tested for this guide.",
+          "checked": "2026-10-10"
+        }
+      ],
+      "utility": {
+        "start": "A short set of your own non-sensitive notes, with an untouched copy.",
+        "simplest_route": "Use three headings in a paper or digital note. AI grouping is optional.",
+        "finish": "You can name one next action and trace it back to the original note without inventing a deadline.",
+        "starter": "ORIGINAL NOTES\n[Keep a copy here or record where they are.]\n\nNEXT ACTION\n[What I have actually decided to do.]\n\nKEEP FOR REFERENCE\n[The useful detail and where to find its source.]\n\nQUESTION TO RESOLVE\n[What is unknown, conditional, or still a possibility.]\n\nLEAVE FOR LATER\n[Something that does not need to become a task.]\n\nCHECK\nDid I keep every condition, uncertainty, and genuine commitment?\nCan I close this note and name the next step?\n"
+      }
+    },
+    {
+      "slug": "shared-plan-people-can-use",
+      "title": "Make a shared plan people can actually use",
+      "description": "Create one readable plan with confirmed commitments, open questions, clear ownership, and sharing choices everyone understands.",
+      "topic": "relationships",
+      "kind": "guide",
+      "lead": "Technology can make coordination easier. It cannot turn a suggestion into an agreement, or make someone responsible for a task they never accepted.",
+      "sections": [
+        {
+          "heading": "Agree on the result before choosing the app",
+          "paragraphs": [
+            "Use this method for a modest shared activity such as a book swap, a creative session, or a small group project. The desired result is one readable plan that participants can find and correct. It is not a perfect dashboard or a record of every conversation.",
+            "Ask how the people involved prefer to receive updates. A short message may be enough. A shared document is useful only when the participants can open it and understand which version is current. Keep an alternative for someone who cannot or does not want to use the chosen service."
+          ]
+        },
+        {
+          "heading": "Keep commitments separate from possibilities",
+          "paragraphs": [
+            "Use four headings: <strong>Agreed</strong>, <strong>Still to decide</strong>, <strong>Who is doing what</strong>, and <strong>Next check-in</strong>. Record the source of an important agreement, such as a direct confirmation from the person involved. Leave an unknown date unknown.",
+            "<strong>Fictional example:</strong> Maya has offered to bring six books. Jules might bring a folding table, provided it fits in the car. Saturday afternoon is a preference, and the room is not booked. A faithful plan says the books are agreed, the table is conditional, and the time and venue still need confirmation.",
+            "An attractive plan that announces a Saturday event, assigns Jules the table, and tells everyone where to arrive would be inaccurate. The correct next action is to resolve the room and time with the responsible people, not to publish the invitation."
+          ]
+        },
+        {
+          "heading": "Choose sharing deliberately",
+          "paragraphs": [
+            "<a href=\"https://support.google.com/keep/answer/6101196?hl=en\">Google Keep supports collaboration</a> on notes and lists. Collaborators can edit the shared content; the documentation also explains that deleting a shared note you own deletes it for everyone. A sent copy and an editable shared note are different choices.",
+            "<a href=\"https://support.apple.com/guide/iphone/share-and-collaborate-iphe4d04f674/ios\">Apple Notes distinguishes sending a copy from collaborating through iCloud</a>. Collaboration requires participants to sign in to their Apple Accounts and enable Notes in iCloud. Choose access permissions intentionally, then ask a participant to confirm that the intended content opens. Do not assume a link is private simply because it is long.",
+            "Use the service your group already understands, or stay with an ordinary message. The method is free to follow; device, account, storage, and connectivity requirements belong to the service. No new subscription is required by this guide."
+          ]
+        },
+        {
+          "heading": "Use AI to organize, not negotiate",
+          "paragraphs": [
+            "For a longer plan, share a de-identified version of the relevant facts rather than an entire private chat. An optional prompt is: <em>Turn these notes into Agreed, Still to decide, Owners who explicitly accepted, and Next check-in. Preserve every condition. Do not infer consent, select a date, assign responsibility, send anything, or invent missing details.</em>",
+            "Review the draft with the original notes and with the people affected. A generated summary is not evidence that someone agreed. Keep any health, access, family, or other sensitive details in a suitably private conversation instead of displaying them in the general plan."
+          ]
+        },
+        {
+          "heading": "Close the loop with the people",
+          "paragraphs": [
+            "Name who will maintain the plan, when an update is worth sending, and how participants can correct it. After the activity, agree whether the shared note should be retained, copied, or removed. Do not silently delete a record another person still needs.",
+            "Judge the result by whether people knew what was agreed and could participate with less confusion. Include the time spent answering access questions and repairing misunderstandings. A simpler arrangement is preferable when the shared system creates more work than it removes."
+          ]
+        }
+      ],
+      "question": "Does everyone understand the same agreement, or have you only created a clearer-looking document?",
+      "related": [
+        "technology-for-real-life",
+        "thoughtful-friend"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "One agreed plan that participants can access and correct.",
+      "sources": [
+        {
+          "label": "Google Keep: share notes, lists and drawings",
+          "url": "https://support.google.com/keep/answer/6101196?hl=en",
+          "note": "Official documentation supports the editing and deletion distinctions. No account or invitation workflow was tested.",
+          "checked": "2026-10-10"
+        },
+        {
+          "label": "Apple Notes: share and collaborate",
+          "url": "https://support.apple.com/guide/iphone/share-and-collaborate-iphe4d04f674/ios",
+          "note": "Official documentation supports the copy-versus-collaboration and account requirements. Check the guide for the software version you use.",
+          "checked": "2026-10-10"
+        }
+      ],
+      "utility": {
+        "start": "A modest activity and the facts each participant has actually confirmed.",
+        "simplest_route": "One ordinary message can be enough. Use a shared note only when everyone can access it.",
+        "finish": "Participants can open the current plan, correct it, and distinguish commitments from possibilities.",
+        "starter": "SHARED PLAN\nActivity:\nCurrent version and where to find it:\n\nAGREED\n[Confirmed detail, by whom, and when.]\n\nSTILL TO DECIDE\n[Unknowns and conditions, not invented answers.]\n\nWHO IS DOING WHAT\n[Only responsibilities the person has accepted.]\n\nNEXT CHECK-IN\n[An agreed update or the question to ask next.]\n\nACCESS CHECK\nCan the intended people open and correct this version?\nWho maintains it, and how will changes be communicated?\n"
+      }
+    },
+    {
+      "slug": "find-the-document-you-need",
+      "title": "Find the document you need without uploading your whole life",
+      "description": "A small, privacy-conscious method for capturing, naming, finding, and checking an ordinary document before asking AI to interpret it.",
+      "topic": "everyday-ai",
+      "kind": "guide",
+      "lead": "The first useful improvement may be finding the right document, not generating a better answer about it. Start with one readable original and a name you will recognize later.",
+      "sections": [
+        {
+          "heading": "Start with a retrieval problem",
+          "paragraphs": [
+            "Choose a low-stakes document you repeatedly misplace, such as instructions for a hobby item or a community notice. The result you want is to open the correct, complete version when needed. Do not begin by uploading every document you own to an AI service.",
+            "This guide is about organization, not deciding which legal, tax, medical, or other consequential originals can be discarded. Keep those records and their handling requirements separate. A convenient digital copy does not establish that you may throw away the original."
+          ]
+        },
+        {
+          "heading": "Capture a readable copy, then inspect it",
+          "paragraphs": [
+            "A clear photograph may be sufficient for a simple notice. For a multi-page item, a document scanner can help keep the pages together. <a href=\"https://support.apple.com/en-au/108963\">Apple documents scanning in Notes and Files</a>; <a href=\"https://support.google.com/drive/answer/3145835?hl=en\">Google Drive documents its mobile scanning feature</a>. Choose a tool and storage location whose sharing arrangements you understand.",
+            "Open the saved result. Check every page, its order, the edges, diagrams, small print, and anything on the reverse. Enlarge a few difficult words. Searchable text is useful, but the page image remains the reference when recognized text is wrong or incomplete. Do not assume that capturing a document proves every part was captured correctly."
+          ]
+        },
+        {
+          "heading": "Use a name and a small index you would actually search",
+          "paragraphs": [
+            "<strong>Fictional example:</strong> a desk-chair instruction leaflet becomes <code>desk-chair-instructions-model-example.pdf</code>. A private index note says what the document covers, where the copy is stored, where the paper remains, and which model it belongs to. The filename is illustrative, not a real product reference.",
+            "Use ordinary words instead of designing an elaborate classification scheme. If two versions exist, explain the difference rather than naming both \"final.\" Record a date when it is useful and known, not because a system insists that every item must have one.",
+            "Now close everything and try to find the document again using the words you would naturally remember. Open it and confirm the model or subject. That retrieval check is more meaningful than the number of files successfully imported into a new app."
+          ]
+        },
+        {
+          "heading": "Ask a narrow question only after locating the source",
+          "paragraphs": [
+            "For an ordinary non-sensitive passage, an optional prompt is: <em>Explain only this excerpt in plain language. Separate what it states from what is missing. Point me to the passage supporting each answer. Do not invent specifications, steps, deadlines, or permissions.</em> Share the minimum excerpt needed and keep the full original available to inspect.",
+            "A summary is not a substitute for the original instructions. Do not improvise safety-critical work from a generated interpretation. For a hazardous or consequential task, consult the responsible source or appropriately qualified help. An inaccessible or confusing document may require a better copy or an explanation from its issuer, not another AI response."
+          ]
+        },
+        {
+          "heading": "Keep access and recovery simple",
+          "paragraphs": [
+            "Check which account or folder holds the copy, who can access it, and whether it can be opened on the device where it will be needed. When offline access matters, test that exact file without a connection before relying on it. Keep a separate backup appropriate to the value and sensitivity of the material.",
+            "Do not interpret a cloud-synced folder as proof that every version can be recovered after an error. Learn the service's actual recovery behavior and test a harmless sample where feasible. The <a href=\"/living-well/free-resources/digital-life/\">digital privacy collection</a> offers background for making those choices.",
+            "Stop when the document is readable, findable, and accessible to the right person. Building a personal search assistant may be interesting later, but it is unnecessary when an understandable filename and a short index solve the problem."
+          ]
+        }
+      ],
+      "question": "Can you find and verify the original when you need it, without trusting a summary to remember for you?",
+      "related": [
+        "technology-for-real-life",
+        "household-friction"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "A readable original copy that can be found and opened again.",
+      "sources": [
+        {
+          "label": "Apple: scan documents on iPhone or iPad",
+          "url": "https://support.apple.com/en-au/108963",
+          "note": "Official instructions establish the Notes and Files scanning options. No device or captured file was tested for this article.",
+          "checked": "2026-10-10"
+        },
+        {
+          "label": "Google Drive: scan documents",
+          "url": "https://support.google.com/drive/answer/3145835?hl=en",
+          "note": "Official mobile scanning instructions. Storage, recognition quality, sharing, and offline access must be checked in the reader's setup.",
+          "checked": "2026-10-10"
+        }
+      ],
+      "utility": {
+        "start": "One low-stakes document you want to find again, not your complete records archive.",
+        "simplest_route": "Use a readable copy, an ordinary filename, and one private index note.",
+        "finish": "You can find, open, and verify the right version on the device where you need it.",
+        "starter": "DOCUMENT INDEX\nWhat this document is:\nSubject, model, or version:\nUseful filename:\nSaved copy location:\nOriginal source or paper location:\nWho should have access:\n\nCOPY CHECK\nAll pages, edges, diagrams, small print, and reverse sides inspected:\nUnclear text to resolve from the original:\n\nRETRIEVAL CHECK\nWords I would naturally search for:\nFound and opened the correct version:\nOffline access tested, only if needed:\nSeparate backup or recovery arrangement:\n"
+      }
+    },
+    {
+      "slug": "rough-idea-to-small-creation",
+      "title": "Turn a rough idea into something you can share",
+      "description": "Move from a brief note to a small draft while preserving your meaning, checking additions, and avoiding invented personal experience.",
+      "topic": "attention",
+      "kind": "guide",
+      "lead": "The point of capturing an idea is not to build a larger pile of ideas. Give one of them a small, finishable form, with assistance serving the expression rather than replacing it.",
+      "sections": [
+        {
+          "heading": "Choose a modest finished object",
+          "paragraphs": [
+            "Pick something small: a short paragraph, a caption, a sketch with a few words, or an outline for a brief video. Decide who it is for and what you want it to communicate. The project does not need to become a publication plan or another channel to maintain.",
+            "A note on paper is a complete starting method. Type it later only when that helps. Keep an untouched version of the original thought so that polishing does not quietly turn it into a different message."
+          ]
+        },
+        {
+          "heading": "Capture your words in a form you can inspect",
+          "paragraphs": [
+            "Write, type, or dictate a few sentences in your own language. <a href=\"https://support.apple.com/guide/iphone/dictate-text-iph2c0651d2/ios\">Apple's iPhone guide describes dictating text</a> into a text field and editing it with the keyboard. This is one possible entry method, not a requirement to use Apple or a claim that every device supports the same options.",
+            "Inspect the text before developing it. A name, a negation, or an unusual word can change the meaning when captured incorrectly. Choose an appropriate place to dictate, and do not record another person or a private conversation merely to collect material. Check the privacy arrangements of any transcription service before sharing audio."
+          ]
+        },
+        {
+          "heading": "Work from a plainly labeled example",
+          "paragraphs": [
+            "<strong>Fictional example:</strong> a rough note reads, \"A piece about repairing an ordinary object. Not a story about a repair I have done. Curious whether keeping something familiar can matter even when replacing it would be easier. Keep the question open.\"",
+            "An illustrative outline could be: introduce the choice between keeping and replacing; consider usefulness, familiarity, effort, and waste; acknowledge that repair is not always possible or appropriate; end with a question about what deserves care. This is an editorial example, not an executed AI response or a personal account.",
+            "The small finished object might be a 150-word reflection built from that outline. It should not suddenly contain a childhood memory, an expert quotation, a measured environmental benefit, or a repair that the writer never performed. Those additions would need real sources, not just a more compelling narrative."
+          ]
+        },
+        {
+          "heading": "Give assistance a specific editorial role",
+          "paragraphs": [
+            "An optional prompt is: <em>Using only these notes, suggest two possible outlines for a short reflection. Preserve the open question and my stated limits. Do not add memories, quotations, experiences, technical claims, or outcomes. Mark places where real evidence or a personal detail would be needed.</em>",
+            "Choose the outline that best serves the idea, then write or revise the draft. Ask for clarity rather than generic inspiration. Retain a sentence because it says what you mean, not because it sounds more polished than your own wording.",
+            "For a visual or audio piece, keep the same boundary. An illustration should not masquerade as a documentary image. Synthetic speech must not be passed off as something a real person said. The finished work should make its nature and authorship clear where that distinction matters."
+          ]
+        },
+        {
+          "heading": "Finish, review, and release only what you stand behind",
+          "paragraphs": [
+            "Read the result against the original note. What changed? Which claims need checking? Does the piece still leave room for uncertainty where you intended it? Check permission before using another person's photograph, story, voice, or text.",
+            "You can share the piece privately, publish an appropriate version, or decide it was useful only as practice. Finishing does not create an obligation to post. Keep the source note and a clearly named final version somewhere understandable, then put the tools away.",
+            "The useful result is a small piece you recognize as your own considered expression. The <a href=\"/living-well/free-resources/books-creativity/\">books and creativity collection</a> offers further starting points, but another resource is optional once the current piece is finished."
+          ]
+        }
+      ],
+      "question": "Does this version express your idea more clearly, or mainly sound like something that could have been written for anyone?",
+      "related": [
+        "technology-for-real-life",
+        "documenting-your-life"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "One small draft whose meaning and factual claims you can stand behind.",
+      "sources": [
+        {
+          "label": "Apple: dictate text on iPhone",
+          "url": "https://support.apple.com/guide/iphone/dictate-text-iph2c0651d2/ios",
+          "note": "Official documentation supports dictation as an optional input method. Device behavior, transcription quality, and this fictional creative workflow were not tested.",
+          "checked": "2026-10-10"
+        }
+      ],
+      "utility": {
+        "start": "A few original sentences and a small intended audience or purpose.",
+        "simplest_route": "Write a short draft yourself. Use dictation or an outline suggestion only for a specific obstacle.",
+        "finish": "The finished piece says what you mean, uses no invented experiences, and is appropriate to share.",
+        "starter": "SMALL CREATIVE BRIEF\nOriginal thought in my words:\nWho this is for:\nOne thing I want to communicate:\nSmall finished form: paragraph / caption / sketch / video outline\n\nDRAFT SHAPE\nOpening:\nOne useful detail or question:\nEnding:\n\nREVIEW BEFORE SHARING\nWhat did I add that was not in the original?\nWhich factual claims need a source?\nWhose permission is needed?\nDoes this still express what I mean?\nShare privately, publish, or keep as practice:\n"
+      }
+    },
+    {
+      "slug": "make-digital-reading-easier",
+      "title": "Make digital reading easier before adding another AI tool",
+      "description": "Try readable text, reading view, or spoken support while keeping the original meaning and choosing what helps you participate.",
+      "topic": "attention",
+      "kind": "guide",
+      "lead": "Sometimes the obstacle is not understanding the subject. It is small text, a crowded page, or an inconvenient way to read. Change the access first, before asking a system to replace the content.",
+      "sections": [
+        {
+          "heading": "Name the friction instead of blaming the reader",
+          "paragraphs": [
+            "Choose one ordinary article you want to read. Is the text too small? Is the layout distracting? Would listening help? Do you need a different format or a clearer explanation? These are different problems and may deserve different responses.",
+            "Begin with the least disruptive option that suits you: a larger display, browser zoom, a readable printout, a text version, or an accessibility feature you already use. No one needs to earn the right to use support, and continuing to use it is not a failure of independence."
+          ]
+        },
+        {
+          "heading": "Try a reading view on a suitable page",
+          "paragraphs": [
+            "<a href=\"https://support.google.com/chrome/answer/14218344?hl=en\">Google's current desktop Chrome instructions</a> describe opening reading mode from the page or browser controls. The feature offers text and spacing adjustments and read-aloud controls. It does not work with every website or format.",
+            "On a compatible text page, try one change at a time, such as a larger type size or a more comfortable line spacing. Keep the original available. A simplified view may not preserve the layout of a table, diagram, interactive element, or surrounding context, so check anything that matters against the original page."
+          ]
+        },
+        {
+          "heading": "Listening can support reading without summarizing it",
+          "paragraphs": [
+            "<a href=\"https://support.apple.com/guide/iphone/hear-whats-on-the-screen-or-typed-iph96b214f0/ios\">Apple describes speaking the screen, selected text, and typing feedback on iPhone</a>. Choose the version of the guide matching your device, and use an input or output method that fits your needs. You do not have to install another AI service to explore a built-in reading aid.",
+            "Spoken text is not the same as a summary, and neither is a guarantee of comprehension. Pause, revisit a sentence, or switch formats when useful. Keep private text from being spoken where others can overhear it. A feature being built in does not establish that every mode or voice has identical privacy or network requirements."
+          ]
+        },
+        {
+          "heading": "Keep meaning intact in a small example",
+          "paragraphs": [
+            "<strong>Fictional example:</strong> a community notice says an open workshop is planned for Saturday, but attendance still needs confirmation and the materials list will be sent later. Enlarging the text or listening to it changes access, not the agreement described.",
+            "A shorter generated version that says \"Attend the workshop Saturday and bring your materials\" has changed the meaning. The condition and missing information matter. An acceptable explanation would keep attendance unconfirmed and identify the materials list as something still to obtain.",
+            "For a confusing, non-sensitive paragraph, an optional request is: <em>Explain this passage in plainer language. Preserve conditions, exceptions, uncertainty, and missing information. Distinguish your explanation from the original, and do not add instructions.</em> Check the explanation yourself. This example is written for illustration, not a reported model test."
+          ]
+        },
+        {
+          "heading": "Choose participation over a reading score",
+          "paragraphs": [
+            "Ask whether you can now use the material in the way you intended. Can you identify its main question, find the supporting passage, or follow a low-stakes instruction without losing an exception? Faster completion is not the only useful outcome.",
+            "When the source is inaccessible or the stakes are high, seek an accessible original or an explanation from the responsible person. Do not force a consequential document through a summary and assume nothing important was lost. The <a href=\"/living-well/learning-with-ai-without-skipping-understanding/\">AI-learning guide</a> offers another worked example of checking understanding.",
+            "Keep the settings that help and leave the rest alone. A successful reading setup can be ordinary and repeatable, without becoming a project to optimize every book or article you encounter."
+          ]
+        }
+      ],
+      "question": "Did the change help you encounter the original more fully, or only give you something shorter to finish?",
+      "related": [
+        "technology-for-real-life",
+        "learning-with-ai-without-skipping-understanding"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "An access method that helps you use the original text without losing important meaning.",
+      "sources": [
+        {
+          "label": "Google Chrome: use reading mode",
+          "url": "https://support.google.com/chrome/answer/14218344?hl=en",
+          "note": "Official desktop reading-mode guidance supports the access options and compatibility limits. No browser feature or assistive-technology setup was personally tested.",
+          "checked": "2026-10-10"
+        },
+        {
+          "label": "Apple: hear screen content and selected text",
+          "url": "https://support.apple.com/guide/iphone/hear-whats-on-the-screen-or-typed-iph96b214f0/ios",
+          "note": "Official iPhone guidance supports the spoken-access example. Consult the version matching the device rather than assuming every menu or capability is identical.",
+          "checked": "2026-10-10"
+        }
+      ],
+      "utility": {
+        "start": "One article you want to read and a specific difficulty with its format.",
+        "simplest_route": "Try zoom, a readable version, a printout, or built-in read-aloud support before an AI summary.",
+        "finish": "You can use the material without losing a condition, exception, or important part of the original.",
+        "starter": "A READING SETUP THAT FITS\nOriginal source:\nWhat I came to understand or enjoy:\nThe format difficulty:\nOne adjustment to try:\n\nMEANING CHECK\nThe important passage in the original:\nConditions or exceptions I must keep:\nInformation still missing:\n\nKEEP OR CHANGE\nDid this make the material more usable?\nWhat support should remain available?\nWhat can I leave alone now?\n"
+      }
+    },
+    {
+      "slug": "reflection-with-your-judgment-intact",
+      "title": "Reflect with AI without handing over your judgment",
+      "description": "Use private reflection and optional generic questions to clarify what matters, without uploading a journal or treating a model as a spiritual authority.",
+      "topic": "meaning",
+      "kind": "guide",
+      "lead": "A reflective tool should help you hear your own question more clearly. It does not need to tell you who you are, assign meaning to an experience, or become the keeper of your private life.",
+      "sections": [
+        {
+          "heading": "Begin privately, with a question you recognize",
+          "paragraphs": [
+            "Choose an ordinary question rather than a complete analysis of yourself. What deserved attention today? Which commitment still matters? What would you like to make more room for tomorrow? A notebook, a private note, a familiar practice, or a conversation with a willing person may be enough.",
+            "You can pause without writing anything. Reflection need not produce an insight, a spiritual interpretation, or a plan. Its usefulness is not measured by the intensity of the feeling it creates or by how much private information you reveal."
+          ]
+        },
+        {
+          "heading": "Separate observation, interpretation, and choice",
+          "paragraphs": [
+            "Write three short headings: <strong>What I noticed</strong>, <strong>What I think it might mean</strong>, and <strong>What I choose next</strong>. Keep them separate. An interpretation may change; another person's intentions may still be unknown.",
+            "<strong>Fictional example:</strong> someone notices that an evening intended for reading became an evening of comparing reading apps. One interpretation is that setup became more attractive than beginning the book. Other explanations are possible. A small choice is to read a page in the existing app before deciding whether another tool is needed.",
+            "This is not a personal experiment result or a diagnosis. It illustrates a question that can lead back into life. The person may discover that the existing format genuinely is inaccessible, in which case changing the tool is reasonable rather than a failure to be present."
+          ]
+        },
+        {
+          "heading": "Ask for questions without supplying private answers",
+          "paragraphs": [
+            "AI can have a limited role without receiving a journal. An optional prompt is: <em>Offer three open questions for reflecting on how to make more room for attention and care in an ordinary week. Do not diagnose anyone, infer hidden motives, claim spiritual insight, or tell me what my priorities should be. Make every question optional.</em>",
+            "Read the questions, choose one if it helps, and answer it away from the service. You do not need to keep sending increasingly intimate details to obtain a more convincing response. Check the privacy and retention arrangements of any service before sharing material you would regret disclosing."
+          ]
+        },
+        {
+          "heading": "Keep spiritual meaning and authority distinct",
+          "paragraphs": [
+            "A generated passage may invite a worthwhile thought. That does not establish special access to your purpose, another person's feelings, or the meaning of a coincidence. Explore a spiritual interpretation through appropriate sources and your own judgment rather than treating fluent language as revelation.",
+            "The existing <a href=\"/living-well/ai-generated-reflections/\">essay on AI-generated reflections</a> explores this distinction. A source from a particular tradition can be read in its own context, without asking a model to blend different beliefs into a personalized verdict. Uncertainty can remain part of the reflection."
+          ]
+        },
+        {
+          "heading": "Choose a modest return to ordinary life",
+          "paragraphs": [
+            "You might make a small decision, have a conversation, change a practical arrangement, or deliberately leave the question open. In the fictional reading example, the next step is an encounter with the book, not another assessment of the reader's character.",
+            "Notice when preparation becomes postponement. Repeatedly asking a system for reassurance or interpretation may stop serving the original question. Pause when the interaction adds pressure or distress, and turn toward suitable human support when a difficulty needs more than an optional exercise.",
+            "This is a reflective method, not mental-health care or a test of spiritual progress. Keep or discard it according to whether it helps you act with more clarity and care, without making your worth depend on a successful session."
+          ]
+        }
+      ],
+      "question": "What remains yours to decide even after you have considered a helpful question?",
+      "related": [
+        "technology-for-real-life",
+        "ai-generated-reflections"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "A private observation, an interpretation held with appropriate uncertainty, and an optional real-world choice.",
+      "sources": [
+        {
+          "label": "NIST: Generative Artificial Intelligence Profile",
+          "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+          "note": "Background on context-sensitive management of generative-AI risks. The public publication description was reviewed; it does not validate this reflective exercise or establish a wellbeing benefit.",
+          "checked": "2026-10-10"
+        }
+      ],
+      "utility": {
+        "start": "One ordinary question, answered privately rather than a journal uploaded to a service.",
+        "simplest_route": "Use paper or a private note. An optional AI request can supply questions without receiving your answers.",
+        "finish": "You have a considered choice or an honestly open question, not a model-generated verdict about yourself.",
+        "starter": "PRIVATE REFLECTION\nMy question:\n\nWHAT I NOTICED\n[An observation, not an explanation of another person.]\n\nWHAT IT MIGHT MEAN\n[One interpretation and another possibility.]\n\nWHAT REMAINS MINE TO DECIDE\n[A value, choice, boundary, or question.]\n\nAN OPTIONAL NEXT STEP\n[A real-world action, conversation, or decision to leave it open.]\n\nSTOPPING POINT\nWould continuing help, or am I only seeking another reassurance?\nKeep this page private. No insight or completed answer is required.\n"
+      }
+    },
+    {
+      "slug": "did-the-tool-actually-help",
+      "title": "Did the tool actually make life easier?",
+      "description": "Review a small technology change by its real purpose, total effort, reliability, privacy, and effect on other people, not just its impressive output.",
+      "topic": "choices",
+      "kind": "guide",
+      "lead": "An attractive output is a beginning, not the result. Judge the change by what happened to the original task and to the people who had to live with the new method.",
+      "sections": [
+        {
+          "heading": "Write down the purpose before the comparison",
+          "paragraphs": [
+            "Choose one low-stakes repeated task. What would useful improvement look like? Finding a file without another search, making a plan easier to understand, participating in an activity, or finishing a draft are clearer aims than \"use more AI.\"",
+            "Keep the purpose close to the situation. Some changes are worthwhile because they improve access or reduce confusion, even if they do not save minutes. A faster method that loses important meaning is not automatically a better one. Use the <a href=\"/living-well/worksheets/#small-experiment\">existing small-experiment worksheet</a> when a private note helps."
+          ]
+        },
+        {
+          "heading": "Compare the whole job, not the moment of generation",
+          "paragraphs": [
+            "Include setup, preparing input, checking, correcting, moving the result into use, and maintaining the system. Compare the same task and the same standard of completion. If other people do part of the work, ask about their effort instead of treating your own screen time as the whole cost.",
+            "<strong>Illustrative calculation, not measured results:</strong> the old method takes six minutes on each of five uses, or thirty minutes. A new method needs twelve minutes of setup, two minutes per use, one minute of checking per use, and three minutes of maintenance. Its first five uses also total thirty minutes: 12 + 10 + 5 + 3.",
+            "If the next five uses need no additional setup and the other assumptions remain the same, they take eighteen minutes: 10 + 5 + 3. That is twelve minutes less than the old method for those five uses. The arithmetic illustrates why setup and repetition matter; it does not predict savings for a real product or reader."
+          ]
+        },
+        {
+          "heading": "Look for reliability, fit, and costs that are not time",
+          "paragraphs": [
+            "Could you inspect the source? Did the plan remain accurate when a detail changed? Could the intended person open the result? Did a service require more personal information than the task justified? Would the method still work when you needed a simple fallback?",
+            "Also look for work shifted to someone else. A household plan may be easier for its creator but harder for everyone asked to update it. An AI draft may save writing time while creating more correction work. Discuss those effects rather than inferring that silence means agreement.",
+            "This guide does not propose a single numerical score for a person's wellbeing. Note the tradeoffs in plain language. Accessibility support, enjoyment, and a less rushed conversation do not need to be translated into a productivity metric to matter."
+          ]
+        },
+        {
+          "heading": "Make a decision you can revise",
+          "paragraphs": [
+            "Choose <strong>keep</strong>, <strong>simplify</strong>, <strong>stop</strong>, or <strong>still unsure</strong>. Name why. A tool that works for one task may not deserve access to the rest of your life. A disappointing trial can be useful when it prevents a larger unnecessary commitment.",
+            "For a low-stakes change, a few ordinary uses may be enough to decide what to try next. They do not establish a general causal finding. Different tasks, expectations, interruptions, or familiarity with the old method could explain some of the difference. Stop earlier when the method creates avoidable risk or distress."
+          ]
+        },
+        {
+          "heading": "Turn a real observation into an honest field note",
+          "paragraphs": [
+            "A future firsthand account should identify what actually happened, which device or service was used, the dates, the comparison, the effort, the mistakes, and the conclusion. Use genuine screenshots or examples only with suitable permission and removal of private information.",
+            "Keep three labels distinct: a proposed method, a fictional worked example, and a firsthand observation. Research findings need their own sources and limits. None of these becomes stronger by being presented as another. The <a href=\"/living-well/field-notes/\">field-note collection</a> retains proposed experiments until actual observations are supplied.",
+            "The final question is not whether the tool was impressive. It is whether you would make the same change again, knowing what it really required and what it made possible outside the interface."
+          ]
+        }
+      ],
+      "question": "Knowing the checking, maintenance, and tradeoffs, would you choose this method again?",
+      "related": [
+        "technology-for-real-life",
+        "time-you-save"
+      ],
+      "published": "2026-10-10",
+      "series": "technology-for-real-life",
+      "evidence_status": "worked-guide-not-firsthand-result",
+      "outcome": "A defensible keep, simplify, stop, or still-unsure decision about one small change.",
+      "utility": {
+        "start": "One low-stakes change and a clear description of the earlier method.",
+        "simplest_route": "Keep a short before-and-after note. A score, tracking app, or AI verdict is unnecessary.",
+        "finish": "You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.",
+        "starter": "DID THIS HELP?\nTask and human purpose:\nWhat counts as finished:\nEarlier method:\nChange tried:\nActual dates and circumstances:\n\nTOTAL EFFORT\nSetup:\nPreparing input:\nDoing the task:\nChecking and correcting:\nMoving the result into use:\nOngoing maintenance:\nWork done by someone else:\n\nBEYOND TIME\nReliability and mistakes:\nAccess, privacy, cost, or permission tradeoffs:\nWhat became possible outside the tool:\nOther explanations for what changed:\n\nDECISION\nKeep / simplify / stop / still unsure:\nWhy:\nWhat this observation cannot establish:\n"
+      }
     }
   ]
 }
