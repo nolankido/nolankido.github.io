@@ -1,0 +1,34 @@
+/* Home and Creative only. Links are separate native targets, never nested. */
+.destination:hover h3 { text-decoration: none; }
+.destination-links { margin-top: auto; }
+.destination-action { color: inherit; min-height: 44px; text-decoration: none; }
+.destination-action:hover, .destination-action:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
+.destination-first { margin-top: 18px; }
+.destination .destination-first-label { margin: 0 0 4px; max-width: none; font: .65rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: .03em; }
+.destination-first-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: inherit; font: 600 .94rem/1.45 var(--sans); text-underline-offset: .2em; }
+.destination .destination-first-note { margin: 4px 0 0; min-height: 3.2em; max-width: 65ch; font: .84rem/1.6 var(--sans); }
+.destination a:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.creative-jumps { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; }
+.creative-jumps a { display: inline-flex; align-items: center; min-height: 44px; font: .84rem/1.5 var(--sans); }
+.page-creative :is(#creative-brief, #creative-practice, #creative-reading) { scroll-margin-top: 200px; }
+.creative-brief-card { border: 1px solid var(--line-dark); border-left: 3px solid var(--green); padding: 24px; margin-block: 24px 16px; background: var(--paper-light); }
+.creative-brief-card h3 { margin-top: 8px; }
+.creative-brief-kind { font: .7rem/1.6 var(--mono); text-transform: uppercase; }
+.creative-brief-card .button { white-space: normal; text-align: left; min-height: 44px; }
+.creative-template { border-block: 1px solid var(--line-dark); margin-block: 18px; }
+.creative-template summary { cursor: pointer; padding: 16px 0; font: 500 .9rem/1.6 var(--sans); min-height: 44px; }
+.creative-template pre { white-space: pre-wrap; overflow-wrap: anywhere; word-break: normal; margin: 0 0 20px; padding: 20px; background: var(--panel); font: .8rem/1.7 var(--mono); }
+.creative-routes .creative-route-outcome { font: .9rem/1.65 var(--sans); }
+@media (max-width: 760px) {
+  .creative-brief-card { padding: 18px; }
+  .creative-template pre { padding: 14px; }
+}
+@media (forced-colors: active) {
+  .destination a:focus-visible { outline-color: Highlight; }
+  .creative-brief-card { border-color: CanvasText; }
+}
+@media print {
+  .creative-jumps, .creative-brief-card .button { display: none; }
+  .destination, .creative-brief-card, .creative-template pre { background: white; color: black; }
+  .creative-brief-card { break-inside: avoid; }
+}
