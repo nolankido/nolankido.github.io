@@ -202,6 +202,7 @@ class PokerContentTests(unittest.TestCase):
 BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html', '_source/site.json', 'about/index.html', 'assets/contact.js', 'assets/hubs.css', 'assets/site.css', 'bio/index.html', 'card/index.html', 'contact/index.html', 'creative/index.html', 'feed.xml', 'index.html', 'notes/decision-quality/index.html', 'notes/finishing-is-a-decision/index.html', 'notes/generous-explanations/index.html', 'notes/index.html', 'notes/learning-from-the-beginning/index.html', 'notes/trustworthy-tools/index.html', 'privacy/index.html', 'resources/index.html', 'styles.css', 'technology/index.html']
 # October 10: reviewed person-first architecture, Writing gateway and shared footer label.
 # All other source and protected contact, privacy, design and Poker checks remain independent.
-BASELINE_DIGEST = 'ead5c431f430abcdab43770459f58ec45a301e889aec53415b2a016c3e1fa18d'
+# October 11: reviewed home first actions and Creative brief; protected sources remain unchanged.
+BASELINE_DIGEST = '2a73c46058e2d9e27be067d95545d31da576e22d5cc990cb44632ca2988e1492'
 
 if __name__=='__main__': unittest.main(verbosity=2)
