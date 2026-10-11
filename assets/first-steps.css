@@ -1,4 +1,6 @@
 /* Home and Creative only. Links are separate native targets, never nested. */
+/* Immediate native jumps remain reliable when page scripts are disabled. */
+:root { scroll-behavior: auto; }
 .destination:hover h3 { text-decoration: none; }
 .destination-links { margin-top: auto; }
 .destination-action { color: inherit; min-height: 44px; text-decoration: none; }

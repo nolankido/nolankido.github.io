@@ -48,6 +48,10 @@ waited for a load event in a JavaScript-disabled context. A minimal local probe
 reproduced the wait. The harness now inserts its test-only text-spacing CSS
 synchronously in both contexts and has progress logs plus a bounded diagnostic
 timeout. Site JavaScript stays disabled throughout the no-script checks.
+The two updated pages use immediate native anchor movement, avoiding unreliable
+smooth-scroll settling in the no-script paths. The browser assertions require
+the destination to be inside the viewport and below the sticky header, not just
+below it somewhere offscreen.
 
 ## Limits
 No actual message, AI-service request, private worksheet answer, at-table poker
