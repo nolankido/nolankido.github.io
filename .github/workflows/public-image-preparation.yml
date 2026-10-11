@@ -1,0 +1,21 @@
+name: Public image preparation
+on:
+  push:
+    branches: [site/public-judgment-20261011]
+    paths: [.github/workflows/public-image-preparation.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: git archive --format=tar.gz HEAD > "$RUNNER_TEMP/public-image-source.tar.gz"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: public-image-source
+          path: ${{ runner.temp }}/public-image-source.tar.gz
+          retention-days: 1
