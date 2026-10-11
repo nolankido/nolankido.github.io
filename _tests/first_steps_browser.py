@@ -86,7 +86,7 @@ try:
      jump.click()
      target=page.locator('#'+anchor).bounding_box()
      header=page.locator('.site-header').bounding_box()
-     assert target['y']>=header['y']+header['height']-1,('obscured-anchor',width,anchor,target,header)
+     assert header['y']+header['height']-1<=target['y']<1000,('obscured-anchor',width,anchor,target,header)
    context.close()
   browser.close()
  assert not errors,errors

@@ -79,6 +79,7 @@ class FirstStepTests(unittest.TestCase):
    scripts=re.findall(r'<script[^>]*src="([^"]+)"',html)
    self.assertEqual(scripts,['https://cloud.umami.is/script.js'])
   css=(ROOT/'assets/first-steps.css').read_text()
+  self.assertIn(':root { scroll-behavior: auto; }',css)
   declared=set(re.findall(r'(--[a-z-]+)\s*:',(ROOT/'styles.css').read_text()))
   self.assertLessEqual(set(re.findall(r'var\((--[a-z-]+)\)',css)),declared)
 
