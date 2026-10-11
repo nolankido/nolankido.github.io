@@ -2,6 +2,7 @@
 from copy import deepcopy
 from hashlib import sha256
 from html import escape
+from html.parser import HTMLParser
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
@@ -18,6 +19,18 @@ import check_live
 import living_well as lw
 import living_well_directory as directory
 import living_well_resources as resources
+
+class FinderTerms(HTMLParser):
+    def __init__(self, html):
+        super().__init__(convert_charrefs=True)
+        self.terms = {}
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'article' and 'data-lw-entry' in attrs:
+            self.terms[attrs['id'].removeprefix('resource-')] = attrs['data-terms']
+
 
 class DirectoryTests(unittest.TestCase):
     @classmethod
@@ -90,6 +103,42 @@ class DirectoryTests(unittest.TestCase):
         self.assertIn('type="button" id="lw-clear"', html)
         self.assertIn('aria-live="polite"', html)
         self.assertNotIn('name="lw-query"', html)
+
+    def test_every_task_and_choice_is_in_its_resources_search_metadata(self):
+        terms = FinderTerms(self.outputs[Path('living-well/find/index.html')]).terms
+        self.assertEqual(set(terms), set(self.entries))
+        for task in self.extra['tasks']:
+            for choice in task['choices']:
+                with self.subTest(task=task['id'], resource=choice['resource']):
+                    for value in (task['id'], task['id'].replace('-', ' '), task['title'],
+                                  task['description'], choice['when'], choice['check']):
+                        self.assertIn(value, terms[choice['resource']])
+
+    def test_task_associations_do_not_leak_into_unrelated_resources(self):
+        tasks = deepcopy(self.extra['tasks'])
+        for number, task in enumerate(tasks):
+            task['title'] = 'unique-task-marker-' + str(number)
+        terms = FinderTerms(directory.finder(self.library, lw.section, tasks)).terms
+        for task in tasks:
+            chosen = {choice['resource'] for choice in task['choices']}
+            for key in self.entries:
+                self.assertEqual(task['title'] in terms[key], key in chosen, (task['id'], key))
+        self.assertEqual(directory.task_search_terms([]), {})
+
+    def test_task_search_metadata_is_escaped_as_literal_text(self):
+        tasks = deepcopy(self.extra['tasks'])
+        sample = '<img src=x onerror="bad()"> & "quoted"'
+        tasks[0]['title'] = sample
+        tasks[0]['description'] = sample
+        tasks[0]['choices'][0]['when'] = sample
+        tasks[0]['choices'][0]['check'] = sample
+        html = directory.finder(self.library, lw.section, tasks)
+        self.assertNotIn(sample, html)
+        self.assertIn(escape(sample, quote=True), html)
+        self.assertNotIn('<img src=x', html)
+        terms = FinderTerms(html).terms
+        self.assertEqual(set(terms), set(self.entries))
+        self.assertIn(sample, terms[tasks[0]['choices'][0]['resource']])
 
     def test_script_and_styles_are_precisely_page_scoped(self):
         for page in lw.manifest(ROOT):

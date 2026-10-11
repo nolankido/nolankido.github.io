@@ -17,6 +17,27 @@ def check_directory(context, nojs, base, root: Path, output: Path):
         assert page.locator('[data-lw-entry]').count() == 98
         before = list(requests)
         query = page.get_by_label('A topic, task, or resource name')
+        tasks = json.loads((root / '_source/living-well/directory.json').read_text())['tasks']
+        for task in tasks:
+            for value in (task['id'].replace('-', ' '), task['title']):
+                query.fill(value)
+                for choice in task['choices']:
+                    expect(page.locator('#resource-' + choice['resource'])).to_be_visible()
+        query.fill('share and coordinate')
+        expect(page.locator('[data-lw-entry]:visible')).to_have_count(5)
+        for key in ('google-keep', 'apple-notes-sharing', 'cryptpad', 'localsend', 'living-room-conversations'):
+            expect(page.locator('#resource-' + key)).to_be_visible()
+        page.get_by_label('Collection', exact=True).select_option('notes-documents')
+        page.get_by_label('Entry access').select_option('web')
+        expect(page.locator('[data-lw-entry]:visible')).to_have_count(2)
+        expect(page.locator('#resource-google-keep')).to_be_visible()
+        expect(page.locator('#resource-apple-notes-sharing')).to_be_visible()
+        page.get_by_label('Entry access').select_option('account')
+        expect(page.locator('[data-lw-entry]:visible')).to_have_count(0)
+        expect(page.locator('#lw-empty')).to_be_visible()
+        page.get_by_role('button', name='Clear filters').click()
+        expect(query).to_be_focused()
+        expect(page.locator('[data-lw-entry]:visible')).to_have_count(98)
         query.fill('ÓBSIDIAN')
         expect(page.locator('[data-lw-entry]:visible')).to_have_count(1)
         expect(page.locator('#resource-obsidian')).to_be_visible()
@@ -79,6 +100,8 @@ def check_directory(context, nojs, base, root: Path, output: Path):
         assert not errors, errors
         (output / 'living-well-directory-browser.json').write_text(json.dumps({
             'inventory': 98, 'passed': True, 'literal_query_test': True,
+            'task_paths_checked': len(tasks), 'task_queries_checked': 2 * len(tasks),
+            'share_and_coordinate_results': 5,
             'combined_filters': True, 'filter_network_requests': 0,
             'nojs_static_inventory': 98, 'errors': errors,
             'note': 'Network comparison is asserted before intentional navigation; later navigation is allowed.'

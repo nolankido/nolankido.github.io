@@ -138,7 +138,7 @@ def render(root: Path, page: dict, section) -> str:
     import living_well_resources as resources
     data, library, entries, guides = context(root)
     if page['directory_kind'] == 'finder':
-        return finder(library, section)
+        return finder(library, section, data['tasks'])
     task = next(t for t in data['tasks'] if t['id'] == page['directory_task'])
     body = section('a-useful-result', 'Start with life', 'What would be useful?',
         '<p class="section-deck">' + escape(task['purpose']) + '</p><div class="prose">'
@@ -164,7 +164,17 @@ def render(root: Path, page: dict, section) -> str:
     return body
 
 
-def finder(library: dict, section) -> str:
+def task_search_terms(tasks: list[dict]) -> dict[str, str]:
+    """Index only the public task associations selected for each resource."""
+    terms: dict[str, list[str]] = {}
+    for task in tasks:
+        shared = [task['id'], task['id'].replace('-', ' '), task['title'], task['description']]
+        for choice in task['choices']:
+            terms.setdefault(choice['resource'], []).extend([*shared, choice['when'], choice['check']])
+    return {key: ' '.join(parts) for key, parts in terms.items()}
+
+
+def finder(library: dict, section, tasks: list[dict] | None = None) -> str:
     import living_well_resources as resources
     shelves = {s['id']: s for s in library['shelves']}
     entries = sorted(library['resources'], key=lambda e: (e['title'].casefold(), e['id']))
@@ -182,10 +192,14 @@ def finder(library: dict, section) -> str:
         + controls + '<noscript><p>Every resource is available below. Use your browser’s Find command to search this page without JavaScript.</p></noscript>'
         + '<p id="lw-result-count" role="status" aria-live="polite" aria-atomic="true">Showing ' + str(len(entries)) + ' of ' + str(len(entries)) + ' resources.</p>'
         + '<p id="lw-empty" hidden>No matching resources. Try fewer words, another collection, or clear the filters. The <a href="/living-well/free-resources/#by-task">task paths</a> offer another way in.</p>')
+    task_terms = task_search_terms(tasks or [])
     results = []
     for e in entries:
         # Hidden metadata comes only from public editorial text, never from visitor input.
-        terms = ' '.join([e['start'], e['limit'], e['format'], e['creator'], shelves[e['shelf']]['title']])
+        parts = [e['start'], e['limit'], e['format'], e['creator'], shelves[e['shelf']]['title']]
+        if e['id'] in task_terms:
+            parts.append(task_terms[e['id']])
+        terms = ' '.join(parts)
         results.append('<article class="lw-finder-item" data-lw-entry data-collection="' + escape(e['shelf'])
             + '" data-access="' + escape(e['access']) + '" data-terms="' + escape(terms, quote=True)
             + '" id="resource-' + escape(e['id']) + '"><h3>' + escape(e['title']) + '</h3><p>' + escape(e['why'])
