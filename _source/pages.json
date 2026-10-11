@@ -19,6 +19,16 @@
     "updated": "2026-10-11"
   },
   {
+    "id": "find",
+    "path": "/find/",
+    "title": "Search the site.",
+    "seo_title": "Search the Site | Nolan Kido",
+    "description": "Search published essays, guides and collections across practical AI, Living Well, poker and creative work. Filter locally without sending your search words.",
+    "source": "find.html",
+    "kicker": "Search the site",
+    "updated": "2026-10-11"
+  },
+  {
     "id": "about",
     "path": "/about/",
     "title": "A little about me.",

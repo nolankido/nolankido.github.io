@@ -122,7 +122,7 @@ class LibraryTests(unittest.TestCase):
             'assets/contact.js':'65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858',
             'styles.css':'44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef',
             'assets/site.css':'784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6',
-            'assets/hubs.css':'239757a4a78e5e6e97da917a7af84682c2b1ada3f0013b615a725d9f366a642c',
+            'assets/hubs.css':'80e948dce779cf2be090beee43711155d89ccd1af7dfc1a932115f3cd92cbb4b',
             '_source/poker/catalog.json':'7c1051f6e2bc3943b7c1dbe4da229694455681b8875a346c99279e555edb733f'}
         for path, expected in protected.items():
             self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(), expected, path)

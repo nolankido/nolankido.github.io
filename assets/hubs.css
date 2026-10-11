@@ -137,3 +137,9 @@
 .essay-context { font:.82rem/1.5 var(--sans); color:var(--ink-soft); margin:12px 0 0; }
 @media (max-width: 760px) { .site-bar .site-edition { display:none; } }
 @media (max-width: 360px) { .site-bar .shell { gap:10px; } .utility-navigation { gap:12px; } }
+
+/* Keep the compact site shortcuts usable at narrow widths and enlarged text. */
+@media (max-width: 420px) {
+  .site-bar .shell { flex-wrap: wrap; row-gap: 2px; }
+  .site-bar .utility-navigation { gap: 14px; }
+}

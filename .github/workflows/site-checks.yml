@@ -21,6 +21,7 @@ jobs:
         run: |
           python _scripts/build.py --check
           python -m unittest discover -s _tests -p 'test_*.py' -v
+          node --check assets/site-find.js
           node --check assets/contact.js
           node --check assets/poker-library.js
           node --check assets/poker-finder.js
@@ -34,6 +35,7 @@ jobs:
         env:
           SCREENSHOT_DIR: ${{ runner.temp }}/poker-reading-previews
         run: |
+          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/site_find_browser.py
           python _tests/browser.py
           python _tests/design_browser.py
           AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/entrypoints_browser.py
@@ -44,6 +46,7 @@ jobs:
         with:
           name: public-image-previews
           path: |
+            ${{ runner.temp }}/poker-reading-previews/find-*.png
             ${{ runner.temp }}/poker-reading-previews/entry-*.png
             ${{ runner.temp }}/poker-reading-previews/resources-*.png
             ${{ runner.temp }}/poker-reading-previews/home-*.png
