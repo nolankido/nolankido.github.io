@@ -48,7 +48,8 @@ class GatewayTests(unittest.TestCase):
         outputs = build.build_outputs()
         technology = outputs[Path('technology/index.html')]
         creative = outputs[Path('creative/index.html')]
-        self.assertIn('Start with selected writing on useful tools', technology)
+        self.assertIn('Build a brief for one task', technology)
+        self.assertIn('href="/technology/task-brief/"', technology)
         self.assertIn('/notes/trustworthy-tools/', technology)
         self.assertIn('/resources/#tool-trust-check', technology)
         self.assertIn('Start with selected writing on explanation', creative)
