@@ -1,0 +1,45 @@
+name: One-time PR 31 task-search correction
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+    paths: ['_scripts/release_pr31_task_search_once.py']
+permissions:
+  contents: read
+jobs:
+  correct:
+    if: github.repository == 'nolankido/nolankido.github.io' && github.event.pull_request.number == 31 && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'living-well-task-directory-20261010'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: living-well-task-directory-20261010
+          fetch-depth: 2
+          persist-credentials: true
+      - name: Check exact owner-authorized branch revision
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git rev-parse HEAD^)" = '3b8a48a640e34506b846b77f237df903c7849e20'
+      - name: Correct source, regenerate HTML, and run all unit tests
+        run: python _scripts/release_pr31_task_search_once.py
+      - name: Commit only the correction and remove the one-time helper
+        run: |
+          git rm .github/workflows/release-pr31-task-search-once.yml _scripts/release_pr31_task_search_once.py
+          git add _scripts/living_well_directory.py _tests/test_living_well_directory.py _tests/living_well_directory_browser.py living-well/find/index.html
+          python - <<'PY'
+          import subprocess
+          expected = {'_scripts/living_well_directory.py', '_tests/test_living_well_directory.py', '_tests/living_well_directory_browser.py', 'living-well/find/index.html', '.github/workflows/release-pr31-task-search-once.yml', '_scripts/release_pr31_task_search_once.py'}
+          actual = set(subprocess.check_output(['git', 'diff', '--cached', '--name-only'], text=True).splitlines())
+          if actual != expected:
+              raise SystemExit('Unexpected staged paths: ' + repr(actual))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix: index associated Living Well task metadata and add regression coverage'
+          git push origin HEAD:refs/heads/living-well-task-directory-20261010
+          echo "TASK_SEARCH_FIXED_COMMIT=$(git rev-parse HEAD)"
