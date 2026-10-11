@@ -3,19 +3,47 @@ on:
   push:
     branches: [site/personal-architecture-20261010]
 permissions:
-  contents: read
+  contents: write
 jobs:
-  snapshot:
-    if: github.repository == 'nolankido/nolankido.github.io'
+  prepare:
+    if: github.repository == 'nolankido/nolankido.github.io' && github.ref == 'refs/heads/site/personal-architecture-20261010'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          persist-credentials: false
-      - name: Package source for review
-        run: git archive --format=tar.gz HEAD > /tmp/site-source.tar.gz
-      - uses: actions/upload-artifact@v4
+          python-version: '3.12'
+      - name: Apply reviewed architecture and run unit checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python _scripts/apply_personal_architecture.py
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/architecture-unit-tests.log"
+      - name: Commit complete release tree to isolated branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch='site/personal-architecture-20261010'
+          actual="$(git ls-remote origin "refs/heads/$branch" | cut -f1)"
+          test "$actual" = "$GITHUB_SHA"
+          git rm _scripts/apply_personal_architecture.py .github/workflows/architecture-preview.yml
+          git add -A
+          git diff --cached --stat | tee "$RUNNER_TEMP/architecture-changes.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Present Nolan first, connect practical AI and the rest of life'
+          git push origin "HEAD:refs/heads/$branch"
+          git rev-parse HEAD > "$RUNNER_TEMP/architecture-release-sha.txt"
+          git archive --format=tar.gz HEAD > "$RUNNER_TEMP/architecture-release.tar.gz"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
-          name: architecture-source
-          path: /tmp/site-source.tar.gz
+          name: architecture-preparation-evidence
+          path: |
+            ${{ runner.temp }}/architecture-unit-tests.log
+            ${{ runner.temp }}/architecture-changes.txt
+            ${{ runner.temp }}/architecture-release-sha.txt
+            ${{ runner.temp }}/architecture-release.tar.gz
           retention-days: 1
