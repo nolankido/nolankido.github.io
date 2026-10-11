@@ -21,22 +21,24 @@ jobs:
           python _scripts/apply_personal_architecture.py
           python _scripts/build.py --check
           python -m unittest discover -s _tests -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/architecture-unit-tests.log"
-      - name: Commit complete release tree to isolated branch
+      - name: Commit site files to isolated branch
         shell: bash
         run: |
           set -euo pipefail
           branch='site/personal-architecture-20261010'
           actual="$(git ls-remote origin "refs/heads/$branch" | cut -f1)"
           test "$actual" = "$GITHUB_SHA"
-          git rm _scripts/apply_personal_architecture.py .github/workflows/architecture-preview.yml
+          git restore .github/workflows/site-checks.yml
+          git rm _scripts/apply_personal_architecture.py
           git add -A
+          test -z "$(git diff --cached --name-only -- .github/workflows/)"
           git diff --cached --stat | tee "$RUNNER_TEMP/architecture-changes.txt"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Present Nolan first, connect practical AI and the rest of life'
-          git push origin "HEAD:refs/heads/$branch"
           git rev-parse HEAD > "$RUNNER_TEMP/architecture-release-sha.txt"
           git archive --format=tar.gz HEAD > "$RUNNER_TEMP/architecture-release.tar.gz"
+          git push origin "HEAD:refs/heads/$branch"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
