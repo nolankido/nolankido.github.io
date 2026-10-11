@@ -30,7 +30,7 @@ class UtilityTests(unittest.TestCase):
 
     def test_eight_substantive_guides_with_explicit_outcomes(self):
         self.assertEqual(set(self.new), SLUGS)
-        self.assertEqual(len(lw.manifest(ROOT)), 61)
+        self.assertEqual(len(lw.manifest(ROOT)), 75)
         self.assertEqual(len(self.entries), 34)
         for slug,e in self.new.items():
             with self.subTest(slug=slug):

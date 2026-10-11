@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 from urllib.parse import urlsplit
+import living_well_directory as directory
 
 PREFIX = '/living-well/'
 ACCESS = {
@@ -13,8 +14,8 @@ ACCESS = {
     'account': 'Free account for participation', 'library': 'Library card required',
     'interactive': 'Free browser interactive',
 }
-TOPIC_SHELVES = {'meaning': ['meaning', 'traditions'], 'attention': ['attention', 'world', 'books-creativity'],
-                'everyday-ai': ['everyday-ai', 'learning', 'digital-life', 'everyday-tools'],
+TOPIC_SHELVES = {'meaning': ['meaning', 'traditions'], 'attention': ['attention', 'world', 'books-creativity', 'reading-access', 'creative-tools'],
+                'everyday-ai': ['everyday-ai', 'learning', 'digital-life', 'everyday-tools', 'notes-documents', 'files-recovery'],
                 'relationships': ['care', 'contribution'], 'choices': ['thinking', 'learning']}
 
 
@@ -35,6 +36,7 @@ def load(root: Path) -> dict:
     data = json.loads((root / '_source/living-well/resources.json').read_text(encoding='utf-8'))
     if data.get('version') != 1:
         raise ValueError('Unknown Living Well resource catalog version')
+    data = directory.extend(root, data)
     reviewed_on = date.fromisoformat(data['reviewed_on'])
     shelf_ids = [s['id'] for s in data['shelves']]
     if any(not slug(i) for i in shelf_ids) or len(shelf_ids) != len(set(shelf_ids)):
@@ -152,7 +154,7 @@ def selection_notes() -> str:
             '<p><strong>Free access has conditions.</strong> Apps can require installation, participation can require a free '
             'account, and library borrowing depends on eligibility. Optional services, printed materials, equipment, and '
             'some extra features may cost money. Access notes identify the free portion rather than describing an entire '
-            'provider as free.</p><p>Source and access descriptions were reviewed on October 9, 2026. Apps have not been installed, '
+            'provider as free.</p><p>Each entry identifies its own source-review date; adding a resource does not renew the older reviews. Apps have not been installed, '
             'courses have not been completed, and every media player or regional access route has not been tested. '
             'These selections are not clinical recommendations or third-party security audits. External sites manage '
             'their own privacy and accessibility.</p><p>The annotations are original and the linked material remains with '
@@ -174,12 +176,14 @@ def render(root: Path, section) -> str:
         'material, free core apps, and opportunities with clearly described registration or eligibility requirements.</p>'
         '<p><a href="#browse-collections">Choose a collection</a> · <a href="#resource-index">Browse the complete index</a> · '
         '<a href="#about-this-collection">How resources are selected</a></p>')
+    body += section('by-task', 'Choose an everyday purpose', 'What would you like to do?',
+        '<p class="section-deck">Compare a few suitable routes for a real task, or use the local finder to search the full directory. These are selection guides, not claims of hands-on product testing.</p><p><a href="/living-well/find/">Find a resource by topic, name, collection, or entry access</a></p>' + directory.tiles(root))
     body += section('without-signing-up', 'Only choosing one?', 'A small beginning is enough.',
         '<div class="lw-situations"><p><span>Hear a thoughtful conversation</span><a href="#on-being">An On Being conversation</a></p>'
         '<p><span>Find a free book</span><a href="#project-gutenberg">Read with Project Gutenberg</a></p>'
         '<p><span>Learn one everyday skill</span><a href="#learnfree">Start with a plain tutorial</a></p>'
         '<p><span>Explore a spiritual question in context</span><a href="' + collection_route('traditions') + '">Wisdom traditions &amp; religious literacy</a></p></div>')
-    body += section('browse-collections', 'Choose a direction', 'Twelve collections, at your pace.',
+    body += section('browse-collections', 'Choose a direction', str(len(data['shelves'])) + ' collections, at your pace.',
         ''.join('<div class="lw-library-group"><h3>' + escape(g['title']) + '</h3>'
                 + collection_tiles(data, [s['id'] for s in data['shelves'] if s['group'] == g['id']]) + '</div>' for g in data['groups']))
     body += section('resource-index', 'Complete index', 'All the starting points.',
@@ -219,7 +223,7 @@ def detail(root: Path, ident: str, section) -> str:
     body += section('continue-reading', 'Related reading', 'Connect the resource to an idea.',
         '<div class="lw-situations">' + ''.join('<p><span>On Living Well</span><a href="/living-well/' + slug + '/">'
             + escape(titles[slug]) + '</a></p>' for slug in shelf['companions']) + '</div>'
-        + '<p><a href="/living-well/free-resources/">All 12 resource collections</a> · '
+        + '<p><a href="/living-well/free-resources/">All resource collections</a> · '
         '<a href="/living-well/topics/' + shelf['topic'] + '/">Explore the related subject</a></p>')
     if ident in {'everyday-tools', 'everyday-ai', 'digital-life', 'care'}:
         body += section('put-a-resource-to-use', 'From reading to doing', 'Use a resource for a real task.',
@@ -254,7 +258,7 @@ def home(root: Path, entries: list[dict], section, cards, topic_cards) -> str:
         '<a href="/living-well/growth-without-self-rejection/">Improvement without self-rejection</a></p></div>')
     body += section('three-free-starts', 'Read · try · explore', 'A few worthwhile places to go.',
         '<div class="lw-cards lw-three">' + ''.join(resource_card(resources[i], True) for i in ['on-being','ucla-mindful','seek'])
-        + '</div><p><a href="/living-well/free-resources/">Browse all 66 free resources across 12 collections</a></p>')
+        + '</div><p><a href="/living-well/free-resources/">Browse all ' + str(len(resources)) + ' resources</a> · <a href="/living-well/free-resources/#by-task">Choose an everyday task</a> · <a href="/living-well/find/">Search the directory</a></p>')
     body += section('choose-a-route', 'Read or try', 'A short read. A place to begin.',
         '<div class="lw-routes lw-two"><article class="lw-route"><p class="lw-eyebrow">Explore an idea</p>'
         '<h3><a href="/living-well/ideas/">Essays &amp; reading paths</a></h3><p>Meaning, attention, and questions that '
@@ -282,5 +286,7 @@ def related_shelf(topic: str) -> str:
             'meaning':'Meaning and wonder', 'traditions':'Wisdom traditions', 'attention':'Attention and presence',
             'world':'Nature and science', 'books-creativity':'Books and creativity', 'everyday-ai':'AI literacy',
             'learning':'Free learning', 'digital-life':'Digital privacy', 'everyday-tools':'Useful tools',
-            'care':'Relationships and memory', 'contribution':'Community contribution', 'thinking':'Philosophy and decisions'
+            'care':'Relationships and memory', 'contribution':'Community contribution', 'thinking':'Philosophy and decisions',
+            'notes-documents':'Notes and documents', 'reading-access':'Reading and participation',
+            'creative-tools':'Creative tools', 'files-recovery':'Files and recovery'
         }[s]) + '</a>' for s in TOPIC_SHELVES[topic]) + '</p>'

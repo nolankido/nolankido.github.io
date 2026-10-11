@@ -25,8 +25,8 @@ class ResourceTests(unittest.TestCase):
         cls.page = cls.outputs[Path('living-well/free-resources/index.html')]
 
     def test_sixtysix_selections_twelve_complete_collections(self):
-        self.assertEqual(len(self.catalog['resources']), 66)
-        self.assertEqual(len(self.catalog['shelves']), 12)
+        self.assertEqual(len(self.catalog['resources']), 98)
+        self.assertEqual(len(self.catalog['shelves']), 16)
         for shelf in self.catalog['shelves']:
             entries = [e for e in self.catalog['resources'] if e['shelf'] == shelf['id']]
             self.assertGreaterEqual(len(entries), 4)
@@ -36,7 +36,8 @@ class ResourceTests(unittest.TestCase):
             self.assertIn(e['companion'], self.entries)
             self.assertIn('id="' + e['id'] + '"', self.page)
             self.assertIn('href="' + escape(e['entry_url'], quote=True) + '"', self.page)
-            self.assertEqual(e['reviewed_on'], '2026-10-09')
+            original_ids = {item['id'] for item in json.loads((ROOT / '_source/living-well/resources.json').read_text())['resources']}
+            self.assertEqual(e['reviewed_on'], '2026-10-09' if e['id'] in original_ids else '2026-10-10')
             self.assertTrue(e['review_scope'])
 
     def test_access_and_limitations_are_not_hidden_behind_registration(self):
