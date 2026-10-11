@@ -1,0 +1,21 @@
+name: Architecture preview
+on:
+  push:
+    branches: [site/personal-architecture-20261010]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    if: github.repository == 'nolankido/nolankido.github.io'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Package source for review
+        run: git archive --format=tar.gz HEAD > /tmp/site-source.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: architecture-source
+          path: /tmp/site-source.tar.gz
+          retention-days: 1
