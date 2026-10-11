@@ -128,3 +128,12 @@
   .site-bar .site-edition { display: none; }
   .identity-footer a { display: block; margin-left: 0; margin-top: 10px; }
 }
+
+/* Reading context and utility discovery; preserve the six-item subject navigation. */
+.utility-navigation { display:flex; flex-wrap:wrap; gap:18px; align-items:center; }
+.site-bar .utility-navigation a { display:inline-flex; align-items:center; min-height:28px; text-decoration:underline; }
+.site-bar .utility-navigation a[aria-current] { text-decoration-thickness:2px; }
+.reading-date, .identity-reading p.reading-date { font: .78rem/1.6 var(--sans); color:var(--ink-soft); margin:12px 0 0; }
+.essay-context { font:.82rem/1.5 var(--sans); color:var(--ink-soft); margin:12px 0 0; }
+@media (max-width: 760px) { .site-bar .site-edition { display:none; } }
+@media (max-width: 360px) { .site-bar .shell { gap:10px; } .utility-navigation { gap:12px; } }

@@ -37,6 +37,20 @@ jobs:
           python _tests/browser.py
           python _tests/design_browser.py
           AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/living_well_browser.py
+      - name: Save personal introduction and essay previews
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: public-image-previews
+          path: |
+            ${{ runner.temp }}/poker-reading-previews/home-*.png
+            ${{ runner.temp }}/poker-reading-previews/about-*.png
+            ${{ runner.temp }}/poker-reading-previews/notes-*.png
+            ${{ runner.temp }}/poker-reading-previews/start-here-*.png
+            ${{ runner.temp }}/poker-reading-previews/technology-*.png
+            ${{ runner.temp }}/poker-reading-previews/keep-the-judgment-*.png
+          retention-days: 1
+          if-no-files-found: error
       - name: Whole-site accessibility and failure recovery
         env:
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
@@ -61,6 +75,7 @@ jobs:
             ${{ runner.temp }}/poker-reading-previews/technology-*.png
             ${{ runner.temp }}/poker-reading-previews/notes-*.png
             ${{ runner.temp }}/poker-reading-previews/creative-*.png
+            ${{ runner.temp }}/poker-reading-previews/keep-the-judgment-*.png
             ${{ runner.temp }}/poker-reading-previews/*.log
             ${{ runner.temp }}/poker-reading-previews/living-well-*.png
             ${{ runner.temp }}/poker-reading-previews/living-well-*.json

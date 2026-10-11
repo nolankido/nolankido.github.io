@@ -1,0 +1,12 @@
+{
+  "default": {
+    "src": "/assets/social/nolan-kido.png",
+    "alt": "Nolan Kido. Build useful things. Make room for a good life. nolankido.com."
+  },
+  "pages": {
+    "keep-the-judgment": {
+      "src": "/assets/social/keep-the-judgment.png",
+      "alt": "Let AI do more. Keep the judgment. An essay by Nolan Kido on purpose, boundaries, and responsibility."
+    }
+  }
+}

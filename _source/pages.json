@@ -6,7 +6,7 @@
     "seo_title": "Nolan Kido | Practical AI, Useful Things & a Good Life",
     "description": "A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.",
     "source": "home.html",
-    "updated": "2026-10-10"
+    "updated": "2026-10-11"
   },
   {
     "id": "start-here",
@@ -16,7 +16,7 @@
     "description": "Meet Nolan Kido, read one useful piece, or find a route into practical AI, thoughtful living, poker, and creative work.",
     "kicker": "New here?",
     "source": "start-here.html",
-    "updated": "2026-10-10"
+    "updated": "2026-10-11"
   },
   {
     "id": "about",
@@ -26,7 +26,7 @@
     "description": "Meet Nolan Kido: practical AI, building, writing, tournament poker, and a life beyond the screen. A selected personal introduction, not a complete biography.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-10"
+    "updated": "2026-10-11"
   },
   {
     "id": "notes",
@@ -36,7 +36,7 @@
     "description": "Four selected reading paths through practical AI, thoughtful living, poker decisions, and creative work, with the original general Notes collection.",
     "kicker": "Writing",
     "source": "notes.html",
-    "updated": "2026-10-10"
+    "updated": "2026-10-11"
   },
   {
     "id": "resources",
@@ -66,7 +66,7 @@
     "description": "Short public introductions to Nolan Kido: practical AI, useful tools, clear ideas, thoughtful living, tournament poker, and creative work.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-10-10"
+    "updated": "2026-10-11"
   },
   {
     "id": "card",
@@ -190,7 +190,7 @@
     "description": "Practical AI with human judgment: decide where a tool belongs, find a useful real-life task, and check whether it actually helped. A starting point from Nolan Kido.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-10"
+    "updated": "2026-10-11"
   },
   {
     "id": "creative",
@@ -940,5 +940,17 @@
     "date": "2026-10-08",
     "updated": "2026-10-08",
     "poker_guide": true
+  },
+  {
+    "id": "keep-the-judgment",
+    "path": "/notes/keep-the-judgment/",
+    "title": "Let AI do more. Keep the judgment.",
+    "seo_title": "Let AI Do More. Keep the Judgment. | Nolan Kido",
+    "description": "Delegating production is not the same as handing over responsibility. An essay on purpose, boundaries, permission, and the choices worth keeping human.",
+    "kicker": "Practical AI / An essay",
+    "source": "notes/keep-the-judgment.html",
+    "note": true,
+    "date": "2026-10-11",
+    "editorial_note": "Prepared with AI assistance. This is an argument about delegation and judgment, not a report of measured results. The Saturday-afternoon scenario is fictional."
   }
 ]

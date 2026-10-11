@@ -2,6 +2,7 @@
 from __future__ import annotations
 import html
 import json
+from presentation import publication
 from pathlib import Path
 
 
@@ -80,7 +81,7 @@ def selected_reading(config: dict, pages: list[dict]) -> str:
     cards = []
     for item in config['selected']:
         page = by_path[item['path']]
-        cards.append('<article class="identity-reading"><p class="note-category">' + html.escape(item['kind']) + '</p><h3><a href="' + html.escape(page['path'], quote=True) + '">' + html.escape(page['title']) + '</a></h3><p>' + html.escape(item['description']) + '</p></article>')
+        cards.append('<article class="identity-reading"><p class="note-category">' + html.escape(item['kind']) + '</p><h3><a href="' + html.escape(page['path'], quote=True) + '">' + html.escape(page['title']) + '</a></h3><p>' + html.escape(item['description']) + '</p>' + publication(page) + '</article>')
     return '<div class="identity-readings">' + ''.join(cards) + '</div>'
 
 
@@ -99,6 +100,6 @@ def reading_routes(config: dict, pages: list[dict]) -> str:
                 kind = 'Poker study guide'
             elif page['id'] == 'poker-hand-review':
                 kind = 'Fictional hand review'
-            cards.append('<article class="note-entry"><p class="note-category">' + kind + '</p><h3><a href="' + html.escape(path, quote=True) + '">' + html.escape(page['title']) + '</a></h3><p>' + html.escape(page['description']) + '</p></article>')
+            cards.append('<article class="note-entry"><p class="note-category">' + kind + '</p><h3><a href="' + html.escape(path, quote=True) + '">' + html.escape(page['title']) + '</a></h3><p>' + html.escape(page['description']) + '</p>' + publication(page) + '</article>')
         sections.append('<section class="section folio-row writing-route" id="' + route['id'] + '" aria-labelledby="writing-' + route['id'] + '-title"><div class="section-meta"><p class="section-label">' + html.escape(route['label']) + '</p></div><div class="section-content"><h2 class="section-title" id="writing-' + route['id'] + '-title">' + html.escape(route['title']) + '</h2><p class="section-deck">' + html.escape(route['description']) + '</p><div class="notes-list">' + ''.join(cards) + '</div></div></section>')
     return '\n'.join(sections)

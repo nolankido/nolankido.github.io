@@ -13,7 +13,7 @@
   <meta property="og:type" content="${og_type}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  ${social_metadata}
   <meta name="twitter:title" content="${seo_title}">
   <meta name="twitter:description" content="${description}">
   <link rel="canonical" href="${canonical}">
@@ -31,7 +31,7 @@
 </head>
 <body class="site-page page-${page_id}">
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="site-bar"><div class="shell"><a href="/">nolankido.com</a><span class="site-edition">Practical AI · A life beyond the screen</span><a class="utility-start" href="/start-here/">Start here</a></div></div>
+  <div class="site-bar"><div class="shell"><a href="/">nolankido.com</a><span class="site-edition">Practical AI · A life beyond the screen</span><nav class="utility-navigation" aria-label="Site shortcuts"><a class="utility-writing" href="/notes/"${writing_current}>Writing</a><a class="utility-start" href="/start-here/">Start here</a></nav></div></div>
   <header class="site-header">
     <nav class="nav shell" aria-label="Primary navigation">
       <a class="brand" href="/" aria-label="Nolan Kido home"><span class="brand-mark" aria-hidden="true">NK</span><span>Nolan Kido</span></a>
