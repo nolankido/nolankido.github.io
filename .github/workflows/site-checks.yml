@@ -32,6 +32,19 @@ jobs:
           python -m pip install -r requirements-test.txt
           python -m playwright install --with-deps chromium
           npm install --prefix "$RUNNER_TEMP/nk-qa" --no-audit --no-fund axe-core@4.10.3
+      - name: First-step journeys and creative brief
+        env:
+          AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
+          SCREENSHOT_DIR: ${{ runner.temp }}/first-step-previews
+        run: python _tests/first_steps_browser.py
+      - name: Save first-step previews
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: first-step-previews
+          path: ${{ runner.temp }}/first-step-previews/
+          retention-days: 1
+          if-no-files-found: error
       - name: Practical AI tool behavior and accessibility
         env:
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
