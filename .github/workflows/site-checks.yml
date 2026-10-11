@@ -59,6 +59,8 @@ jobs:
             ${{ runner.temp }}/poker-reading-previews/about-*.png
             ${{ runner.temp }}/poker-reading-previews/start-here-*.png
             ${{ runner.temp }}/poker-reading-previews/technology-*.png
+            ${{ runner.temp }}/poker-reading-previews/notes-*.png
+            ${{ runner.temp }}/poker-reading-previews/creative-*.png
             ${{ runner.temp }}/poker-reading-previews/*.log
             ${{ runner.temp }}/poker-reading-previews/living-well-*.png
             ${{ runner.temp }}/poker-reading-previews/living-well-*.json
