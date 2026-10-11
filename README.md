@@ -4,7 +4,18 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Site architecture
 
-The main page is a static personal gateway. Poker at `/poker/` is the primary destination, with its guide at `/poker/reviewing-a-hand/`. Notes remains the general reading collection. New styles are isolated in `assets/hubs.css`; existing visual and contact assets are unchanged. See `POKER_RELEASE.md` for scope and publishing boundaries.
+The homepage introduces Nolan first, shows three selected pieces of published
+writing, then opens the four subject libraries in their established order:
+Technology, Living Well, Poker, Creative Work. `/start-here/` is the cross-site
+orientation page. It is available in the shared utility bar on every page.
+The homepage is not a chronological feed, project portfolio, or popularity counter.
+
+`_source/identity.json` owns the primary navigation and three curated reading
+choices. `_scripts/identity.py` validates their destinations against the complete
+public manifest and renders the canonical titles. Existing content stays at its
+original URL. Shared biographies come from `_source/site.json`. Change the
+identity configuration deliberately rather than promoting whichever library
+happens to have the most recent content expansion.
 
 ## Edit and publish
 
@@ -69,9 +80,13 @@ The live verifier makes GET requests to nolankido.com only. It checks public pag
 
 See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs. Revert faulty changes rather than rewriting history.
 
-## Technology-first home
+## Technology-first subject hierarchy
 
-The current gateway hierarchy is Technology, Poker, Creative Work. `/technology/` and `/creative/` are small, explicit introductions with existing reading; Notes remains the cross-subject archive. `TECHNOLOGY_RELEASE.md` supersedes the earlier poker-first ranking. The live checker covers 37 responses.
+Technology remains the first subject, followed by Living Well, Poker, and
+Creative Work. The personal introduction sits above all four. The technology
+hub connects trust checks to practical everyday guides, without duplicating
+articles or presenting proposed experiments as completed evidence. The live
+checker derives page coverage from the complete manifest, including Start here.
 
 ## Poker publishing
 

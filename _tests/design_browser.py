@@ -68,7 +68,7 @@ try:
                     expect(page.locator('#verification-retry')).to_be_visible()
                     expect(page.locator('#contact-submit')).to_be_enabled()
                     expect(page.locator('#form-success')).to_be_hidden()
-                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and (entry.get('poker_guide') or entry['id'] in ['home', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study', 'poker-resources']):
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and (entry.get('poker_guide') or entry['id'] in ['home', 'start-here', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study', 'poker-resources']):
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     page.screenshot(path=str(out / f'{entry["id"]}-{width}.png'), full_page=True)
             page.close()
@@ -186,6 +186,24 @@ try:
             expect(snapshot.locator('dd').nth(1)).to_be_visible()
             expect(page.locator('#pot-ledger')).to_be_visible()
             page.emulate_media(media='screen')
+
+        page.goto(base)
+        page.locator('a.button[href="/technology/"]').click()
+        expect(page).to_have_url(base + '/technology/')
+        page.locator('a[href="/living-well/did-the-tool-actually-help/"]').click()
+        page.locator('.utility-start').focus()
+        page.keyboard.press('Enter')
+        expect(page).to_have_url(base + '/start-here/')
+        expect(page.locator('.identity-reading')).to_have_count(3)
+        page.get_by_role('link', name='About Nolan', exact=True).click()
+        expect(page).to_have_url(base + '/about/')
+        plain = browser.new_context(java_script_enabled=False)
+        plain.route('**/*', lambda route: route.continue_() if urlsplit(route.request.url).hostname == '127.0.0.1' else route.abort())
+        plain_page = plain.new_page()
+        plain_page.goto(base + '/start-here/')
+        plain_page.locator('.identity-reading a').first.click()
+        expect(plain_page).to_have_url(base + '/notes/trustworthy-tools/')
+        plain.close()
 
         page.goto(base + '/poker/glossary/#effective-stack')
         expect(page.locator('#effective-stack')).to_be_visible()

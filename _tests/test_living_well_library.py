@@ -102,8 +102,8 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual(site['url'], 'https://nolankido.com')
         self.assertEqual(site['form_action'], 'https://submit-form.com/uPlTgRTAR')
         self.assertEqual(site['turnstile_sitekey'], '0x4AAAAAAFI2X8NC1cauc_zz')
-        for key in ('tagline', 'bio_long'):
-            self.assertIn('Living Well', site[key])
+        self.assertEqual(site['tagline'], 'Build useful things. Make room for a good life.')
+        self.assertIn('Living Well', site['bio_long'])
         for route in ['about/index.html', 'bio/index.html']:
             self.assertIn('Living Well', self.outputs[Path(route)])
         for phrase in ('spiritual teacher', 'certified', 'my patients', 'clients include', 'award-winning', 'my daily meditation'):
@@ -122,7 +122,7 @@ class LibraryTests(unittest.TestCase):
             'assets/contact.js':'65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858',
             'styles.css':'44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef',
             'assets/site.css':'784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6',
-            'assets/hubs.css':'51ecd02a1c5b66ddd80c08f1b61a128827d45854c4d5ad4d912bc5d881204800',
+            'assets/hubs.css':'ed06a92237c1fd977e64d9917a238f9859f25437cafe59e33f53755d8698f250',
             '_source/poker/catalog.json':'7c1051f6e2bc3943b7c1dbe4da229694455681b8875a346c99279e555edb733f'}
         for path, expected in protected.items():
             self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(), expected, path)

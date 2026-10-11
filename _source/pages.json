@@ -3,20 +3,30 @@
     "id": "home",
     "path": "/",
     "title": "Nolan Kido",
-    "seo_title": "Nolan Kido | Technology, Living Well, Poker & Creative Work",
-    "description": "Explore technology, Living Well, poker, and creative work: useful tools, spirituality, everyday life, thoughtful decisions, and visual storytelling.",
+    "seo_title": "Nolan Kido | Practical AI, Useful Things & a Good Life",
+    "description": "A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.",
     "source": "home.html",
-    "updated": "2026-10-09"
+    "updated": "2026-10-10"
+  },
+  {
+    "id": "start-here",
+    "path": "/start-here/",
+    "title": "A few good places to begin.",
+    "seo_title": "Start Here | Nolan Kido",
+    "description": "Meet Nolan Kido, read one useful piece, or find a route into practical AI, thoughtful living, poker, and creative work.",
+    "kicker": "New here?",
+    "source": "start-here.html",
+    "updated": "2026-10-10"
   },
   {
     "id": "about",
     "path": "/about/",
     "title": "A little about me.",
     "seo_title": "About | Nolan Kido",
-    "description": "An introduction to Nolan Kido and his interests in useful technology, Living Well, tournament poker, and creative work.",
+    "description": "Meet Nolan Kido: practical AI, building, writing, tournament poker, and a life beyond the screen. A selected personal introduction, not a complete biography.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-09"
+    "updated": "2026-10-10"
   },
   {
     "id": "notes",
@@ -26,7 +36,7 @@
     "description": "Worked examples and reflections on trust, decisions, learning, communication, and knowing when to finish. Selected writing by Nolan Kido.",
     "kicker": "Notes",
     "source": "notes.html",
-    "updated": "2026-10-08"
+    "updated": "2026-10-10"
   },
   {
     "id": "resources",
@@ -53,10 +63,10 @@
     "path": "/bio/",
     "title": "A brief introduction.",
     "seo_title": "Short Biography | Nolan Kido",
-    "description": "Short public introductions to Nolan Kido: practical technology, thoughtful living, tournament poker, and creative work.",
+    "description": "Short public introductions to Nolan Kido: practical AI, useful tools, clear ideas, thoughtful living, tournament poker, and creative work.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-10-09"
+    "updated": "2026-10-10"
   },
   {
     "id": "card",
@@ -85,7 +95,8 @@
     "description": "Find your way back to Nolan Kido’s homepage, notes, or contact page.",
     "kicker": "Page not found",
     "source": "404.html",
-    "noindex": true
+    "noindex": true,
+    "updated": "2026-10-10"
   },
   {
     "id": "trustworthy-tools",
@@ -176,10 +187,10 @@
     "path": "/technology/",
     "title": "Technology",
     "seo_title": "Technology | Nolan Kido",
-    "description": "Practical AI, useful software, and the work of making tools trustworthy. Selected reading and a practical resource from Nolan Kido.",
+    "description": "Practical AI with human judgment: decide where a tool belongs, find a useful real-life task, and check whether it actually helped. A starting point from Nolan Kido.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-09"
+    "updated": "2026-10-10"
   },
   {
     "id": "creative",
@@ -189,7 +200,7 @@
     "description": "Writing, design, and visual storytelling. Selected writing from Nolan Kido on explanation and finishing creative work.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-10-09"
+    "updated": "2026-10-10"
   },
   {
     "id": "poker-start-here",
