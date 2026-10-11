@@ -1,0 +1,52 @@
+name: Anchor navigation preparation
+on:
+  push:
+    branches: [codex/reader-paths-anchor-build]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Apply exactly reviewed changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess,hashlib
+          def replace(path,old,new):
+              p=Path(path);s=p.read_text();assert s.count(old)==1,path;p.write_text(s.replace(old,new))
+          replace('assets/first-steps.css','/* Home and Creative only. Links are separate native targets, never nested. */','/* Home and Creative only. Links are separate native targets, never nested. */\n/* Immediate native jumps remain reliable when page scripts are disabled. */\n:root { scroll-behavior: auto; }')
+          replace('_tests/first_steps_browser.py',"assert target['y']>=header['y']+header['height']-1,","assert header['y']+header['height']-1<=target['y']<1000,")
+          replace('_tests/test_first_steps.py','  declared=set(re.findall',"  self.assertIn(':root { scroll-behavior: auto; }',css)\n  declared=set(re.findall")
+          replace('_reports/first-steps-20261011.md','timeout. Site JavaScript stays disabled throughout the no-script checks.','timeout. Site JavaScript stays disabled throughout the no-script checks.\nThe two updated pages use immediate native anchor movement, avoiding unreliable\nsmooth-scroll settling in the no-script paths. The browser assertions require\nthe destination to be inside the viewport and below the sticky header, not just\nbelow it somewhere offscreen.')
+          subprocess.run(['python','_scripts/build.py'],check=True)
+          expected={'index.html':'8f7196d9da02eea804bf8e3b0a74ce581199953361be163199614c9c4c920da6','creative/index.html':'1213bc84d7e53b9e19061b7ce8f3fce299f3062c5e7d8edb325e8519d67546ca','assets/first-steps.css':'1ed3886f11b668fa820e2c5c32c9777c13358982c7de48507d1824f331b76950'}
+          for path,sha in expected.items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==sha,path
+          replace('_tests/test_poker_content.py','2a73c46058e2d9e27be067d95545d31da576e22d5cc990cb44632ca2988e1492','81ec8a36e8e05f743ca8da8d9df21219955aa90d6c209bd2ded69b24a1019ff7')
+          replace('_tests/test_viewer_next.py','02049a0af1336c84d1a66c656ab70281ff12cb309feeca2c6c819b2ba788c3a3',expected['index.html'])
+          replace('_tests/test_viewer_next.py','d4db5c22e657eafd7079509e5129029d76ea7976fab9480fc67f7f31db3d18fc',expected['creative/index.html'])
+          PY
+          python _scripts/build.py --check
+          PYTHONPATH=_tests python -m unittest test_first_steps test_poker_content.PokerContentTests.test_home_and_nonpoker_baseline_are_unchanged test_viewer_next.ViewerNextTests.test_previous_content_and_design_are_unchanged -v
+      - name: Save isolated reviewed patch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_REF_NAME" = 'codex/reader-paths-anchor-build'
+          current=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/codex/reader-paths-anchor-build" --jq .object.sha)
+          test "$current" = "$GITHUB_SHA"
+          git config user.name 'Nolan Kido'
+          git config user.email '212063387+nolankido@users.noreply.github.com'
+          git add assets/first-steps.css _tests/first_steps_browser.py _tests/test_first_steps.py _tests/test_poker_content.py _tests/test_viewer_next.py _reports/first-steps-20261011.md index.html creative/index.html
+          git commit -m 'Make native anchor movement immediate and verify visible destinations'
+          gh auth setup-git
+          git push origin HEAD:refs/heads/codex/reader-paths-anchor-build
+          git rev-parse HEAD
+          git rev-parse HEAD^{tree}
