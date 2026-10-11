@@ -29,6 +29,7 @@ import living_well
 import identity
 import presentation
 import entrypoints
+import site_find
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -108,6 +109,7 @@ def build_outputs() -> dict[Path, str]:
     identity_config = identity.load(ROOT, pages)
     entry_config = entrypoints.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
+    values['site_find_index'] = site_find.render(site_find.entries(ROOT, pages))
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
     values['interest_entrypoints'] = entrypoints.interest_cards(entry_config, pages)
     values['resource_entrypoints'] = entrypoints.resource_cards(entry_config, pages)
@@ -216,6 +218,10 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] in {'start-here', 'resources'} or p.get('note'):
             entry_version = hashlib.sha256((ROOT / 'assets/entrypoints.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/entrypoints.css?v={entry_version}">'
+        if p['id'] == 'find':
+            for asset, kind in [('site-find.css', 'style'), ('site-find.js', 'script')]:
+                version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style' else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
@@ -251,7 +257,7 @@ def build_outputs() -> dict[Path, str]:
             body += poker_experience.related_work(catalog, p['path'])
         header, living_extra = living_well.decorate(p, ROOT, header, schema)
         extra += living_extra
-        data = {**values, 'social_metadata': presentation.metadata(presentation_config, p, site['url']), 'writing_current': (' aria-current="page"' if p['id'] == 'notes' else ' aria-current="location"' if p.get('note') else ''), 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
+        data = {**values, 'find_current': ' aria-current="page"' if p['id'] == 'find' else '', 'social_metadata': presentation.metadata(presentation_config, p, site['url']), 'writing_current': (' aria-current="page"' if p['id'] == 'notes' else ' aria-current="location"' if p.get('note') else ''), 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
                 'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}

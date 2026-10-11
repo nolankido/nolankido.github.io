@@ -1,0 +1,32 @@
+<section class="section folio-row find-intro" aria-labelledby="find-intro-title">
+  <div class="section-meta"><p class="section-label">Across my interests</p></div>
+  <div class="section-content">
+    <h2 class="visually-hidden" id="find-intro-title">Look across my interests.</h2>
+    <p class="section-deck">Essays, guides, and collections across my interests. Find a useful starting point without knowing where it lives.</p>
+    <section class="find-controls" id="find-controls" role="search" aria-label="Search this site" hidden>
+      <label for="find-query">What are you looking for?</label>
+      <div class="find-input-row"><input id="find-query" type="search" maxlength="180" placeholder="Try family story, AI, or pot odds" autocomplete="off" spellcheck="false" aria-describedby="find-scope find-privacy"><button id="find-submit" class="button" type="button">Search</button></div>
+      <div class="find-filter-row">
+        <div><label for="find-interest">Interest</label><select id="find-interest"><option value="">All interests</option><option value="technology">Technology</option><option value="living-well">Living Well</option><option value="poker">Poker</option><option value="creative">Creative Work</option></select></div>
+        <div><label for="find-kind">Type of page</label><select id="find-kind"><option value="">All types</option><option value="essay">Essays</option><option value="guide">Guides</option><option value="collection">Collections &amp; reference</option></select></div>
+        <button id="find-reset" type="button">Clear filters</button>
+      </div>
+      <p class="small-copy" id="find-privacy">Filtering happens on this page. The site does not send, save, or put your search words in the address.</p>
+      <p id="find-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <a href="#find-results" class="text-link">Go to results <span aria-hidden="true">↓</span></a>
+    </section>
+    <p class="small-copy" id="find-scope">Matches published titles, summaries, and interest labels.</p>
+    <details class="find-help"><summary>Search scope and outside resources</summary><p class="small-copy">This is not a full-text search of articles or outside websites. Results stay grouped by their home collection; a page can match more than one interest without appearing twice.</p>
+    <p class="small-copy" id="find-fallback">Open a collection below to browse its pages. This index also works without JavaScript.</p>
+    <p class="small-copy">Looking for an outside source? Use the <a href="/poker/find/">Poker finder</a> or <a href="/living-well/find/">Living Well resource finder</a>. To meet the person behind the site, visit <a href="/about/">About Nolan</a>.</p></details>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="find-results">
+  <div class="section-meta"><p class="section-label">Read or explore</p></div>
+  <div class="section-content">
+    <h2 class="section-title" id="find-results" tabindex="-1">Browse the collections.</h2>
+    <div class="find-empty" id="find-empty" hidden><h3>No matching pages.</h3><p>Try a shorter phrase, one specific word, or a broader interest. Use Clear filters to return to the full index.</p><p>For a guided introduction, <a href="/start-here/">choose a starting point</a>. For a source or worksheet, <a href="/resources/">explore Resources</a>.</p></div>
+    ${site_find_index}
+    <p class="small-copy find-end">Essays and guides are reading, not claims of personal results. Proposed experiments are not included in this search. <a href="/start-here/#reading-this-site">About the writing</a>.</p>
+  </div>
+</section>

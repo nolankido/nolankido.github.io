@@ -1,0 +1,33 @@
+{
+  "note_interests": {
+    "keep-the-judgment": ["technology", "living-well"],
+    "trustworthy-tools": ["technology"],
+    "decision-quality": ["poker", "living-well"],
+    "learning-from-the-beginning": ["technology", "living-well"],
+    "generous-explanations": ["creative"],
+    "finishing-is-a-decision": ["creative", "living-well"]
+  },
+  "also_in": {
+    "/living-well/technology-for-real-life/": ["technology"],
+    "/living-well/decide-what-matters/": ["technology"],
+    "/living-well/what-to-decide-yourself/": ["technology"],
+    "/living-well/scattered-notes-to-next-step/": ["technology"],
+    "/living-well/shared-plan-people-can-use/": ["technology"],
+    "/living-well/find-the-document-you-need/": ["technology"],
+    "/living-well/make-digital-reading-easier/": ["technology"],
+    "/living-well/reflection-with-your-judgment-intact/": ["technology"],
+    "/living-well/did-the-tool-actually-help/": ["technology"],
+    "/living-well/learning-with-ai-without-skipping-understanding/": ["technology"],
+    "/living-well/rough-idea-to-small-creation/": ["creative", "technology"],
+    "/living-well/preserve-family-story/": ["creative"],
+    "/living-well/read-a-poem-without-a-lesson/": ["creative"],
+    "/living-well/free-resources/books-creativity/": ["creative"],
+    "/living-well/free-resources/creative-tools/": ["creative", "technology"],
+    "/living-well/free-resources/everyday-ai/": ["technology"],
+    "/living-well/free-resources/everyday-tools/": ["technology"],
+    "/living-well/free-resources/digital-life/": ["technology"],
+    "/living-well/free-resources/notes-documents/": ["technology"],
+    "/living-well/free-resources/files-recovery/": ["technology"],
+    "/living-well/tasks/make-something/": ["creative", "technology"]
+  }
+}

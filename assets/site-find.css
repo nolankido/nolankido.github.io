@@ -1,0 +1,39 @@
+/* Scoped discovery controls, static index and reading results. */
+.page-find [hidden] { display: none !important; }
+.find-intro { padding-top: 8px; }
+.find-controls { border: 1px solid var(--line-dark); padding: 24px; margin: 24px 0; background: var(--panel); }
+.find-controls label { display: block; font: 600 1rem/1.5 var(--sans); margin-bottom: 8px; }
+.find-input-row { display: flex; gap: 12px; }
+.find-controls input, .find-controls select { font: 1rem/1.5 var(--sans); min-height: 48px; padding: 10px 12px; border: 1px solid var(--ink-soft); color: var(--basalt); background: var(--paper); border-radius: 0; max-width: 100%; }
+.find-controls input { flex: 1; min-width: 0; width: 100%; }
+.find-filter-row { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; margin-top: 20px; }
+.find-filter-row > div { flex: 1 1 180px; min-width: 0; }
+.find-controls select { width: 100%; }
+.find-controls button { min-height: 48px; cursor: pointer; white-space: normal; }
+#find-reset { padding: 10px 14px; color: var(--basalt); background: transparent; border: 1px solid var(--ink-soft); font: 1rem/1.5 var(--sans); }
+#find-status { font: 600 .95rem/1.6 var(--sans); margin: 18px 0 8px; }
+#find-privacy { margin: 18px 0 0; }
+.find-group { margin-bottom: 18px; border: 1px solid var(--line-dark); }
+.find-group summary { padding: 16px 20px; cursor: pointer; font: 600 1.1rem/1.5 var(--sans); }
+.find-group-count { font-weight: 400; }
+.find-items { list-style: none; margin: 0; padding: 0 20px; }
+.find-item { padding: 22px 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.find-item h3 { font: 600 1.18rem/1.45 var(--sans); margin: 6px 0 10px; }
+.find-kind { font: .76rem/1.6 var(--sans); margin: 0; color: var(--ink-soft); }
+.find-description { font: 1.02rem/1.7 var(--serif); margin: 0; max-width: 70ch; }
+.find-date { font: .78rem/1.6 var(--sans); margin: 10px 0 0; color: var(--ink-soft); }
+.find-empty { border: 1px solid var(--line-dark); padding: 20px; margin: 20px 0; }
+.find-end { margin-top: 24px; }
+@media (max-width: 620px) {
+  .find-controls { padding: 16px; }
+  .find-input-row { flex-wrap: wrap; }
+  .find-input-row input { flex-basis: 100%; }
+  .find-input-row button, #find-reset { width: 100%; justify-content: center; }
+  .find-group summary { padding: 14px; }
+  .find-items { padding: 0 14px; }
+}
+@media print { .find-controls { display: none; } }
+
+.find-help { margin: 14px 0; }
+.find-help summary { cursor: pointer; font: .85rem/1.6 var(--sans); padding: 8px 0; }
+.find-help p { margin: 12px 0; }
