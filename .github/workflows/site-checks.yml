@@ -36,6 +36,7 @@ jobs:
         run: |
           python _tests/browser.py
           python _tests/design_browser.py
+          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/entrypoints_browser.py
           AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/living_well_browser.py
       - name: Save personal introduction and essay previews
         if: ${{ always() }}
@@ -43,6 +44,8 @@ jobs:
         with:
           name: public-image-previews
           path: |
+            ${{ runner.temp }}/poker-reading-previews/entry-*.png
+            ${{ runner.temp }}/poker-reading-previews/resources-*.png
             ${{ runner.temp }}/poker-reading-previews/home-*.png
             ${{ runner.temp }}/poker-reading-previews/about-*.png
             ${{ runner.temp }}/poker-reading-previews/notes-*.png

@@ -1,0 +1,30 @@
+{
+  "files": {
+    "CNAME": "841b7acfff3c5ef727da7451571a036b7d73edc756250e1fa14f5b806443e885",
+    "_config.yml": "34926f815fcbdae69ab9d3dc210b61a7c04b62173567722bdd5297e85c1b9440",
+    "_source/about.html": "913c479a365ef5029686c0972d9c985dbe847ff3aa10d63951c7e5c9ba536909",
+    "_source/contact.html": "6ab8eb0ca1288fdd198569e2b1b231e8fa5106341f44c58164d393bb58811e7c",
+    "_source/identity.json": "b2cad9e36a15b86176637b608aee10767724bf32f2750e9db05a4f21af0fe536",
+    "_source/layout.html": "35278a3377f8e53b331e5437fa64b9dd4372de2708ecb0f91cfcf7e367571be6",
+    "_source/notes/decision-quality.html": "e3cfe284d5b8c3b85fbe4183003be0fb44287b08887007a5405ddf190353573d",
+    "_source/notes/finishing-is-a-decision.html": "e501bd622da34ab7973f92419c05c95b1a950de33a4871a17c1a0cca31c8cc65",
+    "_source/notes/generous-explanations.html": "9076fd772a756a8bd80a4578cdaecaaf38bfb28791c99013f8f6776eb177f224",
+    "_source/notes/keep-the-judgment.html": "ba6d607702131531a92cfe5a30bab72ed8d03e4e877fd474636b76c78429bf72",
+    "_source/notes/learning-from-the-beginning.html": "ca23675346af0bbd19f37467acb05d91b95b01920a050b044b2aa30c92315ffe",
+    "_source/notes/trustworthy-tools.html": "798167d44386c74c616fbe22c461f41d5629a67457f600b10033dc2676afe3e8",
+    "_source/presentation.json": "93d7bdd32ecbd7b96f660f618d4f7cc27394eb00f1461f8d5fd437a5b7182f8f",
+    "_source/privacy.html": "30a5f371883901da4c9e413ef12f5641cfcb00d86b2ae544fc24e85da0e7dba5",
+    "_source/site.json": "5e01a8eae2c9593a0dace992e5a13ffbc22b1ab5e0c635ac9bf0db6507c16d65",
+    "assets/contact.js": "65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858",
+    "assets/hubs.css": "239757a4a78e5e6e97da917a7af84682c2b1ada3f0013b615a725d9f366a642c",
+    "assets/site.css": "784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6",
+    "feed.xml": "ba511115cc593966c73c95ffe05839e54eb4616286ff98c171c275ae4db13924",
+    "living-well/feed.xml": "94d241e3797f54abf9f5b35e99a1f1f92cd932d2326c7fdc481fb5a2ce86e094",
+    "poker/feed.xml": "374469c9de296d8f58599e328a581735e04acbe97e719bf36741e5c43d45351f",
+    "styles.css": "44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef"
+  },
+  "collections": {
+    "_source/poker": "77a62cc70b4252fc50496e517454fd3ece957a2ca6a109398e807d9a1fc4a6e6",
+    "_source/living-well": "f8ed580d9c2f8936368793a1979c8e4af78fc512425ebd1b87f143ab5a296679"
+  }
+}
