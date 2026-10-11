@@ -31,10 +31,10 @@
   {
     "id": "notes",
     "path": "/notes/",
-    "title": "Ideas worth keeping.",
-    "seo_title": "Notes | Nolan Kido",
-    "description": "Worked examples and reflections on trust, decisions, learning, communication, and knowing when to finish. Selected writing by Nolan Kido.",
-    "kicker": "Notes",
+    "title": "Writing, across the site.",
+    "seo_title": "Writing | Nolan Kido",
+    "description": "Four selected reading paths through practical AI, thoughtful living, poker decisions, and creative work, with the original general Notes collection.",
+    "kicker": "Writing",
     "source": "notes.html",
     "updated": "2026-10-10"
   },

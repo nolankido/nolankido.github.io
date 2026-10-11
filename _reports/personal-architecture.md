@@ -49,3 +49,28 @@ Run the complete unit suite and committed-output check, then browser reflow,
 keyboard, contact-recovery and accessibility checks. Before merging, compare
 against current main. Verify both GitHub Pages deployment and exact public bytes.
 The one-off branch preparation workflow must not appear in the final release tree.
+
+## Completion pass: writing belongs to the person
+
+The former Notes landing page showed only the five original general notes, even
+though useful writing also lives in Living Well and Poker. The existing `/notes/`
+URL now serves a cross-site Writing gateway. Four curated routes link eight
+existing articles, resolve canonical titles and summaries, and keep the original
+Notes collection in its own section. No article or publication date is changed.
+The shared footer calls this destination Writing. Topic navigation stays at six
+links, and all section-specific navigation and feeds remain intact.
+
+Creative Work now connects its two craft essays with two existing practical
+guides. These are explicitly guidance, not a portfolio or completed case study.
+Technology and Creative Work can both lead readers back into the cross-site
+Writing routes. No new editorial articles, credentials, or private details were
+added to fill perceived gaps.
+
+The identity validator now rejects hubs and proposed experiments from editorial
+reading selections. It also rejects missing, repeated, or malformed routes.
+Regression tests cover article identity, source escaping, stable feed contents,
+original notes, and the shared Writing link on all generated pages.
+
+The remaining public-image limitation is firsthand evidence. Better navigation
+can reveal existing thinking, but does not establish outside recognition or
+measured results. Those require genuine, approved material, not more volume.

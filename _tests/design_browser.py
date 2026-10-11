@@ -68,7 +68,7 @@ try:
                     expect(page.locator('#verification-retry')).to_be_visible()
                     expect(page.locator('#contact-submit')).to_be_enabled()
                     expect(page.locator('#form-success')).to_be_hidden()
-                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and (entry.get('poker_guide') or entry['id'] in ['home', 'start-here', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study', 'poker-resources']):
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440] and (entry.get('poker_guide') or entry['id'] in ['home', 'start-here', 'notes', 'about', 'resources', 'contact', 'trustworthy-tools', 'poker', 'poker-hand-review', 'technology', 'creative', 'poker-start-here', 'poker-study', 'poker-resources']):
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     page.screenshot(path=str(out / f'{entry["id"]}-{width}.png'), full_page=True)
             page.close()
@@ -203,6 +203,13 @@ try:
         plain_page.goto(base + '/start-here/')
         plain_page.locator('.identity-reading a').first.click()
         expect(plain_page).to_have_url(base + '/notes/trustworthy-tools/')
+        plain_page.goto(base + '/notes/')
+        expect(plain_page.locator('.writing-route')).to_have_count(4)
+        plain_page.get_by_role('navigation', name='Writing topics').get_by_role('link', name='Creative Work', exact=True).focus()
+        plain_page.keyboard.press('Enter')
+        expect(plain_page).to_have_url(base + '/notes/#creative')
+        plain_page.locator('#creative a[href="/living-well/rough-idea-to-small-creation/"]').click()
+        expect(plain_page).to_have_url(base + '/living-well/rough-idea-to-small-creation/')
         plain.close()
 
         page.goto(base + '/poker/glossary/#effective-stack')

@@ -1,15 +1,87 @@
 {
   "navigation": [
-    {"id": "technology", "label": "Technology"},
-    {"id": "living-well", "label": "Living Well"},
-    {"id": "poker", "label": "Poker"},
-    {"id": "creative", "label": "Creative Work"},
-    {"id": "about", "label": "About"},
-    {"id": "contact", "label": "Contact"}
+    {
+      "id": "technology",
+      "label": "Technology"
+    },
+    {
+      "id": "living-well",
+      "label": "Living Well"
+    },
+    {
+      "id": "poker",
+      "label": "Poker"
+    },
+    {
+      "id": "creative",
+      "label": "Creative Work"
+    },
+    {
+      "id": "about",
+      "label": "About"
+    },
+    {
+      "id": "contact",
+      "label": "Contact"
+    }
   ],
   "selected": [
-    {"path": "/notes/trustworthy-tools/", "kind": "Worked example / Technology", "description": "Two calculations agree. Both are wrong. A small, checkable example of why independent evidence matters."},
-    {"path": "/living-well/did-the-tool-actually-help/", "kind": "Practical guide / Everyday life", "description": "Look at the effort a tool removes and the work it adds before deciding to keep it."},
-    {"path": "/poker/reviewing-a-hand/", "kind": "Fictional hand / Poker", "description": "Separate a decision from its outcome, with a worked hand and a blank review sheet."}
+    {
+      "path": "/notes/trustworthy-tools/",
+      "kind": "Worked example / Technology",
+      "description": "Two calculations agree. Both are wrong. A small, checkable example of why independent evidence matters."
+    },
+    {
+      "path": "/living-well/did-the-tool-actually-help/",
+      "kind": "Practical guide / Everyday life",
+      "description": "Look at the effort a tool removes and the work it adds before deciding to keep it."
+    },
+    {
+      "path": "/poker/reviewing-a-hand/",
+      "kind": "Fictional hand / Poker",
+      "description": "Separate a decision from its outcome, with a worked hand and a blank review sheet."
+    }
+  ],
+  "reading_routes": [
+    {
+      "id": "technology",
+      "label": "Technology",
+      "title": "Use technology with judgment.",
+      "description": "Start with the purpose of a tool, then ask what would count as a result worth trusting.",
+      "paths": [
+        "/notes/trustworthy-tools/",
+        "/living-well/decide-what-matters/"
+      ]
+    },
+    {
+      "id": "living-well",
+      "label": "Living Well",
+      "title": "Leave room for a life beyond the work.",
+      "description": "Attention, meaning, and curiosity belong in the picture, without turning every question into a productivity problem.",
+      "paths": [
+        "/living-well/time-you-save/",
+        "/living-well/spiritually-curious/"
+      ]
+    },
+    {
+      "id": "poker",
+      "label": "Poker",
+      "title": "Think clearly when outcomes are uncertain.",
+      "description": "Poker offers a specific setting for examining evidence, advice, and the difference between a decision and its result.",
+      "paths": [
+        "/poker/evaluating-poker-advice/",
+        "/poker/variance-and-results/"
+      ]
+    },
+    {
+      "id": "creative",
+      "label": "Creative Work",
+      "title": "Help an idea connect.",
+      "description": "Consider the person reading or watching, then make a small version you can actually finish.",
+      "paths": [
+        "/notes/generous-explanations/",
+        "/living-well/rough-idea-to-small-creation/"
+      ]
+    }
   ]
 }

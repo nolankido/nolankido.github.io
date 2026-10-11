@@ -105,6 +105,7 @@ def build_outputs() -> dict[Path, str]:
     identity_config = identity.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
+    values['identity_routes'] = identity.reading_routes(identity_config, pages)
     values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
     values.update(poker_content.supplement(catalog, ROOT))
