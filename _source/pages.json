@@ -13,7 +13,7 @@
     "path": "/start-here/",
     "title": "A few good places to begin.",
     "seo_title": "Start Here | Nolan Kido",
-    "description": "Meet Nolan Kido, read one useful piece, or find a route into practical AI, thoughtful living, poker, and creative work.",
+    "description": "Choose an interest, read a selected essay, or find something useful. A personal introduction to Nolan Kido and a clear route through the site.",
     "kicker": "New here?",
     "source": "start-here.html",
     "updated": "2026-10-11"
@@ -43,10 +43,10 @@
     "path": "/resources/",
     "title": "Use what helps.",
     "seo_title": "Resources | Nolan Kido",
-    "description": "Private-use worksheets for decisions, tool checks, and learning. Blank editable copies, completed fictional examples, and clear limits.",
+    "description": "Guides, private worksheets, study materials, and outside resources across practical AI, Living Well, poker, and creative work. Choose a useful starting point.",
     "kicker": "Resources",
     "source": "resources.html",
-    "updated": "2026-10-08"
+    "updated": "2026-10-11"
   },
   {
     "id": "contact",
@@ -200,7 +200,7 @@
     "description": "Writing, design, and visual storytelling. Selected writing from Nolan Kido on explanation and finishing creative work.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-10-10"
+    "updated": "2026-10-11"
   },
   {
     "id": "poker-start-here",

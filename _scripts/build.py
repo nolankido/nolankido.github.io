@@ -28,6 +28,7 @@ import poker_topics
 import living_well
 import identity
 import presentation
+import entrypoints
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -105,8 +106,11 @@ def build_outputs() -> dict[Path, str]:
                         f'<h3><a href="{text(p["path"])}">{text(p["title"])}</a></h3>'
                         f'<p>{text(p["description"])}</p>' + presentation.publication(p) + '</article>')
     identity_config = identity.load(ROOT, pages)
+    entry_config = entrypoints.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
+    values['interest_entrypoints'] = entrypoints.interest_cards(entry_config, pages)
+    values['resource_entrypoints'] = entrypoints.resource_cards(entry_config, pages)
     values['identity_routes'] = identity.reading_routes(identity_config, pages)
     values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
@@ -174,6 +178,7 @@ def build_outputs() -> dict[Path, str]:
                         f'      <header class="page-hero shell">{heading}</header>\n'
                         f'      <div class="article-body shell prose">{body}{revision}'
                         f'<p class="editorial-note" id="about-this-essay">{text(p.get("editorial_note", "Prepared with AI assistance. Worked scenarios are fictional; research is linked where used. These essays do not describe private projects or personal events."))}</p>'
+                        f'{entrypoints.next_reading(entry_config, pages, p)}'
                         '<nav class="article-navigation" aria-label="After the note"><a href="/notes/">Writing across the site</a>'
                         '<a href="/contact/">Send a thought or correction</a></nav></div>\n    </article>')
                 extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
@@ -208,6 +213,9 @@ def build_outputs() -> dict[Path, str]:
                 extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
                 if p.get('updated'):
                     extra += f'\n  <meta property="article:modified_time" content="{p["updated"]}">'
+        if p['id'] in {'start-here', 'resources'} or p.get('note'):
+            entry_version = hashlib.sha256((ROOT / 'assets/entrypoints.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/entrypoints.css?v={entry_version}">'
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'

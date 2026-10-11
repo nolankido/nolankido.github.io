@@ -1,0 +1,164 @@
+{
+  "interests": [
+    {
+      "id": "technology",
+      "title": "Make AI useful in real life.",
+      "description": "Start with a specific task, then decide what to delegate and what to check yourself.",
+      "paths": [
+        "/living-well/technology-for-real-life/",
+        "/technology/"
+      ]
+    },
+    {
+      "id": "living-well",
+      "title": "Make room for what matters.",
+      "description": "Explore meaning, attention, and ordinary life. Begin with a question, not a program to complete.",
+      "paths": [
+        "/living-well/time-you-save/",
+        "/living-well/"
+      ]
+    },
+    {
+      "id": "poker",
+      "title": "Understand the decisions behind the game.",
+      "description": "New to watching poker? Start with the viewer introduction. For a particular question, use the Poker finder.",
+      "paths": [
+        "/poker/start-here/",
+        "/poker/find/"
+      ]
+    },
+    {
+      "id": "creative",
+      "title": "Turn an idea into something you can share.",
+      "description": "Choose a reader, a manageable scope, and a finish line. Explore writing and visual storytelling through the choices behind them.",
+      "paths": [
+        "/living-well/rough-idea-to-small-creation/",
+        "/creative/"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "technology",
+      "title": "Practical AI and everyday tasks",
+      "description": "Work through notes, documents, learning, or a shared plan. The guide starts with the task; the directory helps you compare outside tools.",
+      "links": [
+        {
+          "path": "/living-well/technology-for-real-life/",
+          "kind": "Practical guides on this site"
+        },
+        {
+          "path": "/living-well/free-resources/everyday-tools/",
+          "kind": "Outside resources, with access notes"
+        }
+      ]
+    },
+    {
+      "id": "living-well",
+      "title": "Attention, meaning, and ordinary life",
+      "description": "Follow a question through selected reading, or use a private worksheet for a weekly reset, values, attention, or a family story.",
+      "links": [
+        {
+          "path": "/living-well/free-resources/",
+          "kind": "Outside reading and resources"
+        },
+        {
+          "path": "/living-well/worksheets/",
+          "kind": "Blank worksheets on this site"
+        }
+      ]
+    },
+    {
+      "id": "poker",
+      "title": "Poker study and reference",
+      "description": "Review a hand, choose a study direction, or find a source for a specific question. Outside links retain their free or paid access labels.",
+      "links": [
+        {
+          "path": "/poker/study/",
+          "kind": "Study guides and worksheets on this site"
+        },
+        {
+          "path": "/poker/resources/",
+          "kind": "Outside poker sources, with access notes"
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "title": "Writing, art, and making things",
+      "description": "Find something worth reading or looking at, then choose a tool suited to the small thing you want to make.",
+      "links": [
+        {
+          "path": "/living-well/free-resources/books-creativity/",
+          "kind": "Outside books, art, and reading"
+        },
+        {
+          "path": "/living-well/free-resources/creative-tools/",
+          "kind": "Outside creative tools, with access notes"
+        }
+      ]
+    }
+  ],
+  "next_reading": {
+    "keep-the-judgment": [
+      {
+        "path": "/living-well/decide-what-matters/",
+        "reason": "Before you delegate: make the purpose and constraints explicit."
+      },
+      {
+        "path": "/living-well/what-to-decide-yourself/",
+        "reason": "At the decision: separate helpful assistance from choices to keep personal."
+      }
+    ],
+    "trustworthy-tools": [
+      {
+        "path": "/living-well/did-the-tool-actually-help/",
+        "reason": "Beyond correctness: include checking, cleanup, and maintenance in the cost."
+      },
+      {
+        "path": "/notes/keep-the-judgment/",
+        "reason": "Beyond the test: decide which parts of the work still need your judgment."
+      }
+    ],
+    "decision-quality": [
+      {
+        "path": "/poker/reviewing-a-hand/",
+        "reason": "Work through a fictional poker hand without letting the outcome rewrite the decision."
+      },
+      {
+        "path": "/living-well/decide-what-matters/",
+        "reason": "Before choosing between options, decide what you want the choice to serve."
+      }
+    ],
+    "generous-explanations": [
+      {
+        "path": "/living-well/rough-idea-to-small-creation/",
+        "reason": "Put the reader first as you turn a rough idea into a small, shareable version."
+      },
+      {
+        "path": "/living-well/preserve-family-story/",
+        "reason": "When the words belong to someone else, preserve their voice and permission."
+      }
+    ],
+    "learning-from-the-beginning": [
+      {
+        "path": "/living-well/learning-with-ai-without-skipping-understanding/",
+        "reason": "Practice with AI without skipping the part you need to understand yourself."
+      },
+      {
+        "path": "/notes/trustworthy-tools/",
+        "reason": "Use an independent check to tell the difference between agreement and understanding."
+      }
+    ],
+    "finishing-is-a-decision": [
+      {
+        "path": "/living-well/rough-idea-to-small-creation/",
+        "reason": "Choose a manageable scope and a finish line before adding more."
+      },
+      {
+        "path": "/living-well/free-afternoon/",
+        "reason": "After the work: leave space for an afternoon that does not need another project."
+      }
+    ]
+  }
+}
