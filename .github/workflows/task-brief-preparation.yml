@@ -1,0 +1,54 @@
+name: Prepare practical task brief
+on:
+  push:
+    branches: [site/practical-task-brief-20261011]
+    paths: [.github/workflows/task-brief-preparation.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    if: github.repository == 'nolankido/nolankido.github.io' && github.ref == 'refs/heads/site/practical-task-brief-20261011'
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare sources and generated pages
+        run: |
+          python _scripts/apply_task_brief.py
+          python _scripts/build.py --check
+          node --check assets/task-brief.js
+      - name: Complete unit and content suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s _tests -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/task-brief-unit.log"
+      - name: Commit checked site files to the isolated branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch='site/practical-task-brief-20261011'
+          actual="$(git ls-remote origin "refs/heads/$branch" | cut -f1)"
+          test "$actual" = "$GITHUB_SHA"
+          git rm _scripts/apply_task_brief.py
+          git add -A
+          test -z "$(git diff --cached --name-only -- .github/workflows/)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Add a private local AI task-brief builder and useful entry paths'
+          git rev-parse HEAD > "$RUNNER_TEMP/task-brief-head.txt"
+          git archive --format=tar.gz HEAD > "$RUNNER_TEMP/task-brief-release.tar.gz"
+          git push origin "HEAD:refs/heads/$branch"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: task-brief-prepared
+          path: |
+            ${{ runner.temp }}/task-brief-unit.log
+            ${{ runner.temp }}/task-brief-head.txt
+            ${{ runner.temp }}/task-brief-release.tar.gz
+          retention-days: 1

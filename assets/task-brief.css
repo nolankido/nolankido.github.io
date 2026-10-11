@@ -1,0 +1,33 @@
+/* A local utility, scoped to the task-brief page. */
+.page-task-brief .entry-jumps { display:flex; flex-wrap:wrap; gap:12px 24px; margin:24px 0 0; }
+.page-task-brief .entry-jumps a { display:inline-flex; align-items:center; min-height:44px; }
+#brief-workspace { scroll-margin-top: 24px; }
+.brief-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin: 28px 0; }
+.brief-field { min-width: 0; }
+.brief-field:last-child { grid-column: 1 / -1; }
+.brief-field label, .brief-result label { display: block; font: 600 1rem/1.5 var(--sans); }
+.brief-step { color: var(--ink-soft); margin-right: 8px; }
+.brief-required { display: block; font: .75rem/1.5 var(--sans); font-weight: 400; color: var(--ink-soft); }
+.brief-help { font: .9rem/1.6 var(--sans); color: var(--ink-soft); }
+.brief-field textarea, .brief-result textarea { display: block; box-sizing: border-box; width: 100%; min-width: 0; padding: 12px; border: 1px solid var(--line-dark); background: var(--paper); color: var(--basalt); font: 1rem/1.55 var(--sans); resize: vertical; border-radius: 0; }
+.brief-field textarea::placeholder { color: var(--ink-soft); opacity: 1; }
+.brief-field [aria-invalid="true"] { border: 2px solid var(--red); }
+.brief-error { font: .9rem/1.5 var(--sans); color: var(--basalt); margin-top: 8px; }
+.brief-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; align-items: center; }
+.page-task-brief button { cursor: pointer; padding: 12px 18px; min-height: 44px; max-width: 100%; font: 600 .95rem/1.4 var(--sans); border: 1px solid var(--line-dark); border-radius: 0; color: var(--basalt); background: var(--paper); }
+.page-task-brief button.button { background: var(--basalt); color: var(--paper); }
+.page-task-brief button:disabled { opacity: .55; cursor: not-allowed; }
+.page-task-brief textarea:focus-visible, .page-task-brief button:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+.brief-scope, .brief-confirm { border-left: 3px solid var(--red); padding: 14px 20px; margin-block: 24px; }
+.brief-result { border-top: 2px solid var(--line-dark); margin-top: 32px; padding-top: 24px; }
+#brief-text { min-height: 340px; overflow-wrap: anywhere; }
+#brief-status, #brief-copy-status { font: .9rem/1.55 var(--sans); }
+.brief-example, .brief-template { border-top: 1px solid var(--line-dark); padding: 18px 0; }
+.brief-example summary, .brief-template summary { cursor: pointer; font: 600 1.05rem/1.5 var(--sans); min-height: 28px; }
+.brief-example dl { margin: 20px 0; }
+.brief-example dt { font-weight: 600; margin-top: 16px; }
+.brief-example dd { margin: 6px 0 0; line-height: 1.65; }
+.brief-template pre { white-space: pre-wrap; overflow-wrap: anywhere; font: .9rem/1.6 var(--sans); }
+.page-task-brief [hidden] { display: none !important; }
+@media (max-width: 760px) { .brief-fields { grid-template-columns: minmax(0,1fr); gap: 20px; } }
+@media print { #brief-workspace, .entry-jumps, .brief-example-use { display: none !important; } .brief-example, .brief-template { break-inside: auto; } }
