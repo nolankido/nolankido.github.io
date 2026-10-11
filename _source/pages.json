@@ -29,6 +29,16 @@
     "updated": "2026-10-11"
   },
   {
+    "id": "follow",
+    "path": "/follow/",
+    "title": "Follow the writing.",
+    "seo_title": "Follow the Writing | Nolan Kido",
+    "description": "Follow Nolan Kido’s writing in one combined feed or choose Notes, Living Well, or Poker. Clear feed addresses, no mailing-list signup, and ways to stay in touch.",
+    "kicker": "Follow & stay connected",
+    "source": "follow.html",
+    "updated": "2026-10-11"
+  },
+  {
     "id": "about",
     "path": "/about/",
     "title": "A little about me.",
@@ -85,7 +95,8 @@
     "seo_title": "Contact Card | Nolan Kido",
     "description": "A simple way to save Nolan Kido’s website and get in touch.",
     "kicker": "Contact card",
-    "source": "card.html"
+    "source": "card.html",
+    "updated": "2026-10-11"
   },
   {
     "id": "privacy",

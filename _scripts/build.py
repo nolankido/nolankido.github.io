@@ -30,6 +30,7 @@ import identity
 import presentation
 import entrypoints
 import site_find
+import follow
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -173,6 +174,7 @@ def build_outputs() -> dict[Path, str]:
             if p.get('note'):
                 heading += f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · <a href="/about/">Nolan Kido</a> · About {poker_library.minutes(body)} min read</p>'
                 heading += '<p class="essay-context"><a href="#about-this-essay">AI-assisted essay</a></p>'
+                heading += poker_reading.section_outline(body)
                 revision = ''
                 if p.get('revision'):
                     revision = f'<p class="editorial-note"><strong>Revision, <time datetime="{p["updated"]}">{date_label(p["updated"])}</time>:</strong> {text(p["revision"])}</p>'
@@ -181,8 +183,12 @@ def build_outputs() -> dict[Path, str]:
                         f'      <div class="article-body shell prose">{body}{revision}'
                         f'<p class="editorial-note" id="about-this-essay">{text(p.get("editorial_note", "Prepared with AI assistance. Worked scenarios are fictional; research is linked where used. These essays do not describe private projects or personal events."))}</p>'
                         f'{entrypoints.next_reading(entry_config, pages, p)}'
+                        '<details class="note-keep"><summary>Keep or share this essay</summary>'
+                        '<p>Copy the permanent link below to share it. For a reading copy, use your browser’s Print command and choose a printer or Save as PDF. The print view retains the author, date, sources, and editorial disclosure.</p>'
+                        f'<p class="note-origin"><a href="{text(canonical)}">{text(canonical)}</a></p></details>'
+                        f'<p class="note-print-origin">Original article: <a href="{text(canonical)}">{text(canonical)}</a></p>'
                         '<nav class="article-navigation" aria-label="After the note"><a href="/notes/">Writing across the site</a>'
-                        '<a href="/contact/">Send a thought or correction</a></nav></div>\n    </article>')
+                        '<a href="/follow/">Follow the writing</a><a href="/contact/">Send a thought or correction</a></nav></div>\n    </article>')
                 extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
                 if p.get('updated'):
                     extra += f'\n  <meta property="article:modified_time" content="{p["updated"]}">'
@@ -218,6 +224,9 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] in {'start-here', 'resources'} or p.get('note'):
             entry_version = hashlib.sha256((ROOT / 'assets/entrypoints.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/entrypoints.css?v={entry_version}">'
+        if p.get('note') or p['id'] == 'follow':
+            reading_version = hashlib.sha256((ROOT / 'assets/reading.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/reading.css?v={reading_version}">'
         if p['id'] == 'find':
             for asset, kind in [('site-find.css', 'style'), ('site-find.js', 'script')]:
                 version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
@@ -292,6 +301,7 @@ def build_outputs() -> dict[Path, str]:
     outputs.update(poker_reference.exports())
     outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
     outputs.update(living_well.exports(ROOT, site['url']))
+    outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     return outputs
 

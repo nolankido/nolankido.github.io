@@ -1,0 +1,33 @@
+/* Reading and return paths. Loaded only on Notes essays and Follow. */
+.page-follow .feed-address, .page-follow code, .note-keep code { overflow-wrap: anywhere; white-space: normal; word-break: normal; }
+.follow-feeds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.follow-feed { min-width: 0; border-top: 2px solid var(--line-dark); padding-top: 20px; }
+.follow-feed h3 { margin: 0 0 14px; font-size: 1.25rem; }
+.follow-feed p { font: 1rem/1.65 var(--serif); }
+.page-follow .feed-address, .note-keep .note-origin { font: .8rem/1.7 var(--mono); }
+.follow-help { border-block: 1px solid var(--line); padding: 16px 0; margin-top: 24px; }
+.follow-help summary { cursor: pointer; font: 600 1rem/1.6 var(--sans); }
+.follow-help[open] summary { margin-bottom: 16px; }
+.note-article .reader-outline { max-width: 70ch; border-block: 1px solid var(--line); margin-top: 22px; padding: 14px 0; }
+.note-article .reader-outline summary { cursor: pointer; font: 600 .92rem/1.65 var(--sans); }
+.note-article .reader-outline-count { font-weight: 400; color: var(--ink-soft); margin-left: 8px; }
+.note-article .reader-outline ol { margin: 12px 0 0; padding-left: 24px; }
+.note-article .reader-outline li { padding: 4px 0; font: .95rem/1.55 var(--sans); }
+.note-article .article-body h2[id] { scroll-margin-top: 24px; }
+.note-keep { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 18px; }
+.note-keep summary { cursor: pointer; font: 600 .9rem/1.6 var(--sans); }
+.note-keep[open] summary { margin-bottom: 16px; }
+.note-keep p { font: .9rem/1.7 var(--sans); }
+.note-print-origin { display: none; }
+@media (max-width: 900px) { .follow-feeds { grid-template-columns: minmax(0,1fr); } }
+@media print {
+  .note-article .reader-outline, .note-article .reader-next, .note-article .note-keep,
+  .note-article .breadcrumb, .note-article .essay-context { display: none !important; }
+  .note-article .note-print-origin { display: block !important; font: 9pt/1.4 sans-serif; overflow-wrap: anywhere; border-top: 1px solid #777; padding-top: 8pt; }
+  .note-article .article-body { max-width: none; }
+  .note-article .article-body h2 { break-after: avoid; }
+  .note-article p { orphans: 3; widows: 3; }
+  .note-article #about-this-essay { display: block !important; font-size: 9pt; }
+  .note-article .article-body a[href^="https://"]::after { content: " (" attr(href) ")"; font-size: 9pt; overflow-wrap: anywhere; }
+  .note-article .note-print-origin a::after { content: none !important; }
+}

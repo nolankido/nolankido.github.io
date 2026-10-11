@@ -160,8 +160,13 @@ class LabsExpansionTests(unittest.TestCase):
                 for link in Page(outline).tags('a'):
                     self.assertIn(link['href'][1:], ids)
         self.assertGreater(count, 15)
+        # Owner-approved original essays now reuse the same native outline.
+        notes = {build.output_path(p['path']): p for p in self.pages if p.get('note')}
         for path, content in self.outputs.items():
-            if path.suffix == '.html' and not str(path).startswith('poker/'):
+            if path in notes:
+                source = (ROOT / '_source' / notes[path]['source']).read_text()
+                self.assertIn(section_outline(source), content)
+            elif path.suffix == '.html' and not str(path).startswith('poker/'):
                 self.assertNotIn('reader-outline', content)
 
     def test_related_guides_are_curated_complete_and_never_self_referential(self):
