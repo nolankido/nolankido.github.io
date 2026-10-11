@@ -1,0 +1,57 @@
+name: Prepare reviewed reading architecture
+on:
+  push:
+    branches: [site/reading-architecture-completion-20261010]
+    paths:
+      - _scripts/reading-architecture.patch.gz
+      - .github/workflows/reading-architecture-preparation.yml
+permissions:
+  contents: read
+jobs:
+  prepare:
+    if: github.repository == 'nolankido/nolankido.github.io' && github.ref == 'refs/heads/site/reading-architecture-completion-20261010'
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Apply verified source patch and build
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'f59d9608e4605bf5abb048529e03cb984ed50caa6a3117f5002992d292330d26  _scripts/reading-architecture.patch.gz' | sha256sum --check
+          gzip -dc _scripts/reading-architecture.patch.gz > "$RUNNER_TEMP/reading-architecture.patch"
+          git apply --check "$RUNNER_TEMP/reading-architecture.patch"
+          git apply "$RUNNER_TEMP/reading-architecture.patch"
+          python _scripts/build.py
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/reading-unit-tests.log"
+      - name: Commit generated source and output to review branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch='site/reading-architecture-completion-20261010'
+          actual="$(git ls-remote origin "refs/heads/$branch" | cut -f1)"
+          test "$actual" = "$GITHUB_SHA"
+          git rm _scripts/reading-architecture.patch.gz
+          git add -A
+          test -z "$(git diff --cached --name-only -- .github/workflows/)"
+          git diff --cached --stat > "$RUNNER_TEMP/reading-changes.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Connect published writing across Nolan Kido subject collections'
+          git push origin "HEAD:refs/heads/$branch"
+          git rev-parse HEAD > "$RUNNER_TEMP/reading-release-sha.txt"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: reading-architecture-preparation
+          path: |
+            ${{ runner.temp }}/reading-unit-tests.log
+            ${{ runner.temp }}/reading-changes.txt
+            ${{ runner.temp }}/reading-release-sha.txt
+          retention-days: 1
