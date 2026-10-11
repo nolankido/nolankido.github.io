@@ -26,6 +26,7 @@ import poker_reference
 import poker_quality
 import poker_topics
 import living_well
+import identity
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -101,7 +102,9 @@ def build_outputs() -> dict[Path, str]:
         articles.append(f'<article class="note-entry"><p class="note-category">{text(p["kicker"])}</p>'
                         f'<h3><a href="{text(p["path"])}">{text(p["title"])}</a></h3>'
                         f'<p>{text(p["description"])}</p></article>')
+    identity_config = identity.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
+    values['identity_reading'] = identity.selected_reading(identity_config, pages)
     values['notes_list'] = '<div class="notes-list">' + '\n'.join(articles) + '</div>'
     values.update(supplement(ROOT, notes))
     values.update(poker_content.supplement(catalog, ROOT))
@@ -150,9 +153,7 @@ def build_outputs() -> dict[Path, str]:
             body = fill(source.read_text(encoding='utf-8'), page_values)
         if p['path'].startswith('/poker/'):
             body = clean_body(body)
-        section = p.get('section') or ('notes' if p.get('note') else p['id'])
-        nav = ''.join(f'<li><a href="/{name}/"' + ((' aria-current="page"' if p['path'] == '/' + name + '/' else ' aria-current="location"') if section == name else '')
-                      + f'>{label}</a></li>' for name, label in [('technology', 'Technology'), ('living-well', 'Living Well'), ('poker', 'Poker'), ('creative', 'Creative Work'), ('about', 'About'), ('contact', 'Contact')])
+        nav = identity.navigation(identity_config, p)
         canonical = site['url'] + p['path']
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
@@ -180,8 +181,12 @@ def build_outputs() -> dict[Path, str]:
                   'description': p['description'], 'isPartOf': {'@type': 'WebSite', 'name': site['name'], 'url': site['url'] + '/'}}
         if p.get('poker_topic') or p['id'] == 'poker-topics':
             schema['@type'] = 'CollectionPage'
-        if p['id'] == 'home':
-            schema['about'] = {'@type': 'Person', 'name': site['name'], 'url': site['url'] + '/'}
+        if p['id'] in {'home', 'about'}:
+            person = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/', 'description': site['bio_short']}
+            schema['about'] = person
+            schema['mainEntity'] = person
+            if p['id'] == 'about':
+                schema['@type'] = 'ProfilePage'
         if p.get('note'):
             schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date'],
                            'author': {'@type': 'Person', 'name': site['name'], 'url': site['url'] + '/about/'}})

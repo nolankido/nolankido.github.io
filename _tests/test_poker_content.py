@@ -200,8 +200,8 @@ class PokerContentTests(unittest.TestCase):
         self.assertNotIn('/assets/poker.css',build.build_outputs()[Path('index.html')])
 
 BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html', '_source/site.json', 'about/index.html', 'assets/contact.js', 'assets/hubs.css', 'assets/site.css', 'bio/index.html', 'card/index.html', 'contact/index.html', 'creative/index.html', 'feed.xml', 'index.html', 'notes/decision-quality/index.html', 'notes/finishing-is-a-decision/index.html', 'notes/generous-explanations/index.html', 'notes/index.html', 'notes/learning-from-the-beginning/index.html', 'notes/trustworthy-tools/index.html', 'privacy/index.html', 'resources/index.html', 'styles.css', 'technology/index.html']
-# October 9: reviewed owner-approved public introductions and bios include Living Well.
+# October 10: reviewed person-first architecture and source-generated shared shell.
 # All other source and protected contact, privacy, design and Poker checks remain independent.
-BASELINE_DIGEST = 'ad2792feea97faaba1cf540801ec4d1cc13beca7199af60a5bf8c474ba3ad3aa'
+BASELINE_DIGEST = '1e08df4876426463b1ed29cfdcb2f8e8b3bc92f552b3c0952750964ffe341f57'
 
 if __name__=='__main__': unittest.main(verbosity=2)

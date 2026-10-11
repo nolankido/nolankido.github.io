@@ -55,6 +55,10 @@ jobs:
           name: poker-reading-previews
           path: |
             ${{ runner.temp }}/poker-reading-previews/poker-*.png
+            ${{ runner.temp }}/poker-reading-previews/home-*.png
+            ${{ runner.temp }}/poker-reading-previews/about-*.png
+            ${{ runner.temp }}/poker-reading-previews/start-here-*.png
+            ${{ runner.temp }}/poker-reading-previews/technology-*.png
             ${{ runner.temp }}/poker-reading-previews/*.log
             ${{ runner.temp }}/poker-reading-previews/living-well-*.png
             ${{ runner.temp }}/poker-reading-previews/living-well-*.json

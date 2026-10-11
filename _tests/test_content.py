@@ -25,7 +25,7 @@ class ContentTests(unittest.TestCase):
             self.assertIn(p['path'], outputs[Path('notes/index.html')])
         self.assertIn('generous-explanations', selection['selected_notes'])
         self.assertIn('finishing-is-a-decision', selection['selected_notes'])
-        self.assertIn('I build useful tools and explore ideas through technology, thoughtful living, tournament poker, and creative work.', outputs[Path('index.html')])
+        self.assertIn('I work with AI to build useful tools, develop ideas, and make complicated things clearer.', outputs[Path('index.html')])
         self.assertIn('A simple hello is welcome too.', outputs[Path('contact/index.html')])
 
     def test_revisions_are_visible_and_machine_readable(self):
