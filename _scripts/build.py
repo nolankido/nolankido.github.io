@@ -27,6 +27,7 @@ import poker_quality
 import poker_topics
 import living_well
 import identity
+import presentation
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -96,12 +97,13 @@ def build_outputs() -> dict[Path, str]:
     by_id = {p['id']: p for p in notes}
     if len(order) != len(set(order)) or set(order) != set(by_id):
         raise ValueError('Reading order must contain every public note exactly once')
+    presentation_config = presentation.load(ROOT, pages)
     template = (SOURCE / 'layout.html').read_text(encoding='utf-8')
     articles = []
     for p in [by_id[slug] for slug in order]:
         articles.append(f'<article class="note-entry"><p class="note-category">{text(p["kicker"])}</p>'
                         f'<h3><a href="{text(p["path"])}">{text(p["title"])}</a></h3>'
-                        f'<p>{text(p["description"])}</p></article>')
+                        f'<p>{text(p["description"])}</p>' + presentation.publication(p) + '</article>')
     identity_config = identity.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
@@ -159,19 +161,20 @@ def build_outputs() -> dict[Path, str]:
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
         if p['id'] != 'home':
-            heading = '<a href="/notes/" class="breadcrumb">All notes</a>' if p.get('note') else ''
+            heading = '<a href="/notes/" class="breadcrumb">Writing</a>' if p.get('note') else ''
             heading += poker_topics.breadcrumb(p, topics)
             heading += f'<p class="page-kicker">{text(p["kicker"])}</p><h1 class="page-title">{text(p["title"])}</h1>'
             if p.get('note'):
-                heading += f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · Nolan Kido</p>'
+                heading += f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · <a href="/about/">Nolan Kido</a> · About {poker_library.minutes(body)} min read</p>'
+                heading += '<p class="essay-context"><a href="#about-this-essay">AI-assisted essay</a></p>'
                 revision = ''
                 if p.get('revision'):
                     revision = f'<p class="editorial-note"><strong>Revision, <time datetime="{p["updated"]}">{date_label(p["updated"])}</time>:</strong> {text(p["revision"])}</p>'
                 body = ('    <article class="note-article" aria-label="Note">\n'
                         f'      <header class="page-hero shell">{heading}</header>\n'
                         f'      <div class="article-body shell prose">{body}{revision}'
-                        '<p class="editorial-note">Prepared with AI assistance. Worked scenarios are fictional; research is linked where used. These essays do not describe private projects or personal events.</p>'
-                        '<nav class="article-navigation" aria-label="After the note"><a href="/notes/">All notes</a>'
+                        f'<p class="editorial-note" id="about-this-essay">{text(p.get("editorial_note", "Prepared with AI assistance. Worked scenarios are fictional; research is linked where used. These essays do not describe private projects or personal events."))}</p>'
+                        '<nav class="article-navigation" aria-label="After the note"><a href="/notes/">Writing across the site</a>'
                         '<a href="/contact/">Send a thought or correction</a></nav></div>\n    </article>')
                 extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
                 if p.get('updated'):
@@ -240,7 +243,7 @@ def build_outputs() -> dict[Path, str]:
             body += poker_experience.related_work(catalog, p['path'])
         header, living_extra = living_well.decorate(p, ROOT, header, schema)
         extra += living_extra
-        data = {**values, 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
+        data = {**values, 'social_metadata': presentation.metadata(presentation_config, p, site['url']), 'writing_current': (' aria-current="page"' if p['id'] == 'notes' else ' aria-current="location"' if p.get('note') else ''), 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
                 'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}

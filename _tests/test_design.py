@@ -42,9 +42,10 @@ class DesignTests(unittest.TestCase):
         content = build.build_outputs()[Path('index.html')]
         for destination in ['/technology/', '/poker/', '/creative/', '/notes/', '/about/', '/contact/']:
             self.assertIn(destination, content)
-        for obsolete in ['stat-strip', 'selected-notes', 'reading-table', 'class="resource-list"', 'featured_note', '<time']:
+        for obsolete in ['stat-strip', 'selected-notes', 'reading-table', 'class="resource-list"', 'featured_note']:
             self.assertNotIn(obsolete, content)
         self.assertEqual(content.count('class="destination destination-'), 4)
+        self.assertEqual(content.count('class="reading-date"'), 3)
         self.assertLess(content.index('destination-technology'), content.index('destination-poker'))
         self.assertLess(content.index('destination-poker'), content.index('destination-creative'))
 

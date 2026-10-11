@@ -28,6 +28,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['downloads/' + name + '.md' for name in ['decision-record', 'tool-trust-check', 'learning-loop']]
     assets += ['assets/living-well.css', 'living-well/feed.xml', 'assets/living-well-directory.css', 'assets/living-well-directory.js']
     assets += [str(path) for path in build.living_well.worksheet_exports()]
+    sharing = build.presentation.load(root, pages)
+    assets += sorted({card['src'].lstrip('/') for card in [sharing['default'], *sharing['pages'].values()]})
     catalog = build.poker_content.load(root)
     assets += sorted({e['image']['src'].lstrip('/') for e in catalog['entries'] if e.get('image')})
     for path in assets:

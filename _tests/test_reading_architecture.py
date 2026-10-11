@@ -47,8 +47,12 @@ class ReadingArchitectureTests(unittest.TestCase):
 
     def test_curation_does_not_republish_or_change_feed_scope(self):
         original = self.outputs[Path('feed.xml')]
-        self.assertEqual(hashlib.sha256(original.encode()).hexdigest(),
-                         '9b3e05a7e14db5b1e751d18a7ff0c8cbaf47b7d60453c1e9c43424e8d57e223a')
+        # One authorized essay is new; every historical feed item stays unchanged.
+        historical = [item for item in ET.fromstring(original).findall('./channel/item')
+                      if item.findtext('link') != 'https://nolankido.com/notes/keep-the-judgment/']
+        records = [{child.tag: child.text for child in item} for item in historical]
+        self.assertEqual(hashlib.sha256(json.dumps(records, sort_keys=True).encode()).hexdigest(),
+                         '8e700afa6679bf567e5a63f918e5555aaf09124509814a26e648d59fa1618b24')
         for name in ['feed.xml', 'living-well/feed.xml', 'poker/feed.xml']:
             self.assertEqual(self.outputs[Path(name)], (ROOT / name).read_text())
             links = [item.findtext('link') for item in ET.fromstring(self.outputs[Path(name)]).findall('./channel/item')]

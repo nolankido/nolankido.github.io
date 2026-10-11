@@ -1,5 +1,15 @@
 {
-  "featured_note": "trustworthy-tools",
-  "selected_notes": ["generous-explanations", "finishing-is-a-decision"],
-  "note_order": ["trustworthy-tools", "decision-quality", "generous-explanations", "learning-from-the-beginning", "finishing-is-a-decision"]
+  "featured_note": "keep-the-judgment",
+  "selected_notes": [
+    "generous-explanations",
+    "finishing-is-a-decision"
+  ],
+  "note_order": [
+    "keep-the-judgment",
+    "trustworthy-tools",
+    "decision-quality",
+    "generous-explanations",
+    "learning-from-the-beginning",
+    "finishing-is-a-decision"
+  ]
 }

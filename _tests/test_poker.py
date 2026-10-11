@@ -53,7 +53,10 @@ class PokerTests(unittest.TestCase):
 
     def test_general_notes_and_their_dates_are_preserved(self):
         pages = json.loads((ROOT / '_source/pages.json').read_text())
-        notes = [p for p in pages if p.get('note')]
+        notes = [p for p in pages if p.get('note') and p['id'] != 'keep-the-judgment']
+        addition = next(p for p in pages if p['id'] == 'keep-the-judgment')
+        self.assertEqual(addition['date'], '2026-10-11')
+        self.assertTrue(addition['note'])
         self.assertEqual(len(notes), 5)
         self.assertTrue(all(p['path'].startswith('/notes/') for p in notes))
         self.assertTrue(all(p['date'] == '2026-10-05' for p in notes))

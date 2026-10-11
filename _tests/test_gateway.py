@@ -58,7 +58,8 @@ class GatewayTests(unittest.TestCase):
             for unsupported in ['<iframe', 'coming soon', 'Join the waitlist', '<form']:
                 self.assertNotIn(unsupported, page)
         notes = [p for p in json.loads((ROOT / '_source/pages.json').read_text()) if p.get('note')]
-        self.assertEqual(len(notes), 5)
+        self.assertEqual(len(notes), 6)
+        self.assertIn('keep-the-judgment', {p['id'] for p in notes})
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

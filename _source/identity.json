@@ -27,9 +27,9 @@
   ],
   "selected": [
     {
-      "path": "/notes/trustworthy-tools/",
-      "kind": "Worked example / Technology",
-      "description": "Two calculations agree. Both are wrong. A small, checkable example of why independent evidence matters."
+      "path": "/notes/keep-the-judgment/",
+      "kind": "Essay / Practical AI",
+      "description": "Delegate more of the production without giving up the purpose, boundaries, and decisions you need to stand behind."
     },
     {
       "path": "/living-well/did-the-tool-actually-help/",
@@ -49,8 +49,8 @@
       "title": "Use technology with judgment.",
       "description": "Start with the purpose of a tool, then ask what would count as a result worth trusting.",
       "paths": [
-        "/notes/trustworthy-tools/",
-        "/living-well/decide-what-matters/"
+        "/notes/keep-the-judgment/",
+        "/notes/trustworthy-tools/"
       ]
     },
     {

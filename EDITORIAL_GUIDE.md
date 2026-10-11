@@ -34,4 +34,15 @@ Keep domain renewal, account recovery, backup checks, and access arrangements in
 
 ## Technology-first hierarchy
 
-Technology, Poker, and Creative Work are the three permanent subject destinations, in that order. Technology leads by visual prominence even while its public collection is small. Introductory subject pages may curate existing public notes, but must state their present scope without implying a released portfolio. Notes remains a supporting cross-subject collection. This supersedes the earlier poker-first gateway ranking, not the privacy or approval requirements.
+The personal introduction leads the four subject destinations: Technology, Living Well, Poker, Creative Work. Technology leads among subjects, but the person is not reduced to an AI brand. Writing at `/notes/` connects the collections, with Start here as a short orientation. Introductory pages select actual published material without implying a released portfolio. A stronger public image must come from clarity and useful work, not invented credentials or private disclosures. This supersedes earlier subject rankings, not the privacy or approval requirements.
+
+## Original essays and public-image improvements
+
+Opinion essays may develop the approved public perspective without inventing a
+firsthand experiment. Label illustrative scenarios, disclose AI assistance, and
+do not claim that Nolan personally reviewed wording unless he actually did.
+Keep observed results, reasoned arguments, and proposed work distinct. Display
+original publication dates on reading cards; changing curation is not publication.
+Do not add a photo, a guessed social account, biography detail, or client claim to
+fill an apparent credibility gap. Shared previews are local typographic graphics,
+not photographs of the owner. Their display on a social platform is not guaranteed.
