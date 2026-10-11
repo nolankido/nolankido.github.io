@@ -55,3 +55,14 @@ actually has. Automated accessibility testing is not certification.
 
 References: https://www.rssboard.org/rss-specification
 https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing
+
+## Release-verification reliability
+
+The previous main run 38166080483 completed all test stages but reached its
+15-minute cancellation boundary before its final live-byte step. Keep every
+existing test and give the checks job 20 minutes. Move the unchanged read-only
+public verifier into its own ten-minute main-only job, so browser-test duration
+cannot prevent verification. It still compares exact bytes against the checkout,
+retries pending targets, and checks main before and after the run. The full
+pre-release test suite remains required before a manual merge. No continue-on-error,
+permissions expansion, deployment change, or skipped test was introduced.
