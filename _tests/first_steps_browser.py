@@ -77,10 +77,13 @@ try:
        assert not audit,(path,width,audit);report['axe_scans']+=1
       if os.environ.get('SCREENSHOT_DIR'):
        out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(exist_ok=True,parents=True)
+       page.evaluate("document.activeElement?.blur();window.scrollTo({top:0,left:0,behavior:'instant'})")
        page.screenshot(path=str(out/('first-steps-'+(path.strip('/') or 'home')+'-'+str(width)+'.png')),full_page=True)
     page.goto(base+'/creative/')
     for anchor in ['creative-brief','creative-practice','creative-reading']:
-     page.locator('.creative-jumps a[href="#'+anchor+'"]').click()
+     jump=page.locator('.creative-jumps a[href="#'+anchor+'"]')
+     jump.focus();expect(jump).to_be_focused();expect(jump).to_be_in_viewport()
+     jump.click()
      target=page.locator('#'+anchor).bounding_box()
      header=page.locator('.site-header').bounding_box()
      assert target['y']>=header['y']+header['height']-1,('obscured-anchor',width,anchor,target,header)
