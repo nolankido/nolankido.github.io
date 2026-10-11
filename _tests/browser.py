@@ -269,7 +269,16 @@ class BrowserTests(unittest.TestCase):
         expect(page.locator('#contact-name')).to_be_disabled()
         expect(page.locator('#form-success')).to_be_hidden()
         page.set_content(html_for('/notes/'))
-        self.assertEqual(page.locator('.note-entry').count(), sum(bool(p.get('note')) for p in build.public_pages()))
+        notes = [p['path'] for p in build.public_pages() if p.get('note')]
+        original_links = page.locator('#general-notes .note-entry h3 a')
+        self.assertEqual(sorted(link.get_attribute('href') for link in original_links.all()), sorted(notes))
+        config = json.loads((ROOT / '_source/identity.json').read_text(encoding='utf-8'))
+        self.assertEqual(page.locator('.writing-route').count(), len(config['reading_routes']))
+        for route in config['reading_routes']:
+            section = page.locator('.writing-route#' + route['id'])
+            expect(section).to_be_visible()
+            self.assertEqual([link.get_attribute('href') for link in section.locator('.note-entry h3 a').all()], route['paths'])
+        self.assertEqual(page.locator('.note-entry').count(), len(notes) + sum(len(route['paths']) for route in config['reading_routes']))
         context.close()
 
     def test_mobile_tablet_desktop_layout_and_keyboard(self):

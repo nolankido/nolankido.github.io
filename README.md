@@ -11,7 +11,9 @@ orientation page. It is available in the shared utility bar on every page.
 The homepage is not a chronological feed, project portfolio, or popularity counter.
 
 `_source/identity.json` owns the primary navigation and three curated reading
-choices. `_scripts/identity.py` validates their destinations against the complete
+choices, plus four cross-subject reading routes on `/notes/` (Writing). The five
+original general notes and all feed scopes are retained. No article is moved or
+republished when it is featured. `_scripts/identity.py` validates their destinations against the complete
 public manifest and renders the canonical titles. Existing content stays at its
 original URL. Shared biographies come from `_source/site.json`. Change the
 identity configuration deliberately rather than promoting whichever library
