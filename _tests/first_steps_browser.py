@@ -4,7 +4,7 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from urllib.parse import urlsplit
-import json,os
+import faulthandler,json,os
 from playwright.sync_api import sync_playwright,expect
 ROOT=Path(__file__).resolve().parents[1]
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -17,12 +17,15 @@ errors=[];missing=[];report={'keyboard_journeys':0,'downloads':0,'layouts':0,'ex
 def route(r):
  if urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()
  else:r.abort()
+# Bound unexpected driver waits and keep diagnostic output if a browser regresses.
+faulthandler.dump_traceback_later(180,exit=True)
 try:
  with sync_playwright() as pw:
   opts={'headless':True}
   if os.environ.get('CHROMIUM_PATH'):opts['executable_path']=os.environ['CHROMIUM_PATH']
   browser=pw.chromium.launch(**opts)
   for js in [True,False]:
+   print('Testing JavaScript enabled='+str(js),flush=True)
    context=browser.new_context(java_script_enabled=js,accept_downloads=True)
    context.route('**/*',route)
    page=context.new_page()
@@ -47,7 +50,9 @@ try:
    page.goto(base+'/resources/')
    page.locator('a[href="/creative/#creative-brief"]').focus();page.keyboard.press('Enter')
    expect(page).to_have_url(base+'/creative/#creative-brief');report['keyboard_journeys']+=1
+   print('Native journeys and exact download passed',flush=True)
    for width in [320,390,540,768,1024,1440]:
+    print('Testing width='+str(width),flush=True)
     page.set_viewport_size({'width':width,'height':1000})
     for path in ['/','/creative/','/resources/']:
      page.goto(base+path);expect(page.locator('h1')).to_be_visible()
@@ -60,7 +65,9 @@ try:
      if path=='/creative/':
       page.locator('.creative-template summary').click()
       expect(page.locator('.creative-template pre')).to_be_visible()
-     spacing=page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
+     # add_style_tag waits indefinitely for a load event with page scripts disabled.
+     # A synchronous test-only DOM insertion applies the same CSS in both contexts.
+     spacing=page.evaluate_handle("css=>{const el=document.createElement('style');el.textContent=css;document.head.append(el);return el}", '*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
      assert page.evaluate('document.documentElement.scrollWidth')<=width,('spacing',path,width,js)
      report['expanded_spacing']+=1;spacing.evaluate('(n)=>n.remove()')
      if js and width in [390,1440]:
@@ -83,4 +90,5 @@ try:
  assert not missing,missing
  print(json.dumps({'result':'pass',**report},indent=2))
 finally:
+ faulthandler.cancel_dump_traceback_later()
  server.shutdown();server.server_close()

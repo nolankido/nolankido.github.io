@@ -63,7 +63,7 @@ def run():
                 if width in [390, 1440]:
                     page.screenshot(path=str(out / ('living-well-site-home-' + str(width) + '.png')), full_page=True)
             page.goto(base + '/')
-            page.locator('.destination-living-well').focus()
+            page.locator('.destination-living-well .destination-action').focus()
             page.keyboard.press('Enter')
             expect(page).to_have_url(base + '/living-well/')
             page.locator('.lw-routes a[href="/living-well/guides/"]').click()

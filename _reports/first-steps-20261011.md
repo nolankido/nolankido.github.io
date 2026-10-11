@@ -43,6 +43,12 @@ The release verifier includes exact public bytes for the new CSS and text file.
 Build/test success alone is not a deployment claim. Confirm the final Pages
 deployment and the main-commit public-byte check separately.
 
+The initial browser harness timed out when Playwright's style-insertion helper
+waited for a load event in a JavaScript-disabled context. A minimal local probe
+reproduced the wait. The harness now inserts its test-only text-spacing CSS
+synchronously in both contexts and has progress logs plus a bounded diagnostic
+timeout. Site JavaScript stays disabled throughout the no-script checks.
+
 ## Limits
 No actual message, AI-service request, private worksheet answer, at-table poker
 assistance, measured personal result or reader-conversion claim is involved.
