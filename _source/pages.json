@@ -973,5 +973,16 @@
     "note": true,
     "date": "2026-10-11",
     "editorial_note": "Prepared with AI assistance. This is an argument about delegation and judgment, not a report of measured results. The Saturday-afternoon scenario is fictional."
+  },
+  {
+    "id": "task-brief",
+    "section": "technology",
+    "path": "/technology/task-brief/",
+    "title": "Build a clearer AI task brief.",
+    "seo_title": "AI Task Brief Builder | Nolan Kido",
+    "description": "A free local tool for turning an everyday task into a clear AI brief: purpose, inputs, deliverable, checks, and boundaries. No account or AI connection.",
+    "kicker": "Technology / A practical tool",
+    "source": "technology/task-brief.html",
+    "updated": "2026-10-11"
   }
 ]
