@@ -9,7 +9,7 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -36,6 +36,7 @@ jobs:
           SCREENSHOT_DIR: ${{ runner.temp }}/poker-reading-previews
         run: |
           AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/site_find_browser.py
+          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/reading_return_browser.py
           python _tests/browser.py
           python _tests/design_browser.py
           AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/entrypoints_browser.py
@@ -46,6 +47,7 @@ jobs:
         with:
           name: public-image-previews
           path: |
+            ${{ runner.temp }}/poker-reading-previews/return-*.png
             ${{ runner.temp }}/poker-reading-previews/find-*.png
             ${{ runner.temp }}/poker-reading-previews/entry-*.png
             ${{ runner.temp }}/poker-reading-previews/resources-*.png
@@ -87,8 +89,19 @@ jobs:
             ${{ runner.temp }}/poker-reading-previews/living-well-*.json
           retention-days: 1
           if-no-files-found: error
-      - name: Verify published main release
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+  published:
+    name: Published release bytes
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Verify published main release independently of browser-test duration
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -98,4 +111,9 @@ jobs:
             exit 0
           fi
           python _scripts/check_live.py --attempts 10 --interval 10
+          current=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          if [ "$current" != "$GITHUB_SHA" ]; then
+            echo 'Main advanced during verification; the newer run owns current-release verification.'
+            exit 0
+          fi
           echo "LIVE_VERIFIED_COMMIT=$GITHUB_SHA"

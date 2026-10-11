@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Nolan Kido | Writing across the site</title>
+    <link>https://nolankido.com/notes/</link>
+    <description>Published writing from Notes, Living Well, and Poker. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
+    <language>en-us</language>
+    <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>Let AI do more. Keep the judgment.</title>
+      <link>https://nolankido.com/notes/keep-the-judgment/</link>
+      <description>Delegating production is not the same as handing over responsibility. An essay on purpose, boundaries, permission, and the choices worth keeping human.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/keep-the-judgment/</guid>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/feed.xml">Nolan Kido Notes</source>
+    </item>
+    <item>
+      <title>Did the tool actually make life easier?</title>
+      <link>https://nolankido.com/living-well/did-the-tool-actually-help/</link>
+      <description>Review a small technology change by its real purpose, total effort, reliability, privacy, and effect on other people, not just its impressive output.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/did-the-tool-actually-help/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Find the document you need without uploading your whole life</title>
+      <link>https://nolankido.com/living-well/find-the-document-you-need/</link>
+      <description>A small, privacy-conscious method for capturing, naming, finding, and checking an ordinary document before asking AI to interpret it.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/find-the-document-you-need/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Make digital reading easier before adding another AI tool</title>
+      <link>https://nolankido.com/living-well/make-digital-reading-easier/</link>
+      <description>Try readable text, reading view, or spoken support while keeping the original meaning and choosing what helps you participate.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/make-digital-reading-easier/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Reflect with AI without handing over your judgment</title>
+      <link>https://nolankido.com/living-well/reflection-with-your-judgment-intact/</link>
+      <description>Use private reflection and optional generic questions to clarify what matters, without uploading a journal or treating a model as a spiritual authority.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/reflection-with-your-judgment-intact/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Turn a rough idea into something you can share</title>
+      <link>https://nolankido.com/living-well/rough-idea-to-small-creation/</link>
+      <description>Move from a brief note to a small draft while preserving your meaning, checking additions, and avoiding invented personal experience.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/rough-idea-to-small-creation/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Turn scattered notes into one useful next step</title>
+      <link>https://nolankido.com/living-well/scattered-notes-to-next-step/</link>
+      <description>Separate actions, references, and open questions in a small note, with an optional AI grouping step that does not invent obligations.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/scattered-notes-to-next-step/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Make a shared plan people can actually use</title>
+      <link>https://nolankido.com/living-well/shared-plan-people-can-use/</link>
+      <description>Create one readable plan with confirmed commitments, open questions, clear ownership, and sharing choices everyone understands.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/shared-plan-people-can-use/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Technology for real life</title>
+      <link>https://nolankido.com/living-well/technology-for-real-life/</link>
+      <description>Seven practical guides connecting ordinary tasks, thoughtful choices, and useful technology, with clear examples and a simpler alternative.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/technology-for-real-life/</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>A useful tool can make itself less necessary</title>
+      <link>https://nolankido.com/living-well/a-tool-you-can-put-down/</link>
+      <description>An argument for judging technology by what it enables, including the ability to finish, learn, simplify, and leave.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/a-tool-you-can-put-down/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Consciousness: which question are we asking?</title>
+      <link>https://nolankido.com/living-well/consciousness-which-question/</link>
+      <description>A plain-language way into experience, scientific explanations, philosophical disagreement, and questions about AI.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/consciousness-which-question/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Use AI to understand something, not just get an answer</title>
+      <link>https://nolankido.com/living-well/learning-with-ai-without-skipping-understanding/</link>
+      <description>A worked, fictional example of clarifying instructions, checking an explanation, and deciding when to return to the original source.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/learning-with-ai-without-skipping-understanding/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Meditation without buying a lifestyle</title>
+      <link>https://nolankido.com/living-well/meditation-without-buying-a-lifestyle/</link>
+      <description>Three free ways to explore an attention practice, with browser-first starting points and no pressure to adopt a routine or identity.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/meditation-without-buying-a-lifestyle/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Read a poem without turning it into a lesson</title>
+      <link>https://nolankido.com/living-well/read-a-poem-without-a-lesson/</link>
+      <description>A short invitation to read Amanda Gunn’s Ordinary Sugar, with room for pleasure, memory, and an unfinished response.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/read-a-poem-without-a-lesson/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Spiritual curiosity without a new identity</title>
+      <link>https://nolankido.com/living-well/spiritual-curiosity-reading-path/</link>
+      <description>Three different ways into a question: a conversation, some context, and a map of possible explanations. Choose one, not a syllabus.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/spiritual-curiosity-reading-path/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>When technology helps you notice more</title>
+      <link>https://nolankido.com/living-well/technology-that-helps-you-notice/</link>
+      <description>Merlin, Seek, and a no-app alternative: use a small tool to investigate something already in front of you, then return to the world.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/technology-that-helps-you-notice/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Can an AI-generated reflection be meaningful?</title>
+      <link>https://nolankido.com/living-well/ai-generated-reflections/</link>
+      <description>Distinguish a reader's response from the origin, accuracy, and authority of a passage, and keep AI in the role of a thinking aid.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/ai-generated-reflections/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Before you ask AI what to do, decide what matters</title>
+      <link>https://nolankido.com/living-well/decide-what-matters/</link>
+      <description>Clarify values, constraints, affected people, and uncertainty before using an AI system to examine your options.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/decide-what-matters/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>When does documenting your life get in the way of experiencing it?</title>
+      <link>https://nolankido.com/living-well/documenting-your-life/</link>
+      <description>Choose what to record, what to keep private, and when to put the camera away without treating documentation as either all good or all bad.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/documenting-your-life/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Plan a free afternoon without optimizing all the life out of it</title>
+      <link>https://nolankido.com/living-well/free-afternoon/</link>
+      <description>Use just enough planning to support enjoyment, access, and practical constraints while leaving room for an unremarkable, worthwhile afternoon.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/free-afternoon/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>The difference between improving your life and believing you are never enough</title>
+      <link>https://nolankido.com/living-well/growth-without-self-rejection/</link>
+      <description>Choose a specific change without making your whole self the problem, and leave room for limits, acceptance, and outside support.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/growth-without-self-rejection/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Make one recurring household problem less annoying</title>
+      <link>https://nolankido.com/living-well/household-friction/</link>
+      <description>Find the smallest workable fix, use AI only where it helps, and include the people who will live with the new system.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/household-friction/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>What makes an ordinary moment feel sacred?</title>
+      <link>https://nolankido.com/living-well/ordinary-moments/</link>
+      <description>Explore attention, ritual, wonder, and unanswered questions without claiming that a meaningful experience proves its explanation.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/ordinary-moments/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Preserve a family story without losing the person's voice</title>
+      <link>https://nolankido.com/living-well/preserve-family-story/</link>
+      <description>A consent-led way to record, review, and keep a family story, with technology serving the speaker rather than replacing them.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/preserve-family-story/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>A quiet morning does not need a dashboard</title>
+      <link>https://nolankido.com/living-well/quiet-morning/</link>
+      <description>Choose one manageable boundary around attention while preserving the technology you need for care, access, work, and safety.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/quiet-morning/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Can you be spiritually curious without pretending to be certain?</title>
+      <link>https://nolankido.com/living-well/spiritually-curious/</link>
+      <description>Keep wonder, skepticism, and personal meaning in the same conversation without forcing them to become the same thing.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/spiritually-curious/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Can a reminder help you become a more thoughtful friend?</title>
+      <link>https://nolankido.com/living-well/thoughtful-friend/</link>
+      <description>Use technology to support remembering and showing up without turning friendship into a database or replacing the actual conversation.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/thoughtful-friend/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>What is the time you save actually for?</title>
+      <link>https://nolankido.com/living-well/time-you-save/</link>
+      <description>Before adding another automation, decide what the recovered time is meant to make possible and count the work the tool creates.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/time-you-save/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Choosing between two good lives</title>
+      <link>https://nolankido.com/living-well/two-good-lives/</link>
+      <description>Examine meaningful tradeoffs, test whether a plan fits ordinary days, and review disappointment without pretending every choice has one correct answer.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/two-good-lives/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>A weekly reset that does not become another job</title>
+      <link>https://nolankido.com/living-well/weekly-reset/</link>
+      <description>A small paper-first review of commitments, choices, and breathing room, with an optional AI-assisted route and a clear stopping point.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/weekly-reset/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Start here: the questions behind Living Well</title>
+      <link>https://nolankido.com/living-well/what-i-mean-by-living-well/</link>
+      <description>A short introduction to the interests behind this section, with one idea, one free resource, and one practical place to begin.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/what-i-mean-by-living-well/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>What should you decide personally, even when a tool helps you express it?</title>
+      <link>https://nolankido.com/living-well/what-to-decide-yourself/</link>
+      <description>Use help with wording without outsourcing responsibility, inventing feelings, or making promises you do not intend to keep.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/what-to-decide-yourself/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
+      <title>Understand the cost of a cash game.</title>
+      <link>https://nolankido.com/poker/cash-game-costs/</link>
+      <description>Compare rake, caps, fixed collections, extra drops and time charges with fictional schedules and a reconciled session ledger.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/cash-game-costs/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>A practical cash-game study route.</title>
+      <link>https://nolankido.com/poker/cash-game-study-path/</link>
+      <description>Five self-paced study sessions, free source shortlists and a private worksheet: describe the game, price a call, inspect ranges and finish one review.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/cash-game-study-path/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Study cash games without importing tournament assumptions.</title>
+      <link>https://nolankido.com/poker/cash-game-study/</link>
+      <description>Separate cash-game costs, effective stacks and multiway decisions from tournament models, with a worked rake example.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/cash-game-study/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Read the structure before choosing the tournament.</title>
+      <link>https://nolankido.com/poker/choosing-a-tournament/</link>
+      <description>Compare total cost, starting big blinds, blind progression and time commitments using two fictional event structures.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/choosing-a-tournament/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Choose a study tool by the question it answers.</title>
+      <link>https://nolankido.com/poker/choosing-study-tools/</link>
+      <description>Match a study question to free lessons, equity tools or solver documentation. Compare fit, first steps, limits and access without unsupported product rankings.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/choosing-study-tools/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Read poker advice without borrowing its certainty.</title>
+      <link>https://nolankido.com/poker/evaluating-poker-advice/</link>
+      <description>Evaluate a video, chart, article or forum answer by its question, evidence and assumptions, then turn it into one checkable study task.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/evaluating-poker-advice/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Search Poker.</title>
+      <link>https://nolankido.com/poker/find/</link>
+      <description>Search on-site guide prose, resource listings and glossary definitions; jump to matching sections and export a private, temporary study list.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/find/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Your first live cash-game session.</title>
+      <link>https://nolankido.com/poker/first-live-cash-game/</link>
+      <description>Prepare for a live cash table: questions for the desk, buying chips, taking a seat, leaving and recording the session without double-counting costs.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/first-live-cash-game/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Your first live tournament, without the guesswork.</title>
+      <link>https://nolankido.com/poker/first-live-tournament/</link>
+      <description>Prepare for registration, finding your seat, asking procedural questions, and leaving with one useful observation.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/first-live-tournament/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Learn poker with a small, free study path.</title>
+      <link>https://nolankido.com/poker/free-poker-learning-path/</link>
+      <description>Five self-paced sessions that turn free explanations into a hand record, a pot calculation and a decision you can explain.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/free-poker-learning-path/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>The live tournament field guide.</title>
+      <link>https://nolankido.com/poker/live-tournament-guide/</link>
+      <description>Seven practical guides for choosing an event, preparing for tournament day, recording completed hands and evaluating study resources.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/live-tournament-guide/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Multiway pots: count the opponents and the pots.</title>
+      <link>https://nolankido.com/poker/multiway-pot-workshop/</link>
+      <description>Distinguish a better call price from a better hand, separate pot eligibility and avoid importing heads-up defense quotas.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/multiway-pot-workshop/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Omaha, lowball and mixed games: know which rules changed.</title>
+      <link>https://nolankido.com/poker/omaha-and-mixed-games/</link>
+      <description>Compare hand construction, low qualifiers and game rotations, then work through an Omaha hi-lo split-pot example.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/omaha-and-mixed-games/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Omaha hi-lo: play for a share, not just a low.</title>
+      <link>https://nolankido.com/poker/omaha-hi-lo-workshop/</link>
+      <description>Work through legal hand selection, quartering, counterfeiting and pot-share equity with complete fictional examples.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/omaha-hi-lo-workshop/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Check the room, the rules and your protections.</title>
+      <link>https://nolankido.com/poker/poker-access-and-protection/</link>
+      <description>Find regulator and operator information, protect account access, preserve complaint records and reach support without gambling-site rankings.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-access-and-protection/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Choose a poker book or course you will actually use.</title>
+      <link>https://nolankido.com/poker/poker-books-and-courses/</link>
+      <description>Match prerequisites, format and one study goal before buying; distinguish author descriptions, independent reviews and free course material.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-books-and-courses/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Poker math: the right number for the right question.</title>
+      <link>https://nolankido.com/poker/poker-math-reference/</link>
+      <description>Compare call prices, pure-bluff thresholds, minimum defense frequency and pot-limit raises with exact worked examples and a portable reference.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-math-reference/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Turn a poker video or podcast into one useful lesson.</title>
+      <link>https://nolankido.com/poker/poker-media-study/</link>
+      <description>Use annotated media starting points, distinguish transcripts from show notes and build a short study record without copying copyrighted material.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-media-study/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>A map of poker research, without the inflated claims.</title>
+      <link>https://nolankido.com/poker/poker-research-guide/</link>
+      <description>Find original research on regret, sampling, poker AI and evaluation, with explicit boundaries between game-solving results and playing strength.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-research-guide/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Poker rules and fair play: find the right authority.</title>
+      <link>https://nolankido.com/poker/poker-rules-and-fair-play/</link>
+      <description>Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-rules-and-fair-play/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Read the preflop chart before trusting the colors.</title>
+      <link>https://nolankido.com/poker/reading-preflop-charts/</link>
+      <description>Check game, position, stack convention, action history and combo weights before using a preflop chart as a study reference.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/reading-preflop-charts/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Keep a hand note you can actually review.</title>
+      <link>https://nolankido.com/poker/recording-hands/</link>
+      <description>Capture positions, stacks, actions and uncertainty after play, with a checked fictional pot ledger and a reusable private note template.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/recording-hands/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Registration, re-entry and the cost of another attempt.</title>
+      <link>https://nolankido.com/poker/registration-and-reentry/</link>
+      <description>Separate advance registration, starting flights, re-entry and rebuys, then account for each payment without treating previous losses as a reason to continue.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/registration-and-reentry/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>A useful route through the poker web.</title>
+      <link>https://nolankido.com/poker/resource-collections/</link>
+      <description>Guided starting points for free learning, cash games, Omaha and mixed games, poker books and courses, and original research.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/resource-collections/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>What was checked, and what was not.</title>
+      <link>https://nolankido.com/poker/resource-quality/</link>
+      <description>See resource-review methods, recorded dates, index-only limitations and a clear route for corrections.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/resource-quality/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Stud and lowball: change the rules before the strategy.</title>
+      <link>https://nolankido.com/poker/stud-and-lowball-workshop/</link>
+      <description>Compare Stud8, razz, deuce-to-seven and Badugi, with worked hand comparisons and a rotation checklist.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/stud-and-lowball-workshop/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Check the calculation. Keep the assumptions.</title>
+      <link>https://nolankido.com/poker/study-calculators/</link>
+      <description>Three local-only, study-purpose calculators for call thresholds, pure-bluff fold rates and pot-limit raise accounting.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/study-calculators/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Plan the day. Keep the hand. Check the source.</title>
+      <link>https://nolankido.com/poker/tournament-checklists/</link>
+      <description>Three printable, copyable and downloadable private-use sheets for event planning, completed-hand capture and evaluating a poker resource.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournament-checklists/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>From the first seat to the end of the day.</title>
+      <link>https://nolankido.com/poker/tournament-day/</link>
+      <description>Prepare for breaks, table moves, bagging chips and finishing a tournament day without treating each logistical step as a strategic problem.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournament-day/</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>One river. Two different stories.</title>
+      <link>https://nolankido.com/poker/decision-lab/</link>
+      <description>A visual, fictional river exercise: price a call, test the assumed range and reveal two endings without confusing the result with the decision.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/decision-lab/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>The flush arrives. What can still change?</title>
+      <link>https://nolankido.com/poker/flush-and-redraw/</link>
+      <description>Follow a fictional flush through the turn and river, count all remaining cards, and distinguish improving from winning.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/flush-and-redraw/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>From hand notes to a poker vlog.</title>
+      <link>https://nolankido.com/poker/hand-to-vlog/</link>
+      <description>An editing workbench for honest hand reconstruction, clear graphics, useful narration and poker episode companion pages.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/hand-to-vlog/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Pot odds, with the assumptions visible.</title>
+      <link>https://nolankido.com/poker/pot-odds-workshop/</link>
+      <description>Price calls and raises, distinguish draw probabilities from equity, and test the assumptions behind a bluff or call.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/pot-odds-workshop/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Twelve checks. One useful repair.</title>
+      <link>https://nolankido.com/poker/practice-room/</link>
+      <description>Twelve answer-reveal exercises on pot odds, ranges, short stacks, ICM, results and honest poker storytelling.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/practice-room/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>From possible hands to weighted ranges.</title>
+      <link>https://nolankido.com/poker/range-combinations/</link>
+      <description>Count physical combinations, remove known cards, weight betting frequencies and test a fictional river range.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/range-combinations/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>A short stack is a situation, not a chart.</title>
+      <link>https://nolankido.com/poker/short-stack-decisions/</link>
+      <description>Record stacks, antes, action trees and tournament objectives before comparing short-stack decisions or push/fold references.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/short-stack-decisions/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Three all-ins. Two pots.</title>
+      <link>https://nolankido.com/poker/side-pot-lab/</link>
+      <description>Separate a fictional three-way all-in into a main pot, side pot and refund, then check the winners and final stacks.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/side-pot-lab/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>When more chips are not enough.</title>
+      <link>https://nolankido.com/poker/tournament-equity/</link>
+      <description>A checkable three-player ICM example explains prize equity, risk premiums and why gaining chips can lower expected payout.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournament-equity/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Results deserve context.</title>
+      <link>https://nolankido.com/poker/variance-and-results/</link>
+      <description>Separate tournament ROI, trip costs, sample uncertainty and decision evidence with worked accounting and probability examples.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/variance-and-results/</guid>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Good decisions, imperfect outcomes.</title>
+      <link>https://nolankido.com/notes/decision-quality/</link>
+      <description>A fictional gathering, an uncertain forecast, and a $30 choice. Separate the calculation from the people and assumptions it leaves out.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/decision-quality/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/feed.xml">Nolan Kido Notes</source>
+    </item>
+    <item>
+      <title>Finishing is a decision.</title>
+      <link>https://nolankido.com/notes/finishing-is-a-decision/</link>
+      <description>Distinguish a necessary repair from another possible improvement, define done, and leave room for the rest of the day.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/finishing-is-a-decision/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/feed.xml">Nolan Kido Notes</source>
+    </item>
+    <item>
+      <title>What makes an explanation feel generous.</title>
+      <link>https://nolankido.com/notes/generous-explanations/</link>
+      <description>Two versions of the same instruction show how writing can save the reader effort without simplifying away what matters.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/generous-explanations/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/feed.xml">Nolan Kido Notes</source>
+    </item>
+    <item>
+      <title>Learning something difficult from the beginning.</title>
+      <link>https://nolankido.com/notes/learning-from-the-beginning/</link>
+      <description>A fractions example, a smaller-week option, and a learning loop that leaves most of the effort for practice rather than planning.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/learning-from-the-beginning/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/feed.xml">Nolan Kido Notes</source>
+    </item>
+    <item>
+      <title>A working tool is not the same as a trustworthy one.</title>
+      <link>https://nolankido.com/notes/trustworthy-tools/</link>
+      <description>Two calculations agree. Both are wrong. A small worked example of the difference between a convincing demonstration and independent evidence.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/trustworthy-tools/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/feed.xml">Nolan Kido Notes</source>
+    </item>
+    <item>
+      <title>Bets, calls, and side pots.</title>
+      <link>https://nolankido.com/poker/betting-and-pots/</link>
+      <description>Read the amount a player actually adds, understand why a short stack can still win, and keep the pot separate from the size of a wager.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/betting-and-pots/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Pause the hand. Read the situation.</title>
+      <link>https://nolankido.com/poker/follow-along/</link>
+      <description>Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/follow-along/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Poker terms, in plain language.</title>
+      <link>https://nolankido.com/poker/glossary/</link>
+      <description>Forty-eight short entries grouped by what you are trying to understand. Use the topic links, or your browser’s Find command, to look up a word without reading everything.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/glossary/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Which hand wins?</title>
+      <link>https://nolankido.com/poker/hand-rankings/</link>
+      <description>A visual reference to the ten familiar hand labels, followed by the kicker, shared-board, and ace-low situations that often confuse new viewers.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/hand-rankings/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>One hand, from deal to showdown.</title>
+      <link>https://nolankido.com/poker/holdem-basics/</link>
+      <description>Follow a complete hand, learn who acts when, and see why winning the pot is different from winning the same amount in profit.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/holdem-basics/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>What the percentages mean.</title>
+      <link>https://nolankido.com/poker/poker-math/</link>
+      <description>Separate the price of a call, the chance of completing a draw, and the uncertainty in a hand review. They are not interchangeable numbers.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-math/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Why does the seat matter?</title>
+      <link>https://nolankido.com/poker/position-and-stacks/</link>
+      <description>Follow position, heads-up action order, effective stacks and stack-to-pot ratio without mistaking a seat label for a strategy.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/position-and-stacks/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>What is the bet trying to do?</title>
+      <link>https://nolankido.com/poker/ranges-and-bets/</link>
+      <description>Understand ranges, combinations, blockers, value bets and bluffs without treating a commentator’s guess as knowledge of hidden cards.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/ranges-and-bets/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>What changed on the board?</title>
+      <link>https://nolankido.com/poker/reading-the-board/</link>
+      <description>Read suits, connected cards, paired boards and draws. See why one new community card can change the meaning of the same hole cards.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/reading-the-board/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Review a hand, not just the result.</title>
+      <link>https://nolankido.com/poker/reviewing-a-hand/</link>
+      <description>A practical method for reviewing a tournament poker decision, with a worked fictional hand, clear uncertainty labels, and a blank review sheet.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/reviewing-a-hand/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Follow the action.</title>
+      <link>https://nolankido.com/poker/start-here/</link>
+      <description>Follow your first poker hand without reading a full course. Find the player, the action, the amount to call, and a direct explanation when needed.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/start-here/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>What is happening at the table?</title>
+      <link>https://nolankido.com/poker/table-etiquette/</link>
+      <description>Understand floor calls, chip declarations, the clock and spectator boundaries without judging an entire live hand from a short edited clip.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/table-etiquette/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Which kind of tournament is this?</title>
+      <link>https://nolankido.com/poker/tournament-formats/</link>
+      <description>Decode fixed, progressive and mystery bounties, equal-seat satellites and structure sheets so that the same chips do not imply the same prize.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournament-formats/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>How a tournament unfolds.</title>
+      <link>https://nolankido.com/poker/tournaments/</link>
+      <description>Understand the changing blinds, the money bubble, re-entries, and the difference between a large chip stack and a cash result.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournaments/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
+      <title>Questions new viewers ask.</title>
+      <link>https://nolankido.com/poker/viewer-questions/</link>
+      <description>Read the player, action, pot, and call amount in a poker graphic. Find a specific hand or companion and keep later commentary separate from the record.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/viewer-questions/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+  </channel>
+</rss>

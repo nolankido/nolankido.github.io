@@ -11,7 +11,7 @@ from pathlib import Path
 import re
 
 INTERESTS = {'technology': 'Technology', 'living-well': 'Living Well', 'poker': 'Poker', 'creative': 'Creative Work'}
-EXCLUDED = {'home', 'find', 'about', 'bio', 'contact', 'privacy', 'card', '404', 'start-here', 'notes', 'resources',
+EXCLUDED = {'home', 'find', 'follow', 'about', 'bio', 'contact', 'privacy', 'card', '404', 'start-here', 'notes', 'resources',
             'living-well-field-notes', 'living-well-editorial-standards', 'living-well-sources', 'poker-find', 'living-well-find'}
 
 
