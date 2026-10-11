@@ -16,7 +16,7 @@ class Links(HTMLParser):
         self.feed(html)
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
-        if tag == 'a' and 'destination' in values.get('class', '').split():
+        if tag == 'a' and 'destination-action' in values.get('class', '').split():
             self.destinations.append(values['href'])
 
 class GatewayTests(unittest.TestCase):
@@ -52,7 +52,8 @@ class GatewayTests(unittest.TestCase):
         self.assertIn('href="/technology/task-brief/"', technology)
         self.assertIn('/notes/trustworthy-tools/', technology)
         self.assertIn('/resources/#tool-trust-check', technology)
-        self.assertIn('Start with selected writing on explanation', creative)
+        self.assertIn('Start with one person and one thing worth sharing.', creative)
+        self.assertIn('href="/downloads/creative-brief.txt" download', creative)
         self.assertIn('/notes/generous-explanations/', creative)
         self.assertIn('/notes/finishing-is-a-decision/', creative)
         for page in [technology, creative]:

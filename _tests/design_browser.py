@@ -92,17 +92,17 @@ try:
                 assert poker['x'] < creative['x'], ('secondary-order', width)
             else:
                 assert poker['y'] + poker['height'] <= creative['y'], ('mobile-order', width)
-            page.locator('.destination-technology').click()
+            page.locator('.destination-technology .destination-action').click()
             assert page.url.endswith('/technology/')
             page.locator('a[href="/notes/trustworthy-tools/"]').click()
             assert page.url.endswith('/notes/trustworthy-tools/')
             page.goto(base)
-            page.locator('.destination-creative').click()
+            page.locator('.destination-creative .destination-action').click()
             assert page.url.endswith('/creative/')
             page.locator('a[href="/notes/generous-explanations/"]').click()
             assert page.url.endswith('/notes/generous-explanations/')
         page.goto(base)
-        page.locator('.destination-poker').click()
+        page.locator('.destination-poker .destination-action').click()
         assert page.url.endswith('/poker/')
         # Hand review now belongs to the homepage's Study task, not the
         # subject navigation. Keep testing the real one-click reader route.

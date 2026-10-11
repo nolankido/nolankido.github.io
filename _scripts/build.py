@@ -110,6 +110,8 @@ def build_outputs() -> dict[Path, str]:
     identity_config = identity.load(ROOT, pages)
     entry_config = entrypoints.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
+    # Keep the visible planning-sheet preview identical to its downloadable source.
+    values['creative_brief'] = text((ROOT / 'downloads/creative-brief.txt').read_text(encoding='utf-8'))
     values['site_find_index'] = site_find.render(site_find.entries(ROOT, pages))
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
     values['interest_entrypoints'] = entrypoints.interest_cards(entry_config, pages)
@@ -231,6 +233,9 @@ def build_outputs() -> dict[Path, str]:
             for asset, kind in [('site-find.css', 'style'), ('site-find.js', 'script')]:
                 version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
                 extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style' else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
+        if p['id'] in {'home', 'creative'}:
+            starts_version = hashlib.sha256((ROOT / 'assets/first-steps.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/first-steps.css?v={starts_version}">'
         if p['id'] == 'task-brief':
             for asset, kind in [('task-brief.css', 'style'), ('task-brief.js', 'script')]:
                 version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
