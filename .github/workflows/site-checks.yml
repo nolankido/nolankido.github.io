@@ -20,6 +20,7 @@ jobs:
       - name: Check committed build and links
         run: |
           python _scripts/build.py --check
+          python _scripts/check_search.py
           python -m unittest discover -s _tests -p 'test_*.py' -v
           node --check assets/task-brief.js
           node --check assets/site-find.js
@@ -32,6 +33,19 @@ jobs:
           python -m pip install -r requirements-test.txt
           python -m playwright install --with-deps chromium
           npm install --prefix "$RUNNER_TEMP/nk-qa" --no-audit --no-fund axe-core@4.10.3
+      - name: Search and identity reader journeys
+        env:
+          AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
+          SCREENSHOT_DIR: ${{ runner.temp }}/search-identity-previews
+        run: python _tests/search_visibility_browser.py
+      - name: Save search and identity previews
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: search-identity-previews
+          path: ${{ runner.temp }}/search-identity-previews/
+          retention-days: 1
+          if-no-files-found: error
       - name: First-step journeys and creative brief
         env:
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
