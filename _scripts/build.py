@@ -39,6 +39,7 @@ import public_profile
 import font_delivery
 import page_sharing
 import ai_task_choice
+import search_entrypoints
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -82,7 +83,7 @@ def public_pages(root: Path | None = None) -> list[dict]:
     root = ROOT if root is None else root
     base = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
     pages = base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root)
-    return everyday_tasks.metadata(search_visibility.apply_policy(pages), root)
+    return search_entrypoints.metadata(everyday_tasks.metadata(search_visibility.apply_policy(pages), root), root)
 
 
 def build_outputs() -> dict[Path, str]:
@@ -335,6 +336,8 @@ def build_outputs() -> dict[Path, str]:
         body = page_sharing.decorate(body, p, site["url"])
         extra += page_sharing.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
+        header = search_entrypoints.header(p, header)
+        extra += search_entrypoints.head(p, ROOT)
         search_version = hashlib.sha256((ROOT / 'assets/search-visibility.css').read_bytes()).hexdigest()[:12]
         extra += f'\n  <link rel="stylesheet" href="/assets/search-visibility.css?v={search_version}">'
         data = {**values, 'find_current': ' aria-current="page"' if p['id'] == 'find' else '', 'social_metadata': presentation.metadata(presentation_config, p, site['url']), 'writing_current': (' aria-current="page"' if p['id'] == 'notes' else ' aria-current="location"' if p.get('note') else ''), 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),

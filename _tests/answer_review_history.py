@@ -10,6 +10,7 @@ from copy import deepcopy
 from functools import lru_cache
 import json
 import re
+import search_entry_history
 
 ROOT = Path(__file__).resolve().parents[1]
 ID = 'ai-answer-review'
@@ -27,6 +28,7 @@ def original_manifest():
 
 
 def pages(records):
+    records = search_entry_history.pages(records)
     original = original_manifest()
     result = [deepcopy(p) for p in records if p['id'] != ID]
     for p in result:
@@ -37,6 +39,7 @@ def pages(records):
 
 
 def before(path, data):
+    data = search_entry_history.before(path, data)
     path = str(path)
     binary = isinstance(data, bytes)
     if not (path.endswith('.html') or path in {'_source/pages.json', '_source/presentation.json',

@@ -61,7 +61,7 @@ class FirstStepTests(unittest.TestCase):
 
  def test_discovery_does_not_republish_articles(self):
   self.assertIn('href="/creative/#creative-brief"',self.outputs[Path('resources/index.html')])
-  self.assertIn('Use a blank creative brief',self.outputs[Path('find/index.html')])
+  self.assertIn('with a free creative brief',self.outputs[Path('find/index.html')])
   for path in ['feed.xml','writing.xml','living-well/feed.xml','poker/feed.xml']:
    self.assertNotIn('creative-brief',self.outputs[Path(path)])
 

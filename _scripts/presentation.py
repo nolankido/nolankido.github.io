@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 import struct
+import reader_previews
 
 
 def publication(page: dict) -> str:
@@ -20,6 +21,7 @@ def load(root: Path, pages: list[dict]) -> dict:
     config = json.loads((root / '_source/presentation.json').read_text(encoding='utf-8'))
     if not isinstance(config, dict) or not isinstance(config.get('pages'), dict):
         raise ValueError('Presentation needs a default card and page overrides')
+    config['pages'].update(reader_previews.load(root, pages, set(config['pages'])))
     ids = {p['id'] for p in pages}
     if not set(config['pages']).issubset(ids):
         raise ValueError('Sharing card must belong to a published page')

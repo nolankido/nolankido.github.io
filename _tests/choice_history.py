@@ -5,10 +5,11 @@ also pins the actual pre-release inputs and checks the complete new behaviour.
 """
 from pathlib import Path
 import answer_review_history
+import search_entry_history
 import json,re
 ROOT=Path(__file__).resolve().parents[1]
 ROUTE='/technology/should-i-use-ai/'
-NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html',answer_review_history.SOURCE}
+NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html',answer_review_history.SOURCE} | search_entry_history.NEW_SOURCES
 NEW_OUTPUT='technology/should-i-use-ai/index.html'
 NEW_OUTPUTS={NEW_OUTPUT,answer_review_history.OUTPUT}
 
