@@ -1,0 +1,42 @@
+AI ANSWER REVIEW RECORD
+Nolan Kido
+Guide: https://nolankido.com/technology/check-ai-answers/
+
+Keep this copy privately in your own notes. Do not put private answers in a
+public repository. This is a thinking aid, not an automatic accuracy test.
+
+1. NAME THE USE
+What would I do with this answer?
+Which parts could change an action, commitment, amount, or conclusion?
+What would happen if those parts were wrong?
+
+2. CHOOSE THE RELEVANT CHECKS
+An answer can need several checks.
+- Facts/citations: locate the real source, supporting passage, scope and date.
+- Numbers: verify inputs and units; recompute the full calculation separately.
+- Summary: preserve the source's meaning, conditions, uncertainty and ownership.
+- Writing: verify facts, voice, requests and promises; separate draft from send.
+- Code/website: test distinguishing cases and failures; check the released version.
+- Personal advice: separate verified facts, predictions and assumed priorities.
+
+3. RECORD ONE IMPORTANT CLAIM AT A TIME
+Exact claim or behavior:
+Evidence outside the AI answer (source/passages, original material or test):
+Date/version/context of that evidence:
+Independent check actually performed:
+Observed result:
+Remaining unknowns or limits:
+Change needed:
+
+Repeat section 3 for each consequential claim. A second AI agreeing is not
+independent evidence that the claim is true.
+
+4. DECIDE THE NEXT STEP
+Named part and purpose I am prepared to use:
+Parts to revise, leave unused or investigate further:
+Who needs to review or approve any consequential decision or external action?
+What would make me revisit this result?
+
+A check supports only the claim, inputs, scope and version it actually tested.
+A faithful summary can preserve an inaccurate source. Correct arithmetic can
+use incorrect inputs. A reviewed draft is not permission to send or publish.

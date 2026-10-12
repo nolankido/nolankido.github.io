@@ -6,7 +6,7 @@
     "seo_title": "Nolan Kido | Practical AI, Useful Things & a Good Life",
     "description": "A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.",
     "source": "home.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-12"
   },
   {
     "id": "start-here",
@@ -66,7 +66,7 @@
     "description": "Guides, private worksheets, study materials, and outside resources across practical AI, Living Well, poker, and creative work. Choose a useful starting point.",
     "kicker": "Resources",
     "source": "resources.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-12"
   },
   {
     "id": "contact",
@@ -211,7 +211,7 @@
     "description": "Use AI for real tasks without handing over your judgment. Try a free task brief builder, inspect worked examples, and check whether a workflow actually helps.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-12"
   },
   {
     "id": "creative",
@@ -1031,5 +1031,17 @@
     "source": "technology/should-i-use-ai.html",
     "date": "2026-10-12",
     "worked_guide": true
+  },
+  {
+    "id": "ai-answer-review",
+    "path": "/technology/check-ai-answers/",
+    "title": "How to check an AI answer.",
+    "seo_title": "How to Check AI Answers: Facts, Math & Code | Nolan Kido",
+    "description": "Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.",
+    "kicker": "Practical AI / Verification",
+    "source": "technology/check-ai-answers.html",
+    "section": "technology",
+    "worked_guide": true,
+    "date": "2026-10-12"
   }
 ]

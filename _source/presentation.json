@@ -27,6 +27,10 @@
     "ai-website-verification": {
       "src": "/assets/social/checking-ai-website-changes.png",
       "alt": "A passing test is not the whole check. A recorded website repair by Nolan Kido, with evidence."
+    },
+    "ai-answer-review": {
+      "src": "/assets/social/check-ai-answers.png",
+      "alt": "Check the answer. Keep the evidence. A practical guide by Nolan Kido to reviewing AI facts, numbers, summaries, writing, code and advice."
     }
   }
 }

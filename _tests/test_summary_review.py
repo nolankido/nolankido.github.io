@@ -24,13 +24,13 @@ class SummaryReviewTests(unittest.TestCase):
  def test_every_original_article_identity_and_private_boundary_stay_intact(self):
   records=[(p.relative_to(ROOT).as_posix(),digest(choice_history.before(p.relative_to(ROOT),p.read_bytes()))) for p in sorted((ROOT/'_source').rglob('*')) if p.is_file() and p.relative_to(ROOT).as_posix() not in EXCLUDE_SOURCES | choice_history.NEW_SOURCES]
   records.sort(key=lambda x:x[0]);self.assertEqual(len(records),self.baseline['source_count']);self.assertEqual(signature(records),self.baseline['source_digest'])
-  pages=json.loads((ROOT/'_source/pages.json').read_text());pages=[p for p in pages if p['id'] not in {'ai-summary-review','ai-task-choice'}]
+  pages=json.loads(choice_history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text()));pages=[p for p in pages if p['id'] not in {'ai-summary-review','ai-task-choice'}]
   self.assertEqual(digest(json.dumps(pages,sort_keys=True).encode()),self.baseline['manifest_digest'])
  def test_164_original_page_bodies_are_identical(self):
   records=[]
   for p,raw in sorted(self.outputs.items()):
-   if p.suffix=='.html' and p.as_posix() not in EXCLUDE_BODIES and p.as_posix()!=choice_history.NEW_OUTPUT:
-    records.append((p.as_posix(),digest(re.search(rb'<body\b[^>]*>(.*?)</body>',raw.encode(),re.S)[1])))
+   if p.suffix=='.html' and p.as_posix() not in EXCLUDE_BODIES and p.as_posix() not in choice_history.NEW_OUTPUTS:
+    records.append((p.as_posix(),digest(re.search(rb'<body\b[^>]*>(.*?)</body>',choice_history.before(p,raw.encode()),re.S)[1])))
   records.sort(key=lambda x:x[0]);self.assertEqual(len(records),self.baseline['body_count']);self.assertEqual(signature(records),self.baseline['body_digest'])
  def test_every_historical_feed_item_is_preserved_exactly(self):
   for path,expected in self.baseline['feeds'].items():

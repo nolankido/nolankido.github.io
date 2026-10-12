@@ -21,11 +21,11 @@ def main():
     parser.add_argument('--regular', default='DejaVuSans.ttf')
     parser.add_argument('--bold', default='DejaVuSans-Bold.ttf')
     parser.add_argument('--serif', default='DejaVuSerif.ttf')
-    parser.add_argument('--only', nargs='+', choices=['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes'], help='Render selected cards without changing other approved images')
+    parser.add_argument('--only', nargs='+', choices=['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes', 'check-ai-answers'], help='Render selected cards without changing other approved images')
     args = parser.parse_args()
     fonts = {'regular': args.regular, 'bold': args.bold, 'serif': args.serif}
     out = ROOT / 'assets/social'; out.mkdir(parents=True, exist_ok=True)
-    for name in (args.only or ['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes']):
+    for name in (args.only or ['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes', 'check-ai-answers']):
         image = Image.new('RGB', (1200, 630), PAPER)
         draw = ImageDraw.Draw(image)
         draw.line((56, 48, 56, 580), fill=ACCENT, width=3)
@@ -77,6 +77,12 @@ def main():
             text(94, 284, 'is not the whole check.', 68, 'bold')
             text(94, 419, 'A recorded website repair, with evidence.', 30, 'serif')
             text(94, 528, 'nolankido.com/technology/checking-ai-website-changes', 23, color=MUTED)
+        elif name == 'check-ai-answers':
+            text(94, 72, 'A PRACTICAL GUIDE / NOLAN KIDO', 23, color=MUTED)
+            text(94, 178, 'Check the answer.', 72, 'bold')
+            text(94, 284, 'Keep the evidence.', 72, 'bold')
+            text(94, 419, 'Facts. Numbers. Summaries. Writing. Code. Advice.', 27, 'serif')
+            text(94, 528, 'nolankido.com/technology/check-ai-answers', 25, color=MUTED)
         image = image.quantize(colors=32)
         image.save(out / (name + '.png'), optimize=True)
         print(name, (out / (name + '.png')).stat().st_size)

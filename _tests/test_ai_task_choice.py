@@ -9,6 +9,7 @@ import json,re,struct,subprocess,sys,unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,ai_task_choice,check_live
+import answer_review_history
 from test_site import Page
 ID='ai-task-choice'
 PATH='/technology/should-i-use-ai/'
@@ -20,6 +21,7 @@ def signature(el):
     return [el.tag,[list(a) for a in sorted(el.attrib.items())],(el.text or '').strip(),[signature(c) for c in el]]
 
 def original_source(path,raw):
+    raw=answer_review_history.before(path,raw)
     if path in {'_source/technology/home.html','_source/resources.html'}:
         return ADDITION.sub('',raw.decode()).encode()
     if path=='_source/layout.html':
@@ -67,10 +69,10 @@ class TaskChoiceTests(unittest.TestCase):
             raw=original_source(path,(ROOT/path).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(),expected,path)
     def test_original_page_identity_dates_and_feed_records_are_preserved(self):
-        now=json.loads((ROOT/'_source/pages.json').read_text())
+        now=json.loads(answer_review_history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text()))
         self.assertEqual([p for p in now if p['id']!=ID],self.baseline['manifest'])
         for path,old in self.baseline['feeds'].items():
-            channel=ET.fromstring((ROOT/path).read_text()).find('channel')
+            channel=ET.fromstring(answer_review_history.before(path,(ROOT/path).read_text())).find('channel')
             items={i.findtext('guid'):signature(i) for i in channel.findall('item')}
             allowed='https://nolankido.com'+PATH
             self.assertEqual({k:v for k,v in items.items() if k!=allowed},old['items'],path)
@@ -80,7 +82,7 @@ class TaskChoiceTests(unittest.TestCase):
         # remain exact after removing the two explicitly marked hub additions.
         self.assertEqual(len(self.baseline['bodies']),167)
         for path,expected in self.baseline['bodies'].items():
-            body=re.search(r'<body\b[^>]*>(.*?)</body>',self.outputs[Path(path)],re.S)[1]
+            body=re.search(r'<body\b[^>]*>(.*?)</body>',answer_review_history.before(path,self.outputs[Path(path)]),re.S)[1]
             self.assertEqual(sha256(ADDITION.sub('',body).encode()).hexdigest(),expected,path)
     def test_historical_adapter_reverses_only_reviewed_additions(self):
         import choice_history

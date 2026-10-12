@@ -1,0 +1,19 @@
+/* AI answer review guide. Keep shared identity and typography unchanged. */
+.page-ai-answer-review .review-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin: 1.5rem 0; }
+.page-ai-answer-review .review-picker a { display: flex; flex-direction: column; justify-content: center; gap: .35rem; border: 1px solid var(--line); padding: 1rem; min-height: 88px; text-decoration: none; }
+.page-ai-answer-review .review-picker a:hover { border-color: var(--red); }
+.page-ai-answer-review .review-kind { font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
+.page-ai-answer-review .review-picker a > span:last-child { font-size: .9rem; color: var(--ink-soft); }
+.page-ai-answer-review .review-boundary { border-left: 3px solid var(--red); padding: .6rem 1rem; }
+.page-ai-answer-review .review-steps { padding-left: 1.5rem; }
+.page-ai-answer-review .review-steps li { margin: .65rem 0; padding-left: .2rem; }
+.page-ai-answer-review .review-example { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: .9rem 0; margin: 1.3rem 0; }
+.page-ai-answer-review .review-example summary,
+.page-ai-answer-review .review-sheet summary { cursor: pointer; font-weight: 600; line-height: 1.5; min-height: 44px; padding: .55rem 0; }
+.page-ai-answer-review .review-example[open] summary { margin-bottom: 1rem; }
+.page-ai-answer-review .review-calculation { border-left: 3px solid var(--red); padding-left: 1rem; }
+.page-ai-answer-review .review-calculation p { margin: .5rem 0; }
+.page-ai-answer-review pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9rem; padding: 1rem; max-width: 100%; }
+.page-ai-answer-review [id] { scroll-margin-top: 2rem; }
+@media (max-width: 560px) { .page-ai-answer-review .review-picker { grid-template-columns: minmax(0, 1fr); } }
+@media print { .page-ai-answer-review .review-picker { display: none; } .page-ai-answer-review .review-example { break-inside: avoid; } }

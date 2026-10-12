@@ -128,6 +128,7 @@ def build_outputs() -> dict[Path, str]:
     values['ai_choice_questions'] = ai_task_choice.questions(ROOT)
     values['ai_choice_sheet'] = text((ROOT / ai_task_choice.SHEET).read_text(encoding='utf-8'))
     values['summary_review_sheet'] = text((ROOT / 'downloads/ai-summary-review.txt').read_text(encoding='utf-8'))
+    values['answer_review_sheet'] = text((ROOT / 'downloads/ai-answer-review.txt').read_text(encoding='utf-8'))
     values['creative_brief'] = text((ROOT / 'downloads/creative-brief.txt').read_text(encoding='utf-8'))
     values['site_find_index'] = site_find.render(site_find.entries(ROOT, pages))
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
@@ -309,6 +310,9 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] == 'ai-summary-review':
             version = hashlib.sha256((ROOT / 'assets/summary-review.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/summary-review.css?v={version}">'
+        if p['id'] == 'ai-answer-review':
+            version = hashlib.sha256((ROOT / 'assets/answer-review.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/answer-review.css?v={version}">'
         if p['id'] == 'ai-time-savings':
             version = hashlib.sha256((ROOT / 'assets/workflow-time.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script defer src="/assets/workflow-time.js?v={version}"></script>'

@@ -4,13 +4,16 @@ No historical digest is refreshed. The independent test_ai_task_choice contract
 also pins the actual pre-release inputs and checks the complete new behaviour.
 """
 from pathlib import Path
+import answer_review_history
 import json,re
 ROOT=Path(__file__).resolve().parents[1]
 ROUTE='/technology/should-i-use-ai/'
-NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html'}
+NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html',answer_review_history.SOURCE}
 NEW_OUTPUT='technology/should-i-use-ai/index.html'
+NEW_OUTPUTS={NEW_OUTPUT,answer_review_history.OUTPUT}
 
 def before(path,data):
+    data=answer_review_history.before(path,data)
     path=str(path)
     binary=isinstance(data,bytes)
     if not (path.endswith('.html') or path in {'_source/pages.json','technology/feed.xml','writing.xml','sitemap.xml'}):return data
