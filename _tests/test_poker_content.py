@@ -1,4 +1,5 @@
 """Public catalog and baseline contracts. All invented records stay in temp files."""
+import choice_history
 from contextlib import contextmanager
 from copy import deepcopy
 from datetime import date
@@ -195,7 +196,7 @@ class PokerContentTests(unittest.TestCase):
         paths = BASELINE_PATHS
         digester=hashlib.sha256()
         for path in paths:
-            digester.update(path.encode()+b'\0'+(ROOT/path).read_bytes()+b'\0')
+            digester.update(path.encode()+b'\0'+choice_history.read(path)+b'\0')
         self.assertEqual(digester.hexdigest(),BASELINE_DIGEST)
         self.assertNotIn('/assets/poker.css',build.build_outputs()[Path('index.html')])
 

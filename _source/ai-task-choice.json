@@ -1,0 +1,100 @@
+[
+  {
+    "id": "goal",
+    "title": "Can you describe a useful finished result?",
+    "help": "Name something you could inspect, such as a draft agenda with no invented decisions.",
+    "options": [
+      [
+        "clear",
+        "Yes, I know what I need"
+      ],
+      [
+        "unclear",
+        "Not yet"
+      ]
+    ]
+  },
+  {
+    "id": "inputs",
+    "title": "Can these inputs be used in the tool you would choose?",
+    "help": "Consider permission, confidentiality and the service or account rules. Do not paste the material here.",
+    "options": [
+      [
+        "allowed",
+        "I have checked permission and the tool rules"
+      ],
+      [
+        "restricted",
+        "No, this material cannot be shared there"
+      ],
+      [
+        "unknown",
+        "I am not sure"
+      ]
+    ]
+  },
+  {
+    "id": "stakes",
+    "title": "Would a wrong result be easy to catch and undo?",
+    "help": "Use this guide for everyday, low-consequence tasks only. A decision affecting health, safety, rights, significant money or other people may need qualified review.",
+    "options": [
+      [
+        "low",
+        "Yes, this is a low-consequence, reversible task"
+      ],
+      [
+        "high",
+        "No, or I am unsure about the consequences"
+      ]
+    ]
+  },
+  {
+    "id": "review",
+    "title": "Can you check the important parts without trusting the same answer?",
+    "help": "For example, compare against the original notes, recalculate independently, or use a reviewer with the right expertise. Asking AI to agree with itself is not that check.",
+    "options": [
+      [
+        "ready",
+        "Yes, a specific independent check is available"
+      ],
+      [
+        "missing",
+        "No, or the check is not arranged yet"
+      ]
+    ]
+  },
+  {
+    "id": "simpler",
+    "title": "Would a simpler method already do the job?",
+    "help": "A search, checklist, spreadsheet formula or direct conversation may be enough. Include the work of reviewing an AI result in the comparison.",
+    "options": [
+      [
+        "yes",
+        "Yes, a simpler method is adequate"
+      ],
+      [
+        "no",
+        "No, there is a specific reason to try AI"
+      ],
+      [
+        "unknown",
+        "I have not compared them"
+      ]
+    ]
+  },
+  {
+    "id": "scope",
+    "title": "Would AI only prepare something for your review?",
+    "help": "Separate suggesting or drafting from sending, spending, deleting, publishing or making commitments.",
+    "options": [
+      [
+        "draft",
+        "Yes, it would produce a draft or suggestions only"
+      ],
+      [
+        "action",
+        "No, it would also act or change something"
+      ]
+    ]
+  }
+]

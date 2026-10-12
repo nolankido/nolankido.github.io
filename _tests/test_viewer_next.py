@@ -1,4 +1,5 @@
 """Independent checks for the new viewer explanations and unchanged public baseline."""
+import choice_history
 from fractions import Fraction
 from itertools import combinations
 from pathlib import Path
@@ -63,7 +64,7 @@ class ViewerNextTests(unittest.TestCase):
     def test_previous_content_and_design_are_unchanged(self):
         for path,digest in PROTECTED.items():
             with self.subTest(path=path):
-                self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),digest)
+                self.assertEqual(hashlib.sha256(choice_history.read(path)).hexdigest(),digest)
         self.assertEqual(self.outputs[Path('index.html')],(ROOT/'index.html').read_text())
 
     def test_twenty_four_new_disclosures_are_closed(self):

@@ -1,4 +1,5 @@
 """Reader routes are deliberate curation, not new claims or duplicate articles."""
+import choice_history
 from copy import deepcopy
 from html import escape
 from pathlib import Path
@@ -95,7 +96,7 @@ class EntryPointTests(unittest.TestCase):
     def test_preserved_sources_assets_feeds_and_article_dates(self):
         preserved = json.loads((ROOT / '_tests/entrypoints-baseline.json').read_text())
         for path, digest in preserved['files'].items():
-            self.assertEqual(hashlib.sha256((ROOT / path).read_bytes()).hexdigest(), digest, path)
+            self.assertEqual(hashlib.sha256(choice_history.read(path)).hexdigest(), digest, path)
         for directory, digest in preserved['collections'].items():
             actual = hashlib.sha256()
             for file in sorted((ROOT / directory).rglob('*')):

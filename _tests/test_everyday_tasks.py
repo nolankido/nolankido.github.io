@@ -1,4 +1,5 @@
 """Reader task routes, exact portable worksheets, and bounded metadata changes."""
+import choice_history
 from copy import deepcopy
 from html import escape
 from html.parser import HTMLParser
@@ -37,8 +38,8 @@ class EverydayTasksTests(unittest.TestCase):
     def test_exact_original_source_and_feed_preservation(self):
         for path, expected in self.baseline['files'].items():
             with self.subTest(path=path):
-                self.assertEqual(hashlib.sha256((ROOT / path).read_bytes()).hexdigest(), expected)
-        self.assertEqual([{k:p.get(k) for k in ('id','path','title','date','updated','noindex')} for p in self.pages], self.baseline['pages'])
+                self.assertEqual(hashlib.sha256(choice_history.read(path)).hexdigest(), expected)
+        self.assertEqual([{k:p.get(k) for k in ('id','path','title','date','updated','noindex')} for p in self.pages if p['id'] != 'ai-task-choice'], self.baseline['pages'])
 
     def test_seven_existing_tasks_and_eight_specific_search_titles(self):
         self.assertEqual(len(self.config['tasks']), 7)

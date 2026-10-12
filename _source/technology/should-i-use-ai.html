@@ -1,0 +1,48 @@
+<section class="section folio-row" aria-labelledby="choice-start"><div class="section-meta"><p class="section-label">Choose / Bound / Check</p></div><div class="section-content prose">
+<h2 class="intro" id="choice-start">A better prompt is not always the next step.</h2>
+<p>Consider AI when you have a clear task, suitable inputs, a way to check the result, and a reason not to use a simpler method. Otherwise, fix the missing condition first. Sometimes the useful decision is to leave AI out.</p>
+<p>This guide turns that judgment into six questions and a suggested next step. <strong>No AI runs here.</strong> The optional check uses fixed rules, not a model or a risk score. It does not inspect your material, check permissions for you, or approve a tool.</p>
+<nav class="choice-jumps" aria-label="Decision guide sections"><a href="#choice-workspace">Check a task</a><a href="#choice-method">Read the rules</a><a href="#choice-examples">Compare examples</a><a href="#choice-worksheet">Keep the worksheet</a></nav>
+</div></section>
+<section class="section folio-row" aria-labelledby="choice-workspace"><div class="section-meta"><p class="section-label">Six questions / No personal text</p></div><div class="section-content">
+<h2 class="section-title" id="choice-workspace">Start with the task you have in mind.</h2>
+<p class="section-deck">Choose one answer in each group. You do not need to describe your task or upload a document. Answers stay in this page's memory and clear when you reset or leave.</p>
+<p id="choice-fallback">The optional interactive check needs JavaScript. The complete rules, worked examples and blank worksheet below work without it.</p>
+<form id="choice-form" hidden novalidate aria-label="Should I use AI for this task?">
+<div class="choice-questions">${ai_choice_questions}</div>
+<p id="choice-error" role="status" aria-live="polite" aria-atomic="true"></p>
+<div class="choice-actions"><button class="button" type="submit">Show my next step</button><button class="button" type="reset">Clear answers</button></div>
+<p class="small-copy">This is an editorial thinking aid for low-consequence everyday tasks, not a validated assessment or professional advice. No result confirms that a task, service or automatic action is safe.</p>
+</form>
+<section id="choice-result" class="choice-result" aria-labelledby="choice-result-title" hidden>
+<p class="section-label">Your answers / Suggested next step</p><h3 id="choice-result-title" tabindex="-1"></h3><p id="choice-next"></p>
+<h4>What to resolve</h4><ul id="choice-reasons"></ul><p id="choice-boundary"></p><p id="choice-route"></p>
+<p class="small-copy">This follows your selected answers only. It is not independent verification, a measured benefit, or permission from anyone affected.</p>
+</section>
+</div></section>
+<section class="section folio-row" aria-labelledby="choice-method"><div class="section-meta"><p class="section-label">An inspectable method</p></div><div class="section-content prose">
+<h2 id="choice-method">Use the first unresolved condition, not a score.</h2>
+<p>A clear purpose cannot compensate for confidential inputs. Many easy questions cannot cancel one serious consequence. The check therefore uses the following order and still lists every caution that applies.</p>
+<ol class="choice-rules">
+<li><strong>Pause when inputs or consequences are unresolved.</strong> If the material is restricted or permission is unknown, do not put it into the proposed tool. If an error could have serious consequences, keep the decision with the appropriate person and arrange qualified review. This guide is not a route to approving high-stakes automation.</li>
+<li><strong>Prepare before delegating.</strong> If you cannot name a useful result or an independent check, arrange those first. For a summary, keep the original notes and compare the important claims. For unfamiliar specialist work, a fluent answer is not a substitute for a reviewer who understands it.</li>
+<li><strong>Prefer an adequate simpler method.</strong> Use an existing checklist, search, calculation or conversation when it already meets the need. If you have not compared methods, try the ordinary approach before calling the AI version a saving.</li>
+<li><strong>Limit actions, then consider a small trial.</strong> Keep sending, spending, deleting and publishing outside the trial. When the other conditions are met, ask for one draft or a few suggestions you can check before using them. Keep the original, define a stop condition, and count review and repair time.</li>
+</ol>
+<p><strong>Scope matters:</strong> an AI draft can help prepare for a conversation, but it cannot supply another person's agreement. Passing these six questions also does not prove completeness, eliminate bias, or establish that AI will save time. The questions are prompts for your judgment, not a replacement for it.</p>
+</div></section>
+<section class="section folio-row" aria-labelledby="choice-examples"><div class="section-meta"><p class="section-label">Fictional worked examples</p></div><div class="section-content prose">
+<h2 id="choice-examples">Similar-looking tasks can need different answers.</h2>
+<article class="choice-example"><h3>Summarize public event notes into a draft agenda.</h3><p>The source is public, the output is a private draft, and its claims can be checked against the notes. The useful result is a short agenda that preserves open questions. Suppose a manual pass was awkward enough to justify a small experiment.</p><p><strong>Suggested route: try a bounded draft.</strong> Ask for one version without invented owners or dates, then compare it with the source. Keep it a draft until a person reviews it. The <a href="/technology/check-ai-summary/">source-to-summary exercise</a> shows what that review can catch.</p></article>
+<article class="choice-example"><h3>Add known amounts in a list.</h3><p>The inputs are permitted and the result is checkable, but an ordinary spreadsheet formula already produces the required total.</p><p><strong>Suggested route: use the simpler method.</strong> There is no need to add a generative step to this particular calculation. AI might help explain an unfamiliar formula, but that is a different task with its own check.</p></article>
+<article class="choice-example"><h3>Draft invitations from private messages.</h3><p>The planned output is only a draft, but nobody has confirmed that the messages may be used in the proposed AI account. Being able to review the wording does not resolve the permission question.</p><p><strong>Suggested route: pause.</strong> Do not upload the messages. Ask about permission and account rules, or start a new task using material you are entitled to use. Removing a name alone does not establish that the remaining content may be shared.</p></article>
+<article class="choice-example"><h3>Let a tool email an already reviewed announcement.</h3><p>Assume the content, audience, permissions and consequences have been checked. Sending is still a separate action from drafting.</p><p><strong>Suggested route: limit AI to preparation.</strong> Keep the final recipient and send decision with a person. This check does not authorize external actions, even when the text looks ready.</p></article>
+</div></section>
+<section class="section folio-row" aria-labelledby="choice-worksheet"><div class="section-meta"><p class="section-label">Keep the decision</p></div><div class="section-content prose">
+<h2 id="choice-worksheet">Record the boundary before the prompt.</h2><p>A useful record states what the tool may prepare, what it must not do, how the output will be checked, and when to stop. Keep your completed version in your own notes.</p>
+<p><a class="text-link" href="/downloads/should-i-use-ai.txt" download>Download the blank AI task decision worksheet (.txt)</a></p>
+<details class="choice-sheet"><summary>Read the complete blank worksheet</summary><pre>${ai_choice_sheet}</pre></details>
+<h3>When a bounded trial makes sense</h3><p><a href="/technology/task-brief/">Build the task brief</a>, <a href="/technology/check-ai-summary/">practice checking a summary</a>, then <a href="/technology/ai-time-savings/">count the whole workflow's time</a>. These steps answer different questions: what to delegate, whether the output matches its source, and whether the effort was worthwhile.</p>
+<p class="editorial-note">Prepared with AI assistance. This rule-based decision guide and its examples are authored teaching material, not a validated assessment, a captured AI experiment, or a report of Nolan's personal results.</p>
+<p class="small-copy"><strong>Broader background:</strong> <a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer">NIST's AI Risk Management Framework</a> addresses managing risks and considering trustworthiness in AI use and evaluation. This small editorial guide is not a NIST assessment, certification, or implementation of that framework.</p>
+</div></section>

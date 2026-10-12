@@ -1,0 +1,22 @@
+.page-ai-task-choice .choice-questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+.page-ai-task-choice fieldset{min-width:0;margin:0;padding:1.1rem;border:1px solid var(--line)}
+.page-ai-task-choice legend{font-weight:600;padding:0 .3rem;max-width:100%;font-size:1.06rem}
+.page-ai-task-choice .choice-help{font-size:.95rem;line-height:1.6;margin:0 0 .8rem}
+.page-ai-task-choice fieldset label{display:flex;align-items:flex-start;gap:.65rem;min-height:44px;padding:.55rem .3rem;font-size:1rem;line-height:1.55;cursor:pointer}
+.page-ai-task-choice input[type=radio]{flex:none;margin-top:.32rem;width:1.1rem;height:1.1rem;accent-color:var(--basalt)}
+.page-ai-task-choice input:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page-ai-task-choice [aria-invalid=true]{outline:2px solid currentColor;outline-offset:4px}
+.page-ai-task-choice .choice-actions,.page-ai-task-choice .choice-jumps{display:flex;flex-wrap:wrap;gap:.6rem 1rem;margin:1.2rem 0}
+.page-ai-task-choice .choice-actions button,.page-ai-task-choice .choice-jumps a{min-height:44px}
+.page-ai-task-choice .choice-actions button{font:inherit;cursor:pointer}
+.page-ai-task-choice .choice-result{border:2px solid var(--basalt);padding:1.3rem;margin-top:1.5rem;scroll-margin-top:2rem}
+.page-ai-task-choice .choice-result h3{font-size:clamp(1.4rem,3vw,1.9rem)}
+.page-ai-task-choice .choice-result h4{font-size:1rem;margin-top:1rem}
+.page-ai-task-choice .choice-result li,.page-ai-task-choice .choice-rules li{padding:.4rem 0}
+.page-ai-task-choice .choice-example{border-top:1px solid var(--line);padding-top:1.1rem;margin-top:1.3rem}
+.page-ai-task-choice pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem;line-height:1.65}
+.page-ai-task-choice .choice-sheet summary{cursor:pointer;min-height:44px;padding:.8rem 0;font-weight:600}
+#choice-form[hidden],#choice-result[hidden],#choice-fallback[hidden]{display:none!important}
+.page-ai-task-choice #choice-error{font-weight:600}
+@media(max-width:720px){.page-ai-task-choice .choice-questions{grid-template-columns:1fr}}
+@media print{.page-ai-task-choice #choice-form,.page-ai-task-choice .choice-jumps,.page-ai-task-choice #choice-error{display:none!important}.page-ai-task-choice .folio-row{display:block}.page-ai-task-choice .section-meta{display:none}.page-ai-task-choice .choice-result{break-inside:avoid}.page-ai-task-choice details>pre{display:block!important}}

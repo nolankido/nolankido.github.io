@@ -1,4 +1,5 @@
 """Summary review content, truthful publication type, and independent preservation."""
+import choice_history
 from pathlib import Path
 from html import unescape
 from copy import deepcopy
@@ -21,19 +22,19 @@ class SummaryReviewTests(unittest.TestCase):
   cls.pages=build.public_pages();cls.outputs=build.build_outputs();cls.html=cls.outputs[build.output_path(ROUTE)]
   cls.baseline=json.loads((ROOT/'_tests/summary-review-baseline.json').read_text())
  def test_every_original_article_identity_and_private_boundary_stay_intact(self):
-  records=[(p.relative_to(ROOT).as_posix(),digest(p.read_bytes())) for p in sorted((ROOT/'_source').rglob('*')) if p.is_file() and p.relative_to(ROOT).as_posix() not in EXCLUDE_SOURCES]
+  records=[(p.relative_to(ROOT).as_posix(),digest(choice_history.before(p.relative_to(ROOT),p.read_bytes()))) for p in sorted((ROOT/'_source').rglob('*')) if p.is_file() and p.relative_to(ROOT).as_posix() not in EXCLUDE_SOURCES | choice_history.NEW_SOURCES]
   records.sort(key=lambda x:x[0]);self.assertEqual(len(records),self.baseline['source_count']);self.assertEqual(signature(records),self.baseline['source_digest'])
-  pages=json.loads((ROOT/'_source/pages.json').read_text());pages=[p for p in pages if p['id']!='ai-summary-review']
+  pages=json.loads((ROOT/'_source/pages.json').read_text());pages=[p for p in pages if p['id'] not in {'ai-summary-review','ai-task-choice'}]
   self.assertEqual(digest(json.dumps(pages,sort_keys=True).encode()),self.baseline['manifest_digest'])
  def test_164_original_page_bodies_are_identical(self):
   records=[]
   for p,raw in sorted(self.outputs.items()):
-   if p.suffix=='.html' and p.as_posix() not in EXCLUDE_BODIES:
+   if p.suffix=='.html' and p.as_posix() not in EXCLUDE_BODIES and p.as_posix()!=choice_history.NEW_OUTPUT:
     records.append((p.as_posix(),digest(re.search(rb'<body\b[^>]*>(.*?)</body>',raw.encode(),re.S)[1])))
   records.sort(key=lambda x:x[0]);self.assertEqual(len(records),self.baseline['body_count']);self.assertEqual(signature(records),self.baseline['body_digest'])
  def test_every_historical_feed_item_is_preserved_exactly(self):
   for path,expected in self.baseline['feeds'].items():
-   now=feed_records(self.outputs[Path(path)]);now.pop('https://nolankido.com'+ROUTE,None)
+   now=feed_records(choice_history.before(path,self.outputs[Path(path)]));now.pop('https://nolankido.com'+ROUTE,None)
    self.assertEqual(len(now),expected['count'],path)
    self.assertEqual(digest(json.dumps(now,sort_keys=True).encode()),expected['digest'],path)
  def test_new_publication_is_once_in_each_relevant_feed(self):

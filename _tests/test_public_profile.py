@@ -1,4 +1,5 @@
 """Public introductions and preserved, ordered, cache-versioned core styling."""
+import choice_history
 from copy import deepcopy
 from hashlib import sha256
 from html import escape
@@ -33,14 +34,14 @@ class PublicProfileTests(unittest.TestCase):
     def test_original_public_body_identity_feeds_and_css_are_preserved(self):
         baseline=json.loads((ROOT/'_tests/public-profile-baseline.json').read_text())
         records=[]
-        for path in sorted((p for p in self.outputs if p.suffix=='.html' and p.as_posix() not in baseline['body_exclusions']), key=lambda p:p.as_posix()):
-            raw=self.outputs[path].encode()
+        for path in sorted((p for p in self.outputs if p.suffix=='.html' and p.as_posix() not in baseline['body_exclusions'] and p.as_posix() != choice_history.NEW_OUTPUT), key=lambda p:p.as_posix()):
+            raw=choice_history.before(path,self.outputs[path]).encode()
             body=re.search(rb'<body\b[^>]*>(.*?)</body>',raw,re.S).group(1)
             records.append((path.as_posix(),sha256(body).hexdigest()))
         self.assertEqual(len(records),baseline['unchanged_body_count'])
         self.assertEqual(sha256(json.dumps(records,separators=(',',':')).encode()).hexdigest(),baseline['unchanged_body_signature'])
         for path,digest in baseline['unchanged_files'].items():
-            self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),digest,path)
+            self.assertEqual(sha256(choice_history.read(path)).hexdigest(),digest,path)
 
     def test_biographies_are_exact_existing_identity_text(self):
         # Identity file is also pinned by the pre-existing preservation tests.

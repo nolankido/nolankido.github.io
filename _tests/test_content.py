@@ -77,6 +77,8 @@ class ContentTests(unittest.TestCase):
                 expected.insert(0, '/assets/public-profile.js?v=' + hashlib.sha256((ROOT / 'assets/public-profile.js').read_bytes()).hexdigest()[:12])
             if path == Path('technology/ai-time-savings/index.html'):
                 expected.insert(0, '/assets/workflow-time.js?v=' + hashlib.sha256((ROOT / 'assets/workflow-time.js').read_bytes()).hexdigest()[:12])
+            if path == Path('technology/should-i-use-ai/index.html'):
+                expected.insert(0, '/assets/ai-task-choice.js?v=' + hashlib.sha256((ROOT / 'assets/ai-task-choice.js').read_bytes()).hexdigest()[:12])
             if path == Path('technology/task-brief/index.html'):
                 expected.insert(0, '/assets/task-brief.js?v=' + hashlib.sha256((ROOT / 'assets/task-brief.js').read_bytes()).hexdigest()[:12])
             if path == Path('find/index.html'):
