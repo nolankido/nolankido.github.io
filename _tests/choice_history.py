@@ -1,0 +1,36 @@
+"""Reverse only this release's reviewed additions for older golden contracts.
+
+No historical digest is refreshed. The independent test_ai_task_choice contract
+also pins the actual pre-release inputs and checks the complete new behaviour.
+"""
+from pathlib import Path
+import json,re
+ROOT=Path(__file__).resolve().parents[1]
+ROUTE='/technology/should-i-use-ai/'
+NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html'}
+NEW_OUTPUT='technology/should-i-use-ai/index.html'
+
+def before(path,data):
+    path=str(path)
+    binary=isinstance(data,bytes)
+    if not (path.endswith('.html') or path in {'_source/pages.json','technology/feed.xml','writing.xml','sitemap.xml'}):return data
+    text=data.decode() if binary else data
+    text=text.replace('  <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">\n','')
+    text=text.replace('  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">\n','')
+    text=re.sub(r'<!-- AI task choice: start -->\n.*?<!-- AI task choice: end -->\n','',text,flags=re.S)
+    if path=='_source/pages.json':
+        text=json.dumps([p for p in json.loads(text) if p['id']!='ai-task-choice'],indent=2,ensure_ascii=False)+'\n'
+    if path in {'technology/feed.xml','writing.xml'}:
+        text=re.sub(r'    <item>.*?</item>\n',lambda m:'' if '<link>https://nolankido.com'+ROUTE+'</link>' in m[0] else m[0],text,flags=re.S)
+    if path=='sitemap.xml':
+        text=re.sub(r'  <url>.*?</url>\n',lambda m:'' if '<loc>https://nolankido.com'+ROUTE+'</loc>' in m[0] else m[0],text,flags=re.S)
+    if path=='notes/index.html':
+        text=re.sub(r'<article class="note-entry technology-publication">.*?</article>',lambda m:'' if 'href="'+ROUTE+'"' in m[0] else m[0],text,flags=re.S)
+    if path=='find/index.html':
+        old=text
+        text=re.sub(r'<li class="find-item".*?</li>',lambda m:'' if 'href="'+ROUTE+'"' in m[0] else m[0],text,flags=re.S)
+        if text!=old:
+            text=text.replace('id="browse-technology"><summary>Technology <span class="find-group-count" hidden>(9)</span>', 'id="browse-technology"><summary>Technology <span class="find-group-count" hidden>(8)</span>')
+    return text.encode() if binary else text
+
+def read(path):return before(path,(ROOT/path).read_bytes())

@@ -1,4 +1,5 @@
 """Feed identity, native reading controls, and unchanged public-data boundaries."""
+import choice_history
 from copy import deepcopy
 from email.utils import parsedate_to_datetime
 from html import escape
@@ -159,7 +160,7 @@ class ReadingReturnTests(unittest.TestCase):
 
     def test_shared_shell_changed_only_for_return_navigation(self):
         # This exact transform pins the existing analytics, contact and head configuration.
-        layout=(ROOT/'_source/layout.html').read_text()
+        layout=choice_history.read('_source/layout.html').decode()
         reverted=layout.replace('  <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Writing across the site" href="/writing.xml">\n','').replace('<a href="/follow/">Follow writing</a>','<a href="/feed.xml">RSS</a>')
         import hashlib
         self.assertEqual(hashlib.sha256(reverted.encode()).hexdigest(),'2c1e295caa12324de4b639701b3212358ba75a97ee72b8597a2730fd99b4d4f6')

@@ -1,4 +1,5 @@
 """Independently recompute the public time model and keep historical claims bounded."""
+import choice_history
 from fractions import Fraction
 from pathlib import Path
 from copy import deepcopy
@@ -85,7 +86,7 @@ class WorkflowEvidenceTests(unittest.TestCase):
             self.assertIn(limit,text)
     def test_home_feeds_contact_and_original_articles_are_unchanged(self):
         baseline=json.loads((ROOT/'_tests/workflow-evidence-baseline.json').read_text())
-        for p,h in baseline.items():self.assertEqual(hashlib.sha256((ROOT/p).read_bytes()).hexdigest(),h,p)
+        for p,h in baseline.items():self.assertEqual(hashlib.sha256(choice_history.read(p)).hexdigest(),h,p)
     def test_css_uses_existing_tokens(self):
         css=(ROOT/'assets/workflow-evidence.css').read_text()
         available=set(re.findall(r'(--[a-z-]+)\s*:',(ROOT/'styles.css').read_text()+(ROOT/'assets/site.css').read_text()))

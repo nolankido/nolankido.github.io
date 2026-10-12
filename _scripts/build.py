@@ -38,6 +38,7 @@ import core_styles
 import public_profile
 import font_delivery
 import page_sharing
+import ai_task_choice
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -124,6 +125,8 @@ def build_outputs() -> dict[Path, str]:
     values['everyday_task_cards'] = everyday_tasks.cards(everyday_tasks.load(ROOT, pages), living_well.load(ROOT))
     # Keep the visible planning-sheet preview identical to its downloadable source.
     values['workflow_time_sheet'] = text((ROOT / 'downloads/workflow-time-review.txt').read_text(encoding='utf-8'))
+    values['ai_choice_questions'] = ai_task_choice.questions(ROOT)
+    values['ai_choice_sheet'] = text((ROOT / ai_task_choice.SHEET).read_text(encoding='utf-8'))
     values['summary_review_sheet'] = text((ROOT / 'downloads/ai-summary-review.txt').read_text(encoding='utf-8'))
     values['creative_brief'] = text((ROOT / 'downloads/creative-brief.txt').read_text(encoding='utf-8'))
     values['site_find_index'] = site_find.render(site_find.entries(ROOT, pages))
@@ -297,6 +300,12 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] in {'ai-time-savings', 'ai-website-verification'}:
             version = hashlib.sha256((ROOT / 'assets/workflow-evidence.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/workflow-evidence.css?v={version}">'
+        if p['id'] == 'ai-task-choice':
+            for asset in ('ai-task-choice.css', 'ai-task-choice.js'):
+                version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                src = '/assets/' + asset + '?v=' + version
+                extra += ('\n  <link rel="stylesheet" href="' + src + '">' if asset.endswith('.css')
+                          else '\n  <script defer src="' + src + '"></script>')
         if p['id'] == 'ai-summary-review':
             version = hashlib.sha256((ROOT / 'assets/summary-review.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/summary-review.css?v={version}">'

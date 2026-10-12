@@ -1,4 +1,5 @@
 """Local utility contracts: deterministic output, honest scope, and fixed boundaries."""
+import choice_history
 from html import unescape
 from pathlib import Path
 import hashlib
@@ -60,7 +61,7 @@ class TaskBriefTests(unittest.TestCase):
                             h.update(str(file.relative_to(ROOT)).encode()+b'\0'+hashlib.sha256(file.read_bytes()).hexdigest().encode()+b'\0')
                     actual=h.hexdigest()
                 else:
-                    actual=hashlib.sha256(target.read_bytes()).hexdigest()
+                    actual=hashlib.sha256(choice_history.before(path,target.read_bytes())).hexdigest()
                 self.assertEqual(actual,digest)
 
     def test_native_controls_have_labels_limits_and_no_submission(self):

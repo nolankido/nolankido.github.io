@@ -28,6 +28,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/search-visibility.css', 'assets/first-steps.css', 'downloads/creative-brief.txt']
     assets += ['assets/workflow-time.js', 'assets/workflow-evidence.css', 'downloads/workflow-time-review.txt', 'downloads/website-check-reproduction.py', 'downloads/website-check-evidence.json']
     assets += ['technology/feed.xml', 'assets/practical-discovery.css', 'assets/work/task-brief-preview.png', 'assets/work/ai-time-savings-preview.png']
+    assets += ['assets/ai-task-choice.css', 'assets/ai-task-choice.js', 'downloads/should-i-use-ai.txt', 'favicon.png', 'apple-touch-icon.png']
     assets += ['assets/summary-review.css', 'downloads/ai-summary-review.txt']
     assets += ['assets/site-fonts.css', 'assets/page-sharing.css', 'assets/page-sharing.js']
     assets += ['assets/task-brief.css', 'assets/task-brief.js', 'downloads/ai-task-brief.txt']

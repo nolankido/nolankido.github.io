@@ -1,4 +1,5 @@
 """Independent content preservation, local font delivery, and public-link scope."""
+import choice_history
 from copy import deepcopy
 from hashlib import sha256
 from pathlib import Path
@@ -35,14 +36,14 @@ class ReadingDeliveryTests(unittest.TestCase):
 
     def test_every_original_body_is_preserved_apart_from_explicit_privacy_update(self):
         for path, digest in self.baseline['bodies'].items():
-            text = remove_controls(self.outputs[Path(path)])
+            text = remove_controls(choice_history.before(path,self.outputs[Path(path)]))
             if path == 'privacy/index.html': text = old_privacy(text)
             body = re.search(r'<body\b[^>]*>(.*?)</body>', text, re.S)[1]
             self.assertEqual(sha256(body.encode()).hexdigest(), digest, path)
 
     def test_original_sources_scripts_identity_downloads_and_feeds_remain_intact(self):
         for path, digest in self.baseline['files'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = choice_history.read(path)
             if path == '_source/privacy.html': raw = old_privacy(raw.decode()).encode()
             elif path == '_source/pages.json':
                 entries = json.loads(raw)
@@ -100,7 +101,7 @@ class ReadingDeliveryTests(unittest.TestCase):
                 self.assertEqual(html.count('data-copy-page hidden'), 1)
                 self.assertEqual(html.count('data-share-page hidden'), 1)
                 if p.get('note'): self.assertEqual(html.count('Keep or share this essay'), 1)
-        self.assertEqual(count, 90)
+        self.assertEqual(count, 91)
 
     def test_no_runtime_reading_of_private_inputs_or_tracking_in_share_controls(self):
         js = (ROOT / 'assets/page-sharing.js').read_text()
