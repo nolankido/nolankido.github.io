@@ -14,6 +14,8 @@ import calendar
 import json
 import re
 
+from search_visibility import LEGACY_FEED_IDS
+
 KINDS = {'episode': 'episodes', 'hand': 'hands', 'story': 'stories'}
 LABELS = {'episode': 'Episode companion', 'hand': 'Hand review', 'story': 'Tournament story'}
 CORE = {'slug', 'kind', 'title', 'summary', 'published', 'approved', 'sections'}
@@ -258,7 +260,7 @@ def feed(pages: list, origin: str) -> str:
                  ('description', 'Poker episodes, hand reviews, stories, and reading guides.'), ('language', 'en-us')]:
         ET.SubElement(channel, k).text = v
     ET.SubElement(channel, '{http://www.w3.org/2005/Atom}link', {'href': origin + '/poker/feed.xml', 'rel': 'self', 'type': 'application/rss+xml'})
-    eligible = [p for p in pages if p['path'].startswith('/poker/') and p.get('date') and not p.get('noindex')]
+    eligible = [p for p in pages if p['path'].startswith('/poker/') and p.get('date') and (not p.get('noindex') or p['id'] in LEGACY_FEED_IDS)]
     for p in sorted(eligible, key=lambda p: (p['date'], p['id']), reverse=True):
         item = ET.SubElement(channel, 'item')
         for k, v in [('title', p['title']), ('link', origin + p['path']), ('description', p['description'])]:

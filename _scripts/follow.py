@@ -11,6 +11,8 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
+from search_visibility import LEGACY_FEED_IDS
+
 SOURCES = (Path('feed.xml'), Path('living-well/feed.xml'), Path('poker/feed.xml'))
 OUTPUT = Path('writing.xml')
 ATOM = 'http://www.w3.org/2005/Atom'
@@ -34,7 +36,8 @@ def combined(outputs: dict, pages: list[dict], origin: str) -> str:
         for item in channel.findall('item'):
             url = item.findtext('link', '')
             page = published.get(url)
-            if not page or page.get('noindex') or page.get('living_well_kind') == 'experiment' or not page.get('date'):
+            if (not page or (page.get('noindex') and page['id'] not in LEGACY_FEED_IDS)
+                    or page.get('living_well_kind') == 'experiment' or not page.get('date')):
                 raise ValueError('Feed entry must identify a dated, public, non-proposed page: ' + url)
             guid = item.find('guid')
             if guid is None or guid.text != url or guid.get('isPermaLink', 'true') != 'true':

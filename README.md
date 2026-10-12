@@ -147,3 +147,24 @@ excluded from the editorial RSS feed. No private answers, new JavaScript, or
 new third-party services are introduced. The current contact and analytics
 configuration is preserved. Run `_tests/test_living_well.py` and
 `_tests/living_well_browser.py` alongside the existing full regression suite.
+
+## Search visibility and personal identity
+
+`_scripts/search_visibility.py` connects published page types, the existing author
+profile, visible breadcrumbs, and explicit utility-page indexing policy. Do not
+add credentials, social profiles, outcomes, ratings, or representative article
+images without genuine supporting material. Social title cards are not article
+illustrations. Keep indexing choices separate from reader navigation and existing
+RSS identities.
+
+```sh
+python _scripts/check_search.py
+python _tests/search_visibility_browser.py
+```
+
+The search checker runs in Site checks and reads committed HTML. The browser test
+uses the same `CHROMIUM_PATH`, `AXE_PATH`, and `SCREENSHOT_DIR` options as the other
+suites. Its `--offline` mode checks rendered layouts only when local networking is
+unavailable; it does not claim live navigation or no-script validation. See
+`_reports/search-visibility-2026-10-11.md` for the audit and remaining measurement
+priorities, and `_reports/search-audit.json` for the static coverage summary.

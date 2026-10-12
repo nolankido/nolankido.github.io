@@ -203,6 +203,8 @@ BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html
 # October 10: reviewed person-first architecture, Writing gateway and shared footer label.
 # All other source and protected contact, privacy, design and Poker checks remain independent.
 # October 11: reviewed home first actions and Creative brief; protected sources remain unchanged.
-BASELINE_DIGEST = '81ec8a36e8e05f743ca8da8d9df21219955aa90d6c209bd2ded69b24a1019ff7'
+# October 11 search pass: reviewed shared metadata, breadcrumbs and the three revised
+# identity/technology pages. Original article bodies, privacy and home copy stay fixed.
+BASELINE_DIGEST = 'd50de07f3bcf3f5e21ba01b6488fd897c9efeae3e7c4c6e8e6a7e16d0dac4778'
 
 if __name__=='__main__': unittest.main(verbosity=2)

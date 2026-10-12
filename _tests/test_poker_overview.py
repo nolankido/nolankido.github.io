@@ -32,7 +32,7 @@ class PokerOverviewTests(unittest.TestCase):
         for p in self.pages:
             text = self.outputs[build.output_path(p['path'])]
             self.assertNotIn('class="viewer-breadcrumb"', text, p['path'])
-            self.assertEqual(text.count('aria-label="Breadcrumb"'), p['path'] != '/poker/', p['path'])
+            self.assertEqual(text.count('aria-label="Breadcrumb"'), 1, p['path'])
         with self.assertRaises(ValueError):
             poker_navigation.clean_body('<nav class="viewer-breadcrumb"><a id="old">Keep</a></nav>')
         ordinary = '<nav aria-label="Continue"><a href="/poker/">Home</a></nav>'

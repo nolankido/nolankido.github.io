@@ -2,7 +2,7 @@
   "files": {
     "CNAME": "841b7acfff3c5ef727da7451571a036b7d73edc756250e1fa14f5b806443e885",
     "_config.yml": "34926f815fcbdae69ab9d3dc210b61a7c04b62173567722bdd5297e85c1b9440",
-    "_source/about.html": "913c479a365ef5029686c0972d9c985dbe847ff3aa10d63951c7e5c9ba536909",
+    "_source/about.html": "f5f9886535c54334677688a2698f13c999415785eb45cc506cdf1ce3a55bbfa8",
     "_source/contact.html": "6ab8eb0ca1288fdd198569e2b1b231e8fa5106341f44c58164d393bb58811e7c",
     "_source/identity.json": "b2cad9e36a15b86176637b608aee10767724bf32f2750e9db05a4f21af0fe536",
     "_source/layout.html": "cb3930347d24d2a972c59ba7b80f5c8f7621b5f465bee85fdf7738afef47727f",
@@ -12,7 +12,7 @@
     "_source/notes/keep-the-judgment.html": "ba6d607702131531a92cfe5a30bab72ed8d03e4e877fd474636b76c78429bf72",
     "_source/notes/learning-from-the-beginning.html": "ca23675346af0bbd19f37467acb05d91b95b01920a050b044b2aa30c92315ffe",
     "_source/notes/trustworthy-tools.html": "798167d44386c74c616fbe22c461f41d5629a67457f600b10033dc2676afe3e8",
-    "_source/presentation.json": "93d7bdd32ecbd7b96f660f618d4f7cc27394eb00f1461f8d5fd437a5b7182f8f",
+    "_source/presentation.json": "185550e0f0673ad9730523fa94aa9b6c017c576008b6055e18050c69787b648e",
     "_source/privacy.html": "30a5f371883901da4c9e413ef12f5641cfcb00d86b2ae544fc24e85da0e7dba5",
     "_source/site.json": "5e01a8eae2c9593a0dace992e5a13ffbc22b1ab5e0c635ac9bf0db6507c16d65",
     "assets/contact.js": "65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858",

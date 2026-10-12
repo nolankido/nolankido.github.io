@@ -82,7 +82,8 @@ class DirectoryTests(unittest.TestCase):
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1))
             self.assertEqual(schema['@type'], 'CollectionPage')
             self.assertNotIn('datePublished', schema)
-            self.assertIn(page['path'], self.outputs[Path('sitemap.xml')])
+            # Public search utilities remain reachable but are not search landing pages.
+            self.assertEqual(page['path'] in self.outputs[Path('sitemap.xml')], page['id'] != 'living-well-find')
             self.assertIn(page['path'], check_live.targets())
             self.assertIn('aria-label="Living Well section"', html)
         for name in ('living-well-directory.css', 'living-well-directory.js'):

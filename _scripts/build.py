@@ -31,6 +31,7 @@ import presentation
 import entrypoints
 import site_find
 import follow
+import search_visibility
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -73,7 +74,7 @@ def public_pages(root: Path | None = None) -> list[dict]:
     """One manifest for rendering, link tests, sitemaps, and live verification."""
     root = ROOT if root is None else root
     base = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
-    return base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root)
+    return search_visibility.apply_policy(base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root))
 
 
 def build_outputs() -> dict[Path, str]:
@@ -170,7 +171,7 @@ def build_outputs() -> dict[Path, str]:
         header = ''
         extra = '<meta name="robots" content="noindex, follow">' if p.get('noindex') else ''
         if p['id'] != 'home':
-            heading = '<a href="/notes/" class="breadcrumb">Writing</a>' if p.get('note') else ''
+            heading = ''
             heading += poker_topics.breadcrumb(p, topics)
             heading += f'<p class="page-kicker">{text(p["kicker"])}</p><h1 class="page-title">{text(p["title"])}</h1>'
             if p.get('note'):
@@ -275,6 +276,9 @@ def build_outputs() -> dict[Path, str]:
             body += poker_experience.related_work(catalog, p['path'])
         header, living_extra = living_well.decorate(p, ROOT, header, schema)
         extra += living_extra
+        schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
+        search_version = hashlib.sha256((ROOT / 'assets/search-visibility.css').read_bytes()).hexdigest()[:12]
+        extra += f'\n  <link rel="stylesheet" href="/assets/search-visibility.css?v={search_version}">'
         data = {**values, 'find_current': ' aria-current="page"' if p['id'] == 'find' else '', 'social_metadata': presentation.metadata(presentation_config, p, site['url']), 'writing_current': (' aria-current="page"' if p['id'] == 'notes' else ' aria-current="location"' if p.get('note') else ''), 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
                 'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') else 'website', 'extra_head': extra,
