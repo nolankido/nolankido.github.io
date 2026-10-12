@@ -39,6 +39,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += [str(path) for path in build.living_well.utility.worksheet_exports(build.living_well.load(root))]
     assets += ['assets/everyday-tasks.css', 'assets/site-core.css', 'assets/public-profile.css', 'assets/public-profile.js']
     assets += [str(path) for path in build.public_profile.EXPORTS.values()]
+    assets += [str(build.workflow_path.SHEET), str(build.workflow_path.CSS)]
     sharing = build.presentation.load(root, pages)
     assets += sorted({card['src'].lstrip('/') for card in [sharing['default'], *sharing['pages'].values()]})
     catalog = build.poker_content.load(root)

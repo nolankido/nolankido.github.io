@@ -5,6 +5,7 @@ also pins the actual pre-release inputs and checks the complete new behaviour.
 """
 from pathlib import Path
 import json,re
+import workflow_history
 ROOT=Path(__file__).resolve().parents[1]
 ROUTE='/technology/should-i-use-ai/'
 NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html'}
@@ -12,6 +13,7 @@ NEW_OUTPUT='technology/should-i-use-ai/index.html'
 
 def before(path,data):
     path=str(path)
+    data=workflow_history.before(path,data)
     binary=isinstance(data,bytes)
     if not (path.endswith('.html') or path in {'_source/pages.json','technology/feed.xml','writing.xml','sitemap.xml'}):return data
     text=data.decode() if binary else data

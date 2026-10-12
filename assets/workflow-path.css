@@ -1,0 +1,20 @@
+/* Native navigation only. Existing site identity and type remain unchanged. */
+.workflow-stages { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.workflow-stage { min-width: 0; margin: 0; padding: 1.2rem; border: 1px solid var(--rule, #d9d3c8); border-radius: .4rem; }
+.workflow-stage h3 { margin: .45rem 0 .7rem; font-size: 1.15rem; line-height: 1.4; }
+.workflow-stage h3 a { display: inline-flex; align-items: center; min-height: 44px; }
+.workflow-stage p { margin: .7rem 0; }
+.workflow-stage .note-category { margin: 0; color: var(--ink-soft, #43514a); }
+.workflow-outcome { font-size: .9rem; }
+.workflow-workbook { padding-top: 1rem; border-top: 1px solid var(--rule, #d9d3c8); }
+.workflow-workbook summary { cursor: pointer; min-height: 44px; padding: .6rem 0; }
+.workflow-workbook pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .86rem; line-height: 1.65; max-width: 100%; padding: 1rem; border: 1px solid var(--rule, #d9d3c8); }
+.workflow-route { margin-block: .5rem 2rem; padding-block: 1rem; border-block: 1px solid var(--rule, #d9d3c8); }
+.workflow-route ol { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; }
+.workflow-route li { margin: 0; min-width: 0; }
+.workflow-route li > a, .workflow-route li > span { display: flex; flex-direction: column; justify-content: center; min-height: 60px; padding: .5rem .7rem; border: 1px solid var(--rule, #d9d3c8); border-radius: .25rem; }
+.workflow-route [aria-current="step"] { border: 2px solid currentColor; font-weight: 600; }
+.workflow-here { font-size: .75rem; font-weight: 400; }
+.workflow-resource { padding: 1rem; margin: 1.5rem 0; border: 1px solid var(--rule, #d9d3c8); }
+@media (max-width: 600px) { .workflow-stages { grid-template-columns: 1fr; } .workflow-route ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media print { .workflow-route { display: none; } .workflow-stages { display: block; } .workflow-stage { break-inside: avoid; } .workflow-workbook details > * { display: block; } }

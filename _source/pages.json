@@ -16,7 +16,7 @@
     "description": "Choose an interest, read a selected essay, or find something useful. A personal introduction to Nolan Kido and a clear route through the site.",
     "kicker": "New here?",
     "source": "start-here.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-12"
   },
   {
     "id": "find",
@@ -66,7 +66,7 @@
     "description": "Guides, private worksheets, study materials, and outside resources across practical AI, Living Well, poker, and creative work. Choose a useful starting point.",
     "kicker": "Resources",
     "source": "resources.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-12"
   },
   {
     "id": "contact",
@@ -207,11 +207,11 @@
     "id": "technology",
     "path": "/technology/",
     "title": "Practical AI for real life.",
-    "seo_title": "Practical AI for Everyday Life | Nolan Kido",
-    "description": "Use AI for real tasks without handing over your judgment. Try a free task brief builder, inspect worked examples, and check whether a workflow actually helps.",
+    "seo_title": "Practical AI Workflow, Tools & Checklists | Nolan Kido",
+    "description": "Decide whether AI fits, write a task brief, check a summary, and compare the full effort. Free tools, worked guides, and one downloadable workflow workbook.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-12"
   },
   {
     "id": "creative",
