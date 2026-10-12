@@ -99,7 +99,13 @@ try:
     else:r.abort()
    ctx.route('**/*',fallback);p=ctx.new_page();p.set_default_timeout(10000);render(p,calc,False)
    expect(p.locator('#time-editor')).to_be_hidden();expect(p.locator('#time-unavailable')).to_be_visible();expect(p.locator('.time-static-example')).to_have_count(3)
-   p.locator('details summary').focus();p.keyboard.press('Enter');assert p.locator('details pre').inner_text()==(ROOT/'downloads/workflow-time-review.txt').read_text()
+   # The worksheet and page-sharing panel are distinct native disclosures.
+   # Exercise the worksheet explicitly rather than assuming one details element.
+   worksheet=p.locator('section[aria-labelledby="time-worksheet"] details')
+   expect(worksheet).to_have_count(1)
+   worksheet.locator('summary').focus();p.keyboard.press('Enter')
+   expect(worksheet).to_have_attribute('open','')
+   assert worksheet.locator('pre').inner_text()==(ROOT/'downloads/workflow-time-review.txt').read_text()
    for width in [320,390,768,1440]:
     p.set_viewport_size({'width':width,'height':950});assert p.evaluate('document.documentElement.scrollWidth')<=width;report['layouts']+=1
    ctx.close();report['functional']+=1
