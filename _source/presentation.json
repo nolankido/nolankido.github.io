@@ -15,6 +15,18 @@
     "task-brief": {
       "src": "/assets/social/task-brief.png",
       "alt": "A clearer AI task brief. A free tool by Nolan Kido for purpose, inputs, output, checks, and boundaries."
+    },
+    "ai-time-savings": {
+      "src": "/assets/social/ai-time-savings.png",
+      "alt": "Does AI actually save you time? A free calculator by Nolan Kido that counts preparation, review, repairs and upkeep."
+    },
+    "ai-summary-review": {
+      "src": "/assets/social/check-ai-summary.png",
+      "alt": "Check the summary. Keep the meaning. A worked guide by Nolan Kido to tracing claims back to the source."
+    },
+    "ai-website-verification": {
+      "src": "/assets/social/checking-ai-website-changes.png",
+      "alt": "A passing test is not the whole check. A recorded website repair by Nolan Kido, with evidence."
     }
   }
 }

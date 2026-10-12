@@ -99,7 +99,7 @@ class PublicProfileTests(unittest.TestCase):
             for source in core_styles.SOURCES:
                 self.assertFalse(any(h.startswith('/'+source+'?') for h in hrefs))
             # Same font-provider settings and preconnections as before.
-            self.assertTrue(hrefs[0].startswith('https://fonts.googleapis.com/'))
+            self.assertRegex(hrefs[0], r'^/assets/site-fonts[.]css[?]v=[0-9a-f]{12}$')
 
     def test_every_source_changes_bundle_version_and_unsafe_css_fails(self):
         with TemporaryDirectory() as temp:

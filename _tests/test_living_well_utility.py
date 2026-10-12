@@ -84,7 +84,7 @@ class UtilityTests(unittest.TestCase):
                 self.assertIn(escape(s['note']), page)
                 self.assertIn('href="#sources-and-context"', page)
             self.assertNotRegex(page, r'<(?:form|input|textarea|iframe)\b')
-            self.assertEqual(re.findall(r'<script[^>]+src="([^"]+)"', page), ['https://cloud.umami.is/script.js'])
+            self.assertEqual(re.findall(r'<script[^>]+src="([^"]+)"', page), ['/assets/page-sharing.js?v=' + hashlib.sha256((ROOT / 'assets/page-sharing.js').read_bytes()).hexdigest()[:12], 'https://cloud.umami.is/script.js'])
             self.assertNotIn(chr(0x2014), page)
 
     def test_illustrative_arithmetic_counts_setup_checking_and_maintenance(self):

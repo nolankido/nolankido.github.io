@@ -42,7 +42,7 @@
     "_source/notes/keep-the-judgment.html": "ba6d607702131531a92cfe5a30bab72ed8d03e4e877fd474636b76c78429bf72",
     "_source/notes/learning-from-the-beginning.html": "ca23675346af0bbd19f37467acb05d91b95b01920a050b044b2aa30c92315ffe",
     "_source/notes/trustworthy-tools.html": "798167d44386c74c616fbe22c461f41d5629a67457f600b10033dc2676afe3e8",
-    "_source/pages.json": "53b58329030298b6dfa2430365778e9b391a5007af0f16fc8ab4e9f8c7ac24f9",
+    "_source/pages.json": "9e3bd719fa560c178790745806f7d7379b9070fc2e9e5fc9f76cbdd04b8eb86b",
     "_source/poker/RESOURCE_BACKLOG.json": "9e10d5a1f7790c1ad888692473ac80722000904d91d494e78842379d20df76c8",
     "_source/poker/RESOURCE_BATCH_002.md": "045958d98bf26e893a274307db30f136d91ebbde5f23cff56b2e5ac4a419265d",
     "_source/poker/RESOURCE_BATCH_003.json": "59ad883744b8185877b5c1219dd88e91a513f67a9e4bf402fb227f2bf177cc2b",
@@ -116,8 +116,8 @@
     "_source/poker/variance-and-results.html": "94acff5dd6da37090bedc15e5a9b5dcb2098485a8c91873f135f93bd90299963",
     "_source/poker/viewer-questions.html": "c7b35450dc792949002a27398ae73ea6913efce6adee470f287ce67bdc1da2b1",
     "_source/practical-discovery.json": "4298e303e46436d7cc767c4b562b5d592025bae292240fe21b192a75431252ec",
-    "_source/presentation.json": "185550e0f0673ad9730523fa94aa9b6c017c576008b6055e18050c69787b648e",
-    "_source/privacy.html": "30a5f371883901da4c9e413ef12f5641cfcb00d86b2ae544fc24e85da0e7dba5",
+    "_source/presentation.json": "acb3a4cb9d562a2957831a2b8af2abca1b528e935d1508e4f8f9e77687a62efc",
+    "_source/privacy.html": "a98318fd9c827b0ed2f8140e6395e3b1b5f870e2a6010ecc63442b9d5f79ebee",
     "_source/resources.html": "fcce33ba8c7f685ee72e769459159d1843d4b560ec860669f69bc2cbb6b27b0d",
     "_source/selection.json": "3b8a3b261d3f43b8883ad8fe4d2c2ad63593c3edb4a29b7c7775894ef10b1291",
     "_source/site.json": "5e01a8eae2c9593a0dace992e5a13ffbc22b1ab5e0c635ac9bf0db6507c16d65",
@@ -226,7 +226,7 @@
       "path": "/privacy/",
       "title": "Privacy, in plain language.",
       "date": null,
-      "updated": "2026-10-06",
+      "updated": "2026-10-12",
       "noindex": null
     },
     {

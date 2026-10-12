@@ -21,11 +21,11 @@ def main():
     parser.add_argument('--regular', default='DejaVuSans.ttf')
     parser.add_argument('--bold', default='DejaVuSans-Bold.ttf')
     parser.add_argument('--serif', default='DejaVuSerif.ttf')
-    parser.add_argument('--only', nargs='+', choices=['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief'], help='Render selected cards without changing other approved images')
+    parser.add_argument('--only', nargs='+', choices=['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes'], help='Render selected cards without changing other approved images')
     args = parser.parse_args()
     fonts = {'regular': args.regular, 'bold': args.bold, 'serif': args.serif}
     out = ROOT / 'assets/social'; out.mkdir(parents=True, exist_ok=True)
-    for name in (args.only or ['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief']):
+    for name in (args.only or ['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes']):
         image = Image.new('RGB', (1200, 630), PAPER)
         draw = ImageDraw.Draw(image)
         draw.line((56, 48, 56, 580), fill=ACCENT, width=3)
@@ -53,12 +53,30 @@ def main():
             text(94, 286, 'For real life.', 78, 'bold')
             text(94, 420, 'Useful tools. Clear checks. Your judgment.', 31, 'serif')
             text(94, 528, 'nolankido.com/technology', 26, color=MUTED)
-        else:
+        elif name == 'task-brief':
             text(94, 72, 'A FREE TOOL / NOLAN KIDO', 23, color=MUTED)
             text(94, 178, 'A clearer AI', 78, 'bold')
             text(94, 284, 'task brief.', 78, 'bold')
             text(94, 419, 'Purpose. Inputs. Output. Checks. Boundaries.', 30, 'serif')
             text(94, 528, 'nolankido.com/technology/task-brief', 26, color=MUTED)
+        elif name == 'ai-time-savings':
+            text(94, 72, 'A FREE CALCULATOR / NOLAN KIDO', 23, color=MUTED)
+            text(94, 178, 'Does AI actually', 72, 'bold')
+            text(94, 284, 'save you time?', 72, 'bold')
+            text(94, 419, 'Count preparation, review, repairs and upkeep.', 28, 'serif')
+            text(94, 528, 'nolankido.com/technology/ai-time-savings', 25, color=MUTED)
+        elif name == 'check-ai-summary':
+            text(94, 72, 'A WORKED GUIDE / NOLAN KIDO', 23, color=MUTED)
+            text(94, 178, 'Check the summary.', 70, 'bold')
+            text(94, 284, 'Keep the meaning.', 70, 'bold')
+            text(94, 419, 'Trace claims back to the source.', 31, 'serif')
+            text(94, 528, 'nolankido.com/technology/check-ai-summary', 25, color=MUTED)
+        elif name == 'checking-ai-website-changes':
+            text(94, 72, 'A RECORDED CASE / NOLAN KIDO', 23, color=MUTED)
+            text(94, 178, 'A passing test', 68, 'bold')
+            text(94, 284, 'is not the whole check.', 68, 'bold')
+            text(94, 419, 'A recorded website repair, with evidence.', 30, 'serif')
+            text(94, 528, 'nolankido.com/technology/checking-ai-website-changes', 23, color=MUTED)
         image = image.quantize(colors=32)
         image.save(out / (name + '.png'), optimize=True)
         print(name, (out / (name + '.png')).stat().st_size)

@@ -122,10 +122,13 @@ class SiteTests(unittest.TestCase):
             self.assertEqual(scripts.count('https://cloud.umami.is/script.js'), 1)
             other_scripts = [src for src in scripts if src != 'https://cloud.umami.is/script.js']
             allowed = {Path('bio/index.html'): '/assets/public-profile.js', Path('technology/ai-time-savings/index.html'): '/assets/workflow-time.js', Path('technology/task-brief/index.html'): '/assets/task-brief.js', Path('find/index.html'): '/assets/site-find.js', Path('living-well/find/index.html'): '/assets/living-well-directory.js', Path('poker/find/index.html'): '/assets/poker-finder.js', Path('poker/study-calculators/index.html'): '/assets/poker-study-tools.js', Path('poker/resources/index.html'): '/assets/poker-resources.js', Path('contact/index.html'): '/assets/contact.js', Path('poker/library/index.html'): '/assets/poker-library.js'}
-            self.assertEqual(len(other_scripts), 1 if path in allowed else 0)
+            expected_scripts = [allowed[path]] if path in allowed else []
+            schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.outputs[path], re.S)[1])
+            if schema.get('@type') == 'Article' or path in {Path('technology/task-brief/index.html'), Path('technology/ai-time-savings/index.html')}:
+                expected_scripts.append('/assets/page-sharing.js')
+            self.assertEqual([urlsplit(src).path for src in other_scripts], expected_scripts)
             for src in other_scripts:
                 self.assertFalse(urlsplit(src).scheme or urlsplit(src).netloc)
-                self.assertEqual(urlsplit(src).path, allowed[path])
         js = (ROOT / 'assets/contact.js').read_text()
         for forbidden in ['console.log', 'localStorage', 'sessionStorage']:
             self.assertNotIn(forbidden, js)

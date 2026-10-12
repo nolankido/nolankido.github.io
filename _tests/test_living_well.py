@@ -57,6 +57,8 @@ class LivingWellTests(unittest.TestCase):
                 self.assertIn('type="search"', content)
             else:
                 self.assertNotIn('<input', content)
+            if p.get('living_well_entry') and not p.get('noindex'):
+                expected.insert(0, '/assets/page-sharing.js?v=' + hashlib.sha256((ROOT / 'assets/page-sharing.js').read_bytes()).hexdigest()[:12])
             self.assertEqual(scripts, expected)
             if p.get('living_well_entry'):
                 self.assertIn('Prepared with AI assistance', content)

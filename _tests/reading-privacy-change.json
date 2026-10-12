@@ -1,0 +1,4 @@
+{
+  "old": "The site requests Schibsted Grotesk, Source Serif 4, and IBM Plex Mono from Google Fonts. Your browser contacts Google to retrieve the stylesheet and font files, which can disclose technical request information such as your IP address and browser details.",
+  "new": "The site uses Schibsted Grotesk, Source Serif 4, and IBM Plex Mono. Font declarations are served by this website; the font files still load from Google Fonts. Your browser contacts Google for those font files, which can disclose technical request information such as your IP address and browser details."
+}

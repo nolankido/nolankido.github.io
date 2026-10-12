@@ -36,6 +36,8 @@ import practical_discovery
 import everyday_tasks
 import core_styles
 import public_profile
+import font_delivery
+import page_sharing
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -317,6 +319,8 @@ def build_outputs() -> dict[Path, str]:
                           if kind == 'style' else '\n  <script defer src="/assets/' + asset + '?v=' + version + '"></script>')
             schema['about'] = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/'}
         body += practical_discovery.article_return(p)
+        body = page_sharing.decorate(body, p, site["url"])
+        extra += page_sharing.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
         search_version = hashlib.sha256((ROOT / 'assets/search-visibility.css').read_bytes()).hexdigest()[:12]
         extra += f'\n  <link rel="stylesheet" href="/assets/search-visibility.css?v={search_version}">'
@@ -359,7 +363,7 @@ def build_outputs() -> dict[Path, str]:
     outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     outputs.update(public_profile.exports(site))
-    return core_styles.apply(outputs, ROOT)
+    return font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT)
 
 
 def main() -> int:

@@ -213,6 +213,9 @@ BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html
 # Public-profile/core-CSS pass: only /bio/ body and stylesheet references change.
 # Independent signatures in test_public_profile.py preserve 166 complete bodies.
 # Source-review release: hub links/listing only; test_summary_review independently pins 164 original bodies.
-BASELINE_DIGEST = 'af48e56a03e32eb91001ef36ae29a9068ccbe6ac859cf24409044e79caa0a59d'
+# Reading delivery: font references and marked canonical controls are reviewed here.
+# test_reading_delivery independently reverses only those additions and the
+# explicit Privacy notice update against all 169 original body hashes.
+BASELINE_DIGEST = '049304d67f1bc43dd944e12ca1a852a8f9487911133643d01caa609e84147ab5'
 
 if __name__=='__main__': unittest.main(verbosity=2)

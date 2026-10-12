@@ -1,7 +1,7 @@
 {
   "baseline_commit": "0f356fdf543a4de2331b79f417cd4d5376d95fae",
   "unchanged_body_count": 163,
-  "unchanged_body_signature": "06522e8ea99af3a17e5ed375ed28857faaf44bbb25de6adae06eac52bffbb9ba",
+  "unchanged_body_signature": "193b1f54af0758631aed52abb16a912b98d5d730a5f3fe7b98670bf48c4e2e5c",
   "body_exclusions": [
     "bio/index.html",
     "find/index.html",
@@ -24,6 +24,6 @@
     "technology/feed.xml": "dc123cec3fd96832f7f0593b830ee25122b91805a14f1ef41c56caeeea8ef014",
     "living-well/feed.xml": "94d241e3797f54abf9f5b35e99a1f1f92cd932d2326c7fdc481fb5a2ce86e094",
     "poker/feed.xml": "374469c9de296d8f58599e328a581735e04acbe97e719bf36741e5c43d45351f",
-    "sitemap.xml": "91122f2398fff830fe2fb41d99813d729ea3cf926277ce1f8e34047ffe3468e0"
+    "sitemap.xml": "5f5f2990306a03347dc611caf5550ac70c6c8e84683489239a3f11a86daf7696"
   }
 }
