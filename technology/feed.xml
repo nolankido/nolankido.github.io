@@ -3,9 +3,16 @@
   <channel>
     <title>Nolan Kido | Practical AI writing</title>
     <link>https://nolankido.com/technology/</link>
-    <description>Essays and recorded cases about practical AI, checking results, and human judgment. Tools and website edits are not new articles.</description>
+    <description>Essays, worked guides and recorded cases about practical AI, checking results, and human judgment. Tools and website edits are not new articles.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/technology/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Check an AI summary against its source.</title>
+      <link>https://nolankido.com/technology/check-ai-summary/</link>
+      <description>Check an AI summary claim by claim. Compare a fictional source, six annotated problems, and a repaired draft, then use the free source-review checklist.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/check-ai-summary/</guid>
+      <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Let AI do more. Keep the judgment.</title>
       <link>https://nolankido.com/notes/keep-the-judgment/</link>

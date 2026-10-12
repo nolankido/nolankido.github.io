@@ -1,0 +1,9 @@
+/* Source-to-summary exercise only; no changes to shared typography. */
+.page-ai-summary-review .summary-source { list-style: none; padding: 0; }
+.page-ai-summary-review .summary-source li { padding: .8rem 0; border-bottom: 1px solid var(--line); }
+.page-ai-summary-review .summary-boundary,
+.page-ai-summary-review blockquote { border-left: 3px solid var(--red); padding: 1rem; margin: 1.2rem 0; }
+.page-ai-summary-review .summary-finding { padding: .9rem 0; border-bottom: 1px solid var(--line); }
+.page-ai-summary-review summary { cursor: pointer; font-weight: 600; line-height: 1.5; }
+.page-ai-summary-review pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9rem; padding: 1rem; }
+.page-ai-summary-review [id] { scroll-margin-top: 2rem; }

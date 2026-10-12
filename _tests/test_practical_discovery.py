@@ -49,7 +49,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(json.dumps(historical, sort_keys=True).encode()).hexdigest(),
                          self.baseline['combined_record_signature'])
         added = set(now) - set(historical)
-        self.assertEqual(added, {'https://nolankido.com/technology/checking-ai-website-changes/'})
+        self.assertEqual(added, {'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/'})
         for slug in ['task-brief', 'ai-time-savings']:
             self.assertNotIn('https://nolankido.com/technology/' + slug + '/', now)
 
@@ -57,7 +57,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
         tree = ET.fromstring(self.outputs[discovery.FEED])
         items = tree.findall('./channel/item')
         expected = {'https://nolankido.com/notes/' + s + '/' for s in self.config['note_ids']}
-        expected.add('https://nolankido.com/technology/checking-ai-website-changes/')
+        expected.update({'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/'})
         self.assertEqual({i.findtext('link') for i in items}, expected)
         self.assertEqual(len(items), len(expected))
         original = records(self.outputs[Path('feed.xml')])
@@ -142,7 +142,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
         self.assertLess(home.index('A personal introduction'), home.index('class="practical-home"'))
         self.assertLess(home.index('class="identity-reading'), home.index('class="practical-home"'))
         self.assertEqual(writing.count('class="section folio-row writing-route"'), 4)
-        self.assertEqual(writing.count('technology-publication'), 1)
+        self.assertEqual(writing.count('technology-publication'), 2)
         for p in self.pages:
             html = self.outputs[build.output_path(p['path'])]
             self.assertEqual('/assets/practical-discovery.css?' in html, p['id'] in discovery.SCOPED_IDS)

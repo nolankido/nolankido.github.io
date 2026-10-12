@@ -18,17 +18,29 @@ from xml.etree import ElementTree as ET
 
 FEED = Path('technology/feed.xml')
 TITLE = 'Nolan Kido | Practical AI writing'
-DESCRIPTION = 'Essays and recorded cases about practical AI, checking results, and human judgment. Tools and website edits are not new articles.'
+DESCRIPTION = 'Essays, worked guides and recorded cases about practical AI, checking results, and human judgment. Tools and website edits are not new articles.'
 SCOPED_IDS = frozenset({'home', 'technology', 'notes'})
 TOOL_IDS = frozenset({'task-brief', 'ai-time-savings'})
+
+
+def publication_label(page: dict) -> str:
+    """Keep authored exercises visibly distinct from historical evidence."""
+    if page.get('worked_guide') and page.get('evidence_article'):
+        raise ValueError('A worked guide cannot also be a recorded case')
+    if page.get('worked_guide'):
+        if page['worked_guide'] is not True or page.get('section') != 'technology':
+            raise ValueError('Worked guides require explicit Technology publication')
+        return 'Worked guide'
+    return 'Recorded case study'
 
 
 def articles(pages: list[dict]) -> list[dict]:
     """Evidence articles have explicit dates and an existing canonical source."""
     result = []
     for page in pages:
-        if page.get('section') != 'technology' or not page.get('evidence_article'):
+        if page.get('section') != 'technology' or not (page.get('evidence_article') or page.get('worked_guide')):
             continue
+        publication_label(page)
         if page.get('noindex') or page.get('draft') or page.get('living_well_kind') == 'experiment':
             raise ValueError('Technology articles must be published, indexable content')
         if not isinstance(page.get('date'), str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', page['date']):
@@ -131,7 +143,7 @@ def article_cards(pages: list[dict]) -> str:
     for p in articles(pages):
         when = datetime.strptime(p['date'], '%Y-%m-%d')
         label = f'{when.strftime("%B")} {when.day}, {when.year}'
-        cards.append('<article class="note-entry technology-publication"><p class="note-category">Recorded case study / Practical AI</p><h3><a href="' + escape(p['path'], quote=True) + '">' + escape(p['title']) + '</a></h3><p>' + escape(p['description']) + '</p><p class="reading-date">Published <time datetime="' + p['date'] + '">' + label + '</time></p></article>')
+        cards.append('<article class="note-entry technology-publication"><p class="note-category">' + publication_label(p) + ' / Practical AI</p><h3><a href="' + escape(p['path'], quote=True) + '">' + escape(p['title']) + '</a></h3><p>' + escape(p['description']) + '</p><p class="reading-date">Published <time datetime="' + p['date'] + '">' + label + '</time></p></article>')
     return ''.join(cards)
 
 
@@ -172,8 +184,8 @@ def feed(config: dict, pages: list[dict], outputs: dict, origin: str) -> str:
 
 
 def article_return(page: dict) -> str:
-    if not page.get('evidence_article') or page.get('section') != 'technology':
+    if not (page.get('evidence_article') or page.get('worked_guide')) or page.get('section') != 'technology':
         return ''
     return ('<section class="section folio-row technology-return" aria-labelledby="case-return-title"><div class="section-meta"><p class="section-label">Read / Keep / Return</p></div><div class="section-content prose">'
             '<h2 id="case-return-title">Keep the method, not just the result.</h2><p>Read the wider argument in <a href="/notes/keep-the-judgment/">Let AI do more. Keep the judgment.</a>, or <a href="/technology/ai-time-savings/">include verification in your workflow time comparison</a>.</p>'
-            '<nav class="link-row" aria-label="After the case study"><a href="/notes/#technology">More practical AI writing</a><a href="/follow/#practical-ai-feed">Follow practical AI writing</a><a href="/technology/">Back to Technology</a></nav></div></section>')
+            '<nav class="link-row" aria-label="' + ('After the worked guide' if page.get('worked_guide') else 'After the case study') + '"><a href="/notes/#technology">More practical AI writing</a><a href="/follow/#practical-ai-feed">Follow practical AI writing</a><a href="/technology/">Back to Technology</a></nav></div></section>')

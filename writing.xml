@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+    <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>Check an AI summary against its source.</title>
+      <link>https://nolankido.com/technology/check-ai-summary/</link>
+      <description>Check an AI summary claim by claim. Compare a fictional source, six annotated problems, and a repaired draft, then use the free source-review checklist.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/check-ai-summary/</guid>
+      <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
     <item>
       <title>Let AI do more. Keep the judgment.</title>
       <link>https://nolankido.com/notes/keep-the-judgment/</link>

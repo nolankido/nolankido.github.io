@@ -92,11 +92,11 @@ def build_outputs() -> dict[Path, str]:
         raise ValueError('Page routes and IDs must be unique')
     for p in pages:
         output_path(p['path'])
-        if p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or p.get('evidence_article'):
+        if p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')):
             date_value(p['date'])
         if p.get('updated'):
             updated = date_value(p['updated'])
-            if (p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or p.get('evidence_article')) and updated < date_value(p['date']):
+            if (p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide'))) and updated < date_value(p['date']):
                 raise ValueError('An update cannot precede publication')
         if p.get('revision') and not p.get('updated'):
             raise ValueError('Substantive revisions need an explicit update date')
@@ -122,6 +122,7 @@ def build_outputs() -> dict[Path, str]:
     values['everyday_task_cards'] = everyday_tasks.cards(everyday_tasks.load(ROOT, pages), living_well.load(ROOT))
     # Keep the visible planning-sheet preview identical to its downloadable source.
     values['workflow_time_sheet'] = text((ROOT / 'downloads/workflow-time-review.txt').read_text(encoding='utf-8'))
+    values['summary_review_sheet'] = text((ROOT / 'downloads/ai-summary-review.txt').read_text(encoding='utf-8'))
     values['creative_brief'] = text((ROOT / 'downloads/creative-brief.txt').read_text(encoding='utf-8'))
     values['site_find_index'] = site_find.render(site_find.entries(ROOT, pages))
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
@@ -286,14 +287,17 @@ def build_outputs() -> dict[Path, str]:
             body += poker_experience.related_work(catalog, p['path'])
         header, living_extra = living_well.decorate(p, ROOT, header, schema)
         extra += living_extra
-        if p.get('evidence_article'):
+        if (p.get('evidence_article') or p.get('worked_guide')):
             date_value(p['date'])
             schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date']})
-            header = header.replace('</section>', f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · Recorded case study · About {poker_library.minutes(body)} min read</p>' + poker_reading.section_outline(body) + '</section>', 1)
+            header = header.replace('</section>', f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · {practical_discovery.publication_label(p)} · About {poker_library.minutes(body)} min read</p>' + poker_reading.section_outline(body) + '</section>', 1)
             extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
         if p['id'] in {'ai-time-savings', 'ai-website-verification'}:
             version = hashlib.sha256((ROOT / 'assets/workflow-evidence.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/workflow-evidence.css?v={version}">'
+        if p['id'] == 'ai-summary-review':
+            version = hashlib.sha256((ROOT / 'assets/summary-review.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/summary-review.css?v={version}">'
         if p['id'] == 'ai-time-savings':
             version = hashlib.sha256((ROOT / 'assets/workflow-time.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script defer src="/assets/workflow-time.js?v={version}"></script>'
@@ -318,7 +322,7 @@ def build_outputs() -> dict[Path, str]:
         extra += f'\n  <link rel="stylesheet" href="/assets/search-visibility.css?v={search_version}">'
         data = {**values, 'find_current': ' aria-current="page"' if p['id'] == 'find' else '', 'social_metadata': presentation.metadata(presentation_config, p, site['url']), 'writing_current': (' aria-current="page"' if p['id'] == 'notes' else ' aria-current="location"' if p.get('note') else ''), 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
-                'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') or p.get('evidence_article') else 'website', 'extra_head': extra,
+                'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')) else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
         rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
         outputs[output_path(p['path'])] = rendered

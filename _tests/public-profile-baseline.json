@@ -1,10 +1,14 @@
 {
   "baseline_commit": "0f356fdf543a4de2331b79f417cd4d5376d95fae",
-  "unchanged_body_count": 166,
-  "unchanged_body_signature": "e15d06a98f9fce1be3919b5ae8ed94a166e7458e9e203c51dcafc105243a2b35",
+  "unchanged_body_count": 163,
+  "unchanged_body_signature": "06522e8ea99af3a17e5ed375ed28857faaf44bbb25de6adae06eac52bffbb9ba",
   "body_exclusions": [
     "bio/index.html",
-    "find/index.html"
+    "find/index.html",
+    "notes/index.html",
+    "resources/index.html",
+    "technology/check-ai-summary/index.html",
+    "technology/index.html"
   ],
   "unchanged_files": {
     "_source/site.json": "5e01a8eae2c9593a0dace992e5a13ffbc22b1ab5e0c635ac9bf0db6507c16d65",
@@ -16,10 +20,10 @@
     "assets/site.css": "784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6",
     "assets/hubs.css": "80e948dce779cf2be090beee43711155d89ccd1af7dfc1a932115f3cd92cbb4b",
     "feed.xml": "ba511115cc593966c73c95ffe05839e54eb4616286ff98c171c275ae4db13924",
-    "writing.xml": "d59abdd4ec2d134b4a66202880c0efd6d40f79227f90f37f9ece8c0e1e534875",
-    "technology/feed.xml": "488d9846e5e282c66670ba790441a856391edffd4a665ad83354941c1a11bb09",
+    "writing.xml": "1d2abaa7bb9f4918cb9981c0ec4c9876d4e3d0d9e97b11dd222d93c37b12bab7",
+    "technology/feed.xml": "dc123cec3fd96832f7f0593b830ee25122b91805a14f1ef41c56caeeea8ef014",
     "living-well/feed.xml": "94d241e3797f54abf9f5b35e99a1f1f92cd932d2326c7fdc481fb5a2ce86e094",
     "poker/feed.xml": "374469c9de296d8f58599e328a581735e04acbe97e719bf36741e5c43d45351f",
-    "sitemap.xml": "85e716dcc0857f2aeb5b5b75f49e1fb7ce8c31a08ef682d3bd17287fda444599"
+    "sitemap.xml": "91122f2398fff830fe2fb41d99813d729ea3cf926277ce1f8e34047ffe3468e0"
   }
 }

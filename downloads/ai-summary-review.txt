@@ -1,0 +1,37 @@
+SOURCE-TO-SUMMARY REVIEW
+Nolan Kido | https://nolankido.com/technology/check-ai-summary/
+Blank worksheet. Complete it in your own notes, not on this website.
+
+PURPOSE AND AUDIENCE
+[What will this summary be used for, and who may read it?]
+
+SOURCE
+[Title or location, version/date, and the exact section reviewed.]
+[Am I allowed to share this material with the tool and intended audience?]
+
+ONE RECORD PER MATERIAL CLAIM
+Claim in the draft:
+Exact supporting source passage and its location:
+Status: supported / contradicted / not supported / missing condition
+What changed: person / action / number / date / condition / certainty / permission
+Correction or question:
+
+OMISSIONS
+[Which source conditions or restrictions would change a reader's next action?]
+[What can be left out without changing the meaning for this audience?]
+
+REPAIRED SUMMARY
+[Retain conditions, uncertainty, and the difference between ideas and agreements.]
+
+THREE SEPARATE CHECKS
+Source fidelity: [Does the summary accurately represent the reviewed source?]
+External truth/currentness: [What needs independent verification? What is unresolved?]
+Permission/approval: [Who must approve the use, sharing, or action?]
+
+DECISION
+[Revise / ask a question / hold / ready for the stated limited use.]
+[Remaining uncertainty, reviewer and review date, and where the source is kept.]
+
+No score here certifies accuracy or grants permission. A faithful summary can
+repeat a mistaken or outdated source. Do not publish or act without the checks
+and approval appropriate to the consequence. Keep completed copies private.
