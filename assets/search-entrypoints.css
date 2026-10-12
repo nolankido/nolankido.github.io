@@ -1,0 +1,4 @@
+/* Purpose summaries on reviewed reader hubs; shared visual identity is retained. */
+.page-hero .entry-summary { max-width: 68ch; margin: 1.2rem 0 0; color: var(--ink-soft); font: 400 1rem/1.7 var(--sans); }
+.page-hero .page-title { overflow-wrap: anywhere; }
+@media print { .page-hero .entry-summary { color: black; } }

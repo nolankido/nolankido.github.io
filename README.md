@@ -150,6 +150,32 @@ configuration is preserved. Run `_tests/test_living_well.py` and
 
 ## Search visibility and personal identity
 
+Reviewed reader-entry copy lives in `_source/search-entrypoints.json` and is
+applied by `_scripts/search_entrypoints.py`. It supplies specific search titles,
+five clearer hub headings, and visible purpose summaries on twelve existing
+hubs. Article identities, wording, dates, and feed records are not republished.
+
+`_source/reader-previews.json` records the current title, publication kind, layout,
+and exact bytes of individual typographic previews. All ninety articles and the
+three additional subject hubs have distinct cards; the previous hand-designed
+cards remain in place. These are sharing title cards, not article illustrations
+or photographs. They are not added to Article image markup.
+
+After changing an existing article title or proposed/recorded status, regenerate
+and inspect its previews with the maintainer tool, which requires Pillow and
+installed DejaVu fonts:
+
+```sh
+python _scripts/render_reader_previews.py
+python _scripts/build.py
+```
+
+Normal builds need no image renderer or fonts. The renderer preserves every card
+declared in `_source/presentation.json`; its separate catalogue rejects stale
+titles, wrong scopes, and unreviewed image bytes. New articles can retain the
+standard card until previews are deliberately regenerated. Font rasterization
+may differ across machines, so inspect any newly rendered cards before release.
+
 `_scripts/search_visibility.py` connects published page types, the existing author
 profile, visible breadcrumbs, and explicit utility-page indexing policy. Do not
 add credentials, social profiles, outcomes, ratings, or representative article

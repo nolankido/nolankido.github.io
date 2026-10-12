@@ -1,0 +1,1792 @@
+{
+  "version": 1,
+  "pages": {
+    "trustworthy-tools": {
+      "path": "/notes/trustworthy-tools/",
+      "title": "A working tool is not the same as a trustworthy one.",
+      "label": "WRITING / ESSAY",
+      "src": "/assets/social/reader-trustworthy-tools.png",
+      "sha256": "dd98582dd1528a864678fc7eec8f4a163bb4630f35e9f58fade7b49acec84aca",
+      "layout": {
+        "lines": [
+          "A working tool is not the",
+          "same as a trustworthy one."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1085,
+          352
+        ]
+      }
+    },
+    "decision-quality": {
+      "path": "/notes/decision-quality/",
+      "title": "Good decisions, imperfect outcomes.",
+      "label": "WRITING / ESSAY",
+      "src": "/assets/social/reader-decision-quality.png",
+      "sha256": "d6b0564da91084b9a9ed2a85490901d8b692f3c0f5ae656990e72887e518d203",
+      "layout": {
+        "lines": [
+          "Good decisions, imperfect",
+          "outcomes."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1035,
+          339
+        ]
+      }
+    },
+    "learning-from-the-beginning": {
+      "path": "/notes/learning-from-the-beginning/",
+      "title": "Learning something difficult from the beginning.",
+      "label": "WRITING / ESSAY",
+      "src": "/assets/social/reader-learning-from-the-beginning.png",
+      "sha256": "2070159d43c5a68801d94887a49f29d053aebc0954f598a7a0ee33883ad7c5a3",
+      "layout": {
+        "lines": [
+          "Learning something difficult",
+          "from the beginning."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1113,
+          352
+        ]
+      }
+    },
+    "generous-explanations": {
+      "path": "/notes/generous-explanations/",
+      "title": "What makes an explanation feel generous.",
+      "label": "WRITING / ESSAY",
+      "src": "/assets/social/reader-generous-explanations.png",
+      "sha256": "050bab0bc75a7695020bfccc4ef56fe57fb79d408abeac698037f8f54abfafc6",
+      "layout": {
+        "lines": [
+          "What makes an explanation",
+          "feel generous."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1098,
+          352
+        ]
+      }
+    },
+    "finishing-is-a-decision": {
+      "path": "/notes/finishing-is-a-decision/",
+      "title": "Finishing is a decision.",
+      "label": "WRITING / ESSAY",
+      "src": "/assets/social/reader-finishing-is-a-decision.png",
+      "sha256": "78d34e25cd55e69fb4a2a23330c321f259128f97f763d210fe0b58dcb3ddfdf8",
+      "layout": {
+        "lines": [
+          "Finishing is a decision."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          917,
+          288
+        ]
+      }
+    },
+    "poker": {
+      "path": "/poker/",
+      "title": "Poker resources.",
+      "label": "POKER / LEARN, FIND & STUDY",
+      "src": "/assets/social/reader-poker.png",
+      "sha256": "fcf15b6c71396cd31da2ed60480b682c70f6494a4bc9ebada2546f597f0b2ffe",
+      "layout": {
+        "lines": [
+          "Poker resources."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          701,
+          275
+        ]
+      }
+    },
+    "creative": {
+      "path": "/creative/",
+      "title": "Creative Work",
+      "label": "CREATIVE WORK / WRITING & STORYTELLING",
+      "src": "/assets/social/reader-creative.png",
+      "sha256": "865a3973ae88d01f9afad069ed3a64f5a0761fc0bcf258da7b373445175a7bb0",
+      "layout": {
+        "lines": [
+          "Creative Work"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          607,
+          275
+        ]
+      }
+    },
+    "poker-holdem-basics": {
+      "path": "/poker/holdem-basics/",
+      "title": "One hand, from deal to showdown.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-holdem-basics.png",
+      "sha256": "759245e2dc5a3d477a7c414a75e0cbb902bde17858d7aa0d493ac12816cf535c",
+      "layout": {
+        "lines": [
+          "One hand, from deal to",
+          "showdown."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          930,
+          339
+        ]
+      }
+    },
+    "poker-hand-rankings": {
+      "path": "/poker/hand-rankings/",
+      "title": "Which hand wins?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-hand-rankings.png",
+      "sha256": "8817712cde32c58f7b769fb9d2161eb31b121428839aa7ac23c518285a271e76",
+      "layout": {
+        "lines": [
+          "Which hand wins?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          742,
+          275
+        ]
+      }
+    },
+    "poker-betting-and-pots": {
+      "path": "/poker/betting-and-pots/",
+      "title": "Bets, calls, and side pots.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-betting-and-pots.png",
+      "sha256": "8085cc98757f7be7f5bae283e788f0cba4feab6ed906ba080d15e512fb11b07d",
+      "layout": {
+        "lines": [
+          "Bets, calls, and side pots."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          1022,
+          287
+        ]
+      }
+    },
+    "poker-tournaments": {
+      "path": "/poker/tournaments/",
+      "title": "How a tournament unfolds.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-tournaments.png",
+      "sha256": "e7e14e2019f39e5865ebe465bec6536d7fca6c6a38aa68502e0e4eea5eeff498",
+      "layout": {
+        "lines": [
+          "How a tournament unfolds."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          1080,
+          275
+        ]
+      }
+    },
+    "poker-poker-math": {
+      "path": "/poker/poker-math/",
+      "title": "What the percentages mean.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-poker-math.png",
+      "sha256": "6614f56946a45de6215e027b2b5ea8019441050a4e102eeb2f417cf6a947a343",
+      "layout": {
+        "lines": [
+          "What the percentages",
+          "mean."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          897,
+          339
+        ]
+      }
+    },
+    "poker-glossary": {
+      "path": "/poker/glossary/",
+      "title": "Poker terms, in plain language.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-glossary.png",
+      "sha256": "cc939068942b61cbd4c2c45d4bb5c5700779e2d02070f0bd464ec54c9cea2ae5",
+      "layout": {
+        "lines": [
+          "Poker terms, in plain",
+          "language."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          848,
+          352
+        ]
+      }
+    },
+    "poker-viewer-questions": {
+      "path": "/poker/viewer-questions/",
+      "title": "Questions new viewers ask.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-viewer-questions.png",
+      "sha256": "04ed4fd48e64bd5f43719dae1a60bea4fb52a62daad081ec1fe4c0c0c4b0a6a2",
+      "layout": {
+        "lines": [
+          "Questions new viewers ask."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          1098,
+          283
+        ]
+      }
+    },
+    "poker-position-and-stacks": {
+      "path": "/poker/position-and-stacks/",
+      "title": "Why does the seat matter?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-position-and-stacks.png",
+      "sha256": "36b5034d2c6ded69829883646feddd05dc82c3b4af7eabba0e1abcb36f6194ac",
+      "layout": {
+        "lines": [
+          "Why does the seat matter?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          1070,
+          288
+        ]
+      }
+    },
+    "poker-reading-the-board": {
+      "path": "/poker/reading-the-board/",
+      "title": "What changed on the board?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-reading-the-board.png",
+      "sha256": "ee92b76a71d5f77a3c7e2f6be607c80bfcc1c555e85c27088e29e5096b8f1244",
+      "layout": {
+        "lines": [
+          "What changed on the",
+          "board?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          867,
+          339
+        ]
+      }
+    },
+    "poker-ranges-and-bets": {
+      "path": "/poker/ranges-and-bets/",
+      "title": "What is the bet trying to do?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-ranges-and-bets.png",
+      "sha256": "6a4209b8ec72a84bf0242eef16ef19b6f26cca9ffda9dc5d34352446f79240da",
+      "layout": {
+        "lines": [
+          "What is the bet trying to",
+          "do?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          987,
+          339
+        ]
+      }
+    },
+    "poker-tournament-formats": {
+      "path": "/poker/tournament-formats/",
+      "title": "Which kind of tournament is this?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-tournament-formats.png",
+      "sha256": "f68a63a4c63a04f56dc305c80352e6e35c55816ce85b41b7fd33f6d1f08db4d1",
+      "layout": {
+        "lines": [
+          "Which kind of tournament is",
+          "this?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1119,
+          339
+        ]
+      }
+    },
+    "poker-table-etiquette": {
+      "path": "/poker/table-etiquette/",
+      "title": "What is happening at the table?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-table-etiquette.png",
+      "sha256": "33456c6aea81888440e0f23ad56b05c53895205d161be278bb148baa35276d32",
+      "layout": {
+        "lines": [
+          "What is happening at the",
+          "table?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1009,
+          339
+        ]
+      }
+    },
+    "poker-follow-along": {
+      "path": "/poker/follow-along/",
+      "title": "Pause the hand. Read the situation.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-follow-along.png",
+      "sha256": "b7466a92197499852670d75a6e44ca39e5f6c5a2a98fa66ba861585bafb74796",
+      "layout": {
+        "lines": [
+          "Pause the hand. Read the",
+          "situation."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1024,
+          339
+        ]
+      }
+    },
+    "poker-pot-odds-workshop": {
+      "path": "/poker/pot-odds-workshop/",
+      "title": "Pot odds, with the assumptions visible.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-pot-odds-workshop.png",
+      "sha256": "284adec5667d744055e1d3bb64fc25477762368895c503951dcac5e251c450c6",
+      "layout": {
+        "lines": [
+          "Pot odds, with the",
+          "assumptions visible."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          833,
+          351
+        ]
+      }
+    },
+    "poker-short-stack-decisions": {
+      "path": "/poker/short-stack-decisions/",
+      "title": "A short stack is a situation, not a chart.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-short-stack-decisions.png",
+      "sha256": "784d3f1cbd06715aab9520d2643f99675e7203a8a14dc14c3f0450b6ed34fc76",
+      "layout": {
+        "lines": [
+          "A short stack is a situation,",
+          "not a chart."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1086,
+          339
+        ]
+      }
+    },
+    "poker-tournament-equity": {
+      "path": "/poker/tournament-equity/",
+      "title": "When more chips are not enough.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-tournament-equity.png",
+      "sha256": "10cdef7e6c982fa4a91b12bfd028619064f74a8e01591401e17bf8c022ef487c",
+      "layout": {
+        "lines": [
+          "When more chips are not",
+          "enough."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1002,
+          352
+        ]
+      }
+    },
+    "poker-range-combinations": {
+      "path": "/poker/range-combinations/",
+      "title": "From possible hands to weighted ranges.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-range-combinations.png",
+      "sha256": "7e6f3bb86a66ce0c63c7e27d26812691a4d40d6722d1d9e6fa6df4f8cea94f2c",
+      "layout": {
+        "lines": [
+          "From possible hands to",
+          "weighted ranges."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          935,
+          352
+        ]
+      }
+    },
+    "poker-variance-and-results": {
+      "path": "/poker/variance-and-results/",
+      "title": "Results deserve context.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-variance-and-results.png",
+      "sha256": "3ee0c05d951059c3ed7a48703b8b83444b4e0f4f20ff3006a074764e8b4f554b",
+      "layout": {
+        "lines": [
+          "Results deserve context."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          991,
+          275
+        ]
+      }
+    },
+    "poker-hand-to-vlog": {
+      "path": "/poker/hand-to-vlog/",
+      "title": "From hand notes to a poker vlog.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-hand-to-vlog.png",
+      "sha256": "c6f52675a7701b51b5468963e2071234a872fcbdf08a09c6168c92268a2ece8d",
+      "layout": {
+        "lines": [
+          "From hand notes to a poker",
+          "vlog."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1093,
+          352
+        ]
+      }
+    },
+    "poker-practice-room": {
+      "path": "/poker/practice-room/",
+      "title": "Twelve checks. One useful repair.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-practice-room.png",
+      "sha256": "6681d3a5768f5b1b6b74129c501103f8003b55043ab87ab9bdbb30843698ca4a",
+      "layout": {
+        "lines": [
+          "Twelve checks. One useful",
+          "repair."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1043,
+          351
+        ]
+      }
+    },
+    "poker-decision-lab": {
+      "path": "/poker/decision-lab/",
+      "title": "One river. Two different stories.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-decision-lab.png",
+      "sha256": "8f49eee03d8ff6670673af39b4d22b6035c898f8af3a929f8c4d151f4d2c251b",
+      "layout": {
+        "lines": [
+          "One river. Two different",
+          "stories."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          943,
+          339
+        ]
+      }
+    },
+    "poker-flush-and-redraw": {
+      "path": "/poker/flush-and-redraw/",
+      "title": "The flush arrives. What can still change?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-flush-and-redraw.png",
+      "sha256": "807176c9a49bc3127378ebb5bc876a0d406d8839cb9c2c1a65df2fb3d50825ce",
+      "layout": {
+        "lines": [
+          "The flush arrives. What can",
+          "still change?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1085,
+          352
+        ]
+      }
+    },
+    "poker-side-pot-lab": {
+      "path": "/poker/side-pot-lab/",
+      "title": "Three all-ins. Two pots.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-side-pot-lab.png",
+      "sha256": "b517b9388b27888ff5fddcadce01e6bbd8ada800c3d010b1a9b22e6174d351e3",
+      "layout": {
+        "lines": [
+          "Three all-ins. Two pots."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          934,
+          287
+        ]
+      }
+    },
+    "poker-first-live-tournament": {
+      "path": "/poker/first-live-tournament/",
+      "title": "Your first live tournament, without the guesswork.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-first-live-tournament.png",
+      "sha256": "921957864b9aca65118c5ece27634b686d86f478a9574541c9e98dd6197628c7",
+      "layout": {
+        "lines": [
+          "Your first live tournament,",
+          "without the guesswork."
+        ],
+        "font_size": 64,
+        "bounds": [
+          93,
+          205,
+          1050,
+          352
+        ]
+      }
+    },
+    "poker-choosing-a-tournament": {
+      "path": "/poker/choosing-a-tournament/",
+      "title": "Read the structure before choosing the tournament.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-choosing-a-tournament.png",
+      "sha256": "4ab8a30094f918be4df85ab76fd3f556e61441572d909abec35c29fd1bd0060d",
+      "layout": {
+        "lines": [
+          "Read the structure before",
+          "choosing the tournament."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1033,
+          352
+        ]
+      }
+    },
+    "poker-registration-and-reentry": {
+      "path": "/poker/registration-and-reentry/",
+      "title": "Registration, re-entry and the cost of another attempt.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-registration-and-reentry.png",
+      "sha256": "fe506a89640d9d3a61b1321436ca525ab83f91bd966a94f8d4c6606809c8ba09",
+      "layout": {
+        "lines": [
+          "Registration, re-entry and",
+          "the cost of another attempt."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1124,
+          351
+        ]
+      }
+    },
+    "poker-tournament-day": {
+      "path": "/poker/tournament-day/",
+      "title": "From the first seat to the end of the day.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-tournament-day.png",
+      "sha256": "0dcdd8502f2cf849bbdc3be09b25e4617fead9fb3d86270ad81ad11df4375bda",
+      "layout": {
+        "lines": [
+          "From the first seat to the",
+          "end of the day."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1004,
+          352
+        ]
+      }
+    },
+    "poker-recording-hands": {
+      "path": "/poker/recording-hands/",
+      "title": "Keep a hand note you can actually review.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-recording-hands.png",
+      "sha256": "b29bf8d2550e905d3d3cafcc6c02582e49dce1e7b4c319ec5ebeef4770737eb8",
+      "layout": {
+        "lines": [
+          "Keep a hand note you can",
+          "actually review."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1031,
+          352
+        ]
+      }
+    },
+    "poker-choosing-study-tools": {
+      "path": "/poker/choosing-study-tools/",
+      "title": "Choose a study tool by the question it answers.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-choosing-study-tools.png",
+      "sha256": "849429981ed337b7edfa314b973fa0f588de9890e8c59b44f2f68a8047e8c594",
+      "layout": {
+        "lines": [
+          "Choose a study tool by the",
+          "question it answers."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1060,
+          351
+        ]
+      }
+    },
+    "poker-evaluating-poker-advice": {
+      "path": "/poker/evaluating-poker-advice/",
+      "title": "Read poker advice without borrowing its certainty.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-evaluating-poker-advice.png",
+      "sha256": "0cc8cebe2c2c43a6e3ad70749c7c48d1c54101409baaef3217343b71a19ce1e6",
+      "layout": {
+        "lines": [
+          "Read poker advice without",
+          "borrowing its certainty."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1059,
+          352
+        ]
+      }
+    },
+    "poker-free-poker-learning-path": {
+      "path": "/poker/free-poker-learning-path/",
+      "title": "Learn poker with a small, free study path.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-free-poker-learning-path.png",
+      "sha256": "c7acec26fd476de5bdcf499371be2744b3b2e8839eef9a1c7a38544849d75544",
+      "layout": {
+        "lines": [
+          "Learn poker with a small,",
+          "free study path."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1010,
+          352
+        ]
+      }
+    },
+    "poker-cash-game-study": {
+      "path": "/poker/cash-game-study/",
+      "title": "Study cash games without importing tournament assumptions.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-cash-game-study.png",
+      "sha256": "dad778077593c5c2554da0a74b53f5dbb15960d080725828f07b3784f8f7a381",
+      "layout": {
+        "lines": [
+          "Study cash games without",
+          "importing tournament",
+          "assumptions."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1050,
+          415
+        ]
+      }
+    },
+    "poker-omaha-and-mixed-games": {
+      "path": "/poker/omaha-and-mixed-games/",
+      "title": "Omaha, lowball and mixed games: know which rules changed.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-omaha-and-mixed-games.png",
+      "sha256": "9b84424926a96982952fc984dfc32b40119d145aa77eaa01e0c406086448ea8e",
+      "layout": {
+        "lines": [
+          "Omaha, lowball and mixed",
+          "games: know which rules",
+          "changed."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1050,
+          416
+        ]
+      }
+    },
+    "poker-poker-books-and-courses": {
+      "path": "/poker/poker-books-and-courses/",
+      "title": "Choose a poker book or course you will actually use.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-poker-books-and-courses.png",
+      "sha256": "e22ccdb4116b2c7a0af038809cfd39e15c6bf4f63c8ba73a65f114d1d4b6813c",
+      "layout": {
+        "lines": [
+          "Choose a poker book or",
+          "course you will actually use."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1117,
+          352
+        ]
+      }
+    },
+    "poker-poker-research-guide": {
+      "path": "/poker/poker-research-guide/",
+      "title": "A map of poker research, without the inflated claims.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-poker-research-guide.png",
+      "sha256": "85ac8ab24e0c2bded3a833c63ad58f6dc0e5ec0bc84dbdbb84e8ea6f4c9107f0",
+      "layout": {
+        "lines": [
+          "A map of poker research,",
+          "without the inflated claims."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1090,
+          339
+        ]
+      }
+    },
+    "poker-poker-math-reference": {
+      "path": "/poker/poker-math-reference/",
+      "title": "Poker math: the right number for the right question.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-poker-math-reference.png",
+      "sha256": "79a9baf063d9efb153d291a36ffceea42ca7c2b4a3c12b3881c33632f33707b0",
+      "layout": {
+        "lines": [
+          "Poker math: the right",
+          "number for the right",
+          "question."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          874,
+          415
+        ]
+      }
+    },
+    "poker-reading-preflop-charts": {
+      "path": "/poker/reading-preflop-charts/",
+      "title": "Read the preflop chart before trusting the colors.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-reading-preflop-charts.png",
+      "sha256": "4d8409ff1a8df8a11ce4dc9adaa6ac9e9c84452108e54e713392c8b2c4e47925",
+      "layout": {
+        "lines": [
+          "Read the preflop chart",
+          "before trusting the colors."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1048,
+          352
+        ]
+      }
+    },
+    "poker-poker-rules-and-fair-play": {
+      "path": "/poker/poker-rules-and-fair-play/",
+      "title": "Poker rules and fair play: find the right authority.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-poker-rules-and-fair-play.png",
+      "sha256": "62fbd70c764118f3df727da8bd44ef51a26ea11c0dbc058a140c1e2b242c9f68",
+      "layout": {
+        "lines": [
+          "Poker rules and fair play:",
+          "find the right authority."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1006,
+          352
+        ]
+      }
+    },
+    "poker-omaha-hi-lo-workshop": {
+      "path": "/poker/omaha-hi-lo-workshop/",
+      "title": "Omaha hi-lo: play for a share, not just a low.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-omaha-hi-lo-workshop.png",
+      "sha256": "e39535862e86dd2cf3d1be2c3a8a4fab37c344609a12eef8576ee6836132ec30",
+      "layout": {
+        "lines": [
+          "Omaha hi-lo: play for a",
+          "share, not just a low."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          919,
+          352
+        ]
+      }
+    },
+    "poker-stud-and-lowball-workshop": {
+      "path": "/poker/stud-and-lowball-workshop/",
+      "title": "Stud and lowball: change the rules before the strategy.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-stud-and-lowball-workshop.png",
+      "sha256": "04b97d010f350da4e20dae589b1c3e90067ab137cea73491f2b405565b561d64",
+      "layout": {
+        "lines": [
+          "Stud and lowball: change",
+          "the rules before the",
+          "strategy."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1008,
+          416
+        ]
+      }
+    },
+    "poker-multiway-pot-workshop": {
+      "path": "/poker/multiway-pot-workshop/",
+      "title": "Multiway pots: count the opponents and the pots.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-multiway-pot-workshop.png",
+      "sha256": "e853442163a5dc3c263b9ab0005cda4fd130a2133366b7981bb247e0515a19aa",
+      "layout": {
+        "lines": [
+          "Multiway pots: count the",
+          "opponents and the pots."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          994,
+          351
+        ]
+      }
+    },
+    "poker-poker-media-study": {
+      "path": "/poker/poker-media-study/",
+      "title": "Turn a poker video or podcast into one useful lesson.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-poker-media-study.png",
+      "sha256": "c76d6ca3df919944c82c9a234463c643ba9c0259e5158a14cb5990bb13392960",
+      "layout": {
+        "lines": [
+          "Turn a poker video or",
+          "podcast into one useful",
+          "lesson."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          944,
+          403
+        ]
+      }
+    },
+    "poker-poker-access-and-protection": {
+      "path": "/poker/poker-access-and-protection/",
+      "title": "Check the room, the rules and your protections.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-poker-access-and-protection.png",
+      "sha256": "0d67bcbad1ed301e2069b93ea63e57a746ee67e8204c471187b0b277dbcc9635",
+      "layout": {
+        "lines": [
+          "Check the room, the rules",
+          "and your protections."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1030,
+          352
+        ]
+      }
+    },
+    "poker-first-live-cash-game": {
+      "path": "/poker/first-live-cash-game/",
+      "title": "Your first live cash-game session.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-first-live-cash-game.png",
+      "sha256": "b6b3ea6a19a8845231cae006e79965abd3673522a0ef5e81d0d18e644e2bd1c2",
+      "layout": {
+        "lines": [
+          "Your first live cash-game",
+          "session."
+        ],
+        "font_size": 64,
+        "bounds": [
+          93,
+          205,
+          990,
+          339
+        ]
+      }
+    },
+    "poker-cash-game-costs": {
+      "path": "/poker/cash-game-costs/",
+      "title": "Understand the cost of a cash game.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-cash-game-costs.png",
+      "sha256": "67b913bd4753986a88c6b0ac54e00d1f06df775494ef3a601c07e7344773edb1",
+      "layout": {
+        "lines": [
+          "Understand the cost of a",
+          "cash game."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          990,
+          352
+        ]
+      }
+    },
+    "poker-cash-game-study-path": {
+      "path": "/poker/cash-game-study-path/",
+      "title": "A practical cash-game study route.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-cash-game-study-path.png",
+      "sha256": "2f23e9f775f27684e5eabde2efe1ad5963cd048608d1ac41261dd74f7a3fe14e",
+      "layout": {
+        "lines": [
+          "A practical cash-game study",
+          "route."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1117,
+          339
+        ]
+      }
+    },
+    "ai-task-choice": {
+      "path": "/technology/should-i-use-ai/",
+      "title": "Should I use AI for this task?",
+      "label": "PRACTICAL AI / WORKED GUIDE",
+      "src": "/assets/social/reader-ai-task-choice.png",
+      "sha256": "fc90d06732056df1595ba5b438925b68ebf112fb74dd9726f9dc5891409494dc",
+      "layout": {
+        "lines": [
+          "Should I use AI for this",
+          "task?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          918,
+          339
+        ]
+      }
+    },
+    "living-well": {
+      "path": "/living-well/",
+      "title": "Living Well",
+      "label": "LIVING WELL / IDEAS & PRACTICE",
+      "src": "/assets/social/reader-living-well.png",
+      "sha256": "3d9f254e87162059571cbb1860040c60459352824ddfed9ec4898e7790dcc077",
+      "layout": {
+        "lines": [
+          "Living Well"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          490,
+          288
+        ]
+      }
+    },
+    "living-well-what-i-mean-by-living-well": {
+      "path": "/living-well/what-i-mean-by-living-well/",
+      "title": "Start here: the questions behind Living Well",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-what-i-mean-by-living-well.png",
+      "sha256": "2699ec1642d931246a68cfc21740665cea7eacff447cf729846b172fa0665692",
+      "layout": {
+        "lines": [
+          "Start here: the questions",
+          "behind Living Well"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1005,
+          352
+        ]
+      }
+    },
+    "living-well-spiritually-curious": {
+      "path": "/living-well/spiritually-curious/",
+      "title": "Can you be spiritually curious without pretending to be certain?",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-spiritually-curious.png",
+      "sha256": "2189e134b596ce2eea9aea7fddf327bb4ca9fdd3e83963212428b0293a1f3907",
+      "layout": {
+        "lines": [
+          "Can you be spiritually",
+          "curious without pretending",
+          "to be certain?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1080,
+          403
+        ]
+      }
+    },
+    "living-well-time-you-save": {
+      "path": "/living-well/time-you-save/",
+      "title": "What is the time you save actually for?",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-time-you-save.png",
+      "sha256": "5a059af08caf0543abd98c4e65fbc47db74198667a6ba50f31c4748702bd2253",
+      "layout": {
+        "lines": [
+          "What is the time you save",
+          "actually for?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1035,
+          352
+        ]
+      }
+    },
+    "living-well-weekly-reset": {
+      "path": "/living-well/weekly-reset/",
+      "title": "A weekly reset that does not become another job",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-weekly-reset.png",
+      "sha256": "77532cc2d2866630dd4ecbe3443daf3d67cea1bcbce31446f61b8976f5b70d8d",
+      "layout": {
+        "lines": [
+          "A weekly reset that does",
+          "not become another job"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          993,
+          352
+        ]
+      }
+    },
+    "living-well-decide-what-matters": {
+      "path": "/living-well/decide-what-matters/",
+      "title": "Before you ask AI what to do, decide what matters",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-decide-what-matters.png",
+      "sha256": "d7d196b78090786512bad5674a37463da4eea9203386f3e04e00dbfd0a958465",
+      "layout": {
+        "lines": [
+          "Before you ask AI what to",
+          "do, decide what matters"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1026,
+          347
+        ]
+      }
+    },
+    "living-well-preserve-family-story": {
+      "path": "/living-well/preserve-family-story/",
+      "title": "Preserve a family story without losing the person's voice",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-preserve-family-story.png",
+      "sha256": "9c109da1e513ec11ee4842ea4a22c45a8543f7fa6ec4b05b3493d6104db7ad46",
+      "layout": {
+        "lines": [
+          "Preserve a family story",
+          "without losing the person's",
+          "voice"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1081,
+          403
+        ]
+      }
+    },
+    "living-well-what-to-decide-yourself": {
+      "path": "/living-well/what-to-decide-yourself/",
+      "title": "What should you decide personally, even when a tool helps you express it?",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-what-to-decide-yourself.png",
+      "sha256": "2cb59008afe3145837fee9c2509495956b3e39ee9943e46b487e3dd3162b73bb",
+      "layout": {
+        "lines": [
+          "What should you decide",
+          "personally, even when a",
+          "tool helps you express it?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1021,
+          416
+        ]
+      }
+    },
+    "living-well-growth-without-self-rejection": {
+      "path": "/living-well/growth-without-self-rejection/",
+      "title": "The difference between improving your life and believing you are never enough",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-growth-without-self-rejection.png",
+      "sha256": "f87d76227ffb1e48ffbdc2ffa802069f035f50afeeebe4554145a047ef0c120b",
+      "layout": {
+        "lines": [
+          "The difference between",
+          "improving your life and",
+          "believing you are never enough"
+        ],
+        "font_size": 56,
+        "bounds": [
+          94,
+          183,
+          1097,
+          390
+        ]
+      }
+    },
+    "living-well-ordinary-moments": {
+      "path": "/living-well/ordinary-moments/",
+      "title": "What makes an ordinary moment feel sacred?",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-ordinary-moments.png",
+      "sha256": "371c8a611002e1841b9d98b5646736add13ec42d4e8d32f133b63007017aa917",
+      "layout": {
+        "lines": [
+          "What makes an ordinary",
+          "moment feel sacred?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          977,
+          339
+        ]
+      }
+    },
+    "living-well-ai-generated-reflections": {
+      "path": "/living-well/ai-generated-reflections/",
+      "title": "Can an AI-generated reflection be meaningful?",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-ai-generated-reflections.png",
+      "sha256": "9cf1eafa087abfed32130bba3716f6b14ca19ae40f147513b455c2ffd61e26a1",
+      "layout": {
+        "lines": [
+          "Can an AI-generated",
+          "reflection be meaningful?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1018,
+          352
+        ]
+      }
+    },
+    "living-well-quiet-morning": {
+      "path": "/living-well/quiet-morning/",
+      "title": "A quiet morning does not need a dashboard",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-quiet-morning.png",
+      "sha256": "7c6533da0ae2e028a32fffe09460b3090eb39f80f9d7e1f759ff9fdbdf4632bc",
+      "layout": {
+        "lines": [
+          "A quiet morning does not",
+          "need a dashboard"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1012,
+          339
+        ]
+      }
+    },
+    "living-well-documenting-your-life": {
+      "path": "/living-well/documenting-your-life/",
+      "title": "When does documenting your life get in the way of experiencing it?",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-documenting-your-life.png",
+      "sha256": "706c9f74f6362707a26c03bee9048689070fe1fb386b8db94fcbe73d9f8f5ca6",
+      "layout": {
+        "lines": [
+          "When does documenting",
+          "your life get in the way of",
+          "experiencing it?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1028,
+          416
+        ]
+      }
+    },
+    "living-well-free-afternoon": {
+      "path": "/living-well/free-afternoon/",
+      "title": "Plan a free afternoon without optimizing all the life out of it",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-free-afternoon.png",
+      "sha256": "67e49a2d1fbedea3492b42fc836b363e72d3902917ebea32976eeefef2090a0a",
+      "layout": {
+        "lines": [
+          "Plan a free afternoon",
+          "without optimizing all the",
+          "life out of it"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1026,
+          403
+        ]
+      }
+    },
+    "living-well-household-friction": {
+      "path": "/living-well/household-friction/",
+      "title": "Make one recurring household problem less annoying",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-household-friction.png",
+      "sha256": "70fb489feeb5c80de42a53b60771558d731401aefc345f6e130249e4d33a6014",
+      "layout": {
+        "lines": [
+          "Make one recurring",
+          "household problem less",
+          "annoying"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          953,
+          416
+        ]
+      }
+    },
+    "living-well-thoughtful-friend": {
+      "path": "/living-well/thoughtful-friend/",
+      "title": "Can a reminder help you become a more thoughtful friend?",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-thoughtful-friend.png",
+      "sha256": "030a08ab385f8b8468594f989862eb9518a66873969f8d5581b6a73587f98939",
+      "layout": {
+        "lines": [
+          "Can a reminder help you",
+          "become a more thoughtful",
+          "friend?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1054,
+          403
+        ]
+      }
+    },
+    "living-well-two-good-lives": {
+      "path": "/living-well/two-good-lives/",
+      "title": "Choosing between two good lives",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-two-good-lives.png",
+      "sha256": "06d91b932a09e62a1c901fdddfe78ced9fa011440b02aa8d6a01b696fad54175",
+      "layout": {
+        "lines": [
+          "Choosing between two good",
+          "lives"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1117,
+          339
+        ]
+      }
+    },
+    "living-well-notebook-or-ai": {
+      "path": "/living-well/notebook-or-ai/",
+      "title": "Proposed experiment: a notebook or AI for a weekly reflection?",
+      "label": "LIVING WELL / PROPOSED EXPERIMENT",
+      "src": "/assets/social/reader-living-well-notebook-or-ai.png",
+      "sha256": "48a47ba2e3e097c895b8ca05fb12c06a7d103a5aeae0eae1b1dde6247c03d6d6",
+      "layout": {
+        "lines": [
+          "Proposed experiment: a",
+          "notebook or AI for a weekly",
+          "reflection?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1093,
+          403
+        ]
+      }
+    },
+    "living-well-phone-simplification": {
+      "path": "/living-well/phone-simplification/",
+      "title": "Proposed experiment: simplify one part of your phone",
+      "label": "LIVING WELL / PROPOSED EXPERIMENT",
+      "src": "/assets/social/reader-living-well-phone-simplification.png",
+      "sha256": "37bffb2b902e006064c5b8f68e8eb862d520be894124239aa5dca218373d9c7e",
+      "layout": {
+        "lines": [
+          "Proposed experiment:",
+          "simplify one part of your",
+          "phone"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          988,
+          415
+        ]
+      }
+    },
+    "living-well-household-experiment": {
+      "path": "/living-well/household-experiment/",
+      "title": "Proposed experiment: does a household system remove more work than it adds?",
+      "label": "LIVING WELL / PROPOSED EXPERIMENT",
+      "src": "/assets/social/reader-living-well-household-experiment.png",
+      "sha256": "17675993fce5340f1cce6bc777e359a51b48bc7abf0c0f330e19f20ac8b1ebda",
+      "layout": {
+        "lines": [
+          "Proposed experiment: does",
+          "a household system remove",
+          "more work than it adds?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1107,
+          403
+        ]
+      }
+    },
+    "living-well-spiritual-curiosity-reading-path": {
+      "path": "/living-well/spiritual-curiosity-reading-path/",
+      "title": "Spiritual curiosity without a new identity",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-spiritual-curiosity-reading-path.png",
+      "sha256": "4dd4addf45e1ff3e80eabeead432625f0a8a969e236183d24f95033dd7972ef2",
+      "layout": {
+        "lines": [
+          "Spiritual curiosity without a",
+          "new identity"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1103,
+          352
+        ]
+      }
+    },
+    "living-well-technology-that-helps-you-notice": {
+      "path": "/living-well/technology-that-helps-you-notice/",
+      "title": "When technology helps you notice more",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-technology-that-helps-you-notice.png",
+      "sha256": "f196e448e05dcbf4a824a1c2bcfbed005f7442fdc84f35da8199797df88e2a60",
+      "layout": {
+        "lines": [
+          "When technology helps you",
+          "notice more"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1093,
+          339
+        ]
+      }
+    },
+    "living-well-technology-for-real-life": {
+      "path": "/living-well/technology-for-real-life/",
+      "title": "Technology for real life",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-technology-for-real-life.png",
+      "sha256": "3ee26afa5c48fce6cf3eb57bc6db65a5454b283952126104399ddf122a19787e",
+      "layout": {
+        "lines": [
+          "Technology for real life"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          924,
+          288
+        ]
+      }
+    },
+    "living-well-scattered-notes-to-next-step": {
+      "path": "/living-well/scattered-notes-to-next-step/",
+      "title": "Turn scattered notes into one useful next step",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-scattered-notes-to-next-step.png",
+      "sha256": "cc7bffa3abc7146dffc68950564691bfe43b27825093c70014ef7c0dc03ecbd8",
+      "layout": {
+        "lines": [
+          "Turn scattered notes into",
+          "one useful next step"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1008,
+          351
+        ]
+      }
+    },
+    "living-well-shared-plan-people-can-use": {
+      "path": "/living-well/shared-plan-people-can-use/",
+      "title": "Make a shared plan people can actually use",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-shared-plan-people-can-use.png",
+      "sha256": "e8b9beb902db6ae67dfa53b0ce309ade5730bada46eaf111c5cfdf1296ebc222",
+      "layout": {
+        "lines": [
+          "Make a shared plan people",
+          "can actually use"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1066,
+          352
+        ]
+      }
+    },
+    "living-well-find-the-document-you-need": {
+      "path": "/living-well/find-the-document-you-need/",
+      "title": "Find the document you need without uploading your whole life",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-find-the-document-you-need.png",
+      "sha256": "001515f22dcd5f32e121b19f5ccd284849349232fab7abd87be80ff5ab052135",
+      "layout": {
+        "lines": [
+          "Find the document you",
+          "need without uploading",
+          "your whole life"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          954,
+          416
+        ]
+      }
+    },
+    "living-well-rough-idea-to-small-creation": {
+      "path": "/living-well/rough-idea-to-small-creation/",
+      "title": "Turn a rough idea into something you can share",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-rough-idea-to-small-creation.png",
+      "sha256": "8142f6266bf9d6aff796ecef0d7d9f29ba6b565db8fc3f7d101780355f85e9d0",
+      "layout": {
+        "lines": [
+          "Turn a rough idea into",
+          "something you can share"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1002,
+          352
+        ]
+      }
+    },
+    "living-well-make-digital-reading-easier": {
+      "path": "/living-well/make-digital-reading-easier/",
+      "title": "Make digital reading easier before adding another AI tool",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-make-digital-reading-easier.png",
+      "sha256": "2938d77bafc5bb5a68dd4380c799a50f09183aabb340c87640944426d5c2e5b0",
+      "layout": {
+        "lines": [
+          "Make digital reading easier",
+          "before adding another AI",
+          "tool"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1083,
+          403
+        ]
+      }
+    },
+    "living-well-reflection-with-your-judgment-intact": {
+      "path": "/living-well/reflection-with-your-judgment-intact/",
+      "title": "Reflect with AI without handing over your judgment",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-reflection-with-your-judgment-intact.png",
+      "sha256": "724f9208a9114d9670c6b97942211ce5459c74c2c73e8fcf3dc319fa48ab89db",
+      "layout": {
+        "lines": [
+          "Reflect with AI without",
+          "handing over your judgment"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1123,
+          352
+        ]
+      }
+    },
+    "living-well-did-the-tool-actually-help": {
+      "path": "/living-well/did-the-tool-actually-help/",
+      "title": "Did the tool actually make life easier?",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-did-the-tool-actually-help.png",
+      "sha256": "efd026460e840aad2367f96c6040d462456b6f838f8983501e3d8963510596d0",
+      "layout": {
+        "lines": [
+          "Did the tool actually make",
+          "life easier?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1044,
+          339
+        ]
+      }
+    },
+    "living-well-meditation-without-buying-a-lifestyle": {
+      "path": "/living-well/meditation-without-buying-a-lifestyle/",
+      "title": "Meditation without buying a lifestyle",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-meditation-without-buying-a-lifestyle.png",
+      "sha256": "74dec86f7d37fb92f0dcaa6649e4aa55435bcb4d791bb12aaed0bb2de3ca44ad",
+      "layout": {
+        "lines": [
+          "Meditation without buying a",
+          "lifestyle"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1118,
+          352
+        ]
+      }
+    },
+    "living-well-consciousness-which-question": {
+      "path": "/living-well/consciousness-which-question/",
+      "title": "Consciousness: which question are we asking?",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-consciousness-which-question.png",
+      "sha256": "7cb8a7e9ac52388ed9810257897238aec79b909e328ea21a3d17cc8aa09aa3d9",
+      "layout": {
+        "lines": [
+          "Consciousness: which",
+          "question are we asking?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          971,
+          352
+        ]
+      }
+    },
+    "living-well-a-tool-you-can-put-down": {
+      "path": "/living-well/a-tool-you-can-put-down/",
+      "title": "A useful tool can make itself less necessary",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-a-tool-you-can-put-down.png",
+      "sha256": "3b26cd7c4cf7fe068d59388c7732bf1e2ccc41b3754e97346296aa89e0603d14",
+      "layout": {
+        "lines": [
+          "A useful tool can make itself",
+          "less necessary"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1124,
+          352
+        ]
+      }
+    },
+    "living-well-learning-with-ai-without-skipping-understanding": {
+      "path": "/living-well/learning-with-ai-without-skipping-understanding/",
+      "title": "Use AI to understand something, not just get an answer",
+      "label": "LIVING WELL / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-living-well-learning-with-ai-without-skipping-understanding.png",
+      "sha256": "abcade1fea445a5d2d6366e478c31414d75bf65745b065b5f95f69c59ae07091",
+      "layout": {
+        "lines": [
+          "Use AI to understand",
+          "something, not just get an",
+          "answer"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1054,
+          403
+        ]
+      }
+    },
+    "living-well-read-a-poem-without-a-lesson": {
+      "path": "/living-well/read-a-poem-without-a-lesson/",
+      "title": "Read a poem without turning it into a lesson",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-read-a-poem-without-a-lesson.png",
+      "sha256": "608f57d37ff2612ab9733d2d000fa7e4907a03629f3eec3c5332071929b3b00d",
+      "layout": {
+        "lines": [
+          "Read a poem without",
+          "turning it into a lesson"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          919,
+          352
+        ]
+      }
+    }
+  }
+}
