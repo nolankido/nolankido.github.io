@@ -24,6 +24,8 @@ jobs:
         run: |
           python _scripts/build.py --check
           python _tests/check_html5.py
+          python downloads/website-check-reproduction.py
+          node --check assets/workflow-time.js
           python _scripts/check_search.py
           python -m unittest discover -s _tests -p 'test_*.py' -v
           node --check assets/task-brief.js
@@ -43,7 +45,7 @@ jobs:
       matrix:
         include:
           - group: identity
-            suites: search_visibility_browser first_steps_browser task_brief_browser
+            suites: search_visibility_browser first_steps_browser task_brief_browser workflow_evidence_browser
           - group: navigation
             suites: browser design_browser
           - group: reader-tools
