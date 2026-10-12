@@ -46,7 +46,7 @@ jobs:
       matrix:
         include:
           - group: identity
-            suites: search_visibility_browser first_steps_browser task_brief_browser workflow_evidence_browser practical_discovery_browser everyday_tasks_browser public_profile_browser
+            suites: search_visibility_browser first_steps_browser task_brief_browser workflow_evidence_browser practical_discovery_browser everyday_tasks_browser public_profile_browser summary_review_browser
           - group: navigation
             suites: browser design_browser
           - group: reader-tools
