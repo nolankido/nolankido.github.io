@@ -7,9 +7,10 @@ on:
 permissions:
   contents: read
 jobs:
-  checks:
+  build:
+    name: Build and HTML checks
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -17,9 +18,12 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
-      - name: Check committed build and links
+      - name: Install HTML test dependencies
+        run: python -m pip install -r requirements-test.txt
+      - name: Check committed build and HTML before browsers
         run: |
           python _scripts/build.py --check
+          python _tests/check_html5.py
           python _scripts/check_search.py
           python -m unittest discover -s _tests -p 'test_*.py' -v
           node --check assets/task-brief.js
@@ -28,111 +32,76 @@ jobs:
           node --check assets/poker-library.js
           node --check assets/poker-finder.js
           node --check assets/poker-study-tools.js
+  browser:
+    name: Browser / ${{ matrix.group }}
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - group: identity
+            suites: search_visibility_browser first_steps_browser task_brief_browser
+          - group: navigation
+            suites: browser design_browser
+          - group: reader-tools
+            suites: site_find_browser reading_return_browser entrypoints_browser living_well_browser
+          - group: accessibility
+            suites: overview_browser cash_selection_browser review_browser
+          - group: poker
+            suites: poker_browser workshops_browser library_browser labs_browser field_guide_browser collections_browser finder_browser topics_browser full_resource_browser
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
       - name: Install browser and accessibility test tools
         run: |
           python -m pip install -r requirements-test.txt
           python -m playwright install --with-deps chromium
           npm install --prefix "$RUNNER_TEMP/nk-qa" --no-audit --no-fund axe-core@4.10.3
-      - name: Search and identity reader journeys
+      - name: Run every suite and preserve all failures
         env:
+          SUITES: ${{ matrix.suites }}
           AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
-          SCREENSHOT_DIR: ${{ runner.temp }}/search-identity-previews
-        run: python _tests/search_visibility_browser.py
-      - name: Save search and identity previews
-        if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: search-identity-previews
-          path: ${{ runner.temp }}/search-identity-previews/
-          retention-days: 1
-          if-no-files-found: error
-      - name: First-step journeys and creative brief
-        env:
-          AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
-          SCREENSHOT_DIR: ${{ runner.temp }}/first-step-previews
-        run: python _tests/first_steps_browser.py
-      - name: Save first-step previews
-        if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: first-step-previews
-          path: ${{ runner.temp }}/first-step-previews/
-          retention-days: 1
-          if-no-files-found: error
-      - name: Practical AI tool behavior and accessibility
-        env:
-          AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
-          SCREENSHOT_DIR: ${{ runner.temp }}/task-brief-previews
+          SCREENSHOT_DIR: ${{ runner.temp }}/browser-previews
         run: |
           set -o pipefail
-          mkdir -p "$RUNNER_TEMP/task-brief-previews"
-          python _tests/task_brief_browser.py 2>&1 | tee "$RUNNER_TEMP/task-brief-previews/checks.log"
-      - name: Save practical tool previews
-        if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: task-brief-previews
-          path: ${{ runner.temp }}/task-brief-previews/
-          retention-days: 1
-          if-no-files-found: error
-      - name: Offline browser regressions
-        env:
-          SCREENSHOT_DIR: ${{ runner.temp }}/poker-reading-previews
-        run: |
-          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/site_find_browser.py
-          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/reading_return_browser.py
-          python _tests/browser.py
-          python _tests/design_browser.py
-          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/entrypoints_browser.py
-          AXE_PATH="$RUNNER_TEMP/nk-qa/node_modules/axe-core/axe.min.js" python _tests/living_well_browser.py
-      - name: Save personal introduction and essay previews
-        if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: public-image-previews
-          path: |
-            ${{ runner.temp }}/poker-reading-previews/return-*.png
-            ${{ runner.temp }}/poker-reading-previews/find-*.png
-            ${{ runner.temp }}/poker-reading-previews/entry-*.png
-            ${{ runner.temp }}/poker-reading-previews/resources-*.png
-            ${{ runner.temp }}/poker-reading-previews/home-*.png
-            ${{ runner.temp }}/poker-reading-previews/about-*.png
-            ${{ runner.temp }}/poker-reading-previews/notes-*.png
-            ${{ runner.temp }}/poker-reading-previews/start-here-*.png
-            ${{ runner.temp }}/poker-reading-previews/technology-*.png
-            ${{ runner.temp }}/poker-reading-previews/keep-the-judgment-*.png
-          retention-days: 1
-          if-no-files-found: error
-      - name: Whole-site accessibility and failure recovery
-        env:
-          AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
-          SCREENSHOT_DIR: ${{ runner.temp }}/poker-reading-previews
-        run: |
-          set -o pipefail
-          mkdir -p "$RUNNER_TEMP/poker-reading-previews"
-          for suite in overview_browser cash_selection_browser review_browser poker_browser workshops_browser library_browser labs_browser field_guide_browser collections_browser finder_browser topics_browser full_resource_browser; do
+          mkdir -p "$SCREENSHOT_DIR"
+          status=0
+          for suite in $SUITES; do
             echo "Running $suite"
-            python "_tests/$suite.py" 2>&1 | tee "$RUNNER_TEMP/poker-reading-previews/$suite.log"
+            if ! python -u "_tests/$suite.py" 2>&1 | tee "$SCREENSHOT_DIR/$suite.log"; then
+              status=1
+            fi
           done
-      - name: Save Poker reading-path previews and diagnostics
+          exit "$status"
+      - name: Save browser previews and diagnostics
         if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: poker-reading-previews
-          path: |
-            ${{ runner.temp }}/poker-reading-previews/poker-*.png
-            ${{ runner.temp }}/poker-reading-previews/home-*.png
-            ${{ runner.temp }}/poker-reading-previews/about-*.png
-            ${{ runner.temp }}/poker-reading-previews/start-here-*.png
-            ${{ runner.temp }}/poker-reading-previews/technology-*.png
-            ${{ runner.temp }}/poker-reading-previews/notes-*.png
-            ${{ runner.temp }}/poker-reading-previews/creative-*.png
-            ${{ runner.temp }}/poker-reading-previews/keep-the-judgment-*.png
-            ${{ runner.temp }}/poker-reading-previews/*.log
-            ${{ runner.temp }}/poker-reading-previews/living-well-*.png
-            ${{ runner.temp }}/poker-reading-previews/living-well-*.json
+          name: browser-${{ matrix.group }}
+          path: ${{ runner.temp }}/browser-previews/
           retention-days: 1
           if-no-files-found: error
+  checks:
+    name: checks
+    needs: [build, browser]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every release check to pass
+        env:
+          BUILD_RESULT: ${{ needs.build.result }}
+          BROWSER_RESULT: ${{ needs.browser.result }}
+        run: |
+          test "$BUILD_RESULT" = success
+          test "$BROWSER_RESULT" = success
   published:
     name: Published release bytes
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
