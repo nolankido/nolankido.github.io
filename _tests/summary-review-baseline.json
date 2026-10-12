@@ -1,9 +1,9 @@
 {
   "commit": "9a92735d39c139adac8ba41a2adc4aeef35e609f",
   "source_count": 123,
-  "source_digest": "8f603bd2613bb2721dcfabaa271a21fbcb85f2b1091d0fd622dbace81c7fc2bb",
+  "source_digest": "205dac0f35eac2cfcc6fdc3e1a7e2148c918bd92536b71d07beea67945ce09c9",
   "body_count": 164,
-  "body_digest": "ca6f89d192f821370b034dfa41773edfa2d901658cc0ddb58f22c6fbad74bfa0",
+  "body_digest": "4352d629925290a4a5b0bcff8d328bbfb6b36797c30bc92aad89cd943cc1e9ea",
   "feeds": {
     "feed.xml": {
       "count": 6,
@@ -26,5 +26,5 @@
       "digest": "adfaa86661fc05a2f74798da51a89812cec18696a810a2b77b1512c9728fc295"
     }
   },
-  "manifest_digest": "eb2f14521be5983db8d6d93692ffd3ded6506afdc562c5b0083e4d107b1a7b00"
+  "manifest_digest": "fcb56f15d8f991edee88c803df9719a28cdceaa47343b8fc882feb43b99bde85"
 }

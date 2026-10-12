@@ -1,0 +1,19 @@
+/* Bounded, optional actions after the reading. Never a sticky share rail. */
+.page-share-wrap { margin: 2rem 0; padding-left: calc(var(--rail) + var(--gutter)); }
+.page-share { border-block: 1px solid var(--line-dark); padding: 1rem 0; }
+.page-share > summary { min-height: 44px; padding: .55rem 0; cursor: pointer; font-weight: 600; }
+.page-share > p { max-width: 68ch; }
+.page-share-controls { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1rem 0; }
+.page-share-controls button { cursor: pointer; font: 500 .9rem/1.4 var(--sans); min-height: 44px; }
+.page-share-controls [hidden] { display: none !important; }
+.page-share-controls button:disabled { opacity: .65; cursor: wait; }
+.page-share-address, .page-share .small-copy, .page-share-status, .note-keep .note-origin { overflow-wrap: anywhere; }
+.page-share-address { font: .85rem/1.7 var(--mono); }
+.page-share-status { font: 1rem/1.6 var(--sans); }
+.page-share-status:empty, .page-share-print-origin { display: none; }
+@media (max-width: 760px) { .page-share-wrap { padding-left: 0; } }
+@media print {
+  .page-share, .page-share-controls, .page-share-status { display: none !important; }
+  .page-share-wrap { padding-left: 0; margin: 1rem 0; }
+  .page-share-print-origin { display: block; font-size: 9pt; overflow-wrap: anywhere; }
+}

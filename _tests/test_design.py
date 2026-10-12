@@ -19,8 +19,10 @@ class DesignTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertIn('class="ledger"', content)
                 self.assertIn('/resources/', content)
-                for font in ['Schibsted+Grotesk', 'Source+Serif+4', 'IBM+Plex+Mono']:
-                    self.assertIn(font, content)
+                for font in ['Schibsted Grotesk', 'Source Serif 4', 'IBM Plex Mono']:
+                    self.assertIn(font, (ROOT / 'assets/site-fonts.css').read_text())
+                self.assertIn('/assets/site-fonts.css?v=', content)
+                self.assertNotIn('fonts.googleapis.com', content)
                 self.assertIn('/assets/site-core.css?v=', content)
                 self.assertNotRegex(content, r'\[(?:City|CITY|Mon|MON|YYYY|N)\b')
                 self.assertNotIn('80+ titles', content)

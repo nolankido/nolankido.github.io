@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,site_find,practical_discovery
 ROUTE='/technology/check-ai-summary/'
-EXCLUDE_SOURCES={'_source/pages.json','_source/technology/home.html','_source/resources.html','_source/technology/check-ai-summary.html'}
+EXCLUDE_SOURCES={'_source/font-faces.css','_source/pages.json','_source/technology/home.html','_source/resources.html','_source/technology/check-ai-summary.html'}
 EXCLUDE_BODIES={'find/index.html','notes/index.html','resources/index.html','technology/index.html','technology/check-ai-summary/index.html'}
 def digest(v):return sha256(v).hexdigest()
 def signature(v):return digest(json.dumps(v,separators=(',',':')).encode())
@@ -79,7 +79,7 @@ class SummaryReviewTests(unittest.TestCase):
   self.assertEqual(entry['kind'],'guide');self.assertEqual(entry['date'],'2026-10-12')
   self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path('sitemap.xml')])
   self.assertNotIn('<form',self.html);self.assertNotIn('<textarea',self.html)
-  self.assertEqual(re.findall(r'<script[^>]+src="([^"]+)"',self.html),['https://cloud.umami.is/script.js'])
+  self.assertEqual(re.findall(r'<script[^>]+src="([^"]+)"',self.html),['/assets/page-sharing.js?v='+sha256((ROOT/'assets/page-sharing.js').read_bytes()).hexdigest()[:12],'https://cloud.umami.is/script.js'])
   for p in self.pages:
    self.assertEqual('/assets/summary-review.css?' in self.outputs[build.output_path(p['path'])],p['path']==ROUTE)
 if __name__=='__main__':unittest.main(verbosity=2)

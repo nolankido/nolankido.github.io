@@ -91,6 +91,9 @@ class ContentTests(unittest.TestCase):
                 expected.insert(0, '/assets/poker-finder.js?v=' + hashlib.sha256((ROOT / 'assets/poker-finder.js').read_bytes()).hexdigest()[:12])
             if path == Path('living-well/find/index.html'):
                 expected.insert(0, '/assets/living-well-directory.js?v=' + hashlib.sha256((ROOT / 'assets/living-well-directory.js').read_bytes()).hexdigest()[:12])
+            schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', content, re.S)[1])
+            if schema.get('@type') == 'Article' or path in {Path('technology/task-brief/index.html'), Path('technology/ai-time-savings/index.html')}:
+                expected.insert(len(expected)-1, '/assets/page-sharing.js?v=' + hashlib.sha256((ROOT / 'assets/page-sharing.js').read_bytes()).hexdigest()[:12])
             self.assertEqual(sources, expected)
         self.assertNotIn('<form', outputs[Path('resources/index.html')])
         self.assertNotIn('reason for contact, and your message', outputs[Path('privacy/index.html')])
