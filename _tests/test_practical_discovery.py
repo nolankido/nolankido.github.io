@@ -50,7 +50,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(json.dumps(historical, sort_keys=True).encode()).hexdigest(),
                          self.baseline['combined_record_signature'])
         added = set(now) - set(historical)
-        self.assertEqual(added, {'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/', 'https://nolankido.com/technology/should-i-use-ai/'})
+        self.assertEqual(added, {'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/', 'https://nolankido.com/technology/should-i-use-ai/', 'https://nolankido.com/technology/check-ai-answers/'})
         for slug in ['task-brief', 'ai-time-savings']:
             self.assertNotIn('https://nolankido.com/technology/' + slug + '/', now)
 
@@ -58,7 +58,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
         tree = ET.fromstring(self.outputs[discovery.FEED])
         items = tree.findall('./channel/item')
         expected = {'https://nolankido.com/notes/' + s + '/' for s in self.config['note_ids']}
-        expected.update({'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/', 'https://nolankido.com/technology/should-i-use-ai/'})
+        expected.update({'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/', 'https://nolankido.com/technology/should-i-use-ai/', 'https://nolankido.com/technology/check-ai-answers/'})
         self.assertEqual({i.findtext('link') for i in items}, expected)
         self.assertEqual(len(items), len(expected))
         original = records(self.outputs[Path('feed.xml')])

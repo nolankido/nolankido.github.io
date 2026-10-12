@@ -1,0 +1,169 @@
+<section class="section folio-row" aria-labelledby="review-start">
+  <div class="section-meta"><p class="section-label">Start with the use</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="review-start">What would make this answer worth using?</h2>
+    <p class="intro">Choose a check that fits the answer: a source for a factual claim, a separate calculation for a number, and a realistic test for working code.</p>
+    <p>Before checking, name what you intend to do with the result. A draft you will edit, a figure you will publish, and code you will run need different evidence. Circle the parts that could change an action: a date, amount, promise, instruction, or conclusion. Start there.</p>
+    <p>A second AI answer can suggest questions to investigate. Agreement between answers still leaves you needing evidence outside those answers. This guide gives you six ways to obtain it.</p>
+    <p class="review-boundary"><strong>Use more than one check when needed.</strong> A summary may also contain facts and calculations. Faithfully summarizing a mistaken source preserves its mistake. A valid calculation may use the wrong inputs. This is a review method, not an automatic accuracy test or permission to act.</p>
+    <nav class="review-picker" aria-label="Choose the kind of AI answer">
+      <a href="#review-research"><span class="review-kind">Facts &amp; citations</span><span>Does the source support the claim?</span></a>
+      <a href="#review-numbers"><span class="review-kind">Numbers &amp; calculations</span><span>Can you reproduce the whole calculation?</span></a>
+      <a href="#review-summary"><span class="review-kind">Summaries</span><span>Did the meaning survive the shortening?</span></a>
+      <a href="#review-writing"><span class="review-kind">Messages &amp; writing</span><span>Does it say something you can stand behind?</span></a>
+      <a href="#review-code"><span class="review-kind">Code &amp; websites</span><span>Does it work beyond one comfortable example?</span></a>
+      <a href="#review-advice"><span class="review-kind">Personal advice</span><span>Whose priorities does the answer assume?</span></a>
+    </nav>
+    <p class="small-copy">All six methods, examples, and the blank record work without JavaScript. The examples below are authored teaching scenarios, not captured model output or personal results. There is no answer upload or model connection.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-research">
+  <div class="section-meta"><p class="section-label">01 / Facts &amp; citations</p></div>
+  <div class="section-content prose review-method">
+    <h2 id="review-research">Open the source. Then check the claim.</h2>
+    <p>A real link and an impressive document title do not establish that the sentence beside them is true. Review each important claim against the relevant passage.</p>
+    <ol class="review-steps">
+      <li><strong>Existence:</strong> find the document on its publisher's site. Match its title, author or organization, and date. If you cannot locate it, record it as unverified.</li>
+      <li><strong>Support:</strong> locate the passage, table, or result that supports the exact claim. Read the nearby qualifications. Separate what the source says from what the answer infers.</li>
+      <li><strong>Fit:</strong> check the population, setting, assumptions, and limits. A result for one task does not automatically apply to yours.</li>
+      <li><strong>Currency:</strong> for a changing fact, check the current official source and record the date you checked. An authentic historical document can be the wrong source for today's rule.</li>
+    </ol>
+    <details class="review-example" id="research-example"><summary>Try the citation check: a real source, an unsupported number</summary>
+      <p><strong>Fictional answer:</strong> “NIST's 2024 Generative Artificial Intelligence Profile says an answer is 99% reliable if a second chatbot agrees.”</p>
+      <p><strong>Material to inspect:</strong> <a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf#page=9">NIST AI 600-1, section 2.2, Confabulation</a> (printed page 6; PDF page 9). The cited report exists. This passage discusses confident errors and misleading generated reasoning or citations; it does not provide the claimed percentage or agreement rule.</p>
+      <p><strong>Review result:</strong> the source is authentic, but this passage does not support the claim. Remove the unsupported number and rule. A supported statement is narrower: NIST describes how generated explanations and citations can accompany an incorrect answer and encourage misplaced trust.</p>
+      <p>That is a finding about this claim and passage, not proof that every statement in the answer is wrong. Search the actual document for the alleged result before deciding whether another passage supports it.</p>
+    </details>
+    <p class="review-stop"><strong>Keep as unresolved:</strong> an inaccessible source, a missing supporting passage, or a fact whose current status you cannot establish. Do not turn a plausible explanation into a checked fact.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-numbers">
+  <div class="section-meta"><p class="section-label">02 / Numbers &amp; calculations</p></div>
+  <div class="section-content prose review-method">
+    <h2 id="review-numbers">Recompute it, including the work that disappeared.</h2>
+    <p>Write down the inputs and their units before repeating the arithmetic. Then use a calculator, spreadsheet, or small independent example to reproduce the result. Check whether the calculation answers the question you actually asked.</p>
+    <ol class="review-steps">
+      <li>Name the inputs, units, time period, and missing costs.</li>
+      <li>Recompute with a method you can inspect rather than copying the answer's formula unchanged.</li>
+      <li>Try a simple boundary: zero uses, one use, a smaller amount, or a known result. Explain why the output should change.</li>
+      <li>Keep the result conditional on the inputs. Arithmetic alone does not verify estimated time, prices, or future outcomes.</li>
+    </ol>
+    <details class="review-example" id="numbers-example"><summary>Try the time-saving check: faster drafting, smaller overall savings</summary>
+      <p><strong>Fictional plan:</strong> a usual task takes 20 minutes and will be done 12 times. With AI, allow 30 minutes of setup, 6 minutes of drafting and 7 minutes of review per use, plus 18 minutes of additional repairs across the period.</p>
+      <p><strong>Incomplete answer:</strong> “You save 168 minutes.” That subtracts drafting time alone: 12 × (20 − 6).</p>
+      <div class="review-calculation"><p>Usual workflow: 12 × 20 = <strong>240 minutes</strong>.</p><p>AI workflow: 30 + 12 × (6 + 7) + 18 = <strong>204 minutes</strong>.</p><p>Estimated saving: 240 − 204 = <strong>36 minutes</strong>.</p></div>
+      <p><strong>Independent way to inspect it:</strong> 30 setup + 72 drafting + 84 review + 18 repairs = 204. The arithmetic checks the estimate; these fictional inputs do not establish actual savings.</p>
+    </details>
+    <p><a href="/technology/ai-time-savings/">Compare the full time cost of an AI workflow</a>, including upkeep. For a different failure, <a href="/notes/trustworthy-tools/#a-small-claim">see two matching calculations that both use the wrong definition</a>.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-summary">
+  <div class="section-meta"><p class="section-label">03 / Summaries</p></div>
+  <div class="section-content prose review-method">
+    <h2 id="review-summary">Keep conditions, ownership, and uncertainty intact.</h2>
+    <p>Put the source beside the summary. Trace each consequential statement back to a passage. Check what was omitted as well as what was added.</p>
+    <ol class="review-steps">
+      <li>Find the source for dates, amounts, commitments, and named responsibilities.</li>
+      <li>Look for changed certainty: proposed becoming confirmed, possible becoming required.</li>
+      <li>Check dependencies and boundaries: “if,” “unless,” “subject to,” and “draft only.”</li>
+      <li>Restore omissions that would change a reader's next action. Then review the repaired summary again.</li>
+    </ol>
+    <details class="review-example" id="summary-example"><summary>Try the meaning check: a plan that depends on the weather</summary>
+      <p><strong>Fictional source:</strong> “We may meet outdoors on Sunday if the weather allows. Jo will check the forecast on Saturday; nobody has agreed to notify the group yet.”</p>
+      <p><strong>Flawed summary:</strong> “Jo will tell everyone about Sunday's confirmed outdoor meeting.”</p>
+      <p><strong>Repair:</strong> “An outdoor meeting on Sunday is possible, depending on the weather. Jo will check the forecast on Saturday. Responsibility for notifying the group is still unassigned.”</p>
+      <p>The repair preserves the condition and distinguishes checking the forecast from agreeing to send a message. It does not verify the weather or obtain anyone's permission.</p>
+    </details>
+    <p><a href="/technology/check-ai-summary/">Work through a complete summary review</a> with seven source passages, six traceable problems, and a repaired version.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-writing">
+  <div class="section-meta"><p class="section-label">04 / Messages &amp; writing</p></div>
+  <div class="section-content prose review-method">
+    <h2 id="review-writing">Check the commitments, not just the tone.</h2>
+    <p>Read the draft as its recipient would. Polite wording can still invent an agreement, a deadline, a personal experience, or a promise you never intended to make.</p>
+    <ol class="review-steps">
+      <li>Match names, dates, amounts, and factual statements to the supplied material.</li>
+      <li>Underline promises and requests. Confirm who is being asked to do what, and by when.</li>
+      <li>Read it aloud. Replace phrasing you would not use or cannot stand behind.</li>
+      <li>Keep approval of the wording separate from approval to send or publish it.</li>
+    </ol>
+    <details class="review-example" id="writing-example"><summary>Try the commitment check: an inquiry becomes a confirmed meeting</summary>
+      <p><strong>Fictional instruction:</strong> “Ask Sam to suggest two times for a short call next week.”</p>
+      <p><strong>Flawed draft:</strong> “Thanks for confirming our call on Tuesday at 10. I'll send the contract beforehand.”</p>
+      <p><strong>Repair:</strong> “Hi Sam, could you suggest two times for a short call next week? Thanks.”</p>
+      <p>The original instruction supplied neither a confirmed meeting nor a contract promise. A more professional tone cannot fix that change in meaning. Review the final draft, then decide whether to send it.</p>
+    </details>
+    <p><a href="/technology/task-brief/">Define the output and action boundary in an AI task brief</a>. For the reader's experience, <a href="/notes/generous-explanations/">compare two ways of giving the same instruction</a>.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-code">
+  <div class="section-meta"><p class="section-label">05 / Code &amp; websites</p></div>
+  <div class="section-content prose review-method">
+    <h2 id="review-code">Test a claim that could fail.</h2>
+    <p>State the intended behavior before choosing tests. Use an isolated copy and sample data. Include a normal case, a boundary, and a failure or recovery path, with expected results worked out separately.</p>
+    <ol class="review-steps">
+      <li>Write a concrete before-and-after claim. Identify the inputs and expected behavior.</li>
+      <li>Choose tests that distinguish the intended rule from a plausible wrong rule.</li>
+      <li>For a website, check the actual page, keyboard use, narrow screens, error states, and relevant behavior with scripting unavailable.</li>
+      <li>Check the published result separately from the local test. Keep the evidence tied to the version you tested.</li>
+    </ol>
+    <details class="review-example" id="code-example"><summary>Try the boundary check: a percentage mistaken for a fixed amount</summary>
+      <p><strong>Fictional requirement:</strong> return a price after a percentage discount. This deliberately wrong JavaScript treats the percentage as an amount:</p>
+      <pre><code>function discountedPrice(price, percent) {
+  return price - percent;
+}</code></pre>
+      <p>At a price of 100 and a 20% discount, both the intended rule and the wrong rule return 80. That one passing example hides the defect.</p>
+      <p>At a price of 50 and the same 20% discount, the expected price is 40: 50 × (1 − 20 / 100). The wrong function returns 30. This case distinguishes the rules.</p>
+      <p>A corrected formula alone would still leave questions about input validation, rounding, and the intended price format. The small exercise is a test-design lesson, not production pricing code.</p>
+    </details>
+    <p><a href="/technology/checking-ai-website-changes/">Inspect a real website repair</a> where passing unit tests and a separate HTML check asked different questions.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-advice">
+  <div class="section-meta"><p class="section-label">06 / Personal advice</p></div>
+  <div class="section-content prose review-method">
+    <h2 id="review-advice">Separate facts from the life you want.</h2>
+    <p>An answer can organize a choice without knowing which tradeoffs you want to make. Check its factual assumptions separately from its priorities.</p>
+    <ol class="review-steps">
+      <li>Mark factual claims you can verify, and predictions you cannot yet know.</li>
+      <li>Name the objective the answer is optimizing. Ask whether that is yours.</li>
+      <li>Notice whose interests or constraints are missing. Bring relevant people into the actual conversation.</li>
+      <li>Use the answer to form better questions. Keep the decision and responsibility with the people affected.</li>
+    </ol>
+    <details class="review-example" id="advice-example"><summary>Try the priority check: a higher salary becomes the whole decision</summary>
+      <p><strong>Fictional answer:</strong> “Choose the role with the higher salary. It is clearly the better offer.”</p>
+      <p><strong>Missing material:</strong> working hours, the commute, stability, care responsibilities, interest in the work, and which compromises the person is willing to make.</p>
+      <p><strong>Better next step:</strong> verify the terms of each offer, write down the person's priorities, and compare the tradeoffs. The salary difference is a fact to check; “better” depends on a purpose the answer has not established.</p>
+    </details>
+    <p><a href="/living-well/what-to-decide-yourself/">Explore what to decide yourself</a>, or <a href="/living-well/decide-what-matters/">choose the purpose before asking for advice</a>. For decisions with serious consequences, obtain review from someone with the relevant knowledge and responsibility.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-record">
+  <div class="section-meta"><p class="section-label">Keep the evidence</p></div>
+  <div class="section-content prose">
+    <h2 id="review-record">Leave a record you can inspect later.</h2>
+    <p>Write the claim, the evidence outside the answer, the check you actually performed, and what remains unknown. Name the use you are considering. A checked total does not certify a document; a repaired draft does not authorize sending it.</p>
+    <p>Finish with a specific next step: use the reviewed part for a named purpose, revise it, obtain more evidence, or leave it unused. If you cannot review the important parts adequately, a simpler method may be the better choice.</p>
+    <p><a class="button" href="/downloads/ai-answer-review.txt" download>Download the blank review record (.txt)</a></p>
+    <details class="review-sheet"><summary>Preview the complete blank record</summary><pre>${answer_review_sheet}</pre></details>
+    <p class="small-copy">Use the downloaded file privately in your own notes. For a printed reading copy, open the examples you want to include before using your browser's Print command. This page has no answer-entry field and does not evaluate, store, or upload your answer. The site's existing pageview analytics and font delivery are described in <a href="/privacy/">Privacy</a>.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="review-sources">
+  <div class="section-meta"><p class="section-label">Sources &amp; scope</p></div>
+  <div class="section-content prose">
+    <h2 id="review-sources">What supports this guide?</h2>
+    <p>NIST's <a href="https://doi.org/10.6028/NIST.AI.600-1">Generative Artificial Intelligence Profile</a>, published July 2024, describes confident errors and the possibility of generated reasoning or citations misleading a reader (section 2.2). It supports the reason to inspect evidence; it does not validate this site's six-part review method or the fictional reliability percentage in the exercise.</p>
+    <p>The review sequence and six examples are instructional material developed for this site with AI assistance. They are not a measured trial, a benchmark, or a universal certification. Checking selected claims cannot establish that an entire system or answer is reliable.</p>
+    <p><a href="/technology/">Continue with practical AI tools and guides</a>, <a href="/technology/should-i-use-ai/">decide whether AI fits the task</a>, or <a href="/contact/">suggest a correction</a>.</p>
+  </div>
+</section>

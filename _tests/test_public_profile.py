@@ -34,7 +34,7 @@ class PublicProfileTests(unittest.TestCase):
     def test_original_public_body_identity_feeds_and_css_are_preserved(self):
         baseline=json.loads((ROOT/'_tests/public-profile-baseline.json').read_text())
         records=[]
-        for path in sorted((p for p in self.outputs if p.suffix=='.html' and p.as_posix() not in baseline['body_exclusions'] and p.as_posix() != choice_history.NEW_OUTPUT), key=lambda p:p.as_posix()):
+        for path in sorted((p for p in self.outputs if p.suffix=='.html' and p.as_posix() not in baseline['body_exclusions'] and p.as_posix() not in choice_history.NEW_OUTPUTS), key=lambda p:p.as_posix()):
             raw=choice_history.before(path,self.outputs[path]).encode()
             body=re.search(rb'<body\b[^>]*>(.*?)</body>',raw,re.S).group(1)
             records.append((path.as_posix(),sha256(body).hexdigest()))
