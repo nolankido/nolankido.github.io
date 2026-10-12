@@ -42,7 +42,7 @@
     "_source/notes/keep-the-judgment.html": "ba6d607702131531a92cfe5a30bab72ed8d03e4e877fd474636b76c78429bf72",
     "_source/notes/learning-from-the-beginning.html": "ca23675346af0bbd19f37467acb05d91b95b01920a050b044b2aa30c92315ffe",
     "_source/notes/trustworthy-tools.html": "798167d44386c74c616fbe22c461f41d5629a67457f600b10033dc2676afe3e8",
-    "_source/pages.json": "a721819d1701ecd421046ab953d92b07dddd5499a0d2c8a8b1c56f0973c89b2e",
+    "_source/pages.json": "53b58329030298b6dfa2430365778e9b391a5007af0f16fc8ab4e9f8c7ac24f9",
     "_source/poker/RESOURCE_BACKLOG.json": "9e10d5a1f7790c1ad888692473ac80722000904d91d494e78842379d20df76c8",
     "_source/poker/RESOURCE_BATCH_002.md": "045958d98bf26e893a274307db30f136d91ebbde5f23cff56b2e5ac4a419265d",
     "_source/poker/RESOURCE_BATCH_003.json": "59ad883744b8185877b5c1219dd88e91a513f67a9e4bf402fb227f2bf177cc2b",
@@ -118,7 +118,7 @@
     "_source/practical-discovery.json": "4298e303e46436d7cc767c4b562b5d592025bae292240fe21b192a75431252ec",
     "_source/presentation.json": "185550e0f0673ad9730523fa94aa9b6c017c576008b6055e18050c69787b648e",
     "_source/privacy.html": "30a5f371883901da4c9e413ef12f5641cfcb00d86b2ae544fc24e85da0e7dba5",
-    "_source/resources.html": "11e1ad333bff803afc9569b39ef6e095c37c43fdd2fdbfdad974673c538b3a7b",
+    "_source/resources.html": "fcce33ba8c7f685ee72e769459159d1843d4b560ec860669f69bc2cbb6b27b0d",
     "_source/selection.json": "3b8a3b261d3f43b8883ad8fe4d2c2ad63593c3edb4a29b7c7775894ef10b1291",
     "_source/site.json": "5e01a8eae2c9593a0dace992e5a13ffbc22b1ab5e0c635ac9bf0db6507c16d65",
     "_source/start-here.html": "b40f31252b4ab086f4707fd29b407ee860e892fe5555a5fba93b74641c79a18a",
@@ -137,8 +137,8 @@
     "feed.xml": "ba511115cc593966c73c95ffe05839e54eb4616286ff98c171c275ae4db13924",
     "living-well/feed.xml": "94d241e3797f54abf9f5b35e99a1f1f92cd932d2326c7fdc481fb5a2ce86e094",
     "poker/feed.xml": "374469c9de296d8f58599e328a581735e04acbe97e719bf36741e5c43d45351f",
-    "technology/feed.xml": "488d9846e5e282c66670ba790441a856391edffd4a665ad83354941c1a11bb09",
-    "writing.xml": "d59abdd4ec2d134b4a66202880c0efd6d40f79227f90f37f9ece8c0e1e534875"
+    "technology/feed.xml": "dc123cec3fd96832f7f0593b830ee25122b91805a14f1ef41c56caeeea8ef014",
+    "writing.xml": "1d2abaa7bb9f4918cb9981c0ec4c9876d4e3d0d9e97b11dd222d93c37b12bab7"
   },
   "pages": [
     {
@@ -802,6 +802,14 @@
       "path": "/technology/checking-ai-website-changes/",
       "title": "Checking an AI-assisted website change.",
       "date": "2026-10-11",
+      "updated": null,
+      "noindex": null
+    },
+    {
+      "id": "ai-summary-review",
+      "path": "/technology/check-ai-summary/",
+      "title": "Check an AI summary against its source.",
+      "date": "2026-10-12",
       "updated": null,
       "noindex": null
     },

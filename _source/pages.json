@@ -1007,5 +1007,17 @@
     "source": "technology/checking-ai-website-changes.html",
     "date": "2026-10-11",
     "evidence_article": true
+  },
+  {
+    "id": "ai-summary-review",
+    "section": "technology",
+    "path": "/technology/check-ai-summary/",
+    "title": "Check an AI summary against its source.",
+    "seo_title": "How to Check an AI Summary: Worked Example | Nolan Kido",
+    "description": "Check an AI summary claim by claim. Compare a fictional source, six annotated problems, and a repaired draft, then use the free source-review checklist.",
+    "kicker": "Technology / Worked guide",
+    "source": "technology/check-ai-summary.html",
+    "date": "2026-10-12",
+    "worked_guide": true
   }
 ]

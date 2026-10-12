@@ -1,0 +1,30 @@
+{
+  "commit": "9a92735d39c139adac8ba41a2adc4aeef35e609f",
+  "source_count": 123,
+  "source_digest": "8f603bd2613bb2721dcfabaa271a21fbcb85f2b1091d0fd622dbace81c7fc2bb",
+  "body_count": 164,
+  "body_digest": "ca6f89d192f821370b034dfa41773edfa2d901658cc0ddb58f22c6fbad74bfa0",
+  "feeds": {
+    "feed.xml": {
+      "count": 6,
+      "digest": "141b47644d2c8b3a8c1a60d0726fee3846085b08b1aea6f76774ead4c2822058"
+    },
+    "poker/feed.xml": {
+      "count": 54,
+      "digest": "ba553951958ddbeebe6682c16def61ac3618d69ede0619256b9f4de10a79f3c6"
+    },
+    "living-well/feed.xml": {
+      "count": 31,
+      "digest": "53a00599e7fbcddb3ecbf7b6e356641a9963dda52ce40611aafb585b0401848a"
+    },
+    "technology/feed.xml": {
+      "count": 3,
+      "digest": "8b41c215b8f06f8c7b91b71cfd2ab214ee1044c78c66ebd27999cd33718a23b7"
+    },
+    "writing.xml": {
+      "count": 92,
+      "digest": "adfaa86661fc05a2f74798da51a89812cec18696a810a2b77b1512c9728fc295"
+    }
+  },
+  "manifest_digest": "eb2f14521be5983db8d6d93692ffd3ded6506afdc562c5b0083e4d107b1a7b00"
+}

@@ -92,7 +92,7 @@ try:
                     expect(page).to_have_url(base + path)
                     report['keyboard_journeys'] += 1
                 page.goto(base + '/notes/#technology')
-                page.locator('.technology-publication a').focus(); page.keyboard.press('Enter')
+                page.locator('.technology-publication a[href="/technology/checking-ai-website-changes/"]').focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(base + '/technology/checking-ai-website-changes/')
                 page.locator('.technology-return a[href="/follow/#practical-ai-feed"]').focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(base + '/follow/#practical-ai-feed')

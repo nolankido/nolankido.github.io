@@ -278,7 +278,7 @@ class BrowserTests(unittest.TestCase):
         # publishes its recorded cases here, including with site scripts disabled.
         # Derive the expected inventory from the manifest, not the renderer.
         cases = sorted((p for p in build.public_pages()
-                        if p.get('section') == 'technology' and p.get('evidence_article')),
+                        if p.get('section') == 'technology' and (p.get('evidence_article') or p.get('worked_guide'))),
                        key=lambda p: (p['date'], p['path']), reverse=True)
         case_paths = [p['path'] for p in cases]
         for route in config['reading_routes']:
