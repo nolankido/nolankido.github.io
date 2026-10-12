@@ -21,7 +21,7 @@ class DesignTests(unittest.TestCase):
                 self.assertIn('/resources/', content)
                 for font in ['Schibsted+Grotesk', 'Source+Serif+4', 'IBM+Plex+Mono']:
                     self.assertIn(font, content)
-                self.assertIn('ledger-20261005', content)
+                self.assertIn('/assets/site-core.css?v=', content)
                 self.assertNotRegex(content, r'\[(?:City|CITY|Mon|MON|YYYY|N)\b')
                 self.assertNotIn('80+ titles', content)
 

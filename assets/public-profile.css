@@ -1,0 +1,12 @@
+.page-bio .entry-jumps { display: flex; flex-wrap: wrap; gap: .75rem 1.2rem; margin: 1.5rem 0; font: .9rem/1.5 var(--sans); }
+.profile-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem 1.2rem; margin: 1rem 0; }
+.profile-actions a, .profile-work a, #profile-site-url { overflow-wrap: anywhere; }
+[data-profile-copy] { padding: .65rem .9rem; cursor: pointer; }
+[data-profile-copy][hidden] { display: none; }
+.profile-work dt { margin-top: 1.4rem; font-weight: 600; }
+.profile-work dd { margin: .4rem 0 1rem; }
+#profile-copy-status { min-height: 1.6em; }
+@media print {
+  .profile-actions, [data-profile-copy], #profile-copy-status, .page-bio .entry-jumps { display: none !important; }
+  .profile-work dt { break-after: avoid; }
+}

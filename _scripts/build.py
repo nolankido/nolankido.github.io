@@ -34,6 +34,8 @@ import follow
 import search_visibility
 import practical_discovery
 import everyday_tasks
+import core_styles
+import public_profile
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -304,6 +306,12 @@ def build_outputs() -> dict[Path, str]:
             extra += f'\n  <link rel="stylesheet" href="/assets/practical-discovery.css?v={version}">'
         if p.get('section') == 'technology' or p['id'] == 'technology':
             extra += '\n  <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Practical AI writing" href="/technology/feed.xml">'
+        if p['id'] == 'bio':
+            for asset, kind in [('public-profile.css', 'style'), ('public-profile.js', 'script')]:
+                version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                extra += ('\n  <link rel="stylesheet" href="/assets/' + asset + '?v=' + version + '">'
+                          if kind == 'style' else '\n  <script defer src="/assets/' + asset + '?v=' + version + '"></script>')
+            schema['about'] = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/'}
         body += practical_discovery.article_return(p)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
         search_version = hashlib.sha256((ROOT / 'assets/search-visibility.css').read_bytes()).hexdigest()[:12]
@@ -346,7 +354,8 @@ def build_outputs() -> dict[Path, str]:
     outputs[practical_discovery.FEED] = practical_discovery.feed(practical_config, pages, outputs, site['url'])
     outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
-    return outputs
+    outputs.update(public_profile.exports(site))
+    return core_styles.apply(outputs, ROOT)
 
 
 def main() -> int:

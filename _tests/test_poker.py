@@ -43,12 +43,12 @@ class PokerTests(unittest.TestCase):
         self.assertIn('Result, recorded separately', sheet)
 
     def test_new_assets_have_content_versions_and_live_checks(self):
-        version = hashlib.sha256((ROOT / 'assets/hubs.css').read_bytes()).hexdigest()[:12]
+        version = hashlib.sha256((ROOT / 'assets/site-core.css').read_bytes()).hexdigest()[:12]
         for path, content in build.build_outputs().items():
             if path.suffix == '.html':
-                self.assertIn('/assets/hubs.css?v=' + version, content)
+                self.assertIn('/assets/site-core.css?v=' + version, content)
         targets = check_live.targets()
-        for route in ['/poker/', '/poker/reviewing-a-hand/', '/assets/hubs.css', '/downloads/poker-hand-review.md']:
+        for route in ['/poker/', '/poker/reviewing-a-hand/', '/assets/hubs.css', '/assets/site-core.css', '/downloads/poker-hand-review.md']:
             self.assertIn(route, targets)
 
     def test_general_notes_and_their_dates_are_preserved(self):
