@@ -1,0 +1,21 @@
+name: Prepare evidence release
+on:
+  push:
+    branches: [codex/workflow-evidence-20261011]
+    paths: [.github/workflows/evidence-prepare.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: git archive --format=tar --output=/tmp/current-source.tar HEAD
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: current-evidence-source
+          path: /tmp/current-source.tar
+          retention-days: 1
