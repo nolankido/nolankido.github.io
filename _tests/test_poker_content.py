@@ -208,6 +208,8 @@ BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html
 # October 11: reviewed evidence links in About, Resources and Technology only.
 # Practical-work presentation reviewed; original sources/feed records are pinned
 # independently by test_practical_discovery.py. No protected article was rewritten.
-BASELINE_DIGEST = '5855d89b9b25b0ff035fd090cfb16861a06c0b5b5de99888fff9b695ba43223e'
+# Everyday-task routes and guide summaries intentionally change presentation in this snapshot.
+# Original source, feed, URL and date contracts are pinned in test_everyday_tasks.py.
+BASELINE_DIGEST = 'b8a76967c51fc46a6cc69128d7cfc88bdd547a2dc2050e46e4880e799a8dfc8f'
 
 if __name__=='__main__': unittest.main(verbosity=2)

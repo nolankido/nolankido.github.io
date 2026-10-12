@@ -1,0 +1,11 @@
+/* Task navigation only. No global design or interactive behavior changes. */
+.everyday-task-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem 2rem;margin:1.5rem 0 2rem}
+.everyday-task{min-width:0;border-top:1px solid var(--line,#c5ccc6);padding-top:1.2rem;overflow-wrap:anywhere}
+.everyday-task h3{font-size:1.12rem;line-height:1.35;margin:0 0 .65rem}
+.everyday-task p{font-size:.98rem;line-height:1.6;margin:.55rem 0}
+.everyday-task .everyday-outcome{font-size:.94rem}
+.everyday-task .everyday-format{font-size:.83rem;letter-spacing:.02em}
+.everyday-task a{text-underline-offset:.2em}
+.everyday-task a:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+@media(max-width:600px){.everyday-task-grid{grid-template-columns:minmax(0,1fr);gap:1.3rem}}
+@media print{.everyday-task-grid{display:block}.everyday-task{break-inside:avoid}.everyday-format{display:none}}

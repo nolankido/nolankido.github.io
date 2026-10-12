@@ -1,5 +1,7 @@
 """Reader-first, static helpers for the Technology for Real Life guide series."""
 from html import escape
+from pathlib import Path
+import re
 
 SERIES = 'technology-for-real-life'
 EVIDENCE = 'worked-guide-not-firsthand-result'
@@ -32,6 +34,32 @@ def validate(entry: dict) -> None:
             raise ValueError('Utility field is too long: ' + field)
 
 
+def worksheet_path(entry: dict) -> Path:
+    slug = entry.get('slug')
+    if not isinstance(slug, str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', slug):
+        raise ValueError('Invalid worksheet slug')
+    validate(entry)
+    if not entry.get('utility'):
+        raise ValueError('Only worked guides have task worksheets')
+    return Path('downloads/living-well-' + slug + '.txt')
+
+
+def worksheet_exports(entries: list[dict]) -> dict[Path, str]:
+    result = {}
+    for entry in entries:
+        if not entry.get('utility'):
+            continue
+        path = worksheet_path(entry)
+        if path in result:
+            raise ValueError('Duplicate worksheet destination')
+        result[path] = entry['utility']['starter']
+    return result
+
+
+def download_link(entry: dict) -> str:
+    return '<a href="/' + worksheet_path(entry).as_posix() + '" download>Save the blank worksheet (.txt)</a>'
+
+
 def brief(entry: dict) -> str:
     data = entry.get('utility')
     if not data:
@@ -43,7 +71,8 @@ def brief(entry: dict) -> str:
             '<p><strong>Simplest route:</strong> ' + escape(data['simplest_route']) + '</p>'
             '<p><strong>Finish when:</strong> ' + escape(data['finish']) + '</p>'
             '<p class="small-copy">No generative AI required. Worked examples illustrate the method; '
-            'they are not reports of personal tests.</p></aside>')
+            'they are not reports of personal tests.</p>'
+            '<p class="lw-worksheet-actions">' + download_link(entry) + '</p></aside>')
 
 
 def starter(entry: dict) -> str:
@@ -55,7 +84,9 @@ def starter(entry: dict) -> str:
             '<p>Use these headings on paper or copy them into your own note. '
             'Keep the answers with you; there is nothing to submit to this website.</p>'
             '<details class="lw-preview" open><summary>Read or select the plain-text template</summary>'
-            '<pre>' + escape(data['starter']) + '</pre></details></section>')
+            '<pre>' + escape(data['starter']) + '</pre></details>'
+            '<p>' + download_link(entry) + '. The download is the exact blank text shown above, not your answers.</p>'
+            '<p><a href="/technology/#technology-path">Choose another everyday task</a> · <a href="/living-well/worksheets/#everyday-task-sheets">All task worksheets</a></p></section>')
 
 
 def outline(entry: dict, html: str) -> str:
