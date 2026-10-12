@@ -984,5 +984,28 @@
     "kicker": "Technology / A practical tool",
     "source": "technology/task-brief.html",
     "updated": "2026-10-11"
+  },
+  {
+    "id": "ai-time-savings",
+    "section": "technology",
+    "path": "/technology/ai-time-savings/",
+    "title": "Does AI actually save you time?",
+    "seo_title": "AI Time Savings Calculator: Count the Full Workflow | Nolan Kido",
+    "description": "Compare AI workflow time including setup, prompting, review, repairs, and upkeep. Free calculator with break-even examples and a private-use worksheet.",
+    "kicker": "Technology / A practical calculator",
+    "source": "technology/ai-time-savings.html",
+    "updated": "2026-10-11"
+  },
+  {
+    "id": "ai-website-verification",
+    "section": "technology",
+    "path": "/technology/checking-ai-website-changes/",
+    "title": "Checking an AI-assisted website change.",
+    "seo_title": "How to Check AI Website Changes: A Real Case | Nolan Kido",
+    "description": "A documented AI-assisted website change passed 347 tests but still had malformed HTML. Inspect the repair, reproduce the failure, and reuse the checking method.",
+    "kicker": "Technology / Recorded case study",
+    "source": "technology/checking-ai-website-changes.html",
+    "date": "2026-10-11",
+    "evidence_article": true
   }
 ]

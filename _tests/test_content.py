@@ -73,6 +73,8 @@ class ContentTests(unittest.TestCase):
                 continue
             sources = re.findall(r'<script[^>]+src="([^"]+)"', content)
             expected = (['/assets/contact.js?v=' + hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]] if path == Path('contact/index.html') else []) + ['https://cloud.umami.is/script.js']
+            if path == Path('technology/ai-time-savings/index.html'):
+                expected.insert(0, '/assets/workflow-time.js?v=' + hashlib.sha256((ROOT / 'assets/workflow-time.js').read_bytes()).hexdigest()[:12])
             if path == Path('technology/task-brief/index.html'):
                 expected.insert(0, '/assets/task-brief.js?v=' + hashlib.sha256((ROOT / 'assets/task-brief.js').read_bytes()).hexdigest()[:12])
             if path == Path('find/index.html'):

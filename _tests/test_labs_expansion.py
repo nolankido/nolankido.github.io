@@ -160,8 +160,8 @@ class LabsExpansionTests(unittest.TestCase):
                 for link in Page(outline).tags('a'):
                     self.assertIn(link['href'][1:], ids)
         self.assertGreater(count, 15)
-        # Owner-approved original essays now reuse the same native outline.
-        notes = {build.output_path(p['path']): p for p in self.pages if p.get('note')}
+        # Essays and the documented Technology case reuse the same native outline.
+        notes = {build.output_path(p['path']): p for p in self.pages if p.get('note') or p.get('evidence_article')}
         for path, content in self.outputs.items():
             if path in notes:
                 source = (ROOT / '_source' / notes[path]['source']).read_text()

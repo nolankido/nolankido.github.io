@@ -1,0 +1,40 @@
+WORKFLOW TIME REVIEW
+Use privately. Do not include confidential task material.
+
+Task and acceptance standard:
+Comparison window and repetition count (N):
+Basis: planning estimates / observed times (describe how collected)
+Usual effort per task (M), minutes:
+Assisted preparation and production per task (A), minutes:
+Review and repair per assisted task (R), minutes:
+One-time setup (S), minutes:
+Upkeep across the comparison window (K), minutes:
+
+Compare the same work at the same acceptable quality. Use a consistent
+measure of effort. Count waiting only when it prevents other useful work;
+do not count a minute twice. Include failed attempts and cleanup.
+
+Usual total = N * M
+Assisted total = S + K + N * (A + R)
+Net time saved = N * (M - A - R) - S - K
+
+If M - A - R is positive, no net time loss begins at the ceiling of
+(S + K) / (M - A - R), with at least one repetition.
+Strictly positive savings begin at floor((S + K) / (M - A - R)) + 1.
+These thresholds hold setup and upkeep fixed. Recalculate if they grow.
+If the per-task difference is zero or negative, repeating the workflow
+does not create positive time savings at those costs.
+
+Quality check: not yet checked / met / not met
+What was checked, against which source or independent example?
+What failed or needed repair?
+Privacy, money, reliability, enjoyment, and effects on other people:
+Uncertainty and what would change the decision:
+Decision: keep / adjust / stop / gather more observations
+Next review point:
+
+An estimate is not a measured outcome. A before/after observation alone
+is not proof that AI caused the change. This is a time comparison, not
+financial ROI, a safety assessment, or a quality score.
+
+Nolan Kido | https://nolankido.com/technology/ai-time-savings/

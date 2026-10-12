@@ -1,0 +1,36 @@
+{
+  "title": "AI-assisted website change: historical verification record",
+  "site": "https://nolankido.com/",
+  "date_hawaii": "2026-10-11",
+  "scope": "Historical release facts transcribed from public build records. Not a full log or an ongoing verification service.",
+  "pre_repair": {
+    "commit": "2bf8908339e06f604cea00f0254494e17171ecf4",
+    "run": 38195072495,
+    "unit_content_tests_passed": 347,
+    "html5_error": {
+      "path": "/technology/task-brief/",
+      "code": "end-tag-too-early",
+      "tag": "div"
+    }
+  },
+  "repaired": {
+    "candidate": "73782caa4697204690c679626b36427c28201234",
+    "run": 38196825689,
+    "unit_content_tests_passed": 347,
+    "browser_suites_passed": 21,
+    "tree": "b36894be716f47e9a411bfcf78d95c4770d5fa14"
+  },
+  "published": {
+    "commit": "6832b5e1edc85c50a3e6eb39a447cd67d9f0f80c",
+    "matched_targets": 235,
+    "checked_at_utc": "2026-10-12T02:51:04Z",
+    "requests": "Public GET only; no contact messages."
+  },
+  "limitations": [
+    "No measured productivity comparison",
+    "No verified Google indexing or ranking change",
+    "Not full security or accessibility certification",
+    "Some automated color-contrast checks required human review",
+    "Reduced downloadable fixture is illustrative, not a replay of full site audit"
+  ]
+}
