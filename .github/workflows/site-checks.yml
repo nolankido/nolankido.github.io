@@ -30,6 +30,7 @@ jobs:
           python -m unittest discover -s _tests -p 'test_*.py' -v
           node --check assets/public-profile.js
           node --check assets/page-sharing.js
+          node --check assets/ai-task-choice.js
           node --check assets/task-brief.js
           node --check assets/site-find.js
           node --check assets/contact.js
@@ -47,7 +48,7 @@ jobs:
       matrix:
         include:
           - group: identity
-            suites: search_visibility_browser first_steps_browser task_brief_browser workflow_evidence_browser practical_discovery_browser everyday_tasks_browser public_profile_browser summary_review_browser reading_delivery_browser
+            suites: search_visibility_browser first_steps_browser task_brief_browser workflow_evidence_browser practical_discovery_browser everyday_tasks_browser public_profile_browser summary_review_browser reading_delivery_browser ai_task_choice_browser
           - group: navigation
             suites: browser design_browser
           - group: reader-tools
