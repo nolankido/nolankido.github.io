@@ -1,0 +1,58 @@
+{
+  "hub": {
+    "path": "/living-well/technology-for-real-life/",
+    "seo_title": "Everyday AI Workflows: Notes, Plans & Documents | Nolan Kido",
+    "description": "Choose an everyday task, compare a simple method with optional AI, and use a free worksheet. Seven worked guides for notes, plans, documents, and more."
+  },
+  "tasks": [
+    {
+      "slug": "scattered-notes-to-next-step",
+      "label": "Organize notes into action items",
+      "seo_title": "Organize Notes into Action Items, with Optional AI | Nolan Kido",
+      "description": "Turn scattered notes into actions, references, and open questions. Includes a fictional example, an optional AI prompt, and a free text worksheet.",
+      "cue": "Group notes without inventing obligations."
+    },
+    {
+      "slug": "shared-plan-people-can-use",
+      "label": "Make a shared plan",
+      "seo_title": "Shared Planning Template: Decisions, Owners & Dates | Nolan Kido",
+      "description": "Make a shared plan with confirmed details, owners, and open questions. Use the worked guide and free template; keep approval with the people involved.",
+      "cue": "Keep suggestions separate from agreements."
+    },
+    {
+      "slug": "find-the-document-you-need",
+      "label": "Find and organize a document",
+      "seo_title": "Find and Organize Documents Before Using AI | Nolan Kido",
+      "description": "Find, name, and verify one document before asking AI to summarize it. Includes a privacy-conscious workflow and a free document-index template.",
+      "cue": "Find the original before asking for a summary."
+    },
+    {
+      "slug": "rough-idea-to-small-creation",
+      "label": "Turn rough notes into a draft",
+      "seo_title": "Turn Rough Notes into a Draft: A Creative Brief | Nolan Kido",
+      "description": "Develop a small draft from your own notes without invented memories or claims. Includes a fictional example, optional AI outline prompt, and free creative brief.",
+      "cue": "Keep your meaning while improving the draft."
+    },
+    {
+      "slug": "make-digital-reading-easier",
+      "label": "Make digital reading easier",
+      "seo_title": "Make Digital Reading Easier: Reader View & Read-Aloud | Nolan Kido",
+      "description": "Try text size, reader view, and read-aloud support before adding AI. A practical guide with source checks and a free reading-setup worksheet.",
+      "cue": "Use the original text in a format that fits."
+    },
+    {
+      "slug": "reflection-with-your-judgment-intact",
+      "label": "Reflect without outsourcing judgment",
+      "seo_title": "AI-Assisted Reflection: Prompts with Boundaries | Nolan Kido",
+      "description": "Separate observations, interpretations, and choices in a private reflection. Use paper or optional AI questions, with a free worksheet and clear limits.",
+      "cue": "Use a notebook first; questions are not verdicts."
+    },
+    {
+      "slug": "did-the-tool-actually-help",
+      "label": "Decide whether a workflow helped",
+      "seo_title": "Evaluate an AI Workflow: Effort, Quality & Tradeoffs | Nolan Kido",
+      "description": "Evaluate an AI or software workflow beyond its first draft: include setup, checking, upkeep, and effects on others. Free keep-or-stop review worksheet.",
+      "cue": "Count the full effort and consider more than speed."
+    }
+  ]
+}

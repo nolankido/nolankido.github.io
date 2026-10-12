@@ -33,6 +33,7 @@ import site_find
 import follow
 import search_visibility
 import practical_discovery
+import everyday_tasks
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -75,7 +76,8 @@ def public_pages(root: Path | None = None) -> list[dict]:
     """One manifest for rendering, link tests, sitemaps, and live verification."""
     root = ROOT if root is None else root
     base = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
-    return search_visibility.apply_policy(base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root))
+    pages = base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root)
+    return everyday_tasks.metadata(search_visibility.apply_policy(pages), root)
 
 
 def build_outputs() -> dict[Path, str]:
@@ -115,6 +117,7 @@ def build_outputs() -> dict[Path, str]:
     values = {k: text(v) for k, v in site.items()}
     values["practical_home"] = practical_discovery.home_links(practical_config, pages)
     values["practical_work"] = practical_discovery.work_cards(practical_config, pages)
+    values['everyday_task_cards'] = everyday_tasks.cards(everyday_tasks.load(ROOT, pages), living_well.load(ROOT))
     # Keep the visible planning-sheet preview identical to its downloadable source.
     values['workflow_time_sheet'] = text((ROOT / 'downloads/workflow-time-review.txt').read_text(encoding='utf-8'))
     values['creative_brief'] = text((ROOT / 'downloads/creative-brief.txt').read_text(encoding='utf-8'))
@@ -293,6 +296,9 @@ def build_outputs() -> dict[Path, str]:
             version = hashlib.sha256((ROOT / 'assets/workflow-time.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script defer src="/assets/workflow-time.js?v={version}"></script>'
             schema['mainEntity'] = {'@type': 'WebApplication', '@id': canonical + '#application', 'name': 'AI Time Savings Calculator', 'url': canonical, 'description': 'A free local time comparison including setup, production, review and upkeep. No AI runs here.', 'applicationCategory': 'ProductivityApplication', 'operatingSystem': 'Web browser', 'isAccessibleForFree': True, 'creator': {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/'}}
+        if p['id'] in {'technology', 'living-well-worksheets'}:
+            version = hashlib.sha256((ROOT / 'assets/everyday-tasks.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/everyday-tasks.css?v={version}">'
         if p['id'] in practical_discovery.SCOPED_IDS:
             version = hashlib.sha256((ROOT / 'assets/practical-discovery.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/practical-discovery.css?v={version}">'

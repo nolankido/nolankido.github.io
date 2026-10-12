@@ -1,0 +1,19 @@
+SHARED PLAN
+Activity:
+Current version and where to find it:
+
+AGREED
+[Confirmed detail, by whom, and when.]
+
+STILL TO DECIDE
+[Unknowns and conditions, not invented answers.]
+
+WHO IS DOING WHAT
+[Only responsibilities the person has accepted.]
+
+NEXT CHECK-IN
+[An agreed update or the question to ask next.]
+
+ACCESS CHECK
+Can the intended people open and correct this version?
+Who maintains it, and how will changes be communicated?

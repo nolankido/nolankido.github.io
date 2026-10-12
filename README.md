@@ -211,3 +211,32 @@ Review the resulting PNGs and `_reports/work-preview-provenance.json` together.
 Browser/font rasterization can change pixels; dependencies and fictional inputs
 are recorded rather than claiming a cross-platform pixel benchmark. See
 `_reports/practical-discovery-review.md` for scope and limitations.
+
+## Everyday task discovery and portable worksheets
+
+`_source/everyday-tasks.json` selects seven existing worked guides, describes their
+reader tasks, and supplies eight bounded search-title/description overrides.
+`_scripts/everyday_tasks.py` renders the Technology task cards and the additional
+worksheet menu. These are links into the existing Living Well series, not copies
+of articles or a new topical subsite. Original article titles, dates, bodies,
+evidence labels, and all five feed records stay with their original sources.
+
+`_scripts/living_well_utility.py` exports each visible `utility.starter` unchanged
+as `downloads/living-well-<slug>.txt`. Do not maintain a separate worksheet body:
+the preview and download must remain byte-identical. Existing five reflection
+Markdown sheets remain unchanged. The new task-sheet directory is linked at
+`/living-well/worksheets/#everyday-task-sheets`.
+
+```sh
+python _scripts/build.py
+python _scripts/build.py --check
+python _scripts/check_search.py
+python _tests/check_html5.py
+python -m unittest discover -s _tests -p 'test_*.py'
+python _tests/everyday_tasks_browser.py
+```
+
+The browser suite checks native journeys and downloads with JavaScript enabled
+and disabled, print previews, narrow layouts and text spacing. Its `--offline`
+mode does not claim HTTP, download, or axe results. It is added to Site checks
+without removing the previous 23 suites. See `_reports/everyday-task-review.md`.
