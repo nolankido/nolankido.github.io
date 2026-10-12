@@ -135,7 +135,7 @@ try:
         expect(panel.locator('.page-share-status')).to_have_text('Page link copied.')
         assert page.evaluate('window.copiedPages') == [origin + path]
         panel.locator('[data-share-page]').click()
-        expect(panel.locator('.page-share-status')).to_have_text('Sharing dialog completed.')
+        expect(panel.locator('.page-share-status')).to_have_text('Sharing request accepted by your device.')
         assert page.evaluate('window.sharedPages') == [{'title': page.title(), 'url': origin + path}]
         assert len(requests) == before
         if not args.offline:

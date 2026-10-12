@@ -53,7 +53,7 @@
   share.addEventListener('click', () => run(async () => {
     try {
       await navigator.share(data);
-      status.textContent = 'Sharing dialog completed.';
+      status.textContent = 'Sharing request accepted by your device.';
     } catch (error) {
       if (error?.name === 'AbortError') status.textContent = 'Sharing canceled. You can still copy the page link.';
       else selectLink('Sharing is unavailable on this device.');

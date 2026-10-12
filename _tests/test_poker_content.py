@@ -216,6 +216,6 @@ BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html
 # Reading delivery: font references and marked canonical controls are reviewed here.
 # test_reading_delivery independently reverses only those additions and the
 # explicit Privacy notice update against all 169 original body hashes.
-BASELINE_DIGEST = 'a20c3d6935f1b2d2af18f65f9f0214e52d47c968d1fbc70b28fece41d92b46ca'
+BASELINE_DIGEST = '049304d67f1bc43dd944e12ca1a852a8f9487911133643d01caa609e84147ab5'
 
 if __name__=='__main__': unittest.main(verbosity=2)
