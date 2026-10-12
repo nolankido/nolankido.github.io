@@ -39,6 +39,9 @@ try:
    for width in [320,390,768,1440]:
     page.set_viewport_size({'width':width,'height':950});render(ROUTE)
     expect(page.locator('h1')).to_be_visible()
+    assert page.locator('.entry-jumps').evaluate('(el)=>getComputedStyle(el).display')=='flex'
+    for link in page.locator('.entry-jumps a').all():
+     assert link.bounding_box()['height']>=44
     assert page.evaluate('document.documentElement.scrollWidth')<=width
     report['layouts']+=1
     findings=page.locator('.summary-finding[id]')

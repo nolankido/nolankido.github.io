@@ -7,3 +7,5 @@
 .page-ai-summary-review summary { cursor: pointer; font-weight: 600; line-height: 1.5; }
 .page-ai-summary-review pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9rem; padding: 1rem; }
 .page-ai-summary-review [id] { scroll-margin-top: 2rem; }
+.page-ai-summary-review .entry-jumps { display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin: 1.2rem 0; }
+.page-ai-summary-review .entry-jumps a { display: inline-flex; align-items: center; min-height: 44px; }
