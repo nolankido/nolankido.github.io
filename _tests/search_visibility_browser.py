@@ -5,6 +5,7 @@ from pathlib import Path
 from threading import Thread
 from urllib.parse import urlsplit
 import argparse
+import faulthandler
 import json
 import os
 from playwright.sync_api import sync_playwright, expect
@@ -24,6 +25,8 @@ result = {'offline': args.offline, 'layouts': 0, 'text_spacing': 0, 'keyboard_jo
 errors = []
 paths = ['/about/', '/technology/', '/technology/task-brief/', '/notes/keep-the-judgment/',
          '/poker/pot-odds-workshop/', '/living-well/did-the-tool-actually-help/']
+# Fail with a traceback rather than hanging the whole release job.
+faulthandler.dump_traceback_later(300, exit=True)
 try:
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True, **({'executable_path': os.environ['CHROMIUM_PATH']} if os.environ.get('CHROMIUM_PATH') else {}))
@@ -31,6 +34,8 @@ try:
             context = browser.new_context(java_script_enabled=javascript)
             context.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             page = context.new_page()
+            page.set_default_timeout(15000)
+            page.set_default_navigation_timeout(15000)
             def render(path):
                 if args.offline:
                     page.set_content(html_for(path))
@@ -41,6 +46,7 @@ try:
                 print('Checking layouts:', javascript, width, flush=True)
                 page.set_viewport_size({'width': width, 'height': 950})
                 for path in paths:
+                    print('Checking page:', path, flush=True)
                     render(path)
                     expect(page.locator('h1')).to_be_visible()
                     expect(page.locator('nav[aria-label="Breadcrumb"]')).to_have_count(1)
@@ -54,7 +60,12 @@ try:
                         audit = page.evaluate("async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return {violations:r.violations.map(v=>({id:v.id,nodes:v.nodes.length})),incomplete:r.incomplete.map(v=>v.id)}}")
                         assert not audit['violations'], (path, width, audit)
                         result['axe'].append({'path': path, 'width': width, **audit})
-                    page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
+                    # add_style_tag waits for a page-side event that never resolves
+                    # when JavaScript is disabled. Inject synchronously through
+                    # browser automation without enabling any site JavaScript.
+                    page.evaluate(
+                        'css => { const style = document.createElement("style"); style.textContent = css; document.head.appendChild(style); }',
+                        '*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
                     assert page.evaluate('document.documentElement.scrollWidth') <= width, ('spacing', path, width)
                     result['text_spacing'] += 1
             if not args.offline:
@@ -92,3 +103,4 @@ try:
     print(json.dumps(result,indent=2))
 finally:
     server.shutdown();server.server_close()
+    faulthandler.cancel_dump_traceback_later()
