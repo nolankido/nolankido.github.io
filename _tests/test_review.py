@@ -12,11 +12,11 @@ import build
 class ReviewTests(unittest.TestCase):
     def test_asset_versions_follow_content(self):
         outputs = build.build_outputs()
-        css = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
+        css = hashlib.sha256((ROOT / 'assets/site-core.css').read_bytes()).hexdigest()[:12]
         js = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
         for path, content in outputs.items():
             if path.suffix == '.html':
-                self.assertIn('/assets/site.css?v=ledger-20261005-' + css, content)
+                self.assertIn('/assets/site-core.css?v=' + css, content)
         self.assertIn('/assets/contact.js?v=' + js, outputs[Path('contact/index.html')])
 
     def test_recovery_instructions_exist_before_javascript(self):

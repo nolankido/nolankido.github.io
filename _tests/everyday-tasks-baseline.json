@@ -3,7 +3,7 @@
   "files": {
     "_source/404.html": "9c54ad1726af619992b7a692bb6c7cf7bf93717985e44caa65edbba012cbad56",
     "_source/about.html": "4722f4f18d29a609620399332eb8d6ed7876b0bf5fb5e4e32f280e396eee4d2f",
-    "_source/bio.html": "6d3ad3be9a14054dc74bfe2a0371914aadeb86dd780a1c2b621499f359051b95",
+    "_source/bio.html": "0d6a6440d92be4e774beb60918b88be3f3824ef6ebd3f4e7fb1b1bf5602330a8",
     "_source/card.html": "ac53d16bf707c661dca1a56c0e38f32ac10e86b87ffcc37c3a282de30d164b37",
     "_source/contact.html": "6ab8eb0ca1288fdd198569e2b1b231e8fa5106341f44c58164d393bb58811e7c",
     "_source/creative/home.html": "fc941c84ae887f829541ce5656ddc17992bf15e834473a77abcbccf412608846",
@@ -42,7 +42,7 @@
     "_source/notes/keep-the-judgment.html": "ba6d607702131531a92cfe5a30bab72ed8d03e4e877fd474636b76c78429bf72",
     "_source/notes/learning-from-the-beginning.html": "ca23675346af0bbd19f37467acb05d91b95b01920a050b044b2aa30c92315ffe",
     "_source/notes/trustworthy-tools.html": "798167d44386c74c616fbe22c461f41d5629a67457f600b10033dc2676afe3e8",
-    "_source/pages.json": "08f7b8f6525b993f969bcc4f45e6312fa7aa9b44f6ffe29c4ff51d9846ed6479",
+    "_source/pages.json": "a721819d1701ecd421046ab953d92b07dddd5499a0d2c8a8b1c56f0973c89b2e",
     "_source/poker/RESOURCE_BACKLOG.json": "9e10d5a1f7790c1ad888692473ac80722000904d91d494e78842379d20df76c8",
     "_source/poker/RESOURCE_BATCH_002.md": "045958d98bf26e893a274307db30f136d91ebbde5f23cff56b2e5ac4a419265d",
     "_source/poker/RESOURCE_BATCH_003.json": "59ad883744b8185877b5c1219dd88e91a513f67a9e4bf402fb227f2bf177cc2b",

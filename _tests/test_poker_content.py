@@ -210,6 +210,8 @@ BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html
 # independently by test_practical_discovery.py. No protected article was rewritten.
 # Everyday-task routes and guide summaries intentionally change presentation in this snapshot.
 # Original source, feed, URL and date contracts are pinned in test_everyday_tasks.py.
-BASELINE_DIGEST = 'b8a76967c51fc46a6cc69128d7cfc88bdd547a2dc2050e46e4880e799a8dfc8f'
+# Public-profile/core-CSS pass: only /bio/ body and stylesheet references change.
+# Independent signatures in test_public_profile.py preserve 166 complete bodies.
+BASELINE_DIGEST = 'd95ff5443330b610df925466e3e9fbf43da8abd63ecae154d383b31aa336715e'
 
 if __name__=='__main__': unittest.main(verbosity=2)
