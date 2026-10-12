@@ -39,6 +39,7 @@ import public_profile
 import font_delivery
 import page_sharing
 import ai_task_choice
+import workflow_path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -90,6 +91,7 @@ def build_outputs() -> dict[Path, str]:
     catalog = poker_content.load(ROOT)
     pages = public_pages()
     reader_entries = poker_library.load(ROOT, pages)
+    workflow_path.validate(pages, ROOT)
     poker_entries = {e['slug']: e for e in catalog['entries']}
     if len({p['path'] for p in pages}) != len(pages) or len({p['id'] for p in pages}) != len(pages):
         raise ValueError('Page routes and IDs must be unique')
@@ -327,6 +329,9 @@ def build_outputs() -> dict[Path, str]:
                 extra += ('\n  <link rel="stylesheet" href="/assets/' + asset + '?v=' + version + '">'
                           if kind == 'style' else '\n  <script defer src="/assets/' + asset + '?v=' + version + '"></script>')
             schema['about'] = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/'}
+        body = workflow_path.decorate(body, p, ROOT)
+        extra += workflow_path.head(p, ROOT)
+        schema = workflow_path.schema(schema, p, site["url"])
         body += practical_discovery.article_return(p)
         body = page_sharing.decorate(body, p, site["url"])
         extra += page_sharing.head(p, ROOT)
@@ -371,6 +376,7 @@ def build_outputs() -> dict[Path, str]:
     outputs[practical_discovery.FEED] = practical_discovery.feed(practical_config, pages, outputs, site['url'])
     outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
+    outputs[workflow_path.SHEET] = workflow_path.workbook(ROOT)
     outputs.update(public_profile.exports(site))
     return font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT)
 
