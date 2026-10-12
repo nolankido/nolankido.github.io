@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Nolan Kido | Practical AI writing</title>
+    <link>https://nolankido.com/technology/</link>
+    <description>Essays and recorded cases about practical AI, checking results, and human judgment. Tools and website edits are not new articles.</description>
+    <language>en-us</language>
+    <atom:link href="https://nolankido.com/technology/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Let AI do more. Keep the judgment.</title>
+      <link>https://nolankido.com/notes/keep-the-judgment/</link>
+      <description>Delegating production is not the same as handing over responsibility. An essay on purpose, boundaries, permission, and the choices worth keeping human.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/keep-the-judgment/</guid>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Checking an AI-assisted website change.</title>
+      <link>https://nolankido.com/technology/checking-ai-website-changes/</link>
+      <description>A documented AI-assisted website change passed 347 tests but still had malformed HTML. Inspect the repair, reproduce the failure, and reuse the checking method.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/checking-ai-website-changes/</guid>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A working tool is not the same as a trustworthy one.</title>
+      <link>https://nolankido.com/notes/trustworthy-tools/</link>
+      <description>Two calculations agree. Both are wrong. A small worked example of the difference between a convincing demonstration and independent evidence.</description>
+      <guid isPermaLink="true">https://nolankido.com/notes/trustworthy-tools/</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

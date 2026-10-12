@@ -50,7 +50,7 @@ class ReadingReturnTests(unittest.TestCase):
     def test_source_feeds_are_byte_stable(self):
         baseline=json.loads((ROOT/'_tests/entrypoints-baseline.json').read_text())['files']
         import hashlib
-        for path in follow.SOURCES:
+        for path in follow.LEGACY_SOURCES:
             self.assertEqual(hashlib.sha256(self.outputs[path].encode()).hexdigest(),baseline[str(path)])
 
     def test_deterministic_sort_and_required_channel_metadata(self):
@@ -72,6 +72,10 @@ class ReadingReturnTests(unittest.TestCase):
         tree=ET.fromstring(outputs[Path('feed.xml')])
         mutate(tree.find('channel'))
         outputs[Path('feed.xml')]=ET.tostring(tree,encoding='unicode')
+        # Derived Technology copies use the same edited canonical source.
+        import practical_discovery
+        config=practical_discovery.load(ROOT,self.pages)
+        outputs[practical_discovery.FEED]=practical_discovery.feed(config,self.pages,outputs,'https://nolankido.com')
         return outputs
 
     def test_duplicate_identity_collapses_but_conflicting_copy_fails(self):
@@ -96,8 +100,9 @@ class ReadingReturnTests(unittest.TestCase):
     def test_reject_bad_dates_identity_and_remote_origins(self):
         cases=[('pubDate','bad date'),('pubDate','Mon, 12 Oct 2026 00:00:00 GMT'),('guid','wrong'),('link','https://other.example/private/'),('title',''),('description','')]
         for tag,value in cases:
-            output=self.mutated_source(lambda ch: setattr(ch.find('item').find(tag),'text',value))
             with self.subTest(tag=tag,value=value),self.assertRaises(ValueError):
+                # Invalid identity can be rejected while deriving the Technology source.
+                output=self.mutated_source(lambda ch: setattr(ch.find('item').find(tag),'text',value))
                 follow.combined(output,self.pages,'https://nolankido.com')
         for origin in ['http://nolankido.com','https://nolankido.com/','https://nolankido.com?user=1']:
             with self.assertRaises(ValueError):follow.combined(self.outputs,self.pages,origin)

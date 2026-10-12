@@ -1,0 +1,59 @@
+[
+  {
+    "id": "task-brief",
+    "route": "/technology/task-brief/",
+    "selector": "#brief-result",
+    "capture": "Rendered committed HTML with local styles and JavaScript, external requests blocked; fallback fonts. Top-of-result excerpt, no result text edited.",
+    "baseline_commit": "eaf08e16bad12601934f1d704df4403b2d6c6027",
+    "input_basis": "fictional teaching example",
+    "inputs": {
+      "example": "writing (existing illustrative example)"
+    },
+    "src": "/assets/work/task-brief-preview.png",
+    "width": 1044,
+    "height": 600,
+    "full_result_size": [
+      1044,
+      695
+    ],
+    "sha256": "99b7abb778471dfaa6bcff10afc0ebf35a0c47f7897bc0522db13629f4548384",
+    "dependencies": {
+      "_source/technology/task-brief.html": "c67a63c29842279c31b82766484267f87e76745964c86680208d4d4ee15a32e0",
+      "assets/task-brief.js": "85d96792ecf94647d600f28f2d52abb75782f5061ab2efeb1ebcf3f1bab3c155",
+      "assets/task-brief.css": "80b22ed21b424635e7ee6635ff8ded12ef9187062f6820a199196a952f8a9cc4",
+      "styles.css": "44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef",
+      "assets/site.css": "784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6"
+    }
+  },
+  {
+    "id": "ai-time-savings",
+    "route": "/technology/ai-time-savings/",
+    "selector": "#time-result",
+    "capture": "Rendered committed HTML with local styles and JavaScript, external requests blocked; fallback fonts. Top-of-result excerpt, no result text edited.",
+    "baseline_commit": "eaf08e16bad12601934f1d704df4403b2d6c6027",
+    "input_basis": "fictional teaching example",
+    "inputs": {
+      "manual": "30",
+      "assisted": "8",
+      "review": "7",
+      "count": "6",
+      "setup": "60",
+      "upkeep": "15"
+    },
+    "src": "/assets/work/ai-time-savings-preview.png",
+    "width": 1044,
+    "height": 600,
+    "full_result_size": [
+      1044,
+      925
+    ],
+    "sha256": "d8f4b9afcac4bfe52310034d7ae12ca6f0e21493ee417470d58524fafbd0111b",
+    "dependencies": {
+      "_source/technology/ai-time-savings.html": "4f60753870e68c84c98137181b0fa65b96dffa010c664ccc8721d98ba6fa4451",
+      "assets/workflow-time.js": "03de64d48e90980c082fb79b751df7e00e48e37e56659768f551d63dcf786552",
+      "assets/workflow-evidence.css": "1b1578f269666ccffebb6fdc9d1e50ee569b3576cbe7d01c08c682b5f2678d8e",
+      "styles.css": "44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef",
+      "assets/site.css": "784f0d0fb3faeefc953712470a5b86dde775e9c9991e7b22fbc0241ccc69acf6"
+    }
+  }
+]

@@ -1,6 +1,6 @@
 {
-  "index.html": "4d6d10eb3d029709d6001aa49f607885f9a3079793191ef48c65ee998172a183",
-  "_source/home.html": "af3e881503a2d47817fb64140500cfb9d85c1e0e1fa4863ed7fc141b95ed279c",
+  "index.html": "7796a6612cc8a1b07a4649e1376d1813b28bd571f1b175176141f9fd2cc9a1f4",
+  "_source/home.html": "d916948cb1ba3024d64895640a4db41f5ed45dd3222f54d9cb70263e08fe5f12",
   "_source/identity.json": "b2cad9e36a15b86176637b608aee10767724bf32f2750e9db05a4f21af0fe536",
   "_source/site.json": "5e01a8eae2c9593a0dace992e5a13ffbc22b1ab5e0c635ac9bf0db6507c16d65",
   "_source/layout.html": "cb3930347d24d2a972c59ba7b80f5c8f7621b5f465bee85fdf7738afef47727f",
@@ -9,7 +9,7 @@
   "assets/contact.js": "65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858",
   "assets/task-brief.js": "85d96792ecf94647d600f28f2d52abb75782f5061ab2efeb1ebcf3f1bab3c155",
   "feed.xml": "ba511115cc593966c73c95ffe05839e54eb4616286ff98c171c275ae4db13924",
-  "writing.xml": "d7811e7e459236fad69b01e37b6b957d0f3050950b8a488b3e42c3aa61260f00",
+  "writing.xml": "d59abdd4ec2d134b4a66202880c0efd6d40f79227f90f37f9ece8c0e1e534875",
   "poker/feed.xml": "374469c9de296d8f58599e328a581735e04acbe97e719bf36741e5c43d45351f",
   "living-well/feed.xml": "94d241e3797f54abf9f5b35e99a1f1f92cd932d2326c7fdc481fb5a2ce86e094",
   "styles.css": "44be94f4cc9dc8ff7af79d975ceae280ae2c01d7ef755db28effbeb6fbfeb4ef",

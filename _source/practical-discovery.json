@@ -1,0 +1,46 @@
+{
+  "note_ids": [
+    "keep-the-judgment",
+    "trustworthy-tools"
+  ],
+  "works": [
+    {
+      "id": "task-brief",
+      "kind": "tool",
+      "label": "01 / Define the task",
+      "summary": "Turn one task into a clear brief with inputs, boundaries, a finish line, and checks. The builder runs in your browser without an account or a connected AI service.",
+      "action": "Use the free brief builder",
+      "home_label": "Build an AI task brief",
+      "image": {
+        "src": "/assets/work/task-brief-preview.png",
+        "width": 1044,
+        "height": 600,
+        "alt": "Example task brief with purpose, supplied material, deliverable, checks, and boundaries.",
+        "caption": "Actual builder output from the existing fictional writing example. Result excerpt; no AI answer is generated."
+      }
+    },
+    {
+      "id": "ai-time-savings",
+      "kind": "tool",
+      "label": "02 / Count the whole job",
+      "summary": "Compare the time you spend on the entire workflow, including preparation, review, repairs, setup, and upkeep. See both savings and losses, with the assumptions visible.",
+      "action": "Compare a workflow",
+      "home_label": "Compare AI workflow time",
+      "image": {
+        "src": "/assets/work/ai-time-savings-preview.png",
+        "width": 1044,
+        "height": 600,
+        "alt": "Fictional calculator example: 180 minutes usual time versus 165 minutes including setup, review, and upkeep.",
+        "caption": "Actual calculator result excerpt for a fictional planning example. The 15-minute saving is illustrative, not a measured personal outcome."
+      }
+    },
+    {
+      "id": "ai-website-verification",
+      "kind": "case",
+      "label": "03 / Inspect a real release",
+      "summary": "An AI-assisted website change passed 347 unit tests, but a different check found malformed HTML. Follow the failure, repair, and independently checkable release record.",
+      "action": "Read the recorded case",
+      "home_label": "Inspect a recorded build case"
+    }
+  ]
+}

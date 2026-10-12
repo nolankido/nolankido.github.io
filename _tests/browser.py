@@ -274,11 +274,20 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual(sorted(link.get_attribute('href') for link in original_links.all()), sorted(notes))
         config = json.loads((ROOT / '_source/identity.json').read_text(encoding='utf-8'))
         self.assertEqual(page.locator('.writing-route').count(), len(config['reading_routes']))
+        # Curated readings remain in their original order. Technology now also
+        # publishes its recorded cases here, including with site scripts disabled.
+        # Derive the expected inventory from the manifest, not the renderer.
+        cases = sorted((p for p in build.public_pages()
+                        if p.get('section') == 'technology' and p.get('evidence_article')),
+                       key=lambda p: (p['date'], p['path']), reverse=True)
+        case_paths = [p['path'] for p in cases]
         for route in config['reading_routes']:
             section = page.locator('.writing-route#' + route['id'])
             expect(section).to_be_visible()
-            self.assertEqual([link.get_attribute('href') for link in section.locator('.note-entry h3 a').all()], route['paths'])
-        self.assertEqual(page.locator('.note-entry').count(), len(notes) + sum(len(route['paths']) for route in config['reading_routes']))
+            expected = list(route['paths']) + (case_paths if route['id'] == 'technology' else [])
+            self.assertEqual([link.get_attribute('href') for link in section.locator('.note-entry h3 a').all()], expected)
+        self.assertEqual(page.locator('.note-entry').count(),
+                         len(notes) + sum(len(route['paths']) for route in config['reading_routes']) + len(cases))
         context.close()
 
     def test_mobile_tablet_desktop_layout_and_keyboard(self):

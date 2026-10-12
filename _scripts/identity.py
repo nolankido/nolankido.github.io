@@ -3,6 +3,7 @@ from __future__ import annotations
 import html
 import json
 from presentation import publication
+from practical_discovery import article_cards
 from pathlib import Path
 
 
@@ -101,5 +102,7 @@ def reading_routes(config: dict, pages: list[dict]) -> str:
             elif page['id'] == 'poker-hand-review':
                 kind = 'Fictional hand review'
             cards.append('<article class="note-entry"><p class="note-category">' + kind + '</p><h3><a href="' + html.escape(path, quote=True) + '">' + html.escape(page['title']) + '</a></h3><p>' + html.escape(page['description']) + '</p>' + publication(page) + '</article>')
+        if route['id'] == 'technology':
+            cards.append(article_cards(pages))
         sections.append('<section class="section folio-row writing-route" id="' + route['id'] + '" aria-labelledby="writing-' + route['id'] + '-title"><div class="section-meta"><p class="section-label">' + html.escape(route['label']) + '</p></div><div class="section-content"><h2 class="section-title" id="writing-' + route['id'] + '-title">' + html.escape(route['title']) + '</h2><p class="section-deck">' + html.escape(route['description']) + '</p><div class="notes-list">' + ''.join(cards) + '</div></div></section>')
     return '\n'.join(sections)
