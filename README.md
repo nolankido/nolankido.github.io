@@ -168,3 +168,20 @@ suites. Its `--offline` mode checks rendered layouts only when local networking 
 unavailable; it does not claim live navigation or no-script validation. See
 `_reports/search-visibility-2026-10-11.md` for the audit and remaining measurement
 priorities, and `_reports/search-audit.json` for the static coverage summary.
+
+## Practical AI evidence and time comparison
+
+`/technology/ai-time-savings/` compares the whole workflow in minutes, including
+setup, review/repair and total upkeep. `assets/workflow-time.js` exposes a pure
+integer calculation tested against independent exact fractions. The script and
+its styles are page-scoped; there is no input collection or browser persistence.
+The blank worksheet is the source for its exact visible preview.
+
+`/technology/checking-ai-website-changes/` documents a historical pre-release HTML
+failure and its correction, with a reduced public reproduction and a bounded
+record of what the checks establish. Historical test counts must not be silently
+updated to current counts. Run `python downloads/website-check-reproduction.py`
+with `html5lib==1.1`, and `python _tests/workflow_evidence_browser.py` for the new
+reader and calculator journeys. Both are in Site checks; all 21 earlier browser
+suites remain. See `_reports/workflow-evidence-release.md` for scope and the
+Search Console property-access limitation.

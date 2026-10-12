@@ -50,7 +50,7 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
         interests = list(notes[page['id']] if page.get('note') else [page.get('section', page['id'])])
         interests.extend(k for k in extra.get(page['path'], []) if k not in interests)
         kind = ('essay' if page.get('note') or page.get('living_well_kind') == 'essay' else
-                'guide' if page.get('poker_guide') or page.get('living_well_kind') == 'guide' else 'collection')
+                'guide' if page.get('evidence_article') or page.get('poker_guide') or page.get('living_well_kind') == 'guide' else 'collection')
         published = page.get('date', '') if kind != 'collection' else ''
         if published:
             date.fromisoformat(published)
