@@ -13,7 +13,8 @@ from xml.etree import ElementTree as ET
 
 from search_visibility import LEGACY_FEED_IDS
 
-SOURCES = (Path('feed.xml'), Path('living-well/feed.xml'), Path('poker/feed.xml'))
+LEGACY_SOURCES = (Path('feed.xml'), Path('living-well/feed.xml'), Path('poker/feed.xml'))
+SOURCES = (*LEGACY_SOURCES, Path('technology/feed.xml'))
 OUTPUT = Path('writing.xml')
 ATOM = 'http://www.w3.org/2005/Atom'
 
@@ -64,7 +65,7 @@ def combined(outputs: dict, pages: list[dict], origin: str) -> str:
     rss = ET.Element('rss', {'version': '2.0'})
     channel = ET.SubElement(rss, 'channel')
     for key, value in [('title', 'Nolan Kido | Writing across the site'), ('link', origin + '/notes/'),
-                       ('description', 'Published writing from Notes, Living Well, and Poker. Original dates and links, in one feed. Proposed experiments and directory changes are not included.'),
+                       ('description', 'Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.'),
                        ('language', 'en-us')]:
         ET.SubElement(channel, key).text = value
     ET.SubElement(channel, '{' + ATOM + '}link', {'href': origin + '/writing.xml', 'rel': 'self', 'type': 'application/rss+xml'})

@@ -206,6 +206,8 @@ BASELINE_PATHS = ['404.html', 'CNAME', '_source/home.html', '_source/layout.html
 # October 11 search pass: reviewed shared metadata, breadcrumbs and the three revised
 # identity/technology pages. Original article bodies, privacy and home copy stay fixed.
 # October 11: reviewed evidence links in About, Resources and Technology only.
-BASELINE_DIGEST = 'bfff9c19bb9ddda2933900e91e999f0f2b3759e0a9fbd140fea5d72470f709cf'
+# Practical-work presentation reviewed; original sources/feed records are pinned
+# independently by test_practical_discovery.py. No protected article was rewritten.
+BASELINE_DIGEST = '5855d89b9b25b0ff035fd090cfb16861a06c0b5b5de99888fff9b695ba43223e'
 
 if __name__=='__main__': unittest.main(verbosity=2)

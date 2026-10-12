@@ -185,3 +185,29 @@ with `html5lib==1.1`, and `python _tests/workflow_evidence_browser.py` for the n
 reader and calculator journeys. Both are in Site checks; all 21 earlier browser
 suites remain. See `_reports/workflow-evidence-release.md` for scope and the
 Search Console property-access limitation.
+
+## Practical work previews and writing distribution
+
+`_source/practical-discovery.json` selects the two existing browser tools and the
+recorded Technology case. `_scripts/practical_discovery.py` renders the work links,
+previews and Technology writing cards, and creates `/technology/feed.xml`.
+The combined `/writing.xml` feed deduplicates by canonical article identity.
+New published Technology evidence articles are included automatically; calculators
+and site edits are not fabricated into new dated articles. Historical section
+feeds and existing combined-feed item fields remain independently tested.
+
+Real preview capture is developer-only, requires Playwright Chromium and Pillow,
+and blocks external requests:
+
+```sh
+python _scripts/capture_work_previews.py --baseline <reviewed-full-commit-sha>
+python _scripts/build.py
+python _scripts/check_search.py
+python -m unittest discover -s _tests -p test_practical_discovery.py -v
+python _tests/practical_discovery_browser.py
+```
+
+Review the resulting PNGs and `_reports/work-preview-provenance.json` together.
+Browser/font rasterization can change pixels; dependencies and fictional inputs
+are recorded rather than claiming a cross-platform pixel benchmark. See
+`_reports/practical-discovery-review.md` for scope and limitations.

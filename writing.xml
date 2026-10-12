@@ -3,7 +3,7 @@
   <channel>
     <title>Nolan Kido | Writing across the site</title>
     <link>https://nolankido.com/notes/</link>
-    <description>Published writing from Notes, Living Well, and Poker. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
+    <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
     <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
@@ -14,6 +14,14 @@
       <guid isPermaLink="true">https://nolankido.com/notes/keep-the-judgment/</guid>
       <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
       <source url="https://nolankido.com/feed.xml">Nolan Kido Notes</source>
+    </item>
+    <item>
+      <title>Checking an AI-assisted website change.</title>
+      <link>https://nolankido.com/technology/checking-ai-website-changes/</link>
+      <description>A documented AI-assisted website change passed 347 tests but still had malformed HTML. Inspect the repair, reproduce the failure, and reuse the checking method.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/checking-ai-website-changes/</guid>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
     </item>
     <item>
       <title>Did the tool actually make life easier?</title>

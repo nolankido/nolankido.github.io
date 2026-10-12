@@ -32,6 +32,7 @@ import entrypoints
 import site_find
 import follow
 import search_visibility
+import practical_discovery
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -110,7 +111,10 @@ def build_outputs() -> dict[Path, str]:
                         f'<p>{text(p["description"])}</p>' + presentation.publication(p) + '</article>')
     identity_config = identity.load(ROOT, pages)
     entry_config = entrypoints.load(ROOT, pages)
+    practical_config = practical_discovery.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
+    values["practical_home"] = practical_discovery.home_links(practical_config, pages)
+    values["practical_work"] = practical_discovery.work_cards(practical_config, pages)
     # Keep the visible planning-sheet preview identical to its downloadable source.
     values['workflow_time_sheet'] = text((ROOT / 'downloads/workflow-time-review.txt').read_text(encoding='utf-8'))
     values['creative_brief'] = text((ROOT / 'downloads/creative-brief.txt').read_text(encoding='utf-8'))
@@ -289,6 +293,12 @@ def build_outputs() -> dict[Path, str]:
             version = hashlib.sha256((ROOT / 'assets/workflow-time.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script defer src="/assets/workflow-time.js?v={version}"></script>'
             schema['mainEntity'] = {'@type': 'WebApplication', '@id': canonical + '#application', 'name': 'AI Time Savings Calculator', 'url': canonical, 'description': 'A free local time comparison including setup, production, review and upkeep. No AI runs here.', 'applicationCategory': 'ProductivityApplication', 'operatingSystem': 'Web browser', 'isAccessibleForFree': True, 'creator': {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/'}}
+        if p['id'] in practical_discovery.SCOPED_IDS:
+            version = hashlib.sha256((ROOT / 'assets/practical-discovery.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/practical-discovery.css?v={version}">'
+        if p.get('section') == 'technology' or p['id'] == 'technology':
+            extra += '\n  <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Practical AI writing" href="/technology/feed.xml">'
+        body += practical_discovery.article_return(p)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
         search_version = hashlib.sha256((ROOT / 'assets/search-visibility.css').read_bytes()).hexdigest()[:12]
         extra += f'\n  <link rel="stylesheet" href="/assets/search-visibility.css?v={search_version}">'
@@ -327,6 +337,7 @@ def build_outputs() -> dict[Path, str]:
     outputs.update(poker_reference.exports())
     outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
     outputs.update(living_well.exports(ROOT, site['url']))
+    outputs[practical_discovery.FEED] = practical_discovery.feed(practical_config, pages, outputs, site['url'])
     outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     return outputs
