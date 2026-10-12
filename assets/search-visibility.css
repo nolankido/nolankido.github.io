@@ -1,0 +1,11 @@
+/* Native breadcrumbs and article attribution. No scripting or tracking. */
+.search-breadcrumb { padding-block: 1rem 0; font-size: .85rem; line-height: 1.6; }
+.search-breadcrumb ol { display: flex; flex-wrap: wrap; gap: .25rem .65rem; padding: 0; margin: 0; list-style: none; }
+.search-breadcrumb li { display: inline; min-width: 0; overflow-wrap: anywhere; }
+.search-breadcrumb li + li::before { content: "/"; margin-inline-end: .65rem; color: #48534b; }
+.search-breadcrumb a { display: inline-block; padding-block: .3rem; text-underline-offset: .2em; }
+.search-breadcrumb [aria-current] { color: #48534b; }
+.search-author { font-size: .9rem; line-height: 1.65; margin-block: 1rem 0; }
+.search-author a { text-underline-offset: .2em; }
+.search-breadcrumb a:focus-visible, .search-author a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+@media print { .search-breadcrumb { display: none; } .search-author { color: #111; } }

@@ -2,6 +2,7 @@
 from __future__ import annotations
 import html
 import json
+import search_visibility
 from pathlib import Path
 import re
 import identity
@@ -24,7 +25,7 @@ def load(root: Path, pages: list[dict]) -> dict:
         if not isinstance(path, str) or not re.fullmatch(r'/(?:[a-z0-9-]+/)+', path):
             raise ValueError('Reader destinations must be local canonical page routes')
         page = by_path.get(path)
-        if not page or page.get('noindex') or page.get('living_well_kind') == 'experiment':
+        if not page or (page.get('noindex') and page['id'] not in search_visibility.UTILITY_IDS) or page.get('living_well_kind') == 'experiment':
             raise ValueError('Reader destination is missing, hidden, or a proposal: ' + path)
         return page
     for name in ('interests', 'resources'):

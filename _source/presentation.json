@@ -7,6 +7,14 @@
     "keep-the-judgment": {
       "src": "/assets/social/keep-the-judgment.png",
       "alt": "Let AI do more. Keep the judgment. An essay by Nolan Kido on purpose, boundaries, and responsibility."
+    },
+    "technology": {
+      "src": "/assets/social/practical-ai.png",
+      "alt": "Nolan Kido. Practical AI for real life. Useful tools, clear checks, and your judgment."
+    },
+    "task-brief": {
+      "src": "/assets/social/task-brief.png",
+      "alt": "A clearer AI task brief. A free tool by Nolan Kido for purpose, inputs, output, checks, and boundaries."
     }
   }
 }
