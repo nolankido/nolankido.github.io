@@ -1,0 +1,43 @@
+name: Prepare reading delivery
+on:
+  push:
+    branches: [codex/reading-delivery-20261012]
+    paths: [.github/workflows/reading-delivery-prepare.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Capture the existing public font stylesheet only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          from html import unescape
+          from datetime import datetime, timezone
+          import re, json, hashlib
+          source = Path('_source/layout.html').read_text()
+          urls = re.findall(r'href="(https://fonts.googleapis.com/css2[^\"]+)"', source)
+          assert len(urls) == 1
+          url = unescape(urls[0])
+          ua = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+          with urlopen(Request(url, headers={'User-Agent': ua}), timeout=30) as response:
+              assert response.status == 200
+              assert response.headers.get_content_type() == 'text/css'
+              raw = response.read(100001)
+          assert len(raw) <= 100000 and b'@font-face' in raw and b'font-display: swap' in raw
+          out=Path('/tmp/font-review'); out.mkdir()
+          (out/'google-fonts.css').write_bytes(raw)
+          (out/'provenance.json').write_text(json.dumps({'url':url,'user_agent':ua,'retrieved_utc':datetime.now(timezone.utc).isoformat(),'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'scope':'CSS declarations only; no font files copied.'},indent=2)+'\n')
+          print('FONT_CSS_BYTES='+str(len(raw)))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: font-css-review
+          path: /tmp/font-review/
+          retention-days: 1
