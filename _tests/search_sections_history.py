@@ -12,8 +12,15 @@ def change():return json.loads((ROOT/'_tests/search-sections-change.json').read_
 
 def before(path,data):
     path=str(path);c=change()
-    if path not in set(c['patches'])|{'find/index.html'}:return data
+    if path not in set(c['patches'])|{'find/index.html','assets/site.css','assets/site-core.css'}|set(c['anchor_pages']):return data
     binary=isinstance(data,bytes);text=data.decode() if binary else data
+    if path in {'assets/site.css','assets/site-core.css'}:
+        text=text.replace(c['anchor_css'],'',1)
+    if path.endswith('.html') and path in c['anchor_pages']:
+        old,new=c['core_versions']
+        text=text.replace('/assets/site-core.css?v='+new[:12],'/assets/site-core.css?v='+old[:12],1)
+    data=text.encode() if binary else text
+    if path not in set(c['patches'])|{'find/index.html'}:return data
     if path=='find/index.html':
         block=re.search(r'<!-- Search section index: start -->.*?<!-- Search section index: end -->\n',text,re.S)
         if block and sha256(block[0].encode()).hexdigest()==c['block_sha256']:

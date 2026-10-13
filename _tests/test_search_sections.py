@@ -19,7 +19,7 @@ class SearchSectionsTests(unittest.TestCase):
         cls.baseline=json.loads((ROOT/'_tests/search-sections-baseline.json').read_text())
         cls.index=search_sections.index(cls.outputs,cls.pages)
 
-    def test_only_search_page_and_three_existing_search_files_change(self):
+    def test_only_search_and_frozen_native_anchor_spacing_change(self):
         b=self.baseline
         self.assertEqual(self.pages,b['pages'])
         self.assertEqual(set(map(str,self.outputs)),set(b['outputs']))
@@ -28,7 +28,7 @@ class SearchSectionsTests(unittest.TestCase):
             raw=self.outputs[Path(p)]
             if sha256(raw.encode()).hexdigest()!=digest:changed.append(p)
             self.assertEqual(sha256(history.before(p,raw).encode()).hexdigest(),digest,p)
-        self.assertEqual(changed,['find/index.html'])
+        self.assertCountEqual(changed,[p for p in b['outputs'] if p.endswith('.html')]+['assets/site-core.css'])
         paths={p.relative_to(ROOT).as_posix() for d in ['_source','assets','downloads'] for p in (ROOT/d).rglob('*') if p.is_file()}
         self.assertEqual(paths,set(b['files']));self.assertEqual(len(paths),343)
         changed=[]
@@ -36,7 +36,7 @@ class SearchSectionsTests(unittest.TestCase):
             raw=(ROOT/p).read_bytes()
             if sha256(raw).hexdigest()!=digest:changed.append(p)
             self.assertEqual(sha256(history.before(p,raw)).hexdigest(),digest,p)
-        self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css'])
+        self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
         self.assertEqual(len(self.index),151)
@@ -102,7 +102,7 @@ assert(current.score({...r,sections:[['cafe','Café recovery']]},'cafe recov')>=
         self.assertEqual(run.returncode,0,run.stderr)
 
     def test_adapter_cannot_hide_unreviewed_search_code_or_index_changes(self):
-        for path,old,new in [('assets/site-find.js','const stops =','const surprise = 1; const stops ='),('assets/site-find.css','.find-intro {','.find-intro { color: red;'),('_source/find.html','Across my interests','Unexpected heading'),('find/index.html','Keep access and recovery simple','Unreviewed section label')]:
+        for path,old,new in [('assets/site-find.js','const stops =','const surprise = 1; const stops ='),('assets/site-find.css','.find-intro {','.find-intro { color: red;'),('_source/find.html','Across my interests','Unexpected heading'),('find/index.html','Keep access and recovery simple','Unreviewed section label'),('assets/site.css','scroll-padding-top: 180px','scroll-padding-top: 181px'),('assets/site-core.css','scroll-padding-top: 180px','scroll-padding-top: 181px'),('about/index.html','<body','<!-- unreviewed --><body')]:
             data=(ROOT/path).read_text();modified=data.replace(old,new,1)
             self.assertNotEqual(data,modified,path)
             self.assertNotEqual(history.before(path,data),history.before(path,modified),path)

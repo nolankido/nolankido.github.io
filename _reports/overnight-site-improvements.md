@@ -416,15 +416,17 @@ body paragraphs and hidden exercise answers are not full-text indexed.
 
 An independent baseline was captured from production Git objects before edits.
 All 198 output paths and 343 source/asset/download paths are retained. Only the
-search HTML changes among generated outputs; all 170 other pages, article
-metadata, five feeds and sitemap remain exact. The only changed original
-source/assets are search copy, search JavaScript and its scoped stylesheet.
+search page body changes. The other 170 pages change solely in the exact core
+stylesheet cache token for the native anchor-spacing correction below. All
+article metadata, five feeds and sitemap remain exact. Changed original
+source/assets are search copy, search JavaScript, its scoped stylesheet, the
+core accessibility source and its generated CSS bundle.
 Frozen, narrow inverse patches adapt historical checks without resetting any
 golden hash. Negative controls detect unrelated code, style, copy and index
 changes. Six new unit checks passed, including real old/new query comparisons,
 source anchors, hidden-answer exclusion and JSON breakout protection.
 
-The hosted browser fixture adds ten real keyboard search-to-section journeys,
+The hosted browser fixture adds twenty real keyboard search-to-section journeys,
 four expanded-text views, optional-data failure recovery and no-script browsing.
 All existing suites remain required. The full gate, preview review, Pages
 deployment and exact published-target receipt belong on this pass's pull
@@ -442,3 +444,15 @@ for the identical clearance condition, with measured coordinates and an arrival
 screenshot retained. No destination scroll is forced and no public file is
 changed. The next complete hosted run will distinguish unsettled navigation
 from a persistent landing defect before any merge.
+
+The diagnostic run confirmed a real defect: at 390 pixels, the wrapped sticky
+header was 149 pixels tall but the essay fragment landed at 123.58 pixels, even
+with fonts loaded and after the full five-second wait. The retained screenshot
+shows the heading obscured. A narrow-screen rule now gives native fragment
+navigation 180 pixels of scroll padding at widths up to 1050 pixels; the
+desktop rule, header design, article prose and existing anchors remain intact.
+This also protects direct links from outside the site. No runtime scrolling
+script was added. All five arrival journeys now run at 320, 390, 768 and 1440
+pixels. The exact CSS addition and old/new bundle tokens have narrow inverse
+adapters; original baseline hashes remain frozen, with extra negative controls
+for unrelated CSS or page-body changes. The complete gate is required again.

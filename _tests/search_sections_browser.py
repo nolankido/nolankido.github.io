@@ -35,7 +35,7 @@ faulthandler.dump_traceback_later(180,exit=True)
 try:
     with sync_playwright() as pw:
         browser=pw.chromium.launch(headless=True)
-        for width in [390,1440]:
+        for width in [320,390,768,1440]:
             context=browser.new_context(viewport={'width':width,'height':950},reduced_motion='reduce')
             context.route('**/*',route_for());page=context.new_page()
             page.on('pageerror',lambda e:errors.append(str(e)));requests=[];page.on('request',lambda r:requests.append(r.url))
@@ -49,7 +49,7 @@ try:
                 expect(link).to_be_visible()
                 assert page.url==base+'/find/' and len(requests)==before,'Search must cause no URL or network change'
                 assert page.locator('.find-item').evaluate_all('(items)=>items.every(i=>i.querySelectorAll(".find-section-matches a").length<=3)')
-                if query=='recovery' and os.environ.get('SCREENSHOT_DIR'):
+                if query=='recovery' and width in [390,1440] and os.environ.get('SCREENSHOT_DIR'):
                     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
                     page.evaluate("document.activeElement.blur();window.scrollTo({top:0,behavior:'instant'})")
                     page.screenshot(path=str(out/f'search-sections-{width}.png'),full_page=True)

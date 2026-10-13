@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 from catalog import RESOURCES
 import build
+import search_sections_history
 
 class DesignTests(unittest.TestCase):
     def test_every_generated_page_uses_shared_design(self):
@@ -57,7 +58,7 @@ class DesignTests(unittest.TestCase):
         self.assertIn('fallback fonts', privacy)
         expected = {'styles.css': 'aa3896d2168bd26cb4d1ac233e71429002bcc1ea', 'assets/site.css': '0f3af161751edadf1e0f552c226484309370dc49', 'assets/contact.js': '65663ddee4a515c63a9f1d7e35e7ef47b3d21f8a'}
         for path, sha in expected.items():
-            raw = (ROOT / path).read_bytes()
+            raw = search_sections_history.before(path, (ROOT / path).read_bytes())
             blob = b'blob ' + str(len(raw)).encode() + b'\0' + raw
             self.assertEqual(hashlib.sha1(blob).hexdigest(), sha, path)
 
