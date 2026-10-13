@@ -150,6 +150,18 @@ configuration is preserved. Run `_tests/test_living_well.py` and
 
 ## Search visibility and personal identity
 
+The site search at `/find/` includes the visible, named major section headings
+of its existing 151 public destinations. `_scripts/search_sections.py` extracts
+these from generated page HTML, using the same exclusions as reading outlines.
+Disclosure contents, hidden answers, form values and excluded pages are omitted.
+The compact JSON data is embedded only in the search page, so filtering makes
+no network request and requires no separate search service. Title and summary
+matches rank before heading-only matches. Up to three matching section links
+lead to the original page anchors; article copy and URLs are not duplicated.
+The existing browse index and title/summary search survive absent or malformed
+section data. Browser checks cover actual keyboard arrival at the headings,
+expanded text, privacy boundaries and JavaScript-disabled browsing.
+
 Reviewed reader-entry copy lives in `_source/search-entrypoints.json` and is
 applied by `_scripts/search_entrypoints.py`. It supplies specific search titles,
 five clearer hub headings, and visible purpose summaries on twelve existing

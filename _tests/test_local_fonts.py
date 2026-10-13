@@ -7,11 +7,12 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,font_delivery
 import local_fonts_history as history
+import search_sections_history
 
 class LocalFontsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.outputs=build.build_outputs();cls.pages=build.public_pages();cls.baseline=history.baseline()
+        cls.outputs={p:search_sections_history.before(p,data) for p,data in build.build_outputs().items()};cls.pages=build.public_pages();cls.baseline=history.baseline()
         cls.record=json.loads((ROOT/font_delivery.LOCAL_PROVENANCE).read_text())
 
     def test_only_reviewed_head_and_privacy_changes_survive_against_production(self):
@@ -32,7 +33,7 @@ class LocalFontsTests(unittest.TestCase):
         self.assertEqual(paths,set(self.baseline['files'])|set(history.change()['new_files']))
         changed=[]
         for p,digest in self.baseline['files'].items():
-            raw=(ROOT/p).read_bytes()
+            raw=search_sections_history.before(p,(ROOT/p).read_bytes())
             if sha256(raw).hexdigest()!=digest:changed.append(p)
             self.assertEqual(sha256(history.before(p,raw)).hexdigest(),digest,p)
         self.assertCountEqual(changed,['_source/privacy.html','_source/pages.json','assets/site-fonts.css'])

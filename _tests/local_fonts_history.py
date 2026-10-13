@@ -8,6 +8,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import search_sections_history
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -24,6 +25,7 @@ def pages(records):
     return result
 
 def before(path,data):
+    data=search_sections_history.before(path,data)
     path=str(path);b=baseline();c=change()
     if path not in b['outputs'] and path not in {'_source/pages.json','_source/privacy.html'}:return data
     binary=isinstance(data,bytes);text=data.decode() if binary else data

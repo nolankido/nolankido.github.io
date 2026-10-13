@@ -11,6 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build
 import local_fonts_history
+import search_sections_history
 import find_submission_history as history
 
 
@@ -64,7 +65,7 @@ class FindSubmissionTests(unittest.TestCase):
         paths=[p for directory in ['_source','assets','downloads'] for p in (ROOT/directory).rglob('*') if p.is_file() and p.relative_to(ROOT).as_posix() not in local_fonts_history.change()['new_files']]
         records=[[p.relative_to(ROOT).as_posix(),sha256(history.before(p.relative_to(ROOT),p.read_bytes())).hexdigest()] for p in paths]
         self.assertEqual((len(records),digest(records)),(316,self.baseline['files_digest']))
-        code=(ROOT/history.SCRIPT).read_bytes()
+        code=search_sections_history.before(history.SCRIPT,(ROOT/history.SCRIPT).read_bytes())
         self.assertEqual(sha256(code).hexdigest(),self.baseline['new_script_sha256'])
         self.assertEqual(sha256(history.before(history.SCRIPT,code)).hexdigest(),self.baseline['old_script_sha256'])
 
