@@ -7,6 +7,7 @@ from urllib.parse import urlsplit
 import argparse,json,os,faulthandler
 from playwright.sync_api import sync_playwright,expect
 from browser import html_for
+from time_export_history import before as before_export
 parser=argparse.ArgumentParser();parser.add_argument('--offline',action='store_true');args=parser.parse_args()
 ROOT=Path(__file__).resolve().parents[1]
 class Quiet(SimpleHTTPRequestHandler):
@@ -17,7 +18,7 @@ if not args.offline:
  Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port) if server else ''
 calc='/technology/ai-time-savings/';case='/technology/checking-ai-website-changes/'
-report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'axe':[],'journeys':0};errors=[]
+report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0};errors=[]
 faulthandler.dump_traceback_later(300,exit=True)
 try:
  with sync_playwright() as pw:
@@ -29,6 +30,25 @@ try:
   context.route('**/*',route)
   page=context.new_page();page.set_default_timeout(10000);page.set_default_navigation_timeout(15000)
   page.on('pageerror',lambda e:errors.append(str(e)))
+  # The existing preview remains an actual historical capture. Independently
+  # compare full normal-result pixels with its original export handler and the
+  # current script, in separate pages with all external requests blocked.
+  probe=browser.new_context(viewport={'width':1440,'height':1000},device_scale_factor=1,reduced_motion='reduce')
+  probe.route('**/*',lambda r:r.abort())
+  current_script=(ROOT/'assets/workflow-time.js').read_text()
+  captures=[]
+  for label,script in [('before',before_export('assets/workflow-time.js',current_script)),('after',current_script)]:
+   p=probe.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
+   p.set_content(html_for(calc));p.add_script_tag(content=script)
+   for key,value in zip(['manual','assisted','review','count','setup','upkeep'],['30','8','7','6','60','15']):p.locator('#time-'+key).fill(value)
+   p.locator('#time-calculate').click();p.evaluate('document.activeElement.blur()')
+   capture=p.locator('#time-result').screenshot();captures.append(capture)
+   if os.environ.get('SCREENSHOT_DIR'):
+    out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+    (out/f'time-export-normal-{label}.png').write_bytes(capture)
+   p.close()
+  assert captures[0]==captures[1],'The normal calculator result changed beyond export recovery'
+  probe.close();report['export_normal_capture_equivalence']+=1
   def render(p,path,execute=True):
    if args.offline:
     p.set_content(html_for(path))
@@ -51,6 +71,41 @@ try:
   assert page.locator('#time-report').evaluate('x=>x.selectionEnd-x.selectionStart')==len(text);report['functional']+=2
   with page.expect_download() as item:page.locator('#time-download').click()
   download=item.value;assert download.suggested_filename=='workflow-time-comparison.txt';assert Path(download.path()).read_text()==text;report['downloads']+=1
+  expect(page.locator('#time-copy-status')).to_have_text('Text download requested. Keep the comparison in your own notes.')
+  page.evaluate("window.nativeTimeExportURL=URL.createObjectURL;URL.createObjectURL=()=>{throw new Error('Synthetic file creation failure')}")
+  page.locator('#time-download').press('Enter')
+  expect(page.locator('#time-report')).to_be_focused();expect(page.locator('#time-result')).to_be_visible()
+  expect(page.locator('#time-copy-status')).to_have_text('Download unavailable. Copy the selected comparison into your own notes.')
+  assert page.locator('#time-report').input_value()==text
+  assert page.locator('#time-report').evaluate('x=>x.selectionEnd-x.selectionStart')==len(text)
+  for recovery_width in [390,1440]:
+   page.set_viewport_size({'width':recovery_width,'height':1000})
+   assert page.evaluate('document.documentElement.scrollWidth')<=recovery_width
+   report['export_recovery_layouts']+=1
+   if os.environ.get('SCREENSHOT_DIR'):
+    out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+    page.locator('#time-result').screenshot(path=str(out/f'time-export-recovery-{recovery_width}.png'))
+   page.evaluate('css=>{const style=document.createElement("style");style.id="time-export-spacing";style.textContent=css;document.head.appendChild(style)}','*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
+   assert page.evaluate('document.documentElement.scrollWidth')<=recovery_width
+   report['export_recovery_spacing']+=1
+   page.evaluate('document.getElementById("time-export-spacing").remove()')
+  page.evaluate('URL.createObjectURL=window.nativeTimeExportURL');report['functional']+=1
+  page.evaluate("""window.nativeTimeExportClick=HTMLAnchorElement.prototype.click;
+window.nativeTimeExportRevoke=URL.revokeObjectURL;window.timeExportRevoked=[];
+window.timeExportFailureURL=null;URL.createObjectURL=blob=>{const url=window.nativeTimeExportURL.call(URL,blob);window.timeExportFailureURL=url;return url};
+URL.revokeObjectURL=url=>{window.timeExportRevoked.push(url);window.nativeTimeExportRevoke.call(URL,url)};
+HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-comparison.txt')throw new Error('Synthetic download activation failure');return window.nativeTimeExportClick.call(this)}""")
+  page.locator('#time-download').press('Enter')
+  expect(page.locator('#time-report')).to_be_focused();expect(page.locator('#time-result')).to_be_visible()
+  expect(page.locator('#time-copy-status')).to_have_text('Download unavailable. Copy the selected comparison into your own notes.')
+  assert page.locator('#time-report').input_value()==text
+  assert page.locator('#time-report').evaluate('x=>x.selectionEnd-x.selectionStart')==len(text)
+  expect(page.locator('a[download="workflow-time-comparison.txt"]')).to_have_count(0)
+  page.wait_for_function('window.timeExportRevoked.includes(window.timeExportFailureURL)')
+  page.evaluate('HTMLAnchorElement.prototype.click=window.nativeTimeExportClick;URL.revokeObjectURL=window.nativeTimeExportRevoke;URL.createObjectURL=window.nativeTimeExportURL');report['functional']+=1
+  with page.expect_download() as item:page.locator('#time-download').click()
+  assert Path(item.value.path()).read_text()==text;report['downloads']+=1
+  expect(page.locator('#time-copy-status')).to_have_text('Text download requested. Keep the comparison in your own notes.')
   page.locator('#time-review').fill('10');expect(page.locator('#time-result')).to_be_hidden();assert page.locator('#time-report').input_value()==''
   page.locator('#time-calculate').click();expect(page.locator('#time-result-title')).to_have_text('3 min extra time in this window');report['functional']+=1
   page.locator('#time-review').fill('<script>');page.locator('#time-calculate').click();expect(page.locator('#time-review')).to_be_focused();expect(page.locator('#time-result')).to_be_hidden();report['functional']+=1

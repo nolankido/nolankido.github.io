@@ -2,6 +2,7 @@
 from functools import lru_cache
 from pathlib import Path
 import json
+import time_export_history
 
 ROOT = Path(__file__).resolve().parents[1]
 PATHS = frozenset({
@@ -18,6 +19,7 @@ def baseline():
 
 
 def before(path, data):
+    data = time_export_history.before(path, data)
     path = str(path)
     if path not in PATHS:
         return data

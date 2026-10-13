@@ -19,6 +19,7 @@ import build
 import check_live
 import follow
 import practical_discovery as discovery
+import time_export_history
 
 
 def records(xml):
@@ -116,7 +117,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 discovery.feed(config, pages, self.outputs, origin)
 
-    def test_real_capture_provenance_matches_pixels_dependencies_and_labels(self):
+    def test_real_capture_provenance_matches_pixels_and_reviewed_historical_dependencies(self):
         records_ = json.loads((ROOT / '_reports/work-preview-provenance.json').read_text())
         self.assertEqual({r['id'] for r in records_}, {'task-brief', 'ai-time-savings'})
         by_id = {w['id']: w for w in self.config['works']}
@@ -129,7 +130,11 @@ class PracticalDiscoveryTests(unittest.TestCase):
             self.assertIn('excerpt', r['capture'])
             self.assertIn('fictional', by_id[r['id']]['image']['caption'])
             for path, digest in r['dependencies'].items():
-                self.assertEqual(hashlib.sha256((ROOT / path).read_bytes()).hexdigest(), digest, path)
+                # Keep the actual capture record. The exact export-only handler
+                # change is reversed here; normal result pixels are independently
+                # compared with that historical script in the hosted browser suite.
+                captured=time_export_history.before(path,(ROOT / path).read_bytes())
+                self.assertEqual(hashlib.sha256(captured).hexdigest(), digest, path)
 
     def test_discovery_is_native_complete_scoped_and_free_of_new_scripts(self):
         home = self.outputs[Path('index.html')]
