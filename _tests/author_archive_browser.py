@@ -36,7 +36,7 @@ try:
                 expect(page.locator('.archive-list li')).to_have_count(90)
                 for group in page.locator('.archive-group').all():
                     expect(group).not_to_have_attribute('open','')
-                    group.locator('summary').focus();page.keyboard.press('Enter')
+                    group.locator('summary').press('Enter')
                     expect(group).to_have_attribute('open','')
                     expect(group.locator('.archive-list')).to_be_visible()
                     report['groups']+=1
@@ -54,14 +54,16 @@ try:
                     assert not audit['violations'],audit
                     report['axe'].append(audit)
             page.goto(base+'/about/')
-            link=page.locator('a[href="/notes/#all-writing"]');link.focus();page.keyboard.press('Enter')
+            link=page.locator('a[href="/notes/#all-writing"]')
+            with page.expect_navigation(wait_until='load'):link.press('Enter')
             expect(page).to_have_url(base+'/notes/#all-writing');report['journeys']+=1
             for group_id,target in [('practical-ai','ai-answer-review'),('living-well','living-well-notebook-or-ai'),('poker','poker-holdem-basics'),('general-essays','generous-explanations')]:
                 page.goto(base+'/notes/#all-writing')
                 group=page.locator('#archive-'+group_id)
-                group.locator('summary').focus();page.keyboard.press('Enter')
+                group.locator('summary').press('Enter')
                 link=group.locator('[data-archive-id="'+target+'"] a')
-                destination=link.get_attribute('href');link.focus();page.keyboard.press('Enter')
+                destination=link.get_attribute('href')
+                with page.expect_navigation(wait_until='load'):link.press('Enter')
                 expect(page).to_have_url(base+destination);report['journeys']+=1
             ctx.close()
         browser.close()

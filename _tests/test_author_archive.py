@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import author_archive
 import author_archive_history as history
 import build
+import practical_navigation_history
 
 class ArchiveParser(HTMLParser):
     def __init__(self, text):
@@ -44,9 +45,11 @@ class AuthorArchiveTests(unittest.TestCase):
             raw=history.before(path,self.outputs[Path(path)])
             self.assertEqual(sha256(raw.encode()).hexdigest(),digest,path)
 
-    def test_every_article_and_feed_is_byte_identical_without_normalization(self):
+    def test_original_article_output_and_feeds_survive_only_declared_navigation(self):
         for p in self.entries:
-            path=build.output_path(p['path']); self.assertEqual(sha256(self.outputs[path].encode()).hexdigest(),history.baseline()['outputs'][str(path)])
+            path=build.output_path(p['path'])
+            original=practical_navigation_history.before(path,self.outputs[path])
+            self.assertEqual(sha256(original.encode()).hexdigest(),history.baseline()['outputs'][str(path)])
         for path,digest in history.baseline()['outputs'].items():
             if path.endswith('feed.xml') or path=='feed.xml': self.assertEqual(sha256(self.outputs[Path(path)].encode()).hexdigest(),digest)
 

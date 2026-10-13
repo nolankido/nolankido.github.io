@@ -218,6 +218,16 @@ Search Console property-access limitation.
 recorded Technology case. `_scripts/practical_discovery.py` renders the work links,
 previews and Technology writing cards, and creates `/technology/feed.xml`.
 The combined `/writing.xml` feed deduplicates by canonical article identity.
+
+The four practical AI checkpoints share optional navigation from
+`_scripts/practical_navigation.py`. It decorates finished pages after reading
+times and outlines are calculated. The current stage is text, not a tool-resetting
+self-link. Existing page sources, sheets, scripts, publication metadata and feeds
+stay intact. The exact additions and a separately verified production baseline
+are protected by `test_practical_navigation.py`; historical adapters remove only
+the frozen reviewed blocks on the four named pages. Run
+`_tests/practical_navigation_browser.py` in the existing hosted browser workflow
+to check direct arrivals, sibling links, onward choices and private tool return.
 New published Technology evidence articles are included automatically; calculators
 and site edits are not fabricated into new dated articles. Historical section
 feeds and existing combined-feed item fields remain independently tested.

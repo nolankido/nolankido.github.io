@@ -5,6 +5,7 @@ from html import escape
 from pathlib import Path
 import json
 import re
+import practical_navigation_history
 
 # Freeze this release's reviewed copy. Historical adapters must load before
 # production modules, and future editorial changes must not rewrite history.
@@ -26,6 +27,7 @@ def pages(records):
     return result
 
 def before(path, data):
+    data = practical_navigation_history.before(path, data)
     path = str(path)
     if path not in {'technology/index.html', 'resources/index.html', 'find/index.html'}: return data
     binary = isinstance(data, bytes)

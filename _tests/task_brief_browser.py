@@ -154,9 +154,10 @@ try:
         assert p.locator('.brief-template pre').inner_text().strip()+'\n'==(ROOT/'downloads/ai-task-brief.txt').read_text()
         if not args.offline:
             # Build notes and the original worksheet section both offer this file.
-            # Exercise every entry point rather than assuming one download link.
-            links=p.locator('a[download]')
-            assert links.count()>0
+            # Exercise both original worksheet entry points. The optional workflow
+            # adds a separate workbook download, checked by its navigation suite.
+            links=p.locator('a[download][href="/downloads/ai-task-brief.txt"]')
+            expect(links).to_have_count(2)
             for link in links.all():
                 expect(link).to_have_attribute('href','/downloads/ai-task-brief.txt')
                 with p.expect_download() as d:link.click()

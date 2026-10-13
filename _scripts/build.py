@@ -42,6 +42,7 @@ import ai_task_choice
 import search_entrypoints
 import author_archive
 import practical_path
+import practical_navigation
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -338,7 +339,9 @@ def build_outputs() -> dict[Path, str]:
             schema['about'] = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/'}
         body += practical_discovery.article_return(p)
         body = page_sharing.decorate(body, p, site["url"])
+        body = practical_navigation.decorate(p, body, pages, ROOT)
         extra += page_sharing.head(p, ROOT)
+        extra += practical_navigation.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
         schema = author_archive.schema(p, schema, pages, site)
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
