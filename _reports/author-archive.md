@@ -41,8 +41,20 @@ bytes. The final receipt is recorded on the pull request.
 Ranking and traffic impact are unmeasured. More substantial future credibility
 gains depend on genuine firsthand material and actual external recognition.
 This archive improves discovery and presentation of the existing work.
-Connected Search Console properties were checked again; nolankido.com is not
-among them. No Google indexing inspection or sitemap submission is claimed.
+The domain was initially absent from the connected GSC Wizard properties, but
+was already verified in the connected Google account. Registering
+`sc-domain:nolankido.com` succeeded with site-owner access and an active property.
+The Google URL Inspection API reported the homepage indexed with the expected
+canonical and a September 29 crawl. About and Writing were unknown to Google
+at inspection time. These three inspections do not describe every site URL or
+constitute live fetches of this release. No sitemap was listed for this domain
+property. Submit the current live sitemap after deployment; the submission
+receipt belongs in the final pull-request record.
+
+A web-performance query for September 13 through October 10 returned no rows,
+and Google did not establish a settled-through boundary. This is not a measured
+ranking gain or proof that no one has visited the site. The newly connected
+property makes later search measurement possible.
 
 Primary reference:
 https://developers.google.com/search/docs/fundamentals/creating-helpful-content
