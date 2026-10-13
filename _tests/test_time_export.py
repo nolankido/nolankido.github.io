@@ -13,6 +13,7 @@ import build
 import local_fonts_history
 import time_export_history as history
 import find_submission_history
+import time_examples_history
 
 
 class TimeExportTests(unittest.TestCase):
@@ -81,7 +82,7 @@ class TimeExportTests(unittest.TestCase):
             if sha256(raw).hexdigest()!=digest:changed.append(path)
             self.assertEqual(sha256(history.before(path,raw)).hexdigest(),digest,path)
         self.assertEqual(changed,[history.SCRIPT])
-        self.assertEqual(sha256((ROOT/history.SCRIPT).read_bytes()).hexdigest(),self.baseline['new_script_sha256'])
+        self.assertEqual(sha256(time_examples_history.before(history.SCRIPT,(ROOT/history.SCRIPT).read_bytes())).hexdigest(),self.baseline['new_script_sha256'])
 
     def test_history_does_not_hide_unmarked_script_or_html_changes(self):
         script=(ROOT/history.SCRIPT).read_text();page=self.outputs[Path(history.PAGE)]

@@ -598,3 +598,14 @@ Next useful work: use actual reader feedback or approved firsthand material
 to select a substantive improvement. Useful, inspectable tools support the
 site's professional presentation; this pass does not demonstrate a change in
 external rankings or traffic.
+
+
+The first local full run executed 489 tests successfully but could not set up
+the six export-failure tests: their minimal fake document invented nodes for
+missing optional example controls. The fixture now returns null for those
+three absent controls, as a real document does. Its original export-success,
+five failure-injection, stale-state, cleanup and exact-byte assertions remain
+intact. The prior raw-script hash also passes through the new frozen adapter,
+without changing the hash itself. All six affected tests then passed locally.
+No public file changed in this fixture correction. The next exact candidate
+still requires the complete hosted 495-test and 35-browser-suite gate.
