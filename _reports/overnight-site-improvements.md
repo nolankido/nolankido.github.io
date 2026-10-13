@@ -339,3 +339,13 @@ Next useful work: prioritize a genuine new practical-AI case or an observed
 reader task over generic content expansion. Search Console now confirms one
 important entry page is indexed; meaningful performance comparison requires
 more time and actual search data.
+
+The first hosted candidate passed all 481 unit/content checks and all 33
+existing browser suites, including 855 full-site page/viewport checks with the
+real local typefaces. Six mobile/desktop arrival previews were inspected. The
+new font comparison fixture then stalled and the identity job reached its time
+limit. That candidate was not merged. The fixture now separates binary decoding
+from the rendered CSS faces, bounds its readiness checks, provides matching CORS
+headers for the mocked old provider, and logs each decode and view. Exact
+rendering parity, no-script coverage, fallbacks and all 27 asset-byte checks
+remain required. The corrected candidate needs the complete gate again.
