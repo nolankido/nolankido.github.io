@@ -279,3 +279,63 @@ request after execution. Browser execution stays in GitHub Actions.
 Next useful work: use any new archive failure diagnostics to distinguish a
 real focus/route defect from test synchronization. Once the gate is stable,
 inspect a separate reader-facing issue from current evidence.
+
+## Local typography and current indexing evidence
+
+This user-directed pass begins from live main
+`87a733313e01592474bf06cb9ab2adf0f5140ea3` after PR #57. The existing
+Pages deployment and complete post-merge checks succeeded. Only the stale PR #48
+was open; it remains untouched.
+
+A fresh Google Search Console inspection on October 13, 2026 reports the
+Technology hub as Submitted and indexed, with a successful mobile crawl at
+10:40:39 UTC and matching declared and Google-selected canonical URLs:
+https://nolankido.com/technology/
+The queried September 13 to October 10 search-query window returned no rows.
+That does not establish zero traffic or a ranking change. No unchanged sitemap
+was resubmitted, and no indexing request was made.
+
+The remaining font dependency was visible in production HTML and the preserved
+font stylesheet: all pages preconnected to Google and requested font binaries
+from fonts.gstatic.com. Blocking that origin leaves fallback typography rather
+than the reviewed typefaces. This pass moves the exact existing WOFF2 binaries
+to the existing GitHub Pages host. There is no typeface redesign, font generation,
+binary modification, subsetting, extra preload or added runtime code.
+
+All 38 font-face declarations retain the original family, style, weight, display
+policy and Unicode ranges. Their 24 distinct files total 422,284 bytes across
+all language subsets. Browsers still choose the subsets and faces they need;
+this is not the download size of every page. Content-addressed filenames and the
+existing stylesheet versioning support caching. The three original licenses
+are bundled. Provenance records the provider URLs and exact sizes and hashes.
+Builds remain offline and reject missing, changed or unmapped files/licenses.
+
+The font preconnection is removed from all 171 pages. The privacy notice now
+accurately describes same-site font hosting and is dated October 13. All 170
+other complete page bodies, article metadata, five feeds, original font source
+CSS, design styles, analytics, contact behavior and public identity remain intact.
+Original URLs, CNAME and .nojekyll remain. The only modified pre-existing source
+or asset files are the privacy notice, its manifest update, and generated font
+CSS. An independent baseline was captured from production Git objects before
+editing. Historical adapters reverse only the frozen font URL/head substitutions
+and exact privacy change, with negative controls; old golden hashes are retained.
+
+The hosted browser gate adds exact geometry comparison against the original
+provider-font arrangement, using identical font bytes with all external traffic
+blocked. It also exercises all font subsets, blocked-font fallback text, mobile
+reflow, no-script navigation, exact asset responses and scoped accessibility.
+The existing design suite now runs with real local typefaces across every page.
+The published-byte inventory expands from 372 to 399 targets, including every
+font and license. Executed check results and the final deployment receipt belong
+on the pull request after completion.
+
+This removes one external delivery dependency and preserves the intended design
+when Google Fonts is blocked. It does not establish a measured speed improvement,
+Core Web Vitals change or ranking gain. Relevant primary guidance:
+https://web.dev/learn/performance/optimize-web-fonts
+https://web.dev/articles/font-best-practices
+
+Next useful work: prioritize a genuine new practical-AI case or an observed
+reader task over generic content expansion. Search Console now confirms one
+important entry page is indexed; meaningful performance comparison requires
+more time and actual search data.

@@ -10,6 +10,7 @@ import unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build
+import local_fonts_history
 import time_export_history as history
 import find_submission_history
 
@@ -63,10 +64,10 @@ class TimeExportTests(unittest.TestCase):
             if sha256(raw.encode()).hexdigest()!=digest:changed.append(path)
             self.assertEqual(sha256(history.before(path,raw).encode()).hexdigest(),digest,path)
         self.assertEqual(changed,[history.PAGE])
-        self.assertEqual(sha256(json.dumps(self.pages,sort_keys=True,ensure_ascii=False).encode()).hexdigest(),self.baseline['pages_sha256'])
+        self.assertEqual(sha256(json.dumps(local_fonts_history.pages(self.pages),sort_keys=True,ensure_ascii=False).encode()).hexdigest(),self.baseline['pages_sha256'])
         article_count=0
         for page in self.pages:
-            path=build.output_path(page['path']);raw=self.outputs[path]
+            path=build.output_path(page['path']);raw=local_fonts_history.before(path,self.outputs[path])
             schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
             if schema['@type']=='Article':
                 article_count+=1;self.assertEqual(sha256(raw.encode()).hexdigest(),self.baseline['outputs'][str(path)])
@@ -90,7 +91,7 @@ class TimeExportTests(unittest.TestCase):
         changed=page.replace('<body','<!-- unreviewed --><body',1)
         self.assertNotEqual(sha256(history.before(history.PAGE,changed).encode()).hexdigest(),self.baseline['outputs'][history.PAGE])
         untouched='technology/check-ai-answers/index.html'
-        self.assertEqual(history.before(untouched,page),page)
+        self.assertEqual(history.before(untouched,page),local_fonts_history.before(untouched,page))
 
 
 if __name__=='__main__':unittest.main(verbosity=2)

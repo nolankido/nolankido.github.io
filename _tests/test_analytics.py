@@ -50,11 +50,11 @@ class AnalyticsTests(unittest.TestCase):
 
     def test_privacy_notice_matches_the_installation(self):
         content = self.outputs[Path('privacy/index.html')]
-        for expected in ('Updated October 12, 2026', 'Umami Cloud', 'pageviews only', 'Do Not Track', 'https://umami.is/privacy'):
+        for expected in ('Updated October 13, 2026', 'Umami Cloud', 'pageviews only', 'Do Not Track', 'https://umami.is/privacy'):
             self.assertIn(expected, content)
         self.assertNotIn('does not add advertising pixels, behavioral analytics', content)
         privacy = next(page for page in build.public_pages() if page['path'] == '/privacy/')
-        self.assertEqual(privacy['updated'], '2026-10-12')
+        self.assertEqual(privacy['updated'], '2026-10-13')
 
 if __name__ == '__main__':
     unittest.main()

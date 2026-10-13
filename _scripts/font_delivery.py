@@ -1,7 +1,7 @@
-"""Serve the existing font-face declarations locally, not through blocking API CSS.
+"""Serve reviewed, unmodified font files and declarations from the site itself.
 
-No font binaries are copied. Preserve family, style, weight, display and full
-Unicode coverage from the recorded Google CSS response. Builds are offline.
+Preserve the recorded provider CSS as provenance. Only its URLs are localized;
+family, style, weight, display and Unicode coverage stay exact. Builds are offline.
 """
 from hashlib import sha256
 from html import unescape
@@ -12,6 +12,8 @@ import re
 SOURCE = Path('_source/font-faces.css')
 OUTPUT = Path('assets/site-fonts.css')
 PROVENANCE = Path('_reports/font-css-provenance.json')
+LOCAL_PROVENANCE = Path('_reports/local-fonts-provenance.json')
+FILE_PRECONNECT = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
 FAMILIES = {'IBM Plex Mono': {('normal', '400'), ('normal', '500')},
             'Schibsted Grotesk': {('normal', w) for w in ['400', '500', '600', '700', '750']},
             'Source Serif 4': {('normal', '400'), ('normal', '600'), ('italic', '400')}}
@@ -55,8 +57,45 @@ def href(text: str) -> str:
     return '/' + OUTPUT.as_posix() + '?v=' + sha256(text.encode()).hexdigest()[:12]
 
 
-def apply(outputs: dict[Path, str], root: Path) -> dict[Path, str]:
+def local_files(root: Path) -> list[dict]:
+    """Require exact URL coverage, content-addressed files and bundled licenses."""
+    source = declarations(root)
+    expected = set(re.findall(r'url\(([^)]+)\)', source))
+    record = json.loads((root / LOCAL_PROVENANCE).read_text(encoding='utf-8'))
+    fonts, licenses = record['files'], record['licenses']
+    if len(fonts) != len(expected) or {f['url'] for f in fonts} != expected:
+        raise ValueError('Local fonts must cover every original provider URL exactly once')
+    families = {url.split('/s/')[1].split('/')[0] for url in expected}
+    if len(licenses) != len(families) or {f['path'] for f in licenses} != {
+            'assets/fonts/' + family + '-OFL.txt' for family in families}:
+        raise ValueError('Each font family needs its original license')
+    for entry in fonts + licenses:
+        path = entry['path']
+        if entry in fonts:
+            family = entry['url'].split('/s/')[1].split('/')[0]
+            if path != 'assets/fonts/' + family + '-' + entry['sha256'][:12] + '.woff2':
+                raise ValueError('Font path must identify its family and exact content')
+        data = (root / path).read_bytes()
+        if len(data) != entry['bytes'] or sha256(data).hexdigest() != entry['sha256']:
+            raise ValueError('Font asset does not match the reviewed provider bytes: ' + path)
+        if entry in fonts:
+            if data[:4] != b'wOF2' or int.from_bytes(data[8:12], 'big') != len(data):
+                raise ValueError('Invalid WOFF2 asset: ' + path)
+        elif b'SIL OPEN FONT LICENSE' not in data or b'Copyright' not in data:
+            raise ValueError('Missing font copyright and license: ' + path)
+    return fonts + licenses
+
+
+def local_declarations(root: Path) -> str:
     text = declarations(root)
+    for entry in local_files(root):
+        if entry['path'].endswith('.woff2'):
+            text = text.replace('url(' + entry['url'] + ')', 'url(/' + entry['path'] + ')')
+    return text
+
+
+def apply(outputs: dict[Path, str], root: Path) -> dict[Path, str]:
+    text = local_declarations(root)
     record = json.loads((root / PROVENANCE).read_text(encoding='utf-8'))
     link = '<link rel="stylesheet" href="' + href(text) + '">'
     for path, document in list(outputs.items()):
@@ -67,8 +106,11 @@ def apply(outputs: dict[Path, str], root: Path) -> dict[Path, str]:
             raise ValueError('Review the changed font request before replacing it: ' + str(path))
         if document.count(PRECONNECT) != 1:
             raise ValueError('Unexpected font API preconnection: ' + str(path))
+        if document.count(FILE_PRECONNECT) != 1:
+            raise ValueError('Unexpected font-file preconnection: ' + str(path))
         document = GOOGLE_LINK.sub(lambda m: link, document)
         document = document.replace('  ' + PRECONNECT + '\n', '')
+        document = document.replace('  ' + FILE_PRECONNECT + '\n', '')
         outputs[path] = document
     outputs[OUTPUT] = text
     return outputs

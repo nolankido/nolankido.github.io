@@ -49,7 +49,7 @@ python _tests/browser.py
 python _tests/design_browser.py
 ```
 
-Set `CHROMIUM_PATH` to use an installed Chromium binary. Set `SCREENSHOT_DIR` outside the repository for optional screenshots. Set `ALLOW_WEB_FONTS=1` on a separate `design_browser.py` run to verify the three real font families. Default browser checks use fallbacks.
+Set `CHROMIUM_PATH` to use an installed Chromium binary. Set `SCREENSHOT_DIR` outside the repository for optional screenshots. The HTTP design suite verifies the three real font families from local files. The dedicated font suite also checks readable fallbacks when those files fail.
 
 The comprehensive audit additionally uses axe-core. Install it outside the repository:
 
@@ -276,3 +276,13 @@ The browser suite checks native journeys and downloads with JavaScript enabled
 and disabled, print previews, narrow layouts and text spacing. Its `--offline`
 mode does not claim HTTP, download, or axe results. It is added to Site checks
 without removing the previous 23 suites. See `_reports/everyday-task-review.md`.
+
+## Local typeface delivery
+
+`_source/font-faces.css` remains the reviewed provider capture. The build changes
+only its font URLs to the exact content-addressed WOFF2 files in `assets/fonts/`,
+with original licenses and `_reports/local-fonts-provenance.json`. Normal builds
+make no font-provider requests. Replacing a typeface or subset requires a new
+review of binary provenance, licenses, descriptor coverage and rendered geometry.
+The full hosted gate includes `local_fonts_browser.py`; the live verifier checks
+every font and license. The privacy notice describes the current local hosting.

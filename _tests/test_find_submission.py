@@ -10,6 +10,7 @@ import unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build
+import local_fonts_history
 import find_submission_history as history
 
 
@@ -48,10 +49,10 @@ class FindSubmissionTests(unittest.TestCase):
         b=self.baseline
         records=[[str(p),sha256(history.before(p,text).encode()).hexdigest()] for p,text in self.outputs.items()]
         self.assertEqual((len(records),digest(records)),(198,b['outputs_digest']))
-        self.assertEqual(sha256(json.dumps(self.pages,sort_keys=True,ensure_ascii=False).encode()).hexdigest(),b['pages_digest'])
+        self.assertEqual(sha256(json.dumps(local_fonts_history.pages(self.pages),sort_keys=True,ensure_ascii=False).encode()).hexdigest(),b['pages_digest'])
         articles=[];feeds=[]
         for page in self.pages:
-            p=build.output_path(page['path']);text=self.outputs[p]
+            p=build.output_path(page['path']);text=local_fonts_history.before(p,self.outputs[p])
             schema=json.loads(re.search(r'<script type="application/ld[+]json">(.*?)</script>',text)[1])
             if schema['@type']=='Article':articles.append([str(p),sha256(text.encode()).hexdigest()])
         for p,text in self.outputs.items():
@@ -60,7 +61,7 @@ class FindSubmissionTests(unittest.TestCase):
         self.assertEqual((len(feeds),digest(feeds)),(5,b['feeds_digest']))
 
     def test_all_original_sources_assets_and_downloads_allow_only_the_frozen_event_change(self):
-        paths=[p for directory in ['_source','assets','downloads'] for p in (ROOT/directory).rglob('*') if p.is_file()]
+        paths=[p for directory in ['_source','assets','downloads'] for p in (ROOT/directory).rglob('*') if p.is_file() and p.relative_to(ROOT).as_posix() not in local_fonts_history.change()['new_files']]
         records=[[p.relative_to(ROOT).as_posix(),sha256(history.before(p.relative_to(ROOT),p.read_bytes())).hexdigest()] for p in paths]
         self.assertEqual((len(records),digest(records)),(316,self.baseline['files_digest']))
         code=(ROOT/history.SCRIPT).read_bytes()
@@ -73,7 +74,7 @@ class FindSubmissionTests(unittest.TestCase):
             self.assertNotEqual(sha256(history.before(history.SCRIPT,changed).encode()).hexdigest(),self.baseline['old_script_sha256'])
         modified=page.replace('<body','<!-- unexpected --> <body',1)
         self.assertNotEqual(history.before(history.PAGE,page),history.before(history.PAGE,modified))
-        self.assertEqual(history.before('about/index.html',page),page)
+        self.assertEqual(history.before('about/index.html',page),local_fonts_history.before('about/index.html',page))
 
 
 if __name__=='__main__':unittest.main()
