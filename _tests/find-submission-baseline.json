@@ -1,0 +1,16 @@
+{
+  "base": "b42894f9483705d08798562095058380590e3ac2",
+  "outputs_count": 198,
+  "outputs_digest": "2c8c31522e87ba4264d0c0f6be0e388ba7ba5765cdddaab93ef55f39b8ea7bc3",
+  "files_count": 316,
+  "files_digest": "6131975f193ae8e377022933e9f8f421539b25e14b235f042e7874821e34e10f",
+  "articles_count": 90,
+  "articles_digest": "3092cf68ef6edf18105a38022e6057fe05df4044d7965fd673c909f6276c13a4",
+  "feeds_count": 5,
+  "feeds_digest": "5fe925e3e7d071959a53941fdecd4128162ca2ae37a81dbefdd2fc83ca8aec7c",
+  "pages_digest": "221b7b4d5a616e69ed6900f9dc4317287745fa9048d07e6fb6f367030e0d02d2",
+  "old_script_sha256": "d7e0a3bd15ddaa9b1fec96ec82f8ec0dca7bdaaa04480856ad042ed6adc0e604",
+  "new_script_sha256": "50da27d3e0c1e44de9d4eb44c089424952c8bac843e0363bd2625a7e76c5bf7b",
+  "old_handler": "  query.addEventListener('input', event => { if (!event.isComposing) { clearTimeout(timer); timer = setTimeout(filter, 140); } });\n  query.addEventListener('compositionend', filter);\n  query.addEventListener('search', filter);\n  query.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); filter(); } });\n  interest.addEventListener('change', filter);\n  kind.addEventListener('change', filter);\n  document.getElementById('find-submit').addEventListener('click', filter);\n",
+  "new_handler": "  function submit() { filter(); heading.focus(); }\n  query.addEventListener('input', event => { clearTimeout(timer); if (!event.isComposing) timer = setTimeout(filter, 140); });\n  query.addEventListener('compositionstart', () => clearTimeout(timer));\n  query.addEventListener('compositionend', filter);\n  query.addEventListener('search', filter);\n  query.addEventListener('keydown', event => {\n    if (event.key === 'Enter' && !event.isComposing && event.keyCode !== 229) { event.preventDefault(); submit(); }\n  });\n  interest.addEventListener('change', filter);\n  kind.addEventListener('change', filter);\n  document.getElementById('find-submit').addEventListener('click', submit);\n"
+}

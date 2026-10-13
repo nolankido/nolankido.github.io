@@ -11,6 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build
 import time_export_history as history
+import find_submission_history
 
 
 class TimeExportTests(unittest.TestCase):
@@ -58,7 +59,7 @@ class TimeExportTests(unittest.TestCase):
         self.assertEqual(len(self.baseline['outputs']),198)
         changed=[]
         for path,digest in self.baseline['outputs'].items():
-            raw=self.outputs[Path(path)]
+            raw=find_submission_history.before(path,self.outputs[Path(path)])
             if sha256(raw.encode()).hexdigest()!=digest:changed.append(path)
             self.assertEqual(sha256(history.before(path,raw).encode()).hexdigest(),digest,path)
         self.assertEqual(changed,[history.PAGE])
@@ -75,7 +76,7 @@ class TimeExportTests(unittest.TestCase):
         self.assertEqual(len(self.baseline['files']),316)
         changed=[]
         for path,digest in self.baseline['files'].items():
-            raw=(ROOT/path).read_bytes()
+            raw=find_submission_history.before(path,(ROOT/path).read_bytes())
             if sha256(raw).hexdigest()!=digest:changed.append(path)
             self.assertEqual(sha256(history.before(path,raw)).hexdigest(),digest,path)
         self.assertEqual(changed,[history.SCRIPT])

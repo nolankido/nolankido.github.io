@@ -2,6 +2,7 @@
 from functools import lru_cache
 from pathlib import Path
 import json
+import find_submission_history
 
 ROOT=Path(__file__).resolve().parents[1]
 SCRIPT='assets/workflow-time.js'
@@ -14,6 +15,7 @@ def baseline():
 
 
 def before(path,data):
+    data=find_submission_history.before(path,data)
     path=str(path)
     if path not in {SCRIPT,PAGE}:return data
     binary=isinstance(data,bytes);text=data.decode() if binary else data
