@@ -113,9 +113,22 @@
   });
   byId("time-download").addEventListener("click", () => {
     if (result.hidden || !report.value) return;
-    const url = URL.createObjectURL(new Blob([report.value], {type:"text/plain;charset=utf-8"}));
-    const a = document.createElement("a"); a.href = url; a.download = "workflow-time-comparison.txt";
-    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    const text = report.value;
+    let url, a;
+    try {
+      url = URL.createObjectURL(new Blob([text], {type:"text/plain;charset=utf-8"}));
+      a = document.createElement("a"); a.href = url; a.download = "workflow-time-comparison.txt";
+      a.hidden = true; document.body.appendChild(a); a.click();
+      if (!result.hidden && report.value === text) byId("time-copy-status").textContent = "Text download requested. Keep the comparison in your own notes.";
+    } catch (_) {
+      if (!result.hidden && report.value === text) {
+        report.focus(); report.select();
+        byId("time-copy-status").textContent = "Download unavailable. Copy the selected comparison into your own notes.";
+      }
+    } finally {
+      if (a) a.remove();
+      if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
   });
   byId("time-clear").addEventListener("click", () => {
     if (keys.some(k => fields[k].value)) { byId("time-clear-confirm").hidden = false; byId("time-clear-no").focus(); }

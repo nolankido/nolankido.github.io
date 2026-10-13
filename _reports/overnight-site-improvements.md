@@ -80,3 +80,63 @@ Google's current link guidance recommends crawlable anchors, relevant link text
 and helpful contextual cross-references. This is a discovery and reader-flow
 improvement, not evidence of increased search traffic:
 https://developers.google.com/search/docs/crawling-indexing/links-crawlable
+
+## Calculator export recovery
+
+This pass starts from verified production `7f8bb0055ba469db6bb36a431cc0ea29d47c874b`.
+The calculator's file-export handler had no error recovery. An independent Node
+VM fixture injected an unavailable object-URL API into the existing production
+script. Saving raised an uncaught error, left the comparison unselected, and
+provided no download feedback. This is a reproduced failure condition, not a
+claim that ordinary downloads were broken for all visitors.
+
+The handler now keeps the complete comparison visible, focuses and selects it
+for manual copying when file creation or activation fails, and gives a clear
+recovery message. Successful activation says a download was requested; it does
+not claim the browser saved a file. Temporary links are removed and any created
+object URL is revoked. Feedback belongs only to the current visible comparison.
+The arithmetic, input validation, source articles, dates, worksheets, contact
+behavior and analytics stay intact. No new runtime dependency or collection.
+
+Independent production capture verified all 198 generated outputs and 316
+original source, asset and download files against Git objects before editing.
+The only generated-page change is the calculator script's content-derived cache
+version. All 90 article HTML files and all five feeds remain byte identical.
+Historical integrity restores only the exact reviewed handler and that one
+version change. Unmarked code or page edits remain detectable, and old golden
+digests are unchanged.
+
+The failure-injection fixture covers Blob creation, object URL creation, element
+creation, insertion and activation, plus successful exact-text export and stale
+or hidden results. The hosted browser suite injects creation and activation
+failures, checks complete text selection and visible recovery, confirms cleanup,
+and verifies a subsequent real download. Recovery views are checked at mobile
+and desktop widths with expanded text spacing. The historical work-preview
+record is retained with its exact captured script; the hosted suite separately
+requires identical normal-result pixels with the old and new export handlers.
+The existing full release gate and all
+33 browser suites are required. Executed results and final deployment belong in
+the pull request receipt after verification.
+
+Executed local checks: all 198 committed outputs matched the build, all 171 HTML
+pages passed parsing, the search audit passed, and all 469 unit/content tests
+passed. The six new export and preservation tests are included in that total.
+The first full local run correctly rejected a historical preview dependency
+against the changed script. Its check now restores only the exact captured
+export handler; the recorded preview and dependency digests are not rewritten.
+The focused preview suite and the complete 469-test run then passed. Hosted
+failure journeys, pixel equivalence and mobile/desktop views remain required
+before merge. Local browser execution was not used.
+
+The first hosted run passed the build/content gate and normal-result pixel
+equivalence. The new failure test's setup returned its injected function to
+Playwright, which immediately invoked it before the download interaction.
+Setup and restoration now use explicit function bodies with no returned
+function. All recovery, exact-download and cleanup assertions are retained.
+An unrelated collection suite's browser process crashed during startup before
+loading its page. The complete existing gate is still required on the corrected
+candidate; these failures are not publication evidence.
+
+Next useful work: review a different concrete visitor or publishing defect from
+current source and live evidence. Do not repeat completed navigation or export
+work or expand article volume just to fill a work pass.

@@ -14,6 +14,7 @@ import build
 import check_live
 import practical_navigation
 import practical_navigation_history as history
+import time_export_history
 
 STAGES = (
     ('ai-task-choice', '/technology/should-i-use-ai/', 'Decide'),
@@ -50,10 +51,11 @@ class PracticalNavigationTests(unittest.TestCase):
             self.assertEqual(sha256(history.before(path,raw).encode()).hexdigest(),digest,path)
         self.assertCountEqual(changed,history.PATHS)
 
-    def test_all_original_sources_assets_and_downloads_remain_exact(self):
+    def test_original_sources_assets_and_downloads_survive_only_reviewed_export_recovery(self):
         self.assertEqual(len(self.baseline['files']),315)
         for path,digest in self.baseline['files'].items():
-            self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),digest,path)
+            original=time_export_history.before(path,(ROOT/path).read_bytes())
+            self.assertEqual(sha256(original).hexdigest(),digest,path)
         self.assertEqual(sha256((ROOT/practical_navigation.CSS).read_bytes()).hexdigest(),self.baseline['navigation_css_sha256'])
 
     def test_original_article_metadata_content_and_five_feeds_survive(self):
@@ -103,7 +105,8 @@ class PracticalNavigationTests(unittest.TestCase):
             self.assertEqual('id="ai-workflow-navigation"' in raw,page['id'] in ids)
             self.assertEqual('/assets/practical-ai-navigation.css?' in raw,page['id'] in ids)
             restored=history.before(path,raw)
-            self.assertEqual(re.findall(r'<script[^>]*src="([^"]+)"',raw),re.findall(r'<script[^>]*src="([^"]+)"',restored))
+            versioned=time_export_history.before(path,raw)
+            self.assertEqual(re.findall(r'<script[^>]*src="([^"]+)"',versioned),re.findall(r'<script[^>]*src="([^"]+)"',restored))
         self.assertEqual(len(check_live.targets()),372)
         self.assertEqual(check_live.targets()['/assets/practical-ai-navigation.css'],(200,(ROOT/practical_navigation.CSS).read_bytes()))
         css=(ROOT/practical_navigation.CSS).read_text()

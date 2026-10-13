@@ -19,6 +19,7 @@ import reader_previews
 import search_entrypoints
 import search_entry_history as history
 import practical_navigation_history
+import time_export_history
 
 
 class SearchEntryTests(unittest.TestCase):
@@ -30,10 +31,11 @@ class SearchEntryTests(unittest.TestCase):
         cls.entries = search_entrypoints.load(ROOT, cls.pages)
         cls.cards = json.loads((ROOT / reader_previews.SOURCE).read_text())['pages']
 
-    def test_every_original_source_asset_and_download_is_byte_identical(self):
+    def test_original_source_assets_and_downloads_survive_only_reviewed_export_recovery(self):
         self.assertEqual(len(self.baseline['files']), 220)
         for path, expected in self.baseline['files'].items():
-            self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), expected, path)
+            original=time_export_history.before(path,(ROOT / path).read_bytes())
+            self.assertEqual(sha256(original).hexdigest(), expected, path)
 
     def test_all_original_bodies_survive_only_the_declared_entry_changes(self):
         self.assertEqual(len(self.baseline['bodies']), 171)
@@ -133,7 +135,8 @@ class SearchEntryTests(unittest.TestCase):
 
     def test_no_new_runtime_scripts_and_every_new_asset_is_verified_live(self):
         for path, old_scripts in self.baseline['scripts'].items():
-            scripts = re.findall(r'<script[^>]+src="([^"]+)"', self.outputs[Path(path)])
+            original=time_export_history.before(path,self.outputs[Path(path)])
+            scripts = re.findall(r'<script[^>]+src="([^"]+)"', original)
             self.assertEqual(scripts, old_scripts, path)
         targets = check_live.targets()
         self.assertIn('/assets/search-entrypoints.css', targets)
