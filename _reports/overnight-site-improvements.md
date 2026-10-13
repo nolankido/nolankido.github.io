@@ -66,6 +66,15 @@ tests passed. The eight new preservation and navigation checks are included in
 that total. Local browser execution was not used. Hosted browser outcomes and
 publication evidence belong in the release receipt after execution.
 
+The first hosted run passed the new navigation suite. It exposed two inherited
+test assumptions: the task-brief fallback checked every download as the original
+sheet, and an archive keyboard journey checked the next action before the prior
+navigation had fully loaded. The fallback now selects both original sheet links
+explicitly and requires exactly two; their destination and file-byte assertions
+remain. The new workbook has its separate exact-download checks. Archive links
+use keyboard activation inside a full-load navigation wait, retaining every
+original destination and disclosure assertion. No website script is changed.
+
 The navigation uses ordinary HTML links to existing canonical destinations.
 Google's current link guidance recommends crawlable anchors, relevant link text
 and helpful contextual cross-references. This is a discovery and reader-flow
