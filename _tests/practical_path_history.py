@@ -6,6 +6,7 @@ from pathlib import Path
 import json
 import re
 import practical_navigation_history
+import local_fonts_history
 
 # Freeze this release's reviewed copy. Historical adapters must load before
 # production modules, and future editorial changes must not rewrite history.
@@ -19,7 +20,7 @@ def baseline():
     return json.loads((ROOT / '_tests/practical-path-baseline.json').read_text())
 
 def pages(records):
-    result = deepcopy(records)
+    result = local_fonts_history.pages(records)
     old = next(p for p in baseline()['pages'] if p['id'] == 'technology')
     for p in result:
         if p['id'] == 'technology':

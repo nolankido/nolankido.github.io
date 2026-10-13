@@ -1,5 +1,7 @@
 """Restore only the reviewed Poker finder event block and cache version."""
 
+import local_fonts_history
+
 SCRIPT='assets/poker-finder.js'
 PAGE='poker/find/index.html'
 OLD_SHA='13dad324550b31b81fbb8ef79e1a32a608cde10f66ddd3b94f155d64af405a4b'
@@ -28,6 +30,7 @@ NEW="""  function submit() {
 
 
 def before(path,data):
+    data=local_fonts_history.before(path,data)
     path=str(path)
     if path not in {SCRIPT,PAGE}:return data
     binary=isinstance(data,bytes);text=data.decode() if binary else data

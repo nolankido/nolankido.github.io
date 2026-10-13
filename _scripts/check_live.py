@@ -35,6 +35,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/practical-ai-path.css', 'downloads/practical-ai-workbook.txt']
     assets += ['assets/practical-ai-navigation.css']
     assets += ['assets/site-fonts.css', 'assets/page-sharing.css', 'assets/page-sharing.js']
+    assets += [entry['path'] for entry in build.font_delivery.local_files(root)]
     assets += ['assets/task-brief.css', 'assets/task-brief.js', 'downloads/ai-task-brief.txt']
     assets += ['assets/entrypoints.css', 'assets/site-find.css', 'assets/site-find.js', 'assets/reading.css', 'writing.xml']
     assets += ['downloads/' + name + '.md' for name in ['decision-record', 'tool-trust-check', 'learning-loop']]

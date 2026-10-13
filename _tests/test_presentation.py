@@ -1,4 +1,5 @@
 """Professional presentation must not manufacture authority or rewrite history."""
+import local_fonts_history
 from copy import deepcopy
 from pathlib import Path
 import hashlib
@@ -101,7 +102,7 @@ class PresentationTests(unittest.TestCase):
     def test_original_bodies_sensitive_boundaries_and_other_feeds_stay_fixed(self):
         for path, digest in PROTECTED.items():
             with self.subTest(path=path):
-                self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),digest)
+                self.assertEqual(hashlib.sha256(local_fonts_history.before(path,(ROOT/path).read_bytes())).hexdigest(),digest)
         article=self.outputs[Path('notes/keep-the-judgment/index.html')]
         for phrase in ['my clients','my patients','years of experience','guaranteed results','award-winning']:
             self.assertNotIn(phrase, article.lower())

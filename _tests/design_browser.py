@@ -1,4 +1,4 @@
-"""Exercise real local HTTP pages and downloads. External traffic is blocked unless fonts are explicitly enabled."""
+"""Exercise real local HTTP pages and downloads. All external traffic is blocked; reviewed fonts load locally."""
 from pathlib import Path
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -20,7 +20,7 @@ Thread(target=server.serve_forever, daemon=True).start()
 base = 'http://127.0.0.1:' + str(server.server_port)
 manifest = build.public_pages()
 errors, missing = [], []
-with_fonts = os.environ.get('ALLOW_WEB_FONTS') == '1'
+with_fonts = True
 try:
     with sync_playwright() as p:
         opts = {'headless': True}
@@ -29,8 +29,6 @@ try:
         browser = p.chromium.launch(**opts)
         context = browser.new_context(accept_downloads=True)
         allowed = {'127.0.0.1'}
-        if with_fonts:
-            allowed.update({'fonts.googleapis.com', 'fonts.gstatic.com'})
         context.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname in allowed else r.abort())
         for width in [320, 390, 768, 1024, 1440]:
             page = context.new_page()

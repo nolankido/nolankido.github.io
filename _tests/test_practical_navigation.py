@@ -11,6 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
+import local_fonts_history
 import check_live
 import practical_navigation
 import practical_navigation_history as history
@@ -43,7 +44,7 @@ class PracticalNavigationTests(unittest.TestCase):
     def test_every_prior_output_survives_only_the_exact_reviewed_additions(self):
         self.assertEqual(len(self.baseline['outputs']),198)
         self.assertEqual(set(self.baseline['additions']),history.PATHS)
-        self.assertEqual(self.pages,self.baseline['pages'])
+        self.assertEqual(local_fonts_history.pages(self.pages),self.baseline['pages'])
         self.assertEqual(set(map(str,self.outputs)),set(self.baseline['outputs']))
         changed=[]
         for path,digest in self.baseline['outputs'].items():
@@ -62,7 +63,7 @@ class PracticalNavigationTests(unittest.TestCase):
     def test_original_article_metadata_content_and_five_feeds_survive(self):
         articles=[]; identical=[]; feeds=[]
         for page in self.pages:
-            path=build.output_path(page['path']); raw=self.outputs[path]
+            path=build.output_path(page['path']); raw=local_fonts_history.before(path,self.outputs[path])
             schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
             if schema['@type']!='Article': continue
             articles.append(str(path))
@@ -102,13 +103,13 @@ class PracticalNavigationTests(unittest.TestCase):
     def test_page_scope_and_runtime_inventory_are_unchanged(self):
         ids={key for key,_,_ in STAGES}
         for page in self.pages:
-            path=build.output_path(page['path']);raw=self.outputs[path]
+            path=build.output_path(page['path']);raw=local_fonts_history.before(path,self.outputs[path])
             self.assertEqual('id="ai-workflow-navigation"' in raw,page['id'] in ids)
             self.assertEqual('/assets/practical-ai-navigation.css?' in raw,page['id'] in ids)
             restored=history.before(path,raw)
             versioned=time_export_history.before(path,raw)
             self.assertEqual(re.findall(r'<script[^>]*src="([^"]+)"',versioned),re.findall(r'<script[^>]*src="([^"]+)"',restored))
-        self.assertEqual(len(check_live.targets()),372)
+        self.assertEqual(len(check_live.targets()),399)
         self.assertEqual(check_live.targets()['/assets/practical-ai-navigation.css'],(200,(ROOT/practical_navigation.CSS).read_bytes()))
         css=(ROOT/practical_navigation.CSS).read_text()
         self.assertIn('@media print',css)
@@ -124,7 +125,7 @@ class PracticalNavigationTests(unittest.TestCase):
             self.assertNotEqual(sha256(history.before(path,changed).encode()).hexdigest(),self.baseline['outputs'][path])
         unrelated='about/index.html'
         changed=self.outputs[Path(unrelated)]+self.baseline['additions'][path]['blocks'][0]
-        self.assertEqual(history.before(unrelated,changed),changed)
+        self.assertEqual(history.before(unrelated,changed),local_fonts_history.before(unrelated,changed))
 
     def test_repeated_navigation_and_missing_destinations_fail_without_mutation(self):
         page=next(p for p in self.pages if p['id']=='task-brief')

@@ -56,14 +56,14 @@ class ReadingDeliveryTests(unittest.TestCase):
             self.assertEqual(sha256(raw).hexdigest(), digest, path)
 
     def test_fonts_exactly_match_the_reviewed_provider_css_on_every_page(self):
-        text = font_delivery.declarations(ROOT)
+        text = font_delivery.local_declarations(ROOT)
         self.assertEqual(self.outputs[font_delivery.OUTPUT], text)
         self.assertEqual((ROOT / font_delivery.OUTPUT).read_text(), text)
         for p in self.pages:
             html = self.outputs[build.output_path(p['path'])]
             self.assertEqual(html.count('href="' + font_delivery.href(text) + '"'), 1)
             self.assertNotIn('fonts.googleapis.com', html)
-            self.assertIn('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>', html)
+            self.assertNotIn('fonts.gstatic.com', html)
         self.assertEqual(len(re.findall(r'@font-face', text)), 38)
         self.assertEqual(set(re.findall(r'font-display:\s*(\w+)', text)), {'swap'})
 

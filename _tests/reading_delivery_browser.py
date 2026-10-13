@@ -48,9 +48,10 @@ def setup(context, requests, *, old=False, hold_fonts=False, held=None, block_sh
         if u.hostname == 'fonts.googleapis.com':
             if hold_fonts: held.append(r)
             else: r.fulfill(status=200, content_type='text/css', body=font_css)
-        elif u.hostname == 'fonts.gstatic.com':
+        elif u.hostname == 'fonts.gstatic.com' or u.path.startswith('/assets/fonts/'):
             if hold_fonts: held.append(r)
-            else: r.abort()
+            elif u.hostname == 'fonts.gstatic.com': r.abort()
+            else: r.continue_()
         elif block_share and u.path == '/assets/page-sharing.js': r.abort()
         elif u.hostname == urlsplit(base).hostname:
             if args.offline or (old and r.request.resource_type == 'document'):
