@@ -9,6 +9,7 @@ for (const id of ['find-controls','find-query','find-interest','find-kind','find
   nodes[id] = {value:'',hidden:false,textContent:'',events:{},
     addEventListener(type, handler) { this.events[type] = handler; },
     focus() { active = id; },
+    scrollIntoView() {},
     fire(type, data = {}) { this.events[type]?.(data); }};
 }
 const context = {document:{getElementById:id=>nodes[id],querySelectorAll:()=>[]},

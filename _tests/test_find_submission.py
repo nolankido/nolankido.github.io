@@ -69,7 +69,7 @@ class FindSubmissionTests(unittest.TestCase):
 
     def test_adapter_does_not_hide_other_code_or_page_changes(self):
         script=(ROOT/history.SCRIPT).read_text();page=self.outputs[Path(history.PAGE)]
-        for changed in [script.replace('heading.focus();','query.focus();',1),script.replace('const stops =','const unexpected = 1; const stops =',1)]:
+        for changed in [script.replace('heading.focus({preventScroll:true});','query.focus();',1),script.replace('const stops =','const unexpected = 1; const stops =',1)]:
             self.assertNotEqual(sha256(history.before(history.SCRIPT,changed).encode()).hexdigest(),self.baseline['old_script_sha256'])
         modified=page.replace('<body','<!-- unexpected --> <body',1)
         self.assertNotEqual(history.before(history.PAGE,page),history.before(history.PAGE,modified))

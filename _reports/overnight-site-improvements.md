@@ -183,6 +183,15 @@ IME session. All existing browser suites and final live-release proof remain
 required before completion. The pull request receipt records their executed
 results. No local browser was installed or run.
 
+The first hosted candidate passed all 473 unit/content tests and 33 browser
+suites. Visual review of its four submitted-search screenshots found that the
+sticky header could overlap the focused heading in the narrow empty state.
+Explicit submission now focuses without an intermediate scroll and immediately
+centers the heading. The browser checks measure against the actual sticky
+header, including after expanded text spacing, and retain the existing focus,
+keyboard, privacy and result assertions. A complete gate on this corrected
+candidate is required; the earlier pass does not authorize its merge.
+
 Next useful work: inspect a separate concrete reader-entry issue from current
 source and live evidence. If the archive keyboard timing failure recurs, add
 targeted route, focus and input-mode diagnostics before changing its assertions.

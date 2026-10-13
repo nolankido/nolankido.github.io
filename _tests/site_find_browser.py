@@ -109,7 +109,7 @@ try:
             for query in ['', 'family story', 'zznoresults']:
                 set_query(page,query)
                 expect(page.locator('#find-results')).to_be_in_viewport()
-                assert page.locator('#find-results').evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-bar").getBoundingClientRect().bottom-1'),'Focused results must clear the sticky bar'
+                assert page.locator('#find-results').evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom+4'),'Focused results must clear the sticky header'
                 assert page.evaluate('document.documentElement.scrollWidth')<=width,(width,query)
                 if os.environ.get('SCREENSHOT_DIR') and width in [390,1440]:
                     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
@@ -117,6 +117,8 @@ try:
                     if query:page.screenshot(path=str(out/f'find-submitted-{name}-{width}.png'))
                     page.screenshot(path=str(out/f'find-{name}-{width}.png'),full_page=True)
                 spacing=page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
+                set_query(page,query)
+                assert page.locator('#find-results').evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom+4'),'Expanded-text results must clear the sticky header'
                 assert page.evaluate('document.documentElement.scrollWidth')<=width,('text-spacing',width,query)
                 spacing.evaluate('(el)=>el.remove()')
         # Context-specific type and interest filters work without a query.

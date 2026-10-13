@@ -67,7 +67,10 @@
     query.value = ''; interest.value = ''; kind.value = ''; filter();
     if (focus) query.focus();
   }
-  function submit() { filter(); heading.focus(); }
+  function submit() {
+    filter(); heading.focus({preventScroll:true});
+    heading.scrollIntoView({block:'center',behavior:'instant'});
+  }
   query.addEventListener('input', event => { clearTimeout(timer); if (!event.isComposing) timer = setTimeout(filter, 140); });
   query.addEventListener('compositionstart', () => clearTimeout(timer));
   query.addEventListener('compositionend', filter);
