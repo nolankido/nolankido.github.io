@@ -40,6 +40,7 @@ import font_delivery
 import page_sharing
 import ai_task_choice
 import search_entrypoints
+import author_archive
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -83,7 +84,7 @@ def public_pages(root: Path | None = None) -> list[dict]:
     root = ROOT if root is None else root
     base = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
     pages = base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root)
-    return search_entrypoints.metadata(everyday_tasks.metadata(search_visibility.apply_policy(pages), root), root)
+    return search_entrypoints.metadata(author_archive.metadata(everyday_tasks.metadata(search_visibility.apply_policy(pages), root)), root)
 
 
 def build_outputs() -> dict[Path, str]:
@@ -184,6 +185,7 @@ def build_outputs() -> dict[Path, str]:
             body = fill(source.read_text(encoding='utf-8'), page_values)
         if p['path'].startswith('/poker/'):
             body = clean_body(body)
+        body = author_archive.body(p, body, pages)
         nav = identity.navigation(identity_config, p)
         canonical = site['url'] + p['path']
         header = ''
@@ -336,6 +338,8 @@ def build_outputs() -> dict[Path, str]:
         body = page_sharing.decorate(body, p, site["url"])
         extra += page_sharing.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
+        schema = author_archive.schema(p, schema, pages, site)
+        extra += author_archive.head(p, ROOT)
         header = search_entrypoints.header(p, header)
         extra += search_entrypoints.head(p, ROOT)
         search_version = hashlib.sha256((ROOT / 'assets/search-visibility.css').read_bytes()).hexdigest()[:12]

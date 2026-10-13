@@ -1,0 +1,10 @@
+.archive-shortcut { margin-block: 1.25rem; }
+.author-archive .archive-group { border-top: 1px solid var(--line); padding-block: 1.1rem; }
+.author-archive summary { cursor: pointer; font-size: 1.15rem; font-weight: 600; line-height: 1.6; overflow-wrap: anywhere; }
+.author-archive summary span { font-size: .95rem; font-weight: 400; }
+.author-archive .archive-list { list-style: none; padding: 0; margin-block: 1.5rem; }
+.author-archive .archive-list li { border-top: 1px solid var(--line); padding-block: 1rem; break-inside: avoid; }
+.author-archive .archive-list a { font-size: 1.05rem; line-height: 1.6; overflow-wrap: anywhere; }
+.author-archive .archive-meta { font-size: .85rem; margin-block: .5rem; line-height: 1.6; }
+.author-archive .archive-description { font-size: .95rem; line-height: 1.7; margin-block: .5rem; max-width: 65ch; }
+@media print { .author-archive summary { font-weight: bold; } .author-archive .archive-list li { color: black; } }
