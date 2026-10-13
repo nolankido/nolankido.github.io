@@ -456,3 +456,74 @@ script was added. All five arrival journeys now run at 320, 390, 768 and 1440
 pixels. The exact CSS addition and old/new bundle tokens have narrow inverse
 adapters; original baseline hashes remain frozen, with extra negative controls
 for unrelated CSS or page-body changes. The complete gate is required again.
+
+
+PR #59 subsequently passed all 487 unit/content checks and all 35 browser
+suites. Main `16f230aaca2bed83addda5536a1f52e79780ee78` has the reviewed tree
+`1d1c50382d9e04692fd4145c0924dd4e01886e18`. Pages run 38471966842 succeeded;
+published-byte job 115553046543 passed 399/399 targets with that exact main
+marker at 2026-10-13T21:38:04Z. The main Site checks run 38471966872 also
+completed successfully. Final receipt:
+https://github.com/nolankido/nolankido.github.io/pull/59
+
+## Open the original case evidence
+
+This user-directed pass begins from the verified PR #59 release. A fresh
+repository read found only the stale PR #48 open; that branch remains untouched.
+The homepage and a real missing URL were checked directly. The missing URL
+returned HTTP 404 with useful recovery links, so no speculative 404 rewrite
+was needed.
+
+The existing recorded AI-assisted website case promises inspectable evidence,
+but its commit and run IDs were plain text inside a disclosure. Readers now
+have three native links beside the case facts: compare the actual repair,
+inspect its candidate checks, and read the merged release record. Brief labels
+explain what each source contains. The links remain part of the original page;
+there is no new route, runtime, stylesheet, tool state, or externally loaded
+content. The destinations open in the current tab when deliberately followed.
+
+The public comparison confirms that the one corrective commit removed the
+extra closing div from both source and generated output. Fresh GitHub reads
+confirm that run 38196825689 succeeded on candidate
+`73782caa4697204690c679626b36427c28201234` and PR #40 merged as
+`6832b5e1edc85c50a3e6eb39a447cd67d9f0f80c`. These are the same historical
+identifiers already recorded in the article and its downloadable evidence.
+The original 347-test, 21-browser-suite, 235-target account is retained; current
+release counts are not substituted into the historical story. The linked
+release summary is this repository's record, not third-party certification.
+
+An independent baseline was captured from production Git objects before edits.
+All 343 source, asset and download files remain exact, including the article
+source and evidence download. All 198 generated output paths and the complete
+public page metadata remain fixed. Only the case page's evidence navigation is
+added. The other 197 outputs, five feeds, sitemap and on-site search index stay
+exact. A single-page inverse adapter removes only the reviewed block with its
+frozen SHA-256; every older golden hash remains unchanged. Negative controls
+retain detection of altered links, labels and article claims.
+
+Four new unit checks cover exact preservation, verified historical link
+identity, scoped insertion and negative controls. The existing workflow browser
+suite additionally exercises all three links with keyboard Tab and Enter at
+390 and 1440 pixels, with JavaScript both enabled and disabled. GitHub
+destinations are intercepted by exact URL in that fixture, so browser checks
+send no requests or writes to GitHub. Existing case layout, expanded-text and
+accessibility checks remain required at 320, 390, 768 and 1440 pixels. Hosted
+mobile and desktop evidence-panel previews are retained for visual review.
+
+The local deterministic build, 171-page HTML5 check and search metadata audit
+passed. The complete unit/content and hosted browser gate, preview review,
+Pages result and exact published-target receipt belong on this pass's pull
+request after execution. No unexecuted checks or release are claimed here.
+
+One read-only Search Console query on October 13, 2026 returned no page rows
+for September 13 through October 10. Missing rows do not establish zero traffic
+or indexing status. No sitemap was resubmitted. Google's people-first content
+guidance identifies clear sourcing and evidence as useful trust questions:
+https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+This change makes existing evidence easier to inspect. It does not establish
+an external ranking improvement, measured productivity gain or new credential.
+
+Next useful work: use actual reader/search evidence or approved firsthand
+material to select a substantive improvement. Keep the existing historical
+case tied to its original release, and do not create new pages solely to
+increase catalogue size.

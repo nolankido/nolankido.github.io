@@ -18,7 +18,7 @@ if not args.offline:
  Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port) if server else ''
 calc='/technology/ai-time-savings/';case='/technology/checking-ai-website-changes/'
-report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0};errors=[]
+report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0,'case_source_keyboard_journeys':0};errors=[]
 faulthandler.dump_traceback_later(300,exit=True)
 try:
  with sync_playwright() as pw:
@@ -146,6 +146,39 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
      with page.expect_download() as item:link.click()
      assert Path(item.value.path()).read_bytes()==(ROOT/href.lstrip('/')).read_bytes();report['downloads']+=1
   context.close()
+  # Exercise native evidence links with and without JavaScript. An exact URL
+  # allowlist receives a local stub, so the test cannot contact GitHub or mutate it.
+  evidence_urls=[
+   'https://github.com/nolankido/nolankido.github.io/compare/2bf8908339e06f604cea00f0254494e17171ecf4...73782caa4697204690c679626b36427c28201234',
+   'https://github.com/nolankido/nolankido.github.io/actions/runs/38196825689',
+   'https://github.com/nolankido/nolankido.github.io/pull/40',
+  ]
+  for enabled in [True,False]:
+   ctx=browser.new_context(java_script_enabled=enabled,reduced_motion='reduce')
+   def evidence_route(r):
+    if r.request.url in evidence_urls:r.fulfill(status=200,content_type='text/html',body='<title>Source destination</title><h1>Source destination</h1>')
+    elif not args.offline and urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()
+    else:r.abort()
+   ctx.route('**/*',evidence_route);p=ctx.new_page();p.set_default_timeout(10000)
+   for width in [390,1440]:
+    p.set_viewport_size({'width':width,'height':1000});render(p,case)
+    nav=p.get_by_role('navigation',name='Open the original evidence')
+    expect(nav).to_be_visible();expect(nav.locator('a')).to_have_count(3)
+    if os.environ.get('SCREENSHOT_DIR'):
+     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+     p.evaluate('document.fonts.ready')
+     nav.screenshot(path=str(out/f'case-source-links-{width}-js-{enabled}.png'))
+    for index,url in enumerate(evidence_urls):
+     render(p,case);links=p.locator('#case-source-links a')
+     # Start at the first source and reach the remaining destinations by Tab.
+     links.first.focus()
+     for _ in range(index):p.keyboard.press('Tab')
+     expect(links.nth(index)).to_be_focused()
+     expect(links.nth(index)).to_have_attribute('href',url)
+     p.keyboard.press('Enter');expect(p).to_have_url(url)
+     expect(p.get_by_role('heading',name='Source destination')).to_be_visible()
+     report['case_source_keyboard_journeys']+=1
+   ctx.close()
   for mode in ['disabled','blocked']:
    ctx=browser.new_context(java_script_enabled=mode!='disabled',reduced_motion='reduce')
    def fallback(r):

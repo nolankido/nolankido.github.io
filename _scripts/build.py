@@ -44,6 +44,7 @@ import search_entrypoints
 import author_archive
 import practical_path
 import practical_navigation
+import case_evidence
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -341,6 +342,7 @@ def build_outputs() -> dict[Path, str]:
         body += practical_discovery.article_return(p)
         body = page_sharing.decorate(body, p, site["url"])
         body = practical_navigation.decorate(p, body, pages, ROOT)
+        body = case_evidence.decorate(p, body, ROOT)
         extra += page_sharing.head(p, ROOT)
         extra += practical_navigation.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)

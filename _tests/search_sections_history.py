@@ -4,6 +4,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+from case_evidence_history import before as before_case_sources
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -11,6 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def change():return json.loads((ROOT/'_tests/search-sections-change.json').read_text())
 
 def before(path,data):
+    data=before_case_sources(path,data)
     path=str(path);c=change()
     if path not in set(c['patches'])|{'find/index.html','assets/site.css','assets/site-core.css'}|set(c['anchor_pages']):return data
     binary=isinstance(data,bytes);text=data.decode() if binary else data
