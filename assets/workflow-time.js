@@ -39,8 +39,16 @@
   const fields = Object.fromEntries(keys.map(k => [k, byId("time-" + k)]));
   const result = byId("time-result"), status = byId("time-status"), report = byId("time-report");
   const quality = byId("time-quality"), basis = byId("time-basis");
+  const examplePicker = byId("time-example-picker"), exampleConfirm = byId("time-example-confirm");
+  const exampleNote = byId("time-example-origin");
+  let exampleOrigin = "", pendingExample = null, exampleTrigger = null;
+  function dismissExample() {
+    if (exampleConfirm) exampleConfirm.hidden = true;
+    pendingExample = null; exampleTrigger = null;
+  }
   const moneyFree = n => (n / 100).toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 2}) + " min";
   function invalidate() {
+    dismissExample();
     result.hidden = true; report.value = ""; byId("time-copy-status").textContent = "";
     byId("time-clear-confirm").hidden = true;
   }
@@ -50,6 +58,45 @@
   function reset() {
     invalidate(); clearErrors(); keys.forEach(k => { fields[k].value = ""; });
     quality.value = "unknown"; basis.value = "estimate"; status.textContent = "";
+    exampleOrigin = "";
+    if (exampleNote) { exampleNote.hidden = true; exampleNote.textContent = ""; }
+  }
+  if (examplePicker && exampleConfirm && exampleNote && byId("time-example-yes") && byId("time-example-no")) {
+    function loadExample(example) {
+      reset(); keys.forEach(k => { fields[k].value = example.values[k]; });
+      exampleOrigin = "Fictional example starting point: " + example.label + ". The starting values are illustrative, not observed results.";
+      status.textContent = example.label + " example loaded. Review or adjust the values, then calculate. Quality has not been checked.";
+      fields.manual.focus({preventScroll: true});
+      fields.manual.scrollIntoView({block: "center", behavior: "instant"});
+    }
+    let available = 0;
+    for (const button of examplePicker.querySelectorAll("[data-time-example]")) {
+      let values;
+      try {
+        values = JSON.parse(button.dataset.timeExample);
+        if (!values || Object.keys(values).length !== keys.length || !button.dataset.timeLabel) throw new Error("Incomplete example");
+        calculate(values);
+      } catch (_) { button.hidden = true; continue; }
+      const example = {values, label: button.dataset.timeLabel};
+      button.addEventListener("click", () => {
+        if (keys.some(k => fields[k].value) || quality.value !== "unknown" || basis.value !== "estimate") {
+          byId("time-clear-confirm").hidden = true;
+          pendingExample = example; exampleTrigger = button;
+          byId("time-example-message").textContent = "Load the fictional " + example.label.toLowerCase() + " example? This replaces all six values and resets the basis to planning estimates and quality to not yet checked.";
+          exampleConfirm.hidden = false;
+          byId("time-example-no").focus({preventScroll: true});
+          exampleConfirm.scrollIntoView({block: "center", behavior: "instant"});
+        } else loadExample(example);
+      });
+      available += 1;
+    }
+    byId("time-example-yes").addEventListener("click", () => {
+      const example = pendingExample; dismissExample(); if (example) loadExample(example);
+    });
+    byId("time-example-no").addEventListener("click", () => {
+      const button = exampleTrigger; dismissExample(); if (button) button.focus();
+    });
+    examplePicker.hidden = available === 0;
   }
   keys.forEach(k => fields[k].addEventListener("input", () => {
     const hadResult = !result.hidden; invalidate();
@@ -91,7 +138,9 @@
     byId("time-percent").textContent = precision + " versus the usual method";
     const basisText = basis.value === "estimate" ? "Planning estimate, not a measured outcome." : "User-entered observations, not independently verified or a causal experiment.";
     byId("time-basis-note").textContent = basisText;
+    if (exampleNote) { exampleNote.textContent = exampleOrigin; exampleNote.hidden = !exampleOrigin; }
     report.value = ["WORKFLOW TIME COMPARISON", "https://nolankido.com/technology/ai-time-savings/", basisText,
+      ...(exampleOrigin ? [exampleOrigin] : []),
       "", ...keys.map(k => k + ": " + input[k].trim() + (k === "count" ? " repetitions" : " minutes")),
       "", outcome, "Usual total: " + moneyFree(v.usual), "Changed total: " + moneyFree(v.changed),
       "Per-task difference before overhead: " + moneyFree(v.perRun), "Fixed overhead: " + moneyFree(v.overhead),
@@ -131,6 +180,7 @@
     }
   });
   byId("time-clear").addEventListener("click", () => {
+    dismissExample();
     if (keys.some(k => fields[k].value)) { byId("time-clear-confirm").hidden = false; byId("time-clear-no").focus(); }
     else { reset(); fields.manual.focus(); }
   });

@@ -9,13 +9,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build, case_evidence
 import case_evidence_history as history
+import time_examples_history
 from test_site import Page
 
 
 class CaseEvidenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.outputs = build.build_outputs()
+        cls.outputs = {p: time_examples_history.before(p, value) for p, value in build.build_outputs().items()}
         cls.baseline = json.loads((ROOT / '_tests/case-evidence-baseline.json').read_text())
 
     def test_all_original_content_metadata_assets_and_other_outputs_remain_exact(self):
@@ -34,7 +35,7 @@ class CaseEvidenceTests(unittest.TestCase):
         self.assertEqual(files, set(b['files']))
         self.assertEqual(len(files), 343)
         for path, expected in b['files'].items():
-            self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), expected, path)
+            self.assertEqual(sha256(time_examples_history.before(path, (ROOT / path).read_bytes())).hexdigest(), expected, path)
 
     def test_links_point_to_the_verified_historical_source_checks_and_release(self):
         block = case_evidence.block(ROOT)

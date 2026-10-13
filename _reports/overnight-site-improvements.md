@@ -527,3 +527,96 @@ Next useful work: use actual reader/search evidence or approved firsthand
 material to select a substantive improvement. Keep the existing historical
 case tied to its original release, and do not create new pages solely to
 increase catalogue size.
+
+
+PR #60 subsequently passed all 491 unit/content checks and all 35 browser
+suites in run 38477982680. Four source-panel previews were inspected. Main
+`9fc67443cabd8090b47c33bba2f11ce0fe6adc05` retained the reviewed tree
+`9f1b8f41ad3fd082dd8d450b8c9d8c071cf034c1`. Pages run 38479013340 succeeded;
+published-byte job 115576730425 passed 399/399 targets with the exact main
+marker at 2026-10-13T22:38:02Z. Main was reread at 22:39:09Z. The next pass
+also confirmed that the repeated main Site checks run 38479014640 had
+completed successfully. Final receipt:
+https://github.com/nolankido/nolankido.github.io/pull/60
+
+## Try the existing time comparisons without retyping them
+
+The next user-directed review starts from the verified PR #60 release. Main,
+open pull requests and recent deployments were reread. Only stale PR #48 was
+open, and it remains untouched. A link-graph check reached every public page
+except the intentional 404 page from the homepage's main-content links, with
+no route deeper than three steps. There was no evidence for another broad
+navigation rewrite. No new Search Console query or sitemap submission was
+needed so soon after the previous read.
+
+The live time-cost calculator matched the current repository exactly. It had
+three fictional worked examples, each with six inputs, but no way to load
+those values into the calculator. Readers had to transcribe them manually to
+try or adjust the comparison. The existing examples can now be loaded through
+three native buttons above the inputs: Repeated task, One-off task and Review
+costs more. A native link still leads to the original explanations and math.
+No new page or example story was created.
+
+Loading fills the six editable values and focuses the first input. Calculation
+remains a separate deliberate action. Any existing values or nondefault basis
+or quality selections require confirmation before replacement. Cancel preserves
+the current inputs, selected basis/quality and exact report. Editing an input
+cancels a pending replacement, so stale confirmation cannot discard that edit.
+Confirmed replacement resets the basis to planning estimates and quality to
+not yet checked. The example's fictional origin remains visible in results
+and text exports, including after a reader changes the starting values.
+Clear and page-exit behavior remove the example state along with the entries.
+
+All loading happens locally. No new request, tracking, storage, dependency,
+stylesheet or runtime file is introduced. With JavaScript unavailable, the
+original worked arithmetic and complete blank worksheet remain usable; the
+example controls stay hidden. The pure integer calculation code is exact.
+The three loaded scenarios reproduce the existing 15-minute saving and two
+45-minute losses. These are fictional arithmetic examples, not measured
+productivity results.
+
+An independent baseline was captured from current production Git objects
+before changes. Of the 198 generated outputs, only the calculator page changes.
+Among all 343 original source, asset and download files, only the calculator's
+existing script changes. Article source, publication metadata, all five feeds,
+sitemap, on-site search index and existing screenshots remain exact. The
+historical adapters reverse four frozen script hunks, two exact markup blocks
+and one cache token on their two specific paths. All earlier golden hashes
+remain fixed; negative controls expose changes to arithmetic, source claims,
+new control labels or example provenance.
+
+The local build, 171-page HTML5 validation and search audit passed. Four new
+unit checks cover the independent baseline, actual example values and results,
+scoped native markup, and tamper detection. The existing hosted workflow suite
+adds all three example journeys at 320, 390, 768 and 1440 pixels, exact example
+file downloads, replacement cancellation/recovery, provenance retention and
+no-script visibility. The complete candidate gate, hosted preview review,
+Pages deployment and exact live-target receipt belong on this pass's pull
+request after execution. This record does not claim unexecuted checks.
+
+Next useful work: use actual reader feedback or approved firsthand material
+to select a substantive improvement. Useful, inspectable tools support the
+site's professional presentation; this pass does not demonstrate a change in
+external rankings or traffic.
+
+
+The first local full run executed 489 tests successfully but could not set up
+the six export-failure tests: their minimal fake document invented nodes for
+missing optional example controls. The fixture now returns null for those
+three absent controls, as a real document does. Its original export-success,
+five failure-injection, stale-state, cleanup and exact-byte assertions remain
+intact. The prior raw-script hash also passes through the new frozen adapter,
+without changing the hash itself. All six affected tests then passed locally.
+No public file changed in this fixture correction. The next exact candidate
+still requires the complete hosted 495-test and 35-browser-suite gate.
+
+The next hosted candidate passed all 495 unit/content checks. Its unchanged
+normal-result pixel comparison exposed a fixture geometry mismatch: the old
+script leaves the new optional picker hidden while the current script reveals
+it above the result. Both captured results were 1044 by 925 pixels with the
+same content; text and borders shifted by fractional-layout rounding. The
+isolated result comparison now holds that optional surrounding control hidden
+for both scripts. The exact pixel equality assertion remains intact. Separate
+full-page journeys retain the visible picker at all four widths, including
+keyboard actions and mobile/desktop screenshots. No public file changed in
+this fixture correction. A new complete hosted gate is required.

@@ -18,7 +18,7 @@ if not args.offline:
  Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port) if server else ''
 calc='/technology/ai-time-savings/';case='/technology/checking-ai-website-changes/'
-report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0,'case_source_keyboard_journeys':0};errors=[]
+report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0,'case_source_keyboard_journeys':0,'editable_examples':0,'example_replacement_recovery':0,'example_downloads':0};errors=[]
 faulthandler.dump_traceback_later(300,exit=True)
 try:
  with sync_playwright() as pw:
@@ -40,6 +40,11 @@ try:
   for label,script in [('before',before_export('assets/workflow-time.js',current_script)),('after',current_script)]:
    p=probe.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
    p.set_content(html_for(calc));p.add_script_tag(content=script)
+   # Isolate the unchanged manual-entry result at the same document position.
+   # The historical script cannot reveal the new optional picker; allowing only
+   # the current script to reveal it shifts fractional layout coordinates and
+   # changes rasterization. Complete visible example journeys are tested below.
+   p.locator('#time-example-picker').evaluate('el=>{el.hidden=true}')
    for key,value in zip(['manual','assisted','review','count','setup','upkeep'],['30','8','7','6','60','15']):p.locator('#time-'+key).fill(value)
    p.locator('#time-calculate').click();p.evaluate('document.activeElement.blur()')
    capture=p.locator('#time-result').screenshot();captures.append(capture)
@@ -118,6 +123,64 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
   if not args.offline:assert page.evaluate('localStorage.length+sessionStorage.length')==0;assert context.cookies()==[]
   page.locator('#time-manual').fill('1');page.evaluate("window.dispatchEvent(new Event('pagehide'))");expect(page.locator('#time-manual')).to_have_value('');report['functional']+=1
   page.locator('#time-manual').fill('1');page.evaluate("window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}))");expect(page.locator('#time-manual')).to_have_value('');report['functional']+=1
+  examples=[('Repeated task',['30','8','7','6','60','15'],'15 min saved in this window'),
+            ('One-off task',['30','8','7','1','60','0'],'45 min extra time in this window'),
+            ('Review costs more',['20','5','18','10','10','5'],'45 min extra time in this window')]
+  for width in [320,390,768,1440]:
+   page.set_viewport_size({'width':width,'height':1000})
+   for index,(label,values,outcome) in enumerate(examples):
+    render(page,calc);page.evaluate('document.fonts.ready');page.wait_for_timeout(100)
+    initial_requests=len(requests);initial_url=page.url
+    picker=page.locator('#time-example-picker');expect(picker).to_be_visible()
+    picker.locator('button').first.focus()
+    for _ in range(index):page.keyboard.press('Tab')
+    expect(picker.get_by_role('button',name=label,exact=True)).to_be_focused()
+    page.keyboard.press('Enter');expect(page.locator('#time-manual')).to_be_focused()
+    for key,value in zip(['manual','assisted','review','count','setup','upkeep'],values):expect(page.locator('#time-'+key)).to_have_value(value)
+    expect(page.locator('#time-basis')).to_have_value('estimate');expect(page.locator('#time-quality')).to_have_value('unknown')
+    expect(page.locator('#time-result')).to_be_hidden();page.locator('#time-calculate').press('Enter')
+    expect(page.locator('#time-result-title')).to_have_text(outcome)
+    expect(page.locator('#time-example-origin')).to_contain_text('Fictional example starting point: '+label)
+    assert 'Fictional example starting point: '+label in page.locator('#time-report').input_value()
+    assert page.evaluate('document.documentElement.scrollWidth')<=width
+    assert page.url==initial_url and len(requests)==initial_requests
+    if not args.offline:assert page.evaluate('localStorage.length+sessionStorage.length')==0;assert context.cookies()==[]
+    report['editable_examples']+=1
+    if width==390:
+     with page.expect_download() as item:page.locator('#time-download').click()
+     assert Path(item.value.path()).read_text()==page.locator('#time-report').input_value();report['example_downloads']+=1
+    if index==0 and os.environ.get('SCREENSHOT_DIR') and width in [390,1440]:
+     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+     picker.screenshot(path=str(out/f'time-example-picker-{width}.png'))
+     page.locator('#time-result').screenshot(path=str(out/f'time-example-result-{width}.png'))
+   # Cancellation preserves all entries, quality/basis selections and the exact report.
+   page.locator('#time-quality').select_option('pass');page.locator('#time-basis').select_option('observed')
+   page.locator('#time-calculate').click();previous=page.locator('#time-report').input_value()
+   button=page.get_by_role('button',name='Repeated task',exact=True)
+   button.press('Enter');expect(page.locator('#time-example-no')).to_be_focused()
+   expect(page.locator('#time-example-confirm')).to_be_visible();expect(page.locator('#time-result')).to_be_visible()
+   assert page.locator('#time-report').input_value()==previous
+   if os.environ.get('SCREENSHOT_DIR') and width in [390,1440]:
+    page.locator('#time-example-confirm').screenshot(path=str(out/f'time-example-confirm-{width}.png'))
+   page.locator('#time-example-no').press('Enter');expect(button).to_be_focused()
+   for key,value in zip(['manual','assisted','review','count','setup','upkeep'],examples[2][1]):expect(page.locator('#time-'+key)).to_have_value(value)
+   expect(page.locator('#time-quality')).to_have_value('pass');expect(page.locator('#time-basis')).to_have_value('observed')
+   assert page.locator('#time-report').input_value()==previous
+   # Editing cancels a pending replacement; a stale confirmation cannot replace it.
+   button.click();page.locator('#time-manual').fill('21');expect(page.locator('#time-example-confirm')).to_be_hidden()
+   page.locator('#time-example-yes').dispatch_event('click');expect(page.locator('#time-manual')).to_have_value('21')
+   page.locator('#time-calculate').click();expect(page.locator('#time-example-origin')).to_contain_text('Review costs more')
+   button.click();page.locator('#time-example-yes').press('Enter')
+   expect(page.locator('#time-manual')).to_be_focused();expect(page.locator('#time-manual')).to_have_value('30')
+   expect(page.locator('#time-quality')).to_have_value('unknown');expect(page.locator('#time-basis')).to_have_value('estimate')
+   expect(page.locator('#time-result')).to_be_hidden();page.locator('#time-calculate').click()
+   expect(page.locator('#time-result-title')).to_have_text('15 min saved in this window')
+   expect(page.locator('#time-example-origin')).to_contain_text('Repeated task')
+   page.locator('#time-clear').click();page.locator('#time-clear-yes').press('Enter')
+   expect(page.locator('#time-example-origin')).to_be_hidden();expect(page.locator('#time-example-origin')).to_have_text('')
+   button.click();page.evaluate("window.dispatchEvent(new Event('pagehide'))")
+   expect(page.locator('#time-manual')).to_have_value('');expect(page.locator('#time-example-origin')).to_have_text('')
+   report['example_replacement_recovery']+=1
   spacing='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}'
   for path in [calc,case]:
    for width in [320,390,768,1440]:
@@ -187,6 +250,7 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
     else:r.abort()
    ctx.route('**/*',fallback);p=ctx.new_page();p.set_default_timeout(10000);render(p,calc,False)
    expect(p.locator('#time-editor')).to_be_hidden();expect(p.locator('#time-unavailable')).to_be_visible();expect(p.locator('.time-static-example')).to_have_count(3)
+   expect(p.locator('#time-example-picker')).to_be_hidden()
    # The worksheet and page-sharing panel are distinct native disclosures.
    # Exercise the worksheet explicitly rather than assuming one details element.
    worksheet=p.locator('section[aria-labelledby="time-worksheet"] details')

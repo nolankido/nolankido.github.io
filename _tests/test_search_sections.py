@@ -10,12 +10,13 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,search_sections,site_find
 import search_sections_history as history
+import time_examples_history
 from test_site import Page
 
 class SearchSectionsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.outputs=build.build_outputs();cls.pages=build.public_pages()
+        cls.outputs={p:time_examples_history.before(p,d) for p,d in build.build_outputs().items()};cls.pages=build.public_pages()
         cls.baseline=json.loads((ROOT/'_tests/search-sections-baseline.json').read_text())
         cls.index=search_sections.index(cls.outputs,cls.pages)
 
@@ -33,7 +34,7 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertEqual(paths,set(b['files']));self.assertEqual(len(paths),343)
         changed=[]
         for p,digest in b['files'].items():
-            raw=(ROOT/p).read_bytes()
+            raw=time_examples_history.before(p,(ROOT/p).read_bytes())
             if sha256(raw).hexdigest()!=digest:changed.append(p)
             self.assertEqual(sha256(history.before(p,raw)).hexdigest(),digest,p)
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])

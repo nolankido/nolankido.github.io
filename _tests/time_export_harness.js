@@ -15,8 +15,12 @@ function exercise(phase) {
     });
     return nodes.get(id);
   }
+  // This export fixture models manually entered comparisons without the optional
+  // example UI. Missing elements return null, as they do in a real document.
+  // The complete example controls are exercised by workflow_evidence_browser.py.
+  const absentExamples = new Set(['time-example-picker', 'time-example-confirm', 'time-example-origin']);
   const document = {
-    getElementById: element,
+    getElementById: id => absentExamples.has(id) ? null : element(id),
     body: {appendChild(link) {
       if (phase === 'append') throw Error('Synthetic append failure');
       attached.push(link);
