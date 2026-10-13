@@ -609,3 +609,14 @@ intact. The prior raw-script hash also passes through the new frozen adapter,
 without changing the hash itself. All six affected tests then passed locally.
 No public file changed in this fixture correction. The next exact candidate
 still requires the complete hosted 495-test and 35-browser-suite gate.
+
+The next hosted candidate passed all 495 unit/content checks. Its unchanged
+normal-result pixel comparison exposed a fixture geometry mismatch: the old
+script leaves the new optional picker hidden while the current script reveals
+it above the result. Both captured results were 1044 by 925 pixels with the
+same content; text and borders shifted by fractional-layout rounding. The
+isolated result comparison now holds that optional surrounding control hidden
+for both scripts. The exact pixel equality assertion remains intact. Separate
+full-page journeys retain the visible picker at all four widths, including
+keyboard actions and mobile/desktop screenshots. No public file changed in
+this fixture correction. A new complete hosted gate is required.

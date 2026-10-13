@@ -40,6 +40,11 @@ try:
   for label,script in [('before',before_export('assets/workflow-time.js',current_script)),('after',current_script)]:
    p=probe.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
    p.set_content(html_for(calc));p.add_script_tag(content=script)
+   # Isolate the unchanged manual-entry result at the same document position.
+   # The historical script cannot reveal the new optional picker; allowing only
+   # the current script to reveal it shifts fractional layout coordinates and
+   # changes rasterization. Complete visible example journeys are tested below.
+   p.locator('#time-example-picker').evaluate('el=>{el.hidden=true}')
    for key,value in zip(['manual','assisted','review','count','setup','upkeep'],['30','8','7','6','60','15']):p.locator('#time-'+key).fill(value)
    p.locator('#time-calculate').click();p.evaluate('document.activeElement.blur()')
    capture=p.locator('#time-result').screenshot();captures.append(capture)
