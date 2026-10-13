@@ -41,6 +41,7 @@ import page_sharing
 import ai_task_choice
 import search_entrypoints
 import author_archive
+import practical_path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -84,7 +85,7 @@ def public_pages(root: Path | None = None) -> list[dict]:
     root = ROOT if root is None else root
     base = json.loads((root / '_source/pages.json').read_text(encoding='utf-8'))
     pages = base + poker_content.manifest(poker_content.load(root)) + poker_topics.manifest(root) + living_well.manifest(root)
-    return search_entrypoints.metadata(author_archive.metadata(everyday_tasks.metadata(search_visibility.apply_policy(pages), root)), root)
+    return practical_path.metadata(search_entrypoints.metadata(author_archive.metadata(everyday_tasks.metadata(search_visibility.apply_policy(pages), root)), root))
 
 
 def build_outputs() -> dict[Path, str]:
@@ -186,6 +187,7 @@ def build_outputs() -> dict[Path, str]:
         if p['path'].startswith('/poker/'):
             body = clean_body(body)
         body = author_archive.body(p, body, pages)
+        body = practical_path.body(p, body, pages, ROOT)
         nav = identity.navigation(identity_config, p)
         canonical = site['url'] + p['path']
         header = ''
@@ -339,6 +341,8 @@ def build_outputs() -> dict[Path, str]:
         extra += page_sharing.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
         schema = author_archive.schema(p, schema, pages, site)
+        schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
+        extra += practical_path.head(p, ROOT)
         extra += author_archive.head(p, ROOT)
         header = search_entrypoints.header(p, header)
         extra += search_entrypoints.head(p, ROOT)
@@ -383,6 +387,7 @@ def build_outputs() -> dict[Path, str]:
     outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'])
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     outputs.update(public_profile.exports(site))
+    outputs[practical_path.WORKBOOK] = practical_path.workbook(pages, ROOT)
     return font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT)
 
 

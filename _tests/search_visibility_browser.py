@@ -77,7 +77,13 @@ try:
                 expect(page).to_have_url(base+'/technology/task-brief/#how-it-works')
                 expect(page.locator('#how-it-works')).to_be_visible()
                 result['keyboard_journeys'] += 1
-                page.locator('nav[aria-label="Breadcrumb"] a[href="/technology/"]').focus();page.keyboard.press('Enter')
+                # URL and heading assertions can pass before native fragment
+                # navigation finishes assigning focus. Start the return journey
+                # from the fully loaded document and activate its actual link.
+                page.wait_for_load_state('load')
+                breadcrumb = page.locator('nav[aria-label="Breadcrumb"] a[href="/technology/"]')
+                with page.expect_navigation(wait_until='load'):
+                    breadcrumb.press('Enter')
                 expect(page).to_have_url(base+'/technology/')
                 result['keyboard_journeys'] += 1
                 page.goto(base+'/poker/pot-odds-workshop/')
