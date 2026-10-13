@@ -9,6 +9,7 @@ from html import escape
 from pathlib import Path
 import json
 import re
+import author_archive_history
 
 ROOT = Path(__file__).resolve().parents[1]
 NEW_SOURCES = {'_source/search-entrypoints.json', '_source/reader-previews.json'}
@@ -27,6 +28,7 @@ def config():
 
 
 def pages(records):
+    records = author_archive_history.pages(records)
     original = {p['id']: p for p in baseline()['pages']}
     result = deepcopy(records)
     for p in result:
@@ -40,6 +42,7 @@ def pages(records):
 
 
 def before(path, data):
+    data = author_archive_history.before(path, data)
     path = str(path)
     if not path.endswith('.html') and path != 'sitemap.xml':
         return data
