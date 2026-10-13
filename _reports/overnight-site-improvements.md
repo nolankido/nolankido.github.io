@@ -231,3 +231,51 @@ required before this change can be reported live.
 Next useful work: inspect a separate concrete entry or recovery defect after
 this candidate is fully verified. Do not broaden this pass to the other Poker
 filters without reproducing their behavior independently.
+
+
+## Archive keyboard release checks
+
+The next user-directed pass starts from main
+`419a504b49f84d311732f8f30fe927d8626409e4`. PR #56 passed the complete
+pre-merge gate in run 38441955195. Pages run 38443252261 succeeded; published-byte
+job 115454964399 passed 372/372 targets and printed the exact merged SHA. A fresh
+main read and a direct public Poker-finder script hash matched that release.
+
+The post-merge run 38443252774 repeated a historical archive keyboard timeout
+at the article-link activation. All other browser groups, the build and live
+bytes passed. That old log did not identify the subject, input mode, target,
+focus or disclosure state, so it does not establish a public navigation defect
+or prove the exact cause of the intermittent failure.
+
+The archive browser check now verifies that the disclosure opened and the list
+and anchor are visible before focusing the anchor and sending a real Enter.
+It requires the exact expected href, destination URL, completed document load
+and visible main heading. Playwright does not automatically check visibility
+for focus or press; the previous fixture lacked those explicit preconditions:
+https://playwright.dev/python/docs/actionability
+
+The deprecated navigation-event wait is replaced by an exact URL-and-load wait.
+No click fallback, scripted navigation, retry, timeout increase or relaxed
+assertion is added. All four subject destinations and the About-to-archive route
+now run at 390 and 1440 pixels with JavaScript enabled and disabled: twenty
+complete keyboard journeys instead of ten. Existing eight layouts, eight
+expanded-text checks, thirty-two disclosure checks, accessibility scan, no-write
+and no-page-error assertions remain.
+
+Every journey logs mode, width, subject, expected destination, document state,
+focus, disclosure state and target visibility. Failed link journeys preserve a
+structured diagnostic and viewport screenshot in the existing CI artifact,
+then re-raise the original failure. The evidence uses only public local test
+pages and does not capture user messages, private inputs or credentials.
+
+Independent Git-object comparison confirmed that all 198 generated outputs and
+all 316 source, asset and download files are exactly the current production
+bytes. No public page, stylesheet, script, article, feed, author claim or search
+metadata changes in this reliability pass. The build and static search audit
+passed. All 475 unit/content tests and the HTML5 parser check on 171 pages also
+passed. The full hosted gate and final release receipt belong in the pull
+request after execution. Browser execution stays in GitHub Actions.
+
+Next useful work: use any new archive failure diagnostics to distinguish a
+real focus/route defect from test synchronization. Once the gate is stable,
+inspect a separate reader-facing issue from current evidence.
