@@ -434,3 +434,11 @@ does not establish an external search-ranking or traffic improvement.
 Next useful work: use actual reader/search evidence or genuine firsthand
 material to choose the next change. Do not expand the article catalogue or
 repeatedly submit an unchanged sitemap simply to create activity.
+
+The first candidate passed all 487 hosted unit/content checks. The new browser
+journey stopped at its immediate sticky-header clearance assertion on the
+judgment essay. The fixture now waits for native fonts and allows five seconds
+for the identical clearance condition, with measured coordinates and an arrival
+screenshot retained. No destination scroll is forced and no public file is
+changed. The next complete hosted run will distinguish unsettled navigation
+from a persistent landing defect before any merge.

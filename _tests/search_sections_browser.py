@@ -51,11 +51,20 @@ try:
                 assert page.locator('.find-item').evaluate_all('(items)=>items.every(i=>i.querySelectorAll(".find-section-matches a").length<=3)')
                 if query=='recovery' and os.environ.get('SCREENSHOT_DIR'):
                     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+                    page.evaluate("document.activeElement.blur();window.scrollTo({top:0,behavior:'instant'})")
                     page.screenshot(path=str(out/f'search-sections-{width}.png'),full_page=True)
                 link.focus();expect(link).to_be_focused();page.keyboard.press('Enter')
                 page.wait_for_url(base+path+'#'+anchor,wait_until='load')
                 target=page.locator('#'+anchor);expect(target).to_be_visible();expect(target).to_be_in_viewport()
-                assert target.evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom'),(path,anchor,'sticky header')
+                page.evaluate('()=>document.fonts.ready.then(()=>true)')
+                metrics='h=>({top:h.getBoundingClientRect().top,header:document.querySelector(".site-header").getBoundingClientRect().bottom,margin:getComputedStyle(h).scrollMarginTop,padding:getComputedStyle(document.documentElement).scrollPaddingTop,fonts:document.fonts.status})'
+                print('SECTION_ARRIVAL '+json.dumps({'width':width,'path':path,**target.evaluate(metrics)}),flush=True)
+                try:
+                    page.wait_for_function('id=>{const h=document.getElementById(id);return h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom}',arg=anchor,timeout=5000)
+                finally:
+                    if os.environ.get('SCREENSHOT_DIR'):
+                        page.screenshot(path=str(Path(os.environ['SCREENSHOT_DIR'])/f'section-arrival-{cases.index((query,path,anchor))}-{width}.png'))
+                assert target.evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom'),(path,anchor,target.evaluate(metrics))
                 report['keyboard_journeys']+=1
                 page.go_back(wait_until='load');expect(page.locator('#find-query')).to_have_value('')
                 expect(page.locator('.find-section-matches a')).to_have_count(0)
