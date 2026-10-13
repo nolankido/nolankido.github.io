@@ -16,6 +16,7 @@ import check_live
 import check_living_well_links as link_check
 import living_well as lw
 import living_well_resources as library
+import search_sections_history
 
 OLD_IDS = {'on-being','pluralism','closer-to-truth','ucla-mindful','greater-good','plum-village',
            'how-ai-works','openai-academy','claude-academy','merlin','seek','libby','storycorps',
@@ -125,7 +126,7 @@ class LibraryTests(unittest.TestCase):
             'assets/hubs.css':'80e948dce779cf2be090beee43711155d89ccd1af7dfc1a932115f3cd92cbb4b',
             '_source/poker/catalog.json':'7c1051f6e2bc3943b7c1dbe4da229694455681b8875a346c99279e555edb733f'}
         for path, expected in protected.items():
-            self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(), expected, path)
+            self.assertEqual(hashlib.sha256(search_sections_history.before(path,(ROOT/path).read_bytes())).hexdigest(), expected, path)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

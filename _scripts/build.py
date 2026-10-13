@@ -30,6 +30,7 @@ import identity
 import presentation
 import entrypoints
 import site_find
+import search_sections
 import follow
 import search_visibility
 import practical_discovery
@@ -391,7 +392,7 @@ def build_outputs() -> dict[Path, str]:
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     outputs.update(public_profile.exports(site))
     outputs[practical_path.WORKBOOK] = practical_path.workbook(pages, ROOT)
-    return font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT)
+    return search_sections.apply(font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT), pages)
 
 
 def main() -> int:

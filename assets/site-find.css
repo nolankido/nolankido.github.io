@@ -37,3 +37,9 @@
 .find-help { margin: 14px 0; }
 .find-help summary { cursor: pointer; font: .85rem/1.6 var(--sans); padding: 8px 0; }
 .find-help p { margin: 12px 0; }
+
+/* Direct links to visible sections on the existing destination. */
+.find-section-matches { border-left: 2px solid var(--line-dark); margin-top: 14px; padding-left: 14px; }
+.find-section-matches p { font: 600 .8rem/1.6 var(--sans); margin: 0 0 4px; color: var(--ink-soft); }
+.find-section-matches ul { list-style: none; margin: 0; padding: 0; }
+.find-section-matches a { display: inline-block; padding: 8px 0; font: .95rem/1.6 var(--sans); }

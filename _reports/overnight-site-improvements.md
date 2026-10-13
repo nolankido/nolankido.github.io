@@ -367,3 +367,92 @@ with page scripting disabled. It explicitly checks the resulting letter, word
 and line spacing. Keyboard, parity, fallback and asset stages now log progress.
 Coverage and public files remain unchanged; publication still requires a full
 successful candidate run.
+
+PR #58 subsequently passed all 481 unit/content checks and all 34 browser
+suites in run 38463359878. The font fixture passed all 36 paired views, 24
+binary decodes, 12 fallback views, six keyboard journeys and 27 exact asset
+responses. Six arrival previews were inspected. Main
+`9558826cd0098f68e46e0b07349e38d486e3186d` has the same reviewed tree
+`a234b678c8aadf4a2f44511254277ced831bcc5a`. Pages run 38464630611 succeeded;
+published-byte job 115528279801 passed 399/399 targets with that exact main
+marker. The later post-merge browser launch crashed with SIGSEGV before loading
+a page or running a test. The unchanged failed workflow was rerun, and its full
+aggregate check passed. No website code was changed to mask the runner crash.
+Final receipt: https://github.com/nolankido/nolankido.github.io/pull/58
+
+## Search directly into a useful section
+
+The next user-directed pass starts from the verified PR #58 release above.
+Only the stale PR #48 was open at the initial current-repository read. Its
+outdated branch remains untouched. No new Search Console submission or
+inspection was needed immediately after the previous pass.
+
+Current evidence showed that global search could not find visible, published
+headings absent from page titles and summaries. For example, "recovery" missed
+"Keep access and recovery simple" in the document-finding guide. Other
+reproduced misses were "bounded job" in the judgment essay, "commitments" in
+the AI-answer guide, "manageable shape" in Creative Work and "practical needs"
+in the poker access section. The original search score rejected each example.
+
+The existing search page now indexes 914 visible major headings across its
+151 current destinations. Each heading comes from the generated public page
+and retains its exact existing fragment and label. The reading-outline parser
+excludes disclosures, navigation, hidden subtrees, scripts and styles. The
+search page retains its current indexing policy and is not added to the sitemap.
+No new page, service, crawler, tracking or visitor-query transport is introduced.
+
+Results retain their existing collection groups. Title and summary matches
+rank ahead of heading-only matches. Up to three relevant section links are
+shown per result, with the page title still available. A query must match one
+section plus the page context; words in unrelated sections do not create a
+false combined match. Empty queries show the original browse view. Missing or
+malformed optional section data leaves the title/summary search working.
+
+The section-data block adds 55,581 bytes to `/find/` only. Its 141,113-byte HTML
+uses the existing search JavaScript and stylesheet; typing or filtering fetches
+nothing. The original 151-page browse index works with JavaScript disabled.
+Search wording now states its scope accurately: headings are included, article
+body paragraphs and hidden exercise answers are not full-text indexed.
+
+An independent baseline was captured from production Git objects before edits.
+All 198 output paths and 343 source/asset/download paths are retained. Only the
+search page body changes. The other 170 pages change solely in the exact core
+stylesheet cache token for the native anchor-spacing correction below. All
+article metadata, five feeds and sitemap remain exact. Changed original
+source/assets are search copy, search JavaScript, its scoped stylesheet, the
+core accessibility source and its generated CSS bundle.
+Frozen, narrow inverse patches adapt historical checks without resetting any
+golden hash. Negative controls detect unrelated code, style, copy and index
+changes. Six new unit checks passed, including real old/new query comparisons,
+source anchors, hidden-answer exclusion and JSON breakout protection.
+
+The hosted browser fixture adds twenty real keyboard search-to-section journeys,
+four expanded-text views, optional-data failure recovery and no-script browsing.
+All existing suites remain required. The full gate, preview review, Pages
+deployment and exact published-target receipt belong on this pass's pull
+request after execution. This improves on-site discovery and navigation; it
+does not establish an external search-ranking or traffic improvement.
+
+Next useful work: use actual reader/search evidence or genuine firsthand
+material to choose the next change. Do not expand the article catalogue or
+repeatedly submit an unchanged sitemap simply to create activity.
+
+The first candidate passed all 487 hosted unit/content checks. The new browser
+journey stopped at its immediate sticky-header clearance assertion on the
+judgment essay. The fixture now waits for native fonts and allows five seconds
+for the identical clearance condition, with measured coordinates and an arrival
+screenshot retained. No destination scroll is forced and no public file is
+changed. The next complete hosted run will distinguish unsettled navigation
+from a persistent landing defect before any merge.
+
+The diagnostic run confirmed a real defect: at 390 pixels, the wrapped sticky
+header was 149 pixels tall but the essay fragment landed at 123.58 pixels, even
+with fonts loaded and after the full five-second wait. The retained screenshot
+shows the heading obscured. A narrow-screen rule now gives native fragment
+navigation 180 pixels of scroll padding at widths up to 1050 pixels; the
+desktop rule, header design, article prose and existing anchors remain intact.
+This also protects direct links from outside the site. No runtime scrolling
+script was added. All five arrival journeys now run at 320, 390, 768 and 1440
+pixels. The exact CSS addition and old/new bundle tokens have narrow inverse
+adapters; original baseline hashes remain frozen, with extra negative controls
+for unrelated CSS or page-body changes. The complete gate is required again.

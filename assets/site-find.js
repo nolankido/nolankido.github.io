@@ -7,16 +7,28 @@
   const stem = value => value.length > 5 && value.endsWith('ies') ? value.slice(0, -3) + 'y' : value.length > 4 && value.endsWith('s') && !value.endsWith('ss') ? value.slice(0, -1) : value;
   const terms = value => [...new Set(words(String(value).slice(0, 180)).filter(t => !stops.has(t)).map(stem))];
   const matches = (word, term) => word === term || (term.length >= 3 && word.startsWith(term));
+  function matchingSections(record, query) {
+    const needles = terms(query);
+    if (!needles.length) return [];
+    const base = words(record.title + ' ' + record.description + ' ' + record.subjects).map(stem);
+    return (record.sections || []).map((section, order) => {
+      const heading = words(section[1]).map(stem);
+      const hits = needles.filter(term => heading.some(word => matches(word, term))).length;
+      const found = hits > 0 && needles.every(term => [...base, ...heading].some(word => matches(word, term)));
+      return {section, order, hits, found};
+    }).filter(row => row.found).sort((a, b) => b.hits - a.hits || a.order - b.order).slice(0, 3).map(row => row.section);
+  }
   function score(record, query) {
     const needles = terms(query);
     if (!normalize(query)) return String(query).trim() ? -1 : 0;
     if (!needles.length) return -1;
     const title = words(record.title).map(stem);
     const all = [...title, ...words(record.description + ' ' + record.subjects).map(stem)];
-    if (!needles.every(term => all.some(word => matches(word, term)))) return -1;
-    return needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
+    const baseMatch = needles.every(term => all.some(word => matches(word, term)));
+    if (!baseMatch && !matchingSections(record, query).length) return -1;
+    return (baseMatch ? 1000 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = { normalize, terms, score };
+  if (typeof module !== 'undefined' && module.exports) module.exports = { normalize, terms, score, matchingSections };
   if (typeof document === 'undefined') return;
   const controls = document.getElementById('find-controls');
   if (!controls) return;
@@ -26,17 +38,54 @@
   const status = document.getElementById('find-status');
   const heading = document.getElementById('find-results');
   const empty = document.getElementById('find-empty');
+  let sectionIndex = {};
+  try {
+    const data = document.getElementById('find-section-data');
+    const parsed = data ? JSON.parse(data.textContent) : {};
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) sectionIndex = parsed;
+  } catch (_) { /* The original title and summary search remains available. */ }
+  function sectionsFor(node) {
+    const path = node.querySelector('h3 a').getAttribute('href');
+    const rows = sectionIndex[path];
+    return Array.isArray(rows) ? rows.filter(row => Array.isArray(row) && row.length === 2 &&
+      typeof row[0] === 'string' && /^[A-Za-z0-9_-]+$/.test(row[0]) && typeof row[1] === 'string' && row[1].trim()) : [];
+  }
   const groups = [...document.querySelectorAll('.find-group')].map(group => ({
     node: group, list: group.querySelector('.find-items'), count: group.querySelector('.find-group-count'),
     items: [...group.querySelectorAll('.find-item')].map((node, order) => ({
       node, order, title: node.querySelector('h3').textContent,
       description: node.querySelector('.find-description').textContent,
       subjects: node.querySelector('.find-subjects').textContent,
-      interests: node.dataset.interests.split(' '), kind: node.dataset.kind
+      interests: node.dataset.interests.split(' '), kind: node.dataset.kind, sections: sectionsFor(node)
     }))
   }));
   const total = groups.reduce((n, group) => n + group.items.length, 0);
   let timer;
+  function showSections(item, query, visible) {
+    if (!item.sections.length) return;
+    if (!item.sectionMatches) {
+      item.sectionMatches = document.createElement('div');
+      item.sectionMatches.className = 'find-section-matches';
+      item.node.append(item.sectionMatches);
+    }
+    const target = item.sectionMatches;
+    const sections = visible ? matchingSections(item, query) : [];
+    target.replaceChildren();
+    target.hidden = !sections.length;
+    if (!sections.length) return;
+    const label = document.createElement('p');
+    label.textContent = sections.length === 1 ? 'Matching section' : 'Matching sections';
+    const list = document.createElement('ul');
+    const path = item.node.querySelector('h3 a').getAttribute('href');
+    for (const [anchor, title] of sections) {
+      const row = document.createElement('li');
+      const link = document.createElement('a');
+      link.setAttribute('href', path + '#' + anchor);
+      link.textContent = title;
+      row.append(link); list.append(row);
+    }
+    target.append(label, list);
+  }
   function filter() {
     clearTimeout(timer);
     const value = query.value.slice(0, 180);
@@ -50,6 +99,7 @@
         const item = rankedItem.item;
         const show = rankedItem.value >= 0 && (!interest.value || item.interests.includes(interest.value)) && (!kind.value || item.kind === kind.value);
         item.node.hidden = !show;
+        showSections(item, value, show);
         if (show) visible += 1;
         group.list.append(item.node);
       }

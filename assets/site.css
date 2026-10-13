@@ -19,6 +19,10 @@ main:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+/* Wrapped navigation is taller on narrow screens; keep native fragment targets visible. */
+@media (max-width: 1050px) {
+  html { scroll-padding-top: 180px; }
+}
 @media print {
   .site-bar, .site-header, footer, .skip-link, .article-navigation, .contact-form, .seal { display: none !important; }
   body { background: white; color: black; }
