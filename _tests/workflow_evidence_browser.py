@@ -72,7 +72,7 @@ try:
   with page.expect_download() as item:page.locator('#time-download').click()
   download=item.value;assert download.suggested_filename=='workflow-time-comparison.txt';assert Path(download.path()).read_text()==text;report['downloads']+=1
   expect(page.locator('#time-copy-status')).to_have_text('Text download requested. Keep the comparison in your own notes.')
-  page.evaluate("window.nativeTimeExportURL=URL.createObjectURL;URL.createObjectURL=()=>{throw new Error('Synthetic file creation failure')}")
+  page.evaluate("()=>{window.nativeTimeExportURL=URL.createObjectURL;URL.createObjectURL=()=>{throw new Error('Synthetic file creation failure')};}")
   page.locator('#time-download').press('Enter')
   expect(page.locator('#time-report')).to_be_focused();expect(page.locator('#time-result')).to_be_visible()
   expect(page.locator('#time-copy-status')).to_have_text('Download unavailable. Copy the selected comparison into your own notes.')
@@ -89,12 +89,12 @@ try:
    assert page.evaluate('document.documentElement.scrollWidth')<=recovery_width
    report['export_recovery_spacing']+=1
    page.evaluate('document.getElementById("time-export-spacing").remove()')
-  page.evaluate('URL.createObjectURL=window.nativeTimeExportURL');report['functional']+=1
-  page.evaluate("""window.nativeTimeExportClick=HTMLAnchorElement.prototype.click;
+  page.evaluate('()=>{URL.createObjectURL=window.nativeTimeExportURL;}');report['functional']+=1
+  page.evaluate("""()=>{window.nativeTimeExportClick=HTMLAnchorElement.prototype.click;
 window.nativeTimeExportRevoke=URL.revokeObjectURL;window.timeExportRevoked=[];
 window.timeExportFailureURL=null;URL.createObjectURL=blob=>{const url=window.nativeTimeExportURL.call(URL,blob);window.timeExportFailureURL=url;return url};
 URL.revokeObjectURL=url=>{window.timeExportRevoked.push(url);window.nativeTimeExportRevoke.call(URL,url)};
-HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-comparison.txt')throw new Error('Synthetic download activation failure');return window.nativeTimeExportClick.call(this)}""")
+HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-comparison.txt')throw new Error('Synthetic download activation failure');return window.nativeTimeExportClick.call(this)};}""")
   page.locator('#time-download').press('Enter')
   expect(page.locator('#time-report')).to_be_focused();expect(page.locator('#time-result')).to_be_visible()
   expect(page.locator('#time-copy-status')).to_have_text('Download unavailable. Copy the selected comparison into your own notes.')
@@ -102,7 +102,7 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
   assert page.locator('#time-report').evaluate('x=>x.selectionEnd-x.selectionStart')==len(text)
   expect(page.locator('a[download="workflow-time-comparison.txt"]')).to_have_count(0)
   page.wait_for_function('window.timeExportRevoked.includes(window.timeExportFailureURL)')
-  page.evaluate('HTMLAnchorElement.prototype.click=window.nativeTimeExportClick;URL.revokeObjectURL=window.nativeTimeExportRevoke;URL.createObjectURL=window.nativeTimeExportURL');report['functional']+=1
+  page.evaluate('()=>{HTMLAnchorElement.prototype.click=window.nativeTimeExportClick;URL.revokeObjectURL=window.nativeTimeExportRevoke;URL.createObjectURL=window.nativeTimeExportURL;}');report['functional']+=1
   with page.expect_download() as item:page.locator('#time-download').click()
   assert Path(item.value.path()).read_text()==text;report['downloads']+=1
   expect(page.locator('#time-copy-status')).to_have_text('Text download requested. Keep the comparison in your own notes.')

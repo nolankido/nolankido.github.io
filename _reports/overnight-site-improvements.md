@@ -128,6 +128,15 @@ The focused preview suite and the complete 469-test run then passed. Hosted
 failure journeys, pixel equivalence and mobile/desktop views remain required
 before merge. Local browser execution was not used.
 
+The first hosted run passed the build/content gate and normal-result pixel
+equivalence. The new failure test's setup returned its injected function to
+Playwright, which immediately invoked it before the download interaction.
+Setup and restoration now use explicit function bodies with no returned
+function. All recovery, exact-download and cleanup assertions are retained.
+An unrelated collection suite's browser process crashed during startup before
+loading its page. The complete existing gate is still required on the corrected
+candidate; these failures are not publication evidence.
+
 Next useful work: review a different concrete visitor or publishing defect from
 current source and live evidence. Do not repeat completed navigation or export
 work or expand article volume just to fill a work pass.
