@@ -5,7 +5,11 @@ from html import escape
 from pathlib import Path
 import json
 import re
-import practical_path
+
+# Freeze this release's reviewed copy. Historical adapters must load before
+# production modules, and future editorial changes must not rewrite history.
+NEW_TITLE = 'Practical AI Workflow, Tools & Checklists | Nolan Kido'
+NEW_DESCRIPTION = 'Decide whether AI fits, write a brief, check its answer and compare the full cost. Follow four useful steps with free tools, guides and one private-use workbook.'
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,8 +34,8 @@ def before(path, data):
     text = re.sub(pattern, lambda m: baseline()['technology_promos'] if path == 'technology/index.html' else '', text, flags=re.S)
     text = re.sub(r'\n  <link rel="stylesheet" href="/assets/practical-ai-path[.]css[?]v=[a-f0-9]{12}">', '', text)
     old = next(p for p in baseline()['pages'] if p['id'] == 'technology')
-    text = text.replace(escape(practical_path.DESCRIPTION, quote=True), escape(old['description'], quote=True))
-    text = text.replace(escape(practical_path.SEO_TITLE, quote=True), escape(old['seo_title'], quote=True))
+    text = text.replace(escape(NEW_DESCRIPTION, quote=True), escape(old['description'], quote=True))
+    text = text.replace(escape(NEW_TITLE, quote=True), escape(old['seo_title'], quote=True))
     if path == 'technology/index.html':
         def original_schema(match):
             schema = json.loads(match[1])

@@ -8,6 +8,7 @@ import json
 import re
 import shutil
 import sys
+import subprocess
 import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -93,5 +94,10 @@ class PracticalPathTests(unittest.TestCase):
         path='technology/check-ai-answers/index.html'
         raw=self.outputs[Path(path)].replace('<body','<!-- unreviewed --><body',1)
         self.assertNotEqual(sha256(history.before(path,raw).encode()).hexdigest(),history.baseline()['outputs'][path])
+
+    def test_history_loads_in_a_standalone_browser_process_before_build_modules(self):
+        code='import sys;sys.path.insert(0,'+repr(str(ROOT/'_tests'))+');import choice_history'
+        result=subprocess.run([sys.executable,'-I','-c',code],capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
 
 if __name__=='__main__':unittest.main()
