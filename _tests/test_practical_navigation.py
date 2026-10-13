@@ -15,6 +15,7 @@ import check_live
 import practical_navigation
 import practical_navigation_history as history
 import time_export_history
+import find_submission_history
 
 STAGES = (
     ('ai-task-choice', '/technology/should-i-use-ai/', 'Decide'),
@@ -46,7 +47,7 @@ class PracticalNavigationTests(unittest.TestCase):
         self.assertEqual(set(map(str,self.outputs)),set(self.baseline['outputs']))
         changed=[]
         for path,digest in self.baseline['outputs'].items():
-            raw=self.outputs[Path(path)]
+            raw=find_submission_history.before(path,self.outputs[Path(path)])
             if sha256(raw.encode()).hexdigest()!=digest: changed.append(path)
             self.assertEqual(sha256(history.before(path,raw).encode()).hexdigest(),digest,path)
         self.assertCountEqual(changed,history.PATHS)

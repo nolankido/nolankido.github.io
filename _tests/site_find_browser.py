@@ -36,6 +36,7 @@ def load(page,script=True):
 def set_query(page,text):
     page.locator('#find-query').fill(text)
     page.locator('#find-query').press('Enter')
+    expect(page.locator('#find-results')).to_be_focused()
 
 try:
     with sync_playwright() as p:
@@ -49,6 +50,37 @@ try:
         assert page.locator('.find-item').count()==len(items)
         requests=[];page.on('request',lambda r:requests.append(r.url))
         before=page.url
+        # Live typing and input-method composition must retain the editor.
+        query=page.locator('#find-query')
+        query.fill('family story')
+        expect(page.locator('.find-item:visible h3 a[href="/living-well/preserve-family-story/"]')).to_be_visible()
+        expect(query).to_be_focused()
+        original_status=page.locator('#find-status').inner_text()
+        query.evaluate("x=>{x.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));x.value='pot odds';x.dispatchEvent(new InputEvent('input',{bubbles:true,isComposing:true}));}")
+        for flags in [{'isComposing':True,'keyCode':13},{'isComposing':False,'keyCode':229}]:
+            allowed=query.evaluate("(x,flags)=>x.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true,...flags}))",flags)
+            assert allowed,'Composition Enter must retain its native default'
+            expect(query).to_be_focused()
+        page.wait_for_timeout(200)
+        expect(page.locator('#find-status')).to_have_text(original_status)
+        query.evaluate("x=>x.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true}))")
+        expect(page.locator('.find-item:visible h3 a[href="/poker/pot-odds-workshop/"]')).to_be_visible()
+        expect(query).to_be_focused()
+        # Explicit button submission should offer the same keyboard handoff.
+        for activation in ['click','Enter','Space']:
+            query.fill('family story')
+            button=page.locator('#find-submit')
+            if activation=='click':button.click()
+            else:button.press(activation)
+            expect(page.locator('#find-results')).to_be_focused()
+            page.keyboard.press('Tab')
+            expect(page.locator('.find-group:not([hidden]) summary').first).to_be_focused()
+            page.keyboard.press('Tab')
+            expect(page.locator('.find-item:visible h3 a').first).to_be_focused()
+        for field,value in [('find-interest','creative'),('find-kind','guide')]:
+            control=page.locator('#'+field);control.focus();control.select_option(value)
+            expect(control).to_be_focused()
+        page.locator('#find-reset').click()
         for query,destination in [('family story','/living-well/preserve-family-story/'),('how do I review a hand','/poker/reviewing-a-hand/'),('AI','/notes/keep-the-judgment/')]:
             set_query(page,query)
             expect(page.locator('.find-item:not([hidden]) a[href="'+destination+'"]')).to_be_visible()
@@ -76,12 +108,17 @@ try:
             page.set_viewport_size({'width':width,'height':900})
             for query in ['', 'family story', 'zznoresults']:
                 set_query(page,query)
+                expect(page.locator('#find-results')).to_be_in_viewport()
+                assert page.locator('#find-results').evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom+4'),'Focused results must clear the sticky header'
                 assert page.evaluate('document.documentElement.scrollWidth')<=width,(width,query)
                 if os.environ.get('SCREENSHOT_DIR') and width in [390,1440]:
                     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
                     name='browse' if not query else 'family' if query=='family story' else 'empty'
+                    if query:page.screenshot(path=str(out/f'find-submitted-{name}-{width}.png'))
                     page.screenshot(path=str(out/f'find-{name}-{width}.png'),full_page=True)
                 spacing=page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
+                set_query(page,query)
+                assert page.locator('#find-results').evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom+4'),'Expanded-text results must clear the sticky header'
                 assert page.evaluate('document.documentElement.scrollWidth')<=width,('text-spacing',width,query)
                 spacing.evaluate('(el)=>el.remove()')
         # Context-specific type and interest filters work without a query.
@@ -127,6 +164,6 @@ try:
             context.close()
         browser.close()
     assert not errors,errors
-    print('PASS site discovery: queries, cross-interest filters, escaping, reset, no query transport, 15 layouts + 15 text-spacing checks, disabled/blocked script fallback'+(' (in-memory; URL navigation not run)' if OFFLINE else ', keyboard URL navigation and 404 recovery'))
+    print('PASS site discovery: explicit search focus, composition and boundary Enter defaults, live-filter focus, queries, cross-interest filters, escaping, reset, no query transport, 15 layouts + 15 text-spacing checks, disabled/blocked script fallback'+(' (in-memory; URL navigation not run)' if OFFLINE else ', keyboard URL navigation and 404 recovery'))
 finally:
     if server:server.shutdown()

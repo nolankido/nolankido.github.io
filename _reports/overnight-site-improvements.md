@@ -140,3 +140,58 @@ candidate; these failures are not publication evidence.
 Next useful work: review a different concrete visitor or publishing defect from
 current source and live evidence. Do not repeat completed navigation or export
 work or expand article volume just to fill a work pass.
+
+## Finder submission and composition
+
+Production was re-read at `b42894f9483705d08798562095058380590e3ac2`.
+PR #54 is merged and deployed. Its 469 unit/content checks and all 33 browser
+suites passed before merge, Pages run 38359845075 succeeded, and published-byte
+job 115171188773 passed all 372 targets for that exact main SHA. Its post-merge
+Site checks run 38359844453 has also completed successfully. The detailed
+receipt is https://github.com/nolankido/nolankido.github.io/pull/54.
+
+The next inspection found that an explicit site-wide search left keyboard focus
+above the results. Enter was also prevented during input-method composition,
+and a pending live-filter timer was not cancelled when composition began. A
+small independent event fixture reproduced these behaviors against production.
+
+Explicit Enter or Search button activation now filters and focuses the existing
+results heading. Live typing, interest/type changes, native search clearing and
+composition completion keep focus in their control. Composition Enter retains
+its native default, including the 229 boundary case documented by MDN. Starting
+composition cancels a pending filter, avoiding a partial-query announcement.
+This is an input-handling fix, not a claim of multilingual search coverage:
+https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+
+The search algorithm, index records, results grouping, styles, privacy behavior,
+native fallback and original source pages are unchanged. Only the finder event
+block and its generated script cache version change in the public site.
+Before editing, all 198 generated outputs and 316 source/asset/download files
+were independently verified against production Git objects. Their complete
+path-and-byte digests, all 90 article pages, all five feeds and metadata remain
+protected. The historical adapter restores only the exact frozen event block
+and that one cache version; existing golden digests are retained, with mutation
+checks that detect unrelated changes.
+
+Executed locally: 473 unit/content tests passed, including four new interaction
+and preservation checks; the committed build matched all 198 outputs; all 171
+HTML pages parsed; and the search audit passed. The existing hosted finder suite
+now verifies real explicit-search focus and tab order, unchanged typing/filter
+focus, synthetic composition and boundary events, and viewport visibility at
+five widths. Synthetic events test handler behavior, not a real operating-system
+IME session. All existing browser suites and final live-release proof remain
+required before completion. The pull request receipt records their executed
+results. No local browser was installed or run.
+
+The first hosted candidate passed all 473 unit/content tests and 33 browser
+suites. Visual review of its four submitted-search screenshots found that the
+sticky header could overlap the focused heading in the narrow empty state.
+Explicit submission now focuses without an intermediate scroll and immediately
+centers the heading. The browser checks measure against the actual sticky
+header, including after expanded text spacing, and retain the existing focus,
+keyboard, privacy and result assertions. A complete gate on this corrected
+candidate is required; the earlier pass does not authorize its merge.
+
+Next useful work: inspect a separate concrete reader-entry issue from current
+source and live evidence. If the archive keyboard timing failure recurs, add
+targeted route, focus and input-mode diagnostics before changing its assertions.

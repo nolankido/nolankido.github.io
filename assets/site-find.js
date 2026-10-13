@@ -67,13 +67,20 @@
     query.value = ''; interest.value = ''; kind.value = ''; filter();
     if (focus) query.focus();
   }
-  query.addEventListener('input', event => { if (!event.isComposing) { clearTimeout(timer); timer = setTimeout(filter, 140); } });
+  function submit() {
+    filter(); heading.focus({preventScroll:true});
+    heading.scrollIntoView({block:'center',behavior:'instant'});
+  }
+  query.addEventListener('input', event => { clearTimeout(timer); if (!event.isComposing) timer = setTimeout(filter, 140); });
+  query.addEventListener('compositionstart', () => clearTimeout(timer));
   query.addEventListener('compositionend', filter);
   query.addEventListener('search', filter);
-  query.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); filter(); } });
+  query.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !event.isComposing && event.keyCode !== 229) { event.preventDefault(); submit(); }
+  });
   interest.addEventListener('change', filter);
   kind.addEventListener('change', filter);
-  document.getElementById('find-submit').addEventListener('click', filter);
+  document.getElementById('find-submit').addEventListener('click', submit);
   document.getElementById('find-reset').addEventListener('click', () => reset(true));
   // Do not restore a previous visitor query when returning through browser history.
   window.addEventListener('pagehide', () => reset(false));
