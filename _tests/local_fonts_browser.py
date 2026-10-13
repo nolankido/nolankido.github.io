@@ -9,6 +9,7 @@ from pathlib import Path
 from threading import Thread
 from urllib.parse import urlsplit
 from hashlib import sha256
+from time import monotonic
 import json,os,sys,faulthandler
 from playwright.sync_api import sync_playwright,expect
 ROOT=Path(__file__).resolve().parents[1]
@@ -25,6 +26,17 @@ by_url={r['url']:r for r in record['files']}
 paths=['/','/about/','/technology/','/notes/keep-the-judgment/','/poker/holdem-basics/','/living-well/did-the-tool-actually-help/']
 report={'parity_views':0,'local_fonts_loaded':0,'decoded_files':0,'fallback_views':0,'keyboard_journeys':0,'exact_assets':0,'axe':[]}
 errors=[]
+
+def rendered_faces(page,case):
+    # Playwright's in-page polling depends on timers/animation frames, which
+    # need not run when JavaScript is disabled. Read the native FontFaceSet
+    # from the driver instead; retain the same loaded-state requirement.
+    deadline=monotonic()+10
+    while True:
+        state=page.evaluate('({status:document.fonts.status,faces:Array.from(document.fonts,f=>({family:f.family,status:f.status}))})')
+        if state['status']=='loaded':return state['faces']
+        assert monotonic()<deadline,('font readiness timeout',case,state)
+        page.wait_for_timeout(50)
 
 def route_for(requests,old=False,blocked=False):
     def route(r):
@@ -67,8 +79,7 @@ try:
                         case={'reference':old,'scripts':scripts,'width':width,'path':path}
                         print('FONT_VIEW '+json.dumps(case),flush=True)
                         page.goto(base+path)
-                        page.wait_for_function('document.fonts.status === "loaded"',timeout=10000)
-                        faces=page.evaluate('Array.from(document.fonts,f=>({family:f.family,status:f.status}))')
+                        faces=rendered_faces(page,case)
                         assert len(faces)==38,(case,faces)
                         for family in ['Schibsted Grotesk','Source Serif 4','IBM Plex Mono']:
                             assert any(f['family'].strip("'\"")==family and f['status']=='loaded' for f in faces),(case,family,faces)

@@ -349,3 +349,12 @@ from the rendered CSS faces, bounds its readiness checks, provides matching CORS
 headers for the mocked old provider, and logs each decode and view. Exact
 rendering parity, no-script coverage, fallbacks and all 27 asset-byte checks
 remain required. The corrected candidate needs the complete gate again.
+
+The second candidate again passed 481 unit/content checks and the original
+browser suites. All 24 binary decode checks and the three JavaScript-enabled
+viewport parity comparisons passed. Its new fixture timed out in Playwright's
+in-page font-status polling on the no-script About reference. The fixture now
+polls the native FontFaceSet from the driver, keeping the same 10-second bound,
+loaded-state requirement and complete no-script comparisons, with the exact
+font state included in any timeout. No public file changed in either repair.
+The final candidate still requires the complete hosted gate before merging.
