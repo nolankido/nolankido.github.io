@@ -358,3 +358,12 @@ polls the native FontFaceSet from the driver, keeping the same 10-second bound,
 loaded-state requirement and complete no-script comparisons, with the exact
 font state included in any timeout. No public file changed in either repair.
 The final candidate still requires the complete hosted gate before merging.
+
+The third candidate passed the original gate checks and reached all 72 old/new
+font-rendering views, including no-script pages, before the new test's four-minute
+watchdog stopped it. The remaining fallback fixture's text-spacing CSS is now
+delivered in the test HTML rather than waiting on an injected style's load event
+with page scripting disabled. It explicitly checks the resulting letter, word
+and line spacing. Keyboard, parity, fallback and asset stages now log progress.
+Coverage and public files remain unchanged; publication still requires a full
+successful candidate run.
