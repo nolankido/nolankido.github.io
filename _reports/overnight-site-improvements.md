@@ -195,3 +195,39 @@ candidate is required; the earlier pass does not authorize its merge.
 Next useful work: inspect a separate concrete reader-entry issue from current
 source and live evidence. If the archive keyboard timing failure recurs, add
 targeted route, focus and input-mode diagnostics before changing its assertions.
+
+## Poker finder composition handoff
+
+Production was re-read at `b041a9ebcb733581e23d42fd9a1af4433a5244fa`.
+PR #55 is merged and deployed; its release receipt records 473 unit/content
+checks, all 33 browser suites, successful Pages deployment, and 372 exact live
+targets for that SHA. The only other open pull request is the stale PR #48 and
+it remains untouched.
+
+The main Poker finder intercepted Enter and Escape while an input method was
+still composing text. A delayed live-filter callback could also survive the
+start of composition and replace the completed query state. The finder now
+cancels that pending callback, ignores both the standard composing flag and the
+legacy key-code 229 boundary, applies the completed composition without moving
+focus, and reserves results-heading focus for an explicit completed search.
+The focused heading is centered below the sticky site header.
+
+Search terms still stay on the page and out of URLs, storage and requests. The
+index, scoring, aliases, filters, source records, article prose and dates, five
+feeds, contact behavior and analytics are unchanged. A narrow historical
+adapter restores only the exact reviewed event block and its one generated
+cache version; unrelated script mutations remain detectable. The existing
+production-preservation layers continue to protect all 198 outputs, 316 source,
+asset and download files, 90 article pages and five feeds.
+
+Executed locally: the committed build matched all 198 outputs, all 171 HTML
+pages passed the search audit, and all 475 unit/content tests passed. The hosted
+finder suite now exercises composing Enter, the 229 boundary, delayed-filter
+cancellation, completed-composition results, explicit focus and sticky-header
+clearance. Local browser execution was not used. The complete hosted browser
+gate, merge, Pages deployment and exact public-byte verification are still
+required before this change can be reported live.
+
+Next useful work: inspect a separate concrete entry or recovery defect after
+this candidate is fully verified. Do not broaden this pass to the other Poker
+filters without reproducing their behavior independently.

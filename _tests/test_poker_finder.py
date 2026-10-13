@@ -14,6 +14,7 @@ import poker_library
 import poker_resources
 import poker_reference
 import check_live
+import poker_finder_submission_history as submission_history
 
 NEW = ('poker-math-reference', 'reading-preflop-charts', 'poker-rules-and-fair-play')
 
@@ -98,6 +99,23 @@ class FinderTests(unittest.TestCase):
         self.assertIn('<noscript>', self.content)
         self.assertIn('id="finder-controls" class="reader-controls" hidden', self.content)
         self.assertIn('id="finder-support"', self.content)
+
+    def test_submission_is_composition_safe_and_the_prior_script_is_exactly_recoverable(self):
+        js = (ROOT / submission_history.SCRIPT).read_text()
+        self.assertEqual(hashlib.sha256(js.encode()).hexdigest(), submission_history.NEW_SHA)
+        self.assertEqual(hashlib.sha256(submission_history.before(submission_history.SCRIPT, js).encode()).hexdigest(), submission_history.OLD_SHA)
+        self.assertIn("input.addEventListener('compositionstart', () => clearTimeout(timer));", js)
+        self.assertIn("input.addEventListener('compositionend', update);", js)
+        self.assertIn('if (event.isComposing || event.keyCode === 229) return;', js)
+        self.assertIn("heading.scrollIntoView({block: 'center', behavior: 'instant'});", js)
+        old_page = submission_history.before(submission_history.PAGE, self.content)
+        self.assertIn('/assets/poker-finder.js?v=' + submission_history.OLD_SHA[:12], old_page)
+
+    def test_submission_history_does_not_hide_unrelated_changes(self):
+        js = (ROOT / submission_history.SCRIPT).read_text()
+        changed = js.replace('const stop =', 'const unexpected = 1; const stop =', 1)
+        restored = submission_history.before(submission_history.SCRIPT, changed)
+        self.assertNotEqual(hashlib.sha256(restored.encode()).hexdigest(), submission_history.OLD_SHA)
 
     def test_navigation_keeps_resource_discovery_on_every_poker_page_only(self):
         for p in self.pages:

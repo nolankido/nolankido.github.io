@@ -170,10 +170,17 @@
     input.value = ''; kind.value = 'all'; topic.value = 'all'; free.checked = false;
     update(); saveFilters(); input.focus();
   }
-  input.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(update, 120); });
-  input.addEventListener('search', () => update());
+  function submit() {
+    clearTimeout(timer); update(); heading.focus({preventScroll: true});
+    heading.scrollIntoView({block: 'center', behavior: 'instant'});
+  }
+  input.addEventListener('input', event => { clearTimeout(timer); if (!event.isComposing) timer = setTimeout(update, 120); });
+  input.addEventListener('compositionstart', () => clearTimeout(timer));
+  input.addEventListener('compositionend', update);
+  input.addEventListener('search', () => { clearTimeout(timer); update(); });
   input.addEventListener('keydown', event => {
-    if (event.key === 'Enter') { event.preventDefault(); update(); heading.focus(); }
+    if (event.isComposing || event.keyCode === 229) return;
+    if (event.key === 'Enter') { event.preventDefault(); submit(); }
     if (event.key === 'Escape') { event.preventDefault(); clear(); }
   });
   kind.addEventListener('change', filtersChanged); free.addEventListener('change', filtersChanged);

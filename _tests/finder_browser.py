@@ -56,11 +56,27 @@ def main():
             expect(page.locator('#finder-controls')).to_be_visible()
             page.wait_for_timeout(200)
             initial_traffic=list(traffic);initial_url=page.url
+            # Live typing and input-method composition retain the editor. The
+            # legacy 229 boundary must not submit a partial query.
+            search.fill('pot odds')
+            expect(search).to_be_focused()
+            prior_count=page.locator('#finder-count').inner_text()
+            search.evaluate("x=>{x.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));x.value='PLO8';x.dispatchEvent(new InputEvent('input',{bubbles:true,isComposing:true}));}")
+            for flags in [{'isComposing':True,'keyCode':13},{'isComposing':False,'keyCode':229}]:
+                allowed=search.evaluate("(x,flags)=>x.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true,...flags}))",flags)
+                assert allowed,'Composition Enter must retain its native default'
+                expect(search).to_be_focused()
+            page.wait_for_timeout(160)
+            expect(page.locator('#finder-count')).to_have_text(prior_count)
+            search.evaluate("x=>x.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true}))")
+            expect(page.locator('[data-id="external-omaha-eight-rules"]')).to_be_visible()
+            expect(search).to_be_focused()
             # Known glossary answer with no unrelated source-type results.
             page.locator('#finder-kind').select_option('glossary');search.fill('BB');search.press('Enter')
             expect(page.locator('[data-id="term-big-blind"]')).to_be_visible()
             assert page.locator('[data-finder-card]:visible:not([data-kind="glossary"])').count()==0
             assert page.evaluate('document.activeElement.id')=='finder-results-heading'
+            assert page.locator('#finder-results-heading').evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom+4')
             page.locator('#finder-reset').click()
             search.fill('what is ICM?');search.press('Enter')
             expect(page.locator('[data-id="poker-tournament-equity"]')).to_be_visible()
