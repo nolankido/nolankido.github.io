@@ -17,6 +17,7 @@ import build
 import check_live
 import practical_path
 import practical_path_history as history
+import practical_navigation_history
 
 class PracticalPathTests(unittest.TestCase):
     @classmethod
@@ -30,13 +31,15 @@ class PracticalPathTests(unittest.TestCase):
         for path,digest in history.baseline()['outputs'].items():
             self.assertEqual(sha256(history.before(path,self.outputs[Path(path)]).encode()).hexdigest(),digest,path)
 
-    def test_all_ninety_article_pages_and_five_feeds_are_directly_identical(self):
+    def test_all_original_article_output_and_five_feeds_survive_declared_navigation(self):
         count=0;feeds=0
         for p in self.pages:
             path=build.output_path(p['path']);raw=self.outputs[path]
             schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
             if schema['@type']=='Article':
-                count+=1;self.assertEqual(sha256(raw.encode()).hexdigest(),history.baseline()['outputs'][str(path)])
+                count+=1
+                original=practical_navigation_history.before(path,raw)
+                self.assertEqual(sha256(original.encode()).hexdigest(),history.baseline()['outputs'][str(path)])
         for path,digest in history.baseline()['outputs'].items():
             if path.endswith('feed.xml') or path=='writing.xml':
                 feeds+=1;self.assertEqual(sha256(self.outputs[Path(path)].encode()).hexdigest(),digest)

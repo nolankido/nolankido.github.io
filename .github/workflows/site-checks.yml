@@ -52,7 +52,7 @@ jobs:
           - group: navigation
             suites: browser design_browser
           - group: reader-tools
-            suites: site_find_browser reading_return_browser entrypoints_browser living_well_browser author_archive_browser practical_path_browser
+            suites: site_find_browser reading_return_browser entrypoints_browser living_well_browser author_archive_browser practical_path_browser practical_navigation_browser
           - group: accessibility
             suites: overview_browser cash_selection_browser review_browser
           - group: poker

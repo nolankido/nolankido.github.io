@@ -18,6 +18,7 @@ import presentation
 import reader_previews
 import search_entrypoints
 import search_entry_history as history
+import practical_navigation_history
 
 
 class SearchEntryTests(unittest.TestCase):
@@ -41,7 +42,7 @@ class SearchEntryTests(unittest.TestCase):
             body = re.search(r'<body\b[^>]*>(.*?)</body>', raw, re.S)[1]
             self.assertEqual(sha256(body.encode()).hexdigest(), expected, path)
 
-    def test_article_words_dates_and_all_five_feeds_are_preserved_directly(self):
+    def test_article_words_dates_and_all_five_feeds_survive_only_declared_navigation(self):
         old = {p['id']: p for p in self.baseline['pages']}
         count = 0
         for p in self.pages:
@@ -50,6 +51,7 @@ class SearchEntryTests(unittest.TestCase):
             if schema['@type'] != 'Article': continue
             count += 1
             self.assertEqual(p, old[p['id']], p['id'])
+            raw = practical_navigation_history.before(build.output_path(p['path']), raw)
             body = re.search(r'<body\b[^>]*>(.*?)</body>', raw, re.S)[1]
             self.assertEqual(sha256(body.encode()).hexdigest(), self.baseline['bodies'][build.output_path(p['path']).as_posix()])
             self.assertNotIn('image', schema, 'A title card is not a representative article illustration')

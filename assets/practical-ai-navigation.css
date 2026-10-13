@@ -1,0 +1,18 @@
+/* Optional navigation between the four existing AI checkpoints. */
+.ai-workflow-navigation { padding-block: 20px 24px; border-top: 1px solid var(--line-dark); }
+.ai-workflow-title { font: 650 1rem/1.5 var(--sans); margin-bottom: 12px; }
+.ai-workflow-navigation ol { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; list-style: none; margin: 0 0 12px; padding: 0; }
+.ai-workflow-navigation li { min-width: 0; }
+.ai-workflow-navigation li > a, .ai-workflow-current { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 48px; height: 100%; padding: 10px 12px; border: 1px solid var(--line-dark); font: 600 .88rem/1.5 var(--sans); overflow-wrap: anywhere; }
+.ai-workflow-navigation li > a { background: var(--paper-light); }
+.ai-workflow-current { background: var(--basalt); color: var(--paper-light); }
+.ai-workflow-number { font: .68rem/1.5 var(--mono); }
+.ai-workflow-here { flex-basis: 100%; font: .65rem/1.5 var(--mono); }
+.ai-workflow-note { color: var(--ink-soft); font: .85rem/1.6 var(--sans); margin-bottom: 8px; max-width: 760px; }
+.ai-workflow-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; font: .85rem/1.6 var(--sans); }
+.ai-workflow-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.ai-workflow-onward { border-top: 1px solid var(--line-dark); padding-block: 24px 32px; }
+.ai-workflow-onward .section-content > p:first-child { font: 1.05rem/1.6 var(--serif); margin-bottom: 8px; }
+.ai-workflow-onward a { display: inline-block; padding-block: 8px; }
+@media (max-width: 600px) { .ai-workflow-navigation ol { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media print { .ai-workflow-navigation, .ai-workflow-onward { display: none!important; } }
