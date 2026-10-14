@@ -13,7 +13,8 @@
         "viewer-questions",
         "follow-along",
         "free-poker-learning-path",
-        "first-decisions"
+        "first-decisions",
+        "starting-hand-decisions"
       ],
       "related_guides": [
         "table-etiquette",
@@ -35,12 +36,12 @@
           "label": "Practice your first decisions, one question at a time"
         },
         {
-          "guide": "holdem-basics",
-          "label": "Follow a hand from the deal to showdown"
+          "guide": "starting-hand-decisions",
+          "label": "Understand how the situation changes your starting hand"
         },
         {
-          "guide": "hand-rankings",
-          "label": "Check which hand wins"
+          "guide": "holdem-basics",
+          "label": "Follow a hand from the deal to showdown"
         }
       ],
       "glossary_terms": [],

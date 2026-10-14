@@ -1806,6 +1806,26 @@
           287
         ]
       }
+    },
+    "poker-starting-hand-decisions": {
+      "path": "/poker/starting-hand-decisions/",
+      "title": "The same cards. A different decision.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-starting-hand-decisions.png",
+      "sha256": "8fb65adb573d5ae286a4b687610a087dcdede6f6588b4d6ff6b70a061bddd14e",
+      "layout": {
+        "lines": [
+          "The same cards. A different",
+          "decision."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1092,
+          339
+        ]
+      }
     }
   }
 }

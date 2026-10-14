@@ -1056,5 +1056,18 @@
     "date": "2026-10-14",
     "updated": "2026-10-14",
     "poker_guide": true
+  },
+  {
+    "id": "poker-starting-hand-decisions",
+    "path": "/poker/starting-hand-decisions/",
+    "title": "The same cards. A different decision.",
+    "seo_title": "Poker Starting Hands for Beginners | Nolan Kido",
+    "description": "Understand poker starting hands through eight explained exercises on position, prior action, call prices and effective stacks. Build a useful preflop study record.",
+    "kicker": "Poker / Beginner lessons",
+    "source": "poker/starting-hand-decisions.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
   }
 ]

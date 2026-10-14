@@ -8,6 +8,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import preflop_history
 
 ROOT = Path(__file__).resolve().parents[1]
 ID = 'poker-first-decisions'
@@ -20,6 +21,7 @@ def change():
 
 
 def before(path, data):
+    data = preflop_history.before(path, data)
     entry = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
@@ -34,15 +36,18 @@ def before(path, data):
 
 
 def pages(records):
+    records = preflop_history.pages(records)
     return [p for p in records if p != change()['page']]
 
 
 def outputs(records):
+    records = preflop_history.outputs(records)
     return {p: before(p, value) for p, value in records.items()
             if change()['new_outputs'].get(str(p)) != sha256(value.encode()).hexdigest()}
 
 
 def files(paths):
+    paths = preflop_history.files(paths)
     def original(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
         return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()

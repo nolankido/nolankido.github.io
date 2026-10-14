@@ -1060,3 +1060,88 @@ the sticky header. This changes only the test capture, not public content.
 The full gate runs again on that exact candidate before merging; initial
 passes do not substitute for final-candidate verification. Final receipt:
 https://github.com/nolankido/nolankido.github.io/pull/67
+
+## October 14, 2026: beginner preflop context
+
+The preceding first-decisions release is complete. PR #67 merged as
+3ec5f4adf06a232166e8d3c03b9a9be67bee7628 with tree
+4f2b8ca1a57846472dbe2c22b7396eb1d02b6a2e. The exact final candidate
+2e78d2628e60402115f392c8ae6bd4f9c8de2cb8 passed 520 unit/content checks
+and all 36 browser suites in run 38511513021. Four final opening/answer
+previews at 390 and 1440 pixels were inspected. Pages run 38512417231
+succeeded; published-byte job 115683687712 passed 401/401 targets with
+LIVE_VERIFIED_COMMIT=3ec5f4adf06a232166e8d3c03b9a9be67bee7628. A fresh main
+read matched, and the later main check run 38512417631 also completed
+successfully. Its final receipt is https://github.com/nolankido/nolankido.github.io/pull/67.
+
+The user then explicitly requested more detailed beginner poker material.
+A current-content audit identified a useful gap between the first-decisions
+mechanics lesson and the existing preflop-chart guide: reconstructing the
+situation before trying to transfer a chart's answer.
+
+The new /poker/starting-hand-decisions/ guide supplies 2,701 words, eight
+native answer-reveal exercises and a private study-note template. It covers
+hand features, players still to act, earlier action, the current call price,
+future betting, big-blind depth, different effective stacks and hypothetical
+future winnings. A complete final fictional cash-game scene combines those
+inputs. This is original teaching material, not a universal range chart,
+solver output, recorded Nolan hand or claim of profitable play. No wager,
+account or purchase is required. AI assistance and source limits are visible.
+
+A read-only editorial review checked the eight scenes and arithmetic.
+Three precision fixes distinguish an open-raise from raising after a limp,
+identify the final scene as a cash game, and explicitly leave chips for
+future betting in the call-price example. References were checked October
+14, 2026: PokerStars' starting-hand and position material and GTO Wizard's
+Study Mode documentation. Commercial source charts and generic range
+percentages were not copied as recommendations.
+
+The Learn topic places this guide after first-decisions. Generated Read
+next cards connect it from first-decisions and the free learning path.
+The established catalogs add it to the library, Find, author archive,
+Poker and combined feeds, and sitemap. Its social title card uses the
+existing renderer. No new runtime script, form, tracking, dependency,
+download, domain setting or hosting service was added.
+
+Before editing, all 172 manifest records, 199 generated outputs and 345
+source/asset/download files were captured and compared with production Git
+objects at main 3ec5f4adf06a232166e8d3c03b9a9be67bee7628. All existing
+article source files and page metadata remain exact, including the entire
+first-decisions and free-learning-path prose. All prior assets and downloads
+remain exact. Only four source catalogs change, with one new source file and
+one new PNG. Independent tests compare every previous article source and
+all old feed items directly. Whole-file digests and frozen offset edits
+provide exact predecessor views for historical golden tests; no prior
+golden digest was refreshed. Negative controls expose unrelated changes.
+
+Seven new unit/content checks passed locally, including the eight exercise
+contracts, call/stack arithmetic, all original-source preservation, feed
+identity, new discovery and tamper detection. Build reproduction and HTML5
+validation passed for all 173 pages. The technical search audit passed:
+173 unique titles/descriptions, 92 articles and 168 sitemap URLs. Find grew
+by 1,303 bytes, including 689 bytes of section data. The new preview is
+9,245 bytes. These are delivery checks, not evidence of search ranking or
+indexing changes.
+
+The full existing gate remains required for the exact candidate. A new
+hosted browser suite adds four-width reflow, all eight keyboard disclosures,
+six discovery arrivals, no-JavaScript reading and accessibility audits,
+bringing the suite count to 37. Hosted mobile and desktop opening/answer
+previews, the final gate, Pages deployment and all 403 published targets
+must be verified before claiming completion. The pull-request receipt will
+record the exact commit, tree and executed results.
+
+Next useful improvement: observe where real beginners hesitate in the first
+two lessons, then teach a bounded postflop decision sequence using existing
+board-reading and pot-odds material. Avoid adding another overlapping index
+or claiming to be the best resource without user evidence.
+
+The initial full local run executed 527 tests in 265.595 seconds; 524
+passed and three fixture expectations needed correction. The original
+first-decisions live-byte assertion now compares its complete current
+output while its historical checks retain the exact predecessor view.
+The old search-entry preservation count stays 90; it must not include the
+new article. Current section discovery contains 937 headings, including
+the new generated Read next heading. All three affected test files passed
+when rerun. The complete 527-test hosted gate is still required on the
+exact remote candidate, alongside every existing and new browser suite.
