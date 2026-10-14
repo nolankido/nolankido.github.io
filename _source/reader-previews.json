@@ -1885,6 +1885,25 @@
           288
         ]
       }
+    },
+    "poker-betting-with-a-purpose": {
+      "path": "/poker/betting-with-a-purpose/",
+      "title": "Give your bet a purpose.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-betting-with-a-purpose.png",
+      "sha256": "c043f888005e4538ad1478cb88448fad08680707095f5ad1f1812de0db26dc79",
+      "layout": {
+        "lines": [
+          "Give your bet a purpose."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          225,
+          987,
+          288
+        ]
+      }
     }
   }
 }
