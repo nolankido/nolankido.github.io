@@ -9,7 +9,8 @@ import re
 
 NEXT_READS = {
     'first-decisions': ('starting-hand-decisions', 'free-poker-learning-path'),
-    'starting-hand-decisions': ('reading-preflop-charts', 'position-and-stacks'),
+    'starting-hand-decisions': ('first-flop-decisions', 'reading-preflop-charts'),
+    'first-flop-decisions': ('reading-the-board', 'ranges-and-bets'),
     'first-live-cash-game': ('cash-game-costs', 'cash-game-study-path'),
     'cash-game-costs': ('cash-game-study-path', 'variance-and-results'),
     'cash-game-study-path': ('choosing-study-tools', 'reviewing-a-hand'),
@@ -22,7 +23,7 @@ NEXT_READS = {
     'poker-math-reference': ('pot-odds-workshop', 'flush-and-redraw'),
     'reading-preflop-charts': ('range-combinations', 'short-stack-decisions'),
     'poker-rules-and-fair-play': ('table-etiquette', 'first-live-tournament'),
-    'free-poker-learning-path': ('starting-hand-decisions', 'pot-odds-workshop'),
+    'free-poker-learning-path': ('starting-hand-decisions', 'first-flop-decisions'),
     'cash-game-study': ('cash-game-study-path', 'cash-game-costs'),
     'omaha-and-mixed-games': ('hand-rankings', 'betting-and-pots'),
     'poker-books-and-courses': ('free-poker-learning-path', 'evaluating-poker-advice'),

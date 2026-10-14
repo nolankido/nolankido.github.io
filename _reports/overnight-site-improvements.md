@@ -1145,3 +1145,87 @@ new article. Current section discovery contains 937 headings, including
 the new generated Read next heading. All three affected test files passed
 when rerun. The complete 527-test hosted gate is still required on the
 exact remote candidate, alongside every existing and new browser suite.
+
+
+## October 14, 2026: first decisions after the flop
+
+The preceding preflop release is complete. PR #68 merged as
+7b0e99ef1a3af29d49a690581c3bf1bb200159af with tree
+828895b4ce79fc8e4c1c5683cc881eb1722d8b10. Its exact candidate
+1776203c247bc174c3608c6ea69456276bb053ae passed 527 unit/content checks
+and all 37 browser suites in run 38514201502. Four mobile and desktop
+opening/answer previews were inspected. Pages run 38515033504 succeeded,
+and published-byte job 115691802302 passed 403/403 targets with
+LIVE_VERIFIED_COMMIT=7b0e99ef1a3af29d49a690581c3bf1bb200159af. Fresh main
+and tree reads matched; main CI run 38515034207 also succeeded. Final
+receipt: https://github.com/nolankido/nolankido.github.io/pull/68.
+
+The user again requested deeper beginner poker teaching. A fresh main,
+open-PR and deployment review found no competing current work. Stale PR
+#48 remains untouched. A content audit found a useful bridge between the
+first two lessons and the existing board-reading and pot-odds references:
+recognizing what changes after the flop before trying to select a strategy.
+
+The new /poker/first-flop-decisions/ guide supplies 2,525 words, eight
+native answer-reveal exercises and 30 accessible displayed cards. It
+teaches made hands alongside draws, checking and continuation bets,
+conditional betting purposes, open-ended and gutshot completions, a flush
+losing to a full house, counterfeited two pair, separate street payments,
+and a complete check-raise decision snapshot. Worked explanations name
+both known facts and missing information. These are original fictional
+examples with visible AI assistance and source limits, not Nolan's hands,
+solver output, recommended ranges or claims of profitable play. Practice
+requires no wager, account or purchase.
+
+Primary references were checked October 14, 2026: PokerStars material on
+the flop, outs, continuation bets, betting purposes and counterfeiting.
+The references support terminology; generic operator strategy claims were
+not copied into recommendations. A read-only editorial review checked all
+eight scenes and found two wording ambiguities, both corrected before
+publication preparation. Card comparisons were checked independently with
+an exhaustive best-five evaluator. Both draw examples enumerate every one
+of the 47 unseen next cards. Both accounting examples conserve chips and
+separate the existing pot from the additional call.
+
+The Learn topic now offers three ordered beginner lessons. Generated Read
+next links connect the preflop lesson and free learning path to the new
+guide, then point onward to board reading and betting purposes. Existing
+catalogs add the guide to the library, both Find tools, author archive,
+Poker and combined feeds, and sitemap. Its 8,841-byte social title card
+uses the existing renderer. No runtime, stylesheet, form, tracking,
+dependency, download, domain setting or hosting service was added.
+
+Before editing, all 173 manifest records, 200 generated outputs and 347
+source/asset/download files were captured and compared with production Git
+objects at main 7b0e99ef1a3af29d49a690581c3bf1bb200159af. All prior
+article source files and metadata are byte-identical, including both
+beginner lessons and the free learning path. All prior assets, downloads
+and feed items remain exact. Four source catalogs change, with one new
+article source and one new PNG. Independent preservation assertions use
+direct hashes, while historical golden checks use exact whole-file gates
+and frozen offset reversals. No prior golden digest was replaced. Negative
+controls expose unreviewed changes. Current inventory counts advance only
+for the actual new guide and its discovery entries.
+
+All 536 unit/content tests passed locally in 365.425 seconds, including
+the nine new checks. Build reproduction passed for
+201 generated files; HTML5 validation passed for all 174 pages. The search
+audit passed with 174 unique titles/descriptions, 93 articles and 169
+sitemap URLs. Find grew by 1,329 bytes, including 711 bytes of section data;
+the section payload remains below its 60,000-byte limit at 57,630 bytes.
+These checks do not establish indexing or search ranking changes.
+
+The complete existing gate is required on the exact remote candidate.
+The new hosted browser suite checks four widths, all eight answers from
+the keyboard, six discovery arrivals, no-JavaScript reading and two
+accessibility audits. This brings the totals to 536 unit/content tests
+and 38 browser suites. Six mobile/desktop opening, card-example and answer
+previews, Pages deployment, and all 405 published targets must be verified
+before completion. The PR receipt will record the exact candidate and
+merged trees, executed results and live-byte marker.
+
+Next useful improvement: seek real beginner feedback on the three-lesson
+sequence, then address specific hesitation points or build a bounded
+first-session practice capstone. Preserve the deeper references instead
+of adding another overlapping beginner index. No claim of being the best
+resource or of improved rankings is made without supporting evidence.

@@ -14,7 +14,8 @@
         "follow-along",
         "free-poker-learning-path",
         "first-decisions",
-        "starting-hand-decisions"
+        "starting-hand-decisions",
+        "first-flop-decisions"
       ],
       "related_guides": [
         "table-etiquette",
@@ -40,8 +41,8 @@
           "label": "Understand how the situation changes your starting hand"
         },
         {
-          "guide": "holdem-basics",
-          "label": "Follow a hand from the deal to showdown"
+          "guide": "first-flop-decisions",
+          "label": "Read your hand and the action after the flop"
         }
       ],
       "glossary_terms": [],

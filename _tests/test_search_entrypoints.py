@@ -84,8 +84,8 @@ class SearchEntryTests(unittest.TestCase):
     def test_every_article_and_three_subject_hubs_have_a_distinct_preview(self):
         cfg = presentation.load(ROOT, self.pages)
         expected = {p['id'] for p in self.pages if reader_previews.eligible(p)}
-        self.assertEqual(len(expected), 95)
-        self.assertEqual(len(self.cards), 91)
+        self.assertEqual(len(expected), 96)
+        self.assertEqual(len(self.cards), 92)
         self.assertTrue(expected <= set(cfg['pages']))
         self.assertEqual(len({cfg['pages'][key]['src'] for key in expected}), len(expected))
         for key, retained in json.loads((ROOT / '_source/presentation.json').read_text())['pages'].items():
