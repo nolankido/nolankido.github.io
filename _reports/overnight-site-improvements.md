@@ -760,3 +760,65 @@ Next useful work: allow the existing search changes to be recrawled, then use
 actual query/page evidence or reader feedback to select a substantive next
 improvement. Do not add articles, credentials or promotional claims merely to
 increase apparent site size.
+
+PR #63 passed all 501 unit/content checks and all 35 browser suites in run
+38492412754. Two hosted 390/1440-pixel search previews were inspected. The
+reviewed candidate `ada76094ad94886c7f49eaefb454006e808371b7` and merged main
+`d042c29288067e170a07e169310ec94d85af86ba` share tree
+`af9318a385418bc14d31b1b6d00b420a9dda6f5a`. Pages run 38493473212 succeeded;
+published-byte job 115623830028 passed 399/399 targets, including all seven
+changed pages, and emitted the exact merged SHA at 2026-10-14T01:03:05Z. A
+fresh main read matched at 01:03:55Z. This next pass also confirmed that the
+repeated main Site checks run 38493473573 completed successfully. Receipt:
+https://github.com/nolankido/nolankido.github.io/pull/63
+
+## Connect Technology search arrivals to the complete existing hub
+
+Another fresh user request continued work on October 14 UTC, October 13 in
+Hawaii. Current main `d042c29288067e170a07e169310ec94d85af86ba`, repository
+instructions, open pull requests, recent CI/Pages evidence and this record
+were reread. Only stale PR #48 remained open; it was left untouched. No new
+Search Console request or sitemap submission was necessary. Direct live
+reads remain unavailable in this managed session; the existing hosted
+published-byte workflow provides the release check.
+
+The Technology hub's search title and description describe its four-stage
+workflow, but its opening action row had no link to that workflow. Its first
+button went straight to the brief builder, and the checking-guides section
+also lacked an opening jump link. The underlying material and all four
+workflow stages were already present and useful.
+
+The opening row is now one named, native navigation region with four choices,
+in the same order as the page: follow the four-step workflow, try tools and
+inspect a recorded case, choose an everyday task, or read checking guides.
+The existing contact invitation remains immediately below it. This aligns
+arrival choices with the existing search promise and makes the whole hub
+easier to scan without adding another article or tool.
+
+Only `_source/technology/home.html` and its generated Technology page change
+publicly. There is no new CSS, runtime script, dependency, route, storage,
+tracking or hosting behavior. All original article sources, prose, metadata,
+dates, feeds, worksheets and preview images remain exact. The previous
+seven-title release is retained exactly. The complete four-stage path and
+its workbook are unchanged.
+
+An independent baseline captured 198 generated outputs, 343 source/asset/
+download files and the current manifest digest from production Git before
+edits. A frozen two-path adapter reverses only the exact reviewed navigation
+block. Every prior golden hash remains unchanged, and negative controls
+expose changed labels, foreign destinations, unrelated copy or contact links.
+Three focused local tests passed. The existing hosted practical-path suite
+adds 32 keyboard jump-and-continue journeys across four widths, with and
+without JavaScript, plus mobile and desktop opening-navigation previews.
+The complete local and hosted regression gates and final publication receipt
+will be recorded on this pass's pull request after execution.
+
+This is a reader navigation improvement for an existing search entry page.
+No ranking, traffic or indexing gain is claimed. Google's helpful-content
+and page-experience guidance supports making the actual purpose useful and
+understandable; it does not establish a measured search benefit from these
+links:
+https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+
+Next useful work should follow actual reader/search evidence or approved
+firsthand material, rather than expanding the site merely to add pages.

@@ -20,7 +20,7 @@ class Quiet(SimpleHTTPRequestHandler):
 server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)))
 Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port)
-report={'layouts':0,'text_spacing':0,'journeys':0,'previews':0,'downloads':0,'axe':[]}
+report={'layouts':0,'text_spacing':0,'journeys':0,'entry_journeys':0,'previews':0,'downloads':0,'axe':[]}
 errors=[];writes=[]
 try:
     with sync_playwright() as pw:
@@ -33,6 +33,26 @@ try:
             page.on('pageerror',lambda e:errors.append(str(e)))
             for width in [320,390,768,1440]:
                 page.set_viewport_size({'width':width,'height':950})
+                page.goto(base+'/technology/')
+                if scripts and width in [390,1440] and os.environ.get('SCREENSHOT_DIR'):
+                    out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+                    page.evaluate('document.fonts.ready')
+                    page.locator('.topic-introduction').screenshot(path=str(out/f'technology-entry-{width}.png'))
+                for target,heading,next_link in [
+                    ('practical-ai-path','#practical-ai-path-title','.ai-path-steps a[href="/technology/should-i-use-ai/"]'),
+                    ('working-examples','#working-examples','.practical-work-grid a[href="/technology/task-brief/"]'),
+                    ('technology-path','#technology-path','.everyday-task-grid a[href="/living-well/scattered-notes-to-next-step/"]'),
+                    ('technology-reading','#technology-reading-title','#technology-reading a[href="/technology/check-ai-summary/"]'),
+                ]:
+                    page.goto(base+'/technology/')
+                    link=page.locator('.technology-jumps a[href="#'+target+'"]')
+                    link.focus();expect(link).to_be_focused();page.keyboard.press('Enter')
+                    expect(page).to_have_url(base+'/technology/#'+target)
+                    expect(page.locator(heading)).to_be_in_viewport()
+                    page.keyboard.press('Tab')
+                    expect(page.locator(next_link).first).to_be_focused()
+                    expect(page.locator(next_link).first).to_be_in_viewport()
+                    report['entry_journeys']+=1
                 page.goto(base+'/technology/')
                 expect(page.locator('.ai-path-steps li')).to_have_count(4)
                 expect(page.locator('#practical-ai-path-title')).to_have_text('Decide. Brief. Check. Measure.')

@@ -4,6 +4,7 @@ from functools import lru_cache
 from html import escape
 import json
 from pathlib import Path
+from technology_jumps_history import before as before_technology_jumps
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -23,6 +24,7 @@ def pages(records):
 
 
 def before(path, data):
+    data = before_technology_jumps(path, data)
     path = str(path)
     entries = change()['entries']
     entry = next((e for e in entries if path == e['path'].lstrip('/') + 'index.html'), None)
