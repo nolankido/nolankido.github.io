@@ -1069,5 +1069,18 @@
     "date": "2026-10-14",
     "updated": "2026-10-14",
     "poker_guide": true
+  },
+  {
+    "id": "poker-first-flop-decisions",
+    "path": "/poker/first-flop-decisions/",
+    "title": "Your first decisions after the flop.",
+    "seo_title": "Poker After the Flop: Beginner Lessons & Practice | Nolan Kido",
+    "description": "Learn to read made hands and draws, understand checks and bets, and spot changing winners through eight beginner poker exercises with explained answers.",
+    "kicker": "Poker / Beginner lessons",
+    "source": "poker/first-flop-decisions.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
   }
 ]

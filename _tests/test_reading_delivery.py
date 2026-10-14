@@ -101,7 +101,7 @@ class ReadingDeliveryTests(unittest.TestCase):
                 self.assertEqual(html.count('data-copy-page hidden'), 1)
                 self.assertEqual(html.count('data-share-page hidden'), 1)
                 if p.get('note'): self.assertEqual(html.count('Keep or share this essay'), 1)
-        self.assertEqual(count, 94)
+        self.assertEqual(count, 95)
 
     def test_no_runtime_reading_of_private_inputs_or_tracking_in_share_controls(self):
         js = (ROOT / 'assets/page-sharing.js').read_text()

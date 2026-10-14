@@ -1826,6 +1826,26 @@
           339
         ]
       }
+    },
+    "poker-first-flop-decisions": {
+      "path": "/poker/first-flop-decisions/",
+      "title": "Your first decisions after the flop.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-first-flop-decisions.png",
+      "sha256": "9118b1e5e5af43d8810c330ee1234f51bba6a1f2a83d2869368244c82ca2bc21",
+      "layout": {
+        "lines": [
+          "Your first decisions after",
+          "the flop."
+        ],
+        "font_size": 64,
+        "bounds": [
+          93,
+          205,
+          984,
+          351
+        ]
+      }
     }
   }
 }
