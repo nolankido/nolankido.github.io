@@ -7,9 +7,22 @@ from urllib.parse import urlsplit
 import json,os
 from playwright.sync_api import sync_playwright,expect
 from field_guide_browser import QuietHandler,ROOT
-from learning_path_browser import position,SPACING
+from learning_path_browser import SPACING
 ROUTE='/poker/no-limit-holdem-guide/'
 TITLE='No-limit Hold’em: rules, decisions and long-term thinking'
+
+def position(page, locator):
+    # Capture ordinary reading after native disclosure layout and focus scrolling
+    # settle. Keep the same strict sticky-header clearance assertion.
+    page.evaluate('()=>{document.activeElement.blur();return new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))}')
+    metrics=locator.evaluate('''async el=>{
+        const header=document.querySelector('.site-header');
+        window.scrollTo({top:scrollY+el.getBoundingClientRect().top-header.getBoundingClientRect().height-16,behavior:'instant'});
+        await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+        return {top:el.getBoundingClientRect().top,header:header.getBoundingClientRect().bottom};
+    }''')
+    expect(locator).to_be_in_viewport()
+    assert metrics['top']>=metrics['header'],metrics
 
 def main():
     server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=str(ROOT)))
@@ -22,7 +35,7 @@ def main():
         with sync_playwright() as pw:
             opts={'headless':True}
             if os.environ.get('CHROMIUM_PATH'):opts['executable_path']=os.environ['CHROMIUM_PATH']
-            browser=pw.chromium.launch(**opts);context=browser.new_context()
+            browser=pw.chromium.launch(**opts);context=browser.new_context(reduced_motion='reduce')
             context.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
             page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
             for width in [320,390,768,1440]:

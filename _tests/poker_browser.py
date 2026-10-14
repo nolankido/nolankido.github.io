@@ -65,7 +65,8 @@ def run():
                 page.goto(base+'/poker/')
                 feature=page.locator('#featured-work .reader-feature-link')
                 expect(feature).to_have_attribute('href','/poker/stories/test-story/')
-                assert page.locator('#featured-work').bounding_box()['y'] < page.locator('.poker-paths').bounding_box()['y']
+                for paths in page.locator('.poker-paths').all():
+                    assert page.locator('#featured-work').bounding_box()['y'] < paths.bounding_box()['y']
                 feature.focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(base+'/poker/stories/test-story/')
                 expect(page.locator('a[href="https://nolankido.com/poker/reviewing-a-hand/#after-the-session"]')).to_be_visible()
