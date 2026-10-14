@@ -75,7 +75,13 @@ def main():
             for source, selector in [('/poker/first-flop-decisions/', 'main a'),
                                      ('/poker/topics/learn/', 'main a')]:
                 page.goto(origin + source)
+                if source == '/poker/topics/learn/':
+                    group = page.locator('#learn .topic-guides')
+                    expect(group).not_to_have_attribute('open', '')
+                    group.locator('summary').focus(); page.keyboard.press('Enter')
+                    expect(group.locator('ul')).to_be_visible()
                 link = page.locator(selector + '[href="' + ROUTE + '"]').first
+                expect(link).to_be_visible()
                 link.focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(origin + ROUTE)
                 expect(page.locator('h1')).to_be_visible()

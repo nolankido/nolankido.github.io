@@ -1331,3 +1331,18 @@ file had already been rerun separately: all nine tests passed in 3.934
 seconds. No public source, arithmetic or preservation failure was found.
 The complete 545-test hosted gate is still required on the exact corrected
 candidate, alongside every existing and new browser suite.
+
+
+Candidate 6e46b614ff42715fe3b29f1cec7c49f5477db633 passed all 545
+unit/content checks in 166.176 seconds on GitHub run 38520649756. The
+new browser test then exposed a fixture assumption: this new lesson is in
+the Learn topic's collapsed All guides panel, not its three visible first
+steps. The test attempted to focus a hidden link without opening the panel.
+The correction uses the keyboard to open that exact native disclosure,
+asserts its list and destination link are visible, then retains the exact
+arrival assertion. No public file changes. The complete existing gate must
+run on the corrected candidate before merging.
+Six initial mobile/desktop opening, card-example and answer previews were
+inspected. Their layout is clear and the public files remain unchanged by
+the fixture correction. The final candidate still needs its own full gate
+and artifact verification before publication.
