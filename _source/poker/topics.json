@@ -16,7 +16,8 @@
         "first-decisions",
         "starting-hand-decisions",
         "first-flop-decisions",
-        "turn-and-river-decisions"
+        "turn-and-river-decisions",
+        "ranges-for-beginners"
       ],
       "related_guides": [
         "table-etiquette",

@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import ranges_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -14,6 +15,7 @@ def change():
 
 
 def before(path, data):
+    data = ranges_history.before(path, data)
     entry = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
@@ -28,15 +30,18 @@ def before(path, data):
 
 
 def pages(records):
+    records = ranges_history.pages(records)
     c = change()
     return [deepcopy(c['old_page']) if p == c['new_page'] else deepcopy(p) for p in records]
 
 
 def outputs(records):
+    records = ranges_history.outputs(records)
     return {p: before(p, value) for p, value in records.items()}
 
 
 def files(paths):
+    paths = ranges_history.files(paths)
     def original(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
         return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()

@@ -408,6 +408,14 @@
       "topic": "basics",
       "level": "Start here",
       "keywords": "beginner beginners turn river final street missed draw showdown value high card bluff catcher check behind call pot equity share split tie overcard practice"
+    },
+    {
+      "slug": "ranges-for-beginners",
+      "title": "Your first poker range",
+      "description": "Learn poker ranges through six explained exercises: remove impossible cards, compare four hands, and see why a possible bluff is not a measured frequency.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "beginner beginners poker ranges hand reading hidden cards known impossible blockers exact combinations frequency weights bluff catcher evidence practice"
     }
   ]
 }

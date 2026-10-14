@@ -1096,5 +1096,18 @@
     "date": "2026-10-14",
     "updated": "2026-10-14",
     "poker_guide": true
+  },
+  {
+    "id": "poker-ranges-for-beginners",
+    "path": "/poker/ranges-for-beginners/",
+    "title": "Your first poker range.",
+    "seo_title": "Poker Ranges for Beginners: Explained Practice | Nolan Kido",
+    "description": "Learn poker ranges through six explained exercises: remove impossible cards, compare four hands, and see why a possible bluff is not a measured frequency.",
+    "kicker": "Poker / Beginner lessons",
+    "source": "poker/ranges-for-beginners.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
   }
 ]
