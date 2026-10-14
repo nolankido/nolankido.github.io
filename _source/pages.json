@@ -189,7 +189,7 @@
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
-    "updated": "2026-10-08"
+    "updated": "2026-10-14"
   },
   {
     "id": "poker-hand-review",
@@ -233,7 +233,7 @@
     "kicker": "Poker / Start here",
     "source": "poker/start-here.html",
     "date": "2026-10-05",
-    "updated": "2026-10-08"
+    "updated": "2026-10-14"
   },
   {
     "id": "poker-study",
@@ -256,8 +256,9 @@
     "source": "poker/holdem-basics.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-05",
-    "poker_guide": true
+    "updated": "2026-10-14",
+    "poker_guide": true,
+    "revision": "Connected this short viewer guide to the complete beginner Hold’em guide and foundation lessons."
   },
   {
     "id": "poker-hand-rankings",
@@ -1131,6 +1132,19 @@
     "description": "Check six beginner poker skills with explained mistakes, six fresh retry situations, precise lesson links and a private workbook. Share a sticking point if you wish.",
     "kicker": "Poker / Beginner practice",
     "source": "poker/beginner-checkpoint.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-no-limit-holdem-guide",
+    "path": "/poker/no-limit-holdem-guide/",
+    "title": "No-limit Hold’em: rules, decisions and long-term thinking",
+    "seo_title": "No-Limit Texas Hold’em: A Beginner’s Guide | Nolan Kido",
+    "description": "A comprehensive beginner guide to no-limit Texas hold’em: rules, a counted hand, ranges, pot odds, bet purposes, stack depth, tournaments and a practical study route.",
+    "kicker": "Poker / Beginner guide",
+    "source": "poker/no-limit-holdem-guide.html",
     "section": "poker",
     "date": "2026-10-14",
     "updated": "2026-10-14",

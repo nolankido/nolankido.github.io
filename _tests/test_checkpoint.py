@@ -65,7 +65,7 @@ class CheckpointTests(unittest.TestCase):
                                  {k:v for k,v in old.items() if k not in {'description','revision'}})
             else: self.assertEqual(now, old, old['id'])
             path = '_source/' + old['source']
-            self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), self.baseline['files'][path], path)
+            self.assertEqual(sha256(productivity_history.before(path,(ROOT / path).read_bytes())).hexdigest(), self.baseline['files'][path], path)
         restored = history.outputs(self.outputs)
         for path in ['feed.xml','poker/feed.xml','technology/feed.xml','living-well/feed.xml','writing.xml']:
             records = lambda text: {i.findtext('link'): ET.tostring(i, encoding='unicode')
@@ -194,12 +194,12 @@ class CheckpointTests(unittest.TestCase):
             href=a.get('href','')
             if href.startswith('/poker/') and '#' in href:
                 route,anchor=href.split('#');self.assertIn('id="'+anchor+'"',self.outputs[build.output_path(route)],href)
-        targets=check_live.targets();self.assertEqual(len(targets),418)
+        targets=check_live.targets();self.assertEqual(len(targets),420)
         self.assertEqual(targets['/'+checkpoint.SHEET],(200,(ROOT/checkpoint.SHEET).read_bytes()))
-        self.assertEqual(targets[checkpoint.ROUTE],(200,self.text.encode()))
+        self.assertEqual(targets[checkpoint.ROUTE],(200,self.current_outputs[build.output_path(checkpoint.ROUTE)].encode()))
         body=(ROOT/'_source/poker/free-poker-learning-path.html').read_text()
         free=next(p for p in self.pages if p['path']=='/poker/free-poker-learning-path/')
-        entries=poker_library.load(ROOT,self.pages)
+        entries=poker_library.load(ROOT,build.public_pages())
         decorated=checkpoint.decorate(free,poker_beginner_path.decorate(free,body,ROOT),ROOT)
         self.assertEqual(next(e['minutes'] for e in entries if e['route']==free['path']),poker_library.minutes(decorated))
         raw=self.outputs[Path('poker/betting-with-a-purpose/index.html')]

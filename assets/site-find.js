@@ -35,7 +35,21 @@
     if (!baseMatch && !searchTitleMatch && !addressMatch && !matchingSections(record, query).length) return -1;
     return (baseMatch ? 1000 : searchTitleMatch ? 750 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = { normalize, terms, score, matchingSections };
+  function decodeSections(data) {
+    if (!data || data.version !== 2 || !data.pages || typeof data.pages !== 'object' || Array.isArray(data.pages)) return {};
+    const result = Object.create(null);
+    for (const [path, flat] of Object.entries(data.pages)) {
+      if (!/^\/(?:[a-z0-9-]+\/)*$/.test(path) || !Array.isArray(flat) || flat.length % 2) continue;
+      const rows = [];
+      for (let i = 0; i < flat.length; i += 2) {
+        if (typeof flat[i] !== 'string' || !/^[A-Za-z0-9_-]+$/.test(flat[i]) || typeof flat[i + 1] !== 'string' || !flat[i + 1].trim()) continue;
+        rows.push([flat[i], flat[i + 1]]);
+      }
+      result[path] = rows;
+    }
+    return result;
+  }
+  if (typeof module !== 'undefined' && module.exports) module.exports = { normalize, terms, score, matchingSections, decodeSections };
   if (typeof document === 'undefined') return;
   const controls = document.getElementById('find-controls');
   if (!controls) return;
@@ -49,7 +63,7 @@
   try {
     const data = document.getElementById('find-section-data');
     const parsed = data ? JSON.parse(data.textContent) : {};
-    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) sectionIndex = parsed;
+    sectionIndex = decodeSections(parsed);
   } catch (_) { /* The original title and summary search remains available. */ }
   function sectionsFor(node) {
     const path = node.querySelector('h3 a').getAttribute('href');

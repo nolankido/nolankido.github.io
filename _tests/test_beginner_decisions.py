@@ -62,14 +62,15 @@ class BeginnerDecisionsTests(unittest.TestCase):
         self.assertEqual(changed, {'_source/pages.json', '_source/poker/home.html', '_source/poker/free-poker-learning-path.html',
                                    '_source/poker/library.json', '_source/poker/topics.json', '_source/reader-previews.json'})
 
-    def test_old_article_prose_and_metadata_survive_without_a_historical_adapter(self):
-        # These literal removals are independent of the frozen general reversal.
+    def test_old_article_prose_and_metadata_survive_literal_first_lesson_removals(self):
+        # Reverse later reviewed releases first, then independently remove this
+        # release's literal additions without its own frozen general reversal.
         p = '_source/poker/free-poker-learning-path.html'
-        raw = (ROOT / p).read_text()
+        raw = preflop_history.before(p,(ROOT / p).read_text())
         self.assertEqual(raw.count(ASIDE), 1)
         self.assertEqual(sha256(raw.replace(ASIDE, '', 1).encode()).hexdigest(), self.baseline['files'][p])
         p = '_source/poker/home.html'
-        raw = (ROOT / p).read_text()
+        raw = preflop_history.before(p,(ROOT / p).read_text())
         self.assertEqual(raw.count(NEW_CARD), 1)
         self.assertEqual(sha256(raw.replace(NEW_CARD, OLD_CARD, 1).encode()).hexdigest(), self.baseline['files'][p])
         current = {p['id']: p for p in self.pages}
@@ -78,7 +79,7 @@ class BeginnerDecisionsTests(unittest.TestCase):
             if old['source'] in ['poker/home.html', 'poker/free-poker-learning-path.html']:
                 continue
             path = '_source/' + old['source']
-            self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), self.baseline['files'][path], path)
+            self.assertEqual(sha256(preflop_history.before(path,(ROOT / path).read_bytes())).hexdigest(), self.baseline['files'][path], path)
 
     def test_existing_catalog_records_and_feed_items_are_exact(self):
         old = self.baseline['catalogs']
