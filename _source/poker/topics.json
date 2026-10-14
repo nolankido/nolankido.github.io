@@ -12,7 +12,8 @@
         "glossary",
         "viewer-questions",
         "follow-along",
-        "free-poker-learning-path"
+        "free-poker-learning-path",
+        "first-decisions"
       ],
       "related_guides": [
         "table-etiquette",
@@ -27,11 +28,11 @@
         "hand-rankings",
         "pokerology-lessons"
       ],
-      "start_label": "Five free lessons",
+      "start_label": "First decisions",
       "steps": [
         {
-          "guide": "free-poker-learning-path",
-          "label": "Start with a small, free learning path"
+          "guide": "first-decisions",
+          "label": "Practice your first decisions, one question at a time"
         },
         {
           "guide": "holdem-basics",

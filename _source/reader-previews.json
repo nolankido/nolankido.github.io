@@ -1787,6 +1787,25 @@
           352
         ]
       }
+    },
+    "poker-first-decisions": {
+      "path": "/poker/first-decisions/",
+      "title": "Your first poker decisions.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-first-decisions.png",
+      "sha256": "a2e3a2d9063fbad54e6783990e765c226da538e550657f70726c8b19763774c6",
+      "layout": {
+        "lines": [
+          "Your first poker decisions."
+        ],
+        "font_size": 64,
+        "bounds": [
+          93,
+          225,
+          1037,
+          287
+        ]
+      }
     }
   }
 }

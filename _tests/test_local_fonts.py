@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 import copy,json,re,shutil,sys,unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
+import beginner_history
 import build,check_live,font_delivery
 import local_fonts_history as history
 import search_sections_history
@@ -16,11 +17,12 @@ class LocalFontsTests(unittest.TestCase):
         cls.record=json.loads((ROOT/font_delivery.LOCAL_PROVENANCE).read_text())
 
     def test_only_reviewed_head_and_privacy_changes_survive_against_production(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         self.assertEqual(len(self.baseline['outputs']),198)
-        self.assertEqual(set(map(str,self.outputs)),set(self.baseline['outputs']))
-        self.assertEqual(history.pages(self.pages),self.baseline['pages'])
+        self.assertEqual(set(map(str,historical_outputs)),set(self.baseline['outputs']))
+        self.assertEqual(history.pages(beginner_history.pages(self.pages)),self.baseline['pages'])
         unchanged_bodies=0
-        for p,text in self.outputs.items():
+        for p,text in historical_outputs.items():
             restored=history.before(p,text)
             self.assertEqual(sha256(restored.encode()).hexdigest(),self.baseline['outputs'][str(p)],str(p))
             if p.suffix=='.html' and str(p)!='privacy/index.html':
@@ -29,7 +31,7 @@ class LocalFontsTests(unittest.TestCase):
 
     def test_every_original_file_and_the_exact_new_asset_inventory_are_checked(self):
         self.assertEqual(len(self.baseline['files']),316)
-        paths={p.relative_to(ROOT).as_posix() for d in ['_source','assets','downloads'] for p in (ROOT/d).rglob('*') if p.is_file()}
+        paths=beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source','assets','downloads'] for p in (ROOT/d).rglob('*') if p.is_file()})
         self.assertEqual(paths,set(self.baseline['files'])|set(history.change()['new_files']))
         changed=[]
         for p,digest in self.baseline['files'].items():
@@ -70,20 +72,21 @@ class LocalFontsTests(unittest.TestCase):
             self.assertNotIn('fonts.gstatic.com',text);self.assertNotIn('fonts.googleapis.com',text)
         targets=check_live.targets()
         for p in history.change()['new_files']:self.assertEqual(targets['/'+p],(200,(ROOT/p).read_bytes()))
-        self.assertEqual(len(targets),399)
+        self.assertEqual(len(targets),401)
         privacy=self.outputs[Path('privacy/index.html')]
         self.assertIn(history.change()['privacy_new'],privacy)
         self.assertIn('Updated October 13, 2026',privacy)
         self.assertIn('"dateModified": "2026-10-13"',privacy)
 
     def test_history_does_not_hide_other_html_privacy_css_or_metadata_changes(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         for path,old,new in [('about/index.html','<body','<!-- unreviewed --><body'),('privacy/index.html','Umami Cloud','Other Analytics'),('assets/site-fonts.css','font-display: swap','font-display: block')]:
-            changed=self.outputs[Path(path)].replace(old,new,1)
-            self.assertNotEqual(changed,self.outputs[Path(path)])
+            changed=historical_outputs[Path(path)].replace(old,new,1)
+            self.assertNotEqual(changed,historical_outputs[Path(path)])
             self.assertNotEqual(sha256(history.before(path,changed).encode()).hexdigest(),self.baseline['outputs'][path])
-        changed=copy.deepcopy(self.pages);next(p for p in changed if p['id']=='privacy')['description']='Unreviewed'
+        changed=copy.deepcopy(beginner_history.pages(self.pages));next(p for p in changed if p['id']=='privacy')['description']='Unreviewed'
         self.assertNotEqual(history.pages(changed),self.baseline['pages'])
-        self.assertEqual(history.before('unrelated.html',self.outputs[Path('index.html')]),self.outputs[Path('index.html')])
+        self.assertEqual(history.before('unrelated.html',historical_outputs[Path('index.html')]),historical_outputs[Path('index.html')])
 
     def test_browser_font_reference_retains_all_current_page_content(self):
         c=history.change();b=history.baseline();pages=0
@@ -97,7 +100,7 @@ class LocalFontsTests(unittest.TestCase):
             self.assertEqual(reference.split('<body',1)[1],text.split('<body',1)[1])
             self.assertEqual(history.font_reference(path,text.encode()),reference.encode())
             pages+=1
-        self.assertEqual(pages,171)
+        self.assertEqual(pages,172)
         self.assertEqual(history.font_reference('assets/site-fonts.css',font_delivery.local_declarations(ROOT)),font_delivery.declarations(ROOT))
 
 if __name__=='__main__':unittest.main()

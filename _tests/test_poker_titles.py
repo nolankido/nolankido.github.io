@@ -10,6 +10,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build
 import poker_titles_history as history
 import technology_jumps_history
@@ -25,22 +26,23 @@ class PokerTitlesTests(unittest.TestCase):
         cls.baseline = json.loads((ROOT / '_tests/poker-titles-baseline.json').read_text())
 
     def test_seven_search_titles_are_the_only_changes_to_production_content(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         b = self.baseline
-        self.assertEqual(history.pages(self.pages), b['pages'])
+        self.assertEqual(history.pages(beginner_history.pages(self.pages)), b['pages'])
         self.assertEqual((len(b['outputs']), len(b['files']), len(b['bodies'])), (198, 343, 171))
-        self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
+        self.assertEqual(set(map(str, historical_outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():
-            raw = self.outputs[Path(path)]
+            raw = historical_outputs[Path(path)]
             if sha256(raw.encode()).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw).encode()).hexdigest(), expected, path)
         self.assertCountEqual(changed, [e['path'].lstrip('/') + 'index.html' for e in history.change()['entries']])
         # Compare every body directly. This proof does not use any adapter.
         for path, expected in b['bodies'].items():
-            body = re.search(r'<body\b[^>]*>.*?</body>', self.outputs[Path(path)], re.S)[0]
+            body = re.search(r'<body\b[^>]*>.*?</body>', historical_outputs[Path(path)], re.S)[0]
             self.assertEqual(sha256(body.encode()).hexdigest(), expected, path)
-        files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()})
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():
@@ -51,10 +53,11 @@ class PokerTitlesTests(unittest.TestCase):
         self.assertEqual(changed, ['_source/pages.json'])
 
     def test_search_and_sharing_labels_agree_without_renaming_or_redating_articles(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         old = {p['id']: p for p in self.baseline['pages']}
         expected = {e['id']: e for e in history.change()['entries']}
         self.assertEqual(len(expected), 7)
-        for p in self.pages:
+        for p in beginner_history.pages(self.pages):
             if p['id'] not in expected:
                 self.assertEqual(p, old[p['id']])
                 continue
@@ -65,7 +68,7 @@ class PokerTitlesTests(unittest.TestCase):
             self.assertTrue(e['new'].endswith(' | Nolan Kido'))
             self.assertLessEqual(len(e['new']), 65)
             self.assertNotIn('\u2014', e['new'])
-            raw = self.outputs[build.output_path(p['path'])]
+            raw = historical_outputs[build.output_path(p['path'])]
             doc = Page(raw)
             self.assertEqual(unescape(re.search(r'<title>(.*?)</title>', raw)[1]), e['new'])
             meta = {a.get('name', a.get('property')): a.get('content') for a in doc.tags('meta')}
@@ -78,9 +81,10 @@ class PokerTitlesTests(unittest.TestCase):
             self.assertEqual(schema['author']['@id'], 'https://nolankido.com/about/#nolan-kido')
 
     def test_frozen_adapter_exposes_changed_copy_dates_urls_and_unapproved_titles(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         e = history.change()['entries'][1]
         path = e['path'].lstrip('/') + 'index.html'
-        raw = self.outputs[Path(path)]
+        raw = historical_outputs[Path(path)]
         for old, new in [(e['new'], 'Guaranteed winning poker strategy | Nolan Kido'),
                          ('Which hand wins?', 'A fabricated personal result'),
                          ('2026-10-05', '2026-10-14'),
@@ -93,7 +97,7 @@ class PokerTitlesTests(unittest.TestCase):
         changed = raw.replace('</main>', '<p>' + e['new'] + '</p></main>', 1)
         self.assertNotEqual(history.before(path, changed), history.before(path, raw))
         for key, value in [('seo_title', 'An unreviewed label'), ('date', '2026-10-14'), ('title', 'An invented result'), ('path', '/poker/changed/')]:
-            changed = deepcopy(self.pages)
+            changed = deepcopy(beginner_history.pages(self.pages))
             next(p for p in changed if p['id'] == e['id'])[key] = value
             self.assertNotEqual(history.pages(changed), self.baseline['pages'])
         source = (ROOT / '_source/pages.json').read_text()

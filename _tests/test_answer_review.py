@@ -12,6 +12,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build
 import check_live
 import site_find
@@ -46,9 +47,10 @@ class AnswerReviewTests(unittest.TestCase):
         self.assertNotEqual(sha256(body.encode()).hexdigest(), self.baseline['bodies'][path])
 
     def test_historical_feed_entries_keep_every_field_and_each_feed_scope(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         url = 'https://nolankido.com' + history.ROUTE
         for path, original in self.baseline['feeds'].items():
-            items = ET.fromstring(self.outputs[Path(path)]).findall('./channel/item')
+            items = ET.fromstring(historical_outputs[Path(path)]).findall('./channel/item')
             now = {i.findtext('guid'): ET.tostring(i, encoding='unicode') for i in items}
             self.assertEqual({k: v for k, v in now.items() if k != url}, original, path)
             self.assertEqual(sum(i.findtext('guid') == url for i in items), int(path in {'technology/feed.xml', 'writing.xml'}))

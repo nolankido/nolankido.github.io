@@ -965,3 +965,98 @@ uses actual viewport captures and explicitly checks heading clearance for
 each of the six new search arrivals. The complete gate is rerun on that
 exact candidate before publication; a first-candidate pass is not used as
 the final release gate.
+
+PR #66 closure: final candidate 5806816dd4c39c319c9cf59bb0c9996a586b4a35,
+with tree f8293fb03236123605534f492d4f8fe825d744ea, passed all 512 local
+and hosted unit/content checks and all 35 browser suites in run 38507411666.
+The six new keyboard arrivals and history resets passed at 390 and 1440
+pixels. Both viewport previews were inspected. Main merged as
+000477a0684ad1be87615d1b275bdac546fe323d on October 14, 2026. Pages run
+38508171212 succeeded; published-byte job 115670345995 verified 399/399
+targets and that exact merged SHA. Fresh main matched, and the subsequent
+main CI run 38508171447 also completed successfully. Publication receipt:
+https://github.com/nolankido/nolankido.github.io/pull/66
+
+## Beginner poker: practice the decisions before calculating percentages
+
+A new owner request specifically authorized more detailed beginner poker
+content and its publication. Current main, repository instructions, the
+maintenance record, open pull requests and recent deployment results were
+read again. Only stale PR #48 remained open and was left untouched.
+
+The existing rules and rankings references were useful, but the free study
+path moved quickly from a hand walkthrough to pot odds, while the practice
+room opened with calculations and more advanced concepts. A complete
+beginner needed a bridge: recognizing the choices, following the action,
+counting the amount owed and finding the best five cards before studying
+whether a decision was strategically good.
+
+The new /poker/first-decisions/ guide supplies eight short lessons and twelve
+native answer-reveal exercises. It covers card notation and starting-hand
+vulnerabilities, check/call/bet/raise distinctions, positions and heads-up
+order, the big blind's option, current-street call amounts, minimum full
+raises, action returning after a raise, kickers, using one or zero private
+cards, and a complete four-player practice hand. Each answer explains the
+mistake it is intended to catch. The final hand accounts for all 400
+fictional counters and distinguishes the pot won from the winner's net gain.
+
+Every scene is explicitly fictional and can be practiced with a deck or
+counters. No playing account, purchase or wager is needed. It does not
+prescribe a starting-hand range or optimal betting line, imply solver
+analysis, describe Nolan's recorded results or promise profitable play.
+The guide identifies AI assistance and directs readers to the appropriate
+existing next lesson and safer-play support. Rules were checked against
+PokerStars' hold'em and hand-ranking references and the current Poker TDA
+rules on October 14, 2026. A separate read-only content review found no
+remaining blocking rule or clarity issues after corrections.
+
+The Poker homepage's beginner card and Learn topic now open this guide.
+One clearly labeled navigation aside links it from the original free study
+path. Library and search catalogs, the author archive, feeds and sitemap
+include the new article through their existing generators. A new title
+preview uses the established typographic design. No new runtime script,
+tracking, form or third-party dependency was added. Original routes,
+contact behavior, domain settings and hosting remain unchanged.
+
+Preservation evidence starts from main 000477a0684ad1be87615d1b275bdac546fe323d:
+171 manifest records, 198 outputs and 343 source/asset/download files were
+captured and verified against Git objects before editing. The new tests
+retain every old page record and compare all original article source bytes
+independently. The only article-source insertion is the exact navigation
+aside, which is removed literally for comparison; the homepage change is
+one exact beginner card. Original library entries, social preview records
+and every field of all existing feed items remain exact. Only the new Poker
+and combined-feed article entries are added. Existing assets and downloads
+are byte-identical. Frozen full-file digest checks and exact-offset edits
+provide the older tests with their predecessor view; prior golden digests
+were not refreshed. Negative controls expose unreviewed copy or metadata.
+
+Eight new unit/content checks cover inventory, original-content preservation,
+feed identity, all twelve native answers, card names, exhaustive best-five
+comparisons, chip conservation, discovery and tamper detection. The new
+hosted browser suite covers closed and open answers and increased text
+spacing at 320, 390, 768 and 1440 pixels; keyboard operation of every answer;
+six real discovery arrivals; no-JavaScript reading; and accessibility audits.
+The existing complete gate remains required, now with 36 browser suites.
+Exact candidate, executed final gate, inspected previews, Pages deployment
+and published-byte results will be recorded in the pull request receipt.
+
+This is a substantive beginner learning addition, not evidence of improved
+Google rankings or indexing. Next useful work is real beginner feedback on
+which questions remain confusing, then a similarly careful lesson on
+starting-hand decisions with explicitly bounded situations. Avoid presenting
+an unvalidated universal chart or adding repetitive pages just for volume.
+
+The first candidate, acd2cfca92e68c04b6d2e78e27ee5fd06fc218fc, passed all
+520 unit/content checks locally (290.270 seconds) and on GitHub (199.408
+seconds). Build, HTML and technical search checks passed. The Poker browser
+group passed all 48 answer disclosures across four widths, six discovery
+arrivals, no-script operation, and two accessibility audits with no detected
+violations. The two opening previews were inspected. Visual review caught
+a test-capture issue: the answer viewport was recorded before smooth
+scrolling finished. The final candidate waits for fonts, uses an immediate
+capture scroll and asserts that the answer is in the viewport and clear of
+the sticky header. This changes only the test capture, not public content.
+The full gate runs again on that exact candidate before merging; initial
+passes do not substitute for final-candidate verification. Final receipt:
+https://github.com/nolankido/nolankido.github.io/pull/67

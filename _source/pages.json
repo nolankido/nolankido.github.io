@@ -1043,5 +1043,18 @@
     "section": "technology",
     "worked_guide": true,
     "date": "2026-10-12"
+  },
+  {
+    "id": "poker-first-decisions",
+    "path": "/poker/first-decisions/",
+    "title": "Your first poker decisions.",
+    "seo_title": "Poker for Beginners: First Decisions & Practice | Nolan Kido",
+    "description": "Learn to read starting hands, choose legal actions, count calls and compare the best five cards through twelve beginner poker exercises with explained answers.",
+    "kicker": "Poker / Beginner lessons",
+    "source": "poker/first-decisions.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
   }
 ]

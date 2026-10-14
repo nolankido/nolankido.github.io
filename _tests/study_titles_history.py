@@ -5,6 +5,7 @@ from html import escape
 import json
 from pathlib import Path
 from search_public_titles_history import before as before_public_titles
+import beginner_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,7 +16,7 @@ def change():
 
 
 def pages(records):
-    result = deepcopy(records)
+    result = deepcopy(beginner_history.pages(records))
     for page in result:
         for entry in change()['entries']:
             if (page.get('id'), page.get('path'), page.get('seo_title')) == (entry['id'], entry['path'], entry['new']):

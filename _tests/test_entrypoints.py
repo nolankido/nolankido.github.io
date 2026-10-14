@@ -12,6 +12,7 @@ import unittest
 from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build
 import entrypoints
 import check_live
@@ -99,9 +100,9 @@ class EntryPointTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(choice_history.read(path)).hexdigest(), digest, path)
         for directory, digest in preserved['collections'].items():
             actual = hashlib.sha256()
-            for file in sorted((ROOT / directory).rglob('*')):
+            for file in sorted(beginner_history.files([f for f in (ROOT / directory).rglob('*') if f.is_file()])):
                 if file.is_file():
-                    actual.update(file.relative_to(ROOT).as_posix().encode() + b'\0' + file.read_bytes() + b'\0')
+                    actual.update(file.relative_to(ROOT).as_posix().encode() + b'\0' + beginner_history.before(file.relative_to(ROOT), file.read_bytes()) + b'\0')
             self.assertEqual(actual.hexdigest(), digest, directory)
         # The note feeds already include each article's original date and GUID.
         items = ET.fromstring(self.outputs[Path('feed.xml')]).findall('./channel/item')

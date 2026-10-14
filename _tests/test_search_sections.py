@@ -8,6 +8,7 @@ import sys
 import unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
+import beginner_history
 import build,search_sections,site_find
 import search_sections_history as history
 import time_examples_history
@@ -17,21 +18,22 @@ from test_site import Page
 class SearchSectionsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.outputs={p:time_examples_history.before(p,d) for p,d in build.build_outputs().items()};cls.pages=build.public_pages()
+        cls.outputs=build.build_outputs();cls.pages=build.public_pages()
         cls.baseline=json.loads((ROOT/'_tests/search-sections-baseline.json').read_text())
         cls.index=search_sections.index(cls.outputs,cls.pages)
 
     def test_only_search_and_frozen_native_anchor_spacing_change(self):
+        historical_outputs = {p:time_examples_history.before(p,d) for p,d in beginner_history.outputs(self.outputs).items()}
         b=self.baseline
-        self.assertEqual(poker_titles_history.pages(self.pages),b['pages'])
-        self.assertEqual(set(map(str,self.outputs)),set(b['outputs']))
+        self.assertEqual(poker_titles_history.pages(beginner_history.pages(self.pages)),b['pages'])
+        self.assertEqual(set(map(str,historical_outputs)),set(b['outputs']))
         changed=[]
         for p,digest in b['outputs'].items():
-            raw=self.outputs[Path(p)]
+            raw=historical_outputs[Path(p)]
             if sha256(raw.encode()).hexdigest()!=digest:changed.append(p)
             self.assertEqual(sha256(history.before(p,raw).encode()).hexdigest(),digest,p)
         self.assertCountEqual(changed,[p for p in b['outputs'] if p.endswith('.html')]+['assets/site-core.css'])
-        paths={p.relative_to(ROOT).as_posix() for d in ['_source','assets','downloads'] for p in (ROOT/d).rglob('*') if p.is_file()}
+        paths=beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source','assets','downloads'] for p in (ROOT/d).rglob('*') if p.is_file()})
         self.assertEqual(paths,set(b['files']));self.assertEqual(len(paths),343)
         changed=[]
         for p,digest in b['files'].items():
@@ -41,8 +43,8 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
-        self.assertEqual(len(self.index),151)
-        self.assertEqual(sum(map(len,self.index.values())),914)
+        self.assertEqual(len(self.index),152)
+        self.assertEqual(sum(map(len,self.index.values())),926)
         excluded={p['path'] for p in self.pages if p.get('noindex') or p.get('living_well_kind')=='experiment'}
         self.assertFalse(excluded.intersection(self.index))
         self.assertNotIn('/contact/',self.index)
@@ -56,7 +58,10 @@ class SearchSectionsTests(unittest.TestCase):
         payload=re.search(r'<script type="application/json" id="find-section-data">(.*?)</script>',doc,re.S)[1]
         self.assertEqual(json.loads(payload),self.index)
         self.assertLess(len(payload.encode()),60000)
-        self.assertLess(len(doc.encode()),145000)
+        # Preserve this release's original budget after the later reviewed
+        # title metadata and beginner entry are reversed. Current growth has
+        # its own independent bound in test_beginner_decisions.
+        self.assertLess(len(time_examples_history.before(search_sections.PAGE,doc).encode()),145000)
         self.assertIn(['part-5','Keep access and recovery simple'],self.index['/living-well/find-the-document-you-need/'])
 
     def test_only_visible_major_headings_inside_main_are_indexed(self):
