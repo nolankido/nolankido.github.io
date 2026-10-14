@@ -1904,6 +1904,26 @@
           288
         ]
       }
+    },
+    "poker-beginner-checkpoint": {
+      "path": "/poker/beginner-checkpoint/",
+      "title": "Can you explain the next hand?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-beginner-checkpoint.png",
+      "sha256": "64c63bb6e0e14135b0aff118302529407f80e6167d96ad7f3607c82624e3d438",
+      "layout": {
+        "lines": [
+          "Can you explain the next",
+          "hand?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          994,
+          339
+        ]
+      }
     }
   }
 }

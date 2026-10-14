@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
 import betting_history as history
+import checkpoint_history
 from test_viewer_guides import Tags, best
 
 ROUTE = '/poker/betting-with-a-purpose/'
@@ -23,8 +24,9 @@ ROUTE = '/poker/betting-with-a-purpose/'
 class BettingPurposeTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = build.public_pages()
-        cls.outputs = build.build_outputs()
+        cls.pages = checkpoint_history.pages(build.public_pages())
+        cls.current_outputs = build.build_outputs()
+        cls.outputs = checkpoint_history.outputs(cls.current_outputs)
         cls.source = (ROOT / '_source/poker/betting-with-a-purpose.html').read_text()
         cls.baseline = json.loads((ROOT / '_tests/betting-baseline.json').read_text())
 
@@ -38,7 +40,7 @@ class BettingPurposeTests(unittest.TestCase):
         changed = {'_source/pages.json', '_source/poker/library.json', '_source/poker/topics.json',
                    '_source/reader-previews.json', '_scripts/poker_reading.py'}
         for path, digest in b['files'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = checkpoint_history.before(path, (ROOT / path).read_bytes())
             if path not in changed:
                 self.assertEqual(sha256(raw).hexdigest(), digest, path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), digest, path)
@@ -139,7 +141,7 @@ class BettingPurposeTests(unittest.TestCase):
         for path in ['poker/ranges-for-beginners/index.html', 'poker/topics/learn/index.html',
                      'poker/library/index.html', 'poker/find/index.html', 'find/index.html', 'notes/index.html', 'sitemap.xml']:
             self.assertIn(ROUTE, self.outputs[Path(path)], path)
-        self.assertEqual(check_live.targets()[ROUTE], (200, self.outputs[build.output_path(ROUTE)].encode()))
+        self.assertEqual(check_live.targets()[ROUTE], (200, self.current_outputs[build.output_path(ROUTE)].encode()))
 
     def test_history_keeps_unreviewed_claims_visible_in_a_fresh_process(self):
         path = '_source/pages.json'

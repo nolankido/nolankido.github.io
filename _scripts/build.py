@@ -17,6 +17,7 @@ from poker_navigation import section_navigation, clean_body
 import poker_content
 import poker_library
 import poker_beginner_path
+import poker_checkpoint
 import poker_reading
 import poker_experience
 import poker_resources
@@ -192,6 +193,7 @@ def build_outputs() -> dict[Path, str]:
         if p['path'].startswith('/poker/'):
             body = clean_body(body)
         body = poker_beginner_path.decorate(p, body, ROOT)
+        body = poker_checkpoint.decorate(p, body, ROOT)
         body = author_archive.body(p, body, pages)
         body = practical_path.body(p, body, pages, ROOT)
         nav = identity.navigation(identity_config, p)

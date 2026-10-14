@@ -1608,3 +1608,44 @@ the previous range guide's nine tests also passed. Build reproduction, HTML5
 and search audits pass at 177 pages and 96 articles. Full regression tests,
 the hosted candidate browser gate and publication receipts follow in the PR.
 No learner, ranking, traffic or profitability outcome is inferred.
+
+
+## October 14, 2026: beginner understanding, repair and retry
+
+PR #73 is published at main 7d8bf3fddc63fe1cc1fd5f1751fcda93823527e5,
+with tree 119f8a48c3d0abf77d6bad9bc2a30963203dd047 matching the reviewed
+candidate. Its 571 tests, 42 browser suites, six inspected previews, Pages
+38628171058 and all 413 published-byte targets passed. The exact main marker
+was emitted at 19:59:26 UTC. Receipt: PR #73.
+
+The owner then asked to improve quality and content around actual beginner
+understanding. No matching reader feedback was found in a narrow connected
+inbox search; no actual participant or outcome is invented. The new
+/poker/beginner-checkpoint/ supplies six fresh main situations and six retries,
+with reasons each wrong choice fails, precise repair links, private certainty
+notes and a blank workbook whose complete preview comes from the file itself.
+The site tests correctness and delivery; real comprehension still needs willing
+readers' explanations and observations.
+
+All six existing lessons gain a native checkpoint invitation. The free study
+path connects the foundation lessons to ranges, betting purpose and the new
+checkpoint. Original foundation source, article prose, four-lesson menus,
+worksheets and five-session plan remain exact. Only the learning path's
+description and revision record change among old page records, with its
+original date and URL preserved. Existing feeds retain their identities; the
+learning path's description is updated rather than published again.
+
+The optional feedback template points to the existing contact form and states
+its name/email requirements. Contact code, endpoint, anti-spam behavior, privacy
+text and tracking remain exact. Quiz answers are not automatically collected.
+The report _reports/beginner-understanding-20261014.md includes the reasoning,
+independent checks and a concrete manual observation protocol for real readers.
+
+Ten new tests check answer explanations, fresh retry pairs, legal cards,
+hand strength, current-round accounting, two call thresholds, two-hand betting
+comparison, exact workbook prompts/preview, real repair fragments, old source
+and feed identity, six lesson invitations and privacy boundaries. All 116 tests
+in the affected modules passed after fixture corrections. Build reproduction,
+HTML5 and search audits pass at 178 pages, 97 articles and 173 sitemap URLs.
+The full exact-candidate gate, hosted previews and publication receipt follow
+in the PR. No learner success rate, profitable play or search gain is claimed.

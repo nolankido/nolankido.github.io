@@ -45,6 +45,8 @@ class PokerLibraryTests(unittest.TestCase):
         malformed=deepcopy(original);malformed['entries'][0]['keywords']=[];variants.append(malformed)
         with TemporaryDirectory() as d:
             root=Path(d);shutil.copytree(ROOT/'_source',root/'_source')
+            (root/'downloads').mkdir()
+            shutil.copyfile(ROOT/'downloads/poker-beginner-checkpoint.txt',root/'downloads/poker-beginner-checkpoint.txt')
             for data in variants:
                 (root/'_source/poker/library.json').write_text(json.dumps(data))
                 with self.assertRaises(ValueError): library.load(root,self.pages)

@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
 import poker_beginner_path as path
+import poker_checkpoint
 import poker_library
 import learning_path_history as history
 import ranges_history
@@ -147,19 +148,19 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(worksheet.count(b'[ ]'), 4)
         for slug, _ in path.LESSONS: self.assertIn(('https://nolankido.com/poker/' + slug + '/').encode(), worksheet)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 413)
+        self.assertEqual(len(targets), 416)
         self.assertEqual(targets[path.DOWNLOAD], (200, worksheet))
         self.assertEqual(targets['/' + path.CSS], (200, (ROOT / path.CSS).read_bytes()))
         for p in self.pages:
             self.assertEqual('/' + path.CSS + '?v=' in self.outputs[build.output_path(p['path'])], p['path'] in ['/poker/' + slug + '/' for slug, _ in path.LESSONS])
         text = self.outputs[build.output_path(ROUTE)]
-        self.assertEqual(targets[ROUTE], (200, text.encode()))
+        self.assertEqual(targets[ROUTE], (200, self.current_outputs[build.output_path(ROUTE)].encode()))
         self.assertIn(path.PATH, self.outputs[Path('poker/topics/learn/index.html')])
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', text, re.S)[1])
         self.assertEqual((schema['datePublished'], schema['dateModified']), ('2026-10-08', '2026-10-14'))
         entries = poker_library.load(ROOT, build.public_pages())
         entry = next(e for e in entries if e['route'] == ROUTE)
-        self.assertEqual(entry['minutes'], poker_library.minutes(path.decorate(self.page, (ROOT / SOURCE).read_text(), ROOT)))
+        self.assertEqual(entry['minutes'], poker_library.minutes(poker_checkpoint.decorate(self.page, path.decorate(self.page, (ROOT / SOURCE).read_text(), ROOT), ROOT)))
         self.assertIn('beginner-practice-heading', self.outputs[Path('find/index.html')])
         payload = re.search(r'id="find-section-data">(.*?)</script>', self.outputs[Path('find/index.html')], re.S)[1]
         self.assertLess(len(payload.encode()), 60_000)
