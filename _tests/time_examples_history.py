@@ -4,6 +4,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+from search_addresses_history import before as before_search_addresses
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = 'assets/workflow-time.js'
@@ -16,6 +17,7 @@ def change():
 
 
 def before(path, data):
+    data = before_search_addresses(path, data)
     path = str(path)
     if path not in {SCRIPT, PAGE}:
         return data
