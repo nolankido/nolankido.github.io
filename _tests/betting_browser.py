@@ -44,7 +44,13 @@ def main():
                     card_case = page.locator('[data-example="value"]')
                     card_case.evaluate("el=>{const h=document.querySelector('.site-header').getBoundingClientRect().height;window.scrollTo({top:scrollY+el.getBoundingClientRect().top-h-16,behavior:'instant'});}")
                     assert card_case.evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
-                    expect(card_case).to_be_in_viewport(ratio=1)
+                    # The teaching prose can continue below a mobile fold.
+                    # Every displayed card must fit fully in this actual view.
+                    cards = card_case.locator('[role="img"]')
+                    expect(cards).to_have_count(7)
+                    for card in cards.all():
+                        expect(card).to_be_in_viewport(ratio=1)
+                        assert card.evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
                     page.screenshot(path=str(shots / f'betting-cards-{width}.png'))
                 for q in page.locator('details.viewer-question').all():
                     summary = q.locator('summary')
