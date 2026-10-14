@@ -1,0 +1,827 @@
+{
+  "page": {
+    "id": "living-well-ai-and-personal-productivity",
+    "path": "/living-well/ai-and-personal-productivity/",
+    "title": "AI and personal productivity: what actually helps",
+    "seo_title": "AI and personal productivity: what actually helps | Nolan Kido",
+    "description": "Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.",
+    "kicker": "Living Well / Essay",
+    "source": "living-well/page.html",
+    "section": "living-well",
+    "living_well_entry": "ai-and-personal-productivity",
+    "living_well_kind": "essay",
+    "date": "2026-10-14"
+  },
+  "entry": {
+    "slug": "ai-and-personal-productivity",
+    "title": "AI and personal productivity: what actually helps",
+    "description": "Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.",
+    "topic": "everyday-ai",
+    "kind": "essay",
+    "published": "2026-10-14",
+    "lead": "A fast answer is useful only if it helps you finish something worth doing. For ordinary life, the test is the whole job: preparing, checking, correcting and using the result, plus what the change makes possible away from the screen.",
+    "sections": [
+      {
+        "heading": "Count the whole job",
+        "paragraphs": [
+          "A household can contain plenty of work that never looks like a project: replying to a school message, finding an appliance manual, arranging a repair, deciding what to cook, or remembering which appointment still needs confirmation. These tasks compete with paid work, care, rest and the things you would rather be doing. An AI assistant may help with a particular step. It does not automatically make the surrounding responsibility disappear.",
+          "Start by naming a finish you can recognize. A request is ready to send after its facts and recipient are checked. A household plan is useful when the people affected can understand it and agree on their responsibilities. Dinner planning is finished when there is a feasible choice, not when a chatbot has produced an impressive menu. Counting generated words or completed prompts tells you little about any of those outcomes.",
+          "The relevant comparison is with your current workable method. That might be a short phone call, a saved email, a paper list, a calculator or a familiar recipe. AI can be worthwhile even without saving minutes if it makes a task more accessible or easier to begin. But call that benefit what it is. Reduced frustration, a clearer explanation and measured time savings are different observations.",
+          "Count setup, deciding what to share, preparing the input, waiting, reading, checking, fixing, transferring the result and maintaining the arrangement. Also count work moved to someone else. A household dashboard that needs another person to learn your tagging system can reduce your burden while increasing theirs. Ask how the arrangement works for them rather than treating your convenience as the whole result.",
+          "Then protect the purpose. If drafting a neighborhood notice becomes easier, that need not mean publishing twice as often. An efficient system can fill the time it seemed to release. Decide whether you wanted a finished task, more output, a calmer evening or space for something unrelated to productivity. The companion essay <a href=\"/living-well/time-you-save/\">What is the time you save actually for?</a> develops this question without requiring you to make rest another target.",
+          "This is a researched editorial guide, adapted from a Gemini Deep Research draft supplied for this website. Its prompts and time examples are proposed or fictional. They are not reports of Nolan’s household, results from testing a particular chatbot, or proof that these workflows will improve your life."
+        ]
+      },
+      {
+        "heading": "What research shows",
+        "paragraphs": [
+          "Research gives good reasons to try selected tasks and good reasons to check the result. It does not supply a reliable percentage by which an American household should expect to become more productive. Study participants, models, tasks and definitions of quality differ. Results from a particular writing exercise cannot simply be applied to cooking, caregiving or dealing with an insurer.",
+          "In a <a href=\"https://pubmed.ncbi.nlm.nih.gov/37440646/\">2023 randomized study by Shakked Noy and Whitney Zhang</a>, 453 college-educated professionals completed writing tasks related to their occupations. ChatGPT access reduced average task time by 40% and improved assessed output quality by 18%. That is evidence of benefit in those assignments, not a promise of comparable savings across a person’s week. The research also found that performance gaps narrowed; it does not establish that every expert gets little value from AI.",
+          "<a href=\"https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf\">Dell’Acqua and colleagues’ consultant experiment</a> shows why task selection matters. Their 2026 paper reports an experiment with 758 consultants using GPT-4 in 2023. On a set of suitable tasks, AI users completed work 25.1% faster on average and produced higher-quality solutions. On a selected task the model handled poorly, AI users were about <strong>19 percentage points</strong> less likely to reach a correct solution. This contrast concerns the tested tasks and model, not a permanent boundary between all creative and analytical work.",
+          "Evidence about thinking needs equally careful language. <a href=\"https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/\">Lee and colleagues’ 2025 survey</a> collected 936 examples from 319 knowledge workers. Greater confidence in AI was associated with less reported critical thinking. The study concerns people’s reports and associations; it is not a randomized demonstration that AI caused permanent loss of thinking ability.",
+          "A <a href=\"https://arxiv.org/abs/2604.04721v5\">2026 preprint by Grace Liu and colleagues</a>, revised October 3, reports randomized task experiments with 1,222 participants. Its abstract describes reduced persistence and worse unassisted performance after brief AI use in tasks including mathematical reasoning and reading comprehension. That deserves attention when learning is the goal. It does not establish permanent cognitive deterioration from ten minutes of ordinary household use. The abstract was reviewed for this article; the experiments were not independently reproduced here.",
+          "The practical inference is modest: match assistance to the job, inspect the output and preserve the parts you want to learn. For a difficult passage, ask for a hint or explanation and then try to explain it yourself. For a routine draft, let the tool offer a starting version and edit it. These are suggested ways to use the evidence, not workflows that the studies above validated. See <a href=\"/living-well/learning-with-ai-without-skipping-understanding/\">learning with AI without skipping understanding</a> for a worked distinction between receiving an answer and being able to use an idea."
+        ]
+      },
+      {
+        "heading": "Eight everyday uses",
+        "paragraphs": [
+          "Choose one task you already face. The eight possibilities below are a menu, not a ranking or a program to complete. Each prompt uses fictional or minimal information, keeps missing facts visible and leaves the final action with you. Adapt the wording to your circumstances; a more elaborate prompt is not automatically a better one.",
+          "Go straight to <a href=\"#use-paperwork\">paperwork</a>, <a href=\"#use-messages\">messages</a>, <a href=\"#use-meals\">meals</a>, <a href=\"#use-week\">the week</a>, <a href=\"#use-call\">a service call</a>, <a href=\"#use-manual\">a manual</a>, <a href=\"#use-application\">an application</a> or <a href=\"#use-notes\">rough notes</a>."
+        ],
+        "subsections": [
+          {
+            "id": "use-paperwork",
+            "heading": "1. Understand one piece of paperwork",
+            "paragraphs": [
+              "Use this when the obstacle is understanding what a document says, rather than making a medical, legal or financial decision. A non-sensitive excerpt can be enough. Remove identifiers, account numbers and unnecessary details about other people. If sharing the passage is inappropriate, ask its issuer to explain it instead.",
+              "<strong>Example prompt:</strong> <em>Explain this fictional insurance statement in plain language. List the amounts and their labels exactly as written. Separate what the excerpt states from what is missing. Point to the sentence supporting each explanation. Do not decide what I must pay, whether coverage is correct or what my rights are.</em>",
+              "Check each extracted amount, date and qualification against the original. An <a href=\"https://www.cms.gov/initiatives/your-patient-rights/medical-bill-rights/get-help/guides-resources/read-explanation-benefits\">Explanation of Benefits is not a bill</a>; CMS explains the distinction. A generated summary cannot establish an appeal deadline or payment obligation that the source does not settle. Keep questions for the insurer or provider separate from verified facts.",
+              "A useful finish is a short, accurate list of questions for the responsible organization. No particular reduction in waiting time is promised. For a statement with an obvious total and due date, reading it directly is simpler. If locating the original is the real problem, start with <a href=\"/living-well/find-the-document-you-need/\">finding the document you need</a>."
+            ]
+          },
+          {
+            "id": "use-messages",
+            "heading": "2. Draft a request you can stand behind",
+            "paragraphs": [
+              "A blank page can make an ordinary request feel larger than it is. Supply the outcome you want, verified dates, the necessary context and the tone you would use yourself. You can replace names with roles and omit account details until you are in the appropriate communication channel.",
+              "<strong>Example prompt:</strong> <em>Draft a polite follow-up under 100 words. I sent the requested information last week and have not received an update. Ask whether anything else is needed and when I can expect the next step. Do not invent a deadline, threaten cancellation, admit fault or add facts.</em>",
+              "Read the draft aloud. Check dates, claims, promises and the recipient before sending. A chatbot’s polished wording is not a reason to add an ultimatum you have not chosen or a contractual position you do not understand. The job is complete when a message you can stand behind reaches the intended person through the correct channel.",
+              "If two sentences in your own words would do, write them. A saved template can be faster on later occasions. For a larger factual draft, the Technology section’s <a href=\"/technology/task-brief/\">task-brief worksheet</a> helps separate the requested output from information the tool must not invent."
+            ]
+          },
+          {
+            "id": "use-meals",
+            "heading": "3. Choose a feasible meal",
+            "paragraphs": [
+              "AI can suggest combinations when a short list of ingredients leaves you undecided. Give available ingredients, equipment, time and any dietary constraints you want to disclose. Ask for a small choice rather than a week of recipes that creates a second shopping project.",
+              "<strong>Example prompt:</strong> <em>I have canned beans, rice, carrots, spinach and basic seasonings. Suggest two simple dinners using these ingredients and a stovetop. Say what preparation each requires. Do not assume extra groceries or promise that everything fits a time limit you cannot justify.</em>",
+              "Check allergens, portion needs, storage history and cooking instructions yourself. A plausible recipe cannot establish whether a particular leftover is safe. Use <a href=\"https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety\">USDA guidance for leftovers</a> rather than a chatbot’s reassurance. When cooking instructions need a safe internal temperature, consult the <a href=\"https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart\">official temperature chart</a> and a food thermometer.",
+              "Judge the workflow by whether you selected something feasible without unnecessary shopping, wasted ingredients or a long exchange. Those are things to observe, not promised outcomes. A meal you already know may be the best answer. The <a href=\"/living-well/household-friction/\">household-friction guide</a> also asks whether the recurring difficulty needs a simpler arrangement rather than another tool."
+            ]
+          },
+          {
+            "id": "use-week",
+            "heading": "4. Make a crowded week more realistic",
+            "paragraphs": [
+              "A chatbot can help sort a list and propose arrangements, but it should not turn uncertain dates into appointments. Give only the commitments needed for the exercise, mark what is confirmed and include travel, care responsibilities and room for interruptions. Use generic labels where detail adds no planning value.",
+              "<strong>Example prompt:</strong> <em>Sort this task list into confirmed commitments, flexible work and items needing clarification. Identify conflicts and ask about missing constraints. Suggest a smaller plan with unscheduled room. Do not invent dates, assign another person a job or change my calendar.</em>",
+              "Compare the draft with the actual calendar and original messages. Check travel time and the agreement of anyone who shares a task. Do not ask an assistant to reconcile a real work conflict by silently assuming a commitment can be skipped. Confirm the change with whoever is responsible.",
+              "A usable plan should make the next action clearer and reduce commitments when necessary. It need not fill every hour. The <a href=\"/living-well/weekly-reset/\">weekly reset</a> provides a paper-first version, while <a href=\"/living-well/shared-plan-people-can-use/\">a shared plan people can use</a> focuses on access and agreement. For a predictable week, an ordinary calendar may already solve the problem."
+            ]
+          },
+          {
+            "id": "use-call",
+            "heading": "5. Prepare for a service conversation",
+            "paragraphs": [
+              "Use rehearsal when you know what you want to ask but find it hard to begin. Describe the goal and facts you can verify, without disclosing an account number or private correspondence. The tool can propose questions or role-play a response; it cannot know what this particular representative will offer.",
+              "<strong>Example prompt:</strong> <em>I want to ask my internet provider about a lower-cost plan. Help me make a short call checklist: current service needs, available options, full monthly cost, any promotional end date and any change or cancellation fees. Then rehearse two possible responses. Do not invent offers or claim I qualify.</em>",
+              "Use the provider’s actual terms and official contact channel to check an offer. Write down what was agreed, the relevant dates and the final cost before changing a service. Rehearsal can help you ask clearly even if the provider makes no concession; a discount is not a required or guaranteed result.",
+              "A useful finish might be a clear answer, a next contact or an accurate record of the unresolved issue. If a short question in the provider’s help page answers it, stop there. For a sensitive disagreement with someone close to you, a real conversation that leaves room to listen deserves more than a simulated script."
+            ]
+          },
+          {
+            "id": "use-manual",
+            "heading": "6. Find the right maintenance instructions",
+            "paragraphs": [
+              "For an unfamiliar appliance, the first job may be locating the correct manual and recognizing its terms. The exact model and an ordinary symptom can help an assistant suggest what to look for. Keep the manufacturer’s instructions available; a generated troubleshooting sequence is not an authority on your equipment.",
+              "<strong>Example prompt:</strong> <em>I have the manufacturer’s manual for this exact model. In this excerpt, identify the routine cleaning or user-maintenance section, explain unfamiliar terms and list what the text does not tell me. Do not invent a repair, disassembly step or substitute safety instruction.</em>",
+              "Compare the model, diagrams and wording with the original. Follow its stated boundaries for user maintenance. If a task involves hazardous electricity, gas, a damaged device or instructions you cannot safely interpret, contact the manufacturer or qualified help. Asking a chatbot to put “safety first” does not make an improvised procedure safe.",
+              "The finish is finding understandable, applicable instructions, or recognizing that help is needed. Saving a professional visit is not a promise or the standard of success. A clear manufacturer checklist is often faster than an AI exchange. The document-finding guide can help you keep that original readable and accessible for next time."
+            ]
+          },
+          {
+            "id": "use-application",
+            "heading": "7. Make an application clearer",
+            "paragraphs": [
+              "An assistant can compare a job description with experience you have actually supplied. Use a limited excerpt of your resume with contact details removed, and check your employer’s rules before sharing work material. The aim is faithful explanation, not manufacturing a more impressive applicant.",
+              "<strong>Example prompt:</strong> <em>Compare these two truthful experience bullets with the supplied role description. Suggest clearer wording and identify requirements my evidence does not establish. Preserve dates, qualifications and scope. Ask before adding numbers, responsibility or skills. Show the original beside the revision.</em>",
+              "Check every verb and implication. “Supported” and “led” can describe very different responsibilities. A tool may improve clarity, but it cannot promise to bypass a screening system, obtain an interview or make missing experience real. Keep an editable copy whose claims you can explain in a conversation.",
+              "A useful outcome is a checked application with less avoidable editing or a clearer account of your experience. Track that actual effort rather than assuming a productivity multiplier. For a short personal introduction, writing directly may preserve your voice with less work. The Technology section’s <a href=\"/technology/check-ai-answers/\">answer-checking guide</a> offers a reusable way to separate supported claims from plausible additions."
+            ]
+          },
+          {
+            "id": "use-notes",
+            "heading": "8. Turn rough notes into a next step",
+            "paragraphs": [
+              "A messy note can be a good candidate because the information already exists and the desired transformation is small. Supply only the part you have permission to share. Avoid another person’s private story or a full meeting transcript when a few de-identified lines are enough.",
+              "<strong>Example prompt:</strong> <em>Organize these rough notes into confirmed decisions, suggestions, unanswered questions and possible next actions. Preserve uncertainty. Do not assign an owner or deadline unless the notes explicitly state it. List any conflicts or unclear references separately.</em>",
+              "Check the organized version against the note line by line. “Maybe Friday” must not become “due Friday”; a possible volunteer must not become an assigned owner. If there is an important ambiguity, ask the person involved instead of inviting the tool to fill the gap. Save the corrected list where you will actually use it.",
+              "The finish is one clear next action and an honest list of what still needs checking. The <a href=\"/living-well/scattered-notes-to-next-step/\">worked notes-to-next-step guide</a> gives a more detailed example and blank worksheet. For a note containing three clear items, rewriting it yourself is probably the shorter route."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Privacy and control",
+        "paragraphs": [
+          "Begin with the tool you already have access to and a task that fits its available features. If a free option is sufficient, there is no reason to subscribe for this experiment. If a limit prevents useful work, compare the actual feature needed, its price and the effort it would remove. A paid plan does not by itself settle privacy, correctness or whether a workflow is worthwhile.",
+          "Treat giving information to a service as a disclosure to that service, not automatically as posting it publicly. Those are different things. Still, do not provide passwords, account identifiers, confidential work, private correspondence or unnecessary information about other people. Removing a name may not make a distinctive story anonymous. A fictional passage or a smaller excerpt is often enough to learn the method.",
+          "Check the service’s current official policy for the account you use. Training permission, saved history, retention, human safety review, personalization and connected services are separate questions. OpenAI’s <a href=\"https://help.openai.com/en/articles/7730893-data-controls-faq\">data-controls guidance</a> explains that disabling model improvement does not delete saved chats. Anthropic’s <a href=\"https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training\">consumer training policy</a> describes user choice and exceptions. Google’s <a href=\"https://support.google.com/gemini/answer/13594961?hl=en\">Gemini Privacy Hub</a> distinguishes activity settings, temporary chats and retention. There is no single thirty-day rule covering every consumer conversation. These links were checked October 14, 2026; consult the current version before sharing sensitive material.",
+          "For the output, ask what you can actually verify. Inspect amounts with a calculator or spreadsheet, dates against their original source, statements against the document and instructions against the responsible authority. A second polished AI answer is not independent confirmation. If checking takes longer than doing the task directly, use the direct method. More detailed prompting cannot guarantee a truthful or complete response.",
+          "Connected assistants can sometimes send messages, modify files or change a calendar. A draft saying that something is arranged does not prove it happened. Check the account, recipient, action and completion status before relying on it. Grant only the access the task needs and review consequential changes. Preserve a plain copy of the checked result when you need it outside the tool.",
+          "Keep learning and care in view too. If understanding is the aim, attempt part of the work yourself, ask for a hint and explain the result without copying. If an assistive tool supports your access or independence, continued use is not a failure. For relationships, logistics and wording can be supported while listening and deciding what you mean remain human responsibilities. <a href=\"/living-well/what-to-decide-yourself/\">What to decide yourself</a> explores that boundary without reducing it to a ban on useful help."
+        ]
+      },
+      {
+        "heading": "A fair comparison",
+        "paragraphs": [
+          "Try one recurring, low-stakes job over a few ordinary occasions. Write down the task, what counts as finished and the simplest method you would otherwise use. A two-week note can be convenient, but two different weeks are not a controlled experiment: the tasks, interruptions, workload and your familiarity may change. Alternate comparable occasions when practical and record those differences rather than hiding them.",
+          "For both methods, include preparation, doing the task, checking, correcting and putting the result into use. The non-AI baseline does not have zero checking time by definition. If you normally review an email before sending it, that review belongs in the baseline. If AI requires redaction or reformatting first, that belongs in the assisted method. Note one-time setup separately and include it in the total for the observed uses.",
+          "<strong>Fictional example, not measured savings:</strong> Three comparable uses of an earlier method take 18, 20 and 16 minutes, including their normal checking and edits: 54 minutes altogether. An assisted method needs 12 minutes of initial setup, then 9, 11 and 10 minutes for the three uses, including input preparation, waiting, checking, corrections and transfer: 12 + 9 + 11 + 10 = 42 minutes. The illustrative difference is 54 - 42 = 12 minutes over those uses. It is not a forecast for any product or household.",
+          "The output must still meet the same completion standard. If the quicker version omits an important fact or creates more work for someone else, its speed does not settle the comparison. Record mistakes, uncertainty, access problems, cost and any help another person supplied. A smaller task, a familiar second attempt or fewer interruptions could explain a difference that otherwise looks like an AI benefit.",
+          "Keep time and experience on separate lines. Did the whole task take less time? Did it feel easier to begin? Was the result more useful? Was the checking tiring? You may value a calmer process that takes the same time, but that is an observed preference rather than measured time savings. A private rating can help you describe the experience; it is not a clinical measure or proof of a general effect.",
+          "Finish with keep, simplify, stop or still unsure. You need not finish a fortnight to stop an arrangement that creates trouble. If it helps, keep the smallest version that works. If it does not, returning to a paper list or saved template is a successful decision. Use <a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a> and its <a href=\"/living-well/worksheets/#everyday-task-sheets\">blank private worksheet</a> for a fuller record. No answers are collected by this article.",
+          "If a calculation helps, use the Technology section’s <a href=\"/technology/ai-time-savings/\">AI time-savings calculator</a>. Enter your own observations, include review in both methods, and treat its result as arithmetic under your assumptions.",
+          "The useful question remains what becomes possible outside the interface: a sent message, a found document, less repeated administration, more accessible information or an evening you can leave unplanned. These outcomes are worth noticing in ordinary terms. They do not need to become a dashboard, a streak or a promise that every difficult part of life can be automated."
+        ]
+      }
+    ],
+    "question": "Which recurring job would you try to make easier, and what would count as a useful result after checking the whole process?",
+    "related": [
+      "did-the-tool-actually-help",
+      "time-you-save"
+    ],
+    "sources": [
+      {
+        "label": "Noy and Zhang: experimental evidence on AI and writing productivity",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37440646/",
+        "note": "Peer-reviewed 2023 study. Published abstract checked for the sample, time and quality results; household workflows here were not tested by it.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "Dell’Acqua and colleagues: Navigating the Jagged Technological Frontier (PDF)",
+        "url": "https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf",
+        "note": "2026 paper describing the 2023 consultant experiment. Methods, abstract and correctness discussion checked; the 19-point contrast is task-specific.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "Lee and colleagues: generative AI and critical thinking",
+        "url": "https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/",
+        "note": "2025 research summary and abstract. Self-reported experience and associations are distinct from experimentally measured skill loss.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "Liu and colleagues: AI assistance, persistence and independent performance",
+        "url": "https://arxiv.org/abs/2604.04721v5",
+        "note": "2026 preprint, version 5. Abstract and submission status reviewed; no independent replication or claim of lasting household effects.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "CMS: reading an Explanation of Benefits",
+        "url": "https://www.cms.gov/initiatives/your-patient-rights/medical-bill-rights/get-help/guides-resources/read-explanation-benefits",
+        "note": "Official document guidance supports the EOB-versus-bill distinction, not a determination about a reader’s coverage or payment.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "USDA: leftovers and food safety",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety",
+        "note": "Official food-handling guidance. The menu prompt cannot assess the safety of a particular ingredient.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "USDA: safe minimum internal temperatures",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+        "note": "Official reference for temperature checks, not validation of AI-generated cooking instructions.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "OpenAI: data controls in ChatGPT",
+        "url": "https://help.openai.com/en/articles/7730893-data-controls-faq",
+        "note": "Official account-control guidance. Training permission and stored history are separate.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "Anthropic: consumer data and model training",
+        "url": "https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training",
+        "note": "Official consumer policy, including user choice and exceptions. Other account types have different terms.",
+        "checked": "2026-10-14"
+      },
+      {
+        "label": "Google: Gemini Apps Privacy Hub",
+        "url": "https://support.google.com/gemini/answer/13594961?hl=en",
+        "note": "Official guidance distinguishes activity settings, temporary chats, review and retention. Policies and features can change.",
+        "checked": "2026-10-14"
+      }
+    ]
+  },
+  "pages": {
+    "living-well-technology-for-real-life": {
+      "old": {
+        "id": "living-well-technology-for-real-life",
+        "path": "/living-well/technology-for-real-life/",
+        "title": "Technology for real life",
+        "seo_title": "Everyday AI Workflows: Notes, Plans & Documents | Nolan Kido",
+        "description": "Choose an everyday task, compare a simple method with optional AI, and use a free worksheet. Seven worked guides for notes, plans, documents, and more.",
+        "kicker": "Living Well / Practical starting point",
+        "source": "living-well/page.html",
+        "section": "living-well",
+        "living_well_entry": "technology-for-real-life",
+        "living_well_kind": "guide",
+        "date": "2026-10-10"
+      },
+      "new": {
+        "id": "living-well-technology-for-real-life",
+        "path": "/living-well/technology-for-real-life/",
+        "title": "Technology for real life",
+        "seo_title": "Everyday AI Workflows: Notes, Plans & Documents | Nolan Kido",
+        "description": "Choose an everyday task, compare a simple method with optional AI, and use a free worksheet. Seven worked guides for notes, plans, documents, and more.",
+        "kicker": "Living Well / Practical starting point",
+        "source": "living-well/page.html",
+        "section": "living-well",
+        "living_well_entry": "technology-for-real-life",
+        "living_well_kind": "guide",
+        "date": "2026-10-10",
+        "updated": "2026-10-14",
+        "revision": "Added a related research essay on everyday AI use and fair comparisons of total effort."
+      }
+    },
+    "living-well-did-the-tool-actually-help": {
+      "old": {
+        "id": "living-well-did-the-tool-actually-help",
+        "path": "/living-well/did-the-tool-actually-help/",
+        "title": "Did the tool actually make life easier?",
+        "seo_title": "Evaluate an AI Workflow: Effort, Quality & Tradeoffs | Nolan Kido",
+        "description": "Evaluate an AI or software workflow beyond its first draft: include setup, checking, upkeep, and effects on others. Free keep-or-stop review worksheet.",
+        "kicker": "Living Well / Practical guide",
+        "source": "living-well/page.html",
+        "section": "living-well",
+        "living_well_entry": "did-the-tool-actually-help",
+        "living_well_kind": "guide",
+        "date": "2026-10-10"
+      },
+      "new": {
+        "id": "living-well-did-the-tool-actually-help",
+        "path": "/living-well/did-the-tool-actually-help/",
+        "title": "Did the tool actually make life easier?",
+        "seo_title": "Evaluate an AI Workflow: Effort, Quality & Tradeoffs | Nolan Kido",
+        "description": "Evaluate an AI or software workflow beyond its first draft: include setup, checking, upkeep, and effects on others. Free keep-or-stop review worksheet.",
+        "kicker": "Living Well / Practical guide",
+        "source": "living-well/page.html",
+        "section": "living-well",
+        "living_well_entry": "did-the-tool-actually-help",
+        "living_well_kind": "guide",
+        "date": "2026-10-10",
+        "updated": "2026-10-14",
+        "revision": "Added a related research essay on everyday AI use and fair comparisons of total effort."
+      }
+    }
+  },
+  "entries": {
+    "technology-for-real-life": {
+      "old": {
+        "slug": "technology-for-real-life",
+        "title": "Technology for real life",
+        "description": "Seven practical guides connecting ordinary tasks, thoughtful choices, and useful technology, with clear examples and a simpler alternative.",
+        "topic": "everyday-ai",
+        "kind": "guide",
+        "lead": "A useful tool should leave you with something you can use and more attention for the life around it. Start with an ordinary task, not an app you feel obliged to adopt.",
+        "sections": [
+          {
+            "heading": "Choose what you would like to make easier",
+            "paragraphs": [
+              "This path connects the reflective questions in Living Well with concrete things to do: find a document, agree on a plan, develop an idea, read more comfortably, or turn a reflection into a considered next step. The point is not to automate being human. It is to remove avoidable friction while keeping the meaning, choices, and relationships with the people involved.",
+              "You can read one guide and stop. Each begins with a modest result, offers a route without generative AI, and shows what you still need to check. The worked examples are fictional and written for explanation. They are not reports of Nolan using a product or measurements of a benefit."
+            ]
+          },
+          {
+            "heading": "Less administration, clearer coordination",
+            "paragraphs": [
+              "<a href=\"/living-well/scattered-notes-to-next-step/\">Turn scattered notes into one useful next step</a>. Separate actions, references, and unanswered questions instead of asking a system to turn every thought into a task. Leave with one short note you can understand without reopening a conversation.",
+              "<a href=\"/living-well/shared-plan-people-can-use/\">Make a shared plan people can actually use</a>. Distinguish an agreed commitment from a suggestion, choose a place everyone can access, and check the plan with the people named in it.",
+              "<a href=\"/living-well/find-the-document-you-need/\">Find the document you need without uploading your whole life</a>. Start with one ordinary document, a readable copy, and an understandable name. Search and verify the original before considering a summary."
+            ]
+          },
+          {
+            "heading": "More access, expression, and attention",
+            "paragraphs": [
+              "<a href=\"/living-well/rough-idea-to-small-creation/\">Turn a rough idea into something you can share</a>. Keep an original note, develop a small draft, and use assistance without inventing a memory, quote, or experience.",
+              "<a href=\"/living-well/make-digital-reading-easier/\">Make digital reading easier before adding another AI tool</a>. Try text size, reading view, or read-aloud support while keeping access to the original. Assistance can make participation easier without replacing what you came to read.",
+              "<a href=\"/living-well/reflection-with-your-judgment-intact/\">Reflect with AI without handing over your judgment</a>. Use a notebook or a few optional questions to consider what matters. Keep private answers private and finish with a choice that remains yours."
+            ]
+          },
+          {
+            "heading": "Compare three levels of help",
+            "paragraphs": [
+              "<strong>A simple method:</strong> a conversation, a paper note, a named file, or a direct question may already solve the problem. <strong>An ordinary digital tool:</strong> search, dictation, a calendar, or an accessibility feature can support a specific step. <strong>Generative AI:</strong> an optional draft, grouping, or question can help when you can review what it produces.",
+              "These are alternatives, not levels of sophistication to climb. You do not need all three. Instructions on this site are free; devices, connectivity, cloud storage, and some third-party features may have requirements or costs. No guide requires buying a new AI subscription."
+            ]
+          },
+          {
+            "heading": "Ask whether it actually helped",
+            "paragraphs": [
+              "<a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a> gives you a small review method. Include setup, correction, maintenance, privacy, and work shifted to someone else. Speed can matter, but so can being able to participate, understand, or follow through.",
+              "A guide describes a method. A worked example illustrates it. A firsthand field note needs a real account of what happened. Future personal posts can connect those pieces without turning an illustration into evidence. There is no need to manufacture a successful experiment to keep a publishing schedule."
+            ]
+          },
+          {
+            "heading": "What a real-life post should show",
+            "paragraphs": [
+              "A useful future post can start with a small, recognizable obstacle and end with the thing that now works: a plan other people can open, a document found again, an accessible passage, or a small piece of writing. The human purpose comes first; the product is part of the method rather than the story’s hero.",
+              "Whether the format is an article or a video, show the starting material, the simple alternative, the tool’s specific contribution, what needed correction, and the final result. Record setup and checking effort as well as any time saved. End with what the change made possible and who it may not suit.",
+              "A demonstration made with fictional material should say so. A firsthand account should use actual observations, dates, and permitted material, with private details removed before recording. There are no completed personal trials or videos claimed here yet. The worked guides are usable now; they are not placeholders for an invented success story."
+            ]
+          },
+          {
+            "heading": "Return to the reason for doing it",
+            "paragraphs": [
+              "The larger questions remain: <a href=\"/living-well/time-you-save/\">what is the time you save for</a>, what deserves care, and what makes an ordinary moment meaningful? Removing a logistical obstacle can create room for a conversation, a creative afternoon, or an unhurried pause. It does not tell you which of those matters most.",
+              "For tools and background, browse <a href=\"/living-well/free-resources/everyday-tools/\">useful everyday tools</a>, <a href=\"/living-well/free-resources/digital-life/\">digital privacy</a>, and <a href=\"/living-well/free-resources/care/\">relationships and memory</a>. For a different kind of inquiry, the <a href=\"/living-well/topics/meaning/\">meaning and spirituality</a> collection remains its own invitation, not a productivity technique."
+            ]
+          }
+        ],
+        "question": "What would you like a tool to make possible outside the tool itself?",
+        "related": [
+          "time-you-save",
+          "what-i-mean-by-living-well"
+        ],
+        "published": "2026-10-10",
+        "series": "technology-for-real-life",
+        "evidence_status": "worked-guide-not-firsthand-result",
+        "outcome": "Choose one ordinary task and a guide with a clear finish.",
+        "format": "practice-path"
+      },
+      "new": {
+        "slug": "technology-for-real-life",
+        "title": "Technology for real life",
+        "description": "Seven practical guides connecting ordinary tasks, thoughtful choices, and useful technology, with clear examples and a simpler alternative.",
+        "topic": "everyday-ai",
+        "kind": "guide",
+        "lead": "A useful tool should leave you with something you can use and more attention for the life around it. Start with an ordinary task, not an app you feel obliged to adopt.",
+        "sections": [
+          {
+            "heading": "Choose what you would like to make easier",
+            "paragraphs": [
+              "This path connects the reflective questions in Living Well with concrete things to do: find a document, agree on a plan, develop an idea, read more comfortably, or turn a reflection into a considered next step. The point is not to automate being human. It is to remove avoidable friction while keeping the meaning, choices, and relationships with the people involved.",
+              "You can read one guide and stop. Each begins with a modest result, offers a route without generative AI, and shows what you still need to check. The worked examples are fictional and written for explanation. They are not reports of Nolan using a product or measurements of a benefit."
+            ]
+          },
+          {
+            "heading": "Less administration, clearer coordination",
+            "paragraphs": [
+              "<a href=\"/living-well/scattered-notes-to-next-step/\">Turn scattered notes into one useful next step</a>. Separate actions, references, and unanswered questions instead of asking a system to turn every thought into a task. Leave with one short note you can understand without reopening a conversation.",
+              "<a href=\"/living-well/shared-plan-people-can-use/\">Make a shared plan people can actually use</a>. Distinguish an agreed commitment from a suggestion, choose a place everyone can access, and check the plan with the people named in it.",
+              "<a href=\"/living-well/find-the-document-you-need/\">Find the document you need without uploading your whole life</a>. Start with one ordinary document, a readable copy, and an understandable name. Search and verify the original before considering a summary."
+            ]
+          },
+          {
+            "heading": "More access, expression, and attention",
+            "paragraphs": [
+              "<a href=\"/living-well/rough-idea-to-small-creation/\">Turn a rough idea into something you can share</a>. Keep an original note, develop a small draft, and use assistance without inventing a memory, quote, or experience.",
+              "<a href=\"/living-well/make-digital-reading-easier/\">Make digital reading easier before adding another AI tool</a>. Try text size, reading view, or read-aloud support while keeping access to the original. Assistance can make participation easier without replacing what you came to read.",
+              "<a href=\"/living-well/reflection-with-your-judgment-intact/\">Reflect with AI without handing over your judgment</a>. Use a notebook or a few optional questions to consider what matters. Keep private answers private and finish with a choice that remains yours."
+            ]
+          },
+          {
+            "heading": "Compare three levels of help",
+            "paragraphs": [
+              "<strong>A simple method:</strong> a conversation, a paper note, a named file, or a direct question may already solve the problem. <strong>An ordinary digital tool:</strong> search, dictation, a calendar, or an accessibility feature can support a specific step. <strong>Generative AI:</strong> an optional draft, grouping, or question can help when you can review what it produces.",
+              "These are alternatives, not levels of sophistication to climb. You do not need all three. Instructions on this site are free; devices, connectivity, cloud storage, and some third-party features may have requirements or costs. No guide requires buying a new AI subscription."
+            ]
+          },
+          {
+            "heading": "Ask whether it actually helped",
+            "paragraphs": [
+              "<a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a> gives you a small review method. Include setup, correction, maintenance, privacy, and work shifted to someone else. Speed can matter, but so can being able to participate, understand, or follow through.",
+              "A guide describes a method. A worked example illustrates it. A firsthand field note needs a real account of what happened. Future personal posts can connect those pieces without turning an illustration into evidence. There is no need to manufacture a successful experiment to keep a publishing schedule."
+            ]
+          },
+          {
+            "heading": "What a real-life post should show",
+            "paragraphs": [
+              "A useful future post can start with a small, recognizable obstacle and end with the thing that now works: a plan other people can open, a document found again, an accessible passage, or a small piece of writing. The human purpose comes first; the product is part of the method rather than the story’s hero.",
+              "Whether the format is an article or a video, show the starting material, the simple alternative, the tool’s specific contribution, what needed correction, and the final result. Record setup and checking effort as well as any time saved. End with what the change made possible and who it may not suit.",
+              "A demonstration made with fictional material should say so. A firsthand account should use actual observations, dates, and permitted material, with private details removed before recording. There are no completed personal trials or videos claimed here yet. The worked guides are usable now; they are not placeholders for an invented success story."
+            ]
+          },
+          {
+            "heading": "Return to the reason for doing it",
+            "paragraphs": [
+              "The larger questions remain: <a href=\"/living-well/time-you-save/\">what is the time you save for</a>, what deserves care, and what makes an ordinary moment meaningful? Removing a logistical obstacle can create room for a conversation, a creative afternoon, or an unhurried pause. It does not tell you which of those matters most.",
+              "For tools and background, browse <a href=\"/living-well/free-resources/everyday-tools/\">useful everyday tools</a>, <a href=\"/living-well/free-resources/digital-life/\">digital privacy</a>, and <a href=\"/living-well/free-resources/care/\">relationships and memory</a>. For a different kind of inquiry, the <a href=\"/living-well/topics/meaning/\">meaning and spirituality</a> collection remains its own invitation, not a productivity technique.",
+              "For a research-based overview and eight everyday prompts, read <a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result."
+            ]
+          }
+        ],
+        "question": "What would you like a tool to make possible outside the tool itself?",
+        "related": [
+          "time-you-save",
+          "what-i-mean-by-living-well"
+        ],
+        "published": "2026-10-10",
+        "series": "technology-for-real-life",
+        "evidence_status": "worked-guide-not-firsthand-result",
+        "outcome": "Choose one ordinary task and a guide with a clear finish.",
+        "format": "practice-path",
+        "updated": "2026-10-14",
+        "revision": "Added a related research essay on everyday AI use and fair comparisons of total effort."
+      }
+    },
+    "did-the-tool-actually-help": {
+      "old": {
+        "slug": "did-the-tool-actually-help",
+        "title": "Did the tool actually make life easier?",
+        "description": "Review a small technology change by its real purpose, total effort, reliability, privacy, and effect on other people, not just its impressive output.",
+        "topic": "choices",
+        "kind": "guide",
+        "lead": "An attractive output is a beginning, not the result. Judge the change by what happened to the original task and to the people who had to live with the new method.",
+        "sections": [
+          {
+            "heading": "Write down the purpose before the comparison",
+            "paragraphs": [
+              "Choose one low-stakes repeated task. What would useful improvement look like? Finding a file without another search, making a plan easier to understand, participating in an activity, or finishing a draft are clearer aims than \"use more AI.\"",
+              "Keep the purpose close to the situation. Some changes are worthwhile because they improve access or reduce confusion, even if they do not save minutes. A faster method that loses important meaning is not automatically a better one. Use the <a href=\"/living-well/worksheets/#small-experiment\">existing small-experiment worksheet</a> when a private note helps."
+            ]
+          },
+          {
+            "heading": "Compare the whole job, not the moment of generation",
+            "paragraphs": [
+              "Include setup, preparing input, checking, correcting, moving the result into use, and maintaining the system. Compare the same task and the same standard of completion. If other people do part of the work, ask about their effort instead of treating your own screen time as the whole cost.",
+              "<strong>Illustrative calculation, not measured results:</strong> the old method takes six minutes on each of five uses, or thirty minutes. A new method needs twelve minutes of setup, two minutes per use, one minute of checking per use, and three minutes of maintenance. Its first five uses also total thirty minutes: 12 + 10 + 5 + 3.",
+              "If the next five uses need no additional setup and the other assumptions remain the same, they take eighteen minutes: 10 + 5 + 3. That is twelve minutes less than the old method for those five uses. The arithmetic illustrates why setup and repetition matter; it does not predict savings for a real product or reader."
+            ]
+          },
+          {
+            "heading": "Look for reliability, fit, and costs that are not time",
+            "paragraphs": [
+              "Could you inspect the source? Did the plan remain accurate when a detail changed? Could the intended person open the result? Did a service require more personal information than the task justified? Would the method still work when you needed a simple fallback?",
+              "Also look for work shifted to someone else. A household plan may be easier for its creator but harder for everyone asked to update it. An AI draft may save writing time while creating more correction work. Discuss those effects rather than inferring that silence means agreement.",
+              "This guide does not propose a single numerical score for a person's wellbeing. Note the tradeoffs in plain language. Accessibility support, enjoyment, and a less rushed conversation do not need to be translated into a productivity metric to matter."
+            ]
+          },
+          {
+            "heading": "Make a decision you can revise",
+            "paragraphs": [
+              "Choose <strong>keep</strong>, <strong>simplify</strong>, <strong>stop</strong>, or <strong>still unsure</strong>. Name why. A tool that works for one task may not deserve access to the rest of your life. A disappointing trial can be useful when it prevents a larger unnecessary commitment.",
+              "For a low-stakes change, a few ordinary uses may be enough to decide what to try next. They do not establish a general causal finding. Different tasks, expectations, interruptions, or familiarity with the old method could explain some of the difference. Stop earlier when the method creates avoidable risk or distress."
+            ]
+          },
+          {
+            "heading": "Turn a real observation into an honest field note",
+            "paragraphs": [
+              "A future firsthand account should identify what actually happened, which device or service was used, the dates, the comparison, the effort, the mistakes, and the conclusion. Use genuine screenshots or examples only with suitable permission and removal of private information.",
+              "Keep three labels distinct: a proposed method, a fictional worked example, and a firsthand observation. Research findings need their own sources and limits. None of these becomes stronger by being presented as another. The <a href=\"/living-well/field-notes/\">field-note collection</a> retains proposed experiments until actual observations are supplied.",
+              "The final question is not whether the tool was impressive. It is whether you would make the same change again, knowing what it really required and what it made possible outside the interface."
+            ]
+          }
+        ],
+        "question": "Knowing the checking, maintenance, and tradeoffs, would you choose this method again?",
+        "related": [
+          "technology-for-real-life",
+          "time-you-save"
+        ],
+        "published": "2026-10-10",
+        "series": "technology-for-real-life",
+        "evidence_status": "worked-guide-not-firsthand-result",
+        "outcome": "A defensible keep, simplify, stop, or still-unsure decision about one small change.",
+        "utility": {
+          "start": "One low-stakes change and a clear description of the earlier method.",
+          "simplest_route": "Keep a short before-and-after note. A score, tracking app, or AI verdict is unnecessary.",
+          "finish": "You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.",
+          "starter": "DID THIS HELP?\nTask and human purpose:\nWhat counts as finished:\nEarlier method:\nChange tried:\nActual dates and circumstances:\n\nTOTAL EFFORT\nSetup:\nPreparing input:\nDoing the task:\nChecking and correcting:\nMoving the result into use:\nOngoing maintenance:\nWork done by someone else:\n\nBEYOND TIME\nReliability and mistakes:\nAccess, privacy, cost, or permission tradeoffs:\nWhat became possible outside the tool:\nOther explanations for what changed:\n\nDECISION\nKeep / simplify / stop / still unsure:\nWhy:\nWhat this observation cannot establish:\n"
+        }
+      },
+      "new": {
+        "slug": "did-the-tool-actually-help",
+        "title": "Did the tool actually make life easier?",
+        "description": "Review a small technology change by its real purpose, total effort, reliability, privacy, and effect on other people, not just its impressive output.",
+        "topic": "choices",
+        "kind": "guide",
+        "lead": "An attractive output is a beginning, not the result. Judge the change by what happened to the original task and to the people who had to live with the new method.",
+        "sections": [
+          {
+            "heading": "Write down the purpose before the comparison",
+            "paragraphs": [
+              "Choose one low-stakes repeated task. What would useful improvement look like? Finding a file without another search, making a plan easier to understand, participating in an activity, or finishing a draft are clearer aims than \"use more AI.\"",
+              "Keep the purpose close to the situation. Some changes are worthwhile because they improve access or reduce confusion, even if they do not save minutes. A faster method that loses important meaning is not automatically a better one. Use the <a href=\"/living-well/worksheets/#small-experiment\">existing small-experiment worksheet</a> when a private note helps."
+            ]
+          },
+          {
+            "heading": "Compare the whole job, not the moment of generation",
+            "paragraphs": [
+              "Include setup, preparing input, checking, correcting, moving the result into use, and maintaining the system. Compare the same task and the same standard of completion. If other people do part of the work, ask about their effort instead of treating your own screen time as the whole cost.",
+              "<strong>Illustrative calculation, not measured results:</strong> the old method takes six minutes on each of five uses, or thirty minutes. A new method needs twelve minutes of setup, two minutes per use, one minute of checking per use, and three minutes of maintenance. Its first five uses also total thirty minutes: 12 + 10 + 5 + 3.",
+              "If the next five uses need no additional setup and the other assumptions remain the same, they take eighteen minutes: 10 + 5 + 3. That is twelve minutes less than the old method for those five uses. The arithmetic illustrates why setup and repetition matter; it does not predict savings for a real product or reader."
+            ]
+          },
+          {
+            "heading": "Look for reliability, fit, and costs that are not time",
+            "paragraphs": [
+              "Could you inspect the source? Did the plan remain accurate when a detail changed? Could the intended person open the result? Did a service require more personal information than the task justified? Would the method still work when you needed a simple fallback?",
+              "Also look for work shifted to someone else. A household plan may be easier for its creator but harder for everyone asked to update it. An AI draft may save writing time while creating more correction work. Discuss those effects rather than inferring that silence means agreement.",
+              "This guide does not propose a single numerical score for a person's wellbeing. Note the tradeoffs in plain language. Accessibility support, enjoyment, and a less rushed conversation do not need to be translated into a productivity metric to matter."
+            ]
+          },
+          {
+            "heading": "Make a decision you can revise",
+            "paragraphs": [
+              "Choose <strong>keep</strong>, <strong>simplify</strong>, <strong>stop</strong>, or <strong>still unsure</strong>. Name why. A tool that works for one task may not deserve access to the rest of your life. A disappointing trial can be useful when it prevents a larger unnecessary commitment.",
+              "For a low-stakes change, a few ordinary uses may be enough to decide what to try next. They do not establish a general causal finding. Different tasks, expectations, interruptions, or familiarity with the old method could explain some of the difference. Stop earlier when the method creates avoidable risk or distress."
+            ]
+          },
+          {
+            "heading": "Turn a real observation into an honest field note",
+            "paragraphs": [
+              "A future firsthand account should identify what actually happened, which device or service was used, the dates, the comparison, the effort, the mistakes, and the conclusion. Use genuine screenshots or examples only with suitable permission and removal of private information.",
+              "Keep three labels distinct: a proposed method, a fictional worked example, and a firsthand observation. Research findings need their own sources and limits. None of these becomes stronger by being presented as another. The <a href=\"/living-well/field-notes/\">field-note collection</a> retains proposed experiments until actual observations are supplied.",
+              "The final question is not whether the tool was impressive. It is whether you would make the same change again, knowing what it really required and what it made possible outside the interface.",
+              "For the evidence behind AI productivity claims and a comparison that includes checking in both methods, read <a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result."
+            ]
+          }
+        ],
+        "question": "Knowing the checking, maintenance, and tradeoffs, would you choose this method again?",
+        "related": [
+          "technology-for-real-life",
+          "time-you-save"
+        ],
+        "published": "2026-10-10",
+        "series": "technology-for-real-life",
+        "evidence_status": "worked-guide-not-firsthand-result",
+        "outcome": "A defensible keep, simplify, stop, or still-unsure decision about one small change.",
+        "utility": {
+          "start": "One low-stakes change and a clear description of the earlier method.",
+          "simplest_route": "Keep a short before-and-after note. A score, tracking app, or AI verdict is unnecessary.",
+          "finish": "You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.",
+          "starter": "DID THIS HELP?\nTask and human purpose:\nWhat counts as finished:\nEarlier method:\nChange tried:\nActual dates and circumstances:\n\nTOTAL EFFORT\nSetup:\nPreparing input:\nDoing the task:\nChecking and correcting:\nMoving the result into use:\nOngoing maintenance:\nWork done by someone else:\n\nBEYOND TIME\nReliability and mistakes:\nAccess, privacy, cost, or permission tradeoffs:\nWhat became possible outside the tool:\nOther explanations for what changed:\n\nDECISION\nKeep / simplify / stop / still unsure:\nWhy:\nWhat this observation cannot establish:\n"
+        },
+        "updated": "2026-10-14",
+        "revision": "Added a related research essay on everyday AI use and fair comparisons of total effort."
+      }
+    }
+  },
+  "paths": {
+    "find/index.html": {
+      "old_sha256": "38ff2da33045a66ca6238c4284361556d94daad7805c36190b4ffff1299fba90",
+      "new_sha256": "0522c6f7ad5d437603ba350883b0e55248296fdd732c288fb3a279432c712b33",
+      "edits": [
+        {
+          "start": 15386,
+          "end": 18349,
+          "old": "8)</span></summary><ul class=\"find-items\"><li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"A conversation worth having | Nolan Kido\"><p class=\"find-kind\">Collection / reference <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/conversations/\">A conversation worth having</a></h3><p class=\"find-description\">Open-ended questions for a real conversation about meaning, technology, and how ordinary life is changing.</p></li><li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"A quiet morning does not need a dashboard | Nolan Kido\"><p class=\"find-kind\">Guide <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/quiet-morning/\">A quiet morning does not need a dashboard</a></h3><p class=\"find-description\">Choose one manageable boundary around attention while preserving the technology you need for care, access, work, and safety.</p><p class=\"find-date\">Published <time datetime=\"2026-10-08\">October 8, 2026</time></p></li><li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"A useful tool can make itself less necessary | Nolan Kido\"><p class=\"find-kind\">Essay <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/a-tool-you-can-put-down/\">A useful tool can make itself less necessary</a></h3><p class=\"find-description\">An argument for judging technology by what it enables, including the ability to finish, learn, simplify, and leave.</p><p class=\"find-date\">Published <time datetime=\"2026-10-09\">October 9, 2026</time></p></li><li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"A weekly reset that does not become another job | Nolan Kido\"><p class=\"find-kind\">Guide <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/weekly-reset/\">A weekly reset that does not become another job</a></h3><p class=\"find-description\">A small paper-first review of commitments, choices, and breathing room, with an optional AI-assisted route and a clear stopping point.</p><p class=\"find-date\">Published <time datetime=\"2026-10-08\">October 8",
+          "new": "9)</span></summary><ul class=\"find-items\"><li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"A conversation worth having | Nolan Kido\"><p class=\"find-kind\">Collection / reference <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/conversations/\">A conversation worth having</a></h3><p class=\"find-description\">Open-ended questions for a real conversation about meaning, technology, and how ordinary life is changing.</p></li><li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"A quiet morning does not need a dashboard | Nolan Kido\"><p class=\"find-kind\">Guide <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/quiet-morning/\">A quiet morning does not need a dashboard</a></h3><p class=\"find-description\">Choose one manageable boundary around attention while preserving the technology you need for care, access, work, and safety.</p><p class=\"find-date\">Published <time datetime=\"2026-10-08\">October 8, 2026</time></p></li><li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"A useful tool can make itself less necessary | Nolan Kido\"><p class=\"find-kind\">Essay <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/a-tool-you-can-put-down/\">A useful tool can make itself less necessary</a></h3><p class=\"find-description\">An argument for judging technology by what it enables, including the ability to finish, learn, simplify, and leave.</p><p class=\"find-date\">Published <time datetime=\"2026-10-09\">October 9, 2026</time></p></li><li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"A weekly reset that does not become another job | Nolan Kido\"><p class=\"find-kind\">Guide <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/weekly-reset/\">A weekly reset that does not become another job</a></h3><p class=\"find-description\">A small paper-first review of commitments, choices, and breathing room, with an optional AI-assisted route and a clear stopping point.</p><p class=\"find-date\">Published <time datetime=\"2026-10-08\">October 8, 2026</time></p></li><li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"AI and personal productivity: what actually helps | Nolan Kido\"><p class=\"find-kind\">Essay <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Living Well</span></p><h3><a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a></h3><p class=\"find-description\">Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.</p><p class=\"find-date\">Published <time datetime=\"2026-10-14\">October 14"
+        },
+        {
+          "start": 154584,
+          "end": 154889,
+          "old": "",
+          "new": "ai-and-personal-productivity/\":[[\"part-1\",\"Count the whole job\"],[\"part-2\",\"What research shows\"],[\"part-3\",\"Eight everyday uses\"],[\"part-4\",\"Privacy and control\"],[\"part-5\",\"A fair comparison\"],[\"one-question\",\"One question to take with you\"],[\"sources-and-context\",\"Sources and context\"]],\"/living-well/"
+        }
+      ]
+    },
+    "about/index.html": {
+      "old_sha256": "f1835b9420f2957931f7a58a61b29af4f25d33999ae8eaf80f0c7aa23b54aefd",
+      "new_sha256": "1294c24e1dfab00beba476e92bfa4958a0aaf436ce1b203be5fedf50a76ee5ef",
+      "edits": [
+        {
+          "start": 10791,
+          "end": 10792,
+          "old": "7",
+          "new": "8"
+        }
+      ]
+    },
+    "notes/index.html": {
+      "old_sha256": "5947808057920fa6ed1dde2852c12895ba847be52940fb4f5848c7d255c7f072",
+      "new_sha256": "671fe8e6d8e770477207798910048c96af9fb8306e1133817793dc80e5023808",
+      "edits": [
+        {
+          "start": 4265,
+          "end": 19417,
+          "old": "7, \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"A working tool is not the same as a trustworthy one.\", \"url\": \"https://nolankido.com/notes/trustworthy-tools/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Check an AI summary against its source.\", \"url\": \"https://nolankido.com/technology/check-ai-summary/\"}, {\"@type\": \"ListItem\", \"position\": 3, \"name\": \"Checking an AI-assisted website change.\", \"url\": \"https://nolankido.com/technology/checking-ai-website-changes/\"}, {\"@type\": \"ListItem\", \"position\": 4, \"name\": \"How to check an AI answer.\", \"url\": \"https://nolankido.com/technology/check-ai-answers/\"}, {\"@type\": \"ListItem\", \"position\": 5, \"name\": \"Let AI do more. Keep the judgment.\", \"url\": \"https://nolankido.com/notes/keep-the-judgment/\"}, {\"@type\": \"ListItem\", \"position\": 6, \"name\": \"Should I use AI for this task?\", \"url\": \"https://nolankido.com/technology/should-i-use-ai/\"}, {\"@type\": \"ListItem\", \"position\": 7, \"name\": \"A quiet morning does not need a dashboard\", \"url\": \"https://nolankido.com/living-well/quiet-morning/\"}, {\"@type\": \"ListItem\", \"position\": 8, \"name\": \"A useful tool can make itself less necessary\", \"url\": \"https://nolankido.com/living-well/a-tool-you-can-put-down/\"}, {\"@type\": \"ListItem\", \"position\": 9, \"name\": \"A weekly reset that does not become another job\", \"url\": \"https://nolankido.com/living-well/weekly-reset/\"}, {\"@type\": \"ListItem\", \"position\": 10, \"name\": \"Before you ask AI what to do, decide what matters\", \"url\": \"https://nolankido.com/living-well/decide-what-matters/\"}, {\"@type\": \"ListItem\", \"position\": 11, \"name\": \"Can a reminder help you become a more thoughtful friend?\", \"url\": \"https://nolankido.com/living-well/thoughtful-friend/\"}, {\"@type\": \"ListItem\", \"position\": 12, \"name\": \"Can an AI-generated reflection be meaningful?\", \"url\": \"https://nolankido.com/living-well/ai-generated-reflections/\"}, {\"@type\": \"ListItem\", \"position\": 13, \"name\": \"Can you be spiritually curious without pretending to be certain?\", \"url\": \"https://nolankido.com/living-well/spiritually-curious/\"}, {\"@type\": \"ListItem\", \"position\": 14, \"name\": \"Choosing between two good lives\", \"url\": \"https://nolankido.com/living-well/two-good-lives/\"}, {\"@type\": \"ListItem\", \"position\": 15, \"name\": \"Consciousness: which question are we asking?\", \"url\": \"https://nolankido.com/living-well/consciousness-which-question/\"}, {\"@type\": \"ListItem\", \"position\": 16, \"name\": \"Did the tool actually make life easier?\", \"url\": \"https://nolankido.com/living-well/did-the-tool-actually-help/\"}, {\"@type\": \"ListItem\", \"position\": 17, \"name\": \"Find the document you need without uploading your whole life\", \"url\": \"https://nolankido.com/living-well/find-the-document-you-need/\"}, {\"@type\": \"ListItem\", \"position\": 18, \"name\": \"Make a shared plan people can actually use\", \"url\": \"https://nolankido.com/living-well/shared-plan-people-can-use/\"}, {\"@type\": \"ListItem\", \"position\": 19, \"name\": \"Make digital reading easier before adding another AI tool\", \"url\": \"https://nolankido.com/living-well/make-digital-reading-easier/\"}, {\"@type\": \"ListItem\", \"position\": 20, \"name\": \"Make one recurring household problem less annoying\", \"url\": \"https://nolankido.com/living-well/household-friction/\"}, {\"@type\": \"ListItem\", \"position\": 21, \"name\": \"Meditation without buying a lifestyle\", \"url\": \"https://nolankido.com/living-well/meditation-without-buying-a-lifestyle/\"}, {\"@type\": \"ListItem\", \"position\": 22, \"name\": \"Plan a free afternoon without optimizing all the life out of it\", \"url\": \"https://nolankido.com/living-well/free-afternoon/\"}, {\"@type\": \"ListItem\", \"position\": 23, \"name\": \"Preserve a family story without losing the person's voice\", \"url\": \"https://nolankido.com/living-well/preserve-family-story/\"}, {\"@type\": \"ListItem\", \"position\": 24, \"name\": \"Proposed experiment: a notebook or AI for a weekly reflection?\", \"url\": \"https://nolankido.com/living-well/notebook-or-ai/\"}, {\"@type\": \"ListItem\", \"position\": 25, \"name\": \"Proposed experiment: does a household system remove more work than it adds?\", \"url\": \"https://nolankido.com/living-well/household-experiment/\"}, {\"@type\": \"ListItem\", \"position\": 26, \"name\": \"Proposed experiment: simplify one part of your phone\", \"url\": \"https://nolankido.com/living-well/phone-simplification/\"}, {\"@type\": \"ListItem\", \"position\": 27, \"name\": \"Read a poem without turning it into a lesson\", \"url\": \"https://nolankido.com/living-well/read-a-poem-without-a-lesson/\"}, {\"@type\": \"ListItem\", \"position\": 28, \"name\": \"Reflect with AI without handing over your judgment\", \"url\": \"https://nolankido.com/living-well/reflection-with-your-judgment-intact/\"}, {\"@type\": \"ListItem\", \"position\": 29, \"name\": \"Spiritual curiosity without a new identity\", \"url\": \"https://nolankido.com/living-well/spiritual-curiosity-reading-path/\"}, {\"@type\": \"ListItem\", \"position\": 30, \"name\": \"Start here: the questions behind Living Well\", \"url\": \"https://nolankido.com/living-well/what-i-mean-by-living-well/\"}, {\"@type\": \"ListItem\", \"position\": 31, \"name\": \"Technology for real life\", \"url\": \"https://nolankido.com/living-well/technology-for-real-life/\"}, {\"@type\": \"ListItem\", \"position\": 32, \"name\": \"The difference between improving your life and believing you are never enough\", \"url\": \"https://nolankido.com/living-well/growth-without-self-rejection/\"}, {\"@type\": \"ListItem\", \"position\": 33, \"name\": \"Turn a rough idea into something you can share\", \"url\": \"https://nolankido.com/living-well/rough-idea-to-small-creation/\"}, {\"@type\": \"ListItem\", \"position\": 34, \"name\": \"Turn scattered notes into one useful next step\", \"url\": \"https://nolankido.com/living-well/scattered-notes-to-next-step/\"}, {\"@type\": \"ListItem\", \"position\": 35, \"name\": \"Use AI to understand something, not just get an answer\", \"url\": \"https://nolankido.com/living-well/learning-with-ai-without-skipping-understanding/\"}, {\"@type\": \"ListItem\", \"position\": 36, \"name\": \"What is the time you save actually for?\", \"url\": \"https://nolankido.com/living-well/time-you-save/\"}, {\"@type\": \"ListItem\", \"position\": 37, \"name\": \"What makes an ordinary moment feel sacred?\", \"url\": \"https://nolankido.com/living-well/ordinary-moments/\"}, {\"@type\": \"ListItem\", \"position\": 38, \"name\": \"What should you decide personally, even when a tool helps you express it?\", \"url\": \"https://nolankido.com/living-well/what-to-decide-yourself/\"}, {\"@type\": \"ListItem\", \"position\": 39, \"name\": \"When does documenting your life get in the way of experiencing it?\", \"url\": \"https://nolankido.com/living-well/documenting-your-life/\"}, {\"@type\": \"ListItem\", \"position\": 40, \"name\": \"When technology helps you notice more\", \"url\": \"https://nolankido.com/living-well/technology-that-helps-you-notice/\"}, {\"@type\": \"ListItem\", \"position\": 41, \"name\": \"A map of poker research, without the inflated claims.\", \"url\": \"https://nolankido.com/poker/poker-research-guide/\"}, {\"@type\": \"ListItem\", \"position\": 42, \"name\": \"A practical cash-game study route.\", \"url\": \"https://nolankido.com/poker/cash-game-study-path/\"}, {\"@type\": \"ListItem\", \"position\": 43, \"name\": \"A short stack is a situation, not a chart.\", \"url\": \"https://nolankido.com/poker/short-stack-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 44, \"name\": \"Bets, calls, and side pots.\", \"url\": \"https://nolankido.com/poker/betting-and-pots/\"}, {\"@type\": \"ListItem\", \"position\": 45, \"name\": \"Can you explain the next hand?\", \"url\": \"https://nolankido.com/poker/beginner-checkpoint/\"}, {\"@type\": \"ListItem\", \"position\": 46, \"name\": \"Check the room, the rules and your protections.\", \"url\": \"https://nolankido.com/poker/poker-access-and-protection/\"}, {\"@type\": \"ListItem\", \"position\": 47, \"name\": \"Choose a poker book or course you will actually use.\", \"url\": \"https://nolankido.com/poker/poker-books-and-courses/\"}, {\"@type\": \"ListItem\", \"position\": 48, \"name\": \"Choose a study tool by the question it answers.\", \"url\": \"https://nolankido.com/poker/choosing-study-tools/\"}, {\"@type\": \"ListItem\", \"position\": 49, \"name\": \"From hand notes to a poker vlog.\", \"url\": \"https://nolankido.com/poker/hand-to-vlog/\"}, {\"@type\": \"ListItem\", \"position\": 50, \"name\": \"From possible hands to weighted ranges.\", \"url\": \"https://nolankido.com/poker/range-combinations/\"}, {\"@type\": \"ListItem\", \"position\": 51, \"name\": \"From the first seat to the end of the day.\", \"url\": \"https://nolankido.com/poker/tournament-day/\"}, {\"@type\": \"ListItem\", \"position\": 52, \"name\": \"Give your bet a purpose.\", \"url\": \"https://nolankido.com/poker/betting-with-a-purpose/\"}, {\"@type\": \"ListItem\", \"position\": 53, \"name\": \"How a tournament unfolds.\", \"url\": \"https://nolankido.com/poker/tournaments/\"}, {\"@type\": \"ListItem\", \"position\": 54, \"name\": \"Keep a hand note you can actually review.\", \"url\": \"https://nolankido.com/poker/recording-hands/\"}, {\"@type\": \"ListItem\", \"position\": 55, \"name\": \"Learn poker with a small, free study path.\", \"url\": \"https://nolankido.com/poker/free-poker-learning-path/\"}, {\"@type\": \"ListItem\", \"position\": 56, \"name\": \"Multiway pots: count the opponents and the pots.\", \"url\": \"https://nolankido.com/poker/multiway-pot-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 57, \"name\": \"Omaha hi-lo: play for a share, not just a low.\", \"url\": \"https://nolankido.com/poker/omaha-hi-lo-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 58, \"name\": \"Omaha, lowball and mixed games: know which rules changed.\", \"url\": \"https://nolankido.com/poker/omaha-and-mixed-games/\"}, {\"@type\": \"ListItem\", \"position\": 59, \"name\": \"One hand, from deal to showdown.\", \"url\": \"https://nolankido.com/poker/holdem-basics/\"}, {\"@type\": \"ListItem\", \"position\": 60, \"name\": \"One river. Two different stories.\", \"url\": \"https://nolankido.com/poker/decision-lab/\"}, {\"@type\": \"ListItem\", \"position\": 61, \"name\": \"Pause the hand. Read the situation.\", \"url\": \"https://nolankido.com/poker/follow-along/\"}, {\"@type\": \"ListItem\", \"position\": 62, \"name\": \"Poker math: the right number for the right question.\", \"url\": \"https://nolankido.com/poker/poker-math-reference/\"}, {\"@type\": \"ListItem\", \"position\": 63, \"name\": \"Poker rules and fair play: find the right authority.\", \"url\": \"https://nolankido.com/poker/poker-rules-and-fair-play/\"}, {\"@type\": \"ListItem\", \"position\": 64, \"name\": \"Poker terms, in plain language.\", \"url\": \"https://nolankido.com/poker/glossary/\"}, {\"@type\": \"ListItem\", \"position\": 65, \"name\": \"Pot odds, with the assumptions visible.\", \"url\": \"https://nolankido.com/poker/pot-odds-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 66, \"name\": \"Questions new viewers ask.\", \"url\": \"https://nolankido.com/poker/viewer-questions/\"}, {\"@type\": \"ListItem\", \"position\": 67, \"name\": \"Read poker advice without borrowing its certainty.\", \"url\": \"https://nolankido.com/poker/evaluating-poker-advice/\"}, {\"@type\": \"ListItem\", \"position\": 68, \"name\": \"Read the preflop chart before trusting the colors.\", \"url\": \"https://nolankido.com/poker/reading-preflop-charts/\"}, {\"@type\": \"ListItem\", \"position\": 69, \"name\": \"Read the structure before choosing the tournament.\", \"url\": \"https://nolankido.com/poker/choosing-a-tournament/\"}, {\"@type\": \"ListItem\", \"position\": 70, \"name\": \"Registration, re-entry and the cost of another attempt.\", \"url\": \"https://nolankido.com/poker/registration-and-reentry/\"}, {\"@type\": \"ListItem\", \"position\": 71, \"name\": \"Results deserve context.\", \"url\": \"https://nolankido.com/poker/variance-and-results/\"}, {\"@type\": \"ListItem\", \"position\": 72, \"name\": \"Stud and lowball: change the rules before the strategy.\", \"url\": \"https://nolankido.com/poker/stud-and-lowball-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 73, \"name\": \"Study cash games without importing tournament assumptions.\", \"url\": \"https://nolankido.com/poker/cash-game-study/\"}, {\"@type\": \"ListItem\", \"position\": 74, \"name\": \"The flush arrives. What can still change?\", \"url\": \"https://nolankido.com/poker/flush-and-redraw/\"}, {\"@type\": \"ListItem\", \"position\": 75, \"name\": \"The same cards. A different decision.\", \"url\": \"https://nolankido.com/poker/starting-hand-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 76, \"name\": \"Three all-ins. Two pots.\", \"url\": \"https://nolankido.com/poker/side-pot-lab/\"}, {\"@type\": \"ListItem\", \"position\": 77, \"name\": \"Turn a poker video or podcast into one useful lesson.\", \"url\": \"https://nolankido.com/poker/poker-media-study/\"}, {\"@type\": \"ListItem\", \"position\": 78, \"name\": \"Twelve checks. One useful repair.\", \"url\": \"https://nolankido.com/poker/practice-room/\"}, {\"@type\": \"ListItem\", \"position\": 79, \"name\": \"Understand the cost of a cash game.\", \"url\": \"https://nolankido.com/poker/cash-game-costs/\"}, {\"@type\": \"ListItem\", \"position\": 80, \"name\": \"What changed on the board?\", \"url\": \"https://nolankido.com/poker/reading-the-board/\"}, {\"@type\": \"ListItem\", \"position\": 81, \"name\": \"What is happening at the table?\", \"url\": \"https://nolankido.com/poker/table-etiquette/\"}, {\"@type\": \"ListItem\", \"position\": 82, \"name\": \"What is the bet trying to do?\", \"url\": \"https://nolankido.com/poker/ranges-and-bets/\"}, {\"@type\": \"ListItem\", \"position\": 83, \"name\": \"What the percentages mean.\", \"url\": \"https://nolankido.com/poker/poker-math/\"}, {\"@type\": \"ListItem\", \"position\": 84, \"name\": \"When more chips are not enough.\", \"url\": \"https://nolankido.com/poker/tournament-equity/\"}, {\"@type\": \"ListItem\", \"position\": 85, \"name\": \"Which hand wins?\", \"url\": \"https://nolankido.com/poker/hand-rankings/\"}, {\"@type\": \"ListItem\", \"position\": 86, \"name\": \"Which kind of tournament is this?\", \"url\": \"https://nolankido.com/poker/tournament-formats/\"}, {\"@type\": \"ListItem\", \"position\": 87, \"name\": \"Why does the seat matter?\", \"url\": \"https://nolankido.com/poker/position-and-stacks/\"}, {\"@type\": \"ListItem\", \"position\": 88, \"name\": \"Your first decisions after the flop.\", \"url\": \"https://nolankido.com/poker/first-flop-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 89, \"name\": \"Your first live cash-game session.\", \"url\": \"https://nolankido.com/poker/first-live-cash-game/\"}, {\"@type\": \"ListItem\", \"position\": 90, \"name\": \"Your first live tournament, without the guesswork.\", \"url\": \"https://nolankido.com/poker/first-live-tournament/\"}, {\"@type\": \"ListItem\", \"position\": 91, \"name\": \"Your first poker decisions.\", \"url\": \"https://nolankido.com/poker/first-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 92, \"name\": \"Your first poker range.\", \"url\": \"https://nolankido.com/poker/ranges-for-beginners/\"}, {\"@type\": \"ListItem\", \"position\": 93, \"name\": \"Your turn and river decisions.\", \"url\": \"https://nolankido.com/poker/turn-and-river-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 94, \"name\": \"Finishing is a decision.\", \"url\": \"https://nolankido.com/notes/finishing-is-a-decision/\"}, {\"@type\": \"ListItem\", \"position\": 95, \"name\": \"Good decisions, imperfect outcomes.\", \"url\": \"https://nolankido.com/notes/decision-quality/\"}, {\"@type\": \"ListItem\", \"position\": 96, \"name\": \"Learning something difficult from the beginning.\", \"url\": \"https://nolankido.com/notes/learning-from-the-beginning/\"}, {\"@type\": \"ListItem\", \"position\": 97",
+          "new": "8, \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"A working tool is not the same as a trustworthy one.\", \"url\": \"https://nolankido.com/notes/trustworthy-tools/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Check an AI summary against its source.\", \"url\": \"https://nolankido.com/technology/check-ai-summary/\"}, {\"@type\": \"ListItem\", \"position\": 3, \"name\": \"Checking an AI-assisted website change.\", \"url\": \"https://nolankido.com/technology/checking-ai-website-changes/\"}, {\"@type\": \"ListItem\", \"position\": 4, \"name\": \"How to check an AI answer.\", \"url\": \"https://nolankido.com/technology/check-ai-answers/\"}, {\"@type\": \"ListItem\", \"position\": 5, \"name\": \"Let AI do more. Keep the judgment.\", \"url\": \"https://nolankido.com/notes/keep-the-judgment/\"}, {\"@type\": \"ListItem\", \"position\": 6, \"name\": \"Should I use AI for this task?\", \"url\": \"https://nolankido.com/technology/should-i-use-ai/\"}, {\"@type\": \"ListItem\", \"position\": 7, \"name\": \"A quiet morning does not need a dashboard\", \"url\": \"https://nolankido.com/living-well/quiet-morning/\"}, {\"@type\": \"ListItem\", \"position\": 8, \"name\": \"A useful tool can make itself less necessary\", \"url\": \"https://nolankido.com/living-well/a-tool-you-can-put-down/\"}, {\"@type\": \"ListItem\", \"position\": 9, \"name\": \"A weekly reset that does not become another job\", \"url\": \"https://nolankido.com/living-well/weekly-reset/\"}, {\"@type\": \"ListItem\", \"position\": 10, \"name\": \"AI and personal productivity: what actually helps\", \"url\": \"https://nolankido.com/living-well/ai-and-personal-productivity/\"}, {\"@type\": \"ListItem\", \"position\": 11, \"name\": \"Before you ask AI what to do, decide what matters\", \"url\": \"https://nolankido.com/living-well/decide-what-matters/\"}, {\"@type\": \"ListItem\", \"position\": 12, \"name\": \"Can a reminder help you become a more thoughtful friend?\", \"url\": \"https://nolankido.com/living-well/thoughtful-friend/\"}, {\"@type\": \"ListItem\", \"position\": 13, \"name\": \"Can an AI-generated reflection be meaningful?\", \"url\": \"https://nolankido.com/living-well/ai-generated-reflections/\"}, {\"@type\": \"ListItem\", \"position\": 14, \"name\": \"Can you be spiritually curious without pretending to be certain?\", \"url\": \"https://nolankido.com/living-well/spiritually-curious/\"}, {\"@type\": \"ListItem\", \"position\": 15, \"name\": \"Choosing between two good lives\", \"url\": \"https://nolankido.com/living-well/two-good-lives/\"}, {\"@type\": \"ListItem\", \"position\": 16, \"name\": \"Consciousness: which question are we asking?\", \"url\": \"https://nolankido.com/living-well/consciousness-which-question/\"}, {\"@type\": \"ListItem\", \"position\": 17, \"name\": \"Did the tool actually make life easier?\", \"url\": \"https://nolankido.com/living-well/did-the-tool-actually-help/\"}, {\"@type\": \"ListItem\", \"position\": 18, \"name\": \"Find the document you need without uploading your whole life\", \"url\": \"https://nolankido.com/living-well/find-the-document-you-need/\"}, {\"@type\": \"ListItem\", \"position\": 19, \"name\": \"Make a shared plan people can actually use\", \"url\": \"https://nolankido.com/living-well/shared-plan-people-can-use/\"}, {\"@type\": \"ListItem\", \"position\": 20, \"name\": \"Make digital reading easier before adding another AI tool\", \"url\": \"https://nolankido.com/living-well/make-digital-reading-easier/\"}, {\"@type\": \"ListItem\", \"position\": 21, \"name\": \"Make one recurring household problem less annoying\", \"url\": \"https://nolankido.com/living-well/household-friction/\"}, {\"@type\": \"ListItem\", \"position\": 22, \"name\": \"Meditation without buying a lifestyle\", \"url\": \"https://nolankido.com/living-well/meditation-without-buying-a-lifestyle/\"}, {\"@type\": \"ListItem\", \"position\": 23, \"name\": \"Plan a free afternoon without optimizing all the life out of it\", \"url\": \"https://nolankido.com/living-well/free-afternoon/\"}, {\"@type\": \"ListItem\", \"position\": 24, \"name\": \"Preserve a family story without losing the person's voice\", \"url\": \"https://nolankido.com/living-well/preserve-family-story/\"}, {\"@type\": \"ListItem\", \"position\": 25, \"name\": \"Proposed experiment: a notebook or AI for a weekly reflection?\", \"url\": \"https://nolankido.com/living-well/notebook-or-ai/\"}, {\"@type\": \"ListItem\", \"position\": 26, \"name\": \"Proposed experiment: does a household system remove more work than it adds?\", \"url\": \"https://nolankido.com/living-well/household-experiment/\"}, {\"@type\": \"ListItem\", \"position\": 27, \"name\": \"Proposed experiment: simplify one part of your phone\", \"url\": \"https://nolankido.com/living-well/phone-simplification/\"}, {\"@type\": \"ListItem\", \"position\": 28, \"name\": \"Read a poem without turning it into a lesson\", \"url\": \"https://nolankido.com/living-well/read-a-poem-without-a-lesson/\"}, {\"@type\": \"ListItem\", \"position\": 29, \"name\": \"Reflect with AI without handing over your judgment\", \"url\": \"https://nolankido.com/living-well/reflection-with-your-judgment-intact/\"}, {\"@type\": \"ListItem\", \"position\": 30, \"name\": \"Spiritual curiosity without a new identity\", \"url\": \"https://nolankido.com/living-well/spiritual-curiosity-reading-path/\"}, {\"@type\": \"ListItem\", \"position\": 31, \"name\": \"Start here: the questions behind Living Well\", \"url\": \"https://nolankido.com/living-well/what-i-mean-by-living-well/\"}, {\"@type\": \"ListItem\", \"position\": 32, \"name\": \"Technology for real life\", \"url\": \"https://nolankido.com/living-well/technology-for-real-life/\"}, {\"@type\": \"ListItem\", \"position\": 33, \"name\": \"The difference between improving your life and believing you are never enough\", \"url\": \"https://nolankido.com/living-well/growth-without-self-rejection/\"}, {\"@type\": \"ListItem\", \"position\": 34, \"name\": \"Turn a rough idea into something you can share\", \"url\": \"https://nolankido.com/living-well/rough-idea-to-small-creation/\"}, {\"@type\": \"ListItem\", \"position\": 35, \"name\": \"Turn scattered notes into one useful next step\", \"url\": \"https://nolankido.com/living-well/scattered-notes-to-next-step/\"}, {\"@type\": \"ListItem\", \"position\": 36, \"name\": \"Use AI to understand something, not just get an answer\", \"url\": \"https://nolankido.com/living-well/learning-with-ai-without-skipping-understanding/\"}, {\"@type\": \"ListItem\", \"position\": 37, \"name\": \"What is the time you save actually for?\", \"url\": \"https://nolankido.com/living-well/time-you-save/\"}, {\"@type\": \"ListItem\", \"position\": 38, \"name\": \"What makes an ordinary moment feel sacred?\", \"url\": \"https://nolankido.com/living-well/ordinary-moments/\"}, {\"@type\": \"ListItem\", \"position\": 39, \"name\": \"What should you decide personally, even when a tool helps you express it?\", \"url\": \"https://nolankido.com/living-well/what-to-decide-yourself/\"}, {\"@type\": \"ListItem\", \"position\": 40, \"name\": \"When does documenting your life get in the way of experiencing it?\", \"url\": \"https://nolankido.com/living-well/documenting-your-life/\"}, {\"@type\": \"ListItem\", \"position\": 41, \"name\": \"When technology helps you notice more\", \"url\": \"https://nolankido.com/living-well/technology-that-helps-you-notice/\"}, {\"@type\": \"ListItem\", \"position\": 42, \"name\": \"A map of poker research, without the inflated claims.\", \"url\": \"https://nolankido.com/poker/poker-research-guide/\"}, {\"@type\": \"ListItem\", \"position\": 43, \"name\": \"A practical cash-game study route.\", \"url\": \"https://nolankido.com/poker/cash-game-study-path/\"}, {\"@type\": \"ListItem\", \"position\": 44, \"name\": \"A short stack is a situation, not a chart.\", \"url\": \"https://nolankido.com/poker/short-stack-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 45, \"name\": \"Bets, calls, and side pots.\", \"url\": \"https://nolankido.com/poker/betting-and-pots/\"}, {\"@type\": \"ListItem\", \"position\": 46, \"name\": \"Can you explain the next hand?\", \"url\": \"https://nolankido.com/poker/beginner-checkpoint/\"}, {\"@type\": \"ListItem\", \"position\": 47, \"name\": \"Check the room, the rules and your protections.\", \"url\": \"https://nolankido.com/poker/poker-access-and-protection/\"}, {\"@type\": \"ListItem\", \"position\": 48, \"name\": \"Choose a poker book or course you will actually use.\", \"url\": \"https://nolankido.com/poker/poker-books-and-courses/\"}, {\"@type\": \"ListItem\", \"position\": 49, \"name\": \"Choose a study tool by the question it answers.\", \"url\": \"https://nolankido.com/poker/choosing-study-tools/\"}, {\"@type\": \"ListItem\", \"position\": 50, \"name\": \"From hand notes to a poker vlog.\", \"url\": \"https://nolankido.com/poker/hand-to-vlog/\"}, {\"@type\": \"ListItem\", \"position\": 51, \"name\": \"From possible hands to weighted ranges.\", \"url\": \"https://nolankido.com/poker/range-combinations/\"}, {\"@type\": \"ListItem\", \"position\": 52, \"name\": \"From the first seat to the end of the day.\", \"url\": \"https://nolankido.com/poker/tournament-day/\"}, {\"@type\": \"ListItem\", \"position\": 53, \"name\": \"Give your bet a purpose.\", \"url\": \"https://nolankido.com/poker/betting-with-a-purpose/\"}, {\"@type\": \"ListItem\", \"position\": 54, \"name\": \"How a tournament unfolds.\", \"url\": \"https://nolankido.com/poker/tournaments/\"}, {\"@type\": \"ListItem\", \"position\": 55, \"name\": \"Keep a hand note you can actually review.\", \"url\": \"https://nolankido.com/poker/recording-hands/\"}, {\"@type\": \"ListItem\", \"position\": 56, \"name\": \"Learn poker with a small, free study path.\", \"url\": \"https://nolankido.com/poker/free-poker-learning-path/\"}, {\"@type\": \"ListItem\", \"position\": 57, \"name\": \"Multiway pots: count the opponents and the pots.\", \"url\": \"https://nolankido.com/poker/multiway-pot-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 58, \"name\": \"Omaha hi-lo: play for a share, not just a low.\", \"url\": \"https://nolankido.com/poker/omaha-hi-lo-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 59, \"name\": \"Omaha, lowball and mixed games: know which rules changed.\", \"url\": \"https://nolankido.com/poker/omaha-and-mixed-games/\"}, {\"@type\": \"ListItem\", \"position\": 60, \"name\": \"One hand, from deal to showdown.\", \"url\": \"https://nolankido.com/poker/holdem-basics/\"}, {\"@type\": \"ListItem\", \"position\": 61, \"name\": \"One river. Two different stories.\", \"url\": \"https://nolankido.com/poker/decision-lab/\"}, {\"@type\": \"ListItem\", \"position\": 62, \"name\": \"Pause the hand. Read the situation.\", \"url\": \"https://nolankido.com/poker/follow-along/\"}, {\"@type\": \"ListItem\", \"position\": 63, \"name\": \"Poker math: the right number for the right question.\", \"url\": \"https://nolankido.com/poker/poker-math-reference/\"}, {\"@type\": \"ListItem\", \"position\": 64, \"name\": \"Poker rules and fair play: find the right authority.\", \"url\": \"https://nolankido.com/poker/poker-rules-and-fair-play/\"}, {\"@type\": \"ListItem\", \"position\": 65, \"name\": \"Poker terms, in plain language.\", \"url\": \"https://nolankido.com/poker/glossary/\"}, {\"@type\": \"ListItem\", \"position\": 66, \"name\": \"Pot odds, with the assumptions visible.\", \"url\": \"https://nolankido.com/poker/pot-odds-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 67, \"name\": \"Questions new viewers ask.\", \"url\": \"https://nolankido.com/poker/viewer-questions/\"}, {\"@type\": \"ListItem\", \"position\": 68, \"name\": \"Read poker advice without borrowing its certainty.\", \"url\": \"https://nolankido.com/poker/evaluating-poker-advice/\"}, {\"@type\": \"ListItem\", \"position\": 69, \"name\": \"Read the preflop chart before trusting the colors.\", \"url\": \"https://nolankido.com/poker/reading-preflop-charts/\"}, {\"@type\": \"ListItem\", \"position\": 70, \"name\": \"Read the structure before choosing the tournament.\", \"url\": \"https://nolankido.com/poker/choosing-a-tournament/\"}, {\"@type\": \"ListItem\", \"position\": 71, \"name\": \"Registration, re-entry and the cost of another attempt.\", \"url\": \"https://nolankido.com/poker/registration-and-reentry/\"}, {\"@type\": \"ListItem\", \"position\": 72, \"name\": \"Results deserve context.\", \"url\": \"https://nolankido.com/poker/variance-and-results/\"}, {\"@type\": \"ListItem\", \"position\": 73, \"name\": \"Stud and lowball: change the rules before the strategy.\", \"url\": \"https://nolankido.com/poker/stud-and-lowball-workshop/\"}, {\"@type\": \"ListItem\", \"position\": 74, \"name\": \"Study cash games without importing tournament assumptions.\", \"url\": \"https://nolankido.com/poker/cash-game-study/\"}, {\"@type\": \"ListItem\", \"position\": 75, \"name\": \"The flush arrives. What can still change?\", \"url\": \"https://nolankido.com/poker/flush-and-redraw/\"}, {\"@type\": \"ListItem\", \"position\": 76, \"name\": \"The same cards. A different decision.\", \"url\": \"https://nolankido.com/poker/starting-hand-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 77, \"name\": \"Three all-ins. Two pots.\", \"url\": \"https://nolankido.com/poker/side-pot-lab/\"}, {\"@type\": \"ListItem\", \"position\": 78, \"name\": \"Turn a poker video or podcast into one useful lesson.\", \"url\": \"https://nolankido.com/poker/poker-media-study/\"}, {\"@type\": \"ListItem\", \"position\": 79, \"name\": \"Twelve checks. One useful repair.\", \"url\": \"https://nolankido.com/poker/practice-room/\"}, {\"@type\": \"ListItem\", \"position\": 80, \"name\": \"Understand the cost of a cash game.\", \"url\": \"https://nolankido.com/poker/cash-game-costs/\"}, {\"@type\": \"ListItem\", \"position\": 81, \"name\": \"What changed on the board?\", \"url\": \"https://nolankido.com/poker/reading-the-board/\"}, {\"@type\": \"ListItem\", \"position\": 82, \"name\": \"What is happening at the table?\", \"url\": \"https://nolankido.com/poker/table-etiquette/\"}, {\"@type\": \"ListItem\", \"position\": 83, \"name\": \"What is the bet trying to do?\", \"url\": \"https://nolankido.com/poker/ranges-and-bets/\"}, {\"@type\": \"ListItem\", \"position\": 84, \"name\": \"What the percentages mean.\", \"url\": \"https://nolankido.com/poker/poker-math/\"}, {\"@type\": \"ListItem\", \"position\": 85, \"name\": \"When more chips are not enough.\", \"url\": \"https://nolankido.com/poker/tournament-equity/\"}, {\"@type\": \"ListItem\", \"position\": 86, \"name\": \"Which hand wins?\", \"url\": \"https://nolankido.com/poker/hand-rankings/\"}, {\"@type\": \"ListItem\", \"position\": 87, \"name\": \"Which kind of tournament is this?\", \"url\": \"https://nolankido.com/poker/tournament-formats/\"}, {\"@type\": \"ListItem\", \"position\": 88, \"name\": \"Why does the seat matter?\", \"url\": \"https://nolankido.com/poker/position-and-stacks/\"}, {\"@type\": \"ListItem\", \"position\": 89, \"name\": \"Your first decisions after the flop.\", \"url\": \"https://nolankido.com/poker/first-flop-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 90, \"name\": \"Your first live cash-game session.\", \"url\": \"https://nolankido.com/poker/first-live-cash-game/\"}, {\"@type\": \"ListItem\", \"position\": 91, \"name\": \"Your first live tournament, without the guesswork.\", \"url\": \"https://nolankido.com/poker/first-live-tournament/\"}, {\"@type\": \"ListItem\", \"position\": 92, \"name\": \"Your first poker decisions.\", \"url\": \"https://nolankido.com/poker/first-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 93, \"name\": \"Your first poker range.\", \"url\": \"https://nolankido.com/poker/ranges-for-beginners/\"}, {\"@type\": \"ListItem\", \"position\": 94, \"name\": \"Your turn and river decisions.\", \"url\": \"https://nolankido.com/poker/turn-and-river-decisions/\"}, {\"@type\": \"ListItem\", \"position\": 95, \"name\": \"Finishing is a decision.\", \"url\": \"https://nolankido.com/notes/finishing-is-a-decision/\"}, {\"@type\": \"ListItem\", \"position\": 96, \"name\": \"Good decisions, imperfect outcomes.\", \"url\": \"https://nolankido.com/notes/decision-quality/\"}, {\"@type\": \"ListItem\", \"position\": 97, \"name\": \"Learning something difficult from the beginning.\", \"url\": \"https://nolankido.com/notes/learning-from-the-beginning/\"}, {\"@type\": \"ListItem\", \"position\": 98"
+        },
+        {
+          "start": 22414,
+          "end": 22415,
+          "old": "7",
+          "new": "8"
+        },
+        {
+          "start": 33372,
+          "end": 38441,
+          "old": "7 published articles, grouped by subject and alphabetized within each group. Choose a subject to open its list. The short reading paths above are still the easiest way to begin.</p><p class=\"small-copy\"><a href=\"/about/\" rel=\"author\">About Nolan</a> · <a href=\"/start-here/#reading-this-site\">How to read this material</a> · <a href=\"/follow/\">Follow future writing</a></p><details class=\"archive-group\" id=\"archive-practical-ai\"><summary>Practical AI <span>(6)</span></summary><p>Checking AI work, deciding when to use it, and keeping human judgment visible.</p><ul class=\"archive-list\"><li data-archive-id=\"trustworthy-tools\"><a href=\"/notes/trustworthy-tools/\">A working tool is not the same as a trustworthy one.</a><p class=\"archive-meta\">AI-assisted essay · Published <time datetime=\"2026-10-05\">October 5, 2026</time></p><p class=\"archive-description\">Two calculations agree. Both are wrong. A small worked example of the difference between a convincing demonstration and independent evidence.</p></li><li data-archive-id=\"ai-summary-review\"><a href=\"/technology/check-ai-summary/\">Check an AI summary against its source.</a><p class=\"archive-meta\">Guide with worked examples · Published <time datetime=\"2026-10-12\">October 12, 2026</time></p><p class=\"archive-description\">Check an AI summary claim by claim. Compare a fictional source, six annotated problems, and a repaired draft, then use the free source-review checklist.</p></li><li data-archive-id=\"ai-website-verification\"><a href=\"/technology/checking-ai-website-changes/\">Checking an AI-assisted website change.</a><p class=\"archive-meta\">Recorded case · Published <time datetime=\"2026-10-11\">October 11, 2026</time></p><p class=\"archive-description\">A documented AI-assisted website change passed 347 tests but still had malformed HTML. Inspect the repair, reproduce the failure, and reuse the checking method.</p></li><li data-archive-id=\"ai-answer-review\"><a href=\"/technology/check-ai-answers/\">How to check an AI answer.</a><p class=\"archive-meta\">Guide with worked examples · Published <time datetime=\"2026-10-12\">October 12, 2026</time></p><p class=\"archive-description\">Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.</p></li><li data-archive-id=\"keep-the-judgment\"><a href=\"/notes/keep-the-judgment/\">Let AI do more. Keep the judgment.</a><p class=\"archive-meta\">AI-assisted essay · Published <time datetime=\"2026-10-11\">October 11, 2026</time></p><p class=\"archive-description\">Delegating production is not the same as handing over responsibility. An essay on purpose, boundaries, permission, and the choices worth keeping human.</p></li><li data-archive-id=\"ai-task-choice\"><a href=\"/technology/should-i-use-ai/\">Should I use AI for this task?</a><p class=\"archive-meta\">Guide with worked examples · Published <time datetime=\"2026-10-12\">October 12, 2026</time></p><p class=\"archive-description\">Decide whether to use AI, choose a simpler method, or pause. Six questions, clear decision rules, four worked examples, and a free private-use worksheet.</p></li></ul></details><details class=\"archive-group\" id=\"archive-living-well\"><summary>Living Well <span>(34)</span></summary><p>Essays, practical guides and explicitly proposed experiments for ordinary life.</p><ul class=\"archive-list\"><li data-archive-id=\"living-well-quiet-morning\"><a href=\"/living-well/quiet-morning/\">A quiet morning does not need a dashboard</a><p class=\"archive-meta\">Practical guide · Published <time datetime=\"2026-10-08\">October 8, 2026</time></p><p class=\"archive-description\">Choose one manageable boundary around attention while preserving the technology you need for care, access, work, and safety.</p></li><li data-archive-id=\"living-well-a-tool-you-can-put-down\"><a href=\"/living-well/a-tool-you-can-put-down/\">A useful tool can make itself less necessary</a><p class=\"archive-meta\">AI-assisted essay · Published <time datetime=\"2026-10-09\">October 9, 2026</time></p><p class=\"archive-description\">An argument for judging technology by what it enables, including the ability to finish, learn, simplify, and leave.</p></li><li data-archive-id=\"living-well-weekly-reset\"><a href=\"/living-well/weekly-reset/\">A weekly reset that does not become another job</a><p class=\"archive-meta\">Practical guide · Published <time datetime=\"2026-10-08\">October 8, 2026</time></p><p class=\"archive-description\">A small paper-first review of commitments, choices, and breathing room, with an optional AI-assisted route and a clear stopping point",
+          "new": "8 published articles, grouped by subject and alphabetized within each group. Choose a subject to open its list. The short reading paths above are still the easiest way to begin.</p><p class=\"small-copy\"><a href=\"/about/\" rel=\"author\">About Nolan</a> · <a href=\"/start-here/#reading-this-site\">How to read this material</a> · <a href=\"/follow/\">Follow future writing</a></p><details class=\"archive-group\" id=\"archive-practical-ai\"><summary>Practical AI <span>(6)</span></summary><p>Checking AI work, deciding when to use it, and keeping human judgment visible.</p><ul class=\"archive-list\"><li data-archive-id=\"trustworthy-tools\"><a href=\"/notes/trustworthy-tools/\">A working tool is not the same as a trustworthy one.</a><p class=\"archive-meta\">AI-assisted essay · Published <time datetime=\"2026-10-05\">October 5, 2026</time></p><p class=\"archive-description\">Two calculations agree. Both are wrong. A small worked example of the difference between a convincing demonstration and independent evidence.</p></li><li data-archive-id=\"ai-summary-review\"><a href=\"/technology/check-ai-summary/\">Check an AI summary against its source.</a><p class=\"archive-meta\">Guide with worked examples · Published <time datetime=\"2026-10-12\">October 12, 2026</time></p><p class=\"archive-description\">Check an AI summary claim by claim. Compare a fictional source, six annotated problems, and a repaired draft, then use the free source-review checklist.</p></li><li data-archive-id=\"ai-website-verification\"><a href=\"/technology/checking-ai-website-changes/\">Checking an AI-assisted website change.</a><p class=\"archive-meta\">Recorded case · Published <time datetime=\"2026-10-11\">October 11, 2026</time></p><p class=\"archive-description\">A documented AI-assisted website change passed 347 tests but still had malformed HTML. Inspect the repair, reproduce the failure, and reuse the checking method.</p></li><li data-archive-id=\"ai-answer-review\"><a href=\"/technology/check-ai-answers/\">How to check an AI answer.</a><p class=\"archive-meta\">Guide with worked examples · Published <time datetime=\"2026-10-12\">October 12, 2026</time></p><p class=\"archive-description\">Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.</p></li><li data-archive-id=\"keep-the-judgment\"><a href=\"/notes/keep-the-judgment/\">Let AI do more. Keep the judgment.</a><p class=\"archive-meta\">AI-assisted essay · Published <time datetime=\"2026-10-11\">October 11, 2026</time></p><p class=\"archive-description\">Delegating production is not the same as handing over responsibility. An essay on purpose, boundaries, permission, and the choices worth keeping human.</p></li><li data-archive-id=\"ai-task-choice\"><a href=\"/technology/should-i-use-ai/\">Should I use AI for this task?</a><p class=\"archive-meta\">Guide with worked examples · Published <time datetime=\"2026-10-12\">October 12, 2026</time></p><p class=\"archive-description\">Decide whether to use AI, choose a simpler method, or pause. Six questions, clear decision rules, four worked examples, and a free private-use worksheet.</p></li></ul></details><details class=\"archive-group\" id=\"archive-living-well\"><summary>Living Well <span>(35)</span></summary><p>Essays, practical guides and explicitly proposed experiments for ordinary life.</p><ul class=\"archive-list\"><li data-archive-id=\"living-well-quiet-morning\"><a href=\"/living-well/quiet-morning/\">A quiet morning does not need a dashboard</a><p class=\"archive-meta\">Practical guide · Published <time datetime=\"2026-10-08\">October 8, 2026</time></p><p class=\"archive-description\">Choose one manageable boundary around attention while preserving the technology you need for care, access, work, and safety.</p></li><li data-archive-id=\"living-well-a-tool-you-can-put-down\"><a href=\"/living-well/a-tool-you-can-put-down/\">A useful tool can make itself less necessary</a><p class=\"archive-meta\">AI-assisted essay · Published <time datetime=\"2026-10-09\">October 9, 2026</time></p><p class=\"archive-description\">An argument for judging technology by what it enables, including the ability to finish, learn, simplify, and leave.</p></li><li data-archive-id=\"living-well-weekly-reset\"><a href=\"/living-well/weekly-reset/\">A weekly reset that does not become another job</a><p class=\"archive-meta\">Practical guide · Published <time datetime=\"2026-10-08\">October 8, 2026</time></p><p class=\"archive-description\">A small paper-first review of commitments, choices, and breathing room, with an optional AI-assisted route and a clear stopping point.</p></li><li data-archive-id=\"living-well-ai-and-personal-productivity\"><a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a><p class=\"archive-meta\">AI-assisted essay · Published <time datetime=\"2026-10-14\">October 14, 2026</time></p><p class=\"archive-description\">Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job"
+        }
+      ]
+    },
+    "living-well/ideas/index.html": {
+      "old_sha256": "6175eaf4b3e117dfbc1861bd174b441ae7989d6e48370893ae744c61675d1587",
+      "new_sha256": "765098112dc30cf952a9bcc5f40e0aaba243cff3f2428f018c5b9f7cb76defa4",
+      "edits": [
+        {
+          "start": 12676,
+          "end": 13029,
+          "old": "",
+          "new": "article class=\"lw-card\"><p class=\"lw-eyebrow\">Essay · 17 min read</p><h3><a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a></h3><p>Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.</p></article><"
+        }
+      ]
+    },
+    "living-well/topics/everyday-ai/index.html": {
+      "old_sha256": "d1b528f91c89eb0706354583f16187b359c4af02be11e8a6963b2fc89c952916",
+      "new_sha256": "9ba69a48c66e36ccc692ba7423a1cae983b3e1a74c36e55d4a19d50b3e2d2182",
+      "edits": [
+        {
+          "start": 10423,
+          "end": 10776,
+          "old": "",
+          "new": "article class=\"lw-card\"><p class=\"lw-eyebrow\">Essay · 17 min read</p><h3><a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a></h3><p>Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.</p></article><"
+        }
+      ]
+    },
+    "living-well/technology-for-real-life/index.html": {
+      "old_sha256": "6a244a370aa1f47325ce76c0e917432524b5a6eea2418619103baf33dbe5ddbb",
+      "new_sha256": "ae1d619c3ab8814c6bf145afd43a4db8b6b6792824dfd99392b68506aae0e3b9",
+      "edits": [
+        {
+          "start": 3046,
+          "end": 3109,
+          "old": "",
+          "new": "  <meta property=\"article:modified_time\" content=\"2026-10-14\">\n"
+        },
+        {
+          "start": 4011,
+          "end": 4041,
+          "old": "",
+          "new": "dateModified\": \"2026-10-14\", \""
+        },
+        {
+          "start": 7896,
+          "end": 15127,
+          "old": "details class=\"lw-outline\"><summary>On this page</summary><nav aria-label=\"On this page\"><ol><li><a href=\"#part-1\">Choose what you would like to make easier</a></li><li><a href=\"#part-2\">Less administration, clearer coordination</a></li><li><a href=\"#part-3\">More access, expression, and attention</a></li><li><a href=\"#part-4\">Compare three levels of help</a></li><li><a href=\"#part-5\">Ask whether it actually helped</a></li><li><a href=\"#part-6\">What a real-life post should show</a></li><li><a href=\"#part-7\">Return to the reason for doing it</a></li><li><a href=\"#one-question\">One question to take with you</a></li></ol></nav></details><p class=\"search-author\">By <a href=\"/about/\" rel=\"author\">Nolan Kido</a> · <a href=\"/start-here/#reading-this-site\">About this writing</a></p></section>\n<article class=\"lw-article\" aria-label=\"Technology for real life\"><div class=\"article-body shell prose\"><p class=\"article-lead\">A useful tool should leave you with something you can use and more attention for the life around it. Start with an ordinary task, not an app you feel obliged to adopt.</p><h2 id=\"part-1\">Choose what you would like to make easier</h2><p>This path connects the reflective questions in Living Well with concrete things to do: find a document, agree on a plan, develop an idea, read more comfortably, or turn a reflection into a considered next step. The point is not to automate being human. It is to remove avoidable friction while keeping the meaning, choices, and relationships with the people involved.</p><p>You can read one guide and stop. Each begins with a modest result, offers a route without generative AI, and shows what you still need to check. The worked examples are fictional and written for explanation. They are not reports of Nolan using a product or measurements of a benefit.</p><h2 id=\"part-2\">Less administration, clearer coordination</h2><p><a href=\"/living-well/scattered-notes-to-next-step/\">Turn scattered notes into one useful next step</a>. Separate actions, references, and unanswered questions instead of asking a system to turn every thought into a task. Leave with one short note you can understand without reopening a conversation.</p><p><a href=\"/living-well/shared-plan-people-can-use/\">Make a shared plan people can actually use</a>. Distinguish an agreed commitment from a suggestion, choose a place everyone can access, and check the plan with the people named in it.</p><p><a href=\"/living-well/find-the-document-you-need/\">Find the document you need without uploading your whole life</a>. Start with one ordinary document, a readable copy, and an understandable name. Search and verify the original before considering a summary.</p><h2 id=\"part-3\">More access, expression, and attention</h2><p><a href=\"/living-well/rough-idea-to-small-creation/\">Turn a rough idea into something you can share</a>. Keep an original note, develop a small draft, and use assistance without inventing a memory, quote, or experience.</p><p><a href=\"/living-well/make-digital-reading-easier/\">Make digital reading easier before adding another AI tool</a>. Try text size, reading view, or read-aloud support while keeping access to the original. Assistance can make participation easier without replacing what you came to read.</p><p><a href=\"/living-well/reflection-with-your-judgment-intact/\">Reflect with AI without handing over your judgment</a>. Use a notebook or a few optional questions to consider what matters. Keep private answers private and finish with a choice that remains yours.</p><h2 id=\"part-4\">Compare three levels of help</h2><p><strong>A simple method:</strong> a conversation, a paper note, a named file, or a direct question may already solve the problem. <strong>An ordinary digital tool:</strong> search, dictation, a calendar, or an accessibility feature can support a specific step. <strong>Generative AI:</strong> an optional draft, grouping, or question can help when you can review what it produces.</p><p>These are alternatives, not levels of sophistication to climb. You do not need all three. Instructions on this site are free; devices, connectivity, cloud storage, and some third-party features may have requirements or costs. No guide requires buying a new AI subscription.</p><h2 id=\"part-5\">Ask whether it actually helped</h2><p><a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a> gives you a small review method. Include setup, correction, maintenance, privacy, and work shifted to someone else. Speed can matter, but so can being able to participate, understand, or follow through.</p><p>A guide describes a method. A worked example illustrates it. A firsthand field note needs a real account of what happened. Future personal posts can connect those pieces without turning an illustration into evidence. There is no need to manufacture a successful experiment to keep a publishing schedule.</p><h2 id=\"part-6\">What a real-life post should show</h2><p>A useful future post can start with a small, recognizable obstacle and end with the thing that now works: a plan other people can open, a document found again, an accessible passage, or a small piece of writing. The human purpose comes first; the product is part of the method rather than the story’s hero.</p><p>Whether the format is an article or a video, show the starting material, the simple alternative, the tool’s specific contribution, what needed correction, and the final result. Record setup and checking effort as well as any time saved. End with what the change made possible and who it may not suit.</p><p>A demonstration made with fictional material should say so. A firsthand account should use actual observations, dates, and permitted material, with private details removed before recording. There are no completed personal trials or videos claimed here yet. The worked guides are usable now; they are not placeholders for an invented success story.</p><h2 id=\"part-7\">Return to the reason for doing it</h2><p>The larger questions remain: <a href=\"/living-well/time-you-save/\">what is the time you save for</a>, what deserves care, and what makes an ordinary moment meaningful? Removing a logistical obstacle can create room for a conversation, a creative afternoon, or an unhurried pause. It does not tell you which of those matters most.</p><p>For tools and background, browse <a href=\"/living-well/free-resources/everyday-tools/\">useful everyday tools</a>, <a href=\"/living-well/free-resources/digital-life/\">digital privacy</a>, and <a href=\"/living-well/free-resources/care/\">relationships and memory</a>. For a different kind of inquiry, the <a href=\"/living-well/topics/meaning/\">meaning and spirituality</a> collection remains its own invitation, not a productivity technique",
+          "new": "p class=\"editorial-note\"><strong>Revision, <time datetime=\"2026-10-14\">2026-10-14</time>:</strong> Added a related research essay on everyday AI use and fair comparisons of total effort.</p><details class=\"lw-outline\"><summary>On this page</summary><nav aria-label=\"On this page\"><ol><li><a href=\"#part-1\">Choose what you would like to make easier</a></li><li><a href=\"#part-2\">Less administration, clearer coordination</a></li><li><a href=\"#part-3\">More access, expression, and attention</a></li><li><a href=\"#part-4\">Compare three levels of help</a></li><li><a href=\"#part-5\">Ask whether it actually helped</a></li><li><a href=\"#part-6\">What a real-life post should show</a></li><li><a href=\"#part-7\">Return to the reason for doing it</a></li><li><a href=\"#one-question\">One question to take with you</a></li></ol></nav></details><p class=\"search-author\">By <a href=\"/about/\" rel=\"author\">Nolan Kido</a> · <a href=\"/start-here/#reading-this-site\">About this writing</a></p></section>\n<article class=\"lw-article\" aria-label=\"Technology for real life\"><div class=\"article-body shell prose\"><p class=\"article-lead\">A useful tool should leave you with something you can use and more attention for the life around it. Start with an ordinary task, not an app you feel obliged to adopt.</p><h2 id=\"part-1\">Choose what you would like to make easier</h2><p>This path connects the reflective questions in Living Well with concrete things to do: find a document, agree on a plan, develop an idea, read more comfortably, or turn a reflection into a considered next step. The point is not to automate being human. It is to remove avoidable friction while keeping the meaning, choices, and relationships with the people involved.</p><p>You can read one guide and stop. Each begins with a modest result, offers a route without generative AI, and shows what you still need to check. The worked examples are fictional and written for explanation. They are not reports of Nolan using a product or measurements of a benefit.</p><h2 id=\"part-2\">Less administration, clearer coordination</h2><p><a href=\"/living-well/scattered-notes-to-next-step/\">Turn scattered notes into one useful next step</a>. Separate actions, references, and unanswered questions instead of asking a system to turn every thought into a task. Leave with one short note you can understand without reopening a conversation.</p><p><a href=\"/living-well/shared-plan-people-can-use/\">Make a shared plan people can actually use</a>. Distinguish an agreed commitment from a suggestion, choose a place everyone can access, and check the plan with the people named in it.</p><p><a href=\"/living-well/find-the-document-you-need/\">Find the document you need without uploading your whole life</a>. Start with one ordinary document, a readable copy, and an understandable name. Search and verify the original before considering a summary.</p><h2 id=\"part-3\">More access, expression, and attention</h2><p><a href=\"/living-well/rough-idea-to-small-creation/\">Turn a rough idea into something you can share</a>. Keep an original note, develop a small draft, and use assistance without inventing a memory, quote, or experience.</p><p><a href=\"/living-well/make-digital-reading-easier/\">Make digital reading easier before adding another AI tool</a>. Try text size, reading view, or read-aloud support while keeping access to the original. Assistance can make participation easier without replacing what you came to read.</p><p><a href=\"/living-well/reflection-with-your-judgment-intact/\">Reflect with AI without handing over your judgment</a>. Use a notebook or a few optional questions to consider what matters. Keep private answers private and finish with a choice that remains yours.</p><h2 id=\"part-4\">Compare three levels of help</h2><p><strong>A simple method:</strong> a conversation, a paper note, a named file, or a direct question may already solve the problem. <strong>An ordinary digital tool:</strong> search, dictation, a calendar, or an accessibility feature can support a specific step. <strong>Generative AI:</strong> an optional draft, grouping, or question can help when you can review what it produces.</p><p>These are alternatives, not levels of sophistication to climb. You do not need all three. Instructions on this site are free; devices, connectivity, cloud storage, and some third-party features may have requirements or costs. No guide requires buying a new AI subscription.</p><h2 id=\"part-5\">Ask whether it actually helped</h2><p><a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a> gives you a small review method. Include setup, correction, maintenance, privacy, and work shifted to someone else. Speed can matter, but so can being able to participate, understand, or follow through.</p><p>A guide describes a method. A worked example illustrates it. A firsthand field note needs a real account of what happened. Future personal posts can connect those pieces without turning an illustration into evidence. There is no need to manufacture a successful experiment to keep a publishing schedule.</p><h2 id=\"part-6\">What a real-life post should show</h2><p>A useful future post can start with a small, recognizable obstacle and end with the thing that now works: a plan other people can open, a document found again, an accessible passage, or a small piece of writing. The human purpose comes first; the product is part of the method rather than the story’s hero.</p><p>Whether the format is an article or a video, show the starting material, the simple alternative, the tool’s specific contribution, what needed correction, and the final result. Record setup and checking effort as well as any time saved. End with what the change made possible and who it may not suit.</p><p>A demonstration made with fictional material should say so. A firsthand account should use actual observations, dates, and permitted material, with private details removed before recording. There are no completed personal trials or videos claimed here yet. The worked guides are usable now; they are not placeholders for an invented success story.</p><h2 id=\"part-7\">Return to the reason for doing it</h2><p>The larger questions remain: <a href=\"/living-well/time-you-save/\">what is the time you save for</a>, what deserves care, and what makes an ordinary moment meaningful? Removing a logistical obstacle can create room for a conversation, a creative afternoon, or an unhurried pause. It does not tell you which of those matters most.</p><p>For tools and background, browse <a href=\"/living-well/free-resources/everyday-tools/\">useful everyday tools</a>, <a href=\"/living-well/free-resources/digital-life/\">digital privacy</a>, and <a href=\"/living-well/free-resources/care/\">relationships and memory</a>. For a different kind of inquiry, the <a href=\"/living-well/topics/meaning/\">meaning and spirituality</a> collection remains its own invitation, not a productivity technique.</p><p>For a research-based overview and eight everyday prompts, read <a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result"
+        }
+      ]
+    },
+    "living-well/did-the-tool-actually-help/index.html": {
+      "old_sha256": "c8122348730853f85193b283a2d81545dc88bb9417db6e320cc382c2fb0ccf1c",
+      "new_sha256": "54721c4203fa8957f0c9adf9e3eb44bcc60f542c2f559ec406680742626e1d63",
+      "edits": [
+        {
+          "start": 3099,
+          "end": 3162,
+          "old": "",
+          "new": "  <meta property=\"article:modified_time\" content=\"2026-10-14\">\n"
+        },
+        {
+          "start": 4071,
+          "end": 4101,
+          "old": "",
+          "new": "dateModified\": \"2026-10-14\", \""
+        },
+        {
+          "start": 7983,
+          "end": 14726,
+          "old": "details class=\"lw-outline\"><summary>On this page</summary><nav aria-label=\"On this page\"><ol><li><a href=\"#useful-result\">What you will make</a></li><li><a href=\"#part-1\">Write down the purpose before the comparison</a></li><li><a href=\"#part-2\">Compare the whole job, not the moment of generation</a></li><li><a href=\"#part-3\">Look for reliability, fit, and costs that are not time</a></li><li><a href=\"#part-4\">Make a decision you can revise</a></li><li><a href=\"#part-5\">Turn a real observation into an honest field note</a></li><li><a href=\"#plain-text-starter\">A small template to use</a></li><li><a href=\"#one-question\">One question to take with you</a></li></ol></nav></details><p class=\"search-author\">By <a href=\"/about/\" rel=\"author\">Nolan Kido</a> · <a href=\"/start-here/#reading-this-site\">About this writing</a></p></section>\n<article class=\"lw-article\" aria-label=\"Did the tool actually make life easier?\"><div class=\"article-body shell prose\"><p class=\"article-lead\">An attractive output is a beginning, not the result. Judge the change by what happened to the original task and to the people who had to live with the new method.</p><aside class=\"lw-callout lw-utility-brief\" aria-labelledby=\"useful-result\"><p class=\"lw-eyebrow\">Technology for real life · Worked guide</p><h2 id=\"useful-result\">What you will make</h2><p>A defensible keep, simplify, stop, or still-unsure decision about one small change.</p><p><strong>Start with:</strong> One low-stakes change and a clear description of the earlier method.</p><p><strong>Simplest route:</strong> Keep a short before-and-after note. A score, tracking app, or AI verdict is unnecessary.</p><p><strong>Finish when:</strong> You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.</p><p class=\"small-copy\">No generative AI required. Worked examples illustrate the method; they are not reports of personal tests.</p><p class=\"lw-worksheet-actions\"><a href=\"/downloads/living-well-did-the-tool-actually-help.txt\" download>Save the blank worksheet (.txt)</a></p></aside><h2 id=\"part-1\">Write down the purpose before the comparison</h2><p>Choose one low-stakes repeated task. What would useful improvement look like? Finding a file without another search, making a plan easier to understand, participating in an activity, or finishing a draft are clearer aims than \"use more AI.\"</p><p>Keep the purpose close to the situation. Some changes are worthwhile because they improve access or reduce confusion, even if they do not save minutes. A faster method that loses important meaning is not automatically a better one. Use the <a href=\"/living-well/worksheets/#small-experiment\">existing small-experiment worksheet</a> when a private note helps.</p><h2 id=\"part-2\">Compare the whole job, not the moment of generation</h2><p>Include setup, preparing input, checking, correcting, moving the result into use, and maintaining the system. Compare the same task and the same standard of completion. If other people do part of the work, ask about their effort instead of treating your own screen time as the whole cost.</p><p><strong>Illustrative calculation, not measured results:</strong> the old method takes six minutes on each of five uses, or thirty minutes. A new method needs twelve minutes of setup, two minutes per use, one minute of checking per use, and three minutes of maintenance. Its first five uses also total thirty minutes: 12 + 10 + 5 + 3.</p><p>If the next five uses need no additional setup and the other assumptions remain the same, they take eighteen minutes: 10 + 5 + 3. That is twelve minutes less than the old method for those five uses. The arithmetic illustrates why setup and repetition matter; it does not predict savings for a real product or reader.</p><h2 id=\"part-3\">Look for reliability, fit, and costs that are not time</h2><p>Could you inspect the source? Did the plan remain accurate when a detail changed? Could the intended person open the result? Did a service require more personal information than the task justified? Would the method still work when you needed a simple fallback?</p><p>Also look for work shifted to someone else. A household plan may be easier for its creator but harder for everyone asked to update it. An AI draft may save writing time while creating more correction work. Discuss those effects rather than inferring that silence means agreement.</p><p>This guide does not propose a single numerical score for a person's wellbeing. Note the tradeoffs in plain language. Accessibility support, enjoyment, and a less rushed conversation do not need to be translated into a productivity metric to matter.</p><h2 id=\"part-4\">Make a decision you can revise</h2><p>Choose <strong>keep</strong>, <strong>simplify</strong>, <strong>stop</strong>, or <strong>still unsure</strong>. Name why. A tool that works for one task may not deserve access to the rest of your life. A disappointing trial can be useful when it prevents a larger unnecessary commitment.</p><p>For a low-stakes change, a few ordinary uses may be enough to decide what to try next. They do not establish a general causal finding. Different tasks, expectations, interruptions, or familiarity with the old method could explain some of the difference. Stop earlier when the method creates avoidable risk or distress.</p><h2 id=\"part-5\">Turn a real observation into an honest field note</h2><p>A future firsthand account should identify what actually happened, which device or service was used, the dates, the comparison, the effort, the mistakes, and the conclusion. Use genuine screenshots or examples only with suitable permission and removal of private information.</p><p>Keep three labels distinct: a proposed method, a fictional worked example, and a firsthand observation. Research findings need their own sources and limits. None of these becomes stronger by being presented as another. The <a href=\"/living-well/field-notes/\">field-note collection</a> retains proposed experiments until actual observations are supplied.</p><p>The final question is not whether the tool was impressive. It is whether you would make the same change again, knowing what it really required and what it made possible outside the interface",
+          "new": "p class=\"editorial-note\"><strong>Revision, <time datetime=\"2026-10-14\">2026-10-14</time>:</strong> Added a related research essay on everyday AI use and fair comparisons of total effort.</p><details class=\"lw-outline\"><summary>On this page</summary><nav aria-label=\"On this page\"><ol><li><a href=\"#useful-result\">What you will make</a></li><li><a href=\"#part-1\">Write down the purpose before the comparison</a></li><li><a href=\"#part-2\">Compare the whole job, not the moment of generation</a></li><li><a href=\"#part-3\">Look for reliability, fit, and costs that are not time</a></li><li><a href=\"#part-4\">Make a decision you can revise</a></li><li><a href=\"#part-5\">Turn a real observation into an honest field note</a></li><li><a href=\"#plain-text-starter\">A small template to use</a></li><li><a href=\"#one-question\">One question to take with you</a></li></ol></nav></details><p class=\"search-author\">By <a href=\"/about/\" rel=\"author\">Nolan Kido</a> · <a href=\"/start-here/#reading-this-site\">About this writing</a></p></section>\n<article class=\"lw-article\" aria-label=\"Did the tool actually make life easier?\"><div class=\"article-body shell prose\"><p class=\"article-lead\">An attractive output is a beginning, not the result. Judge the change by what happened to the original task and to the people who had to live with the new method.</p><aside class=\"lw-callout lw-utility-brief\" aria-labelledby=\"useful-result\"><p class=\"lw-eyebrow\">Technology for real life · Worked guide</p><h2 id=\"useful-result\">What you will make</h2><p>A defensible keep, simplify, stop, or still-unsure decision about one small change.</p><p><strong>Start with:</strong> One low-stakes change and a clear description of the earlier method.</p><p><strong>Simplest route:</strong> Keep a short before-and-after note. A score, tracking app, or AI verdict is unnecessary.</p><p><strong>Finish when:</strong> You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.</p><p class=\"small-copy\">No generative AI required. Worked examples illustrate the method; they are not reports of personal tests.</p><p class=\"lw-worksheet-actions\"><a href=\"/downloads/living-well-did-the-tool-actually-help.txt\" download>Save the blank worksheet (.txt)</a></p></aside><h2 id=\"part-1\">Write down the purpose before the comparison</h2><p>Choose one low-stakes repeated task. What would useful improvement look like? Finding a file without another search, making a plan easier to understand, participating in an activity, or finishing a draft are clearer aims than \"use more AI.\"</p><p>Keep the purpose close to the situation. Some changes are worthwhile because they improve access or reduce confusion, even if they do not save minutes. A faster method that loses important meaning is not automatically a better one. Use the <a href=\"/living-well/worksheets/#small-experiment\">existing small-experiment worksheet</a> when a private note helps.</p><h2 id=\"part-2\">Compare the whole job, not the moment of generation</h2><p>Include setup, preparing input, checking, correcting, moving the result into use, and maintaining the system. Compare the same task and the same standard of completion. If other people do part of the work, ask about their effort instead of treating your own screen time as the whole cost.</p><p><strong>Illustrative calculation, not measured results:</strong> the old method takes six minutes on each of five uses, or thirty minutes. A new method needs twelve minutes of setup, two minutes per use, one minute of checking per use, and three minutes of maintenance. Its first five uses also total thirty minutes: 12 + 10 + 5 + 3.</p><p>If the next five uses need no additional setup and the other assumptions remain the same, they take eighteen minutes: 10 + 5 + 3. That is twelve minutes less than the old method for those five uses. The arithmetic illustrates why setup and repetition matter; it does not predict savings for a real product or reader.</p><h2 id=\"part-3\">Look for reliability, fit, and costs that are not time</h2><p>Could you inspect the source? Did the plan remain accurate when a detail changed? Could the intended person open the result? Did a service require more personal information than the task justified? Would the method still work when you needed a simple fallback?</p><p>Also look for work shifted to someone else. A household plan may be easier for its creator but harder for everyone asked to update it. An AI draft may save writing time while creating more correction work. Discuss those effects rather than inferring that silence means agreement.</p><p>This guide does not propose a single numerical score for a person's wellbeing. Note the tradeoffs in plain language. Accessibility support, enjoyment, and a less rushed conversation do not need to be translated into a productivity metric to matter.</p><h2 id=\"part-4\">Make a decision you can revise</h2><p>Choose <strong>keep</strong>, <strong>simplify</strong>, <strong>stop</strong>, or <strong>still unsure</strong>. Name why. A tool that works for one task may not deserve access to the rest of your life. A disappointing trial can be useful when it prevents a larger unnecessary commitment.</p><p>For a low-stakes change, a few ordinary uses may be enough to decide what to try next. They do not establish a general causal finding. Different tasks, expectations, interruptions, or familiarity with the old method could explain some of the difference. Stop earlier when the method creates avoidable risk or distress.</p><h2 id=\"part-5\">Turn a real observation into an honest field note</h2><p>A future firsthand account should identify what actually happened, which device or service was used, the dates, the comparison, the effort, the mistakes, and the conclusion. Use genuine screenshots or examples only with suitable permission and removal of private information.</p><p>Keep three labels distinct: a proposed method, a fictional worked example, and a firsthand observation. Research findings need their own sources and limits. None of these becomes stronger by being presented as another. The <a href=\"/living-well/field-notes/\">field-note collection</a> retains proposed experiments until actual observations are supplied.</p><p>The final question is not whether the tool was impressive. It is whether you would make the same change again, knowing what it really required and what it made possible outside the interface.</p><p>For the evidence behind AI productivity claims and a comparison that includes checking in both methods, read <a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "5c387fe19d854c4ede7813cc2fe65a4bb85ff9eb262369130c808c659db4aa23",
+      "new_sha256": "b2f29bd89690b3ecf541830d6a58e49ac46f175ebb66c9d49923dc83145f7b01",
+      "edits": [
+        {
+          "start": 15500,
+          "end": 15501,
+          "old": "0",
+          "new": "4"
+        },
+        {
+          "start": 16411,
+          "end": 16412,
+          "old": "0",
+          "new": "4"
+        },
+        {
+          "start": 17096,
+          "end": 17226,
+          "old": "",
+          "new": "  </url>\n  <url>\n    <loc>https://nolankido.com/living-well/ai-and-personal-productivity/</loc>\n    <lastmod>2026-10-14</lastmod>\n"
+        }
+      ]
+    },
+    "living-well/feed.xml": {
+      "old_sha256": "94d241e3797f54abf9f5b35e99a1f1f92cd932d2326c7fdc481fb5a2ce86e094",
+      "new_sha256": "bb266e64ccf63dc8aea65cfe4267492062051d46b0359e91942dd4f52e60d9d3",
+      "edits": [
+        {
+          "start": 440,
+          "end": 959,
+          "old": "",
+          "new": "    <item>\n      <title>AI and personal productivity: what actually helps</title>\n      <link>https://nolankido.com/living-well/ai-and-personal-productivity/</link>\n      <description>Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.</description>\n      <guid isPermaLink=\"true\">https://nolankido.com/living-well/ai-and-personal-productivity/</guid>\n      <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>\n    </item>\n"
+        }
+      ]
+    },
+    "writing.xml": {
+      "old_sha256": "51e121b5da619567f2b09f04583263648e04647e55001c519547cfe18cb8cf65",
+      "new_sha256": "b79f1521858ce47f8296f0bb7bd619640c8c46fbdb2f108eb2f8862e821cd4bc",
+      "edits": [
+        {
+          "start": 592,
+          "end": 1206,
+          "old": "",
+          "new": "    <item>\n      <title>AI and personal productivity: what actually helps</title>\n      <link>https://nolankido.com/living-well/ai-and-personal-productivity/</link>\n      <description>Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.</description>\n      <guid isPermaLink=\"true\">https://nolankido.com/living-well/ai-and-personal-productivity/</guid>\n      <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>\n      <source url=\"https://nolankido.com/living-well/feed.xml\">Nolan Kido Living Well</source>\n    </item>\n"
+        }
+      ]
+    },
+    "_source/reader-previews.json": {
+      "old_sha256": "a7582d051a35c4d0ceb788a721550653dfedb9106227353cb6823c12e84178b4",
+      "new_sha256": "64bfb6fbe8f25270eb88076978383867f0226fe4f105301f4c80f74c2b2a9ac3",
+      "edits": [
+        {
+          "start": 56399,
+          "end": 57047,
+          "old": "",
+          "new": "    },\n    \"living-well-ai-and-personal-productivity\": {\n      \"path\": \"/living-well/ai-and-personal-productivity/\",\n      \"title\": \"AI and personal productivity: what actually helps\",\n      \"label\": \"LIVING WELL / ESSAY\",\n      \"src\": \"/assets/social/reader-living-well-ai-and-personal-productivity.png\",\n      \"sha256\": \"d5f32372b7e7f1f51c14c4e4d78f2d0f3a858440082f0fbf090bed0a9699dcfa\",\n      \"layout\": {\n        \"lines\": [\n          \"AI and personal\",\n          \"productivity: what actually\",\n          \"helps\"\n        ],\n        \"font_size\": 64,\n        \"bounds\": [\n          94,\n          185,\n          1068,\n          415\n        ]\n      }\n"
+        }
+      ]
+    },
+    "_source/living-well/discovery.json": {
+      "old_sha256": "562d0b7cee1bc4213f3a44d6c1c5aa944f47e19d97b6b312d9373b41bf04099f",
+      "new_sha256": "de57f9ec18145bffa48348cb3ef380fba25d6d1443763953af4af78c0a3c3229",
+      "edits": [
+        {
+          "start": 17976,
+          "end": 18252,
+          "old": "",
+          "new": ",\n            \"For a research-based overview and eight everyday prompts, read <a href=\\\"/living-well/ai-and-personal-productivity/\\\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result.\""
+        },
+        {
+          "start": 18712,
+          "end": 18852,
+          "old": "",
+          "new": ",\n      \"updated\": \"2026-10-14\",\n      \"revision\": \"Added a related research essay on everyday AI use and fair comparisons of total effort.\""
+        },
+        {
+          "start": 64608,
+          "end": 64930,
+          "old": "",
+          "new": ",\n            \"For the evidence behind AI productivity claims and a comparison that includes checking in both methods, read <a href=\\\"/living-well/ai-and-personal-productivity/\\\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result.\""
+        },
+        {
+          "start": 66339,
+          "end": 66479,
+          "old": "",
+          "new": ",\n      \"updated\": \"2026-10-14\",\n      \"revision\": \"Added a related research essay on everyday AI use and fair comparisons of total effort.\""
+        }
+      ]
+    },
+    "_scripts/living_well.py": {
+      "old_sha256": "158f4ea82f5e211be808cf58e473546125f6bbafce63e049e735d541a5f14e82",
+      "new_sha256": "7d46d167e1fd9c9327786a61e1fdae2450c6e0fcb74cafd069e07d007f412cee",
+      "edits": [
+        {
+          "start": 9304,
+          "end": 9467,
+          "old": "",
+          "new": "    extra = root / '_source/living-well/productivity.json'\n    if extra.exists():\n        entries.extend(json.loads(extra.read_text(encoding='utf-8'))['entries'])\n"
+        },
+        {
+          "start": 11940,
+          "end": 13009,
+          "old": "",
+          "new": "        ids = set()\n        for section in entry['sections']:\n            subs = section.get('subsections', [])\n            if not isinstance(subs, list):\n                raise ValueError('Living Well subsections must be a list')\n            for sub in subs:\n                if not isinstance(sub, dict) or set(sub) != {'id', 'heading', 'paragraphs'}:\n                    raise ValueError('Invalid Living Well subsection')\n                if not isinstance(sub['id'], str) or not re.fullmatch(r'use-[a-z0-9-]+', sub['id']):\n                    raise ValueError('Invalid Living Well subsection anchor')\n                if sub['id'] in ids or not isinstance(sub['heading'], str) or not sub['heading'].strip():\n                    raise ValueError('Duplicate or empty Living Well subsection')\n                if not isinstance(sub['paragraphs'], list) or not sub['paragraphs'] or any(not isinstance(p, str) or not p.strip() for p in sub['paragraphs']):\n                    raise ValueError('Living Well subsection needs paragraph text')\n                ids.add(sub['id'])\n"
+        },
+        {
+          "start": 15928,
+          "end": 16082,
+          "old": "",
+          "new": "    text += ' ' + ' '.join(sub['heading'] + ' ' + ' '.join(sub['paragraphs']) for section in entry['sections'] for sub in section.get('subsections', []))\n"
+        },
+        {
+          "start": 19183,
+          "end": 19408,
+          "old": "",
+          "new": "        for sub in s.get('subsections', []):\n            body += '<h3 id=\"' + escape(sub['id'], quote=True) + '\">' + escape(sub['heading']) + '</h3>'\n            body += ''.join('<p>' + p + '</p>' for p in sub['paragraphs'])\n"
+        }
+      ]
+    }
+  },
+  "new_outputs": {
+    "living-well/ai-and-personal-productivity/index.html": "b7f1eea5dcc83299802dcbebb4950b55dc90463bd3106fa4f0ff95e510d5fb15"
+  },
+  "new_files": {
+    "_source/living-well/productivity.json": "e16a5712125b271fed64fd5fc9072d11bf7b8ac738416a2a946f290cf53221f2",
+    "assets/social/reader-living-well-ai-and-personal-productivity.png": "d5f32372b7e7f1f51c14c4e4d78f2d0f3a858440082f0fbf090bed0a9699dcfa"
+  }
+}

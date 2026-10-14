@@ -21,8 +21,8 @@ class LivingWellTests(unittest.TestCase):
         cls.outputs = build.build_outputs()
 
     def test_full_launch_scope_and_substance(self):
-        self.assertEqual(len(self.pages), 75)
-        self.assertEqual(sum(e['kind'] != 'experiment' for e in self.entries), 31)
+        self.assertEqual(len(self.pages), 76)
+        self.assertEqual(sum(e['kind'] != 'experiment' for e in self.entries), 32)
         self.assertEqual(sum(e['kind'] == 'experiment' for e in self.entries), 3)
         self.assertEqual({e['topic'] for e in self.entries}, {t[0] for t in lw.TOPICS})
         for e in self.entries:

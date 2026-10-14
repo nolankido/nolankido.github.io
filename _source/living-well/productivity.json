@@ -1,0 +1,217 @@
+{
+  "entries": [
+    {
+      "slug": "ai-and-personal-productivity",
+      "title": "AI and personal productivity: what actually helps",
+      "description": "Use AI for everyday tasks without adding more work. Read the research, try eight practical prompts, protect your information and compare the whole job.",
+      "topic": "everyday-ai",
+      "kind": "essay",
+      "published": "2026-10-14",
+      "lead": "A fast answer is useful only if it helps you finish something worth doing. For ordinary life, the test is the whole job: preparing, checking, correcting and using the result, plus what the change makes possible away from the screen.",
+      "sections": [
+        {
+          "heading": "Count the whole job",
+          "paragraphs": [
+            "A household can contain plenty of work that never looks like a project: replying to a school message, finding an appliance manual, arranging a repair, deciding what to cook, or remembering which appointment still needs confirmation. These tasks compete with paid work, care, rest and the things you would rather be doing. An AI assistant may help with a particular step. It does not automatically make the surrounding responsibility disappear.",
+            "Start by naming a finish you can recognize. A request is ready to send after its facts and recipient are checked. A household plan is useful when the people affected can understand it and agree on their responsibilities. Dinner planning is finished when there is a feasible choice, not when a chatbot has produced an impressive menu. Counting generated words or completed prompts tells you little about any of those outcomes.",
+            "The relevant comparison is with your current workable method. That might be a short phone call, a saved email, a paper list, a calculator or a familiar recipe. AI can be worthwhile even without saving minutes if it makes a task more accessible or easier to begin. But call that benefit what it is. Reduced frustration, a clearer explanation and measured time savings are different observations.",
+            "Count setup, deciding what to share, preparing the input, waiting, reading, checking, fixing, transferring the result and maintaining the arrangement. Also count work moved to someone else. A household dashboard that needs another person to learn your tagging system can reduce your burden while increasing theirs. Ask how the arrangement works for them rather than treating your convenience as the whole result.",
+            "Then protect the purpose. If drafting a neighborhood notice becomes easier, that need not mean publishing twice as often. An efficient system can fill the time it seemed to release. Decide whether you wanted a finished task, more output, a calmer evening or space for something unrelated to productivity. The companion essay <a href=\"/living-well/time-you-save/\">What is the time you save actually for?</a> develops this question without requiring you to make rest another target.",
+            "This is a researched editorial guide, adapted from a Gemini Deep Research draft supplied for this website. Its prompts and time examples are proposed or fictional. They are not reports of Nolan’s household, results from testing a particular chatbot, or proof that these workflows will improve your life."
+          ]
+        },
+        {
+          "heading": "What research shows",
+          "paragraphs": [
+            "Research gives good reasons to try selected tasks and good reasons to check the result. It does not supply a reliable percentage by which an American household should expect to become more productive. Study participants, models, tasks and definitions of quality differ. Results from a particular writing exercise cannot simply be applied to cooking, caregiving or dealing with an insurer.",
+            "In a <a href=\"https://pubmed.ncbi.nlm.nih.gov/37440646/\">2023 randomized study by Shakked Noy and Whitney Zhang</a>, 453 college-educated professionals completed writing tasks related to their occupations. ChatGPT access reduced average task time by 40% and improved assessed output quality by 18%. That is evidence of benefit in those assignments, not a promise of comparable savings across a person’s week. The research also found that performance gaps narrowed; it does not establish that every expert gets little value from AI.",
+            "<a href=\"https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf\">Dell’Acqua and colleagues’ consultant experiment</a> shows why task selection matters. Their 2026 paper reports an experiment with 758 consultants using GPT-4 in 2023. On a set of suitable tasks, AI users completed work 25.1% faster on average and produced higher-quality solutions. On a selected task the model handled poorly, AI users were about <strong>19 percentage points</strong> less likely to reach a correct solution. This contrast concerns the tested tasks and model, not a permanent boundary between all creative and analytical work.",
+            "Evidence about thinking needs equally careful language. <a href=\"https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/\">Lee and colleagues’ 2025 survey</a> collected 936 examples from 319 knowledge workers. Greater confidence in AI was associated with less reported critical thinking. The study concerns people’s reports and associations; it is not a randomized demonstration that AI caused permanent loss of thinking ability.",
+            "A <a href=\"https://arxiv.org/abs/2604.04721v5\">2026 preprint by Grace Liu and colleagues</a>, revised October 3, reports randomized task experiments with 1,222 participants. Its abstract describes reduced persistence and worse unassisted performance after brief AI use in tasks including mathematical reasoning and reading comprehension. That deserves attention when learning is the goal. It does not establish permanent cognitive deterioration from ten minutes of ordinary household use. The abstract was reviewed for this article; the experiments were not independently reproduced here.",
+            "The practical inference is modest: match assistance to the job, inspect the output and preserve the parts you want to learn. For a difficult passage, ask for a hint or explanation and then try to explain it yourself. For a routine draft, let the tool offer a starting version and edit it. These are suggested ways to use the evidence, not workflows that the studies above validated. See <a href=\"/living-well/learning-with-ai-without-skipping-understanding/\">learning with AI without skipping understanding</a> for a worked distinction between receiving an answer and being able to use an idea."
+          ]
+        },
+        {
+          "heading": "Eight everyday uses",
+          "paragraphs": [
+            "Choose one task you already face. The eight possibilities below are a menu, not a ranking or a program to complete. Each prompt uses fictional or minimal information, keeps missing facts visible and leaves the final action with you. Adapt the wording to your circumstances; a more elaborate prompt is not automatically a better one.",
+            "Go straight to <a href=\"#use-paperwork\">paperwork</a>, <a href=\"#use-messages\">messages</a>, <a href=\"#use-meals\">meals</a>, <a href=\"#use-week\">the week</a>, <a href=\"#use-call\">a service call</a>, <a href=\"#use-manual\">a manual</a>, <a href=\"#use-application\">an application</a> or <a href=\"#use-notes\">rough notes</a>."
+          ],
+          "subsections": [
+            {
+              "id": "use-paperwork",
+              "heading": "1. Understand one piece of paperwork",
+              "paragraphs": [
+                "Use this when the obstacle is understanding what a document says, rather than making a medical, legal or financial decision. A non-sensitive excerpt can be enough. Remove identifiers, account numbers and unnecessary details about other people. If sharing the passage is inappropriate, ask its issuer to explain it instead.",
+                "<strong>Example prompt:</strong> <em>Explain this fictional insurance statement in plain language. List the amounts and their labels exactly as written. Separate what the excerpt states from what is missing. Point to the sentence supporting each explanation. Do not decide what I must pay, whether coverage is correct or what my rights are.</em>",
+                "Check each extracted amount, date and qualification against the original. An <a href=\"https://www.cms.gov/initiatives/your-patient-rights/medical-bill-rights/get-help/guides-resources/read-explanation-benefits\">Explanation of Benefits is not a bill</a>; CMS explains the distinction. A generated summary cannot establish an appeal deadline or payment obligation that the source does not settle. Keep questions for the insurer or provider separate from verified facts.",
+                "A useful finish is a short, accurate list of questions for the responsible organization. No particular reduction in waiting time is promised. For a statement with an obvious total and due date, reading it directly is simpler. If locating the original is the real problem, start with <a href=\"/living-well/find-the-document-you-need/\">finding the document you need</a>."
+              ]
+            },
+            {
+              "id": "use-messages",
+              "heading": "2. Draft a request you can stand behind",
+              "paragraphs": [
+                "A blank page can make an ordinary request feel larger than it is. Supply the outcome you want, verified dates, the necessary context and the tone you would use yourself. You can replace names with roles and omit account details until you are in the appropriate communication channel.",
+                "<strong>Example prompt:</strong> <em>Draft a polite follow-up under 100 words. I sent the requested information last week and have not received an update. Ask whether anything else is needed and when I can expect the next step. Do not invent a deadline, threaten cancellation, admit fault or add facts.</em>",
+                "Read the draft aloud. Check dates, claims, promises and the recipient before sending. A chatbot’s polished wording is not a reason to add an ultimatum you have not chosen or a contractual position you do not understand. The job is complete when a message you can stand behind reaches the intended person through the correct channel.",
+                "If two sentences in your own words would do, write them. A saved template can be faster on later occasions. For a larger factual draft, the Technology section’s <a href=\"/technology/task-brief/\">task-brief worksheet</a> helps separate the requested output from information the tool must not invent."
+              ]
+            },
+            {
+              "id": "use-meals",
+              "heading": "3. Choose a feasible meal",
+              "paragraphs": [
+                "AI can suggest combinations when a short list of ingredients leaves you undecided. Give available ingredients, equipment, time and any dietary constraints you want to disclose. Ask for a small choice rather than a week of recipes that creates a second shopping project.",
+                "<strong>Example prompt:</strong> <em>I have canned beans, rice, carrots, spinach and basic seasonings. Suggest two simple dinners using these ingredients and a stovetop. Say what preparation each requires. Do not assume extra groceries or promise that everything fits a time limit you cannot justify.</em>",
+                "Check allergens, portion needs, storage history and cooking instructions yourself. A plausible recipe cannot establish whether a particular leftover is safe. Use <a href=\"https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety\">USDA guidance for leftovers</a> rather than a chatbot’s reassurance. When cooking instructions need a safe internal temperature, consult the <a href=\"https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart\">official temperature chart</a> and a food thermometer.",
+                "Judge the workflow by whether you selected something feasible without unnecessary shopping, wasted ingredients or a long exchange. Those are things to observe, not promised outcomes. A meal you already know may be the best answer. The <a href=\"/living-well/household-friction/\">household-friction guide</a> also asks whether the recurring difficulty needs a simpler arrangement rather than another tool."
+              ]
+            },
+            {
+              "id": "use-week",
+              "heading": "4. Make a crowded week more realistic",
+              "paragraphs": [
+                "A chatbot can help sort a list and propose arrangements, but it should not turn uncertain dates into appointments. Give only the commitments needed for the exercise, mark what is confirmed and include travel, care responsibilities and room for interruptions. Use generic labels where detail adds no planning value.",
+                "<strong>Example prompt:</strong> <em>Sort this task list into confirmed commitments, flexible work and items needing clarification. Identify conflicts and ask about missing constraints. Suggest a smaller plan with unscheduled room. Do not invent dates, assign another person a job or change my calendar.</em>",
+                "Compare the draft with the actual calendar and original messages. Check travel time and the agreement of anyone who shares a task. Do not ask an assistant to reconcile a real work conflict by silently assuming a commitment can be skipped. Confirm the change with whoever is responsible.",
+                "A usable plan should make the next action clearer and reduce commitments when necessary. It need not fill every hour. The <a href=\"/living-well/weekly-reset/\">weekly reset</a> provides a paper-first version, while <a href=\"/living-well/shared-plan-people-can-use/\">a shared plan people can use</a> focuses on access and agreement. For a predictable week, an ordinary calendar may already solve the problem."
+              ]
+            },
+            {
+              "id": "use-call",
+              "heading": "5. Prepare for a service conversation",
+              "paragraphs": [
+                "Use rehearsal when you know what you want to ask but find it hard to begin. Describe the goal and facts you can verify, without disclosing an account number or private correspondence. The tool can propose questions or role-play a response; it cannot know what this particular representative will offer.",
+                "<strong>Example prompt:</strong> <em>I want to ask my internet provider about a lower-cost plan. Help me make a short call checklist: current service needs, available options, full monthly cost, any promotional end date and any change or cancellation fees. Then rehearse two possible responses. Do not invent offers or claim I qualify.</em>",
+                "Use the provider’s actual terms and official contact channel to check an offer. Write down what was agreed, the relevant dates and the final cost before changing a service. Rehearsal can help you ask clearly even if the provider makes no concession; a discount is not a required or guaranteed result.",
+                "A useful finish might be a clear answer, a next contact or an accurate record of the unresolved issue. If a short question in the provider’s help page answers it, stop there. For a sensitive disagreement with someone close to you, a real conversation that leaves room to listen deserves more than a simulated script."
+              ]
+            },
+            {
+              "id": "use-manual",
+              "heading": "6. Find the right maintenance instructions",
+              "paragraphs": [
+                "For an unfamiliar appliance, the first job may be locating the correct manual and recognizing its terms. The exact model and an ordinary symptom can help an assistant suggest what to look for. Keep the manufacturer’s instructions available; a generated troubleshooting sequence is not an authority on your equipment.",
+                "<strong>Example prompt:</strong> <em>I have the manufacturer’s manual for this exact model. In this excerpt, identify the routine cleaning or user-maintenance section, explain unfamiliar terms and list what the text does not tell me. Do not invent a repair, disassembly step or substitute safety instruction.</em>",
+                "Compare the model, diagrams and wording with the original. Follow its stated boundaries for user maintenance. If a task involves hazardous electricity, gas, a damaged device or instructions you cannot safely interpret, contact the manufacturer or qualified help. Asking a chatbot to put “safety first” does not make an improvised procedure safe.",
+                "The finish is finding understandable, applicable instructions, or recognizing that help is needed. Saving a professional visit is not a promise or the standard of success. A clear manufacturer checklist is often faster than an AI exchange. The document-finding guide can help you keep that original readable and accessible for next time."
+              ]
+            },
+            {
+              "id": "use-application",
+              "heading": "7. Make an application clearer",
+              "paragraphs": [
+                "An assistant can compare a job description with experience you have actually supplied. Use a limited excerpt of your resume with contact details removed, and check your employer’s rules before sharing work material. The aim is faithful explanation, not manufacturing a more impressive applicant.",
+                "<strong>Example prompt:</strong> <em>Compare these two truthful experience bullets with the supplied role description. Suggest clearer wording and identify requirements my evidence does not establish. Preserve dates, qualifications and scope. Ask before adding numbers, responsibility or skills. Show the original beside the revision.</em>",
+                "Check every verb and implication. “Supported” and “led” can describe very different responsibilities. A tool may improve clarity, but it cannot promise to bypass a screening system, obtain an interview or make missing experience real. Keep an editable copy whose claims you can explain in a conversation.",
+                "A useful outcome is a checked application with less avoidable editing or a clearer account of your experience. Track that actual effort rather than assuming a productivity multiplier. For a short personal introduction, writing directly may preserve your voice with less work. The Technology section’s <a href=\"/technology/check-ai-answers/\">answer-checking guide</a> offers a reusable way to separate supported claims from plausible additions."
+              ]
+            },
+            {
+              "id": "use-notes",
+              "heading": "8. Turn rough notes into a next step",
+              "paragraphs": [
+                "A messy note can be a good candidate because the information already exists and the desired transformation is small. Supply only the part you have permission to share. Avoid another person’s private story or a full meeting transcript when a few de-identified lines are enough.",
+                "<strong>Example prompt:</strong> <em>Organize these rough notes into confirmed decisions, suggestions, unanswered questions and possible next actions. Preserve uncertainty. Do not assign an owner or deadline unless the notes explicitly state it. List any conflicts or unclear references separately.</em>",
+                "Check the organized version against the note line by line. “Maybe Friday” must not become “due Friday”; a possible volunteer must not become an assigned owner. If there is an important ambiguity, ask the person involved instead of inviting the tool to fill the gap. Save the corrected list where you will actually use it.",
+                "The finish is one clear next action and an honest list of what still needs checking. The <a href=\"/living-well/scattered-notes-to-next-step/\">worked notes-to-next-step guide</a> gives a more detailed example and blank worksheet. For a note containing three clear items, rewriting it yourself is probably the shorter route."
+              ]
+            }
+          ]
+        },
+        {
+          "heading": "Privacy and control",
+          "paragraphs": [
+            "Begin with the tool you already have access to and a task that fits its available features. If a free option is sufficient, there is no reason to subscribe for this experiment. If a limit prevents useful work, compare the actual feature needed, its price and the effort it would remove. A paid plan does not by itself settle privacy, correctness or whether a workflow is worthwhile.",
+            "Treat giving information to a service as a disclosure to that service, not automatically as posting it publicly. Those are different things. Still, do not provide passwords, account identifiers, confidential work, private correspondence or unnecessary information about other people. Removing a name may not make a distinctive story anonymous. A fictional passage or a smaller excerpt is often enough to learn the method.",
+            "Check the service’s current official policy for the account you use. Training permission, saved history, retention, human safety review, personalization and connected services are separate questions. OpenAI’s <a href=\"https://help.openai.com/en/articles/7730893-data-controls-faq\">data-controls guidance</a> explains that disabling model improvement does not delete saved chats. Anthropic’s <a href=\"https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training\">consumer training policy</a> describes user choice and exceptions. Google’s <a href=\"https://support.google.com/gemini/answer/13594961?hl=en\">Gemini Privacy Hub</a> distinguishes activity settings, temporary chats and retention. There is no single thirty-day rule covering every consumer conversation. These links were checked October 14, 2026; consult the current version before sharing sensitive material.",
+            "For the output, ask what you can actually verify. Inspect amounts with a calculator or spreadsheet, dates against their original source, statements against the document and instructions against the responsible authority. A second polished AI answer is not independent confirmation. If checking takes longer than doing the task directly, use the direct method. More detailed prompting cannot guarantee a truthful or complete response.",
+            "Connected assistants can sometimes send messages, modify files or change a calendar. A draft saying that something is arranged does not prove it happened. Check the account, recipient, action and completion status before relying on it. Grant only the access the task needs and review consequential changes. Preserve a plain copy of the checked result when you need it outside the tool.",
+            "Keep learning and care in view too. If understanding is the aim, attempt part of the work yourself, ask for a hint and explain the result without copying. If an assistive tool supports your access or independence, continued use is not a failure. For relationships, logistics and wording can be supported while listening and deciding what you mean remain human responsibilities. <a href=\"/living-well/what-to-decide-yourself/\">What to decide yourself</a> explores that boundary without reducing it to a ban on useful help."
+          ]
+        },
+        {
+          "heading": "A fair comparison",
+          "paragraphs": [
+            "Try one recurring, low-stakes job over a few ordinary occasions. Write down the task, what counts as finished and the simplest method you would otherwise use. A two-week note can be convenient, but two different weeks are not a controlled experiment: the tasks, interruptions, workload and your familiarity may change. Alternate comparable occasions when practical and record those differences rather than hiding them.",
+            "For both methods, include preparation, doing the task, checking, correcting and putting the result into use. The non-AI baseline does not have zero checking time by definition. If you normally review an email before sending it, that review belongs in the baseline. If AI requires redaction or reformatting first, that belongs in the assisted method. Note one-time setup separately and include it in the total for the observed uses.",
+            "<strong>Fictional example, not measured savings:</strong> Three comparable uses of an earlier method take 18, 20 and 16 minutes, including their normal checking and edits: 54 minutes altogether. An assisted method needs 12 minutes of initial setup, then 9, 11 and 10 minutes for the three uses, including input preparation, waiting, checking, corrections and transfer: 12 + 9 + 11 + 10 = 42 minutes. The illustrative difference is 54 - 42 = 12 minutes over those uses. It is not a forecast for any product or household.",
+            "The output must still meet the same completion standard. If the quicker version omits an important fact or creates more work for someone else, its speed does not settle the comparison. Record mistakes, uncertainty, access problems, cost and any help another person supplied. A smaller task, a familiar second attempt or fewer interruptions could explain a difference that otherwise looks like an AI benefit.",
+            "Keep time and experience on separate lines. Did the whole task take less time? Did it feel easier to begin? Was the result more useful? Was the checking tiring? You may value a calmer process that takes the same time, but that is an observed preference rather than measured time savings. A private rating can help you describe the experience; it is not a clinical measure or proof of a general effect.",
+            "Finish with keep, simplify, stop or still unsure. You need not finish a fortnight to stop an arrangement that creates trouble. If it helps, keep the smallest version that works. If it does not, returning to a paper list or saved template is a successful decision. Use <a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a> and its <a href=\"/living-well/worksheets/#everyday-task-sheets\">blank private worksheet</a> for a fuller record. No answers are collected by this article.",
+            "If a calculation helps, use the Technology section’s <a href=\"/technology/ai-time-savings/\">AI time-savings calculator</a>. Enter your own observations, include review in both methods, and treat its result as arithmetic under your assumptions.",
+            "The useful question remains what becomes possible outside the interface: a sent message, a found document, less repeated administration, more accessible information or an evening you can leave unplanned. These outcomes are worth noticing in ordinary terms. They do not need to become a dashboard, a streak or a promise that every difficult part of life can be automated."
+          ]
+        }
+      ],
+      "question": "Which recurring job would you try to make easier, and what would count as a useful result after checking the whole process?",
+      "related": [
+        "did-the-tool-actually-help",
+        "time-you-save"
+      ],
+      "sources": [
+        {
+          "label": "Noy and Zhang: experimental evidence on AI and writing productivity",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37440646/",
+          "note": "Peer-reviewed 2023 study. Published abstract checked for the sample, time and quality results; household workflows here were not tested by it.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "Dell’Acqua and colleagues: Navigating the Jagged Technological Frontier (PDF)",
+          "url": "https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf",
+          "note": "2026 paper describing the 2023 consultant experiment. Methods, abstract and correctness discussion checked; the 19-point contrast is task-specific.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "Lee and colleagues: generative AI and critical thinking",
+          "url": "https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/",
+          "note": "2025 research summary and abstract. Self-reported experience and associations are distinct from experimentally measured skill loss.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "Liu and colleagues: AI assistance, persistence and independent performance",
+          "url": "https://arxiv.org/abs/2604.04721v5",
+          "note": "2026 preprint, version 5. Abstract and submission status reviewed; no independent replication or claim of lasting household effects.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "CMS: reading an Explanation of Benefits",
+          "url": "https://www.cms.gov/initiatives/your-patient-rights/medical-bill-rights/get-help/guides-resources/read-explanation-benefits",
+          "note": "Official document guidance supports the EOB-versus-bill distinction, not a determination about a reader’s coverage or payment.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "USDA: leftovers and food safety",
+          "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety",
+          "note": "Official food-handling guidance. The menu prompt cannot assess the safety of a particular ingredient.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "USDA: safe minimum internal temperatures",
+          "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+          "note": "Official reference for temperature checks, not validation of AI-generated cooking instructions.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "OpenAI: data controls in ChatGPT",
+          "url": "https://help.openai.com/en/articles/7730893-data-controls-faq",
+          "note": "Official account-control guidance. Training permission and stored history are separate.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "Anthropic: consumer data and model training",
+          "url": "https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training",
+          "note": "Official consumer policy, including user choice and exceptions. Other account types have different terms.",
+          "checked": "2026-10-14"
+        },
+        {
+          "label": "Google: Gemini Apps Privacy Hub",
+          "url": "https://support.google.com/gemini/answer/13594961?hl=en",
+          "note": "Official guidance distinguishes activity settings, temporary chats, review and retention. Policies and features can change.",
+          "checked": "2026-10-14"
+        }
+      ]
+    }
+  ]
+}

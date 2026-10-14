@@ -18,6 +18,7 @@ import poker_checkpoint as checkpoint
 import poker_beginner_path
 import poker_library
 import checkpoint_history as history
+import productivity_history
 from test_viewer_guides import Tags, best
 
 LABELS = ['one', 'two', 'three', 'four', 'five', 'six']
@@ -29,8 +30,9 @@ REPAIRS = ['/poker/first-decisions/#chips-owed', '/poker/starting-hand-decisions
 class CheckpointTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = build.public_pages()
-        cls.outputs = build.build_outputs()
+        cls.pages = productivity_history.pages(build.public_pages())
+        cls.current_outputs = build.build_outputs()
+        cls.outputs = productivity_history.outputs(cls.current_outputs)
         cls.source = (ROOT / '_source/poker/beginner-checkpoint.html').read_text()
         cls.text = cls.outputs[build.output_path(checkpoint.ROUTE)]
         cls.baseline = json.loads((ROOT / '_tests/checkpoint-baseline.json').read_text())
@@ -50,7 +52,7 @@ class CheckpointTests(unittest.TestCase):
                    '_source/reader-previews.json', '_scripts/build.py', '_scripts/poker_library.py',
                    '_scripts/poker_reading.py', '_scripts/check_live.py'}
         for path, digest in b['files'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = productivity_history.before(path, (ROOT / path).read_bytes())
             if path not in mutable: self.assertEqual(sha256(raw).hexdigest(), digest, path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), digest, path)
 
@@ -192,7 +194,7 @@ class CheckpointTests(unittest.TestCase):
             href=a.get('href','')
             if href.startswith('/poker/') and '#' in href:
                 route,anchor=href.split('#');self.assertIn('id="'+anchor+'"',self.outputs[build.output_path(route)],href)
-        targets=check_live.targets();self.assertEqual(len(targets),416)
+        targets=check_live.targets();self.assertEqual(len(targets),418)
         self.assertEqual(targets['/'+checkpoint.SHEET],(200,(ROOT/checkpoint.SHEET).read_bytes()))
         self.assertEqual(targets[checkpoint.ROUTE],(200,self.text.encode()))
         body=(ROOT/'_source/poker/free-poker-learning-path.html').read_text()

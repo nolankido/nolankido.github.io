@@ -8,6 +8,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import productivity_history
 
 ROOT = Path(__file__).resolve().parents[1]
 ID = 'poker-beginner-checkpoint'
@@ -20,6 +21,7 @@ def change():
 
 
 def before(path, data):
+    data = productivity_history.before(path, data)
     entry = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
@@ -34,17 +36,20 @@ def before(path, data):
 
 
 def pages(records):
+    records = productivity_history.pages(records)
     c = change()
     return [deepcopy(c['old_page']) if p == c['new_page'] else deepcopy(p)
             for p in records if p != c['page']]
 
 
 def outputs(records):
+    records = productivity_history.outputs(records)
     return {p: before(p, value) for p, value in records.items()
             if change()['new_outputs'].get(str(p)) != sha256(value.encode()).hexdigest()}
 
 
 def files(paths):
+    paths = productivity_history.files(paths)
     def original(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
         return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()
