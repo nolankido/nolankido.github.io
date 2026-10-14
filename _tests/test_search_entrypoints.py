@@ -20,6 +20,7 @@ import search_entrypoints
 import search_entry_history as history
 import practical_navigation_history
 import time_export_history
+import poker_titles_history
 
 
 class SearchEntryTests(unittest.TestCase):
@@ -52,7 +53,7 @@ class SearchEntryTests(unittest.TestCase):
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', raw)[1])
             if schema['@type'] != 'Article': continue
             count += 1
-            self.assertEqual(p, old[p['id']], p['id'])
+            self.assertEqual(poker_titles_history.pages([p])[0], old[p['id']], p['id'])
             raw = practical_navigation_history.before(build.output_path(p['path']), raw)
             body = re.search(r'<body\b[^>]*>(.*?)</body>', raw, re.S)[1]
             self.assertEqual(sha256(body.encode()).hexdigest(), self.baseline['bodies'][build.output_path(p['path']).as_posix()])

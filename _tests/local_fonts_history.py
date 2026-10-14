@@ -3,12 +3,12 @@
 No old golden hashes are refreshed. The independent local-fonts baseline pins
 all pre-release outputs and files directly from production Git objects.
 """
-from copy import deepcopy
 from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
 import search_sections_history
+import poker_titles_history
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -19,7 +19,7 @@ def baseline():return json.loads((ROOT/'_tests/local-fonts-baseline.json').read_
 def change():return json.loads((ROOT/'_tests/local-fonts-change.json').read_text())
 
 def pages(records):
-    result=deepcopy(records)
+    result=poker_titles_history.pages(records)
     for p in result:
         if p['id']=='privacy' and p.get('updated')=='2026-10-13':p['updated']='2026-10-12'
     return result

@@ -2,6 +2,7 @@
 from functools import lru_cache
 import json
 from pathlib import Path
+from poker_titles_history import before as before_poker_titles
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -12,6 +13,7 @@ def change():
 
 
 def before(path, data):
+    data = before_poker_titles(path, data)
     path = str(path)
     if path not in {'assets/site-find.js', '_source/find.html', 'find/index.html'}:
         return data

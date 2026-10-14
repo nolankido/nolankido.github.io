@@ -1,0 +1,76 @@
+{
+  "entries": [
+    {
+      "id": "poker-holdem-basics",
+      "path": "/poker/holdem-basics/",
+      "old": "One hand, from deal to showdown | Nolan Kido Poker",
+      "new": "Texas Hold'em Rules: Deal to Showdown | Nolan Kido"
+    },
+    {
+      "id": "poker-hand-rankings",
+      "path": "/poker/hand-rankings/",
+      "old": "Which hand wins? | Nolan Kido Poker",
+      "new": "Poker Hand Rankings: Which Hand Wins? | Nolan Kido"
+    },
+    {
+      "id": "poker-betting-and-pots",
+      "path": "/poker/betting-and-pots/",
+      "old": "Bets, calls, and side pots | Nolan Kido Poker",
+      "new": "Poker Betting: Calls, Raises and Side Pots | Nolan Kido"
+    },
+    {
+      "id": "poker-tournaments",
+      "path": "/poker/tournaments/",
+      "old": "How a tournament unfolds | Nolan Kido Poker",
+      "new": "How Poker Tournaments Work: Blinds and Payouts | Nolan Kido"
+    },
+    {
+      "id": "poker-poker-math",
+      "path": "/poker/poker-math/",
+      "old": "What the percentages mean | Nolan Kido Poker",
+      "new": "Poker Math: Pot Odds, Outs and Equity | Nolan Kido"
+    },
+    {
+      "id": "poker-position-and-stacks",
+      "path": "/poker/position-and-stacks/",
+      "old": "Why does the seat matter? | Nolan Kido Poker",
+      "new": "Poker Position, Effective Stacks and SPR | Nolan Kido"
+    },
+    {
+      "id": "poker-reading-the-board",
+      "path": "/poker/reading-the-board/",
+      "old": "What changed on the board? | Nolan Kido Poker",
+      "new": "Reading a Poker Board: Suits, Pairs and Draws | Nolan Kido"
+    }
+  ],
+  "source_patches": [
+    [
+      "    \"title\": \"One hand, from deal to showdown.\",\n    \"seo_title\": \"One hand, from deal to showdown | Nolan Kido Poker\",",
+      "    \"title\": \"One hand, from deal to showdown.\",\n    \"seo_title\": \"Texas Hold'em Rules: Deal to Showdown | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"Which hand wins?\",\n    \"seo_title\": \"Which hand wins? | Nolan Kido Poker\",",
+      "    \"title\": \"Which hand wins?\",\n    \"seo_title\": \"Poker Hand Rankings: Which Hand Wins? | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"Bets, calls, and side pots.\",\n    \"seo_title\": \"Bets, calls, and side pots | Nolan Kido Poker\",",
+      "    \"title\": \"Bets, calls, and side pots.\",\n    \"seo_title\": \"Poker Betting: Calls, Raises and Side Pots | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"How a tournament unfolds.\",\n    \"seo_title\": \"How a tournament unfolds | Nolan Kido Poker\",",
+      "    \"title\": \"How a tournament unfolds.\",\n    \"seo_title\": \"How Poker Tournaments Work: Blinds and Payouts | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"What the percentages mean.\",\n    \"seo_title\": \"What the percentages mean | Nolan Kido Poker\",",
+      "    \"title\": \"What the percentages mean.\",\n    \"seo_title\": \"Poker Math: Pot Odds, Outs and Equity | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"Why does the seat matter?\",\n    \"seo_title\": \"Why does the seat matter? | Nolan Kido Poker\",",
+      "    \"title\": \"Why does the seat matter?\",\n    \"seo_title\": \"Poker Position, Effective Stacks and SPR | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"What changed on the board?\",\n    \"seo_title\": \"What changed on the board? | Nolan Kido Poker\",",
+      "    \"title\": \"What changed on the board?\",\n    \"seo_title\": \"Reading a Poker Board: Suits, Pairs and Draws | Nolan Kido\","
+    ]
+  ]
+}
