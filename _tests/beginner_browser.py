@@ -34,6 +34,7 @@ def main():
                 page.set_viewport_size({'width': width, 'height': 900})
                 response = page.goto(origin + ROUTE)
                 assert response and response.status == 200
+                page.evaluate('()=>document.fonts.ready.then(()=>true)')
                 expect(page.locator('h1')).to_have_text('Your first poker decisions.')
                 expect(page.locator('details.viewer-question')).to_have_count(12)
                 expect(page.locator('details.viewer-question[open]')).to_have_count(0)
@@ -46,7 +47,15 @@ def main():
                     expect(q.locator('div')).to_be_visible()
                     report['keyboard_answers'] += 1
                     if q.get_attribute('id') == 'check-kicker' and shots and width in [390, 1440]:
-                        q.evaluate('(el)=>el.scrollIntoView({block:"center"})')
+                        # Cancel smooth motion before recording a viewport.
+                        # Center the actual answer, leaving the sticky header clear.
+                        q.evaluate('''el=>{const r=el.getBoundingClientRect();
+                            const header=document.querySelector('.site-header').getBoundingClientRect().height;
+                            const top=Math.max(header+16,(innerHeight-r.height)/2);
+                            window.scrollTo({top:scrollY+r.top-top,behavior:'instant'});}''')
+                        expect(q.locator('summary')).to_be_in_viewport()
+                        expect(q.locator('div')).to_be_in_viewport()
+                        assert q.evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
                         page.screenshot(path=str(shots / f'beginner-answer-{width}.png'))
                 expect(page.locator('#check-full-hand')).to_contain_text('400')
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), ('open', width)

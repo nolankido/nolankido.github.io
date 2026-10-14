@@ -1046,3 +1046,17 @@ Google rankings or indexing. Next useful work is real beginner feedback on
 which questions remain confusing, then a similarly careful lesson on
 starting-hand decisions with explicitly bounded situations. Avoid presenting
 an unvalidated universal chart or adding repetitive pages just for volume.
+
+The first candidate, acd2cfca92e68c04b6d2e78e27ee5fd06fc218fc, passed all
+520 unit/content checks locally (290.270 seconds) and on GitHub (199.408
+seconds). Build, HTML and technical search checks passed. The Poker browser
+group passed all 48 answer disclosures across four widths, six discovery
+arrivals, no-script operation, and two accessibility audits with no detected
+violations. The two opening previews were inspected. Visual review caught
+a test-capture issue: the answer viewport was recorded before smooth
+scrolling finished. The final candidate waits for fonts, uses an immediate
+capture scroll and asserts that the answer is in the viewport and clear of
+the sticky header. This changes only the test capture, not public content.
+The full gate runs again on that exact candidate before merging; initial
+passes do not substitute for final-candidate verification. Final receipt:
+https://github.com/nolankido/nolankido.github.io/pull/67
