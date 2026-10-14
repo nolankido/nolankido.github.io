@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import poker_titles_history as history
+import technology_jumps_history
 from test_site import Page
 
 
@@ -19,7 +20,7 @@ class PokerTitlesTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pages = build.public_pages()
-        cls.outputs = build.build_outputs()
+        cls.outputs = {p: technology_jumps_history.before(p, value) for p, value in build.build_outputs().items()}
         cls.baseline = json.loads((ROOT / '_tests/poker-titles-baseline.json').read_text())
 
     def test_seven_search_titles_are_the_only_changes_to_production_content(self):
@@ -42,7 +43,7 @@ class PokerTitlesTests(unittest.TestCase):
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = technology_jumps_history.before(path, (ROOT / path).read_bytes())
             if sha256(raw).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), expected, path)
