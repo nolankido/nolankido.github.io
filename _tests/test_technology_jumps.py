@@ -8,6 +8,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build
 import technology_jumps_history as history
 import study_titles_history
@@ -21,18 +22,19 @@ class TechnologyJumpsTests(unittest.TestCase):
         cls.baseline = json.loads((ROOT / '_tests/technology-jumps-baseline.json').read_text())
 
     def test_only_the_existing_technology_opening_navigation_changes(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         b = self.baseline
-        self.assertEqual(sha256(json.dumps(study_titles_history.pages(build.public_pages()), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
+        self.assertEqual(sha256(json.dumps(study_titles_history.pages(beginner_history.pages(build.public_pages())), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
         self.assertEqual((len(b['outputs']), len(b['files'])), (198, 343))
-        self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
+        self.assertEqual(set(map(str, historical_outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():
-            raw = self.outputs[Path(path)]
+            raw = historical_outputs[Path(path)]
             if sha256(raw.encode()).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw).encode()).hexdigest(), expected, path)
         self.assertEqual(changed, ['technology/index.html'])
-        files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()})
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():

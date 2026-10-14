@@ -11,6 +11,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build, site_find
 import search_public_titles_history as history
 from test_site import Page
@@ -25,13 +26,14 @@ class SearchPublicTitlesTests(unittest.TestCase):
         cls.baseline = json.loads((ROOT / '_tests/search-public-titles-baseline.json').read_text())
 
     def test_only_search_metadata_and_runtime_change_against_production(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         b = self.baseline
-        self.assertEqual(self.pages, b['pages'])
+        self.assertEqual(beginner_history.pages(self.pages), b['pages'])
         self.assertEqual((len(b['outputs']), len(b['files']), len(b['bodies'])), (198, 343, 171))
-        self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
+        self.assertEqual(set(map(str, historical_outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():
-            raw = self.outputs[Path(path)]
+            raw = historical_outputs[Path(path)]
             if sha256(raw.encode()).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw).encode()).hexdigest(), expected, path)
@@ -40,13 +42,13 @@ class SearchPublicTitlesTests(unittest.TestCase):
         for path, expected in b['bodies'].items():
             if path == 'find/index.html':
                 continue
-            body = re.search(r'<body\b[^>]*>.*?</body>', self.outputs[Path(path)], re.S)[0]
+            body = re.search(r'<body\b[^>]*>.*?</body>', historical_outputs[Path(path)], re.S)[0]
             self.assertEqual(sha256(body.encode()).hexdigest(), expected, path)
-        files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()})
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = beginner_history.before(path, (ROOT / path).read_bytes())
             if sha256(raw).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), expected, path)
@@ -55,7 +57,7 @@ class SearchPublicTitlesTests(unittest.TestCase):
     def test_exact_public_titles_are_escaped_and_invalid_metadata_fails_closed(self):
         expected = {p['path']: p for p in self.pages if site_find.eligible(p)}
         cards = Page(site_find.render(self.items)).tags('li')
-        self.assertEqual(len(cards), 151)
+        self.assertEqual(len(cards), 152)
         for item, card in zip(self.items, cards):
             self.assertEqual(item['search_title'], expected[item['path']]['seo_title'])
             self.assertEqual(card['data-search-title'], item['search_title'])

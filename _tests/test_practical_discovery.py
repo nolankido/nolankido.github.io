@@ -15,6 +15,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build
 import check_live
 import follow
@@ -45,7 +46,8 @@ class PracticalDiscoveryTests(unittest.TestCase):
             self.assertEqual(self.outputs[path].encode(), (ROOT / path).read_bytes())
 
     def test_combined_feed_preserves_every_original_record_and_source(self):
-        now = records(self.outputs[follow.OUTPUT])
+        historical_outputs = beginner_history.outputs(self.outputs)
+        now = records(historical_outputs[follow.OUTPUT])
         historical = {url: now[url] for url in self.baseline['combined_urls']}
         self.assertEqual(len(historical), self.baseline['combined_record_count'])
         self.assertEqual(hashlib.sha256(json.dumps(historical, sort_keys=True).encode()).hexdigest(),

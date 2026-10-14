@@ -9,6 +9,7 @@ import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
+import beginner_history
 import build
 import local_fonts_history
 import time_export_history as history
@@ -58,17 +59,18 @@ class TimeExportTests(unittest.TestCase):
             self.assertEqual(case['downloads'],[]);self.assertEqual(case['feedback'],'')
 
     def test_all_original_outputs_survive_only_the_calculator_cache_version(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         self.assertEqual(len(self.baseline['outputs']),198)
         changed=[]
         for path,digest in self.baseline['outputs'].items():
-            raw=find_submission_history.before(path,self.outputs[Path(path)])
+            raw=find_submission_history.before(path,historical_outputs[Path(path)])
             if sha256(raw.encode()).hexdigest()!=digest:changed.append(path)
             self.assertEqual(sha256(history.before(path,raw).encode()).hexdigest(),digest,path)
         self.assertEqual(changed,[history.PAGE])
-        self.assertEqual(sha256(json.dumps(local_fonts_history.pages(self.pages),sort_keys=True,ensure_ascii=False).encode()).hexdigest(),self.baseline['pages_sha256'])
+        self.assertEqual(sha256(json.dumps(local_fonts_history.pages(beginner_history.pages(self.pages)),sort_keys=True,ensure_ascii=False).encode()).hexdigest(),self.baseline['pages_sha256'])
         article_count=0
-        for page in self.pages:
-            path=build.output_path(page['path']);raw=local_fonts_history.before(path,self.outputs[path])
+        for page in beginner_history.pages(self.pages):
+            path=build.output_path(page['path']);raw=local_fonts_history.before(path,historical_outputs[path])
             schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
             if schema['@type']=='Article':
                 article_count+=1;self.assertEqual(sha256(raw.encode()).hexdigest(),self.baseline['outputs'][str(path)])
@@ -85,7 +87,8 @@ class TimeExportTests(unittest.TestCase):
         self.assertEqual(sha256(time_examples_history.before(history.SCRIPT,(ROOT/history.SCRIPT).read_bytes())).hexdigest(),self.baseline['new_script_sha256'])
 
     def test_history_does_not_hide_unmarked_script_or_html_changes(self):
-        script=(ROOT/history.SCRIPT).read_text();page=self.outputs[Path(history.PAGE)]
+        historical_outputs = beginner_history.outputs(self.outputs)
+        script=(ROOT/history.SCRIPT).read_text();page=historical_outputs[Path(history.PAGE)]
         for raw in [script.replace('const keys =','const unexpected = []; const keys =',1),
                     script.replace('Download unavailable.','An unsupported claim.',1)]:
             self.assertNotEqual(sha256(history.before(history.SCRIPT,raw).encode()).hexdigest(),self.baseline['files'][history.SCRIPT])

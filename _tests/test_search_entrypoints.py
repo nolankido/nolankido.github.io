@@ -12,6 +12,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build
 import check_live
 import presentation
@@ -39,17 +40,19 @@ class SearchEntryTests(unittest.TestCase):
             self.assertEqual(sha256(original).hexdigest(), expected, path)
 
     def test_all_original_bodies_survive_only_the_declared_entry_changes(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         self.assertEqual(len(self.baseline['bodies']), 171)
         for path, expected in self.baseline['bodies'].items():
-            raw = history.before(path, self.outputs[Path(path)])
+            raw = history.before(path, historical_outputs[Path(path)])
             body = re.search(r'<body\b[^>]*>(.*?)</body>', raw, re.S)[1]
             self.assertEqual(sha256(body.encode()).hexdigest(), expected, path)
 
     def test_article_words_dates_and_all_five_feeds_survive_only_declared_navigation(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         old = {p['id']: p for p in self.baseline['pages']}
         count = 0
-        for p in self.pages:
-            raw = self.outputs[build.output_path(p['path'])]
+        for p in beginner_history.pages(self.pages):
+            raw = historical_outputs[build.output_path(p['path'])]
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', raw)[1])
             if schema['@type'] != 'Article': continue
             count += 1
@@ -60,7 +63,7 @@ class SearchEntryTests(unittest.TestCase):
             self.assertNotIn('image', schema, 'A title card is not a representative article illustration')
         self.assertEqual(count, 90)
         for path, digest in self.baseline['feeds'].items():
-            self.assertEqual(sha256(self.outputs[Path(path)].encode()).hexdigest(), digest, path)
+            self.assertEqual(sha256(historical_outputs[Path(path)].encode()).hexdigest(), digest, path)
 
     def test_twelve_hubs_have_matching_visible_and_search_purpose(self):
         self.assertEqual(len(self.entries), 12)
@@ -81,8 +84,8 @@ class SearchEntryTests(unittest.TestCase):
     def test_every_article_and_three_subject_hubs_have_a_distinct_preview(self):
         cfg = presentation.load(ROOT, self.pages)
         expected = {p['id'] for p in self.pages if reader_previews.eligible(p)}
-        self.assertEqual(len(expected), 93)
-        self.assertEqual(len(self.cards), 89)
+        self.assertEqual(len(expected), 94)
+        self.assertEqual(len(self.cards), 90)
         self.assertTrue(expected <= set(cfg['pages']))
         self.assertEqual(len({cfg['pages'][key]['src'] for key in expected}), len(expected))
         for key, retained in json.loads((ROOT / '_source/presentation.json').read_text())['pages'].items():
@@ -128,15 +131,16 @@ class SearchEntryTests(unittest.TestCase):
         self.assertEqual(old, self.baseline['pages'])
         self.assertEqual(history.pages(result), old)
         self.assertIsNot(result, old)
-        marked = deepcopy(self.pages); next(p for p in marked if p['id'] == 'living-well-guides')['date'] = '2026-10-12'
+        marked = deepcopy(beginner_history.pages(self.pages)); next(p for p in marked if p['id'] == 'living-well-guides')['date'] = '2026-10-12'
         with self.assertRaises(ValueError): search_entrypoints.load(ROOT, marked)
         with self.assertRaises(ValueError): search_entrypoints.header({'entry_summary': 'One purpose'}, '<section>' + search_entrypoints.BEGIN + '</section>')
         injected = search_entrypoints.header({'entry_summary': '<script>alert(1)</script>'}, '<section></section>')
         self.assertIn('&lt;script&gt;', injected); self.assertNotIn('<script>', injected)
 
     def test_no_new_runtime_scripts_and_every_new_asset_is_verified_live(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         for path, old_scripts in self.baseline['scripts'].items():
-            original=time_export_history.before(path,self.outputs[Path(path)])
+            original=time_export_history.before(path,historical_outputs[Path(path)])
             scripts = re.findall(r'<script[^>]+src="([^"]+)"', original)
             self.assertEqual(scripts, old_scripts, path)
         targets = check_live.targets()
@@ -145,8 +149,9 @@ class SearchEntryTests(unittest.TestCase):
             self.assertEqual(targets[record['src']], (200, (ROOT / record['src'].lstrip('/')).read_bytes()))
 
     def test_integrity_view_keeps_unreviewed_article_changes_detectable(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         path = 'notes/trustworthy-tools/index.html'
-        changed = self.outputs[Path(path)].replace('A claim small enough to check', 'An unsupported new claim', 1)
+        changed = historical_outputs[Path(path)].replace('A claim small enough to check', 'An unsupported new claim', 1)
         raw = history.before(path, changed)
         body = re.search(r'<body\b[^>]*>(.*?)</body>', raw, re.S)[1]
         self.assertNotEqual(sha256(body.encode()).hexdigest(), self.baseline['bodies'][path])

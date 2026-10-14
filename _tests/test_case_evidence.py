@@ -7,6 +7,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build, case_evidence
 import case_evidence_history as history
 import time_examples_history
@@ -21,18 +22,19 @@ class CaseEvidenceTests(unittest.TestCase):
         cls.baseline = json.loads((ROOT / '_tests/case-evidence-baseline.json').read_text())
 
     def test_all_original_content_metadata_assets_and_other_outputs_remain_exact(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         b = self.baseline
-        self.assertEqual(poker_titles_history.pages(build.public_pages()), b['pages'])
-        self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
+        self.assertEqual(poker_titles_history.pages(beginner_history.pages(build.public_pages())), b['pages'])
+        self.assertEqual(set(map(str, historical_outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():
-            value = self.outputs[Path(path)]
+            value = historical_outputs[Path(path)]
             if sha256(value.encode()).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, value).encode()).hexdigest(), expected, path)
         self.assertEqual(changed, [case_evidence.PATH])
-        files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads']
-                 for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads']
+                 for p in (ROOT / d).rglob('*') if p.is_file()})
         self.assertEqual(files, set(b['files']))
         self.assertEqual(len(files), 343)
         for path, expected in b['files'].items():

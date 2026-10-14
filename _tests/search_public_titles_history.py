@@ -2,6 +2,7 @@
 from functools import lru_cache
 import json
 from pathlib import Path
+from beginner_history import before as before_beginner
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -12,6 +13,7 @@ def change():
 
 
 def before(path, data):
+    data = before_beginner(path, data)
     path = str(path)
     if path not in change()['patches']:
         return data

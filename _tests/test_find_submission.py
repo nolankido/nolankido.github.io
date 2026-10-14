@@ -9,6 +9,7 @@ import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
+import beginner_history
 import build
 import local_fonts_history
 import search_sections_history
@@ -47,22 +48,23 @@ class FindSubmissionTests(unittest.TestCase):
         self.assertEqual(old['compositionStart']['pending'],1)
 
     def test_all_production_outputs_articles_feeds_and_metadata_remain_exact_except_cache_version(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         b=self.baseline
-        records=[[str(p),sha256(history.before(p,text).encode()).hexdigest()] for p,text in self.outputs.items()]
+        records=[[str(p),sha256(history.before(p,text).encode()).hexdigest()] for p,text in historical_outputs.items()]
         self.assertEqual((len(records),digest(records)),(198,b['outputs_digest']))
-        self.assertEqual(sha256(json.dumps(local_fonts_history.pages(self.pages),sort_keys=True,ensure_ascii=False).encode()).hexdigest(),b['pages_digest'])
+        self.assertEqual(sha256(json.dumps(local_fonts_history.pages(beginner_history.pages(self.pages)),sort_keys=True,ensure_ascii=False).encode()).hexdigest(),b['pages_digest'])
         articles=[];feeds=[]
-        for page in self.pages:
-            p=build.output_path(page['path']);text=local_fonts_history.before(p,self.outputs[p])
+        for page in beginner_history.pages(self.pages):
+            p=build.output_path(page['path']);text=local_fonts_history.before(p,historical_outputs[p])
             schema=json.loads(re.search(r'<script type="application/ld[+]json">(.*?)</script>',text)[1])
             if schema['@type']=='Article':articles.append([str(p),sha256(text.encode()).hexdigest()])
-        for p,text in self.outputs.items():
+        for p,text in historical_outputs.items():
             if str(p).endswith('feed.xml') or str(p)=='writing.xml':feeds.append([str(p),sha256(text.encode()).hexdigest()])
         self.assertEqual((len(articles),digest(articles)),(90,b['articles_digest']))
         self.assertEqual((len(feeds),digest(feeds)),(5,b['feeds_digest']))
 
     def test_all_original_sources_assets_and_downloads_allow_only_the_frozen_event_change(self):
-        paths=[p for directory in ['_source','assets','downloads'] for p in (ROOT/directory).rglob('*') if p.is_file() and p.relative_to(ROOT).as_posix() not in local_fonts_history.change()['new_files']]
+        paths=beginner_history.files([p for directory in ['_source','assets','downloads'] for p in (ROOT/directory).rglob('*') if p.is_file() and p.relative_to(ROOT).as_posix() not in local_fonts_history.change()['new_files']])
         records=[[p.relative_to(ROOT).as_posix(),sha256(history.before(p.relative_to(ROOT),p.read_bytes())).hexdigest()] for p in paths]
         self.assertEqual((len(records),digest(records)),(316,self.baseline['files_digest']))
         code=search_sections_history.before(history.SCRIPT,(ROOT/history.SCRIPT).read_bytes())
@@ -70,7 +72,8 @@ class FindSubmissionTests(unittest.TestCase):
         self.assertEqual(sha256(history.before(history.SCRIPT,code)).hexdigest(),self.baseline['old_script_sha256'])
 
     def test_adapter_does_not_hide_other_code_or_page_changes(self):
-        script=(ROOT/history.SCRIPT).read_text();page=self.outputs[Path(history.PAGE)]
+        historical_outputs = beginner_history.outputs(self.outputs)
+        script=(ROOT/history.SCRIPT).read_text();page=historical_outputs[Path(history.PAGE)]
         for changed in [script.replace('heading.focus({preventScroll:true});','query.focus();',1),script.replace('const stops =','const unexpected = 1; const stops =',1)]:
             self.assertNotEqual(sha256(history.before(history.SCRIPT,changed).encode()).hexdigest(),self.baseline['old_script_sha256'])
         modified=page.replace('<body','<!-- unexpected --> <body',1)

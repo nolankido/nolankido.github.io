@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 import re
 
 NEXT_READS = {
+    'first-decisions': ('holdem-basics', 'free-poker-learning-path'),
     'first-live-cash-game': ('cash-game-costs', 'cash-game-study-path'),
     'cash-game-costs': ('cash-game-study-path', 'variance-and-results'),
     'cash-game-study-path': ('choosing-study-tools', 'reviewing-a-hand'),

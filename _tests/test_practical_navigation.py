@@ -10,6 +10,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build
 import local_fonts_history
 import check_live
@@ -42,13 +43,14 @@ class PracticalNavigationTests(unittest.TestCase):
         cls.baseline=history.baseline()
 
     def test_every_prior_output_survives_only_the_exact_reviewed_additions(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         self.assertEqual(len(self.baseline['outputs']),198)
         self.assertEqual(set(self.baseline['additions']),history.PATHS)
-        self.assertEqual(local_fonts_history.pages(self.pages),self.baseline['pages'])
-        self.assertEqual(set(map(str,self.outputs)),set(self.baseline['outputs']))
+        self.assertEqual(local_fonts_history.pages(beginner_history.pages(self.pages)),self.baseline['pages'])
+        self.assertEqual(set(map(str,historical_outputs)),set(self.baseline['outputs']))
         changed=[]
         for path,digest in self.baseline['outputs'].items():
-            raw=find_submission_history.before(path,self.outputs[Path(path)])
+            raw=find_submission_history.before(path,historical_outputs[Path(path)])
             if sha256(raw.encode()).hexdigest()!=digest: changed.append(path)
             self.assertEqual(sha256(history.before(path,raw).encode()).hexdigest(),digest,path)
         self.assertCountEqual(changed,history.PATHS)
@@ -61,9 +63,10 @@ class PracticalNavigationTests(unittest.TestCase):
         self.assertEqual(sha256((ROOT/practical_navigation.CSS).read_bytes()).hexdigest(),self.baseline['navigation_css_sha256'])
 
     def test_original_article_metadata_content_and_five_feeds_survive(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         articles=[]; identical=[]; feeds=[]
-        for page in self.pages:
-            path=build.output_path(page['path']); raw=local_fonts_history.before(path,self.outputs[path])
+        for page in beginner_history.pages(self.pages):
+            path=build.output_path(page['path']); raw=local_fonts_history.before(path,historical_outputs[path])
             schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
             if schema['@type']!='Article': continue
             articles.append(str(path))
@@ -73,7 +76,7 @@ class PracticalNavigationTests(unittest.TestCase):
             self.assertEqual(schema,json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',restored)[1]))
         for path,digest in self.baseline['outputs'].items():
             if path.endswith('feed.xml') or path=='writing.xml':
-                feeds.append(path);self.assertEqual(sha256(self.outputs[Path(path)].encode()).hexdigest(),digest)
+                feeds.append(path);self.assertEqual(sha256(historical_outputs[Path(path)].encode()).hexdigest(),digest)
         self.assertEqual((len(articles),len(identical),len(feeds)),(90,88,5))
 
     def test_exact_stage_order_and_current_page_are_native_without_a_self_link(self):
@@ -109,13 +112,14 @@ class PracticalNavigationTests(unittest.TestCase):
             restored=history.before(path,raw)
             versioned=time_export_history.before(path,raw)
             self.assertEqual(re.findall(r'<script[^>]*src="([^"]+)"',versioned),re.findall(r'<script[^>]*src="([^"]+)"',restored))
-        self.assertEqual(len(check_live.targets()),399)
+        self.assertEqual(len(check_live.targets()),401)
         self.assertEqual(check_live.targets()['/assets/practical-ai-navigation.css'],(200,(ROOT/practical_navigation.CSS).read_bytes()))
         css=(ROOT/practical_navigation.CSS).read_text()
         self.assertIn('@media print',css)
 
     def test_tampered_article_and_tampered_marked_navigation_remain_detectable(self):
-        path='technology/check-ai-answers/index.html';raw=self.outputs[Path(path)]
+        historical_outputs = beginner_history.outputs(self.outputs)
+        path='technology/check-ai-answers/index.html';raw=historical_outputs[Path(path)]
         mutations=[raw.replace('Use the stages you need.','An unreviewed claim.',1),
                    raw.replace('<body','<!-- unreviewed article change --><body',1),
                    raw.replace('See the whole path','An unreviewed destination label',1),
@@ -124,7 +128,7 @@ class PracticalNavigationTests(unittest.TestCase):
             self.assertNotEqual(raw,changed)
             self.assertNotEqual(sha256(history.before(path,changed).encode()).hexdigest(),self.baseline['outputs'][path])
         unrelated='about/index.html'
-        changed=self.outputs[Path(unrelated)]+self.baseline['additions'][path]['blocks'][0]
+        changed=historical_outputs[Path(unrelated)]+self.baseline['additions'][path]['blocks'][0]
         self.assertEqual(history.before(unrelated,changed),local_fonts_history.before(unrelated,changed))
 
     def test_repeated_navigation_and_missing_destinations_fail_without_mutation(self):

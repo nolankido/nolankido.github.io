@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import author_archive
 import author_archive_history as history
+import beginner_history
 import build
 import practical_navigation_history
 
@@ -36,7 +37,7 @@ class AuthorArchiveTests(unittest.TestCase):
             schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
             if schema['@type']=='Article': actual.append(p['id'])
         parser=ArchiveParser(self.outputs[Path('notes/index.html')])
-        self.assertEqual(len(actual),90)
+        self.assertEqual(len(actual),91)
         self.assertCountEqual(parser.ids,actual)
         self.assertEqual(len(parser.ids),len(set(parser.ids)))
 
@@ -46,19 +47,20 @@ class AuthorArchiveTests(unittest.TestCase):
             self.assertEqual(sha256(raw.encode()).hexdigest(),digest,path)
 
     def test_original_article_output_and_feeds_survive_only_declared_navigation(self):
-        for p in self.entries:
+        historical_outputs = beginner_history.outputs(self.outputs)
+        for p in beginner_history.pages(self.entries):
             path=build.output_path(p['path'])
-            original=practical_navigation_history.before(path,self.outputs[path])
+            original=practical_navigation_history.before(path,historical_outputs[path])
             self.assertEqual(sha256(original.encode()).hexdigest(),history.baseline()['outputs'][str(path)])
         for path,digest in history.baseline()['outputs'].items():
-            if path.endswith('feed.xml') or path=='feed.xml': self.assertEqual(sha256(self.outputs[Path(path)].encode()).hexdigest(),digest)
+            if path.endswith('feed.xml') or path=='feed.xml': self.assertEqual(sha256(historical_outputs[Path(path)].encode()).hexdigest(),digest)
 
     def test_schema_order_names_and_destinations_match_the_visible_archive(self):
         raw=self.outputs[Path('notes/index.html')]
         schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
         listing=schema['mainEntity'];parser=ArchiveParser(raw)
-        self.assertEqual(listing['numberOfItems'],90)
-        self.assertEqual([v['position'] for v in listing['itemListElement']],list(range(1,91)))
+        self.assertEqual(listing['numberOfItems'],91)
+        self.assertEqual([v['position'] for v in listing['itemListElement']],list(range(1,92)))
         by_id={p['id']:p for p in self.entries}
         self.assertEqual([(v['url'],v['name']) for v in listing['itemListElement']], [('https://nolankido.com'+by_id[k]['path'],by_id[k]['title']) for k in parser.ids])
         self.assertEqual(schema['creator']['@id'],'https://nolankido.com/about/#nolan-kido')

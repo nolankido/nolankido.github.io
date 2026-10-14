@@ -10,6 +10,7 @@ import sys
 import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'_scripts'))
+import beginner_history
 import build
 import check_live
 import site_find
@@ -56,9 +57,9 @@ class TaskBriefTests(unittest.TestCase):
                 target=ROOT/path
                 if target.is_dir():
                     h=hashlib.sha256()
-                    for file in sorted(target.rglob('*')):
+                    for file in sorted(beginner_history.files([f for f in target.rglob('*') if f.is_file()])):
                         if file.is_file():
-                            h.update(str(file.relative_to(ROOT)).encode()+b'\0'+hashlib.sha256(file.read_bytes()).hexdigest().encode()+b'\0')
+                            h.update(str(file.relative_to(ROOT)).encode()+b'\0'+hashlib.sha256(beginner_history.before(file.relative_to(ROOT), file.read_bytes())).hexdigest().encode()+b'\0')
                     actual=h.hexdigest()
                 else:
                     actual=hashlib.sha256(choice_history.before(path,target.read_bytes())).hexdigest()

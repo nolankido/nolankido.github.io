@@ -9,6 +9,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+import beginner_history
 import build, site_find
 import search_addresses_history as history
 import poker_titles_history
@@ -21,17 +22,18 @@ class SearchAddressesTests(unittest.TestCase):
         cls.baseline = json.loads((ROOT / '_tests/search-addresses-baseline.json').read_text())
 
     def test_only_search_behavior_scope_copy_and_cache_token_change(self):
+        historical_outputs = beginner_history.outputs(self.outputs)
         b = self.baseline
-        self.assertEqual(sha256(json.dumps(poker_titles_history.pages(build.public_pages()), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
-        self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
+        self.assertEqual(sha256(json.dumps(poker_titles_history.pages(beginner_history.pages(build.public_pages())), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
+        self.assertEqual(set(map(str, historical_outputs)), set(b['outputs']))
         changed = []
         for p, expected in b['outputs'].items():
-            value = self.outputs[Path(p)]
+            value = historical_outputs[Path(p)]
             if sha256(value.encode()).hexdigest() != expected:
                 changed.append(p)
             self.assertEqual(sha256(history.before(p, value).encode()).hexdigest(), expected, p)
         self.assertEqual(changed, ['find/index.html'])
-        files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()})
         self.assertEqual(files, set(b['files']))
         changed = []
         for p, expected in b['files'].items():
@@ -43,7 +45,7 @@ class SearchAddressesTests(unittest.TestCase):
 
     def test_real_missed_destinations_ranking_and_conservative_address_scope(self):
         rows = site_find.entries(ROOT, build.public_pages())
-        sections = json.loads(re.search(r'id="find-section-data">(.*?)</script>', self.outputs[Path('find/index.html')], re.S)[1])
+        sections = json.loads(re.search(r'id="find-section-data">(.*?)</script>', (ROOT / 'find/index.html').read_text(), re.S)[1])
         for row in rows:
             row.update(subjects=' '.join(row['interests']), sections=sections[row['path']])
         old = history.before('assets/site-find.js', (ROOT / 'assets/site-find.js').read_text())
