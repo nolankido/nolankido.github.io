@@ -892,3 +892,76 @@ https://developers.google.com/search/docs/appearance/title-link
 Next useful work remains evidence-led: allow recrawling, use actual reader or
 query feedback to select substantive improvements, and publish firsthand
 material only when the owner supplies or approves it.
+
+
+PR #65 completed on October 14 UTC, October 13 in Hawaii. Candidate
+`a1ca7169633cd996759200a8bc0a897c63264e3c` passed all 508 local and hosted
+unit/content checks and the complete 35-suite browser gate in run
+38497342635. Its 20 new title arrivals and the existing interaction checks
+passed. Merged main `2ed0590205d4da419fe6fa5543149894ac6b98e8` retained reviewed
+tree `70848838e4ba15ed475a3e7f17ce510751173847`. Pages run 38498497798 succeeded,
+and published-byte job 115639628297 passed 399/399 targets and emitted that
+exact merged SHA at 2026-10-14T01:58:25Z. Fresh main matched at 01:58:50Z.
+Receipt: https://github.com/nolankido/nolankido.github.io/pull/65
+
+## Find pages by their existing descriptive public titles
+
+A fresh request continued improvement after PR #65. The current main,
+editorial guide, maintenance record, recent CI/Pages results and open pull
+requests were checked again. Only stale PR #48 remained open and was left
+untouched. A fresh three-page crawl of Home, About and Technology returned
+HTTP 200, self-canonicals, indexable directives, single main headings and
+structured data, with no major audit issues. A low-priority description
+length heuristic did not justify changing accurate copy. Search Console
+returned no page/query rows for September 14 through October 11, 2026; that
+absence is not evidence of zero traffic or indexing. No sitemap was
+resubmitted.
+
+A real search defect was reproduced locally against production: searching
+for "pot odds calculator" missed the calculator, "Texas Holdem rules" missed
+the rules guide, and "AI assisted reflection prompts" missed the reflection
+guide. Each phrase is supported by that destination's already published
+search/browser title. The local index previously omitted those titles.
+
+The index now includes the exact public descriptive title of each of its
+151 existing pages as escaped metadata on the existing result card. The
+runtime uses those words to recover previously missed pages and relevant
+individual sections. Existing headline/summary matches and address matches
+retain their scores; newly recovered descriptive-title matches rank between
+those two tiers. All words must still match one destination, and unrelated
+section headings cannot be combined into an invented match. The visible
+cards, headings, summaries, dates, filters, routes and no-script index stay
+unchanged. Search remains local, without query transport, storage or URL
+persistence. No new content source, synonyms, tracking or request is added.
+
+An independent pre-edit baseline was verified against production Git
+objects: 198 outputs, 343 source/asset/download files, all manifest records
+and 171 page-body hashes. Only the generated Find page and its existing
+runtime change publicly. Every other body is compared directly without an
+adapter; all original source records, five feeds, asset bytes other than
+the Find runtime, and downloads remain exact. Frozen complete card-opening
+attributes, exact runtime patches and one cache token support the older
+preservation checks. Negative controls expose unreviewed titles, prose,
+URLs and ranking logic. Previous golden hashes were retained.
+
+Four focused regression/preservation tests and the preceding three study
+title tests passed locally. The existing browser suite now covers all three
+missed queries under its no-query-network assertion and adds six real
+keyboard arrivals at 390 and 1440 pixels, checking destination title,
+original heading, reflow and private-query reset on browser history return.
+The complete local/hosted gate, inspected previews and exact publication
+receipt will be recorded on the pull request after execution.
+
+This repairs discoverability inside the site. The crawl shows technical
+accessibility to a crawler, not actual Google indexing or improved search
+rankings. No ranking or traffic gain is claimed. Next useful work remains
+actual search or reader feedback and owner-approved firsthand evidence,
+rather than extra pages or speculative search keywords.
+
+The first candidate passed all 512 local and hosted unit/content checks and
+the new search journeys in the hosted reader-tools group. Its full-page
+captures showed a sticky-header capture artifact, so the final candidate
+uses actual viewport captures and explicitly checks heading clearance for
+each of the six new search arrivals. The complete gate is rerun on that
+exact candidate before publication; a first-candidate pass is not used as
+the final release gate.
