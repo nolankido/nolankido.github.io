@@ -123,11 +123,11 @@ def main():
             static = offline.new_page(); static.goto(origin + ROUTE)
             static.locator('#path-check-flop summary').focus(); static.keyboard.press('Enter')
             expect(static.locator('#path-check-flop div')).to_contain_text('9-9-A-6-2')
-            static.locator('#path-flop h3 a').click()
+            static.locator('#path-flop h3 a').focus(); static.keyboard.press('Enter')
             expect(static).to_have_url(origin + '/poker/first-flop-decisions/')
             static.locator('#beginner-path-navigation summary').focus(); static.keyboard.press('Enter')
             expect(static.locator('#beginner-path-navigation nav')).to_be_visible()
-            static.locator('#beginner-path-navigation a[href="' + ROUTE + '#beginner-practice"]').click()
+            static.locator('#beginner-path-navigation a[href="' + ROUTE + '#beginner-practice"]').focus(); static.keyboard.press('Enter')
             expect(static).to_have_url(origin + ROUTE + '#beginner-practice')
             assert not errors, errors
             browser.close()

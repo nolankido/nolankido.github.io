@@ -1385,8 +1385,8 @@ links, a current-page marker without a self-link, a return to the route and
 the same blank private study card. The Learn topic exposes a direct link to
 the complete route while retaining its three existing starting steps. The
 2,077-byte TXT card has four blank skill records and ordinary return URLs.
-There is no stored progress, answer transport, account, new runtime,
-stylesheet or dependency. No new route, article or ranking claim is added.
+There is no stored progress, answer transport, account, new runtime
+or dependency. One small stylesheet applies only to the four path menus. No new route, article or ranking claim is added.
 
 The original five-session source and every previous article source remain
 byte-identical. The route is a separate approved fragment inserted at its
@@ -1430,7 +1430,7 @@ and all 40 browser suites before merge. New browser coverage includes the
 four-width route, all readiness panels, current markers, actual forward and
 return navigation, the exact study-card bytes, print, no-JavaScript reading,
 privacy checks and mobile/desktop accessibility audits. Six hosted route,
-answer and menu previews require inspection. Pages success, all 408 exact
+answer and menu previews require inspection. Pages success, all 409 exact
 published targets and a fresh main read remain required after merge. The
 PR receipt will record executed release evidence and exact tree identity.
 
@@ -1438,3 +1438,20 @@ Next useful task: observe actual beginner use of this sequence, especially
 whether readers can explain a call price and identify the missing evidence
 for an action. Improve a demonstrated point of confusion rather than adding
 another generic beginner index or claiming comparative superiority.
+
+Initial candidate a3366b74f6a8e9fca64b13d6daffae009b322d2e passed all
+554 unit/content tests in 156.795 seconds in run 38527141447. All existing
+browser suites passed. The new suite passed the route, goals, four-width
+reflow, keyboard answers, menus, JavaScript-enabled navigation, exact
+download, print and privacy checks, then timed out waiting for a no-script
+mouse navigation to finish. The correction uses explicit keyboard
+activation for that leg and retains the exact route and destination
+assertions. No assertion is removed.
+
+Six initial hosted previews were inspected. The desktop current-lesson
+label sat too close to the summary focus outline because its shorter
+span inherited a two-column list intended for links. A stylesheet scoped
+to these four menus now keeps the numbered route in one column and aligns
+the current label with the links. All previous stylesheets remain exact.
+The corrected candidate still requires the complete gate, six final
+previews, Pages and all 409 published targets before completion.

@@ -44,7 +44,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(len(changed), 14)
         files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads']
                  for p in (ROOT / d).rglob('*') if p.is_file()}
-        self.assertEqual(files - set(b['files']), {ADDITION, path.DOWNLOAD.lstrip('/')})
+        self.assertEqual(files - set(b['files']), {ADDITION, path.DOWNLOAD.lstrip('/'), path.CSS})
         for p, digest in b['files'].items():
             self.assertEqual(sha256(history.before(p, (ROOT / p).read_bytes())).hexdigest(), digest, p)
 
@@ -144,8 +144,11 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(worksheet.count(b'[ ]'), 4)
         for slug, _ in path.LESSONS: self.assertIn(('https://nolankido.com/poker/' + slug + '/').encode(), worksheet)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 408)
+        self.assertEqual(len(targets), 409)
         self.assertEqual(targets[path.DOWNLOAD], (200, worksheet))
+        self.assertEqual(targets['/' + path.CSS], (200, (ROOT / path.CSS).read_bytes()))
+        for p in self.pages:
+            self.assertEqual('/' + path.CSS + '?v=' in self.outputs[build.output_path(p['path'])], p['path'] in ['/poker/' + slug + '/' for slug, _ in path.LESSONS])
         text = self.outputs[build.output_path(ROUTE)]
         self.assertEqual(targets[ROUTE], (200, text.encode()))
         self.assertIn(path.PATH, self.outputs[Path('poker/topics/learn/index.html')])

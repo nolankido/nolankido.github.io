@@ -295,6 +295,7 @@ def build_outputs() -> dict[Path, str]:
             if p['id'] == 'poker-library':
                 library_version = hashlib.sha256((ROOT / 'assets/poker-library.js').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <script defer src="/assets/poker-library.js?v={library_version}"></script>'
+            extra += poker_beginner_path.stylesheet(p, ROOT)
             reader_meta = poker_library.reader_meta(p, reader_entries)
             if reader_meta:
                 header = header.replace('</section>', reader_meta + poker_reading.section_outline(body) + poker_beginner_path.navigation(p, pages) + '</section>', 1)

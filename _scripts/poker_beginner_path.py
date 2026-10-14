@@ -1,14 +1,23 @@
 """One native route through the existing beginner lessons. No saved reader state."""
 from html import escape
+from hashlib import sha256
 
 PATH = '/poker/free-poker-learning-path/#beginner-practice'
 DOWNLOAD = '/downloads/poker-beginner-study-card.txt'
+CSS = 'assets/poker-beginner-path.css'
 LESSONS = (
     ('first-decisions', 'Cards, actions and the pot'),
     ('starting-hand-decisions', 'Your starting hand in context'),
     ('first-flop-decisions', 'Your first decisions after the flop'),
     ('turn-and-river-decisions', 'The turn, river and showdown'),
 )
+
+
+def stylesheet(page, root):
+    if page['path'] not in {'/poker/' + slug + '/' for slug, _ in LESSONS}:
+        return ''
+    version = sha256((root / CSS).read_bytes()).hexdigest()[:12]
+    return '\n  <link rel="stylesheet" href="/' + CSS + '?v=' + version + '">'
 
 
 def decorate(page, body, root):
