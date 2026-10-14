@@ -1,0 +1,56 @@
+{
+  "entries": [
+    {
+      "id": "poker-decision-lab",
+      "path": "/poker/decision-lab/",
+      "old": "One river. Two different stories | Nolan Kido",
+      "new": "Poker River Exercise: Pot Odds & Ranges | Nolan Kido"
+    },
+    {
+      "id": "poker-flush-and-redraw",
+      "path": "/poker/flush-and-redraw/",
+      "old": "The flush arrives. What can still change? | Nolan Kido",
+      "new": "Poker Flushes & Redraws: A Worked Exercise | Nolan Kido"
+    },
+    {
+      "id": "poker-side-pot-lab",
+      "path": "/poker/side-pot-lab/",
+      "old": "Three all-ins. Two pots | Nolan Kido",
+      "new": "Poker Side-Pot Exercise: All-Ins & Refunds | Nolan Kido"
+    },
+    {
+      "id": "poker-decision-labs",
+      "path": "/poker/decision-labs/",
+      "old": "The Decision Labs | Nolan Kido",
+      "new": "Poker Decision Labs: Ranges, Draws & Side Pots | Nolan Kido"
+    },
+    {
+      "id": "poker-study-calculators",
+      "path": "/poker/study-calculators/",
+      "old": "Check the calculation. Keep the assumptions | Nolan Kido Poker",
+      "new": "Poker Calculators: Pot Odds, Bluffs & Pot-Limit Raises | Nolan Kido"
+    }
+  ],
+  "source_patches": [
+    [
+      "    \"title\": \"One river. Two different stories.\",\n    \"seo_title\": \"One river. Two different stories | Nolan Kido\",",
+      "    \"title\": \"One river. Two different stories.\",\n    \"seo_title\": \"Poker River Exercise: Pot Odds & Ranges | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"The flush arrives. What can still change?\",\n    \"seo_title\": \"The flush arrives. What can still change? | Nolan Kido\",",
+      "    \"title\": \"The flush arrives. What can still change?\",\n    \"seo_title\": \"Poker Flushes & Redraws: A Worked Exercise | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"Three all-ins. Two pots.\",\n    \"seo_title\": \"Three all-ins. Two pots | Nolan Kido\",",
+      "    \"title\": \"Three all-ins. Two pots.\",\n    \"seo_title\": \"Poker Side-Pot Exercise: All-Ins & Refunds | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"The Decision Labs.\",\n    \"seo_title\": \"The Decision Labs | Nolan Kido\",",
+      "    \"title\": \"The Decision Labs.\",\n    \"seo_title\": \"Poker Decision Labs: Ranges, Draws & Side Pots | Nolan Kido\","
+    ],
+    [
+      "    \"title\": \"Check the calculation. Keep the assumptions.\",\n    \"seo_title\": \"Check the calculation. Keep the assumptions | Nolan Kido Poker\",",
+      "    \"title\": \"Check the calculation. Keep the assumptions.\",\n    \"seo_title\": \"Poker Calculators: Pot Odds, Bluffs & Pot-Limit Raises | Nolan Kido\","
+    ]
+  ]
+}

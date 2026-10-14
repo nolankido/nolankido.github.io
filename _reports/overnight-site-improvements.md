@@ -832,3 +832,63 @@ https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 
 Next useful work should follow actual reader/search evidence or approved
 firsthand material, rather than expanding the site merely to add pages.
+
+PR #64 completed on October 14 UTC, October 13 in Hawaii. The repaired
+candidate `7603408ea9d7b551b4aab2a0471aceb101f7b7e9` passed all 505 local tests
+and the full hosted gate, including all 35 browser suites, in run
+38495579345. The 32 entry journeys passed; both final hosted opening previews
+matched the inspected previews byte for byte. Merged main
+`4fd2f3bce66ccc44f003887193f2430635e46174` retained the exact reviewed tree
+`141fb3203492961ad06771299167b70ecd1cb80c`. Pages run 38496575095 succeeded,
+and published-byte job 115633593388 passed 399/399 targets and emitted the
+exact merged SHA at 2026-10-14T01:36:30Z. Fresh main matched at 01:37:05Z.
+Receipt: https://github.com/nolankido/nolankido.github.io/pull/64
+
+## Name the existing poker study tools clearly in search
+
+A fresh request continued website improvement after PR #64. Current main,
+the editorial guide, recent CI/Pages results, open pull requests and this
+record were checked. Only stale PR #48 remained open and was left untouched.
+No Search Console request or unchanged sitemap resubmission was necessary.
+
+The existing calculators and three fictional Decision Labs are useful study
+destinations, but their search titles mostly described scenes rather than
+the subject. For example, "Three all-ins. Two pots" did not name its side-pot
+exercise, and the calculator title did not identify the calculations. Five
+search labels now name the actual material: pot-odds, bluff and pot-limit
+calculators; the Decision Labs collection; river pot odds and ranges;
+flushes and redraws; and side-pot all-ins and refunds.
+
+Only five `seo_title` fields and the corresponding generated head labels
+change publicly. HTML title, Open Graph title, Twitter title and WebPage or
+Article name agree. Original visible titles, page bodies, article headlines,
+dates, authorship, descriptions, URLs, schemas' other properties and preview
+images remain unchanged. The calculator is still a scoped accounting tool,
+and the labs remain fictional after-play exercises. No strategy, outcome,
+credential or search-performance claim was added.
+
+An independent pre-edit baseline was captured from production Git objects:
+198 outputs, 343 source/asset/download files, all manifest records and 171
+page-body hashes. A frozen adapter reverses only the five exact head labels
+and exact manifest patches. Previous golden hashes are retained. Negative
+controls expose unreviewed labels, dates, prose, moved URLs and changed
+identity. The new body-hash proof compares all 171 page bodies directly,
+without any historical adapter. All five feeds and all asset/download bytes
+are unchanged.
+
+Three focused title tests and the six preceding title/navigation tests
+passed locally. The existing search-entry browser suite adds 20 arrivals
+covering all five destinations at 390 and 1440 pixels, with and without
+JavaScript. These verify title, sharing labels, original heading, canonical
+URL and reflow. Existing calculator arithmetic and Decision Lab interaction
+checks remain in the complete gate. Final local, hosted and publication
+evidence will be recorded on the pull request after execution.
+
+This makes the purpose of already published material easier to recognize.
+Google recommends descriptive, concise title text but may choose a different
+displayed title. No ranking, traffic or indexing gain is measured or promised:
+https://developers.google.com/search/docs/appearance/title-link
+
+Next useful work remains evidence-led: allow recrawling, use actual reader or
+query feedback to select substantive improvements, and publish firsthand
+material only when the owner supplies or approves it.
