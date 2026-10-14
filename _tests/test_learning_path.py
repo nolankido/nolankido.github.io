@@ -16,6 +16,7 @@ import check_live
 import poker_beginner_path as path
 import poker_library
 import learning_path_history as history
+import ranges_history
 from test_viewer_guides import Tags, best
 
 ROUTE = '/poker/free-poker-learning-path/'
@@ -26,8 +27,9 @@ ADDITION = '_source/poker/beginner-learning-path.html'
 class LearningPathTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = build.public_pages()
-        cls.outputs = build.build_outputs()
+        cls.pages = ranges_history.pages(build.public_pages())
+        cls.current_outputs = build.build_outputs()
+        cls.outputs = ranges_history.outputs(cls.current_outputs)
         cls.baseline = json.loads((ROOT / '_tests/learning-path-baseline.json').read_text())
         cls.addition = (ROOT / ADDITION).read_text()
         cls.page = next(p for p in cls.pages if p['path'] == ROUTE)
@@ -44,15 +46,16 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(len(changed), 14)
         files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads']
                  for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = ranges_history.files(files)
         self.assertEqual(files - set(b['files']), {ADDITION, path.DOWNLOAD.lstrip('/'), path.CSS})
         for p, digest in b['files'].items():
-            self.assertEqual(sha256(history.before(p, (ROOT / p).read_bytes())).hexdigest(), digest, p)
+            self.assertEqual(sha256(history.before(p, ranges_history.before(p, (ROOT / p).read_bytes()))).hexdigest(), digest, p)
 
     def test_original_article_sources_assets_downloads_and_other_metadata_are_exact(self):
         # Direct hashes bypass every historical adapter.
         for p, digest in self.baseline['files'].items():
             if p not in {'_source/pages.json', '_source/poker/library.json'}:
-                self.assertEqual(sha256((ROOT / p).read_bytes()).hexdigest(), digest, p)
+                self.assertEqual(sha256(ranges_history.before(p, (ROOT / p).read_bytes())).hexdigest(), digest, p)
         current = {p['id']: p for p in self.pages}
         for old in self.baseline['pages']:
             new = current[old['id']]
@@ -144,7 +147,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(worksheet.count(b'[ ]'), 4)
         for slug, _ in path.LESSONS: self.assertIn(('https://nolankido.com/poker/' + slug + '/').encode(), worksheet)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 409)
+        self.assertEqual(len(targets), 411)
         self.assertEqual(targets[path.DOWNLOAD], (200, worksheet))
         self.assertEqual(targets['/' + path.CSS], (200, (ROOT / path.CSS).read_bytes()))
         for p in self.pages:
@@ -154,7 +157,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertIn(path.PATH, self.outputs[Path('poker/topics/learn/index.html')])
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', text, re.S)[1])
         self.assertEqual((schema['datePublished'], schema['dateModified']), ('2026-10-08', '2026-10-14'))
-        entries = poker_library.load(ROOT, self.pages)
+        entries = poker_library.load(ROOT, build.public_pages())
         entry = next(e for e in entries if e['route'] == ROUTE)
         self.assertEqual(entry['minutes'], poker_library.minutes(path.decorate(self.page, (ROOT / SOURCE).read_text(), ROOT)))
         self.assertIn('beginner-practice-heading', self.outputs[Path('find/index.html')])

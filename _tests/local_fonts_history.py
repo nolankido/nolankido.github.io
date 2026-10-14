@@ -27,11 +27,11 @@ def pages(records):
 def font_reference(path,data):
     """Change font delivery only, so browser parity uses identical current copy."""
     path=str(path);b=baseline();c=change()
-    if path not in b['outputs'] and path not in {'poker/first-decisions/index.html', 'poker/starting-hand-decisions/index.html', 'poker/first-flop-decisions/index.html', 'poker/turn-and-river-decisions/index.html'}:return data
+    if path not in b['outputs'] and path not in {'poker/first-decisions/index.html', 'poker/starting-hand-decisions/index.html', 'poker/first-flop-decisions/index.html', 'poker/turn-and-river-decisions/index.html', 'poker/ranges-for-beginners/index.html'}:return data
     binary=isinstance(data,bytes);text=data.decode() if binary else data
     if path=='assets/site-fonts.css':
         for old,new in c['urls'].items():text=text.replace('url('+new+')','url('+old+')')
-    if path.endswith('.html') and (path in b['outputs'] or path in {'poker/first-decisions/index.html', 'poker/starting-hand-decisions/index.html', 'poker/first-flop-decisions/index.html', 'poker/turn-and-river-decisions/index.html'}):
+    if path.endswith('.html') and (path in b['outputs'] or path in {'poker/first-decisions/index.html', 'poker/starting-hand-decisions/index.html', 'poker/first-flop-decisions/index.html', 'poker/turn-and-river-decisions/index.html', 'poker/ranges-for-beginners/index.html'}):
         new='<link rel="stylesheet" href="/assets/site-fonts.css?v='+c['new_css_sha256'][:12]+'">'
         old='<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link rel="stylesheet" href="/assets/site-fonts.css?v='+b['outputs']['assets/site-fonts.css'][:12]+'">'
         text=text.replace(new,old,1)

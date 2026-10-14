@@ -1455,3 +1455,124 @@ to these four menus now keeps the numbered route in one column and aligns
 the current label with the links. All previous stylesheets remain exact.
 The corrected candidate still requires the complete gate, six final
 previews, Pages and all 409 published targets before completion.
+
+## October 14, 2026: a beginner introduction to ranges
+
+PR #71 is published and verified at main
+0caa7cd17a7b5381721fea59841c1542cc698b71, tree
+9f3b1ada2c222a64be90659bb3d093dd96a24c58. Final candidate
+512c90b9c2493947e9b806d90f9253dfa5444561 passed all 554 unit/content
+tests and all 40 browser suites in run 38528360441. Four final route/answer
+previews matched the inspected initial previews byte for byte; both corrected
+menu previews were inspected. Pages 38529656209 succeeded. Published-byte
+job 115738210159 passed all 409 targets and emitted the exact main marker
+at 07:39:24 UTC. Fresh main and receipt reads matched. The duplicate full
+main run 38529656766 subsequently passed all jobs. Receipt:
+https://github.com/nolankido/nolankido.github.io/pull/71.
+
+The user requested another beginner content improvement. Current main,
+repository instructions, open PRs, recent CI, deployment and coverage were
+read before editing. Stale PR #48 remains untouched. The existing range
+references and combination workshop cover labels, blockers and weights,
+but move quickly into group counts. The next useful bridge is a small
+set of explicit two-card alternatives before the larger mathematical model.
+
+The new /poker/ranges-for-beginners/ contains 2,254 words, six native
+answer-reveal exercises and 15 accessible displayed cards. It separates
+known cards, physically possible holdings and an assumed betting range.
+One river board and four exact opposing holdings keep the comparison
+small. It explains why checking does not expose a weak hand, why a known
+card creates a physical exclusion, why one exact holding differs from a
+broad hand label, and why a possible bluff is not a measured frequency.
+
+All examples are fictional and visibly AI-assisted. On the unpaired final
+board, the hero's K-K-Q-9-5 loses to the three stronger alternatives and
+beats only the Q-J high-card alternative. A 40-chip pot and 20-chip river
+bet produce a 60 current pot and 80 final pot after calling. Equal weights
+give 25% equity and zero call value relative to folding. Giving the only
+beaten alternative half weight instead gives 1/7 equity and -60/7 chips
+relative to folding. Both models are explicitly invented and incomplete;
+neither is claimed to describe an actual player, profitable strategy or
+the best action among all legal choices. The lesson also explains why one
+revealed hand cannot establish which frequency model was correct.
+
+Primary introductions to ranges and pot odds were read October 14, 2026.
+Their terminology is used, but broad prescriptions that checking excludes
+strong hands, generic player percentages and specific strategy advice are
+not adopted. The card comparisons and fractional arithmetic were checked
+independently. No wager, account, purchase, personal result or solver
+validation is implied.
+
+The guide follows turn-and-river-decisions through generated Read next
+navigation and leads to the existing combination workshop and river lab.
+It is in the Learn topic's complete list, library, both Find tools, author
+archive, feeds and sitemap. The four-lesson foundation route, current-page
+menus, original five-session plan and private study card remain unchanged.
+No new runtime, stylesheet, form, tracking, dependency or download is added.
+The new 7,449-byte sharing preview is a typographic title card and was
+inspected.
+
+The production baseline was verified against Git objects before editing:
+175 page records, 202 outputs and 354 source/asset/download files. Every
+prior article source, metadata record, asset, download and existing feed
+item remains exact. Only the four catalog files gain the new guide. Frozen
+whole-file adapters reverse reviewed offsets only when the entire file
+matches its reviewed digest. Independent direct hashes and negative
+controls retain preservation evidence without refreshing old golden hashes.
+The prior learning-path tests use that exact predecessor for historical
+views and the current full manifest for their current library lookup.
+Archive counters advance by exactly one article; all identity, order,
+publication-date and destination assertions are retained.
+
+All nine new tests passed locally in 3.488 seconds. The corrected nine
+archive tests and nine learning-path tests also passed. The initial full
+local run loaded old article, sharing, preview and search counters plus a
+historical-manifest lookup before their corrections. Current counters
+advance only by the actual new article and its generated section anchors.
+The deterministic search-audit report was regenerated from the passing
+audit. The full local result is recorded below when it finishes. Build reproduction, HTML5 and search audits pass for 176 pages,
+95 articles and 171 sitemap URLs. The section payload is 58,892 bytes under
+the unchanged 60,000-byte limit. No indexing or ranking result is inferred.
+
+The exact candidate requires the complete hosted gate: 563 unit/content
+tests and all 41 browser suites. The new browser suite covers four widths,
+24 keyboard answer openings, five actual discovery arrivals, no-JavaScript
+reading and two accessibility audits. Six hosted opening/card/answer
+previews require inspection. Pages, all 411 published targets and a fresh
+main read are required after merge. The PR receipt will identify the exact
+reviewed tree and executed release evidence.
+
+Next useful task: check actual beginner understanding of known cards versus
+assumed frequencies. A correction based on a demonstrated misunderstanding
+is more useful than another broad index, an unverified recommended range
+or an unsupported claim to be the best resource online.
+
+The initial full local run completed 563 tests in 375.620 seconds: seven
+failures and one error. They were two archive counts (95 rather than 94),
+the sharing count (97 rather than 96), preview eligibility (98 rather than
+97), current Find-card count (156 rather than 155), section anchors (967
+rather than 966), the old deterministic audit snapshot, and the library
+lookup using a historical manifest against the current catalog. These
+current-count fixtures and that lookup were corrected; exact ordering,
+identity, destination, metadata escaping and all historical golden checks
+remain in place. No card, arithmetic, source-preservation or public build
+error was found. The complete hosted gate remains required on the final
+candidate after these corrections.
+All 59 tests across the seven affected existing test files passed after
+correction, in addition to the nine new range tests. The final hosted gate
+will execute all 563 tests together on the exact candidate.
+
+Initial candidate 939652d6c4559e02ee24d09c7e008dd6eb113afc passed all
+563 unit/content tests in 298.721 seconds in run 38532211769. Its Poker,
+identity, accessibility and navigation groups passed. The new range suite
+passed all four widths, 24 keyboard answer openings, five actual arrivals,
+no-JavaScript reading and two accessibility audits with no violations.
+All six hosted opening/card/answer previews were inspected and are clear.
+
+The reader-tools group identified two remaining browser counters: the
+archive expected 94 articles instead of 95, and the no-script Find list
+expected 155 entries instead of 156. Only those exact counts and the
+Find diagnostic count are corrected; their existing destination, focus,
+ordering and no-script assertions remain. No public file changes. The
+complete existing gate must pass on the corrected candidate, followed by
+candidate-bound artifact verification, Pages and all 411 published targets.

@@ -1866,6 +1866,25 @@
           339
         ]
       }
+    },
+    "poker-ranges-for-beginners": {
+      "path": "/poker/ranges-for-beginners/",
+      "title": "Your first poker range.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-ranges-for-beginners.png",
+      "sha256": "9b06862ec6d1f1b267077d79d9d0c0f38c73a80288e74234399bd301e2a893bf",
+      "layout": {
+        "lines": [
+          "Your first poker range."
+        ],
+        "font_size": 64,
+        "bounds": [
+          93,
+          225,
+          910,
+          288
+        ]
+      }
     }
   }
 }
