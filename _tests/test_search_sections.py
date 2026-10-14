@@ -11,6 +11,7 @@ sys.path.insert(0,str(ROOT/'_scripts'))
 import build,search_sections,site_find
 import search_sections_history as history
 import time_examples_history
+import poker_titles_history
 from test_site import Page
 
 class SearchSectionsTests(unittest.TestCase):
@@ -22,7 +23,7 @@ class SearchSectionsTests(unittest.TestCase):
 
     def test_only_search_and_frozen_native_anchor_spacing_change(self):
         b=self.baseline
-        self.assertEqual(self.pages,b['pages'])
+        self.assertEqual(poker_titles_history.pages(self.pages),b['pages'])
         self.assertEqual(set(map(str,self.outputs)),set(b['outputs']))
         changed=[]
         for p,digest in b['outputs'].items():

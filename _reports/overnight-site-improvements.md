@@ -689,3 +689,74 @@ The fixture now verifies that both Essays and Guides exclude the calculator,
 then that Collections & reference includes the exact destination. All prior
 filter and destination assertions remain. No public file changed in this
 test correction. The updated exact candidate still requires the full gate.
+
+PR #62 subsequently passed all 498 unit/content checks and all 35 browser
+suites in run 38490038389. Four hosted mobile/desktop search-arrival previews
+were inspected. Candidate `6e1a487a71fbebddc4e5ff8ac7e9ac31db85f145`, with tree
+`0d97f16a7ccca62ab0b50c20813c85d498562c0e`, was merged as
+`2a853aa0dcf14171855008f4f94808b483421bba`. Pages run 38490962170 succeeded;
+published-byte job 115615771787 passed 399/399 targets and emitted the exact
+merged SHA at 2026-10-14T00:35:22Z. Fresh main and Pages reads matched at
+00:36:03Z. This next pass confirmed that the repeated main Site checks run
+38490962277 also completed successfully. Final receipt:
+https://github.com/nolankido/nolankido.github.io/pull/62
+
+## Describe seven foundational poker guides clearly in search
+
+A fresh user request continued this work on October 14 UTC, October 13 in
+Hawaii. The pass began from current main
+`2a853aa0dcf14171855008f4f94808b483421bba`. Repository instructions, open pull
+requests, the maintenance record and current CI/Pages evidence were reread.
+Only stale PR #48 was open; it remains untouched. The preceding release's
+exact published-byte receipt covers this starting tree. Direct live reads
+from this session were unavailable through the managed network and web
+reader, so the existing hosted published-byte check remains the release
+verification path. No additional Search Console request or sitemap submission
+was needed.
+
+Several foundational viewer guides had accurate but ambiguous search titles,
+such as "Which hand wins?", "What the percentages mean" and "Why does the
+seat matter?". Each guide's actual source and examples were inspected before
+selecting a clearer topic label. This is a metadata-only correction of that
+entry-point ambiguity, not a rewrite or new publication of the lessons.
+
+| Existing URL | Search and sharing title |
+| --- | --- |
+| `/poker/holdem-basics/` | Texas Hold'em Rules: Deal to Showdown \| Nolan Kido |
+| `/poker/hand-rankings/` | Poker Hand Rankings: Which Hand Wins? \| Nolan Kido |
+| `/poker/betting-and-pots/` | Poker Betting: Calls, Raises and Side Pots \| Nolan Kido |
+| `/poker/tournaments/` | How Poker Tournaments Work: Blinds and Payouts \| Nolan Kido |
+| `/poker/poker-math/` | Poker Math: Pot Odds, Outs and Equity \| Nolan Kido |
+| `/poker/position-and-stacks/` | Poker Position, Effective Stacks and SPR \| Nolan Kido |
+| `/poker/reading-the-board/` | Reading a Poker Board: Suits, Pairs and Draws \| Nolan Kido |
+
+The only production source edits are seven `seo_title` fields in the existing
+manifest. The existing renderer carries them to the title element, Open Graph,
+Twitter title and structured-data name on those seven pages. Original visible
+headings, Article headlines, descriptions, authorship, publication and update
+dates, URLs, canonical tags, sharing graphics, all five feeds and sitemap remain
+exact. No body copy, source article, asset, download, runtime, dependency,
+tracking or hosting configuration changes.
+
+An independent baseline was captured from the starting production Git objects
+before edits: 198 generated outputs, 343 source/asset/download files, the full
+page manifest and all 171 page-body hashes. A frozen adapter reverses only the
+seven reviewed metadata values at their exact paths and field contexts. Older
+golden hashes remain unchanged. New tests independently compare every raw
+page body, constrain all other manifest fields and expose altered titles,
+article copy, dates, URLs and metadata on the wrong path. All three focused
+tests, the deterministic build check, 171-page HTML5 validation and the search
+audit passed locally. The complete regression gate and publication evidence
+will be recorded on this pass's pull request after execution.
+
+Google's title-link guidance recommends concise, descriptive titles and notes
+that its displayed title may come from other page signals. This pass makes
+existing subject matter easier to recognize; it does not establish improved
+rankings, indexing or traffic, or promise that a search engine will show the
+exact supplied title:
+https://developers.google.com/search/docs/appearance/title-link
+
+Next useful work: allow the existing search changes to be recrawled, then use
+actual query/page evidence or reader feedback to select a substantive next
+improvement. Do not add articles, credentials or promotional claims merely to
+increase apparent site size.

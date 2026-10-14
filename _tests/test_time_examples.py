@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build, time_examples
 import time_examples_history as history
 import search_addresses_history
+import poker_titles_history
 from test_site import Page
 
 
@@ -22,7 +23,7 @@ class TimeExamplesTests(unittest.TestCase):
 
     def test_only_one_page_and_its_scoped_script_change(self):
         b = self.baseline
-        self.assertEqual(sha256(json.dumps(build.public_pages(), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
+        self.assertEqual(sha256(json.dumps(poker_titles_history.pages(build.public_pages()), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
         self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():

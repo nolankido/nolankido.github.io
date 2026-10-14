@@ -11,17 +11,18 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build, site_find
 import search_addresses_history as history
+import poker_titles_history
 
 
 class SearchAddressesTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.outputs = build.build_outputs()
+        cls.outputs = {p: poker_titles_history.before(p, value) for p, value in build.build_outputs().items()}
         cls.baseline = json.loads((ROOT / '_tests/search-addresses-baseline.json').read_text())
 
     def test_only_search_behavior_scope_copy_and_cache_token_change(self):
         b = self.baseline
-        self.assertEqual(sha256(json.dumps(build.public_pages(), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
+        self.assertEqual(sha256(json.dumps(poker_titles_history.pages(build.public_pages()), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
         self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
         changed = []
         for p, expected in b['outputs'].items():
@@ -34,7 +35,7 @@ class SearchAddressesTests(unittest.TestCase):
         self.assertEqual(files, set(b['files']))
         changed = []
         for p, expected in b['files'].items():
-            value = (ROOT / p).read_bytes()
+            value = poker_titles_history.before(p, (ROOT / p).read_bytes())
             if sha256(value).hexdigest() != expected:
                 changed.append(p)
             self.assertEqual(sha256(history.before(p, value)).hexdigest(), expected, p)

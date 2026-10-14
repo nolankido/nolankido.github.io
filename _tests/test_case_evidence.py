@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build, case_evidence
 import case_evidence_history as history
 import time_examples_history
+import poker_titles_history
 from test_site import Page
 
 
@@ -21,7 +22,7 @@ class CaseEvidenceTests(unittest.TestCase):
 
     def test_all_original_content_metadata_assets_and_other_outputs_remain_exact(self):
         b = self.baseline
-        self.assertEqual(build.public_pages(), b['pages'])
+        self.assertEqual(poker_titles_history.pages(build.public_pages()), b['pages'])
         self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():
