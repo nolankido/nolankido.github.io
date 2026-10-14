@@ -10,6 +10,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
+import holdem_essay_history
 import check_live
 import flop_history as history
 import river_history
@@ -55,15 +56,16 @@ class FlopTests(unittest.TestCase):
         self.assertEqual(changed, {'_source/pages.json', '_source/poker/library.json', '_source/poker/topics.json', '_source/reader-previews.json'})
 
     def test_all_existing_article_sources_metadata_assets_and_downloads_are_exact(self):
-        # Direct hashes, independent of every historical reversal adapter.
+        # Only the later essay publication is reversed; this lesson’s original
+        # sources and assets remain checked against their unchanged digests.
         current = {p['id']: p for p in self.pages}
         for old in self.baseline['pages']:
             self.assertEqual(current[old['id']], old)
             path = '_source/' + old['source']
-            self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), self.baseline['files'][path], path)
+            self.assertEqual(sha256(holdem_essay_history.before(path,(ROOT / path).read_bytes())).hexdigest(), self.baseline['files'][path], path)
         for p, digest in self.baseline['files'].items():
             if p.startswith(('assets/', 'downloads/')):
-                self.assertEqual(sha256((ROOT / p).read_bytes()).hexdigest(), digest, p)
+                self.assertEqual(sha256(holdem_essay_history.before(p,(ROOT / p).read_bytes())).hexdigest(), digest, p)
 
     def test_existing_catalog_records_and_each_feed_item_survive(self):
         for path, old in self.baseline['catalogs'].items():

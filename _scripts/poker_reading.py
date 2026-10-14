@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 import re
 
 NEXT_READS = {
+    'no-limit-holdem-guide': ('first-decisions', 'beginner-checkpoint'),
     'first-decisions': ('starting-hand-decisions', 'free-poker-learning-path'),
     'starting-hand-decisions': ('first-flop-decisions', 'reading-preflop-charts'),
     'first-flop-decisions': ('turn-and-river-decisions', 'reading-the-board'),

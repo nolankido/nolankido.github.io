@@ -1945,6 +1945,27 @@
           415
         ]
       }
+    },
+    "poker-no-limit-holdem-guide": {
+      "path": "/poker/no-limit-holdem-guide/",
+      "title": "No-limit Hold’em: rules, decisions and long-term thinking",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-no-limit-holdem-guide.png",
+      "sha256": "a0f88535e8ae99f4facad50af21efbc5a24b06b37d174648e4c46fa0e98356b5",
+      "layout": {
+        "lines": [
+          "No-limit Hold’em: rules,",
+          "decisions and long-term",
+          "thinking"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          966,
+          416
+        ]
+      }
     }
   }
 }

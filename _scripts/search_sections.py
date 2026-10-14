@@ -38,7 +38,11 @@ def apply(outputs: dict[Path, str], pages: list[dict]) -> dict[Path, str]:
     document = outputs[PAGE]
     if BEGIN in document or document.count('</main>') != 1:
         raise ValueError('Add the search section index exactly once')
-    data = json.dumps(index(outputs, pages), ensure_ascii=False, separators=(',', ':'))
+    # Flatten pairs on the wire to keep every heading inside the delivery budget.
+    # The browser restores the exact [anchor, label] rows before filtering.
+    packed = {path: [value for row in rows for value in row]
+              for path, rows in index(outputs, pages).items()}
+    data = json.dumps({'version': 2, 'pages': packed}, ensure_ascii=False, separators=(',', ':'))
     # JSON data is not executable script. Escape HTML delimiters defensively.
     for char, value in [('&', '\\u0026'), ('<', '\\u003c'), ('>', '\\u003e'),
                         ('\u2028', '\\u2028'), ('\u2029', '\\u2029')]:

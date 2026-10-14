@@ -2,6 +2,14 @@
   "version": 1,
   "entries": [
     {
+      "slug": "no-limit-holdem-guide",
+      "title": "No-limit Hold’em: rules, decisions and long-term thinking",
+      "description": "A comprehensive beginner guide to no-limit Texas hold’em: rules, a counted hand, ranges, pot odds, bet purposes, stack depth, tournaments and a practical study route.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "beginner beginners complete comprehensive guide essay no limit holdem hold em rules starting hands action order before after bet pot odds clean outs equity value bluff stack depth variance learning"
+    },
+    {
       "slug": "decision-lab",
       "title": "One river. Two different stories.",
       "description": "Pause at a river bet, price the call, then reveal two possible endings. The outcome changes; the information available before the call does not.",

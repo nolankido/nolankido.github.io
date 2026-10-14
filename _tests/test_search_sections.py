@@ -43,8 +43,8 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
-        self.assertEqual(len(self.index),159)
-        self.assertEqual(sum(map(len,self.index.values())),988)
+        self.assertEqual(len(self.index),160)
+        self.assertEqual(sum(map(len,self.index.values())),1002)
         excluded={p['path'] for p in self.pages if p.get('noindex') or p.get('living_well_kind')=='experiment'}
         self.assertFalse(excluded.intersection(self.index))
         self.assertNotIn('/contact/',self.index)
@@ -56,7 +56,9 @@ class SearchSectionsTests(unittest.TestCase):
                 self.assertTrue(label.strip())
         doc=self.outputs[search_sections.PAGE]
         payload=re.search(r'<script type="application/json" id="find-section-data">(.*?)</script>',doc,re.S)[1]
-        self.assertEqual(json.loads(payload),self.index)
+        packed=json.loads(payload)
+        self.assertEqual(packed['version'],2)
+        self.assertEqual({p:[v[i:i+2] for i in range(0,len(v),2)] for p,v in packed['pages'].items()},self.index)
         self.assertLess(len(payload.encode()),60000)
         # Preserve this release's original budget after the later reviewed
         # title metadata and beginner entry are reversed. Current growth has
@@ -85,7 +87,7 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertNotIn(text,rendered)
         self.assertEqual(len(Page(rendered).tags('script')),1)
         payload=re.search(r'id="find-section-data">(.*?)</script>',rendered)[1]
-        self.assertEqual(json.loads(payload)[p['path']],[['safe',text]])
+        self.assertEqual(json.loads(payload)['pages'][p['path']],['safe',text])
         with self.assertRaises(ValueError):search_sections.apply(outputs,[p])
 
     def test_real_missed_queries_ranking_and_section_specificity(self):

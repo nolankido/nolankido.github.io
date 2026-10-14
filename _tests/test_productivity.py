@@ -15,6 +15,7 @@ import build
 import living_well as lw
 import check_live
 import productivity_history as history
+import holdem_essay_history as essay_history
 SLUG='ai-and-personal-productivity'
 ROUTE='/living-well/'+SLUG+'/'
 class ProductivityTests(unittest.TestCase):
@@ -35,7 +36,7 @@ class ProductivityTests(unittest.TestCase):
         mutable={'_source/living-well/discovery.json','_source/reader-previews.json','_scripts/living_well.py'}
         for path,digest in b['files'].items():
             raw=(ROOT/path).read_bytes()
-            if path not in mutable:self.assertEqual(sha256(raw).hexdigest(),digest,path)
+            if path not in mutable | set(essay_history.change()['paths']):self.assertEqual(sha256(raw).hexdigest(),digest,path)
             self.assertEqual(sha256(history.before(path,raw)).hexdigest(),digest,path)
     def test_unreviewed_claims_and_records_are_not_hidden_by_history(self):
         records=deepcopy(self.pages);page=next(p for p in records if p['path']==ROUTE);page['description']='A claim nobody reviewed'

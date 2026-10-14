@@ -158,7 +158,7 @@ def supplement(topics: list[dict]) -> dict[str, str]:
                         '<div class="section-content"><h2 class="section-title" id="topic-' + ident + '">' + title + '</h2>'
                         '<p class="section-deck">' + escape(topic['summary']) + '</p>' + support + caution
                         + '<div class="topic-columns"><div><h3>Start with a question</h3><ol class="topic-steps">' + steps + '</ol>'
-                        + ('<p><a href="/poker/free-poker-learning-path/#beginner-practice">Follow all four beginner lessons with goals and readiness checks</a>.</p>' if ident == 'learn' else '')
+                        + ('<p>Choose your depth: <a href="/poker/no-limit-holdem-guide/">read the complete beginner Hold’em guide</a>, <a href="/poker/free-poker-learning-path/#beginner-practice">follow four foundation lessons</a>, or <a href="/poker/beginner-checkpoint/">try the checkpoint with repair links</a>. Use the glossary and rules guides below as references.</p>' if ident == 'learn' else '')
                         + '<details class="poker-details topic-guides"><summary>All ' + str(len(topic['guides'])) + ' guides on this topic</summary>'
                         '<ul>' + guides + '</ul></details><p><a href="' + escape(finder_url(topic, 'guide'), quote=True)
                         + '">Search on-site material in this topic</a></p></div>'

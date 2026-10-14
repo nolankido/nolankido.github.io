@@ -4,8 +4,9 @@
     {
       "id": "learn",
       "title": "Learn poker",
-      "summary": "Rules, hand rankings, vocabulary and a first path through the game.",
+      "summary": "A complete Hold’em overview, short lessons, explained practice and rules to look up.",
       "primary_guides": [
+        "no-limit-holdem-guide",
         "holdem-basics",
         "hand-rankings",
         "betting-and-pots",

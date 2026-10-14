@@ -45,7 +45,8 @@ class SearchAddressesTests(unittest.TestCase):
 
     def test_real_missed_destinations_ranking_and_conservative_address_scope(self):
         rows = site_find.entries(ROOT, build.public_pages())
-        sections = json.loads(re.search(r'id="find-section-data">(.*?)</script>', (ROOT / 'find/index.html').read_text(), re.S)[1])
+        packed = json.loads(re.search(r'id="find-section-data">(.*?)</script>', (ROOT / 'find/index.html').read_text(), re.S)[1])
+        sections = {p:[v[i:i+2] for i in range(0,len(v),2)] for p,v in packed['pages'].items()}
         for row in rows:
             row.update(subjects=' '.join(row['interests']), sections=sections[row['path']])
         old = history.before('assets/site-find.js', (ROOT / 'assets/site-find.js').read_text())
