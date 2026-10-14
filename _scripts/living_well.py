@@ -159,6 +159,9 @@ def load(root: Path) -> list[dict]:
     for name in ('launch.json', 'further.json', 'discovery.json', 'expansion.json'):
         data = json.loads((root / '_source/living-well' / name).read_text(encoding='utf-8'))
         entries.extend(data['entries'])
+    extra = root / '_source/living-well/productivity.json'
+    if extra.exists():
+        entries.extend(json.loads(extra.read_text(encoding='utf-8'))['entries'])
     seen = set()
     topics = {t[0] for t in TOPICS}
     for entry in entries:
@@ -200,6 +203,21 @@ def load(root: Path) -> list[dict]:
         headings = [s['heading'] for s in entry['sections']]
         if len(headings) != len(set(headings)):
             raise ValueError('Duplicate Living Well section heading: ' + slug)
+        ids = set()
+        for section in entry['sections']:
+            subs = section.get('subsections', [])
+            if not isinstance(subs, list):
+                raise ValueError('Living Well subsections must be a list')
+            for sub in subs:
+                if not isinstance(sub, dict) or set(sub) != {'id', 'heading', 'paragraphs'}:
+                    raise ValueError('Invalid Living Well subsection')
+                if not isinstance(sub['id'], str) or not re.fullmatch(r'use-[a-z0-9-]+', sub['id']):
+                    raise ValueError('Invalid Living Well subsection anchor')
+                if sub['id'] in ids or not isinstance(sub['heading'], str) or not sub['heading'].strip():
+                    raise ValueError('Duplicate or empty Living Well subsection')
+                if not isinstance(sub['paragraphs'], list) or not sub['paragraphs'] or any(not isinstance(p, str) or not p.strip() for p in sub['paragraphs']):
+                    raise ValueError('Living Well subsection needs paragraph text')
+                ids.add(sub['id'])
         raw = json.dumps(entry)
         if re.search(r'<\s*(script|iframe|form|input|textarea|style)\b|\bon\w+\s*=|javascript:', raw, re.I):
             raise ValueError('Interactive or executable content is not permitted in Living Well prose')
@@ -242,6 +260,7 @@ def manifest(root: Path) -> list[dict]:
 def minutes(entry: dict) -> int:
     text = entry['lead'] + ' '.join(s['heading'] + ' ' + ' '.join(s['paragraphs']) for s in entry['sections']) + entry.get('practice', '') + entry['question']
     text += ' '.join(c['label'] + ' ' + c['note'] for c in entry.get('sources', []))
+    text += ' ' + ' '.join(sub['heading'] + ' ' + ' '.join(sub['paragraphs']) for section in entry['sections'] for sub in section.get('subsections', []))
     text += ' ' + utility.reading_text(entry)
     return max(1, math.ceil(len(re.findall(r'\b[\w\'-]+\b', unescape(re.sub('<[^>]+>', ' ', text)))) / 220))
 
@@ -294,6 +313,9 @@ def article(entry: dict, entries: list[dict]) -> str:
     for number, s in enumerate(entry['sections'], 1):
         body += '<h2 id="part-' + str(number) + '">' + escape(s['heading']) + '</h2>'
         body += ''.join('<p>' + p + '</p>' for p in s['paragraphs'])
+        for sub in s.get('subsections', []):
+            body += '<h3 id="' + escape(sub['id'], quote=True) + '">' + escape(sub['heading']) + '</h3>'
+            body += ''.join('<p>' + p + '</p>' for p in sub['paragraphs'])
     body += utility.starter(entry)
     if entry.get('practice'):
         body += '<aside class="lw-callout"><h2 id="try-it">One optional practice</h2><p>' + entry['practice'] + '</p><p class="small-copy">Keep any notes privately. Skip or adapt this exercise if it does not fit your circumstances.</p></aside>'

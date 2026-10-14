@@ -170,7 +170,8 @@
           "heading": "Return to the reason for doing it",
           "paragraphs": [
             "The larger questions remain: <a href=\"/living-well/time-you-save/\">what is the time you save for</a>, what deserves care, and what makes an ordinary moment meaningful? Removing a logistical obstacle can create room for a conversation, a creative afternoon, or an unhurried pause. It does not tell you which of those matters most.",
-            "For tools and background, browse <a href=\"/living-well/free-resources/everyday-tools/\">useful everyday tools</a>, <a href=\"/living-well/free-resources/digital-life/\">digital privacy</a>, and <a href=\"/living-well/free-resources/care/\">relationships and memory</a>. For a different kind of inquiry, the <a href=\"/living-well/topics/meaning/\">meaning and spirituality</a> collection remains its own invitation, not a productivity technique."
+            "For tools and background, browse <a href=\"/living-well/free-resources/everyday-tools/\">useful everyday tools</a>, <a href=\"/living-well/free-resources/digital-life/\">digital privacy</a>, and <a href=\"/living-well/free-resources/care/\">relationships and memory</a>. For a different kind of inquiry, the <a href=\"/living-well/topics/meaning/\">meaning and spirituality</a> collection remains its own invitation, not a productivity technique.",
+            "For a research-based overview and eight everyday prompts, read <a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result."
           ]
         }
       ],
@@ -183,7 +184,9 @@
       "series": "technology-for-real-life",
       "evidence_status": "worked-guide-not-firsthand-result",
       "outcome": "Choose one ordinary task and a guide with a clear finish.",
-      "format": "practice-path"
+      "format": "practice-path",
+      "updated": "2026-10-14",
+      "revision": "Added a related research essay on everyday AI use and fair comparisons of total effort."
     },
     {
       "slug": "scattered-notes-to-next-step",
@@ -666,7 +669,8 @@
           "paragraphs": [
             "A future firsthand account should identify what actually happened, which device or service was used, the dates, the comparison, the effort, the mistakes, and the conclusion. Use genuine screenshots or examples only with suitable permission and removal of private information.",
             "Keep three labels distinct: a proposed method, a fictional worked example, and a firsthand observation. Research findings need their own sources and limits. None of these becomes stronger by being presented as another. The <a href=\"/living-well/field-notes/\">field-note collection</a> retains proposed experiments until actual observations are supplied.",
-            "The final question is not whether the tool was impressive. It is whether you would make the same change again, knowing what it really required and what it made possible outside the interface."
+            "The final question is not whether the tool was impressive. It is whether you would make the same change again, knowing what it really required and what it made possible outside the interface.",
+            "For the evidence behind AI productivity claims and a comparison that includes checking in both methods, read <a href=\"/living-well/ai-and-personal-productivity/\">AI and personal productivity: what actually helps</a>. Use its examples to choose a small task, then return here to check the complete result."
           ]
         }
       ],
@@ -684,7 +688,9 @@
         "simplest_route": "Keep a short before-and-after note. A score, tracking app, or AI verdict is unnecessary.",
         "finish": "You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.",
         "starter": "DID THIS HELP?\nTask and human purpose:\nWhat counts as finished:\nEarlier method:\nChange tried:\nActual dates and circumstances:\n\nTOTAL EFFORT\nSetup:\nPreparing input:\nDoing the task:\nChecking and correcting:\nMoving the result into use:\nOngoing maintenance:\nWork done by someone else:\n\nBEYOND TIME\nReliability and mistakes:\nAccess, privacy, cost, or permission tradeoffs:\nWhat became possible outside the tool:\nOther explanations for what changed:\n\nDECISION\nKeep / simplify / stop / still unsure:\nWhy:\nWhat this observation cannot establish:\n"
-      }
+      },
+      "updated": "2026-10-14",
+      "revision": "Added a related research essay on everyday AI use and fair comparisons of total effort."
     }
   ]
 }

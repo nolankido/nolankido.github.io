@@ -1924,6 +1924,27 @@
           339
         ]
       }
+    },
+    "living-well-ai-and-personal-productivity": {
+      "path": "/living-well/ai-and-personal-productivity/",
+      "title": "AI and personal productivity: what actually helps",
+      "label": "LIVING WELL / ESSAY",
+      "src": "/assets/social/reader-living-well-ai-and-personal-productivity.png",
+      "sha256": "d5f32372b7e7f1f51c14c4e4d78f2d0f3a858440082f0fbf090bed0a9699dcfa",
+      "layout": {
+        "lines": [
+          "AI and personal",
+          "productivity: what actually",
+          "helps"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1068,
+          415
+        ]
+      }
     }
   }
 }

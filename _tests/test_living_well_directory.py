@@ -7,6 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 import json
+import productivity_history
 import re
 import subprocess
 import sys
@@ -45,7 +46,7 @@ class DirectoryTests(unittest.TestCase):
         self.assertEqual(len(self.extra['tasks']), 9)
         self.assertEqual(len(self.library['resources']), 98)
         self.assertEqual(len(self.library['shelves']), 16)
-        self.assertEqual(len(lw.manifest(ROOT)), 75)
+        self.assertEqual(len(lw.manifest(ROOT)), 76)
         base = json.loads((ROOT / '_source/living-well/resources.json').read_text())
         self.assertEqual(len(base['resources']), 66)
         self.assertEqual(self.library['resources'][:66], base['resources'])
@@ -214,7 +215,7 @@ class DirectoryTests(unittest.TestCase):
             'living-well/feed.xml': '94d241e3797f54abf9f5b35e99a1f1f92cd932d2326c7fdc481fb5a2ce86e094',
             '_source/living-well/discovery.json': '562d0b7cee1bc4213f3a44d6c1c5aa944f47e19d97b6b312d9373b41bf04099f',
         }.items():
-            self.assertEqual(sha256((ROOT / relative).read_bytes()).hexdigest(), digest, relative)
+            self.assertEqual(sha256(productivity_history.before(relative, (ROOT / relative).read_bytes())).hexdigest(), digest, relative)
         self.assertEqual(len(lw.worksheet_exports()), 5)
         for path, text in lw.worksheet_exports().items():
             self.assertEqual((ROOT / path).read_text(), text)

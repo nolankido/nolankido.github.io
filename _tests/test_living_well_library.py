@@ -32,7 +32,7 @@ class LibraryTests(unittest.TestCase):
 
     def test_twelve_distinct_collection_pages_with_complete_context(self):
         self.assertEqual(len(library.manifest(ROOT)), 16)
-        self.assertEqual(len(lw.manifest(ROOT)), 75)
+        self.assertEqual(len(lw.manifest(ROOT)), 76)
         live = check_live.targets()
         for shelf in self.data['shelves']:
             with self.subTest(shelf=shelf['id']):
@@ -79,7 +79,7 @@ class LibraryTests(unittest.TestCase):
             self.assertEqual(scripts, ['https://cloud.umami.is/script.js'])
             self.assertNotIn('utm_', body)
             self.assertNotIn(chr(0x2014), body)
-        self.assertEqual(len(self.readings), 34)
+        self.assertEqual(len(self.readings), 35)
         self.assertEqual(sum(e['kind'] == 'experiment' for e in self.readings.values()), 3)
 
     def test_invalid_library_context_is_rejected(self):

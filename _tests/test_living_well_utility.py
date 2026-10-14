@@ -30,15 +30,17 @@ class UtilityTests(unittest.TestCase):
 
     def test_eight_substantive_guides_with_explicit_outcomes(self):
         self.assertEqual(set(self.new), SLUGS)
-        self.assertEqual(len(lw.manifest(ROOT)), 75)
-        self.assertEqual(len(self.entries), 34)
+        self.assertEqual(len(lw.manifest(ROOT)), 76)
+        self.assertEqual(len(self.entries), 35)
         for slug,e in self.new.items():
             with self.subTest(slug=slug):
                 self.assertEqual(e['kind'], 'guide')
                 self.assertEqual(e['published'], '2026-10-10')
                 self.assertEqual(e['evidence_status'], 'worked-guide-not-firsthand-result')
                 self.assertTrue(e['outcome'].strip())
-                self.assertNotIn('updated', e)
+                if slug in {'technology-for-real-life','did-the-tool-actually-help'}:
+                    self.assertEqual(e['updated'], '2026-10-14'); self.assertTrue(e['revision'])
+                else: self.assertNotIn('updated', e)
                 self.assertGreaterEqual(len(e['sections']), 5)
                 text = e['lead'] + ' '.join(' '.join(s['paragraphs']) for s in e['sections'])
                 self.assertGreaterEqual(len(re.findall(r'\b[\w\'-]+\b', re.sub('<[^>]+>', ' ', text))), 390)
@@ -61,14 +63,14 @@ class UtilityTests(unittest.TestCase):
         self.assertLess(guides.index('href="/living-well/technology-for-real-life/"'), guides.index('href="/living-well/meditation-without-buying-a-lifestyle/"'))
 
     def test_original_twenty_six_readings_are_exactly_preserved(self):
-        old = {s:e for s,e in self.entries.items() if s not in SLUGS}
+        old = {s:e for s,e in self.entries.items() if s not in SLUGS and s != 'ai-and-personal-productivity'}
         self.assertEqual(len(old), 26)
         digest = hashlib.sha256(json.dumps(old, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
         self.assertEqual(digest, OLD_READING_DIGEST)
         feed = ET.fromstring(self.outputs[Path('living-well/feed.xml')])
         items = feed.findall('./channel/item')
-        self.assertEqual(len(items), 31)
-        self.assertEqual(len({i.findtext('guid') for i in items}), 31)
+        self.assertEqual(len(items), 32)
+        self.assertEqual(len({i.findtext('guid') for i in items}), 32)
         field = self.outputs[Path('living-well/field-notes/index.html')]
         self.assertIn('No completed personal field notes are published here yet', field)
         self.assertEqual(sum(e['kind'] == 'experiment' for e in self.entries.values()), 3)
