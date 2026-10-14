@@ -1846,6 +1846,26 @@
           351
         ]
       }
+    },
+    "poker-turn-and-river-decisions": {
+      "path": "/poker/turn-and-river-decisions/",
+      "title": "Your turn and river decisions.",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-turn-and-river-decisions.png",
+      "sha256": "5fe481cd3065bcbbd118525adc496938cb4bc0e3d75479a0da08b281423f2c0c",
+      "layout": {
+        "lines": [
+          "Your turn and river",
+          "decisions."
+        ],
+        "font_size": 64,
+        "bounds": [
+          93,
+          205,
+          781,
+          339
+        ]
+      }
     }
   }
 }

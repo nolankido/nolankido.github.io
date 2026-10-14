@@ -1082,5 +1082,18 @@
     "date": "2026-10-14",
     "updated": "2026-10-14",
     "poker_guide": true
+  },
+  {
+    "id": "poker-turn-and-river-decisions",
+    "path": "/poker/turn-and-river-decisions/",
+    "title": "Your turn and river decisions.",
+    "seo_title": "Poker Turn & River: Beginner Decisions & Practice | Nolan Kido",
+    "description": "Learn why missed draws can still win, how river checks and calls work, and what a shared pot means through six beginner exercises with explained answers.",
+    "kicker": "Poker / Beginner lessons",
+    "source": "poker/turn-and-river-decisions.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
   }
 ]

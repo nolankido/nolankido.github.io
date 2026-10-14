@@ -121,11 +121,11 @@ try:
             report['address_data_fallbacks']+=1;context.close()
         context=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':950});context.route('**/*',route_for());page=context.new_page()
         page.goto(base+'/find/');expect(page.locator('#find-controls')).to_be_hidden()
-        expect(page.locator('.find-item')).to_have_count(154)
+        expect(page.locator('.find-item')).to_have_count(155)
         page.locator('#browse-technology summary').focus();page.keyboard.press('Enter')
         link=page.locator('#browse-technology h3 a').first;destination=link.get_attribute('href')
         link.focus();page.keyboard.press('Enter');page.wait_for_url(base+destination,wait_until='load');expect(page.locator('h1')).to_be_visible()
-        report['no_script_pages']=154;context.close()
+        report['no_script_pages']=155;context.close()
         assert not errors,errors
         browser.close();report['status']='pass';print(json.dumps(report,indent=2))
         if os.environ.get('SCREENSHOT_DIR'):(Path(os.environ['SCREENSHOT_DIR'])/'search-sections-report.json').write_text(json.dumps(report,indent=2)+'\n')

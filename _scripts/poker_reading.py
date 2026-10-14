@@ -10,7 +10,8 @@ import re
 NEXT_READS = {
     'first-decisions': ('starting-hand-decisions', 'free-poker-learning-path'),
     'starting-hand-decisions': ('first-flop-decisions', 'reading-preflop-charts'),
-    'first-flop-decisions': ('reading-the-board', 'ranges-and-bets'),
+    'first-flop-decisions': ('turn-and-river-decisions', 'reading-the-board'),
+    'turn-and-river-decisions': ('decision-lab', 'pot-odds-workshop'),
     'first-live-cash-game': ('cash-game-costs', 'cash-game-study-path'),
     'cash-game-costs': ('cash-game-study-path', 'variance-and-results'),
     'cash-game-study-path': ('choosing-study-tools', 'reviewing-a-hand'),
