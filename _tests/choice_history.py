@@ -11,9 +11,10 @@ import beginner_history
 import preflop_history
 import flop_history
 import river_history
+import learning_path_history
 ROOT=Path(__file__).resolve().parents[1]
 ROUTE='/technology/should-i-use-ai/'
-NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html',answer_review_history.SOURCE} | search_entry_history.NEW_SOURCES | set(beginner_history.change()['new_files']) | set(preflop_history.change()['new_files']) | set(flop_history.change()['new_files']) | set(river_history.change()['new_files'])
+NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html',answer_review_history.SOURCE} | search_entry_history.NEW_SOURCES | set(beginner_history.change()['new_files']) | set(preflop_history.change()['new_files']) | set(flop_history.change()['new_files']) | set(river_history.change()['new_files']) | set(learning_path_history.change()['new_files'])
 NEW_OUTPUT='technology/should-i-use-ai/index.html'
 NEW_OUTPUTS={NEW_OUTPUT,answer_review_history.OUTPUT,beginner_history.OUTPUT,preflop_history.OUTPUT,flop_history.OUTPUT,river_history.OUTPUT}
 

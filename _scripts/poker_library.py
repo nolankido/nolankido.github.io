@@ -7,6 +7,7 @@ from datetime import datetime
 import json
 import re
 from poker_reading import next_reads
+import poker_beginner_path
 
 TOPICS = {'study': 'Learning resources', 'cash': 'Cash-game study', 'variants': 'Other poker games', 'research': 'Poker research', 'basics': 'Learn the basics', 'hands': 'Read a hand', 'tournaments': 'Tournament study',
           'live': 'Live tournament preparation', 'practice': 'Try a decision', 'results': 'Results and review', 'creative': 'Make a vlog'}
@@ -50,7 +51,7 @@ def load(root, pages):
         source = (root / '_source' / page['source']).resolve()
         if not source.is_relative_to((root / '_source').resolve()):
             raise ValueError('Library source outside source directory')
-        result.append({**item, 'route': route, 'minutes': minutes(source.read_text(encoding='utf-8'))})
+        result.append({**item, 'route': route, 'minutes': minutes(poker_beginner_path.decorate(page, source.read_text(encoding='utf-8'), root))})
         seen.add(route)
     if seen != expected:
         raise ValueError('Library missing published guides: ' + ', '.join(sorted(expected - seen)))
