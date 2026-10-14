@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
 import ranges_history as history
+import betting_history
 from test_viewer_guides import Tags, best
 
 ROUTE = '/poker/ranges-for-beginners/'
@@ -25,9 +26,9 @@ def feed_records(xml):
 class RangeTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = build.public_pages()
+        cls.pages = betting_history.pages(build.public_pages())
         cls.current_outputs = build.build_outputs()
-        cls.outputs = cls.current_outputs
+        cls.outputs = betting_history.outputs(cls.current_outputs)
         cls.text = cls.outputs[build.output_path(ROUTE)]
         cls.source = (ROOT / '_source/poker/ranges-for-beginners.html').read_text()
         cls.baseline = json.loads((ROOT / '_tests/ranges-baseline.json').read_text())
@@ -43,11 +44,12 @@ class RangeTests(unittest.TestCase):
             self.assertEqual(sha256(raw.encode()).hexdigest(), b['outputs'][str(p)], str(p))
         files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads']
                  for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = betting_history.files(files)
         self.assertEqual(files - set(b['files']), set(history.change()['new_files']))
         self.assertEqual(set(history.change()['new_files']), {'_source/poker/ranges-for-beginners.html', 'assets/social/reader-poker-ranges-for-beginners.png'})
         changed = set()
         for p, digest in b['files'].items():
-            raw = (ROOT / p).read_bytes()
+            raw = betting_history.before(p, (ROOT / p).read_bytes())
             if sha256(raw).hexdigest() != digest: changed.add(p)
             self.assertEqual(sha256(history.before(p, raw)).hexdigest(), digest, p)
         self.assertEqual(changed, {'_source/pages.json', '_source/poker/library.json', '_source/poker/topics.json', '_source/reader-previews.json'})
@@ -65,7 +67,7 @@ class RangeTests(unittest.TestCase):
 
     def test_existing_catalog_records_and_each_feed_item_survive(self):
         for path, old in self.baseline['catalogs'].items():
-            now = json.loads((ROOT / path).read_text())
+            now = json.loads(betting_history.before(path, (ROOT / path).read_text()))
             if path.endswith('library.json'):
                 now['entries'] = [v for v in now['entries'] if v['slug'] != 'ranges-for-beginners']
             else:

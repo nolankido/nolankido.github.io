@@ -1576,3 +1576,35 @@ Find diagnostic count are corrected; their existing destination, focus,
 ordering and no-script assertions remain. No public file changes. The
 complete existing gate must pass on the corrected candidate, followed by
 candidate-bound artifact verification, Pages and all 411 published targets.
+
+
+## October 14, 2026: beginner betting purpose
+
+The owner's request renewed beginner-content improvement authority through the
+existing GitHub repository. Production main was dc39792022e74088dceca1d25d7a6c34a5d8c562.
+PR #72 is completed: the full candidate gate, Pages deployment and all 411
+published-byte checks passed. Its duplicate full main gate also completed
+successfully. A fresh direct GET during this review returned exact main bytes
+for the published range lesson. Only stale PR #48 was open and is untouched.
+
+The current-content assessment identifies betting purpose as the next practical
+teaching gap. The new /poker/betting-with-a-purpose/ connects the range lesson
+to value, check comparisons, response-sensitive sizing, river bluffs and turn
+semi-bluffs through seven explained exercises and 2,283 words. The optional
+arithmetic compares complete terminal decision-point payouts rather than
+counting the player's returned bet as profit. All scenes and responses are
+fictional supplied models, with no actual opponent frequencies or optimal
+strategy claim. Primary terminology sources were read October 14, 2026.
+
+The report _reports/beginner-poker-20261014.md records the previous status,
+assessment, implementation, preservation and next useful work. Every prior
+article source, metadata record, asset, download and feed item is exact.
+Existing library, topic, search, archive, feed and sitemap generators expose
+the new guide. Historical digests remain intact behind bounded reviewed-file
+adapters, with negative controls. Current counters advance by one article.
+
+All eight new independent tests passed after repairing one incorrect fragment;
+the previous range guide's nine tests also passed. Build reproduction, HTML5
+and search audits pass at 177 pages and 96 articles. Full regression tests,
+the hosted candidate browser gate and publication receipts follow in the PR.
+No learner, ranking, traffic or profitability outcome is inferred.
