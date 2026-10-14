@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
 import flop_history as history
+import river_history
 from test_viewer_guides import Tags, best
 
 ROUTE = '/poker/first-flop-decisions/'
@@ -25,8 +26,9 @@ def feed_records(xml):
 class FlopTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = build.public_pages()
-        cls.outputs = build.build_outputs()
+        cls.pages = river_history.pages(build.public_pages())
+        cls.current_outputs = build.build_outputs()
+        cls.outputs = river_history.outputs(cls.current_outputs)
         cls.text = cls.outputs[build.output_path(ROUTE)]
         cls.source = (ROOT / '_source/poker/first-flop-decisions.html').read_text()
         cls.baseline = json.loads((ROOT / '_tests/flop-baseline.json').read_text())
@@ -42,11 +44,12 @@ class FlopTests(unittest.TestCase):
             self.assertEqual(sha256(raw.encode()).hexdigest(), b['outputs'][str(p)], str(p))
         files = {p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads']
                  for p in (ROOT / d).rglob('*') if p.is_file()}
+        files = river_history.files(files)
         self.assertEqual(files - set(b['files']), set(history.change()['new_files']))
         self.assertEqual(set(history.change()['new_files']), {'_source/poker/first-flop-decisions.html', 'assets/social/reader-poker-first-flop-decisions.png'})
         changed = set()
         for p, digest in b['files'].items():
-            raw = (ROOT / p).read_bytes()
+            raw = river_history.before(p, (ROOT / p).read_bytes())
             if sha256(raw).hexdigest() != digest: changed.add(p)
             self.assertEqual(sha256(history.before(p, raw)).hexdigest(), digest, p)
         self.assertEqual(changed, {'_source/pages.json', '_source/poker/library.json', '_source/poker/topics.json', '_source/reader-previews.json'})
@@ -64,7 +67,7 @@ class FlopTests(unittest.TestCase):
 
     def test_existing_catalog_records_and_each_feed_item_survive(self):
         for path, old in self.baseline['catalogs'].items():
-            now = json.loads((ROOT / path).read_text())
+            now = json.loads(river_history.before(path, (ROOT / path).read_text()))
             if path.endswith('library.json'):
                 now['entries'] = [v for v in now['entries'] if v['slug'] != 'first-flop-decisions']
             else:
@@ -161,7 +164,7 @@ class FlopTests(unittest.TestCase):
         self.assertEqual(schema['author']['name'], 'Nolan Kido')
         self.assertIn('Poker After the Flop: Beginner Lessons &amp; Practice', self.text)
         targets = check_live.targets()
-        self.assertEqual(targets[ROUTE], (200, self.text.encode()))
+        self.assertEqual(targets[ROUTE], (200, self.current_outputs[build.output_path(ROUTE)].encode()))
         self.assertEqual(targets['/assets/social/reader-poker-first-flop-decisions.png'][0], 200)
         find = self.outputs[Path('find/index.html')]; prior = history.before('find/index.html', find)
         self.assertLess(len(find.encode()) - len(prior.encode()), 2048)

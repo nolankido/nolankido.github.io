@@ -1229,3 +1229,120 @@ sequence, then address specific hesitation points or build a bounded
 first-session practice capstone. Preserve the deeper references instead
 of adding another overlapping beginner index. No claim of being the best
 resource or of improved rankings is made without supporting evidence.
+
+
+## October 14, 2026: beginner turn and river interpretation
+
+The preceding flop release is complete. PR #69 merged as
+90466011ca43cfd4458a9a470aea9d8712b3cf77 with tree
+016d7edb3e92c3848b3e05ac88cc2963c0deac7d. Its exact candidate
+4bcdd0b10a11ceeeba443fe6c0e3d5f0308453bf passed 536 unit/content checks
+and all 38 browser suites in run 38517815268. Six mobile and desktop
+opening, card-example and answer previews were inspected. Pages run
+38518793453 succeeded, and published-byte job 115703499744 passed 405/405
+targets with LIVE_VERIFIED_COMMIT=90466011ca43cfd4458a9a470aea9d8712b3cf77.
+A fresh main read matched. Main CI run 38518793719 subsequently passed
+all of its build and browser jobs and aggregate checks job 115706344077.
+Final receipt: https://github.com/nolankido/nolankido.github.io/pull/69.
+
+The user requested another substantial beginner improvement. Current main,
+open PRs, deployment and source material were reviewed. Stale PR #48 is
+untouched, with no competing current work observed. A read-only editorial
+audit found that a generic complete-hand capstone would repeat the existing
+hold'em walkthrough, follow-along scenes and recent lessons. The more
+useful gap was understanding what changes on the final street.
+
+The new /poker/turn-and-river-decisions/ guide supplies 2,327 words, six
+native answer-reveal exercises and 23 accessible displayed cards. A connected
+pair-and-draw example teaches an overcard on the turn, a missed river draw
+that retains a pair, and checking behind when no new community card remains.
+A separate ace-high showdown demonstrates that missing a draw does not
+mean having no showdown value. A river-call example separates catching a
+bluff from making one. The final shared-straight example shows why zero
+outright wins can coexist with 50% equity and a positive call value relative
+to folding under explicitly limited assumptions.
+
+The scenes are original fictional teaching material, not Nolan's hands,
+solver output, recommendations of a range, or claims of profitable play.
+AI assistance and source limits are visible. Practice requires no wager,
+account or purchase. A review refined the definition of showdown value to
+include sharing the pot. Every listed best-five ranking and all 990 legal
+opposing holdings on the final straight board were independently checked.
+The examples distinguish known cards from assumed opponent frequencies,
+legal raises from a restricted call/fold comparison, and receiving chips
+from full-hand profit. No sixth community card or guaranteed best action
+is implied.
+
+Primary references were read October 14, 2026: PokerStars' hold'em rules,
+showdown explanation, bluff-catcher terminology and pot-odds lesson.
+Only mechanics and terminology are used; generic strategy prescriptions
+and unqualified approximations from the external pages are not adopted.
+
+The new guide follows first-flop-decisions through generated Read next
+navigation, then leads to the existing river Decision Lab and pot-odds
+workshop. It is also in the Learn topic's full guide list, library, both
+Find tools, author archive, Poker and combined feeds, and sitemap. The
+existing three introductory topic steps remain exact. Its social title
+card uses the existing renderer. No runtime, stylesheet, form, dependency,
+tracking, download, domain setting or hosting service was added.
+
+The production baseline at main 90466011ca43cfd4458a9a470aea9d8712b3cf77
+was verified against Git objects before editing: 174 manifest records,
+201 generated outputs and 349 source/asset/download files. All prior
+article sources and metadata remain byte-identical, including the full
+first-flop-decisions text. All prior assets, downloads and feed items are
+preserved. Only four source catalogs change, with a new source and a new
+PNG. Direct-hash preservation checks are independent of exact historical
+adapters; no older golden digest was refreshed. The predecessor adapters
+require exact whole-file hashes and frozen offset reversals, and negative
+controls reject unrelated changes.
+
+Nine new unit/content checks pass, including all 990 opposing hands and
+fractional win/tie accounting. A copied negative-control inventory count
+was corrected from 174 to 175, retaining the assertion that an unreviewed
+page mutation must not be removed. The corrected test file passes all nine
+checks. Build reproduction passes for 202 outputs. HTML5 and search checks
+pass for 175 pages, 94 articles and 170 sitemap URLs, with distinct titles
+and descriptions. Find grows by 1,198 bytes, including 577 bytes of section
+data; that payload remains under 60,000 bytes at 58,207 bytes. The inspected
+social preview is 8,466 bytes. These are delivery checks, not evidence of
+indexing or ranking improvements.
+
+The complete existing hosted gate remains required on the exact candidate:
+545 unit/content tests and all 39 browser suites. The new browser suite
+covers four widths, six keyboard answers at each width, five real discovery
+arrivals, no-JavaScript reading and two accessibility audits. Six mobile and
+desktop opening, card-example and answer previews must be inspected. Pages
+deployment, all 407 published targets and a fresh main read are required
+before completion. The PR receipt will record the exact tree and executed
+release evidence.
+
+Next useful step: obtain real beginner feedback on this connected sequence
+and address specific confusion, particularly at hand comparison and the
+transition from knowing a price to justifying an action. The site already
+has complete-hand walkthroughs and deeper practice, so another generic
+beginner index or quota-driven lesson would add less value.
+
+
+The initial full local suite executed 545 tests in 304.696 seconds. It
+loaded the earlier negative-control count before that count was corrected,
+so 544 passed and that one assertion reported 175 versus 174. The corrected
+file had already been rerun separately: all nine tests passed in 3.934
+seconds. No public source, arithmetic or preservation failure was found.
+The complete 545-test hosted gate is still required on the exact corrected
+candidate, alongside every existing and new browser suite.
+
+
+Candidate 6e46b614ff42715fe3b29f1cec7c49f5477db633 passed all 545
+unit/content checks in 166.176 seconds on GitHub run 38520649756. The
+new browser test then exposed a fixture assumption: this new lesson is in
+the Learn topic's collapsed All guides panel, not its three visible first
+steps. The test attempted to focus a hidden link without opening the panel.
+The correction uses the keyboard to open that exact native disclosure,
+asserts its list and destination link are visible, then retains the exact
+arrival assertion. No public file changes. The complete existing gate must
+run on the corrected candidate before merging.
+Six initial mobile/desktop opening, card-example and answer previews were
+inspected. Their layout is clear and the public files remain unchanged by
+the fixture correction. The final candidate still needs its own full gate
+and artifact verification before publication.

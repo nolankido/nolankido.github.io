@@ -15,7 +15,8 @@
         "free-poker-learning-path",
         "first-decisions",
         "starting-hand-decisions",
-        "first-flop-decisions"
+        "first-flop-decisions",
+        "turn-and-river-decisions"
       ],
       "related_guides": [
         "table-etiquette",

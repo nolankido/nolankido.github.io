@@ -400,6 +400,14 @@
       "topic": "basics",
       "level": "Start here",
       "keywords": "beginner beginners after flop postflop made hand draw top pair kicker check bet continuation c bet value bluff straight gutshot flush full house counterfeit two pair practice"
+    },
+    {
+      "slug": "turn-and-river-decisions",
+      "title": "Your turn and river decisions",
+      "description": "Learn why missed draws can still win, how river checks and calls work, and what a shared pot means through six beginner exercises with explained answers.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "beginner beginners turn river final street missed draw showdown value high card bluff catcher check behind call pot equity share split tie overcard practice"
     }
   ]
 }
