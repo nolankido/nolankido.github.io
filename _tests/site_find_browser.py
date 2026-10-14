@@ -155,6 +155,8 @@ try:
                 page.set_viewport_size({'width':width,'height':900})
                 for query,destination in title_queries:
                     set_query(page,query)
+                    expect(page.locator('#find-results')).to_be_in_viewport()
+                    assert page.locator('#find-results').evaluate('h=>h.getBoundingClientRect().top>=document.querySelector(".site-header").getBoundingClientRect().bottom+4'),'Descriptive-title results must clear the sticky header'
                     link=page.locator('.find-item:visible h3 a[href="'+destination+'"]')
                     expect(link).to_be_visible()
                     record=next(p for p in build.public_pages() if p['path']==destination)
@@ -162,7 +164,7 @@ try:
                     assert page.evaluate('document.documentElement.scrollWidth')<=width
                     if os.environ.get('SCREENSHOT_DIR') and query=='pot odds calculator':
                         out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
-                        page.screenshot(path=str(out/f'find-public-title-{width}.png'),full_page=True)
+                        page.screenshot(path=str(out/f'find-public-title-{width}.png'))
                     link.focus();page.keyboard.press('Enter')
                     expect(page).to_have_url(base+destination)
                     expect(page).to_have_title(record['seo_title'])

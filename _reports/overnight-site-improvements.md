@@ -957,3 +957,11 @@ accessibility to a crawler, not actual Google indexing or improved search
 rankings. No ranking or traffic gain is claimed. Next useful work remains
 actual search or reader feedback and owner-approved firsthand evidence,
 rather than extra pages or speculative search keywords.
+
+The first candidate passed all 512 local and hosted unit/content checks and
+the new search journeys in the hosted reader-tools group. Its full-page
+captures showed a sticky-header capture artifact, so the final candidate
+uses actual viewport captures and explicitly checks heading clearance for
+each of the six new search arrivals. The complete gate is rerun on that
+exact candidate before publication; a first-candidate pass is not used as
+the final release gate.
