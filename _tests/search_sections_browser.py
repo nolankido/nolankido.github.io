@@ -17,7 +17,7 @@ cases=[('recovery','/living-well/find-the-document-you-need/','part-5'),
        ('commitments','/technology/check-ai-answers/','review-writing'),
        ('manageable shape','/creative/','creative-brief-title'),
        ('practical needs','/poker/poker-rules-and-fair-play/','access-and-support')]
-report={'keyboard_journeys':0,'spacing_views':0,'data_fallbacks':0,'no_script_pages':0,'axe':[]}
+report={'keyboard_journeys':0,'address_journeys':0,'address_filters':0,'address_data_fallbacks':0,'spacing_views':0,'data_fallbacks':0,'no_script_pages':0,'axe':[]}
 errors=[]
 def route_for(mode='normal'):
     def route(r):
@@ -68,6 +68,29 @@ try:
                 report['keyboard_journeys']+=1
                 page.go_back(wait_until='load');expect(page.locator('#find-query')).to_have_value('')
                 expect(page.locator('.find-section-matches a')).to_have_count(0)
+            for query,path in [('AI time savings','/technology/ai-time-savings/'),('poker hand rankings','/poker/hand-rankings/')]:
+                before=len(requests)
+                page.locator('#find-query').fill(query);page.locator('#find-query').press('Enter')
+                expect(page.locator('#find-results')).to_be_focused()
+                link=page.locator('.find-item:visible h3 a[href="'+path+'"]');expect(link).to_be_visible()
+                assert page.url==base+'/find/' and len(requests)==before
+                assert page.evaluate('document.documentElement.scrollWidth')<=width
+                if width in [390,1440] and os.environ.get('SCREENSHOT_DIR'):
+                    page.evaluate('()=>document.fonts.ready.then(()=>true)')
+                    page.evaluate("document.activeElement.blur();window.scrollTo({top:0,behavior:'instant'})")
+                    page.screenshot(path=str(Path(os.environ['SCREENSHOT_DIR'])/f'search-address-{path.strip("/").replace("/","-")}-{width}.png'),full_page=True)
+                link.focus();page.keyboard.press('Enter');page.wait_for_url(base+path,wait_until='load')
+                expect(page.locator('h1')).to_be_visible();report['address_journeys']+=1
+                page.go_back(wait_until='load');expect(page.locator('#find-query')).to_have_value('')
+            page.locator('#find-query').fill('AI time savings');page.locator('#find-query').press('Enter')
+            page.locator('#find-kind').select_option('essay');expect(page.locator('#find-empty')).to_be_visible()
+            page.locator('#find-kind').select_option('guide');expect(page.locator('#find-empty')).to_be_visible()
+            page.locator('#find-kind').select_option('collection')
+            expect(page.locator('.find-item:visible h3 a[href="/technology/ai-time-savings/"]')).to_be_visible()
+            page.locator('#find-interest').select_option('poker');expect(page.locator('#find-empty')).to_be_visible()
+            page.locator('#find-reset').press('Enter');expect(page.locator('#find-query')).to_be_focused()
+            expect(page.locator('#find-query')).to_have_value('');expect(page.locator('#find-interest')).to_have_value('');expect(page.locator('#find-kind')).to_have_value('')
+            report['address_filters']+=1
             assert context.cookies()==[]
             assert page.evaluate('localStorage.length+sessionStorage.length')==0
             context.close()
@@ -91,7 +114,11 @@ try:
             page.goto(base+'/find/');page.locator('#find-query').fill('family story');page.locator('#find-query').press('Enter')
             expect(page.locator('.find-item:visible h3 a[href="/living-well/preserve-family-story/"]')).to_be_visible()
             expect(page.locator('.find-section-matches a')).to_have_count(0)
-            report['data_fallbacks']+=1;context.close()
+            report['data_fallbacks']+=1
+            page.locator('#find-query').fill('AI time savings');page.locator('#find-query').press('Enter')
+            expect(page.locator('.find-item:visible h3 a[href="/technology/ai-time-savings/"]')).to_be_visible()
+            expect(page.locator('.find-section-matches a')).to_have_count(0)
+            report['address_data_fallbacks']+=1;context.close()
         context=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':950});context.route('**/*',route_for());page=context.new_page()
         page.goto(base+'/find/');expect(page.locator('#find-controls')).to_be_hidden()
         expect(page.locator('.find-item')).to_have_count(151)

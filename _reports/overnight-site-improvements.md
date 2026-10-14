@@ -620,3 +620,72 @@ for both scripts. The exact pixel equality assertion remains intact. Separate
 full-page journeys retain the visible picker at all four widths, including
 keyboard actions and mobile/desktop screenshots. No public file changed in
 this fixture correction. A new complete hosted gate is required.
+
+PR #61 subsequently passed all 495 unit/content checks and all 35 browser
+suites in run 38483859287. The two normal-result PNGs were byte-identical.
+Six hosted example previews and desktop full-page sections were inspected.
+The exact candidate tree `286e61fe97df417587bc497d17c59b1de616ccca` was merged
+as `9ce47a41bad642dbabfdfa4d919350716fc0a6df`. Pages run 38484849045 succeeded;
+published-byte job 115595898045 passed 399/399 targets and emitted the exact
+merged SHA at 2026-10-13T23:33:04Z. Fresh main and Pages reads matched at
+23:33:52Z. This next pass also confirmed that the repeated main Site checks
+run 38484848731 completed successfully. Final receipt:
+https://github.com/nolankido/nolankido.github.io/pull/61
+
+## Find existing pages by the words in their addresses
+
+The next user-directed pass began on October 14 UTC, October 13 in Hawaii,
+from current main `9ce47a41bad642dbabfdfa4d919350716fc0a6df`. Main, repository
+instructions, open pull requests and the completed CI/Pages runs were reread.
+Only stale PR #48 was open; it remains untouched. Live `/find/` and its search
+script matched current main exactly. No new sitemap submission or Search
+Console request was needed so soon after the preceding read.
+
+Two concrete misses were reproduced with the actual 151-page search index:
+`AI time savings` returned no results, despite the existing calculator at
+`/technology/ai-time-savings/`. `poker hand rankings` omitted the dedicated
+`/poker/hand-rankings/` guide, whose editorial title is "Which hand wins?"
+Both phrases are already present in the pages' descriptive canonical addresses.
+
+Search now considers those existing local destination words as a secondary
+signal. A full title/summary match retains its original score and ranks ahead
+of an address-assisted match; a matching section still links to its actual
+heading. Every non-stopword must match. No guessed synonym, fuzzy correction,
+external URL, query parameter, fragment, private input or hidden answer is
+added to the index. The scope explanation now mentions page addresses.
+The same result link supplies the words, so no extra index or data file is
+needed. Filtering still happens locally without URL, network or storage changes.
+
+An independent baseline was captured from production Git objects before edits.
+The only generated change is `/find/`, covering its scope sentence and script
+cache token. Among 343 source/asset/download files, only the search source's
+scope sentence and existing search script change. All article prose, metadata,
+dates, five feeds, sitemap, original URLs, contact and analytics remain exact.
+A frozen three-path adapter reverses only three contextual script hunks, one
+source-copy hunk and one cache token. Earlier golden hashes remain unchanged;
+negative controls expose altered ranking, unexpected code and edited copy.
+
+Three new unit checks passed locally: full preservation, the two real missed
+destinations plus ranking/scope controls, and historical-adapter tamper
+detection. The existing hosted search-section suite adds eight keyboard
+search-to-page journeys at four widths, four filter/reset checks and two
+missing/malformed section-data fallbacks. Existing section arrivals,
+no-script browsing, privacy and accessibility checks remain required.
+The complete local and hosted gate, preview review and final publication
+receipt will be recorded on this pass's pull request after execution.
+
+This is an on-site discovery repair, not evidence of an external search-ranking
+increase. Google's people-first guidance supports useful, navigable content;
+it does not establish a ranking gain from this change:
+https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+Next useful work should follow actual reader/search evidence or approved
+firsthand material. No new article or page was manufactured for this pass.
+
+The local full run passed 498 tests in 260.550 seconds; hosted candidate
+`3aedd20795f87815d707c735965103778aae1e95` also passed all 498 unit/content
+checks. Its new browser filter test incorrectly assumed that the calculator
+was a guide. The existing, unchanged index classifies it as collection/reference.
+The fixture now verifies that both Essays and Guides exclude the calculator,
+then that Collections & reference includes the exact destination. All prior
+filter and destination assertions remain. No public file changed in this
+test correction. The updated exact candidate still requires the full gate.
