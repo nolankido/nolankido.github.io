@@ -89,7 +89,7 @@ class HoldemEssayTests(unittest.TestCase):
         self.assertEqual(check_live.targets()[ROUTE],(200,self.html.encode()))
         self.assertEqual(len([e for e in self.main.iter('details') if e.get('id','').startswith('guide-check-')]),3)
         self.assertGreater(len(self.text.split()),7000)
-        self.assertIn('Gemini Deep Research',self.text);self.assertIn('No reader study or learning outcome is claimed',self.text)
+        self.assertIn('a research draft supplied for this website',self.text);self.assertNotIn('Gemini',self.text);self.assertIn('No reader study or learning outcome is claimed',self.text)
         self.assertIn('it does not establish how quickly a beginner learns',self.text)
         self.assertNotRegex(self.html,'|```|'+chr(8212))
         self.assertNotRegex(self.html,r'<(?:form|input|textarea|iframe)\b')

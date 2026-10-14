@@ -1,6 +1,6 @@
 # Beginner Hold’em guide: editorial and integration review
 
-The supplied Gemini Deep Research essay is published as a comprehensive Poker guide at `/poker/no-limit-holdem-guide/`. Its broad scope complements the shorter viewer explanation and the four foundation lessons. Those lessons, the range and betting lessons, and the six-skill checkpoint remain available.
+The supplied research essay is published as a comprehensive Poker guide at `/poker/no-limit-holdem-guide/`. Its broad scope complements the shorter viewer explanation and the four foundation lessons. Those lessons, the range and betting lessons, and the six-skill checkpoint remain available.
 
 ## Editorial findings and changes
 
