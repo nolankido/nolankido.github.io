@@ -13,13 +13,14 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import poker_titles_history as history
 import technology_jumps_history
+import study_titles_history
 from test_site import Page
 
 
 class PokerTitlesTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = build.public_pages()
+        cls.pages = study_titles_history.pages(build.public_pages())
         cls.outputs = {p: technology_jumps_history.before(p, value) for p, value in build.build_outputs().items()}
         cls.baseline = json.loads((ROOT / '_tests/poker-titles-baseline.json').read_text())
 

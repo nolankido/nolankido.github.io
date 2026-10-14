@@ -25,7 +25,7 @@ class Quiet(SimpleHTTPRequestHandler):
 server = ThreadingHTTPServer(('127.0.0.1', 0), partial(Quiet, directory=str(ROOT)))
 Thread(target=server.serve_forever, daemon=True).start()
 base = 'http://127.0.0.1:' + str(server.server_port)
-report = {'layouts': 0, 'text_spacing': 0, 'journeys': 0, 'preview_bytes': 0, 'axe': []}
+report = {'layouts': 0, 'text_spacing': 0, 'journeys': 0, 'study_title_arrivals': 0, 'preview_bytes': 0, 'axe': []}
 errors = []
 writes = []
 try:
@@ -67,6 +67,18 @@ try:
                 link = page.locator('a[href="' + target + '"]').first
                 link.focus(); page.keyboard.press('Enter'); expect(page).to_have_url(base + target)
                 expect(page.locator('.entry-summary')).to_be_visible(); report['journeys'] += 1
+            for width in [390, 1440]:
+                page.set_viewport_size({'width': width, 'height': 950})
+                for entry in json.loads((ROOT / '_tests/study-titles-change.json').read_text())['entries']:
+                    page.goto(base + entry['path'])
+                    original = next(p for p in pages if p['id'] == entry['id'])
+                    expect(page).to_have_title(entry['new'])
+                    expect(page.locator('h1')).to_have_text(original['title'])
+                    expect(page.locator('meta[property="og:title"]')).to_have_attribute('content', entry['new'])
+                    expect(page.locator('meta[name="twitter:title"]')).to_have_attribute('content', entry['new'])
+                    expect(page.locator('link[rel="canonical"]')).to_have_attribute('href', 'https://nolankido.com' + entry['path'])
+                    assert page.evaluate('document.documentElement.scrollWidth') <= width
+                    report['study_title_arrivals'] += 1
             if scripts:
                 records = json.loads((ROOT / '_source/reader-previews.json').read_text())['pages']
                 for record in records.values():
