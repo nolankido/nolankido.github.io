@@ -680,3 +680,12 @@ it does not establish a ranking gain from this change:
 https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 Next useful work should follow actual reader/search evidence or approved
 firsthand material. No new article or page was manufactured for this pass.
+
+The local full run passed 498 tests in 260.550 seconds; hosted candidate
+`3aedd20795f87815d707c735965103778aae1e95` also passed all 498 unit/content
+checks. Its new browser filter test incorrectly assumed that the calculator
+was a guide. The existing, unchanged index classifies it as collection/reference.
+The fixture now verifies that both Essays and Guides exclude the calculator,
+then that Collections & reference includes the exact destination. All prior
+filter and destination assertions remain. No public file changed in this
+test correction. The updated exact candidate still requires the full gate.
