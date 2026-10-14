@@ -80,7 +80,7 @@ def main():
                     expect(group).not_to_have_attribute('open', '')
                     group.locator('summary').focus(); page.keyboard.press('Enter')
                     expect(group.locator('ul')).to_be_visible()
-                link = page.locator(selector + '[href="' + ROUTE + '"]').first
+                link = page.locator(selector + '[href="' + ROUTE + '"]:visible').first
                 expect(link).to_be_visible()
                 link.focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(origin + ROUTE)
@@ -102,7 +102,7 @@ def main():
             offline.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             static = offline.new_page()
             static.goto(origin + '/poker/first-flop-decisions/')
-            static.locator('main a[href="' + ROUTE + '"]').click()
+            static.locator('.reader-related a[href="' + ROUTE + '"]').click()
             expect(static.locator('details.viewer-question')).to_have_count(6)
             static.locator('#check-check summary').focus(); static.keyboard.press('Enter')
             expect(static.locator('#check-check div')).to_contain_text('final betting round is complete')

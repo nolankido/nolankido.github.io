@@ -16,6 +16,7 @@ from catalog import supplement
 from poker_navigation import section_navigation, clean_body
 import poker_content
 import poker_library
+import poker_beginner_path
 import poker_reading
 import poker_experience
 import poker_resources
@@ -190,6 +191,7 @@ def build_outputs() -> dict[Path, str]:
             body = fill(source.read_text(encoding='utf-8'), page_values)
         if p['path'].startswith('/poker/'):
             body = clean_body(body)
+        body = poker_beginner_path.decorate(p, body, ROOT)
         body = author_archive.body(p, body, pages)
         body = practical_path.body(p, body, pages, ROOT)
         nav = identity.navigation(identity_config, p)
@@ -293,9 +295,10 @@ def build_outputs() -> dict[Path, str]:
             if p['id'] == 'poker-library':
                 library_version = hashlib.sha256((ROOT / 'assets/poker-library.js').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <script defer src="/assets/poker-library.js?v={library_version}"></script>'
+            extra += poker_beginner_path.stylesheet(p, ROOT)
             reader_meta = poker_library.reader_meta(p, reader_entries)
             if reader_meta:
-                header = header.replace('</section>', reader_meta + poker_reading.section_outline(body) + '</section>', 1)
+                header = header.replace('</section>', reader_meta + poker_reading.section_outline(body) + poker_beginner_path.navigation(p, pages) + '</section>', 1)
                 body += poker_topics.related_topic(p, topics)
                 body += poker_library.related(p, reader_entries)
         if p['path'].startswith('/poker/') and not p.get('poker_entry') and p['path'] != '/poker/':

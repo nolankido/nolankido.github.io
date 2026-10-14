@@ -698,14 +698,15 @@
     "id": "poker-free-poker-learning-path",
     "path": "/poker/free-poker-learning-path/",
     "title": "Learn poker with a small, free study path.",
-    "seo_title": "Learn poker with a small, free study path | Nolan Kido Poker",
-    "description": "Five self-paced sessions that turn free explanations into a hand record, a pot calculation and a decision you can explain.",
+    "seo_title": "Learn Poker for Beginners: Free Study Path | Nolan Kido",
+    "description": "Follow four beginner poker lessons with explained readiness checks and a private study card, then choose from five free study sessions.",
     "kicker": "Poker / Resource collections",
     "source": "poker/free-poker-learning-path.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-08",
-    "poker_guide": true
+    "updated": "2026-10-14",
+    "poker_guide": true,
+    "revision": "Added a connected four-lesson beginner route, readiness checks and a blank study card. The original five-session plan remains unchanged."
   },
   {
     "id": "poker-cash-game-study",

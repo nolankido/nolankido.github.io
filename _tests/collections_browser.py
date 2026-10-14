@@ -42,7 +42,7 @@ def main():
                 expect(page.locator('main a[href="/poker/' + slug + '/"]').first).to_be_visible()
             for slug in SLUGS[1:]:
                 page.goto(origin + '/poker/' + slug + '/')
-                panel = page.locator('details.viewer-question')
+                panel = page.locator('#self-check + details.viewer-question' if slug == 'free-poker-learning-path' else 'details.viewer-question')
                 expect(panel.locator('div')).not_to_be_visible()
                 panel.locator('summary').focus(); page.keyboard.press('Enter')
                 expect(panel.locator('div')).to_be_visible()

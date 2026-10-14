@@ -1346,3 +1346,112 @@ Six initial mobile/desktop opening, card-example and answer previews were
 inspected. Their layout is clear and the public files remain unchanged by
 the fixture correction. The final candidate still needs its own full gate
 and artifact verification before publication.
+
+## October 14, 2026: a connected beginner study route
+
+PR #70 completed the turn-and-river lesson at main
+2dcf972a85ab3cf6c5e21539fe489805df5400b9, tree
+cd8856ee03bdc47be9d4a876afdc6940b6874786. Final candidate
+c64c93ce200e65b1641111a43e01b573b5b31ad2 passed all 545 unit/content
+tests and all 39 browser suites in run 38521641061. The six final screenshots
+were byte-identical to the six inspected initial mobile/desktop previews.
+Pages run 38522834767 succeeded. Published-byte job 115716252234 passed
+407/407 targets and emitted the exact main marker at 06:33:53 UTC. Main was
+re-read successfully. Its duplicate full CI run 38522834829 subsequently
+completed successfully. Receipt: https://github.com/nolankido/nolankido.github.io/pull/70.
+
+The next user request renewed active improvement and publication authority.
+Fresh main, open PRs, repository guidance and live-release results were read.
+Only stale PR #48 was open; it remains untouched. The beginner collection
+already had detailed mechanics, preflop, flop and final-street lessons. The
+existing free learning path linked the first lesson but did not present all
+four as a route with explicit goals, readiness checks or a way to keep one's
+place. Improving that connection was more useful than another overlapping
+article.
+
+The existing /poker/free-poker-learning-path/ now has a four-lesson route
+with 1,004 words of original teaching and guidance. Each lesson has a goal,
+a skill to explain before moving on, a closed native readiness check, a
+worked explanation and an exact repair link. Four checks address additional
+call amounts, the blinds' remaining turns, a made pair plus an unfinished
+flush draw, and a river price versus actual pot-share equity. The fictional
+30/10 river ledger uses 10 / 50 = 20%; it states no fees, no side pots, enough
+chips and a closing call. It does not claim that a price establishes the best
+action or compare the call with every raise. The five-card example is
+9-9-A-6-2, with four hearts, not a flush.
+
+All four destination lessons receive an optional native path menu, ordered
+links, a current-page marker without a self-link, a return to the route and
+the same blank private study card. The Learn topic exposes a direct link to
+the complete route while retaining its three existing starting steps. The
+2,077-byte TXT card has four blank skill records and ordinary return URLs.
+There is no stored progress, answer transport, account, new runtime
+or dependency. One small stylesheet applies only to the four path menus. No new route, article or ranking claim is added.
+
+The original five-session source and every previous article source remain
+byte-identical. The route is a separate approved fragment inserted at its
+existing study-plan anchor. All prior assets and downloads are exact. Only
+two source catalogs change. One existing page's search title, description,
+update date and revision are intentionally changed for this substantive
+addition; its October 8 publication date remains exact. Other article
+metadata remains exact. Only that page's description in the two relevant
+feeds changes; item identities, publication dates and all other feed items
+remain exact. The visible revision and machine-readable date agree. The
+library reading estimate includes the new fragment.
+
+The production baseline was checked against Git objects before editing:
+175 page records, 202 generated outputs and 351 source/asset/download files.
+The exact predecessor adapter requires a complete reviewed file digest and
+frozen offsets; unrelated mutations stay visible. Direct preservation tests
+bypass adapters, and negative controls reject altered amounts, current-page
+labels and unsupported metadata. Old golden digests are retained. Existing
+outline fixtures now include the actual decorated public body; the strict
+search-section count advances by exactly one, from 957 to 958. Arrival tests
+retain exact destinations and select the visible original forward links;
+the new optional menus have their own browser coverage. The existing
+collection checkpoint retains its exact selector despite four new checks.
+
+Initial local verification ran all 554 tests in 303.983 seconds and exposed
+four failures and one fixture error. The new revision was not yet visible;
+that content defect was fixed. Two outline fixtures assumed only the old
+source fragment, and one section count lacked the new heading. The new
+hosting-preservation fixture assumed an absent .nojekyll file existed; it
+now independently preserves the actual baseline presence or absence, with
+no Git-history dependency in hosted tests. The corrected new nine checks
+pass, along with all 26 tests across the four affected existing test files.
+Build reproduction, HTML5 and search audits pass for 175 pages, 94 articles
+and 170 sitemap URLs. The section-search payload is 58,283 bytes, below the
+unchanged 60,000-byte limit. Primary hold'em and pot-odds references were
+read October 14, 2026. No operator's broad strategy recommendations are
+adopted.
+
+The exact candidate must pass the full hosted gate of 554 unit/content tests
+and all 40 browser suites before merge. New browser coverage includes the
+four-width route, all readiness panels, current markers, actual forward and
+return navigation, the exact study-card bytes, print, no-JavaScript reading,
+privacy checks and mobile/desktop accessibility audits. Six hosted route,
+answer and menu previews require inspection. Pages success, all 409 exact
+published targets and a fresh main read remain required after merge. The
+PR receipt will record executed release evidence and exact tree identity.
+
+Next useful task: observe actual beginner use of this sequence, especially
+whether readers can explain a call price and identify the missing evidence
+for an action. Improve a demonstrated point of confusion rather than adding
+another generic beginner index or claiming comparative superiority.
+
+Initial candidate a3366b74f6a8e9fca64b13d6daffae009b322d2e passed all
+554 unit/content tests in 156.795 seconds in run 38527141447. All existing
+browser suites passed. The new suite passed the route, goals, four-width
+reflow, keyboard answers, menus, JavaScript-enabled navigation, exact
+download, print and privacy checks, then timed out waiting for a no-script
+mouse navigation to finish. The correction uses explicit keyboard
+activation for that leg and retains the exact route and destination
+assertions. No assertion is removed.
+
+Six initial hosted previews were inspected. The desktop current-lesson
+label sat too close to the summary focus outline because its shorter
+span inherited a two-column list intended for links. A stylesheet scoped
+to these four menus now keeps the numbered route in one column and aligns
+the current label with the links. All previous stylesheets remain exact.
+The corrected candidate still requires the complete gate, six final
+previews, Pages and all 409 published targets before completion.

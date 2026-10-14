@@ -71,7 +71,7 @@ def main():
                                      ('/poker/topics/learn/', 'main a'),
                                      ('/poker/free-poker-learning-path/', 'main a')]:
                 page.goto(origin + source)
-                link = page.locator(selector + '[href="' + ROUTE + '"]').first
+                link = page.locator(selector + '[href="' + ROUTE + '"]:visible').first
                 link.focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(origin + ROUTE)
                 expect(page.locator('h1')).to_be_visible()
@@ -92,7 +92,7 @@ def main():
             offline.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             static = offline.new_page()
             static.goto(origin + '/poker/first-decisions/')
-            static.locator('main a[href="' + ROUTE + '"]').click()
+            static.locator('.reader-related a[href="' + ROUTE + '"]').click()
             expect(static.locator('details.viewer-question')).to_have_count(8)
             static.locator('#check-price summary').focus(); static.keyboard.press('Enter')
             expect(static.locator('#check-price div')).to_contain_text('adding 4')

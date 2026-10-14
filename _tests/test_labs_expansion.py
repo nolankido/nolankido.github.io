@@ -6,6 +6,7 @@ import unittest
 from test_site import ROOT, Page, build
 from test_viewer_guides import best
 from poker_reading import section_outline, next_reads, NEXT_READS
+import poker_beginner_path
 import poker_library
 import check_live
 
@@ -151,6 +152,7 @@ class LabsExpansionTests(unittest.TestCase):
         for entry in self.entries:
             page = next(p for p in self.pages if p['path'] == entry['route'])
             source = (ROOT / '_source' / page['source']).read_text()
+            source = poker_beginner_path.decorate(page, source, ROOT)
             outline = section_outline(source)
             rendered = self.outputs[build.output_path(entry['route'])]
             if outline:
