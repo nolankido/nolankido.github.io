@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import study_titles_history as history
+import search_public_titles_history
 from test_site import Page
 
 
@@ -19,7 +20,7 @@ class StudyTitlesTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pages = build.public_pages()
-        cls.outputs = build.build_outputs()
+        cls.outputs = {p: search_public_titles_history.before(p, value) for p, value in build.build_outputs().items()}
         cls.baseline = json.loads((ROOT / '_tests/study-titles-baseline.json').read_text())
 
     def test_only_five_head_labels_change_against_production(self):
@@ -34,7 +35,8 @@ class StudyTitlesTests(unittest.TestCase):
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw).encode()).hexdigest(), expected, path)
         self.assertCountEqual(changed, [e['path'].lstrip('/') + 'index.html' for e in history.change()['entries']])
-        # This independent body proof does not use any historical adapter.
+        # Later search-only metadata is independently proved by its own baseline.
+        # These title changes still preserve every page body at this release.
         for path, expected in b['bodies'].items():
             body = re.search(r'<body\b[^>]*>.*?</body>', self.outputs[Path(path)], re.S)[0]
             self.assertEqual(sha256(body.encode()).hexdigest(), expected, path)
@@ -42,7 +44,7 @@ class StudyTitlesTests(unittest.TestCase):
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = search_public_titles_history.before(path, (ROOT / path).read_bytes())
             if sha256(raw).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), expected, path)

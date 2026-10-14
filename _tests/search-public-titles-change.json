@@ -1,0 +1,647 @@
+{
+  "commit": "2ed0590205d4da419fe6fa5543149894ac6b98e8",
+  "patches": {
+    "assets/site-find.js": [
+      [
+        "",
+        "  // Reuse the exact public browser/search title, without inventing keywords.\n  const searchTitleWords = record => typeof record.searchTitle === 'string' ? words(record.searchTitle).map(stem) : [];\n"
+      ],
+      [
+        "    const base = [...words(record.title + ' ' + record.description + ' ' + record.subjects).map(stem), ...addressWords(record)];\n",
+        "    const base = [...words(record.title + ' ' + record.description + ' ' + record.subjects).map(stem), ...searchTitleWords(record), ...addressWords(record)];\n"
+      ],
+      [
+        "    if (!baseMatch && !addressMatch && !matchingSections(record, query).length) return -1;\n    return (baseMatch ? 1000 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);\n",
+        "    const searchTitleMatch = !addressMatch && needles.every(term => [...all, ...searchTitleWords(record), ...addressWords(record)].some(word => matches(word, term)));\n    if (!baseMatch && !searchTitleMatch && !addressMatch && !matchingSections(record, query).length) return -1;\n    return (baseMatch ? 1000 : searchTitleMatch ? 750 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);\n"
+      ],
+      [
+        "",
+        "      searchTitle: node.dataset.searchTitle || '',\n"
+      ]
+    ],
+    "_scripts/site_find.py": [
+      [
+        "        if not all(isinstance(page.get(k), str) and page[k].strip() for k in ('title', 'description')):\n            raise ValueError('Searchable pages need a title and summary')\n",
+        "        if not all(isinstance(page.get(k), str) and page[k].strip() for k in ('title', 'seo_title', 'description')):\n            raise ValueError('Searchable pages need a heading, public search title and summary')\n"
+      ],
+      [
+        "        result.append({'path': page['path'], 'title': page['title'], 'description': page['description'],\n",
+        "        result.append({'path': page['path'], 'title': page['title'], 'search_title': page['seo_title'], 'description': page['description'],\n"
+      ],
+      [
+        "            cards.append(f'<li class=\"find-item\" data-kind=\"{item[\"kind\"]}\" data-interests=\"{\" \".join(item[\"interests\"])}\">'\n",
+        "            cards.append(f'<li class=\"find-item\" data-kind=\"{item[\"kind\"]}\" data-interests=\"{\" \".join(item[\"interests\"])}\" data-search-title=\"{escape(item[\"search_title\"], quote=True)}\">'\n"
+      ]
+    ],
+    "find/index.html": [
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"technology\" data-search-title=\"A Working Tool Is Not the Same as a Trustworthy One | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"technology\" data-search-title=\"AI Task Brief Builder &amp; Prompt Template | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\" data-search-title=\"How to Check an AI Summary: Worked Example | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\" data-search-title=\"How to Check AI Website Changes: A Real Case | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"technology\" data-search-title=\"AI Time Savings Calculator: Count the Full Workflow | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\" data-search-title=\"How to Check AI Answers: Facts, Math &amp; Code | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"technology living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"technology living-well\" data-search-title=\"Learning Something Difficult from the Beginning | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"technology living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"technology living-well\" data-search-title=\"Let AI Do More. Keep the Judgment. | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"technology\" data-search-title=\"Practical AI Workflow, Tools &amp; Checklists | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"technology\" data-search-title=\"Should I Use AI? Task Decision Guide &amp; Checklist | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"A conversation worth having | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"A quiet morning does not need a dashboard | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"A useful tool can make itself less necessary | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"A weekly reset that does not become another job | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"AI for everyday life | Living Well | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\" data-search-title=\"AI literacy &amp; thoughtful use | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Attention &amp; presence | Living Well | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Attention, presence &amp; self-kindness | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Before you ask AI what to do, decide what matters | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well creative\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well creative\" data-search-title=\"Books, art &amp; creative exploration | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"Can a reminder help you become a more thoughtful friend? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"Can an AI-generated reflection be meaningful? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"Can you be spiritually curious without pretending to be certain? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Choices &amp; growth | Living Well | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"Choosing between two good lives | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Community, access &amp; contribution | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"Consciousness: which question are we asking? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Evaluate an AI Workflow: Effort, Quality &amp; Tradeoffs | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\" data-search-title=\"Digital privacy &amp; confident use | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Essays on Meaning, Attention &amp; Everyday Life | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\" data-search-title=\"Files, sharing &amp; recovery | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Find and keep the right document | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Find and Organize Documents Before Using AI | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Free learning &amp; practical understanding | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Free Learning, Reading &amp; Everyday Tools | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Help someone participate or contribute | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Keep access and recover your work | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Learn something and keep room for reflection | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Living Well: Meaning, Attention &amp; Everyday Life | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Meaning, Attention &amp; Everyday AI: Topics | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Shared Planning Template: Decisions, Owners &amp; Dates | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well creative technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well creative technology\" data-search-title=\"Make a small thing worth sharing | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Make Digital Reading Easier: Reader View &amp; Read-Aloud | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"Make one recurring household problem less annoying | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well creative technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well creative technology\" data-search-title=\"Make, edit &amp; communicate | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Meaning &amp; spirituality | Living Well | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Meaning, wonder &amp; spiritual curiosity | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"Meditation without buying a lifestyle | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Nature, science &amp; everyday wonder | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\" data-search-title=\"Notes, documents &amp; useful information | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Organize a thought and choose a next step | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Philosophy, decisions &amp; perspective | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well\" data-search-title=\"Plan a free afternoon without optimizing all the life out of it | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Practical Guides for Everyday Life | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well creative\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well creative\" data-search-title=\"Preserve a family story without losing the person&#x27;s voice | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well creative\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well creative\" data-search-title=\"Read a poem without turning it into a lesson | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Read, listen and understand | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Reading, listening &amp; participation | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"AI-Assisted Reflection: Prompts with Boundaries | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Relationships &amp; care | Living Well | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Relationships, memory &amp; listening | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Share a plan without creating confusion | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"Spiritual curiosity without a new identity | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"Start here: the questions behind Living Well | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Everyday AI Workflows: Notes, Plans &amp; Documents | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"The difference between improving your life and believing you are never enough | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well creative technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well creative technology\" data-search-title=\"Turn Rough Notes into a Draft: A Creative Brief | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Organize Notes into Action Items, with Optional AI | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Use a screen to notice the world | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"living-well technology\" data-search-title=\"Use AI to understand something, not just get an answer | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well technology\" data-search-title=\"Useful tools &amp; everyday skills | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"What is the time you save actually for? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"What makes an ordinary moment feel sacred? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well technology\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well technology\" data-search-title=\"What should you decide personally, even when a tool helps you express it? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"When does documenting your life get in the way of experiencing it? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"living-well\" data-search-title=\"When technology helps you notice more | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Wisdom traditions &amp; religious literacy | Living Well\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"living-well\" data-search-title=\"Free Reflection &amp; Everyday Task Worksheets | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"A map of poker research, without the inflated claims | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"A practical cash-game study route | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Short-Stack Study Workshop | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Resource Collections | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker Betting: Calls, Raises and Side Pots | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Cash games | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Calculators: Pot Odds, Bluffs &amp; Pot-Limit Raises | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Check the room, the rules and your protections | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Choose a poker book or course you will actually use | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Choose a study tool by the question it answers | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Topics: Guides, Tools, Events &amp; Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Viewer Guide | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"From Hand Notes to a Poker Vlog | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Range Combinations Workshop | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"From the first seat to the end of the day | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"poker living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"poker living-well\" data-search-title=\"Good Decisions, Imperfect Outcomes | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"How Poker Tournaments Work: Blinds and Payouts | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Keep a hand note you can actually review | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Learn poker | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Learn poker with a small, free study path | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Multiway pots: count the opponents and the pots | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"News, results &amp; creators | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Omaha &amp; mixed games | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Omaha hi-lo: play for a share, not just a low | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Omaha, lowball and mixed games: know which rules changed | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Texas Hold&#x27;em Rules: Deal to Showdown | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker River Exercise: Pot Odds &amp; Ranges | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Pause the hand. Read the situation | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Places to play &amp; home games | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Plan the day. Keep the hand. Check the source | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Guides: Rules, Strategy &amp; Hand Review | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker math: the right number for the right question | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Resource Guide: Rules, Strategy, Tools &amp; More | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker rules and fair play: find the right authority | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker terms, in plain language | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Pot Odds Workshop | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Questions new viewers ask | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Read poker advice without borrowing its certainty | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Read the preflop chart before trusting the colors | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Read the structure before choosing the tournament | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Registration, re-entry and the cost of another attempt | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Research &amp; development | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Tournament Variance and Results | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Review a Poker Hand, Not Just the Result | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Safer play &amp; rules | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Strategy &amp; math | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Stud and lowball: change the rules before the strategy | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Study cash games without importing tournament assumptions | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Study tools &amp; training | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Decision Labs: Ranges, Draws &amp; Side Pots | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker Flushes &amp; Redraws: A Worked Exercise | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"The live tournament field guide | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Study Desk: Hand Reviews &amp; Practice | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker Resource Directory | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker Side-Pot Exercise: All-Ins &amp; Refunds | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Tournaments | Poker Resources | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Turn a poker video or podcast into one useful lesson | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker Study Practice Room | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Understand the cost of a cash game | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Reading a Poker Board: Suits, Pairs and Draws | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"What is happening at the table? | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"What is the bet trying to do? | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker Math: Pot Odds, Outs and Equity | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"What was checked, and what was not | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Tournament Equity and ICM | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker Hand Rankings: Which Hand Wins? | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Which kind of tournament is this? | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Poker Position, Effective Stacks and SPR | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Your first live cash-game session | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\">",
+        "<li class=\"find-item\" data-kind=\"guide\" data-interests=\"poker\" data-search-title=\"Your first live tournament, without the guesswork | Nolan Kido Poker\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"creative\">",
+        "<li class=\"find-item\" data-kind=\"collection\" data-interests=\"creative\" data-search-title=\"Creative Work: Writing &amp; Visual Storytelling | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"creative living-well\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"creative living-well\" data-search-title=\"Finishing Is a Decision | Nolan Kido\">"
+      ],
+      [
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"creative\">",
+        "<li class=\"find-item\" data-kind=\"essay\" data-interests=\"creative\" data-search-title=\"What Makes an Explanation Feel Generous | Nolan Kido\">"
+      ]
+    ]
+  },
+  "script_versions": [
+    "64463e1e19a3",
+    "26192a6cf9ef"
+  ]
+}

@@ -10,10 +10,12 @@
   // Use only the canonical local destination already present in each result.
   // No decoding, query string, fragment, external address or guessed synonym.
   const addressWords = record => typeof record.path === 'string' && /^\/(?:[a-z0-9-]+\/)+$/.test(record.path) ? words(record.path).map(stem) : [];
+  // Reuse the exact public browser/search title, without inventing keywords.
+  const searchTitleWords = record => typeof record.searchTitle === 'string' ? words(record.searchTitle).map(stem) : [];
   function matchingSections(record, query) {
     const needles = terms(query);
     if (!needles.length) return [];
-    const base = [...words(record.title + ' ' + record.description + ' ' + record.subjects).map(stem), ...addressWords(record)];
+    const base = [...words(record.title + ' ' + record.description + ' ' + record.subjects).map(stem), ...searchTitleWords(record), ...addressWords(record)];
     return (record.sections || []).map((section, order) => {
       const heading = words(section[1]).map(stem);
       const hits = needles.filter(term => heading.some(word => matches(word, term))).length;
@@ -29,8 +31,9 @@
     const all = [...title, ...words(record.description + ' ' + record.subjects).map(stem)];
     const baseMatch = needles.every(term => all.some(word => matches(word, term)));
     const addressMatch = needles.every(term => [...all, ...addressWords(record)].some(word => matches(word, term)));
-    if (!baseMatch && !addressMatch && !matchingSections(record, query).length) return -1;
-    return (baseMatch ? 1000 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
+    const searchTitleMatch = !addressMatch && needles.every(term => [...all, ...searchTitleWords(record), ...addressWords(record)].some(word => matches(word, term)));
+    if (!baseMatch && !searchTitleMatch && !addressMatch && !matchingSections(record, query).length) return -1;
+    return (baseMatch ? 1000 : searchTitleMatch ? 750 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = { normalize, terms, score, matchingSections };
   if (typeof document === 'undefined') return;
@@ -58,6 +61,7 @@
     node: group, list: group.querySelector('.find-items'), count: group.querySelector('.find-group-count'),
     items: [...group.querySelectorAll('.find-item')].map((node, order) => ({
       node, order, path: node.querySelector('h3 a').getAttribute('href'), title: node.querySelector('h3').textContent,
+      searchTitle: node.dataset.searchTitle || '',
       description: node.querySelector('.find-description').textContent,
       subjects: node.querySelector('.find-subjects').textContent,
       interests: node.dataset.interests.split(' '), kind: node.dataset.kind, sections: sectionsFor(node)

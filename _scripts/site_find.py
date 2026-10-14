@@ -45,8 +45,8 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
             continue
         if not re.fullmatch(r'/(?:[a-z0-9-]+/)+', page['path']):
             raise ValueError('Discovery destinations must be local canonical pages')
-        if not all(isinstance(page.get(k), str) and page[k].strip() for k in ('title', 'description')):
-            raise ValueError('Searchable pages need a title and summary')
+        if not all(isinstance(page.get(k), str) and page[k].strip() for k in ('title', 'seo_title', 'description')):
+            raise ValueError('Searchable pages need a heading, public search title and summary')
         interests = list(notes[page['id']] if page.get('note') else [page.get('section', page['id'])])
         interests.extend(k for k in extra.get(page['path'], []) if k not in interests)
         kind = ('essay' if page.get('note') or page.get('living_well_kind') == 'essay' else
@@ -54,7 +54,7 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
         published = page.get('date', '') if kind != 'collection' else ''
         if published:
             date.fromisoformat(published)
-        result.append({'path': page['path'], 'title': page['title'], 'description': page['description'],
+        result.append({'path': page['path'], 'title': page['title'], 'search_title': page['seo_title'], 'description': page['description'],
                        'interests': interests, 'home': interests[0], 'kind': kind, 'date': published})
     return sorted(result, key=lambda e: (list(INTERESTS).index(e['home']), e['title'].casefold(), e['path']))
 
@@ -71,7 +71,7 @@ def render(items: list[dict]) -> str:
             if item['date']:
                 dt = date.fromisoformat(item['date'])
                 published = f'<p class="find-date">Published <time datetime="{escape(item["date"], quote=True)}">{dt.strftime("%B")} {dt.day}, {dt.year}</time></p>'
-            cards.append(f'<li class="find-item" data-kind="{item["kind"]}" data-interests="{" ".join(item["interests"])}">'
+            cards.append(f'<li class="find-item" data-kind="{item["kind"]}" data-interests="{" ".join(item["interests"])}" data-search-title="{escape(item["search_title"], quote=True)}">'
                          f'<p class="find-kind">{names[item["kind"]]} <span aria-hidden="true">/</span> <span class="find-subjects">{escape(subjects)}</span></p>'
                          f'<h3><a href="{escape(item["path"], quote=True)}">{escape(item["title"])}</a></h3>'
                          f'<p class="find-description">{escape(item["description"])}</p>{published}</li>')

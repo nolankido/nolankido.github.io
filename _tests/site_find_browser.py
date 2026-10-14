@@ -18,6 +18,9 @@ OFFLINE='--offline' in sys.argv
 if OFFLINE:
     from browser import html_for
 items=site_find.entries(ROOT,build.public_pages())
+title_queries=[('pot odds calculator','/poker/study-calculators/'),
+               ('Texas Holdem rules','/poker/holdem-basics/'),
+               ('AI assisted reflection prompts','/living-well/reflection-with-your-judgment-intact/')]
 server=None
 if not OFFLINE:
     class Quiet(SimpleHTTPRequestHandler):
@@ -81,7 +84,7 @@ try:
             control=page.locator('#'+field);control.focus();control.select_option(value)
             expect(control).to_be_focused()
         page.locator('#find-reset').click()
-        for query,destination in [('family story','/living-well/preserve-family-story/'),('how do I review a hand','/poker/reviewing-a-hand/'),('AI','/notes/keep-the-judgment/')]:
+        for query,destination in [('family story','/living-well/preserve-family-story/'),('how do I review a hand','/poker/reviewing-a-hand/'),('AI','/notes/keep-the-judgment/')]+title_queries:
             set_query(page,query)
             expect(page.locator('.find-item:not([hidden]) a[href="'+destination+'"]')).to_be_visible()
         page.locator('#find-interest').select_option('creative')
@@ -147,6 +150,25 @@ try:
             expect(page.locator('#find-query')).to_have_value('')
             page.goto(base+'/404.html');page.locator('main a[href="/find/"]').click()
             expect(page).to_have_url(base+'/find/')
+            # Public descriptive titles must lead to the actual page by keyboard.
+            for width in [390,1440]:
+                page.set_viewport_size({'width':width,'height':900})
+                for query,destination in title_queries:
+                    set_query(page,query)
+                    link=page.locator('.find-item:visible h3 a[href="'+destination+'"]')
+                    expect(link).to_be_visible()
+                    record=next(p for p in build.public_pages() if p['path']==destination)
+                    expect(link).to_have_text(record['title'])
+                    assert page.evaluate('document.documentElement.scrollWidth')<=width
+                    if os.environ.get('SCREENSHOT_DIR') and query=='pot odds calculator':
+                        out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+                        page.screenshot(path=str(out/f'find-public-title-{width}.png'),full_page=True)
+                    link.focus();page.keyboard.press('Enter')
+                    expect(page).to_have_url(base+destination)
+                    expect(page).to_have_title(record['seo_title'])
+                    expect(page.locator('h1')).to_have_text(record['title'])
+                    page.go_back();expect(page.locator('#find-query')).to_have_value('')
+                    assert page.locator('.find-item:not([hidden])').count()==len(items)
         context.close()
         # No-JavaScript and blocked-script visitors have a usable native index.
         for disabled in [True,False]:
@@ -164,6 +186,6 @@ try:
             context.close()
         browser.close()
     assert not errors,errors
-    print('PASS site discovery: explicit search focus, composition and boundary Enter defaults, live-filter focus, queries, cross-interest filters, escaping, reset, no query transport, 15 layouts + 15 text-spacing checks, disabled/blocked script fallback'+(' (in-memory; URL navigation not run)' if OFFLINE else ', keyboard URL navigation and 404 recovery'))
+    print('PASS site discovery: explicit search focus, composition and boundary Enter defaults, live-filter focus, queries, cross-interest filters, escaping, reset, no query transport, 15 layouts + 15 text-spacing checks, disabled/blocked script fallback'+(' (in-memory; URL navigation not run)' if OFFLINE else ', keyboard URL navigation and 404 recovery, 6 descriptive-title keyboard arrivals and private-query history resets'))
 finally:
     if server:server.shutdown()
