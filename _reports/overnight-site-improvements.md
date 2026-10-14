@@ -1561,3 +1561,18 @@ candidate after these corrections.
 All 59 tests across the seven affected existing test files passed after
 correction, in addition to the nine new range tests. The final hosted gate
 will execute all 563 tests together on the exact candidate.
+
+Initial candidate 939652d6c4559e02ee24d09c7e008dd6eb113afc passed all
+563 unit/content tests in 298.721 seconds in run 38532211769. Its Poker,
+identity, accessibility and navigation groups passed. The new range suite
+passed all four widths, 24 keyboard answer openings, five actual arrivals,
+no-JavaScript reading and two accessibility audits with no violations.
+All six hosted opening/card/answer previews were inspected and are clear.
+
+The reader-tools group identified two remaining browser counters: the
+archive expected 94 articles instead of 95, and the no-script Find list
+expected 155 entries instead of 156. Only those exact counts and the
+Find diagnostic count are corrected; their existing destination, focus,
+ordering and no-script assertions remain. No public file changes. The
+complete existing gate must pass on the corrected candidate, followed by
+candidate-bound artifact verification, Pages and all 411 published targets.
