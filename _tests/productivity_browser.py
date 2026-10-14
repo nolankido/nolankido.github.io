@@ -51,11 +51,17 @@ def main():
                     assert not bad,(width,bad);report['axe'].append({'width':width,'violations':bad})
                 report['viewports']+=1
             for route in ['/living-well/ideas/','/living-well/topics/everyday-ai/','/living-well/technology-for-real-life/','/living-well/did-the-tool-actually-help/','/notes/']:
-                page.goto(origin+route);link=page.locator('main a[href="'+ROUTE+'"]').first
-                link.focus();page.keyboard.press('Enter');expect(page).to_have_url(origin+ROUTE);report['arrivals']+=1
+                page.goto(origin+route)
+                if route=='/notes/':
+                    page.locator('#archive-living-well summary').press('Enter')
+                    expect(page.locator('#archive-living-well')).to_have_attribute('open','')
+                link=page.locator('main a[href="'+ROUTE+'"]').first
+                expect(link).to_be_visible();link.press('Enter')
+                page.wait_for_url(origin+ROUTE,wait_until='load');expect(page).to_have_url(origin+ROUTE)
+                report['arrivals']+=1
             page.goto(origin+'/find/');page.locator('#find-query').fill('personal productivity');page.locator('#find-query').press('Enter')
             link=page.locator('main a[href="'+ROUTE+'"]:visible').first;link.focus();page.keyboard.press('Enter')
-            expect(page).to_have_url(origin+ROUTE);report['search']+=1
+            page.wait_for_url(origin+ROUTE,wait_until='load');expect(page).to_have_url(origin+ROUTE);report['search']+=1
             expect(page.locator('.lw-article a[href="/technology/check-ai-answers/"]')).to_be_visible()
             expect(page.locator('.lw-article a[href="/living-well/did-the-tool-actually-help/"]').first).to_be_visible()
             page.emulate_media(media='print');expect(page.locator('#part-5')).to_be_visible();expect(page.locator('#use-paperwork')).to_be_visible();page.emulate_media(media='screen')

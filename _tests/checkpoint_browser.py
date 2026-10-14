@@ -75,9 +75,10 @@ def main():
             report['lesson_arrivals']+=1
             page.locator('#answer-one summary').focus();page.keyboard.press('Enter')
             link=page.locator('#answer-one a[href="/poker/first-decisions/#chips-owed"]')
-            link.focus();page.keyboard.press('Enter');expect(page).to_have_url(origin+'/poker/first-decisions/#chips-owed')
-            page.locator('aside[aria-labelledby="beginner-checkpoint-invite"] a[href="'+ROUTE+'"]').focus();page.keyboard.press('Enter')
-            expect(page).to_have_url(origin+ROUTE)
+            link.focus();page.keyboard.press('Enter');page.wait_for_url(origin+'/poker/first-decisions/#chips-owed',wait_until='load');expect(page).to_have_url(origin+'/poker/first-decisions/#chips-owed')
+            link=page.locator('aside[aria-labelledby="beginner-checkpoint-invite"] a[href="'+ROUTE+'"]')
+            expect(link).to_be_visible();link.press('Enter')
+            page.wait_for_url(origin+ROUTE,wait_until='load');expect(page).to_have_url(origin+ROUTE)
             page.locator('#retry-one summary').focus();page.keyboard.press('Enter')
             expect(page.locator('#retry-one div')).to_contain_text('5 - 0 = 5');report['repair_retry']+=1
             for route,field,result in [('/poker/library/','#library-search','#library-grid'),('/poker/find/','#finder-search','main'),('/find/','#find-query','main')]:

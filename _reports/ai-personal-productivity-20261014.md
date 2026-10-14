@@ -138,3 +138,14 @@ hash was relaxed.
 All 586 local unit/content tests pass after the corrections above, along with
 all 53 focused Living Well checks and the five new article tests. The sharing
 card was visually inspected and fits its existing delivery budget.
+
+The first hosted candidate (`18cf81ce85d66f275da856a4358decd6d5c36685`)
+passed all 586 unit/content tests but exposed two browser-test navigation
+problems. The new archive-arrival test attempted to focus a link inside the
+closed native Living Well archive group; it now opens the group with the
+keyboard and verifies visibility before activation. The existing poker
+checkpoint repair/return test asserted a fragment URL before load completion;
+it now waits for the loaded destination and uses the anchor's keyboard press
+for return. Expected URLs and assertions are retained, without retries or
+larger timeouts. No public page, visitor script or article content changed in
+these corrections. The corrected candidate is rechecked before publication.
