@@ -813,6 +813,16 @@ without JavaScript, plus mobile and desktop opening-navigation previews.
 The complete local and hosted regression gates and final publication receipt
 will be recorded on this pass's pull request after execution.
 
+The initial candidate passed all 504 local and hosted unit/content checks,
+and its 32 new hosted keyboard journeys passed. An inherited font-parity
+fixture reverted later content changes only in its reference page, so it
+incorrectly compared old navigation with the new navigation. The browser
+reference now changes font delivery alone. Exact geometry, font bytes,
+loaded-state and blocked-font checks remain intact. A new test verifies that
+the reference preserves all 171 current page bodies and changes only the
+reviewed font head fragment. The complete gate is rerun on the repaired
+candidate before publication.
+
 This is a reader navigation improvement for an existing search entry page.
 No ranking, traffic or indexing gain is claimed. Google's helpful-content
 and page-experience guidance supports making the actual purpose useful and

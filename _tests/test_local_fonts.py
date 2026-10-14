@@ -85,4 +85,19 @@ class LocalFontsTests(unittest.TestCase):
         self.assertNotEqual(history.pages(changed),self.baseline['pages'])
         self.assertEqual(history.before('unrelated.html',self.outputs[Path('index.html')]),self.outputs[Path('index.html')])
 
+    def test_browser_font_reference_retains_all_current_page_content(self):
+        c=history.change();b=history.baseline();pages=0
+        new='<link rel="stylesheet" href="/assets/site-fonts.css?v='+c['new_css_sha256'][:12]+'">'
+        old='<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link rel="stylesheet" href="/assets/site-fonts.css?v='+b['outputs']['assets/site-fonts.css'][:12]+'">'
+        for path,text in build.build_outputs().items():
+            if path.suffix!='.html':continue
+            reference=history.font_reference(path,text)
+            self.assertEqual(text.count(new),1,str(path))
+            self.assertEqual(reference,text.replace(new,old,1),str(path))
+            self.assertEqual(reference.split('<body',1)[1],text.split('<body',1)[1])
+            self.assertEqual(history.font_reference(path,text.encode()),reference.encode())
+            pages+=1
+        self.assertEqual(pages,171)
+        self.assertEqual(history.font_reference('assets/site-fonts.css',font_delivery.local_declarations(ROOT)),font_delivery.declarations(ROOT))
+
 if __name__=='__main__':unittest.main()

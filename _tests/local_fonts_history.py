@@ -24,10 +24,10 @@ def pages(records):
         if p['id']=='privacy' and p.get('updated')=='2026-10-13':p['updated']='2026-10-12'
     return result
 
-def before(path,data):
-    data=search_sections_history.before(path,data)
+def font_reference(path,data):
+    """Change font delivery only, so browser parity uses identical current copy."""
     path=str(path);b=baseline();c=change()
-    if path not in b['outputs'] and path not in {'_source/pages.json','_source/privacy.html'}:return data
+    if path not in b['outputs']:return data
     binary=isinstance(data,bytes);text=data.decode() if binary else data
     if path=='assets/site-fonts.css':
         for old,new in c['urls'].items():text=text.replace('url('+new+')','url('+old+')')
@@ -35,6 +35,13 @@ def before(path,data):
         new='<link rel="stylesheet" href="/assets/site-fonts.css?v='+c['new_css_sha256'][:12]+'">'
         old='<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link rel="stylesheet" href="/assets/site-fonts.css?v='+b['outputs']['assets/site-fonts.css'][:12]+'">'
         text=text.replace(new,old,1)
+    return text.encode() if binary else text
+
+def before(path,data):
+    data=font_reference(path,search_sections_history.before(path,data))
+    path=str(path);c=change()
+    if path not in baseline()['outputs'] and path not in {'_source/pages.json','_source/privacy.html'}:return data
+    binary=isinstance(data,bytes);text=data.decode() if binary else data
     if path in {'_source/privacy.html','privacy/index.html'}:
         text=text.replace(c['privacy_new'],c['privacy_old'],1).replace(c['providers_new'],c['providers_old'],1)
         text=text.replace('Updated October 13, 2026','Updated October 12, 2026',1)

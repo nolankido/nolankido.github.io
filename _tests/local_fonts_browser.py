@@ -52,7 +52,7 @@ def route_for(requests,old=False,blocked=False):
                 r.fulfill(status=200,content_type='text/html',body=document)
             elif old and (r.request.resource_type=='document' or u.path=='/assets/site-fonts.css'):
                 path=u.path.lstrip('/')+('index.html' if u.path.endswith('/') else '')
-                r.fulfill(status=200,content_type='text/css' if path.endswith('.css') else 'text/html',body=history.before(path,(ROOT/path).read_bytes()))
+                r.fulfill(status=200,content_type='text/css' if path.endswith('.css') else 'text/html',body=history.font_reference(path,(ROOT/path).read_bytes()))
             else:r.continue_()
         else:r.abort()
     return route
