@@ -699,14 +699,14 @@
     "path": "/poker/free-poker-learning-path/",
     "title": "Learn poker with a small, free study path.",
     "seo_title": "Learn Poker for Beginners: Free Study Path | Nolan Kido",
-    "description": "Follow four beginner poker lessons with explained readiness checks and a private study card, then choose from five free study sessions.",
+    "description": "Follow four foundation lessons, build range and betting skills, then use a beginner checkpoint with fresh retries, precise repair links and a private workbook.",
     "kicker": "Poker / Resource collections",
     "source": "poker/free-poker-learning-path.html",
     "section": "poker",
     "date": "2026-10-08",
     "updated": "2026-10-14",
     "poker_guide": true,
-    "revision": "Added a connected four-lesson beginner route, readiness checks and a blank study card. The original five-session plan remains unchanged."
+    "revision": "Added six-skill checkpoint practice, fresh retries and optional reader-feedback prompts after the foundation lessons."
   },
   {
     "id": "poker-cash-game-study",
@@ -1118,6 +1118,19 @@
     "description": "Practice why to bet or check through seven explained exercises: target worse calls, compare bet sizes, understand bluffs, and question your assumptions.",
     "kicker": "Poker / Beginner lessons",
     "source": "poker/betting-with-a-purpose.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
+  },
+  {
+    "id": "poker-beginner-checkpoint",
+    "path": "/poker/beginner-checkpoint/",
+    "title": "Can you explain the next hand?",
+    "seo_title": "Beginner Poker Checkpoint: Explain, Repair & Retry | Nolan Kido",
+    "description": "Check six beginner poker skills with explained mistakes, six fresh retry situations, precise lesson links and a private workbook. Share a sticking point if you wish.",
+    "kicker": "Poker / Beginner practice",
+    "source": "poker/beginner-checkpoint.html",
     "section": "poker",
     "date": "2026-10-14",
     "updated": "2026-10-14",

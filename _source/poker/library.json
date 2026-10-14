@@ -252,7 +252,7 @@
     {
       "slug": "free-poker-learning-path",
       "title": "Learn poker with a small, free study path.",
-      "description": "Follow four beginner poker lessons with explained readiness checks and a private study card, then choose from five free study sessions.",
+      "description": "Follow four foundation lessons, build range and betting skills, then use a beginner checkpoint with fresh retries, precise repair links and a private workbook.",
       "topic": "study",
       "level": "Start here",
       "keywords": "free beginner learn study course lessons worksheets practice readiness checks study card four lessons course progress"
@@ -424,6 +424,14 @@
       "topic": "basics",
       "level": "Start here",
       "keywords": "beginner beginners betting value bet bluff semi bluff draw check checking purpose bet sizing worse calls better folds response assumptions practice"
+    },
+    {
+      "slug": "beginner-checkpoint",
+      "title": "Can you explain the next hand?",
+      "description": "Check six beginner poker skills with explained mistakes, six fresh retry situations, precise lesson links and a private workbook. Share a sticking point if you wish.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "beginner beginners checkpoint check understanding misconception feedback learning confidence retry repair practice call position draw price equity range value bet"
     }
   ]
 }

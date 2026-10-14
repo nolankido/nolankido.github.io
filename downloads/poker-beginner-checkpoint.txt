@@ -1,0 +1,131 @@
+BEGINNER POKER CHECKPOINT WORKBOOK
+Nolan Kido | https://nolankido.com/poker/beginner-checkpoint/
+
+Choose two situations, give your own reason, then open the answer.
+All scenes are fictional. Use paper, cards or counters; no wager or account is needed.
+This file stays on your device. The website does not receive your answers.
+Use study materials before or after play, following the venue's rules.
+
+1. You face a raise to eight
+You posted the big blind of 2. On this same preflop round, another player raises to a total of 8. You have enough chips, made no other contribution, and there are no antes. Which explanation describes the extra chips required to call?
+A. Add 8 because that is the amount announced.
+B. Add 6 because your posted 2 already counts toward the 8.
+C. Add 4 because a call always costs two big blinds.
+
+My first letter:
+My reason:
+Before opening the answer, I felt: sure / partly sure / guessing
+Answer: https://nolankido.com/poker/beginner-checkpoint/#answer-one
+One difference between my reason and the explanation:
+Repair: https://nolankido.com/poker/first-decisions/#chips-owed
+
+Changed situation: You paid 8 preflop. On the flop, the opponent makes the first bet of 5, and you have contributed nothing on this new round. How much is a call now? Explain why the earlier 8 does or does not reduce it.
+My retry answer and reason:
+Retry answer: https://nolankido.com/poker/beginner-checkpoint/#retry-one
+What is clearer, and what remains unclear:
+
+2. You call from the button
+At a six-player table, the first two players fold. The cutoff, the seat immediately before the button, raises to 6. You are on the button and call. The small blind and big blind have not made their initial decisions. Which explanation fits?
+A. Your call completes preflop because the button is always last.
+B. Your call completes preflop because you matched the raiser's total.
+C. The blinds still have decisions; either could change the action.
+
+My first letter:
+My reason:
+Before opening the answer, I felt: sure / partly sure / guessing
+Answer: https://nolankido.com/poker/beginner-checkpoint/#answer-two
+One difference between my reason and the explanation:
+Repair: https://nolankido.com/poker/starting-hand-decisions/#position
+
+Changed situation: Only you on the button and the big blind reach the flop. The big blind checks, then you check. Does the big blind receive another turn merely because you acted after them?
+My retry answer and reason:
+Retry answer: https://nolankido.com/poker/beginner-checkpoint/#retry-two
+What is clearer, and what remains unclear:
+
+3. Four spades are visible to you
+You hold king of spades and queen of spades. The flop is queen of clubs, eight of spades and three of spades. Which description separates what you have now from what you could make?
+A. A pair of queens with a king kicker, plus a spade-flush draw.
+B. A completed flush because both private cards are spades.
+C. A flush draw, so there is no made hand to name.
+
+My first letter:
+My reason:
+Before opening the answer, I felt: sure / partly sure / guessing
+Answer: https://nolankido.com/poker/beginner-checkpoint/#answer-three
+One difference between my reason and the explanation:
+Repair: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+
+Changed situation: The turn is the five of diamonds. Name your made hand and the spade draw again. Did receiving a fourth community card itself complete the flush?
+My retry answer and reason:
+Retry answer: https://nolankido.com/poker/beginner-checkpoint/#retry-three
+What is clearer, and what remains unclear:
+
+4. The river pot was twenty-four
+A fictional heads-up cash-game river pot contains 24 before the opponent bets 8. You have enough chips to call, and a call ends betting. Assume no fees, side pots or tournament payout effects. Which statement is justified?
+A. 8 / 32 = 25%, which proves a call is good.
+B. 8 / 40 = 20% is the break-even pot share; your hand's share still needs a model.
+C. The opponent bet one third of the pot, so you win one third of the time.
+
+My first letter:
+My reason:
+Before opening the answer, I felt: sure / partly sure / guessing
+Answer: https://nolankido.com/poker/beginner-checkpoint/#answer-four
+One difference between my reason and the explanation:
+Repair: https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
+
+Changed situation: The pot is 30 before a river bet of 15 under the same assumptions. What is the new break-even share? What information is still missing even after the arithmetic?
+My retry answer and reason:
+Retry answer: https://nolankido.com/poker/beginner-checkpoint/#retry-four
+What is clearer, and what remains unclear:
+
+5. A check and two possible aces
+You hold A♥ Q♦, ace of hearts and queen of diamonds, on Q♠ 9♣ 6♥ 4♦ 2♣. These codes name exact ranks and suits: spades ♠, hearts ♥, diamonds ♦ and clubs ♣. The opponent checks. Which explanation fits the information you have?
+A. A♥ K♥ remains possible because ace-king is a common hand name.
+B. The check proves the opponent has no hand stronger than your queens.
+C. A♣ K♦ is physically possible, but the check does not establish its frequency.
+
+My first letter:
+My reason:
+Before opening the answer, I felt: sure / partly sure / guessing
+Answer: https://nolankido.com/poker/beginner-checkpoint/#answer-five
+One difference between my reason and the explanation:
+Repair: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
+
+Changed situation: At showdown, the opponent reveals A♣ K♦ once. Does this prove that an earlier equal-weight range model was correct, or establish how often the opponent checks ace-king?
+My retry answer and reason:
+Retry answer: https://nolankido.com/poker/beginner-checkpoint/#retry-five
+What is clearer, and what remains unclear:
+
+6. You have a pair and can bet
+You hold J♣ T♦ on T♠ 8♥ 5♣ 3♦ 2♠. The opponent checks to you last to act on the river. Your current best five are T-T-J-8-5. Which explanation gives a useful next study question?
+A. Which worse hands would call this size, which better hands would continue, and how does betting compare with checking?
+B. A pair is enough to justify a bet without considering any response.
+C. If the opponent eventually folds, the bet was necessarily better than checking.
+
+My first letter:
+My reason:
+Before opening the answer, I felt: sure / partly sure / guessing
+Answer: https://nolankido.com/poker/beginner-checkpoint/#answer-six
+One difference between my reason and the explanation:
+Repair: https://nolankido.com/poker/betting-with-a-purpose/#value
+
+Changed situation, optional arithmetic: In a restricted teaching model the pot is 20 and both players have 100 behind. The only opposing alternatives are 9♣ 9♦ and 8♣ 8♦, each with probability one half at this decision. Against a bet of 6 the worse nines always fold and the better eights always call. There are no raises, fees or side pots. A check ends betting. Compare the average chips received minus new chips paid for betting and checking.
+My retry answer and reason:
+Retry answer: https://nolankido.com/poker/beginner-checkpoint/#retry-six
+What is clearer, and what remains unclear:
+
+ONE NEXT STEP
+The one lesson or section I will revisit:
+What I want to explain without looking:
+
+OPTIONAL READER FEEDBACK
+Use https://nolankido.com/contact/ only if you wish to share one sticking point.
+The existing form requires your name and email. No workbook is sent automatically.
+Page or situation:
+What I was trying to understand:
+The wording or step that confused me:
+What would have helped:
+Leave out private hand histories, financial details and other players' names.
+
+Learning outcomes have not been measured. These checks are not a skill certification.
+Prepared with AI assistance. October 14, 2026.

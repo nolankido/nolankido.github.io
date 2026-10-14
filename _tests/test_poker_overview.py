@@ -8,6 +8,7 @@ import re
 import unittest
 from test_site import ROOT, Page, build
 import poker_beginner_path
+import poker_checkpoint
 import poker_reading
 import poker_navigation
 import poker_finder
@@ -46,7 +47,7 @@ class PokerOverviewTests(unittest.TestCase):
         for p in self.pages:
             if not p.get('poker_guide') and p['path'] != '/poker/reviewing-a-hand/': continue
             source = (ROOT / '_source' / p['source']).read_text()
-            source = poker_beginner_path.decorate(p, source, ROOT)
+            source = poker_checkpoint.decorate(p, poker_beginner_path.decorate(p, source, ROOT), ROOT)
             headings = poker_reading.VisibleHeadings(source).headings
             if len(headings) < 2: continue
             text = self.outputs[build.output_path(p['path'])]
