@@ -102,10 +102,12 @@ def lesson_support(page, body, root):
         return body
     index = routes.index(lesson)
     links = ''.join(f'<li><a href="#{anchor}">{escape(label)}</a></li>' for anchor, label in lesson['first_pass'])
+    card_case = {'first-decisions':'pair', 'first-flop-decisions':'three-kind', 'turn-and-river-decisions':'two-pair'}.get(lesson['slug'])
+    card_practice = f'<p><a href="{ROUTE}#hand-lab-{card_case}">Build the best five with actual cards</a>. Choose the five yourself and explain what you leave out.</p>' if card_case else ''
     first = ('<aside class="course-first-pass" aria-labelledby="course-first-pass-title"><h2 id="course-first-pass-title">Your first pass through this stage</h2>'
              f'<p><strong>Stage {index+1} of 6:</strong> {escape(lesson["goal"])}</p>'
              '<p>Begin with these sections. The rest of this page is a reference to return to, rather than another reading assignment.</p>'
-             f'<ul>{links}</ul><p><a href="{poker_practice.lesson_link(lesson["slug"])}">See a worked example, then try three changed questions</a>.</p><p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></aside>')
+             f'<ul>{links}</ul>{card_practice}<p><a href="{poker_practice.lesson_link(lesson["slug"])}">See a worked example, then try three changed questions</a>.</p><p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></aside>')
     anchor = '<p class="article-lead">'
     if body.count(anchor) != 1 or 'id="course-first-pass-title"' in body:
         raise ValueError('A course lesson needs one introduction and one first-pass guide')
