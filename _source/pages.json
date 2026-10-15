@@ -255,6 +255,19 @@
     "poker_comic": true
   },
   {
+    "id": "poker-comic-why-acting-last-helps",
+    "path": "/poker/comics/why-acting-last-helps/",
+    "title": "Why acting last helps",
+    "seo_title": "Why Acting Last Helps: A Poker Comic | Nolan Kido",
+    "description": "Sam discovers the value of position in a four-panel poker comic, with a readable text version and notes on the button, betting order and uncertain clues.",
+    "kicker": "Poker / Comic 05",
+    "source": "poker/comics/why-acting-last-helps.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_comic": true
+  },
+  {
     "id": "poker-hand-review",
     "path": "/poker/reviewing-a-hand/",
     "title": "Review a hand, not just the result.",

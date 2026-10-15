@@ -22,7 +22,7 @@ class TournamentBudgetTests(unittest.TestCase):
 
     def test_exact_predecessor_inputs_outputs_and_mutation_guards(self):
         b=self.baseline
-        self.assertEqual((b['commit'],len(b['pages']),len(b['outputs']),len(b['files'])),('8f8f0795257f23603b6e2d6bb8ad6f1c00727654',187,214,438))
+        self.assertEqual((b['commit'],len(b['pages']),len(b['outputs']),len(b['files'])),('0879bc632d57ac8591206dbe7ff6c99bac96b62f',188,215,440))
         self.assertEqual(history.pages(self.pages),b['pages'])
         old=history.outputs(self.outputs);self.assertEqual(set(map(str,old)),set(b['outputs']))
         for p,v in old.items():self.assertEqual(sha256(v.encode()).hexdigest(),b['outputs'][str(p)],str(p))
@@ -111,7 +111,7 @@ class TournamentBudgetTests(unittest.TestCase):
             self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(feed)])
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1])
         self.assertEqual((schema['@type'],schema['datePublished']),('Article','2026-10-15'))
-        self.assertEqual(len(check_live.targets()),446)
+        self.assertEqual(len(check_live.targets()),448)
         for asset in ['assets/poker-budget.css','downloads/poker-tournament-trip-budget.md','assets/social/reader-poker-tournament-trip-budget.png']:
             self.assertEqual(check_live.targets()['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():

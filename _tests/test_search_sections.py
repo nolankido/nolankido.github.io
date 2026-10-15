@@ -43,8 +43,8 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
-        self.assertEqual(len(self.index),168)
-        self.assertEqual(sum(map(len,self.index.values())),1062)
+        self.assertEqual(len(self.index),169)
+        self.assertEqual(sum(map(len,self.index.values())),1065)
         excluded={p['path'] for p in self.pages if p.get('noindex') or p.get('living_well_kind')=='experiment'}
         self.assertFalse(excluded.intersection(self.index))
         self.assertNotIn('/contact/',self.index)
