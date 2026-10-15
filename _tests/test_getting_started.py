@@ -81,7 +81,7 @@ class GettingStartedTests(unittest.TestCase):
         current=search_sections.index(self.outputs,self.pages)
         previous=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         previous['/poker/library/']=[[a,label.replace('56 free guides','57 free guides')] for a,label in previous['/poker/library/']]
-        self.assertEqual({p:v for p,v in current.items() if p not in {ROUTE,'/poker/comics/best-five-cards-win/','/poker/comics/why-acting-last-helps/'}},previous)
+        self.assertEqual({p:v for p,v in current.items() if p not in {ROUTE,'/poker/comics/best-five-cards-win/','/poker/comics/why-acting-last-helps/','/poker/comics/good-decision-bad-river/'}},previous)
         raw=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[search_sections.PAGE],re.S)[1]
         self.assertLess(len(raw.encode()),60000)
         code=r'''const assert=require('node:assert/strict'),s=require('./assets/site-find.js');

@@ -268,6 +268,19 @@
     "poker_comic": true
   },
   {
+    "id": "poker-comic-good-decision-bad-river",
+    "path": "/poker/comics/good-decision-bad-river/",
+    "title": "Good decision, bad river",
+    "seo_title": "Good Decision, Bad River: A Poker Comic | Nolan Kido",
+    "description": "A six-panel poker comic about bad beats, taking a break and judging a decision by what you knew at the time, with a readable text version.",
+    "kicker": "Poker / Comic 06",
+    "source": "poker/comics/good-decision-bad-river.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_comic": true
+  },
+  {
     "id": "poker-hand-review",
     "path": "/poker/reviewing-a-hand/",
     "title": "Review a hand, not just the result.",
