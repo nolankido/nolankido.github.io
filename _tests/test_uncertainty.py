@@ -103,9 +103,9 @@ class UncertaintyTests(unittest.TestCase):
         old['/poker/library/']=[[a,label.replace('55 free guides','56 free guides')] for a,label in old['/poker/library/']]
         self.assertEqual({k:v for k,v in idx.items() if k!=ROUTE},old)
         packed=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[Path('find/index.html')],re.S)[1]
-        # Comic 02 adds 163 bytes of headings; retain all existing search entries.
-        self.assertLessEqual(len(packed.encode()),60200)
-        self.assertEqual(len(check_live.targets()),434)
+        # Comics 02 and 03 add 273 bytes of headings; retain all existing search entries.
+        self.assertLessEqual(len(packed.encode()),60350)
+        self.assertEqual(len(check_live.targets()),436)
         for path in ['/assets/poker-uncertainty.css','/downloads/poker-under-uncertainty-reproduce.py','/downloads/poker-under-uncertainty-evidence.json','/assets/poker/uncertainty-bayes.png']:
             self.assertIn(path,check_live.targets())
 
