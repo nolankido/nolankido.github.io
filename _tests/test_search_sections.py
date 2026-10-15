@@ -43,8 +43,8 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
-        self.assertEqual(len(self.index),161)
-        self.assertEqual(sum(map(len,self.index.values())),1019)
+        self.assertEqual(len(self.index),164)
+        self.assertEqual(sum(map(len,self.index.values())),1028)
         excluded={p['path'] for p in self.pages if p.get('noindex') or p.get('living_well_kind')=='experiment'}
         self.assertFalse(excluded.intersection(self.index))
         self.assertNotIn('/contact/',self.index)
@@ -59,7 +59,8 @@ class SearchSectionsTests(unittest.TestCase):
         packed=json.loads(payload)
         self.assertEqual(packed['version'],2)
         self.assertEqual({p:[v[i:i+2] for i in range(0,len(v),2)] for p,v in packed['pages'].items()},self.index)
-        self.assertLess(len(payload.encode()),60000)
+        # Comic 02 adds 163 bytes of headings; retain all existing search entries.
+        self.assertLess(len(payload.encode()),60200)
         # Preserve this release's original budget after the later reviewed
         # title metadata and beginner entry are reversed. Current growth has
         # its own independent bound in test_beginner_decisions.

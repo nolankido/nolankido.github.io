@@ -216,6 +216,19 @@
     "poker_comic": true
   },
   {
+    "id": "poker-comic-poker-hand-rankings",
+    "path": "/poker/comics/poker-hand-rankings/",
+    "title": "Poker hand rankings",
+    "seo_title": "Poker Hand Rankings: A Poker Comic | Nolan Kido",
+    "description": "An illustrated poker hand ranking guide, from royal flush to high card, with readable definitions and notes on aces, ties and your best five cards.",
+    "kicker": "Poker / Comic 02",
+    "source": "poker/comics/poker-hand-rankings.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_comic": true
+  },
+  {
     "id": "poker-hand-review",
     "path": "/poker/reviewing-a-hand/",
     "title": "Review a hand, not just the result.",
