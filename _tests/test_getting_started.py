@@ -79,6 +79,7 @@ class GettingStartedTests(unittest.TestCase):
         self.assertIn('16.67%',self.text);self.assertIn('+$2.40',self.text)
 
     def test_all_old_heading_destinations_and_labels_survive_within_original_budget(self):
+        canonical=search_sections.index(self.outputs,self.pages)
         current=search_sections.index(tournament_budget_history.outputs(self.outputs),tournament_budget_history.pages(self.pages))
         previous=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         previous['/poker/library/']=[[a,label.replace('56 free guides','57 free guides')] for a,label in previous['/poker/library/']]
@@ -97,7 +98,7 @@ assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
 '''
         entry=next(e for e in site_find.entries(ROOT,self.pages) if e['path']==ROUTE)
         entry.update(subjects=' '.join(entry['interests']),searchTitle=entry['search_title'],sections=current[ROUTE])
-        run=subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'packed':json.loads(raw),'canonical':current,'entry':entry}),text=True,capture_output=True)
+        run=subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'packed':json.loads(raw),'canonical':canonical,'entry':entry}),text=True,capture_output=True)
         self.assertEqual(run.returncode,0,run.stderr)
 
     def test_learning_routes_native_explanations_source_scope_and_private_sheet(self):

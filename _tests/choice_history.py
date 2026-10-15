@@ -34,7 +34,7 @@ NEW_OUTPUTS.add(uncertainty_history.OUTPUT)
 NEW_SOURCES |= set(comics_history.change()['new_files'])
 NEW_OUTPUTS |= set(comics_history.change()['new_outputs'])
 NEW_SOURCES |= set(getting_started_history.change()['new_files'])
-NEW_OUTPUTS.add(getting_started_history.OUTPUT)
+NEW_OUTPUTS |= set(getting_started_history.change()['new_outputs'])
 NEW_SOURCES |= set(tournament_budget_history.change()['new_files'])
 NEW_OUTPUTS.add(tournament_budget_history.OUTPUT)
 
