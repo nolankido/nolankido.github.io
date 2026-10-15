@@ -112,7 +112,7 @@ class TournamentBudgetTests(unittest.TestCase):
             self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(feed)])
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1])
         self.assertEqual((schema['@type'],schema['datePublished']),('Article','2026-10-15'))
-        self.assertEqual(len(check_live.targets()),463)
+        self.assertEqual(len(check_live.targets()),466)
         for asset in ['assets/poker-budget.css','downloads/poker-tournament-trip-budget.md','assets/social/reader-poker-tournament-trip-budget.png']:
             self.assertEqual(check_live.targets()['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():

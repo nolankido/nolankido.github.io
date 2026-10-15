@@ -4,6 +4,16 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Beginner Poker course
 
+`/poker/beginner-practice/` is the supporting practice utility. Its six short
+models and eighteen questions live in `_source/poker/beginner-practice.json`;
+`_scripts/poker_practice.py` validates and renders the native version. Keep the
+three fixed mixed sets transparent and verify every changed card or counter
+example independently. The optional script hides choices until requested,
+supports uncertainty, and retains mistakes in the current visit's review after a
+corrected retry. It sends and stores no answers. Run `test_poker_practice.py` and
+`poker_practice_browser.py` alongside the ordinary release gate. See
+`_reports/beginner-practice-learning-review.md` for the learning audit and limits.
+
 `_source/poker/beginner-course.json` owns the six-stage order, first-pass section
 links, recall prompts, specific checkpoint targets and six-scene fictional hand.
 `_scripts/poker_course.py` validates those destinations and cards, decorates the

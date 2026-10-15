@@ -10,6 +10,7 @@ import poker_content
 import poker_beginner_path
 import poker_checkpoint
 import poker_course
+import poker_practice
 
 
 class Glossary(HTMLParser):
@@ -83,10 +84,10 @@ class GuideText(HTMLParser):
             if tag not in self.VOID:
                 self.skip = 1
             return
-        if 'data-course-scene' in attrs:
+        if 'data-course-scene' in attrs or 'data-drill-case' in attrs:
             self.finish()
             anchor = attrs.get('id', '')
-            if not re.fullmatch(r'course-scene-[a-z]+', anchor):
+            if not re.fullmatch(r'course-scene-[a-z]+|exercise-[a-z]+(?:-[a-z]+)*', anchor):
                 raise ValueError('Unsafe course scene anchor')
             self.current = {'anchor': anchor, 'title': '', 'parts': []}
             self.course_heading = True
@@ -127,7 +128,7 @@ class GuideText(HTMLParser):
 
 
 def guide_sections(root: Path, page: dict, catalog: dict) -> list[dict]:
-    if not page.get('poker_guide') and not page.get('poker_entry') and not page.get('poker_comic') and page['path'] != '/poker/reviewing-a-hand/':
+    if not page.get('poker_guide') and not page.get('poker_entry') and not page.get('poker_comic') and page['path'] not in {'/poker/reviewing-a-hand/', poker_practice.ROUTE}:
         return []
     if page.get('poker_entry'):
         record = next(e for e in catalog['entries'] if e['slug'] == page['poker_entry'])
@@ -137,6 +138,8 @@ def guide_sections(root: Path, page: dict, catalog: dict) -> list[dict]:
         if not path.is_relative_to((root / '_source').resolve()):
             raise ValueError('Search sources must be public manifest sources')
         source = path.read_text(encoding='utf-8')
+        if page['path'] == poker_practice.ROUTE:
+            source = source.replace('${poker_beginner_practice}', poker_practice.render(root))
         if page['path'] == poker_course.ROUTE:
             source = poker_checkpoint.decorate(page, poker_beginner_path.decorate(page, source, root), root)
     return GuideText(source).sections

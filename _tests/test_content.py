@@ -91,6 +91,8 @@ class ContentTests(unittest.TestCase):
                 expected.insert(0, '/assets/poker-study-tools.js?v=' + hashlib.sha256((ROOT / 'assets/poker-study-tools.js').read_bytes()).hexdigest()[:12])
             if path == Path('poker/find/index.html'):
                 expected.insert(0, '/assets/poker-finder.js?v=' + hashlib.sha256((ROOT / 'assets/poker-finder.js').read_bytes()).hexdigest()[:12])
+            if path == Path('poker/beginner-practice/index.html'):
+                expected.insert(0, '/assets/poker-beginner-practice.js?v=' + hashlib.sha256((ROOT / 'assets/poker-beginner-practice.js').read_bytes()).hexdigest()[:12])
             if path == Path('living-well/find/index.html'):
                 expected.insert(0, '/assets/living-well-directory.js?v=' + hashlib.sha256((ROOT / 'assets/living-well-directory.js').read_bytes()).hexdigest()[:12])
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', content, re.S)[1])
