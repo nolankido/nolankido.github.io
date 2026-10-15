@@ -72,7 +72,7 @@ class SearchEntryTests(unittest.TestCase):
             if p['id'] in self.entries:
                 self.assertFalse(p.get('date'))
                 self.assertFalse(p.get('noindex'))
-                self.assertEqual(p['updated'], '2026-10-12')
+                self.assertEqual(p['updated'], '2026-10-15' if p['id'] == 'poker-library' else '2026-10-12')
                 self.assertEqual(raw.count('class="entry-summary"'), 1)
                 self.assertIn('<p class="entry-summary">' + escape(p['description']) + '</p>', raw)
                 self.assertIn('<h1 class="page-title">' + escape(p['title']) + '</h1>', raw)
