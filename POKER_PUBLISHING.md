@@ -175,3 +175,24 @@ For a takedown, do not silently remove the catalog entry and leave old generated
 HTML online. Remove the generated file in the same reviewed change, update related
 links and record the reason privately. Stable public content should be corrected
 in place where appropriate. Removing something does not erase public Git history.
+
+
+## Poker comics
+
+The series index is `/poker/comics/`; the first comic is
+`/poker/comics/learn-no-limit-holdem/`. Artwork is hosted locally, unchanged from
+the shared Gemini image, at `assets/poker/comics/learn-no-limit-holdem.jpg`
+(687 × 1024 pixels). The smaller uploaded PNG was a preview of the same artwork.
+
+For the next approved comic, add its original image to `assets/poker/comics/`,
+a source page under `_source/poker/comics/`, and a manifest entry in
+`_source/pages.json` with `section: poker`, `poker_comic: true`, an explicit
+publication date, and its permanent route. Add its card to
+`_source/poker/comics.html`; keep earlier comic URLs and publication dates.
+Include a readable text version, attribution and any needed rules clarifications.
+Do not describe an AI-generated scene as a recorded hand or personal experience.
+
+The date puts the comic into the existing Poker feed and combined writing feed.
+Search indexes derive from the manifest, and Poker search also indexes the text
+version. Comic pages use the existing sharing controls. Source and generated HTML
+must be rebuilt and committed together using the normal local release checks.

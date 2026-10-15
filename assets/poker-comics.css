@@ -1,0 +1,26 @@
+/* Keep the artwork complete and make its text available at every screen size. */
+.comic-feature { display: grid; grid-template-columns: minmax(160px, 240px) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: center; }
+.comic-feature-image { display: block; max-width: 240px; }
+.comic-feature-image img { display: block; width: 100%; height: auto; border: 1px solid var(--line, #d9d4c6); }
+.comic-feature h3 { margin-top: 0; font-size: clamp(1.5rem, 3vw, 2rem); }
+.comic-edition { font-family: var(--mono, monospace); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+.comic-reader { padding-bottom: 3rem; }
+.comic-reader .comic-artwork { margin: 2rem auto; max-width: 687px; }
+.comic-artwork > a { display: block; }
+.comic-artwork img { display: block; width: 100%; height: auto; }
+.comic-artwork figcaption { margin-top: .8rem; font-size: .9rem; line-height: 1.6; }
+.comic-reader .comic-rules-note { border-left: 3px solid #496549; padding: .3rem 1.2rem; margin: 2rem 0; background: #f3f1e8; color: #17241c; }
+.comic-rules-note h2 { font-size: 1.25rem; margin-top: .7rem; }
+.comic-text { padding-left: 1.5rem; }
+.comic-text li { padding-left: .4rem; margin-bottom: 1.4rem; }
+.comic-text h3 { margin-bottom: .35rem; }
+.comic-text p { margin-top: 0; }
+@media (max-width: 620px) {
+  .comic-feature { grid-template-columns: minmax(0, 1fr); }
+  .comic-feature-image { max-width: 200px; }
+}
+@media print {
+  .comic-artwork { break-inside: avoid; max-width: 150mm !important; }
+  .comic-feature { grid-template-columns: 120px 1fr; }
+  .comic-rules-note { break-inside: avoid; }
+}

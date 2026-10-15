@@ -254,6 +254,9 @@ def build_outputs() -> dict[Path, str]:
                 extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
                 if p.get('updated'):
                     extra += f'\n  <meta property="article:modified_time" content="{p["updated"]}">'
+            if p['path'].startswith('/poker/comics/') or p['id'] == 'poker':
+                comics_version = hashlib.sha256((ROOT / 'assets/poker-comics.css').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <link rel="stylesheet" href="/assets/poker-comics.css?v={comics_version}">'
         if p['id'] in {'start-here', 'resources'} or p.get('note'):
             entry_version = hashlib.sha256((ROOT / 'assets/entrypoints.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/entrypoints.css?v={entry_version}">'

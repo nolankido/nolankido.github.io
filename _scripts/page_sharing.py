@@ -12,7 +12,7 @@ ASSETS = ('page-sharing.css', 'page-sharing.js')
 
 def eligible(page: dict) -> bool:
     return not page.get('noindex') and bool(
-        page.get('note') or page.get('poker_entry') or page.get('poker_guide') or
+        page.get('note') or page.get('poker_entry') or page.get('poker_guide') or page.get('poker_comic') or
         page.get('living_well_entry') or page.get('evidence_article') or
         page.get('worked_guide') or page['id'] in {'task-brief', 'ai-time-savings'})
 

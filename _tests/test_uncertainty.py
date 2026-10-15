@@ -10,6 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections
 import uncertainty_history as history
+import comics_history
 from test_viewer_guides import best
 ROUTE='/poker/poker-under-uncertainty/'
 spec=importlib.util.spec_from_file_location('uncertainty',ROOT/'downloads/poker-under-uncertainty-reproduce.py')
@@ -95,7 +96,7 @@ class UncertaintyTests(unittest.TestCase):
         self.assertIn('13',self.text);self.assertIn('795–818',self.text)
         self.assertIn('not a peer-reviewed research paper',self.text)
         self.assertNotRegex(self.html,r'<script[^>]+(?:mathjax|katex)|<iframe|<form')
-        idx=search_sections.index(self.outputs,self.pages)
+        idx=search_sections.index(comics_history.outputs(self.outputs),comics_history.pages(self.pages))
         before=json.loads((ROOT/'_tests/uncertainty-baseline.json').read_text())
         old=search_sections.index(history.outputs(self.outputs),before['pages'])
         # The existing library heading accurately changes its inventory to 56.
@@ -103,7 +104,7 @@ class UncertaintyTests(unittest.TestCase):
         self.assertEqual({k:v for k,v in idx.items() if k!=ROUTE},old)
         packed=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[Path('find/index.html')],re.S)[1]
         self.assertLessEqual(len(packed.encode()),60000)
-        self.assertEqual(len(check_live.targets()),428)
+        self.assertEqual(len(check_live.targets()),432)
         for path in ['/assets/poker-uncertainty.css','/downloads/poker-under-uncertainty-reproduce.py','/downloads/poker-under-uncertainty-evidence.json','/assets/poker/uncertainty-bayes.png']:
             self.assertIn(path,check_live.targets())
 

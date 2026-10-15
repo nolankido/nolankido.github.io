@@ -113,7 +113,7 @@ class GuideText(HTMLParser):
 
 
 def guide_sections(root: Path, page: dict, catalog: dict) -> list[dict]:
-    if not page.get('poker_guide') and not page.get('poker_entry') and page['path'] != '/poker/reviewing-a-hand/':
+    if not page.get('poker_guide') and not page.get('poker_entry') and not page.get('poker_comic') and page['path'] != '/poker/reviewing-a-hand/':
         return []
     if page.get('poker_entry'):
         record = next(e for e in catalog['entries'] if e['slug'] == page['poker_entry'])

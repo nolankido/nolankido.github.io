@@ -11,6 +11,7 @@ def section_navigation(page: dict) -> str:
     study_routes = {'/poker/study/', '/poker/study-calculators/', '/poker/decision-labs/',
                     '/poker/tournament-checklists/'}
     if path == '/poker/': current_route = path
+    elif path.startswith('/poker/comics/'): current_route = '/poker/comics/'
     elif path == '/poker/glossary/': current_route = path
     elif path == '/poker/find/': current_route = path
     elif path in {'/poker/resources/', '/poker/resource-quality/'}: current_route = '/poker/resources/'
@@ -21,7 +22,8 @@ def section_navigation(page: dict) -> str:
     links = []
     for route, label in [('/poker/', 'Home'), ('/poker/topics/', 'Topics'), ('/poker/find/', 'Search'),
                          ('/poker/library/', 'Guides'), ('/poker/resources/', 'External links'),
-                         ('/poker/study/', 'Study desk'), ('/poker/glossary/', 'Glossary')]:
+                         ('/poker/study/', 'Study desk'), ('/poker/glossary/', 'Glossary'),
+                         ('/poker/comics/', 'Comics')]:
         current = (' aria-current="page"' if path == route else ' aria-current="location"') if route == current_route else ''
         links.append(f'<a href="{escape(route, quote=True)}"{current}>{escape(label)}</a>')
     return ('<div class="subsite-bar"><div class="shell"><span class="subsite-name">Nolan Kido / Poker</span>'
