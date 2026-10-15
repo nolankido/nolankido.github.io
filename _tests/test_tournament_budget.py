@@ -111,7 +111,7 @@ class TournamentBudgetTests(unittest.TestCase):
             self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(feed)])
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1])
         self.assertEqual((schema['@type'],schema['datePublished']),('Article','2026-10-15'))
-        self.assertEqual(len(check_live.targets()),448)
+        self.assertEqual(len(check_live.targets()),450)
         for asset in ['assets/poker-budget.css','downloads/poker-tournament-trip-budget.md','assets/social/reader-poker-tournament-trip-budget.png']:
             self.assertEqual(check_live.targets()['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
@@ -121,7 +121,7 @@ class TournamentBudgetTests(unittest.TestCase):
         current=search_sections.index(self.outputs,self.pages)
         old=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         old['/poker/library/']=[[a,label.replace('57 free guides','58 free guides')] for a,label in old['/poker/library/']]
-        self.assertEqual({p:v for p,v in current.items() if p!=ROUTE},old)
+        self.assertEqual({p:v for p,v in current.items() if p not in {ROUTE,'/poker/comics/good-decision-bad-river/'}},old)
         raw=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[search_sections.PAGE],re.S)[1]
         self.assertLess(len(raw.encode()),60000)
         entry=next(e for e in site_find.entries(ROOT,self.pages) if e['path']==ROUTE)

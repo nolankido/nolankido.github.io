@@ -31,6 +31,8 @@ def pages(records):
         if record == c['page']:
             continue
         pair = c['pages'].get(record['id'])
+        if pair and pair['old'] is None and record == pair['new']:
+            continue
         result.append(deepcopy(pair['old']) if pair and record == pair['new'] else deepcopy(record))
     return result
 
