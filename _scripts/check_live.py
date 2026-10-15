@@ -39,6 +39,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/poker-uncertainty.css', 'downloads/poker-under-uncertainty-reproduce.py', 'downloads/poker-under-uncertainty-evidence.json']
     assets += ['assets/poker-session.css', 'downloads/poker-first-session.md']
     assets += ['assets/poker-budget.css', 'downloads/poker-tournament-trip-budget.md']
+    assets += ['assets/poker-discovery.css']
     assets += ['assets/poker-venue.css', 'downloads/thunder-valley-first-visit.md']
     assets += ['assets/poker-multiway.css', 'downloads/poker-multiway-review.md']
     assets += ['assets/poker-short-stack.css', 'downloads/short-stack-icm-example.py']

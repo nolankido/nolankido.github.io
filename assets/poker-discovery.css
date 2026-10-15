@@ -1,0 +1,17 @@
+/* Reading choices on the two Poker hubs. Native links work without scripts. */
+.poker-hub-jumps { display:flex; flex-wrap:wrap; gap:4px 22px; margin:24px 0 0; font:.9rem/1.5 var(--sans); }
+.poker-hub-jumps a { display:inline-flex; align-items:center; min-height:44px; text-underline-offset:.22em; }
+.poker-goal-grid,.poker-long-read-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin:28px 0; }
+.poker-goal,.poker-long-read { min-width:0; border-top:2px solid var(--basalt); padding:22px 0 4px; }
+.poker-goal h3,.poker-long-read h3 { margin:0 0 14px; font:700 1.4rem/1.3 var(--sans); letter-spacing:-.02em; overflow-wrap:anywhere; }
+.poker-long-read h3 a { color:inherit; text-underline-offset:.16em; }
+.poker-goal p,.poker-long-read > p:not(.reader-eyebrow):not(.poker-reading-time) { margin:0 0 14px; font:1rem/1.65 var(--serif); }
+.poker-goal ul { list-style:none; margin:0; padding:0; }
+.poker-goal li { margin:0; }
+.poker-goal li a { display:inline-flex; align-items:center; min-height:44px; padding:5px 0; font:.95rem/1.5 var(--sans); text-underline-offset:.2em; }
+.poker-reading-time { margin:16px 0 0; font:.75rem/1.6 var(--mono); color:var(--ink-soft); }
+.poker-hub-jumps a:focus-visible,.poker-goal a:focus-visible,.poker-long-read a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+#reading-routes,#in-depth,#all-guides,#comics,#online-resources,#watch,#after-play { scroll-margin-top:140px; }
+.poker-beginner-options { margin-top:24px; }
+@media(max-width:700px) { .poker-goal-grid,.poker-long-read-grid { grid-template-columns:minmax(0,1fr); gap:18px; } }
+@media print { .poker-hub-jumps { display:none; } .poker-goal-grid,.poker-long-read-grid { display:block; } .poker-goal,.poker-long-read { break-inside:avoid; margin-bottom:24px; } }

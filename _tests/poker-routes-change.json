@@ -1,0 +1,477 @@
+{
+  "parent": "f05bea77919b097a53ce341f9dd34f888b6ec841",
+  "pages": {
+    "poker": {
+      "old": {
+        "id": "poker",
+        "path": "/poker/",
+        "title": "Poker resources.",
+        "seo_title": "Poker Resource Guide: Rules, Strategy, Tools & More | Nolan Kido",
+        "description": "Find poker guides and external resources by topic: rules, cash games, tournaments, strategy, Omaha, tools, events, media, research and safer play.",
+        "kicker": "Nolan Kido / Poker",
+        "source": "poker/home.html",
+        "section": "poker",
+        "updated": "2026-10-14"
+      },
+      "new": {
+        "id": "poker",
+        "path": "/poker/",
+        "title": "Poker resources.",
+        "seo_title": "Poker Resource Guide: Rules, Strategy, Tools & More | Nolan Kido",
+        "description": "Find poker guides and external resources by topic: rules, cash games, tournaments, strategy, Omaha, tools, events, media, research and safer play.",
+        "kicker": "Nolan Kido / Poker",
+        "source": "poker/home.html",
+        "section": "poker",
+        "updated": "2026-10-15"
+      }
+    },
+    "poker-library": {
+      "old": {
+        "id": "poker-library",
+        "path": "/poker/library/",
+        "title": "Poker guides and hand explanations.",
+        "seo_title": "Poker Guides: Rules, Strategy & Hand Review | Nolan Kido",
+        "description": "Find poker explanations for rules, hand rankings, pot odds, ranges, cash games and tournaments. Search by topic or term and choose the depth you need.",
+        "kicker": "Poker / Read, study, create",
+        "source": "poker/library.html",
+        "section": "poker",
+        "updated": "2026-10-12",
+        "entry_summary": "Find poker explanations for rules, hand rankings, pot odds, ranges, cash games and tournaments. Search by topic or term and choose the depth you need."
+      },
+      "new": {
+        "id": "poker-library",
+        "path": "/poker/library/",
+        "title": "Poker guides and hand explanations.",
+        "seo_title": "Poker Guides: Rules, Strategy & Hand Review | Nolan Kido",
+        "description": "Find poker explanations for rules, hand rankings, pot odds, ranges, cash games and tournaments. Search by topic or term and choose the depth you need.",
+        "kicker": "Poker / Read, study, create",
+        "source": "poker/library.html",
+        "section": "poker",
+        "updated": "2026-10-15",
+        "entry_summary": "Find poker explanations for rules, hand rankings, pot odds, ranges, cash games and tournaments. Search by topic or term and choose the depth you need."
+      }
+    }
+  },
+  "paths": {
+    ".github/workflows/site-checks.yml": {
+      "old_sha256": "ef991e4b31c3fe13922a591231b6522a5ca15c8424301797bbaa7f5a15b251fd",
+      "new_sha256": "a909a5783febe74ff7add7ec7a54cc7e19912574c524e47ef6e4cf533166171b",
+      "edits": [
+        {
+          "start": 2853,
+          "end": 2877,
+          "old": "",
+          "new": " poker_discovery_browser"
+        }
+      ]
+    },
+    "_scripts/build.py": {
+      "old_sha256": "938ae4ee55afc62d4f8ec45df2ebe747dedf5d4e89d9a3a5a78ed8d08e6a7193",
+      "new_sha256": "2241126b1a7b9327e4fa79ea95c679547166fba93f3dc03135145a783e0c38ed",
+      "edits": [
+        {
+          "start": 620,
+          "end": 643,
+          "old": "",
+          "new": "import poker_discovery\n"
+        },
+        {
+          "start": 8184,
+          "end": 8252,
+          "old": "",
+          "new": "    values.update(poker_discovery.supplement(ROOT, reader_entries))\n"
+        },
+        {
+          "start": 26780,
+          "end": 26827,
+          "old": "",
+          "new": "        extra += poker_discovery.head(p, ROOT)\n"
+        }
+      ]
+    },
+    "_scripts/check_live.py": {
+      "old_sha256": "e9c547e51c6885ccd23983577bc2ea5db972b98b131322bca9652bbb0bb1b0cf",
+      "new_sha256": "53dc3bd3a1e784bfcb1192525240948ffb76374ea87e6447a1b12e039da42987",
+      "edits": [
+        {
+          "start": 3448,
+          "end": 3493,
+          "old": "",
+          "new": "    assets += ['assets/poker-discovery.css']\n"
+        }
+      ]
+    },
+    "_source/notes.html": {
+      "old_sha256": "8ea724a352bc7624ea9012cdefb88d107424eef3aabddb0c00825f21eb3d9670",
+      "new_sha256": "539281a853bb3681128564019dba587b543f27e5dbe592f54bc358b17b4c5d59",
+      "edits": [
+        {
+          "start": 2469,
+          "end": 2572,
+          "old": "",
+          "new": " longer poker read, <a href=\"/poker/library/#in-depth\">choose a substantial guide by subject</a>. For a"
+        }
+      ]
+    },
+    "_source/pages.json": {
+      "old_sha256": "9d435567e1b3d965f0f50704b5b09aa852de5ce7e3b5638dff13c45b0cd92c28",
+      "new_sha256": "12961ae7ccc759ed602a8f78b7fc8c3b18f244d2a8b5cccdef7224ba6c51da60",
+      "edits": [
+        {
+          "start": 8039,
+          "end": 8040,
+          "old": "4",
+          "new": "5"
+        }
+      ]
+    },
+    "_source/poker/home.html": {
+      "old_sha256": "b5b39f7e7fb0d0f88ba46e57d9524788ef83336ec8a9ae34409d145c0e5e9bac",
+      "new_sha256": "5898050caa9a84d4554f158c4ecf0a0e9a009862900d609086445829ca1ddb92",
+      "edits": [
+        {
+          "start": 321,
+          "end": 511,
+          "old": "${poker_resource_count} outside sources. ${poker_library_count} practical guides. One map for learning the game, studying a decision or exploring the wider poker world",
+          "new": "Learn Hold’em, study a hand, prepare for live play or explore the research. Choose a starting point below, or search ${poker_library_count} guides and ${poker_resource_count} outside sources"
+        },
+        {
+          "start": 712,
+          "end": 1030,
+          "old": "",
+          "new": "    <nav class=\"poker-hub-jumps\" aria-label=\"On the Poker homepage\"><a href=\"#reading-routes\">Choose a path</a><a href=\"#in-depth\">Read in depth</a><a href=\"#online-resources\">Outside sources</a><a href=\"#after-play\">Practice &amp; preparation</a><a href=\"#comics\">Comics</a><a href=\"#watch\">Nolan’s stories</a></nav>\n"
+        },
+        {
+          "start": 1451,
+          "end": 2748,
+          "old": "aria-labelledby=\"viewer-learning-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">A first useful step</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"viewer-learning-title\">Start with what you came to do.</h2>\n    <div class=\"poker-paths\" role=\"group\" aria-label=\"Ways to explore Poker\">\n      <a href=\"/poker/first-decisions/\"><span class=\"note-category\">Learn</span><strong>I am new to poker</strong><span>Eight short lessons and twelve explained practice questions. No wager or account needed.</span></a>\n      <a href=\"/poker/topics/places-to-play/\"><span class=\"note-category\">Find</span><strong>I need a game or event source</strong><span>Official schedules, room finders and home-game resources.</span></a>\n      <a href=\"/poker/reviewing-a-hand/\"><span class=\"note-category\">Study</span><strong>I want to understand a decision</strong><span>Keep the recorded action separate from the later explanation.</span></a>\n    </div>\n    <h3 id=\"beginner-reading-options\">Choose how to learn Hold’em</h3>\n    <div class=\"poker-paths\" role=\"group\" aria-label=\"Beginner reading options\">\n      <a href=\"/poker/no-limit-holdem-guide/\"><span class=\"note-category\">Overview</span><strong>Read the complete guide</strong><span>Rules, one counted hand, prices, ranges and long-term thinking. Read it in parts.</span></a>\n      <a href=\"/poker/getting-started/\"><span class=\"note-category\">First session</span><strong>Prepare to try the game</strong><span>Choose a setting, count the whole cost, rehearse procedure and plan a first month. Money is optional.</span></a>\n      <a href=\"/poker/free-poker-learning-path/#beginner-practice\"><span class=\"note-category\">Short lessons</span><strong>Learn one idea at a time</strong><span>Four foundation lessons, then ranges and betting. Explain a small example before continuing.</span></a>\n      <a href=\"/poker/beginner-checkpoint/\"><span class=\"note-category\">Practice</span><strong>Try a fresh situation</strong><span>Six skills, common mistakes, exact repair links and changed situations to retry.</span></a>\n      <a href=\"/poker/start-here/#viewer-library\"><span class=\"note-category\">Reference</span><strong>Look up what interrupted you</strong><span>Hand rankings, action, amounts and the changing board.</span></a>\n    </div>\n    <p>Studying cash games? <a href=\"/poker/cash-game-study/\">Check the game assumptions</a>, then <a href=\"/poker/cash-game-study-path/\">follow a five-session study route</a>.</p>\n    <p>Reviewing a 10–20 BB tournament decision? <a href=\"/poker/short-stack-decisions/\">Compare the available actions, ante and payout objective</a>, with a counted ICM example and a blank review sheet.</p>\n    <p>Several players calling every raise? <a href=\"/poker/limped-multiway-pots/\">Work through limped and multiway live pots</a>, with a counted hand and a private review sheet.</p",
+          "new": "id=\"reading-routes\" aria-labelledby=\"viewer-learning-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Choose / A useful first step</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"viewer-learning-title\">What brought you to the table?</h2>\n    <p class=\"section-deck\">Each path starts with an existing guide. Choose the question that fits; there is no sequence to complete.</p>\n    ${poker_goal_routes}\n    <details class=\"poker-details poker-beginner-options\"><summary id=\"beginner-reading-options\">More ways to learn or follow a hand</summary>\n      <ul><li><a href=\"/poker/free-poker-learning-path/#beginner-practice\">Learn one idea at a time</a> with short lessons and explained questions.</li>\n      <li><a href=\"/poker/beginner-checkpoint/\">Try a fresh beginner situation</a>, with repair links and a changed example to retry.</li>\n      <li><a href=\"/poker/start-here/#viewer-library\">Follow a video or hand account</a> with a reference for the action, amounts and board.</li>\n      <li><a href=\"/poker/cash-game-study/\">Check cash-game assumptions</a>, then <a href=\"/poker/cash-game-study-path/\">follow a five-session study route</a>.</li>\n      <li><a href=\"/poker/topics/places-to-play/\">Find official game and event sources</a>.</li></ul>\n    </details"
+        },
+        {
+          "start": 2809,
+          "end": 3380,
+          "old": "comics\" aria-labelledby=\"poker-comics-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">New / Poker comics</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-comics-title\">Learn the game in pictures.</h2>\n    <div class=\"comic-feature\"><a class=\"comic-feature-image\" href=\"/poker/comics/learn-no-limit-holdem/\" aria-label=\"Read Learn no-limit Hold’em, the first poker comic\"><img src=\"/assets/poker/comics/learn-no-limit-holdem.jpg\" width=\"687\" height=\"1024\" alt=\"Six illustrated panels introduce the poker table, cards, blinds and preflop action.\" loading=\"lazy\" decoding=\"async\"></a><div><p class=\"comic-edition\">Comic 01</p><h3><a href=\"/poker/comics/learn-no-limit-holdem/\">Learn no-limit Hold’em</a></h3><p>A visual welcome to the table, with a readable text version and a few important rules notes. The first in a growing collection of poker comics.</p><div class=\"link-row\"><a class=\"button\" href=\"/poker/comics/learn-no-limit-holdem/\">Read the comic</a><a class=\"text-link\" href=\"/poker/comics/\">Explore Poker Comics</a></div></div></div>\n    <p>Continue the series with <a href=\"/poker/comics/poker-hand-rankings/\">Comic 02: Poker hand rankings</a>, then follow the action in <a href=\"/poker/comics/one-hand-four-streets/\">Comic 03: One hand, four streets</a>. Learn what counts at showdown in <a href=\"/poker/comics/best-five-cards-win/\">Comic 04: The best five cards win</a>, then discover the value of position in <a href=\"/poker/comics/why-acting-last-helps/\">Comic 05: Why acting last helps</a>. Explore bad beats and decision quality in <a href=\"/poker/comics/good-decision-bad-river/\">Comic 06: Good decision, bad river",
+          "new": "in-depth\" aria-labelledby=\"in-depth-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Read / In depth</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"in-depth-title\">Read in depth.</h2>\n    <p class=\"section-deck\">Substantial guides with worked examples, sources and explicit assumptions. Read in sections; the times below are estimates, before practice or note-taking.</p>\n    ${poker_in_depth}\n    <p><a href=\"/poker/library/#all-guides\">Browse every on-site guide</a> or <a href=\"/poker/study/\">choose a worksheet or practice exercise"
+        },
+        {
+          "start": 6091,
+          "end": 6091,
+          "old": "<section class=\"section folio-row\" id=\"watch\" aria-labelledby=\"poker-stories-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Nolan / From the table</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-stories-title\">Stories and episode companions.</h2><p class=\"section-deck\">I play tournament poker and am building a vlog. Published accounts will live here, separate from the resource directory and fictional teaching exercises.</p>${poker_collection}${poker_intro_action}<p>Watching a hand for the first time? <a href=\"/poker/start-here/\">Use the viewer guide</a>. <a href=\"/poker/hand-to-vlog/#behind-the-edit\">See one explanation before and after</a>.</p></div>\n</section>\n",
+          "new": ""
+        },
+        {
+          "start": 7559,
+          "end": 10014,
+          "old": "",
+          "new": "<section class=\"section folio-row\" id=\"comics\" aria-labelledby=\"poker-comics-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">New / Poker comics</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-comics-title\">Learn the game in pictures.</h2>\n    <div class=\"comic-feature\"><a class=\"comic-feature-image\" href=\"/poker/comics/learn-no-limit-holdem/\" aria-label=\"Read Learn no-limit Hold’em, the first poker comic\"><img src=\"/assets/poker/comics/learn-no-limit-holdem.jpg\" width=\"687\" height=\"1024\" alt=\"Six illustrated panels introduce the poker table, cards, blinds and preflop action.\" loading=\"lazy\" decoding=\"async\"></a><div><p class=\"comic-edition\">Comic 01</p><h3><a href=\"/poker/comics/learn-no-limit-holdem/\">Learn no-limit Hold’em</a></h3><p>A visual welcome to the table, with a readable text version and a few important rules notes. The first in a growing collection of poker comics.</p><div class=\"link-row\"><a class=\"button\" href=\"/poker/comics/learn-no-limit-holdem/\">Read the comic</a><a class=\"text-link\" href=\"/poker/comics/\">Explore Poker Comics</a></div></div></div>\n    <p>Continue the series with <a href=\"/poker/comics/poker-hand-rankings/\">Comic 02: Poker hand rankings</a>, then follow the action in <a href=\"/poker/comics/one-hand-four-streets/\">Comic 03: One hand, four streets</a>. Learn what counts at showdown in <a href=\"/poker/comics/best-five-cards-win/\">Comic 04: The best five cards win</a>, then discover the value of position in <a href=\"/poker/comics/why-acting-last-helps/\">Comic 05: Why acting last helps</a>. Explore bad beats and decision quality in <a href=\"/poker/comics/good-decision-bad-river/\">Comic 06: Good decision, bad river</a>.</p>\n  </div>\n</section>\n<section class=\"section folio-row\" id=\"watch\" aria-labelledby=\"poker-stories-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Nolan / From the table</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-stories-title\">Stories and episode companions.</h2><p class=\"section-deck\">I play tournament poker and am building a vlog. Published accounts will live here, separate from the resource directory and fictional teaching exercises.</p>${poker_collection}${poker_intro_action}<p>Watching a hand for the first time? <a href=\"/poker/start-here/\">Use the viewer guide</a>. <a href=\"/poker/hand-to-vlog/#behind-the-edit\">See one explanation before and after</a>.</p></div>\n</section>\n"
+        }
+      ]
+    },
+    "_source/poker/library.html": {
+      "old_sha256": "f018086b4be2daa0a34f607553475246f23a8b97e1edc5ba207d026adbf4efdd",
+      "new_sha256": "acc7424dcb942eaa35536bd7ccf3c5ad2c6ee3b04172e948d5432144232e0a4a",
+      "edits": [
+        {
+          "start": 35,
+          "end": 1270,
+          "old": "",
+          "new": "id=\"reading-routes\" aria-labelledby=\"library-routes-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Choose / A starting point</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"library-routes-title\">Find the guide that fits your question.</h2>\n    <p class=\"section-deck\">Choose a reading path, settle into one substantial guide, or go straight to the complete searchable library.</p>\n    <nav class=\"poker-hub-jumps\" aria-label=\"On the guide library\"><a href=\"#reading-routes\">Reading paths</a><a href=\"#in-depth\">Read in depth</a><a href=\"#all-guides\">All ${poker_library_count} guides &amp; filters</a></nav>\n    ${poker_goal_routes}\n  </div>\n</section>\n<section class=\"section folio-row\" id=\"in-depth\" aria-labelledby=\"in-depth-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Read / In depth</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"in-depth-title\">Four guides to read in sections.</h2>\n    <p class=\"section-deck\">A complete introduction, two specific playing problems and an advanced essay. Reading times are estimates; practice and notes can take longer.</p>\n    ${poker_in_depth}\n  </div>\n</section>\n<section class=\"section folio-row\" id=\"all-guides\" "
+        },
+        {
+          "start": 1449,
+          "end": 1452,
+          "old": "Browse",
+          "new": "All"
+        }
+      ]
+    },
+    "_source/search-entrypoints.json": {
+      "old_sha256": "671bf9f715837090e487c3b74a81a2a4b2e7156e121de18c612c04b9f4b42f81",
+      "new_sha256": "e9ba1000f0330f2294fd7147e2bfa343c7373c5e87cd2dee5d0468bbc036f33f",
+      "edits": [
+        {
+          "start": 2495,
+          "end": 2496,
+          "old": "2",
+          "new": "5"
+        }
+      ]
+    },
+    "_tests/choice_history.py": {
+      "old_sha256": "69e5b5958499e219b3a00db8c84809b5982565caaeb7cf52d64e8ec0742f7670",
+      "new_sha256": "236bbd7853c765d77b18adec24e95a7529c94c9f49f63eea8f4f7c6e669ad46d",
+      "edits": [
+        {
+          "start": 777,
+          "end": 805,
+          "old": "",
+          "new": "import poker_routes_history\n"
+        },
+        {
+          "start": 2668,
+          "end": 2731,
+          "old": "",
+          "new": "NEW_SOURCES |= set(poker_routes_history.change()['new_files'])\n"
+        }
+      ]
+    },
+    "_tests/design_browser.py": {
+      "old_sha256": "8de267a8835d172de1f65f87d178b244fb5498ebf8f53078cd97e5ed5e824300",
+      "new_sha256": "0bfd0f7e80db410f6e3d652d5e3b96e020af4b409821a797700f7136fe86e7d9",
+      "edits": [
+        {
+          "start": 6852,
+          "end": 6856,
+          "old": "paths",
+          "new": "goal"
+        },
+        {
+          "start": 6986,
+          "end": 7012,
+          "old": "I want to understand a decision",
+          "new": "Work through a hand review"
+        }
+      ]
+    },
+    "_tests/short_stack_history.py": {
+      "old_sha256": "ad91418369abb43f9e32363caaa2b1a3fff67ba54bf4ec690ed6d9a64735da60",
+      "new_sha256": "de1621edcae162588f7731b94914a3feb53fab3cef57d723806386cedb17069e",
+      "edits": [
+        {
+          "start": 200,
+          "end": 228,
+          "old": "",
+          "new": "import poker_routes_history\n"
+        },
+        {
+          "start": 460,
+          "end": 511,
+          "old": "",
+          "new": "    data = poker_routes_history.before(path, data)\n"
+        },
+        {
+          "start": 1066,
+          "end": 1116,
+          "old": "",
+          "new": "    records = poker_routes_history.pages(records)\n"
+        },
+        {
+          "start": 1503,
+          "end": 1555,
+          "old": "",
+          "new": "    records = poker_routes_history.outputs(records)\n"
+        },
+        {
+          "start": 1716,
+          "end": 1762,
+          "old": "",
+          "new": "    paths = poker_routes_history.files(paths)\n"
+        }
+      ]
+    },
+    "_tests/test_checkpoint.py": {
+      "old_sha256": "31de1da704c30042f739e061e7ec0cb329b50f893f0de6678cae094af49b15b8",
+      "new_sha256": "b444a0963e058b42a016ead9ca48523a7a7d973749a044a875aa1127ce8ec38f",
+      "edits": [
+        {
+          "start": 12180,
+          "end": 12181,
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    "_tests/test_getting_started.py": {
+      "old_sha256": "61437af263a43ade9be09a7f925cddae7a66829bd6f75a8adefed3dfefdf2c00",
+      "new_sha256": "dbb1c8af9e2de1cb89f8560d9e80b3c03355a3f5f50433d5902aca982d69be7e",
+      "edits": [
+        {
+          "start": 9515,
+          "end": 9516,
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    "_tests/test_local_fonts.py": {
+      "old_sha256": "c96e231674cfe6b6fbf2313915e2e1b7a862b21562945ab1f6d840ea31bfe2f2",
+      "new_sha256": "50a71c8d85b6c46b17c7667a20c079767e05e2e28d05e7e20278cacfd5ed6fe3",
+      "edits": [
+        {
+          "start": 4952,
+          "end": 4953,
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    "_tests/test_multiway_essay.py": {
+      "old_sha256": "b10614a35fdde53854d9a5b3989a92241cc24b2bed88f8c2ea84081f75be1ca3",
+      "new_sha256": "6cfd2911330121863a704e7ab46bfa6a4291066389c44689702a02126874ae4f",
+      "edits": [
+        {
+          "start": 8179,
+          "end": 8180,
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    "_tests/test_short_stack_flagship.py": {
+      "old_sha256": "b263b63cabbcf939529d74affd7992c787346d1efdac0f2ffb60fb55e545c0c1",
+      "new_sha256": "c238fb16c86fa04be4186e83701144aa14337db8fb17e08d5149bbf9302bf139",
+      "edits": [
+        {
+          "start": 10078,
+          "end": 10079,
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    "_tests/test_thunder_valley.py": {
+      "old_sha256": "c6a8ebde93f1da66ac716bf098c82da583661eeb1297001f2dadd1db429b1b30",
+      "new_sha256": "56ac600c713f5485a88803683c103d3935bce81ccc9125d2c0fa14628e565dd8",
+      "edits": [
+        {
+          "start": 6225,
+          "end": 6226,
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    "find/index.html": {
+      "old_sha256": "ed4701fd7e0be7794538977673d748b99fd8fab02aaac4d2ded43ac18073840a",
+      "new_sha256": "dc56481fac0415ae8c6308f208f65cddaaac0ff2436a709010b35b749df772fa",
+      "edits": [
+        {
+          "start": 112047,
+          "end": 121412,
+          "old": "Start with what you came to do.\",\"poker-comics-title\",\"Learn the game in pictures.\",\"online-resources-title\",\"The poker web, organized by subject.\",\"full-study-title\",\"Find a passage. Check a calculation.\",\"poker-stories-title\",\"Stories and episode companions.\",\"after-play-title\",\"Turn one answer into useful practice.\",\"poker-approach-title\",\"Useful context, not a promise of certainty.\"],\"comics/\":[\"intro\",\"Poker, one panel at a time.\",\"next\",\"Keep learning.\"],\"comics/learn-no-limit-holdem/\":[\"rules\",\"Rules notes\",\"text\",\"Text version\",\"next\",\"What comes next?\"],\"comics/poker-hand-rankings/\":[\"rules\",\"Before using this as a reference\",\"text\",\"The rankings, strongest to weakest\",\"compare\",\"The category comes first\"],\"comics/one-hand-four-streets/\":[\"rules\",\"A few details to keep straight\",\"text\",25],\"comics/best-five-cards-win/\":[\"rules\",\"Count five cards, every time\",\"text\",25,\"practice\",\"Does the kicker count?\"],\"comics/why-acting-last-helps/\":[\"rules\",\"The button acts last after the flop\",\"text\",25,\"practice\",\"What can you do with that information?\"],\"comics/good-decision-bad-river/\":[\"rules\",\"A result is not a verdict on the decision\",\"text\",25,\"practice\",\"Review the hand before judging yourself\"],\"reviewing-a-hand/\":[\"record\",\"First, preserve the situation.\",\"decision\",\"Pause at one decision.\",\"assumptions\",\"Separate the record from the interpretation.\",\"alternatives\",\"Compare the alternatives before choosing a verdict.\",\"after-the-session\",\"After the session: revisit the explanation, not the memory.\",\"review-sheet\",\"Leave one useful next step.\",\"reader-next-heading\",23],\"start-here/\":[\"quick-start\",\"Follow the hand in three passes.\",\"situation\",\"Read the situation first.\",\"action\",\"Follow the action, one street at a time.\",\"terms\",\"A few terms worth knowing.\",\"interpretation\",\"Keep three kinds of information separate.\",\"viewer-library\",\"Find the explanation you need.\",\"after-play-workshops-title\",\"Move from following the action to checking the reasoning.\"],\"study/\":[\"study-intro\",\"What do you need for this study session?\",\"study-routes-title\",\"Choose the explanation your record needs.\",\"hand-review-title\",\"The hand-review sheet\",\"session-debrief-title\",\"The session-debrief sheet\",\"field-study-title\",\"A useful note starts before the analysis.\",\"collection-study-title\",\"A route through the wider resource library.\",\"workshops-title\",\"Workshops and three Decision Labs.\",\"creator-workbench-title\",\"A smaller study cycle and a clearer episode.\",\"study-limits\",\"A worksheet is not the verdict.\"],\"holdem-basics/\":[\"goal\",\"Two ways to win\",\"position\",\"The button is a position, not necessarily the person dealing\",\"walkthrough\",\"A complete fictional hand\",\"try\",\"Pause and check\",\"guide-sources\",18,\"reader-next-heading\",23],\"hand-rankings/\":[\"rankings\",\"Strongest to weakest\",\"ties\",\"Compare only the best five cards\",\"compare\",\"Four fictional showdowns\",\"guide-sources\",18,\"reader-next-heading\",23],\"betting-and-pots/\":[\"actions\",\"Five ordinary actions\",\"raise-to\",\"“To” is a total; “by” is an increment\",\"all-in\",\"More chips do not automatically win the hand\",\"try\",\"Try the numbers\",\"guide-sources\",18,\"reader-next-heading\",23],\"tournaments/\":[\"chips\",\"The stack is not a cash balance\",\"levels\",\"The same stack can become shallower\",\"bubble\",\"The bubble changes what is at stake\",\"formats\",\"Listen for the event format\",\"guide-sources\",18,\"reader-next-heading\",23],\"poker-math/\":[\"odds\",\"The price of a call\",\"outs\",\"Completing a draw is not the same as winning\",\"range\",\"A range describes possibilities, not revealed cards\",\"variance\",\"A favorite can lose without the decision being wrong\",\"guide-sources\",18,\"reader-next-heading\",23],\"glossary/\":[\"table\",\"Seats and stack sizes\",\"actions\",\"Betting language\",\"cards\",\"Cards and boards\",\"analysis\",\"Draws and analysis\",\"tournament\",\"Tournament context\",\"viewing\",\"Reading the story\",\"guide-sources\",18,\"reader-next-heading\",23],\"viewer-questions/\":[\"graphics\",\"Read the player, the action, then the amount.\",\"questions\",\"Questions that can interrupt the story\",\"use\",\"Find the promised hand, then return to the story.\",\"guide-sources\",18,\"reader-next-heading\",23],\"position-and-stacks/\":[\"position\",\"Start with the button, not the camera angle\",\"seat-order\",\"Read a six-handed or nine-handed label\",\"relative\",\"The advantage is information, not a stronger card\",\"stack-to-pot\",\"Two different measurements of a stack\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"reading-the-board/\":[\"texture\",\"Describe the board before judging the hand\",\"draws\",\"A draw needs a specific improvement\",\"changing\",\"A good hand can change relative strength\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"ranges-and-bets/\":[\"range\",\"A range is a set of possibilities\",\"combos\",\"A hand name is not one combination\",\"intent\",\"Ask which response the bet is trying to get\",\"labels\",\"Action names describe the sequence\",\"uncertainty\",\"A model is useful only with its assumptions\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"tournament-formats/\":[\"labels\",\"Separate the game from the prize structure\",\"bounties\",\"A bounty is not another stack of chips\",\"satellites\",\"A satellite can finish without one player owning every chip\",\"structure\",\"Read a structure sheet like a viewer\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"table-etiquette/\":[\"floor\",\"Why has the dealer called the floor?\",\"declarations\",\"Words and chips both matter\",\"live-hand\",\"A live hand belongs to its player\",\"pace\",\"Long decisions, clocks and chip counts\",\"filming\",\"Vlog footage is not blanket permission to film\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"follow-along/\":[\"how\",\"Pause for a question, not a prescribed action\",\"scene-1-title\",\"Scene 1: what is the price of the raise?\",\"scene-2-title\",\"Scene 2: best now is not best forever\",\"scene-3-title\",\"Scene 3: a known price, an unknown chance\",\"takeaway\",\"Take one question back to the video\",\"guide-sources\",18,\"reader-next-heading\",23],\"pot-odds-workshop/\":[\"price-the-decision\",\"The price is exact. The range usually is not.\",\"call-price\",\"One definition prevents most mistakes.\",\"facing-a-raise\",\"A raise-to amount is not the amount to call.\",\"draws\",\"Seeing two cards and paying for one are different contracts.\",\"bluffs\",\"A zero-equity bluff has a different threshold.\",\"review-output\",\"Finish with a conditional conclusion.\",\"reader-next-heading\",23],\"short-stack-decisions/\":[\"short-stack-start\",\"Playing 10–20 big blinds in live tournaments\",\"models\",\"Separate the action tree from the objective\",\"record\",\"Record a state, not a stack label.\",\"antes\",\"A big-blind ante is posted once per hand.\",\"risk-reward\",\"Compare risk and reward without mistaking it for strategy\",\"spot-families\",\"Do not mix these four families.\",\"depths\",\"What changes at 20, 15 and 10 BB?\",\"icm-call\",\"One call, two objectives: chips and classic ICM\",\"missing-information\",\"A reported 15 BB hand can still be incomplete\",\"chart-check\",\"Give every chart a small compatibility label.\",\"study-loop\",\"A small comparison beats a wall of charts.\",\"references-and-limits\",18,\"reader-next-heading\",23],\"tournament-equity/\":[\"chips-and-prizes\",\"Winning more chips and winning more prize money are different objectives.\",\"toy-model\",\"An example small enough to audit.\",\"threshold\",\"The break-even probability is no longer 50%.\",\"spectator\",\"The player who did nothing can gain value.\",\"limits\",\"What this model leaves out.\",\"record\",\"The minimum useful tournament-context note.\",\"reader-next-heading\",23],\"range-combinations/\":[\"range-counting\",\"Count the hands. Then ask how they got here.\",\"starting-combos\",\"A grid square is not a physical hand.\",\"removal\",\"Use a physical-card example.\",\"weights\",\"A possible bluff is not a full-weight bluff.\",\"sensitivity\",\"Blockers can remove good news as well as bad news.\",\"practice\",\"Make the next range claim auditable.\",\"reader-next-heading\",23],\"variance-and-results/\":[\"results-with-context\",\"Let the result be a result, not an identity.\",\"ledger\",\"Count entries and events separately.\",\"roi\",\"Three arithmetic lines, three different meanings.\",\"variance\",\"A probability example is not a personal forecast.\",\"review\",\"Maintain a second record for decision evidence.\",\"boundaries\",\"Set the stopping rule before the result.\",\"reader-next-heading\",23],\"hand-to-vlog/\":[\"hand-story\",\"Give the viewer a question worth staying for.\",\"select\",\"Select a decision, not just the largest pot.\",\"reconstruct\",\"Build the fact sheet before the voiceover.\",\"narration\",\"Use three clearly different voices.\",\"graphics\",\"Show only the information available at that moment.\",\"edit-case-title\",\"The same hand. A clearer starting point.\",\"episode\",\"A proposed episode structure.\",\"publish\",\"The companion page should add something.\",\"reader-next-heading\",23],\"practice-room/\":[\"practice-start\",\"Write a prediction before opening the answer.\",\"price-check-title\",\"Call and bluff prices\",\"combo-check-title\",\"Range combinations\",\"spot-check-title\",\"Short-stack inputs\",\"icm-check-title\",\"Tournament equity\",\"results-check-title\",\"Results and limits\",\"story-check-title\",\"Vlog judgment\",\"reader-next-heading\",23],\"library/\":[\"library-intro\",\"Browse",
+          "new": "What brought you to the table?\",\"in-depth-title\",\"Read in depth.\",\"online-resources-title\",\"The poker web, organized by subject.\",\"full-study-title\",\"Find a passage. Check a calculation.\",\"after-play-title\",\"Turn one answer into useful practice.\",\"poker-comics-title\",\"Learn the game in pictures.\",\"poker-stories-title\",\"Stories and episode companions.\",\"poker-approach-title\",\"Useful context, not a promise of certainty.\"],\"comics/\":[\"intro\",\"Poker, one panel at a time.\",\"next\",\"Keep learning.\"],\"comics/learn-no-limit-holdem/\":[\"rules\",\"Rules notes\",\"text\",\"Text version\",\"next\",\"What comes next?\"],\"comics/poker-hand-rankings/\":[\"rules\",\"Before using this as a reference\",\"text\",\"The rankings, strongest to weakest\",\"compare\",\"The category comes first\"],\"comics/one-hand-four-streets/\":[\"rules\",\"A few details to keep straight\",\"text\",25],\"comics/best-five-cards-win/\":[\"rules\",\"Count five cards, every time\",\"text\",25,\"practice\",\"Does the kicker count?\"],\"comics/why-acting-last-helps/\":[\"rules\",\"The button acts last after the flop\",\"text\",25,\"practice\",\"What can you do with that information?\"],\"comics/good-decision-bad-river/\":[\"rules\",\"A result is not a verdict on the decision\",\"text\",25,\"practice\",\"Review the hand before judging yourself\"],\"reviewing-a-hand/\":[\"record\",\"First, preserve the situation.\",\"decision\",\"Pause at one decision.\",\"assumptions\",\"Separate the record from the interpretation.\",\"alternatives\",\"Compare the alternatives before choosing a verdict.\",\"after-the-session\",\"After the session: revisit the explanation, not the memory.\",\"review-sheet\",\"Leave one useful next step.\",\"reader-next-heading\",23],\"start-here/\":[\"quick-start\",\"Follow the hand in three passes.\",\"situation\",\"Read the situation first.\",\"action\",\"Follow the action, one street at a time.\",\"terms\",\"A few terms worth knowing.\",\"interpretation\",\"Keep three kinds of information separate.\",\"viewer-library\",\"Find the explanation you need.\",\"after-play-workshops-title\",\"Move from following the action to checking the reasoning.\"],\"study/\":[\"study-intro\",\"What do you need for this study session?\",\"study-routes-title\",\"Choose the explanation your record needs.\",\"hand-review-title\",\"The hand-review sheet\",\"session-debrief-title\",\"The session-debrief sheet\",\"field-study-title\",\"A useful note starts before the analysis.\",\"collection-study-title\",\"A route through the wider resource library.\",\"workshops-title\",\"Workshops and three Decision Labs.\",\"creator-workbench-title\",\"A smaller study cycle and a clearer episode.\",\"study-limits\",\"A worksheet is not the verdict.\"],\"holdem-basics/\":[\"goal\",\"Two ways to win\",\"position\",\"The button is a position, not necessarily the person dealing\",\"walkthrough\",\"A complete fictional hand\",\"try\",\"Pause and check\",\"guide-sources\",18,\"reader-next-heading\",23],\"hand-rankings/\":[\"rankings\",\"Strongest to weakest\",\"ties\",\"Compare only the best five cards\",\"compare\",\"Four fictional showdowns\",\"guide-sources\",18,\"reader-next-heading\",23],\"betting-and-pots/\":[\"actions\",\"Five ordinary actions\",\"raise-to\",\"“To” is a total; “by” is an increment\",\"all-in\",\"More chips do not automatically win the hand\",\"try\",\"Try the numbers\",\"guide-sources\",18,\"reader-next-heading\",23],\"tournaments/\":[\"chips\",\"The stack is not a cash balance\",\"levels\",\"The same stack can become shallower\",\"bubble\",\"The bubble changes what is at stake\",\"formats\",\"Listen for the event format\",\"guide-sources\",18,\"reader-next-heading\",23],\"poker-math/\":[\"odds\",\"The price of a call\",\"outs\",\"Completing a draw is not the same as winning\",\"range\",\"A range describes possibilities, not revealed cards\",\"variance\",\"A favorite can lose without the decision being wrong\",\"guide-sources\",18,\"reader-next-heading\",23],\"glossary/\":[\"table\",\"Seats and stack sizes\",\"actions\",\"Betting language\",\"cards\",\"Cards and boards\",\"analysis\",\"Draws and analysis\",\"tournament\",\"Tournament context\",\"viewing\",\"Reading the story\",\"guide-sources\",18,\"reader-next-heading\",23],\"viewer-questions/\":[\"graphics\",\"Read the player, the action, then the amount.\",\"questions\",\"Questions that can interrupt the story\",\"use\",\"Find the promised hand, then return to the story.\",\"guide-sources\",18,\"reader-next-heading\",23],\"position-and-stacks/\":[\"position\",\"Start with the button, not the camera angle\",\"seat-order\",\"Read a six-handed or nine-handed label\",\"relative\",\"The advantage is information, not a stronger card\",\"stack-to-pot\",\"Two different measurements of a stack\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"reading-the-board/\":[\"texture\",\"Describe the board before judging the hand\",\"draws\",\"A draw needs a specific improvement\",\"changing\",\"A good hand can change relative strength\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"ranges-and-bets/\":[\"range\",\"A range is a set of possibilities\",\"combos\",\"A hand name is not one combination\",\"intent\",\"Ask which response the bet is trying to get\",\"labels\",\"Action names describe the sequence\",\"uncertainty\",\"A model is useful only with its assumptions\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"tournament-formats/\":[\"labels\",\"Separate the game from the prize structure\",\"bounties\",\"A bounty is not another stack of chips\",\"satellites\",\"A satellite can finish without one player owning every chip\",\"structure\",\"Read a structure sheet like a viewer\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"table-etiquette/\":[\"floor\",\"Why has the dealer called the floor?\",\"declarations\",\"Words and chips both matter\",\"live-hand\",\"A live hand belongs to its player\",\"pace\",\"Long decisions, clocks and chip counts\",\"filming\",\"Vlog footage is not blanket permission to film\",\"practice\",6,\"guide-sources\",18,\"reader-next-heading\",23],\"follow-along/\":[\"how\",\"Pause for a question, not a prescribed action\",\"scene-1-title\",\"Scene 1: what is the price of the raise?\",\"scene-2-title\",\"Scene 2: best now is not best forever\",\"scene-3-title\",\"Scene 3: a known price, an unknown chance\",\"takeaway\",\"Take one question back to the video\",\"guide-sources\",18,\"reader-next-heading\",23],\"pot-odds-workshop/\":[\"price-the-decision\",\"The price is exact. The range usually is not.\",\"call-price\",\"One definition prevents most mistakes.\",\"facing-a-raise\",\"A raise-to amount is not the amount to call.\",\"draws\",\"Seeing two cards and paying for one are different contracts.\",\"bluffs\",\"A zero-equity bluff has a different threshold.\",\"review-output\",\"Finish with a conditional conclusion.\",\"reader-next-heading\",23],\"short-stack-decisions/\":[\"short-stack-start\",\"Playing 10–20 big blinds in live tournaments\",\"models\",\"Separate the action tree from the objective\",\"record\",\"Record a state, not a stack label.\",\"antes\",\"A big-blind ante is posted once per hand.\",\"risk-reward\",\"Compare risk and reward without mistaking it for strategy\",\"spot-families\",\"Do not mix these four families.\",\"depths\",\"What changes at 20, 15 and 10 BB?\",\"icm-call\",\"One call, two objectives: chips and classic ICM\",\"missing-information\",\"A reported 15 BB hand can still be incomplete\",\"chart-check\",\"Give every chart a small compatibility label.\",\"study-loop\",\"A small comparison beats a wall of charts.\",\"references-and-limits\",18,\"reader-next-heading\",23],\"tournament-equity/\":[\"chips-and-prizes\",\"Winning more chips and winning more prize money are different objectives.\",\"toy-model\",\"An example small enough to audit.\",\"threshold\",\"The break-even probability is no longer 50%.\",\"spectator\",\"The player who did nothing can gain value.\",\"limits\",\"What this model leaves out.\",\"record\",\"The minimum useful tournament-context note.\",\"reader-next-heading\",23],\"range-combinations/\":[\"range-counting\",\"Count the hands. Then ask how they got here.\",\"starting-combos\",\"A grid square is not a physical hand.\",\"removal\",\"Use a physical-card example.\",\"weights\",\"A possible bluff is not a full-weight bluff.\",\"sensitivity\",\"Blockers can remove good news as well as bad news.\",\"practice\",\"Make the next range claim auditable.\",\"reader-next-heading\",23],\"variance-and-results/\":[\"results-with-context\",\"Let the result be a result, not an identity.\",\"ledger\",\"Count entries and events separately.\",\"roi\",\"Three arithmetic lines, three different meanings.\",\"variance\",\"A probability example is not a personal forecast.\",\"review\",\"Maintain a second record for decision evidence.\",\"boundaries\",\"Set the stopping rule before the result.\",\"reader-next-heading\",23],\"hand-to-vlog/\":[\"hand-story\",\"Give the viewer a question worth staying for.\",\"select\",\"Select a decision, not just the largest pot.\",\"reconstruct\",\"Build the fact sheet before the voiceover.\",\"narration\",\"Use three clearly different voices.\",\"graphics\",\"Show only the information available at that moment.\",\"edit-case-title\",\"The same hand. A clearer starting point.\",\"episode\",\"A proposed episode structure.\",\"publish\",\"The companion page should add something.\",\"reader-next-heading\",23],\"practice-room/\":[\"practice-start\",\"Write a prediction before opening the answer.\",\"price-check-title\",\"Call and bluff prices\",\"combo-check-title\",\"Range combinations\",\"spot-check-title\",\"Short-stack inputs\",\"icm-check-title\",\"Tournament equity\",\"results-check-title\",\"Results and limits\",\"story-check-title\",\"Vlog judgment\",\"reader-next-heading\",23],\"library/\":[\"library-routes-title\",\"Find the guide that fits your question.\",\"in-depth-title\",\"Four guides to read in sections.\",\"library-intro\",\"All"
+        }
+      ]
+    },
+    "notes/index.html": {
+      "old_sha256": "f2a73a03fd502bca7da9a5f97139ef51ee4f4694cc214fbae8668b32261e09a6",
+      "new_sha256": "f5281dad1bb27529ccd9183a52f636102f17309b9555e0cb930191e802d0e2fe",
+      "edits": [
+        {
+          "start": 80308,
+          "end": 80411,
+          "old": "",
+          "new": " longer poker read, <a href=\"/poker/library/#in-depth\">choose a substantial guide by subject</a>. For a"
+        }
+      ]
+    },
+    "poker/index.html": {
+      "old_sha256": "2ea1c8352483bb7a647ef85fa7f43d33e7f85b95a2be29ed31179aebd8b38a0b",
+      "new_sha256": "ec0618f2adac06652734c392b044fc64857344e458f2d82c18f55cc3467e0f8d",
+      "edits": [
+        {
+          "start": 3044,
+          "end": 3120,
+          "old": "",
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-discovery.css?v=a7b01d974fc4\">\n"
+        },
+        {
+          "start": 3871,
+          "end": 3872,
+          "old": "4",
+          "new": "5"
+        },
+        {
+          "start": 6702,
+          "end": 6852,
+          "old": "146 outside sources. 60 practical guides. One map for learning the game, studying a decision or exploring the wider poker world",
+          "new": "Learn Hold’em, study a hand, prepare for live play or explore the research. Choose a starting point below, or search 60 guides and 146 outside sources"
+        },
+        {
+          "start": 7053,
+          "end": 7371,
+          "old": "",
+          "new": "    <nav class=\"poker-hub-jumps\" aria-label=\"On the Poker homepage\"><a href=\"#reading-routes\">Choose a path</a><a href=\"#in-depth\">Read in depth</a><a href=\"#online-resources\">Outside sources</a><a href=\"#after-play\">Practice &amp; preparation</a><a href=\"#comics\">Comics</a><a href=\"#watch\">Nolan’s stories</a></nav>\n"
+        },
+        {
+          "start": 7776,
+          "end": 10767,
+          "old": "aria-labelledby=\"viewer-learning-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">A first useful step</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"viewer-learning-title\">Start with what you came to do.</h2>\n    <div class=\"poker-paths\" role=\"group\" aria-label=\"Ways to explore Poker\">\n      <a href=\"/poker/first-decisions/\"><span class=\"note-category\">Learn</span><strong>I am new to poker</strong><span>Eight short lessons and twelve explained practice questions. No wager or account needed.</span></a>\n      <a href=\"/poker/topics/places-to-play/\"><span class=\"note-category\">Find</span><strong>I need a game or event source</strong><span>Official schedules, room finders and home-game resources.</span></a>\n      <a href=\"/poker/reviewing-a-hand/\"><span class=\"note-category\">Study</span><strong>I want to understand a decision</strong><span>Keep the recorded action separate from the later explanation.</span></a>\n    </div>\n    <h3 id=\"beginner-reading-options\">Choose how to learn Hold’em</h3>\n    <div class=\"poker-paths\" role=\"group\" aria-label=\"Beginner reading options\">\n      <a href=\"/poker/no-limit-holdem-guide/\"><span class=\"note-category\">Overview</span><strong>Read the complete guide</strong><span>Rules, one counted hand, prices, ranges and long-term thinking. Read it in parts.</span></a>\n      <a href=\"/poker/getting-started/\"><span class=\"note-category\">First session</span><strong>Prepare to try the game</strong><span>Choose a setting, count the whole cost, rehearse procedure and plan a first month. Money is optional.</span></a>\n      <a href=\"/poker/free-poker-learning-path/#beginner-practice\"><span class=\"note-category\">Short lessons</span><strong>Learn one idea at a time</strong><span>Four foundation lessons, then ranges and betting. Explain a small example before continuing.</span></a>\n      <a href=\"/poker/beginner-checkpoint/\"><span class=\"note-category\">Practice</span><strong>Try a fresh situation</strong><span>Six skills, common mistakes, exact repair links and changed situations to retry.</span></a>\n      <a href=\"/poker/start-here/#viewer-library\"><span class=\"note-category\">Reference</span><strong>Look up what interrupted you</strong><span>Hand rankings, action, amounts and the changing board.</span></a>\n    </div>\n    <p>Studying cash games? <a href=\"/poker/cash-game-study/\">Check the game assumptions</a>, then <a href=\"/poker/cash-game-study-path/\">follow a five-session study route</a>.</p>\n    <p>Reviewing a 10–20 BB tournament decision? <a href=\"/poker/short-stack-decisions/\">Compare the available actions, ante and payout objective</a>, with a counted ICM example and a blank review sheet.</p>\n    <p>Several players calling every raise? <a href=\"/poker/limped-multiway-pots/\">Work through limped and multiway live pots</a>, with a counted hand and a private review sheet.</p",
+          "new": "id=\"reading-routes\" aria-labelledby=\"viewer-learning-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Choose / A useful first step</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"viewer-learning-title\">What brought you to the table?</h2>\n    <p class=\"section-deck\">Each path starts with an existing guide. Choose the question that fits; there is no sequence to complete.</p>\n    <div class=\"poker-goal-grid\"><article class=\"poker-goal\" aria-labelledby=\"goal-learn\"><h3 id=\"goal-learn\">Learn Hold’em</h3><p>Start with the rules and a small decision. Choose short lessons or a complete reference.</p><ul><li><a href=\"/poker/first-decisions/\">Start with short lessons</a></li><li><a href=\"/poker/no-limit-holdem-guide/\">Read the complete Hold’em guide</a></li></ul></article><article class=\"poker-goal\" aria-labelledby=\"goal-decisions\"><h3 id=\"goal-decisions\">Study a decision</h3><p>Reconstruct the action, name the missing inputs and compare a choice with its result.</p><ul><li><a href=\"/poker/reviewing-a-hand/\">Work through a hand review</a></li><li><a href=\"/poker/limped-multiway-pots/\">Think through limped and multiway pots</a></li><li><a href=\"/poker/short-stack-decisions/\">Study a 10–20 BB tournament decision</a></li></ul></article><article class=\"poker-goal\" aria-labelledby=\"goal-live\"><h3 id=\"goal-live\">Prepare for live play</h3><p>Plan the setting, procedures and whole cost before deciding whether to play.</p><ul><li><a href=\"/poker/getting-started/\">Prepare for a first session</a></li><li><a href=\"/poker/tournament-trip-budget/\">Budget a tournament trip</a></li><li><a href=\"/poker/thunder-valley-poker-guide/\">Plan a first visit to Thunder Valley</a></li></ul></article><article class=\"poker-goal\" aria-labelledby=\"goal-research\"><h3 id=\"goal-research\">Explore the math and research</h3><p>Connect probability, ranges and tournament value, then examine the models behind the claims.</p><ul><li><a href=\"/poker/poker-under-uncertainty/\">Read Poker under uncertainty</a></li><li><a href=\"/poker/poker-research-guide/\">Find the original research</a></li></ul></article></div>\n    <details class=\"poker-details poker-beginner-options\"><summary id=\"beginner-reading-options\">More ways to learn or follow a hand</summary>\n      <ul><li><a href=\"/poker/free-poker-learning-path/#beginner-practice\">Learn one idea at a time</a> with short lessons and explained questions.</li>\n      <li><a href=\"/poker/beginner-checkpoint/\">Try a fresh beginner situation</a>, with repair links and a changed example to retry.</li>\n      <li><a href=\"/poker/start-here/#viewer-library\">Follow a video or hand account</a> with a reference for the action, amounts and board.</li>\n      <li><a href=\"/poker/cash-game-study/\">Check cash-game assumptions</a>, then <a href=\"/poker/cash-game-study-path/\">follow a five-session study route</a>.</li>\n      <li><a href=\"/poker/topics/places-to-play/\">Find official game and event sources</a>.</li></ul>\n    </details"
+        },
+        {
+          "start": 10828,
+          "end": 12878,
+          "old": "comics\" aria-labelledby=\"poker-comics-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">New / Poker comics</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-comics-title\">Learn the game in pictures.</h2>\n    <div class=\"comic-feature\"><a class=\"comic-feature-image\" href=\"/poker/comics/learn-no-limit-holdem/\" aria-label=\"Read Learn no-limit Hold’em, the first poker comic\"><img src=\"/assets/poker/comics/learn-no-limit-holdem.jpg\" width=\"687\" height=\"1024\" alt=\"Six illustrated panels introduce the poker table, cards, blinds and preflop action.\" loading=\"lazy\" decoding=\"async\"></a><div><p class=\"comic-edition\">Comic 01</p><h3><a href=\"/poker/comics/learn-no-limit-holdem/\">Learn no-limit Hold’em</a></h3><p>A visual welcome to the table, with a readable text version and a few important rules notes. The first in a growing collection of poker comics.</p><div class=\"link-row\"><a class=\"button\" href=\"/poker/comics/learn-no-limit-holdem/\">Read the comic</a><a class=\"text-link\" href=\"/poker/comics/\">Explore Poker Comics</a></div></div></div>\n    <p>Continue the series with <a href=\"/poker/comics/poker-hand-rankings/\">Comic 02: Poker hand rankings</a>, then follow the action in <a href=\"/poker/comics/one-hand-four-streets/\">Comic 03: One hand, four streets</a>. Learn what counts at showdown in <a href=\"/poker/comics/best-five-cards-win/\">Comic 04: The best five cards win</a>, then discover the value of position in <a href=\"/poker/comics/why-acting-last-helps/\">Comic 05: Why acting last helps</a>. Explore bad beats and decision quality in <a href=\"/poker/comics/good-decision-bad-river/\">Comic 06: Good decision, bad river",
+          "new": "in-depth\" aria-labelledby=\"in-depth-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Read / In depth</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"in-depth-title\">Read in depth.</h2>\n    <p class=\"section-deck\">Substantial guides with worked examples, sources and explicit assumptions. Read in sections; the times below are estimates, before practice or note-taking.</p>\n    <div class=\"poker-long-read-grid\"><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">Complete introduction</p><h3><a href=\"/poker/no-limit-holdem-guide/\">No-limit Hold’em: rules, decisions and long-term thinking</a></h3><p>The rules, a counted hand, prices and ranges. Begin here if the terminology is new.</p><p class=\"poker-reading-time\">About 49 min read</p></article><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">Live cash and tournament decisions</p><h3><a href=\"/poker/limped-multiway-pots/\">Limped and multiway pots: how to think through live poker</a></h3><p>Several callers, different effective stacks and a counted live hand. Cash and tournament assumptions stay explicit.</p><p class=\"poker-reading-time\">About 15 min read</p></article><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">10–20 BB tournament study</p><h3><a href=\"/poker/short-stack-decisions/\">Short stacks beyond the chart</a></h3><p>Available actions, antes and chip value versus prize value. Includes a checked ICM example and a review sheet.</p><p class=\"poker-reading-time\">About 15 min read</p></article><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">Advanced essay</p><h3><a href=\"/poker/poker-under-uncertainty/\">Poker under uncertainty: probability, inference and decisions</a></h3><p>Probability, Bayesian ranges, expected value and variance. Read after the basics; calculations can be reproduced.</p><p class=\"poker-reading-time\">About 50 min read</p></article></div>\n    <p><a href=\"/poker/library/#all-guides\">Browse every on-site guide</a> or <a href=\"/poker/study/\">choose a worksheet or practice exercise"
+        },
+        {
+          "start": 16165,
+          "end": 16165,
+          "old": "<section class=\"section folio-row\" id=\"watch\" aria-labelledby=\"poker-stories-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Nolan / From the table</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-stories-title\">Stories and episode companions.</h2><p class=\"section-deck\">I play tournament poker and am building a vlog. Published accounts will live here, separate from the resource directory and fictional teaching exercises.</p><div class=\"poker-first-read\"><p class=\"note-category\">A starting point</p><h3><a href=\"/poker/reviewing-a-hand/\">Review a hand, not just the result.</a></h3><p>A worked, clearly fictional hand shows how to keep the action, original thinking, and later analysis separate.</p><p class=\"small-copy\">No vlog episodes or tournament stories are published on this site yet. This guide and the study resources below are available now.</p></div><div class=\"link-row\"><a class=\"button\" href=\"/poker/follow-along/\">Start with one hand <span aria-hidden=\"true\">→</span></a></div><p>Watching a hand for the first time? <a href=\"/poker/start-here/\">Use the viewer guide</a>. <a href=\"/poker/hand-to-vlog/#behind-the-edit\">See one explanation before and after</a>.</p></div>\n</section>\n",
+          "new": ""
+        },
+        {
+          "start": 17622,
+          "end": 20605,
+          "old": "",
+          "new": "</section>\n<section class=\"section folio-row\" id=\"comics\" aria-labelledby=\"poker-comics-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">New / Poker comics</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-comics-title\">Learn the game in pictures.</h2>\n    <div class=\"comic-feature\"><a class=\"comic-feature-image\" href=\"/poker/comics/learn-no-limit-holdem/\" aria-label=\"Read Learn no-limit Hold’em, the first poker comic\"><img src=\"/assets/poker/comics/learn-no-limit-holdem.jpg\" width=\"687\" height=\"1024\" alt=\"Six illustrated panels introduce the poker table, cards, blinds and preflop action.\" loading=\"lazy\" decoding=\"async\"></a><div><p class=\"comic-edition\">Comic 01</p><h3><a href=\"/poker/comics/learn-no-limit-holdem/\">Learn no-limit Hold’em</a></h3><p>A visual welcome to the table, with a readable text version and a few important rules notes. The first in a growing collection of poker comics.</p><div class=\"link-row\"><a class=\"button\" href=\"/poker/comics/learn-no-limit-holdem/\">Read the comic</a><a class=\"text-link\" href=\"/poker/comics/\">Explore Poker Comics</a></div></div></div>\n    <p>Continue the series with <a href=\"/poker/comics/poker-hand-rankings/\">Comic 02: Poker hand rankings</a>, then follow the action in <a href=\"/poker/comics/one-hand-four-streets/\">Comic 03: One hand, four streets</a>. Learn what counts at showdown in <a href=\"/poker/comics/best-five-cards-win/\">Comic 04: The best five cards win</a>, then discover the value of position in <a href=\"/poker/comics/why-acting-last-helps/\">Comic 05: Why acting last helps</a>. Explore bad beats and decision quality in <a href=\"/poker/comics/good-decision-bad-river/\">Comic 06: Good decision, bad river</a>.</p>\n  </div>\n</section>\n<section class=\"section folio-row\" id=\"watch\" aria-labelledby=\"poker-stories-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Nolan / From the table</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-stories-title\">Stories and episode companions.</h2><p class=\"section-deck\">I play tournament poker and am building a vlog. Published accounts will live here, separate from the resource directory and fictional teaching exercises.</p><div class=\"poker-first-read\"><p class=\"note-category\">A starting point</p><h3><a href=\"/poker/reviewing-a-hand/\">Review a hand, not just the result.</a></h3><p>A worked, clearly fictional hand shows how to keep the action, original thinking, and later analysis separate.</p><p class=\"small-copy\">No vlog episodes or tournament stories are published on this site yet. This guide and the study resources below are available now.</p></div><div class=\"link-row\"><a class=\"button\" href=\"/poker/follow-along/\">Start with one hand <span aria-hidden=\"true\">→</span></a></div><p>Watching a hand for the first time? <a href=\"/poker/start-here/\">Use the viewer guide</a>. <a href=\"/poker/hand-to-vlog/#behind-the-edit\">See one explanation before and after</a>.</p></div>\n"
+        }
+      ]
+    },
+    "poker/library/index.html": {
+      "old_sha256": "7c75eba49a2555619a3582ca7e44acec10f4d39c91ce95ce01205dd09a8d8a43",
+      "new_sha256": "bf0284666f84f3c0c81e759b26308063821a6e8d14e8e27ecb20526cd3c929d0",
+      "edits": [
+        {
+          "start": 3039,
+          "end": 3115,
+          "old": "",
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-discovery.css?v=a7b01d974fc4\">\n"
+        },
+        {
+          "start": 3949,
+          "end": 3950,
+          "old": "2",
+          "new": "5"
+        },
+        {
+          "start": 6802,
+          "end": 11190,
+          "old": "",
+          "new": "id=\"reading-routes\" aria-labelledby=\"library-routes-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Choose / A starting point</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"library-routes-title\">Find the guide that fits your question.</h2>\n    <p class=\"section-deck\">Choose a reading path, settle into one substantial guide, or go straight to the complete searchable library.</p>\n    <nav class=\"poker-hub-jumps\" aria-label=\"On the guide library\"><a href=\"#reading-routes\">Reading paths</a><a href=\"#in-depth\">Read in depth</a><a href=\"#all-guides\">All 60 guides &amp; filters</a></nav>\n    <div class=\"poker-goal-grid\"><article class=\"poker-goal\" aria-labelledby=\"goal-learn\"><h3 id=\"goal-learn\">Learn Hold’em</h3><p>Start with the rules and a small decision. Choose short lessons or a complete reference.</p><ul><li><a href=\"/poker/first-decisions/\">Start with short lessons</a></li><li><a href=\"/poker/no-limit-holdem-guide/\">Read the complete Hold’em guide</a></li></ul></article><article class=\"poker-goal\" aria-labelledby=\"goal-decisions\"><h3 id=\"goal-decisions\">Study a decision</h3><p>Reconstruct the action, name the missing inputs and compare a choice with its result.</p><ul><li><a href=\"/poker/reviewing-a-hand/\">Work through a hand review</a></li><li><a href=\"/poker/limped-multiway-pots/\">Think through limped and multiway pots</a></li><li><a href=\"/poker/short-stack-decisions/\">Study a 10–20 BB tournament decision</a></li></ul></article><article class=\"poker-goal\" aria-labelledby=\"goal-live\"><h3 id=\"goal-live\">Prepare for live play</h3><p>Plan the setting, procedures and whole cost before deciding whether to play.</p><ul><li><a href=\"/poker/getting-started/\">Prepare for a first session</a></li><li><a href=\"/poker/tournament-trip-budget/\">Budget a tournament trip</a></li><li><a href=\"/poker/thunder-valley-poker-guide/\">Plan a first visit to Thunder Valley</a></li></ul></article><article class=\"poker-goal\" aria-labelledby=\"goal-research\"><h3 id=\"goal-research\">Explore the math and research</h3><p>Connect probability, ranges and tournament value, then examine the models behind the claims.</p><ul><li><a href=\"/poker/poker-under-uncertainty/\">Read Poker under uncertainty</a></li><li><a href=\"/poker/poker-research-guide/\">Find the original research</a></li></ul></article></div>\n  </div>\n</section>\n<section class=\"section folio-row\" id=\"in-depth\" aria-labelledby=\"in-depth-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Read / In depth</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"in-depth-title\">Four guides to read in sections.</h2>\n    <p class=\"section-deck\">A complete introduction, two specific playing problems and an advanced essay. Reading times are estimates; practice and notes can take longer.</p>\n    <div class=\"poker-long-read-grid\"><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">Complete introduction</p><h3><a href=\"/poker/no-limit-holdem-guide/\">No-limit Hold’em: rules, decisions and long-term thinking</a></h3><p>The rules, a counted hand, prices and ranges. Begin here if the terminology is new.</p><p class=\"poker-reading-time\">About 49 min read</p></article><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">Live cash and tournament decisions</p><h3><a href=\"/poker/limped-multiway-pots/\">Limped and multiway pots: how to think through live poker</a></h3><p>Several callers, different effective stacks and a counted live hand. Cash and tournament assumptions stay explicit.</p><p class=\"poker-reading-time\">About 15 min read</p></article><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">10–20 BB tournament study</p><h3><a href=\"/poker/short-stack-decisions/\">Short stacks beyond the chart</a></h3><p>Available actions, antes and chip value versus prize value. Includes a checked ICM example and a review sheet.</p><p class=\"poker-reading-time\">About 15 min read</p></article><article class=\"poker-long-read\"><p class=\"reader-eyebrow\">Advanced essay</p><h3><a href=\"/poker/poker-under-uncertainty/\">Poker under uncertainty: probability, inference and decisions</a></h3><p>Probability, Bayesian ranges, expected value and variance. Read after the basics; calculations can be reproduced.</p><p class=\"poker-reading-time\">About 50 min read</p></article></div>\n  </div>\n</section>\n<section class=\"section folio-row\" id=\"all-guides\" "
+        },
+        {
+          "start": 11369,
+          "end": 11372,
+          "old": "Browse",
+          "new": "All"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "57616b9616129e57e1989efb149ec3fe2fd5e90b7dc5d2716a9d5f5224e81775",
+      "new_sha256": "9ad581024eed35c03beaf67733bbd6769da66b15c0ea78b576bd45365b4f1d31",
+      "edits": [
+        {
+          "start": 1619,
+          "end": 1620,
+          "old": "4",
+          "new": "5"
+        },
+        {
+          "start": 5304,
+          "end": 5305,
+          "old": "2",
+          "new": "5"
+        }
+      ]
+    }
+  },
+  "new_files": {
+    "_source/poker/reading-routes.json": "6c66081825c5d2eea27665688deded8c4fe3b23bc1d9fd882db31770930de45f",
+    "_scripts/poker_discovery.py": "ea49bc15490cb7ef3d077f8318bb5511e349f49aef303c533dade9b977a95111",
+    "assets/poker-discovery.css": "a7b01d974fc49e78946941263fab314e632f3fdad8c520cbda5ac3e05d606f34"
+  },
+  "new_outputs": {}
+}

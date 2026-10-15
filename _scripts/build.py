@@ -19,6 +19,7 @@ import poker_library
 import poker_beginner_path
 import poker_checkpoint
 import poker_reading
+import poker_discovery
 import poker_experience
 import poker_resources
 import poker_collections
@@ -164,6 +165,7 @@ def build_outputs() -> dict[Path, str]:
             entry['minutes'] = poker_library.minutes(fill(source, values))
     topics = poker_topics.load(ROOT, pages, reader_entries, resource_entries)
     values.update(poker_library.supplement(reader_entries, topics))
+    values.update(poker_discovery.supplement(ROOT, reader_entries))
     values.update(poker_topics.supplement(topics))
     finder_entries = poker_topics.annotate(poker_finder.entries(ROOT, pages, reader_entries, resource_entries), topics)
     values.update(poker_finder.render(poker_selection.annotate(finder_entries, resource_selection)))
@@ -377,6 +379,7 @@ def build_outputs() -> dict[Path, str]:
         schema = author_archive.schema(p, schema, pages, site)
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
         extra += practical_path.head(p, ROOT)
+        extra += poker_discovery.head(p, ROOT)
         extra += author_archive.head(p, ROOT)
         header = search_entrypoints.header(p, header)
         extra += search_entrypoints.head(p, ROOT)

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "id": "learn",
+      "title": "Learn Hold’em",
+      "description": "Start with the rules and a small decision. Choose short lessons or a complete reference.",
+      "links": [
+        {"slug": "first-decisions", "label": "Start with short lessons"},
+        {"slug": "no-limit-holdem-guide", "label": "Read the complete Hold’em guide"}
+      ]
+    },
+    {
+      "id": "decisions",
+      "title": "Study a decision",
+      "description": "Reconstruct the action, name the missing inputs and compare a choice with its result.",
+      "links": [
+        {"slug": "reviewing-a-hand", "label": "Work through a hand review"},
+        {"slug": "limped-multiway-pots", "label": "Think through limped and multiway pots"},
+        {"slug": "short-stack-decisions", "label": "Study a 10–20 BB tournament decision"}
+      ]
+    },
+    {
+      "id": "live",
+      "title": "Prepare for live play",
+      "description": "Plan the setting, procedures and whole cost before deciding whether to play.",
+      "links": [
+        {"slug": "getting-started", "label": "Prepare for a first session"},
+        {"slug": "tournament-trip-budget", "label": "Budget a tournament trip"},
+        {"slug": "thunder-valley-poker-guide", "label": "Plan a first visit to Thunder Valley"}
+      ]
+    },
+    {
+      "id": "research",
+      "title": "Explore the math and research",
+      "description": "Connect probability, ranges and tournament value, then examine the models behind the claims.",
+      "links": [
+        {"slug": "poker-under-uncertainty", "label": "Read Poker under uncertainty"},
+        {"slug": "poker-research-guide", "label": "Find the original research"}
+      ]
+    }
+  ],
+  "in_depth": [
+    {"slug": "no-limit-holdem-guide", "kind": "Complete introduction", "description": "The rules, a counted hand, prices and ranges. Begin here if the terminology is new."},
+    {"slug": "limped-multiway-pots", "kind": "Live cash and tournament decisions", "description": "Several callers, different effective stacks and a counted live hand. Cash and tournament assumptions stay explicit."},
+    {"slug": "short-stack-decisions", "kind": "10–20 BB tournament study", "description": "Available actions, antes and chip value versus prize value. Includes a checked ICM example and a review sheet."},
+    {"slug": "poker-under-uncertainty", "kind": "Advanced essay", "description": "Probability, Bayesian ranges, expected value and variance. Read after the basics; calculations can be reproduced."}
+  ]
+}
