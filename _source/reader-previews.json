@@ -1966,6 +1966,27 @@
           416
         ]
       }
+    },
+    "poker-under-uncertainty": {
+      "path": "/poker/poker-under-uncertainty/",
+      "title": "Poker under uncertainty: probability, inference and decisions",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-under-uncertainty.png",
+      "sha256": "4b661c6ff4512cff86acf6a698d9b48490bb9b4e555e28a4531cb602d7a58983",
+      "layout": {
+        "lines": [
+          "Poker under uncertainty:",
+          "probability, inference and",
+          "decisions"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1027,
+          403
+        ]
+      }
     }
   }
 }

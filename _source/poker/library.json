@@ -440,6 +440,14 @@
       "topic": "basics",
       "level": "Start here",
       "keywords": "beginner beginners checkpoint check understanding misconception feedback learning confidence retry repair practice call position draw price equity range value bet"
+    },
+    {
+      "slug": "poker-under-uncertainty",
+      "title": "Poker under uncertainty: probability, inference and decisions",
+      "description": "An advanced poker essay on probability, Bayesian ranges, expected value, variance, ICM and decision quality, with fictional models and reproducible calculations.",
+      "topic": "research",
+      "level": "Go deeper",
+      "keywords": "probability conditional Bayesian Bayes inference decision theory expected value EV variance confidence interval power sample size ICM bankroll ruin CFR solver research poker uncertainty reproducible"
     }
   ]
 }
