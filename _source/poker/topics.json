@@ -192,7 +192,8 @@
         "pot-odds-workshop",
         "range-combinations",
         "poker-math-reference",
-        "reading-preflop-charts"
+        "reading-preflop-charts",
+        "poker-under-uncertainty"
       ],
       "related_guides": [
         "decision-lab",
@@ -308,7 +309,8 @@
         "poker-research-guide",
         "poker-math-reference",
         "poker-media-study",
-        "cash-game-study-path"
+        "cash-game-study-path",
+        "poker-under-uncertainty"
       ],
       "resource_categories": [
         "tools",
@@ -403,7 +405,8 @@
       ],
       "related_guides": [
         "recording-hands",
-        "follow-along"
+        "follow-along",
+        "poker-under-uncertainty"
       ],
       "resource_categories": [
         "results",
@@ -447,7 +450,8 @@
       ],
       "related_guides": [
         "choosing-study-tools",
-        "evaluating-poker-advice"
+        "evaluating-poker-advice",
+        "poker-under-uncertainty"
       ],
       "resource_categories": [
         "research"

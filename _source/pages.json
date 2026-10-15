@@ -1149,5 +1149,18 @@
     "date": "2026-10-14",
     "updated": "2026-10-14",
     "poker_guide": true
+  },
+  {
+    "id": "poker-under-uncertainty",
+    "path": "/poker/poker-under-uncertainty/",
+    "title": "Poker under uncertainty: probability, inference and decisions",
+    "seo_title": "Poker Under Uncertainty: Probability & Decision Theory | Nolan Kido",
+    "description": "An advanced poker essay on probability, Bayesian ranges, expected value, variance, ICM and decision quality, with fictional models and reproducible calculations.",
+    "kicker": "Poker / Research essay",
+    "source": "poker/poker-under-uncertainty.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
   }
 ]

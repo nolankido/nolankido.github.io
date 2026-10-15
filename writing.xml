@@ -56,6 +56,14 @@
       <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
     </item>
     <item>
+      <title>Poker under uncertainty: probability, inference and decisions</title>
+      <link>https://nolankido.com/poker/poker-under-uncertainty/</link>
+      <description>An advanced poker essay on probability, Bayesian ranges, expected value, variance, ICM and decision quality, with fictional models and reproducible calculations.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/poker-under-uncertainty/</guid>
+      <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
       <title>Your first poker range.</title>
       <link>https://nolankido.com/poker/ranges-for-beginners/</link>
       <description>Learn poker ranges through six explained exercises: remove impossible cards, compare four hands, and see why a possible bluff is not a measured frequency.</description>

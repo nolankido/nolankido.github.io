@@ -1,0 +1,308 @@
+{
+  "scope": "Fictional models, not a strategy or real-player performance estimate",
+  "cards": {
+    "hero": [
+      "As",
+      "Ks"
+    ],
+    "turn_board": [
+      "Js",
+      "7d",
+      "2s",
+      "4c"
+    ],
+    "legal_combinations": [
+      {
+        "holding": "JJ",
+        "combos": 3,
+        "weight": "1",
+        "effective_mass": "3",
+        "river_equity": "7/44"
+      },
+      {
+        "holding": "77",
+        "combos": 3,
+        "weight": "1",
+        "effective_mass": "3",
+        "river_equity": "7/44"
+      },
+      {
+        "holding": "22",
+        "combos": 3,
+        "weight": "1",
+        "effective_mass": "3",
+        "river_equity": "7/44"
+      },
+      {
+        "holding": "AJs",
+        "combos": 3,
+        "weight": "3/4",
+        "effective_mass": "9/4",
+        "river_equity": "3/11"
+      },
+      {
+        "holding": "KJs",
+        "combos": 3,
+        "weight": "3/4",
+        "effective_mass": "9/4",
+        "river_equity": "3/11"
+      },
+      {
+        "holding": "QJs",
+        "combos": 3,
+        "weight": "3/4",
+        "effective_mass": "9/4",
+        "river_equity": "15/44"
+      },
+      {
+        "holding": "T9s",
+        "combos": 4,
+        "weight": "1/2",
+        "effective_mass": "2",
+        "river_equity": "73/88"
+      },
+      {
+        "holding": "98s",
+        "combos": 4,
+        "weight": "1/2",
+        "effective_mass": "2",
+        "river_equity": "73/88"
+      },
+      {
+        "holding": "QTs",
+        "combos": 4,
+        "weight": "1/2",
+        "effective_mass": "2",
+        "river_equity": "79/88"
+      },
+      {
+        "holding": "AQs",
+        "combos": 3,
+        "weight": "1/4",
+        "effective_mass": "3/4",
+        "river_equity": "21/22"
+      }
+    ],
+    "mass": "45/2",
+    "equity": "181/440"
+  },
+  "river": {
+    "board": [
+      "Js",
+      "7d",
+      "2s",
+      "4c",
+      "Kd"
+    ],
+    "strong_mass": "21/2",
+    "worse_pair_mass": "9/2",
+    "weaker_unpaired_mass": "27/4",
+    "threshold": "26/87",
+    "boundary": "303/610",
+    "examples": [
+      {
+        "x": "7/20",
+        "equity": "9/37",
+        "call_ev_bb": "-895/74"
+      },
+      {
+        "x": "1/2",
+        "equity": "3/10",
+        "call_ev_bb": "1/4"
+      }
+    ]
+  },
+  "draw": {
+    "combinations": 1326,
+    "classes": 169,
+    "flops": 19600,
+    "at_least_one_pair_rank_on_flop": "144/1225",
+    "exact_flush_by_river": "378/1081",
+    "outs": [
+      {
+        "outs": 2,
+        "turn": "2/47",
+        "river": "91/1081"
+      },
+      {
+        "outs": 4,
+        "turn": "4/47",
+        "river": "178/1081"
+      },
+      {
+        "outs": 6,
+        "turn": "6/47",
+        "river": "261/1081"
+      },
+      {
+        "outs": 8,
+        "turn": "8/47",
+        "river": "340/1081"
+      },
+      {
+        "outs": 9,
+        "turn": "9/47",
+        "river": "378/1081"
+      },
+      {
+        "outs": 10,
+        "turn": "10/47",
+        "river": "415/1081"
+      },
+      {
+        "outs": 12,
+        "turn": "12/47",
+        "river": "486/1081"
+      },
+      {
+        "outs": 15,
+        "turn": "15/47",
+        "river": "585/1081"
+      }
+    ]
+  },
+  "bayes": {
+    "prior": [
+      "3/10",
+      "9/20",
+      "1/4"
+    ],
+    "likelihood": [
+      "4/5",
+      "3/5",
+      "1/5"
+    ],
+    "posterior": [
+      "3/7",
+      "27/56",
+      "5/56"
+    ]
+  },
+  "frequency": {
+    "wilson_n": 12,
+    "successes": 3,
+    "beta_prior": [
+      6,
+      24
+    ],
+    "posterior": [
+      9,
+      33
+    ],
+    "mean": "3/14",
+    "wilson_95": [
+      0.08894166839405476,
+      0.5323053349335656
+    ],
+    "equal_tail_95": [
+      0.10560803322606105,
+      0.3486654674513796
+    ]
+  },
+  "win_rate": {
+    "sigma_per_block_bb": 90,
+    "z95_used": 1.96,
+    "precision_hands_for_mean_3_using_1_96": 345744.00000000006,
+    "approx_80_power_hands": 706399.1760914177,
+    "half_widths": [
+      {
+        "hands": 1000,
+        "se_bb_per_100": 28.46049894151541,
+        "half_width": 55.78257792537021
+      },
+      {
+        "hands": 10000,
+        "se_bb_per_100": 9.0,
+        "half_width": 17.64
+      },
+      {
+        "hands": 100000,
+        "se_bb_per_100": 2.8460498941515415,
+        "half_width": 5.578257792537022
+      },
+      {
+        "hands": 1000000,
+        "se_bb_per_100": 0.9,
+        "half_width": 1.764
+      }
+    ]
+  },
+  "icm": {
+    "before": [
+      "1075/28",
+      "131/4",
+      "202/7"
+    ],
+    "hero_win_equity": "41",
+    "break_even_q": "17/28"
+  },
+  "ledger": {
+    "pots": [
+      22.5,
+      37.5,
+      87.5,
+      217.5
+    ],
+    "stacks_before_turn": [
+      131.5,
+      131.5
+    ],
+    "stacks_after_turn_call": [
+      106.5,
+      106.5
+    ],
+    "stacks_after_river_call": [
+      41.5,
+      41.5
+    ]
+  },
+  "brownian": {
+    "time_unit": "one 100-hand block",
+    "sigma_bb": 90,
+    "probabilities": [
+      {
+        "mu_bb": 3,
+        "bankroll_bb": 2000,
+        "ruin_probability": 0.22730069704883135
+      },
+      {
+        "mu_bb": 3,
+        "bankroll_bb": 3000,
+        "ruin_probability": 0.10836802322189586
+      },
+      {
+        "mu_bb": 3,
+        "bankroll_bb": 5000,
+        "ruin_probability": 0.024632127216140873
+      },
+      {
+        "mu_bb": 5,
+        "bankroll_bb": 2000,
+        "ruin_probability": 0.08465798862252998
+      },
+      {
+        "mu_bb": 5,
+        "bankroll_bb": 3000,
+        "ruin_probability": 0.024632127216140873
+      },
+      {
+        "mu_bb": 5,
+        "bankroll_bb": 5000,
+        "ruin_probability": 0.002085306345612765
+      }
+    ]
+  },
+  "monte_carlo": {
+    "numpy": "2.3.5",
+    "python": "3.12.14",
+    "seed": 20261014,
+    "n": 1000000,
+    "estimate": 0.349986,
+    "se": 0.0004769651976863721,
+    "normal_95": [
+      0.34905114821253475,
+      0.3509208517874653
+    ],
+    "event": "At least one target suit card in two draws, not winning equity"
+  }
+}
