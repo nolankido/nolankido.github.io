@@ -10,6 +10,14 @@
       "keywords": "beginner beginners complete comprehensive guide essay no limit holdem hold em rules starting hands action order before after bet pot odds clean outs equity value bluff stack depth variance learning"
     },
     {
+      "slug": "getting-started",
+      "title": "Get started with no-limit Texas Hold’em",
+      "description": "A beginner’s guide to a first poker session: formats, full costs, rules rehearsal, time and money boundaries, and a practical first month of study.",
+      "topic": "basics",
+      "level": "Start here",
+      "keywords": "beginner beginners getting started first session first month live online cash tournament format money time budget cost fees re-entry effective stack chips procedure practice learning plan"
+    },
+    {
       "slug": "decision-lab",
       "title": "One river. Two different stories.",
       "description": "Pause at a river bet, price the call, then reveal two possible endings. The outcome changes; the information available before the call does not.",

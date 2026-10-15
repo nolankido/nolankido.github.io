@@ -1199,5 +1199,18 @@
     "date": "2026-10-14",
     "updated": "2026-10-14",
     "poker_guide": true
+  },
+  {
+    "id": "poker-getting-started",
+    "path": "/poker/getting-started/",
+    "title": "Get started with no-limit Texas Hold’em",
+    "seo_title": "How to Get Started Playing No-Limit Texas Hold’em | Nolan Kido",
+    "description": "A beginner’s guide to a first poker session: formats, full costs, rules rehearsal, time and money boundaries, and a practical first month of study.",
+    "kicker": "Poker / First session",
+    "source": "poker/getting-started.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_guide": true
   }
 ]
