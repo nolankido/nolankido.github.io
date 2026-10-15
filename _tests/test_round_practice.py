@@ -119,8 +119,9 @@ class RoundPracticeTests(unittest.TestCase):
         self.assertIn('/'+practice.CSS,check_live.targets());self.assertIn('/'+practice.SCRIPT,check_live.targets())
         self.assertNotIn('<form',practice.render(ROOT))
         script=(ROOT/practice.SCRIPT).read_text()
-        for forbidden in ['fetch(', 'XMLHttpRequest','localStorage','sessionStorage','document.cookie','innerHTML','sendBeacon','location.hash=']:
+        for forbidden in ['fetch(', 'XMLHttpRequest','localStorage','sessionStorage','document.cookie','innerHTML','sendBeacon','history.pushState','history.replaceState','location.assign','location.replace']:
             self.assertNotIn(forbidden,script)
+        self.assertNotRegex(script,r'\blocation\.hash\s*=(?!=)')
 
 
 if __name__=='__main__':unittest.main()

@@ -39,7 +39,9 @@ payments on this round, the total wager, the earlier pot and the next player.
 Checks, bets, full raises, calls and folds produce different legal lines. Errors
 leave the ledger unchanged and explain a specific rule. Readers may see a worked
 line, restart or switch starting points. Exact lesson arrivals and correction
-messages receive visible focus below the site header after font layout settles. Each line stays available in the current
+messages receive visible focus below the site header after font layout settles.
+Pending arrival focus is cancelled when a learner starts using the controls, so
+a later font response does not take focus away from their action. Each line stays available in the current
 document until restarted or reloaded.
 
 The preflop start retains the big blind's option even when every payment matches.

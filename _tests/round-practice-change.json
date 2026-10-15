@@ -270,13 +270,13 @@
     },
     "poker/free-poker-learning-path/index.html": {
       "old_sha256": "53ff281885666716312fdba418887261a68a5bf67799c0b00e4b7179c4829eb1",
-      "new_sha256": "ea0e6fb97bce371d0f7fcb8050acbe5007b1a0fa5b863845952e56e96787b3f2",
+      "new_sha256": "76bd15e2d1d03cfdada1f67dc9d20b1bcb3a065fee88a57e1251cecba0ce985b",
       "edits": [
         {
           "start": 3622,
           "end": 3782,
           "old": "",
-          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-round-practice.css?v=9a34288f41a9\">\n  <script defer src=\"/assets/poker-round-practice.js?v=45c2f1bbdf9f\"></script>\n"
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-round-practice.css?v=9a34288f41a9\">\n  <script defer src=\"/assets/poker-round-practice.js?v=c57f668dfae1\"></script>\n"
         },
         {
           "start": 8131,
@@ -435,7 +435,7 @@
     "_source/poker/round-practice.json": "cb286dc9be94293b82a4320df3b91c254cc0d647871a99aed41dc56e39aab3dc",
     "_scripts/poker_round_practice.py": "4ce1849b0a9aada9c1bb8fbdc49bcd01b3a32ee8a0d96d4aed45f081767c9d50",
     "assets/poker-round-practice.css": "9a34288f41a9ae32d6ccdbb6c5f9c12ba9a731079479136855c879591cd4eb63",
-    "assets/poker-round-practice.js": "45c2f1bbdf9f8141d8e2efbbad38550956b1cb24ff62978d27371dfd11c3d975"
+    "assets/poker-round-practice.js": "c57f668dfae1b3734edac1fb8d59ad9c170a4c6585e89ea9b4d4252b70932561"
   },
   "new_outputs": {}
 }

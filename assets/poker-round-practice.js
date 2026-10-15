@@ -61,6 +61,16 @@
   } catch (_) { return; }
   const make=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
   const reveal = node => { node.focus({preventScroll:true}); node.scrollIntoView({block:'start',behavior:'instant'}); };
+  let arrivalToken=0;
+  root.addEventListener('focusin',e=>{if(e.target.closest('[data-round-live]')) arrivalToken++;});
+  function arrive(node,id) {
+    const active=document.activeElement;
+    if(active?.closest('[data-round-live]') && !active.closest('[hidden]')) return;
+    const token=++arrivalToken;
+    document.fonts.ready.then(()=>requestAnimationFrame(()=>{
+      if(token===arrivalToken && location.hash.slice(1)===id) reveal(node);
+    }));
+  }
   const rules={
     'check-facing':['Actions facing a wager','legal-actions'], 'call-zero':['Checking when nothing is owed','legal-actions'],
     'bet-existing':['Bet versus raise','legal-actions'], 'raise-none':['Bet versus raise','legal-actions'], 'fold-free':['Check versus fold','legal-actions'],
@@ -128,17 +138,17 @@
     const chosen=articles.find(n=>n.id===id || n.id+'-title'===id);
     if (!chosen) return;
     articles.forEach(n=>{n.hidden=n!==chosen;});
-    if (focus) document.fonts.ready.then(()=>requestAnimationFrame(()=>{if(location.hash.slice(1)===id) reveal(chosen.querySelector('h3'));}));
+    if (focus) arrive(chosen.querySelector('h3'),id);
   }
   root.classList.add('round-enhanced');
   activate(location.hash.slice(1),false);
   if (!articles.some(n=>n.hidden)) activate(articles[0].id,false);
   function followFragment() {
     const id=location.hash.slice(1);
-    if(id==='betting-rehearsal') document.fonts.ready.then(()=>requestAnimationFrame(()=>{if(location.hash.slice(1)===id)reveal(root.querySelector('h2'));}));
+    if(id==='betting-rehearsal') arrive(root.querySelector('h2'),id);
     else activate(id,true);
   }
   followFragment();
   window.addEventListener('hashchange',followFragment);
-  root.querySelectorAll('.round-starts a').forEach(a=>a.addEventListener('click',()=>activate(a.hash.slice(1),true)));
+  root.querySelectorAll('.round-starts a').forEach(a=>a.addEventListener('click',()=>activate(a.hash.slice(1),location.hash===a.hash)));
 }());

@@ -29,7 +29,7 @@ def main():
     Thread(target=server.serve_forever,daemon=True).start();origin='http://127.0.0.1:'+str(server.server_port)
     shots=Path(os.environ['SCREENSHOT_DIR']) if os.environ.get('SCREENSHOT_DIR') else None
     if shots:shots.mkdir(parents=True,exist_ok=True)
-    errors=[];report={'widths':[],'fallbacks':0,'deep_links':0,'axe':[]}
+    errors=[];report={'widths':[],'fallbacks':0,'deep_links':0,'delayed_font_arrivals':0,'axe':[]}
     try:
         with sync_playwright() as pw:
             opts={'headless':True}
@@ -133,6 +133,22 @@ def main():
                 expect(fallback.locator('[data-round-native]:visible')).to_have_count(3)
                 expect(fallback.locator('[data-round-live]:visible')).to_have_count(0)
                 detail=fallback.locator('[data-round-worked]').first;enter(fallback,detail.locator('summary'));expect(detail.locator('div')).to_be_visible();ctx.close();report['fallbacks']+=1
+            # A learner can start before fonts arrive. Later layout must not take
+            # focus away from a control they are already using.
+            slow=browser.new_context(viewport={'width':390,'height':950})
+            slow.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
+            held=[];slow.route('**/*.woff2*',lambda r:held.append(r))
+            early=slow.new_page();early.goto(origin+ROUTE+'#round-practice-flop',wait_until='domcontentloaded')
+            expect(early.locator('[data-round-practice]')).to_have_class('round-practice round-enhanced')
+            assert held,'The delayed-font fixture did not intercept a font'
+            action=early.locator('#round-practice-flop [data-round-action]');action.focus();expect(action).to_be_focused()
+            slow.unroute('**/*.woff2*')
+            for request in held:request.continue_()
+            early.evaluate('()=>document.fonts.ready.then(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))))')
+            expect(action).to_be_focused()
+            move(early,early.locator('#round-practice-flop'),'bet',1)
+            expect(early.locator('#round-practice-flop [data-round-feedback]')).to_contain_text('minimum opening bet is 2')
+            slow.close();report['delayed_font_arrivals']+=1
             browser.close()
         assert not errors,errors
         print(json.dumps({'status':'pass',**report},indent=2))
