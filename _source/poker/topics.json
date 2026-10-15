@@ -7,6 +7,7 @@
       "summary": "A complete Hold’em overview, short lessons, explained practice and rules to look up.",
       "primary_guides": [
         "no-limit-holdem-guide",
+        "getting-started",
         "holdem-basics",
         "hand-rankings",
         "betting-and-pots",
@@ -70,7 +71,8 @@
         "position-and-stacks",
         "side-pot-lab",
         "variance-and-results",
-        "choosing-study-tools"
+        "choosing-study-tools",
+        "getting-started"
       ],
       "resource_categories": [],
       "resource_ids": [
@@ -134,7 +136,8 @@
       "related_guides": [
         "reading-preflop-charts",
         "recording-hands",
-        "poker-rules-and-fair-play"
+        "poker-rules-and-fair-play",
+        "getting-started"
       ],
       "resource_categories": [
         "tournament-study"
@@ -310,7 +313,8 @@
         "poker-math-reference",
         "poker-media-study",
         "cash-game-study-path",
-        "poker-under-uncertainty"
+        "poker-under-uncertainty",
+        "getting-started"
       ],
       "resource_categories": [
         "tools",

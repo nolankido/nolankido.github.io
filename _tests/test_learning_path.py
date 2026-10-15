@@ -148,7 +148,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(worksheet.count(b'[ ]'), 4)
         for slug, _ in path.LESSONS: self.assertIn(('https://nolankido.com/poker/' + slug + '/').encode(), worksheet)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 438)
+        self.assertEqual(len(targets), 442)
         self.assertEqual(targets[path.DOWNLOAD], (200, worksheet))
         self.assertEqual(targets['/' + path.CSS], (200, (ROOT / path.CSS).read_bytes()))
         for p in self.pages:
@@ -163,8 +163,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(entry['minutes'], poker_library.minutes(poker_checkpoint.decorate(self.page, path.decorate(self.page, (ROOT / SOURCE).read_text(), ROOT), ROOT)))
         self.assertIn('beginner-practice-heading', self.outputs[Path('find/index.html')])
         payload = re.search(r'id="find-section-data">(.*?)</script>', self.outputs[Path('find/index.html')], re.S)[1]
-        # Comic 02 adds 163 bytes of headings; retain all existing search entries.
-        self.assertLess(len(payload.encode()), 60_200)
+        self.assertLess(len(payload.encode()), 60_000)
 
     def test_no_new_runtime_and_unrelated_files_remain_exact(self):
         before = history.outputs(self.outputs)

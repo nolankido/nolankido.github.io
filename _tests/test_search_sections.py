@@ -43,8 +43,8 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
-        self.assertEqual(len(self.index),166)
-        self.assertEqual(sum(map(len,self.index.values())),1033)
+        self.assertEqual(len(self.index),167)
+        self.assertEqual(sum(map(len,self.index.values())),1049)
         excluded={p['path'] for p in self.pages if p.get('noindex') or p.get('living_well_kind')=='experiment'}
         self.assertFalse(excluded.intersection(self.index))
         self.assertNotIn('/contact/',self.index)
@@ -57,10 +57,10 @@ class SearchSectionsTests(unittest.TestCase):
         doc=self.outputs[search_sections.PAGE]
         payload=re.search(r'<script type="application/json" id="find-section-data">(.*?)</script>',doc,re.S)[1]
         packed=json.loads(payload)
-        self.assertEqual(packed['version'],2)
-        self.assertEqual({p:[v[i:i+2] for i in range(0,len(v),2)] for p,v in packed['pages'].items()},self.index)
-        # Comics 02 through 04 add 415 bytes of headings; retain all existing search entries.
-        self.assertLess(len(payload.encode()),60500)
+        self.assertEqual(packed['version'],3)
+        unpacked={('/'+g+'/'+s if g else '/'):[v[i:i+2] for i in range(0,len(v),2)] for g,entries in packed['pages'].items() for s,v in entries.items()}
+        self.assertEqual(unpacked,self.index)
+        self.assertLess(len(payload.encode()),60000)
         # Preserve this release's original budget after the later reviewed
         # title metadata and beginner entry are reversed. Current growth has
         # its own independent bound in test_beginner_decisions.
@@ -88,7 +88,7 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertNotIn(text,rendered)
         self.assertEqual(len(Page(rendered).tags('script')),1)
         payload=re.search(r'id="find-section-data">(.*?)</script>',rendered)[1]
-        self.assertEqual(json.loads(payload)['pages'][p['path']],['safe',text])
+        self.assertEqual(json.loads(payload)['pages']['notes']['example/'],['safe',text])
         with self.assertRaises(ValueError):search_sections.apply(outputs,[p])
 
     def test_real_missed_queries_ranking_and_section_specificity(self):
