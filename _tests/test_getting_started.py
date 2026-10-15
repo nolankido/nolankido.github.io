@@ -8,7 +8,7 @@ import json,re,subprocess,sys,unittest
 import html5lib
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
-import build,check_live,search_sections
+import build,check_live,search_sections,site_find
 import getting_started_history as history
 from test_viewer_guides import best
 ROUTE='/poker/getting-started/'
@@ -86,6 +86,7 @@ class GettingStartedTests(unittest.TestCase):
         self.assertLess(len(raw.encode()),60000)
         code=r'''const assert=require('node:assert/strict'),s=require('./assets/site-find.js');
 const d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));
+assert(s.score(d.entry,'beginner poker')>=1000);
 assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);
 assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections({version:2,pages:{'/poker/':['safe','Old label']}}))),{'/poker/':[['safe','Old label']]});
 for(const bad of [null,{}, {version:99,pages:{}},{version:3,pages:[]},{version:3,pages:{'https://evil':{'':['safe','x']}}},{version:3,pages:{poker:{'../':['safe','x']}}},{version:3,pages:{poker:{'x?y/':['safe','x']}}}])assert.equal(Object.keys(s.decodeSections(bad)).length,0);
@@ -93,7 +94,9 @@ assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections({version:3,pages:{po
 assert.equal(Object.keys(s.decodeSections({version:3,pages:{poker:{'':['odd']}}})).length,0);
 assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
 '''
-        run=subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'packed':json.loads(raw),'canonical':current}),text=True,capture_output=True)
+        entry=next(e for e in site_find.entries(ROOT,self.pages) if e['path']==ROUTE)
+        entry.update(subjects=' '.join(entry['interests']),searchTitle=entry['search_title'],sections=current[ROUTE])
+        run=subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'packed':json.loads(raw),'canonical':current,'entry':entry}),text=True,capture_output=True)
         self.assertEqual(run.returncode,0,run.stderr)
 
     def test_learning_routes_native_explanations_source_scope_and_private_sheet(self):

@@ -76,6 +76,9 @@ def main():
                 link=page.locator('main a[href="'+ROUTE+'"]').first
                 expect(link).to_be_visible();link.press('Enter')
                 page.wait_for_url(origin+ROUTE,wait_until='load');report['arrivals']+=1
+            page.goto(origin+'/find/');page.locator('#find-query').fill('beginner poker');page.locator('#find-query').press('Enter')
+            arrival=page.locator('.find-item a[href="'+ROUTE+'"]').first
+            expect(arrival).to_be_visible();arrival.press('Enter');page.wait_for_url(origin+ROUTE,wait_until='load')
             page.goto(origin+'/find/');page.locator('#find-query').fill('first month');page.locator('#find-query').press('Enter')
             page.locator('.find-section-matches a[href="'+ROUTE+'#month"]').press('Enter')
             page.wait_for_url(origin+ROUTE+'#month',wait_until='load');expect(page.locator('#month')).to_be_in_viewport()
