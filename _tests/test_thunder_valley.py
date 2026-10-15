@@ -81,7 +81,7 @@ class ThunderValleyTests(unittest.TestCase):
             self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(name)])
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1])
         self.assertEqual((schema['@type'],schema['datePublished']),('Article','2026-10-15'))
-        targets=check_live.targets();self.assertEqual(len(targets),468)
+        targets=check_live.targets();self.assertEqual(len(targets),470)
         for asset in ['assets/poker-venue.css','downloads/thunder-valley-first-visit.md','assets/social/reader-poker-thunder-valley-poker-guide.png']:
             self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():

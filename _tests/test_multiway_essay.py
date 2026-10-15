@@ -99,7 +99,7 @@ const d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));
 for(const q of ['limped multiway pots','limpers','isolation'])assert(s.score(d.entry,q)>0);
 assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);'''
         subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':canonical}),text=True,check=True)
-        targets=check_live.targets();self.assertEqual(len(targets),468)
+        targets=check_live.targets();self.assertEqual(len(targets),470)
         for asset in ['assets/poker-multiway.css','downloads/poker-multiway-review.md','assets/social/reader-poker-limped-multiway-pots.png']:self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
             if p.suffix=='.html':self.assertEqual('/assets/poker-multiway.css?' in v,p==build.output_path(ROUTE))

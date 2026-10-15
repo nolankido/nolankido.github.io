@@ -84,10 +84,10 @@ class GuideText(HTMLParser):
             if tag not in self.VOID:
                 self.skip = 1
             return
-        if 'data-course-scene' in attrs or 'data-drill-case' in attrs or 'data-lab-case' in attrs:
+        if 'data-course-scene' in attrs or 'data-drill-case' in attrs or 'data-lab-case' in attrs or 'data-round-case' in attrs:
             self.finish()
             anchor = attrs.get('id', '')
-            if not re.fullmatch(r'course-scene-[a-z]+|exercise-[a-z]+(?:-[a-z]+)*|hand-lab-[a-z]+(?:-[a-z]+)*', anchor):
+            if not re.fullmatch(r'course-scene-[a-z]+|exercise-[a-z]+(?:-[a-z]+)*|hand-lab-[a-z]+(?:-[a-z]+)*|round-practice-[a-z]+', anchor):
                 raise ValueError('Unsafe course scene anchor')
             self.current = {'anchor': anchor, 'title': '', 'parts': []}
             self.course_heading = True

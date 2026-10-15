@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import round_practice_history
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -13,6 +14,7 @@ def change():
 
 
 def before(path, data):
+    data = round_practice_history.before(path, data)
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
     item = change()['paths'].get(str(path))
@@ -27,14 +29,17 @@ def before(path, data):
 
 
 def pages(records):
+    records = round_practice_history.pages(records)
     return [deepcopy(change()['pages'][p['id']]['old']) if p['id'] in change()['pages'] and p == change()['pages'][p['id']]['new'] else deepcopy(p) for p in records]
 
 
 def outputs(records):
+    records = round_practice_history.outputs(records)
     return {path: before(path, text) for path, text in records.items()}
 
 
 def files(paths):
+    paths = round_practice_history.files(paths)
     def keep(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
         return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()

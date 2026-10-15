@@ -122,7 +122,7 @@ assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
         self.assertIn('They have not been validated as a teaching curriculum with actual beginners',self.text)
         self.assertNotIn('Correctly rank 20',self.text)
         self.assertNotRegex(self.html,r'|```|'+chr(8212)+r'|<form|<input|<textarea|<iframe')
-        self.assertEqual(len(check_live.targets()),468)
+        self.assertEqual(len(check_live.targets()),470)
         for p in [ROUTE,'/assets/poker-session.css','/downloads/poker-first-session.md']:
             self.assertIn(p,check_live.targets())
         worksheet=(ROOT/'downloads/poker-first-session.md').read_text()

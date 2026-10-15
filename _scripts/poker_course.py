@@ -104,10 +104,12 @@ def lesson_support(page, body, root):
     links = ''.join(f'<li><a href="#{anchor}">{escape(label)}</a></li>' for anchor, label in lesson['first_pass'])
     card_case = {'first-decisions':'pair', 'first-flop-decisions':'three-kind', 'turn-and-river-decisions':'two-pair'}.get(lesson['slug'])
     card_practice = f'<p><a href="{ROUTE}#hand-lab-{card_case}">Build the best five with actual cards</a>. Choose the five yourself and explain what you leave out.</p>' if card_case else ''
+    round_case = {"first-decisions":"preflop", "starting-hand-decisions":"preflop", "first-flop-decisions":"flop"}.get(lesson["slug"])
+    round_practice = f'<p><a href="{ROUTE}#round-practice-{round_case}">Rehearse the actions with counters</a>. Choose the moves yourself and track who still needs a turn.</p>' if round_case else ''
     first = ('<aside class="course-first-pass" aria-labelledby="course-first-pass-title"><h2 id="course-first-pass-title">Your first pass through this stage</h2>'
              f'<p><strong>Stage {index+1} of 6:</strong> {escape(lesson["goal"])}</p>'
              '<p>Begin with these sections. The rest of this page is a reference to return to, rather than another reading assignment.</p>'
-             f'<ul>{links}</ul>{card_practice}<p><a href="{poker_practice.lesson_link(lesson["slug"])}">See a worked example, then try three changed questions</a>.</p><p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></aside>')
+             f'<ul>{links}</ul><p><strong>Choose one practice task below.</strong> Return for the other formats when they help answer a question.</p>{card_practice}{round_practice}<p><a href="{poker_practice.lesson_link(lesson["slug"])}">See a worked example, then try three changed questions</a>.</p><p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></aside>')
     anchor = '<p class="article-lead">'
     if body.count(anchor) != 1 or 'id="course-first-pass-title"' in body:
         raise ValueError('A course lesson needs one introduction and one first-pass guide')
@@ -133,6 +135,10 @@ def workbook(root):
              'Use learning materials before or after play, following the room’s rules.', '',
              'MY NEXT SMALL STEP', 'The lesson I reached:', 'What I can explain without looking:',
              'One thing to revisit:', 'The exact lesson or section link I want to return to:', '',
+             'OPTIONAL BETTING ROUND NOTES', 'https://nolankido.com/poker/free-poker-learning-path/#betting-rehearsal',
+             'Starting point and street:', 'Seat acting now:', 'Total wager on this round:',
+             'This seat already paid on this round:', 'My action and extra counters:',
+             'Who still needs a turn, and why:', 'One rule to explain again later:', '',
              'SIX CONNECTED STAGES', 'Mark a box when you can explain a changed example. This is not a grade.', '']
     for number, lesson in enumerate(data['lessons'], 1):
         lines += [f'[ ] {number}. {lesson["title"].upper()}', 'https://nolankido.com/poker/' + lesson['slug'] + '/', lesson['goal'],

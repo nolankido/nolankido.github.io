@@ -3,6 +3,7 @@ from html import escape
 from hashlib import sha256
 import poker_course
 import poker_hand_lab
+import poker_round_practice
 
 PATH = '/poker/free-poker-learning-path/#beginner-practice'
 DOWNLOAD = '/downloads/poker-beginner-study-card.txt'
@@ -25,7 +26,7 @@ def decorate(page, body, root):
     anchor = '<section class="course-later" aria-labelledby="how-to-use">'
     if body.count(anchor) != 1 or 'id="beginner-practice"' in body:
         raise ValueError('Beginner route requires one original study-plan anchor')
-    addition = poker_hand_lab.render(root) + poker_course.guided_hand(root) + poker_course.overview(root, (root / '_source/poker/beginner-learning-path.html').read_text(encoding='utf-8'))
+    addition = poker_hand_lab.render(root) + poker_course.guided_hand(root) + poker_round_practice.render(root) + poker_course.overview(root, (root / '_source/poker/beginner-learning-path.html').read_text(encoding='utf-8'))
     return body.replace(anchor, addition + anchor, 1)
 
 
