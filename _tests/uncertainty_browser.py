@@ -51,6 +51,13 @@ def main():
                 expect(page.locator('main')).to_contain_text('131.5 bb behind before the turn bet')
                 if shots and width in [390,1440]:
                     position(page,page.locator('#river-case'));page.screenshot(path=str(shots/f'uncertainty-case-{width}.png'))
+                page.locator('main a[href="#source-cfr"]').first.press('Enter')
+                source=page.locator('#source-cfr');expect(source).to_be_in_viewport()
+                metrics=source.evaluate('''async e=>{
+                    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+                    return {top:e.getBoundingClientRect().top,header:document.querySelector('.site-header').getBoundingClientRect().bottom};
+                }''')
+                assert metrics['top']>=metrics['header'],('citation clearance',width,metrics)
                 page.add_style_tag(content=SPACING)
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),('spacing',width)
                 if os.environ.get('AXE_PATH') and width in [390,1440]:

@@ -24,7 +24,8 @@
 .uncertainty-guide figure img { display: block; width: 100%; height: auto; }
 .uncertainty-guide figcaption { margin-top: .8rem; font-size: .95rem; }
 .uncertainty-guide .uncertainty-sources { padding-left: 1.5rem; }
-.uncertainty-guide .uncertainty-sources li { margin-bottom: 1.2rem; scroll-margin-top: 8rem; }
+.uncertainty-guide .uncertainty-sources li { margin-bottom: 1.2rem; }
+.uncertainty-guide :is(h2,h3,.uncertainty-sources li) { scroll-margin-top: 12rem; }
 @media print {
   .uncertainty-guide .uncertainty-table { overflow: visible; }
   .uncertainty-guide .uncertainty-table .viewer-table { min-width: 0; table-layout: fixed; font-size: 8pt; }

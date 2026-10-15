@@ -479,11 +479,11 @@
     }
   },
   "new_outputs": {
-    "poker/poker-under-uncertainty/index.html": "34be2bbf8a2b0afd3c98286c7e38b471cc50936bc9ac0a0b17485085ef269bc4"
+    "poker/poker-under-uncertainty/index.html": "9db1034bf68329658b2003b7a2299679f66f0d8809d6759c04b773708192541d"
   },
   "new_files": {
     "_source/poker/poker-under-uncertainty.html": "eebea0b08979d78dafae77f0bb732976e00cfad558c0aedee451e48f0512810e",
-    "assets/poker-uncertainty.css": "5160c22739e339b3ac0cf9d4687b76dcff9d46aec00cf01b030b4b16c91bd786",
+    "assets/poker-uncertainty.css": "7bc02494864d284fccb1af59f80274ccbfb274bb9ba8c9db610cb722fd8e6b94",
     "assets/social/reader-poker-under-uncertainty.png": "4b661c6ff4512cff86acf6a698d9b48490bb9b4e555e28a4531cb602d7a58983",
     "assets/poker/uncertainty-precision.png": "edfa7d8cc1bd32711fa403bad59f433b57581eb829ff3ac188be7bd60fecc20b",
     "assets/poker/uncertainty-boundary.png": "0b408e8a24e7377b4ca83a937f428cb97740eb894b0014b2f6e689bcc920b5eb",
