@@ -20,7 +20,7 @@ Guide: https://nolankido.com/poker/short-stack-decisions/
 - Small blind / big blind:
 - Ante amount and type (none / each player / big blind):
 - Starting stacks in chips, with before/after-posting convention:
-- Chips behind and live contributions already posted:
+- Chips behind, live contributions and dead antes recorded separately:
 - Relevant opposing stacks, recorded separately:
 - Position and known hole cards:
 - Action so far, in order:
@@ -34,7 +34,9 @@ Guide: https://nolankido.com/poker/short-stack-decisions/
 
 - Chip value, prize value or a named alternative:
 - Players remaining and payouts actually known:
-- Who covers whom:
+- Who covers whom after dead antes and live posts:
+- Deal terms, locked awards and residual prizes if applicable:
+- Ties possible, and how the comparison accounts for them:
 - Bounty structure and amounts if relevant:
 - Unknown field stacks or approximate inputs:
 
@@ -42,6 +44,9 @@ Guide: https://nolankido.com/poker/short-stack-decisions/
 
 - Reference name, version/date and exact settings:
 - Allowed actions (including any excluded limp/small-raise options):
+- Raise sizes, flat calls and later-play settings actually configured:
+- Output status: public summary / recorded tool output / my calculation
+- Missing settings or source limitations:
 - Table size and position convention match?
 - Stacks, blind/ante, action history and objective match?
 - Classification: matching inputs / approximate with named differences / not comparable
@@ -55,7 +60,9 @@ confidence. A nearby stack depth does not establish an interpolated answer.
 - Prediction before looking:
 - One input changed:
 - Inputs kept fixed:
-- Result observed, including units and model:
+- Result observed, including units, model and rounding:
+- Pot/refund ledger and total-chip check:
+- Assigned range or supplied win probability, and why:
 - Sensitivity or unresolved uncertainty:
 - One sentence I can explain without the chart:
 - Next check, or a deliberate stopping point:

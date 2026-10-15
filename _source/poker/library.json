@@ -180,10 +180,10 @@
     {
       "slug": "short-stack-decisions",
       "title": "Short stacks beyond the chart",
-      "description": "Match position, stacks, ante structure, available actions and tournament objective before comparing references.",
+      "description": "Study 10–20 BB live tournament decisions beyond push/fold: 15BB action choices, antes, raise sizes, a checkable ICM call and a private review sheet.",
       "topic": "tournaments",
       "level": "Go deeper",
-      "keywords": "push fold shove short stack 5 BB 10 BB ante chart compatibility"
+      "keywords": "push fold shove short stack 5 BB 10 BB 10BB 15 BB 15BB 20 BB 20BB live tournament ante BBA effective coverage chips behind action tree small raise limp call ICM chip EV prize value risk reward chart compatibility"
     },
     {
       "slug": "tournament-equity",
