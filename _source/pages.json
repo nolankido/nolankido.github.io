@@ -229,6 +229,19 @@
     "poker_comic": true
   },
   {
+    "id": "poker-comic-one-hand-four-streets",
+    "path": "/poker/comics/one-hand-four-streets/",
+    "title": "One hand, four streets",
+    "seo_title": "One Hand, Four Streets: A Poker Comic | Nolan Kido",
+    "description": "Follow a poker hand through preflop, flop, turn, river and showdown in a six-panel comic, with a readable text companion and rules clarifications.",
+    "kicker": "Poker / Comic 03",
+    "source": "poker/comics/one-hand-four-streets.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_comic": true
+  },
+  {
     "id": "poker-hand-review",
     "path": "/poker/reviewing-a-hand/",
     "title": "Review a hand, not just the result.",
