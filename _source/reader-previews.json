@@ -2027,6 +2027,26 @@
           352
         ]
       }
+    },
+    "poker-thunder-valley-poker-guide": {
+      "path": "/poker/thunder-valley-poker-guide/",
+      "title": "Playing poker at Thunder Valley: a first-timer’s guide",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-thunder-valley-poker-guide.png",
+      "sha256": "c62ce1f1caf7cd29e968a427ec664ec3fd66ec2b22795e16d430f842ed7f5121",
+      "layout": {
+        "lines": [
+          "Playing poker at Thunder",
+          "Valley: a first-timer’s guide"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1084,
+          352
+        ]
+      }
     }
   }
 }

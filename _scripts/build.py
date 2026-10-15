@@ -169,7 +169,7 @@ def build_outputs() -> dict[Path, str]:
     values.update(poker_finder.render(poker_selection.annotate(finder_entries, resource_selection)))
     values.update(poker_reference.supplement())
     # The on-page and printable previews use the exact downloadable blank files.
-    for slug in ("poker-event-planner", "poker-hand-capture", "poker-resource-check", "poker-tournament-trip-budget"):
+    for slug in ("poker-event-planner", "poker-hand-capture", "poker-resource-check", "poker-tournament-trip-budget", "thunder-valley-first-visit"):
         values[slug.replace("-", "_")] = text((ROOT / "downloads" / (slug + ".md")).read_text(encoding="utf-8"))
     values['hubs_css_version'] = hashlib.sha256((ROOT / 'assets/hubs.css').read_bytes()).hexdigest()[:12]
     values['site_css_version'] = hashlib.sha256((ROOT / 'assets/site.css').read_bytes()).hexdigest()[:12]
@@ -310,6 +310,9 @@ def build_outputs() -> dict[Path, str]:
             if p['id'] == 'poker-tournament-trip-budget':
                 version = hashlib.sha256((ROOT / 'assets/poker-budget.css').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-budget.css?v={version}">'
+            if p['id'] == 'poker-thunder-valley-poker-guide':
+                version = hashlib.sha256((ROOT / 'assets/poker-venue.css').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <link rel="stylesheet" href="/assets/poker-venue.css?v={version}">'
             reader_meta = poker_library.reader_meta(p, reader_entries)
             if reader_meta:
                 header = header.replace('</section>', reader_meta + poker_reading.section_outline(body) + poker_beginner_path.navigation(p, pages) + '</section>', 1)
