@@ -2,6 +2,23 @@
 
 A small static website for introductions, selected writing, and practical resources. GitHub Pages serves committed HTML. There is no runtime application server or database. Optional, cookie-free Umami Cloud pageview analytics is installed through the shared layout; the site works when analytics is blocked. See `ANALYTICS.md`.
 
+## Beginner Poker course
+
+`_source/poker/beginner-course.json` owns the six-stage order, first-pass section
+links, recall prompts, specific checkpoint targets and six-scene fictional hand.
+`_scripts/poker_course.py` validates those destinations and cards, decorates the
+existing lessons and generates `downloads/poker-beginner-study-card.txt` plus its
+exact preview. Edit the configuration and rebuild rather than editing the TXT.
+`assets/poker-course.js` adds optional per-scene practice on the course overview;
+it has no network or storage API. Native answers and the full sequence work when
+the script is blocked. Keep search scene anchors stable and exclude answer panels.
+
+Run `python -m unittest discover -s _tests -p test_poker_course.py -v` and
+`python _tests/poker_course_browser.py` for focused verification, then the normal
+release gate. The independent hand oracle checks accounting and ranks, not
+optimal strategy. See `_reports/free-poker-learning-path-review.md` for the
+beginner-task audit, research basis and limits of the evaluation.
+
 ## Site architecture
 
 The homepage introduces Nolan first, shows three selected pieces of published

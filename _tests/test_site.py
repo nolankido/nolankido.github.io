@@ -84,7 +84,7 @@ class SiteTests(unittest.TestCase):
                                 pairs = parse_qsl(url.fragment, keep_blank_values=True)
                                 self.assertEqual(len(pairs), len(dict(pairs)), 'Duplicate filter')
                                 topic_ids = {t['id'] for t in json.loads((ROOT / '_source/poker/topics.json').read_text())['entries']}
-                                allowed = {'topic': topic_ids, 'kind': {'guide', 'resource', 'glossary'}, 'free': {'1'}}
+                                allowed = {Path('poker/free-poker-learning-path/index.html'): '/assets/poker-course.js', 'topic': topic_ids, 'kind': {'guide', 'resource', 'glossary'}, 'free': {'1'}}
                                 self.assertTrue(pairs)
                                 for key, value in pairs:
                                     self.assertIn(key, allowed)

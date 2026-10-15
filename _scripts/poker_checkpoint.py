@@ -19,7 +19,7 @@ def decorate(page, body, root):
                    '</pre></div></details>')
         return body.replace(MARKER, preview, 1)
     if page['path'] == poker_beginner_path.PATH.split('#')[0]:
-        anchor = '<h2 id="how-to-use">'
+        anchor = '<section class="course-later" aria-labelledby="how-to-use">'
         if body.count(anchor) != 1 or 'id="beginner-next-step"' in body:
             raise ValueError('Checkpoint route requires one original study-plan anchor')
         return body.replace(anchor, (root / '_source/poker/beginner-checkpoint-route.html').read_text(encoding='utf-8') + anchor, 1)

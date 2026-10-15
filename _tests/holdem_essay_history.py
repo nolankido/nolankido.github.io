@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import poker_course_history
 import uncertainty_history
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = 'poker/no-limit-holdem-guide/index.html'

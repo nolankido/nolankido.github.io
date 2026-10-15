@@ -20,6 +20,7 @@ import poker_beginner_path
 import poker_checkpoint
 import poker_reading
 import poker_discovery
+import poker_course
 import poker_experience
 import poker_resources
 import poker_collections
@@ -380,6 +381,7 @@ def build_outputs() -> dict[Path, str]:
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
         extra += practical_path.head(p, ROOT)
         extra += poker_discovery.head(p, ROOT)
+        extra += poker_course.head(p, ROOT)
         extra += author_archive.head(p, ROOT)
         header = search_entrypoints.header(p, header)
         extra += search_entrypoints.head(p, ROOT)
@@ -418,6 +420,7 @@ def build_outputs() -> dict[Path, str]:
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
     outputs.update(poker_collections.exports(resource_entries))
     outputs.update(poker_reference.exports())
+    outputs[Path('downloads/poker-beginner-study-card.txt')] = poker_course.workbook(ROOT)
     outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
     outputs.update(living_well.exports(ROOT, site['url']))
     outputs[practical_discovery.FEED] = practical_discovery.feed(practical_config, pages, outputs, site['url'])

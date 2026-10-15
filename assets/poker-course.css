@@ -1,0 +1,41 @@
+/* One bounded practice scene and a plain route through the beginner references. */
+.course-hand,.course-first-pass,.course-stage-end { margin:32px 0; padding:clamp(18px,3vw,28px); border:1px solid var(--line-dark); border-top:3px solid var(--red); background:var(--paper-light); }
+.course-hand h2,.course-first-pass h2,.course-stage-end h2 { margin-top:0; }
+.course-scenes { list-style:none; padding:0; margin:24px 0; }
+.course-scene { border-top:1px solid var(--line-dark); padding-top:22px; margin:26px 0; scroll-margin-top:160px; }
+.course-scene h3 { margin-top:0; }
+.course-scene-progress { font:.85rem/1.6 var(--mono); padding-block:12px; border-bottom:1px solid var(--line-dark); }
+.course-state { display:flex; flex-wrap:wrap; gap:18px 30px; margin:22px 0; }
+.course-state > div { min-width:0; }
+.course-state-label { margin:0 0 10px!important; font:.75rem/1.6 var(--mono)!important; }
+.course-counters { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:24px 0; }
+.course-counters > div { min-width:0; border:1px solid var(--line-dark); padding:12px; }
+.course-counters dt { font:.72rem/1.5 var(--mono); }
+.course-counters dd { margin:8px 0 0; font:700 1.5rem/1.3 var(--sans); }
+.course-seat-order { display:flex; flex-wrap:wrap; gap:8px 22px; font:.85rem/1.6 var(--sans); padding-left:22px; }
+.course-seat-order li { flex:1 1 135px; margin:0; }
+.course-question { min-width:0; margin:24px 0 16px; padding:0; border:0; }
+.course-question legend { font:700 1.1rem/1.5 var(--sans); margin-bottom:12px; }
+.course-question ol { margin:0; padding-left:24px; }
+.course-question li { padding-left:3px; margin:8px 0; }
+.course-question label { display:flex; align-items:flex-start; gap:12px; min-height:44px; padding:8px 4px; font:1rem/1.55 var(--sans); }
+.course-question input { flex:0 0 auto; margin-top:5px; width:19px; height:19px; accent-color:var(--basalt); }
+.course-enhanced .course-question label { cursor:pointer; }
+.course-enhanced .course-question label:has(input:checked) { outline:2px solid var(--basalt); outline-offset:2px; background:var(--panel); }
+.course-hand-controls,.course-check-controls,.course-stage-end nav { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
+.course-hand button { min-height:44px; padding:10px 14px; background:var(--basalt); color:var(--paper-light); border:1px solid var(--basalt); font:600 .9rem/1.5 var(--sans); cursor:pointer; }
+.course-hand button:disabled { background:var(--panel); color:var(--ink-soft); border-color:var(--line-dark); cursor:default; }
+.course-answer-status { font:600 .95rem/1.6 var(--sans); }
+.course-hand a:focus-visible,.course-hand button:focus-visible,.course-question input:focus-visible,.course-hand summary:focus-visible,.course-scene h3:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+.course-stage-end nav a { display:inline-flex; align-items:center; min-height:44px; }
+.course-first-pass ul { margin-bottom:12px; }
+.course-first-pass li a { display:inline-flex; align-items:center; min-height:44px; }
+.course-enhanced .course-manual-help { display:none; }
+.course-later { border-top:2px solid var(--line-dark); margin-top:44px; padding-top:24px; }
+.course-review { margin:28px 0; padding:20px; background:var(--panel); border-left:3px solid var(--red); }
+.course-quick-links { display:flex; flex-wrap:wrap; gap:8px 20px; margin:24px 0; font:.95rem/1.5 var(--sans); }
+.course-quick-links a { display:inline-flex; align-items:center; min-height:44px; }
+.course-hand [hidden] { display:none!important; }
+#first-hand-practice,#beginner-practice,#beginner-next-step,#return-practice { scroll-margin-top:160px; }
+@media(max-width:420px) { .course-counters { grid-template-columns:1fr; gap:8px; } .course-counters > div { display:flex; align-items:center; justify-content:space-between; gap:14px; } .course-counters dd { margin:0; } }
+@media print { .course-hand [data-course-scene][hidden] { display:list-item!important; } .course-hand [data-course-solution][hidden],.course-hand [data-choice-note][hidden] { display:block!important; } .course-hand details > div { display:block!important; } .course-hand details::details-content { content-visibility:visible!important; } .course-hand [data-course-enhanced],.course-hand input,.course-scene-progress,.course-answer-status,.course-quick-links,.course-stage-end nav { display:none!important; } .course-hand,.course-first-pass,.course-stage-end { padding:12px; background:white; color:black; } .course-scene { break-inside:avoid; } .course-manual-help { display:block!important; } }

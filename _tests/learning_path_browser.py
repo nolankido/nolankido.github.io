@@ -10,8 +10,8 @@ from playwright.sync_api import sync_playwright, expect
 from field_guide_browser import QuietHandler, ROOT
 
 ROUTE = '/poker/free-poker-learning-path/'
-LESSONS = ['first-decisions', 'starting-hand-decisions', 'first-flop-decisions', 'turn-and-river-decisions']
-CHECKS = ['cards', 'starting', 'flop', 'river']
+LESSONS = ['first-decisions', 'starting-hand-decisions', 'first-flop-decisions', 'turn-and-river-decisions', 'ranges-for-beginners', 'betting-with-a-purpose']
+CHECKS = ['cards', 'starting', 'flop', 'river', 'ranges', 'purpose']
 SPACING = '* {line-height:1.5 !important;letter-spacing:.12em !important;word-spacing:.16em !important} p {margin-bottom:2em !important}'
 
 
@@ -42,7 +42,7 @@ def main():
                 response = page.goto(origin + ROUTE)
                 assert response and response.status == 200
                 page.evaluate('()=>document.fonts.ready.then(()=>true)')
-                expect(page.locator('#beginner-practice .viewer-question')).to_have_count(4)
+                expect(page.locator('#beginner-practice .viewer-question')).to_have_count(6)
                 expect(page.locator('#beginner-practice .viewer-question[open]')).to_have_count(0)
                 expect(page.locator('#session-one')).to_have_text('1. Tell the story of one hand.')
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
@@ -72,7 +72,7 @@ def main():
                     expect(menu).not_to_have_attribute('open', '')
                     menu.locator('summary').focus(); page.keyboard.press('Enter')
                     expect(menu.locator('nav')).to_be_visible()
-                    expect(menu).to_contain_text('Lesson ' + str(index) + ' of 4')
+                    expect(menu).to_contain_text('Lesson ' + str(index) + ' of 6')
                     expect(menu.locator('span[aria-current="page"]')).to_have_count(1)
                     expect(menu.locator('a[href="/poker/' + slug + '/"]')).to_have_count(0)
                     report['path_menus'] += 1
@@ -133,7 +133,7 @@ def main():
             browser.close()
     finally:
         server.shutdown(); server.server_close()
-    print('PASS: connected beginner route, four readiness checks, four current-page menus, exact private worksheet, print, no-JavaScript and privacy checks.')
+    print('PASS: connected beginner route, six readiness checks, six current-page menus, exact private worksheet, print, no-JavaScript and privacy checks.')
     print(json.dumps(report, indent=2))
 
 
