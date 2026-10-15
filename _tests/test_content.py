@@ -96,6 +96,8 @@ class ContentTests(unittest.TestCase):
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', content, re.S)[1])
             if schema.get('@type') == 'Article' or path in {Path('technology/task-brief/index.html'), Path('technology/ai-time-savings/index.html'), Path('poker/comics/learn-no-limit-holdem/index.html'), Path('poker/comics/poker-hand-rankings/index.html'), Path('poker/comics/one-hand-four-streets/index.html'), Path('poker/comics/best-five-cards-win/index.html'), Path('poker/comics/why-acting-last-helps/index.html'), Path('poker/comics/good-decision-bad-river/index.html')}:
                 expected.insert(len(expected)-1, '/assets/page-sharing.js?v=' + hashlib.sha256((ROOT / 'assets/page-sharing.js').read_bytes()).hexdigest()[:12])
+            if path == Path('poker/free-poker-learning-path/index.html'):
+                expected.insert(len(expected)-1, '/assets/poker-course.js?v=' + hashlib.sha256((ROOT / 'assets/poker-course.js').read_bytes()).hexdigest()[:12])
             self.assertEqual(sources, expected)
         self.assertNotIn('<form', outputs[Path('resources/index.html')])
         self.assertNotIn('reason for contact, and your message', outputs[Path('privacy/index.html')])

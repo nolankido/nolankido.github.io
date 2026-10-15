@@ -1,9 +1,9 @@
 BEGINNER POKER STUDY CARD
 Nolan Kido | https://nolankido.com/poker/free-poker-learning-path/#beginner-practice
 
-For private notes, with paper, a deck or counters. No wager or account needed.
+For private notes with paper, a deck or counters. No wager or account needed.
 The website does not receive this file or save your progress.
-Use learning materials before or after play, following the room's rules.
+Use learning materials before or after play, following the room’s rules.
 
 MY NEXT SMALL STEP
 The lesson I reached:
@@ -11,44 +11,124 @@ What I can explain without looking:
 One thing to revisit:
 The exact lesson or section link I want to return to:
 
-FOUR LESSONS
-Mark a box when you can explain the skill. These are study notes, not a grade.
-Repeat a lesson or stop whenever that is useful.
+SIX CONNECTED STAGES
+Mark a box when you can explain a changed example. This is not a grade.
 
 [ ] 1. CARDS, ACTIONS AND THE POT
 https://nolankido.com/poker/first-decisions/
-Can I identify the acting player, count the additional call and compare five cards?
+Name your legal actions, count an additional call and build the best five cards.
+First pass: Read private and shared cards; Name the available actions; Count the extra chips; Choose the best five
+Recall: You face a raise to 9 after posting a big blind of 2. Explain why a call adds 7, not 9.
+Fresh practice: https://nolankido.com/poker/beginner-checkpoint/#situation-one
 My explanation:
 Still unclear:
+One correction after checking:
 
 [ ] 2. YOUR STARTING HAND IN CONTEXT
 https://nolankido.com/poker/starting-hand-decisions/
-Can I name the position, earlier action, price, effective stack and players behind?
+Describe position and earlier action before judging two private cards.
+First pass: Find who still has a turn; Read the earlier action
+Recall: Three players fold before the button at a six-player table. Name the two players who still have initial decisions.
+Fresh practice: https://nolankido.com/poker/beginner-checkpoint/#situation-two
 My explanation:
 Still unclear:
+One correction after checking:
 
 [ ] 3. YOUR FIRST DECISIONS AFTER THE FLOP
 https://nolankido.com/poker/first-flop-decisions/
-Can I distinguish the current hand, a draw and assumptions about an opponent?
+Name a made hand and a draw separately, then read the action.
+First pass: Name the hand and the draw; Read checks and bets
+Recall: You hold two hearts and see two hearts on the flop. Explain why four hearts are a draw rather than a flush.
+Fresh practice: https://nolankido.com/poker/beginner-checkpoint/#situation-three
 My explanation:
 Still unclear:
+One correction after checking:
 
 [ ] 4. THE TURN, RIVER AND SHOWDOWN
 https://nolankido.com/poker/turn-and-river-decisions/
-Can I explain when action ends and separate a call price from expected pot share?
+Rebuild the best five after each new card and distinguish a call price from a reason to call.
+First pass: Rebuild a missed draw; Separate price from hand strength
+Recall: A river pot is 20 before a bet of 10. A call adds 10 and makes 40. Explain what 10 / 40 = 25% does and does not establish.
+Fresh practice: https://nolankido.com/poker/beginner-checkpoint/#situation-four
 My explanation:
 Still unclear:
+One correction after checking:
 
-RETURN FOR FOUR EXPLAINED READINESS CHECKS
-https://nolankido.com/poker/free-poker-learning-path/#beginner-practice
+[ ] 5. YOUR FIRST RANGE
+https://nolankido.com/poker/ranges-for-beginners/
+Separate known cards, possible opposing hands and assumptions about their frequency.
+First pass: Separate facts and possibilities; Remove impossible cards
+Recall: You hold the ace of hearts. Explain why the opponent cannot hold that exact card, and why a check does not reveal their other cards.
+Fresh practice: https://nolankido.com/poker/beginner-checkpoint/#situation-five
+My explanation:
+Still unclear:
+One correction after checking:
 
-THEN CHOOSE ONE STUDY TASK
-https://nolankido.com/poker/free-poker-learning-path/#how-to-use
-Tell one hand's story; reconstruct a pot; explain a decision; choose a game to
-understand; or study one source. There is no need to finish an entire archive.
+[ ] 6. BETTING WITH A PURPOSE
+https://nolankido.com/poker/betting-with-a-purpose/
+Say which worse hands might call or better hands might fold, and compare betting with checking.
+First pass: Name the response you want; Explain the purpose without arithmetic
+Recall: Your bet wins when everyone folds. Explain why that ending alone does not show the bet was better than checking.
+Fresh practice: https://nolankido.com/poker/beginner-checkpoint/#situation-six
+My explanation:
+Still unclear:
+One correction after checking:
 
-Completing this card does not establish profitable play or readiness to risk
-money. Fictional practice is enough. Do not record other people's identifying
-information or upload private hand notes here.
+ONE SCRIPTED HAND
+Six players start with 100 counters. Blinds 1/2. No ante, fees or side pots.
+You are on the button with ace of hearts and jack of hearts.
+The actions are supplied for learning, not betting recommendations.
 
-Prepared with AI assistance. October 14, 2026. Blank educational worksheet.
+1. Before the flop: follow the seats
+Six players start with 100 counters each. The small blind posts 1 and the big blind posts 2. There is no ante, fee or side pot. Three players fold. You are on the button, the seat marked by the dealer marker. Both blinds still have their first decisions.
+After your initial action on the button, who still has an initial decision?
+My first reason:
+One thing I corrected:
+Repair: https://nolankido.com/poker/starting-hand-decisions/#position
+
+2. Preflop: add only what is missing
+For this scripted practice hand, you raise to 6 total and the small blind folds. The big blind already posted 2 on this betting round and faces your total wager of 6. The current pot is your 6, the folded small blind's 1 and the big blind's 2: 9.
+How many additional counters does the big blind need to call?
+My first reason:
+One thing I corrected:
+Repair: https://nolankido.com/poker/first-decisions/#chips-owed
+
+3. The flop: name what you have now
+The big blind calls. The flop, the first three shared cards, is jack of spades, seven of hearts and two of hearts. The big blind checks, meaning it makes no bet. Your private cards remain ace of hearts and jack of hearts.
+Which description fits your cards on this flop?
+My first reason:
+One thing I corrected:
+Repair: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+
+4. A flop raise: count this round again
+The scripted line continues: you bet 4 and the big blind raises to 12 total on the flop. The pot is now the previous 13 plus your 4 plus the opponent's 12: 29. Your preflop contribution belongs to an earlier round.
+How many more counters would a flop call add?
+My first reason:
+One thing I corrected:
+Repair: https://nolankido.com/poker/first-decisions/#chips-owed
+
+5. The river: rebuild the hand
+You call the extra 8. The turn is nine of clubs; both players check, so nobody pays more on that round. The river is four of diamonds, the last shared card. The big blind bets 10 into the pot of 37, making the current pot 47.
+Which statement is justified before you decide?
+My first reason:
+One thing I corrected:
+Repair: https://nolankido.com/poker/turn-and-river-decisions/#river-reset
+
+6. Showdown: separate the result and the reason
+For the final scripted action, you call 10. The big blind reveals queen of hearts and jack of diamonds. Compare each player's best five. This is one fictional ending, not evidence about how frequently an actual opponent bluffs or bets for value.
+Which conclusion follows from this ending?
+My first reason:
+One thing I corrected:
+Repair: https://nolankido.com/poker/ranges-for-beginners/#one-reveal
+
+RETURN LATER
+At the next study session, explain two checkpoint situations with the lesson closed.
+On a later day, try their changed situations. Use one repair link for any gap.
+This is a suggested routine, not a tested optimal poker-study schedule.
+Date I returned:
+What I could explain without looking:
+One question for the next visit:
+
+Completing this card does not establish profitable play or readiness to risk money.
+Fictional practice is enough. Do not upload private hand notes or identifying information.
+Prepared with AI assistance. October 15, 2026. Blank educational worksheet.

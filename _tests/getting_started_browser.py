@@ -9,6 +9,7 @@ from playwright.sync_api import sync_playwright,expect
 from field_guide_browser import QuietHandler,ROOT
 from learning_path_browser import SPACING
 from holdem_essay_browser import position
+from native_fragment import follow_fragment
 ROUTE='/poker/getting-started/'
 TITLE='Get started with no-limit Texas Hold’em'
 
@@ -36,23 +37,20 @@ def main():
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),width
                 if shots and width in [390,1440]:page.screenshot(path=str(shots/f'getting-started-opening-{width}.png'))
                 page.locator('.reader-outline').first.locator('summary').press('Enter')
-                page.locator('.reader-outline').first.locator('a[href="#format"]').press('Enter')
-                expect(page.locator('#format')).to_be_in_viewport()
+                follow_fragment(page, page.locator('.reader-outline').first.locator('a[href="#format"]'), '#format')
                 table=page.locator('.session-table');table.focus();table.press('ArrowRight')
                 if width<768:page.wait_for_function('e=>e.scrollWidth>e.clientWidth && e.scrollLeft>0',arg=table.element_handle())
-                page.locator('.reader-outline').first.locator('a[href="#math"]').press('Enter')
-                expect(page.locator('#math')).to_be_in_viewport()
+                follow_fragment(page, page.locator('.reader-outline').first.locator('a[href="#math"]'), '#math')
                 question=page.locator('#price-check').locator('..');explanation=question.locator('details > div')
                 expect(explanation).not_to_be_visible()
                 question.locator('summary').press('Enter');expect(explanation).to_be_visible()
                 expect(explanation).to_contain_text('+$2.40')
                 if shots and width in [390,1440]:
                     position(page,page.locator('#price-check'));page.screenshot(path=str(shots/f'getting-started-practice-{width}.png'))
-                page.locator('.reader-outline').first.locator('a[href="#month"]').press('Enter')
-                expect(page.locator('#month')).to_be_in_viewport()
+                follow_fragment(page, page.locator('.reader-outline').first.locator('a[href="#month"]'), '#month')
                 if shots and width in [390,1440]:
                     position(page,page.locator('#month'));page.screenshot(path=str(shots/f'getting-started-month-{width}.png'))
-                page.locator('main a[href="#source-tda"]').first.press('Enter')
+                follow_fragment(page, page.locator('main a[href="#source-tda"]').first, '#source-tda')
                 source=page.locator('#source-tda');expect(source).to_be_in_viewport()
                 metrics=source.evaluate('''async e=>{
                     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));

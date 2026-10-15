@@ -7,6 +7,9 @@ import re
 import poker_library
 import poker_resources
 import poker_content
+import poker_beginner_path
+import poker_checkpoint
+import poker_course
 
 
 class Glossary(HTMLParser):
@@ -61,6 +64,7 @@ class GuideText(HTMLParser):
         self.current = {'anchor': '', 'title': 'Introduction', 'parts': []}
         self.skip = 0
         self.heading = False
+        self.course_heading = False
         self.feed(re.sub(r'\$\{[a-z_]+\}', '', source))
         self.finish()
 
@@ -79,7 +83,17 @@ class GuideText(HTMLParser):
             if tag not in self.VOID:
                 self.skip = 1
             return
-        if tag == 'h2':
+        if 'data-course-scene' in attrs:
+            self.finish()
+            anchor = attrs.get('id', '')
+            if not re.fullmatch(r'course-scene-[a-z]+', anchor):
+                raise ValueError('Unsafe course scene anchor')
+            self.current = {'anchor': anchor, 'title': '', 'parts': []}
+            self.course_heading = True
+        elif tag == 'h3' and self.course_heading:
+            self.heading = True
+            self.course_heading = False
+        elif tag == 'h2':
             self.finish()
             anchor = attrs.get('id', '')
             if anchor and not re.fullmatch(r'[a-zA-Z0-9_-]+', anchor):
@@ -98,7 +112,7 @@ class GuideText(HTMLParser):
             if tag not in self.VOID:
                 self.skip -= 1
             return
-        if tag == 'h2':
+        if tag == 'h2' or (tag == 'h3' and self.heading):
             self.heading = False
         elif tag in {'p', 'li', 'td', 'th', 'h3'}:
             self.current['parts'].append(' ')
@@ -123,6 +137,8 @@ def guide_sections(root: Path, page: dict, catalog: dict) -> list[dict]:
         if not path.is_relative_to((root / '_source').resolve()):
             raise ValueError('Search sources must be public manifest sources')
         source = path.read_text(encoding='utf-8')
+        if page['path'] == poker_course.ROUTE:
+            source = poker_checkpoint.decorate(page, poker_beginner_path.decorate(page, source, root), root)
     return GuideText(source).sections
 
 

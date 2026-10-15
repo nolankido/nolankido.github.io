@@ -71,6 +71,10 @@ def main():
                                      ('/poker/topics/learn/', 'main a'),
                                      ('/poker/free-poker-learning-path/', 'aside a')]:
                 page.goto(origin + source)
+                if source == '/poker/':
+                    page.locator('.poker-goal-grid a[href="/poker/free-poker-learning-path/"]').press('Enter')
+                    page.wait_for_url(origin + '/poker/free-poker-learning-path/', wait_until='load')
+                    selector = 'aside a'
                 link = page.locator(selector + '[href="' + ROUTE + '"]').first
                 link.focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(origin + ROUTE)
@@ -92,7 +96,9 @@ def main():
             offline.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             static = offline.new_page()
             static.goto(origin + '/poker/')
-            static.locator('.poker-goal-grid a[href="' + ROUTE + '"]').click()
+            static.locator('.poker-goal-grid a[href="/poker/free-poker-learning-path/"]').press('Enter')
+            static.wait_for_url(origin + '/poker/free-poker-learning-path/', wait_until='load')
+            static.locator('aside a[href="' + ROUTE + '"]').first.press('Enter')
             expect(static.locator('details.viewer-question')).to_have_count(12)
             static.locator('#check-call summary').focus(); static.keyboard.press('Enter')
             expect(static.locator('#check-call div')).to_contain_text('4 more')

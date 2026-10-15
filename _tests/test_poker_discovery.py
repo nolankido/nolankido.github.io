@@ -9,6 +9,7 @@ import html5lib
 from test_site import ROOT, build
 import poker_discovery
 import poker_routes_history as history
+import poker_course_history
 
 
 class PokerDiscoveryTests(unittest.TestCase):
@@ -24,8 +25,9 @@ class PokerDiscoveryTests(unittest.TestCase):
         b = self.baseline
         self.assertEqual(b['commit'], 'f05bea77919b097a53ce341f9dd34f888b6ec841')
         self.assertEqual(history.pages(self.pages), b['pages'])
-        self.assertEqual(set(map(str, self.outputs)), set(b['outputs']))
-        for path, value in self.outputs.items():
+        previous = poker_course_history.outputs(self.outputs)
+        self.assertEqual(set(map(str, previous)), set(b['outputs']))
+        for path, value in previous.items():
             self.assertEqual(sha256(history.before(path, value).encode()).hexdigest(), b['outputs'][str(path)], path)
         for path, digest in {**b['files'], **b['extras']}.items():
             self.assertEqual(sha256(history.before(path, (ROOT / path).read_bytes())).hexdigest(), digest, path)
@@ -34,13 +36,13 @@ class PokerDiscoveryTests(unittest.TestCase):
         routes = {p['path'] for p in self.pages if p.get('poker_guide') or p.get('poker_entry') or p.get('note') or p.get('living_well_entry') or p.get('evidence_article') or p.get('worked_guide')}
         for route in routes:
             path = build.output_path(route)
-            self.assertEqual(sha256(self.outputs[path].encode()).hexdigest(), self.baseline['outputs'][str(path)], route)
+            self.assertEqual(sha256(poker_course_history.before(path,self.outputs[path]).encode()).hexdigest(), self.baseline['outputs'][str(path)], route)
         for path, digest in self.baseline['outputs'].items():
             if path.endswith('feed.xml') or path == 'writing.xml':
-                self.assertEqual(sha256(self.outputs[Path(path)].encode()).hexdigest(), digest, path)
+                self.assertEqual(sha256(poker_course_history.before(path,self.outputs[Path(path)]).encode()).hexdigest(), digest, path)
         for path, digest in self.baseline['files'].items():
             if path.startswith(('assets/', 'downloads/')):
-                self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), digest, path)
+                self.assertEqual(sha256(poker_course_history.before(path,(ROOT / path).read_bytes())).hexdigest(), digest, path)
 
     def test_old_hub_fragment_destinations_survive(self):
         for route in poker_discovery.HUBS:

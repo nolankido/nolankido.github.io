@@ -15,6 +15,7 @@ import build
 import check_live
 import poker_beginner_path as path
 import poker_checkpoint
+import poker_course
 import poker_library
 import learning_path_history as history
 import ranges_history
@@ -30,6 +31,7 @@ class LearningPathTests(unittest.TestCase):
     def setUpClass(cls):
         cls.pages = ranges_history.pages(build.public_pages())
         cls.current_outputs = build.build_outputs()
+        cls.current_pages = build.public_pages()
         cls.outputs = ranges_history.outputs(cls.current_outputs)
         cls.baseline = json.loads((ROOT / '_tests/learning-path-baseline.json').read_text())
         cls.addition = (ROOT / ADDITION).read_text()
@@ -70,8 +72,10 @@ class LearningPathTests(unittest.TestCase):
     def test_old_study_plan_is_exact_and_only_its_existing_feed_item_is_revised(self):
         original = (ROOT / SOURCE).read_text()
         decorated = path.decorate(self.page, original, ROOT)
-        self.assertEqual(decorated.replace(self.addition, '', 1), original)
-        self.assertEqual(decorated.count(self.addition), 1)
+        additions = poker_course.guided_hand(ROOT) + poker_course.overview(ROOT, self.addition)
+        self.assertEqual(decorated.count(additions), 1)
+        self.assertEqual(decorated.replace(additions, '', 1), original)
+        self.assertEqual(decorated.count('id="beginner-practice"'), 1)
         for feed, old in self.baseline['feed_items'].items():
             now = {i.findtext('link'): ET.tostring(i, encoding='unicode')
                    for i in ET.fromstring(self.outputs[Path(feed)]).findall('./channel/item')}
@@ -88,11 +92,11 @@ class LearningPathTests(unittest.TestCase):
     def test_four_complete_readiness_checks_have_exact_repair_destinations(self):
         tags = Tags(self.addition).items
         questions = [a for tag, a in tags if tag == 'details']
-        self.assertEqual([a['id'] for a in questions], ['path-check-' + v for v in ['cards', 'starting', 'flop', 'river']])
+        self.assertEqual([a['id'] for a in questions], ['path-check-' + v for v in ['cards', 'starting', 'flop', 'river', 'ranges', 'purpose']])
         self.assertTrue(all('open' not in a for a in questions))
         repairs = ['first-decisions/#chips-owed', 'starting-hand-decisions/#position',
                    'first-flop-decisions/#made-and-drawing', 'turn-and-river-decisions/#catching-a-bluff']
-        for a, repair in zip(questions, repairs):
+        for a, repair in zip(questions[:4], repairs):
             answer = re.search('id="' + a['id'] + r'".*?<div>(.*?)</div></details>', self.addition, re.S)[1]
             self.assertIn('href="/poker/' + repair + '"', answer)
             self.assertGreater(len(re.sub('<[^>]+>', ' ', answer).split()), 65)
@@ -122,22 +126,22 @@ class LearningPathTests(unittest.TestCase):
     def test_all_four_lessons_have_native_order_current_marker_and_private_download(self):
         routes = ['/poker/' + slug + '/' for slug, _ in path.LESSONS]
         for i, route in enumerate(routes):
-            page = next(p for p in self.pages if p['path'] == route)
-            nav = path.navigation(page, self.pages)
+            page = next(p for p in self.current_pages if p['path'] == route)
+            nav = path.navigation(page, self.current_pages)
             tags = Tags(nav).items
             current = [(tag, a) for tag, a in tags if a.get('aria-current') == 'page']
             self.assertEqual(current, [('span', {'aria-current': 'page'})])
             self.assertNotIn('href="' + route + '"', nav)
             lesson_links = [a['href'] for tag, a in tags if tag == 'a' and a['href'] in routes]
             self.assertEqual(lesson_links, [v for v in routes if v != route])
-            self.assertIn('Lesson ' + str(i + 1) + ' of 4', nav)
+            self.assertIn('Lesson ' + str(i + 1) + ' of 6', nav)
             self.assertIn('href="' + path.PATH + '"', nav)
             self.assertIn('href="' + path.DOWNLOAD + '" download', nav)
-            self.assertIn(nav, self.outputs[build.output_path(route)])
-        for page in self.pages:
-            self.assertEqual(bool(path.navigation(page, self.pages)), page['path'] in routes)
-        missing = [p for p in self.pages if p['path'] != routes[-1]]
-        with self.assertRaises(ValueError): path.navigation(next(p for p in self.pages if p['path'] == routes[0]), missing)
+            self.assertIn(nav, self.current_outputs[build.output_path(route)])
+        for page in self.current_pages:
+            self.assertEqual(bool(path.navigation(page, self.current_pages)), page['path'] in routes)
+        missing = [p for p in self.current_pages if p['path'] != routes[-1]]
+        with self.assertRaises(ValueError): path.navigation(next(p for p in self.current_pages if p['path'] == routes[0]), missing)
         with self.assertRaises(ValueError): path.decorate(self.page, '<p>No insertion point.</p>', ROOT)
         once = path.decorate(self.page, (ROOT / SOURCE).read_text(), ROOT)
         with self.assertRaises(ValueError): path.decorate(self.page, once, ROOT)
@@ -145,24 +149,24 @@ class LearningPathTests(unittest.TestCase):
     def test_worksheet_discovery_reading_estimate_schema_and_live_bytes(self):
         worksheet = (ROOT / path.DOWNLOAD.lstrip('/')).read_bytes()
         self.assertIn(b'What I can explain without looking:', worksheet)
-        self.assertEqual(worksheet.count(b'[ ]'), 4)
+        self.assertEqual(worksheet.count(b'[ ]'), 6)
         for slug, _ in path.LESSONS: self.assertIn(('https://nolankido.com/poker/' + slug + '/').encode(), worksheet)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 461)
+        self.assertEqual(len(targets), 463)
         self.assertEqual(targets[path.DOWNLOAD], (200, worksheet))
         self.assertEqual(targets['/' + path.CSS], (200, (ROOT / path.CSS).read_bytes()))
-        for p in self.pages:
-            self.assertEqual('/' + path.CSS + '?v=' in self.outputs[build.output_path(p['path'])], p['path'] in ['/poker/' + slug + '/' for slug, _ in path.LESSONS])
-        text = self.outputs[build.output_path(ROUTE)]
+        for p in self.current_pages:
+            self.assertEqual('/' + path.CSS + '?v=' in self.current_outputs[build.output_path(p['path'])], p['path'] in ['/poker/' + slug + '/' for slug, _ in path.LESSONS])
+        text = self.current_outputs[build.output_path(ROUTE)]
         self.assertEqual(targets[ROUTE], (200, self.current_outputs[build.output_path(ROUTE)].encode()))
-        self.assertIn(path.PATH, self.outputs[Path('poker/topics/learn/index.html')])
+        self.assertIn(path.PATH, self.current_outputs[Path('poker/topics/learn/index.html')])
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', text, re.S)[1])
-        self.assertEqual((schema['datePublished'], schema['dateModified']), ('2026-10-08', '2026-10-14'))
+        self.assertEqual((schema['datePublished'], schema['dateModified']), ('2026-10-08', '2026-10-15'))
         entries = poker_library.load(ROOT, build.public_pages())
         entry = next(e for e in entries if e['route'] == ROUTE)
         self.assertEqual(entry['minutes'], poker_library.minutes(poker_checkpoint.decorate(self.page, path.decorate(self.page, (ROOT / SOURCE).read_text(), ROOT), ROOT)))
-        self.assertIn('beginner-practice-heading', self.outputs[Path('find/index.html')])
-        payload = re.search(r'id="find-section-data">(.*?)</script>', self.outputs[Path('find/index.html')], re.S)[1]
+        self.assertIn('beginner-practice-heading', self.current_outputs[Path('find/index.html')])
+        payload = re.search(r'id="find-section-data">(.*?)</script>', self.current_outputs[Path('find/index.html')], re.S)[1]
         self.assertLess(len(payload.encode()), 60_000)
 
     def test_no_new_runtime_and_unrelated_files_remain_exact(self):
