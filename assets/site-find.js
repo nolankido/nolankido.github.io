@@ -36,7 +36,8 @@
     return (baseMatch ? 1000 : searchTitleMatch ? 750 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
   }
   function decodeSections(data) {
-    if (!data || ![2, 3].includes(data.version) || !data.pages || typeof data.pages !== 'object' || Array.isArray(data.pages)) return {};
+    if (!data || ![2, 3, 4].includes(data.version) || !data.pages || typeof data.pages !== 'object' || Array.isArray(data.pages)) return {};
+    if (data.version === 4 && (!Array.isArray(data.labels) || data.labels.some(label => typeof label !== 'string' || !label.trim()))) return {};
     const result = Object.create(null);
     const entries = [];
     if (data.version === 2) entries.push(...Object.entries(data.pages));
@@ -51,8 +52,10 @@
       if (!/^\/(?:[a-z0-9-]+\/)*$/.test(path) || !Array.isArray(flat) || flat.length % 2) continue;
       const rows = [];
       for (let i = 0; i < flat.length; i += 2) {
-        if (typeof flat[i] !== 'string' || !/^[A-Za-z0-9_-]+$/.test(flat[i]) || typeof flat[i + 1] !== 'string' || !flat[i + 1].trim()) continue;
-        rows.push([flat[i], flat[i + 1]]);
+        const value = flat[i + 1];
+        const label = data.version === 4 && Number.isInteger(value) && value >= 0 ? data.labels[value] : value;
+        if (typeof flat[i] !== 'string' || !/^[A-Za-z0-9_-]+$/.test(flat[i]) || typeof label !== 'string' || !label.trim()) continue;
+        rows.push([flat[i], label]);
       }
       result[path] = rows;
     }

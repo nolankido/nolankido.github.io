@@ -1,0 +1,22 @@
+.budget-guide :is(h2, h3, .budget-sources li) { scroll-margin-top: 12rem; }
+.budget-guide .budget-comparison { max-width: 100%; overflow-x: auto; margin: 1.5rem 0 .5rem; }
+.budget-guide .budget-comparison .viewer-table { min-width: 46rem; margin: 0; table-layout: auto; }
+.budget-guide .budget-comparison:focus-visible { outline: 3px solid var(--accent, #b42332); outline-offset: 3px; }
+.budget-guide .budget-scroll-hint { font-size: .9em; color: var(--muted, #48534b); }
+.budget-guide .budget-equations { padding-left: 1.5rem; }
+.budget-guide .budget-equations li { margin-bottom: .75rem; }
+.budget-guide .budget-check { margin: 2rem 0; padding: 1rem; border: 1px solid var(--line, #bdbdb4); }
+.budget-guide .budget-check h3 { margin-top: 0; }
+.budget-guide .budget-result { padding-left: 1rem; border-left: 3px solid var(--accent, #b42332); }
+.budget-guide .budget-sources { padding-left: 1.5rem; }
+.budget-guide .budget-sources li { margin-bottom: 1.2rem; }
+.budget-guide .budget-sheet { white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (min-width: 60rem) { .budget-guide .budget-scroll-hint { display: none; } }
+@media print {
+  .budget-guide .budget-comparison { overflow: visible; }
+  .budget-guide .budget-comparison .viewer-table { min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .budget-guide .budget-scroll-hint { display: none; }
+  .budget-guide .budget-check { padding: .5rem; }
+  .budget-guide .budget-check details > div { display: block !important; }
+  .budget-guide .budget-check details::details-content { content-visibility: visible !important; }
+}

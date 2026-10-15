@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>What does a $400 poker tournament really cost?</title>
+      <link>https://nolankido.com/poker/tournament-trip-budget/</link>
+      <description>Plan a poker tournament trip budget: three worked $400 WSOP Circuit examples separate entry fees, travel, hotels, meals, re-entry reserves, time and actual profit.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournament-trip-budget/</guid>
+      <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
     <item>
       <title>AI and personal productivity: what actually helps</title>
       <link>https://nolankido.com/living-well/ai-and-personal-productivity/</link>

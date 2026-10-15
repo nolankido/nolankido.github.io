@@ -7,6 +7,13 @@
     <language>en-us</language>
     <atom:link href="https://nolankido.com/poker/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>What does a $400 poker tournament really cost?</title>
+      <link>https://nolankido.com/poker/tournament-trip-budget/</link>
+      <description>Plan a poker tournament trip budget: three worked $400 WSOP Circuit examples separate entry fees, travel, hotels, meals, re-entry reserves, time and actual profit.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/tournament-trip-budget/</guid>
+      <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Poker under uncertainty: probability, inference and decisions</title>
       <link>https://nolankido.com/poker/poker-under-uncertainty/</link>
       <description>An advanced poker essay on probability, Bayesian ranges, expected value, variance, ICM and decision quality, with fictional models and reproducible calculations.</description>

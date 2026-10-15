@@ -1251,5 +1251,18 @@
     "date": "2026-10-14",
     "updated": "2026-10-14",
     "poker_guide": true
+  },
+  {
+    "id": "poker-tournament-trip-budget",
+    "path": "/poker/tournament-trip-budget/",
+    "title": "What does a $400 poker tournament really cost?",
+    "seo_title": "$400 Poker Tournament Trip Budget | Nolan Kido",
+    "description": "Plan a poker tournament trip budget: three worked $400 WSOP Circuit examples separate entry fees, travel, hotels, meals, re-entry reserves, time and actual profit.",
+    "kicker": "Poker / Tournament planning",
+    "source": "poker/tournament-trip-budget.html",
+    "section": "poker",
+    "date": "2026-10-15",
+    "updated": "2026-10-15",
+    "poker_guide": true
   }
 ]
