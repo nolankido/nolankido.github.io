@@ -18,6 +18,7 @@ import checkpoint_history
 import productivity_history
 import holdem_essay_history
 import uncertainty_history
+import comics_history
 import getting_started_history
 ROOT=Path(__file__).resolve().parents[1]
 ROUTE='/technology/should-i-use-ai/'
@@ -29,6 +30,8 @@ NEW_SOURCES |= set(holdem_essay_history.change()['new_files'])
 NEW_OUTPUTS.add(holdem_essay_history.OUTPUT)
 NEW_SOURCES |= set(uncertainty_history.change()['new_files'])
 NEW_OUTPUTS.add(uncertainty_history.OUTPUT)
+NEW_SOURCES |= set(comics_history.change()['new_files'])
+NEW_OUTPUTS |= set(comics_history.change()['new_outputs'])
 NEW_SOURCES |= set(getting_started_history.change()['new_files'])
 NEW_OUTPUTS.add(getting_started_history.OUTPUT)
 

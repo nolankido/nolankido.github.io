@@ -24,7 +24,7 @@ class GettingStartedTests(unittest.TestCase):
 
     def test_exact_predecessor_and_unreviewed_mutation_guards(self):
         b=self.baseline
-        self.assertEqual((b['commit'],len(b['pages']),len(b['outputs']),len(b['files'])),('c929afb071095d529842873bee6bba05e6060eac',181,208,424))
+        self.assertEqual((b['commit'],len(b['pages']),len(b['outputs']),len(b['files'])),('8ee741485accf624b7bd2c3f47bb66d382eff230',184,211,430))
         self.assertEqual(history.pages(self.pages),b['pages'])
         original=history.outputs(self.outputs);self.assertEqual(set(map(str,original)),set(b['outputs']))
         for p,v in original.items():self.assertEqual(sha256(v.encode()).hexdigest(),b['outputs'][str(p)],str(p))
@@ -96,7 +96,7 @@ assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
         self.assertEqual(run.returncode,0,run.stderr)
 
     def test_learning_routes_native_explanations_source_scope_and_private_sheet(self):
-        arrivals=['/poker/','/poker/topics/learn/','/poker/topics/cash-games/','/poker/topics/tournaments/','/poker/topics/study/','/poker/library/','/poker/free-poker-learning-path/','/poker/start-here/','/poker/no-limit-holdem-guide/','/poker/first-live-cash-game/','/poker/first-live-tournament/','/notes/','/find/','/poker/find/']
+        arrivals=['/poker/','/poker/topics/learn/','/poker/topics/cash-games/','/poker/topics/tournaments/','/poker/topics/study/','/poker/library/','/poker/free-poker-learning-path/','/poker/start-here/','/poker/no-limit-holdem-guide/','/poker/first-live-cash-game/','/poker/first-live-tournament/','/poker/comics/','/notes/','/find/','/poker/find/']
         for route in arrivals:self.assertIn(ROUTE,self.outputs[build.output_path(route)],route)
         for p in ['writing.xml','poker/feed.xml','sitemap.xml']:self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(p)])
         self.assertEqual(len(search_sections.headings(self.html)),16)
@@ -111,7 +111,7 @@ assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
         self.assertIn('They have not been validated as a teaching curriculum with actual beginners',self.text)
         self.assertNotIn('Correctly rank 20',self.text)
         self.assertNotRegex(self.html,r'|```|'+chr(8212)+r'|<form|<input|<textarea|<iframe')
-        self.assertEqual(len(check_live.targets()),432)
+        self.assertEqual(len(check_live.targets()),438)
         for p in [ROUTE,'/assets/poker-session.css','/downloads/poker-first-session.md']:
             self.assertIn(p,check_live.targets())
         worksheet=(ROOT/'downloads/poker-first-session.md').read_text()

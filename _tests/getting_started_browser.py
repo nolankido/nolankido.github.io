@@ -66,7 +66,7 @@ def main():
                     bad=page.evaluate("async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))}")
                     assert not bad,(width,bad);report['axe'].append({'width':width,'violations':bad})
                 report['widths'].append(width)
-            arrivals=['/poker/','/poker/topics/learn/','/poker/topics/cash-games/','/poker/topics/tournaments/','/poker/library/','/poker/free-poker-learning-path/','/poker/start-here/','/poker/no-limit-holdem-guide/','/poker/first-live-cash-game/','/poker/first-live-tournament/','/notes/']
+            arrivals=['/poker/','/poker/topics/learn/','/poker/topics/cash-games/','/poker/topics/tournaments/','/poker/library/','/poker/free-poker-learning-path/','/poker/start-here/','/poker/no-limit-holdem-guide/','/poker/first-live-cash-game/','/poker/first-live-tournament/','/poker/comics/','/notes/']
             for route in arrivals:
                 page.goto(origin+route)
                 if route.startswith('/poker/topics/'):
@@ -95,7 +95,7 @@ def main():
             assert static.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
             assert not errors,errors;browser.close()
     finally:server.shutdown();server.server_close()
-    print('PASS: explained practice, keyboard outline and table scrolling, eleven integrated routes, section search, four widths, text spacing, print, no JavaScript and no data collection.')
+    print('PASS: explained practice, keyboard outline and table scrolling, twelve integrated routes, section search, four widths, text spacing, print, no JavaScript and no data collection.')
     print(json.dumps(report,indent=2))
 
 if __name__=='__main__':main()

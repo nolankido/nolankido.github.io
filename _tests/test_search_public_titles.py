@@ -57,7 +57,7 @@ class SearchPublicTitlesTests(unittest.TestCase):
     def test_exact_public_titles_are_escaped_and_invalid_metadata_fails_closed(self):
         expected = {p['path']: p for p in self.pages if site_find.eligible(p)}
         cards = Page(site_find.render(self.items)).tags('li')
-        self.assertEqual(len(cards), 162)
+        self.assertEqual(len(cards), 165)
         for item, card in zip(self.items, cards):
             self.assertEqual(item['search_title'], expected[item['path']]['seo_title'])
             self.assertEqual(card['data-search-title'], item['search_title'])
@@ -76,7 +76,7 @@ class SearchPublicTitlesTests(unittest.TestCase):
 
     def test_real_missed_queries_ranking_sections_and_old_match_preservation(self):
         packed = json.loads(re.search(r'id="find-section-data">(.*?)</script>', self.outputs[Path('find/index.html')], re.S)[1])
-        sections = {p:[v[i:i+2] for i in range(0,len(v),2)] for p,v in packed['pages'].items()}
+        sections = {('/'+g+'/'+s if g else '/'):[v[i:i+2] for i in range(0,len(v),2)] for g,entries in packed['pages'].items() for s,v in entries.items()}
         rows = [dict(r, searchTitle=r['search_title'], subjects=' '.join(r['interests']), sections=sections[r['path']]) for r in self.items]
         old = history.before('assets/site-find.js', (ROOT / 'assets/site-find.js').read_text())
         code = r'''

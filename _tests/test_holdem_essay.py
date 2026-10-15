@@ -72,7 +72,7 @@ class HoldemEssayTests(unittest.TestCase):
         for value in ['$167 - $80 = +$87','34.97%','19.57%','16.67%','+$3.48','$30 / $120 = 25%','$150','20%']:
             self.assertIn(value,self.text)
 
-    def test_lossless_search_keeps_every_old_heading_under_original_budget(self):
+    def test_lossless_search_keeps_every_old_heading_under_reviewed_budget(self):
         raw=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[search_sections.PAGE],re.S)[1]
         self.assertLess(len(raw.encode()),60000)
         canonical=search_sections.index(self.outputs,self.pages)

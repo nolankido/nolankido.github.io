@@ -60,7 +60,7 @@ class AuthorArchiveTests(unittest.TestCase):
         schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
         listing=schema['mainEntity'];parser=ArchiveParser(raw)
         self.assertEqual(listing['numberOfItems'],101)
-        self.assertEqual([v['position'] for v in listing['itemListElement']],list(range(1,101)))
+        self.assertEqual([v['position'] for v in listing['itemListElement']],list(range(1,102)))
         by_id={p['id']:p for p in self.entries}
         self.assertEqual([(v['url'],v['name']) for v in listing['itemListElement']], [('https://nolankido.com'+by_id[k]['path'],by_id[k]['title']) for k in parser.ids])
         self.assertEqual(schema['creator']['@id'],'https://nolankido.com/about/#nolan-kido')
