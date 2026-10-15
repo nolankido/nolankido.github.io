@@ -194,7 +194,7 @@ class CheckpointTests(unittest.TestCase):
             href=a.get('href','')
             if href.startswith('/poker/') and '#' in href:
                 route,anchor=href.split('#');self.assertIn('id="'+anchor+'"',self.outputs[build.output_path(route)],href)
-        targets=check_live.targets();self.assertEqual(len(targets),436)
+        targets=check_live.targets();self.assertEqual(len(targets),438)
         self.assertEqual(targets['/'+checkpoint.SHEET],(200,(ROOT/checkpoint.SHEET).read_bytes()))
         self.assertEqual(targets[checkpoint.ROUTE],(200,self.current_outputs[build.output_path(checkpoint.ROUTE)].encode()))
         body=(ROOT/'_source/poker/free-poker-learning-path.html').read_text()
