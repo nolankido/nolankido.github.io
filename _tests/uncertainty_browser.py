@@ -67,8 +67,12 @@ def main():
                 report['widths'].append(width)
             for route in ['/poker/topics/strategy/','/poker/topics/research/','/poker/library/','/poker/poker-math-reference/','/poker/poker-research-guide/','/notes/']:
                 page.goto(origin+route)
+                if route.startswith('/poker/topics/'):
+                    page.locator('details.topic-guides > summary').press('Enter')
+                    expect(page.locator('details.topic-guides')).to_have_attribute('open','')
                 if route=='/notes/':page.locator('#archive-poker summary').press('Enter')
-                page.locator('main a[href="'+ROUTE+'"]').first.press('Enter')
+                link=page.locator('main a[href="'+ROUTE+'"]').first
+                expect(link).to_be_visible();link.press('Enter')
                 page.wait_for_url(origin+ROUTE,wait_until='load');report['arrivals']+=1
             page.goto(origin+'/find/');page.locator('#find-query').fill('Bayes');page.locator('#find-query').press('Enter')
             page.locator('.find-section-matches a[href="'+ROUTE+'#bayes"]').press('Enter')
