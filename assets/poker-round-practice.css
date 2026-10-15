@@ -1,0 +1,32 @@
+/* Match the course's existing paper, ink and red accent. */
+.round-practice { margin:36px 0; padding:clamp(14px,3vw,28px); border:1px solid var(--line-dark); background:var(--paper-light); scroll-margin-top:160px; }
+.round-practice > h2 { margin-top:0; }
+.round-practice :where(h3,h4,.round-feedback) { scroll-margin-top:160px; }
+.round-starts { display:flex; flex-wrap:wrap; gap:12px 24px; margin:24px 0; }
+.round-starts a { display:inline-flex; align-items:center; min-height:44px; }
+.round-case { padding-top:24px; border-top:1px solid var(--line-dark); scroll-margin-top:160px; }
+.round-table { table-layout:fixed; width:100%; font-size:clamp(.76rem,2.6vw,.95rem); }
+.round-table :where(th,td) { overflow-wrap:anywhere; }
+.round-current { background:var(--panel); }
+.round-turn { font:700 1.1rem/1.6 var(--sans); margin:24px 0 12px; }
+.round-totals { font:.82rem/1.7 var(--mono)!important; }
+.round-practice fieldset { min-width:0; border:0; padding:0; margin:24px 0; }
+.round-practice legend { font:700 1rem/1.5 var(--sans); margin-bottom:14px; }
+.round-practice label { display:block; margin:16px 0; font:600 .9rem/1.6 var(--sans); }
+.round-practice :where(select,input) { display:block; width:min(100%,340px); min-height:44px; padding:10px; margin-top:8px; border:1px solid var(--line-dark); border-radius:0; background:var(--paper); color:var(--ink); font:1rem/1.5 var(--sans); }
+.round-practice input:disabled { background:var(--panel); }
+.round-practice input[aria-invalid=true] { border:2px solid var(--red); }
+.round-practice button { min-height:44px; padding:10px 14px; font:600 .9rem/1.5 var(--sans); background:var(--basalt); color:var(--paper-light); border:1px solid var(--basalt); cursor:pointer; }
+.round-input-help,.round-privacy { font-size:.85rem!important; }
+.round-feedback { font:600 .95rem/1.6 var(--sans)!important; }
+.round-review { margin:24px 0; }
+.round-practice :where(input,select,button,summary,a,h3,h4,.round-feedback):focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+.round-practice [hidden] { display:none!important; }
+@media print {
+  .round-practice { padding:0; border:0; background:white; }
+  .round-practice [data-round-case][hidden],.round-practice [data-round-native][hidden] { display:block!important; }
+  .round-practice [data-round-live],.round-starts { display:none!important; }
+  .round-practice details > div { display:block!important; }
+  .round-practice details::details-content { content-visibility:visible!important; }
+  .round-case { break-inside:avoid; }
+}

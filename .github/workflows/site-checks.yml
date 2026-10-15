@@ -40,6 +40,7 @@ jobs:
           node --check assets/poker-course.js
           node --check assets/poker-beginner-practice.js
           node --check assets/poker-hand-lab.js
+          node --check assets/poker-round-practice.js
   browser:
     name: Browser / ${{ matrix.group }}
     needs: build
@@ -59,7 +60,7 @@ jobs:
           - group: accessibility
             suites: overview_browser cash_selection_browser review_browser
           - group: poker
-            suites: poker_browser workshops_browser library_browser labs_browser field_guide_browser collections_browser finder_browser topics_browser full_resource_browser beginner_browser preflop_browser flop_browser river_browser learning_path_browser ranges_browser betting_browser checkpoint_browser holdem_essay_browser uncertainty_browser getting_started_browser tournament_budget_browser thunder_valley_browser multiway_essay_browser short_stack_flagship_browser poker_discovery_browser poker_course_browser poker_practice_browser hand_lab_browser
+            suites: poker_browser workshops_browser library_browser labs_browser field_guide_browser collections_browser finder_browser topics_browser full_resource_browser beginner_browser preflop_browser flop_browser river_browser learning_path_browser ranges_browser betting_browser checkpoint_browser holdem_essay_browser uncertainty_browser getting_started_browser tournament_budget_browser thunder_valley_browser multiway_essay_browser short_stack_flagship_browser poker_discovery_browser poker_course_browser poker_practice_browser hand_lab_browser round_practice_browser
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:

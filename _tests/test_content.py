@@ -101,6 +101,7 @@ class ContentTests(unittest.TestCase):
             if path == Path('poker/free-poker-learning-path/index.html'):
                 expected.insert(len(expected)-1, '/assets/poker-course.js?v=' + hashlib.sha256((ROOT / 'assets/poker-course.js').read_bytes()).hexdigest()[:12])
                 expected.insert(len(expected)-1, '/assets/poker-hand-lab.js?v=' + hashlib.sha256((ROOT / 'assets/poker-hand-lab.js').read_bytes()).hexdigest()[:12])
+                expected.insert(len(expected)-1, '/assets/poker-round-practice.js?v=' + hashlib.sha256((ROOT / 'assets/poker-round-practice.js').read_bytes()).hexdigest()[:12])
             self.assertEqual(sources, expected)
         self.assertNotIn('<form', outputs[Path('resources/index.html')])
         self.assertNotIn('reason for contact, and your message', outputs[Path('privacy/index.html')])

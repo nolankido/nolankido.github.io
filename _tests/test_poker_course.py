@@ -15,6 +15,7 @@ import poker_course as course
 import poker_finder
 import poker_course_history as history
 import poker_practice_history
+import round_practice_history
 
 
 def document(source):
@@ -63,7 +64,7 @@ class PokerCourseTests(unittest.TestCase):
                 continue
             if page.get('poker_guide') or page.get('poker_entry') or page.get('note') or page.get('worked_guide') or page.get('living_well_entry') or page['path'] in {'/', '/about/', '/contact/'}:
                 path = build.output_path(page['path'])
-                self.assertEqual(sha256(self.outputs[path].encode()).hexdigest(), self.baseline['outputs'][str(path)], page['path'])
+                self.assertEqual(sha256(round_practice_history.before(str(path), self.outputs[path]).encode()).hexdigest(), self.baseline['outputs'][str(path)], page['path'])
 
     def test_six_stages_share_one_order_and_valid_specific_practice(self):
         overview = document(self.outputs[build.output_path(course.ROUTE)])
@@ -161,7 +162,7 @@ class PokerCourseTests(unittest.TestCase):
             self.assertNotIn(forbidden, js)
         self.assertIn('/' + course.CSS, check_live.targets())
         self.assertIn('/' + course.SCRIPT, check_live.targets())
-        self.assertEqual(len(check_live.targets()), 468)
+        self.assertEqual(len(check_live.targets()), 470)
 
     def test_invalid_cards_stages_repairs_and_duplicate_scenes_are_rejected(self):
         variants = []

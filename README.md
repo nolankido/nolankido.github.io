@@ -4,6 +4,15 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Beginner Poker course
 
+The course also includes a branching betting rehearsal. Three starting ledgers
+live in `_source/poker/round-practice.json`; `_scripts/poker_round_practice.py`
+renders native tables and worked lines, while `assets/poker-round-practice.js`
+tracks full raises, pending turns and uncalled returns. Its bounded model omits
+stack limits and short all-ins. Do not turn accepted moves into strategy grades.
+Run `test_round_practice.py` and `round_practice_browser.py`; the audit is in
+`_reports/betting-rehearsal-learning-review.md`. The exact prior release is pinned
+in the new baseline and reversed only by its SHA-bound history adapter.
+
 The free course begins with card foundations and a constructive best-five lab.
 `_source/poker/hand-lab.json` owns one worked selection and ten fixed exercises;
 `_scripts/poker_hand_lab.py` renders the native version and reuses the published

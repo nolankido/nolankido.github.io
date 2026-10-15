@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "preflop",
+      "title": "Before the flop: the big blind still gets a turn",
+      "prompt": "A three-player table has a button, small blind and big blind, clockwise in that order. Blinds are 1 and 2. The button acts first. Try calling around, then try a different legal line.",
+      "state": {"street":"preflop","bigBlind":2,"priorPot":0,"current":2,"lastRaise":2,"players":[{"id":"button","name":"Button","paid":0,"folded":false},{"id":"small","name":"Small blind","paid":1,"folded":false},{"id":"big","name":"Big blind","paid":2,"folded":false}],"pending":["button","small","big"]},
+      "worked": [
+        {"actor":"button","action":"call","add":2,"reason":"The button adds 2, matching the live big blind."},
+        {"actor":"small","action":"call","add":1,"reason":"The small blind adds only 1 to the 1 already posted. All three have now paid 2, but the big blind has not taken its turn."},
+        {"actor":"big","action":"check","add":0,"reason":"The big blind checks its option. It could instead raise. Now the round ends and the flop can be dealt; the pot is 6."}
+      ]
+    },
+    {
+      "id": "flop",
+      "title": "On the flop: a check can be followed by a bet",
+      "prompt": "The same three seats reached the flop with 6 in the pot. Payments on this new round start at zero. The small blind acts first. Try checking around, then restart and add a bet or raise.",
+      "state": {"street":"flop","bigBlind":2,"priorPot":6,"current":0,"lastRaise":2,"players":[{"id":"button","name":"Button","paid":0,"folded":false},{"id":"small","name":"Small blind","paid":0,"folded":false},{"id":"big","name":"Big blind","paid":0,"folded":false}],"pending":["small","big","button"]},
+      "worked": [
+        {"actor":"small","action":"check","add":0,"reason":"Checking adds nothing and keeps the small blind in the hand."},
+        {"actor":"big","action":"bet","add":4,"reason":"The big blind opens betting for 4. This gives the small blind another decision, even though it already checked."},
+        {"actor":"button","action":"call","add":4,"reason":"The button adds 4. The small blind still needs to respond."},
+        {"actor":"small","action":"call","add":4,"reason":"The small blind matches the 4. Everyone remaining has responded to the latest wager; the round ends with 18 in the pot."}
+      ]
+    },
+    {
+      "id": "raise",
+      "title": "Facing a raise: count only the new counters",
+      "prompt": "There was 6 in the pot before this flop round. The small blind bet 4, the big blind raised to 10 total, and the button folded. The small blind acts again. Try a call, then restart to compare a fold or a full raise.",
+      "state": {"street":"flop","bigBlind":2,"priorPot":6,"current":10,"lastRaise":6,"players":[{"id":"button","name":"Button","paid":0,"folded":true},{"id":"small","name":"Small blind","paid":4,"folded":false},{"id":"big","name":"Big blind","paid":10,"folded":false}],"pending":["small"]},
+      "worked": [
+        {"actor":"small","action":"call","add":6,"reason":"The call adds 10 minus 4 = 6, making 26 in the pot. No earlier-street payment reduces this amount. A full raise would need to reach at least 16 total, adding at least 12 to the small blind's 4. The previous raise increased the wager by 6, from 4 to 10; it did not increase it by 10."}
+      ]
+    }
+  ]
+}
