@@ -1,4 +1,4 @@
-"""Reverse only this exact reviewed first-session publication for old contracts."""
+"""Reverse only the exact first-session and fourth-comic publications for old contracts."""
 from copy import deepcopy
 from functools import lru_cache
 from hashlib import sha256
@@ -31,6 +31,8 @@ def pages(records):
         if record == c['page']:
             continue
         pair = c['pages'].get(record['id'])
+        if pair and pair['old'] is None and record == pair['new']:
+            continue
         result.append(deepcopy(pair['old']) if pair and record == pair['new'] else deepcopy(record))
     return result
 

@@ -242,6 +242,19 @@
     "poker_comic": true
   },
   {
+    "id": "poker-comic-best-five-cards-win",
+    "path": "/poker/comics/best-five-cards-win/",
+    "title": "The best five cards win",
+    "seo_title": "The Best Five Cards Win: A Poker Comic | Nolan Kido",
+    "description": "A six-panel Hold’em comic about using two, one or zero hole cards, playing the board and splitting ties, with readable examples and rules notes.",
+    "kicker": "Poker / Comic 04",
+    "source": "poker/comics/best-five-cards-win.html",
+    "section": "poker",
+    "date": "2026-10-14",
+    "updated": "2026-10-14",
+    "poker_comic": true
+  },
+  {
     "id": "poker-hand-review",
     "path": "/poker/reviewing-a-hand/",
     "title": "Review a hand, not just the result.",
