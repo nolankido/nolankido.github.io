@@ -84,7 +84,7 @@ class SiteTests(unittest.TestCase):
                                 pairs = parse_qsl(url.fragment, keep_blank_values=True)
                                 self.assertEqual(len(pairs), len(dict(pairs)), 'Duplicate filter')
                                 topic_ids = {t['id'] for t in json.loads((ROOT / '_source/poker/topics.json').read_text())['entries']}
-                                allowed = {Path('poker/free-poker-learning-path/index.html'): '/assets/poker-course.js', 'topic': topic_ids, 'kind': {'guide', 'resource', 'glossary'}, 'free': {'1'}}
+                                allowed = {'topic': topic_ids, 'kind': {'guide', 'resource', 'glossary'}, 'free': {'1'}}
                                 self.assertTrue(pairs)
                                 for key, value in pairs:
                                     self.assertIn(key, allowed)
@@ -126,6 +126,8 @@ class SiteTests(unittest.TestCase):
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.outputs[path], re.S)[1])
             if schema.get('@type') == 'Article' or path in {Path('technology/task-brief/index.html'), Path('technology/ai-time-savings/index.html'), Path('poker/comics/learn-no-limit-holdem/index.html'), Path('poker/comics/poker-hand-rankings/index.html'), Path('poker/comics/one-hand-four-streets/index.html'), Path('poker/comics/best-five-cards-win/index.html'), Path('poker/comics/why-acting-last-helps/index.html'), Path('poker/comics/good-decision-bad-river/index.html')}:
                 expected_scripts.append('/assets/page-sharing.js')
+            if path == Path('poker/free-poker-learning-path/index.html'):
+                expected_scripts.append('/assets/poker-course.js')
             self.assertEqual([urlsplit(src).path for src in other_scripts], expected_scripts)
             for src in other_scripts:
                 self.assertFalse(urlsplit(src).scheme or urlsplit(src).netloc)
