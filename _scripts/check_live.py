@@ -40,6 +40,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/poker-session.css', 'downloads/poker-first-session.md']
     assets += ['assets/poker-budget.css', 'downloads/poker-tournament-trip-budget.md']
     assets += ['assets/poker-venue.css', 'downloads/thunder-valley-first-visit.md']
+    assets += ['assets/poker-multiway.css', 'downloads/poker-multiway-review.md']
     assets += ['assets/poker/uncertainty-' + name + '.png' for name in ['precision', 'bayes', 'boundary']]
     assets += ['assets/site-fonts.css', 'assets/page-sharing.css', 'assets/page-sharing.js']
     assets += [entry['path'] for entry in build.font_delivery.local_files(root)]

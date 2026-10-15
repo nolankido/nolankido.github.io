@@ -1290,5 +1290,18 @@
     "date": "2026-10-15",
     "updated": "2026-10-15",
     "poker_guide": true
+  },
+  {
+    "id": "poker-limped-multiway-pots",
+    "path": "/poker/limped-multiway-pots/",
+    "title": "Limped and multiway pots: how to think through live poker",
+    "seo_title": "Limped & Multiway Pots: Low-Stakes Live Poker | Nolan Kido",
+    "description": "Play against limpers in low-stakes live poker: isolation raises, position, stacks, ranges, a counted cash hand, tournament pressure and solver limits.",
+    "kicker": "Poker / Cash-game decisions",
+    "source": "poker/limped-multiway-pots.html",
+    "section": "poker",
+    "date": "2026-10-15",
+    "updated": "2026-10-15",
+    "poker_guide": true
   }
 ]

@@ -84,8 +84,8 @@ class SearchEntryTests(unittest.TestCase):
     def test_every_article_and_three_subject_hubs_have_a_distinct_preview(self):
         cfg = presentation.load(ROOT, self.pages)
         expected = {p['id'] for p in self.pages if reader_previews.eligible(p)}
-        self.assertEqual(len(expected), 106)
-        self.assertEqual(len(self.cards), 102)
+        self.assertEqual(len(expected), 107)
+        self.assertEqual(len(self.cards), 103)
         self.assertTrue(expected <= set(cfg['pages']))
         self.assertEqual(len({cfg['pages'][key]['src'] for key in expected}), len(expected))
         for key, retained in json.loads((ROOT / '_source/presentation.json').read_text())['pages'].items():
@@ -103,7 +103,7 @@ class SearchEntryTests(unittest.TestCase):
             total += len(raw)
             self.assertEqual(' '.join(record['layout']['lines']), by_id[key]['title'])
             self.assertEqual(record['path'], by_id[key]['path'])
-        added = [self.cards[k] for k in ['poker-tournament-trip-budget', 'poker-thunder-valley-poker-guide']]
+        added = [self.cards[k] for k in ['poker-tournament-trip-budget', 'poker-thunder-valley-poker-guide', 'poker-limped-multiway-pots']]
         added_bytes = sum(len((ROOT / card['src'].lstrip('/')).read_bytes()) for card in added)
         self.assertLess(total - added_bytes, 1_000_000)
         self.assertLess(total, 1_000_000 + len(added) * 25_000)

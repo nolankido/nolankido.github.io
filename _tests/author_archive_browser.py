@@ -83,7 +83,7 @@ try:
             for width in [320,390,768,1440]:
                 page.set_viewport_size({'width':width,'height':950})
                 page.goto(base+'/notes/')
-                expect(page.locator('.archive-list li')).to_have_count(103)
+                expect(page.locator('.archive-list li')).to_have_count(104)
                 for group in page.locator('.archive-group').all():
                     expect(group).not_to_have_attribute('open','')
                     group.locator('summary').press('Enter')

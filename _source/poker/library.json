@@ -26,6 +26,14 @@
       "keywords": "tournament trip budget cost buy in buy-in 400 WSOP Circuit Turning Stone travel hotel meals fee rake re-entry reserve cash profit break even worksheet weekend overnight taxes hold time"
     },
     {
+      "slug": "limped-multiway-pots",
+      "title": "Limped and multiway pots: how to think through live poker",
+      "description": "Play against limpers in low-stakes live poker: isolation raises, position, stacks, ranges, a counted cash hand, tournament pressure and solver limits.",
+      "topic": "cash",
+      "level": "Build understanding",
+      "keywords": "limp limped limper limpers overlimp isolation isolate everyone calls multiway multi way low stakes live cash game ranges position effective stack stack to pot SPR continuation cbet check raise bluff fold equity joint conditional independent tournament bubble ICM solver nodelocking review"
+    },
+    {
       "slug": "thunder-valley-poker-guide",
       "title": "Playing poker at Thunder Valley: a first-timer’s guide",
       "description": "Plan your first Thunder Valley poker visit: official room information, WSOP Circuit structures, registration questions, cash waitlists, meals and a private checklist.",

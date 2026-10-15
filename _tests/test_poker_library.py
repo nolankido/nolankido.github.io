@@ -6,8 +6,11 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 import json
+import re
 import shutil
 import unittest
+from xml.etree import ElementTree as ET
+import html5lib
 from test_site import ROOT, build
 import poker_library as library
 import check_live
@@ -58,7 +61,16 @@ class PokerLibraryTests(unittest.TestCase):
         self.assertIn('225 words per minute',self.outputs[Path('poker/library/index.html')])
         for entry in self.entries:
             content=self.outputs[build.output_path(entry['route'])]
-            self.assertIn(f'About {entry["minutes"]} min read',content)
+            expected=entry['minutes']
+            if entry['slug'] in {'choosing-study-tools','cash-game-study-path'}:
+                # The builder includes these guides' expanded source shortlists
+                # and worksheet, which are absent from the raw-source estimate.
+                doc=html5lib.parse(content,namespaceHTMLElements=False)
+                body=next(e for e in doc.iter('div') if 'article-body' in e.get('class','').split())
+                expected=library.minutes(ET.tostring(body,encoding='unicode'))
+            meta=re.search(r'<p class="reader-meta">(.*?)</p>',content,re.S)
+            self.assertIsNotNone(meta,entry['route'])
+            self.assertIn(f'About {expected} min read',meta[1],entry['route'])
             self.assertIn('id="reader-next-heading"',content)
 
     def test_catalog_text_is_escaped(self):

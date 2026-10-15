@@ -62,6 +62,7 @@
       "summary": "First live sessions, game costs, multiway decisions and a practical cash-game study route.",
       "primary_guides": [
         "cash-game-study",
+        "limped-multiway-pots",
         "multiway-pot-workshop",
         "first-live-cash-game",
         "cash-game-costs",
@@ -140,7 +141,8 @@
         "recording-hands",
         "poker-rules-and-fair-play",
         "getting-started",
-        "thunder-valley-poker-guide"
+        "thunder-valley-poker-guide",
+        "limped-multiway-pots"
       ],
       "resource_categories": [
         "tournament-study"
@@ -205,7 +207,8 @@
         "decision-lab",
         "flush-and-redraw",
         "short-stack-decisions",
-        "multiway-pot-workshop"
+        "multiway-pot-workshop",
+        "limped-multiway-pots"
       ],
       "resource_categories": [
         "math",
