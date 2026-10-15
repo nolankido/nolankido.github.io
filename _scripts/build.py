@@ -22,6 +22,7 @@ import poker_reading
 import poker_discovery
 import poker_course
 import poker_practice
+import poker_hand_lab
 import poker_experience
 import poker_resources
 import poker_collections
@@ -385,6 +386,7 @@ def build_outputs() -> dict[Path, str]:
         extra += poker_discovery.head(p, ROOT)
         extra += poker_course.head(p, ROOT)
         extra += poker_practice.head(p, ROOT)
+        extra += poker_hand_lab.head(p, ROOT)
         extra += author_archive.head(p, ROOT)
         header = search_entrypoints.header(p, header)
         extra += search_entrypoints.head(p, ROOT)

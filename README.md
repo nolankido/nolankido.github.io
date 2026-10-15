@@ -4,6 +4,15 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Beginner Poker course
 
+The free course begins with card foundations and a constructive best-five lab.
+`_source/poker/hand-lab.json` owns one worked selection and ten fixed exercises;
+`_scripts/poker_hand_lab.py` renders the native version and reuses the published
+ranking chart. `assets/poker-hand-lab.js` checks any five-card selection, including
+equally strong alternatives, without sending or storing answers. Run
+`test_hand_lab.py` and `hand_lab_browser.py` with the ordinary release gate. The
+unit suite includes independent Python oracles and complete five-card category
+enumeration. See `_reports/card-foundations-learning-review.md` for the audit.
+
 `/poker/beginner-practice/` is the supporting practice utility. Its six short
 models and eighteen questions live in `_source/poker/beginner-practice.json`;
 `_scripts/poker_practice.py` validates and renders the native version. Keep the

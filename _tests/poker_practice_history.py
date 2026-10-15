@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import hand_lab_history
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -13,6 +14,7 @@ def change():
 
 
 def before(path, data):
+    data = hand_lab_history.before(path, data)
     entry = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
@@ -27,18 +29,21 @@ def before(path, data):
 
 
 def pages(records):
+    records = hand_lab_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[r['id']]['old']) if r['id'] in pairs and r == pairs[r['id']]['new'] else deepcopy(r)
             for r in records if r != change()['new_pages'].get(r['id'])]
 
 
 def outputs(records):
+    records = hand_lab_history.outputs(records)
     return {p: before(p, value) for p, value in records.items()
             if change()['new_outputs'].get(str(p)) != sha256(value.encode()).hexdigest()}
 
 
 def files(paths):
+    paths = hand_lab_history.files(paths)
     def retained(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
-        return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()
+        return change()['new_files'].get(key) != sha256(hand_lab_history.before(key, (ROOT / path).read_bytes())).hexdigest()
     return type(paths)(path for path in paths if retained(path))

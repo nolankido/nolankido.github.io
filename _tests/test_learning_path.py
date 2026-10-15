@@ -16,6 +16,7 @@ import check_live
 import poker_beginner_path as path
 import poker_checkpoint
 import poker_course
+import poker_hand_lab
 import poker_library
 import learning_path_history as history
 import ranges_history
@@ -72,7 +73,7 @@ class LearningPathTests(unittest.TestCase):
     def test_old_study_plan_is_exact_and_only_its_existing_feed_item_is_revised(self):
         original = (ROOT / SOURCE).read_text()
         decorated = path.decorate(self.page, original, ROOT)
-        additions = poker_course.guided_hand(ROOT) + poker_course.overview(ROOT, self.addition)
+        additions = poker_hand_lab.render(ROOT) + poker_course.guided_hand(ROOT) + poker_course.overview(ROOT, self.addition)
         self.assertEqual(decorated.count(additions), 1)
         self.assertEqual(decorated.replace(additions, '', 1), original)
         self.assertEqual(decorated.count('id="beginner-practice"'), 1)
@@ -152,7 +153,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(worksheet.count(b'[ ]'), 6)
         for slug, _ in path.LESSONS: self.assertIn(('https://nolankido.com/poker/' + slug + '/').encode(), worksheet)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 466)
+        self.assertEqual(len(targets), 468)
         self.assertEqual(targets[path.DOWNLOAD], (200, worksheet))
         self.assertEqual(targets['/' + path.CSS], (200, (ROOT / path.CSS).read_bytes()))
         for p in self.current_pages:

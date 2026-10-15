@@ -129,6 +129,7 @@ class SiteTests(unittest.TestCase):
                 expected_scripts.append('/assets/page-sharing.js')
             if path == Path('poker/free-poker-learning-path/index.html'):
                 expected_scripts.append('/assets/poker-course.js')
+                expected_scripts.append('/assets/poker-hand-lab.js')
             self.assertEqual([urlsplit(src).path for src in other_scripts], expected_scripts)
             for src in other_scripts:
                 self.assertFalse(urlsplit(src).scheme or urlsplit(src).netloc)
