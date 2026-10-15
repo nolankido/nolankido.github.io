@@ -37,6 +37,10 @@ the performance of unseen learners.
 | Review | Choose one correction to revisit | Retain weaker attempts after correction and distinguish a hint or requested solution. Report only hands actually attempted or helped during this visit. |
 | Continue | Connect cards with decisions | Continue to the existing guided hand, six stages and varied question bank. Stages 1, 3 and 4 link to relevant construction cases. |
 
+The bank is returnable practice: the course explicitly suggests trying one hand,
+pausing or continuing to the guided hand, then returning to other cases later.
+There is no requirement to finish the ten hands before studying the actions.
+
 The foundations and lab live within the existing free course. No new page,
 article, guide count or competing course is introduced. The opening provides
 four direct routes. The existing visual chart is reused from the hand-ranking
