@@ -130,6 +130,7 @@
         "tournament-equity",
         "first-live-tournament",
         "choosing-a-tournament",
+        "tournament-trip-budget",
         "registration-and-reentry",
         "tournament-day"
       ],
@@ -370,7 +371,8 @@
         "table-etiquette",
         "tournament-day",
         "poker-access-and-protection",
-        "first-live-cash-game"
+        "first-live-cash-game",
+        "tournament-trip-budget"
       ],
       "resource_categories": [
         "events",
@@ -491,7 +493,8 @@
       ],
       "related_guides": [
         "variance-and-results",
-        "registration-and-reentry"
+        "registration-and-reentry",
+        "tournament-trip-budget"
       ],
       "resource_categories": [
         "rules",

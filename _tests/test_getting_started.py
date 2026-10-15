@@ -10,6 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
 import getting_started_history as history
+import tournament_budget_history
 from test_viewer_guides import best
 ROUTE='/poker/getting-started/'
 
@@ -78,7 +79,7 @@ class GettingStartedTests(unittest.TestCase):
         self.assertIn('16.67%',self.text);self.assertIn('+$2.40',self.text)
 
     def test_all_old_heading_destinations_and_labels_survive_within_original_budget(self):
-        current=search_sections.index(self.outputs,self.pages)
+        current=search_sections.index(tournament_budget_history.outputs(self.outputs),tournament_budget_history.pages(self.pages))
         previous=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         previous['/poker/library/']=[[a,label.replace('56 free guides','57 free guides')] for a,label in previous['/poker/library/']]
         self.assertEqual({p:v for p,v in current.items() if p not in {ROUTE,'/poker/comics/best-five-cards-win/'}},previous)
@@ -120,7 +121,7 @@ assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
         self.assertIn('They have not been validated as a teaching curriculum with actual beginners',self.text)
         self.assertNotIn('Correctly rank 20',self.text)
         self.assertNotRegex(self.html,r'|```|'+chr(8212)+r'|<form|<input|<textarea|<iframe')
-        self.assertEqual(len(check_live.targets()),442)
+        self.assertEqual(len(check_live.targets()),446)
         for p in [ROUTE,'/assets/poker-session.css','/downloads/poker-first-session.md']:
             self.assertIn(p,check_live.targets())
         worksheet=(ROOT/'downloads/poker-first-session.md').read_text()

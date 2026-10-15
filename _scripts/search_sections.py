@@ -5,6 +5,7 @@ Reuse the reading-outline parser to exclude disclosures and hidden answers.
 No body prose, form values, remote content or excluded pages are indexed.
 """
 import json
+from collections import Counter
 from pathlib import Path
 import re
 from poker_reading import VisibleHeadings
@@ -38,15 +39,19 @@ def apply(outputs: dict[Path, str], pages: list[dict]) -> dict[Path, str]:
     document = outputs[PAGE]
     if BEGIN in document or document.count('</main>') != 1:
         raise ValueError('Add the search section index exactly once')
-    # Group canonical routes by their first segment instead of repeating it.
-    # Keep every anchor and label verbatim. The browser restores full paths
-    # and [anchor, label] rows before filtering, inside the same byte budget.
+    # Group routes and pool repeated labels. Every anchor and label survives
+    # verbatim; the browser restores the canonical rows before filtering.
+    canonical = index(outputs, pages)
+    counts = Counter(label for rows in canonical.values() for _, label in rows)
+    labels = sorted(label for label, count in counts.items() if count > 1 and len(label) > 8)
+    references = {label: i for i, label in enumerate(labels)}
     packed = {}
-    for path, rows in index(outputs, pages).items():
+    for path, rows in canonical.items():
         group = path.split('/')[1]
         suffix = path[len(group) + 2:] if group else ''
-        packed.setdefault(group, {})[suffix] = [value for row in rows for value in row]
-    data = json.dumps({'version': 3, 'pages': packed}, ensure_ascii=False, separators=(',', ':'))
+        packed.setdefault(group, {})[suffix] = [value for anchor, label in rows
+            for value in (anchor, references.get(label, label))]
+    data = json.dumps({'version': 4, 'labels': labels, 'pages': packed}, ensure_ascii=False, separators=(',', ':'))
     # JSON data is not executable script. Escape HTML delimiters defensively.
     for char, value in [('&', '\\u0026'), ('<', '\\u003c'), ('>', '\\u003e'),
                         ('\u2028', '\\u2028'), ('\u2029', '\\u2029')]:

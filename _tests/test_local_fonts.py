@@ -72,7 +72,7 @@ class LocalFontsTests(unittest.TestCase):
             self.assertNotIn('fonts.gstatic.com',text);self.assertNotIn('fonts.googleapis.com',text)
         targets=check_live.targets()
         for p in history.change()['new_files']:self.assertEqual(targets['/'+p],(200,(ROOT/p).read_bytes()))
-        self.assertEqual(len(targets),442)
+        self.assertEqual(len(targets),446)
         privacy=self.outputs[Path('privacy/index.html')]
         self.assertIn(history.change()['privacy_new'],privacy)
         self.assertIn('Updated October 13, 2026',privacy)
@@ -100,7 +100,7 @@ class LocalFontsTests(unittest.TestCase):
             self.assertEqual(reference.split('<body',1)[1],text.split('<body',1)[1])
             self.assertEqual(history.font_reference(path,text.encode()),reference.encode())
             pages+=1
-        self.assertEqual(pages,187)
+        self.assertEqual(pages,188)
         self.assertEqual(history.font_reference('assets/site-fonts.css',font_delivery.local_declarations(ROOT)),font_delivery.declarations(ROOT))
 
 if __name__=='__main__':unittest.main()

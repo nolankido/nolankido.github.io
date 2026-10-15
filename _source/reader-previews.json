@@ -2007,6 +2007,26 @@
           339
         ]
       }
+    },
+    "poker-tournament-trip-budget": {
+      "path": "/poker/tournament-trip-budget/",
+      "title": "What does a $400 poker tournament really cost?",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-tournament-trip-budget.png",
+      "sha256": "17f5ce75e9819a898ba21d7f57baf2486cf483925a37f9886ec238ad80e64264",
+      "layout": {
+        "lines": [
+          "What does a $400 poker",
+          "tournament really cost?"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          972,
+          352
+        ]
+      }
     }
   }
 }
