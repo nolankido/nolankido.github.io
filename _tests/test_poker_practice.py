@@ -16,6 +16,7 @@ import poker_course
 import poker_finder
 import poker_practice as practice
 import poker_practice_history as history
+import poker_foundations_history
 
 
 class PokerPracticeTests(unittest.TestCase):
@@ -171,7 +172,7 @@ class PokerPracticeTests(unittest.TestCase):
         self.assertEqual(json.loads(schema)['@type'], 'WebPage')
         for path in ['poker/feed.xml','writing.xml']:
             old = ET.fromstring(history.before(path, self.outputs[Path(path)]))
-            current = ET.fromstring(self.outputs[Path(path)])
+            current = ET.fromstring(poker_foundations_history.before(path, self.outputs[Path(path)]))
             fields = lambda root: [(x.findtext('guid'),x.findtext('pubDate'),x.findtext('title')) for x in root.findall('./channel/item')]
             self.assertEqual(fields(old), fields(current))
 

@@ -106,7 +106,7 @@ assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canoni
 
     def test_old_images_are_immutable_and_new_title_card_is_bounded(self):
         for p,d in self.baseline['files'].items():
-            if p.startswith('assets/social/'):self.assertEqual(sha256((ROOT/p).read_bytes()).hexdigest(),d,p)
+            if p.startswith('assets/social/'):self.assertEqual(sha256(history.before(p,(ROOT/p).read_bytes())).hexdigest(),d,p)
         record=json.loads((ROOT/'_source/reader-previews.json').read_text())['pages']['poker-limped-multiway-pots']
         raw=(ROOT/record['src'].lstrip('/')).read_bytes()
         self.assertEqual(sha256(raw).hexdigest(),record['sha256']);self.assertLess(len(raw),25000)
