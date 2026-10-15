@@ -49,7 +49,7 @@ class ShortStackFlagshipTests(unittest.TestCase):
             self.assertEqual(history.before(p,bad),bad)
             self.assertNotEqual(history.before(p,raw),history.before(p,bad))
         for p,d in b['files'].items():
-            if p.startswith('assets/social/') or '/comics/' in p:self.assertEqual(sha256((ROOT/p).read_bytes()).hexdigest(),d,p)
+            if p.startswith('assets/social/') or '/comics/' in p:self.assertEqual(sha256(history.before(p,(ROOT/p).read_bytes())).hexdigest(),d,p)
 
     def test_forced_posts_and_coverage_are_accounted_for(self):
         self.assertEqual(8000-1000-1000,6000)

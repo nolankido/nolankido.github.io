@@ -103,7 +103,8 @@ class SearchEntryTests(unittest.TestCase):
             total += len(raw)
             self.assertEqual(' '.join(record['layout']['lines']), by_id[key]['title'])
             self.assertEqual(record['path'], by_id[key]['path'])
-        added = [self.cards[k] for k in ['poker-tournament-trip-budget', 'poker-thunder-valley-poker-guide', 'poker-limped-multiway-pots']]
+        # New and deliberately retitled cards each retain the same 25 KB limit.
+        added = [self.cards[k] for k in ['poker-tournament-trip-budget', 'poker-thunder-valley-poker-guide', 'poker-limped-multiway-pots', 'poker', 'poker-free-poker-learning-path']]
         added_bytes = sum(len((ROOT / card['src'].lstrip('/')).read_bytes()) for card in added)
         self.assertLess(total - added_bytes, 1_000_000)
         self.assertLess(total, 1_000_000 + len(added) * 25_000)

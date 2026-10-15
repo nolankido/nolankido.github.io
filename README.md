@@ -4,6 +4,13 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Beginner Poker course
 
+The public entry is now **Poker Foundations**, at the existing
+`/poker/free-poker-learning-path/` URL. Poker home leads with the free course;
+its compact syllabus uses the same lesson data as the six core lessons.
+The shared Poker bar links to the course and identifies its lessons and practice
+pages as the current section. Outcomes, starting choices and the finish guide
+are explained in `_reports/free-poker-foundations-concept.md`.
+
 The course also includes a branching betting rehearsal. Three starting ledgers
 live in `_source/poker/round-practice.json`; `_scripts/poker_round_practice.py`
 renders native tables and worked lines, while `assets/poker-round-practice.js`

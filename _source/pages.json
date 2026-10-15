@@ -183,9 +183,9 @@
   {
     "id": "poker",
     "path": "/poker/",
-    "title": "Poker resources.",
-    "seo_title": "Poker Resource Guide: Rules, Strategy, Tools & More | Nolan Kido",
-    "description": "Find poker guides and external resources by topic: rules, cash games, tournaments, strategy, Omaha, tools, events, media, research and safer play.",
+    "title": "Learn poker with Nolan Kido.",
+    "seo_title": "Learn Poker: Free Beginner Course & Resources | Nolan Kido",
+    "description": "Start Poker Foundations, a free Texas Hold’em beginner course. Practice decisions, prepare for live play and explore guides and outside resources.",
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
@@ -788,16 +788,16 @@
   {
     "id": "poker-free-poker-learning-path",
     "path": "/poker/free-poker-learning-path/",
-    "title": "Learn poker with a small, free study path.",
-    "seo_title": "Learn Poker for Beginners: Free Study Path | Nolan Kido",
-    "description": "Learn Texas Hold’em with card basics, a best-five hand builder, a guided hand, six connected lessons, varied practice and a private study card.",
-    "kicker": "Poker / Resource collections",
+    "title": "Poker Foundations: a free beginner course.",
+    "seo_title": "Poker Foundations: Free Texas Hold’em Beginner Course | Nolan Kido",
+    "description": "Learn no-limit Texas Hold’em with six connected lessons, card practice, a guided hand and betting rehearsal. Free, self-paced and no signup needed.",
+    "kicker": "Poker / Free beginner course",
     "source": "poker/free-poker-learning-path.html",
     "section": "poker",
     "date": "2026-10-08",
     "updated": "2026-10-15",
     "poker_guide": true,
-    "revision": "Added a betting-round rehearsal with changing actions, additional chip amounts and turn order, plus clearer starting choices."
+    "revision": "Organized the existing six-stage learning path as Poker Foundations, with explicit outcomes, starting choices and a finish-and-continue guide."
   },
   {
     "id": "poker-cash-game-study",

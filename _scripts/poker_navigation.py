@@ -8,9 +8,15 @@ def section_navigation(page: dict) -> str:
         return ''
     # Every utility and guide has a single meaningful current section.
     path = page['path']
+    course_route = '/poker/free-poker-learning-path/'
+    course_routes = {course_route, '/poker/beginner-practice/', '/poker/beginner-checkpoint/',
+                     '/poker/first-decisions/', '/poker/starting-hand-decisions/',
+                     '/poker/first-flop-decisions/', '/poker/turn-and-river-decisions/',
+                     '/poker/ranges-for-beginners/', '/poker/betting-with-a-purpose/'}
     study_routes = {'/poker/study/', '/poker/study-calculators/', '/poker/decision-labs/',
                     '/poker/tournament-checklists/'}
     if path == '/poker/': current_route = path
+    elif path in course_routes: current_route = course_route
     elif path.startswith('/poker/comics/'): current_route = '/poker/comics/'
     elif path == '/poker/glossary/': current_route = path
     elif path == '/poker/find/': current_route = path
@@ -20,7 +26,7 @@ def section_navigation(page: dict) -> str:
     elif page.get('poker_guide') or path in {'/poker/library/', '/poker/reviewing-a-hand/', '/poker/start-here/', '/poker/live-tournament-guide/'}: current_route = '/poker/library/'
     else: current_route = '/poker/'
     links = []
-    for route, label in [('/poker/', 'Home'), ('/poker/topics/', 'Topics'), ('/poker/find/', 'Search'),
+    for route, label in [('/poker/', 'Home'), (course_route, 'Free course'), ('/poker/topics/', 'Topics'), ('/poker/find/', 'Search'),
                          ('/poker/library/', 'Guides'), ('/poker/resources/', 'External links'),
                          ('/poker/study/', 'Study desk'), ('/poker/glossary/', 'Glossary'),
                          ('/poker/comics/', 'Comics')]:

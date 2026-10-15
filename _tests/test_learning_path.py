@@ -182,7 +182,7 @@ class LearningPathTests(unittest.TestCase):
     def test_unreviewed_mutations_are_never_erased_by_history(self):
         for file, old, new in [('poker/free-poker-learning-path/index.html', '10 / 50 = 20%', '10 / 50 = 50%'),
                                ('poker/turn-and-river-decisions/index.html', 'Lesson 4 of 4', 'Lesson 1 of 4'),
-                               ('_source/pages.json', 'Learn Poker for Beginners:', 'Invented qualification:')]:
+                               ('_source/pages.json', 'Poker Foundations: Free Texas Hold’em Beginner Course', 'Invented qualification:')]:
             raw = self.outputs[Path(file)] if Path(file) in self.outputs else (ROOT / file).read_text()
             changed = raw.replace(old, new, 1)
             self.assertNotEqual(raw, changed)

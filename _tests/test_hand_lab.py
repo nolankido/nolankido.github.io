@@ -19,6 +19,7 @@ import check_live
 import poker_finder
 import poker_hand_lab as lab
 import hand_lab_history as history
+import poker_foundations_history
 
 
 def node(code, data=None):
@@ -49,14 +50,15 @@ class HandLabTests(unittest.TestCase):
             self.assertEqual(sha256(history.before(path,(ROOT/path).read_bytes())).hexdigest(),digest,path)
         for path,digest in b['files'].items():
             if path.startswith('_source/poker/') and path.endswith('.html') and path not in {'_source/poker/free-poker-learning-path.html','_source/poker/beginner-learning-path.html','_source/poker/beginner-practice.html'}:
-                self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),digest,path)
+                self.assertEqual(sha256(history.before(path,(ROOT/path).read_bytes())).hexdigest(),digest,path)
         self.assertEqual(set(history.change()['new_files']),{lab.DATA,lab.CSS,lab.SCRIPT,'_scripts/poker_hand_lab.py'})
         self.assertEqual(history.change()['new_outputs'],{})
         actual={p.relative_to(ROOT).as_posix() for d in ['_source','_scripts','assets','downloads'] for p in (ROOT/d).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
         self.assertEqual(history.files(actual),set(b['files']))
         for path in ['poker/feed.xml','writing.xml']:
             identity=lambda text:[(x.findtext('guid'),x.findtext('pubDate'),x.findtext('title')) for x in ET.fromstring(text).findall('./channel/item')]
-            self.assertEqual(identity(previous[Path(path)]),identity(self.outputs[Path(path)]))
+            current = poker_foundations_history.before(path, self.outputs[Path(path)])
+            self.assertEqual(identity(previous[Path(path)]),identity(current))
 
     def test_mutations_outside_the_frozen_review_are_not_hidden(self):
         for path in ['_scripts/build.py','_scripts/poker_course.py','_source/pages.json','poker/free-poker-learning-path/index.html','find/index.html']:

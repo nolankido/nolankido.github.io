@@ -168,7 +168,7 @@ class CollectionTests(unittest.TestCase):
                 self.assertNotIn(term, source)
         overview = self.outputs[Path('poker/index.html')]
         self.assertIn('href="/poker/resources/"', overview)
-        self.assertIn('Find a poker answer', overview)
+        self.assertIn('href="/poker/find/"', overview)
         self.assertIn('building a vlog', overview)
         self.assertIn('id="watch"', overview)
 

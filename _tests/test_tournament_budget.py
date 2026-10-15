@@ -148,8 +148,8 @@ assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(mixed))),{'/poker/':
         self.assertLess(len(raw),25000)
         self.assertEqual(sha256(raw).hexdigest(),new['sha256'])
         previous={p:d for p,d in self.baseline['files'].items() if p.startswith('assets/social/')}
-        for p,d in previous.items():self.assertEqual(sha256((ROOT/p).read_bytes()).hexdigest(),d,p)
-        old_total=sum((ROOT/v['src'].lstrip('/')).stat().st_size for k,v in cards.items() if k!='poker-tournament-trip-budget')
+        for p,d in previous.items():self.assertEqual(sha256(history.before(p,(ROOT/p).read_bytes())).hexdigest(),d,p)
+        old_total=sum(len(thunder_valley_history.before(v['src'].lstrip('/'),(ROOT/v['src'].lstrip('/')).read_bytes())) for k,v in cards.items() if k!='poker-tournament-trip-budget')
         self.assertLess(old_total,1000000)
 
 if __name__=='__main__':unittest.main()

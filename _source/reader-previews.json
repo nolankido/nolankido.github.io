@@ -102,20 +102,21 @@
     },
     "poker": {
       "path": "/poker/",
-      "title": "Poker resources.",
+      "title": "Learn poker with Nolan Kido.",
       "label": "POKER / LEARN, FIND & STUDY",
       "src": "/assets/social/reader-poker.png",
-      "sha256": "fcf15b6c71396cd31da2ed60480b682c70f6494a4bc9ebada2546f597f0b2ffe",
+      "sha256": "eb8eaa58a25d9ae1bea416291be3bc50cf7f5dd860af3b7b78011a7b1c696323",
       "layout": {
         "lines": [
-          "Poker resources."
+          "Learn poker with Nolan",
+          "Kido."
         ],
         "font_size": 64,
         "bounds": [
           94,
-          225,
-          701,
-          275
+          205,
+          936,
+          339
         ]
       }
     },
@@ -733,20 +734,20 @@
     },
     "poker-free-poker-learning-path": {
       "path": "/poker/free-poker-learning-path/",
-      "title": "Learn poker with a small, free study path.",
+      "title": "Poker Foundations: a free beginner course.",
       "label": "POKER / PRACTICAL GUIDE",
       "src": "/assets/social/reader-poker-free-poker-learning-path.png",
-      "sha256": "c7acec26fd476de5bdcf499371be2744b3b2e8839eef9a1c7a38544849d75544",
+      "sha256": "8e8022274ca50ff2c5049fccb4ed4bebcaef57915a990bbc7d413eedca25b43c",
       "layout": {
         "lines": [
-          "Learn poker with a small,",
-          "free study path."
+          "Poker Foundations: a free",
+          "beginner course."
         ],
         "font_size": 64,
         "bounds": [
           94,
           205,
-          1010,
+          1028,
           352
         ]
       }
