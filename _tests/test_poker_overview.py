@@ -26,7 +26,7 @@ class PokerOverviewTests(unittest.TestCase):
         for p in self.pages:
             nav = poker_navigation.section_navigation(p)
             self.assertEqual(nav.count('aria-current='), 1, p['path'])
-            self.assertEqual(len(Page(nav).tags('a')), 7, p['path'])
+            self.assertEqual(len(Page(nav).tags('a')), 8, p['path'])
         nav = poker_navigation.section_navigation({'path':'/poker/study-calculators/'})
         self.assertIn('href="/poker/study/" aria-current="location"', nav)
 

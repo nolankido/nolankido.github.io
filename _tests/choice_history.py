@@ -18,6 +18,7 @@ import checkpoint_history
 import productivity_history
 import holdem_essay_history
 import uncertainty_history
+import comics_history
 ROOT=Path(__file__).resolve().parents[1]
 ROUTE='/technology/should-i-use-ai/'
 NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html',answer_review_history.SOURCE} | search_entry_history.NEW_SOURCES | set(beginner_history.change()['new_files']) | set(preflop_history.change()['new_files']) | set(flop_history.change()['new_files']) | set(river_history.change()['new_files']) | set(learning_path_history.change()['new_files']) | set(ranges_history.change()['new_files'])
@@ -28,6 +29,8 @@ NEW_SOURCES |= set(holdem_essay_history.change()['new_files'])
 NEW_OUTPUTS.add(holdem_essay_history.OUTPUT)
 NEW_SOURCES |= set(uncertainty_history.change()['new_files'])
 NEW_OUTPUTS.add(uncertainty_history.OUTPUT)
+NEW_SOURCES |= set(comics_history.change()['new_files'])
+NEW_OUTPUTS |= set(comics_history.change()['new_outputs'])
 
 def before(path,data):
     data=answer_review_history.before(path,data)

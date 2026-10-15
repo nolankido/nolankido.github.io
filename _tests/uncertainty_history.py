@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import comics_history
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = 'poker/poker-under-uncertainty/index.html'
 
@@ -12,6 +13,7 @@ def change():
     return json.loads((ROOT / '_tests/uncertainty-change.json').read_text())
 
 def before(path, data):
+    data = comics_history.before(path, data)
     entry = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
@@ -25,6 +27,7 @@ def before(path, data):
     return value.encode() if binary else value
 
 def pages(records):
+    records = comics_history.pages(records)
     c = change()
     result = []
     for record in records:
@@ -35,10 +38,12 @@ def pages(records):
     return result
 
 def outputs(records):
+    records = comics_history.outputs(records)
     return {p: before(p, v) for p, v in records.items()
             if change()['new_outputs'].get(str(p)) != sha256(v.encode()).hexdigest()}
 
 def files(paths):
+    paths = comics_history.files(paths)
     def original(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
         return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()
