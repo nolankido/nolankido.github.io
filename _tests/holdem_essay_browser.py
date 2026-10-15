@@ -74,6 +74,12 @@ def main():
                 page.goto(origin+route)
                 if route=='/notes/':
                     page.locator('#archive-poker summary').press('Enter');expect(page.locator('#archive-poker')).to_have_attribute('open','')
+                if route=='/poker/free-poker-learning-path/':
+                    overview=page.locator('details.poker-details').filter(has=page.locator('a[href="'+ROUTE+'"]'))
+                    expect(overview).to_have_count(1)
+                    expect(overview).not_to_have_attribute('open','')
+                    overview.locator('summary').press('Enter')
+                    expect(overview).to_have_attribute('open','')
                 link=page.locator('main a[href="'+ROUTE+'"]').first
                 expect(link).to_be_visible();link.press('Enter');page.wait_for_url(origin+ROUTE,wait_until='load');report['arrivals']+=1
             page.goto(origin+'/find/');page.locator('#find-query').fill('draws');page.locator('#find-query').press('Enter')

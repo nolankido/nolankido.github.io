@@ -3113,5 +3113,7 @@
     "downloads/living-well-reflection-with-your-judgment-intact.txt": "e715b8f849eabf2d18830d4f853f8d781c9b13a10c9f10b8b2790916b342b6f8",
     "downloads/thunder-valley-first-visit.md": "fef0cb6285c944d85caf49d9e5ebbff5e6e431a93ecde337de1121d27df170d3"
   },
-  "extras": {}
+  "extras": {
+    "_reports/search-audit.json": "e0e97a09a488effcae4c6e0e088df36589ab96985fa7e92a87956149009b3107"
+  }
 }

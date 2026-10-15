@@ -46,6 +46,24 @@
     }
   },
   "paths": {
+    "_reports/search-audit.json": {
+      "old_sha256": "e0e97a09a488effcae4c6e0e088df36589ab96985fa7e92a87956149009b3107",
+      "new_sha256": "61901a54cfae7fd4fb1ba3ea8927bc8b77b357c2cf16ff4e7663027e2760dc9a",
+      "edits": [
+        {
+          "start": 111,
+          "end": 139,
+          "old": "2,\n  \"breadcrumb_pages\": 190",
+          "new": "3,\n  \"breadcrumb_pages\": 191"
+        },
+        {
+          "start": 202,
+          "end": 257,
+          "old": "7,\n  \"unique_titles\": 192,\n  \"unique_descriptions\": 192",
+          "new": "8,\n  \"unique_titles\": 193,\n  \"unique_descriptions\": 193"
+        }
+      ]
+    },
     "_scripts/build.py": {
       "old_sha256": "0526765200924dcf610c8a23d9b1a9b639285dbef62c39beddf640b3289b6ccc",
       "new_sha256": "838002097e285140446445a3bb6c1ae1972e21cc8d25ed37fa9041503f72c330",

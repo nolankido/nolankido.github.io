@@ -35,6 +35,9 @@ class PokerPracticeTests(unittest.TestCase):
             self.assertEqual(sha256(value.encode()).hexdigest(), self.b['outputs'][str(path)], path)
         for path, digest in self.b['files'].items():
             self.assertEqual(sha256(history.before(path, (ROOT / path).read_bytes())).hexdigest(), digest, path)
+        self.assertEqual(self.b['extras'], {'_reports/search-audit.json': 'e0e97a09a488effcae4c6e0e088df36589ab96985fa7e92a87956149009b3107'})
+        for path, digest in self.b['extras'].items():
+            self.assertEqual(sha256(history.before(path, (ROOT / path).read_bytes())).hexdigest(), digest, path)
         edited_sources = {'_source/poker/free-poker-learning-path.html', '_source/poker/beginner-learning-path.html', '_source/poker/beginner-checkpoint-route.html', '_source/poker/library.html'}
         for path, digest in self.b['files'].items():
             if path.startswith('_source/poker/') and path.endswith('.html') and path not in edited_sources:
@@ -43,7 +46,7 @@ class PokerPracticeTests(unittest.TestCase):
         self.assertEqual(set(history.change()['new_outputs']), {'poker/beginner-practice/index.html'})
 
     def test_unrelated_mutations_are_not_hidden(self):
-        for path in ['_scripts/build.py', '_scripts/poker_course.py', 'poker/free-poker-learning-path/index.html', '_source/pages.json']:
+        for path in ['_scripts/build.py', '_scripts/poker_course.py', 'poker/free-poker-learning-path/index.html', '_source/pages.json', '_reports/search-audit.json']:
             changed = (ROOT / path).read_bytes() + b'Unreviewed change'
             self.assertEqual(history.before(path, changed), changed)
         added = build.output_path(practice.ROUTE)
