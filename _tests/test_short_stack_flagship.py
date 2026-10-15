@@ -104,6 +104,7 @@ class ShortStackFlagshipTests(unittest.TestCase):
         self.assertNotRegex(self.html,r'||—|turn\d+(?:view|search)\d+|33,478')
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1])
         self.assertEqual((schema['datePublished'],schema['dateModified']),('2026-10-06','2026-10-15'))
+        self.assertIn(next(p for p in self.pages if p['path']==ROUTE)['revision'],self.text)
         self.assertIn('Originally published October 6, 2026',self.text)
         self.assertIn('Substantially expanded October 15, 2026',self.text)
 
