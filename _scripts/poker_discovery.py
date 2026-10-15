@@ -58,7 +58,7 @@ def supplement(root, entries):
                      f'<h3><a href="{guide["route"]}">{escape(guide["title"])}</a></h3>'
                      f'<p>{escape(item["description"])}</p>'
                      f'<p class="poker-reading-time">About {guide["minutes"]} min read</p></article>')
-    return {'poker_goal_routes': '<div class="poker-goal-grid">' + ''.join(routes) + '</div>',
+    return {'poker_goal_routes': '<div class="poker-goal-grid" role="group" aria-label="Ways to explore Poker">' + ''.join(routes) + '</div>',
             'poker_in_depth': '<div class="poker-long-read-grid">' + ''.join(reads) + '</div>'}
 
 

@@ -9,7 +9,7 @@ import build
 class PokerAccessibilityTests(unittest.TestCase):
     def test_reader_paths_have_a_nameable_role(self):
         output = build.build_outputs()[Path('poker/index.html')]
-        self.assertIn('class="poker-paths" role="group" aria-label="Ways to explore Poker"', output)
+        self.assertIn('class="poker-goal-grid" role="group" aria-label="Ways to explore Poker"', output)
 
 if __name__ == '__main__':
     unittest.main()

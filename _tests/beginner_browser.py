@@ -67,7 +67,7 @@ def main():
                     result = page.evaluate('''async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))}''')
                     assert not result, (width, result)
                     report['axe'].append({'width': width, 'violations': result})
-            for source, selector in [('/poker/', '.poker-paths a'),
+            for source, selector in [('/poker/', '.poker-goal-grid a'),
                                      ('/poker/topics/learn/', 'main a'),
                                      ('/poker/free-poker-learning-path/', 'aside a')]:
                 page.goto(origin + source)
@@ -92,7 +92,7 @@ def main():
             offline.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             static = offline.new_page()
             static.goto(origin + '/poker/')
-            static.locator('.poker-paths a[href="' + ROUTE + '"]').click()
+            static.locator('.poker-goal-grid a[href="' + ROUTE + '"]').click()
             expect(static.locator('details.viewer-question')).to_have_count(12)
             static.locator('#check-call summary').focus(); static.keyboard.press('Enter')
             expect(static.locator('#check-call div')).to_contain_text('4 more')
