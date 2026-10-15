@@ -91,8 +91,10 @@ class HandLabTests(unittest.TestCase):
     def test_javascript_values_match_independent_five_and_seven_card_oracles(self):
         deck=[r+s for r in '23456789TJQKA' for s in 'shdc'];rng=Random(20261015)
         fives=[list(cs) for item in self.data['cases'] for cs in combinations(item['hero']+item['board'],5)]
+        fives += [cards.split() for cards in ['As Ks Qs Js Ts','Ac 2h 3d 4s 5c','Ks Ah 2d 3s 4c','Ah Ad Ks Qc Jd','Ah Ad Ks Qc Td']]
         fives += [rng.sample(deck,5) for _ in range(1500)]
         sevens=[c['hero']+c['board'] for c in self.data['cases']] + [rng.sample(deck,7) for _ in range(1000)]
+        sevens += [cards.split() for cards in ['As Ah Ad Ks Kh Kd 2c','As Ah Ks Kh Qs Qh 2c','As Ks Qs Js 9s 2s Tc','As 2h 3d 4c 5s 6h 7d','As Ks Qs Js Ts 2h 3d']]
         result=node("const h=require('./assets/poker-hand-lab.js'),d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));process.stdout.write(JSON.stringify({fives:d.fives.map(h.scoreFive),sevens:d.sevens.map(c=>h.bestFive(c).score)}));",{'fives':fives,'sevens':sevens})
         self.assertEqual(result['fives'],[list(five(c)) for c in fives])
         self.assertEqual(result['sevens'],[list(best(c)) for c in sevens])
