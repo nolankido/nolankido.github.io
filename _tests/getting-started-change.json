@@ -237,6 +237,24 @@
         }
       ]
     },
+    "_reports/search-audit.json": {
+      "old_sha256": "96ca77fbd86d6ab6c5499095358a5d50da7d8ffc22cd4cfa3fe272c677beb068",
+      "new_sha256": "ef905dff27604d69b6a6461119e66eb9e66d3cbbe685af34a50f7bbfa4876703",
+      "edits": [
+        {
+          "start": 111,
+          "end": 139,
+          "old": "4,\n  \"breadcrumb_pages\": 182",
+          "new": "5,\n  \"breadcrumb_pages\": 183"
+        },
+        {
+          "start": 179,
+          "end": 257,
+          "old": "0,\n  \"sitemap_urls\": 179,\n  \"unique_titles\": 184,\n  \"unique_descriptions\": 184",
+          "new": "1,\n  \"sitemap_urls\": 180,\n  \"unique_titles\": 185,\n  \"unique_descriptions\": 185"
+        }
+      ]
+    },
     "find/index.html": {
       "old_sha256": "70be7adb1e538fc34fd59a38ed6f94cd75447be32a79f3de14b9ecae9d8fa854",
       "new_sha256": "1f5b739f6f406f998f38e18693fcef35b70d2404ef5b8ace06e9b1b82d51e718",

@@ -29,11 +29,12 @@ class GettingStartedTests(unittest.TestCase):
         original=history.outputs(self.outputs);self.assertEqual(set(map(str,original)),set(b['outputs']))
         for p,v in original.items():self.assertEqual(sha256(v.encode()).hexdigest(),b['outputs'][str(p)],str(p))
         for p,d in b['files'].items():self.assertEqual(sha256(history.before(p,(ROOT/p).read_bytes())).hexdigest(),d,p)
+        for p,d in b['extras'].items():self.assertEqual(sha256(history.before(p,(ROOT/p).read_bytes())).hexdigest(),d,p)
         records=deepcopy(self.pages);next(p for p in records if p['path']==ROUTE)['description']='Unreviewed promise'
         self.assertNotEqual(history.pages(records),b['pages'])
         changed=dict(self.outputs);changed[build.output_path(ROUTE)]=self.html.replace('63 BB','99 BB')
         self.assertIn(build.output_path(ROUTE),history.outputs(changed))
-        for path in ['assets/site-find.js','_scripts/search_sections.py','poker/no-limit-holdem-guide/index.html','find/index.html']:
+        for path in ['assets/site-find.js','_scripts/search_sections.py','poker/no-limit-holdem-guide/index.html','find/index.html','_reports/search-audit.json']:
             raw=(ROOT/path).read_bytes();bad=raw+b'Unreviewed'
             self.assertEqual(history.before(path,bad),bad)
             self.assertNotEqual(history.before(path,raw),history.before(path,bad))

@@ -2965,5 +2965,9 @@
     "downloads/practical-ai-workbook.txt": "c793d8d20e0006f522d081d34b901cc97d5bb741c2dd4861e2eceb20b8966e23",
     "assets/site-core.css": "10383d71aabb5f4fcba8b133a1cb34c22851ccf148b7ff8760dacde2aaf1a648",
     "assets/site-fonts.css": "e5da049df0af15fc3a53872b32149dc015e6183b4561d40082b2921b9c3580f4"
+  },
+  "extras": {
+    "POKER_PUBLISHING.md": "9b70dc3c12a55276bbaaacb0ae75dc44f9631756f5a30a5d99df455fb01851b1",
+    "_reports/search-audit.json": "96ca77fbd86d6ab6c5499095358a5d50da7d8ffc22cd4cfa3fe272c677beb068"
   }
 }
