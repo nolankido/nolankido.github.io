@@ -83,6 +83,11 @@ class UncertaintyTests(unittest.TestCase):
     def test_native_math_sources_delivery_and_privacy(self):
         math=[e for e in self.main.iter() if e.tag=='{http://www.w3.org/1998/Math/MathML}math']
         self.assertEqual(len(math),190)
+        # The converter must not treat unbraced "42" as one binomial argument.
+        fractions=[e for e in self.main.iter() if e.tag=='{http://www.w3.org/1998/Math/MathML}mfrac']
+        arguments=[tuple(''.join(child.itertext()) for child in e) for e in fractions]
+        self.assertIn(('4','2'),arguments)
+        self.assertNotIn(('42','='),arguments)
         self.assertNotRegex(self.html,r'|\\\[|\\\(|```|Proposed figure|eP-eC\+C\?')
         self.assertEqual(len(list(self.main.iter('table'))),11)
         self.assertEqual(len([e for e in self.main.iter('img') if '/uncertainty-' in e.get('src','')]),3)
