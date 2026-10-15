@@ -5,12 +5,6 @@
   margin: 1rem 0;
 }
 .uncertainty-guide math { font-family: math; }
-.uncertainty-guide math[display="inline"] {
-  display: inline-block;
-  vertical-align: middle;
-  max-width: 100%;
-  overflow-x: auto;
-}
 .uncertainty-guide .uncertainty-table {
   max-width: 100%;
   overflow-x: auto;
