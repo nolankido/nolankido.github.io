@@ -1,0 +1,18 @@
+.session-guide :is(h2, h3, .session-sources li) { scroll-margin-top: 12rem; }
+.session-guide .session-table { max-width: 100%; overflow-x: auto; margin: 1.5rem 0; }
+.session-guide .session-table .viewer-table { min-width: 60rem; table-layout: auto; margin: 0; }
+.session-guide .session-table:focus-visible { outline: 3px solid var(--accent, #b42332); outline-offset: 3px; }
+.session-guide .session-check { margin: 2rem 0; padding: 1rem; border: 1px solid var(--line, #bdbdb4); }
+.session-guide .session-check h3 { margin-top: 0; }
+.session-guide .session-stages { list-style: none; padding-left: 0; }
+.session-guide .session-stages > li { border-top: 1px solid var(--line, #bdbdb4); padding: 1rem 0; }
+.session-guide .session-stages h3 { margin-top: 0; }
+.session-guide .session-sources { padding-left: 1.5rem; }
+.session-guide .session-sources li { margin-bottom: 1.2rem; }
+@media print {
+  .session-guide .session-table { overflow: visible; }
+  .session-guide .session-table .viewer-table { min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .session-guide .session-check { padding: .5rem; }
+  .session-guide .session-check details > div { display: block !important; }
+  .session-guide .session-check details::details-content { content-visibility: visible !important; }
+}

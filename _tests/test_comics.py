@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
 import comics_history as history
+import getting_started_history
 
 class ComicsTests(unittest.TestCase):
     @classmethod
@@ -21,7 +22,7 @@ class ComicsTests(unittest.TestCase):
         frozen = history.change()
         self.assertEqual(frozen['base_commit'], 'c929afb071095d529842873bee6bba05e6060eac')
         for path, entry in frozen['paths'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = getting_started_history.before(path, (ROOT / path).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), entry['new_sha256'], path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), entry['old_sha256'], path)
         path = 'poker/holdem-basics/index.html'

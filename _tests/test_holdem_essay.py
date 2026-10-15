@@ -74,10 +74,9 @@ class HoldemEssayTests(unittest.TestCase):
 
     def test_lossless_search_keeps_every_old_heading_under_reviewed_budget(self):
         raw=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[search_sections.PAGE],re.S)[1]
-        # Comics 02 and 03 add 273 bytes of headings; retain all existing search entries.
-        self.assertLess(len(raw.encode()),60350)
+        self.assertLess(len(raw.encode()),60000)
         canonical=search_sections.index(self.outputs,self.pages)
-        code="const a=require('node:assert/strict'),s=require('./assets/site-find.js'),d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));a.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);for(const bad of [null,[],{}, {version:2,pages:[]},{version:3,pages:{}}]) a.deepEqual(s.decodeSections(bad),{});a.equal(Object.keys(s.decodeSections({version:2,pages:{'/poker/':['odd']}})).length,0);a.deepEqual(s.decodeSections({version:2,pages:{'/poker/':['bad id','x','safe','</script><img src=x>']}})['/poker/'],[['safe','</script><img src=x>']]);a.equal(Object.keys(s.decodeSections({version:2,pages:{'https://example.com/':['safe','x']}})).length,0);"
+        code="const a=require('node:assert/strict'),s=require('./assets/site-find.js'),d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));a.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);for(const bad of [null,[],{}, {version:2,pages:[]},{version:99,pages:{}}]) a.deepEqual(s.decodeSections(bad),{});a.equal(Object.keys(s.decodeSections({version:2,pages:{'/poker/':['odd']}})).length,0);a.deepEqual(s.decodeSections({version:2,pages:{'/poker/':['bad id','x','safe','</script><img src=x>']}})['/poker/'],[['safe','</script><img src=x>']]);a.equal(Object.keys(s.decodeSections({version:2,pages:{'https://example.com/':['safe','x']}})).length,0);"
         run=subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'packed':json.loads(raw),'canonical':canonical}),text=True,capture_output=True)
         self.assertEqual(run.returncode,0,run.stderr)
         old=self.baseline['outputs'];restored=history.outputs(self.outputs)
