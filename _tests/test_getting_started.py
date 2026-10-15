@@ -81,7 +81,7 @@ class GettingStartedTests(unittest.TestCase):
         current=search_sections.index(self.outputs,self.pages)
         previous=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         previous['/poker/library/']=[[a,label.replace('56 free guides','57 free guides')] for a,label in previous['/poker/library/']]
-        self.assertEqual({p:v for p,v in current.items() if p not in {ROUTE,'/poker/comics/best-five-cards-win/'}},previous)
+        self.assertEqual({p:v for p,v in current.items() if p not in {ROUTE,'/poker/comics/best-five-cards-win/','/poker/comics/why-acting-last-helps/'}},previous)
         raw=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[search_sections.PAGE],re.S)[1]
         self.assertLess(len(raw.encode()),60000)
         code=r'''const assert=require('node:assert/strict'),s=require('./assets/site-find.js');
@@ -120,7 +120,7 @@ assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
         self.assertIn('They have not been validated as a teaching curriculum with actual beginners',self.text)
         self.assertNotIn('Correctly rank 20',self.text)
         self.assertNotRegex(self.html,r'|```|'+chr(8212)+r'|<form|<input|<textarea|<iframe')
-        self.assertEqual(len(check_live.targets()),442)
+        self.assertEqual(len(check_live.targets()),444)
         for p in [ROUTE,'/assets/poker-session.css','/downloads/poker-first-session.md']:
             self.assertIn(p,check_live.targets())
         worksheet=(ROOT/'downloads/poker-first-session.md').read_text()
