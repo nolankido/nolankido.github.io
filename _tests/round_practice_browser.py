@@ -50,7 +50,8 @@ def main():
                 pre=root.locator('#round-practice-preflop');feedback=pre.locator('[data-round-feedback]')
                 select=pre.locator('[data-round-action]');select.focus();page.keyboard.press('Home');page.keyboard.press('ArrowDown');page.keyboard.press('Tab');expect(select).to_have_value('check')
                 enter(page,pre.locator('[data-round-move]'));expect(feedback).to_contain_text('owes 2');expect(pre.locator('[data-round-totals]')).to_contain_text('Pot now: 3.')
-                move(page,pre,'call',9);expect(feedback).to_contain_text('2 minus 0 = 2')
+                move(page,pre,'call',9);expect(feedback).to_contain_text('2 minus 0 = 2');expect(feedback).to_be_focused();expect(feedback).to_be_in_viewport()
+                assert feedback.evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
                 move(page,pre,'call',2);expect(pre.locator('[data-round-turn]')).to_contain_text('Small blind acts next')
                 expect(pre.locator('[data-round-turn]')).to_be_focused()
                 move(page,pre,'call',1);expect(pre.locator('[data-round-turn]')).to_contain_text('Big blind acts next')
@@ -102,8 +103,15 @@ def main():
                 report['widths'].append(width)
             for slug,case in [('first-decisions','preflop'),('starting-hand-decisions','preflop'),('first-flop-decisions','flop')]:
                 page.goto(origin+'/poker/'+slug+'/');enter(page,page.locator('.course-first-pass a[href$="#round-practice-'+case+'"]'))
-                target=page.locator('#round-practice-'+case);expect(target).to_be_visible();expect(target.locator('[data-round-live]')).to_be_visible();expect(target.locator('[data-round-log] li')).to_have_count(0);report['deep_links']+=1
-            page.reload();expect(page.locator('[data-round-practice]')).to_have_class('round-practice round-enhanced');expect(page.locator('[data-round-case]:visible [data-round-review]')).to_have_text('')
+                target=page.locator('#round-practice-'+case);expect(target).to_be_visible();expect(target.locator('h3')).to_be_focused();expect(target.locator('h3')).to_be_in_viewport();assert target.locator('h3').evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom");expect(target.locator('[data-round-live]')).to_be_visible();expect(target.locator('[data-round-log] li')).to_have_count(0);report['deep_links']+=1
+            page.set_viewport_size({'width':390,'height':950})
+            for case in ['preflop','flop','raise']:
+                page.goto(origin+ROUTE+'#round-practice-'+case)
+                heading=page.locator('#round-practice-'+case+' > h3')
+                expect(heading).to_be_focused();expect(heading).to_be_in_viewport()
+                assert heading.evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
+                report['deep_links']+=1
+            page.reload();expect(page.locator('[data-round-practice]')).to_have_class('round-practice round-enhanced');expect(page.locator('[data-round-case]:visible h3')).to_be_focused();expect(page.locator('[data-round-case]:visible h3')).to_be_in_viewport();expect(page.locator('[data-round-case]:visible [data-round-review]')).to_have_text('')
             page.emulate_media(media='print')
             expect(page.locator('[data-round-case]:visible')).to_have_count(3)
             expect(page.locator('[data-round-native]:visible')).to_have_count(3)

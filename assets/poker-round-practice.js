@@ -60,6 +60,7 @@
     states=articles.map(n=>start(JSON.parse(n.dataset.roundState)));
   } catch (_) { return; }
   const make=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
+  const reveal = node => { node.focus({preventScroll:true}); node.scrollIntoView({block:'start',behavior:'instant'}); };
   const rules={
     'check-facing':['Actions facing a wager','legal-actions'], 'call-zero':['Checking when nothing is owed','legal-actions'],
     'bet-existing':['Bet versus raise','legal-actions'], 'raise-none':['Bet versus raise','legal-actions'], 'fold-free':['Check versus fold','legal-actions'],
@@ -82,11 +83,11 @@
     const help=make('p','For a call, bet or raise, enter extra counters for this seat on this round. Check and fold add zero. This rehearsal checks the move before applying it; venue rulings for mistaken declarations are outside the model.','round-input-help');help.id=article.id+'-amount-help';
     const submit=make('button','Try this move');submit.type='button';submit.dataset.roundMove='';
     choices.append(label,addLabel,help,submit);
-    const status=make('p','', 'round-feedback');status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.dataset.roundFeedback='';
+    const status=make('p','', 'round-feedback');status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.dataset.roundFeedback='';status.tabIndex=-1;
     const logDetail=make('details','', 'poker-details');const logSummary=make('summary','Your line so far');const log=make('ol');log.dataset.roundLog='';logDetail.append(logSummary,log);
     const restart=make('button','Restart this round');restart.type='button';restart.dataset.roundRestart='';
     const review=make('div','', 'round-review');review.dataset.roundReview='';
-    live.append(turn,totals,area,choices,status,logDetail,restart,review);
+    live.append(turn,totals,area,status,choices,logDetail,restart,review);
     function showReview() {
       review.replaceChildren();
       if (!notes.size) return;
@@ -110,16 +111,16 @@
       let add=0;
       if (['call','bet','raise'].includes(action.value)) add=/^[0-9]+$/.test(amount.value.trim())?Number(amount.value.trim()):NaN;
       const r=act(state,action.value,add);
-      if (!r.ok) {status.textContent=r.message;if(rules[r.code]){notes.add(r.code);showReview();}amount.setAttribute('aria-invalid',['amount','call-cost','minimum','ceiling'].includes(r.code)?'true':'false');return;}
+      if (!r.ok) {status.textContent=r.message;if(rules[r.code]){notes.add(r.code);showReview();}amount.setAttribute('aria-invalid',['amount','call-cost','minimum','ceiling'].includes(r.code)?'true':'false');reveal(status);return;}
       const player=state.players.find(p=>p.id===r.actor);state=r.state;
       const words=player.name+': '+r.action+(r.add?'; added '+r.add+', now paid '+state.players.find(p=>p.id===r.actor).paid+' this round':'')+'.';
       log.append(make('li',words));logDetail.open=true;status.textContent=words+' This move follows the rules in the model.';
-      action.value='';amount.value='';amount.disabled=true;amount.removeAttribute('aria-invalid');render();turn.focus();
+      action.value='';amount.value='';amount.disabled=true;amount.removeAttribute('aria-invalid');render();reveal(turn);
     }
     submit.addEventListener('click',attempt);
     amount.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();attempt();}});
     action.addEventListener('change',()=>{amount.disabled=!['call','bet','raise'].includes(action.value);amount.value='';amount.removeAttribute('aria-invalid');status.textContent='';});
-    restart.addEventListener('click',()=>{state=start(states[i]);action.value='';amount.value='';amount.disabled=true;amount.removeAttribute('aria-invalid');log.replaceChildren();status.textContent='Round restarted. Try a different line, or repeat without the worked example.';render();turn.focus();});
+    restart.addEventListener('click',()=>{state=start(states[i]);action.value='';amount.value='';amount.disabled=true;amount.removeAttribute('aria-invalid');log.replaceChildren();status.textContent='Round restarted. Try a different line, or repeat without the worked example.';render();reveal(turn);});
     article.querySelector('[data-round-worked]').addEventListener('toggle',e=>{if(e.target.open){notes.add('worked');showReview();}});
     render();live.hidden=false;article.querySelector('[data-round-native]').hidden=true;
   });
@@ -127,11 +128,17 @@
     const chosen=articles.find(n=>n.id===id || n.id+'-title'===id);
     if (!chosen) return;
     articles.forEach(n=>{n.hidden=n!==chosen;});
-    if (focus) chosen.querySelector('h3').focus();
+    if (focus) document.fonts.ready.then(()=>requestAnimationFrame(()=>{if(location.hash.slice(1)===id) reveal(chosen.querySelector('h3'));}));
   }
   root.classList.add('round-enhanced');
   activate(location.hash.slice(1),false);
   if (!articles.some(n=>n.hidden)) activate(articles[0].id,false);
-  window.addEventListener('hashchange',()=>activate(location.hash.slice(1),true));
-  root.querySelectorAll('.round-starts a').forEach(a=>a.addEventListener('click',()=>activate(a.hash.slice(1),false)));
+  function followFragment() {
+    const id=location.hash.slice(1);
+    if(id==='betting-rehearsal') document.fonts.ready.then(()=>requestAnimationFrame(()=>{if(location.hash.slice(1)===id)reveal(root.querySelector('h2'));}));
+    else activate(id,true);
+  }
+  followFragment();
+  window.addEventListener('hashchange',followFragment);
+  root.querySelectorAll('.round-starts a').forEach(a=>a.addEventListener('click',()=>activate(a.hash.slice(1),true)));
 }());

@@ -1,7 +1,7 @@
 /* Match the course's existing paper, ink and red accent. */
 .round-practice { margin:36px 0; padding:clamp(14px,3vw,28px); border:1px solid var(--line-dark); background:var(--paper-light); scroll-margin-top:160px; }
 .round-practice > h2 { margin-top:0; }
-.round-practice :where(h3,h4) { scroll-margin-top:160px; }
+.round-practice :where(h3,h4,.round-feedback) { scroll-margin-top:160px; }
 .round-starts { display:flex; flex-wrap:wrap; gap:12px 24px; margin:24px 0; }
 .round-starts a { display:inline-flex; align-items:center; min-height:44px; }
 .round-case { padding-top:24px; border-top:1px solid var(--line-dark); scroll-margin-top:160px; }
@@ -20,7 +20,7 @@
 .round-input-help,.round-privacy { font-size:.85rem!important; }
 .round-feedback { font:600 .95rem/1.6 var(--sans)!important; }
 .round-review { margin:24px 0; }
-.round-practice :where(input,select,button,summary,a,h3,h4):focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+.round-practice :where(input,select,button,summary,a,h3,h4,.round-feedback):focus-visible { outline:3px solid var(--red); outline-offset:4px; }
 .round-practice [hidden] { display:none!important; }
 @media print {
   .round-practice { padding:0; border:0; background:white; }
