@@ -104,7 +104,7 @@ class UncertaintyTests(unittest.TestCase):
         self.assertEqual({k:v for k,v in idx.items() if k!=ROUTE},old)
         packed=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[Path('find/index.html')],re.S)[1]
         self.assertLessEqual(len(packed.encode()),60000)
-        self.assertEqual(len(check_live.targets()),458)
+        self.assertEqual(len(check_live.targets()),460)
         for path in ['/assets/poker-uncertainty.css','/downloads/poker-under-uncertainty-reproduce.py','/downloads/poker-under-uncertainty-evidence.json','/assets/poker/uncertainty-bayes.png']:
             self.assertIn(path,check_live.targets())
 

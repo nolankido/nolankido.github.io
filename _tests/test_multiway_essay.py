@@ -9,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
 import multiway_history as history
+import short_stack_history
 ROUTE='/poker/limped-multiway-pots/'
 ARRIVALS=['/poker/','/poker/library/','/poker/topics/cash-games/','/poker/topics/strategy/','/poker/topics/tournaments/','/poker/multiway-pot-workshop/','/poker/cash-game-study/','/poker/cash-game-study-path/','/poker/first-flop-decisions/','/poker/betting-with-a-purpose/','/poker/poker-under-uncertainty/','/notes/']
 
@@ -88,7 +89,7 @@ class MultiwayEssayTests(unittest.TestCase):
         for route in ARRIVALS:self.assertIn('href="'+ROUTE,self.outputs[build.output_path(route)],route)
         for name in ['poker/feed.xml','writing.xml','sitemap.xml']:self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(name)])
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1]);self.assertEqual((schema['@type'],schema['datePublished']),('Article','2026-10-15'))
-        current=search_sections.index(self.outputs,self.pages);old=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
+        canonical=search_sections.index(self.outputs,self.pages);current=search_sections.index(short_stack_history.outputs(self.outputs),short_stack_history.pages(self.pages));old=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         old['/poker/library/']=[[a,label.replace('59 free guides','60 free guides')] for a,label in old['/poker/library/']]
         self.assertEqual({p:v for p,v in current.items() if p!=ROUTE},old)
         raw=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[search_sections.PAGE],re.S)[1];self.assertLess(len(raw.encode()),60000)
@@ -97,8 +98,8 @@ class MultiwayEssayTests(unittest.TestCase):
 const d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));
 for(const q of ['limped multiway pots','limpers','isolation'])assert(s.score(d.entry,q)>0);
 assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);'''
-        subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':current}),text=True,check=True)
-        targets=check_live.targets();self.assertEqual(len(targets),458)
+        subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':canonical}),text=True,check=True)
+        targets=check_live.targets();self.assertEqual(len(targets),460)
         for asset in ['assets/poker-multiway.css','downloads/poker-multiway-review.md','assets/social/reader-poker-limped-multiway-pots.png']:self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
             if p.suffix=='.html':self.assertEqual('/assets/poker-multiway.css?' in v,p==build.output_path(ROUTE))

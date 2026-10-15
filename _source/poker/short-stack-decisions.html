@@ -1,35 +1,188 @@
-<article class="section folio-row viewer-guide" aria-labelledby="short-stack-start">
-  <div class="section-meta"><p class="section-label">Workshop / Short stacks</p></div>
-  <div class="section-content prose">
-    <nav class="viewer-breadcrumb" aria-label="Study breadcrumb"><a href="/poker/study/#workshops">The study desk</a></nav>
-    <p class="viewer-scope">After-play study, not an at-table aid. Fictional examples explain how to define and compare a spot. No push/fold ranges are supplied or claimed to be solved.</p>
-    <h2 id="short-stack-start">“I had eight blinds” is the beginning of a question.</h2>
-    <p>Two players can hold the same cards with the same nominal stack and face different decisions. One is first into an unopened pot on the button. The other is in the big blind after a raise and a call. The number of players, posted money, available actions, other stacks and tournament prizes can all differ. A chart cell is useful only after its situation matches yours.</p>
-    <p>This is a study method for the small-stack decisions that are easy to compress into slogans. It also gives a reviewer a way to explain why two charts disagree without immediately declaring one wrong. Begin with <a href="/poker/position-and-stacks/">position and stack terminology</a> if effective stacks are unfamiliar.</p>
-    <nav class="poker-jump" aria-label="Short-stack workshop sections"><a href="#record">Define the state</a><a href="#antes">Count the ante</a><a href="#spot-families">Separate spot families</a><a href="#chart-check">Compare charts</a><a href="#study-loop">Run a study loop</a></nav>
-    <h2 id="record">Record a state, not a stack label.</h2>
-    <p>Write the blind level, ante type, seats dealt in, button location, action so far and stack convention. “8 BB at the start of the hand before posting” is different from “8 BB behind after posting.” Use the software or chart's own convention when comparing results, and retain your raw chip counts so that a conversion can be checked.</p>
-    <div class="viewer-example"><h3>A chip count with two labels</h3><p>A player begins with 8,000 chips. The blinds are 500/1,000 with a 1,000 big-blind ante. They are the big blind and can post both amounts in full. The starting stack is <strong>8 BB</strong>; after posting the live blind and ante, <strong>6,000 chips remain behind</strong>.</p><p>The 1,000 live blind can count toward a call. The 1,000 ante cannot. A bare label of “6 BB” loses information about both the starting state and the posted money. Short-posting and ante-priority procedures require the event's rules, not extrapolation from this example.</p></div>
-    <p>Effective stack is opponent-specific. A button with 12 BB facing blinds with 7 BB and 30 BB has a different amount at risk against each. Reducing this to “7 BB effective” hides the deeper opponent. In a multiway all-in, different contribution levels can also create side pots.</p>
-    <h2 id="antes">A big-blind ante is posted once per hand.</h2>
-    <p>At a six-handed table with a 0.5 BB small blind, a 1 BB big blind and a 1 BB big-blind ante, the initial pot is <strong>2.5 BB</strong>. Do not multiply that big-blind ante by six. With a 0.1 BB ante from each of six players instead, the initial pot is <strong>2.1 BB</strong>.</p>
-    <p>At unchanged blinds, a player who completes an ordinary full six-hand orbit pays a total of 2.5 BB in the first structure or 2.1 BB in the second, assuming every obligation is posted in full. That is bookkeeping, not a survival clock: blinds can rise, the table can change and the player may win or lose chips before completing an orbit.</p>
-    <p>Keep actual forced contributions in the pot ledger. A blind is a live contribution and an ante is not a bet toward the amount to call. This distinction matters most when very little is left behind.</p>
-    <h2 id="spot-families">Do not mix these four families.</h2>
-    <table class="viewer-table"><caption>Choose the decision family before consulting a reference</caption><thead><tr><th scope="col">Family</th><th scope="col">What must match</th></tr></thead><tbody><tr><th scope="row">First-in decision</th><td>All earlier players folded. Count everyone still to act and preserve their stacks.</td></tr><tr><th scope="row">Facing an open</th><td>The opener's size and assumed range, plus players behind, are part of the state.</td></tr><tr><th scope="row">Calling an all-in</th><td>The actual amount owed and the shover's range matter. You cannot make the existing shover fold by calling.</td></tr><tr><th scope="row">Limped or multiway pot</th><td>Prior contributions and additional opponents create a different game from an unopened heads-up comparison.</td></tr></tbody></table>
-    <p>“Push/fold” is an action abstraction: a model removes alternatives such as limping or a smaller raise from a particular decision. It does not prove those alternatives are inferior in the unrestricted game. Even a very short stack can have legal non-all-in options in some situations. State what the model allowed instead of turning a simplifying assumption into a universal rule.</p>
-    <h2 id="chart-check">Give every chart a small compatibility label.</h2>
-    <p>Before comparing a hand recommendation, record the table size and position convention; all relevant stacks; blind and ante structure; action history; chip-value or prize-value objective; permitted actions; and the source or version. For a prize-sensitive comparison, keep the payouts and remaining-field information too.</p>
-    <p>Then label the match as <strong>exact for the recorded inputs</strong>, <strong>approximate with named differences</strong>, or <strong>not comparable</strong>. “Exact” here describes matching inputs, not a claim that a program has solved the game perfectly. A screenshot with missing settings is not an exact reference.</p>
-    <p>For example, a six-max, no-ante, first-in 5 BB chip-value chart is not an exact answer for a five-handed 4.5 BB spot with a big-blind ante near a payout jump. It may be educational, but the differences are the point of the study rather than inconvenient footnotes.</p>
-    <h3>A nearby depth is not a license to interpolate.</h3>
-    <p>A binary shove/fold label at 4 BB and another at 5 BB do not by themselves specify the answer at 4.5 BB. A reported mixed frequency is also not a confidence score. Prefer an exact matching calculation when available; otherwise retain the mismatch and describe the result as an approximation. Do not silently round a difficult spot into certainty.</p>
-    <h2 id="study-loop">A small comparison beats a wall of charts.</h2>
-    <p>Choose one family, such as a button first-in decision. Save one complete input record and predict which factors should matter before looking at a result. Compare one change at a time: ante structure, an opponent's stack, or the payout objective. Record what changed and what remained fixed.</p>
-    <p>Finish with a statement you could explain without the chart: “This comparison changes the posted pot but keeps the action tree and stacks fixed,” or “This difference might be due to the payout model, so the chip-value reference is not enough.” A study session that identifies a mismatch has produced something useful even before it produces an action recommendation.</p>
-    <p>For a limited-energy session, reconstruct one hand and stop before querying a tool. For a longer session, add a matching reference and one sensitivity check. There is no need to memorize dozens of isolated cells before understanding the question they answer.</p>
-    <p><a class="button" href="/downloads/poker-short-stack-record.md" download>Download the short-stack input record</a></p>
-    <div class="viewer-sources"><h2>References and limits</h2><p><a href="https://www.pokertda.com/view-poker-tda-rules/">Poker TDA's published rules</a> cover electronic-device and strategy-tool restrictions; house rules control a particular event. Check the current rules before play. <a href="https://blog.gtowizard.com/icm-basics/">GTO Wizard: ICM basics</a> explains the distinction between chip and prize value. The compatibility checklist is an editorial study framework, not a certified strategy. Prepared with AI assistance. No private solver results are published here.</p></div>
-    <nav class="article-navigation" aria-label="Continue studying"><a href="/poker/tournament-equity/">Understand the payout objective</a><a href="/poker/practice-room/#spot-check">Try a chart-matching exercise</a></nav>
-  </div>
-</article>
+<div class="article-body shell prose viewer-guide short-stack-guide">
+<nav class="viewer-breadcrumb" aria-label="Guide location"><a href="/poker/">Poker</a><span aria-hidden="true"> / </span><a href="/poker/topics/tournaments/">Tournaments</a></nav>
+<h2 id="short-stack-start">Playing 10–20 big blinds in live tournaments</h2>
+<p class="article-lead">At 15 big blinds, “What can I shove?” is only one question. You may be first in, facing a raise, completing the small blind or considering a call for your tournament life. Start by defining the available actions and what you are trying to maximize: chips or modeled prize equity.</p>
+
+<p class="viewer-scope"><strong>After-play study, not an at-table aid.</strong> This expanded guide focuses on 10–20 BB live tournament decisions. Calculated examples are fictional and show their assumptions. No personal hand, new solver run or universally correct range is claimed. Sources checked October 15, 2026.</p>
+
+<p>If you want the shortest route, <a href="#record">record the situation</a>, compare <a href="#depths">what changes at 20, 15 and 10 BB</a>, then work through <a href="#icm-call">the chip-value versus ICM call</a>. Use <a href="/poker/position-and-stacks/">position and stack terminology</a> if effective stacks are unfamiliar. The <a href="#study-loop">short-stack input record</a> is for a private review after play.</p>
+<p>Two players can hold the same cards with the same nominal stack and face different decisions. A button entering an unopened pot is not in the same position as a big blind responding to a raise and a call. A useful chart matches the game being studied, including the actions that were allowed to happen.</p>
+<h2 id="models">Separate the action tree from the objective</h2>
+<p>A <strong>decision tree</strong> describes what players can do and what can happen next. A push/fold model deliberately removes some branches. In HoldemResources’ heads-up example, the small blind can only shove or fold; the big blind facing a shove can only call or fold. That chart answers the restricted two-player game. It does not establish that a smaller raise or a limp would be worse if those actions were available. <a href="#source-hu">1</a></p>
+<p><strong>Chip expected value</strong>, or chip EV, values outcomes in chips. <strong>ICM</strong>, the Independent Chip Model, estimates tournament prize equity from stacks and payouts. Changing the objective is separate from expanding the tree. HRC’s free Nash ICM calculator explicitly remains a push-or-fold calculation; its configurable tree documentation also describes broader preflop and postflop analysis. <a href="#source-nash">2</a> <a href="#source-tree">3</a></p>
+<table class="viewer-table"><caption>Action tree and objective are separate choices</caption>
+<thead>
+<tr>
+<th scope="col">Study model</th>
+<th scope="col">What changes</th>
+<th scope="col">What remains a limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Push/fold, chip EV</td>
+<td>Values the allowed outcomes in chips</td>
+<td>Smaller raises and limps may be absent</td>
+</tr>
+<tr>
+<td>Push/fold, ICM</td>
+<td>Values outcomes using a specified prize model</td>
+<td>Adding payouts does not restore omitted actions</td>
+</tr>
+<tr>
+<td>Multiple actions, chip EV</td>
+<td>Can compare the non-all-in branches actually configured</td>
+<td>Still needs stacks, ranges, sizes and later-play assumptions</td>
+</tr>
+<tr>
+<td>Multiple actions, ICM</td>
+<td>Adds a prize objective to a broader tree</td>
+<td>Remains conditional on the configured tree and payout model</td>
+</tr>
+</tbody>
+</table>
+<p>“The chart shoves” and “this other model raises small” need not be contradictory. First check whether the models offered the same choices. Then check whether they valued the results in the same units. Neither a mixed frequency nor a tool’s recommendation is a confidence score about an unknown live opponent.</p>
+<section class="short-stack-check" aria-labelledby="model-check"><h3 id="model-check">Check: does adding payouts add small raises?</h3><details class="poker-details viewer-question"><summary>Show the distinction</summary><div><p><strong>No.</strong> A push/fold ICM model changes how outcomes are valued. It still cannot compare an omitted small raise with a shove. The action tree and the objective are two separate specifications.</p></div></details></section>
+
+<h2 id="record">Record a state, not a stack label.</h2>
+<p>Write the blind level, ante type, seats dealt in, button location, action so far and stack convention. “15 BB before posting” differs from “15 BB behind after posting.” Keep the original chip counts so a conversion can be checked. Identify every opponent who can still enter the pot, not only the person whose action caught your attention.</p>
+<p><strong>A smaller-stack contrast, retained from the original workshop:</strong> a player begins with 8,000 chips at blinds of 500/1,000 with a 1,000 big-blind ante. They are the big blind and can post both in full. The starting stack is <strong>8 BB</strong>; after posting the live blind and ante, <strong>6,000 chips remain behind</strong>. The live blind counts toward a call. The ante does not. Short-posting and ante-priority procedures require the event’s rules.</p>
+<p><strong>Effective stacks are opponent-specific.</strong> With 17 BB against players starting with 8 BB, 16 BB and 55 BB, the amounts initially contestable between you and each are 8, 16 and 17 BB, before accounting for forced contributions. Then account for dead antes and live posts. An opponent who started with fewer chips can cover your remaining live stake after you pay a big-blind ante; assess elimination risk from the actual post-ante state. In a multiway all-in, different contribution levels can create side pots; use the <a href="/poker/side-pot-lab/">side-pot lab</a> for refunds and eligibility.</p>
+<p>Separate three meanings of “players remaining”: players still to act in this hand, players seated at this table, and players left in the tournament. They affect different parts of the decision. Nine-handed under the gun has eight players behind; a six-handed first-to-act seat has five. The same position label does not make those situations identical. Tournament field size and payouts answer another question again.</p>
+<h2 id="antes">A big-blind ante is posted once per hand.</h2>
+<p>At a six-handed table with a 0.5 BB small blind, a 1 BB big blind and a 1 BB big-blind ante, the initial pot is <strong>2.5 BB</strong>. Do not multiply that big-blind ante by six. With a <strong>0.1 BB ante from each of six players</strong> instead, the initial pot is <strong>2.1 BB</strong>. A nine-handed table using that individual ante would begin with 2.4 BB.</p>
+<p>At unchanged blinds, a player completing a full six-hand orbit pays 2.5 BB in the first structure or 2.1 BB in the second, assuming every obligation is posted in full. This is bookkeeping, not a survival clock: blinds rise, tables change and hands can win or lose chips before the orbit ends.</p>
+<p>Keep forced contributions in the ledger. An ante is money in the pot, not a live bet toward the amount to call. That distinction can alter an all-in price. The current Poker TDA rules also address big-blind-ante situations and restrict strategy tools at the table. Confirm the rules of your event and use these materials away from play. <a href="#source-tda">4</a></p>
+<h2 id="risk-reward">Compare risk and reward without mistaking it for strategy</h2>
+<p><strong>Fictional boundary model:</strong> nine-handed no-limit Hold’em; action folds to you in the cutoff; you start with 20 BB before forced bets and have posted none; all opponents start with at least 21 BB; blinds 0.5/1 BB; a 1 BB big-blind ante is fully posted by the big blind. No other contributions, bounty or deductions. The objective is chip EV. Compare a raise to 2 BB with a shove of 20 BB.</p>
+<p>For this calculation only, assume each action wins the initial pot when everyone folds and loses its entire additional investment whenever anyone continues. There is no showdown equity, later betting or refund in that losing branch. These artificial assumptions isolate risk and reward; they are not a model of how either action actually plays.</p>
+<p>The pot starts at <strong>0.5 + 1 + 1 = 2.5 BB</strong>. Under this zero-equity model, the break-even joint fold probability is <strong>risk / (risk + reward)</strong>:</p>
+<table class="viewer-table"><caption>Zero-equity fold thresholds in the fictional 20 BB setup</caption>
+<thead>
+<tr>
+<th scope="col">Additional investment</th>
+<th scope="col" style="text-align: right;">Joint folds needed to break even</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raise to 2 BB</td>
+<td style="text-align: right;">2 / 4.5 = <strong>44.44%</strong></td>
+</tr>
+<tr>
+<td>Shove 20 BB</td>
+<td style="text-align: right;">20 / 22.5 = <strong>88.89%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The two actions will not necessarily receive the same responses. A small raise can face a call or reraise and a real shoving hand may retain equity when called. These numbers therefore do not select a preferred action. They show why removing the small-raise branch changes the question.</p>
+<p><strong>Ante sensitivity, with a separate 15 BB starting stack:</strong> keep the same cutoff, opponents covering, 0.5/1 blinds and artificial losing-when-called model. A 15 BB shove needs <strong>15 / 16.5 = 90.91%</strong> joint folds with no ante, versus <strong>15 / 17.5 = 85.71%</strong> with a 1 BB big-blind ante. The nominal stack is unchanged while the immediate reward differs.</p>
+<p>If several opponents remain, the relevant event is everyone required to fold, not any one player’s fold rate. Responses are conditional on earlier actions and card removal. The <a href="/poker/limped-multiway-pots/#bluff-math">multiway guide</a> explains that calculation. Do not interpret these toy thresholds as measured live-player frequencies.</p>
+<h2 id="spot-families">Do not mix these four families.</h2>
+<table class="viewer-table"><caption>Choose the decision family before consulting a reference</caption>
+<thead>
+<tr>
+<th scope="col">Family</th>
+<th scope="col">What must match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First-in decision</td>
+<td>All earlier players folded. Count everyone still to act and retain their stacks.</td>
+</tr>
+<tr>
+<td>Facing an open</td>
+<td>Record the opener’s total size, assumed range and the players behind. A rejam is a shove after someone has raised.</td>
+</tr>
+<tr>
+<td>Calling an all-in</td>
+<td>Count what is still owed and the relevant range. Calling cannot make the existing shover fold.</td>
+</tr>
+<tr>
+<td>Limped or multiway pot</td>
+<td>Prior contributions, more ranges and possible side pots create a different game.</td>
+</tr>
+</tbody>
+</table>
+<p>At 15 BB, “shove first in” and “call a shove” are different decisions even with the same cards. The opener can win immediately through folds. A caller needs an adequate expected share of the contested pot under the relevant objective. Neither a familiar hand name nor the fear of becoming shorter supplies the missing range.</p>
+<h2 id="depths">What changes at 20, 15 and 10 BB?</h2>
+<p>Treat the depths as study checkpoints, not switches that activate universal rules. Position, antes, opposing stacks and the prior action remain part of every checkpoint.</p>
+<p>Poker Academy’s September 17, 2026 article reports nine-handed, chip-EV, 1 BB big-blind-ante solutions with 2 BB opens, and a 2.5 BB small-blind raise option. Its examples show small early-position opens at 20 and 15 BB, both raises and shoves on the 15 BB button, and some small button raises even at 10 BB. It also includes small-blind limps. These are provider-reported examples, not new solves or recommended live-field frequencies. The public summary is not a complete export of every opponent stack and downstream setting. <a href="#source-depths">5</a></p>
+<p><strong>At 20 BB, compare the branches you would lose by using push/fold.</strong> Can a small raise win the pot, get called by worse or induce a response you can profitably continue against? If you intend to fold to a shove, which ranges make that plan reasonable? A non-all-in raise is not automatically a mistake because you may later fold. Nor is raise/fold automatically appropriate with every playable hand.</p>
+<p><strong>At 15 BB, start with the decision family and the players behind.</strong> An early-position first-in decision, a button open, a small-blind completion and a rejam over a raise are separate studies. A short blind can shove over your raise; a covering player can threaten your tournament life. Write the response plan before describing a smaller raise as “keeping options open.” It also creates new decisions.</p>
+<p><strong>At 10 BB, shoving becomes a more prominent study option without becoming the only legal action.</strong> A 2 BB open uses one fifth of a 10 BB starting stack before forced bets are considered. That makes the remaining call price important, but it does not mean every hand is committed. Count the additional call and compare against an assigned range. Avoid turning a low threshold into proof that your hand reaches it.</p>
+<p><strong>In the small blind, distinguish completing from opening elsewhere.</strong> If action folds to you, you already have a live half-blind invested in a standard 0.5/1 structure. Completing costs another half-blind and leaves the big blind an action. A cheap completion is not a free showdown. The range that reaches that decision and the big blind’s options matter.</p>
+<p>For a useful comparison, keep everything except the selected variable fixed. If the table, ante, stack convention and permitted sizes all change between two screenshots, the difference cannot be credited solely to moving from 20 to 15 BB.</p>
+<h2 id="icm-call">One call, two objectives: chips and classic ICM</h2>
+<p><strong>Complete fictional setup:</strong> four players remain in a standard no-limit Hold’em tournament. Finishing prizes are <strong>$50, $30, $20 and $0</strong>. Starting stacks before posting, in the order <strong>small blind, C, you in the big blind, D</strong>, are <strong>40, 30, 20 and 10 BB</strong>. Blinds are 0.5/1 BB with <strong>no ante</strong>. C and D fold; the small blind shoves. No bounty, deal, re-entry, satellite prize, deductions or other contributions apply.</p>
+<p>You posted 1 BB and have <strong>19 BB left to call</strong>. The small blind covers your 20 BB contribution. Its excess 20 BB is uncalled and returned if you call; it is not part of the contested award. There are no further betting decisions after a call. The two-outcome calculation below explicitly assumes no ties. Your cards and the shover’s range are unspecified because we are calculating a required win probability, not assigning one to a hand.</p>
+<p><strong>Chip EV:</strong> after calling, each player has contributed an effective 20 BB, making a <strong>40 BB contested pot</strong>. Relative to folding now, the extra call costs 19 BB. The break-even win probability is <strong>19 / 40 = 47.5%</strong>. Chips already posted are not charged again.</p>
+<p><strong>Classic ICM:</strong> the Malmuth–Harville model assigns finish probabilities from chip shares, successively removing each possible higher finisher. It then weights those probabilities by the prizes. HRC identifies this as the algorithm used by its separate ICM equity calculator. This prize model does not forecast individual skill, future position or blind changes. <a href="#source-icm">6</a></p>
+<div aria-label="Four-player ICM outcome comparison" class="short-stack-table" role="region" tabindex="0">
+<table class="viewer-table"><caption>Four-player ICM branches with 100 BB conserved</caption>
+<thead>
+<tr>
+<th scope="col">Choice or outcome</th>
+<th scope="col">Stacks in the stated order</th>
+<th scope="col" style="text-align: right;">Your modeled prize equity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fold</td>
+<td>41, 30, 19, 10 BB</td>
+<td style="text-align: right;">$22.946148</td>
+</tr>
+<tr>
+<td>Call and win</td>
+<td>20, 30, 40, 10 BB</td>
+<td style="text-align: right;">$33.603175</td>
+</tr>
+<tr>
+<td>Call and lose</td>
+<td>60, 30, 0, 10 BB</td>
+<td style="text-align: right;">$0, fourth place</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="short-stack-scroll-hint">On a narrow screen, scroll this comparison sideways. The amounts are calculated for this fictional payout structure.</p>
+
+<p>The fold branch preserves the small blind’s 40 BB starting stack plus your surrendered 1 BB. Winning returns its uncalled excess and leaves you with the 40 BB contested pot. Losing transfers your full 20 BB to the covering player. <strong>All branches conserve 100 BB.</strong></p>
+<p>With loss value zero and no ties, calling has modeled prize equity <strong>q × $33.603175</strong>. It must match folding’s $22.946148. Using unrounded values gives <strong>q = 68.2857%</strong>, approximately <strong>68.3%</strong>. A hypothetical 60% win probability would exceed the 47.5% chip threshold but fall below this particular ICM threshold. That is not a recommendation for any named hand.</p>
+<p>The exact hero finish probabilities are available in <a href="/downloads/short-stack-icm-example.py">the reproduction script</a>. It uses only Python’s standard library, enumerates the finish orders and prints the branch values, thresholds and chip-conservation checks. It is an arithmetic example, not a poker solver, range generator or at-table assistant.</p>
+<p>Changing the short stack, prizes, action or bounty can change the comparison. With a single winner-only residual monetary prize after a deal, classic ICM reduces that residual value to chip share; locked awards are constants. Do not import the usual payout ladder into a hand without checking the actual deal. Conversely, “ICM matters” does not establish a fold when the state is unspecified. Continue with <a href="/poker/tournament-equity/">tournament equity</a> for another counted example.</p>
+<section class="short-stack-check" aria-labelledby="icm-check"><h3 id="icm-check">Check: is a 60% win chance enough here?</h3><details class="poker-details viewer-question"><summary>Show the two comparisons</summary><div><p>Under this exact no-tie setup, <strong>yes for chip EV, no for classic ICM prize equity</strong>. The chip threshold is 47.5%; the modeled prize threshold is about 68.3%. The 60% is supplied for the exercise. No actual hand’s equity has been estimated.</p></div></details></section>
+
+<h2 id="missing-information">A reported 15 BB hand can still be incomplete</h2>
+<p>PokerNews’ coverage of the May 2026 Triton Montenegro $50,000 seven-handed event reports that Thomas Muehloecker opened and called a Christoph Vogelsang ace-five shove with K♥ J♥ from a stack described as 15 big blinds. It also reports a three-handed deal with $100,000 and the trophy left to play for. This is an attributed public report, not Nolan’s hand or recollection. <a href="#source-reported">7</a></p>
+<p>The account does not supply a complete decision state: exact pre-hand stacks and positions, opening size, ante, whether the 15 BB describes the original stack or what remained, and opponent range assumptions. Its deal allocations also differ between the narrative and results table. Confirm the deal terms before assigning a payout objective. The supported conclusion here is a question list, not a grade for the K♥ J♥ call.</p>
+<p>For your own difficult short-stack hand, capture those missing details and what you actually thought at the time. Keep later analysis separate. A showdown supplies one holding; it does not verify the entire range that should have been assigned before the cards were shown. Use <a href="/poker/recording-hands/">recording hands</a> to preserve an honest record.</p>
+<h2 id="chart-check">Give every chart a small compatibility label.</h2>
+<p>Record table size and position convention; all relevant stacks and posting conventions; blinds and antes; prior action; the chip-value or prize-value objective; permitted actions; and the source or version. A prize-sensitive comparison also needs payouts, remaining-field information and other prize mechanics. A tool with postflop support still needs its postflop settings to match the study question. <a href="#source-tree">3</a></p>
+<p>Label the reference <strong>matching inputs</strong>, <strong>approximate with named differences</strong>, or <strong>not comparable</strong>. Matching inputs does not certify solution accuracy. A screenshot with missing settings cannot provide an exact reference.</p>
+<p>A six-max, no-ante, first-in 5 BB chip-value chart is not an exact answer for a five-handed 4.5 BB big-blind-ante spot near a payout jump. Likewise, shove/fold labels at 4 and 5 BB do not specify a 4.5 BB answer. Do not silently round a difficult spot into certainty or interpret a mixed frequency as confidence.</p>
+<h2 id="study-loop">A small comparison beats a wall of charts.</h2>
+<p>Choose one family, such as a button first-in decision. Save a complete input record and predict which factor should matter before consulting a result. Change one variable: ante, one opponent’s stack, an allowed raise size or the payout objective. Record what changed and what stayed fixed.</p>
+<p>Finish with a sentence you can explain without the chart: “This comparison changes the posted pot while keeping stacks and actions fixed,” or “The chip-value reference omits the prize question I need to answer.” Identifying a mismatch is useful work even when the exact action remains unresolved.</p>
+<p><a href="/downloads/poker-short-stack-record.md">Download the short-stack input record</a>, or copy the same blank text below. Keep completed records private. The sheet includes a short version for a limited-energy study session and a fuller model checklist.</p>
+<pre class="short-stack-sheet">${poker_short_stack_record}</pre>
+
+<section class="short-stack-check" aria-labelledby="ante-check"><h3 id="ante-check">Check: does a 1 BB big-blind ante become 9 BB nine-handed?</h3><details class="poker-details viewer-question"><summary>Show the accounting</summary><div><p><strong>No.</strong> With 0.5/1 blinds and a fully posted 1 BB big-blind ante, the initial pot is 2.5 BB. The big blind posts that ante once. An individual ante from each player is a different structure.</p></div></details></section>
+
+<h2 id="references-and-limits">References and limits</h2>
+<ol class="short-stack-sources">
+<li id="source-hu"><a href="https://www.holdemresources.net/hune">HoldemResources: HeadsUp Push/Fold Nash Equilibrium</a>. Defines the restricted two-player shove/fold and call/fold game, with separate ante cases.</li>
+<li id="source-nash"><a href="https://www.holdemresources.net/nashicm">HoldemResources: Nash ICM Calculator</a>. Identifies its free tournament calculation as push-or-fold. This is distinct from its stack-to-prize ICM equity calculator.</li>
+<li id="source-tree"><a href="https://www.holdemresources.net/docs/tree-config/">HoldemResources: Tree Configuration</a>. Documents raise sizes, limps, flat calls, all-in settings and postflop branches. Documentation describes options; it is not a solve of a reader’s hand.</li>
+<li id="source-tda"><a href="https://www.pokertda.com/view-poker-tda-rules/">Poker TDA: 2026 rules, procedures and addendum</a>. Rule 5 addresses devices and strategy tools; the rules also address BBA situations. The event’s adopted rules and tournament director govern actual play.</li>
+<li id="source-depths"><a href="https://poker.academy/blog/post/how-to-survive-with-a-short-stack-20bb-or-less">Poker Academy: short-stack tournament strategy</a>, updated September 17, 2026. Provider-reported action examples with stated nine-handed chip-EV, BBA and sizing assumptions. No charts, hand ranges or recommended live-field frequencies are reproduced here.</li>
+<li id="source-icm"><a href="https://www.holdemresources.net/icmcalculator">HoldemResources: ICM Calculator</a>. Identifies classic Malmuth–Harville ICM. The four-player branch arithmetic here is independently reproduced in the linked script, not an asserted output from an unrecorded solver run.</li>
+<li id="source-reported"><a href="https://www.pokernews.com/tours/triton/2026-triton-montenegro/50k-nlh-7-handed/">PokerNews: 2026 Triton Montenegro $50k NLH seven-handed coverage</a>. The reported K♥ J♥ decision and three-handed deal illustrate missing inputs. The narrative’s deal allocations and the results table disagree, so no exact deal-state analysis is claimed.</li>
+</ol>
+
+<p class="editorial-note">Originally published October 6, 2026. Substantially expanded <time datetime="2026-10-15">October 15, 2026</time> using a supplied research essay. Expanded the 10–20 BB action comparisons, clarified ante and coverage conventions, and added a reproducible four-player ICM call with explained checks. Prepared with AI assistance. References checked on the revision date. Calculated examples are fictional; the PokerNews hand is attributed separately. No private solver research, personal session or human usability result is published or implied.</p>
+
+<nav class="article-navigation" aria-label="Continue studying"><a href="/poker/tournament-equity/">Understand the payout objective</a><a href="/poker/reading-preflop-charts/">Read a chart’s assumptions</a><a href="/poker/practice-room/#spot-check">Try a chart-matching exercise</a><a href="/poker/study/">Return to the study desk</a><a href="/contact/">Send a correction or confusing passage</a></nav>
+</div>

@@ -1,0 +1,20 @@
+.short-stack-guide :is(h2, h3, .short-stack-sources li) { scroll-margin-top: 12rem; }
+.short-stack-guide .short-stack-check { margin: 2rem 0; padding: 1rem; border: 1px solid var(--line, #bdbdb4); }
+.short-stack-guide .short-stack-check h3 { margin-top: 0; }
+.short-stack-guide .short-stack-sources { padding-left: 1.5rem; }
+.short-stack-guide .short-stack-sources li { margin-bottom: 1.2rem; }
+.short-stack-guide .short-stack-table { max-width: 100%; overflow-x: auto; margin: 1.5rem 0 .5rem; }
+.short-stack-guide .short-stack-table .viewer-table { min-width: 44rem; margin: 0; table-layout: fixed; }
+.short-stack-guide .short-stack-table:focus-visible { outline: 3px solid var(--accent, #b42332); outline-offset: 3px; }
+.short-stack-guide .short-stack-scroll-hint { font-size: .9em; color: var(--muted, #48534b); }
+.short-stack-guide .short-stack-sheet { box-sizing: border-box; max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; padding: 1.25rem; border: 1px solid var(--line-dark); background: var(--panel); font: .87rem/1.7 var(--mono); }
+@media (min-width: 60rem) { .short-stack-guide .short-stack-scroll-hint { display: none; } }
+@media print {
+  .short-stack-guide .short-stack-check { padding: .5rem; }
+  .short-stack-guide .short-stack-check details > div { display: block !important; }
+  .short-stack-guide .short-stack-check details::details-content { content-visibility: visible !important; }
+  .short-stack-guide .short-stack-table { overflow: visible; }
+  .short-stack-guide .short-stack-table .viewer-table { min-width: 0; font-size: 8pt; }
+  .short-stack-guide .short-stack-scroll-hint { display: none; }
+  .short-stack-guide .short-stack-sheet { padding: 0; border: 0; background: none; font-size: 10pt; line-height: 1.4; break-inside: auto; }
+}

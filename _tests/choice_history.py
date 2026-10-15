@@ -23,6 +23,7 @@ import getting_started_history
 import tournament_budget_history
 import thunder_valley_history
 import multiway_history
+import short_stack_history
 ROOT=Path(__file__).resolve().parents[1]
 ROUTE='/technology/should-i-use-ai/'
 NEW_SOURCES={'_source/ai-task-choice.json','_source/technology/should-i-use-ai.html',answer_review_history.SOURCE} | search_entry_history.NEW_SOURCES | set(beginner_history.change()['new_files']) | set(preflop_history.change()['new_files']) | set(flop_history.change()['new_files']) | set(river_history.change()['new_files']) | set(learning_path_history.change()['new_files']) | set(ranges_history.change()['new_files'])
@@ -43,6 +44,8 @@ NEW_SOURCES |= set(thunder_valley_history.change()['new_files'])
 NEW_OUTPUTS |= set(thunder_valley_history.change()['new_outputs'])
 NEW_SOURCES |= set(multiway_history.change()['new_files'])
 NEW_OUTPUTS |= set(multiway_history.change()['new_outputs'])
+NEW_SOURCES |= set(short_stack_history.change()['new_files'])
+NEW_OUTPUTS |= set(short_stack_history.change()['new_outputs'])
 
 def before(path,data):
     data=answer_review_history.before(path,data)

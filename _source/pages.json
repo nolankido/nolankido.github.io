@@ -522,14 +522,15 @@
     "id": "poker-short-stack-decisions",
     "path": "/poker/short-stack-decisions/",
     "title": "A short stack is a situation, not a chart.",
-    "seo_title": "Short-Stack Study Workshop | Nolan Kido",
-    "description": "Record stacks, antes, action trees and tournament objectives before comparing short-stack decisions or push/fold references.",
-    "kicker": "Poker / After-play study",
+    "seo_title": "Playing 10–20 Big Blinds in Live Tournaments | Nolan Kido",
+    "description": "Study 10–20 BB live tournament decisions beyond push/fold: 15BB action choices, antes, raise sizes, a checkable ICM call and a private review sheet.",
+    "kicker": "Poker / Short-stack decisions",
     "source": "poker/short-stack-decisions.html",
     "section": "poker",
     "date": "2026-10-06",
-    "updated": "2026-10-06",
-    "poker_guide": true
+    "updated": "2026-10-15",
+    "poker_guide": true,
+    "revision": "Expanded the 10–20 BB action comparisons, clarified ante and coverage conventions, and added a reproducible four-player ICM call with explained checks."
   },
   {
     "id": "poker-tournament-equity",
