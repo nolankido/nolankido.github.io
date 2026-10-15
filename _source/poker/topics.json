@@ -72,7 +72,8 @@
         "side-pot-lab",
         "variance-and-results",
         "choosing-study-tools",
-        "getting-started"
+        "getting-started",
+        "thunder-valley-poker-guide"
       ],
       "resource_categories": [],
       "resource_ids": [
@@ -138,7 +139,8 @@
         "reading-preflop-charts",
         "recording-hands",
         "poker-rules-and-fair-play",
-        "getting-started"
+        "getting-started",
+        "thunder-valley-poker-guide"
       ],
       "resource_categories": [
         "tournament-study"
@@ -364,7 +366,9 @@
       "id": "places-to-play",
       "title": "Places to play & home games",
       "summary": "Official event hubs, room finders, home-game setup and communities.",
-      "primary_guides": [],
+      "primary_guides": [
+        "thunder-valley-poker-guide"
+      ],
       "related_guides": [
         "first-live-tournament",
         "choosing-a-tournament",
@@ -494,7 +498,8 @@
       "related_guides": [
         "variance-and-results",
         "registration-and-reentry",
-        "tournament-trip-budget"
+        "tournament-trip-budget",
+        "thunder-valley-poker-guide"
       ],
       "resource_categories": [
         "rules",

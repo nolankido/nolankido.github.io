@@ -9,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
 import tournament_budget_history as history
+import thunder_valley_history
 ROUTE='/poker/tournament-trip-budget/'
 
 class TournamentBudgetTests(unittest.TestCase):
@@ -111,14 +112,15 @@ class TournamentBudgetTests(unittest.TestCase):
             self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(feed)])
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1])
         self.assertEqual((schema['@type'],schema['datePublished']),('Article','2026-10-15'))
-        self.assertEqual(len(check_live.targets()),450)
+        self.assertEqual(len(check_live.targets()),454)
         for asset in ['assets/poker-budget.css','downloads/poker-tournament-trip-budget.md','assets/social/reader-poker-tournament-trip-budget.png']:
             self.assertEqual(check_live.targets()['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
             if p.suffix=='.html':self.assertEqual('/assets/poker-budget.css?' in v,p==build.output_path(ROUTE))
 
     def test_every_prior_search_heading_survives_and_pooled_labels_round_trip(self):
-        current=search_sections.index(self.outputs,self.pages)
+        canonical=search_sections.index(self.outputs,self.pages)
+        current=search_sections.index(thunder_valley_history.outputs(self.outputs),thunder_valley_history.pages(self.pages))
         old=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         old['/poker/library/']=[[a,label.replace('57 free guides','58 free guides')] for a,label in old['/poker/library/']]
         self.assertEqual({p:v for p,v in current.items() if p not in {ROUTE,'/poker/comics/good-decision-bad-river/'}},old)
@@ -137,11 +139,11 @@ for(const bad of [null,{}, {version:4,pages:{}},{version:4,labels:[''],pages:{}}
 const mixed={version:4,labels:['Repeated <label> & café'],pages:{poker:{'':['a',0,'b','Unique label','c',-1,'d',5,'bad id',0,'e',null]}}};
 assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(mixed))),{'/poker/':[['a','Repeated <label> & café'],['b','Unique label']]});
 '''
-        data={'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':current}
+        data={'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':canonical}
         subprocess.run(['node','-e',code],input=json.dumps(data),text=True,check=True,cwd=ROOT)
 
     def test_new_card_has_its_own_bound_and_all_previous_cards_keep_their_bytes(self):
-        cards=json.loads((ROOT/'_source/reader-previews.json').read_text())['pages']
+        cards=json.loads(thunder_valley_history.before('_source/reader-previews.json',(ROOT/'_source/reader-previews.json').read_text()))['pages']
         new=cards['poker-tournament-trip-budget'];raw=(ROOT/new['src'].lstrip('/')).read_bytes()
         self.assertLess(len(raw),25000)
         self.assertEqual(sha256(raw).hexdigest(),new['sha256'])

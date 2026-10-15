@@ -1277,5 +1277,18 @@
     "date": "2026-10-15",
     "updated": "2026-10-15",
     "poker_guide": true
+  },
+  {
+    "id": "poker-thunder-valley-poker-guide",
+    "path": "/poker/thunder-valley-poker-guide/",
+    "title": "Playing poker at Thunder Valley: a first-timer’s guide",
+    "seo_title": "Thunder Valley Poker: First-Timer’s Guide | Nolan Kido",
+    "description": "Plan your first Thunder Valley poker visit: official room information, WSOP Circuit structures, registration questions, cash waitlists, meals and a private checklist.",
+    "kicker": "Poker / Places to play",
+    "source": "poker/thunder-valley-poker-guide.html",
+    "section": "poker",
+    "date": "2026-10-15",
+    "updated": "2026-10-15",
+    "poker_guide": true
   }
 ]
