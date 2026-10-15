@@ -123,6 +123,16 @@ unchanged.
 
 ## Poker subject architecture
 
+The Poker homepage and guide library share four reader paths and a curated
+in-depth shelf from `_source/poker/reading-routes.json`. `_scripts/poker_discovery.py`
+validates every destination against the published guide library and uses its
+current titles and reading estimates. Edit that configuration to change the
+selection; do not maintain a second copy of article titles or durations. The full
+guide catalogue retains its own order, topic filters and no-script fallback.
+Keep the existing hub fragment targets when rearranging their sections. Run
+`python _tests/poker_discovery_browser.py` for keyboard arrivals, narrow layouts,
+section jumps, no-script reading and optional axe scans.
+
 `/poker/topics/` is the shared subject map across original guides and outside
 sources. Ten focused subject pages are generated from `_source/poker/topics.json`.
 Every guide needs one primary topic; related placements are allowed. Every

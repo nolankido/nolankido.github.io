@@ -107,8 +107,8 @@ class PokerExperienceTests(unittest.TestCase):
         e['sources'] = [{'label': 'Review method', 'url': 'https://nolankido.com/poker/reviewing-a-hand/#after-the-session'}]
         with catalog_root([e]) as root, patch.object(build, 'ROOT', root), patch.object(build, 'SOURCE', root / '_source'):
             outputs = build.build_outputs(); home = outputs[Path('poker/index.html')]
-            self.assertLess(home.index('id="featured-work"'), home.index('class="poker-paths"'))
-            self.assertLess(home.index('id="watch"'), home.index('id="after-play"'))
+            self.assertLess(home.index('id="featured-work"'), home.index('class="poker-goal-grid"'))
+            self.assertLess(home.index('id="after-play"'), home.index('id="watch"'))
             guide = outputs[Path('poker/reviewing-a-hand/index.html')]
             self.assertIn('/poker/hands/approved-test/', guide)
             self.assertIn('id="context-reading-title"', guide)
@@ -118,7 +118,7 @@ class PokerExperienceTests(unittest.TestCase):
     def test_overview_and_existing_viewer_fragments_stay_available(self):
         outputs = build.build_outputs()
         home = outputs[Path('poker/index.html')]
-        self.assertLess(home.index('id="watch"'), home.index('id="after-play"'))
+        self.assertLess(home.index('id="after-play"'), home.index('id="watch"'))
         self.assertTrue({'watch', 'study', 'after-play', 'viewer-learning-title',
                          'poker-intro-title', 'poker-approach-title', 'poker-connect-title'} <= IDs(home).ids)
         start = outputs[Path('poker/start-here/index.html')]

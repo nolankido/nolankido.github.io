@@ -11,6 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
 import short_stack_history as history
+import poker_routes_history
 ROUTE='/poker/short-stack-decisions/'
 ARRIVALS=['/poker/','/poker/library/','/poker/topics/tournaments/','/poker/topics/strategy/','/poker/tournaments/','/poker/reading-preflop-charts/','/poker/position-and-stacks/','/poker/first-live-tournament/','/poker/tournament-equity/','/poker/limped-multiway-pots/','/poker/study/','/notes/']
 
@@ -124,14 +125,15 @@ class ShortStackFlagshipTests(unittest.TestCase):
     def test_routes_search_old_anchors_and_live_inventory(self):
         for route in ARRIVALS:self.assertIn('href="'+ROUTE,self.outputs[build.output_path(route)],route)
         for name in ['poker/feed.xml','writing.xml','sitemap.xml']:self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(name)])
-        current=search_sections.index(self.outputs,self.pages);old=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
+        canonical=search_sections.index(self.outputs,self.pages)
+        current=search_sections.index(poker_routes_history.outputs(self.outputs),poker_routes_history.pages(self.pages));old=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         self.assertEqual({p:v for p,v in current.items() if p!=ROUTE},{p:v for p,v in old.items() if p!=ROUTE})
         self.assertTrue({v[0] for v in old[ROUTE]} <= {v[0] for v in current[ROUTE]})
         raw=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[search_sections.PAGE],re.S)[1];self.assertLess(len(raw.encode()),60000)
         entry=next(e for e in site_find.entries(ROOT,self.pages) if e['path']==ROUTE)
         code=r'''const assert=require('node:assert/strict'),s=require('./assets/site-find.js');const d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));for(const q of ['15BB','short stack','10–20 BB'])assert(s.score(d.entry,q)>0);assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);'''
-        subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':current}),text=True,check=True)
-        targets=check_live.targets();self.assertEqual(len(targets),460)
+        subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':canonical}),text=True,check=True)
+        targets=check_live.targets();self.assertEqual(len(targets),461)
         for asset in ['assets/poker-short-stack.css','downloads/short-stack-icm-example.py','downloads/poker-short-stack-record.md']:self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
             if p.suffix=='.html':self.assertEqual('/assets/poker-short-stack.css?' in v,p==build.output_path(ROUTE))

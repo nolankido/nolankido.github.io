@@ -104,9 +104,9 @@ try:
         assert page.url.endswith('/poker/')
         # Hand review now belongs to the homepage's Study task, not the
         # subject navigation. Keep testing the real one-click reader route.
-        review_route = page.locator('.poker-paths a[href="/poker/reviewing-a-hand/"]')
+        review_route = page.locator('.poker-goal a[href="/poker/reviewing-a-hand/"]')
         expect(review_route).to_have_count(1)
-        expect(review_route).to_contain_text('I want to understand a decision')
+        expect(review_route).to_contain_text('Work through a hand review')
         review_route.focus()
         page.keyboard.press('Enter')
         expect(page).to_have_url(base + '/poker/reviewing-a-hand/')

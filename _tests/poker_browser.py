@@ -65,7 +65,8 @@ def run():
                 page.goto(base+'/poker/')
                 feature=page.locator('#featured-work .reader-feature-link')
                 expect(feature).to_have_attribute('href','/poker/stories/test-story/')
-                for paths in page.locator('.poker-paths').all():
+                expect(page.locator('.poker-goal-grid')).to_have_count(1)
+                for paths in page.locator('.poker-goal-grid').all():
                     assert page.locator('#featured-work').bounding_box()['y'] < paths.bounding_box()['y']
                 feature.focus(); page.keyboard.press('Enter')
                 expect(page).to_have_url(base+'/poker/stories/test-story/')
