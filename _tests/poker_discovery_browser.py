@@ -41,6 +41,12 @@ def main():
                     expect(page.locator('.poker-goal')).to_have_count(4)
                     expect(page.locator('.poker-long-read')).to_have_count(4)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), (hub, width)
+                    if hub == '/poker/':
+                        expect(page.locator('.poker-foundations-syllabus li')).to_have_count(6)
+                        expect(page.locator('.poker-introduction .button')).to_have_attribute('href', '/poker/free-poker-learning-path/')
+                        if shots and width in [390, 1440]:
+                            page.screenshot(path=str(shots / f'poker-learning-entrance-{width}.png'))
+                            page.locator('#free-course').screenshot(path=str(shots / f'poker-foundations-card-{width}.png'))
                     for target in (['#in-depth', '#after-play', '#watch'] if hub == '/poker/' else ['#in-depth', '#all-guides']):
                         page.locator('.poker-hub-jumps a[href="' + target + '"]').press('Enter')
                         expect(page.locator(target)).to_be_in_viewport()
@@ -72,6 +78,14 @@ def main():
             nojs = browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 1000})
             nojs.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             static = nojs.new_page()
+            static.goto(origin + '/poker/')
+            static.locator('.poker-introduction .button').press('Enter')
+            static.wait_for_url(origin + '/poker/free-poker-learning-path/', wait_until='load')
+            expect(static.locator('h1')).to_have_text('Poker Foundations: a free beginner course.')
+            expect(static.locator('#course-outcomes')).to_be_visible()
+            static.locator('.subsite-links a[aria-current="page"]').focus()
+            expect(static.locator('.subsite-links a[aria-current="page"]')).to_have_attribute('href', '/poker/free-poker-learning-path/')
+            report['no_script_arrivals'] += 1
             for hub in ['/poker/', '/poker/library/']:
                 for item in routes['in_depth']:
                     static.goto(origin + hub)

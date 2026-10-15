@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import poker_foundations_history
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -13,6 +14,7 @@ def change():
 
 
 def before(path, data):
+    data = poker_foundations_history.before(path, data)
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
     item = change()['paths'].get(str(path))
@@ -27,10 +29,12 @@ def before(path, data):
 
 
 def pages(records):
+    records = poker_foundations_history.pages(records)
     return [deepcopy(change()['pages'][p['id']]['old']) if p['id'] in change()['pages'] and p == change()['pages'][p['id']]['new'] else deepcopy(p) for p in records]
 
 
 def outputs(records):
+    records = poker_foundations_history.outputs(records)
     return {path: before(path, text) for path, text in records.items()}
 
 

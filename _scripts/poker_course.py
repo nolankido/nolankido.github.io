@@ -64,6 +64,14 @@ def cards(values):
         f'<span class="viewer-card{" viewer-card-red" if c[1] in "hd" else ""}" role="img" aria-label="{ranks[c[0]]} of {suits[c[1]][0]}"><span aria-hidden="true">{c[0]}<small>{suits[c[1]][1]}</small></span></span>' for c in values) + '</span>'
 
 
+def syllabus(root):
+    """The homepage uses the same lesson order and goals as the course itself."""
+    return '<ol class="poker-foundations-syllabus">' + ''.join(
+        '<li><a href="/poker/' + lesson['slug'] + '/">' + escape(lesson['title']) + '</a>'
+        '<p>' + escape(lesson['goal']) + '</p></li>'
+        for lesson in load(root)['lessons']) + '</ol>'
+
+
 def guided_hand(root):
     data = load(root)['hand']
     scenes = []

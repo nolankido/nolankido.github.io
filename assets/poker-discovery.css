@@ -13,5 +13,20 @@
 .poker-hub-jumps a:focus-visible,.poker-goal a:focus-visible,.poker-long-read a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
 #reading-routes,#in-depth,#all-guides,#comics,#online-resources,#watch,#after-play { scroll-margin-top:140px; }
 .poker-beginner-options { margin-top:24px; }
+.poker-entry-note { margin:16px 0 0; font:.9rem/1.6 var(--sans); color:var(--ink-soft); }
+.poker-entry-search { margin:22px 0 0; font:1rem/1.65 var(--serif); }
+.poker-foundations-card { border:1px solid var(--basalt); border-top:4px solid var(--red); padding:clamp(20px,4vw,40px); background:var(--paper-light); min-width:0; }
+.poker-foundations-card .section-title { margin:10px 0 18px; }
+.poker-course-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; padding:20px 0; margin:24px 0; border-block:1px solid var(--ink-soft); font:.9rem/1.5 var(--sans); }
+.poker-course-facts dt { font-weight:700; margin:0 0 6px; }
+.poker-course-facts dd { margin:0; }
+.poker-foundations-syllabus { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 32px; padding-inline-start:24px; margin:18px 0 24px; }
+.poker-foundations-syllabus li { min-width:0; padding-inline-start:4px; font:.95rem/1.5 var(--sans); }
+.poker-foundations-syllabus li::marker { color:var(--red); font-weight:700; }
+.poker-foundations-syllabus a { display:inline-flex; align-items:center; min-height:44px; font-weight:700; text-underline-offset:.2em; }
+.poker-foundations-syllabus p { margin:4px 0 0; font:.95rem/1.6 var(--serif); }
+.poker-foundations-card a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+#free-course { scroll-margin-top:140px; }
 @media(max-width:700px) { .poker-goal-grid,.poker-long-read-grid { grid-template-columns:minmax(0,1fr); gap:18px; } }
+@media(max-width:700px) { .poker-foundations-syllabus,.poker-course-facts { grid-template-columns:minmax(0,1fr); } .poker-course-facts { gap:14px; } }
 @media print { .poker-hub-jumps { display:none; } .poker-goal-grid,.poker-long-read-grid { display:block; } .poker-goal,.poker-long-read { break-inside:avoid; margin-bottom:24px; } }

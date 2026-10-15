@@ -160,6 +160,7 @@ def build_outputs() -> dict[Path, str]:
     values.update(poker_resources.supplement(resource_entries, poker_selection.directory_details(resource_selection, resource_entries)))
     values['poker_cash_study_sheet'] = text((ROOT / 'downloads/poker-cash-study.md').read_text(encoding='utf-8'))
     values['poker_beginner_practice'] = poker_practice.render(ROOT)
+    values['poker_foundations_syllabus'] = poker_course.syllabus(ROOT)
     values.update(poker_quality.supplement(resource_entries))
     values.update(poker_collections.supplement(collections, resource_entries))
     # Count the visible generated shortlist and worksheet content, including
