@@ -529,7 +529,8 @@
     "section": "poker",
     "date": "2026-10-06",
     "updated": "2026-10-15",
-    "poker_guide": true
+    "poker_guide": true,
+    "revision": "Expanded the 10–20 BB action comparisons, clarified ante and coverage conventions, and added a reproducible four-player ICM call with explained checks."
   },
   {
     "id": "poker-tournament-equity",
