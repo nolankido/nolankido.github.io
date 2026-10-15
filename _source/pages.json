@@ -790,14 +790,14 @@
     "path": "/poker/free-poker-learning-path/",
     "title": "Learn poker with a small, free study path.",
     "seo_title": "Learn Poker for Beginners: Free Study Path | Nolan Kido",
-    "description": "Learn poker through a guided practice hand and six connected stages, with first-pass reading, explained checks, precise repair links and a private study card.",
+    "description": "Learn poker through six connected stages, a guided hand, worked examples, 18 varied practice questions and a private study card.",
     "kicker": "Poker / Resource collections",
     "source": "poker/free-poker-learning-path.html",
     "section": "poker",
     "date": "2026-10-08",
     "updated": "2026-10-15",
     "poker_guide": true,
-    "revision": "Connected six stages with a guided hand, shorter first passes, next-stage links and practice to return to later."
+    "revision": "Added worked examples, 18 varied questions and mixed practice with links to the specific skill to revisit."
   },
   {
     "id": "poker-cash-game-study",
@@ -1304,5 +1304,16 @@
     "date": "2026-10-15",
     "updated": "2026-10-15",
     "poker_guide": true
+  },
+  {
+    "id": "poker-beginner-practice",
+    "path": "/poker/beginner-practice/",
+    "title": "Practice the next poker idea.",
+    "seo_title": "Free Beginner Poker Practice: Worked Examples & Questions | Nolan Kido",
+    "description": "Learn six beginner poker ideas through worked examples, 18 varied questions, mixed practice and a private review of what to revisit.",
+    "kicker": "Poker / Beginner practice",
+    "source": "poker/beginner-practice.html",
+    "section": "poker",
+    "updated": "2026-10-15"
   }
 ]

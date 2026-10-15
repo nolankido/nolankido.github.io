@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import poker_practice_history
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -13,6 +14,7 @@ def change():
 
 
 def before(path, data):
+    data = poker_practice_history.before(path, data)
     entry = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
@@ -27,11 +29,13 @@ def before(path, data):
 
 
 def pages(records):
+    records = poker_practice_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[r['id']]['old']) if r['id'] in pairs and r == pairs[r['id']]['new'] else deepcopy(r) for r in records]
 
 
 def outputs(records):
+    records = poker_practice_history.outputs(records)
     def retained(path, value):
         key = str(path)
         if key not in change()['new_outputs']:
@@ -45,7 +49,8 @@ def outputs(records):
 
 
 def files(paths):
+    paths = poker_practice_history.files(paths)
     def original(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
-        return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()
+        return change()['new_files'].get(key) != sha256(poker_practice_history.before(key, (ROOT / path).read_bytes())).hexdigest()
     return type(paths)(p for p in paths if original(p))

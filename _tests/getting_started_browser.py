@@ -71,6 +71,12 @@ def main():
                     page.locator('details.topic-guides > summary').press('Enter')
                     expect(page.locator('details.topic-guides')).to_have_attribute('open','')
                 if route=='/notes/':page.locator('#archive-poker summary').press('Enter')
+                if route=='/poker/free-poker-learning-path/':
+                    overview=page.locator('details.poker-details').filter(has=page.locator('a[href="'+ROUTE+'"]'))
+                    expect(overview).to_have_count(1)
+                    expect(overview).not_to_have_attribute('open','')
+                    overview.locator('summary').press('Enter')
+                    expect(overview).to_have_attribute('open','')
                 link=page.locator('main a[href="'+ROUTE+'"]').first
                 expect(link).to_be_visible();link.press('Enter')
                 page.wait_for_url(origin+ROUTE,wait_until='load');report['arrivals']+=1

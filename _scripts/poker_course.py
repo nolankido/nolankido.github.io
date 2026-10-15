@@ -4,6 +4,7 @@ from hashlib import sha256
 from pathlib import Path
 import json
 import re
+import poker_practice
 
 ROUTE = '/poker/free-poker-learning-path/'
 DATA = '_source/poker/beginner-course.json'
@@ -104,7 +105,7 @@ def lesson_support(page, body, root):
     first = ('<aside class="course-first-pass" aria-labelledby="course-first-pass-title"><h2 id="course-first-pass-title">Your first pass through this stage</h2>'
              f'<p><strong>Stage {index+1} of 6:</strong> {escape(lesson["goal"])}</p>'
              '<p>Begin with these sections. The rest of this page is a reference to return to, rather than another reading assignment.</p>'
-             f'<ul>{links}</ul><p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></aside>')
+             f'<ul>{links}</ul><p><a href="{poker_practice.lesson_link(lesson["slug"])}">See a worked example, then try three changed questions</a>.</p><p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></aside>')
     anchor = '<p class="article-lead">'
     if body.count(anchor) != 1 or 'id="course-first-pass-title"' in body:
         raise ValueError('A course lesson needs one introduction and one first-pass guide')

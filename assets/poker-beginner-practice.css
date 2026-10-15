@@ -1,0 +1,43 @@
+/* Scoped to the beginner practice utility. */
+.drill-room { margin:32px 0; padding:clamp(16px,3vw,28px); border:1px solid var(--line-dark); border-top:3px solid var(--red); background:var(--paper-light); }
+.drill-room > h2 { margin-top:0; }
+.drill-skill-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 16px; margin:24px 0; }
+.drill-skill-nav a { min-height:44px; display:flex; align-items:center; padding:8px; font:600 .9rem/1.5 var(--sans); }
+.drill-skill-nav a[aria-current] { outline:2px solid var(--basalt); background:var(--panel); }
+.drill-mix-controls { border-block:1px solid var(--line-dark); padding:20px 0; margin:24px 0; }
+.drill-mix-controls p { margin-bottom:0; font:.9rem/1.6 var(--sans); }
+.drill-progress { font:.8rem/1.6 var(--mono)!important; padding-block:12px; }
+.drill-unit { margin:32px 0; scroll-margin-top:160px; }
+.drill-case { margin:28px 0; padding-top:22px; border-top:1px solid var(--line-dark); scroll-margin-top:160px; }
+.drill-case h3 { margin-top:0; }
+.drill-room fieldset { border:0; padding:0; margin:24px 0; min-width:0; }
+.drill-room legend { font:700 1.1rem/1.5 var(--sans); }
+.drill-think { font:.9rem/1.6 var(--sans)!important; }
+.drill-room fieldset ol { margin:16px 0; padding-left:24px; }
+.drill-room fieldset li { padding-left:3px; }
+.drill-room label { display:flex; align-items:flex-start; gap:12px; padding:8px 4px; min-height:44px; font:1rem/1.55 var(--sans); }
+.drill-room input { width:19px; height:19px; flex:0 0 auto; margin-top:5px; accent-color:var(--basalt); }
+.drills-enhanced label { cursor:pointer; }
+.drill-room label:has(input:checked) { outline:2px solid var(--basalt); outline-offset:2px; background:var(--panel); }
+.drill-room button { min-height:44px; padding:10px 14px; background:var(--basalt); color:var(--paper-light); border:1px solid var(--basalt); font:600 .9rem/1.5 var(--sans); cursor:pointer; }
+.drill-room button:disabled { background:var(--panel); color:var(--ink-soft); border-color:var(--line-dark); cursor:default; }
+.drill-checks,.drill-steps { display:flex; flex-wrap:wrap; gap:12px; margin:20px 0; }
+.drill-card-state { display:flex; flex-wrap:wrap; gap:18px 28px; margin:22px 0; }
+.drill-card-state > div { min-width:0; }
+.drill-card-label { font:.75rem/1.6 var(--mono)!important; margin:0 0 10px!important; }
+.drill-review { margin:28px 0; padding-top:24px; border-top:2px solid var(--line-dark); }
+.drill-review li { margin-bottom:18px; }
+.drill-room [data-drill-status] { font:600 .95rem/1.6 var(--sans); }
+.drill-room :where(a,button,input,summary,h2,h3):focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+.drills-enhanced .drill-native-help { display:none; }
+.drill-room [hidden] { display:none!important; }
+@media(max-width:420px) { .drill-skill-nav { grid-template-columns:1fr; } }
+@media print {
+  .drill-room { padding:0; border:0; background:white; color:black; }
+  .drill-room [data-drill-unit][hidden],.drill-room [data-drill-case][hidden],.drill-room [data-drill-model][hidden],.drill-room [data-drill-answer][hidden],.drill-room [data-drill-choices][hidden],.drill-room [data-drill-note][hidden] { display:block!important; }
+  .drill-room details > div { display:block!important; }
+  .drill-room details::details-content { content-visibility:visible!important; }
+  .drill-room [data-drill-enhanced],.drill-room input,.drill-progress,.drill-skill-nav,.drill-room [data-drill-status] { display:none!important; }
+  .drill-case,.drill-model { break-inside:avoid; }
+  .drill-native-help { display:block!important; }
+}

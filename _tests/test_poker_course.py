@@ -14,6 +14,7 @@ import check_live
 import poker_course as course
 import poker_finder
 import poker_course_history as history
+import poker_practice_history
 
 
 def document(source):
@@ -41,7 +42,7 @@ class PokerCourseTests(unittest.TestCase):
             self.assertEqual(sha256(history.before(path, (ROOT / path).read_bytes())).hexdigest(), digest, path)
         self.assertEqual(set(history.change()['new_files']), {course.DATA, course.CSS, course.SCRIPT, '_scripts/poker_course.py'})
         self.assertEqual(set(history.change()['new_outputs']), {'downloads/poker-beginner-study-card.txt'})
-        self.assertEqual([p['id'] for p in self.pages], [p['id'] for p in b['pages']])
+        self.assertEqual([p['id'] for p in poker_practice_history.pages(self.pages)], [p['id'] for p in b['pages']])
 
     def test_history_never_hides_an_unreviewed_change(self):
         for path in ['poker/free-poker-learning-path/index.html', '_scripts/poker_finder.py', '_source/poker/first-decisions.html', course.CSS]:
@@ -74,7 +75,7 @@ class PokerCourseTests(unittest.TestCase):
             doc = document(self.outputs[build.output_path('/poker/' + lesson['slug'] + '/')])
             first = next(e for e in doc.iter('aside') if e.get('class') == 'course-first-pass')
             self.assertIn(f'Stage {index + 1} of 6:', ''.join(first.itertext()))
-            self.assertEqual([a.get('href') for a in first.iter('a')][:-1], ['#' + a for a, _ in lesson['first_pass']])
+            self.assertEqual([a.get('href') for ul in first.iter('ul') for a in ul.iter('a')], ['#' + a for a, _ in lesson['first_pass']])
             ids = {e.get('id') for e in doc.iter()}
             self.assertTrue(all(a in ids for a, _ in lesson['first_pass']))
             end = next(e for e in doc.iter('aside') if e.get('class') == 'course-stage-end')
@@ -160,7 +161,7 @@ class PokerCourseTests(unittest.TestCase):
             self.assertNotIn(forbidden, js)
         self.assertIn('/' + course.CSS, check_live.targets())
         self.assertIn('/' + course.SCRIPT, check_live.targets())
-        self.assertEqual(len(check_live.targets()), 463)
+        self.assertEqual(len(check_live.targets()), 466)
 
     def test_invalid_cards_stages_repairs_and_duplicate_scenes_are_rejected(self):
         variants = []
