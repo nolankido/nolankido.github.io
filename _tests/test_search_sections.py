@@ -43,8 +43,8 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
-        self.assertEqual(len(self.index),169)
-        self.assertEqual(sum(map(len,self.index.values())),1055)
+        self.assertEqual(len(self.index),170)
+        self.assertEqual(sum(map(len,self.index.values())),1068)
         excluded={p['path'] for p in self.pages if p.get('noindex') or p.get('living_well_kind')=='experiment'}
         self.assertFalse(excluded.intersection(self.index))
         self.assertNotIn('/contact/',self.index)
@@ -57,8 +57,8 @@ class SearchSectionsTests(unittest.TestCase):
         doc=self.outputs[search_sections.PAGE]
         payload=re.search(r'<script type="application/json" id="find-section-data">(.*?)</script>',doc,re.S)[1]
         packed=json.loads(payload)
-        self.assertEqual(packed['version'],3)
-        unpacked={('/'+g+'/'+s if g else '/'):[v[i:i+2] for i in range(0,len(v),2)] for g,entries in packed['pages'].items() for s,v in entries.items()}
+        self.assertEqual(packed['version'],4)
+        unpacked={('/'+g+'/'+s if g else '/'):[[v[i],packed['labels'][v[i+1]] if type(v[i+1]) is int else v[i+1]] for i in range(0,len(v),2)] for g,entries in packed['pages'].items() for s,v in entries.items()}
         self.assertEqual(unpacked,self.index)
         self.assertLess(len(payload.encode()),60000)
         # Preserve this release's original budget after the later reviewed
