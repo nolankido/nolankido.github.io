@@ -112,7 +112,7 @@ class PracticalNavigationTests(unittest.TestCase):
             restored=history.before(path,raw)
             versioned=time_export_history.before(path,raw)
             self.assertEqual(re.findall(r'<script[^>]*src="([^"]+)"',versioned),re.findall(r'<script[^>]*src="([^"]+)"',restored))
-        self.assertEqual(len(check_live.targets()),428)
+        self.assertEqual(len(check_live.targets()),432)
         self.assertEqual(check_live.targets()['/assets/practical-ai-navigation.css'],(200,(ROOT/practical_navigation.CSS).read_bytes()))
         css=(ROOT/practical_navigation.CSS).read_text()
         self.assertIn('@media print',css)

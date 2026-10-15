@@ -1987,6 +1987,26 @@
           403
         ]
       }
+    },
+    "poker-getting-started": {
+      "path": "/poker/getting-started/",
+      "title": "Get started with no-limit Texas Hold’em",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-getting-started.png",
+      "sha256": "4ee58dd6721f2fd35e2b399ea0cce49d21695d4d2bddb013a61bcea6cedc1d03",
+      "layout": {
+        "lines": [
+          "Get started with no-limit",
+          "Texas Hold’em"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          987,
+          339
+        ]
+      }
     }
   }
 }

@@ -301,6 +301,9 @@ def build_outputs() -> dict[Path, str]:
             if p['id'] == 'poker-under-uncertainty':
                 version = hashlib.sha256((ROOT / 'assets/poker-uncertainty.css').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-uncertainty.css?v={version}">'
+            if p['id'] == 'poker-getting-started':
+                version = hashlib.sha256((ROOT / 'assets/poker-session.css').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <link rel="stylesheet" href="/assets/poker-session.css?v={version}">'
             reader_meta = poker_library.reader_meta(p, reader_entries)
             if reader_meta:
                 header = header.replace('</section>', reader_meta + poker_reading.section_outline(body) + poker_beginner_path.navigation(p, pages) + '</section>', 1)

@@ -36,9 +36,18 @@
     return (baseMatch ? 1000 : searchTitleMatch ? 750 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
   }
   function decodeSections(data) {
-    if (!data || data.version !== 2 || !data.pages || typeof data.pages !== 'object' || Array.isArray(data.pages)) return {};
+    if (!data || ![2, 3].includes(data.version) || !data.pages || typeof data.pages !== 'object' || Array.isArray(data.pages)) return {};
     const result = Object.create(null);
-    for (const [path, flat] of Object.entries(data.pages)) {
+    const entries = [];
+    if (data.version === 2) entries.push(...Object.entries(data.pages));
+    else for (const [group, pages] of Object.entries(data.pages)) {
+      if (!/^[a-z0-9-]*$/.test(group) || !pages || typeof pages !== 'object' || Array.isArray(pages)) continue;
+      for (const [suffix, flat] of Object.entries(pages)) {
+        if (!/^(?:[a-z0-9-]+\/)*$/.test(suffix) || (!group && suffix)) continue;
+        entries.push([group ? '/' + group + '/' + suffix : '/', flat]);
+      }
+    }
+    for (const [path, flat] of entries) {
       if (!/^\/(?:[a-z0-9-]+\/)*$/.test(path) || !Array.isArray(flat) || flat.length % 2) continue;
       const rows = [];
       for (let i = 0; i < flat.length; i += 2) {
