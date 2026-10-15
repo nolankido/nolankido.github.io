@@ -50,5 +50,5 @@ def files(paths):
     paths = river_history.files(paths)
     def original(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
-        return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()
+        return change()['new_files'].get(key) != sha256(river_history.before(key, (ROOT / path).read_bytes())).hexdigest()
     return type(paths)(p for p in paths if original(p))

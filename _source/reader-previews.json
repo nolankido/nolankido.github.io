@@ -2047,6 +2047,27 @@
           352
         ]
       }
+    },
+    "poker-limped-multiway-pots": {
+      "path": "/poker/limped-multiway-pots/",
+      "title": "Limped and multiway pots: how to think through live poker",
+      "label": "POKER / PRACTICAL GUIDE",
+      "src": "/assets/social/reader-poker-limped-multiway-pots.png",
+      "sha256": "053d67da3f38145143719b67b1ca13ecebfc279c01c0a09208487fc295ce4d7f",
+      "layout": {
+        "lines": [
+          "Limped and multiway pots:",
+          "how to think through live",
+          "poker"
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1073,
+          415
+        ]
+      }
     }
   }
 }

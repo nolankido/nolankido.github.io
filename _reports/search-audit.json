@@ -1,12 +1,12 @@
 {
   "status": "pass",
   "scope": "committed static files, not rankings or indexing confirmation",
-  "pages": 191,
-  "breadcrumb_pages": 189,
+  "pages": 192,
+  "breadcrumb_pages": 190,
   "noindex_pages": 5,
-  "articles": 103,
-  "sitemap_urls": 186,
-  "unique_titles": 191,
-  "unique_descriptions": 191,
+  "articles": 104,
+  "sitemap_urls": 187,
+  "unique_titles": 192,
+  "unique_descriptions": 192,
   "errors": []
 }

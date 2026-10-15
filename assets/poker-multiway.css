@@ -1,0 +1,12 @@
+.multiway-guide :is(h2, h3, .multiway-sources li) { scroll-margin-top: 12rem; }
+.multiway-guide .multiway-check { margin: 2rem 0; padding: 1rem; border: 1px solid var(--line, #bdbdb4); }
+.multiway-guide .multiway-check h3 { margin-top: 0; }
+.multiway-guide .multiway-sources { padding-left: 1.5rem; }
+.multiway-guide .multiway-sources li { margin-bottom: 1.2rem; }
+.multiway-guide .multiway-sheet { box-sizing: border-box; max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; padding: 1.25rem; border: 1px solid var(--line-dark); background: var(--panel); font: .87rem/1.7 var(--mono); }
+@media print {
+  .multiway-guide .multiway-check { padding: .5rem; }
+  .multiway-guide .multiway-check details > div { display: block !important; }
+  .multiway-guide .multiway-check details::details-content { content-visibility: visible !important; }
+  .multiway-guide .multiway-sheet { padding: 0; border: 0; background: none; font-size: 10pt; line-height: 1.4; break-inside: auto; }
+}

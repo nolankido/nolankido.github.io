@@ -137,7 +137,7 @@ class BettingPurposeTests(unittest.TestCase):
             href = a.get('href', '')
             if not href.startswith('/poker/') or '#' not in href: continue
             route, anchor = href.split('#')
-            self.assertIn('id="' + anchor + '"', self.outputs[build.output_path(route)], href)
+            self.assertIn('id="' + anchor + '"', self.current_outputs[build.output_path(route)], href)
         for path in ['poker/ranges-for-beginners/index.html', 'poker/topics/learn/index.html',
                      'poker/library/index.html', 'poker/find/index.html', 'find/index.html', 'notes/index.html', 'sitemap.xml']:
             self.assertIn(ROUTE, self.outputs[Path(path)], path)

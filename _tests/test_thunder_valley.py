@@ -8,6 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
 import thunder_valley_history as history
+import multiway_history
 ROUTE='/poker/thunder-valley-poker-guide/'
 
 class ThunderValleyTests(unittest.TestCase):
@@ -80,14 +81,15 @@ class ThunderValleyTests(unittest.TestCase):
             self.assertIn('https://nolankido.com'+ROUTE,self.outputs[Path(name)])
         schema=json.loads(re.search(r'type="application/ld\+json">(.*?)</script>',self.html)[1])
         self.assertEqual((schema['@type'],schema['datePublished']),('Article','2026-10-15'))
-        targets=check_live.targets();self.assertEqual(len(targets),454)
+        targets=check_live.targets();self.assertEqual(len(targets),458)
         for asset in ['assets/poker-venue.css','downloads/thunder-valley-first-visit.md','assets/social/reader-poker-thunder-valley-poker-guide.png']:
             self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
             if p.suffix=='.html':self.assertEqual('/assets/poker-venue.css?' in v,p==build.output_path(ROUTE))
 
     def test_all_old_search_headings_survive_and_real_queries_reach_the_guide(self):
-        current=search_sections.index(self.outputs,self.pages)
+        canonical=search_sections.index(self.outputs,self.pages)
+        current=search_sections.index(multiway_history.outputs(self.outputs),multiway_history.pages(self.pages))
         old=search_sections.index(history.outputs(self.outputs),self.baseline['pages'])
         old['/poker/library/']=[[a,label.replace('58 free guides','59 free guides')] for a,label in old['/poker/library/']]
         self.assertEqual({p:v for p,v in current.items() if p!=ROUTE},old)
@@ -99,7 +101,7 @@ const d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));
 for(const q of ['Thunder Valley','Thunder Valley poker','Thunder Valley registration'])assert(s.score(d.entry,q)>=1000);
 assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);
 '''
-        subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':current}),text=True,check=True)
+        subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':canonical}),text=True,check=True)
 
     def test_every_previous_card_is_unchanged_and_new_card_is_bounded(self):
         for p,d in self.baseline['files'].items():

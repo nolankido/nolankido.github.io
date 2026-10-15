@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 import re
 
 NEXT_READS = {
+    'limped-multiway-pots': ('multiway-pot-workshop', 'cash-game-study-path'),
     'thunder-valley-poker-guide': ('first-live-tournament', 'tournament-trip-budget'),
     'tournament-trip-budget': ('choosing-a-tournament', 'registration-and-reentry'),
     'getting-started': ('first-decisions', 'beginner-checkpoint'),
