@@ -92,16 +92,6 @@ release gate. The independent hand oracle checks accounting and ranks, not
 optimal strategy. See `_reports/free-poker-learning-path-review.md` for the
 beginner-task audit, research basis and limits of the evaluation.
 
-## Poker study lists
-
-The Poker Finder's temporary study list offers per-entry removal, Markdown
-download and explicit copy with a complete selectable-text fallback. Its export
-retains the public catalogue limitations and source-review context, while search
-words and matching passages stay out. Selections do not persist across reloads.
-Run `_tests/finder_browser.py` for list editing, clipboard/download failure and
-keyboard recovery checks. See `_reports/poker-study-list/README.md`; the separate
-history adapter preserves the earlier search and teaching evidence.
-
 ## Site architecture
 
 The homepage introduces Nolan first, shows three selected pieces of published
