@@ -5,7 +5,7 @@
       "slug": "first-decisions",
       "idea": "Your cards, your turn and your payment are different questions.",
       "teach": [
-        "Your two private cards belong to you. The board is shared by everyone still in the hand: three cards on the flop, a fourth on the turn and a fifth on the river. From the flop onward, make the best five from the cards available now; neither private card has to play.",
+        "Your two private cards belong to you. The board is shared by everyone still in the hand: three cards on the flop, a fourth on the turn and a fifth on the river. On the flop, those five available cards make your current hand. On the turn and river, choose the best five again. At showdown, when all five shared cards are out, you may use zero, one or two private cards.",
         "A check keeps your hand without paying when you owe nothing. A call matches a wager; a raise increases it. Folding gives up your claim to the pot. On your turn facing a bet, with enough chips and raising permitted, you may fold, call or raise. You cannot check past the bet.",
         "Count a call using this betting round only: the current total wager minus what you already paid on this round. Payments on an earlier round stay in the pot. The amount owed says what a call costs, not whether it is a good decision."
       ],
