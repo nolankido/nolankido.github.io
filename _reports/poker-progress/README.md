@@ -4,7 +4,7 @@ Prepared October 16, 2026 UTC against published PR #105, commit
 `ca0264c251f2c999a8375d9e748521fe46ef22fe`.
 
 **Status at handoff:** implementation and focused preservation checks are
-complete. The new progress browser suite passed in 68.6 seconds. The full
+complete. The new progress browser suite passed in 78.0 seconds. The full
 744-test unit run, 57-suite hosted browser gate and deployment verification
 remain required. Final check and deployment receipts belong in the pull request.
 
@@ -86,9 +86,12 @@ stored records are left untouched and are not silently loaded or replaced.
 Before autosaving, the controller compares the current stored value with the
 value it expects. A stale tab therefore checks for clearing before writing old
 marks back, even if its storage event has been held. Cross-tab clearing resets
-the local record and disables saving. A returning browser-cached page checks
-storage again. These safeguards use localStorage events and comparisons, with
-no additional keys or cross-device synchronization.
+tabs that were using the saved record and disables their saving. Tabs with
+Remember off retain their independent temporary marks and next task when another
+tab creates or removes a saved record. A returning browser-cached page checks
+storage again and follows the same distinction. These safeguards use
+localStorage events and comparisons, with no additional keys or cross-device
+synchronization.
 
 Import request and record revisions invalidate pending reads or previews after
 edits, reset, saving changes, other-tab changes and page departure. Rejected or
@@ -156,11 +159,16 @@ check of 221 generated outputs; HTML5 and search-metadata checks for 193 HTML
 pages; search-result parity; and JavaScript syntax checking. The complete
 744-test unit run and all 57 hosted browser suites remain release gates. The
 new browser suite passed: two layouts, all 14 native destinations, 24 invalid
-imports, one full import flow, nine storage scenarios, four cross-tab scenarios,
+imports, one full import flow, nine storage scenarios, six cross-tab scenarios,
 six file/preview races, eight download failures and two script-free modes.
 It exercised real JSON downloads, imports and storage, plus explicit failure
 injection. No page errors, extra action requests, cookies or unintended storage
 writes were observed. Mobile and desktop screenshots were inspected.
+
+The cross-tab coverage includes real removal events from both the saved-copy
+control and `localStorage.clear()`. Unsaved tabs preserve all six marks, their
+next task, export and pasted import text, remain temporary, and do not recreate
+a removed record. Tabs using the saved record still clear as intended.
 
 Run from the repository root with the test dependencies and Playwright Chromium
 installed:

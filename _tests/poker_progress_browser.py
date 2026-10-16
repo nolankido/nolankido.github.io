@@ -634,6 +634,80 @@ def check_storage(browser, origin, errors, report):
 
 
 def check_cross_tab(browser, origin, errors, report):
+    # A temporary desk belongs to this tab. Another tab's saved copy must not
+    # replace or reset it, whether that copy is removed by the UI or site-data
+    # clearing. Observe real browser storage events after the controller runs.
+    for removal in ('forget', 'clear'):
+        context, page = progress_page(browser, origin, errors)
+        try:
+            observed = request_watch(page)
+            baseline = state(page)
+            for lesson, value in zip(LESSONS, ('working', 'practiced', 'revisit', 'working', 'practiced', 'revisit')):
+                mark(page, lesson, value)
+            page.locator('#progress-next').select_option('practice:' + LESSONS[5])
+            temporary = state(page)
+            exported = export_json(page, download=False)
+            pasted = json_text(baseline)
+            page.locator('#progress-import-text').fill(pasted)
+            expect(page.locator('#progress-remember')).not_to_be_checked()
+            assert stored(page) is None
+            page.evaluate("""() => {
+              __progressTest.storageEvents = [];
+              window.addEventListener('storage', event => __progressTest.storageEvents.push({
+                key: event.key, oldValue: event.oldValue, newValue: event.newValue,
+                local: event.storageArea === window.localStorage
+              }));
+            }""")
+
+            companion = context.new_page()
+            watch_errors(companion, errors)
+            load(companion, origin)
+            assert_state(companion, baseline)
+            mark(companion, LESSONS[0], 'revisit')
+            companion.locator('#progress-next').select_option('checkpoint')
+            remember(companion)
+            saved = state(companion)
+            assert saved != temporary and stored(companion) == saved
+            page.wait_for_function('__progressTest.storageEvents.length >= 1')
+            events = page.evaluate('__progressTest.storageEvents')
+            assert len(events) == 1 and events[0]['local'] and events[0]['key'] == KEY, events
+            assert events[0]['oldValue'] is None and json.loads(events[0]['newValue']) == saved
+            assert_state(page, temporary)
+            expect(page.locator('#progress-export-text')).to_have_value(exported)
+            expect(page.locator('#progress-import-text')).to_have_value(pasted)
+            expect(page.locator('#progress-remember')).not_to_be_checked()
+            assert stored(page) == saved, 'A temporary tab must not overwrite another tab\'s saved record'
+            assert all(call['op'] == 'get' for call in page.evaluate('__progressTest.calls'))
+
+            if removal == 'forget':
+                enter(companion, companion.locator('#progress-forget'))
+                expect(companion.locator('#progress-remember')).not_to_be_checked()
+            else:
+                # This is an isolated browser context with synthetic data only.
+                companion.evaluate('localStorage.clear()')
+            assert stored(companion) is None
+            page.wait_for_function('__progressTest.storageEvents.length >= 2')
+            events = page.evaluate('__progressTest.storageEvents')
+            assert len(events) == 2 and events[1]['local'] and events[1]['newValue'] is None, events
+            assert events[1]['key'] == (KEY if removal == 'forget' else None), events
+            assert_state(page, temporary)
+            expect(page.locator('#progress-export-text')).to_have_value(exported)
+            expect(page.locator('#progress-import-text')).to_have_value(pasted)
+            expect(page.locator('#progress-remember')).not_to_be_checked()
+            assert stored(page) is None
+
+            mark(page, LESSONS[0], 'practiced')
+            temporary['lessons'][LESSONS[0]] = 'practiced'
+            assert_state(page, temporary)
+            expect(page.locator('#progress-import-text')).to_have_value(pasted)
+            expect(page.locator('#progress-remember')).not_to_be_checked()
+            assert stored(page) is None, 'Later temporary edits must not resurrect the removed saved copy'
+            assert all(call['op'] == 'get' for call in page.evaluate('__progressTest.calls'))
+            private_actions(context, page, observed)
+            report['cross_tab'] += 1
+        finally:
+            context.close()
+
     for held, pending_read in ((False, False), (True, False), (False, True)):
         context, page = progress_page(browser, origin, errors)
         try:

@@ -166,12 +166,17 @@
     stateRevision += 1;
     invalidateImport('Saved progress changed in another tab. Review an import again before replacing anything.');
     if (raw === null) {
-      state = blankRecord(config);
       remember = false;
-      pasteInput.value = '';
-      fileInput.value = '';
-      showStorage('The saved copy was cleared in another tab. Remember on this device is now off.', true);
-      status.textContent = 'Progress was cleared in another tab. This page has been reset and will not save old marks again.';
+      if (wasRemembered) {
+        state = blankRecord(config);
+        pasteInput.value = '';
+        fileInput.value = '';
+        showStorage('The saved copy was cleared in another tab. Remember on this device is now off.', true);
+        status.textContent = 'Progress was cleared in another tab. This page has been reset and will not save old marks again.';
+      } else {
+        showStorage('The saved copy was cleared in another tab. Your open-page marks and next task remain temporary.', true);
+        status.textContent = 'Your open-page marks and next task are unchanged. Remember on this device stays off.';
+      }
     } else {
       try {
         const replacement = parseRecord(raw, config);

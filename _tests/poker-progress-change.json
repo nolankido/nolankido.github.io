@@ -273,13 +273,13 @@
     },
     "poker/study/index.html": {
       "old_sha256": "c6438f22f4111bb7c70789258d562043be7d6c4a190e1fff7027c8b9278dce0f",
-      "new_sha256": "4d10cd221816e8819a141bc18e25547d8d3ab16427b5054d43dc9741eddc4708",
+      "new_sha256": "adb7a6fde258ea841ac870bef8fde84c1acd7ae266b5a66e5e73e181f14fdf77",
       "edits": [
         {
           "start": 2969,
           "end": 3117,
           "old": "",
-          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-progress.css?v=eaea29052803\">\n  <script defer src=\"/assets/poker-progress.js?v=17477d4879d2\"></script>\n"
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-progress.css?v=eaea29052803\">\n  <script defer src=\"/assets/poker-progress.js?v=00519eeba7a4\"></script>\n"
         },
         {
           "start": 3951,
@@ -409,6 +409,6 @@
   "new_files": {
     "_scripts/poker_progress.py": "e52620a5c7a1455d3f8fe9f70a3877747cc3f369f2e8e0bc0794456534341930",
     "assets/poker-progress.css": "eaea29052803c9706b5881d31c0a930382ca3dae7e42c402138b7d52a7c090fa",
-    "assets/poker-progress.js": "17477d4879d253c484ec882f0905bf00e1c1031427f71175c3fd9e519e1da682"
+    "assets/poker-progress.js": "00519eeba7a42b99b0e2bd4abf4530a4550d61be0ed8a88f618ecc073141cbd2"
   }
 }
