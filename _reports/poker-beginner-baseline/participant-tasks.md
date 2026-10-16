@@ -22,7 +22,7 @@ Your private cards: queen of clubs (Qc), jack of clubs (Jc).
 
 Shared board: not dealt yet.
 
-Does posting the big blind count as your initial decision? What do you add to call 8? If cutoff had instead raised to 12 with everything else equivalent, what would you add? After you call and these three players see the flop, who acts first? Explain.
+Does posting the big blind count as your initial decision? What do you add to call 8? In a different hand with the same private cards, seats and blinds, cutoff raises to 12, button calls 12 and small blind folds: what would you add then? In either case, after you call and these three players see the flop, who acts first? Explain.
 
 ## T3
 
