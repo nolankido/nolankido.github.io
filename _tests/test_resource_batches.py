@@ -46,7 +46,11 @@ class ResourceBatchTests(unittest.TestCase):
             self.assertIn(phrase, (entry['title'] + ' ' + entry['kind'] + ' ' + entry['notes']).lower())
         self.assertEqual(self.entries['satellite-masterclass']['access'], 'Paid')
         self.assertEqual(self.entries['tda-rules']['review_method'], 'page')
-        self.assertIn('September 7, 2026', self.entries['tda-rules']['notes'])
+        current = poker_resources.rules_values(ROOT)
+        self.assertIn('version ' + current['poker_tda_version'], self.entries['tda-rules']['notes'])
+        self.assertIn(current['poker_tda_published_label'], self.entries['tda-rules']['notes'])
+        # Batch 002 remains a historical record rather than freezing the live version.
+        self.assertIn('version 1.0', self.record)
 
     def test_unresolved_candidates_and_working_documents_are_not_rendered(self):
         outputs = build.build_outputs()

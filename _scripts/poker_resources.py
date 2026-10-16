@@ -28,6 +28,7 @@ ACCESS = {'Free', 'Mixed', 'Paid'}
 LEVELS = {'Beginner', 'Intermediate', 'Advanced', 'Technical', 'All levels'}
 FIELDS = {'id', 'title', 'url', 'publisher', 'category', 'kind', 'access', 'level',
           'description', 'notes', 'reviewed_on', 'review_method'}
+RULE_TOKEN = re.compile(r'\$\{(poker_tda_[a-z_]+)\}')
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -56,6 +57,57 @@ def canonical_url(value: str) -> str:
     return urlunsplit(('https', host, parsed.path.rstrip('/'), parsed.query, ''))
 
 
+def rule_values(entry: dict, *, as_of: date | None = None) -> dict[str, str]:
+    """The directory's reviewed TDA record owns current version metadata."""
+    version = entry.get('source_version')
+    if (entry.get('id') != 'tda-rules' or not isinstance(version, dict)
+            or set(version) != {'edition', 'version', 'published_on'}
+            or type(version['edition']) is not int or not 2000 <= version['edition'] <= 9999
+            or not isinstance(version['version'], str)
+            or not re.fullmatch(r'[1-9]\d*\.\d+', version['version'])):
+        raise ValueError('TDA references need an explicit edition, version and publication date')
+    published = checked_date(version['published_on'])
+    reviewed = checked_date(entry['reviewed_on'])
+    today = datetime.now(timezone.utc).date() if as_of is None else as_of
+    if published.year != version['edition'] or not published <= reviewed <= today:
+        raise ValueError('TDA publication and review dates must be ordered and not in the future')
+    if (canonical_url(entry['url']) != 'https://pokertda.com/view-poker-tda-rules'
+            or entry['review_method'] != 'page'):
+        raise ValueError('Current TDA references require a reviewed official rules page')
+    def label(value):
+        return f'{value.strftime("%B")} {value.day}, {value.year}'
+    return {
+        'poker_tda_url': entry['url'],
+        'poker_tda_edition': str(version['edition']),
+        'poker_tda_version': version['version'],
+        'poker_tda_label': f'Poker TDA: {version["edition"]} rules, version {version["version"]}',
+        'poker_tda_long_label': f'{version["edition"]} Rules, Version {version["version"]}, {label(published)}',
+        'poker_tda_published_label': label(published),
+        'poker_tda_reviewed_on': entry['reviewed_on'],
+        'poker_tda_reviewed_label': label(reviewed),
+    }
+
+
+def rules_values(root: Path) -> dict[str, str]:
+    entries = json.loads((root / '_source/poker/resources.json').read_text(encoding='utf-8'))['entries']
+    records = [e for e in entries if e.get('id') == 'tda-rules']
+    if len(records) != 1:
+        raise ValueError('Current TDA references need exactly one directory record')
+    return rule_values(records[0])
+
+
+def resolve_rules(source: str, root: Path, *, values: dict[str, str] | None = None) -> str:
+    """Expand only TDA tokens; keep other source templates for their own renderers."""
+    if '${poker_tda_' not in source:
+        return source
+    values = rules_values(root) if values is None else values
+    def replace(match):
+        if match[1] not in values:
+            raise ValueError('Unknown TDA reference token: ' + match[1])
+        return escape(values[match[1]], quote=True)
+    return RULE_TOKEN.sub(replace, source)
+
+
 def load(root: Path, *, as_of: date | None = None) -> list[dict]:
     if as_of is None:
         as_of = datetime.now(timezone.utc).date()
@@ -67,7 +119,20 @@ def load(root: Path, *, as_of: date | None = None) -> list[dict]:
     if not isinstance(data['entries'], list) or not data['entries']:
         raise ValueError('The resource directory needs a nonempty reviewed list')
     seen_ids, seen_urls = set(), set()
-    for entry in data['entries']:
+    entries = []
+    for stored in data['entries']:
+        entry = stored.copy() if isinstance(stored, dict) else stored
+        if isinstance(entry, dict) and 'source_version' in entry:
+            values = rule_values(entry, as_of=as_of)
+            del entry['source_version']
+            # Notes are plain text here; HTML escaping belongs to card/export renderers.
+            if not isinstance(entry.get('notes'), str):
+                raise ValueError('Rule reference notes must be text')
+            def replace_note(match):
+                if match[1] not in values:
+                    raise ValueError('Unknown TDA reference token: ' + match[1])
+                return values[match[1]]
+            entry['notes'] = RULE_TOKEN.sub(replace_note, entry['notes'])
         if not isinstance(entry, dict) or set(entry) != FIELDS:
             raise ValueError('Invalid resource fields; keep candidates in the separate backlog')
         for key, value in entry.items():
@@ -75,6 +140,8 @@ def load(root: Path, *, as_of: date | None = None) -> list[dict]:
                 raise ValueError('Resource fields must be strings; only notes can be empty')
             if any(ord(c) < 32 for c in value) or chr(0x2014) in value:
                 raise ValueError('Unsupported resource punctuation or control character')
+            if '${' in value:
+                raise ValueError('Resource entries must not contain unresolved templates')
         if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', entry['id']) or entry['id'] in seen_ids:
             raise ValueError('Resource IDs must be unique lower-case slugs')
         if len(entry['title']) > 140 or len(entry['description']) > 400 or len(entry['notes']) > 400:
@@ -92,7 +159,8 @@ def load(root: Path, *, as_of: date | None = None) -> list[dict]:
         if reviewed > as_of:
             raise ValueError('Cannot claim a future resource review')
         seen_ids.add(entry['id']); seen_urls.add(url)
-    return data['entries']
+        entries.append(entry)
+    return entries
 
 
 # The detailed publisher format remains visible. These broader buckets are for finding it.

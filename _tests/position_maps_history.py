@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import rules_reference_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -14,6 +15,7 @@ def change():
 
 
 def before(path, data):
+    data = rules_reference_history.before(path, data)
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
     item = change()['paths'].get(str(path))
@@ -28,6 +30,7 @@ def before(path, data):
 
 
 def pages(records):
+    records = rules_reference_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[p['id']]['old']) if p['id'] in pairs and p == pairs[p['id']]['new'] else deepcopy(p) for p in records]
 

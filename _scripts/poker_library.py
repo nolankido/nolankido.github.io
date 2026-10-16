@@ -9,6 +9,7 @@ import re
 from poker_reading import next_reads
 import poker_beginner_path
 import poker_checkpoint
+import poker_resources
 
 TOPICS = {'study': 'Learning resources', 'cash': 'Cash-game study', 'variants': 'Other poker games', 'research': 'Poker research', 'basics': 'Learn the basics', 'hands': 'Read a hand', 'tournaments': 'Tournament study',
           'live': 'Live tournament preparation', 'practice': 'Try a decision', 'results': 'Results and review', 'creative': 'Make a vlog'}
@@ -52,7 +53,7 @@ def load(root, pages):
         source = (root / '_source' / page['source']).resolve()
         if not source.is_relative_to((root / '_source').resolve()):
             raise ValueError('Library source outside source directory')
-        body = poker_checkpoint.decorate(page, poker_beginner_path.decorate(page, source.read_text(encoding='utf-8'), root), root)
+        body = poker_checkpoint.decorate(page, poker_beginner_path.decorate(page, poker_resources.resolve_rules(source.read_text(encoding='utf-8'), root), root), root)
         result.append({**item, 'route': route, 'minutes': minutes(body)})
         seen.add(route)
     if seen != expected:

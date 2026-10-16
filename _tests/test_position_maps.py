@@ -10,6 +10,7 @@ from test_site import ROOT, build
 import poker_course
 import poker_lessons
 import position_maps_history as history
+import rules_reference_history
 
 
 class PositionMapTests(unittest.TestCase):
@@ -51,7 +52,7 @@ class PositionMapTests(unittest.TestCase):
         self.assertEqual(current, original)
         for p, digest in self.baseline['files'].items():
             if p.endswith('.js') or p.startswith('downloads/') or p in ['_source/poker/' + s + '.html' for s, _ in poker_course.LESSONS]:
-                self.assertEqual(sha256((ROOT / p).read_bytes()).hexdigest(), digest, p)
+                self.assertEqual(sha256(rules_reference_history.before(p, (ROOT / p).read_bytes())).hexdigest(), digest, p)
         for lesson in poker_lessons.load(ROOT, [s for s, _ in poker_course.LESSONS]):
             self.assertLess(len(json.dumps(lesson).split()), 550)
 

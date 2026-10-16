@@ -196,3 +196,25 @@ The date puts the comic into the existing Poker feed and combined writing feed.
 Search indexes derive from the manifest, and Poker search also indexes the text
 version. Comic pages use the existing sharing controls. Source and generated HTML
 must be rebuilt and committed together using the normal local release checks.
+
+## Current tournament rules references
+
+The `tda-rules` record in `_source/poker/resources.json` owns the current TDA
+edition, version and publication date in `source_version`, plus its existing
+`reviewed_on` date. Current guide citations use `${poker_tda_label}` or
+`${poker_tda_long_label}` rather than a second handwritten version number.
+The builder, guide reading estimates, Poker search and directory exports resolve
+the same record. Historical batch notes and references explicitly describing
+older rulebooks retain their original dates and editions.
+
+For an update, read the official rules page and version history first. Check
+the rules used by affected examples, update this one record and its actual
+review date, then rebuild and run the release checks. A reachable URL does not
+establish a new editorial review; neither the build nor a link checker updates
+review dates. Do not refresh unrelated publishers' review dates. Document the
+checked rules and any uninspected addenda or translations in the review note.
+
+The rules-history adapter preserves the exact earlier production bytes for
+historical regression tests. Do not refresh older golden files to make an
+unexpected change pass. New checks verify propagation from a synthetic version
+change, current output consistency, and preservation of all unrelated resources.

@@ -146,7 +146,7 @@ def guide_sections(root: Path, page: dict, catalog: dict) -> list[dict]:
             source = poker_checkpoint.decorate(page, source, root)
         elif page['path'] in {'/poker/' + slug + '/' for slug, _ in poker_course.LESSONS}:
             source = poker_course.lesson_support(page, source, root)
-    return GuideText(source).sections
+    return GuideText(poker_resources.resolve_rules(source, root)).sections
 
 
 def entries(root: Path, pages: list[dict], guides: list[dict], resources: list[dict]) -> list[dict]:
