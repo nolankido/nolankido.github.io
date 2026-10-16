@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "id": "S1",
+      "lesson": "first-decisions",
+      "title": "Cards, legal actions and additional payment",
+      "criteria": [
+        [
+          "S1.1",
+          "Construct exactly five available cards; distinguish private cards from the shared board.",
+          "Uses six cards, requires both private cards, or names a card that is unavailable."
+        ],
+        [
+          "S1.2",
+          "Count an additional call as the current wager minus this round's contribution.",
+          "Subtracts an earlier round's payment or adds an already posted blind twice."
+        ],
+        [
+          "S1.3",
+          "Explain when checking, betting, calling, folding or a legal raise is available under the stated assumptions.",
+          "Checks past an unmatched bet or treats every contribution as a new raise."
+        ]
+      ],
+      "tasks": [
+        "L1-A",
+        "A-preflop",
+        "A-river",
+        "B-preflop",
+        "B-flop",
+        "G-call",
+        "G-raise",
+        "G-river"
+      ],
+      "probe": "If the learner says the right number but subtracts preflop chips from a flop call, would the feedback expose that reason?",
+      "sources": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "id": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "Position and players still to act",
+      "criteria": [
+        [
+          "S2.1",
+          "Follow the six-player initial preflop order through button, small blind and big blind.",
+          "Says the button ends preflop or counts posting a blind as taking an initial turn."
+        ],
+        [
+          "S2.2",
+          "Rebuild postflop order from remaining seats clockwise after the button.",
+          "Carries preflop order into the flop or moves blinds after other players fold."
+        ],
+        [
+          "S2.3",
+          "Explain how earlier action, price and relevant stacks change a situation with the same two cards.",
+          "Uses a hand label or seat alone to prescribe an action without those facts."
+        ]
+      ],
+      "tasks": [
+        "L2-A",
+        "A-preflop",
+        "A-turn",
+        "B-preflop",
+        "G-position"
+      ],
+      "probe": "Can the text distinguish two players remaining from a hand originally dealt heads-up? The examples remain six-player deals.",
+      "sources": [
+        "R1",
+        "R3"
+      ]
+    },
+    {
+      "id": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Made hand, draw and observed action",
+      "criteria": [
+        [
+          "S3.1",
+          "Name the current best five and count the suit cards actually available.",
+          "Calls four suited cards a completed flush or overlooks a made pair beside a draw."
+        ],
+        [
+          "S3.2",
+          "Explain that improving and winning are different claims.",
+          "Treats a completed draw as a guaranteed win regardless of later board or opposing cards."
+        ],
+        [
+          "S3.3",
+          "Read a check or bet as an action and explain the resulting options.",
+          "Treats a check as proof of weakness or allows checking again past a new bet."
+        ]
+      ],
+      "tasks": [
+        "L3-A",
+        "A-flop",
+        "B-flop",
+        "B-turn",
+        "G-flop"
+      ],
+      "probe": "Would a confident answer of 'a flush' be repaired by counting the exact hearts or spades rather than only revealing the category?",
+      "sources": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "id": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Rebuild the hand and distinguish price from equity",
+      "criteria": [
+        [
+          "S4.1",
+          "Rebuild the best five after the turn and river, including changed kickers and missed draws.",
+          "Keeps an obsolete kicker, waits for a card after the river or awards the wrong showdown winner."
+        ],
+        [
+          "S4.2",
+          "For the stated final heads-up call, divide the additional call by the pot after calling.",
+          "Omits the caller's extra chips from the denominator or treats the bet size alone as the price."
+        ],
+        [
+          "S4.3",
+          "State the no-fee, no-side-pot, no-prize-effect assumptions and distinguish required pot share, including ties, from estimated equity.",
+          "Treats 20% or 25% as a measured winning probability or an automatic instruction to call."
+        ]
+      ],
+      "tasks": [
+        "L4-A",
+        "A-turn",
+        "A-river",
+        "B-turn",
+        "B-river",
+        "G-river",
+        "G-showdown"
+      ],
+      "probe": "Can the reviewer derive e(P+C)-C = 0 and explain why that prices this call without ranking every available action?",
+      "sources": [
+        "R1",
+        "R2",
+        "M1"
+      ]
+    },
+    {
+      "id": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "Known cards, possible holdings and frequencies",
+      "criteria": [
+        [
+          "S5.1",
+          "Remove candidates that reuse a known exact card and compare each remaining candidate separately.",
+          "Allows a duplicate card or combines mutually exclusive candidates into one physical deal."
+        ],
+        [
+          "S5.2",
+          "Compare legal candidates with the hero's best five without assigning unsupported frequencies.",
+          "Makes all listed candidates equally likely or calls a small candidate list a complete range."
+        ],
+        [
+          "S5.3",
+          "Separate a check or one showdown reveal from an estimate of how often a holding takes that action.",
+          "Uses one revealed hand or a checked turn to establish or eliminate an entire frequency model."
+        ]
+      ],
+      "tasks": [
+        "L5-A",
+        "A-turn",
+        "A-river",
+        "B-river",
+        "G-showdown"
+      ],
+      "probe": "If two possible models allow the same observed hand, does the explanation keep both possible until more evidence is supplied?",
+      "sources": [
+        "R1",
+        "R2",
+        "M2"
+      ]
+    },
+    {
+      "id": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Bet purpose, alternatives and outcome bias",
+      "criteria": [
+        [
+          "S6.1",
+          "Identify worse callers for a value argument and better folders for a bluff argument.",
+          "Calls any winning bet value or any losing hand a profitable bluff."
+        ],
+        [
+          "S6.2",
+          "Compare betting with checking using frequencies, amounts, other responses and future action where relevant.",
+          "Treats naming one worse caller or holding a strong category as a complete betting verdict."
+        ],
+        [
+          "S6.3",
+          "Keep the scripted result separate from the quality of the earlier decision.",
+          "Uses a win or loss as proof of the best action or implies profitable-play readiness from this course."
+        ]
+      ],
+      "tasks": [
+        "L6-A",
+        "A-flop",
+        "B-turn",
+        "A-river",
+        "B-river",
+        "G-flop",
+        "G-showdown"
+      ],
+      "probe": "Can the restricted response assumptions support the stated comparison without pretending to describe an actual player's measured range?",
+      "sources": [
+        "M1",
+        "M2"
+      ]
+    }
+  ]
+}
