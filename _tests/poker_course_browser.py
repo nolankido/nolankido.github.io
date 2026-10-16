@@ -29,6 +29,14 @@ def reflow(page):
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
 
 
+def reveal_short_answer(page):
+    # Same-document section navigation preserves native disclosure state.
+    answer = page.locator('#course-lesson-answer')
+    if answer.get_attribute('open') is None:
+        enter(page, answer.locator('summary'))
+    expect(answer.locator('div')).to_be_visible()
+
+
 def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
@@ -157,10 +165,10 @@ def main():
                         expect(target).to_be_in_viewport()
                         assert target.evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
                         page.goto(origin + route + '#course-lesson-try')
-                        enter(page, page.locator('#course-lesson-answer > summary'))
+                        reveal_short_answer(page)
                     if shots and index in [0, 4] and width in [390, 1440]:
                         page.goto(origin + route + '#course-lesson-try')
-                        enter(page, page.locator('#course-lesson-answer > summary'))
+                        reveal_short_answer(page)
                         page.locator('#course-lesson-try').evaluate("el=>scrollTo({top:scrollY+el.getBoundingClientRect().top-document.querySelector('.site-header').getBoundingClientRect().height-20,behavior:'instant'})")
                         page.screenshot(path=str(shots / f'short-lesson-task-{index + 1}-{width}.png'))
                     if os.environ.get('AXE_PATH') and width in [390, 1440]:
