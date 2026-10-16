@@ -233,12 +233,15 @@ def main():
                 expect(native.locator('.course-first-pass')).to_be_visible()
                 enter(native, native.locator('.course-stage-end a.button'))
                 expect(native).to_have_url(origin + '/poker/starting-hand-decisions/')
-                for lesson in DATA['lessons']:
+                for index, lesson in enumerate(DATA['lessons']):
                     native.goto(origin + '/poker/' + lesson['slug'] + '/#course-lesson-try')
                     expect(native.locator('#course-lesson-answer > div')).to_be_hidden()
                     enter(native, native.locator('#course-lesson-answer > summary'))
                     expect(native.locator('#course-lesson-answer > div')).to_be_visible()
                     enter(native, native.locator('.course-lesson-next a.button'))
+                    expected = '/poker/' + DATA['lessons'][index + 1]['slug'] + '/' if index < 5 else '/poker/beginner-checkpoint/'
+                    expect(native).to_have_url(origin + expected)
+                    native.wait_for_load_state('domcontentloaded')
                     reflow(native)
                 fallback.close()
                 report['fallbacks'] += 1
