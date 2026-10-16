@@ -79,7 +79,8 @@ def main():
         for button in page.locator('[data-finder-card]:visible .finder-save').all():button.click()
         expect(page.locator('#finder-shelf-count')).to_contain_text('12 of 12')
         page.locator('#finder-more').click();page.locator('[data-finder-card]:visible .finder-save').nth(12).click()
-        expect(page.locator('#finder-shelf-count')).to_contain_text('Remove one')
+        expect(page.locator('#finder-shelf-count')).to_have_text('12 of 12 places used. Remove an item below before adding another.')
+        expect(page.locator('.finder-shelf-remove').first).to_be_focused()
         assert page.locator('#finder-shelf-list li').count()==12
         page.reload();expect(page.locator('#finder-shelf-count')).to_contain_text('0 of 12')
         page.goto(origin+'/poker/study-calculators/');initial=len(traffic);tool_url=page.url
