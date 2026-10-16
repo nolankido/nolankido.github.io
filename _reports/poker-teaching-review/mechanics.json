@@ -1,0 +1,402 @@
+{
+  "scope_fingerprint": "6cdc772a6e3403551a9b5ffc1422fc054e6939f4b7254b79590528c9d2b995eb",
+  "status": "mechanical cross-check only; human review pending",
+  "cases": [
+    {
+      "task": "L1-W",
+      "best_rank": [
+        1,
+        12,
+        11,
+        8,
+        3
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "L1-A",
+      "best_rank": [
+        1,
+        12,
+        11,
+        9,
+        5
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "L2-W",
+      "best_rank": null,
+      "category": "preflop: no five-card hand"
+    },
+    {
+      "task": "L2-A",
+      "best_rank": null,
+      "category": "preflop: no five-card hand"
+    },
+    {
+      "task": "L3-W",
+      "best_rank": [
+        1,
+        10,
+        14,
+        7,
+        2
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "L3-A",
+      "best_rank": [
+        1,
+        13,
+        12,
+        8,
+        3
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "L4-W",
+      "best_rank": [
+        1,
+        11,
+        10,
+        8,
+        5
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "L4-A",
+      "best_rank": [
+        1,
+        12,
+        11,
+        9,
+        6
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "L5-W",
+      "best_rank": [
+        1,
+        10,
+        14,
+        8,
+        5
+      ],
+      "category": "one pair",
+      "candidate_comparisons": [
+        "impossible",
+        "weaker",
+        "stronger"
+      ]
+    },
+    {
+      "task": "L5-A",
+      "best_rank": [
+        1,
+        12,
+        13,
+        9,
+        6
+      ],
+      "category": "one pair",
+      "candidate_comparisons": [
+        "impossible",
+        "stronger",
+        "weaker"
+      ]
+    },
+    {
+      "task": "L6-W",
+      "best_rank": [
+        1,
+        10,
+        11,
+        8,
+        5
+      ],
+      "category": "one pair",
+      "candidate_comparisons": [
+        "weaker",
+        "stronger"
+      ]
+    },
+    {
+      "task": "L6-A",
+      "best_rank": [
+        1,
+        9,
+        11,
+        8,
+        7
+      ],
+      "category": "one pair",
+      "candidate_comparisons": [
+        "weaker",
+        "stronger"
+      ]
+    },
+    {
+      "task": "A-preflop",
+      "pot": 3,
+      "additional_call": 2,
+      "hero_behind": 100,
+      "best_rank": null,
+      "category": "preflop: no five-card hand"
+    },
+    {
+      "task": "A-flop",
+      "pot": 13,
+      "additional_call": 0,
+      "hero_behind": 94,
+      "best_rank": [
+        1,
+        10,
+        14,
+        7,
+        2
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "A-turn",
+      "pot": 21,
+      "additional_call": 0,
+      "hero_behind": 90,
+      "best_rank": [
+        1,
+        10,
+        14,
+        7,
+        4
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "A-river",
+      "pot": 28,
+      "additional_call": 7,
+      "hero_behind": 90,
+      "best_rank": [
+        1,
+        10,
+        14,
+        9,
+        7
+      ],
+      "category": "one pair",
+      "candidate_comparisons": [
+        "impossible",
+        "weaker",
+        "stronger"
+      ],
+      "pot_after_call": 35,
+      "break_even_share": "1/5"
+    },
+    {
+      "task": "A-showdown",
+      "pot_awarded": 35,
+      "hero_rank": [
+        1,
+        10,
+        14,
+        9,
+        7
+      ],
+      "opponent_rank": [
+        3,
+        9,
+        10,
+        7
+      ],
+      "winner_seat": 5,
+      "ending_stacks": [
+        100,
+        100,
+        100,
+        83,
+        99,
+        118
+      ],
+      "hero_net": -17
+    },
+    {
+      "task": "B-preflop",
+      "pot": 9,
+      "additional_call": 5,
+      "hero_behind": 99,
+      "best_rank": null,
+      "category": "preflop: no five-card hand"
+    },
+    {
+      "task": "B-flop",
+      "pot": 21,
+      "additional_call": 7,
+      "hero_behind": 94,
+      "best_rank": [
+        1,
+        12,
+        13,
+        8,
+        3
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "B-turn",
+      "pot": 28,
+      "additional_call": 0,
+      "hero_behind": 87,
+      "best_rank": [
+        5,
+        13,
+        12,
+        8,
+        5,
+        3
+      ],
+      "category": "flush",
+      "candidate_comparisons": [
+        "weaker",
+        "stronger"
+      ]
+    },
+    {
+      "task": "B-river",
+      "pot": 42,
+      "additional_call": 14,
+      "hero_behind": 87,
+      "best_rank": [
+        5,
+        13,
+        12,
+        8,
+        5,
+        3
+      ],
+      "category": "flush",
+      "candidate_comparisons": [
+        "impossible",
+        "stronger",
+        "weaker"
+      ],
+      "pot_after_call": 56,
+      "break_even_share": "1/4"
+    },
+    {
+      "task": "B-showdown",
+      "pot_awarded": 56,
+      "hero_rank": [
+        5,
+        13,
+        12,
+        8,
+        5,
+        3
+      ],
+      "opponent_rank": [
+        5,
+        11,
+        10,
+        8,
+        5,
+        3
+      ],
+      "winner_seat": 4,
+      "ending_stacks": [
+        100,
+        100,
+        73,
+        100,
+        129,
+        98
+      ],
+      "hero_net": 29
+    },
+    {
+      "task": "G-position",
+      "pot": 3,
+      "best_rank": null,
+      "category": "preflop: no five-card hand"
+    },
+    {
+      "task": "G-call",
+      "pot": 9,
+      "best_rank": null,
+      "category": "preflop: no five-card hand"
+    },
+    {
+      "task": "G-flop",
+      "pot": 13,
+      "best_rank": [
+        1,
+        11,
+        14,
+        7,
+        2
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "G-raise",
+      "pot": 29,
+      "best_rank": [
+        1,
+        11,
+        14,
+        7,
+        2
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "G-river",
+      "pot": 47,
+      "best_rank": [
+        1,
+        11,
+        14,
+        9,
+        7
+      ],
+      "category": "one pair"
+    },
+    {
+      "task": "G-showdown",
+      "pot": 57,
+      "best_rank": [
+        1,
+        11,
+        14,
+        9,
+        7
+      ],
+      "category": "one pair",
+      "opponent_rank": [
+        1,
+        11,
+        12,
+        9,
+        7
+      ],
+      "ending_stacks": [
+        100,
+        100,
+        100,
+        129,
+        99,
+        72
+      ],
+      "hero_net": 29
+    }
+  ],
+  "limits": [
+    "Prose numbers, legal-action wording and pedagogy require reviewer inspection.",
+    "Candidate comparisons treat holdings as separate alternatives, without frequencies.",
+    "No equity model, solver result, learner outcome or optimal-action grade is computed."
+  ]
+}
