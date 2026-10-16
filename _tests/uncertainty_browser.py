@@ -9,6 +9,7 @@ from playwright.sync_api import sync_playwright,expect
 from field_guide_browser import QuietHandler,ROOT
 from learning_path_browser import SPACING
 from holdem_essay_browser import position
+from native_fragment import follow_fragment
 ROUTE='/poker/poker-under-uncertainty/'
 TITLE='Poker under uncertainty: probability, inference and decisions'
 
@@ -46,12 +47,12 @@ def main():
                 table.focus();table.press('ArrowRight')
                 if width<768:
                     page.wait_for_function('e=>e.scrollWidth>e.clientWidth && e.scrollLeft>0',arg=table.element_handle())
-                page.locator('.reader-outline').first.locator('a[href="#river-case"]').press('Enter')
+                follow_fragment(page, page.locator('.reader-outline').first.locator('a[href="#river-case"]'), '#river-case')
                 expect(page.locator('#river-case')).to_be_in_viewport()
                 expect(page.locator('main')).to_contain_text('131.5 bb behind before the turn bet')
                 if shots and width in [390,1440]:
                     position(page,page.locator('#river-case'));page.screenshot(path=str(shots/f'uncertainty-case-{width}.png'))
-                page.locator('main a[href="#source-cfr"]').first.press('Enter')
+                follow_fragment(page, page.locator('main a[href="#source-cfr"]').first, '#source-cfr')
                 source=page.locator('#source-cfr');expect(source).to_be_in_viewport()
                 metrics=source.evaluate('''async e=>{
                     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));

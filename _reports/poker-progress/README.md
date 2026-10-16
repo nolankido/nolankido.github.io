@@ -170,6 +170,18 @@ control and `localStorage.clear()`. Unsaved tabs preserve all six marks, their
 next task, export and pasted import text, remain temporary, and do not recreate
 a removed record. Tabs using the saved record still clear as intended.
 
+Full-site QA also observed intermittent failures at two unchanged keyboard
+fragment actions in the uncertainty article's browser test. The article and its
+styles had not changed. Those two actions now use the existing `follow_fragment`
+helper: it establishes focused, visible, settled source-link state before
+ordinary Enter activation and requires the resulting fragment URL and target
+visibility. Existing target-viewport and citation-clearance assertions remain.
+No destination scrolling, retry, timeout increase or production change was
+added. The bounded diagnostic runs established intermittency but did not capture
+enough failing state to prove its root cause.
+The corrected full uncertainty suite passed in one 15.0-second run, including
+all four widths, six arrival routes, and zero axe violations at 390 and 1440 px.
+
 Run from the repository root with the test dependencies and Playwright Chromium
 installed:
 
