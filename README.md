@@ -4,6 +4,16 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Beginner Poker course
 
+The course finish now connects its six skills across two complete fictional
+hands at `/poker/beginner-checkpoint/#course-hand`. The later streets, feedback
+and results use closed native disclosures. `_source/poker/final-hands.json`
+owns the cards, ledgers and eight open prompts; `_scripts/poker_final_hands.py`
+renders both the page and the prompts in the existing six-stage study card.
+Keep results separate from decision quality and do not turn unspecified ranges
+into action grades. Run `test_final_hands.py`; `checkpoint_browser.py` also
+checks both hands, paper parity and script-free use. See
+`_reports/connected-final-hands-review.md` for the learning audit and its limits.
+
 The public entry is now **Poker Foundations**, at the existing
 `/poker/free-poker-learning-path/` URL. Poker home leads with the free course;
 its compact syllabus uses the same lesson data as the six core lessons.

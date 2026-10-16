@@ -6,6 +6,7 @@ import json
 import re
 import poker_practice
 import poker_lessons
+import poker_final_hands
 
 ROUTE = '/poker/free-poker-learning-path/'
 DATA = '_source/poker/beginner-course.json'
@@ -181,7 +182,7 @@ def workbook(root):
               'Completing this card does not establish profitable play or readiness to risk money.',
               'Fictional practice is enough. Do not upload private hand notes or identifying information.',
               'Prepared with AI assistance. October 15, 2026. Blank educational worksheet.', '']
-    return '\n'.join(lines)
+    return '\n'.join(lines) + poker_final_hands.workbook(root)
 
 
 def overview(root, source):
@@ -193,7 +194,7 @@ def overview(root, source):
 
 
 def head(page, root):
-    routes = {ROUTE} | {'/poker/' + slug + '/' for slug, _ in LESSONS}
+    routes = {ROUTE, poker_final_hands.ROUTE} | {'/poker/' + slug + '/' for slug, _ in LESSONS}
     if page['path'] not in routes:
         return ''
     version = sha256((root / CSS).read_bytes()).hexdigest()[:12]

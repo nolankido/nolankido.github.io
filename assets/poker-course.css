@@ -1,6 +1,6 @@
 /* One bounded practice scene and a plain route through the beginner references. */
 /* Keep keyboard focus and native fragment arrivals from starting competing scrolls. */
-html:has(.course-first-pass) { scroll-behavior:auto; }
+html:has(.course-first-pass),html:has(.course-final) { scroll-behavior:auto; }
 .course-hand,.course-first-pass,.course-stage-end { margin:32px 0; padding:clamp(18px,3vw,28px); border:1px solid var(--line-dark); border-top:3px solid var(--red); background:var(--paper-light); }
 .course-hand h2,.course-first-pass h2,.course-stage-end h2 { margin-top:0; }
 .course-scenes { list-style:none; padding:0; margin:24px 0; }
@@ -56,3 +56,14 @@ html:has(.course-first-pass) { scroll-behavior:auto; }
 #first-hand-practice,#beginner-practice,#beginner-next-step,#return-practice { scroll-margin-top:160px; }
 @media(max-width:420px) { .course-counters { grid-template-columns:1fr; gap:8px; } .course-counters > div { display:flex; align-items:center; justify-content:space-between; gap:14px; } .course-counters dd { margin:0; } }
 @media print { .course-hand [data-course-scene][hidden] { display:list-item!important; } .course-hand [data-course-solution][hidden],.course-hand [data-choice-note][hidden] { display:block!important; } .course-hand details > div { display:block!important; } .course-hand details::details-content { content-visibility:visible!important; } .course-hand [data-course-enhanced],.course-hand input,.course-scene-progress,.course-answer-status,.course-quick-links,.course-stage-end nav { display:none!important; } .course-hand,.course-first-pass,.course-stage-end { padding:12px; background:white; color:black; } .course-scene { break-inside:avoid; } .course-manual-help { display:block!important; } }
+
+/* Connected final hands use native disclosures, including without scripts. */
+.course-final { margin:36px 0; padding:24px; border-left:3px solid var(--red); background:var(--panel); }
+.course-final h4 { margin:24px 0 12px; font:700 1.1rem/1.5 var(--sans); }
+.course-final-stop { padding-bottom:12px; }
+.course-final-return { margin-top:28px; }
+.course-final-ending { border-top:2px solid var(--line); }
+.course-final summary { overflow-wrap:anywhere; }
+#course-hand,#course-hand-review,[id^="course-hand-"] { scroll-margin-top:160px; }
+@media(max-width:420px) { .course-final { padding:16px; } }
+@media print { .course-final { padding:0; border:0; background:white; } .course-final details > div { display:block!important; } .course-final details::details-content { content-visibility:visible!important; } .course-final h3,.course-final h4 { break-after:avoid; } }

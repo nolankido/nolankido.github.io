@@ -15,13 +15,50 @@ LESSONS = ['first-decisions','starting-hand-decisions','first-flop-decisions',
            'turn-and-river-decisions','ranges-for-beginners','betting-with-a-purpose']
 
 
+def enter(page, locator):
+    locator.scroll_into_view_if_needed()
+    locator.focus()
+    expect(locator).to_be_focused()
+    expect(locator).to_be_in_viewport()
+    page.keyboard.press('Enter')
+
+
+def final_hands(page, report, shots=None, width=390):
+    expect(page.locator('.course-final details[open]')).to_have_count(0)
+    for hand in ['a','b']:
+        if hand=='b':
+            enter(page,page.locator('#course-hand-b > summary'))
+        for number,street in enumerate(['preflop','flop','turn','river']):
+            stop=page.locator('#course-hand-'+hand+'-'+street)
+            if number:
+                enter(page,stop.locator(':scope > summary'))
+            answer=stop.locator('.course-final-answer')
+            expect(answer.locator('div')).to_be_hidden()
+            expect(stop.locator('h4')).to_be_visible()
+            if shots and hand=='a' and street=='flop' and width in [390,1440]:
+                position(page,stop.locator('h4'))
+                page.screenshot(path=str(shots/f'final-hand-cards-{width}.png'))
+            enter(page,answer.locator('summary'))
+            expect(answer.locator('div')).to_be_visible()
+            if shots and hand=='b' and street=='river' and width in [390,1440]:
+                position(page,answer)
+                page.screenshot(path=str(shots/f'final-hand-feedback-{width}.png'))
+            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+            report['connected_stops']+=1
+        ending=page.locator('#course-hand-'+hand+'-ending')
+        expect(ending.locator('div')).to_be_hidden()
+        enter(page,ending.locator('summary'))
+        expect(ending.locator('div')).to_contain_text('600 counters')
+        expect(ending.locator('div')).to_contain_text('does not')
+
+
 def main():
     server = ThreadingHTTPServer(('127.0.0.1',0), partial(QuietHandler,directory=str(ROOT)))
     Thread(target=server.serve_forever,daemon=True).start()
     origin = 'http://127.0.0.1:' + str(server.server_port)
     shots = Path(os.environ['SCREENSHOT_DIR']) if os.environ.get('SCREENSHOT_DIR') else None
     if shots: shots.mkdir(parents=True,exist_ok=True)
-    report = {'viewport_checks':0,'keyboard_answers':0,'lesson_arrivals':0,'search_arrivals':0,'repair_retry':0,'axe':[]}
+    report = {'viewport_checks':0,'keyboard_answers':0,'lesson_arrivals':0,'search_arrivals':0,'repair_retry':0,'connected_stops':0,'axe':[]}
     errors = []
     try:
         with sync_playwright() as pw:
@@ -39,6 +76,7 @@ def main():
                 expect(page.locator('details.viewer-question')).to_have_count(12)
                 expect(page.locator('details.viewer-question[open]')).to_have_count(0)
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'),width
+                final_hands(page,report,shots,width)
                 if shots and width in [390,1440]:
                     page.screenshot(path=str(shots/f'checkpoint-opening-{width}.png'))
                     example = page.locator('[data-case="draw"] .viewer-example'); position(page,example)
@@ -96,12 +134,22 @@ def main():
             expect(page.locator('main a[href="/contact/"]').first).to_be_visible()
             assert page.evaluate('localStorage.length === 0 && sessionStorage.length === 0')
             assert context.cookies()==[]
-            page.emulate_media(media='print');expect(page.locator('#try')).to_be_visible();page.emulate_media(media='screen')
+            page.goto(origin+ROUTE)
+            expect(page.locator('#course-hand-b-ending > div')).to_be_hidden()
+            page.emulate_media(media='print');expect(page.locator('#try')).to_be_visible()
+            expect(page.locator('#course-hand-b-ending > div')).to_be_visible()
+            page.emulate_media(media='screen')
+            enter(page,page.locator('#course-hand-a-preflop-answer > summary'))
+            enter(page,page.locator('#course-hand-a-preflop-answer a[href="/poker/first-decisions/#chips-owed"]'))
+            expect(page).to_have_url(origin+'/poker/first-decisions/#chips-owed')
+            page.wait_for_load_state('domcontentloaded')
+            expect(page.locator('#chips-owed')).to_be_in_viewport()
             offline=browser.new_context(java_script_enabled=False,accept_downloads=True,viewport={'width':390,'height':900})
             offline.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
             static=offline.new_page();static.goto(origin+'/poker/free-poker-learning-path/')
             static.locator('#beginner-next-step a[href="'+ROUTE+'"]').focus();static.keyboard.press('Enter')
             expect(static).to_have_url(origin+ROUTE)
+            final_hands(static,report)
             static.locator('#answer-four summary').focus();static.keyboard.press('Enter')
             expect(static.locator('#answer-four div')).to_contain_text('8 / 40 = 20%')
             static.locator('#retry-four summary').focus();static.keyboard.press('Enter')
