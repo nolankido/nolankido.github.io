@@ -1,5 +1,10 @@
 # Poker search: question matching and precise repairs
 
+This is the frozen PR #103 release record. The next release and its separate
+evidence are in [poker-search-titles](../poker-search-titles/README.md).
+Use `evaluate.py --prior-release` to replay this release; the default now
+evaluates the current site, and `--write` saves in the new report folder.
+
 Prepared October 16, 2026 UTC. This advances the technical portion of roadmap
 cycle 12 while qualified teaching review and beginner observations remain open.
 The observation-dependent learning-screen redesign is still deferred. No review,

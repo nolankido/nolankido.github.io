@@ -8,6 +8,7 @@ import unittest
 from unittest.mock import patch
 from test_site import ROOT, build
 import poker_search_history as history
+import poker_search_titles_history as title_history
 
 FOLDER = ROOT / '_reports/poker-search-intent'
 spec = spec_from_file_location('poker_search_evaluation', FOLDER / 'evaluate.py')
@@ -24,7 +25,7 @@ class PokerSearchIntentTests(unittest.TestCase):
 
     def test_declared_regressions_reproduce_and_known_failure_has_an_honest_section(self):
         baseline = evaluation.evaluate(baseline=True)
-        current = evaluation.evaluate()
+        current = evaluation.evaluate(prior_release=True)
         self.assertEqual(baseline, json.loads((FOLDER / 'baseline.json').read_text()))
         self.assertEqual(current, json.loads((FOLDER / 'results.json').read_text()))
         self.assertEqual(baseline['target_hits_top_three'], 18)
@@ -87,7 +88,7 @@ const original=JSON.stringify(cards);ranked('two pair lose');assert.equal(JSON.s
         self.assertEqual(history.before('unrelated.bin', b'\xff\x00'), b'\xff\x00')
 
     def test_searchable_sources_and_closed_answer_exclusions_are_unchanged(self):
-        page = (ROOT / 'poker/find/index.html').read_text()
+        page = title_history.before('poker/find/index.html', (ROOT / 'poker/find/index.html').read_text())
         old = history.before('poker/find/index.html', page)
         self.assertEqual(evaluation.Cards(page).rows, evaluation.Cards(old).rows)
         start = '<body'

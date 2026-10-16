@@ -1,0 +1,599 @@
+{
+  "commit": "9bb91ac660de26eb91aa43b1aae2b3486a1691d6",
+  "paths": {
+    "_scripts/poker_finder.py": {
+      "old_sha256": "40c16f100b5d2fc615c69e6dfd61e86e2903cd96b19564119d948257402d5689",
+      "new_sha256": "d65a606eb19a7d7075b676f7dea87684d7c41171602cbeeacfb0414dd7a45258",
+      "edits": [
+        {
+          "start": 6984,
+          "end": 7061,
+          "old": "",
+          "new": "                       'search_title': page.get('seo_title', page['title']),\n"
+        },
+        {
+          "start": 9450,
+          "end": 9574,
+          "old": "",
+          "new": "+ (f'data-search-title=\"{escape(e[\"search_title\"], quote=True)}\" ' if e.get('search_title') else '')\n                     + "
+        }
+      ]
+    },
+    "assets/poker-finder.js": {
+      "old_sha256": "aba5277b8ab1652028e27028723bf7e0ff6ccb9ead8d3b840893bf6d9d7b334b",
+      "new_sha256": "da9a89b4c6d88f631a5b0afcfe897583f6592e0a1bc9fc52e7e433ac14b2b50e",
+      "edits": [
+        {
+          "start": 4212,
+          "end": 4455,
+          "old": "return {...card, title: normalize(card.title), text: normalize(card.text",
+          "new": "// Public search titles supplement the visible heading; they do not replace it.\n    return {...card, title: normalize(card.title), searchTitle: normalize(card.searchTitle || ''),\n      text: normalize(card.text + ' ' + (card.searchTitle || '')"
+        },
+        {
+          "start": 5630,
+          "end": 6022,
+          "old": "text, t)) ? 5 : 1), 0)\n      + (search.query.length && card.title === search.query.join(' ') ? 50 : 0)\n      + (search.hints.some(t => includes(card.title, t)) ? 40",
+          "new": "searchTitle, t)) ? 8 : g.some(t => includes(card.text, t)) ? 5 : 1), 0)\n      + (search.query.length && card.title === search.query.join(' ') ? 50\n        : search.query.length > 1 && (' ' + card.searchTitle + ' ').includes(' ' + search.query.join(' ') + ' ') ? 25 : 0)\n      + (search.hints.some(t => includes(card.title, t)) ? 40 : search.hints.some(t => includes(card.searchTitle, t)) ? 16"
+        },
+        {
+          "start": 7455,
+          "end": 7498,
+          "old": "",
+          "new": " searchTitle: el.dataset.searchTitle || '',"
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "old_sha256": "662a30970ce5089730118dac092a008f8f9c6c54ebba84d8afd18ad466e16e98",
+      "new_sha256": "8583aaca0dca7c114f8c75dc6fe30bb22671ca5f0b967b4e5c53f1b16b3f9a46",
+      "edits": [
+        {
+          "start": 3058,
+          "end": 3070,
+          "old": "aba5277b8ab1",
+          "new": "da9a89b4c6d8"
+        },
+        {
+          "start": 11250,
+          "end": 11333,
+          "old": "",
+          "new": "data-search-title=\"Learn Poker: Free Beginner Course &amp; Resources | Nolan Kido\" "
+        },
+        {
+          "start": 12099,
+          "end": 12145,
+          "old": "",
+          "new": "data-search-title=\"Poker Comics | Nolan Kido\" "
+        },
+        {
+          "start": 12855,
+          "end": 12926,
+          "old": "",
+          "new": "data-search-title=\"Learn No-Limit Hold’em: A Poker Comic | Nolan Kido\" "
+        },
+        {
+          "start": 17439,
+          "end": 17507,
+          "old": "",
+          "new": "data-search-title=\"Poker Hand Rankings: A Poker Comic | Nolan Kido\" "
+        },
+        {
+          "start": 21000,
+          "end": 21071,
+          "old": "",
+          "new": "data-search-title=\"One Hand, Four Streets: A Poker Comic | Nolan Kido\" "
+        },
+        {
+          "start": 25044,
+          "end": 25116,
+          "old": "",
+          "new": "data-search-title=\"The Best Five Cards Win: A Poker Comic | Nolan Kido\" "
+        },
+        {
+          "start": 29008,
+          "end": 29078,
+          "old": "",
+          "new": "data-search-title=\"Why Acting Last Helps: A Poker Comic | Nolan Kido\" "
+        },
+        {
+          "start": 32908,
+          "end": 32981,
+          "old": "",
+          "new": "data-search-title=\"Good Decision, Bad River: A Poker Comic | Nolan Kido\" "
+        },
+        {
+          "start": 37217,
+          "end": 37291,
+          "old": "",
+          "new": "data-search-title=\"Review a Poker Hand, Not Just the Result | Nolan Kido\" "
+        },
+        {
+          "start": 44030,
+          "end": 44082,
+          "old": "",
+          "new": "data-search-title=\"Poker Viewer Guide | Nolan Kido\" "
+        },
+        {
+          "start": 44855,
+          "end": 44934,
+          "old": "",
+          "new": "data-search-title=\"Poker Study Desk: Hand Reviews &amp; Practice | Nolan Kido\" "
+        },
+        {
+          "start": 45741,
+          "end": 45817,
+          "old": "",
+          "new": "data-search-title=\"Texas Hold&#x27;em Rules: Deal to Showdown | Nolan Kido\" "
+        },
+        {
+          "start": 51265,
+          "end": 51336,
+          "old": "",
+          "new": "data-search-title=\"Poker Hand Rankings: Which Hand Wins? | Nolan Kido\" "
+        },
+        {
+          "start": 55725,
+          "end": 55801,
+          "old": "",
+          "new": "data-search-title=\"Poker Betting: Calls, Raises and Side Pots | Nolan Kido\" "
+        },
+        {
+          "start": 60883,
+          "end": 60963,
+          "old": "",
+          "new": "data-search-title=\"How Poker Tournaments Work: Blinds and Payouts | Nolan Kido\" "
+        },
+        {
+          "start": 66812,
+          "end": 66883,
+          "old": "",
+          "new": "data-search-title=\"Poker Math: Pot Odds, Outs and Equity | Nolan Kido\" "
+        },
+        {
+          "start": 72581,
+          "end": 72651,
+          "old": "",
+          "new": "data-search-title=\"Poker terms, in plain language | Nolan Kido Poker\" "
+        },
+        {
+          "start": 80254,
+          "end": 80319,
+          "old": "",
+          "new": "data-search-title=\"Questions new viewers ask | Nolan Kido Poker\" "
+        },
+        {
+          "start": 85093,
+          "end": 85167,
+          "old": "",
+          "new": "data-search-title=\"Poker Position, Effective Stacks and SPR | Nolan Kido\" "
+        },
+        {
+          "start": 91372,
+          "end": 91451,
+          "old": "",
+          "new": "data-search-title=\"Reading a Poker Board: Suits, Pairs and Draws | Nolan Kido\" "
+        },
+        {
+          "start": 96556,
+          "end": 96625,
+          "old": "",
+          "new": "data-search-title=\"What is the bet trying to do? | Nolan Kido Poker\" "
+        },
+        {
+          "start": 102548,
+          "end": 102621,
+          "old": "",
+          "new": "data-search-title=\"Which kind of tournament is this? | Nolan Kido Poker\" "
+        },
+        {
+          "start": 108828,
+          "end": 108899,
+          "old": "",
+          "new": "data-search-title=\"What is happening at the table? | Nolan Kido Poker\" "
+        },
+        {
+          "start": 115506,
+          "end": 115580,
+          "old": "",
+          "new": "data-search-title=\"Pause the hand. Read the situation | Nolan Kido Poker\" "
+        },
+        {
+          "start": 120487,
+          "end": 120538,
+          "old": "",
+          "new": "data-search-title=\"Pot Odds Workshop | Nolan Kido\" "
+        },
+        {
+          "start": 128074,
+          "end": 128152,
+          "old": "",
+          "new": "data-search-title=\"Playing 10–20 Big Blinds in Live Tournaments | Nolan Kido\" "
+        },
+        {
+          "start": 149715,
+          "end": 149774,
+          "old": "",
+          "new": "data-search-title=\"Tournament Equity and ICM | Nolan Kido\" "
+        },
+        {
+          "start": 157498,
+          "end": 157559,
+          "old": "",
+          "new": "data-search-title=\"Range Combinations Workshop | Nolan Kido\" "
+        },
+        {
+          "start": 165353,
+          "end": 165418,
+          "old": "",
+          "new": "data-search-title=\"Tournament Variance and Results | Nolan Kido\" "
+        },
+        {
+          "start": 173837,
+          "end": 173902,
+          "old": "",
+          "new": "data-search-title=\"From Hand Notes to a Poker Vlog | Nolan Kido\" "
+        },
+        {
+          "start": 185447,
+          "end": 185506,
+          "old": "",
+          "new": "data-search-title=\"Poker Study Practice Room | Nolan Kido\" "
+        },
+        {
+          "start": 191822,
+          "end": 191903,
+          "old": "",
+          "new": "data-search-title=\"Poker Guides: Rules, Strategy &amp; Hand Review | Nolan Kido\" "
+        },
+        {
+          "start": 192728,
+          "end": 192805,
+          "old": "",
+          "new": "data-search-title=\"Poker River Exercise: Pot Odds &amp; Ranges | Nolan Kido\" "
+        },
+        {
+          "start": 198212,
+          "end": 198292,
+          "old": "",
+          "new": "data-search-title=\"Poker Flushes &amp; Redraws: A Worked Exercise | Nolan Kido\" "
+        },
+        {
+          "start": 202572,
+          "end": 202652,
+          "old": "",
+          "new": "data-search-title=\"Poker Side-Pot Exercise: All-Ins &amp; Refunds | Nolan Kido\" "
+        },
+        {
+          "start": 207374,
+          "end": 207458,
+          "old": "",
+          "new": "data-search-title=\"Poker Decision Labs: Ranges, Draws &amp; Side Pots | Nolan Kido\" "
+        },
+        {
+          "start": 208225,
+          "end": 208283,
+          "old": "",
+          "new": "data-search-title=\"Poker Resource Directory | Nolan Kido\" "
+        },
+        {
+          "start": 209122,
+          "end": 209211,
+          "old": "",
+          "new": "data-search-title=\"Your first live tournament, without the guesswork | Nolan Kido Poker\" "
+        },
+        {
+          "start": 215637,
+          "end": 215726,
+          "old": "",
+          "new": "data-search-title=\"Read the structure before choosing the tournament | Nolan Kido Poker\" "
+        },
+        {
+          "start": 221569,
+          "end": 221663,
+          "old": "",
+          "new": "data-search-title=\"Registration, re-entry and the cost of another attempt | Nolan Kido Poker\" "
+        },
+        {
+          "start": 227864,
+          "end": 227945,
+          "old": "",
+          "new": "data-search-title=\"From the first seat to the end of the day | Nolan Kido Poker\" "
+        },
+        {
+          "start": 233692,
+          "end": 233772,
+          "old": "",
+          "new": "data-search-title=\"Keep a hand note you can actually review | Nolan Kido Poker\" "
+        },
+        {
+          "start": 239699,
+          "end": 239785,
+          "old": "",
+          "new": "data-search-title=\"Choose a study tool by the question it answers | Nolan Kido Poker\" "
+        },
+        {
+          "start": 247410,
+          "end": 247499,
+          "old": "",
+          "new": "data-search-title=\"Read poker advice without borrowing its certainty | Nolan Kido Poker\" "
+        },
+        {
+          "start": 253398,
+          "end": 253469,
+          "old": "",
+          "new": "data-search-title=\"The live tournament field guide | Nolan Kido Poker\" "
+        },
+        {
+          "start": 254288,
+          "end": 254373,
+          "old": "",
+          "new": "data-search-title=\"Plan the day. Keep the hand. Check the source | Nolan Kido Poker\" "
+        },
+        {
+          "start": 255225,
+          "end": 255312,
+          "old": "",
+          "new": "data-search-title=\"Poker Foundations: Free Texas Hold’em Beginner Course | Nolan Kido\" "
+        },
+        {
+          "start": 286390,
+          "end": 286487,
+          "old": "",
+          "new": "data-search-title=\"Study cash games without importing tournament assumptions | Nolan Kido Poker\" "
+        },
+        {
+          "start": 293038,
+          "end": 293134,
+          "old": "",
+          "new": "data-search-title=\"Omaha, lowball and mixed games: know which rules changed | Nolan Kido Poker\" "
+        },
+        {
+          "start": 299438,
+          "end": 299529,
+          "old": "",
+          "new": "data-search-title=\"Choose a poker book or course you will actually use | Nolan Kido Poker\" "
+        },
+        {
+          "start": 305782,
+          "end": 305874,
+          "old": "",
+          "new": "data-search-title=\"A map of poker research, without the inflated claims | Nolan Kido Poker\" "
+        },
+        {
+          "start": 312862,
+          "end": 312922,
+          "old": "",
+          "new": "data-search-title=\"Poker Resource Collections | Nolan Kido\" "
+        },
+        {
+          "start": 313747,
+          "end": 313838,
+          "old": "",
+          "new": "data-search-title=\"Poker math: the right number for the right question | Nolan Kido Poker\" "
+        },
+        {
+          "start": 320199,
+          "end": 320288,
+          "old": "",
+          "new": "data-search-title=\"Read the preflop chart before trusting the colors | Nolan Kido Poker\" "
+        },
+        {
+          "start": 326688,
+          "end": 326779,
+          "old": "",
+          "new": "data-search-title=\"Poker rules and fair play: find the right authority | Nolan Kido Poker\" "
+        },
+        {
+          "start": 333692,
+          "end": 333777,
+          "old": "",
+          "new": "data-search-title=\"Poker Topics: Guides, Tools, Events &amp; Resources | Nolan Kido\" "
+        },
+        {
+          "start": 334567,
+          "end": 334652,
+          "old": "",
+          "new": "data-search-title=\"Omaha hi-lo: play for a share, not just a low | Nolan Kido Poker\" "
+        },
+        {
+          "start": 340952,
+          "end": 341046,
+          "old": "",
+          "new": "data-search-title=\"Stud and lowball: change the rules before the strategy | Nolan Kido Poker\" "
+        },
+        {
+          "start": 346901,
+          "end": 346988,
+          "old": "",
+          "new": "data-search-title=\"Multiway pots: count the opponents and the pots | Nolan Kido Poker\" "
+        },
+        {
+          "start": 353529,
+          "end": 353621,
+          "old": "",
+          "new": "data-search-title=\"Turn a poker video or podcast into one useful lesson | Nolan Kido Poker\" "
+        },
+        {
+          "start": 359832,
+          "end": 359918,
+          "old": "",
+          "new": "data-search-title=\"Check the room, the rules and your protections | Nolan Kido Poker\" "
+        },
+        {
+          "start": 366827,
+          "end": 366919,
+          "old": "",
+          "new": "data-search-title=\"Poker Calculators: Pot Odds, Bluffs &amp; Pot-Limit Raises | Nolan Kido\" "
+        },
+        {
+          "start": 367757,
+          "end": 367831,
+          "old": "",
+          "new": "data-search-title=\"What was checked, and what was not | Nolan Kido Poker\" "
+        },
+        {
+          "start": 368634,
+          "end": 368707,
+          "old": "",
+          "new": "data-search-title=\"Your first live cash-game session | Nolan Kido Poker\" "
+        },
+        {
+          "start": 376250,
+          "end": 376324,
+          "old": "",
+          "new": "data-search-title=\"Understand the cost of a cash game | Nolan Kido Poker\" "
+        },
+        {
+          "start": 383085,
+          "end": 383158,
+          "old": "",
+          "new": "data-search-title=\"A practical cash-game study route | Nolan Kido Poker\" "
+        },
+        {
+          "start": 390141,
+          "end": 390226,
+          "old": "",
+          "new": "data-search-title=\"Poker for Beginners: First Decisions &amp; Practice | Nolan Kido\" "
+        },
+        {
+          "start": 405298,
+          "end": 405366,
+          "old": "",
+          "new": "data-search-title=\"Poker Starting Hands for Beginners | Nolan Kido\" "
+        },
+        {
+          "start": 423578,
+          "end": 423665,
+          "old": "",
+          "new": "data-search-title=\"Poker After the Flop: Beginner Lessons &amp; Practice | Nolan Kido\" "
+        },
+        {
+          "start": 437285,
+          "end": 437376,
+          "old": "",
+          "new": "data-search-title=\"Poker Turn &amp; River: Beginner Decisions &amp; Practice | Nolan Kido\" "
+        },
+        {
+          "start": 450767,
+          "end": 450847,
+          "old": "",
+          "new": "data-search-title=\"Poker Ranges for Beginners: Explained Practice | Nolan Kido\" "
+        },
+        {
+          "start": 464515,
+          "end": 464604,
+          "old": "",
+          "new": "data-search-title=\"Poker Betting for Beginners: Value, Bluffs &amp; Checks | Nolan Kido\" "
+        },
+        {
+          "start": 477458,
+          "end": 477546,
+          "old": "",
+          "new": "data-search-title=\"Beginner Poker Checkpoint: Explain, Repair &amp; Retry | Nolan Kido\" "
+        },
+        {
+          "start": 490879,
+          "end": 490955,
+          "old": "",
+          "new": "data-search-title=\"No-Limit Texas Hold’em: A Beginner’s Guide | Nolan Kido\" "
+        },
+        {
+          "start": 556568,
+          "end": 556660,
+          "old": "",
+          "new": "data-search-title=\"Poker Under Uncertainty: Probability &amp; Decision Theory | Nolan Kido\" "
+        },
+        {
+          "start": 627301,
+          "end": 627384,
+          "old": "",
+          "new": "data-search-title=\"How to Get Started Playing No-Limit Texas Hold’em | Nolan Kido\" "
+        },
+        {
+          "start": 687127,
+          "end": 687194,
+          "old": "",
+          "new": "data-search-title=\"$400 Poker Tournament Trip Budget | Nolan Kido\" "
+        },
+        {
+          "start": 712232,
+          "end": 712307,
+          "old": "",
+          "new": "data-search-title=\"Thunder Valley Poker: First-Timer’s Guide | Nolan Kido\" "
+        },
+        {
+          "start": 728153,
+          "end": 728236,
+          "old": "",
+          "new": "data-search-title=\"Limped &amp; Multiway Pots: Low-Stakes Live Poker | Nolan Kido\" "
+        },
+        {
+          "start": 749967,
+          "end": 750062,
+          "old": "",
+          "new": "data-search-title=\"Free Beginner Poker Practice: Worked Examples &amp; Questions | Nolan Kido\" "
+        },
+        {
+          "start": 762076,
+          "end": 762139,
+          "old": "",
+          "new": "data-search-title=\"Learn poker | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 762968,
+          "end": 763030,
+          "old": "",
+          "new": "data-search-title=\"Cash games | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 763875,
+          "end": 763938,
+          "old": "",
+          "new": "data-search-title=\"Tournaments | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 764737,
+          "end": 764808,
+          "old": "",
+          "new": "data-search-title=\"Strategy &amp; math | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 765636,
+          "end": 765711,
+          "old": "",
+          "new": "data-search-title=\"Omaha &amp; mixed games | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 766515,
+          "end": 766593,
+          "old": "",
+          "new": "data-search-title=\"Study tools &amp; training | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 767437,
+          "end": 767520,
+          "old": "",
+          "new": "data-search-title=\"Places to play &amp; home games | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 768386,
+          "end": 768466,
+          "old": "",
+          "new": "data-search-title=\"News, results &amp; creators | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 769316,
+          "end": 769394,
+          "old": "",
+          "new": "data-search-title=\"Research &amp; development | Poker Resources | Nolan Kido\" "
+        },
+        {
+          "start": 770251,
+          "end": 770325,
+          "old": "",
+          "new": "data-search-title=\"Safer play &amp; rules | Poker Resources | Nolan Kido\" "
+        }
+      ]
+    }
+  }
+}

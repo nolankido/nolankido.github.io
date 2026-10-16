@@ -159,6 +159,7 @@ def entries(root: Path, pages: list[dict], guides: list[dict], resources: list[d
         g = by_route.get(page['path'])
         label = poker_library.TOPICS[g['topic']] if g else 'Section overview'
         result.append({'id': page['id'], 'kind': 'guide', 'title': page['title'], 'description': page['description'],
+                       'search_title': page.get('seo_title', page['title']),
                        'url': page['path'], 'access': 'Free', 'meta': 'On this site · ' + label,
                        'keywords': (g['keywords'] + ' ' + g['level']) if g else page.get('kicker', ''),
                        'notes': '', 'context': '', 'reviewed': '', 'sections': guide_sections(root, page, catalog)})
@@ -188,7 +189,8 @@ def render(items: list[dict]) -> dict[str, str]:
         cards.append(f'<article class="reader-card finder-card" data-finder-card data-id="{escape(e["id"], quote=True)}" '
                      f'data-kind="{e["kind"]}" data-free="{str(e["access"] == "Free").lower()}" '
                      f'data-topics="{escape(" ".join(e.get("topics", [])), quote=True)}" '
-                     f'data-search="{search}" tabindex="-1">'
+                     + (f'data-search-title="{escape(e["search_title"], quote=True)}" ' if e.get('search_title') else '')
+                     + f'data-search="{search}" tabindex="-1">'
                      f'<p class="reader-eyebrow">{escape(e["meta"])}</p>'
                      f'<h3><a href="{escape(e["url"], quote=True)}"' + (' rel="external"' if e['kind'] == 'resource' else '') + f'>{title}</a></h3>'
                      f'<p>{escape(e["description"])}</p>'

@@ -48,7 +48,9 @@
     return {query, groups, hints, active: Boolean(value.trim())};
   }
   function prepare(card) {
-    return {...card, title: normalize(card.title), text: normalize(card.text), body: normalize(card.body),
+    // Public search titles supplement the visible heading; they do not replace it.
+    return {...card, title: normalize(card.title), searchTitle: normalize(card.searchTitle || ''),
+      text: normalize(card.text + ' ' + (card.searchTitle || '')), body: normalize(card.body),
       passages: card.passages.map(p => ({...p, headingWords: normalize(p.heading), words: normalize(p.text + ' ' + p.heading)}))};
   }
   function passage(card, search) {
@@ -64,9 +66,10 @@
     const focused = passage(card, search);
     const sectionScore = focused ? search.groups.filter(g => g.some(t => includes(focused.headingWords, t))).length * 8
       + (search.groups.every(g => g.some(t => includes(focused.words, t))) ? 12 : 0) : 0;
-    return search.groups.reduce((n, g) => n + (g.some(t => includes(card.title, t)) ? 20 : g.some(t => includes(card.text, t)) ? 5 : 1), 0)
-      + (search.query.length && card.title === search.query.join(' ') ? 50 : 0)
-      + (search.hints.some(t => includes(card.title, t)) ? 40 : 0)
+    return search.groups.reduce((n, g) => n + (g.some(t => includes(card.title, t)) ? 20 : g.some(t => includes(card.searchTitle, t)) ? 8 : g.some(t => includes(card.text, t)) ? 5 : 1), 0)
+      + (search.query.length && card.title === search.query.join(' ') ? 50
+        : search.query.length > 1 && (' ' + card.searchTitle + ' ').includes(' ' + search.query.join(' ') + ' ') ? 25 : 0)
+      + (search.hints.some(t => includes(card.title, t)) ? 40 : search.hints.some(t => includes(card.searchTitle, t)) ? 16 : 0)
       + (card.kind === 'glossary' && search.groups.some(g => g.some(t => includes(card.title, t))) ? 12 : 0) + sectionScore;
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = {normalize, prepare, plan, score, passage};
@@ -84,7 +87,7 @@
   const heading = document.getElementById('finder-results-heading');
   if (![controls, grid, input, kind, topic, free, reset, more, count, empty, heading].every(Boolean)) return;
   const cards = Array.from(grid.querySelectorAll('[data-finder-card]')).map((el, index) => ({
-    el, index, kind: el.dataset.kind, topics: new Set((el.dataset.topics || '').split(' ')), text: el.dataset.search || '', body: Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => p.dataset.heading + ' ' + p.textContent).join(' '), title: el.querySelector('h3').textContent,
+    el, index, kind: el.dataset.kind, topics: new Set((el.dataset.topics || '').split(' ')), text: el.dataset.search || '', body: Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => p.dataset.heading + ' ' + p.textContent).join(' '), title: el.querySelector('h3').textContent, searchTitle: el.dataset.searchTitle || '',
     passages: Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => ({heading: p.dataset.heading, anchor: p.dataset.anchor, text: p.textContent})),
     url: el.querySelector('h3 a').getAttribute('href')
   })).map(prepare);
