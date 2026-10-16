@@ -64,13 +64,19 @@ def main():
                 ('pot ods', '/poker/glossary/#pot-odds'),
                 ('kikcer poker', '/poker/glossary/#kicker'),
                 ('first live tournment', '/poker/first-live-tournament/'),
-                ('what does BB mean', '/poker/glossary/#big-blind')]:
+                ('what does BB mean', '/poker/glossary/#big-blind'),
+                ('what is ICM', '/poker/tournament-equity/'),
+                ('prize equity', '/poker/tournament-equity/'),
+                ('tournament equity', '/poker/tournament-equity/')]:
                 search.fill(question);search.press('Enter')
                 first=page.locator('[data-finder-card]:visible').first
                 expect(first.locator('h3 a')).to_have_attribute('href',target)
                 if target=='/poker/hand-rankings/':
                     expect(first.locator('.finder-jump a')).to_have_attribute('href',target+'#ties')
                     expect(first.locator('.finder-excerpt')).to_contain_text('Two pair compares the higher pair')
+                if target=='/poker/tournament-equity/':
+                    expect(first.locator('h3 a')).to_have_text('When more chips are not enough.')
+                    expect(first.locator('.finder-excerpt')).to_be_visible()
             search.fill('two pair football');search.press('Enter')
             expect(page.locator('#finder-empty')).to_be_visible()
             page.locator('#finder-reset').click()
