@@ -8,6 +8,7 @@ Do not fill gaps with assumed passes, invented quotations or synthetic learners.
 | --- | --- |
 | Dates/timezones; recruitment method and adult beginner inclusion | |
 | Planned number; recruited/consented/started/completed/withdrawn counts | |
+| Original cohort and labeled replacements: separate counts/reasons; all starters total | |
 | Full release SHA, teaching/kit fingerprints and actual human decisions | |
 | Live/local modes, devices/access setups, deviations and coverage limitations | |
 | Which skill slots were observed, missing, repeated or previously exposed | |
@@ -16,7 +17,8 @@ Do not fill gaps with assumed passes, invented quotations or synthetic learners.
 
 | Measure | Actual count / denominator and eligibility |
 | --- | --- |
-| First short task reached within 30 seconds without help | |
+| Accepted first learning activity reached within 30 seconds without help | |
+| Accepted entry route: lesson 1 or card basics, separate counts and combined | |
 | Eventual unaided arrival within 180 seconds | |
 | Requested or received navigation help | |
 | Wrong destination; overview mistaken for first activity | |
@@ -26,6 +28,9 @@ Do not fill gaps with assumed passes, invented quotations or synthetic learners.
 List coded sessions underlying each count. Show all starters and reasons for
 any narrower denominator. A participant reaching the task after help stays in
 the assisted category. Do not remove a difficult session to improve a ratio.
+Show original-cohort and replacement results separately; no replacement changes
+the original cohort's entry ratio. Card basics is an accepted advertised start,
+not a wrong destination. Record the observed activity as well as its URL.
 
 ## Lesson, repair and follow-up, separately by assigned skill
 
@@ -65,9 +70,11 @@ cosmetic preference. Explain whether a proposed change addresses an observed
 problem or remains a hypothesis. A small convenience sample, single-skill
 assignments, facilitator presence and short interval limit interpretation.
 
-Cycle 3 closes only when actual 6 to 8 adult sessions and their hints, sticking
-points, task counts and explanation errors have been recorded, with prerequisites
-and deviations explicit. With fewer sessions, report a partial round. Cycle 4
+Cycle 3 targets 6 to 8 usable adult skill slots, with actual hints, sticking
+points, task counts and explanation errors recorded and prerequisites and
+deviations explicit. Additional labeled replacement sessions are permitted;
+retain every original record and report the actual total even when above eight.
+With fewer usable slots or missing coverage, report a partial round. Cycle 4
 then changes the learning screen and seeks fresh observations against its
 7-of-8 within 30 seconds target; this blank form supplies no such result.
 If exposure or missing attempts leaves the later unfamiliar-problem question

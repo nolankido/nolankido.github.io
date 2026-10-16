@@ -2,8 +2,10 @@
 from copy import deepcopy
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
+import re
 from tempfile import TemporaryDirectory
 import unittest
+from urllib.parse import urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLDER = ROOT / '_reports/poker-beginner-baseline'
@@ -47,6 +49,49 @@ class BeginnerBaselineTests(unittest.TestCase):
                 mutation(changed)
                 with self.assertRaises(ValueError):
                     kit.validate(changed, self.lessons)
+
+    def test_missing_or_empty_candidate_material_cannot_pass_preparation(self):
+        for index in (4, 5):
+            for change in ('missing_cards', 'missing_comparisons', 'missing_both',
+                           'empty_both', 'mismatched_lengths'):
+                with self.subTest(task=index, change=change):
+                    changed = deepcopy(self.data)
+                    task = changed['tasks'][index]
+                    if change in ('missing_cards', 'missing_both'):
+                        task.pop('candidates')
+                    if change in ('missing_comparisons', 'missing_both'):
+                        task.pop('expected_comparisons')
+                    if change == 'empty_both':
+                        task['candidates'] = []; task['expected_comparisons'] = []
+                    if change == 'mismatched_lengths':
+                        task['expected_comparisons'].pop()
+                    with self.assertRaises(ValueError):
+                        kit.validate(changed, self.lessons)
+
+    def test_alternate_raise_and_button_call_always_share_the_new_total(self):
+        changed = deepcopy(self.data)
+        changed['tasks'][1]['alternate_call'] = {'wager': 14, 'paid_this_round': 2, 'additional': 12}
+        kit.validate(changed, self.lessons)
+        prompt = kit.exhibits(changed['tasks'])['participant-tasks.md']
+        totals = re.search(r'cutoff raises to (\d+), button calls (\d+)', prompt)
+        self.assertIsNotNone(totals)
+        self.assertEqual(totals.groups(), ('14', '14'))
+        self.assertIn('You have posted 2 as the big blind.', prompt)
+
+    def test_entry_definition_accepts_both_advertised_beginner_starts(self):
+        source = (ROOT / '_source/poker/free-poker-learning-path.html').read_text()
+        controls = re.search(r'<div class="link-row">(.*?)</div>', source).group(1)
+        advertised = {urljoin('/poker/free-poker-learning-path/', href)
+                      for href in re.findall(r'href="([^"]+)"', controls)}
+        protocol = (FOLDER / 'protocol.md').read_text().split('## E:', 1)[1].split('## L:', 1)[0]
+        accepted = set(re.findall(r'^\| (/poker/\S+) \|', protocol, re.M))
+        self.assertTrue(advertised <= accepted, advertised - accepted)
+        self.assertEqual(len(advertised), 2)
+        for route in accepted:
+            target = urlsplit(route)
+            page = (ROOT / target.path.lstrip('/') / 'index.html').read_text()
+            if target.fragment:
+                self.assertIn('id="' + target.fragment + '"', page)
 
     def test_stale_exhibits_and_changed_instrument_have_distinct_revisions(self):
         original = kit.check()

@@ -4,7 +4,8 @@ Copy outside the repository before completing. No session has been recorded.
 
 | Field | Actual record |
 | --- | --- |
-| Coded session ID; planned slot; assigned lesson/probe | |
+| Coded session ID; planned slot; assigned lesson/probe; original or replacement | |
+| For replacement: original coded slot, reason added and separately reported cohort | |
 | Date/time/timezone; facilitator/note-taker codes | |
 | Adult confirmed; written-note consent confirmed; stop/withdrawal arrangement | |
 | Private consent-record reference; storage/access/deletion date | |
@@ -22,6 +23,7 @@ Copy outside the repository before completing. No session has been recorded.
 | Start URL and state; timer start | |
 | First activity identified, URL/fragment and observed path | |
 | At 30 seconds: correct task reached unaided yes/no/not observable, reason | |
+| Valid route chosen: lesson 1 or card-basics prerequisite | |
 | Eventual arrival elapsed seconds; stopped or timed out at 180 seconds | |
 | Help request time; every facilitator prompt/cue and its time | |
 | Technical/access barrier, actual elapsed time and separate explanation | |

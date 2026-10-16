@@ -15,7 +15,7 @@
       "id": "T2", "lesson": "starting-hand-decisions", "skill": "S2",
       "hero": ["Qc", "Jc"], "board": [],
       "setup": "Six seats in clockwise order are first, next, cutoff, button, small blind, big blind. You are the big blind. Blinds are 1 and 2. First and next fold; cutoff raises to 8 total; button calls 8; small blind folds. You posted 2 and have not yet taken your initial turn. Assume enough counters, no all-ins or side pots.",
-      "prompt": "Does posting the big blind count as your initial decision? What do you add to call 8? In a different hand with the same private cards, seats and blinds, cutoff raises to 12, button calls 12 and small blind folds: what would you add then? In either case, after you call and these three players see the flop, who acts first? Explain.",
+      "prompt": "Does posting the big blind count as your initial decision? What do you add to call 8? After you call and these three players see the flop, who acts first? Explain.",
       "call": {"wager": 8, "paid_this_round": 2, "additional": 6},
       "alternate_call": {"wager": 12, "paid_this_round": 2, "additional": 10},
       "points": ["Posting is not the initial decision; you still have that turn after the small blind folds.", "Call adds 6 for a total of 8; the alternate raise requires 10 more. The same private cards do not fix the price.", "You, the big blind, act first postflop among big blind, cutoff and button, clockwise after the button; this was a six-player deal."]

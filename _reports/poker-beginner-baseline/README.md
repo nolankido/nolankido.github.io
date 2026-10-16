@@ -16,10 +16,12 @@ There are no participant records or results in this kit. It does not close cycle
    [probe-review-form.md](probe-review-form.md). Record corrections and a separate
    decision for the exact kit fingerprint. Both decisions are prerequisites for
    learner sessions. The checker cannot grant either decision.
-2. Read [protocol.md](protocol.md). Nolan recruits 6 to 8 consenting adults who
+2. Read [protocol.md](protocol.md). Nolan plans 6 to 8 consenting adults who
    want introductory hold'em instruction. No invitations have been sent. Use
    their usual devices and include different screen sizes and access needs
    where possible. Do not exclude someone because they use assistive technology.
+   Additional labeled sessions may fill an exposed or incomplete skill slot;
+   retain every original starter and report replacements separately.
 3. Copy [session-form.md](session-form.md) and [summary-form.md](summary-form.md)
    **outside this public repository** before filling anything in. Use one session
    form per person. Keep contact details and consent records separately from

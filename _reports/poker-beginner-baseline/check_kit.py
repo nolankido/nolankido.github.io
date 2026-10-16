@@ -49,7 +49,17 @@ def validate(data, lessons):
         if (not task['setup'].strip() or not task['prompt'].strip()
                 or len(task['points']) != 3 or any(not p.strip() for p in task['points'])):
             raise ValueError('Task needs a setup, prompt and three scoring points')
-        if 'candidates' in task:
+        has_candidates = 'candidates' in task
+        has_comparisons = 'expected_comparisons' in task
+        if has_candidates != has_comparisons:
+            raise ValueError('Candidate cards and comparison expectations must appear together')
+        if task['skill'] in ('S5', 'S6') and not has_candidates:
+            raise ValueError('Range and bet-purpose probes require candidate cards')
+        if has_candidates:
+            if (not isinstance(task['candidates'], list) or not task['candidates']
+                    or not isinstance(task['expected_comparisons'], list)
+                    or len(task['candidates']) != len(task['expected_comparisons'])):
+                raise ValueError('Candidate cards and comparisons need matching nonzero lengths')
             comparisons = [teaching.comparison(task['hero'], task['board'], c)
                            for c in task['candidates']]
             if comparisons != task['expected_comparisons']:
@@ -95,6 +105,13 @@ def exhibits(tasks):
         for i, candidate in enumerate(task.get('candidates', []), 1):
             prompts += ['Candidate ' + str(i) + ': ' + cards(candidate) + '.', '']
         prompts += [task['prompt'], '']
+        if 'alternate_call' in task:
+            alternate = task['alternate_call']
+            prompts += ['In a different hand with the same private cards, seats and blinds, '
+                        + 'cutoff raises to ' + str(alternate['wager']) + ', button calls '
+                        + str(alternate['wager']) + ' and small blind folds. '
+                        + 'You have posted ' + str(alternate['paid_this_round'])
+                        + ' as the big blind. What would you add to call then, and why?', '']
         key += ['## ' + task['id'] + ' / ' + task['skill'] + ' / ' + task['lesson'], '']
         key += [str(i) + '. ' + p for i, p in enumerate(task['points'], 1)] + ['']
         if 'expected_rank' in task:

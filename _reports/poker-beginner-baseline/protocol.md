@@ -9,8 +9,9 @@ review and new follow-up task/key review. A pending decision or unresolved
 material error means learner sessions wait. A colleague can rehearse the draft
 for timing and clarity; label that rehearsal and exclude it from learner counts.
 
-Plan 40 to 50 minutes per adult. Choose 6 or 8 sessions before the round; if
-recruitment ends at 7 or earlier, report the actual number and missing coverage.
+Plan 40 to 50 minutes per adult. Choose a target of 6 or 8 usable skill slots
+before the round; if recruitment ends at 7 or earlier, report the actual number
+and missing coverage. Six to eight is a planned target, not a cap on all starters.
 Use these slots, assigned before seeing anyone's performance:
 
 | Planned slot | Lesson and follow-up | Purpose |
@@ -23,6 +24,15 @@ Use these slots, assigned before seeing anyone's performance:
 | 6 | L6 / T6: betting-with-a-purpose | Bet purpose and missing response information |
 | 7, if planned | L1 / T1 | Repeat the first skill |
 | 8, if planned | L2 / T2 | Repeat the second skill |
+
+If a planned slot's follow-up is exposed, missing or interrupted, retain the
+original record and add a separately labeled replacement session for that skill.
+Use an already reviewed problem with a new adult who reports not seeing it;
+do not improvise a replacement problem. A new problem needs its own review and
+fingerprint and belongs to a separately labeled extension. More than eight
+actual starters is allowed. Report the original cohort and replacements
+separately, including why each was added, and retain an all-starters total.
+Do not add people to reach a favorable entry ratio or replace an observed error.
 
 Record self-reported prior play/study, prior site exposure, device/browser,
 viewport and access setup. No exact age, gambling history, account details or
@@ -69,9 +79,18 @@ no retained scroll or open feedback. Start timing after reading:
 > you have found it.
 
 Say no menu, course, lesson or button labels. At 30 seconds, quietly record
-whether they have reached the first lesson's short task area, without help.
-Accept its first-pass explanation, worked example or independent attempt as an
-activity; the course overview alone or an unrelated reference is not arrival.
+whether they have reached either advertised starting activity without help:
+
+| Accepted route | Observed activity required |
+| --- | --- |
+| /poker/first-decisions/ | Learner identifies its short first-pass explanation, worked example or independent attempt. |
+| /poker/free-poker-learning-path/#card-basics | Learner identifies the card names, goal or worked selection offered by the site's explicit new-to-cards route. |
+
+The course overview alone or an unrelated reference is not arrival. A person
+choosing the advertised card-basics prerequisite has found a valid first activity;
+record which route they chose and analyze the two routes separately as well as
+combined. Do not code card basics as a wrong destination because it precedes
+lesson 1. The URL fragment alone does not prove the activity was identified.
 Record the URL/fragment and what they identify, not just a yes/no. Continue
 unaided to 180 seconds unless they stop. Record eventual arrival separately
 from arrival within 30 seconds. This same start/prompt/definition can be reused
@@ -173,3 +192,5 @@ misunderstanding first, then repeated confusion, then isolated friction. Tie
 each proposed fix to specific coded observations and a follow-up check. One
 severe access barrier can merit a fix even without repetition. Cycle 4's planned
 7-of-8 within 30 seconds is a future iteration target, not a result of this kit.
+Keep its first eight preplanned entry observations distinct from any supplemental
+sessions; replacement sessions must not improve the original cohort's ratio.
