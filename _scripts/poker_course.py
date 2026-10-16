@@ -124,7 +124,7 @@ def lesson_support(page, body, root):
     short = poker_lessons.load(root, [r['slug'] for r in routes])[index]
     first = ('<section class="course-first-pass" aria-labelledby="course-first-pass-title"><h2 id="course-first-pass-title">Start with the short lesson.</h2>'
              f'<p><strong>Stage {index+1} of 6:</strong> {escape(lesson["goal"])}</p>'
-             + poker_lessons.render(short, cards, next_route, next_label, optional) + '</section>'
+             + poker_lessons.render(short, cards, next_route, next_label, optional, page['revision']) + '</section>'
              '<h2 id="lesson-reference">Full explanation and more examples</h2>')
     anchor = '<p class="article-lead">'
     if body.count(anchor) != 1 or 'id="course-first-pass-title"' in body:
