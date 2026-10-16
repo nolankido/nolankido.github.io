@@ -6,6 +6,8 @@ A small static website for introductions, selected writing, and practical resour
 
 The overview puts the six-lesson route and finish before the optional practice
 tools. `_scripts/poker_beginner_path.py` owns that order and the three-tool menu.
+`poker_course.entry` moves the source's existing start controls under the course
+title. Keep one source control row and one title so the build can check the move.
 Card basics provide a direct lesson-1 continuation before the extra exercises.
 All practice anchors remain available. See `_reports/course-entrance-review.md`;
 `test_course_route.py` and `learning_path_browser.py` check the core and optional

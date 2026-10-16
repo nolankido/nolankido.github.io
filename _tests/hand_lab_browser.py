@@ -43,7 +43,7 @@ def main():
     origin='http://127.0.0.1:'+str(server.server_port)
     shots=Path(os.environ['SCREENSHOT_DIR']) if os.environ.get('SCREENSHOT_DIR') else None
     if shots:shots.mkdir(parents=True,exist_ok=True)
-    report={'constructed_hands':0,'equivalent_selections':0,'lesson_arrivals':0,'fallbacks':0,'axe':[]}
+    report={'constructed_hands':0,'equivalent_selections':0,'lesson_arrivals':0,'fallbacks':0,'delayed_font_arrivals':0,'axe':[]}
     errors=[]
     try:
         with sync_playwright() as pw:
@@ -57,7 +57,7 @@ def main():
                 page.set_viewport_size({'width':width,'height':950})
                 assert page.goto(origin+ROUTE).status==200
                 page.evaluate('()=>document.fonts.ready.then(()=>true)')
-                enter(page,page.locator('.article-body > .link-row a[href="#card-basics"]'))
+                enter(page,page.locator('.course-entry-actions a[href="#card-basics"]'))
                 expect(page.locator('#card-basics-title')).to_be_in_viewport()
                 assert page.locator('#card-basics-title').evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
                 expect(page.locator('.hand-lab-rankings')).not_to_have_attribute('open','')
@@ -199,6 +199,29 @@ def main():
                     answer=native.locator('#hand-lab-'+ident+' [data-lab-answer]')
                     enter(native,answer.locator('summary'));expect(answer.locator('div')).to_be_visible()
                 flow_ok(native);fallback.close();report['fallbacks']+=1
+            for mode in ['settled-arrival','active-control']:
+                slow=browser.new_context(viewport={'width':390,'height':950})
+                slow.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
+                held=[];slow.route('**/*.woff2*',lambda r:held.append(r))
+                early=slow.new_page();early.goto(origin+ROUTE+'#hand-lab-pair',wait_until='domcontentloaded')
+                early.on('pageerror',lambda e:errors.append(str(e)))
+                expect(early.locator('[data-hand-lab]')).to_have_class('hand-lab hand-lab-enhanced')
+                assert held,'The delayed-font fixture did not intercept a font'
+                control=early.locator('#hand-lab-pair input').first
+                if mode=='active-control':
+                    control.focus();early.keyboard.press('Space');expect(control).to_be_checked()
+                slow.unroute('**/*.woff2*')
+                for request in held:request.continue_()
+                early.wait_for_load_state('load')
+                early.evaluate('()=>document.fonts.ready.then(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))))')
+                if mode=='active-control':
+                    expect(control).to_be_focused();expect(control).to_be_checked()
+                else:
+                    title=early.locator('#hand-lab-pair h3')
+                    expect(title).to_be_in_viewport()
+                    assert title.evaluate("el=>el.getBoundingClientRect().top>=document.querySelector('.site-header').getBoundingClientRect().bottom")
+                    if shots:early.screenshot(path=str(shots/'course-route-card-arrival-390.png'))
+                slow.close();report['delayed_font_arrivals']+=1
             assert not errors,errors
             browser.close()
     finally:

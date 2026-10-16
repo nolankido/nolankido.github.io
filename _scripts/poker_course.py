@@ -194,6 +194,18 @@ def overview(root, source):
     return source.replace(marker, preview, 1)
 
 
+def entry(page, header, body):
+    """Put the existing course start controls directly below its title."""
+    if page['path'] != ROUTE:
+        return header, body
+    rows = [row for row in re.findall(r'<div class="link-row">.*?</div>', body, re.S)
+            if 'href="/poker/first-decisions/"' in row and 'href="#card-basics"' in row]
+    if len(rows) != 1 or header.count('</h1>') != 1 or 'course-entry-actions' in header:
+        raise ValueError('Course entry needs one start row and one title')
+    actions = rows[0].replace('class="link-row"', 'class="link-row course-entry-actions"', 1)
+    return header.replace('</h1>', '</h1>' + actions, 1), body.replace(rows[0], '', 1)
+
+
 def head(page, root):
     routes = {ROUTE, poker_final_hands.ROUTE} | {'/poker/' + slug + '/' for slug, _ in LESSONS}
     if page['path'] not in routes:

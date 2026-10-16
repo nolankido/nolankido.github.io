@@ -25,7 +25,9 @@ def enter(page,locator):
 
 def course_route(page,origin,report,shots=None,width=390):
     page.evaluate('()=>document.fonts.ready.then(()=>true)')
-    enter(page,page.locator('.article-body > .link-row .button'))
+    expect(page.locator('.course-entry-actions .button')).to_be_in_viewport(ratio=1)
+    expect(page.locator('.course-entry-actions a[href="#card-basics"]')).to_be_in_viewport(ratio=1)
+    enter(page,page.locator('.course-entry-actions .button'))
     expect(page).to_have_url(origin+'/poker/first-decisions/')
     page.wait_for_load_state('domcontentloaded')
     expect(page.locator('#course-first-pass-title')).to_have_text('Start with the short lesson.')

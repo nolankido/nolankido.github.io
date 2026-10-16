@@ -17,7 +17,7 @@ from the six lessons while choosing where to begin.
 
 | Visitor task | New route |
 | --- | --- |
-| Start the first lesson | A primary lesson-1 link at the entrance and the start of the six-lesson map |
+| Start the first lesson | Primary start controls directly under the course title, plus a lesson-1 link at the map |
 | Learn unfamiliar card names first | Card basics and a worked selection, with a direct continuation to lesson 1 |
 | Find the course sequence | The six-lesson map and finish come before the supporting tools |
 | Repair one difficulty | A three-tool menu explains when card practice, a guided hand or betting rehearsal is useful |
@@ -28,13 +28,26 @@ downloads and permanent targets remain. The supporting tools stay usable in the
 native document and with scripts enabled. Moving them does not hide an exercise
 or require another interaction to reach a known fragment. The reading estimate
 still includes the whole page and is explicitly distinguished from a class
-duration. This release does not add another syllabus, question bank, script,
+duration. This release does not add another syllabus, question bank, script file,
 account, stored learner state, email service or purchase flow.
+
+The first captures showed the original article header pushing the start controls
+below the opening screen. The renderer now moves that existing control row under
+the course title. The browser journey checks that the primary action is in the
+initial viewport at all four tested widths; titles and other page headers retain
+their existing structure.
 
 Native section navigation on this long course overview uses immediate arrivals,
 matching the short lessons. This lets a keyboard visitor move between the map
 and practice without competing focus and smooth-scroll movements. It does not
 change the content or the exercise logic.
+
+Moving the map ahead of the card lab exposed an early bookmark scroll that could
+finish before the page and fonts settled. The existing hand-lab script now
+aligns its selected hand after those layout changes and cancels a pending
+alignment when a learner has focused a control. Scoring and exercise data are
+unchanged. Browser checks include held-font arrivals and interaction before the
+fonts arrive; the fifteen other JavaScript files remain byte-identical.
 
 ## Verification and limits
 

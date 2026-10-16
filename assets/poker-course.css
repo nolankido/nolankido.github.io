@@ -76,3 +76,6 @@ html:has(.course-first-pass),html:has(.course-final),html:has(.course-tool-menu)
 .course-tool-choices p { margin:8px 0 0; }
 #practice-tools { scroll-margin-top:160px; }
 @media print { .course-tool-menu { border:0; } .course-tool-choices > li { background:white; } }
+
+.course-entry-actions { margin:20px 0; }
+.course-entry-actions .button { white-space:normal; }

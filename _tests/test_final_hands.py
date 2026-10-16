@@ -117,7 +117,7 @@ class FinalHandTests(unittest.TestCase):
                 self.assertNotIn(ending, paper)
         for path,digest in self.baseline['files'].items():
             if path.endswith('.js'):
-                self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),digest,path)
+                self.assertEqual(sha256(history.before(path,(ROOT/path).read_bytes())).hexdigest(),digest,path)
 
     def test_bad_cards_ledger_timing_and_repairs_fail_before_publication(self):
         data = json.loads((ROOT/final.DATA).read_text())

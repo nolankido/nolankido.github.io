@@ -42,7 +42,8 @@ class CourseRouteTests(unittest.TestCase):
         for ident in self.baseline['course_anchors']:
             self.assertEqual(ids.count(ident),1,ident)
         self.assertEqual(set(ids)-set(self.baseline['course_anchors']),{'practice-tools'})
-        intro=next(e for e in self.doc.iter('div') if e.get('class')=='link-row')
+        intro=next(e for e in self.doc.iter('div') if 'course-entry-actions' in e.get('class','').split())
+        self.assertLess(self.html.index('course-entry-actions'),self.html.index('class="reader-meta"'))
         primary=next(a for a in intro.iter('a') if a.get('class')=='button')
         self.assertEqual(primary.get('href'),'/poker/first-decisions/')
         self.assertIn('#card-basics',[a.get('href') for a in intro.iter('a')])
@@ -63,11 +64,18 @@ class CourseRouteTests(unittest.TestCase):
             return_link=next(e for e in self.doc.iter('p') if e.get('class')==name)
             self.assertIn('#beginner-practice',[a.get('href') for a in return_link.iter('a')])
 
-    def test_exercise_data_scripts_downloads_and_full_lessons_are_unchanged(self):
+    def test_exercise_data_scoring_downloads_and_full_lessons_are_unchanged(self):
         b=self.baseline
         for path,digest in b['files'].items():
             if path.endswith('.js') or path.startswith('downloads/') or path in ['_source/poker/'+slug+'.html' for slug,_ in poker_course.LESSONS] or path in ['_source/poker/beginner-course.json','_source/poker/course-lessons.json','_source/poker/hand-lab.json','_source/poker/round-practice.json','_source/poker/final-hands.json']:
-                self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),digest,path)
+                raw=(ROOT/path).read_bytes()
+                if path=='assets/poker-hand-lab.js':
+                    previous=history.before(path,raw)
+                    self.assertEqual(sha256(previous).hexdigest(),digest,path)
+                    marker=b"  restart.addEventListener('click'"
+                    self.assertEqual(raw.split(marker)[0],previous.split(marker)[0])
+                    self.assertEqual(history.before(path,raw+b'\n// Unreviewed change'),raw+b'\n// Unreviewed change')
+                else:self.assertEqual(sha256(raw).hexdigest(),digest,path)
         self.assertEqual(self.html.count('data-lab-case'),10)
         self.assertEqual(self.html.count('data-course-scene '),6)
         self.assertNotIn('<form',self.html)
