@@ -56,6 +56,24 @@ def main():
             expect(page.locator('#finder-controls')).to_be_visible()
             page.wait_for_timeout(200)
             initial_traffic=list(traffic);initial_url=page.url
+            # Real failed question, changed wording, spelling recovery and exact
+            # short abbreviations use the same core as the declared benchmark.
+            for question, target in [
+                ('why did my two pair lose', '/poker/hand-rankings/'),
+                ('TWO PAIRS LOST', '/poker/hand-rankings/'),
+                ('pot ods', '/poker/glossary/#pot-odds'),
+                ('kikcer poker', '/poker/glossary/#kicker'),
+                ('first live tournment', '/poker/first-live-tournament/'),
+                ('what does BB mean', '/poker/glossary/#big-blind')]:
+                search.fill(question);search.press('Enter')
+                first=page.locator('[data-finder-card]:visible').first
+                expect(first.locator('h3 a')).to_have_attribute('href',target)
+                if target=='/poker/hand-rankings/':
+                    expect(first.locator('.finder-jump a')).to_have_attribute('href',target+'#ties')
+                    expect(first.locator('.finder-excerpt')).to_contain_text('Two pair compares the higher pair')
+            search.fill('two pair football');search.press('Enter')
+            expect(page.locator('#finder-empty')).to_be_visible()
+            page.locator('#finder-reset').click()
             # Live typing and input-method composition retain the editor. The
             # legacy 229 boundary must not submit a partial query.
             search.fill('pot odds')

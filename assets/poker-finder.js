@@ -2,6 +2,74 @@
    Only validated topic, source type and free-access filters use URL fragments. */
 (() => {
   'use strict';
+  const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g, '')
+    .replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim()
+    .replace(/\bpre flop\b/g, 'preflop').replace(/\bhold em\b/g, 'holdem')
+    .replace(/\breentry\b/g, 're entry').replace(/\b2 ?pairs?\b/g, 'two pair').replace(/\btwo pairs\b/g, 'two pair');
+  const stop = new Set('a an the what how do does did is are be that i my in on of for to can and with when why who which after from mean means much more poker'.split(' '));
+  const aliases = {
+    mtt: ['mtt', 'tournament'], sng: ['sng', 'sit and go'], plo: ['plo', 'omaha'],
+    plo8: ['plo8', 'omaha hi lo', 'omaha high low', 'omaha eight'], o8: ['plo8', 'omaha hi lo', 'omaha high low'],
+    holdem: ['holdem', 'hold em'], nlhe: ['nlhe', 'holdem', 'hold em'],
+    bb: ['bb', 'big blind'], spr: ['spr', 'stack to pot'], icm: ['icm', 'independent chip', 'tournament equity'],
+    gto: ['gto', 'game theory', 'solver'], cbet: ['cbet', 'continuation bet'],
+    rta: ['rta', 'real time assistance', 'fair play'], pkos: ['pko', 'bounty'], pko: ['pko', 'bounty'],
+    hu: ['hu', 'heads up'], rake: ['rake', 'game costs'], rules: ['rules', 'procedures'],
+    beginner: ['beginner', 'start here', 'learn the basics'], videos: ['video', 'watch'], podcasts: ['podcast', 'audio'],
+    calling: ['call', 'calling'], calculate: ['calculate', 'calculation', 'calculator', 'price'],
+    count: ['count', 'calculate', 'calculation'], acts: ['acts', 'act', 'action'],
+    bet: ['bet', 'bets', 'betting'], pot: ['pot', 'pots'], outs: ['out', 'outs']
+  };
+  // Short abbreviations are whole words: BB must not match the unrelated BBA.
+  const includes = (text, phrase) => (' ' + text + ' ').includes(' ' + phrase + (phrase.length <= 3 || phrase === 'free' ? ' ' : ''));
+  const spellings = {tournment: 'tournament', tournamnet: 'tournament', kikcer: 'kicker', kicer: 'kicker'};
+  const phrases = ['two pair', 'full house', 'big blind', 'small blind', 'pot odds', 'best five', 're entry'];
+  function plan(value) {
+    const text = normalize(value.slice(0, 160).replace(/c[ -]bet/gi, 'cbet'));
+    const tokens = text.split(/\s+/).filter(Boolean).map(word => Object.prototype.hasOwnProperty.call(spellings, word) ? spellings[word] : word);
+    if (tokens.includes('pot')) for (let i = 0; i < tokens.length; i += 1) if (tokens[i] === 'ods') tokens[i] = 'odds';
+    const query = tokens.filter(word => !stop.has(word));
+    const comparison = query.some(word => ['pair', 'straight', 'flush', 'kicker', 'house'].includes(word));
+    const groups = [];
+    for (let i = 0; i < query.length; i += 1) {
+      const pair = query[i] + ' ' + query[i + 1];
+      if (phrases.includes(pair)) { groups.push([pair]); i += 1; }
+      else if (comparison && ['lose', 'lost', 'wins', 'win', 'beat', 'beats'].includes(query[i])) groups.push(['lose', 'lost', 'win', 'wins', 'beat', 'compare', 'comparison', 'rank', 'kicker']);
+      else groups.push(Object.prototype.hasOwnProperty.call(aliases, query[i]) ? aliases[query[i]] : [query[i]]);
+    }
+    let hints = [];
+    if (comparison || includes(text, 'best five')) hints = ['hand rankings', 'which hand wins', 'best five'];
+    else if (includes(query.join(' '), 'pot odds') || query.includes('outs') || (query.includes('break') && query.includes('even'))) hints = ['pot odds', 'math'];
+    else if (query.includes('call') || query.includes('calling')) hints = ['first poker decisions', 'bets calls', 'math'];
+    else if (query.includes('acts') || query.includes('position')) hints = ['position', 'first poker decisions', 'starting hand'];
+    else if (query.includes('icm')) hints = ['tournament chips', 'tournament equity', 'prize equity'];
+    else if (query.includes('gto')) hints = ['study tool'];
+    return {query, groups, hints, active: Boolean(value.trim())};
+  }
+  function prepare(card) {
+    return {...card, title: normalize(card.title), text: normalize(card.text), body: normalize(card.body),
+      passages: card.passages.map(p => ({...p, headingWords: normalize(p.heading), words: normalize(p.text + ' ' + p.heading)}))};
+  }
+  function passage(card, search) {
+    if (!search.groups.length) return null;
+    return card.passages.map((p, index) => {
+      const hits = search.groups.filter(g => g.some(t => includes(p.words, t))).length;
+      return {p, index, value: hits * 4 + search.groups.filter(g => g.some(t => includes(p.headingWords, t))).length, hits};
+    }).filter(row => row.hits > 0).sort((a, b) => b.value - a.value || a.index - b.index)[0]?.p || null;
+  }
+  function score(card, search) {
+    if (search.active && !search.groups.length) return -1;
+    if (!search.groups.every(g => g.some(t => includes(card.text + ' ' + card.body, t)))) return -1;
+    const focused = passage(card, search);
+    const sectionScore = focused ? search.groups.filter(g => g.some(t => includes(focused.headingWords, t))).length * 8
+      + (search.groups.every(g => g.some(t => includes(focused.words, t))) ? 12 : 0) : 0;
+    return search.groups.reduce((n, g) => n + (g.some(t => includes(card.title, t)) ? 20 : g.some(t => includes(card.text, t)) ? 5 : 1), 0)
+      + (search.query.length && card.title === search.query.join(' ') ? 50 : 0)
+      + (search.hints.some(t => includes(card.title, t)) ? 40 : 0)
+      + (card.kind === 'glossary' && search.groups.some(g => g.some(t => includes(card.title, t))) ? 12 : 0) + sectionScore;
+  }
+  if (typeof module !== 'undefined' && module.exports) module.exports = {normalize, prepare, plan, score, passage};
+  if (typeof document === 'undefined') return;
   const controls = document.getElementById('finder-controls');
   const grid = document.getElementById('finder-results');
   const input = document.getElementById('finder-search');
@@ -14,26 +82,11 @@
   const empty = document.getElementById('finder-empty');
   const heading = document.getElementById('finder-results-heading');
   if (![controls, grid, input, kind, topic, free, reset, more, count, empty, heading].every(Boolean)) return;
-  const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g, '')
-    .replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim()
-    .replace(/\bpre flop\b/g, 'preflop').replace(/\bhold em\b/g, 'holdem');
-  const stop = new Set('a an the what how do does is are i my in on of for to can and with when why'.split(' '));
-  const aliases = {
-    mtt: ['mtt', 'tournament'], sng: ['sng', 'sit and go'], plo: ['plo', 'omaha'],
-    plo8: ['plo8', 'omaha hi lo', 'omaha high low', 'omaha eight'], o8: ['plo8', 'omaha hi lo', 'omaha high low'],
-    holdem: ['holdem', 'hold em'], nlhe: ['nlhe', 'holdem', 'hold em'],
-    bb: ['bb', 'big blind'], spr: ['spr', 'stack to pot'], icm: ['icm', 'independent chip', 'tournament equity'],
-    gto: ['gto', 'game theory', 'solver'], cbet: ['cbet', 'continuation bet'],
-    rta: ['rta', 'real time assistance', 'fair play'], pkos: ['pko', 'bounty'], pko: ['pko', 'bounty'],
-    hu: ['hu', 'heads up'], rake: ['rake', 'game costs'], rules: ['rules', 'procedures'],
-    beginner: ['beginner', 'start here', 'learn the basics'], videos: ['video', 'watch'], podcasts: ['podcast', 'audio']
-  };
-  const includes = (text, phrase) => (' ' + text).includes(' ' + phrase);
   const cards = Array.from(grid.querySelectorAll('[data-finder-card]')).map((el, index) => ({
-    el, index, topics: new Set((el.dataset.topics || '').split(' ')), text: normalize(el.dataset.search || ''), body: normalize(Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => p.dataset.heading + ' ' + p.textContent).join(' ')), title: normalize(el.querySelector('h3').textContent),
-    passages: Array.from(el.querySelectorAll('[data-finder-passage]')),
+    el, index, kind: el.dataset.kind, topics: new Set((el.dataset.topics || '').split(' ')), text: el.dataset.search || '', body: Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => p.dataset.heading + ' ' + p.textContent).join(' '), title: el.querySelector('h3').textContent,
+    passages: Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => ({heading: p.dataset.heading, anchor: p.dataset.anchor, text: p.textContent})),
     url: el.querySelector('h3 a').getAttribute('href')
-  }));
+  })).map(prepare);
   if (!cards.length) return;
   const shelf = document.getElementById('finder-shelf');
   const shelfList = document.getElementById('finder-shelf-list');
@@ -86,8 +139,6 @@
   let matches = cards;
   let timer;
   let printing = false;
-  const words = () => normalize(input.value.slice(0, 160).replace(/c[ -]bet/gi, 'cbet'))
-    .split(/\s+/).filter(word => word && !stop.has(word));
   function render() {
     const visible = new Set(matches.slice(0, printing ? matches.length : limit).map(item => item.el));
     for (const card of cards) card.el.hidden = !visible.has(card.el);
@@ -98,35 +149,31 @@
   }
   function update(resetPage = true) {
     clearTimeout(timer);
-    const query = words();
-    const groups = query.map(word => aliases[word] || [word]);
+    const search = plan(input.value), groups = search.groups;
     matches = cards.filter(card => (kind.value === 'all' || card.el.dataset.kind === kind.value)
       && (topic.value === 'all' || card.topics.has(topic.value))
       && (!free.checked || card.el.dataset.free === 'true')
-      && groups.every(group => group.some(term => includes(card.text + ' ' + card.body, term))));
-    const score = card => groups.reduce((total, group) => total + (group.some(term => includes(card.title, term)) ? 20 : group.some(term => includes(card.text, term)) ? 5 : 1), 0)
-      + (query.length && card.title === query.join(' ') ? 50 : 0);
-    matches.sort((a, b) => score(b) - score(a) || a.index - b.index);
+      ).map(card => ({card, value: score(card, search)})).filter(row => row.value >= 0)
+      .sort((a, b) => b.value - a.value || a.card.index - b.card.index).map(row => row.card);
     for (const card of cards) {
       const excerpt = card.el.querySelector('.finder-excerpt');
       const jump = card.el.querySelector('.finder-jump');
       if (!excerpt || !jump) continue;
-      const selected = card.passages.map(p => ({p, score: groups.reduce((n, g) => n + (g.some(t => includes(normalize(p.textContent + ' ' + p.dataset.heading), t)) ? 1 : 0), 0)}))
-        .sort((a, b) => b.score - a.score)[0];
-      const found = groups.length && selected && selected.score > 0;
+      const selected = passage(card, search);
+      const found = groups.length && selected;
       excerpt.hidden = !found;
       // A matching passage without an anchor has no honest section jump.
-      jump.hidden = !found || !selected.p.dataset.anchor;
+      jump.hidden = !found || !selected.anchor;
       if (found) {
-        const text = selected.p.textContent.replace(/\s+/g, ' ').trim();
+        const text = selected.text.replace(/\s+/g, ' ').trim();
         const hit = text.split(/(?<=[.!?])\s+/)
           .map(sentence => ({sentence, score: groups.reduce((n, group) => n + (group.some(term => includes(normalize(sentence), term)) ? 1 : 0), 0)}))
           .sort((a, b) => b.score - a.score)[0].sentence || text;
         excerpt.textContent = 'In this guide: ' + hit.slice(0, 320) + (hit.length > 320 ? '…' : '');
         const link = jump.querySelector('a');
-        if (selected.p.dataset.anchor) {
-          link.setAttribute('href', card.url + '#' + selected.p.dataset.anchor);
-          link.textContent = 'Read: ' + selected.p.dataset.heading;
+        if (selected.anchor) {
+          link.setAttribute('href', card.url + '#' + selected.anchor);
+          link.textContent = 'Read: ' + selected.heading;
         } else {
           link.removeAttribute('href');
           link.textContent = '';

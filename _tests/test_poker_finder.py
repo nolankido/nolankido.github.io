@@ -15,6 +15,7 @@ import poker_resources
 import poker_reference
 import check_live
 import poker_finder_submission_history as submission_history
+import poker_search_history
 
 NEW = ('poker-math-reference', 'reading-preflop-charts', 'poker-rules-and-fair-play')
 
@@ -101,7 +102,7 @@ class FinderTests(unittest.TestCase):
         self.assertIn('id="finder-support"', self.content)
 
     def test_submission_is_composition_safe_and_the_prior_script_is_exactly_recoverable(self):
-        js = (ROOT / submission_history.SCRIPT).read_text()
+        js = poker_search_history.before(submission_history.SCRIPT, (ROOT / submission_history.SCRIPT).read_text())
         self.assertEqual(hashlib.sha256(js.encode()).hexdigest(), submission_history.NEW_SHA)
         self.assertEqual(hashlib.sha256(submission_history.before(submission_history.SCRIPT, js).encode()).hexdigest(), submission_history.OLD_SHA)
         self.assertIn("input.addEventListener('compositionstart', () => clearTimeout(timer));", js)
