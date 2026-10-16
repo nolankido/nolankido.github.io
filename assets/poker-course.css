@@ -79,3 +79,31 @@ html:has(.course-first-pass),html:has(.course-final),html:has(.course-tool-menu)
 
 .course-entry-actions { margin:20px 0; }
 .course-entry-actions .button { white-space:normal; }
+
+/* Native six-seat maps retain clockwise document order at every width. */
+.course-position-map { margin:24px 0; }
+.course-position-map figcaption { font:1rem/1.6 var(--sans); }
+.course-position-map figcaption strong { display:block; margin-bottom:8px; }
+.course-position-layout { position:relative; max-width:600px; margin:20px auto; }
+.course-position-felt { position:absolute; inset:5% 19%; border:1px solid var(--line-dark); border-radius:45%; background:var(--panel); }
+.course-position-layout ol { position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(20px,12%) minmax(0,1fr); gap:14px 8px; list-style:none; padding:0; margin:0; }
+.course-position-seat { display:flex; flex-direction:column; gap:5px; min-width:0; margin:0!important; padding:12px 10px; border:1px solid var(--line-dark); background:var(--paper-light); font:.9rem/1.45 var(--sans); overflow-wrap:anywhere; }
+.course-position-seat:nth-child(1) { grid-area:1 / 1; }
+.course-position-seat:nth-child(2) { grid-area:1 / 3; }
+.course-position-seat:nth-child(3) { grid-area:2 / 3; }
+.course-position-seat:nth-child(4) { grid-area:3 / 3; }
+.course-position-seat:nth-child(5) { grid-area:3 / 1; }
+.course-position-seat:nth-child(6) { grid-area:2 / 1; }
+.course-position-number { align-self:flex-start; display:grid; place-items:center; min-width:24px; min-height:24px; border:1px solid currentColor; border-radius:50%; font:700 .85rem/1 var(--sans); }
+.course-position-seat.is-you { border:2px solid var(--red); }
+.course-position-seat.is-you > strong { text-decoration:underline; text-underline-offset:4px; }
+.course-position-seat.is-folded { border-style:dashed; }
+.course-position-button { font:700 .8rem/1.5 var(--sans); }
+.course-position-orders { display:grid; gap:16px; margin:24px 0; font:1rem/1.6 var(--sans); }
+.course-position-orders > div { padding:12px 16px; border-left:3px solid var(--red); background:var(--paper-light); }
+.course-position-orders p { margin:0 0 10px; font:inherit; }
+.course-position-orders ol { margin:0; padding-left:24px; }
+.course-position-orders li { margin:6px 0; }
+.course-position-note { font:1rem/1.6 var(--sans); }
+@media(max-width:420px) { .course-position-seat { padding:10px 7px; font-size:.875rem; } }
+@media print { .course-position-map { break-inside:avoid; } .course-position-seat,.course-position-felt,.course-position-orders > div { background:white; } .course-position-seat.is-you { border:2px solid black; } }

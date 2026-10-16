@@ -75,7 +75,7 @@ class CourseRouteTests(unittest.TestCase):
                     marker=b"  restart.addEventListener('click'"
                     self.assertEqual(raw.split(marker)[0],previous.split(marker)[0])
                     self.assertEqual(history.before(path,raw+b'\n// Unreviewed change'),raw+b'\n// Unreviewed change')
-                else:self.assertEqual(sha256(raw).hexdigest(),digest,path)
+                else:self.assertEqual(sha256(history.before(path,raw)).hexdigest(),digest,path)
         self.assertEqual(self.html.count('data-lab-case'),10)
         self.assertEqual(self.html.count('data-course-scene '),6)
         self.assertNotIn('<form',self.html)

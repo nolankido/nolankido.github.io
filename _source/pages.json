@@ -1160,9 +1160,9 @@
     "source": "poker/starting-hand-decisions.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-15",
+    "updated": "2026-10-16",
     "poker_guide": true,
-    "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
+    "revision": "Added six-seat table maps and action-order comparisons to the short lesson, showing why the button and blinds act in different orders before and after the flop."
   },
   {
     "id": "poker-first-flop-decisions",

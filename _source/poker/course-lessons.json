@@ -33,11 +33,13 @@
       ],
       "worked": {
         "setup": ["The first seat, next seat and cutoff fold. You are on the button with queen-jack of spades. The small blind has posted 1 and the big blind 2. Neither blind has taken its initial turn."],
+        "table": {"hero":3,"paid":[0,0,0,0,1,2],"folded":[0,1,2]},
         "cards": [{"label":"Your private cards","values":["Qs","Js"]}],
         "answer": ["You face an unraised big blind. A call would add 2 because you have paid zero. Both blinds still have decisions after your initial action; either may raise. Being on the button does not finish preflop. This description does not prescribe a call or a raise."]
       },
       "attempt": {
         "setup": ["You now sit in the small blind with the same private cards. The first two seats fold, the cutoff raises to 6, and the button calls 6. Your posted small blind is 1. The big blind has not yet acted."],
+        "table": {"hero":4,"paid":[0,0,6,6,1,2],"folded":[0,1]},
         "cards": [{"label":"Your private cards","values":["Qs","Js"]}],
         "prompt": "How much more would your call add? Who still has an initial decision after you? Explain two ways this situation differs from the worked example, despite the same private cards.",
         "answer": ["A call adds 6 - 1 = 5. The big blind still has an initial decision, and a raise could return action to you or the earlier players. The pot has already been raised and called, and you are in the small blind rather than on the button.","Your two cards did not change, but the earlier action, price and position did. If you reach a flop, the small blind acts before the other remaining seats in this six-player hand. The price alone does not settle whether to continue."],

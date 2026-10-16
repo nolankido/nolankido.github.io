@@ -1,0 +1,352 @@
+{
+  "parent": "515ca7e2fec02ed8177d3e0aa474a7a28fce5dc6",
+  "pages": {
+    "poker-starting-hand-decisions": {
+      "old": {
+        "id": "poker-starting-hand-decisions",
+        "path": "/poker/starting-hand-decisions/",
+        "title": "The same cards. A different decision.",
+        "seo_title": "Poker Starting Hands for Beginners | Nolan Kido",
+        "description": "Understand poker starting hands through eight explained exercises on position, prior action, call prices and effective stacks. Build a useful preflop study record.",
+        "kicker": "Poker Foundations / Lesson 2 of 6",
+        "source": "poker/starting-hand-decisions.html",
+        "section": "poker",
+        "date": "2026-10-14",
+        "updated": "2026-10-15",
+        "poker_guide": true,
+        "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
+      },
+      "new": {
+        "id": "poker-starting-hand-decisions",
+        "path": "/poker/starting-hand-decisions/",
+        "title": "The same cards. A different decision.",
+        "seo_title": "Poker Starting Hands for Beginners | Nolan Kido",
+        "description": "Understand poker starting hands through eight explained exercises on position, prior action, call prices and effective stacks. Build a useful preflop study record.",
+        "kicker": "Poker Foundations / Lesson 2 of 6",
+        "source": "poker/starting-hand-decisions.html",
+        "section": "poker",
+        "date": "2026-10-14",
+        "updated": "2026-10-16",
+        "poker_guide": true,
+        "revision": "Added six-seat table maps and action-order comparisons to the short lesson, showing why the button and blinds act in different orders before and after the flop."
+      }
+    }
+  },
+  "new_pages": {},
+  "paths": {
+    "README.md": {
+      "old_sha256": "640a996a32242b10a5ee904cd5fefc500f4e7ca58ea6d9960a24dd0c5fde07f1",
+      "new_sha256": "f6b63787e2c764356a01ee2699164ce74d5127061ee61f2e5eaccd1d115751d4",
+      "edits": [
+        {
+          "start": 385,
+          "end": 1072,
+          "old": "",
+          "new": "\nLesson 2 includes native six-seat maps for its worked and changed situations.\nTheir `table` records in `_source/poker/course-lessons.json` hold the current\nseat, round payments and folds. `_scripts/poker_lessons.py` renders those same\nrecords as clockwise seat lists and conditional flop-order comparisons. Keep\nthe changed comparison inside its closed answer. These are bounded six-player\npreflop examples, with 100 starting counters and 1/2 blinds, without all-ins.\nSee `_reports/position-maps-learning-review.md` and `test_position_maps.py`;\n`poker_course_browser.py` covers narrow layouts, enlarged text, print and\nscript-free use. The original study-card prompts remain unchanged.\n"
+        }
+      ]
+    },
+    "_scripts/poker_course.py": {
+      "old_sha256": "32c472213c224f8e7333f71acdf8322ec971538fd80e334d5ead183f56c2c0d4",
+      "new_sha256": "bb7c5e2277e2b05640ab73f41099b8b1051e04a3bc9472fa898489a91919b6e3",
+      "edits": [
+        {
+          "start": 10701,
+          "end": 10718,
+          "old": "",
+          "new": ", page['updated']"
+        }
+      ]
+    },
+    "_scripts/poker_lessons.py": {
+      "old_sha256": "54bd52913692bb7f576c074159e7f4349fc166fd6749d8c0e968ac8f238cea4c",
+      "new_sha256": "5c332f744570293573acfc719bfa17b6a60b7c014f5f755af792903ec3b77c27",
+      "edits": [
+        {
+          "start": 100,
+          "end": 126,
+          "old": "",
+          "new": "from datetime import date\n"
+        },
+        {
+          "start": 192,
+          "end": 1513,
+          "old": "",
+          "new": "SEATS = ('First seat', 'Next seat', 'Cutoff', 'Button', 'Small blind', 'Big blind')\n\n\ndef validate_table(table):\n    \"\"\"These maps describe a six-player initial preflop turn, without all-ins.\"\"\"\n    if not isinstance(table, dict) or set(table) != {'hero', 'paid', 'folded'}:\n        raise ValueError('A position map needs a current seat, six payments and folds')\n    hero, paid, folded = table['hero'], table['paid'], table['folded']\n    if type(hero) is not int or not 0 <= hero < 5 or not isinstance(paid, list) or len(paid) != 6 or any(type(n) is not int or not 0 <= n < 100 for n in paid):\n        raise ValueError('Position maps use six seats and payments below the 100-counter starting stack')\n    if not isinstance(folded, list) or any(type(n) is not int or not 0 <= n < hero for n in folded) or len(set(folded)) != len(folded):\n        raise ValueError('Only distinct earlier seats can have folded before this initial turn')\n    if paid[4] != 1 or paid[5] != 2 or any(paid[i] != 0 for i in range(hero, 4)) or any(paid[i] != 0 for i in folded):\n        raise ValueError('Seats still to act retain only their 1/2 blinds')\n    wager = max(paid)\n    if any(paid[i] != wager for i in range(hero) if i not in folded) or wager == 3:\n        raise ValueError('Earlier live seats must have matched a legal opening wager')\n"
+        },
+        {
+          "start": 2556,
+          "end": 2961,
+          "old": "",
+          "new": "            if lesson['slug'] == 'starting-hand-decisions' and 'table' not in case:\n                raise ValueError('Both position examples need their six-seat map')\n            if 'table' in case:\n                if lesson['slug'] != 'starting-hand-decisions':\n                    raise ValueError('The six-seat preflop maps belong to the position lesson')\n                validate_table(case['table'])\n"
+        },
+        {
+          "start": 4044,
+          "end": 6234,
+          "old": "",
+          "new": "def position_map(table):\n    if table is None:\n        return ''\n    seats = []\n    for i, name in enumerate(SEATS):\n        state = 'Folded' if i in table['folded'] else 'You: your turn' if i == table['hero'] else 'Already acted' if i < table['hero'] else 'Not acted yet'\n        classes = 'course-position-seat' + (' is-you' if i == table['hero'] else '') + (' is-folded' if i in table['folded'] else '')\n        button = '<span class=\"course-position-button\">Dealer button</span>' if i == 3 else ''\n        seats.append('<li class=\"' + classes + '\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>' + str(i + 1) + '</span><strong>' + name + '</strong>' + button + '<span>' + state + '</span><span>Paid ' + str(table['paid'][i]) + '</span></li>')\n    return ('<figure class=\"course-position-map\"><figcaption><strong>Find your seat before reading your cards.</strong> Six seats, numbered clockwise for this hand. Seat 1 starts preflop; the button moves for the next hand. Payments are counters on this round.</figcaption>'\n            '<div class=\"course-position-layout\"><span class=\"course-position-felt\" aria-hidden=\"true\"></span><ol role=\"list\" aria-label=\"Six seats in clockwise initial preflop order\">' + ''.join(seats) + '</ol></div></figure>')\n\n\ndef position_orders(table):\n    if table is None:\n        return ''\n    def queue(indices, label):\n        rows = ''.join('<li>' + SEATS[i] + (' (you)' if i == table['hero'] else '') + '</li>' for i in indices)\n        return '<div><p><strong>' + label + '</strong></p><ol>' + rows + '</ol></div>'\n    pending = [i for i in range(table['hero'] + 1, 6) if i not in table['folded']]\n    flop = [i for i in [4, 5, 0, 1, 2, 3] if i not in table['folded']]\n    return ('<div class=\"course-position-orders\">' + queue(pending, 'Next initial turns before the flop') + queue(flop, 'First turns on the flop, if every live seat continues') + '</div>'\n            '<p class=\"course-position-note\">Skip folded seats. These are initial turns, not a complete betting round: a later bet or raise can give an earlier player another decision. The maps describe six players, not the special two-player blind rules.</p>')\n\n\n"
+        },
+        {
+          "start": 6588,
+          "end": 6622,
+          "old": "",
+          "new": "position_map(case.get('table')) + "
+        },
+        {
+          "start": 6706,
+          "end": 6728,
+          "old": "",
+          "new": ", updated='2026-10-15'"
+        },
+        {
+          "start": 6763,
+          "end": 6863,
+          "old": "",
+          "new": "    revised = date.fromisoformat(updated)\n    stamp = f'{revised:%B} {revised.day}, {revised.year}'\n"
+        },
+        {
+          "start": 7421,
+          "end": 7470,
+          "old": "",
+          "new": "position_orders(lesson['worked'].get('table')) + "
+        },
+        {
+          "start": 7985,
+          "end": 8025,
+          "old": "",
+          "new": " position_orders(attempt.get('table')) +"
+        },
+        {
+          "start": 8913,
+          "end": 8926,
+          "old": "October 15, 2026",
+          "new": "' + stamp + '"
+        }
+      ]
+    },
+    "_source/pages.json": {
+      "old_sha256": "a70f15715038d8febd795de72948dcbcd4a8fcf585f771f1a9fab15ff2b16775",
+      "new_sha256": "4dbfb105ccf0b45d77fc0ff8d32155350f212961019b2d1c6aeedf37ea99670f",
+      "edits": [
+        {
+          "start": 51652,
+          "end": 51653,
+          "old": "5",
+          "new": "6"
+        },
+        {
+          "start": 51704,
+          "end": 51857,
+          "old": "a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below",
+          "new": "six-seat table maps and action-order comparisons to the short lesson, showing why the button and blinds act in different orders before and after the flop"
+        }
+      ]
+    },
+    "_source/poker/course-lessons.json": {
+      "old_sha256": "e1ffc2846c05c92fbb19bf0fcd462ff929f7976d41bd07c4a82a4b7820596fa5",
+      "new_sha256": "517594e06e86b8fd28fb27147f24943bfbe2e0cc98abf536304b456f7481a628",
+      "edits": [
+        {
+          "start": 3998,
+          "end": 4065,
+          "old": "",
+          "new": "        \"table\": {\"hero\":3,\"paid\":[0,0,0,0,1,2],\"folded\":[0,1,2]},\n"
+        },
+        {
+          "start": 4663,
+          "end": 4728,
+          "old": "",
+          "new": "        \"table\": {\"hero\":4,\"paid\":[0,0,6,6,1,2],\"folded\":[0,1]},\n"
+        }
+      ]
+    },
+    "assets/poker-course.css": {
+      "old_sha256": "dfe4502bbde35922700a6393800a535e12f8b1809e0f318a1100e587b809e318",
+      "new_sha256": "d116712863164f31d502d354ff73cb9921ef343049bbdd5251a7b606c765646d",
+      "edits": [
+        {
+          "start": 7968,
+          "end": 10418,
+          "old": "",
+          "new": "\n/* Native six-seat maps retain clockwise document order at every width. */\n.course-position-map { margin:24px 0; }\n.course-position-map figcaption { font:1rem/1.6 var(--sans); }\n.course-position-map figcaption strong { display:block; margin-bottom:8px; }\n.course-position-layout { position:relative; max-width:600px; margin:20px auto; }\n.course-position-felt { position:absolute; inset:5% 19%; border:1px solid var(--line-dark); border-radius:45%; background:var(--panel); }\n.course-position-layout ol { position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(20px,12%) minmax(0,1fr); gap:14px 8px; list-style:none; padding:0; margin:0; }\n.course-position-seat { display:flex; flex-direction:column; gap:5px; min-width:0; margin:0!important; padding:12px 10px; border:1px solid var(--line-dark); background:var(--paper-light); font:.9rem/1.45 var(--sans); overflow-wrap:anywhere; }\n.course-position-seat:nth-child(1) { grid-area:1 / 1; }\n.course-position-seat:nth-child(2) { grid-area:1 / 3; }\n.course-position-seat:nth-child(3) { grid-area:2 / 3; }\n.course-position-seat:nth-child(4) { grid-area:3 / 3; }\n.course-position-seat:nth-child(5) { grid-area:3 / 1; }\n.course-position-seat:nth-child(6) { grid-area:2 / 1; }\n.course-position-number { align-self:flex-start; display:grid; place-items:center; min-width:24px; min-height:24px; border:1px solid currentColor; border-radius:50%; font:700 .85rem/1 var(--sans); }\n.course-position-seat.is-you { border:2px solid var(--red); }\n.course-position-seat.is-you > strong { text-decoration:underline; text-underline-offset:4px; }\n.course-position-seat.is-folded { border-style:dashed; }\n.course-position-button { font:700 .8rem/1.5 var(--sans); }\n.course-position-orders { display:grid; gap:16px; margin:24px 0; font:1rem/1.6 var(--sans); }\n.course-position-orders > div { padding:12px 16px; border-left:3px solid var(--red); background:var(--paper-light); }\n.course-position-orders p { margin:0 0 10px; font:inherit; }\n.course-position-orders ol { margin:0; padding-left:24px; }\n.course-position-orders li { margin:6px 0; }\n.course-position-note { font:1rem/1.6 var(--sans); }\n@media(max-width:420px) { .course-position-seat { padding:10px 7px; font-size:.875rem; } }\n@media print { .course-position-map { break-inside:avoid; } .course-position-seat,.course-position-felt,.course-position-orders > div { background:white; } .course-position-seat.is-you { border:2px solid black; } }\n"
+        }
+      ]
+    },
+    "poker/beginner-checkpoint/index.html": {
+      "old_sha256": "505b5948ca2dbd9338517d504d439a1edd68c0b3b025082ad1186e4519dbd2f4",
+      "new_sha256": "10e39decb49aa966475134da6af84fd54b930b7a660077bfe63102367ad3b28a",
+      "edits": [
+        {
+          "start": 3447,
+          "end": 3458,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        }
+      ]
+    },
+    "poker/betting-with-a-purpose/index.html": {
+      "old_sha256": "866b1ce999716bee3f01bee5341dc89a8d6c7ef4df90845abdfc0f48e785f04d",
+      "new_sha256": "3f9d9cd74f3de7708408001a68a384a21cc859a9105c280800f165a414a59cc7",
+      "edits": [
+        {
+          "start": 3491,
+          "end": 3502,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "old_sha256": "f655f8fa4aadb32d0ac8976a4948709d26a3ecdf3c2c24a3a1d210a298338dca",
+      "new_sha256": "f1532974035453f191141bb155fa8a9dac1c11e45bfa26bcc79ee7402e4951df",
+      "edits": [
+        {
+          "start": 401485,
+          "end": 403831,
+          "old": "Your private cards You face an unraised big blind. A call would add 2 because you have paid zero. Both blinds still have decisions after your initial action; either may raise. Being on the button does not finish preflop. This description does not prescribe a call or a raise. 3. Explain a changed situation You now sit in the small blind with the same private cards. The first two seats fold, the cutoff raises to 6, and the button calls 6. Your posted small blind is 1. The big blind has not yet acted. Your private cards Your task: How much more would your call add? Who still has an initial decision after you? Explain two ways this situation differs from the worked example, despite the same private cards. Say your explanation or write it on paper before opening the answer. Before you move on: Name the players still to act and the earlier action before describing your private cards. If that is still difficult, use the repair link or pause and return. Your explanation stays with you. Updated October 15, 2026: Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below",
+          "new": "Find your seat before reading your cards. Six seats, numbered clockwise for this hand. Seat 1 starts preflop; the button moves for the next hand. Payments are counters on this round. Seat 1 First seat Folded Paid 0 Seat 2 Next seat Folded Paid 0 Seat 3 Cutoff Folded Paid 0 Seat 4 Button Dealer button You: your turn Paid 0 Seat 5 Small blind Not acted yet Paid 1 Seat 6 Big blind Not acted yet Paid 2 Your private cards You face an unraised big blind. A call would add 2 because you have paid zero. Both blinds still have decisions after your initial action; either may raise. Being on the button does not finish preflop. This description does not prescribe a call or a raise. Next initial turns before the flop Small blind Big blind First turns on the flop, if every live seat continues Small blind Big blind Button (you) Skip folded seats. These are initial turns, not a complete betting round: a later bet or raise can give an earlier player another decision. The maps describe six players, not the special two-player blind rules. 3. Explain a changed situation You now sit in the small blind with the same private cards. The first two seats fold, the cutoff raises to 6, and the button calls 6. Your posted small blind is 1. The big blind has not yet acted. Find your seat before reading your cards. Six seats, numbered clockwise for this hand. Seat 1 starts preflop; the button moves for the next hand. Payments are counters on this round. Seat 1 First seat Folded Paid 0 Seat 2 Next seat Folded Paid 0 Seat 3 Cutoff Already acted Paid 6 Seat 4 Button Dealer button Already acted Paid 6 Seat 5 Small blind You: your turn Paid 1 Seat 6 Big blind Not acted yet Paid 2 Your private cards Your task: How much more would your call add? Who still has an initial decision after you? Explain two ways this situation differs from the worked example, despite the same private cards. Say your explanation or write it on paper before opening the answer. Before you move on: Name the players still to act and the earlier action before describing your private cards. If that is still difficult, use the repair link or pause and return. Your explanation stays with you. Updated October 16, 2026: Added six-seat table maps and action-order comparisons to the short lesson, showing why the button and blinds act in different orders before and after the flop"
+        }
+      ]
+    },
+    "poker/first-decisions/index.html": {
+      "old_sha256": "1cb101e00e09260203cbe75026abbee54bd0a47f580349fc05985550f71c0c9f",
+      "new_sha256": "24d7dcac274ed86cecd8577e5876e0f712a5d9878908d4e87d9338a231531a59",
+      "edits": [
+        {
+          "start": 3478,
+          "end": 3489,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        },
+        {
+          "start": 43914,
+          "end": 43915,
+          "old": "6",
+          "new": "7"
+        }
+      ]
+    },
+    "poker/first-flop-decisions/index.html": {
+      "old_sha256": "03f25774057462a9ed3879302bd59d0501d88fc266887d96dc1f0b894abe0c1c",
+      "new_sha256": "cbc520aa2bfc647ed1c114915a6af1a13632781a2afeec359237806475511610",
+      "edits": [
+        {
+          "start": 3501,
+          "end": 3512,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        }
+      ]
+    },
+    "poker/free-poker-learning-path/index.html": {
+      "old_sha256": "010f9adf11f13d9bd5de5e09bc7f56b0a8ffe9c350a3145ae464d4e5e9f11f72",
+      "new_sha256": "13f027d72b4f9b159ed66496c4b980c67e8e9545dbfc0b53647569cb4a5d39c2",
+      "edits": [
+        {
+          "start": 3434,
+          "end": 3445,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        }
+      ]
+    },
+    "poker/library/index.html": {
+      "old_sha256": "15bea2487e1d973fa31882eb117f32548dfd04d6c71b654b56fa4b87e3162fd7",
+      "new_sha256": "dc12fa2bf02884d573a67f41d9a316a7460aac8ecde0e9d831cd561c469f9b22",
+      "edits": [
+        {
+          "start": 57896,
+          "end": 57897,
+          "old": "6",
+          "new": "7"
+        }
+      ]
+    },
+    "poker/ranges-for-beginners/index.html": {
+      "old_sha256": "b5efb2151781249bc2a9ef8887260ad05e7764ee8bb1e810e418dd9cc93112b0",
+      "new_sha256": "1d2e0dcb505251f1e0b59a55c948ec27636203f09391c64f300d2e25db844f09",
+      "edits": [
+        {
+          "start": 3460,
+          "end": 3471,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        }
+      ]
+    },
+    "poker/starting-hand-decisions/index.html": {
+      "old_sha256": "af1bdf78a4fecc575592d798852c48216a12e0d44b988cfdde646c4c2399cdeb",
+      "new_sha256": "556686b95f053883a773d5c31f5ef8cd72436bebaece3a2c1ea2394871905725",
+      "edits": [
+        {
+          "start": 3131,
+          "end": 3132,
+          "old": "5",
+          "new": "6"
+        },
+        {
+          "start": 3491,
+          "end": 3502,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        },
+        {
+          "start": 4280,
+          "end": 4281,
+          "old": "5",
+          "new": "6"
+        },
+        {
+          "start": 7908,
+          "end": 7981,
+          "old": "6 min read</a></span><span>Updated <time datetime=\"2026-10-15\">October 15",
+          "new": "7 min read</a></span><span>Updated <time datetime=\"2026-10-16\">October 16"
+        },
+        {
+          "start": 12152,
+          "end": 20612,
+          "old": "div class=\"course-lesson-cards\"><div><p class=\"course-state-label\">Your private cards</p><span class=\"viewer-cards\"><span class=\"viewer-card\" role=\"img\" aria-label=\"Queen of spades\"><span aria-hidden=\"true\">Q<small>♠</small></span></span><span class=\"viewer-card\" role=\"img\" aria-label=\"Jack of spades\"><span aria-hidden=\"true\">J<small>♠</small></span></span></span></div></div><p>You face an unraised big blind. A call would add 2 because you have paid zero. Both blinds still have decisions after your initial action; either may raise. Being on the button does not finish preflop. This description does not prescribe a call or a raise.</p></section><section class=\"course-lesson-attempt\" aria-labelledby=\"course-lesson-try\"><h3 id=\"course-lesson-try\">3. Explain a changed situation</h3><p>You now sit in the small blind with the same private cards. The first two seats fold, the cutoff raises to 6, and the button calls 6. Your posted small blind is 1. The big blind has not yet acted.</p><div class=\"course-lesson-cards\"><div><p class=\"course-state-label\">Your private cards</p><span class=\"viewer-cards\"><span class=\"viewer-card\" role=\"img\" aria-label=\"Queen of spades\"><span aria-hidden=\"true\">Q<small>♠</small></span></span><span class=\"viewer-card\" role=\"img\" aria-label=\"Jack of spades\"><span aria-hidden=\"true\">J<small>♠</small></span></span></span></div></div><p><strong>Your task:</strong> How much more would your call add? Who still has an initial decision after you? Explain two ways this situation differs from the worked example, despite the same private cards.</p><p>Say your explanation or write it on paper before opening the answer.</p><details class=\"poker-details\" id=\"course-lesson-answer\"><summary>Check your explanation</summary><div><p>A call adds 6 - 1 = 5. The big blind still has an initial decision, and a raise could return action to you or the earlier players. The pot has already been raised and called, and you are in the small blind rather than on the button.</p><p>Your two cards did not change, but the earlier action, price and position did. If you reach a flop, the small blind acts before the other remaining seats in this six-player hand. The price alone does not settle whether to continue.</p><p><a href=\"/poker/starting-hand-decisions/#position\">Revisit the exact explanation</a> if your reason differed, then close this answer and explain what changed.</p></div></details></section><p class=\"course-lesson-recall\"><strong>Before you move on:</strong> Name the players still to act and the earlier action before describing your private cards. If that is still difficult, use the repair link or pause and return. Your explanation stays with you.</p><nav class=\"course-lesson-next\" aria-label=\"Continue from the short lesson\"><a class=\"button\" href=\"/poker/first-flop-decisions/\">Next lesson: Your first decisions after the flop</a><a href=\"#lesson-reference\">Read the full explanation</a></nav><details class=\"poker-details course-lesson-options\"><summary>Full explanation and other practice</summary><div><p>Use a full section when it answers your question:</p><ul><li><a href=\"#position\">Find who still has a turn</a></li><li><a href=\"#earlier-action\">Read the earlier action</a></li></ul><p>Choose one extra practice task when useful.</p><p><a href=\"/poker/free-poker-learning-path/#round-practice-preflop\">Rehearse the actions with counters</a>. Choose the moves yourself and track who still needs a turn.</p><p><a href=\"/poker/beginner-practice/#practice-position\">See another worked example, then try three changed questions</a>.</p><p><a href=\"/poker/beginner-checkpoint/#situation-two\">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></div></details><p class=\"editorial-note\">Updated October 15, 2026: Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below",
+          "new": "figure class=\"course-position-map\"><figcaption><strong>Find your seat before reading your cards.</strong> Six seats, numbered clockwise for this hand. Seat 1 starts preflop; the button moves for the next hand. Payments are counters on this round.</figcaption><div class=\"course-position-layout\"><span class=\"course-position-felt\" aria-hidden=\"true\"></span><ol role=\"list\" aria-label=\"Six seats in clockwise initial preflop order\"><li class=\"course-position-seat is-folded\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>1</span><strong>First seat</strong><span>Folded</span><span>Paid 0</span></li><li class=\"course-position-seat is-folded\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>2</span><strong>Next seat</strong><span>Folded</span><span>Paid 0</span></li><li class=\"course-position-seat is-folded\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>3</span><strong>Cutoff</strong><span>Folded</span><span>Paid 0</span></li><li class=\"course-position-seat is-you\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>4</span><strong>Button</strong><span class=\"course-position-button\">Dealer button</span><span>You: your turn</span><span>Paid 0</span></li><li class=\"course-position-seat\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>5</span><strong>Small blind</strong><span>Not acted yet</span><span>Paid 1</span></li><li class=\"course-position-seat\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>6</span><strong>Big blind</strong><span>Not acted yet</span><span>Paid 2</span></li></ol></div></figure><div class=\"course-lesson-cards\"><div><p class=\"course-state-label\">Your private cards</p><span class=\"viewer-cards\"><span class=\"viewer-card\" role=\"img\" aria-label=\"Queen of spades\"><span aria-hidden=\"true\">Q<small>♠</small></span></span><span class=\"viewer-card\" role=\"img\" aria-label=\"Jack of spades\"><span aria-hidden=\"true\">J<small>♠</small></span></span></span></div></div><p>You face an unraised big blind. A call would add 2 because you have paid zero. Both blinds still have decisions after your initial action; either may raise. Being on the button does not finish preflop. This description does not prescribe a call or a raise.</p><div class=\"course-position-orders\"><div><p><strong>Next initial turns before the flop</strong></p><ol><li>Small blind</li><li>Big blind</li></ol></div><div><p><strong>First turns on the flop, if every live seat continues</strong></p><ol><li>Small blind</li><li>Big blind</li><li>Button (you)</li></ol></div></div><p class=\"course-position-note\">Skip folded seats. These are initial turns, not a complete betting round: a later bet or raise can give an earlier player another decision. The maps describe six players, not the special two-player blind rules.</p></section><section class=\"course-lesson-attempt\" aria-labelledby=\"course-lesson-try\"><h3 id=\"course-lesson-try\">3. Explain a changed situation</h3><p>You now sit in the small blind with the same private cards. The first two seats fold, the cutoff raises to 6, and the button calls 6. Your posted small blind is 1. The big blind has not yet acted.</p><figure class=\"course-position-map\"><figcaption><strong>Find your seat before reading your cards.</strong> Six seats, numbered clockwise for this hand. Seat 1 starts preflop; the button moves for the next hand. Payments are counters on this round.</figcaption><div class=\"course-position-layout\"><span class=\"course-position-felt\" aria-hidden=\"true\"></span><ol role=\"list\" aria-label=\"Six seats in clockwise initial preflop order\"><li class=\"course-position-seat is-folded\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>1</span><strong>First seat</strong><span>Folded</span><span>Paid 0</span></li><li class=\"course-position-seat is-folded\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>2</span><strong>Next seat</strong><span>Folded</span><span>Paid 0</span></li><li class=\"course-position-seat\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>3</span><strong>Cutoff</strong><span>Already acted</span><span>Paid 6</span></li><li class=\"course-position-seat\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>4</span><strong>Button</strong><span class=\"course-position-button\">Dealer button</span><span>Already acted</span><span>Paid 6</span></li><li class=\"course-position-seat is-you\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>5</span><strong>Small blind</strong><span>You: your turn</span><span>Paid 1</span></li><li class=\"course-position-seat\"><span class=\"course-position-number\"><span class=\"visually-hidden\">Seat </span>6</span><strong>Big blind</strong><span>Not acted yet</span><span>Paid 2</span></li></ol></div></figure><div class=\"course-lesson-cards\"><div><p class=\"course-state-label\">Your private cards</p><span class=\"viewer-cards\"><span class=\"viewer-card\" role=\"img\" aria-label=\"Queen of spades\"><span aria-hidden=\"true\">Q<small>♠</small></span></span><span class=\"viewer-card\" role=\"img\" aria-label=\"Jack of spades\"><span aria-hidden=\"true\">J<small>♠</small></span></span></span></div></div><p><strong>Your task:</strong> How much more would your call add? Who still has an initial decision after you? Explain two ways this situation differs from the worked example, despite the same private cards.</p><p>Say your explanation or write it on paper before opening the answer.</p><details class=\"poker-details\" id=\"course-lesson-answer\"><summary>Check your explanation</summary><div><p>A call adds 6 - 1 = 5. The big blind still has an initial decision, and a raise could return action to you or the earlier players. The pot has already been raised and called, and you are in the small blind rather than on the button.</p><p>Your two cards did not change, but the earlier action, price and position did. If you reach a flop, the small blind acts before the other remaining seats in this six-player hand. The price alone does not settle whether to continue.</p><div class=\"course-position-orders\"><div><p><strong>Next initial turns before the flop</strong></p><ol><li>Big blind</li></ol></div><div><p><strong>First turns on the flop, if every live seat continues</strong></p><ol><li>Small blind (you)</li><li>Big blind</li><li>Cutoff</li><li>Button</li></ol></div></div><p class=\"course-position-note\">Skip folded seats. These are initial turns, not a complete betting round: a later bet or raise can give an earlier player another decision. The maps describe six players, not the special two-player blind rules.</p><p><a href=\"/poker/starting-hand-decisions/#position\">Revisit the exact explanation</a> if your reason differed, then close this answer and explain what changed.</p></div></details></section><p class=\"course-lesson-recall\"><strong>Before you move on:</strong> Name the players still to act and the earlier action before describing your private cards. If that is still difficult, use the repair link or pause and return. Your explanation stays with you.</p><nav class=\"course-lesson-next\" aria-label=\"Continue from the short lesson\"><a class=\"button\" href=\"/poker/first-flop-decisions/\">Next lesson: Your first decisions after the flop</a><a href=\"#lesson-reference\">Read the full explanation</a></nav><details class=\"poker-details course-lesson-options\"><summary>Full explanation and other practice</summary><div><p>Use a full section when it answers your question:</p><ul><li><a href=\"#position\">Find who still has a turn</a></li><li><a href=\"#earlier-action\">Read the earlier action</a></li></ul><p>Choose one extra practice task when useful.</p><p><a href=\"/poker/free-poker-learning-path/#round-practice-preflop\">Rehearse the actions with counters</a>. Choose the moves yourself and track who still needs a turn.</p><p><a href=\"/poker/beginner-practice/#practice-position\">See another worked example, then try three changed questions</a>.</p><p><a href=\"/poker/beginner-checkpoint/#situation-two\">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></div></details><p class=\"editorial-note\">Updated October 16, 2026: Added six-seat table maps and action-order comparisons to the short lesson, showing why the button and blinds act in different orders before and after the flop"
+        }
+      ]
+    },
+    "poker/topics/learn/index.html": {
+      "old_sha256": "74fd5b8d80334a1a2f0f5dd4ab9df0142b19b66f2413778746d85aaf680dc727",
+      "new_sha256": "41279bb8e23b38c9e0a022ce51ec668f25868940305a10098138cc0403a558a3",
+      "edits": [
+        {
+          "start": 9198,
+          "end": 9199,
+          "old": "6",
+          "new": "7"
+        }
+      ]
+    },
+    "poker/turn-and-river-decisions/index.html": {
+      "old_sha256": "823c7fee6c3b3042ea0faded589711f30111061340a28687c17aa34283f4e2f2",
+      "new_sha256": "5d97b8b2f3a852c6f913a25cd16718ad8a7d48e3841475772a49d05a3115a29c",
+      "edits": [
+        {
+          "start": 3520,
+          "end": 3531,
+          "old": "fe4502bbde3",
+          "new": "11671286316"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "eba6ef49e16070bbe2cad559ec60fb43a430e73703687b366f5641bd55f2df73",
+      "new_sha256": "a5899ec565da4dbd55ce5e667d05b7bf56cf64137edb788cf2296766e6745550",
+      "edits": [
+        {
+          "start": 10252,
+          "end": 10253,
+          "old": "5",
+          "new": "6"
+        }
+      ]
+    }
+  },
+  "new_files": {},
+  "new_outputs": {}
+}

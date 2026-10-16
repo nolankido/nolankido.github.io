@@ -4,6 +4,16 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Beginner Poker course
 
+Lesson 2 includes native six-seat maps for its worked and changed situations.
+Their `table` records in `_source/poker/course-lessons.json` hold the current
+seat, round payments and folds. `_scripts/poker_lessons.py` renders those same
+records as clockwise seat lists and conditional flop-order comparisons. Keep
+the changed comparison inside its closed answer. These are bounded six-player
+preflop examples, with 100 starting counters and 1/2 blinds, without all-ins.
+See `_reports/position-maps-learning-review.md` and `test_position_maps.py`;
+`poker_course_browser.py` covers narrow layouts, enlarged text, print and
+script-free use. The original study-card prompts remain unchanged.
+
 The overview puts the six-lesson route and finish before the optional practice
 tools. `_scripts/poker_beginner_path.py` owns that order and the three-tool menu.
 `poker_course.entry` moves the source's existing start controls under the course

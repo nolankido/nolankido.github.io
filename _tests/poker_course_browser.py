@@ -40,6 +40,36 @@ def reveal_short_answer(page):
     expect(answer.locator('div')).to_be_visible()
 
 
+def check_position_maps(page, shots=None, width=390):
+    maps = page.locator('.course-position-map')
+    expect(maps).to_have_count(2)
+    expect(page.locator('.course-lesson-model .course-position-orders')).to_be_visible()
+    expect(page.locator('#course-lesson-answer .course-position-orders')).to_be_hidden()
+    for i, kind in enumerate(['model', 'attempt']):
+        fig = maps.nth(i)
+        seats = fig.locator('.course-position-seat')
+        expect(seats).to_have_count(6)
+        expect(seats.locator('strong')).to_have_text(['First seat', 'Next seat', 'Cutoff', 'Button', 'Small blind', 'Big blind'])
+        expect(fig.locator('.is-you')).to_contain_text('Button' if i == 0 else 'Small blind')
+        expect(fig.locator('.is-you')).to_contain_text('You: your turn')
+        expect(fig.locator('.course-position-button')).to_have_text('Dealer button')
+        boxes = seats.evaluate_all('els=>els.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,fits:e.scrollWidth<=e.clientWidth+1}})')
+        assert all(b['fits'] for b in boxes), boxes
+        # Read clockwise around the visible table, with matching rows on each side.
+        assert boxes[0]['x'] < boxes[1]['x'] and abs(boxes[0]['y'] - boxes[1]['y']) < 1, boxes
+        assert boxes[1]['y'] < boxes[2]['y'] < boxes[3]['y'], boxes
+        assert boxes[4]['x'] < boxes[3]['x'] and abs(boxes[4]['y'] - boxes[3]['y']) < 1, boxes
+        assert boxes[0]['y'] < boxes[5]['y'] < boxes[4]['y'] and abs(boxes[5]['y'] - boxes[2]['y']) < 1, boxes
+        if shots and width in [390, 1440]:
+            fig.screenshot(path=str(shots / f'position-map-{kind}-{width}.png'))
+    reflow(page)
+    if width == 320:
+        spacing = page.add_style_tag(content=SPACING)
+        reflow(page)
+        assert maps.locator('.course-position-seat').evaluate_all('els=>els.every(e=>e.scrollWidth<=e.clientWidth+1)')
+        spacing.evaluate('el=>el.remove()')
+
+
 def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(ROOT)))
     Thread(target=server.serve_forever, daemon=True).start()
@@ -47,7 +77,7 @@ def main():
     shots = Path(os.environ['SCREENSHOT_DIR']) if os.environ.get('SCREENSHOT_DIR') else None
     if shots:
         shots.mkdir(parents=True, exist_ok=True)
-    report = {'guided_hands': 0, 'short_lessons': 0, 'fresh_lesson_arrivals': 0, 'fallbacks': 0, 'axe': []}
+    report = {'guided_hands': 0, 'short_lessons': 0, 'position_maps': 0, 'fresh_lesson_arrivals': 0, 'fallbacks': 0, 'axe': []}
     errors = []
     try:
         with sync_playwright() as pw:
@@ -158,8 +188,15 @@ def main():
                     reflow(page)
                     if shots and index == 0 and width in [390, 1440]:
                         page.screenshot(path=str(shots / f'short-lesson-start-{width}.png'))
+                    if index == 1:
+                        check_position_maps(page, shots, width)
+                        report['position_maps'] += 1
                     enter(page, first.locator('#course-lesson-answer > summary'))
                     expect(first.locator('#course-lesson-answer > div')).to_be_visible()
+                    if index == 1:
+                        expect(first.locator('#course-lesson-answer .course-position-orders')).to_be_visible()
+                        if shots and width in [390, 1440]:
+                            first.locator('#course-lesson-answer').screenshot(path=str(shots / f'position-map-explanation-{width}.png'))
                     expect(first.locator('#course-lesson-answer a')).to_have_attribute('href', SHORT[index]['attempt']['repair'])
                     if width == 390:
                         enter(page, first.locator('#course-lesson-answer a'))
@@ -185,6 +222,9 @@ def main():
                     expect(page.locator('#course-lesson-answer > div')).to_be_hidden()
                     page.emulate_media(media='print')
                     expect(page.locator('#course-lesson-answer > div')).to_be_visible()
+                    if index == 1:
+                        expect(page.locator('.course-position-map')).to_have_count(2)
+                        expect(page.locator('#course-lesson-answer .course-position-orders')).to_be_visible()
                     page.emulate_media(media='screen')
                     enter(page, page.locator('.course-lesson-next a.button'))
                     expected = '/poker/' + DATA['lessons'][index + 1]['slug'] + '/' if index < 5 else '/poker/beginner-checkpoint/'
@@ -239,6 +279,10 @@ def main():
                 expect(native).to_have_url(origin + '/poker/starting-hand-decisions/')
                 for index, lesson in enumerate(DATA['lessons']):
                     native.goto(origin + '/poker/' + lesson['slug'] + '/#course-lesson-try')
+                    if index == 1:
+                        native.evaluate('()=>document.fonts.ready.then(()=>true)')
+                        check_position_maps(native)
+                        report['position_maps'] += 1
                     expect(native.locator('#course-lesson-answer > div')).to_be_hidden()
                     enter(native, native.locator('#course-lesson-answer > summary'))
                     expect(native.locator('#course-lesson-answer > div')).to_be_visible()
