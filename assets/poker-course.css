@@ -65,5 +65,5 @@ html:has(.course-first-pass),html:has(.course-final) { scroll-behavior:auto; }
 .course-final-ending { border-top:2px solid var(--line); }
 .course-final summary { overflow-wrap:anywhere; }
 #course-hand,#course-hand-review,[id^="course-hand-"] { scroll-margin-top:160px; }
-@media(max-width:420px) { .course-final { padding:16px; } }
+@media(max-width:600px) { .course-final { padding:16px; } .course-final-return > div,.course-final-street > div { padding:16px 0; } .course-final-answer > div { padding:16px 12px; } }
 @media print { .course-final { padding:0; border:0; background:white; } .course-final details > div { display:block!important; } .course-final details::details-content { content-visibility:visible!important; } .course-final h3,.course-final h4 { break-after:avoid; } }

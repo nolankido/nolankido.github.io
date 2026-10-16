@@ -215,7 +215,7 @@
     },
     "assets/poker-course.css": {
       "old_sha256": "0b399c9824582136ee39f6561e7527bde57c2b0daa1b6294f8c1cd57754dfb90",
-      "new_sha256": "3c5704a9094ae06feb2562ea9863e9a3148ce0aabfd662fd9adea118c2099a9d",
+      "new_sha256": "2a8a234cd6ec9939cca776a265e3ec0903648c0eaa6bd126a29af3d5f0a516a6",
       "edits": [
         {
           "start": 200,
@@ -225,9 +225,9 @@
         },
         {
           "start": 6197,
-          "end": 7064,
+          "end": 7188,
           "old": "",
-          "new": "\n/* Connected final hands use native disclosures, including without scripts. */\n.course-final { margin:36px 0; padding:24px; border-left:3px solid var(--red); background:var(--panel); }\n.course-final h4 { margin:24px 0 12px; font:700 1.1rem/1.5 var(--sans); }\n.course-final-stop { padding-bottom:12px; }\n.course-final-return { margin-top:28px; }\n.course-final-ending { border-top:2px solid var(--line); }\n.course-final summary { overflow-wrap:anywhere; }\n#course-hand,#course-hand-review,[id^=\"course-hand-\"] { scroll-margin-top:160px; }\n@media(max-width:420px) { .course-final { padding:16px; } }\n@media print { .course-final { padding:0; border:0; background:white; } .course-final details > div { display:block!important; } .course-final details::details-content { content-visibility:visible!important; } .course-final h3,.course-final h4 { break-after:avoid; } }\n"
+          "new": "\n/* Connected final hands use native disclosures, including without scripts. */\n.course-final { margin:36px 0; padding:24px; border-left:3px solid var(--red); background:var(--panel); }\n.course-final h4 { margin:24px 0 12px; font:700 1.1rem/1.5 var(--sans); }\n.course-final-stop { padding-bottom:12px; }\n.course-final-return { margin-top:28px; }\n.course-final-ending { border-top:2px solid var(--line); }\n.course-final summary { overflow-wrap:anywhere; }\n#course-hand,#course-hand-review,[id^=\"course-hand-\"] { scroll-margin-top:160px; }\n@media(max-width:600px) { .course-final { padding:16px; } .course-final-return > div,.course-final-street > div { padding:16px 0; } .course-final-answer > div { padding:16px 12px; } }\n@media print { .course-final { padding:0; border:0; background:white; } .course-final details > div { display:block!important; } .course-final details::details-content { content-visibility:visible!important; } .course-final h3,.course-final h4 { break-after:avoid; } }\n"
         }
       ]
     },
@@ -257,7 +257,7 @@
     },
     "poker/beginner-checkpoint/index.html": {
       "old_sha256": "ea6b1c88205b5adee9615563efd101c3aef5558458d22cd85274012084fae586",
-      "new_sha256": "7b9abfe239d5c4554c204b112056cf0790a4dcd2a84461b0307f5a1159549e01",
+      "new_sha256": "feb9989660885bb18b75d9c9b7a1362f1e38a760fb3291de200c5405fb077481",
       "edits": [
         {
           "start": 3167,
@@ -269,7 +269,7 @@
           "start": 3388,
           "end": 3461,
           "old": "",
-          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-course.css?v=3c5704a9094a\">\n"
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-course.css?v=2a8a234cd6ec\">\n"
         },
         {
           "start": 4250,
@@ -311,13 +311,13 @@
     },
     "poker/betting-with-a-purpose/index.html": {
       "old_sha256": "5312b0917e690cbfaf5a0eadea6eb13f3d72d1eedc9484c6b638b42740a40a03",
-      "new_sha256": "d03986a5196d897f265b06f9c3977d74bc30ce8c50b82ba30da3c2b80684be74",
+      "new_sha256": "75238ca1efd41aa3ef5e65dad2b2d56476a377840277fb306cd45418995e2e0f",
       "edits": [
         {
           "start": 3490,
           "end": 3502,
           "old": "0b399c982458",
-          "new": "3c5704a9094a"
+          "new": "2a8a234cd6ec"
         },
         {
           "start": 39595,
@@ -347,13 +347,13 @@
     },
     "poker/first-decisions/index.html": {
       "old_sha256": "5858d7af394eae92ae80df7b0bed010fddd42d5b5314fa73603b068921b631ae",
-      "new_sha256": "6e51190df5413f3fbef03b5844924a4c32c81bcaa2b81bb8ca1a2ad68475a5f7",
+      "new_sha256": "d6c80fac2b3429c85531ba4c332bdba1a6c7cc2ea2fd91b5657a1126f99497e2",
       "edits": [
         {
           "start": 3477,
           "end": 3489,
           "old": "0b399c982458",
-          "new": "3c5704a9094a"
+          "new": "2a8a234cd6ec"
         },
         {
           "start": 44813,
@@ -365,19 +365,19 @@
     },
     "poker/first-flop-decisions/index.html": {
       "old_sha256": "ad4a23a4f9e3affb60d4db62a2b3fa9ca0c9d7d9672b4b14a214e838ecf2018a",
-      "new_sha256": "30f7da18688ff41b17f21a2a21e5f537243a07814a42528d37e5d008ef193f67",
+      "new_sha256": "b46f5a24bf090002f75979775e158b19191fd1fbc89007a8716d9ea8875261fa",
       "edits": [
         {
           "start": 3500,
           "end": 3512,
           "old": "0b399c982458",
-          "new": "3c5704a9094a"
+          "new": "2a8a234cd6ec"
         }
       ]
     },
     "poker/free-poker-learning-path/index.html": {
       "old_sha256": "07f36d8b4f395adea3f5860a653786a58a74796dd5d216c8cf39d2c138ca3346",
-      "new_sha256": "1a470dacfeedd9367fd128d15ed28107d53b2d15f361f3d4b121e027f3dffa6e",
+      "new_sha256": "e85a3d8d324decc54c99b1fd9d54840e93b68678b65e2ed734324605936e093f",
       "edits": [
         {
           "start": 3154,
@@ -389,7 +389,7 @@
           "start": 3433,
           "end": 3445,
           "old": "0b399c982458",
-          "new": "3c5704a9094a"
+          "new": "2a8a234cd6ec"
         },
         {
           "start": 4606,
@@ -479,25 +479,25 @@
     },
     "poker/ranges-for-beginners/index.html": {
       "old_sha256": "216dae521ec33c320cf61c8847387b5634980515676ee06a89a05985d2d3f1f8",
-      "new_sha256": "e20a37de8d0900feaf1491cd0db4611a3124a3551a67f8050fd3d3b613c88f10",
+      "new_sha256": "6cebc687660656a423d3a0fd0eb885d59f25be3dc06cdb89ab3ddede07e7335c",
       "edits": [
         {
           "start": 3459,
           "end": 3471,
           "old": "0b399c982458",
-          "new": "3c5704a9094a"
+          "new": "2a8a234cd6ec"
         }
       ]
     },
     "poker/starting-hand-decisions/index.html": {
       "old_sha256": "c686ed5a0ca1987e5f58c91a57360a43c64a9a3a3bfbc542c793868d4e97cf74",
-      "new_sha256": "7c14a00c44c448e41369d6335b8b37c947591e5fae9ddc26f61a1451555c9d88",
+      "new_sha256": "8dfd9434a58a9eaca27574326df7812d28393e1e6549baa559ac152e872cc05b",
       "edits": [
         {
           "start": 3490,
           "end": 3502,
           "old": "0b399c982458",
-          "new": "3c5704a9094a"
+          "new": "2a8a234cd6ec"
         }
       ]
     },
@@ -515,13 +515,13 @@
     },
     "poker/turn-and-river-decisions/index.html": {
       "old_sha256": "2164f118fcc26d22015493556334299f45517a0853881e7bde68508083f99ed0",
-      "new_sha256": "b14a8cc154cbdb98c2e3e307aa4ec81280404f0ee446bae2ce78cb98f1c4ef56",
+      "new_sha256": "c3805a8dc0770a0731021ea9485d958d5f3c93bfae3bc39eb5259badc05c259e",
       "edits": [
         {
           "start": 3519,
           "end": 3531,
           "old": "0b399c982458",
-          "new": "3c5704a9094a"
+          "new": "2a8a234cd6ec"
         }
       ]
     },

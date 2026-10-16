@@ -27,6 +27,9 @@ original twelve individual situations. Each street asks for a spoken or written
 explanation without answer choices. Feedback includes the reasoning, likely
 misconceptions and specific repair destinations. Later streets, answers and the
 result start closed. Hand B is inside a separate disclosure for a later visit.
+Mobile feedback keeps the parent disclosures' horizontal padding flat so that
+nested panels do not squeeze the explanation into a narrow column. Browser
+checks measure usable text width as well as horizontal overflow.
 These are two fixed hands; repeated exposure eventually becomes recall, so the
 course explicitly asks for unfamiliar examples when checking further transfer.
 

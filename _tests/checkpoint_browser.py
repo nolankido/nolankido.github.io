@@ -40,6 +40,10 @@ def final_hands(page, report, shots=None, width=390):
                 page.screenshot(path=str(shots/f'final-hand-cards-{width}.png'))
             enter(page,answer.locator('summary'))
             expect(answer.locator('div')).to_be_visible()
+            if width < 600:
+                readable=answer.locator('div').evaluate("el=>el.clientWidth-parseFloat(getComputedStyle(el).paddingLeft)-parseFloat(getComputedStyle(el).paddingRight)")
+                panel=page.locator('.course-final').bounding_box()['width']
+                assert readable >= panel * .70, ('readable answer width',width,hand,street,readable,panel)
             if shots and hand=='b' and street=='river' and width in [390,1440]:
                 position(page,answer)
                 page.screenshot(path=str(shots/f'final-hand-feedback-{width}.png'))
