@@ -38,6 +38,10 @@ an explicit reference heading. Original section links still work, including
 repair links from existing tools. Extra practice choices move into a disclosure
 after the short task. The course map explains this routine.
 
+Native section arrivals in the lessons use immediate scrolling. This keeps a
+keyboard focus scroll from competing with the next repair-link jump on a long
+page. Browser checks verify the destination is visible below the fixed header.
+
 No new public page, script, external service, account, email form or saved
 progress is introduced. The existing private-use study card remains the way to
 record a next task. Reading estimates still describe the complete page, so the

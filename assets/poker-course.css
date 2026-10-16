@@ -1,4 +1,6 @@
 /* One bounded practice scene and a plain route through the beginner references. */
+/* Keep keyboard focus and native fragment arrivals from starting competing scrolls. */
+html:has(.course-first-pass) { scroll-behavior:auto; }
 .course-hand,.course-first-pass,.course-stage-end { margin:32px 0; padding:clamp(18px,3vw,28px); border:1px solid var(--line-dark); border-top:3px solid var(--red); background:var(--paper-light); }
 .course-hand h2,.course-first-pass h2,.course-stage-end h2 { margin-top:0; }
 .course-scenes { list-style:none; padding:0; margin:24px 0; }

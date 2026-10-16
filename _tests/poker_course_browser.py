@@ -17,6 +17,8 @@ SPACING = '* {line-height:1.5!important;letter-spacing:.12em!important;word-spac
 
 def enter(page, locator):
     locator.focus()
+    expect(locator).to_be_focused()
+    expect(locator).to_be_in_viewport()
     page.keyboard.press('Enter')
 
 
@@ -146,6 +148,7 @@ def main():
                     page.goto(origin + route + '#course-first-pass-title')
                     page.evaluate('()=>document.fonts.ready.then(()=>true)')
                     first = page.locator('.course-first-pass')
+                    assert page.evaluate("getComputedStyle(document.documentElement).scrollBehavior === 'auto'")
                     expect(first).to_contain_text(f'Stage {index + 1} of 6')
                     expect(first.locator('#course-lesson-answer > div')).to_be_hidden()
                     expect(first.locator('.course-lesson-options > div')).to_be_hidden()

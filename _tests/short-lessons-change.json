@@ -402,11 +402,17 @@
     },
     "assets/poker-course.css": {
       "old_sha256": "33e59b4a659e519d9b97520a78989c6f9ecae6551cbce27a4bf413e73e04be41",
-      "new_sha256": "86dbbc4ed7da33efbc1c4b54cd3ffffeeca053cb6c25c7c8b7ea3b40172dc666",
+      "new_sha256": "0b399c9824582136ee39f6561e7527bde57c2b0daa1b6294f8c1cd57754dfb90",
       "edits": [
         {
-          "start": 3042,
-          "end": 4507,
+          "start": 84,
+          "end": 227,
+          "old": "",
+          "new": "/* Keep keyboard focus and native fragment arrivals from starting competing scrolls. */\nhtml:has(.course-first-pass) { scroll-behavior:auto; }\n"
+        },
+        {
+          "start": 3185,
+          "end": 4650,
           "old": "",
           "new": ".course-first-pass h3 { margin-top:28px; }\n.course-lesson-model { margin:24px 0; padding:18px; border-left:3px solid var(--red); background:var(--panel); }\n.course-lesson-model h3 { margin-top:0; }\n.course-lesson-attempt { margin:28px 0; padding-top:8px; border-top:1px solid var(--line-dark); }\n.course-lesson-cards { display:flex; flex-wrap:wrap; gap:16px 24px; margin:20px 0; }\n.course-lesson-cards > div { min-width:0; max-width:100%; }\n.course-lesson-cards .viewer-cards { flex-wrap:wrap; }\n.course-lesson-recall { padding-top:16px; border-top:1px solid var(--line-dark); }\n.course-lesson-next { display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin:24px 0; }\n.course-lesson-next a { display:inline-flex; align-items:center; min-height:44px; max-width:100%; }\n.course-lesson-next .button { white-space:normal; }\n.course-first-pass summary:focus-visible,.course-first-pass a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }\n#course-first-pass-title,#course-lesson-idea,#course-lesson-model,#course-lesson-try,#course-lesson-answer,#lesson-reference { scroll-margin-top:160px; }\n@media(max-width:420px) { .course-lesson-model { padding:14px; } }\n@media print { .course-first-pass details > div { display:block!important; } .course-first-pass details::details-content { content-visibility:visible!important; } .course-lesson-next,.course-lesson-options { display:none!important; } .course-lesson-model { background:white; } }\n"
         }
@@ -486,7 +492,7 @@
     },
     "poker/betting-with-a-purpose/index.html": {
       "old_sha256": "233d00714e0fbab6f9e181e263f9703f5d22336e4db3e5e0732036da654f5498",
-      "new_sha256": "e38d2338adcdaa0cf4ee9ccad166a6ed340d578e75686c2f225035e01a065e3a",
+      "new_sha256": "5312b0917e690cbfaf5a0eadea6eb13f3d72d1eedc9484c6b638b42740a40a03",
       "edits": [
         {
           "start": 3131,
@@ -498,7 +504,7 @@
           "start": 3490,
           "end": 3502,
           "old": "33e59b4a659e",
-          "new": "86dbbc4ed7da"
+          "new": "0b399c982458"
         },
         {
           "start": 4285,
@@ -540,7 +546,7 @@
     },
     "poker/first-decisions/index.html": {
       "old_sha256": "af85f0c6646b98cf5269f1c7996ef24799ccb0d6a512d9a15dcdeb9fe8718f94",
-      "new_sha256": "804b47da275292596c34a0dede7ab9b26740ccefb013ca8ed2ee4e961917a7c3",
+      "new_sha256": "5858d7af394eae92ae80df7b0bed010fddd42d5b5314fa73603b068921b631ae",
       "edits": [
         {
           "start": 3118,
@@ -552,7 +558,7 @@
           "start": 3477,
           "end": 3489,
           "old": "33e59b4a659e",
-          "new": "86dbbc4ed7da"
+          "new": "0b399c982458"
         },
         {
           "start": 4268,
@@ -582,7 +588,7 @@
     },
     "poker/first-flop-decisions/index.html": {
       "old_sha256": "6285fe4d0554b0e040a9f409d0baa45a2bb0bfb4379fe730b71d1c3dea000697",
-      "new_sha256": "fa27020200d3ec54b2aca8689bb49c388730a8f10bd897af3e768167c80f0226",
+      "new_sha256": "ad4a23a4f9e3affb60d4db62a2b3fa9ca0c9d7d9672b4b14a214e838ecf2018a",
       "edits": [
         {
           "start": 3141,
@@ -594,7 +600,7 @@
           "start": 3500,
           "end": 3512,
           "old": "33e59b4a659e",
-          "new": "86dbbc4ed7da"
+          "new": "0b399c982458"
         },
         {
           "start": 4291,
@@ -624,13 +630,13 @@
     },
     "poker/free-poker-learning-path/index.html": {
       "old_sha256": "61c4f06c29d91ce256b2c5e7eda40fa0ec8a2aa0534e2bd877b41c1e083e12bb",
-      "new_sha256": "1b6e3dd74aca34825528fba9b8cadc6b2b36c466e7bf7ed8e8243a977de0175c",
+      "new_sha256": "07f36d8b4f395adea3f5860a653786a58a74796dd5d216c8cf39d2c138ca3346",
       "edits": [
         {
           "start": 3433,
           "end": 3445,
           "old": "33e59b4a659e",
-          "new": "86dbbc4ed7da"
+          "new": "0b399c982458"
         },
         {
           "start": 8246,
@@ -750,7 +756,7 @@
     },
     "poker/ranges-for-beginners/index.html": {
       "old_sha256": "eec66eda3203fe1024fb525f513ecdae0b3d97d42b4b01161b5c5dff4102b8f2",
-      "new_sha256": "f76765e0408633605838b01f14d15d692cd86e3b8ed1fbfdba4d4d3198d80629",
+      "new_sha256": "216dae521ec33c320cf61c8847387b5634980515676ee06a89a05985d2d3f1f8",
       "edits": [
         {
           "start": 3100,
@@ -762,7 +768,7 @@
           "start": 3459,
           "end": 3471,
           "old": "33e59b4a659e",
-          "new": "86dbbc4ed7da"
+          "new": "0b399c982458"
         },
         {
           "start": 4249,
@@ -792,7 +798,7 @@
     },
     "poker/starting-hand-decisions/index.html": {
       "old_sha256": "26dd5e726f7f8dc14cf29f20827154307334aa57c081c648c1ea5d40f7834556",
-      "new_sha256": "d220aa9e6de5a2aa6fd090c983a744fc651d63b0c16d1d82ace9ed9020798751",
+      "new_sha256": "c686ed5a0ca1987e5f58c91a57360a43c64a9a3a3bfbc542c793868d4e97cf74",
       "edits": [
         {
           "start": 3131,
@@ -804,7 +810,7 @@
           "start": 3490,
           "end": 3502,
           "old": "33e59b4a659e",
-          "new": "86dbbc4ed7da"
+          "new": "0b399c982458"
         },
         {
           "start": 4280,
@@ -846,7 +852,7 @@
     },
     "poker/turn-and-river-decisions/index.html": {
       "old_sha256": "f2f7f02845a519666f00d1b4ee25e32dd7d6cd89bc8e361f4ea8553a7c19c28d",
-      "new_sha256": "822b391aff019e24e203dd824d9213c7c071bc05758835e24d991a1066d51f51",
+      "new_sha256": "2164f118fcc26d22015493556334299f45517a0853881e7bde68508083f99ed0",
       "edits": [
         {
           "start": 3160,
@@ -858,7 +864,7 @@
           "start": 3519,
           "end": 3531,
           "old": "33e59b4a659e",
-          "new": "86dbbc4ed7da"
+          "new": "0b399c982458"
         },
         {
           "start": 4315,
