@@ -46,6 +46,11 @@ return-to-map links, narrow layouts, keyboard use, disabled scripts and unchange
 exercise behavior. Review fresh mobile and desktop captures before publication.
 Record executed checks in the PR and verify production bytes afterward.
 
+The initial CI run passed all 702 unit tests in 587 seconds, then reached the
+build job's ten-minute deadline during the remaining checks. The build deadline
+is now fifteen minutes. All unit, syntax, browser and publication gates remain;
+the change gives the existing suite time to finish rather than skipping checks.
+
 The design inference is that presenting the course before its supporting tools
 makes the intended sequence easier to distinguish. It remains untested with real
 beginners. Observe whether a new visitor can find lesson 1, explain what is

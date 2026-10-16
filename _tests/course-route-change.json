@@ -34,6 +34,18 @@
   },
   "new_pages": {},
   "paths": {
+    ".github/workflows/site-checks.yml": {
+      "old_sha256": "4cd4f50d49ab0c662d9dfd0e57e226d0276ce79729ce1ac6ce0b2f8a064cd510",
+      "new_sha256": "4a580d7a4dfe618a6a4831e0be01c18e90581bd67b2f4ca9154b81bcfd3ed821",
+      "edits": [
+        {
+          "start": 214,
+          "end": 215,
+          "old": "0",
+          "new": "5"
+        }
+      ]
+    },
     "README.md": {
       "old_sha256": "44be2f97d96315500aa0ea73f5df3d8e2b9c5346fcfbd57e108fbc3effbfcb93",
       "new_sha256": "cd7b298fda6668a6cbaee83fe3ecd5bdc8675c2c9580bd74835711aa297a57da",
