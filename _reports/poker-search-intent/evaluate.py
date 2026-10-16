@@ -14,6 +14,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / '_tests'))
 import poker_search_titles_history as title_history
+import poker_study_list_history as study_history
 FOLDER = Path('_reports/poker-search-intent')
 BASE = '1d6afff35e16d74a04415f8bc85dafe6f5b369bd'
 LEGACY_SHA = 'c8ad7e80e8f0d9be0a13421c2f2c45beb6744e6f447a70a08ea36c83628df987'
@@ -95,15 +96,19 @@ process.stdout.write(JSON.stringify(result));
 '''
 
 
-def evaluate(root=ROOT, baseline=False, prior_release=False):
+def evaluate(root=ROOT, baseline=False, prior_release=False, titles_release=False):
+    if sum((baseline, prior_release, titles_release)) > 1:
+        raise ValueError('Choose one historical release')
     queries = json.loads((root / FOLDER / 'queries.json').read_text())
     cases = queries['cases']
     if len(cases) != 30 or len({c['id'] for c in cases}) != 30 or any(not c['reason'] or not c['acceptable_paths'] for c in cases):
         raise ValueError('Keep 30 distinct declared targets with relevance reasons')
     index_text = snapshot_text(root, 'poker/find/index.html') if baseline else (root / 'poker/find/index.html').read_text()
     script = (root / 'assets/poker-finder.js').read_text()
+    if titles_release:
+        index_text = study_history.before('poker/find/index.html', index_text)
+        script = study_history.before('assets/poker-finder.js', script)
     if prior_release:
-        if baseline: raise ValueError('Choose one historical release')
         index_text = title_history.before('poker/find/index.html', index_text)
         script = title_history.before('assets/poker-finder.js', script)
     rows = Cards(index_text).rows
@@ -115,7 +120,7 @@ def evaluate(root=ROOT, baseline=False, prior_release=False):
     if legacy and sha256(legacy.encode()).hexdigest() != LEGACY_SHA:
         raise ValueError('Legacy formula is not the frozen source')
     result = subprocess.run(['node', '-e', ENGINE], cwd=root,
-                            input=json.dumps({'rows': rows, 'cases': cases, 'legacy': legacy, 'script': script if prior_release else None}),
+                            input=json.dumps({'rows': rows, 'cases': cases, 'legacy': legacy, 'script': script if prior_release or titles_release else None}),
                             text=True, capture_output=True, check=True)
     results = json.loads(result.stdout)
     return {'scope': queries['status'], 'baseline_commit': BASE,
@@ -130,13 +135,19 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--baseline', action='store_true')
     parser.add_argument('--prior-release', action='store_true', help='Replay the frozen 29/30 release')
+    parser.add_argument('--titles-release', action='store_true', help='Replay the frozen 30/30 title-ranking release')
     parser.add_argument('--write', action='store_true')
     args = parser.parse_args()
-    report = evaluate(baseline=args.baseline, prior_release=args.prior_release)
+    report = evaluate(baseline=args.baseline, prior_release=args.prior_release, titles_release=args.titles_release)
     if args.write:
-        target = ROOT / FOLDER / ('baseline.json' if args.baseline else 'results.json') if args.baseline or args.prior_release else ROOT / '_reports/poker-search-titles/results.json'
+        if args.baseline or args.prior_release:
+            target = ROOT / FOLDER / ('baseline.json' if args.baseline else 'results.json')
+        elif args.titles_release:
+            target = ROOT / '_reports/poker-search-titles/results.json'
+        else:
+            target = ROOT / '_reports/poker-study-list/search-results.json'
         text = json.dumps(report, ensure_ascii=False, indent=2) + '\n'
-        if (args.baseline or args.prior_release) and target.exists() and target.read_text() != text:
+        if (args.baseline or args.prior_release or args.titles_release) and target.exists() and target.read_text() != text:
             raise ValueError('The frozen baseline would change; use a separately labeled evaluation round')
         target.write_text(text)
     print(str(report['target_hits_top_three']) + '/30 declared targets in the first three results')

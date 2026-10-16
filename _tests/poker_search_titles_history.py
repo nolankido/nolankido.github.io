@@ -3,6 +3,7 @@ from functools import lru_cache
 from hashlib import sha256
 import json
 from pathlib import Path
+import poker_study_list_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -13,6 +14,7 @@ def change():
 
 
 def before(path, data):
+    data = poker_study_list_history.before(path, data)
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
     item = change()['paths'].get(str(path))

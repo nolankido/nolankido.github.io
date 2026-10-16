@@ -96,10 +96,34 @@
   const shelfList = document.getElementById('finder-shelf-list');
   const shelfCount = document.getElementById('finder-shelf-count');
   const shelfDownload = document.getElementById('finder-shelf-download');
+  const shelfCopy = document.getElementById('finder-shelf-copy');
+  const shelfStatus = document.getElementById('finder-shelf-status');
+  const shelfPreview = document.getElementById('finder-shelf-preview');
+  const shelfText = document.getElementById('finder-shelf-text');
   const chosen = new Set();
   let exportURL;
-  function renderShelf() {
-    if (!shelf || !shelfList || !shelfCount || !shelfDownload) return;
+  let exportText = '';
+  let shelfRevision = 0;
+  let copyAttempt = 0;
+  function releaseExport() {
+    shelfDownload.hidden = true;
+    shelfDownload.removeAttribute('href');
+    const previous = exportURL;
+    exportURL = undefined;
+    if (previous) {
+      try { URL.revokeObjectURL(previous); } catch (_) { /* The old link is already removed. */ }
+    }
+  }
+  function revealShelfText(select = false) {
+    shelfPreview.open = true;
+    if (select) { shelfText.focus(); shelfText.select(); }
+  }
+  function renderShelf(focusIndex) {
+    if (![shelf, shelfList, shelfCount, shelfDownload, shelfCopy, shelfStatus, shelfPreview, shelfText].every(Boolean)) return;
+    shelfRevision += 1;
+    copyAttempt += 1;
+    releaseExport();
+    shelfStatus.textContent = '';
     shelf.hidden = chosen.size === 0;
     shelfList.replaceChildren();
     const lines = ['# My poker study list', '', 'Public links selected on Nolan Kido Poker. This is a snapshot, not a new source review.', ''];
@@ -109,20 +133,46 @@
       if (!chosen.has(card.el.dataset.id)) continue;
       const sourceLink = card.el.querySelector('h3 a');
       const li = document.createElement('li'), link = document.createElement('a');
-      link.textContent = sourceLink.textContent; link.setAttribute('href', card.url); li.appendChild(link); shelfList.appendChild(li);
+      link.textContent = sourceLink.textContent; link.setAttribute('href', card.url); li.appendChild(link);
+      const remove = document.createElement('button'), index = shelfList.children.length;
+      remove.type = 'button'; remove.className = 'finder-shelf-remove'; remove.textContent = 'Remove';
+      remove.dataset.finderRemove = card.el.dataset.id;
+      remove.setAttribute('aria-label', 'Remove ' + sourceLink.textContent + ' from study list');
+      remove.addEventListener('click', () => { chosen.delete(card.el.dataset.id); renderShelf(index); });
+      li.appendChild(remove); shelfList.appendChild(li);
       const url = card.url.startsWith('/') ? 'https://nolankido.com' + card.url : card.url;
       lines.push('## ' + sourceLink.textContent, '', url, '');
-      for (const para of Array.from(card.el.children).filter(el => el.tagName === 'P' && !el.classList.contains('finder-excerpt') && !el.classList.contains('finder-jump'))) lines.push(para.textContent, '');
+      for (const para of Array.from(card.el.children).filter(el => el.tagName === 'P' && !el.classList.contains('finder-excerpt') && !el.classList.contains('finder-jump'))) {
+        const details = para.cloneNode(true);
+        for (const link of details.querySelectorAll('a[href]')) {
+          const href = link.getAttribute('href');
+          const address = href.startsWith('/') ? 'https://nolankido.com' + href : href;
+          link.textContent = '[' + link.textContent + '](' + address + ')';
+        }
+        lines.push(details.textContent, '');
+      }
     }
-    shelfCount.textContent = chosen.size + ' of 12 places used. This list clears when the page reloads; download it to keep it.';
-    if (exportURL) URL.revokeObjectURL(exportURL);
-    shelfDownload.hidden = !chosen.size;
+    exportText = chosen.size ? lines.join('\n') : '';
+    shelfText.value = exportText;
+    shelfCount.textContent = chosen.size + ' of 12 places used. This list clears when the page reloads; download or copy it to keep it.';
     if (chosen.size) {
-      exportURL = URL.createObjectURL(new Blob([lines.join('\n')], {type: 'text/markdown;charset=utf-8'}));
-      shelfDownload.href = exportURL;
-    } else shelfDownload.removeAttribute('href');
+      try {
+        exportURL = URL.createObjectURL(new Blob([exportText], {type: 'text/markdown;charset=utf-8'}));
+        shelfDownload.href = exportURL;
+        shelfDownload.hidden = false;
+      } catch (_) {
+        releaseExport();
+        shelfStatus.textContent = 'The download is unavailable here. Copy the list or use the complete text below.';
+        revealShelfText();
+      }
+    } else shelfPreview.open = false;
+    if (Number.isInteger(focusIndex)) {
+      const buttons = shelfList.querySelectorAll('.finder-shelf-remove');
+      if (buttons.length) buttons[Math.min(focusIndex, buttons.length - 1)].focus();
+      else input.focus();
+    }
   }
-  if (shelf && shelfList && shelfCount && shelfDownload) {
+  if ([shelf, shelfList, shelfCount, shelfDownload, shelfCopy, shelfStatus, shelfPreview, shelfText].every(Boolean)) {
     shelf.hidden = true;
     cards.forEach(card => {
       const button = card.el.querySelector('.finder-save');
@@ -132,11 +182,45 @@
         const id = card.el.dataset.id;
         if (chosen.has(id)) chosen.delete(id);
         else if (chosen.size < 12) chosen.add(id);
-        else {shelfCount.textContent = 'The list has 12 items. Remove one before adding another.'; return;}
+        else {
+          copyAttempt += 1;
+          shelfCount.textContent = '12 of 12 places used. Remove an item below before adding another.';
+          shelfStatus.textContent = '';
+          shelfList.querySelector('.finder-shelf-remove').focus();
+          return;
+        }
         renderShelf();
       });
     });
+    shelfCopy.addEventListener('click', async () => {
+      if (!chosen.size) return;
+      const revision = shelfRevision, attempt = ++copyAttempt, text = exportText;
+      const current = () => revision === shelfRevision && attempt === copyAttempt && chosen.size > 0;
+      shelfStatus.textContent = '';
+      try {
+        if (typeof navigator === 'undefined' || !navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(text);
+        if (current()) shelfStatus.textContent = 'Study list copied. Paste it into your own notes.';
+      } catch (_) {
+        if (!current()) return;
+        shelfStatus.textContent = 'Copying is unavailable here. Use your device’s Copy command on the complete list below.';
+        revealShelfText(document.activeElement === shelfCopy);
+      }
+    });
+    shelfDownload.addEventListener('click', event => {
+      copyAttempt += 1;
+      if (!chosen.size || !exportURL) {
+        event.preventDefault();
+        if (chosen.size) {
+          shelfStatus.textContent = 'The download is unavailable here. Use the complete text below.';
+          revealShelfText(document.activeElement === shelfDownload);
+        }
+        return;
+      }
+      shelfStatus.textContent = 'Download requested. If no file appears, copy the list or use the complete text below.';
+    });
     document.getElementById('finder-shelf-clear').addEventListener('click', () => {chosen.clear(); renderShelf(); input.focus();});
+    window.addEventListener('pagehide', event => { if (!event.persisted) releaseExport(); });
     renderShelf();
   }
   let limit = 12;
