@@ -39,6 +39,7 @@ def outputs(records):
 
 
 def files(paths):
+    paths = poker_foundations_history.files(paths)
     def keep(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
         return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()

@@ -162,6 +162,7 @@ def main():
             page.emulate_media(media='screen')
             for unit in UNITS:
                 page.goto(origin + '/poker/' + unit['lesson'] + '/')
+                enter(page, page.locator('.course-lesson-options > summary'))
                 href = ROUTE + '#practice-' + unit['id']
                 enter(page, page.locator('.course-first-pass a[href="' + href + '"]'))
                 expect(page).to_have_url(origin + href)
