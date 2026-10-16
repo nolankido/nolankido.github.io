@@ -16,6 +16,7 @@ SPACING = '* {line-height:1.5!important;letter-spacing:.12em!important;word-spac
 
 
 def enter(page, locator):
+    locator.scroll_into_view_if_needed()
     locator.focus()
     expect(locator).to_be_focused()
     expect(locator).to_be_in_viewport()
