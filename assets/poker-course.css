@@ -30,6 +30,21 @@
 .course-stage-end nav a { display:inline-flex; align-items:center; min-height:44px; }
 .course-first-pass ul { margin-bottom:12px; }
 .course-first-pass li a { display:inline-flex; align-items:center; min-height:44px; }
+.course-first-pass h3 { margin-top:28px; }
+.course-lesson-model { margin:24px 0; padding:18px; border-left:3px solid var(--red); background:var(--panel); }
+.course-lesson-model h3 { margin-top:0; }
+.course-lesson-attempt { margin:28px 0; padding-top:8px; border-top:1px solid var(--line-dark); }
+.course-lesson-cards { display:flex; flex-wrap:wrap; gap:16px 24px; margin:20px 0; }
+.course-lesson-cards > div { min-width:0; max-width:100%; }
+.course-lesson-cards .viewer-cards { flex-wrap:wrap; }
+.course-lesson-recall { padding-top:16px; border-top:1px solid var(--line-dark); }
+.course-lesson-next { display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin:24px 0; }
+.course-lesson-next a { display:inline-flex; align-items:center; min-height:44px; max-width:100%; }
+.course-lesson-next .button { white-space:normal; }
+.course-first-pass summary:focus-visible,.course-first-pass a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+#course-first-pass-title,#course-lesson-idea,#course-lesson-model,#course-lesson-try,#course-lesson-answer,#lesson-reference { scroll-margin-top:160px; }
+@media(max-width:420px) { .course-lesson-model { padding:14px; } }
+@media print { .course-first-pass details > div { display:block!important; } .course-first-pass details::details-content { content-visibility:visible!important; } .course-lesson-next,.course-lesson-options { display:none!important; } .course-lesson-model { background:white; } }
 .course-enhanced .course-manual-help { display:none; }
 .course-later { border-top:2px solid var(--line-dark); margin-top:44px; padding-top:24px; }
 .course-review { margin:28px 0; padding:20px; background:var(--panel); border-left:3px solid var(--red); }

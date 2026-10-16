@@ -102,7 +102,7 @@ def main():
                         root.scroll_into_view_if_needed();page.screenshot(path=str(shots/f'betting-rehearsal-{width}.png'))
                 report['widths'].append(width)
             for slug,case in [('first-decisions','preflop'),('starting-hand-decisions','preflop'),('first-flop-decisions','flop')]:
-                page.goto(origin+'/poker/'+slug+'/');enter(page,page.locator('.course-first-pass a[href$="#round-practice-'+case+'"]'))
+                page.goto(origin+'/poker/'+slug+'/');enter(page,page.locator('.course-lesson-options > summary'));enter(page,page.locator('.course-first-pass a[href$="#round-practice-'+case+'"]'))
                 target=page.locator('#round-practice-'+case);expect(target).to_be_visible();expect(target.locator('h3')).to_be_focused();expect(target.locator('h3')).to_be_in_viewport();assert target.locator('h3').evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom");expect(target.locator('[data-round-live]')).to_be_visible();expect(target.locator('[data-round-log] li')).to_have_count(0);report['deep_links']+=1
             page.set_viewport_size({'width':390,'height':950})
             for case in ['preflop','flop','raise']:

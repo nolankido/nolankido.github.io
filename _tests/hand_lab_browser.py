@@ -150,6 +150,7 @@ def main():
             expect(item).to_be_visible();expect(item.locator('h3')).to_be_focused()
             for slug,ident in [('first-decisions','pair'),('first-flop-decisions','three-kind'),('turn-and-river-decisions','two-pair')]:
                 page.goto(origin+'/poker/'+slug+'/')
+                enter(page,page.locator('.course-lesson-options > summary'))
                 href=ROUTE+'#hand-lab-'+ident
                 enter(page,page.locator('.course-first-pass a[href="'+href+'"]'))
                 expect(page).to_have_url(origin+href)

@@ -11,6 +11,15 @@ The shared Poker bar links to the course and identifies its lessons and practice
 pages as the current section. Outcomes, starting choices and the finish guide
 are explained in `_reports/free-poker-foundations-concept.md`.
 
+Each of the six lessons starts with a native short lesson: one idea, a worked
+example, an open explanation task and its answer with a precise repair link.
+`_source/poker/course-lessons.json` owns these examples; `_scripts/poker_lessons.py`
+validates and renders them through the existing course module. Full articles
+remain below, with the same section targets. No new JavaScript or saved progress
+is used. The study card includes the six changed prompts without answers. See
+`_reports/short-course-lessons-review.md` and `test_short_lessons.py`; the existing
+`poker_course_browser.py` also checks the complete short-lesson journey.
+
 The course also includes a branching betting rehearsal. Three starting ledgers
 live in `_source/poker/round-practice.json`; `_scripts/poker_round_practice.py`
 renders native tables and worked lines, while `assets/poker-round-practice.js`

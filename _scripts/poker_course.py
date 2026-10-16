@@ -5,6 +5,7 @@ from pathlib import Path
 import json
 import re
 import poker_practice
+import poker_lessons
 
 ROUTE = '/poker/free-poker-learning-path/'
 DATA = '_source/poker/beginner-course.json'
@@ -114,15 +115,21 @@ def lesson_support(page, body, root):
     card_practice = f'<p><a href="{ROUTE}#hand-lab-{card_case}">Build the best five with actual cards</a>. Choose the five yourself and explain what you leave out.</p>' if card_case else ''
     round_case = {"first-decisions":"preflop", "starting-hand-decisions":"preflop", "first-flop-decisions":"flop"}.get(lesson["slug"])
     round_practice = f'<p><a href="{ROUTE}#round-practice-{round_case}">Rehearse the actions with counters</a>. Choose the moves yourself and track who still needs a turn.</p>' if round_case else ''
-    first = ('<aside class="course-first-pass" aria-labelledby="course-first-pass-title"><h2 id="course-first-pass-title">Your first pass through this stage</h2>'
+    next_route = '/poker/' + routes[index+1]['slug'] + '/' if index+1 < len(routes) else '/poker/beginner-checkpoint/'
+    next_label = 'Next lesson: ' + routes[index+1]['title'] if index+1 < len(routes) else 'Next: try the beginner checkpoint'
+    optional = (f'<p>Use a full section when it answers your question:</p><ul>{links}</ul>'
+                f'<p>Choose one extra practice task when useful.</p>{card_practice}{round_practice}'
+                f'<p><a href="{poker_practice.lesson_link(lesson["slug"])}">See another worked example, then try three changed questions</a>.</p>'
+                f'<p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p>')
+    short = poker_lessons.load(root, [r['slug'] for r in routes])[index]
+    first = ('<section class="course-first-pass" aria-labelledby="course-first-pass-title"><h2 id="course-first-pass-title">Start with the short lesson.</h2>'
              f'<p><strong>Stage {index+1} of 6:</strong> {escape(lesson["goal"])}</p>'
-             '<p>Begin with these sections. The rest of this page is a reference to return to, rather than another reading assignment.</p>'
-             f'<ul>{links}</ul><p><strong>Choose one practice task below.</strong> Return for the other formats when they help answer a question.</p>{card_practice}{round_practice}<p><a href="{poker_practice.lesson_link(lesson["slug"])}">See a worked example, then try three changed questions</a>.</p><p><a href="{lesson["practice"]}">Try this stage’s fresh practice situation</a>. Explain it before opening the answer.</p></aside>')
+             + poker_lessons.render(short, cards, next_route, next_label, optional) + '</section>'
+             '<h2 id="lesson-reference">Full explanation and more examples</h2>')
     anchor = '<p class="article-lead">'
     if body.count(anchor) != 1 or 'id="course-first-pass-title"' in body:
         raise ValueError('A course lesson needs one introduction and one first-pass guide')
     body = body.replace(anchor, first + anchor, 1)
-    next_route = '/poker/' + routes[index+1]['slug'] + '/' if index+1 < len(routes) else '/poker/beginner-checkpoint/'
     next_label = 'Next stage: ' + routes[index+1]['title'] if index+1 < len(routes) else 'Next: try the beginner checkpoint'
     prev_route = '/poker/' + routes[index-1]['slug'] + '/' if index else ROUTE
     end = ('<aside class="course-stage-end" aria-labelledby="course-stage-end-title"><h2 id="course-stage-end-title">Pause, explain, then choose the next step</h2>'
@@ -137,10 +144,13 @@ def lesson_support(page, body, root):
 
 def workbook(root):
     data = load(root)
+    short_lessons = poker_lessons.load(root, [r['slug'] for r in data['lessons']])
     lines = ['BEGINNER POKER STUDY CARD', 'Nolan Kido | https://nolankido.com' + ROUTE + '#beginner-practice', '',
              'For private notes with paper, a deck or counters. No wager or account needed.',
              'The website does not receive this file or save your progress.',
-             'Use learning materials before or after play, following the room’s rules.', '',
+             'Use learning materials before or after play, following the room’s rules.',
+             'Card codes: T=ten, J=jack, Q=queen, K=king, A=ace; s=spades, h=hearts,',
+             'd=diamonds, c=clubs. Qh means queen of hearts. Each code names one card.', '',
              'MY NEXT SMALL STEP', 'The lesson I reached:', 'What I can explain without looking:',
              'One thing to revisit:', 'The exact lesson or section link I want to return to:', '',
              'OPTIONAL BETTING ROUND NOTES', 'https://nolankido.com/poker/free-poker-learning-path/#betting-rehearsal',
@@ -149,8 +159,14 @@ def workbook(root):
              'Who still needs a turn, and why:', 'One rule to explain again later:', '',
              'SIX CONNECTED STAGES', 'Mark a box when you can explain a changed example. This is not a grade.', '']
     for number, lesson in enumerate(data['lessons'], 1):
+        short = short_lessons[number - 1]
         lines += [f'[ ] {number}. {lesson["title"].upper()}', 'https://nolankido.com/poker/' + lesson['slug'] + '/', lesson['goal'],
                   'First pass: ' + '; '.join(label for _, label in lesson['first_pass']),
+                  'SHORT LESSON: EXPLAIN A CHANGED SITUATION', *short['attempt']['setup'],
+                  *[g['label'] + ': ' + ', '.join(g['values']) for g in short['attempt'].get('cards', []) + short['attempt'].get('candidates', [])],
+                  short['attempt']['prompt'], 'My first explanation before checking:',
+                  'Compare: https://nolankido.com/poker/' + lesson['slug'] + '/#course-lesson-try',
+                  'My explanation after checking:', 'One difference I can explain with the answer closed:',
                   'Recall: ' + lesson['recall'], 'Fresh practice: https://nolankido.com' + lesson['practice'],
                   'My explanation:', 'Still unclear:', 'One correction after checking:', '']
     lines += ['ONE SCRIPTED HAND', 'Six players start with 100 counters. Blinds 1/2. No ante, fees or side pots.',

@@ -11,6 +11,7 @@ from field_guide_browser import QuietHandler, ROOT
 
 ROUTE = '/poker/free-poker-learning-path/'
 DATA = json.loads((ROOT / '_source/poker/beginner-course.json').read_text())
+SHORT = json.loads((ROOT / '_source/poker/course-lessons.json').read_text())['lessons']
 SPACING = '* {line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important} p {margin-bottom:2em!important}'
 
 
@@ -35,7 +36,7 @@ def main():
     shots = Path(os.environ['SCREENSHOT_DIR']) if os.environ.get('SCREENSHOT_DIR') else None
     if shots:
         shots.mkdir(parents=True, exist_ok=True)
-    report = {'guided_hands': 0, 'fresh_lesson_arrivals': 0, 'fallbacks': 0, 'axe': []}
+    report = {'guided_hands': 0, 'short_lessons': 0, 'fresh_lesson_arrivals': 0, 'fallbacks': 0, 'axe': []}
     errors = []
     try:
         with sync_playwright() as pw:
@@ -130,10 +131,58 @@ def main():
             enter(page, link)
             expect(page.locator('[data-course-hand]')).to_have_class('course-hand course-enhanced')
             expect(page.locator('[data-course-scene]:visible')).to_have_id('course-scene-river')
+            for width in [320, 390, 768, 1440]:
+                page.set_viewport_size({'width': width, 'height': 900})
+                for index, lesson in enumerate(DATA['lessons']):
+                    route = '/poker/' + lesson['slug'] + '/'
+                    page.goto(origin + route + '#course-first-pass-title')
+                    page.evaluate('()=>document.fonts.ready.then(()=>true)')
+                    first = page.locator('.course-first-pass')
+                    expect(first).to_contain_text(f'Stage {index + 1} of 6')
+                    expect(first.locator('#course-lesson-answer > div')).to_be_hidden()
+                    expect(first.locator('.course-lesson-options > div')).to_be_hidden()
+                    expect(first.locator('input,textarea,button')).to_have_count(0)
+                    expect(first.locator('#course-first-pass-title')).to_be_in_viewport()
+                    reflow(page)
+                    if shots and index == 0 and width in [390, 1440]:
+                        page.screenshot(path=str(shots / f'short-lesson-start-{width}.png'))
+                    enter(page, first.locator('#course-lesson-answer > summary'))
+                    expect(first.locator('#course-lesson-answer > div')).to_be_visible()
+                    expect(first.locator('#course-lesson-answer a')).to_have_attribute('href', SHORT[index]['attempt']['repair'])
+                    if width == 390:
+                        enter(page, first.locator('#course-lesson-answer a'))
+                        repair = SHORT[index]['attempt']['repair']
+                        expect(page).to_have_url(origin + repair)
+                        target = page.locator('#' + repair.split('#')[1])
+                        expect(target).to_be_in_viewport()
+                        assert target.evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
+                        page.goto(origin + route + '#course-lesson-try')
+                        enter(page, page.locator('#course-lesson-answer > summary'))
+                    if shots and index in [0, 4] and width in [390, 1440]:
+                        page.goto(origin + route + '#course-lesson-try')
+                        enter(page, page.locator('#course-lesson-answer > summary'))
+                        page.locator('#course-lesson-try').evaluate("el=>scrollTo({top:scrollY+el.getBoundingClientRect().top-document.querySelector('.site-header').getBoundingClientRect().height-20,behavior:'instant'})")
+                        page.screenshot(path=str(shots / f'short-lesson-task-{index + 1}-{width}.png'))
+                    if os.environ.get('AXE_PATH') and width in [390, 1440]:
+                        page.add_script_tag(path=os.environ['AXE_PATH'])
+                        violations = page.evaluate("async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))}")
+                        assert not violations, violations
+                    page.add_style_tag(content=SPACING)
+                    reflow(page)
+                    enter(page, page.locator('#course-lesson-answer > summary'))
+                    expect(page.locator('#course-lesson-answer > div')).to_be_hidden()
+                    page.emulate_media(media='print')
+                    expect(page.locator('#course-lesson-answer > div')).to_be_visible()
+                    page.emulate_media(media='screen')
+                    enter(page, page.locator('.course-lesson-next a.button'))
+                    expected = '/poker/' + DATA['lessons'][index + 1]['slug'] + '/' if index < 5 else '/poker/beginner-checkpoint/'
+                    expect(page).to_have_url(origin + expected)
+                    report['short_lessons'] += 1
             for index, lesson in enumerate(DATA['lessons']):
                 page.goto(origin + '/poker/' + lesson['slug'] + '/')
                 first = page.locator('.course-first-pass')
                 expect(first).to_contain_text(f'Stage {index + 1} of 6')
+                enter(page, first.locator('.course-lesson-options > summary'))
                 enter(page, first.locator('a[href="#' + lesson['first_pass'][0][0] + '"]'))
                 expect(page).to_have_url(origin + '/poker/' + lesson['slug'] + '/#' + lesson['first_pass'][0][0])
                 expect(page.locator('#' + lesson['first_pass'][0][0])).to_be_in_viewport()
@@ -176,6 +225,13 @@ def main():
                 expect(native.locator('.course-first-pass')).to_be_visible()
                 enter(native, native.locator('.course-stage-end a.button'))
                 expect(native).to_have_url(origin + '/poker/starting-hand-decisions/')
+                for lesson in DATA['lessons']:
+                    native.goto(origin + '/poker/' + lesson['slug'] + '/#course-lesson-try')
+                    expect(native.locator('#course-lesson-answer > div')).to_be_hidden()
+                    enter(native, native.locator('#course-lesson-answer > summary'))
+                    expect(native.locator('#course-lesson-answer > div')).to_be_visible()
+                    enter(native, native.locator('.course-lesson-next a.button'))
+                    reflow(native)
                 fallback.close()
                 report['fallbacks'] += 1
             assert not errors, errors

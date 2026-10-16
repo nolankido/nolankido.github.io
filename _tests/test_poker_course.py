@@ -74,7 +74,7 @@ class PokerCourseTests(unittest.TestCase):
         self.assertFalse(any(e.get('id') in {'first-hand-practice', 'beginner-practice', 'return-practice'} for e in later.iter()))
         for index, lesson in enumerate(self.data['lessons']):
             doc = document(self.outputs[build.output_path('/poker/' + lesson['slug'] + '/')])
-            first = next(e for e in doc.iter('aside') if e.get('class') == 'course-first-pass')
+            first = next(e for e in doc.iter('section') if e.get('class') == 'course-first-pass')
             self.assertIn(f'Stage {index + 1} of 6:', ''.join(first.itertext()))
             self.assertEqual([a.get('href') for ul in first.iter('ul') for a in ul.iter('a')], ['#' + a for a, _ in lesson['first_pass']])
             ids = {e.get('id') for e in doc.iter()}

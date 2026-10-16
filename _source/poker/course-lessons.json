@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "lessons": [
+    {
+      "slug": "first-decisions",
+      "idea": "Your cards, your turn and your payment are different questions.",
+      "teach": [
+        "Your two private cards belong to you. The board is shared by everyone still in the hand: three cards on the flop, a fourth on the turn and a fifth on the river. From the flop onward, make the best five from the cards available now; neither private card has to play.",
+        "A check keeps your hand without paying when you owe nothing. A call matches a wager; a raise increases it. Folding gives up your claim to the pot. On your turn facing a bet, with enough chips and raising permitted, you may fold, call or raise. You cannot check past the bet.",
+        "Count a call using this betting round only: the current total wager minus what you already paid on this round. Payments on an earlier round stay in the pot. The amount owed says what a call costs, not whether it is a good decision."
+      ],
+      "worked": {
+        "setup": ["It is your turn on the flop. The opponent bets 4. You have paid nothing on this round and have ample counters. Both short-lesson examples exclude antes, fees and all-ins."],
+        "cards": [{"label":"Your private cards","values":["Qh","Jc"]},{"label":"Shared flop","values":["Qs","8d","3s"]}],
+        "answer": ["Your best five are Q-Q-J-8-3: a pair of queens. Calling adds 4 - 0 = 4 counters. You can fold, call 4 or make a legal raise; checking is unavailable. Having a pair does not choose an action for you."]
+      },
+      "attempt": {
+        "setup": ["A different hand reaches this flop. You paid 6 preflop. The opponent now bets 7; you have paid nothing on this new round. It is your turn, with ample counters and raising permitted."],
+        "cards": [{"label":"Your private cards","values":["Qh","Jc"]},{"label":"Shared flop","values":["Qd","9c","5h"]}],
+        "prompt": "Name your best five. How many additional counters would a call add? Explain whether checking is available and whether the earlier 6 reduces the call.",
+        "answer": ["Your best five are Q-Q-J-9-5, a pair of queens. A call adds 7 - 0 = 7. The 6 was paid preflop and does not pay for a flop bet. Facing this wager, you may fold, call 7 or make a legal raise; you cannot check.","Look for both parts in your explanation: five actual cards, and a payment counted on the current round. If you subtracted the earlier 6, reset the round's contribution to zero before counting again."],
+        "repair": "/poker/first-decisions/#chips-owed"
+      },
+      "recall": "Explain why paying on the previous round does not cover a new bet."
+    },
+    {
+      "slug": "starting-hand-decisions",
+      "idea": "Read the action before deciding what two cards mean.",
+      "teach": [
+        "The button marks the dealer position. At a table of three or more players, preflop action starts after the big blind and proceeds clockwise. In a six-player game, the initial order is first seat, next seat, cutoff, button, small blind, big blind. The cutoff is the seat immediately before the button.",
+        "After the flop, the first remaining player clockwise after the button acts first. The button therefore acts after a blind on the flop, but the blinds still have initial turns after the button preflop. A later raise can give earlier players another decision.",
+        "Describe your seat, earlier action, price and relevant stacks before using a hand label or chart. Suited means your two cards share a suit; it does not establish that playing them is best. These examples use six players who began with 100 counters each, blinds 1/2 and no ante or fees."
+      ],
+      "worked": {
+        "setup": ["The first seat, next seat and cutoff fold. You are on the button with queen-jack of spades. The small blind has posted 1 and the big blind 2. Neither blind has taken its initial turn."],
+        "cards": [{"label":"Your private cards","values":["Qs","Js"]}],
+        "answer": ["You face an unraised big blind. A call would add 2 because you have paid zero. Both blinds still have decisions after your initial action; either may raise. Being on the button does not finish preflop. This description does not prescribe a call or a raise."]
+      },
+      "attempt": {
+        "setup": ["You now sit in the small blind with the same private cards. The first two seats fold, the cutoff raises to 6, and the button calls 6. Your posted small blind is 1. The big blind has not yet acted."],
+        "cards": [{"label":"Your private cards","values":["Qs","Js"]}],
+        "prompt": "How much more would your call add? Who still has an initial decision after you? Explain two ways this situation differs from the worked example, despite the same private cards.",
+        "answer": ["A call adds 6 - 1 = 5. The big blind still has an initial decision, and a raise could return action to you or the earlier players. The pot has already been raised and called, and you are in the small blind rather than on the button.","Your two cards did not change, but the earlier action, price and position did. If you reach a flop, the small blind acts before the other remaining seats in this six-player hand. The price alone does not settle whether to continue."],
+        "repair": "/poker/starting-hand-decisions/#position"
+      },
+      "recall": "Name the players still to act and the earlier action before describing your private cards."
+    },
+    {
+      "slug": "first-flop-decisions",
+      "idea": "Name the hand you have and the draw you still need.",
+      "teach": [
+        "A made hand describes what your cards make now. A draw describes cards that could improve it. You can have both. A pair needs two cards of one rank; a flush needs five of one suit. Four cards of one suit are not a completed flush.",
+        "Count distinct cards, including your private cards and the shared flop. Then describe the action separately. A check does not reveal a weak hand, and a possible improvement does not guarantee the winning hand. These scenes assume it is your turn, ample counters, no all-ins and raising permitted."
+      ],
+      "worked": {
+        "setup": ["You are on the button. Only you and the big blind reached the flop. The big blind checks to you; nobody has bet on this round."],
+        "cards": [{"label":"Your private cards","values":["Ah","Th"]},{"label":"Shared flop","values":["Tc","7h","2h"]}],
+        "answer": ["Your best five are T-T-A-7-2: a pair of tens with an ace kicker. There are four hearts, so you also have a heart-flush draw. You may check or bet because nothing is owed. The opponent's check does not tell you which private cards they hold."]
+      },
+      "attempt": {
+        "setup": ["In another heads-up flop, the opponent bets 5. You have paid nothing on this round."],
+        "cards": [{"label":"Your private cards","values":["Ks","Qs"]},{"label":"Shared flop","values":["Kd","8s","3s"]}],
+        "prompt": "Name your best five and your draw separately. Is checking available? Does another spade guarantee that you win?",
+        "answer": ["Your best five are K-K-Q-8-3, a pair of kings with a queen kicker. Four spades give you a spade-flush draw. You may fold, call 5 or make a legal raise; you cannot check past the bet.","Another spade would complete a flush, but it would not guarantee a win. A stronger flush or another stronger hand can be possible, depending on the later board and opposing cards. Keep 'improves my hand' separate from 'wins the pot.'"],
+        "repair": "/poker/first-flop-decisions/#made-and-drawing"
+      },
+      "recall": "Say what your cards make now before naming a card you hope to receive."
+    },
+    {
+      "slug": "turn-and-river-decisions",
+      "idea": "Rebuild the hand, then price the call without inventing its chances.",
+      "teach": [
+        "The turn is the fourth shared card; the river is the fifth and last. Rebuild your best five when a card arrives. A missed draw can leave a pair, but no later community card can complete a draw once the river is out.",
+        "For a heads-up river call that ends betting, the break-even pot share in chips is the additional call divided by the pot after your call. This is a price. Your expected share against possible opposing hands, including ties, is a different question.",
+        "Both scenes assume a fictional cash game, ample chips, no fees, no side pots and no tournament payout effects. A fold or legal raise may also be available; pricing a call does not compare every action."
+      ],
+      "worked": {
+        "setup": ["The opponent bets 12 into a river pot of 24. You have paid nothing on this round."],
+        "cards": [{"label":"Your private cards","values":["Jh","Th"]},{"label":"Shared river board","values":["Jc","8h","3h","2d","5s"]}],
+        "answer": ["Your best five are J-J-T-8-5. The heart draw missed; you still have a pair of jacks. The bet makes the current pot 36. Calling adds 12 and makes 48, so 12 / 48 = 25% is the break-even share. It is not a measured chance that your hand wins."]
+      },
+      "attempt": {
+        "setup": ["A different river pot contains 36 before the opponent bets 12. You have paid nothing on the river; a call ends betting under the same assumptions."],
+        "cards": [{"label":"Your private cards","values":["Qs","Js"]},{"label":"Shared river board","values":["Qh","9s","4s","2c","6d"]}],
+        "prompt": "List the best five. Did the spade draw arrive? Give the current pot, the pot after calling and the break-even share. What is still missing before recommending a call?",
+        "answer": ["Your best five are Q-Q-J-9-6. Four spades leave a missed flush draw and a pair of queens. The current pot is 48; your additional 12 makes 60. The break-even share is 12 / 60 = 20%.","The same bet of 12 has a different price because the earlier pot changed. You still need a justified model of the opponent's possible hands and their frequencies to estimate your pot share, including ties. The arithmetic alone does not show that calling is best."],
+        "repair": "/poker/turn-and-river-decisions/#catching-a-bluff"
+      },
+      "recall": "Explain the difference between a call's break-even share and evidence that your hand meets it."
+    },
+    {
+      "slug": "ranges-for-beginners",
+      "idea": "A possible hand is different from a likely hand.",
+      "teach": [
+        "A range is a model of the hands an opponent could hold in a situation. First remove exact cards you already know. A card cannot be in your private hand, on the board and in an opponent's hand at the same time.",
+        "Then separate possibility from frequency. A legal holding may be possible without being common. A check is an observed action; the cards and frequencies behind it remain uncertain. Listing three candidates does not give each a one-third chance, and these candidate lists are not complete ranges."
+      ],
+      "worked": {
+        "setup": ["The opponent checks to you on the river. Consider the three exact candidate holdings below."],
+        "cards": [{"label":"Your private cards","values":["Ah","Td"]},{"label":"Shared river board","values":["Ts","8c","5h","3d","2s"]}],
+        "candidates": [{"label":"Candidate A","values":["Ah","Kh"]},{"label":"Candidate B","values":["Ac","Kd"]},{"label":"Candidate C","values":["Th","Tc"]}],
+        "answer": ["A is impossible: it reuses your ace of hearts. B is physically possible, but its frequency is unknown. C is also possible and makes three tens, which beat your pair. Checking therefore does not prove the opponent holds a weaker hand. None of these observations supplies probabilities."]
+      },
+      "attempt": {
+        "setup": ["In another river hand, the opponent checks. Consider these different exact candidates."],
+        "cards": [{"label":"Your private cards","values":["Ks","Qh"]},{"label":"Shared river board","values":["Qs","9d","6c","4s","2h"]}],
+        "candidates": [{"label":"Candidate A","values":["Ks","Jh"]},{"label":"Candidate B","values":["Kh","Kc"]},{"label":"Candidate C","values":["Jd","Td"]}],
+        "prompt": "Which candidate is impossible? Can a legal candidate beat your queens? Does a candidate being legal, or appearing once at showdown, establish how often it checks?",
+        "answer": ["A is impossible because you hold the king of spades. B and C reuse none of the known cards. B makes a pair of kings and beats your queens; C does not. A check is compatible with either legal holding.","Neither physical possibility nor one reveal establishes a frequency. Different models can allow the same observed hand. Say which cards and actions are known, then label any frequency as an assumption needing evidence."],
+        "repair": "/poker/ranges-for-beginners/#known-and-possible"
+      },
+      "recall": "Name one observed fact, one physically possible hand and one frequency you do not know."
+    },
+    {
+      "slug": "betting-with-a-purpose",
+      "idea": "Explain the response a bet needs, then compare checking.",
+      "teach": [
+        "A value-bet explanation needs worse hands that will call. A bluff explanation needs better hands that will fold. A hand's label or one winning result is not a complete reason to bet. Different opposing hands may respond differently.",
+        "When the opponent checks to you last to act on the river, checking takes the hand to showdown without a new wager. Compare that option with betting. The frequency of each opposing hand and its response matter, including possible raises.",
+        "Both examples use fictional heads-up river hands, ample counters, no fees or side pots and the supplied response assumptions. They teach questions to ask; the site has not measured any player's actual responses."
+      ],
+      "worked": {
+        "setup": ["The opponent checks to you. Suppose, for this restricted example, a worse pair of nines always folds to your proposed bet and a better hand of three eights always calls. These are two illustrative candidates, not an estimated range."],
+        "cards": [{"label":"Your private cards","values":["Js","Td"]},{"label":"Shared river board","values":["Th","8c","5d","3s","2c"]}],
+        "candidates": [{"label":"Worse: pair of nines","values":["9s","9d"]},{"label":"Better: three eights","values":["8s","8d"]}],
+        "answer": ["Your pair of tens beats the nines and loses to three eights. Under these supplied responses, neither candidate supports the proposed value-bet argument: the worse hand does not call, and the better hand does. The better hand does not fold to support a bluff either. Checking already wins against the nines without a new wager. This conclusion is about this restricted model."]
+      },
+      "attempt": {
+        "setup": ["In a different hand, the opponent checks to you last to act. For a proposed bet of 4, suppose the worse eights call and the better jacks also call. No frequency or complete range has been supplied."],
+        "cards": [{"label":"Your private cards","values":["9h","8h"]},{"label":"Shared river board","values":["9c","7s","4d","2c","Js"]}],
+        "candidates": [{"label":"Candidate: pair of eights","values":["8c","8d"]},{"label":"Candidate: pair of jacks","values":["Jc","Td"]}],
+        "prompt": "Which candidate could pay a value bet, and which beats you? What changed from the worked example? What is still missing before saying betting is better than checking?",
+        "answer": ["Your best five are 9-9-J-8-7. The eights are worse and, under the supplied response, call the bet. They are a candidate source of value. The jacks are better and also call, so they cost you when present. Unlike the worked example, at least one worse hand now calls.","That is useful evidence within the example, not a complete verdict. You still need the frequencies of opposing hands, other possible holdings and their responses, including raises. Compare the resulting expectation with checking. Winning one pot would not fill those gaps or prove the bet was best."],
+        "repair": "/poker/betting-with-a-purpose/#value"
+      },
+      "recall": "Name a worse caller or a better folder, then say what checking would achieve."
+    }
+  ]
+}

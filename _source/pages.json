@@ -797,7 +797,7 @@
     "date": "2026-10-08",
     "updated": "2026-10-15",
     "poker_guide": true,
-    "revision": "Organized the existing six-stage learning path as Poker Foundations, with explicit outcomes, starting choices and a finish-and-continue guide."
+    "revision": "Organized Poker Foundations around six short lessons with worked examples, open explanation tasks and next steps; expanded the private-use study card with the changed situations."
   },
   {
     "id": "poker-cash-game-study",
@@ -1142,12 +1142,13 @@
     "title": "Your first poker decisions.",
     "seo_title": "Poker for Beginners: First Decisions & Practice | Nolan Kido",
     "description": "Learn to read starting hands, choose legal actions, count calls and compare the best five cards through twelve beginner poker exercises with explained answers.",
-    "kicker": "Poker / Beginner lessons",
+    "kicker": "Poker Foundations / Lesson 1 of 6",
     "source": "poker/first-decisions.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
-    "poker_guide": true
+    "updated": "2026-10-15",
+    "poker_guide": true,
+    "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
   },
   {
     "id": "poker-starting-hand-decisions",
@@ -1155,12 +1156,13 @@
     "title": "The same cards. A different decision.",
     "seo_title": "Poker Starting Hands for Beginners | Nolan Kido",
     "description": "Understand poker starting hands through eight explained exercises on position, prior action, call prices and effective stacks. Build a useful preflop study record.",
-    "kicker": "Poker / Beginner lessons",
+    "kicker": "Poker Foundations / Lesson 2 of 6",
     "source": "poker/starting-hand-decisions.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
-    "poker_guide": true
+    "updated": "2026-10-15",
+    "poker_guide": true,
+    "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
   },
   {
     "id": "poker-first-flop-decisions",
@@ -1168,12 +1170,13 @@
     "title": "Your first decisions after the flop.",
     "seo_title": "Poker After the Flop: Beginner Lessons & Practice | Nolan Kido",
     "description": "Learn to read made hands and draws, understand checks and bets, and spot changing winners through eight beginner poker exercises with explained answers.",
-    "kicker": "Poker / Beginner lessons",
+    "kicker": "Poker Foundations / Lesson 3 of 6",
     "source": "poker/first-flop-decisions.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
-    "poker_guide": true
+    "updated": "2026-10-15",
+    "poker_guide": true,
+    "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
   },
   {
     "id": "poker-turn-and-river-decisions",
@@ -1181,12 +1184,13 @@
     "title": "Your turn and river decisions.",
     "seo_title": "Poker Turn & River: Beginner Decisions & Practice | Nolan Kido",
     "description": "Learn why missed draws can still win, how river checks and calls work, and what a shared pot means through six beginner exercises with explained answers.",
-    "kicker": "Poker / Beginner lessons",
+    "kicker": "Poker Foundations / Lesson 4 of 6",
     "source": "poker/turn-and-river-decisions.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
-    "poker_guide": true
+    "updated": "2026-10-15",
+    "poker_guide": true,
+    "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
   },
   {
     "id": "poker-ranges-for-beginners",
@@ -1194,12 +1198,13 @@
     "title": "Your first poker range.",
     "seo_title": "Poker Ranges for Beginners: Explained Practice | Nolan Kido",
     "description": "Learn poker ranges through six explained exercises: remove impossible cards, compare four hands, and see why a possible bluff is not a measured frequency.",
-    "kicker": "Poker / Beginner lessons",
+    "kicker": "Poker Foundations / Lesson 5 of 6",
     "source": "poker/ranges-for-beginners.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
-    "poker_guide": true
+    "updated": "2026-10-15",
+    "poker_guide": true,
+    "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
   },
   {
     "id": "poker-betting-with-a-purpose",
@@ -1207,12 +1212,13 @@
     "title": "Give your bet a purpose.",
     "seo_title": "Poker Betting for Beginners: Value, Bluffs & Checks | Nolan Kido",
     "description": "Practice why to bet or check through seven explained exercises: target worse calls, compare bet sizes, understand bluffs, and question your assumptions.",
-    "kicker": "Poker / Beginner lessons",
+    "kicker": "Poker Foundations / Lesson 6 of 6",
     "source": "poker/betting-with-a-purpose.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
-    "poker_guide": true
+    "updated": "2026-10-15",
+    "poker_guide": true,
+    "revision": "Added a short course lesson with a worked example, a changed situation to explain and a direct next lesson; the full reference remains below."
   },
   {
     "id": "poker-beginner-checkpoint",

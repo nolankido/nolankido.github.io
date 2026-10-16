@@ -142,6 +142,8 @@ def guide_sections(root: Path, page: dict, catalog: dict) -> list[dict]:
             source = source.replace('${poker_beginner_practice}', poker_practice.render(root))
         if page['path'] == poker_course.ROUTE:
             source = poker_checkpoint.decorate(page, poker_beginner_path.decorate(page, source, root), root)
+        elif page['path'] in {'/poker/' + slug + '/' for slug, _ in poker_course.LESSONS}:
+            source = poker_course.lesson_support(page, source, root)
     return GuideText(source).sections
 
 
