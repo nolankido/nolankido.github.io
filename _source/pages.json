@@ -106,7 +106,7 @@
     "description": "How nolankido.com handles website visits and contact-form messages.",
     "kicker": "Privacy",
     "source": "privacy.html",
-    "updated": "2026-10-13"
+    "updated": "2026-10-16"
   },
   {
     "id": "404",
@@ -333,7 +333,7 @@
     "section": "poker",
     "kicker": "Poker / Between sessions",
     "source": "poker/study.html",
-    "updated": "2026-10-08"
+    "updated": "2026-10-16"
   },
   {
     "id": "poker-holdem-basics",

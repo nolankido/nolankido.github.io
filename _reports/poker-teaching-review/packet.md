@@ -1,7 +1,7 @@
 # Poker Foundations: independent teaching review
 
-Material commit: `74f438934beca0ab2563af0dfe279923d588f0f1`.
-Packet fingerprint: `7449fd7a4632eace38d9e5c5b3d9d4e1554c0abf6febd97e61c5909aa5fe53fa`.
+Material commit: `8505785a02c2565e3dd97215f8ce7dc63aa6db43`.
+Packet fingerprint: `0ab8f0afd7bb03e99c1c09f6900f1625a74aa8cff15e4da3779a1f0969501495`.
 Prepared 2026-10-16 UTC. **Human review: pending.**
 
 Read README.md for the review protocol. Work through the prompts before opening answer-key.md. Use reference-text.md to inspect the complete source-article text. This is a reviewer packet with fictional examples, not a beginner outcome study.
@@ -10,7 +10,7 @@ Card codes: T=ten, J=jack, Q=queen, K=king, A=ace; s=spades, h=hearts, d=diamond
 
 ## S1. Cards, legal actions and additional payment
 
-Full source: https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html
+Full source: https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-decisions.html
 Live lesson: https://nolankido.com/poker/first-decisions/#course-first-pass-title
 
 ### Accuracy and misconception criteria
@@ -54,7 +54,7 @@ Before approving: inspect the full source article, its first-pass sections, and 
 
 ## S2. Position and players still to act
 
-Full source: https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/starting-hand-decisions.html
+Full source: https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/starting-hand-decisions.html
 Live lesson: https://nolankido.com/poker/starting-hand-decisions/#course-first-pass-title
 
 ### Accuracy and misconception criteria
@@ -100,7 +100,7 @@ Before approving: inspect the full source article, its first-pass sections, and 
 
 ## S3. Made hand, draw and observed action
 
-Full source: https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-flop-decisions.html
+Full source: https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-flop-decisions.html
 Live lesson: https://nolankido.com/poker/first-flop-decisions/#course-first-pass-title
 
 ### Accuracy and misconception criteria
@@ -142,7 +142,7 @@ Before approving: inspect the full source article, its first-pass sections, and 
 
 ## S4. Rebuild the hand and distinguish price from equity
 
-Full source: https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html
+Full source: https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/turn-and-river-decisions.html
 Live lesson: https://nolankido.com/poker/turn-and-river-decisions/#course-first-pass-title
 
 ### Accuracy and misconception criteria
@@ -186,7 +186,7 @@ Before approving: inspect the full source article, its first-pass sections, and 
 
 ## S5. Known cards, possible holdings and frequencies
 
-Full source: https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html
+Full source: https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/ranges-for-beginners.html
 Live lesson: https://nolankido.com/poker/ranges-for-beginners/#course-first-pass-title
 
 ### Accuracy and misconception criteria
@@ -234,7 +234,7 @@ Before approving: inspect the full source article, its first-pass sections, and 
 
 ## S6. Bet purpose, alternatives and outcome bias
 
-Full source: https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/betting-with-a-purpose.html
+Full source: https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/betting-with-a-purpose.html
 Live lesson: https://nolankido.com/poker/betting-with-a-purpose/#course-first-pass-title
 
 ### Accuracy and misconception criteria
@@ -294,9 +294,9 @@ Cumulative paid by seat: [0, 0, 0, 0, 1, 2]. Current-round hero payment: 0; curr
 
 How much would calling add? If you instead raise to a total of 6, how much do you add, and who still has an initial decision? Explain why the button does not end this preflop round.
 
-Count the additional chips. Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
+Count the additional chips. Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
-Follow the players still to act. Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
+Follow the players still to act. Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
 
 ### A-flop
 
@@ -307,9 +307,9 @@ Cumulative paid by seat: [0, 0, 0, 6, 1, 6]. Current-round hero payment: 0; curr
 
 Name your current best five and a possible improvement. Is checking available? If you bet for value, which response would help, and what would you need to compare the bet with checking?
 
-Separate the made hand and draw. Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+Separate the made hand and draw. Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
 
-Explain the response a value bet needs. Snapshot repair: [betting-with-a-purpose #value](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/betting-with-a-purpose.html#L12); [readable exhibit](reference-text.md#ref-betting-with-a-purpose-value). Live navigation: https://nolankido.com/poker/betting-with-a-purpose/#value
+Explain the response a value bet needs. Snapshot repair: [betting-with-a-purpose #value](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/betting-with-a-purpose.html#L12); [readable exhibit](reference-text.md#ref-betting-with-a-purpose-value). Live navigation: https://nolankido.com/poker/betting-with-a-purpose/#value
 
 ### A-turn
 
@@ -320,9 +320,9 @@ Cumulative paid by seat: [0, 0, 0, 10, 1, 10]. Current-round hero payment: 0; cu
 
 Rebuild your best five. Has the heart flush arrived? What does the opponent's check establish, and what does it leave unknown? If you both check, who acts first on the river?
 
-Review what the new card changes. Snapshot repair: [turn-and-river-decisions #turn-reset](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html#L5); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-turn-reset). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#turn-reset
+Review what the new card changes. Snapshot repair: [turn-and-river-decisions #turn-reset](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/turn-and-river-decisions.html#L5); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-turn-reset). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#turn-reset
 
-Separate observed action from assumptions. Snapshot repair: [ranges-for-beginners #known-and-possible](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html#L5); [readable exhibit](reference-text.md#ref-ranges-for-beginners-known-and-possible). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
+Separate observed action from assumptions. Snapshot repair: [ranges-for-beginners #known-and-possible](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/ranges-for-beginners.html#L5); [readable exhibit](reference-text.md#ref-ranges-for-beginners-known-and-possible). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
 
 ### A-river
 
@@ -336,9 +336,9 @@ Cumulative paid by seat: [0, 0, 0, 10, 1, 17]. Current-round hero payment: 0; cu
 
 Name your best five and what happened to the draw. Which candidate conflicts with a known card? Which legal candidate is weaker and which is stronger? Count the call and final pot, calculate the break-even equity, and state what is still missing before judging a call. Is checking available?
 
-Separate call price from equity. Snapshot repair: [turn-and-river-decisions #catching-a-bluff](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html#L28); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-catching-a-bluff). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
+Separate call price from equity. Snapshot repair: [turn-and-river-decisions #catching-a-bluff](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/turn-and-river-decisions.html#L28); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-catching-a-bluff). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
 
-Check candidates before assigning frequencies. Snapshot repair: [ranges-for-beginners #known-and-possible](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html#L5); [readable exhibit](reference-text.md#ref-ranges-for-beginners-known-and-possible). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
+Check candidates before assigning frequencies. Snapshot repair: [ranges-for-beginners #known-and-possible](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/ranges-for-beginners.html#L5); [readable exhibit](reference-text.md#ref-ranges-for-beginners-known-and-possible). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
 
 ## Hand B: return later from the small blind
 
@@ -354,9 +354,9 @@ Cumulative paid by seat: [0, 0, 6, 0, 1, 2]. Current-round hero payment: 1; curr
 
 How many additional chips would calling cost? Who still has an initial decision? If only you and the cutoff reach the flop, who acts first after the flop? Explain what changed from the button hand.
 
-Count only the additional chips. Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
+Count only the additional chips. Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
-Rebuild the action order. Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
+Rebuild the action order. Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
 
 ### B-flop
 
@@ -367,9 +367,9 @@ Cumulative paid by seat: [0, 0, 13, 0, 6, 2]. Current-round hero payment: 0; cur
 
 Name your best five and draw. How much would a call add? Can you check again? Explain why the chips you paid preflop do or do not reduce this call.
 
-Name the current hand and draw. Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+Name the current hand and draw. Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
 
-Reset the contribution for a new round. Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
+Reset the contribution for a new round. Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
 ### B-turn
 
@@ -382,9 +382,9 @@ Cumulative paid by seat: [0, 0, 13, 0, 13, 2]. Current-round hero payment: 0; cu
 
 Name your best five now. Compare the two possible holdings with yours. If both would call a proposed bet, does naming the worse caller alone establish a good value bet? What else would you compare with checking?
 
-Rebuild the hand when a draw arrives. Snapshot repair: [turn-and-river-decisions #turn-reset](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html#L5); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-turn-reset). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#turn-reset
+Rebuild the hand when a draw arrives. Snapshot repair: [turn-and-river-decisions #turn-reset](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/turn-and-river-decisions.html#L5); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-turn-reset). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#turn-reset
 
-Compare the responses with checking. Snapshot repair: [betting-with-a-purpose #value](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/betting-with-a-purpose.html#L12); [readable exhibit](reference-text.md#ref-betting-with-a-purpose-value). Live navigation: https://nolankido.com/poker/betting-with-a-purpose/#value
+Compare the responses with checking. Snapshot repair: [betting-with-a-purpose #value](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/betting-with-a-purpose.html#L12); [readable exhibit](reference-text.md#ref-betting-with-a-purpose-value). Live navigation: https://nolankido.com/poker/betting-with-a-purpose/#value
 
 ### B-river
 
@@ -398,9 +398,9 @@ Cumulative paid by seat: [0, 0, 27, 0, 13, 2]. Current-round hero payment: 0; cu
 
 Name your best five. Classify the candidates as impossible, legal and stronger, or legal and weaker. Did the checked turn rule out the stronger hand? Count the call and final pot, calculate the break-even equity and explain why the result will not measure the opponent's range.
 
-Calculate the changed call price. Snapshot repair: [turn-and-river-decisions #catching-a-bluff](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html#L28); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-catching-a-bluff). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
+Calculate the changed call price. Snapshot repair: [turn-and-river-decisions #catching-a-bluff](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/turn-and-river-decisions.html#L28); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-catching-a-bluff). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
 
-Keep possibility separate from frequency. Snapshot repair: [ranges-for-beginners #known-and-possible](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html#L5); [readable exhibit](reference-text.md#ref-ranges-for-beginners-known-and-possible). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
+Keep possibility separate from frequency. Snapshot repair: [ranges-for-beginners #known-and-possible](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/ranges-for-beginners.html#L5); [readable exhibit](reference-text.md#ref-ranges-for-beginners-known-and-possible). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
 
 ## Guided hand: inspect the recognition choices and feedback
 
@@ -415,7 +415,7 @@ After your initial action on the button, who still has an initial decision?
 - **B.** The small blind and the big blind.
 - **C.** Only the big blind.
 
-Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
+Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
 
 ### G-call
 
@@ -426,7 +426,7 @@ How many additional counters does the big blind need to call?
 - **B.** 8 more.
 - **C.** 4 more.
 
-Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
+Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
 ### G-flop
 
@@ -437,7 +437,7 @@ Which description fits your cards on this flop?
 - **B.** A completed heart flush.
 - **C.** Only a draw, with no made hand.
 
-Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
 
 ### G-raise
 
@@ -448,7 +448,7 @@ How many more counters would a flop call add?
 - **B.** 8 more.
 - **C.** 16 more.
 
-Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
+Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
 ### G-river
 
@@ -459,7 +459,7 @@ Which statement is justified before you decide?
 - **B.** Your draw can wait for one more community card.
 - **C.** You have a pair of jacks; a call would add 10.
 
-Snapshot repair: [turn-and-river-decisions #river-reset](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html#L11); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-river-reset). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#river-reset
+Snapshot repair: [turn-and-river-decisions #river-reset](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/turn-and-river-decisions.html#L11); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-river-reset). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#river-reset
 
 ### G-showdown
 
@@ -470,4 +470,4 @@ Which conclusion follows from this ending?
 - **B.** You make a profit of 57.
 - **C.** Winning proves every earlier bet and call was best.
 
-Snapshot repair: [ranges-for-beginners #one-reveal](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html#L37); [readable exhibit](reference-text.md#ref-ranges-for-beginners-one-reveal). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#one-reveal
+Snapshot repair: [ranges-for-beginners #one-reveal](https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/ranges-for-beginners.html#L37); [readable exhibit](reference-text.md#ref-ranges-for-beginners-one-reveal). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#one-reveal

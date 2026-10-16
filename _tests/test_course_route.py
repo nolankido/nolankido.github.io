@@ -30,7 +30,7 @@ class CourseRouteTests(unittest.TestCase):
         for path,digest in {**b['files'],**b['extras']}.items():
             self.assertEqual(sha256(history.before(path,(ROOT/path).read_bytes())).hexdigest(),digest,path)
         actual={p.relative_to(ROOT).as_posix() for d in ['_source','_scripts','assets','downloads'] for p in (ROOT/d).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
-        self.assertEqual(actual,set(b['files']))
+        self.assertEqual(history.files(actual),set(b['files']))
         self.assertEqual(history.change()['new_files'],{})
         self.assertEqual(history.change()['new_pages'],{})
         self.assertEqual(history.change()['new_outputs'],{})

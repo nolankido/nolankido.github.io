@@ -19,6 +19,7 @@ import poker_beginner_path
 import poker_library
 import checkpoint_history as history
 import productivity_history
+import poker_progress_history as progress_history
 from test_viewer_guides import Tags, best
 
 LABELS = ['one', 'two', 'three', 'four', 'five', 'six']
@@ -181,7 +182,8 @@ class CheckpointTests(unittest.TestCase):
             self.assertIn(phrase,self.source)
         self.assertNotRegex(self.source,r'<(?:script|form|input|textarea|iframe)\b')
         for path in ['assets/contact.js','_source/contact.html','_source/privacy.html']:
-            self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),self.baseline['files'][path])
+            raw = progress_history.before(path, (ROOT/path).read_bytes())
+            self.assertEqual(sha256(raw).hexdigest(),self.baseline['files'][path],path)
 
     def test_six_lesson_arrivals_course_links_live_targets_and_unreviewed_changes(self):
         for route in checkpoint.LESSONS:
@@ -194,7 +196,7 @@ class CheckpointTests(unittest.TestCase):
             href=a.get('href','')
             if href.startswith('/poker/') and '#' in href:
                 route,anchor=href.split('#');self.assertIn('id="'+anchor+'"',self.outputs[build.output_path(route)],href)
-        targets=check_live.targets();self.assertEqual(len(targets),470)
+        targets=check_live.targets();self.assertEqual(len(targets),472)
         self.assertEqual(targets['/'+checkpoint.SHEET],(200,(ROOT/checkpoint.SHEET).read_bytes()))
         self.assertEqual(targets[checkpoint.ROUTE],(200,self.current_outputs[build.output_path(checkpoint.ROUTE)].encode()))
         body=(ROOT/'_source/poker/free-poker-learning-path.html').read_text()

@@ -10,6 +10,7 @@ from pathlib import Path
 import json
 import re
 import author_archive_history
+import poker_progress_history
 
 ROOT = Path(__file__).resolve().parents[1]
 NEW_SOURCES = {'_source/search-entrypoints.json', '_source/reader-previews.json'}
@@ -24,7 +25,8 @@ def baseline():
 
 @lru_cache(maxsize=1)
 def config():
-    return json.loads((ROOT / '_source/search-entrypoints.json').read_text())['entries']
+    path = '_source/search-entrypoints.json'
+    return json.loads(poker_progress_history.before(path, (ROOT / path).read_text()))['entries']
 
 
 def pages(records):

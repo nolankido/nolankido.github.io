@@ -1,0 +1,28 @@
+{
+  "commit": "ca0264c251f2c999a8375d9e748521fe46ef22fe",
+  "source_count": 480,
+  "output_count": 221,
+  "source_fingerprint": "15bcd3632e7a7fbad545794d3ead579eedfcc28ecb1cecbe7c34ecff394a1f83",
+  "output_fingerprint": "dcf7f0169a6b5dc462e6ab74d7b26319ff9aecaa66351b213a6c9ddbd711a04a",
+  "extras": {
+    ".github/workflows/site-checks.yml": "4a580d7a4dfe618a6a4831e0be01c18e90581bd67b2f4ca9154b81bcfd3ed821",
+    "README.md": "f6b63787e2c764356a01ee2699164ce74d5127061ee61f2e5eaccd1d115751d4"
+  },
+  "teaching_inputs": {
+    "_source/poker/beginner-course.json": "99246f90e90d074262005b871693b8f43fbfb4f198a8b6ea37ec65f13eda42e4",
+    "_source/poker/course-lessons.json": "517594e06e86b8fd28fb27147f24943bfbe2e0cc98abf536304b456f7481a628",
+    "_source/poker/final-hands.json": "82cc67cdc3fee7443ac001080dc37688f22ee82e67cc55e919b90c80da7bf04c",
+    "_source/poker/free-poker-learning-path.html": "51cf9fb08da150f8301a97eddc39760146a28efbe45fa4cafc9c9b6dafe087b6",
+    "_source/poker/beginner-checkpoint.html": "cf657e86912bb1b6867422781648577ecc7762ed2e3f4c903313385dfe2bfd31",
+    "_scripts/poker_course.py": "bb7c5e2277e2b05640ab73f41099b8b1051e04a3bc9472fa898489a91919b6e3",
+    "_scripts/poker_lessons.py": "934f7658058a778693a096cb2e323833cd20e9b3d4244fe80c6b89838100834e",
+    "_scripts/poker_final_hands.py": "2523ea5089d261cb995f98ec27dc384f423b0abc7f7788ca370a89f9132d37f0",
+    "_source/poker/first-decisions.html": "d3cb4a41627b6406c30d6d5f2723a4722121db837a87b661a582fb4609c354f1",
+    "_source/poker/starting-hand-decisions.html": "0f38aaad548b6b78a35ad13943246426da72bc30f69b473f2cd4e449c3bdc443",
+    "_source/poker/first-flop-decisions.html": "00ed7bf081c5002e918a4014e9d9d39de65bd0f14ae45a2edce1c0e9c0e83b55",
+    "_source/poker/turn-and-river-decisions.html": "78295c8a6ecc44184da5735062ffdfa0e0fa091a59a5da79994e8f1246c50815",
+    "_source/poker/ranges-for-beginners.html": "9883dfb63b661fe47470acf00f4ca6e4180428f9d7409fd4360063efd935acf2",
+    "_source/poker/betting-with-a-purpose.html": "280777ff4e01332fee12798bc51c3f98286e56232872da584742c9e543289f80"
+  },
+  "teaching_fingerprint": "7449fd7a4632eace38d9e5c5b3d9d4e1554c0abf6febd97e61c5909aa5fe53fa"
+}

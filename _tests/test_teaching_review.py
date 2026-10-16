@@ -27,7 +27,7 @@ class TeachingReviewTests(unittest.TestCase):
     def test_committed_packet_covers_all_tasks_and_keeps_review_pending(self):
         packet.check(ROOT)
         scope = packet.read(ROOT, packet.FOLDER / 'scope.json')
-        self.assertEqual(scope['material_commit'], '74f438934beca0ab2563af0dfe279923d588f0f1')
+        self.assertEqual(scope['material_commit'], '8505785a02c2565e3dd97215f8ce7dc63aa6db43')
         self.assertEqual(len(scope['source_files']), 14)
         self.assertEqual(scope['human_review'], 'pending')
         rubric = packet.read(ROOT, packet.FOLDER / 'rubric.json')['skills']

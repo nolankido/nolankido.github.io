@@ -9,6 +9,7 @@ from unittest.mock import patch
 from test_site import ROOT, build
 import poker_search_history as history
 import poker_search_titles_history as title_history
+import poker_progress_history as progress_history
 
 FOLDER = ROOT / '_reports/poker-search-intent'
 spec = spec_from_file_location('poker_search_evaluation', FOLDER / 'evaluate.py')
@@ -73,6 +74,7 @@ const original=JSON.stringify(cards);ranked('two pair lose');assert.equal(JSON.s
         self.assertEqual(b['commit'], evaluation.BASE)
         files = {p.relative_to(ROOT).as_posix(): p.read_bytes() for d in capture.PREFIXES
                  for p in (ROOT / d).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+        files = progress_history.source_records(files)
         outputs = {str(p): raw.encode() for p, raw in self.outputs.items()}
         self.assertEqual((len(files), len(outputs)), (b['source_count'], b['output_count']))
         self.assertEqual(capture.fingerprint({p: history.before(p, raw) for p, raw in files.items()}), b['source_fingerprint'])

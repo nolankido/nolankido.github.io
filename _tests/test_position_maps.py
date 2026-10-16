@@ -34,7 +34,7 @@ class PositionMapTests(unittest.TestCase):
         for p, digest in {**b['files'], **b['extras']}.items():
             self.assertEqual(sha256(history.before(p, (ROOT / p).read_bytes())).hexdigest(), digest, p)
         files = {p.relative_to(ROOT).as_posix() for d in ['_source', '_scripts', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
-        self.assertEqual(files, set(b['files']))
+        self.assertEqual(history.files(files), set(b['files']))
         self.assertEqual(history.change()['new_pages'], {})
         self.assertEqual(history.change()['new_outputs'], {})
         self.assertEqual(history.change()['new_files'], {})
