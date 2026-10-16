@@ -1,7 +1,7 @@
 # Blank reviewer response
 
 Material commit: `74f438934beca0ab2563af0dfe279923d588f0f1`.
-Packet fingerprint: `6cdc772a6e3403551a9b5ffc1422fc054e6939f4b7254b79590528c9d2b995eb`.
+Packet fingerprint: `7449fd7a4632eace38d9e5c5b3d9d4e1554c0abf6febd97e61c5909aa5fe53fa`.
 Prepared 2026-10-16 UTC. **Human review: pending.**
 
 Complete a copy outside this public repository. Name and contact details are optional for private coordination; publish only an approved summary.

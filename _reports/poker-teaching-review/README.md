@@ -20,6 +20,9 @@ been supplied. This preparation does not close the cycle's human-review gate.
    and the six-scene guided hand. The twelve isolated checkpoint situations,
    best-five lab, betting rehearsal, optional practice banks and other guides
    are outside this review's scope.
+   Use the snapshot source links and readable exhibits to judge repair content.
+   Live links are for navigation checks and may show later edits. Every guided
+   scene's repair and any optional feedback paragraph are included in the key.
 3. Record **unreviewed / accept / revise / block** against each of the 18
    criteria. Use exact task IDs, an independent reason and an issue ID. A correct
    number alone does not establish that the explanation teaches the right reason.

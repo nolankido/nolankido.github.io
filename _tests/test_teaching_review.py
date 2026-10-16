@@ -3,8 +3,10 @@ from copy import deepcopy
 from importlib.util import module_from_spec, spec_from_file_location
 import json
 from pathlib import Path
+import re
 from tempfile import TemporaryDirectory
 import unittest
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLDER = ROOT / '_reports/poker-teaching-review'
@@ -70,6 +72,36 @@ class TeachingReviewTests(unittest.TestCase):
         self.assertEqual(rows['B-river']['candidate_comparisons'], ['impossible','stronger','weaker'])
         self.assertEqual(rows['L6-A']['best_rank'], (1,9,11,8,7))
         self.assertEqual(rows['G-showdown']['ending_stacks'], [100,100,100,129,99,72])
+
+    def test_all_feedback_and_repairs_have_snapshot_bound_exhibits(self):
+        key = (FOLDER / 'answer-key.md').read_text()
+        prompts = (FOLDER / 'packet.md').read_text()
+        reference = (FOLDER / 'reference-text.md').read_text()
+        scope = packet.read(ROOT, packet.FOLDER / 'scope.json')
+        guided = packet.read(ROOT, '_source/poker/beginner-course.json')['hand']['scenes']
+        def section(text, task, level):
+            match = re.search(r'(?ms)^' + '#' * level + ' ' + re.escape(task)
+                              + r'\n(.*?)(?=^#{1,' + str(level) + r'} |\Z)', text)
+            self.assertIsNotNone(match, task)
+            return match[1]
+        groups = [(lesson['attempt']['repair'], section(key, f'L{i}-A', 2))
+                  for i, lesson in enumerate(packet.read(ROOT, '_source/poker/course-lessons.json')['lessons'], 1)]
+        groups += [(url, section(prompts, h['id'].upper() + '-' + s['street'].lower(), 3))
+                   for h in packet.read(ROOT, '_source/poker/final-hands.json')['hands']
+                   for s in h['stops'] for url, _ in s['repairs']]
+        for scene in guided:
+            feedback = section(key, 'G-' + scene['id'], 2)
+            if scene.get('extra'): self.assertIn(scene['extra'], feedback)
+            groups += [(scene['repair'], feedback), (scene['repair'], section(prompts, 'G-' + scene['id'], 3))]
+        for route, text in groups:
+            target = urlsplit(route)
+            slug = target.path.strip('/').split('/')[-1]
+            pinned = 'https://github.com/nolankido/nolankido.github.io/blob/' + scope['material_commit'] + '/_source/poker/' + slug + '.html#L'
+            self.assertIn(pinned, text)
+            self.assertIn('(reference-text.md#ref-' + slug + '-' + target.fragment + ')', text)
+            self.assertIn('<a id="ref-' + slug + '-' + target.fragment + '"></a>', reference)
+        with self.assertRaises(ValueError):
+            packet.repair_exhibit(ROOT, scope, '/poker/first-decisions/#nonexistent')
 
     def test_invalid_cards_winners_and_ledgers_cannot_receive_a_clean_report(self):
         original = packet.read(ROOT, '_source/poker/final-hands.json')

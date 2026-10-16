@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[2]
 FOLDER = Path('_reports/poker-teaching-review')
@@ -207,6 +208,23 @@ def link(scope, path):
     return 'https://github.com/nolankido/nolankido.github.io/blob/' + scope['material_commit'] + '/' + path
 
 
+def repair_exhibit(root, scope, route):
+    target = urlsplit(route)
+    slug = target.path.removeprefix('/poker/').strip('/')
+    if (target.scheme or target.netloc or target.query or slug not in SLUGS
+            or not re.fullmatch('[a-z0-9-]+', target.fragment)):
+        raise ValueError('Repair must reach a scoped lesson section')
+    path = '_source/poker/' + slug + '.html'
+    pattern = re.compile(r'\bid=[\"\x27]' + re.escape(target.fragment) + r'[\"\x27]')
+    locations = [n for n, text in enumerate((root / path).read_text(encoding='utf-8').splitlines(), 1) if pattern.search(text)]
+    if len(locations) != 1:
+        raise ValueError('Repair needs one exact source destination: ' + route)
+    return ('Snapshot repair: [' + slug + ' #' + target.fragment + ']('
+            + link(scope, path) + '#L' + str(locations[0]) + '); '
+            '[readable exhibit](reference-text.md#ref-' + slug + '-' + target.fragment
+            + '). Live navigation: https://nolankido.com' + route)
+
+
 def stamp(scope):
     return ['Material commit: `' + scope['material_commit'] + '`.',
             'Packet fingerprint: `' + scope['fingerprint'] + '`.',
@@ -226,9 +244,9 @@ def case_text(lines, case):
 
 
 class ReferenceText(HTMLParser):
-    def __init__(self, source):
+    def __init__(self, source, slug):
         super().__init__(convert_charrefs=True)
-        self.lines, self.parts, self.skip = [], [], 0
+        self.lines, self.parts, self.skip, self.slug = [], [], 0, slug
         self.feed(source); self.flush()
 
     def flush(self):
@@ -239,12 +257,17 @@ class ReferenceText(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if tag in {'script', 'style'}: self.skip += 1
         if self.skip: return
+        anchor = dict(attrs).get('id')
+        if anchor:
+            if not re.fullmatch('[a-z0-9-]+', anchor):
+                raise ValueError('Reference anchor needs a stable safe ID')
+            self.flush()
+            self.lines.extend(['<a id="ref-' + self.slug + '-' + anchor + '"></a>', ''])
         if tag in {'p', 'li', 'h1', 'h2', 'h3', 'summary', 'tr', 'figcaption'}:
             self.flush()
             if tag.startswith('h') and tag[1:].isdigit():
                 self.parts.append('#### ')
             if tag == 'li': self.parts.append('- ')
-            anchor = dict(attrs).get('id')
             if anchor: self.parts.append('[' + anchor + '] ')
         if tag in {'td', 'th'} and self.parts: self.parts.append(' / ')
 
@@ -300,7 +323,7 @@ def documents(root, scope):
             case_text(packet, lesson[kind])
             key += ['## ' + task, '']
             for paragraph in lesson[kind]['answer']: key.extend([paragraph, ''])
-            if kind == 'attempt': key += ['Repair: https://nolankido.com' + lesson[kind]['repair'], '']
+            if kind == 'attempt': key += [repair_exhibit(root, scope, lesson[kind]['repair']), '']
         packet += ['Before approving: inspect the full source article, its first-pass sections, and every repair destination for this skill. Record any confusing terms, missing assumptions or feedback that would let the misconception survive.', '']
     for hand in hands:
         packet += ['## ' + hand['title'], '', 'Six players start with 100 counters each. Blinds 1/2; no antes, fees, all-ins, side pots or prize effects. Seats: first seat, next seat, cutoff, button, small blind, big blind.',
@@ -311,7 +334,9 @@ def documents(root, scope):
                        'Board available now: ' + (', '.join(hand['board'][:stop['board_count']]) or 'none') + '.',
                        'Cumulative paid by seat: ' + str(stop['paid']) + '. Current-round hero payment: ' + str(stop['street_paid']) + '; current wager: ' + str(stop['wager']) + '.', '']
             for c in stop.get('candidates', []): packet.append('- ' + c['label'] + ': ' + ', '.join(c['values']))
-            packet += ['', stop['prompt'], '', 'Review repair targets: ' + '; '.join('https://nolankido.com' + url for url, _ in stop['repairs']), '']
+            packet += ['', stop['prompt'], '']
+            for url, label in stop['repairs']:
+                packet += [label + '. ' + repair_exhibit(root, scope, url), '']
             key += ['## ' + task, '']
             for paragraph in stop['answer']: key.extend([paragraph, ''])
         key += ['## ' + hand['id'].upper() + '-showdown', '', 'Opponent: ' + ', '.join(hand['opponent']) + '.', '']
@@ -322,9 +347,11 @@ def documents(root, scope):
         task = 'G-' + scene['id']
         packet += ['### ' + task, '', scene['action'], scene['question'], '']
         packet.extend('- **' + chr(65 + i) + '.** ' + label for i, (label, _) in enumerate(scene['choices']))
-        packet.append('')
+        packet += ['', repair_exhibit(root, scope, scene['repair']), '']
         key += ['## ' + task, '', 'Current selected answer: ' + chr(65 + scene['correct']) + '.', scene['solution'],
                 '', *['- **' + chr(65 + i) + ':** ' + reason for i, (_, reason) in enumerate(scene['choices'])], '']
+        if scene.get('extra'): key += [scene['extra'], '']
+        key += [repair_exhibit(root, scope, scene['repair']), '']
     evidence = audit(root)
     tasks = {r['task'] for r in evidence['cases']}
     if any(task not in tasks for s in rubric for task in s['tasks']):
@@ -362,7 +389,7 @@ def documents(root, scope):
         source = (root / path).read_text(encoding='utf-8')
         for token, value in tokens.items(): source = source.replace('${' + token + '}', value)
         if '${' in source: raise ValueError('Unresolved source text in reviewer reference')
-        reference += ['## ' + slug, '', link(scope, path), '', *ReferenceText(source).lines]
+        reference += ['## ' + slug, '', link(scope, path), '', *ReferenceText(source, slug).lines]
     return {'packet.md': '\n'.join(packet), 'answer-key.md': '\n'.join(key),
             'review-form.md': '\n'.join(form), 'reference-text.md': '\n'.join(reference),
             'mechanics.json': encoded({'scope_fingerprint': scope['fingerprint'], **evidence}).decode()}

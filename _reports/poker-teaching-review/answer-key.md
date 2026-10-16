@@ -1,7 +1,7 @@
 # Current feedback and mechanical cross-check
 
 Material commit: `74f438934beca0ab2563af0dfe279923d588f0f1`.
-Packet fingerprint: `6cdc772a6e3403551a9b5ffc1422fc054e6939f4b7254b79590528c9d2b995eb`.
+Packet fingerprint: `7449fd7a4632eace38d9e5c5b3d9d4e1554c0abf6febd97e61c5909aa5fe53fa`.
 Prepared 2026-10-16 UTC. **Human review: pending.**
 
 This key reproduces the current teaching feedback for inspection. It is not an independent human approval. Check the current prose against the recomputed card and ledger evidence below.
@@ -16,7 +16,7 @@ Your best five are Q-Q-J-9-5, a pair of queens. A call adds 7 - 0 = 7. The 6 was
 
 Look for both parts in your explanation: five actual cards, and a payment counted on the current round. If you subtracted the earlier 6, reset the round's contribution to zero before counting again.
 
-Repair: https://nolankido.com/poker/first-decisions/#chips-owed
+Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
 ## L2-W
 
@@ -28,7 +28,7 @@ A call adds 6 - 1 = 5. The big blind still has an initial decision, and a raise 
 
 Your two cards did not change, but the earlier action, price and position did. If you reach a flop, the small blind acts before the other remaining seats in this six-player hand. The price alone does not settle whether to continue.
 
-Repair: https://nolankido.com/poker/starting-hand-decisions/#position
+Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
 
 ## L3-W
 
@@ -40,7 +40,7 @@ Your best five are K-K-Q-8-3, a pair of kings with a queen kicker. Four spades g
 
 Another spade would complete a flush, but it would not guarantee a win. A stronger flush or another stronger hand can be possible, depending on the later board and opposing cards. Keep 'improves my hand' separate from 'wins the pot.'
 
-Repair: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
 
 ## L4-W
 
@@ -52,7 +52,7 @@ Your best five are Q-Q-J-9-6. Four spades leave a missed flush draw and a pair o
 
 The same bet of 12 has a different price because the earlier pot changed. You still need a justified model of the opponent's possible hands and their frequencies to estimate your pot share, including ties. The arithmetic alone does not show that calling is best.
 
-Repair: https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
+Snapshot repair: [turn-and-river-decisions #catching-a-bluff](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html#L28); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-catching-a-bluff). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
 
 ## L5-W
 
@@ -64,7 +64,7 @@ A is impossible because you hold the king of spades. B and C reuse none of the k
 
 Neither physical possibility nor one reveal establishes a frequency. Different models can allow the same observed hand. Say which cards and actions are known, then label any frequency as an assumption needing evidence.
 
-Repair: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
+Snapshot repair: [ranges-for-beginners #known-and-possible](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html#L5); [readable exhibit](reference-text.md#ref-ranges-for-beginners-known-and-possible). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
 
 ## L6-W
 
@@ -76,7 +76,7 @@ Your best five are 9-9-J-8-7. The eights are worse and, under the supplied respo
 
 That is useful evidence within the example, not a complete verdict. You still need the frequencies of opposing hands, other possible holdings and their responses, including raises. Compare the resulting expectation with checking. Winning one pot would not fill those gaps or prove the bet was best.
 
-Repair: https://nolankido.com/poker/betting-with-a-purpose/#value
+Snapshot repair: [betting-with-a-purpose #value](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/betting-with-a-purpose.html#L12); [readable exhibit](reference-text.md#ref-betting-with-a-purpose-value). Live navigation: https://nolankido.com/poker/betting-with-a-purpose/#value
 
 ## A-preflop
 
@@ -155,6 +155,8 @@ The small blind and big blind still act. Before the flop, the initial action beg
 - **B:** Yes. The two seats after the button still have their initial decisions.
 - **C:** The small blind still acts before the big blind. Its forced post was not its initial decision.
 
+Snapshot repair: [starting-hand-decisions #position](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/starting-hand-decisions.html#L17); [readable exhibit](reference-text.md#ref-starting-hand-decisions-position). Live navigation: https://nolankido.com/poker/starting-hand-decisions/#position
+
 ## G-call
 
 Current selected answer: C.
@@ -163,6 +165,8 @@ The call adds 6 - 2 = 4. The big blind's total contribution becomes 6. The pot t
 - **A:** Six is the total wager. The big blind has already paid 2 of that total on this round.
 - **B:** Adding the posted 2 to the total 6 counts those forced chips twice.
 - **C:** Yes. Subtract the big blind's 2 already paid from the total wager of 6.
+
+Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
 ## G-flop
 
@@ -173,6 +177,8 @@ Your current best five are J-J-A-7-2. You have a pair of jacks with an ace kicke
 - **B:** A flush needs five hearts. Only four hearts are available to you now.
 - **C:** The board's jack and your private jack already make a pair, even though you also have a draw.
 
+Snapshot repair: [first-flop-decisions #made-and-drawing](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-flop-decisions.html#L5); [readable exhibit](reference-text.md#ref-first-flop-decisions-made-and-drawing). Live navigation: https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+
 ## G-raise
 
 Current selected answer: B.
@@ -181,6 +187,8 @@ The call adds 12 - 4 = 8, making the pot 37. Each remaining player has put in 6 
 - **A:** Twelve is the opponent's total flop wager. Your 4 on this round already pays part of it.
 - **B:** Yes. Match 12 total after accounting for your 4 already paid on the flop.
 - **C:** The raise is to 12 total, not by another 12 on top of your bet of 4.
+
+Snapshot repair: [first-decisions #chips-owed](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html#L28); [readable exhibit](reference-text.md#ref-first-decisions-chips-owed). Live navigation: https://nolankido.com/poker/first-decisions/#chips-owed
 
 ## G-river
 
@@ -191,6 +199,10 @@ Your best five are J-J-A-9-7. The flush did not arrive, but your pair remains. A
 - **B:** The river is the fifth and final shared card. No later card will complete this missed draw.
 - **C:** Yes. The missed flush leaves your pair, and no earlier-round payment covers this new bet.
 
+Optional after stage 4: if a call ends this heads-up cash-game hand, 10 / 57 is about 17.54%. With no fees or side pots this prices a call in chips; it does not measure your hand's equity or prove that calling is correct.
+
+Snapshot repair: [turn-and-river-decisions #river-reset](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html#L11); [readable exhibit](reference-text.md#ref-turn-and-river-decisions-river-reset). Live navigation: https://nolankido.com/poker/turn-and-river-decisions/#river-reset
+
 ## G-showdown
 
 Current selected answer: A.
@@ -199,6 +211,8 @@ Your J-J-A-9-7 beats the opponent's J-J-Q-9-7 because the ace kicker outranks th
 - **A:** Yes. Your ace kicker wins, and receiving the pot includes getting back your own contributions.
 - **B:** You receive 57, but 28 of it is your own earlier contribution. The net gain is 29.
 - **C:** One ending does not compare your choices against the alternatives or validate an assumed range.
+
+Snapshot repair: [ranges-for-beginners #one-reveal](https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html#L37); [readable exhibit](reference-text.md#ref-ranges-for-beginners-one-reveal). Live navigation: https://nolankido.com/poker/ranges-for-beginners/#one-reveal
 
 ## Independent recomputation from structured fields
 
