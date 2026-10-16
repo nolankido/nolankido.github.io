@@ -142,16 +142,24 @@
     update(); focusItem(review);
   });
   restart.addEventListener('click', () => { reset(); focusItem(items[0].el); });
+  let arrivalToken = 0;
+  root.addEventListener('focusin', () => { arrivalToken++; });
   const fragment = focus => {
     const target = document.getElementById(location.hash.slice(1));
     const el = target && target.closest('[data-lab-case]');
     const match = items.findIndex(item => item.el === el);
     if (match < 0) return;
     index = match; complete = false; update();
-    requestAnimationFrame(() => { if (focus) focusItem(el); else {
-      const header = document.querySelector('.site-header');
-      scrollTo({top: scrollY + el.getBoundingClientRect().top - (header ? header.getBoundingClientRect().height : 0) - 20, behavior: 'instant'});
-    } });
+    const token = ++arrivalToken, hash = location.hash;
+    const settle = () => document.fonts.ready.then(() => requestAnimationFrame(() => {
+      if (token !== arrivalToken || location.hash !== hash || el.hidden || complete) return;
+      if (focus) focusItem(el); else {
+        const header = document.querySelector('.site-header');
+        scrollTo({top: scrollY + el.getBoundingClientRect().top - (header ? header.getBoundingClientRect().height : 0) - 20, behavior: 'instant'});
+      }
+    }));
+    settle();
+    if (document.readyState !== 'complete') addEventListener('load', settle, {once: true});
   };
   root.addEventListener('click', event => {
     const link = event.target.closest('a');

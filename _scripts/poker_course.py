@@ -98,11 +98,12 @@ def guided_hand(root):
     return ('<section id="first-hand-practice" class="course-hand" aria-labelledby="course-hand-title" data-course-hand>'
             '<h2 id="course-hand-title">Follow one hand, one decision at a time.</h2>'
             '<p>Use counters or paper. The actions are scripted to explain the rules and accounting; they are not betting recommendations. Read a scene, give your reason, then compare it with the explanation. You can continue after any answer.</p>'
-            '<p><a href="#beginner-practice">Skip to the six-stage lesson map</a>. No account or wager is needed.</p>'
+            '<p><a href="#beginner-practice">Return to the six-lesson map</a>. No account or wager is needed.</p>'
             '<p class="course-scene-progress" data-course-progress aria-live="polite">Six scenes, from the first action to the result.</p>'
             '<ol class="course-scenes">' + ''.join(scenes) + '</ol>'
             '<nav class="course-hand-controls" aria-label="Guided hand scenes" data-course-enhanced hidden><button type="button" data-course-back>Previous scene</button><button type="button" data-course-next disabled>Next scene</button></nav>'
-            '<p data-course-finish hidden>You reached the final scene. <a href="#beginner-practice">Choose the first unfamiliar stage below</a>, then <a href="/poker/beginner-checkpoint/">try a different situation</a>. A familiar answer is a cue to explain the reason again later.</p></section>')
+            '<p data-course-finish hidden>You reached the final scene. Keep one correction in your own notes, then <a href="/poker/beginner-checkpoint/">try a different situation</a> when you are ready. A familiar answer is a cue to explain the reason again later.</p>'
+            '<p class="course-practice-return"><a href="#beginner-practice">Return to the six-lesson map</a> when you have answered the question you came to practice.</p></section>')
 
 
 def lesson_support(page, body, root):
@@ -191,6 +192,18 @@ def overview(root, source):
         raise ValueError('Course overview needs one workbook preview marker')
     preview = '<details class="poker-details" id="course-workbook-preview"><summary>Preview the complete blank study card</summary><div><pre class="worksheet-preview">' + escape(workbook(root)) + '</pre></div></details>'
     return source.replace(marker, preview, 1)
+
+
+def entry(page, header, body):
+    """Put the existing course start controls directly below its title."""
+    if page['path'] != ROUTE:
+        return header, body
+    rows = [row for row in re.findall(r'<div class="link-row">.*?</div>', body, re.S)
+            if 'href="/poker/first-decisions/"' in row and 'href="#card-basics"' in row]
+    if len(rows) != 1 or header.count('</h1>') != 1 or 'course-entry-actions' in header:
+        raise ValueError('Course entry needs one start row and one title')
+    actions = rows[0].replace('class="link-row"', 'class="link-row course-entry-actions"', 1)
+    return header.replace('</h1>', '</h1>' + actions, 1), body.replace(rows[0], '', 1)
 
 
 def head(page, root):

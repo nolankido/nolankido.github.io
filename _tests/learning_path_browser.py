@@ -15,6 +15,58 @@ CHECKS = ['cards', 'starting', 'flop', 'river', 'ranges', 'purpose']
 SPACING = '* {line-height:1.5 !important;letter-spacing:.12em !important;word-spacing:.16em !important} p {margin-bottom:2em !important}'
 
 
+def enter(page,locator):
+    locator.scroll_into_view_if_needed()
+    locator.focus()
+    expect(locator).to_be_focused()
+    expect(locator).to_be_in_viewport()
+    page.keyboard.press('Enter')
+
+
+def course_route(page,origin,report,shots=None,width=390):
+    page.evaluate('()=>document.fonts.ready.then(()=>true)')
+    expect(page.locator('.course-entry-actions .button')).to_be_in_viewport(ratio=1)
+    expect(page.locator('.course-entry-actions a[href="#card-basics"]')).to_be_in_viewport(ratio=1)
+    enter(page,page.locator('.course-entry-actions .button'))
+    expect(page).to_have_url(origin+'/poker/first-decisions/')
+    page.wait_for_load_state('domcontentloaded')
+    expect(page.locator('#course-first-pass-title')).to_have_text('Start with the short lesson.')
+    enter(page,page.locator('#beginner-path-navigation > summary'))
+    enter(page,page.locator('#beginner-path-navigation a[href="'+ROUTE+'#beginner-practice"]'))
+    expect(page).to_have_url(origin+ROUTE+'#beginner-practice')
+    page.wait_for_load_state('domcontentloaded')
+    page.evaluate('()=>document.fonts.ready.then(()=>true)')
+    expect(page.locator('#beginner-practice-heading')).to_be_in_viewport()
+    if shots and width in [390,1440]:
+        position(page,page.locator('#beginner-practice-heading'))
+        page.screenshot(path=str(shots/f'course-route-map-{width}.png'))
+    report['course_entries']+=1
+    for target,heading in [('#card-basics','#card-basics-title'),('#first-hand-practice','#course-hand-title'),('#betting-rehearsal','#round-practice-title')]:
+        enter(page,page.locator('.course-quick-links a[href="#practice-tools"]'))
+        expect(page.locator('#practice-tools')).to_be_in_viewport()
+        if shots and width in [390,1440] and target=='#card-basics':
+            position(page,page.locator('#practice-tools'))
+            page.screenshot(path=str(shots/f'course-route-tools-{width}.png'))
+        enter(page,page.locator('.course-tool-menu a[href="'+target+'"]'))
+        expect(page.locator(heading)).to_be_in_viewport()
+        report['optional_arrivals']+=1
+        if target=='#card-basics':
+            enter(page,page.locator('.hand-basics-ready a'))
+            expect(page).to_have_url(origin+'/poker/first-decisions/')
+            page.wait_for_load_state('domcontentloaded')
+            page.goto(origin+ROUTE)
+            page.evaluate('()=>document.fonts.ready.then(()=>true)')
+        elif target=='#first-hand-practice':
+            enter(page,page.locator('.course-practice-return a'))
+            expect(page.locator('#beginner-practice-heading')).to_be_in_viewport()
+        else:
+            enter(page,page.locator('#betting-rehearsal a[href="#beginner-practice"]'))
+            expect(page.locator('#beginner-practice-heading')).to_be_in_viewport()
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+    page.goto(origin+ROUTE)
+    page.evaluate('()=>document.fonts.ready.then(()=>true)')
+
+
 def position(page, locator):
     locator.evaluate("el=>{const h=document.querySelector('.site-header').getBoundingClientRect().height;window.scrollTo({top:scrollY+el.getBoundingClientRect().top-h-16,behavior:'instant'});}")
     expect(locator).to_be_in_viewport()
@@ -27,7 +79,7 @@ def main():
     origin = 'http://127.0.0.1:' + str(server.server_port)
     shots = Path(os.environ['SCREENSHOT_DIR']) if os.environ.get('SCREENSHOT_DIR') else None
     if shots: shots.mkdir(parents=True, exist_ok=True)
-    report = {'viewport_checks': 0, 'keyboard_answers': 0, 'path_menus': 0, 'lesson_arrivals': 0, 'return_arrivals': 0, 'axe': []}
+    report = {'viewport_checks': 0, 'keyboard_answers': 0, 'path_menus': 0, 'lesson_arrivals': 0, 'return_arrivals': 0, 'course_entries':0,'optional_arrivals':0,'axe': []}
     errors = []
     try:
         with sync_playwright() as pw:
@@ -42,6 +94,9 @@ def main():
                 response = page.goto(origin + ROUTE)
                 assert response and response.status == 200
                 page.evaluate('()=>document.fonts.ready.then(()=>true)')
+                if shots and width in [390,1440]:
+                    page.screenshot(path=str(shots/f'course-route-entry-{width}.png'))
+                course_route(page,origin,report,shots,width)
                 expect(page.locator('#beginner-practice .viewer-question')).to_have_count(6)
                 expect(page.locator('#beginner-practice .viewer-question[open]')).to_have_count(0)
                 expect(page.locator('#session-one')).to_have_text('1. Tell the story of one hand.')
@@ -121,6 +176,7 @@ def main():
             offline = browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 900})
             offline.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
             static = offline.new_page(); static.goto(origin + ROUTE)
+            course_route(static,origin,report)
             static.locator('#path-check-flop summary').focus(); static.keyboard.press('Enter')
             expect(static.locator('#path-check-flop div')).to_contain_text('9-9-A-6-2')
             static.locator('#path-flop h3 a').focus(); static.keyboard.press('Enter')
@@ -129,6 +185,10 @@ def main():
             expect(static.locator('#beginner-path-navigation nav')).to_be_visible()
             static.locator('#beginner-path-navigation a[href="' + ROUTE + '#beginner-practice"]').focus(); static.keyboard.press('Enter')
             expect(static).to_have_url(origin + ROUTE + '#beginner-practice')
+            blocked=browser.new_context(viewport={'width':390,'height':900})
+            blocked.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' and r.request.resource_type!='script' else r.abort())
+            native=blocked.new_page();native.goto(origin+ROUTE)
+            course_route(native,origin,report)
             assert not errors, errors
             browser.close()
     finally:

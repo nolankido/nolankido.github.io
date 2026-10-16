@@ -392,6 +392,7 @@ def build_outputs() -> dict[Path, str]:
         extra += poker_round_practice.head(p, ROOT)
         extra += author_archive.head(p, ROOT)
         header = search_entrypoints.header(p, header)
+        header, body = poker_course.entry(p, header, body)
         extra += search_entrypoints.head(p, ROOT)
         search_version = hashlib.sha256((ROOT / 'assets/search-visibility.css').read_bytes()).hexdigest()[:12]
         extra += f'\n  <link rel="stylesheet" href="/assets/search-visibility.css?v={search_version}">'

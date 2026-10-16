@@ -26,7 +26,14 @@ def decorate(page, body, root):
     anchor = '<section class="course-later" aria-labelledby="how-to-use">'
     if body.count(anchor) != 1 or 'id="beginner-practice"' in body:
         raise ValueError('Beginner route requires one original study-plan anchor')
-    addition = poker_hand_lab.render(root) + poker_course.guided_hand(root) + poker_round_practice.render(root) + poker_course.overview(root, (root / '_source/poker/beginner-learning-path.html').read_text(encoding='utf-8'))
+    lessons = poker_course.overview(root, (root / '_source/poker/beginner-learning-path.html').read_text(encoding='utf-8'))
+    tools = ('<section class="course-tool-menu" aria-labelledby="practice-tools"><h2 id="practice-tools">Optional practice when you need it.</h2>'
+             '<p>The six lessons above are the course. Choose one tool below when it helps with a particular difficulty, then return to the lesson you were studying. You can use paper, a deck or counters. There is no requirement to finish all of these exercises.</p>'
+             '<ul class="course-tool-choices"><li><a href="#card-basics">Card basics and best-five practice</a><p>Use this when card names, rankings or choosing five cards are unfamiliar. Read the basics and one worked selection, then begin lesson 1; the ten extra hands are available for later practice.</p></li>'
+             '<li><a href="#first-hand-practice">A guided hand from deal to result</a><p>Use this when the sequence of a hand is hard to follow. Explain one scripted scene, compare the feedback, then pause or continue.</p></li>'
+             '<li><a href="#betting-rehearsal">A betting round with counters</a><p>Use this when you lose track of whose turn it is or how many extra chips to add. Take the seats’ turns in one round, then return to the relevant lesson.</p></li></ul>'
+             '<p><a href="#beginner-practice">Return to the six-lesson map</a> or <a href="/poker/beginner-checkpoint/#course-hand">attempt the complete-hand finish after the lessons</a>.</p></section>')
+    addition = lessons + tools + poker_hand_lab.render(root) + poker_course.guided_hand(root) + poker_round_practice.render(root)
     return body.replace(anchor, addition + anchor, 1)
 
 

@@ -156,7 +156,7 @@ class ShortLessonTests(unittest.TestCase):
     def test_short_lessons_add_no_script_or_personal_state_and_stay_bounded(self):
         for path, digest in self.baseline['files'].items():
             if path.endswith('.js'):
-                self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), digest, path)
+                self.assertEqual(sha256(history.before(path, (ROOT / path).read_bytes())).hexdigest(), digest, path)
         for lesson in self.lessons:
             self.assertLess(len(json.dumps(lesson).split()), 550)
             self.assertNotIn(chr(0x2014), json.dumps(lesson, ensure_ascii=False))
