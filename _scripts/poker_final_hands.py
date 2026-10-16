@@ -105,7 +105,7 @@ def workbook(root):
             for candidate in stop.get('candidates', []):
                 lines.append(candidate['label'] + ': ' + ' '.join(candidate['values']))
             lines += [stop['prompt'], 'My first explanation:', 'One correction after comparing:', 'Compare: https://nolankido.com' + ROUTE + '#' + anchor + '-answer']
-        lines += ['', 'My explanation before the result:', 'The result did or did not support my original assumptions because:',
+        lines += ['', 'My explanation before the result:', 'One thing the result shows; one thing it does not establish:',
                   'Reveal only afterward: https://nolankido.com' + ROUTE + '#course-hand-' + hand['id'] + '-ending', '']
     lines += ['Without looking, I could explain:', 'One repair and the section to revisit:', 'On my later attempt, what changed:',
               'These are self-check notes, not a skill score. No answers are sent to the website.', '']

@@ -163,7 +163,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(targets[ROUTE], (200, self.current_outputs[build.output_path(ROUTE)].encode()))
         self.assertIn(path.PATH, self.current_outputs[Path('poker/topics/learn/index.html')])
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', text, re.S)[1])
-        self.assertEqual((schema['datePublished'], schema['dateModified']), ('2026-10-08', '2026-10-15'))
+        self.assertEqual((schema['datePublished'], schema['dateModified']), ('2026-10-08', '2026-10-16'))
         entries = poker_library.load(ROOT, build.public_pages())
         entry = next(e for e in entries if e['route'] == ROUTE)
         self.assertEqual(entry['minutes'], poker_library.minutes(poker_checkpoint.decorate(self.page, path.decorate(self.page, (ROOT / SOURCE).read_text(), ROOT), ROOT)))
