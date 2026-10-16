@@ -129,12 +129,12 @@ class HandLabTests(unittest.TestCase):
         result=node("const h=require('./assets/poker-hand-lab.js');let rejected=0;for(const c of [null,[],['As','As','Kh','Qh','Jh'],['1s','2s','3s','4s','5s'],['As','Ks','Qs','Js','Ts','9s'],['as','Ks','Qs','Js','Ts']]){try{h.scoreFive(c);}catch(e){rejected++;}}process.stdout.write(JSON.stringify(rejected));")
         self.assertEqual(result,6)
 
-    def test_new_foundations_precede_the_hand_and_connect_to_existing_stages(self):
+    def test_optional_foundations_follow_the_course_map_and_precede_the_guided_hand(self):
         html=self.outputs[build.output_path(lab.ROUTE)]
         doc=html5lib.parse(html,namespaceHTMLElements=False)
         ids=[e.get('id') for e in doc.iter() if e.get('id')]
         self.assertLess(ids.index('card-basics'),ids.index('first-hand-practice'))
-        self.assertLess(ids.index('first-hand-practice'),ids.index('beginner-practice'))
+        self.assertLess(ids.index('beginner-practice'),ids.index('card-basics'))
         self.assertEqual(len([e for e in doc.iter('input') if e.get('type')=='checkbox']),70)
         self.assertEqual(len([e for e in doc.iter('article') if 'data-lab-case' in e.attrib]),10)
         for slug,case in [('first-decisions','pair'),('first-flop-decisions','three-kind'),('turn-and-river-decisions','two-pair')]:

@@ -57,7 +57,7 @@ def main():
                 page.set_viewport_size({'width':width,'height':950})
                 assert page.goto(origin+ROUTE).status==200
                 page.evaluate('()=>document.fonts.ready.then(()=>true)')
-                enter(page,page.locator('.article-body > .link-row .button[href="#card-basics"]'))
+                enter(page,page.locator('.article-body > .link-row a[href="#card-basics"]'))
                 expect(page.locator('#card-basics-title')).to_be_in_viewport()
                 assert page.locator('#card-basics-title').evaluate("el=>el.getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom")
                 expect(page.locator('.hand-lab-rankings')).not_to_have_attribute('open','')

@@ -4,6 +4,13 @@ A small static website for introductions, selected writing, and practical resour
 
 ## Beginner Poker course
 
+The overview puts the six-lesson route and finish before the optional practice
+tools. `_scripts/poker_beginner_path.py` owns that order and the three-tool menu.
+Card basics provide a direct lesson-1 continuation before the extra exercises.
+All practice anchors remain available. See `_reports/course-entrance-review.md`;
+`test_course_route.py` and `learning_path_browser.py` check the core and optional
+journeys without adding learner tracking or saved progress.
+
 The course finish now connects its six skills across two complete fictional
 hands at `/poker/beginner-checkpoint/#course-hand`. The later streets, feedback
 and results use closed native disclosures. `_source/poker/final-hands.json`

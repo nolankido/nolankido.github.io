@@ -1,6 +1,6 @@
 /* One bounded practice scene and a plain route through the beginner references. */
 /* Keep keyboard focus and native fragment arrivals from starting competing scrolls. */
-html:has(.course-first-pass),html:has(.course-final) { scroll-behavior:auto; }
+html:has(.course-first-pass),html:has(.course-final),html:has(.course-tool-menu) { scroll-behavior:auto; }
 .course-hand,.course-first-pass,.course-stage-end { margin:32px 0; padding:clamp(18px,3vw,28px); border:1px solid var(--line-dark); border-top:3px solid var(--red); background:var(--paper-light); }
 .course-hand h2,.course-first-pass h2,.course-stage-end h2 { margin-top:0; }
 .course-scenes { list-style:none; padding:0; margin:24px 0; }
@@ -67,3 +67,12 @@ html:has(.course-first-pass),html:has(.course-final) { scroll-behavior:auto; }
 #course-hand,#course-hand-review,[id^="course-hand-"] { scroll-margin-top:160px; }
 @media(max-width:600px) { .course-final { padding:16px; } .course-final-return > div,.course-final-street > div { padding:16px 0; } .course-final-answer > div { padding:16px 12px; } }
 @media print { .course-final { padding:0; border:0; background:white; } .course-final details > div { display:block!important; } .course-final details::details-content { content-visibility:visible!important; } .course-final h3,.course-final h4 { break-after:avoid; } }
+
+/* Keep the course route ahead of supporting practice. */
+.course-tool-menu { margin:40px 0 24px; padding-top:24px; border-top:2px solid var(--line-dark); }
+.course-tool-choices { list-style:none; padding:0; display:grid; gap:16px; }
+.course-tool-choices > li { padding:16px; margin:0; border-left:3px solid var(--red); background:var(--panel); }
+.course-tool-choices > li > a { display:inline-flex; align-items:center; min-height:44px; font:700 1rem/1.5 var(--sans); }
+.course-tool-choices p { margin:8px 0 0; }
+#practice-tools { scroll-margin-top:160px; }
+@media print { .course-tool-menu { border:0; } .course-tool-choices > li { background:white; } }

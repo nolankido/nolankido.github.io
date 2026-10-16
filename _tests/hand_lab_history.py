@@ -42,5 +42,5 @@ def files(paths):
     paths = round_practice_history.files(paths)
     def keep(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
-        return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()
+        return change()['new_files'].get(key) != sha256(round_practice_history.before(key, (ROOT / path).read_bytes())).hexdigest()
     return type(paths)(path for path in paths if keep(path))
