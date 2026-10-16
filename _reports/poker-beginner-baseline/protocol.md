@@ -124,8 +124,8 @@ Anything the facilitator then explains is logged as content help.
 ## B: Short break, target 10 minutes
 
 Close lesson/feedback and take a neutral break without poker study or discussion.
-Record the actual interval from the last poker explanation to the follow-up
-response. Allow a shorter interval if needed and label it. Do not describe this
+Record the actual interval from the last poker explanation until the follow-up
+problem is shown. Allow a shorter interval if needed and label it. Do not describe this
 as week-later retention or a validated spacing interval. No answers or follow-up
 problem are shown during the break.
 
