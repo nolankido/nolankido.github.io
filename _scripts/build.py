@@ -154,6 +154,7 @@ def build_outputs() -> dict[Path, str]:
     values.update(poker_content.supplement(catalog, ROOT))
     values.update(poker_experience.supplement(catalog))
     resource_entries = poker_resources.load(ROOT)
+    values.update({key: text(value) for key, value in poker_resources.rules_values(ROOT).items()})
     collections = poker_collections.load(ROOT, resource_entries, pages)
     resource_selection = poker_selection.load(ROOT, resource_entries)
     values.update(poker_selection.supplement(resource_selection, resource_entries))

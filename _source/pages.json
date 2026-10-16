@@ -437,8 +437,9 @@
     "source": "poker/position-and-stacks.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-05",
-    "poker_guide": true
+    "updated": "2026-10-16",
+    "poker_guide": true,
+    "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
   },
   {
     "id": "poker-reading-the-board",
@@ -489,8 +490,9 @@
     "source": "poker/table-etiquette.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-08",
-    "poker_guide": true
+    "updated": "2026-10-16",
+    "poker_guide": true,
+    "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
   },
   {
     "id": "poker-follow-along",
@@ -502,8 +504,9 @@
     "source": "poker/follow-along.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-05",
-    "poker_guide": true
+    "updated": "2026-10-16",
+    "poker_guide": true,
+    "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
   },
   {
     "id": "poker-pot-odds-workshop",
@@ -900,8 +903,9 @@
     "source": "poker/poker-rules-and-fair-play.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-08",
-    "poker_guide": true
+    "updated": "2026-10-16",
+    "poker_guide": true,
+    "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
   },
   {
     "id": "poker-find",

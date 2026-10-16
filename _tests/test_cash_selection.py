@@ -13,6 +13,7 @@ import unittest
 from test_site import ROOT, Page, build
 import check_live
 import poker_selection
+import rules_reference_history
 
 SLUGS = ('first-live-cash-game', 'cash-game-costs', 'cash-game-study-path')
 
@@ -71,7 +72,7 @@ class CashSelectionTests(unittest.TestCase):
 
     def test_existing_resource_identity_access_and_reviews_are_unchanged(self):
         # Snapshot of the 145 approved records at baseline 2a625ce, not a new review claim.
-        original = [r for r in self.resources if r['id'] != 'stars-live-cash-rules']
+        original = [r for r in rules_reference_history.resources(self.resources) if r['id'] != 'stars-live-cash-rules']
         self.assertEqual(len(original),145)
         self.assertEqual(sha256(json.dumps(original,sort_keys=True,ensure_ascii=False).encode()).hexdigest(), 'b80e3f91b32bef0e250dac5bbc362a8032283f244f5ab6a9915e3fbd53164948')
         added=self.by_id['stars-live-cash-rules']

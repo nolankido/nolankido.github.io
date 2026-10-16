@@ -1,7 +1,7 @@
 {
   "version": 1,
   "directory": "https://nolankido.com/poker/resources/",
-  "latest_listing_review": "2026-10-08",
+  "latest_listing_review": "2026-10-16",
   "scope": "Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.",
   "entries": [
     {
@@ -952,8 +952,8 @@
       "access": "Free",
       "level": "All levels",
       "description": "Tournament rules, recommended procedures, and examples from the association that publishes them.",
-      "notes": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.",
-      "reviewed_on": "2026-10-07",
+      "notes": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.",
+      "reviewed_on": "2026-10-16",
       "review_method": "page"
     },
     {

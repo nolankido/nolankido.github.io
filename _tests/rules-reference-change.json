@@ -1,0 +1,779 @@
+{
+  "commit": "bc0d6ae893e59b89aaa63fd7c6aa58be78045fae",
+  "paths": {
+    "POKER_PUBLISHING.md": {
+      "old_sha256": "9b70dc3c12a55276bbaaacb0ae75dc44f9631756f5a30a5d99df455fb01851b1",
+      "new_sha256": "bea57e1d6ae2a89ea275d4c8e67efb9b33b3e87b41f25880eec6c35ed059a6d8",
+      "edits": [
+        {
+          "start": 10968,
+          "end": 12304,
+          "old": "",
+          "new": "\n## Current tournament rules references\n\nThe `tda-rules` record in `_source/poker/resources.json` owns the current TDA\nedition, version and publication date in `source_version`, plus its existing\n`reviewed_on` date. Current guide citations use `${poker_tda_label}` or\n`${poker_tda_long_label}` rather than a second handwritten version number.\nThe builder, guide reading estimates, Poker search and directory exports resolve\nthe same record. Historical batch notes and references explicitly describing\nolder rulebooks retain their original dates and editions.\n\nFor an update, read the official rules page and version history first. Check\nthe rules used by affected examples, update this one record and its actual\nreview date, then rebuild and run the release checks. A reachable URL does not\nestablish a new editorial review; neither the build nor a link checker updates\nreview dates. Do not refresh unrelated publishers' review dates. Document the\nchecked rules and any uninspected addenda or translations in the review note.\n\nThe rules-history adapter preserves the exact earlier production bytes for\nhistorical regression tests. Do not refresh older golden files to make an\nunexpected change pass. New checks verify propagation from a synthetic version\nchange, current output consistency, and preservation of all unrelated resources.\n"
+        }
+      ]
+    },
+    "_scripts/build.py": {
+      "old_sha256": "caf2d6ebb13f320c943c0cbc5ac8fd28f9263f689b71012cd6d3637160080d58",
+      "new_sha256": "7f9aa03eaa55b500100f85d26f8708a7902e4d1a9819fe790a3c466b9df8368d",
+      "edits": [
+        {
+          "start": 7086,
+          "end": 7185,
+          "old": "",
+          "new": "    values.update({key: text(value) for key, value in poker_resources.rules_values(ROOT).items()})\n"
+        }
+      ]
+    },
+    "_scripts/poker_finder.py": {
+      "old_sha256": "edb6478865ed593495e9129138a552d097e65f2d7e827c385db4c45f4fbfb5ce",
+      "new_sha256": "40c16f100b5d2fc615c69e6dfd61e86e2903cd96b19564119d948257402d5689",
+      "edits": [
+        {
+          "start": 6338,
+          "end": 6381,
+          "old": "source",
+          "new": "poker_resources.resolve_rules(source, root)"
+        }
+      ]
+    },
+    "_scripts/poker_library.py": {
+      "old_sha256": "52ce396aea9d4bef81d28b4347cab4db64407927f1119ac76cc3ed4eb2c83bbf",
+      "new_sha256": "eae666bb48d752ef72cb4d86e08279f702a9777280098c54cdffb2e5bd2a6374",
+      "edits": [
+        {
+          "start": 325,
+          "end": 348,
+          "old": "",
+          "new": "import poker_resources\n"
+        },
+        {
+          "start": 3017,
+          "end": 3087,
+          "old": "source.read_text(encoding='utf-8'",
+          "new": "poker_resources.resolve_rules(source.read_text(encoding='utf-8'), root"
+        }
+      ]
+    },
+    "_scripts/poker_resources.py": {
+      "old_sha256": "761025f78dd12c6eb3e441678a54ca3c4b22e6fcd07ad6dd473e98d6bde4277e",
+      "new_sha256": "4d99ae88e31bb053bff6d575fef3b2ad80ee8cb14db5875e3b4a3b6168915235",
+      "edits": [
+        {
+          "start": 1668,
+          "end": 1722,
+          "old": "",
+          "new": "RULE_TOKEN = re.compile(r'\\$\\{(poker_tda_[a-z_]+)\\}')\n"
+        },
+        {
+          "start": 3304,
+          "end": 6066,
+          "old": "",
+          "new": "def rule_values(entry: dict, *, as_of: date | None = None) -> dict[str, str]:\n    \"\"\"The directory's reviewed TDA record owns current version metadata.\"\"\"\n    version = entry.get('source_version')\n    if (entry.get('id') != 'tda-rules' or not isinstance(version, dict)\n            or set(version) != {'edition', 'version', 'published_on'}\n            or type(version['edition']) is not int or not 2000 <= version['edition'] <= 9999\n            or not isinstance(version['version'], str)\n            or not re.fullmatch(r'[1-9]\\d*\\.\\d+', version['version'])):\n        raise ValueError('TDA references need an explicit edition, version and publication date')\n    published = checked_date(version['published_on'])\n    reviewed = checked_date(entry['reviewed_on'])\n    today = datetime.now(timezone.utc).date() if as_of is None else as_of\n    if published.year != version['edition'] or not published <= reviewed <= today:\n        raise ValueError('TDA publication and review dates must be ordered and not in the future')\n    if (canonical_url(entry['url']) != 'https://pokertda.com/view-poker-tda-rules'\n            or entry['review_method'] != 'page'):\n        raise ValueError('Current TDA references require a reviewed official rules page')\n    def label(value):\n        return f'{value.strftime(\"%B\")} {value.day}, {value.year}'\n    return {\n        'poker_tda_url': entry['url'],\n        'poker_tda_edition': str(version['edition']),\n        'poker_tda_version': version['version'],\n        'poker_tda_label': f'Poker TDA: {version[\"edition\"]} rules, version {version[\"version\"]}',\n        'poker_tda_long_label': f'{version[\"edition\"]} Rules, Version {version[\"version\"]}, {label(published)}',\n        'poker_tda_published_label': label(published),\n        'poker_tda_reviewed_on': entry['reviewed_on'],\n        'poker_tda_reviewed_label': label(reviewed),\n    }\n\n\ndef rules_values(root: Path) -> dict[str, str]:\n    entries = json.loads((root / '_source/poker/resources.json').read_text(encoding='utf-8'))['entries']\n    records = [e for e in entries if e.get('id') == 'tda-rules']\n    if len(records) != 1:\n        raise ValueError('Current TDA references need exactly one directory record')\n    return rule_values(records[0])\n\n\ndef resolve_rules(source: str, root: Path, *, values: dict[str, str] | None = None) -> str:\n    \"\"\"Expand only TDA tokens; keep other source templates for their own renderers.\"\"\"\n    if '${poker_tda_' not in source:\n        return source\n    values = rules_values(root) if values is None else values\n    def replace(match):\n        if match[1] not in values:\n            raise ValueError('Unknown TDA reference token: ' + match[1])\n        return escape(values[match[1]], quote=True)\n    return RULE_TOKEN.sub(replace, source)\n\n\n"
+        },
+        {
+          "start": 6775,
+          "end": 7541,
+          "old": "for entry in data['entries']:",
+          "new": "entries = []\n    for stored in data['entries']:\n        entry = stored.copy() if isinstance(stored, dict) else stored\n        if isinstance(entry, dict) and 'source_version' in entry:\n            values = rule_values(entry, as_of=as_of)\n            del entry['source_version']\n            # Notes are plain text here; HTML escaping belongs to card/export renderers.\n            if not isinstance(entry.get('notes'), str):\n                raise ValueError('Rule reference notes must be text')\n            def replace_note(match):\n                if match[1] not in values:\n                    raise ValueError('Unknown TDA reference token: ' + match[1])\n                return values[match[1]]\n            entry['notes'] = RULE_TOKEN.sub(replace_note, entry['notes'])"
+        },
+        {
+          "start": 8084,
+          "end": 8205,
+          "old": "",
+          "new": "            if '${' in value:\n                raise ValueError('Resource entries must not contain unresolved templates')\n"
+        },
+        {
+          "start": 9451,
+          "end": 9495,
+          "old": "return data['entries']",
+          "new": "    entries.append(entry)\n    return entries"
+        }
+      ]
+    },
+    "_source/pages.json": {
+      "old_sha256": "4dbfb105ccf0b45d77fc0ff8d32155350f212961019b2d1c6aeedf37ea99670f",
+      "new_sha256": "23bb0c21a9fcdb0c4d23b16dc362d0380841d94e74bd913c3b2328d614d14359",
+      "edits": [
+        {
+          "start": 18703,
+          "end": 18882,
+          "old": "05\",\n    \"poker_guide\": true",
+          "new": "16\",\n    \"poker_guide\": true,\n    \"revision\": \"Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.\""
+        },
+        {
+          "start": 21065,
+          "end": 21244,
+          "old": "08\",\n    \"poker_guide\": true",
+          "new": "16\",\n    \"poker_guide\": true,\n    \"revision\": \"Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.\""
+        },
+        {
+          "start": 21768,
+          "end": 21947,
+          "old": "05\",\n    \"poker_guide\": true",
+          "new": "16\",\n    \"poker_guide\": true,\n    \"revision\": \"Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.\""
+        },
+        {
+          "start": 40023,
+          "end": 40202,
+          "old": "08\",\n    \"poker_guide\": true",
+          "new": "16\",\n    \"poker_guide\": true,\n    \"revision\": \"Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.\""
+        }
+      ]
+    },
+    "_source/poker/first-decisions.html": {
+      "old_sha256": "d6bcec649a96c4cb0c90799d271b84afa7c6f36b36441c5b1aaf95c67eac9f12",
+      "new_sha256": "d3cb4a41627b6406c30d6d5f2723a4722121db837a87b661a582fb4609c354f1",
+      "edits": [
+        {
+          "start": 22788,
+          "end": 22884,
+          "old": "page identifies its current text as 2026 Rules, Version 1.1, September 21, 2026",
+          "new": "reference was rechecked ${poker_tda_reviewed_label}; its current text is ${poker_tda_long_label}"
+        }
+      ]
+    },
+    "_source/poker/follow-along.html": {
+      "old_sha256": "4d22197f41d08578bb6e60898fd8db0ef096202a946c857851d2ccae6a75611a",
+      "new_sha256": "b23723ec23ef3aa448ace3707a7443a1c9d3c4f834c159302884030e8699125b",
+      "edits": [
+        {
+          "start": 11495,
+          "end": 12207,
+          "old": "Poker TDA: 2026 rules, version 1.0</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p></section>\n  ",
+          "new": "${poker_tda_label}</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p><p>TDA reference rechecked ${poker_tda_reviewed_label}: ${poker_tda_long_label}. The other reference-review dates above are unchanged.</p></section>\n  <p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p>\n"
+        }
+      ]
+    },
+    "_source/poker/getting-started.html": {
+      "old_sha256": "f43ced449cfb58bb1d1f369321284a923251e6d70ac037f7c504bb8d1d973a4e",
+      "new_sha256": "8cf9ce29423630d4a0a385f294a84c108ee8fe59335518aac038a33d8b39c2be",
+      "edits": [
+        {
+          "start": 62762,
+          "end": 62878,
+          "old": "official TDA page displayed <strong>2026 Rules, Version 1.1, September 21, 2026",
+          "new": "TDA reference was rechecked ${poker_tda_reviewed_label}; the official page displayed <strong>${poker_tda_long_label}"
+        },
+        {
+          "start": 63211,
+          "end": 63234,
+          "old": "2026 Rules, v1.1, September 21, 2026",
+          "new": "${poker_tda_long_label}"
+        }
+      ]
+    },
+    "_source/poker/poker-rules-and-fair-play.html": {
+      "old_sha256": "24b311ca8900119a9f4c7cc14e7597bcde2d893a93753352fabb388d93d0bf1c",
+      "new_sha256": "011582adb954972f6188ad4ceea7674eabdd64a12d6a0f778aaa4da68846d9a0",
+      "edits": [
+        {
+          "start": 1513,
+          "end": 1641,
+          "old": "The <a href=\"https://www.pokertda.com/view-poker-tda-rules/\">TDA page</a> currently displays its 2026 rules, version 1.0 dated September 7, 2026",
+          "new": "At our ${poker_tda_reviewed_label} check, the <a href=\"${poker_tda_url}\">official TDA page</a> displayed ${poker_tda_long_label}"
+        },
+        {
+          "start": 6870,
+          "end": 7093,
+          "old": "",
+          "new": "<p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p>\n"
+        }
+      ]
+    },
+    "_source/poker/position-and-stacks.html": {
+      "old_sha256": "488b01979ec43c39bcfcf61ada3f7088e29412af47b3e9290c03eff8f2ae7f61",
+      "new_sha256": "c968ade0e7953a83f9dcf0bb3b67ce2b5790c240f1ffbadc0448dc7705c4a906",
+      "edits": [
+        {
+          "start": 2971,
+          "end": 2989,
+          "old": "Poker TDA: 2026 rules, version 1.0",
+          "new": "${poker_tda_label}"
+        },
+        {
+          "start": 6565,
+          "end": 7439,
+          "old": "Poker TDA: 2026 rules, version 1.0</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/lesson/introduction-to-stack-to-pot-ratio-spr/\">PokerStars Learn: stack-to-pot ratio</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p></section>\n  ",
+          "new": "${poker_tda_label}</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/lesson/introduction-to-stack-to-pot-ratio-spr/\">PokerStars Learn: stack-to-pot ratio</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p><p>TDA reference rechecked ${poker_tda_reviewed_label}: ${poker_tda_long_label}. The other reference-review dates above are unchanged.</p></section>\n  <p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p>\n"
+        }
+      ]
+    },
+    "_source/poker/resources.json": {
+      "old_sha256": "1de3974bcba6a8678ff07583087b60ac10144df8bc797d84b9ee9382fb95f8c9",
+      "new_sha256": "7830983b69c7289a0f4d71b11f3382dfe61a35f6ed4a9a57f831c47dde61dea2",
+      "edits": [
+        {
+          "start": 425,
+          "end": 814,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.\", \"reviewed_on\": \"2026-10-07\", \"review_method\": \"page\"",
+          "new": "Read ${poker_tda_edition} rules, version ${poker_tda_version}, dated ${poker_tda_published_label}. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.\", \"reviewed_on\": \"2026-10-16\", \"review_method\": \"page\", \"source_version\": {\"edition\": 2026, \"version\": \"1.1\", \"published_on\": \"2026-09-21\"}"
+        }
+      ]
+    },
+    "_source/poker/table-etiquette.html": {
+      "old_sha256": "75a19a8074d01fcb21f62db321246ca1a2b4d9144a28a4dd04731cc87b4d4272",
+      "new_sha256": "83710244bffe5abce2592655f6d7391d3532d7a25f34e89bdd261ab4f88ac885",
+      "edits": [
+        {
+          "start": 1638,
+          "end": 1656,
+          "old": "Poker TDA: 2026 rules, version 1.0",
+          "new": "${poker_tda_label}"
+        },
+        {
+          "start": 6304,
+          "end": 7303,
+          "old": "Poker TDA: 2026 rules, version 1.0</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/strategies/poker-terms-glossary/\">PokerStars Learn: terminology</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstarslive.com/poker/rules/\">PokerStars Live: event-specific rules and filming restrictions</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p></section>\n  ",
+          "new": "${poker_tda_label}</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/strategies/poker-terms-glossary/\">PokerStars Learn: terminology</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstarslive.com/poker/rules/\">PokerStars Live: event-specific rules and filming restrictions</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p><p>TDA reference rechecked ${poker_tda_reviewed_label}: ${poker_tda_long_label}. The other reference-review dates above are unchanged.</p></section>\n  <p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p>\n"
+        }
+      ]
+    },
+    "downloads/poker-resource-directory.json": {
+      "old_sha256": "5c99ee4e51a25f6db7351aae9fc74b190c4a946ea529b3e189ef5686b9399097",
+      "new_sha256": "80519d584ab95e5816fb88f3a4fd4b6d9201dabbfb8fe0e49c616bcd0676f8eb",
+      "edits": [
+        {
+          "start": 111,
+          "end": 113,
+          "old": "08",
+          "new": "16"
+        },
+        {
+          "start": 43044,
+          "end": 43285,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.\",\n      \"reviewed_on\": \"2026-10-07",
+          "new": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.\",\n      \"reviewed_on\": \"2026-10-16"
+        }
+      ]
+    },
+    "downloads/poker-resource-directory.md": {
+      "old_sha256": "7a2c4c6f7438322636179aaa11534b5fe6d4a69842a7b69489f813e6cc281c5a",
+      "new_sha256": "74b3aa9f96500339656d9743669cecb5d473b7c8ba75846d2b245b2e9401d4eb",
+      "edits": [
+        {
+          "start": 323,
+          "end": 325,
+          "old": "08",
+          "new": "16"
+        },
+        {
+          "start": 34576,
+          "end": 34781,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence",
+          "new": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control"
+        },
+        {
+          "start": 34808,
+          "end": 34810,
+          "old": "07",
+          "new": "16"
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "old_sha256": "f1532974035453f191141bb155fa8a9dac1c11e45bfa26bcc79ee7402e4951df",
+      "new_sha256": "d840731cc0b5efb6b692356e27f075dbdb8586a3e5396c1e108249c42942c9f7",
+      "edits": [
+        {
+          "start": 86788,
+          "end": 89632,
+          "old": "0</p><p data-finder-passage data-anchor=\"relative\" data-heading=\"The advantage is information, not a stronger card\">Consider a fictional flop with only the cutoff and button remaining. The cutoff must decide before seeing whether the button intends to check or bet. The button can use that observed action. If instead only the cutoff and big blind remain, the cutoff acts after the big blind. The same seat label can therefore be in position against one opponent and out of position against another. A late seat is not a promise of winning. The cards, prior action and stack sizes still matter. Nor does checking prove weakness: a player can check a strong hand, a medium hand or a hand with little showdown value.</p><p data-finder-passage data-anchor=\"stack-to-pot\" data-heading=\"Two different measurements of a stack\">Big blinds describe a stack relative to the forced wager. Stack-to-pot ratio, usually SPR , compares the effective remaining stack with the current pot. It is commonly quoted at the start of the flop. State when it was measured: chips already bet are not still in the player’s stack. For tournament stacks, preserve what was posted and what remains behind. The short-stack input example shows why an 8 BB starting stack can leave 6 BB behind after the blind and ante. PokerStars Learn: stack-to-pot ratio Same stack, different pot Suppose the smaller remaining stack is 12,000 chips and the big blind is 400. That stack is 30 BB . With a 3,000 pot, SPR = 12,000 ÷ 3,000 = 4 . With a 6,000 pot, the same stack has SPR = 2 . The cards need not change for the amount at risk relative to the pot to look very different. These are separate snapshots, not two stages of one hand. A low SPR is not an automatic instruction to go all-in. For two players, the smaller stack limits what they can contest against each other. A larger opponent cannot make a player wager money outside the chips permitted in play. With three or more players, different stack sizes can create side pots ; one headline SPR is not a complete description.</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"References and limits\">PokerStars Learn: positions ; Poker TDA: 2026 rules, version 1.0 ; PokerStars Learn: stack-to-pot ratio . References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide",
+          "new": "1</p><p data-finder-passage data-anchor=\"relative\" data-heading=\"The advantage is information, not a stronger card\">Consider a fictional flop with only the cutoff and button remaining. The cutoff must decide before seeing whether the button intends to check or bet. The button can use that observed action. If instead only the cutoff and big blind remain, the cutoff acts after the big blind. The same seat label can therefore be in position against one opponent and out of position against another. A late seat is not a promise of winning. The cards, prior action and stack sizes still matter. Nor does checking prove weakness: a player can check a strong hand, a medium hand or a hand with little showdown value.</p><p data-finder-passage data-anchor=\"stack-to-pot\" data-heading=\"Two different measurements of a stack\">Big blinds describe a stack relative to the forced wager. Stack-to-pot ratio, usually SPR , compares the effective remaining stack with the current pot. It is commonly quoted at the start of the flop. State when it was measured: chips already bet are not still in the player’s stack. For tournament stacks, preserve what was posted and what remains behind. The short-stack input example shows why an 8 BB starting stack can leave 6 BB behind after the blind and ante. PokerStars Learn: stack-to-pot ratio Same stack, different pot Suppose the smaller remaining stack is 12,000 chips and the big blind is 400. That stack is 30 BB . With a 3,000 pot, SPR = 12,000 ÷ 3,000 = 4 . With a 6,000 pot, the same stack has SPR = 2 . The cards need not change for the amount at risk relative to the pot to look very different. These are separate snapshots, not two stages of one hand. A low SPR is not an automatic instruction to go all-in. For two players, the smaller stack limits what they can contest against each other. A larger opponent cannot make a player wager money outside the chips permitted in play. With three or more players, different stack sizes can create side pots ; one headline SPR is not a complete description.</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"References and limits\">PokerStars Learn: positions ; Poker TDA: 2026 rules, version 1.1 ; PokerStars Learn: stack-to-pot ratio . References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide. TDA reference rechecked October 16, 2026: 2026 Rules, Version 1.1, September 21, 2026. The other reference-review dates above are unchanged. Updated October 16, 2026 : Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged"
+        },
+        {
+          "start": 109239,
+          "end": 118381,
+          "old": "0</p><p data-finder-passage data-anchor=\"declarations\" data-heading=\"Words and chips both matter\">Under TDA rules, in-turn declarations and chip actions can bind a player. A silent single oversized chip facing a bet normally means a call, not a raise. A player needs to make a raise intention clear before or as required by the applicable rule. Staff determine ambiguous situations. A big chip does not automatically mean a big raise In a fictional hand, a player faces 600 and silently places a single 1,000 chip forward. Under the stated TDA overchip rule, that is a call for 600; 400 is change. “Raises to 1,000” would be a different claim about what happened, and legality would depend on the preceding betting sequence. Listen to the dealer’s announcement and any recorded declaration. A graphic assembled afterward should not overrule the actual account.</p><p data-finder-passage data-anchor=\"live-hand\" data-heading=\"A live hand belongs to its player\">TDA rules prohibit discussing live or mucked hand contents, advising play, or reading a hand that has not been tabled. Helping read properly tabled cards or pointing out a pot-award mistake at showdown is different. The timing and what is exposed matter. As a spectator, save strategic comments for after the hand. Saying “I folded a king” can change another player’s information even though your own cards are no longer live. A friend does not become an allowed adviser just because they are standing behind the player.</p><p data-finder-passage data-anchor=\"pace\" data-heading=\"Long decisions, clocks and chip counts\">“In the tank” means taking time over a decision. A clock request asks staff to apply a decision deadline under the event’s rules; it is not evidence of a weak hand. Shot-clock events may instead have a regular time limit and time-extension procedures. A neat, countable stack helps others understand the situation. Small stacks of high-denomination chips can be worth more than visually large piles of low-denomination chips. Do not infer an exact wager from chip color or pile height without knowing the denominations. PokerStars Learn: terminology</p><p data-finder-passage data-anchor=\"filming\" data-heading=\"Vlog footage is not blanket permission to film\">Device, filming and outside-assistance policies differ by event. TDA rules restrict devices during a live hand and disallow strategy tools at the table. PokerStars Live also publishes additional restrictions. Neither seeing a camera in one video nor knowing the player establishes permission at a different venue. PokerStars Live: event-specific rules and filming restrictions For this site, private or unapproved footage should stay private. A hand can be explained afterward with an explicitly reconstructed account and illustrations. A reconstruction is not proof that the original hand was recorded, and another player’s name is usually unnecessary for understanding the decision. Watching the vlog does not require wagering. Enjoying the story, understanding the cards and discussing a completed hand are worthwhile on their own. These guides are for that viewing and study context, not for operating a tool while a real hand is underway.</p><p data-finder-passage data-anchor=\"practice\" data-heading=\"Check your reading\">Preparing to sit down yourself? The first live tournament guide covers arrival, registration and the procedural questions worth asking.</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"References and limits\">Poker TDA: 2026 rules, version 1.0 ; PokerStars Learn: terminology ; PokerStars Live: event-specific rules and filming restrictions . References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide. Published October 5, 2026 . Prepared with AI assistance. Use these materials for viewing and study away from live play.</p></div></details><button type=\"button\" class=\"finder-save\" aria-pressed=\"false\" hidden>Add to study list</button></article>\n<article class=\"reader-card finder-card\" data-finder-card data-id=\"poker-follow-along\" data-kind=\"guide\" data-free=\"true\" data-topics=\"learn poker-world\" data-search=\"Pause the hand. Read the situation. Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity. quiz practice scenes viewer follow along cards showdown Practice Learn poker News, results &amp; creators On this site · Try a decision\" tabindex=\"-1\"><p class=\"reader-eyebrow\">On this site · Try a decision</p><h3><a href=\"/poker/follow-along/\">Pause the hand. Read the situation.</a></h3><p>Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity.</p><p class=\"finder-excerpt\" hidden></p><p class=\"finder-jump\" hidden><a href=\"/poker/follow-along/\">Read matching section</a></p><details class=\"finder-text\"><summary>Searchable article text, without exercise answers</summary><div><p data-finder-passage data-anchor=\"\" data-heading=\"Introduction\">Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity. For watching standard 52-card no-limit hold’em. All hands, stacks and event examples here are fictional, not accounts of Nolan’s results. No live-play assistance or recommended betting ranges.</p><p data-finder-passage data-anchor=\"how\" data-heading=\"Pause for a question, not a prescribed action\">These three fictional scenes combine the library’s ideas. Read only the information shown, answer the question, then open the explanation. This is a practice page, not a recorded episode, a betting simulator or a test of whether you should call or fold. Try this viewing rhythm: identify the position and stacks, read the board, confirm the amount to call, then separate observations from assumptions. Reveal results last. A useful question is often “what information is missing?”</p><p data-finder-passage data-anchor=\"scene-1-title\" data-heading=\"Scene 1: what is the price of the raise?\">Six-handed hold’em. Blinds 100/200, no ante. The button starts with 6,000 chips and the big blind with 9,000. Everyone folds to the button, who raises to 500. The small blind folds; the big blind calls. The flop pot is 1,100 = 500 + 500 + 100 . Button’s cards Flop The big blind checks. The button bets 400. The big blind raises to 1,200 total on the flop . Freeze the hand here. The button’s 400 is already in the pot, not still behind. Review raising to versus raising by or position and remaining stacks .</p><p data-finder-passage data-anchor=\"scene-2-title\" data-heading=\"Scene 2: best now is not best forever\">Two players are all-in with no betting left. Their cards are exposed for this exercise. Compare the strongest five-card hand available after each street, not which hand felt strongest at the start. Player A Player B Flop Review changing board texture or the order of hands .</p><p data-finder-passage data-anchor=\"scene-3-title\" data-heading=\"Scene 3: a known price, an unknown chance\">Player A River board The pot is 4,000 before B bets 2,000. A faces the last decision: assume a call closes the hand, no further betting, no rake, no tied outcome, and evaluate chips only. B’s hole cards and betting range are unknown. Review the percentages or how range assumptions enter an explanation .</p><p data-finder-passage data-anchor=\"takeaway\" data-heading=\"Take one question back to the video\">You do not need to calculate everything while watching. Start by noticing whether the graphic shows the pot before or after a bet, whether a stack is measured before or after posting, and which cards were genuinely known. When a detail is missing, leave it missing rather than fill it with an exact-looking guess. Save the watching checklist</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"References and limits\">PokerStars: Texas hold’em rules ; PokerStars Learn: card combinations ; Poker TDA: 2026 rules, version 1.0 . References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide",
+          "new": "1</p><p data-finder-passage data-anchor=\"declarations\" data-heading=\"Words and chips both matter\">Under TDA rules, in-turn declarations and chip actions can bind a player. A silent single oversized chip facing a bet normally means a call, not a raise. A player needs to make a raise intention clear before or as required by the applicable rule. Staff determine ambiguous situations. A big chip does not automatically mean a big raise In a fictional hand, a player faces 600 and silently places a single 1,000 chip forward. Under the stated TDA overchip rule, that is a call for 600; 400 is change. “Raises to 1,000” would be a different claim about what happened, and legality would depend on the preceding betting sequence. Listen to the dealer’s announcement and any recorded declaration. A graphic assembled afterward should not overrule the actual account.</p><p data-finder-passage data-anchor=\"live-hand\" data-heading=\"A live hand belongs to its player\">TDA rules prohibit discussing live or mucked hand contents, advising play, or reading a hand that has not been tabled. Helping read properly tabled cards or pointing out a pot-award mistake at showdown is different. The timing and what is exposed matter. As a spectator, save strategic comments for after the hand. Saying “I folded a king” can change another player’s information even though your own cards are no longer live. A friend does not become an allowed adviser just because they are standing behind the player.</p><p data-finder-passage data-anchor=\"pace\" data-heading=\"Long decisions, clocks and chip counts\">“In the tank” means taking time over a decision. A clock request asks staff to apply a decision deadline under the event’s rules; it is not evidence of a weak hand. Shot-clock events may instead have a regular time limit and time-extension procedures. A neat, countable stack helps others understand the situation. Small stacks of high-denomination chips can be worth more than visually large piles of low-denomination chips. Do not infer an exact wager from chip color or pile height without knowing the denominations. PokerStars Learn: terminology</p><p data-finder-passage data-anchor=\"filming\" data-heading=\"Vlog footage is not blanket permission to film\">Device, filming and outside-assistance policies differ by event. TDA rules restrict devices during a live hand and disallow strategy tools at the table. PokerStars Live also publishes additional restrictions. Neither seeing a camera in one video nor knowing the player establishes permission at a different venue. PokerStars Live: event-specific rules and filming restrictions For this site, private or unapproved footage should stay private. A hand can be explained afterward with an explicitly reconstructed account and illustrations. A reconstruction is not proof that the original hand was recorded, and another player’s name is usually unnecessary for understanding the decision. Watching the vlog does not require wagering. Enjoying the story, understanding the cards and discussing a completed hand are worthwhile on their own. These guides are for that viewing and study context, not for operating a tool while a real hand is underway.</p><p data-finder-passage data-anchor=\"practice\" data-heading=\"Check your reading\">Preparing to sit down yourself? The first live tournament guide covers arrival, registration and the procedural questions worth asking.</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"References and limits\">Poker TDA: 2026 rules, version 1.1 ; PokerStars Learn: terminology ; PokerStars Live: event-specific rules and filming restrictions . References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide. TDA reference rechecked October 16, 2026: 2026 Rules, Version 1.1, September 21, 2026. The other reference-review dates above are unchanged. Updated October 16, 2026 : Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged. Published October 5, 2026 . Prepared with AI assistance. Use these materials for viewing and study away from live play.</p></div></details><button type=\"button\" class=\"finder-save\" aria-pressed=\"false\" hidden>Add to study list</button></article>\n<article class=\"reader-card finder-card\" data-finder-card data-id=\"poker-follow-along\" data-kind=\"guide\" data-free=\"true\" data-topics=\"learn poker-world\" data-search=\"Pause the hand. Read the situation. Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity. quiz practice scenes viewer follow along cards showdown Practice Learn poker News, results &amp; creators On this site · Try a decision\" tabindex=\"-1\"><p class=\"reader-eyebrow\">On this site · Try a decision</p><h3><a href=\"/poker/follow-along/\">Pause the hand. Read the situation.</a></h3><p>Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity.</p><p class=\"finder-excerpt\" hidden></p><p class=\"finder-jump\" hidden><a href=\"/poker/follow-along/\">Read matching section</a></p><details class=\"finder-text\"><summary>Searchable article text, without exercise answers</summary><div><p data-finder-passage data-anchor=\"\" data-heading=\"Introduction\">Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity. For watching standard 52-card no-limit hold’em. All hands, stacks and event examples here are fictional, not accounts of Nolan’s results. No live-play assistance or recommended betting ranges.</p><p data-finder-passage data-anchor=\"how\" data-heading=\"Pause for a question, not a prescribed action\">These three fictional scenes combine the library’s ideas. Read only the information shown, answer the question, then open the explanation. This is a practice page, not a recorded episode, a betting simulator or a test of whether you should call or fold. Try this viewing rhythm: identify the position and stacks, read the board, confirm the amount to call, then separate observations from assumptions. Reveal results last. A useful question is often “what information is missing?”</p><p data-finder-passage data-anchor=\"scene-1-title\" data-heading=\"Scene 1: what is the price of the raise?\">Six-handed hold’em. Blinds 100/200, no ante. The button starts with 6,000 chips and the big blind with 9,000. Everyone folds to the button, who raises to 500. The small blind folds; the big blind calls. The flop pot is 1,100 = 500 + 500 + 100 . Button’s cards Flop The big blind checks. The button bets 400. The big blind raises to 1,200 total on the flop . Freeze the hand here. The button’s 400 is already in the pot, not still behind. Review raising to versus raising by or position and remaining stacks .</p><p data-finder-passage data-anchor=\"scene-2-title\" data-heading=\"Scene 2: best now is not best forever\">Two players are all-in with no betting left. Their cards are exposed for this exercise. Compare the strongest five-card hand available after each street, not which hand felt strongest at the start. Player A Player B Flop Review changing board texture or the order of hands .</p><p data-finder-passage data-anchor=\"scene-3-title\" data-heading=\"Scene 3: a known price, an unknown chance\">Player A River board The pot is 4,000 before B bets 2,000. A faces the last decision: assume a call closes the hand, no further betting, no rake, no tied outcome, and evaluate chips only. B’s hole cards and betting range are unknown. Review the percentages or how range assumptions enter an explanation .</p><p data-finder-passage data-anchor=\"takeaway\" data-heading=\"Take one question back to the video\">You do not need to calculate everything while watching. Start by noticing whether the graphic shows the pot before or after a bet, whether a stack is measured before or after posting, and which cards were genuinely known. When a detail is missing, leave it missing rather than fill it with an exact-looking guess. Save the watching checklist</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"References and limits\">PokerStars: Texas hold’em rules ; PokerStars Learn: card combinations ; Poker TDA: 2026 rules, version 1.1 . References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide. TDA reference rechecked October 16, 2026: 2026 Rules, Version 1.1, September 21, 2026. The other reference-review dates above are unchanged. Updated October 16, 2026 : Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged"
+        },
+        {
+          "start": 324609,
+          "end": 329070,
+          "old": "The TDA page currently displays its 2026 rules, version 1.0 dated September 7, 2026. Its floor-decision rule emphasizes fairness and final staff decisions. Do not assume a tournament rulebook is automatically the governing cash-game policy. TDA&#x27;s download page links long and short formats and a route to translations; check each document&#x27;s own version.</p><p data-finder-passage data-anchor=\"at-the-table\" data-heading=\"Clarify facts without announcing an unintended action.\">Before acting, ask for the amount or the action to be clarified. TDA Rule 3 warns that action terms used in questions can be interpreted as a declaration. Neutral questions reduce avoidable ambiguity. For a dispute, ask for the floor and describe the sequence, amounts and statements without deciding the penalty yourself. Preserve the distinction between a rules question and strategic advice. A dealer can clarify an amount; another person should not choose your action. Keep filming, note-taking and devices within the event&#x27;s actual restrictions.</p><p data-finder-passage data-anchor=\"raise-example\" data-heading=\"A minimum raise follows the increment, not a doubling rule.\">Fictional no-limit sequence A bets 100 and B raises to 250, an increment of 150. The next full raise is to 400 . If C instead goes all-in for 340, the 90 increase does not reopen B’s raising option in this sequence. The example illustrates the full-raise and reopening distinction in TDA Rules 45 and 49. Players who have not acted, cumulative short all-ins and limit games require their own checks. Read the applicable examples or ask the floor instead of extending this one sequence into a universal shortcut.</p><p data-finder-passage data-anchor=\"online-tools\" data-heading=\"“Between hands” does not necessarily mean “allowed.”\">PokerStars&#x27; third-party-tools policy distinguishes tools permitted generally, tools prohibited always, and tools restricted while its software is open. That last category is not limited to the seconds when a player faces a decision. A tool&#x27;s marketing claim that it is compliant is not the operator&#x27;s approval. GGPoker&#x27;s Security &amp; Ecology Policy is a separate operator document with its own treatment of external assistance, software and player conduct. Do not transfer a permission from one room to another, or assume that a second device changes the rule. For this site, the intended use is before or after a playing session, away from the table. Close the playing client when its policy requires that separation. These links are policy references, not endorsements, location-eligibility checks or permission to use this site&#x27;s search during play.</p><p data-finder-passage data-anchor=\"reporting\" data-heading=\"Report a concern with a record, not a public accusation.\">Keep the event or table identifier, time, relevant hand reference and a factual description. Separate what you directly observed from what you inferred. Send concerns through the room&#x27;s appropriate private channel rather than posting another player&#x27;s identifying information, account data or unsupported accusations. Ask what information is needed and preserve your own relevant records without covert collection. Do not buy mined opponent histories or try to investigate by breaking the operator&#x27;s rules yourself. For account-security problems, use the operator&#x27;s authenticated support route, not a link from an unsolicited message.</p><p data-finder-passage data-anchor=\"access-and-support\" data-heading=\"Make practical needs part of preparation.\">Ask the organizer ahead of time about seating, communication or other accommodations you need. TDA Rule 10 addresses accommodations where possible; it is not a guarantee that a particular event has the arrangements you require. Confirm the actual plan before traveling. For gambling-related distress or difficulty controlling play, the support directory offers a separate route. Help is not something to postpone until you have studied more or recovered a loss.</p><p data-finder-passage data-anchor=\"selected-sources\" data-heading=\"Go to the source\">These selections retain the directory&#x27;s access labels, individual review dates and limitations. Public-page reading is not a product accuracy test",
+          "new": "At our October 16, 2026 check, the official TDA page displayed 2026 Rules, Version 1.1, September 21, 2026. Its floor-decision rule emphasizes fairness and final staff decisions. Do not assume a tournament rulebook is automatically the governing cash-game policy. TDA&#x27;s download page links long and short formats and a route to translations; check each document&#x27;s own version.</p><p data-finder-passage data-anchor=\"at-the-table\" data-heading=\"Clarify facts without announcing an unintended action.\">Before acting, ask for the amount or the action to be clarified. TDA Rule 3 warns that action terms used in questions can be interpreted as a declaration. Neutral questions reduce avoidable ambiguity. For a dispute, ask for the floor and describe the sequence, amounts and statements without deciding the penalty yourself. Preserve the distinction between a rules question and strategic advice. A dealer can clarify an amount; another person should not choose your action. Keep filming, note-taking and devices within the event&#x27;s actual restrictions.</p><p data-finder-passage data-anchor=\"raise-example\" data-heading=\"A minimum raise follows the increment, not a doubling rule.\">Fictional no-limit sequence A bets 100 and B raises to 250, an increment of 150. The next full raise is to 400 . If C instead goes all-in for 340, the 90 increase does not reopen B’s raising option in this sequence. The example illustrates the full-raise and reopening distinction in TDA Rules 45 and 49. Players who have not acted, cumulative short all-ins and limit games require their own checks. Read the applicable examples or ask the floor instead of extending this one sequence into a universal shortcut.</p><p data-finder-passage data-anchor=\"online-tools\" data-heading=\"“Between hands” does not necessarily mean “allowed.”\">PokerStars&#x27; third-party-tools policy distinguishes tools permitted generally, tools prohibited always, and tools restricted while its software is open. That last category is not limited to the seconds when a player faces a decision. A tool&#x27;s marketing claim that it is compliant is not the operator&#x27;s approval. GGPoker&#x27;s Security &amp; Ecology Policy is a separate operator document with its own treatment of external assistance, software and player conduct. Do not transfer a permission from one room to another, or assume that a second device changes the rule. For this site, the intended use is before or after a playing session, away from the table. Close the playing client when its policy requires that separation. These links are policy references, not endorsements, location-eligibility checks or permission to use this site&#x27;s search during play.</p><p data-finder-passage data-anchor=\"reporting\" data-heading=\"Report a concern with a record, not a public accusation.\">Keep the event or table identifier, time, relevant hand reference and a factual description. Separate what you directly observed from what you inferred. Send concerns through the room&#x27;s appropriate private channel rather than posting another player&#x27;s identifying information, account data or unsupported accusations. Ask what information is needed and preserve your own relevant records without covert collection. Do not buy mined opponent histories or try to investigate by breaking the operator&#x27;s rules yourself. For account-security problems, use the operator&#x27;s authenticated support route, not a link from an unsolicited message.</p><p data-finder-passage data-anchor=\"access-and-support\" data-heading=\"Make practical needs part of preparation.\">Ask the organizer ahead of time about seating, communication or other accommodations you need. TDA Rule 10 addresses accommodations where possible; it is not a guarantee that a particular event has the arrangements you require. Confirm the actual plan before traveling. For gambling-related distress or difficulty controlling play, the support directory offers a separate route. Help is not something to postpone until you have studied more or recovered a loss.</p><p data-finder-passage data-anchor=\"selected-sources\" data-heading=\"Go to the source\">These selections retain the directory&#x27;s access labels, individual review dates and limitations. Public-page reading is not a product accuracy test. Updated October 16, 2026 : Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged"
+        },
+        {
+          "start": 398836,
+          "end": 398896,
+          "old": "page identifies its current text a",
+          "new": "reference was rechecked October 16, 2026; its current text i"
+        },
+        {
+          "start": 677719,
+          "end": 678071,
+          "old": "official TDA page displayed 2026 Rules, Version 1.1, September 21, 2026 . Rules, policies, laws, fees and support contacts can change. Commercial sources describe their own services. Local rules and current operator policies control actual play. Poker Tournament Directors Association. 2026 Rules, v",
+          "new": "TDA reference was rechecked October 16, 2026; the official page displayed 2026 Rules, Version 1.1, September 21, 2026 . Rules, policies, laws, fees and support contacts can change. Commercial sources describe their own services. Local rules and current operator policies control actual play. Poker Tournament Directors Association. 2026 Rules, Version "
+        },
+        {
+          "start": 764905,
+          "end": 765194,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-07\">2026-10-07",
+          "new": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-16\">2026-10-16"
+        }
+      ]
+    },
+    "poker/first-decisions/index.html": {
+      "old_sha256": "24d7dcac274ed86cecd8577e5876e0f712a5d9878908d4e87d9338a231531a59",
+      "new_sha256": "c07bc8f63448d80f4fe42e61db5c93b1dad49bfc81cf8543c15232661c7b6405",
+      "edits": [
+        {
+          "start": 40110,
+          "end": 40170,
+          "old": "page identifies its current text a",
+          "new": "reference was rechecked October 16, 2026; its current text i"
+        }
+      ]
+    },
+    "poker/follow-along/index.html": {
+      "old_sha256": "a7b13fe931792983557bc8d8370363963c9696ab3c12f9b3cc978622d2a81335",
+      "new_sha256": "62244d238edc35f2a324dd8a2bdb8da9b65cba03e9dbd683f8a21a7d0957d685",
+      "edits": [
+        {
+          "start": 3037,
+          "end": 3039,
+          "old": "05",
+          "new": "16"
+        },
+        {
+          "start": 4007,
+          "end": 4009,
+          "old": "05",
+          "new": "16"
+        },
+        {
+          "start": 7609,
+          "end": 7623,
+          "old": "05\">October 5",
+          "new": "16\">October 16"
+        },
+        {
+          "start": 19744,
+          "end": 20448,
+          "old": "0</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p></section>\n  ",
+          "new": "1</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p><p>TDA reference rechecked October 16, 2026: 2026 Rules, Version 1.1, September 21, 2026. The other reference-review dates above are unchanged.</p></section>\n  <p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p>\n"
+        }
+      ]
+    },
+    "poker/getting-started/index.html": {
+      "old_sha256": "c3843c1d50f5d8c401e8b098fe5dd48331d69d7962a7fdeccc5afd2f2d10924b",
+      "new_sha256": "a820ebe3d582aed59779590b300dc164c0f7a5af7aef2923c0b59249d6ee98ff",
+      "edits": [
+        {
+          "start": 71907,
+          "end": 71965,
+          "old": "official TDA",
+          "new": "TDA reference was rechecked October 16, 2026; the official"
+        },
+        {
+          "start": 72377,
+          "end": 72385,
+          "old": "v",
+          "new": "Version "
+        }
+      ]
+    },
+    "poker/library/index.html": {
+      "old_sha256": "dc12fa2bf02884d573a67f41d9a316a7460aac8ecde0e9d831cd561c469f9b22",
+      "new_sha256": "4ebb9d51eec2d7e788f9d03f7fc09633b36002f6c9f9f43073cafe623286d9ac",
+      "edits": [
+        {
+          "start": 31335,
+          "end": 31336,
+          "old": "4",
+          "new": "5"
+        }
+      ]
+    },
+    "poker/multiway-pot-workshop/index.html": {
+      "old_sha256": "bc0ba710f26e76f4fa9dd4b8f9034298a60fff0494c9cd2f34dc1a38ffd0e466",
+      "new_sha256": "5468129dde1dc4fe861d5df63a7265caca226cace16a002cd15e91d4eb0bdcd2",
+      "edits": [
+        {
+          "start": 17077,
+          "end": 17366,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-07\">2026-10-07",
+          "new": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-16\">2026-10-16"
+        }
+      ]
+    },
+    "poker/poker-rules-and-fair-play/index.html": {
+      "old_sha256": "cff2472e0b61faa3d3c1114513f77df3daf3560d5ebb63a4db986410f59a76c4",
+      "new_sha256": "62b218525c9c98d0864e4e16464fffdacfe156a9c1eb53e2bf2c6eaeb0ecd3cf",
+      "edits": [
+        {
+          "start": 3168,
+          "end": 3170,
+          "old": "08",
+          "new": "16"
+        },
+        {
+          "start": 4166,
+          "end": 4168,
+          "old": "08",
+          "new": "16"
+        },
+        {
+          "start": 7932,
+          "end": 7946,
+          "old": "08\">October 8",
+          "new": "16\">October 16"
+        },
+        {
+          "start": 10250,
+          "end": 10411,
+          "old": "The <a href=\"https://www.pokertda.com/view-poker-tda-rules/\">TDA page</a> currently displays its 2026 rules, version 1.0 dated September 7",
+          "new": "At our October 16, 2026 check, the <a href=\"https://www.pokertda.com/view-poker-tda-rules/\">official TDA page</a> displayed 2026 Rules, Version 1.1, September 21"
+        },
+        {
+          "start": 16127,
+          "end": 19347,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-07\">2026-10-07</time> · <a href=\"/poker/resources/#resource-tda-rules\">Full directory listing</a></p></article><article class=\"reader-card\" data-collection-resource=\"tda-rule-downloads\"><p class=\"reader-eyebrow\">Poker Tournament Directors Association</p><h3><a href=\"https://www.pokertda.com/poker-tda-rules/\" rel=\"external\">TDA rule downloads and translation access</a></h3><p class=\"reader-card-meta\">Free · Official rules · All levels</p><p>Official access point for longform and shortform tournament rules, illustrated material and translation links.</p><p class=\"small-copy\"><strong>Before you use it:</strong> Search-index description checked; direct page retrieval timed out. Downloads and translations were not individually reviewed. Check the document version and the event rules actually adopted.</p><p class=\"small-copy\">Search index only · <time datetime=\"2026-10-08\">2026-10-08</time> · <a href=\"/poker/resources/#resource-tda-rule-downloads\">Full directory listing</a></p></article><article class=\"reader-card\" data-collection-resource=\"stars-tool-policy\"><p class=\"reader-eyebrow\">PokerStars</p><h3><a href=\"https://www.pokerstars.com/poker/room/prohibited/\" rel=\"external\">PokerStars: third-party tools and services policy</a></h3><p class=\"reader-card-meta\">Free · Official rules · All levels</p><p>Operator policy distinguishing permitted tools, tools prohibited at all times and tools restricted while its software is open.</p><p class=\"small-copy\"><strong>Before you use it:</strong> Policy text read, not independent enforcement testing. Applies to this operator and can change. This is not an endorsement, eligibility check or permission to use a specific tool.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-08\">2026-10-08</time> · <a href=\"/poker/resources/#resource-stars-tool-policy\">Full directory listing</a></p></article><article class=\"reader-card\" data-collection-resource=\"gg-security-policy\"><p class=\"reader-eyebrow\">GGPoker Network</p><h3><a href=\"https://legal.ggpoker.com/network/security-ecology-policy/\" rel=\"external\">GGPoker: Security and Ecology Policy</a></h3><p class=\"reader-card-meta\">Free · Official rules · All levels</p><p>The network policy on game integrity, external assistance, player conduct and account responsibility.</p><p class=\"small-copy\"><strong>Before you use it:</strong> Policy text read, not an audit of enforcement or operator safety. Recheck the current version and applicable operator terms; inclusion does not establish local eligibility.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-08\">2026-10-08</time> · <a href=\"/poker/resources/#resource-gg-security-policy\">Full directory listing</a></p></article></div",
+          "new": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-16\">2026-10-16</time> · <a href=\"/poker/resources/#resource-tda-rules\">Full directory listing</a></p></article><article class=\"reader-card\" data-collection-resource=\"tda-rule-downloads\"><p class=\"reader-eyebrow\">Poker Tournament Directors Association</p><h3><a href=\"https://www.pokertda.com/poker-tda-rules/\" rel=\"external\">TDA rule downloads and translation access</a></h3><p class=\"reader-card-meta\">Free · Official rules · All levels</p><p>Official access point for longform and shortform tournament rules, illustrated material and translation links.</p><p class=\"small-copy\"><strong>Before you use it:</strong> Search-index description checked; direct page retrieval timed out. Downloads and translations were not individually reviewed. Check the document version and the event rules actually adopted.</p><p class=\"small-copy\">Search index only · <time datetime=\"2026-10-08\">2026-10-08</time> · <a href=\"/poker/resources/#resource-tda-rule-downloads\">Full directory listing</a></p></article><article class=\"reader-card\" data-collection-resource=\"stars-tool-policy\"><p class=\"reader-eyebrow\">PokerStars</p><h3><a href=\"https://www.pokerstars.com/poker/room/prohibited/\" rel=\"external\">PokerStars: third-party tools and services policy</a></h3><p class=\"reader-card-meta\">Free · Official rules · All levels</p><p>Operator policy distinguishing permitted tools, tools prohibited at all times and tools restricted while its software is open.</p><p class=\"small-copy\"><strong>Before you use it:</strong> Policy text read, not independent enforcement testing. Applies to this operator and can change. This is not an endorsement, eligibility check or permission to use a specific tool.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-08\">2026-10-08</time> · <a href=\"/poker/resources/#resource-stars-tool-policy\">Full directory listing</a></p></article><article class=\"reader-card\" data-collection-resource=\"gg-security-policy\"><p class=\"reader-eyebrow\">GGPoker Network</p><h3><a href=\"https://legal.ggpoker.com/network/security-ecology-policy/\" rel=\"external\">GGPoker: Security and Ecology Policy</a></h3><p class=\"reader-card-meta\">Free · Official rules · All levels</p><p>The network policy on game integrity, external assistance, player conduct and account responsibility.</p><p class=\"small-copy\"><strong>Before you use it:</strong> Policy text read, not an audit of enforcement or operator safety. Recheck the current version and applicable operator terms; inclusion does not establish local eligibility.</p><p class=\"small-copy\">Public page read · <time datetime=\"2026-10-08\">2026-10-08</time> · <a href=\"/poker/resources/#resource-gg-security-policy\">Full directory listing</a></p></article></div>\n<p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p"
+        },
+        {
+          "start": 21021,
+          "end": 21022,
+          "old": "4",
+          "new": "5"
+        }
+      ]
+    },
+    "poker/position-and-stacks/index.html": {
+      "old_sha256": "23fcfa2fbdde3fdc6ad723875cb0df9119fe85ff87156f671aa60d893a254f39",
+      "new_sha256": "ec362076f63d136a16b8d4eb1b7747892e3a8d4a287d1ca70590df6541878153",
+      "edits": [
+        {
+          "start": 2997,
+          "end": 2999,
+          "old": "05",
+          "new": "16"
+        },
+        {
+          "start": 3958,
+          "end": 3960,
+          "old": "05",
+          "new": "16"
+        },
+        {
+          "start": 7601,
+          "end": 7615,
+          "old": "05\">October 5",
+          "new": "16\">October 16"
+        },
+        {
+          "start": 11195,
+          "end": 11196,
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "start": 14805,
+          "end": 15671,
+          "old": "0</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/lesson/introduction-to-stack-to-pot-ratio-spr/\">PokerStars Learn: stack-to-pot ratio</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p></section>\n  ",
+          "new": "1</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/lesson/introduction-to-stack-to-pot-ratio-spr/\">PokerStars Learn: stack-to-pot ratio</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p><p>TDA reference rechecked October 16, 2026: 2026 Rules, Version 1.1, September 21, 2026. The other reference-review dates above are unchanged.</p></section>\n  <p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p>\n"
+        }
+      ]
+    },
+    "poker/resource-quality/index.html": {
+      "old_sha256": "24d993f7076cbf4ddab5e961a18a256affa9d1b9b7fb227e97c2d7e13e11bda8",
+      "new_sha256": "27a98a08e9e07b12ef04e618e01fb6bc650dedadd863d95dbe15e9c4d0d479a3",
+      "edits": [
+        {
+          "start": 8464,
+          "end": 8579,
+          "old": "08</th><td>38</td></tr><tr><th scope=\"row\">2026-10-07</th><td>108",
+          "new": "16</th><td>1</td></tr><tr><th scope=\"row\">2026-10-08</th><td>38</td></tr><tr><th scope=\"row\">2026-10-07</th><td>107"
+        }
+      ]
+    },
+    "poker/resources/index.html": {
+      "old_sha256": "0a3f9b6830525bcaa5c0a1e5d6ae4a7b0a9f5557efc74b0f3650e57b6e2fe3fa",
+      "new_sha256": "481cd242a4d6bf1ccf017f88f8d945fe68cdb5fab94015aab4ae02483fd3b830",
+      "edits": [
+        {
+          "start": 35629,
+          "end": 35932,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.</p><p class=\"small-copy resource-review\">Listing reviewed <time datetime=\"2026-10-07\">2026-10-07",
+          "new": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.</p><p class=\"small-copy resource-review\">Listing reviewed <time datetime=\"2026-10-16\">2026-10-16"
+        }
+      ]
+    },
+    "poker/table-etiquette/index.html": {
+      "old_sha256": "192604faf8a0bc80e0fc15e5a014af72c1760ceb5642544f24bef836cbe66ac6",
+      "new_sha256": "b2ece8b32ac3199bf38589b5e5e9833601661df720e3ea0ef8b7c40cc2591a0c",
+      "edits": [
+        {
+          "start": 3023,
+          "end": 3025,
+          "old": "08",
+          "new": "16"
+        },
+        {
+          "start": 3990,
+          "end": 3992,
+          "old": "08",
+          "new": "16"
+        },
+        {
+          "start": 7569,
+          "end": 7642,
+          "old": "4 min read</a></span><span>Updated <time datetime=\"2026-10-08\">October 8",
+          "new": "5 min read</a></span><span>Updated <time datetime=\"2026-10-16\">October 16"
+        },
+        {
+          "start": 9926,
+          "end": 9927,
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "start": 14608,
+          "end": 15599,
+          "old": "0</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/strategies/poker-terms-glossary/\">PokerStars Learn: terminology</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstarslive.com/poker/rules/\">PokerStars Live: event-specific rules and filming restrictions</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p></section>\n  ",
+          "new": "1</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstars.com/poker/learn/strategies/poker-terms-glossary/\">PokerStars Learn: terminology</a>; <a class=\"viewer-citation\" href=\"https://www.pokerstarslive.com/poker/rules/\">PokerStars Live: event-specific rules and filming restrictions</a>.</p><p>References checked October 5, 2026. The examples and calculations are original teaching illustrations. Rules depend on the event; a definition or simplified model does not establish the best action in a real hand. External references may contain commercial offers. No purchase is required for this guide.</p><p>TDA reference rechecked October 16, 2026: 2026 Rules, Version 1.1, September 21, 2026. The other reference-review dates above are unchanged.</p></section>\n  <p class=\"editorial-note\">Updated <time datetime=\"2026-10-16\">October 16, 2026</time>: Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged.</p>\n"
+        }
+      ]
+    },
+    "poker/topics/learn/index.html": {
+      "old_sha256": "41279bb8e23b38c9e0a022ce51ec668f25868940305a10098138cc0403a558a3",
+      "new_sha256": "d51be014aa4958615df96b679cca5d7c5a44f2d9b9a0ab09bd55dea84fb22c35",
+      "edits": [
+        {
+          "start": 10026,
+          "end": 10027,
+          "old": "4",
+          "new": "5"
+        }
+      ]
+    },
+    "poker/topics/places-to-play/index.html": {
+      "old_sha256": "07fe449cf33927fa269e52f56d7b284e19053975084697c2672179a8f2ee51ea",
+      "new_sha256": "96ba91e03385aecb9d88815f30bc6460e242b598fbae2367d7110ba97d302017",
+      "edits": [
+        {
+          "start": 8170,
+          "end": 8171,
+          "old": "4",
+          "new": "5"
+        }
+      ]
+    },
+    "poker/topics/safer-play/index.html": {
+      "old_sha256": "febd6310cf8f7874d48f6f204207b7c50d12eb8b114b432a916ba3d6da079edf",
+      "new_sha256": "0a93091ee84dffbdcc65ed8c07fa064898b004bcf12ffd3c3efdd5a2a2ab3456",
+      "edits": [
+        {
+          "start": 7877,
+          "end": 10345,
+          "old": "4 min</span></li><li><a href=\"/poker/poker-access-and-protection/\">Check the room, the rules and your protections.</a><span class=\"topic-meta\">Start here · About 4 min</span></li><li><a href=\"/poker/variance-and-results/\">Results deserve context</a><span class=\"topic-meta\">Go deeper · About 5 min</span></li><li><a href=\"/poker/registration-and-reentry/\">Registration, re-entry and the cost of another attempt.</a><span class=\"topic-meta\">Start here · About 4 min</span></li><li><a href=\"/poker/tournament-trip-budget/\">What does a $400 poker tournament really cost?</a><span class=\"topic-meta\">Build understanding · About 17 min</span></li><li><a href=\"/poker/thunder-valley-poker-guide/\">Playing poker at Thunder Valley: a first-timer’s guide</a><span class=\"topic-meta\">Start here · About 11 min</span></li></ul></details><p><a href=\"/poker/find/#topic=safer-play&amp;kind=guide\">Search on-site material in this topic</a></p></div><div><h3>Selected outside sources</h3><p class=\"topic-meta\">Editorial starting points, not a ranking.</p><ul class=\"topic-sources\"><li class=\"topic-source\" data-topic-source=\"ncpg\"><h4><a href=\"https://www.ncpgambling.org/help-treatment/\" rel=\"external\">National Council on Problem Gambling help</a></h4><p class=\"topic-meta\">National Council on Problem Gambling · Free · Support information</p><p>An official starting point for finding gambling-related support and treatment information.</p><p class=\"topic-caution\"><strong>Before you use it:</strong> Support resources are separate from performance coaching; use the current contact options on the source page.</p><p class=\"topic-meta\">Public page read · <time datetime=\"2026-10-07\">2026-10-07</time> · <a href=\"/poker/resources/#resource-ncpg\">Full listing</a></p></li><li class=\"topic-source\" data-topic-source=\"tda-rules\"><h4><a href=\"https://www.pokertda.com/view-poker-tda-rules/\" rel=\"external\">Poker TDA rules and procedures</a></h4><p class=\"topic-meta\">Poker Tournament Directors Association · Free · Official rules</p><p>Tournament rules, recommended procedures, and examples from the association that publishes them.</p><p class=\"topic-caution\"><strong>Before you use it:</strong> Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.</p><p class=\"topic-meta\">Public page read · <time datetime=\"2026-10-07\">2026-10-07",
+          "new": "5 min</span></li><li><a href=\"/poker/poker-access-and-protection/\">Check the room, the rules and your protections.</a><span class=\"topic-meta\">Start here · About 4 min</span></li><li><a href=\"/poker/variance-and-results/\">Results deserve context</a><span class=\"topic-meta\">Go deeper · About 5 min</span></li><li><a href=\"/poker/registration-and-reentry/\">Registration, re-entry and the cost of another attempt.</a><span class=\"topic-meta\">Start here · About 4 min</span></li><li><a href=\"/poker/tournament-trip-budget/\">What does a $400 poker tournament really cost?</a><span class=\"topic-meta\">Build understanding · About 17 min</span></li><li><a href=\"/poker/thunder-valley-poker-guide/\">Playing poker at Thunder Valley: a first-timer’s guide</a><span class=\"topic-meta\">Start here · About 11 min</span></li></ul></details><p><a href=\"/poker/find/#topic=safer-play&amp;kind=guide\">Search on-site material in this topic</a></p></div><div><h3>Selected outside sources</h3><p class=\"topic-meta\">Editorial starting points, not a ranking.</p><ul class=\"topic-sources\"><li class=\"topic-source\" data-topic-source=\"ncpg\"><h4><a href=\"https://www.ncpgambling.org/help-treatment/\" rel=\"external\">National Council on Problem Gambling help</a></h4><p class=\"topic-meta\">National Council on Problem Gambling · Free · Support information</p><p>An official starting point for finding gambling-related support and treatment information.</p><p class=\"topic-caution\"><strong>Before you use it:</strong> Support resources are separate from performance coaching; use the current contact options on the source page.</p><p class=\"topic-meta\">Public page read · <time datetime=\"2026-10-07\">2026-10-07</time> · <a href=\"/poker/resources/#resource-ncpg\">Full listing</a></p></li><li class=\"topic-source\" data-topic-source=\"tda-rules\"><h4><a href=\"https://www.pokertda.com/view-poker-tda-rules/\" rel=\"external\">Poker TDA rules and procedures</a></h4><p class=\"topic-meta\">Poker Tournament Directors Association · Free · Official rules</p><p>Tournament rules, recommended procedures, and examples from the association that publishes them.</p><p class=\"topic-caution\"><strong>Before you use it:</strong> Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.</p><p class=\"topic-meta\">Public page read · <time datetime=\"2026-10-16\">2026-10-16"
+        }
+      ]
+    },
+    "poker/topics/tournaments/index.html": {
+      "old_sha256": "cec1efdfd0253eaec4d7cc4df7ffb8b801f82384cd8fa7bdbf74faa7bd1f95db",
+      "new_sha256": "3265e762e0afcd39e2a7dc1763f1e2b9212bf1b2ed7d6545c138278fd0cd40b9",
+      "edits": [
+        {
+          "start": 11647,
+          "end": 11936,
+          "old": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.</p><p class=\"topic-meta\">Public page read · <time datetime=\"2026-10-07\">2026-10-07",
+          "new": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.</p><p class=\"topic-meta\">Public page read · <time datetime=\"2026-10-16\">2026-10-16"
+        }
+      ]
+    },
+    "poker/tournament-day/index.html": {
+      "old_sha256": "1f4fc06c9cb16b753c9fabb58beed16d902ee879eaeed3711661e04a48f61f62",
+      "new_sha256": "c3f0d34c1b9f975dc2c6a8394b903df3749cddc69ab35be3c7510ee21e7314c8",
+      "edits": [
+        {
+          "start": 15981,
+          "end": 15982,
+          "old": "4",
+          "new": "5"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "a5899ec565da4dbd55ce5e667d05b7bf56cf64137edb788cf2296766e6745550",
+      "new_sha256": "4db42fee374ad485cb0866d83feb754c6efa5700d53ffb6153d9bf0ac3e3e219",
+      "edits": [
+        {
+          "start": 3853,
+          "end": 3855,
+          "old": "05",
+          "new": "16"
+        },
+        {
+          "start": 4302,
+          "end": 4304,
+          "old": "08",
+          "new": "16"
+        },
+        {
+          "start": 4410,
+          "end": 4412,
+          "old": "05",
+          "new": "16"
+        },
+        {
+          "start": 7943,
+          "end": 7945,
+          "old": "08",
+          "new": "16"
+        }
+      ]
+    }
+  },
+  "pages": {
+    "poker-position-and-stacks": {
+      "old": {
+        "id": "poker-position-and-stacks",
+        "path": "/poker/position-and-stacks/",
+        "title": "Why does the seat matter?",
+        "seo_title": "Poker Position, Effective Stacks and SPR | Nolan Kido",
+        "description": "Follow position, heads-up action order, effective stacks and stack-to-pot ratio without mistaking a seat label for a strategy.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/position-and-stacks.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-05",
+        "poker_guide": true
+      },
+      "new": {
+        "id": "poker-position-and-stacks",
+        "path": "/poker/position-and-stacks/",
+        "title": "Why does the seat matter?",
+        "seo_title": "Poker Position, Effective Stacks and SPR | Nolan Kido",
+        "description": "Follow position, heads-up action order, effective stacks and stack-to-pot ratio without mistaking a seat label for a strategy.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/position-and-stacks.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-16",
+        "poker_guide": true,
+        "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
+      }
+    },
+    "poker-table-etiquette": {
+      "old": {
+        "id": "poker-table-etiquette",
+        "path": "/poker/table-etiquette/",
+        "title": "What is happening at the table?",
+        "seo_title": "What is happening at the table? | Nolan Kido Poker",
+        "description": "Understand floor calls, chip declarations, the clock and spectator boundaries without judging an entire live hand from a short edited clip.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/table-etiquette.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-08",
+        "poker_guide": true
+      },
+      "new": {
+        "id": "poker-table-etiquette",
+        "path": "/poker/table-etiquette/",
+        "title": "What is happening at the table?",
+        "seo_title": "What is happening at the table? | Nolan Kido Poker",
+        "description": "Understand floor calls, chip declarations, the clock and spectator boundaries without judging an entire live hand from a short edited clip.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/table-etiquette.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-16",
+        "poker_guide": true,
+        "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
+      }
+    },
+    "poker-follow-along": {
+      "old": {
+        "id": "poker-follow-along",
+        "path": "/poker/follow-along/",
+        "title": "Pause the hand. Read the situation.",
+        "seo_title": "Pause the hand. Read the situation | Nolan Kido Poker",
+        "description": "Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/follow-along.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-05",
+        "poker_guide": true
+      },
+      "new": {
+        "id": "poker-follow-along",
+        "path": "/poker/follow-along/",
+        "title": "Pause the hand. Read the situation.",
+        "seo_title": "Pause the hand. Read the situation | Nolan Kido Poker",
+        "description": "Work through three fictional scenes: calling a raise, a winner that changes twice, and a river decision where price is not the same as equity.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/follow-along.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-16",
+        "poker_guide": true,
+        "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
+      }
+    },
+    "poker-poker-rules-and-fair-play": {
+      "old": {
+        "id": "poker-poker-rules-and-fair-play",
+        "path": "/poker/poker-rules-and-fair-play/",
+        "title": "Poker rules and fair play: find the right authority.",
+        "seo_title": "Poker rules and fair play: find the right authority | Nolan Kido Poker",
+        "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
+        "kicker": "Poker / Practical reference",
+        "source": "poker/poker-rules-and-fair-play.html",
+        "section": "poker",
+        "date": "2026-10-08",
+        "updated": "2026-10-08",
+        "poker_guide": true
+      },
+      "new": {
+        "id": "poker-poker-rules-and-fair-play",
+        "path": "/poker/poker-rules-and-fair-play/",
+        "title": "Poker rules and fair play: find the right authority.",
+        "seo_title": "Poker rules and fair play: find the right authority | Nolan Kido Poker",
+        "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
+        "kicker": "Poker / Practical reference",
+        "source": "poker/poker-rules-and-fair-play.html",
+        "section": "poker",
+        "date": "2026-10-08",
+        "updated": "2026-10-16",
+        "poker_guide": true,
+        "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
+      }
+    }
+  },
+  "resources": {
+    "tda-rules": {
+      "old": {
+        "id": "tda-rules",
+        "title": "Poker TDA rules and procedures",
+        "url": "https://www.pokertda.com/view-poker-tda-rules/",
+        "publisher": "Poker Tournament Directors Association",
+        "category": "rules",
+        "kind": "Official rules",
+        "access": "Free",
+        "level": "All levels",
+        "description": "Tournament rules, recommended procedures, and examples from the association that publishes them.",
+        "notes": "Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.",
+        "reviewed_on": "2026-10-07",
+        "review_method": "page"
+      },
+      "new": {
+        "id": "tda-rules",
+        "title": "Poker TDA rules and procedures",
+        "url": "https://www.pokertda.com/view-poker-tda-rules/",
+        "publisher": "Poker Tournament Directors Association",
+        "category": "rules",
+        "kind": "Official rules",
+        "access": "Free",
+        "level": "All levels",
+        "description": "Tournament rules, recommended procedures, and examples from the association that publishes them.",
+        "notes": "Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.",
+        "reviewed_on": "2026-10-16",
+        "review_method": "page"
+      }
+    }
+  }
+}

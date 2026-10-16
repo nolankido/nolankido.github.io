@@ -2,7 +2,7 @@
 
 Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.
 
-146 unique resources. Most recent individual listing review: 2026-10-08.
+146 unique resources. Most recent individual listing review: 2026-10-16.
 
 This is not a claim that all resources were rechecked on that date.
 
@@ -885,9 +885,9 @@ Poker Tournament Directors Association | rules | Official rules | Free | All lev
 
 Tournament rules, recommended procedures, and examples from the association that publishes them.
 
-Before you use it: Directly read the official 2026 rules, version 1.0 dated September 7, 2026, including procedures and the addendum. TDA rules supplement house rules; applicable agency rules take precedence.
+Before you use it: Read 2026 rules, version 1.1, dated September 21, 2026. Rechecked player, betting, showdown, device and floor procedures; not every addendum or translation. Event, house and applicable agency rules control.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-16 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-tda-rules
 
 ## PokerStars cash-game rake schedules
