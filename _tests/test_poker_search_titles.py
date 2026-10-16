@@ -7,6 +7,7 @@ import subprocess
 import unittest
 from test_site import ROOT, build
 import poker_search_titles_history as history
+import poker_study_list_history as study_history
 
 
 def load(name, path):
@@ -26,7 +27,7 @@ class PokerSearchTitlesTests(unittest.TestCase):
 
     def test_same_declared_targets_improve_without_losing_any_prior_pass(self):
         old = evaluation.evaluate(prior_release=True)
-        current = evaluation.evaluate()
+        current = evaluation.evaluate(titles_release=True)
         self.assertEqual(current, json.loads((ROOT / '_reports/poker-search-titles/results.json').read_text()))
         self.assertEqual((old['target_hits_top_three'], current['target_hits_top_three']), (29, 30))
         self.assertEqual(old['query_sha256'], current['query_sha256'])
@@ -37,7 +38,7 @@ class PokerSearchTitlesTests(unittest.TestCase):
         self.assertEqual(icm['top_three'][0]['url'], '/poker/tournament-equity/')
 
     def test_titles_come_from_public_manifest_and_existing_card_content_is_identical(self):
-        page = (ROOT / 'poker/find/index.html').read_text()
+        page = study_history.before('poker/find/index.html', (ROOT / 'poker/find/index.html').read_text())
         old = history.before('poker/find/index.html', page)
         rows = evaluation.Cards(page).rows
         pages = {p['path']: p for p in build.public_pages()}

@@ -1,0 +1,119 @@
+{
+  "commit": "ff403da6eeb4afbca704e17ce3592a2977011dcd",
+  "paths": {
+    "_source/poker/find.html": {
+      "old_sha256": "9a2840a20e52abf2f447847810038f9e61d32977940118e5f928b06ba84fdf37",
+      "new_sha256": "7671dae9e37889360581a062988e74dd25ae5574eea46716751d5d02ef856208",
+      "edits": [
+        {
+          "start": 2972,
+          "end": 3731,
+          "old": "p><a id=\"finder-shelf-download\" download=\"poker-study-list.md\" hidden>Download this list as Markdown</a></p",
+          "new": "div class=\"finder-shelf-actions\"><a id=\"finder-shelf-download\" download=\"poker-study-list.md\" hidden>Download this list as Markdown</a><button type=\"button\" id=\"finder-shelf-copy\">Copy study list</button></div><p id=\"finder-shelf-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p><details class=\"poker-details\" id=\"finder-shelf-preview\"><summary>View or copy the complete list</summary><div><label for=\"finder-shelf-text\">Your complete study list in Markdown</label><textarea id=\"finder-shelf-text\" rows=\"10\" readonly spellcheck=\"false\" aria-describedby=\"finder-shelf-text-help\"></textarea><p id=\"finder-shelf-text-help\" class=\"small-copy\">Select the text and use your device’s Copy command, then paste it into your own notes.</p></div></details"
+        }
+      ]
+    },
+    "assets/poker-finder.css": {
+      "old_sha256": "cd9ed27798ea9a25dade63e857033cd8d42f968b560cc449bf80faa3804ebc38",
+      "new_sha256": "c470d24de38e47bffff0640ebd6e8af56e778c405b8d897cc3d4b9e7dbf9f9d6",
+      "edits": [
+        {
+          "start": 2260,
+          "end": 2443,
+          "old": " { min-height:44px; padding:8px 14px; margin-top:12px; white-space:normal; font:inherit; cursor:pointer",
+          "new": ", #finder-shelf-copy, .finder-shelf-remove { min-height:44px; padding:8px 14px; white-space:normal; font:inherit; cursor:pointer; }\n.finder-save, #finder-shelf-clear { margin-top:12px"
+        },
+        {
+          "start": 2512,
+          "end": 3329,
+          "old": "@media print { .finder-save, #finder-shelf-clear, #finder-shelf-download",
+          "new": "#finder-shelf-list a { margin-right:12px; }\n.finder-shelf-remove { vertical-align:middle; }\n.finder-shelf-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; }\n#finder-shelf-download { padding:10px 0; }\n#finder-shelf-status:empty { margin:0; }\n#finder-shelf-preview { margin-top:20px; }\n#finder-shelf-preview > div { padding:16px; }\n#finder-shelf-preview label { display:block; margin-bottom:10px; }\n#finder-shelf-text { display:block; box-sizing:border-box; width:100%; max-width:100%; min-height:15rem; padding:12px; resize:vertical; font:inherit; line-height:1.5; color:var(--basalt); background:var(--paper-light); border:1px solid var(--line-dark); }\n@media print { .finder-save, #finder-shelf-clear, .finder-shelf-actions, .finder-shelf-remove, #finder-shelf-status, #finder-shelf-preview"
+        }
+      ]
+    },
+    "assets/poker-finder.js": {
+      "old_sha256": "da9a89b4c6d88f631a5b0afcfe897583f6592e0a1bc9fc52e7e433ac14b2b50e",
+      "new_sha256": "6d1624f702a4de3c46ae92030b041c54c4eddc0d15cb24ee3bd443b80ee0891c",
+      "edits": [
+        {
+          "start": 8028,
+          "end": 8302,
+          "old": "",
+          "new": "  const shelfCopy = document.getElementById('finder-shelf-copy');\n  const shelfStatus = document.getElementById('finder-shelf-status');\n  const shelfPreview = document.getElementById('finder-shelf-preview');\n  const shelfText = document.getElementById('finder-shelf-text');\n"
+        },
+        {
+          "start": 8349,
+          "end": 9112,
+          "old": "function renderShelf() {\n    if (!shelf || !shelfList || !shelfCount || !shelfDownload) return",
+          "new": "let exportText = '';\n  let shelfRevision = 0;\n  let copyAttempt = 0;\n  function releaseExport() {\n    shelfDownload.hidden = true;\n    shelfDownload.removeAttribute('href');\n    const previous = exportURL;\n    exportURL = undefined;\n    if (previous) {\n      try { URL.revokeObjectURL(previous); } catch (_) { /* The old link is already removed. */ }\n    }\n  }\n  function revealShelfText(select = false) {\n    shelfPreview.open = true;\n    if (select) { shelfText.focus(); shelfText.select(); }\n  }\n  function renderShelf(focusIndex) {\n    if (![shelf, shelfList, shelfCount, shelfDownload, shelfCopy, shelfStatus, shelfPreview, shelfText].every(Boolean)) return;\n    shelfRevision += 1;\n    copyAttempt += 1;\n    releaseExport();\n    shelfStatus.textContent = ''"
+        },
+        {
+          "start": 9921,
+          "end": 10404,
+          "old": "",
+          "new": "\n      const remove = document.createElement('button'), index = shelfList.children.length;\n      remove.type = 'button'; remove.className = 'finder-shelf-remove'; remove.textContent = 'Remove';\n      remove.dataset.finderRemove = card.el.dataset.id;\n      remove.setAttribute('aria-label', 'Remove ' + sourceLink.textContent + ' from study list');\n      remove.addEventListener('click', () => { chosen.delete(card.el.dataset.id); renderShelf(index); });\n      li.appendChild(remove);"
+        },
+        {
+          "start": 10760,
+          "end": 11150,
+          "old": "lines.push(para.textContent, '');",
+          "new": "{\n        const details = para.cloneNode(true);\n        for (const link of details.querySelectorAll('a[href]')) {\n          const href = link.getAttribute('href');\n          const address = href.startsWith('/') ? 'https://nolankido.com' + href : href;\n          link.textContent = '[' + link.textContent + '](' + address + ')';\n        }\n        lines.push(details.textContent, '');\n      }"
+        },
+        {
+          "start": 11161,
+          "end": 11381,
+          "old": "shelfCount.textContent = chosen.size + ' of 12 places used. This list clears when the page reloads; download it to keep it.';\n    if (exportURL) URL.revokeObjectURL(exportURL);\n    shelfDownload.hidden = !chosen.size",
+          "new": "exportText = chosen.size ? lines.join('\\n') : '';\n    shelfText.value = exportText;\n    shelfCount.textContent = chosen.size + ' of 12 places used. This list clears when the page reloads; download or copy it to keep it.'"
+        },
+        {
+          "start": 11412,
+          "end": 12065,
+          "old": "exportURL = URL.createObjectURL(new Blob([lines.join('\\n')], {type: 'text/markdown;charset=utf-8'}));\n      shelfDownload.href = exportURL;\n    } else shelfDownload.removeAttribute('href');",
+          "new": "try {\n        exportURL = URL.createObjectURL(new Blob([exportText], {type: 'text/markdown;charset=utf-8'}));\n        shelfDownload.href = exportURL;\n        shelfDownload.hidden = false;\n      } catch (_) {\n        releaseExport();\n        shelfStatus.textContent = 'The download is unavailable here. Copy the list or use the complete text below.';\n        revealShelfText();\n      }\n    } else shelfPreview.open = false;\n    if (Number.isInteger(focusIndex)) {\n      const buttons = shelfList.querySelectorAll('.finder-shelf-remove');\n      if (buttons.length) buttons[Math.min(focusIndex, buttons.length - 1)].focus();\n      else input.focus();\n    }"
+        },
+        {
+          "start": 12076,
+          "end": 12185,
+          "old": "shelf && shelfList && shelfCount && shelfDownload",
+          "new": "[shelf, shelfList, shelfCount, shelfDownload, shelfCopy, shelfStatus, shelfPreview, shelfText].every(Boolean)"
+        },
+        {
+          "start": 12556,
+          "end": 12822,
+          "old": "shelfCount.textContent = 'The list has 12 items. Remove one before adding another.'; return;",
+          "new": "\n          copyAttempt += 1;\n          shelfCount.textContent = '12 of 12 places used. Remove an item below before adding another.';\n          shelfStatus.textContent = '';\n          shelfList.querySelector('.finder-shelf-remove').focus();\n          return;\n        "
+        },
+        {
+          "start": 12865,
+          "end": 14270,
+          "old": "",
+          "new": "    shelfCopy.addEventListener('click', async () => {\n      if (!chosen.size) return;\n      const revision = shelfRevision, attempt = ++copyAttempt, text = exportText;\n      const current = () => revision === shelfRevision && attempt === copyAttempt && chosen.size > 0;\n      shelfStatus.textContent = '';\n      try {\n        if (typeof navigator === 'undefined' || !navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable');\n        await navigator.clipboard.writeText(text);\n        if (current()) shelfStatus.textContent = 'Study list copied. Paste it into your own notes.';\n      } catch (_) {\n        if (!current()) return;\n        shelfStatus.textContent = 'Copying is unavailable here. Use your device’s Copy command on the complete list below.';\n        revealShelfText(document.activeElement === shelfCopy);\n      }\n    });\n    shelfDownload.addEventListener('click', event => {\n      copyAttempt += 1;\n      if (!chosen.size || !exportURL) {\n        event.preventDefault();\n        if (chosen.size) {\n          shelfStatus.textContent = 'The download is unavailable here. Use the complete text below.';\n          revealShelfText(document.activeElement === shelfDownload);\n        }\n        return;\n      }\n      shelfStatus.textContent = 'Download requested. If no file appears, copy the list or use the complete text below.';\n    });\n"
+        },
+        {
+          "start": 14402,
+          "end": 14496,
+          "old": "",
+          "new": "    window.addEventListener('pagehide', event => { if (!event.persisted) releaseExport(); });\n"
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "old_sha256": "8583aaca0dca7c114f8c75dc6fe30bb22671ca5f0b967b4e5c53f1b16b3f9a46",
+      "new_sha256": "d6333d3d97d9e5cf4ed328593903e8d7e7c9550401e1d09b4f3b6c17b546cd5d",
+      "edits": [
+        {
+          "start": 2997,
+          "end": 3070,
+          "old": "d9ed27798ea\">\n  <script defer src=\"/assets/poker-finder.js?v=da9a89b4c6d8",
+          "new": "470d24de38e\">\n  <script defer src=\"/assets/poker-finder.js?v=6d1624f702a4"
+        },
+        {
+          "start": 9887,
+          "end": 10646,
+          "old": "p><a id=\"finder-shelf-download\" download=\"poker-study-list.md\" hidden>Download this list as Markdown</a></p",
+          "new": "div class=\"finder-shelf-actions\"><a id=\"finder-shelf-download\" download=\"poker-study-list.md\" hidden>Download this list as Markdown</a><button type=\"button\" id=\"finder-shelf-copy\">Copy study list</button></div><p id=\"finder-shelf-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p><details class=\"poker-details\" id=\"finder-shelf-preview\"><summary>View or copy the complete list</summary><div><label for=\"finder-shelf-text\">Your complete study list in Markdown</label><textarea id=\"finder-shelf-text\" rows=\"10\" readonly spellcheck=\"false\" aria-describedby=\"finder-shelf-text-help\"></textarea><p id=\"finder-shelf-text-help\" class=\"small-copy\">Select the text and use your device’s Copy command, then paste it into your own notes.</p></div></details"
+        }
+      ]
+    }
+  }
+}
