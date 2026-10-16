@@ -16,6 +16,7 @@ import poker_lessons
 import poker_finder
 import search_sections
 import short_lessons_history as history
+import rules_reference_history
 
 
 class ShortLessonTests(unittest.TestCase):
@@ -66,7 +67,8 @@ class ShortLessonTests(unittest.TestCase):
             expected = '/poker/' + self.slugs[index + 1] + '/' if index < 5 else '/poker/beginner-checkpoint/'
             self.assertEqual(next(nav.iter('a')).get('href'), expected)
             self.assertFalse(list(first.iter('input')) + list(first.iter('textarea')))
-            original = (ROOT / '_source/poker' / (lesson['slug'] + '.html')).read_text()
+            path = '_source/poker/' + lesson['slug'] + '.html'
+            original = rules_reference_history.before(path, (ROOT / path).read_text())
             self.assertEqual(sha256(original.encode()).hexdigest(), self.baseline['files']['_source/poker/' + lesson['slug'] + '.html'])
             for anchor in re.findall(r'\bid="([^"]+)"', original):
                 self.assertEqual(source.count('id="' + anchor + '"'), 1)
