@@ -67,6 +67,8 @@ class PositionMapTests(unittest.TestCase):
             self.assertEqual([i for i, r in enumerate(rows) if 'is-folded' in r.get('class', '').split()], folded)
             for i, row in enumerate(rows):
                 text = ''.join(row.itertext())
+                self.assertIn('Seat ' + str(i + 1) + ' ' + names[i] + ' ', text)
+                self.assertIn(' Paid ' + str(paid[i]), text)
                 self.assertIn('Seat ' + str(i + 1), text)
                 self.assertIn('Paid ' + str(paid[i]), text)
                 self.assertIn('You: your turn' if i == hero else 'Folded' if i in folded else 'Already acted' if i < hero else 'Not acted yet', text)

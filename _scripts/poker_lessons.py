@@ -71,8 +71,8 @@ def position_map(table):
     for i, name in enumerate(SEATS):
         state = 'Folded' if i in table['folded'] else 'You: your turn' if i == table['hero'] else 'Already acted' if i < table['hero'] else 'Not acted yet'
         classes = 'course-position-seat' + (' is-you' if i == table['hero'] else '') + (' is-folded' if i in table['folded'] else '')
-        button = '<span class="course-position-button">Dealer button</span>' if i == 3 else ''
-        seats.append('<li class="' + classes + '"><span class="course-position-number"><span class="visually-hidden">Seat </span>' + str(i + 1) + '</span><strong>' + name + '</strong>' + button + '<span>' + state + '</span><span>Paid ' + str(table['paid'][i]) + '</span></li>')
+        button = '<span class="course-position-button">Dealer button</span> ' if i == 3 else ''
+        seats.append('<li class="' + classes + '"><span class="course-position-number"><span class="visually-hidden">Seat </span>' + str(i + 1) + '</span> <strong>' + name + '</strong> ' + button + '<span>' + state + '</span> <span>Paid ' + str(table['paid'][i]) + '</span></li>')
     return ('<figure class="course-position-map"><figcaption><strong>Find your seat before reading your cards.</strong> Six seats, numbered clockwise for this hand. Seat 1 starts preflop; the button moves for the next hand. Payments are counters on this round.</figcaption>'
             '<div class="course-position-layout"><span class="course-position-felt" aria-hidden="true"></span><ol role="list" aria-label="Six seats in clockwise initial preflop order">' + ''.join(seats) + '</ol></div></figure>')
 
