@@ -149,7 +149,9 @@ def workbook(root):
     short_lessons = poker_lessons.load(root, [r['slug'] for r in data['lessons']])
     lines = ['BEGINNER POKER STUDY CARD', 'Nolan Kido | https://nolankido.com' + ROUTE + '#beginner-practice', '',
              'For private notes with paper, a deck or counters. No wager or account needed.',
-             'The website does not receive this file or save your progress.',
+             'The website does not receive this file or your answers.',
+             'Optional lesson marks can stay in your browser through the Study desk:',
+             'https://nolankido.com/poker/study/#course-progress',
              'Use learning materials before or after play, following the room’s rules.',
              'Card codes: T=ten, J=jack, Q=queen, K=king, A=ace; s=spades, h=hearts,',
              'd=diamonds, c=clubs. Qh means queen of hearts. Each code names one card.', '',
