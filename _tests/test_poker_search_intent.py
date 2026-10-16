@@ -50,6 +50,9 @@ assert.equal(ranked('what does BB mean')[0],'/poker/glossary/#big-blind');
 assert(!ranked('learn poker free').includes('/poker/glossary/#freezeout'));
 assert.equal(ranked('kicer')[0],'/poker/glossary/#kicker');
 assert.equal(ranked('ods').length,0); // Correct this spelling only in a pot-odds context.
+assert(ranked('poker').includes('/poker/')); // A broad topic query is still meaningful on its own.
+assert(ranked('what is poker').includes('/poker/'));
+assert.equal(e.plan('house charge').hints.length,0); // House fees are not a full-house comparison.
 assert.equal(ranked('')[0],cards[0].url); // Unfiltered browsing retains its original order.
 const original=JSON.stringify(cards);ranked('two pair lose');assert.equal(JSON.stringify(cards),original);
 '''

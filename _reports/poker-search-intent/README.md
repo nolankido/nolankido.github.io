@@ -25,6 +25,9 @@ perform arbitrary fuzzy matching. Short abbreviations match whole words, so
 BB does not mean BBA. Free does not match freezeout. Unrelated remaining words
 still have to match; “two pair football” does not return a hand-ranking answer.
 Literal object-property names cannot become inherited alias functions.
+A broad “poker” query still returns matching pages; that context word is omitted
+only when another content term remains. House charges do not trigger the
+full-house comparison hint.
 
 Ranking adds bounded subject-title hints and rewards a relevant, complete
 passage over matches scattered through a long article. The snippet and section

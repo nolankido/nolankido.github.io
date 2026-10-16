@@ -6,7 +6,7 @@
     .replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim()
     .replace(/\bpre flop\b/g, 'preflop').replace(/\bhold em\b/g, 'holdem')
     .replace(/\breentry\b/g, 're entry').replace(/\b2 ?pairs?\b/g, 'two pair').replace(/\btwo pairs\b/g, 'two pair');
-  const stop = new Set('a an the what how do does did is are be that i my in on of for to can and with when why who which after from mean means much more poker'.split(' '));
+  const stop = new Set('a an the what how do does did is are be that i my in on of for to can and with when why who which after from mean means much more'.split(' '));
   const aliases = {
     mtt: ['mtt', 'tournament'], sng: ['sng', 'sit and go'], plo: ['plo', 'omaha'],
     plo8: ['plo8', 'omaha hi lo', 'omaha high low', 'omaha eight'], o8: ['plo8', 'omaha hi lo', 'omaha high low'],
@@ -28,8 +28,9 @@
     const text = normalize(value.slice(0, 160).replace(/c[ -]bet/gi, 'cbet'));
     const tokens = text.split(/\s+/).filter(Boolean).map(word => Object.prototype.hasOwnProperty.call(spellings, word) ? spellings[word] : word);
     if (tokens.includes('pot')) for (let i = 0; i < tokens.length; i += 1) if (tokens[i] === 'ods') tokens[i] = 'odds';
-    const query = tokens.filter(word => !stop.has(word));
-    const comparison = query.some(word => ['pair', 'straight', 'flush', 'kicker', 'house'].includes(word));
+    const content = tokens.filter(word => !stop.has(word));
+    const query = content.some(word => word !== 'poker') ? content.filter(word => word !== 'poker') : content;
+    const comparison = query.some(word => ['pair', 'straight', 'flush', 'kicker'].includes(word)) || (query.includes('full') && query.includes('house'));
     const groups = [];
     for (let i = 0; i < query.length; i += 1) {
       const pair = query[i] + ' ' + query[i + 1];

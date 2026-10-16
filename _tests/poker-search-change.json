@@ -3,71 +3,71 @@
   "paths": {
     "assets/poker-finder.js": {
       "old_sha256": "c8ad7e80e8f0d9be0a13421c2f2c45beb6744e6f447a70a08ea36c83628df987",
-      "new_sha256": "d90baa7fa40c57ebad2568c7fac8014cf61bb09a8fc1c88ad7291dbe069bcecd",
+      "new_sha256": "aba5277b8ab1652028e27028723bf7e0ff6ccb9ead8d3b840893bf6d9d7b334b",
       "edits": [
         {
           "start": 183,
-          "end": 5768,
+          "end": 5921,
           "old": "",
-          "new": "  const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[\\u0300-\\u036f]/g, '')\n    .replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim()\n    .replace(/\\bpre flop\\b/g, 'preflop').replace(/\\bhold em\\b/g, 'holdem')\n    .replace(/\\breentry\\b/g, 're entry').replace(/\\b2 ?pairs?\\b/g, 'two pair').replace(/\\btwo pairs\\b/g, 'two pair');\n  const stop = new Set('a an the what how do does did is are be that i my in on of for to can and with when why who which after from mean means much more poker'.split(' '));\n  const aliases = {\n    mtt: ['mtt', 'tournament'], sng: ['sng', 'sit and go'], plo: ['plo', 'omaha'],\n    plo8: ['plo8', 'omaha hi lo', 'omaha high low', 'omaha eight'], o8: ['plo8', 'omaha hi lo', 'omaha high low'],\n    holdem: ['holdem', 'hold em'], nlhe: ['nlhe', 'holdem', 'hold em'],\n    bb: ['bb', 'big blind'], spr: ['spr', 'stack to pot'], icm: ['icm', 'independent chip', 'tournament equity'],\n    gto: ['gto', 'game theory', 'solver'], cbet: ['cbet', 'continuation bet'],\n    rta: ['rta', 'real time assistance', 'fair play'], pkos: ['pko', 'bounty'], pko: ['pko', 'bounty'],\n    hu: ['hu', 'heads up'], rake: ['rake', 'game costs'], rules: ['rules', 'procedures'],\n    beginner: ['beginner', 'start here', 'learn the basics'], videos: ['video', 'watch'], podcasts: ['podcast', 'audio'],\n    calling: ['call', 'calling'], calculate: ['calculate', 'calculation', 'calculator', 'price'],\n    count: ['count', 'calculate', 'calculation'], acts: ['acts', 'act', 'action'],\n    bet: ['bet', 'bets', 'betting'], pot: ['pot', 'pots'], outs: ['out', 'outs']\n  };\n  // Short abbreviations are whole words: BB must not match the unrelated BBA.\n  const includes = (text, phrase) => (' ' + text + ' ').includes(' ' + phrase + (phrase.length <= 3 || phrase === 'free' ? ' ' : ''));\n  const spellings = {tournment: 'tournament', tournamnet: 'tournament', kikcer: 'kicker', kicer: 'kicker'};\n  const phrases = ['two pair', 'full house', 'big blind', 'small blind', 'pot odds', 'best five', 're entry'];\n  function plan(value) {\n    const text = normalize(value.slice(0, 160).replace(/c[ -]bet/gi, 'cbet'));\n    const tokens = text.split(/\\s+/).filter(Boolean).map(word => Object.prototype.hasOwnProperty.call(spellings, word) ? spellings[word] : word);\n    if (tokens.includes('pot')) for (let i = 0; i < tokens.length; i += 1) if (tokens[i] === 'ods') tokens[i] = 'odds';\n    const query = tokens.filter(word => !stop.has(word));\n    const comparison = query.some(word => ['pair', 'straight', 'flush', 'kicker', 'house'].includes(word));\n    const groups = [];\n    for (let i = 0; i < query.length; i += 1) {\n      const pair = query[i] + ' ' + query[i + 1];\n      if (phrases.includes(pair)) { groups.push([pair]); i += 1; }\n      else if (comparison && ['lose', 'lost', 'wins', 'win', 'beat', 'beats'].includes(query[i])) groups.push(['lose', 'lost', 'win', 'wins', 'beat', 'compare', 'comparison', 'rank', 'kicker']);\n      else groups.push(Object.prototype.hasOwnProperty.call(aliases, query[i]) ? aliases[query[i]] : [query[i]]);\n    }\n    let hints = [];\n    if (comparison || includes(text, 'best five')) hints = ['hand rankings', 'which hand wins', 'best five'];\n    else if (includes(query.join(' '), 'pot odds') || query.includes('outs') || (query.includes('break') && query.includes('even'))) hints = ['pot odds', 'math'];\n    else if (query.includes('call') || query.includes('calling')) hints = ['first poker decisions', 'bets calls', 'math'];\n    else if (query.includes('acts') || query.includes('position')) hints = ['position', 'first poker decisions', 'starting hand'];\n    else if (query.includes('icm')) hints = ['tournament chips', 'tournament equity', 'prize equity'];\n    else if (query.includes('gto')) hints = ['study tool'];\n    return {query, groups, hints, active: Boolean(value.trim())};\n  }\n  function prepare(card) {\n    return {...card, title: normalize(card.title), text: normalize(card.text), body: normalize(card.body),\n      passages: card.passages.map(p => ({...p, headingWords: normalize(p.heading), words: normalize(p.text + ' ' + p.heading)}))};\n  }\n  function passage(card, search) {\n    if (!search.groups.length) return null;\n    return card.passages.map((p, index) => {\n      const hits = search.groups.filter(g => g.some(t => includes(p.words, t))).length;\n      return {p, index, value: hits * 4 + search.groups.filter(g => g.some(t => includes(p.headingWords, t))).length, hits};\n    }).filter(row => row.hits > 0).sort((a, b) => b.value - a.value || a.index - b.index)[0]?.p || null;\n  }\n  function score(card, search) {\n    if (search.active && !search.groups.length) return -1;\n    if (!search.groups.every(g => g.some(t => includes(card.text + ' ' + card.body, t)))) return -1;\n    const focused = passage(card, search);\n    const sectionScore = focused ? search.groups.filter(g => g.some(t => includes(focused.headingWords, t))).length * 8\n      + (search.groups.every(g => g.some(t => includes(focused.words, t))) ? 12 : 0) : 0;\n    return search.groups.reduce((n, g) => n + (g.some(t => includes(card.title, t)) ? 20 : g.some(t => includes(card.text, t)) ? 5 : 1), 0)\n      + (search.query.length && card.title === search.query.join(' ') ? 50 : 0)\n      + (search.hints.some(t => includes(card.title, t)) ? 40 : 0)\n      + (card.kind === 'glossary' && search.groups.some(g => g.some(t => includes(card.title, t))) ? 12 : 0) + sectionScore;\n  }\n  if (typeof module !== 'undefined' && module.exports) module.exports = {normalize, prepare, plan, score, passage};\n  if (typeof document === 'undefined') return;\n"
+          "new": "  const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[\\u0300-\\u036f]/g, '')\n    .replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim()\n    .replace(/\\bpre flop\\b/g, 'preflop').replace(/\\bhold em\\b/g, 'holdem')\n    .replace(/\\breentry\\b/g, 're entry').replace(/\\b2 ?pairs?\\b/g, 'two pair').replace(/\\btwo pairs\\b/g, 'two pair');\n  const stop = new Set('a an the what how do does did is are be that i my in on of for to can and with when why who which after from mean means much more'.split(' '));\n  const aliases = {\n    mtt: ['mtt', 'tournament'], sng: ['sng', 'sit and go'], plo: ['plo', 'omaha'],\n    plo8: ['plo8', 'omaha hi lo', 'omaha high low', 'omaha eight'], o8: ['plo8', 'omaha hi lo', 'omaha high low'],\n    holdem: ['holdem', 'hold em'], nlhe: ['nlhe', 'holdem', 'hold em'],\n    bb: ['bb', 'big blind'], spr: ['spr', 'stack to pot'], icm: ['icm', 'independent chip', 'tournament equity'],\n    gto: ['gto', 'game theory', 'solver'], cbet: ['cbet', 'continuation bet'],\n    rta: ['rta', 'real time assistance', 'fair play'], pkos: ['pko', 'bounty'], pko: ['pko', 'bounty'],\n    hu: ['hu', 'heads up'], rake: ['rake', 'game costs'], rules: ['rules', 'procedures'],\n    beginner: ['beginner', 'start here', 'learn the basics'], videos: ['video', 'watch'], podcasts: ['podcast', 'audio'],\n    calling: ['call', 'calling'], calculate: ['calculate', 'calculation', 'calculator', 'price'],\n    count: ['count', 'calculate', 'calculation'], acts: ['acts', 'act', 'action'],\n    bet: ['bet', 'bets', 'betting'], pot: ['pot', 'pots'], outs: ['out', 'outs']\n  };\n  // Short abbreviations are whole words: BB must not match the unrelated BBA.\n  const includes = (text, phrase) => (' ' + text + ' ').includes(' ' + phrase + (phrase.length <= 3 || phrase === 'free' ? ' ' : ''));\n  const spellings = {tournment: 'tournament', tournamnet: 'tournament', kikcer: 'kicker', kicer: 'kicker'};\n  const phrases = ['two pair', 'full house', 'big blind', 'small blind', 'pot odds', 'best five', 're entry'];\n  function plan(value) {\n    const text = normalize(value.slice(0, 160).replace(/c[ -]bet/gi, 'cbet'));\n    const tokens = text.split(/\\s+/).filter(Boolean).map(word => Object.prototype.hasOwnProperty.call(spellings, word) ? spellings[word] : word);\n    if (tokens.includes('pot')) for (let i = 0; i < tokens.length; i += 1) if (tokens[i] === 'ods') tokens[i] = 'odds';\n    const content = tokens.filter(word => !stop.has(word));\n    const query = content.some(word => word !== 'poker') ? content.filter(word => word !== 'poker') : content;\n    const comparison = query.some(word => ['pair', 'straight', 'flush', 'kicker'].includes(word)) || (query.includes('full') && query.includes('house'));\n    const groups = [];\n    for (let i = 0; i < query.length; i += 1) {\n      const pair = query[i] + ' ' + query[i + 1];\n      if (phrases.includes(pair)) { groups.push([pair]); i += 1; }\n      else if (comparison && ['lose', 'lost', 'wins', 'win', 'beat', 'beats'].includes(query[i])) groups.push(['lose', 'lost', 'win', 'wins', 'beat', 'compare', 'comparison', 'rank', 'kicker']);\n      else groups.push(Object.prototype.hasOwnProperty.call(aliases, query[i]) ? aliases[query[i]] : [query[i]]);\n    }\n    let hints = [];\n    if (comparison || includes(text, 'best five')) hints = ['hand rankings', 'which hand wins', 'best five'];\n    else if (includes(query.join(' '), 'pot odds') || query.includes('outs') || (query.includes('break') && query.includes('even'))) hints = ['pot odds', 'math'];\n    else if (query.includes('call') || query.includes('calling')) hints = ['first poker decisions', 'bets calls', 'math'];\n    else if (query.includes('acts') || query.includes('position')) hints = ['position', 'first poker decisions', 'starting hand'];\n    else if (query.includes('icm')) hints = ['tournament chips', 'tournament equity', 'prize equity'];\n    else if (query.includes('gto')) hints = ['study tool'];\n    return {query, groups, hints, active: Boolean(value.trim())};\n  }\n  function prepare(card) {\n    return {...card, title: normalize(card.title), text: normalize(card.text), body: normalize(card.body),\n      passages: card.passages.map(p => ({...p, headingWords: normalize(p.heading), words: normalize(p.text + ' ' + p.heading)}))};\n  }\n  function passage(card, search) {\n    if (!search.groups.length) return null;\n    return card.passages.map((p, index) => {\n      const hits = search.groups.filter(g => g.some(t => includes(p.words, t))).length;\n      return {p, index, value: hits * 4 + search.groups.filter(g => g.some(t => includes(p.headingWords, t))).length, hits};\n    }).filter(row => row.hits > 0).sort((a, b) => b.value - a.value || a.index - b.index)[0]?.p || null;\n  }\n  function score(card, search) {\n    if (search.active && !search.groups.length) return -1;\n    if (!search.groups.every(g => g.some(t => includes(card.text + ' ' + card.body, t)))) return -1;\n    const focused = passage(card, search);\n    const sectionScore = focused ? search.groups.filter(g => g.some(t => includes(focused.headingWords, t))).length * 8\n      + (search.groups.every(g => g.some(t => includes(focused.words, t))) ? 12 : 0) : 0;\n    return search.groups.reduce((n, g) => n + (g.some(t => includes(card.title, t)) ? 20 : g.some(t => includes(card.text, t)) ? 5 : 1), 0)\n      + (search.query.length && card.title === search.query.join(' ') ? 50 : 0)\n      + (search.hints.some(t => includes(card.title, t)) ? 40 : 0)\n      + (card.kind === 'glossary' && search.groups.some(g => g.some(t => includes(card.title, t))) ? 12 : 0) + sectionScore;\n  }\n  if (typeof module !== 'undefined' && module.exports) module.exports = {normalize, prepare, plan, score, passage};\n  if (typeof document === 'undefined') return;\n"
         },
         {
-          "start": 6519,
-          "end": 6519,
+          "start": 6672,
+          "end": 6672,
           "old": "  const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[\\u0300-\\u036f]/g, '')\n    .replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim()\n    .replace(/\\bpre flop\\b/g, 'preflop').replace(/\\bhold em\\b/g, 'holdem');\n  const stop = new Set('a an the what how do does is are i my in on of for to can and with when why'.split(' '));\n  const aliases = {\n    mtt: ['mtt', 'tournament'], sng: ['sng', 'sit and go'], plo: ['plo', 'omaha'],\n    plo8: ['plo8', 'omaha hi lo', 'omaha high low', 'omaha eight'], o8: ['plo8', 'omaha hi lo', 'omaha high low'],\n    holdem: ['holdem', 'hold em'], nlhe: ['nlhe', 'holdem', 'hold em'],\n    bb: ['bb', 'big blind'], spr: ['spr', 'stack to pot'], icm: ['icm', 'independent chip', 'tournament equity'],\n    gto: ['gto', 'game theory', 'solver'], cbet: ['cbet', 'continuation bet'],\n    rta: ['rta', 'real time assistance', 'fair play'], pkos: ['pko', 'bounty'], pko: ['pko', 'bounty'],\n    hu: ['hu', 'heads up'], rake: ['rake', 'game costs'], rules: ['rules', 'procedures'],\n    beginner: ['beginner', 'start here', 'learn the basics'], videos: ['video', 'watch'], podcasts: ['podcast', 'audio']\n  };\n  const includes = (text, phrase) => (' ' + text).includes(' ' + phrase);\n",
           "new": ""
         },
         {
-          "start": 6628,
-          "end": 7060,
+          "start": 6781,
+          "end": 7213,
           "old": "topics: new Set((el.dataset.topics || '').split(' ')), text: normalize(el.dataset.search || ''), body: normalize(Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => p.dataset.heading + ' ' + p.textContent).join(' ')), title: normalize(el.querySelector('h3').textContent),\n    passages: Array.from(el.querySelectorAll('[data-finder-passage]'",
           "new": "kind: el.dataset.kind, topics: new Set((el.dataset.topics || '').split(' ')), text: el.dataset.search || '', body: Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => p.dataset.heading + ' ' + p.textContent).join(' '), title: el.querySelector('h3').textContent,\n    passages: Array.from(el.querySelectorAll('[data-finder-passage]')).map(p => ({heading: p.dataset.heading, anchor: p.dataset.anchor, text: p.textContent}"
         },
         {
-          "start": 7124,
-          "end": 7137,
+          "start": 7277,
+          "end": 7290,
           "old": "",
           "new": ".map(prepare)"
         },
         {
-          "start": 10018,
-          "end": 10018,
+          "start": 10171,
+          "end": 10171,
           "old": "  const words = () => normalize(input.value.slice(0, 160).replace(/c[ -]bet/gi, 'cbet'))\n    .split(/\\s+/).filter(word => word && !stop.has(word));\n",
           "new": ""
         },
         {
-          "start": 10614,
-          "end": 10664,
+          "start": 10767,
+          "end": 10817,
           "old": "query = words();\n    const groups = query.map(word => aliases[word] || [word])",
           "new": "search = plan(input.value), groups = search.groups"
         },
         {
-          "start": 10894,
-          "end": 11067,
+          "start": 11047,
+          "end": 11220,
           "old": "&& groups.every(group => group.some(term => includes(card.text + ' ' + card.body, term))));\n    const score = card => groups.reduce((total, group) => total + (group.some(term => includes(card.title, term)) ? 20 : group.some(term => includes(card.text, term)) ? 5 : 1), 0)\n      + (query.length && card.title === query.join(' ') ? 50 : 0);\n    matches.sort((a, b) => score(b) - score(a) || a.index - b.index",
           "new": ").map(card => ({card, value: score(card, search)})).filter(row => row.value >= 0)\n      .sort((a, b) => b.value - a.value || a.card.index - b.card.index).map(row => row.card"
         },
         {
-          "start": 11286,
-          "end": 11354,
+          "start": 11439,
+          "end": 11507,
           "old": "card.passages.map(p => ({p, score: groups.reduce((n, g) => n + (g.some(t => includes(normalize(p.textContent + ' ' + p.dataset.heading), t)) ? 1 : 0), 0)}))\n        .sort((a, b) => b.score - a.score)[0];\n      const found = groups.length && selected && selected.score > 0",
           "new": "passage(card, search);\n      const found = groups.length && selected"
         },
         {
-          "start": 11501,
-          "end": 11501,
+          "start": 11654,
+          "end": 11654,
           "old": "p.dataset.",
           "new": ""
         },
         {
-          "start": 11558,
-          "end": 11561,
+          "start": 11711,
+          "end": 11714,
           "old": "p.textConten",
           "new": "tex"
         },
         {
-          "start": 12025,
-          "end": 12154,
+          "start": 12178,
+          "end": 12307,
           "old": "p.dataset.anchor) {\n          link.setAttribute('href', card.url + '#' + selected.p.dataset.anchor);\n          link.textContent = 'Read: ' + selected.p.dataset",
           "new": "anchor) {\n          link.setAttribute('href', card.url + '#' + selected.anchor);\n          link.textContent = 'Read: ' + selected"
         }
@@ -75,13 +75,13 @@
     },
     "poker/find/index.html": {
       "old_sha256": "d840731cc0b5efb6b692356e27f075dbdb8586a3e5396c1e108249c42942c9f7",
-      "new_sha256": "ff540361570f1164de2f36c3f4c8b357c5d96fe12a444fbee935ed341eb1b964",
+      "new_sha256": "662a30970ce5089730118dac092a008f8f9c6c54ebba84d8afd18ad466e16e98",
       "edits": [
         {
           "start": 3058,
           "end": 3070,
           "old": "c8ad7e80e8f0",
-          "new": "d90baa7fa40c"
+          "new": "aba5277b8ab1"
         }
       ]
     }
