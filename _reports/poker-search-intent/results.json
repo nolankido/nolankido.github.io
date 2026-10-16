@@ -1,0 +1,792 @@
+{
+  "scope": "AI-authored regression targets; human relevance review pending",
+  "baseline_commit": "1d6afff35e16d74a04415f8bc85dafe6f5b369bd",
+  "query_sha256": "3e34eea059d6352b0e2d751c9fef12b7e1abbc8f6955b733539e19104d102ade",
+  "index_sha256": "662a30970ce5089730118dac092a008f8f9c6c54ebba84d8afd18ad466e16e98",
+  "script_sha256": "aba5277b8ab1652028e27028723bf7e0ff6ccb9ead8d3b840893bf6d9d7b334b",
+  "entries": 284,
+  "target_hits_top_three": 29,
+  "total_queries": 30,
+  "results": [
+    {
+      "id": "Q01",
+      "query": "why did my two pair lose",
+      "matches": 11,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 85,
+          "section": "/poker/hand-rankings/#ties",
+          "excerpt": "First compare the category. Within the same category compare the defining ranks, then any kickers from highest to lowest. A full house compares its three-of-a-kind rank first. Two pair compares the higher pair, then the lower pair, then the fifth card. A flush compares all five cards in descending order until they diff"
+        },
+        {
+          "url": "/poker/comics/poker-hand-rankings/",
+          "score": 81,
+          "section": "/poker/comics/poker-hand-rankings/#text",
+          "excerpt": "This text companion explains each category. The list follows standard high-hand poker, as used in full-deck Texas Hold’em. Royal flush A-K-Q-J-10, all in one suit. Straight flush Five consecutive ranks in one suit. Four of a kind Four matching ranks and a fifth card. Full house Three matching ranks plus a pair. Flush F"
+        },
+        {
+          "url": "/poker/comics/best-five-cards-win/",
+          "score": 73,
+          "section": "/poker/comics/best-five-cards-win/#text",
+          "excerpt": "The showdown A player expects an ace in their hand to settle the result. The dealer slows them down: first identify the best five cards available to each player still in the hand. How it works Your private cards do not have to appear in your final hand. Select whichever five-card combination is strongest, whether it us"
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "query": "does a flush beat a straight",
+      "matches": 18,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 90,
+          "section": "/poker/hand-rankings/#ties",
+          "excerpt": "First compare the category. Within the same category compare the defining ranks, then any kickers from highest to lowest. A full house compares its three-of-a-kind rank first. Two pair compares the higher pair, then the lower pair, then the fifth card. A flush compares all five cards in descending order until they diff"
+        },
+        {
+          "url": "/poker/comics/poker-hand-rankings/",
+          "score": 86,
+          "section": "/poker/comics/poker-hand-rankings/#text",
+          "excerpt": "This text companion explains each category. The list follows standard high-hand poker, as used in full-deck Texas Hold’em. Royal flush A-K-Q-J-10, all in one suit. Straight flush Five consecutive ranks in one suit. Four of a kind Four matching ranks and a fifth card. Full house Three matching ranks plus a pair. Flush F"
+        },
+        {
+          "url": "/poker/omaha-and-mixed-games/",
+          "score": 27,
+          "section": "/poker/omaha-and-mixed-games/#low-is-not-one-game",
+          "excerpt": "In ace-to-five lowball, aces are low and straights and flushes do not spoil the low. In deuce-to-seven, aces are high and straights and flushes count against it. Thus an unsuited 7-5-4-3-2 is an excellent deuce-to-seven hand, while A-2-3-4-5 is not the lowball winner it would be under ace-to-five rules. Badugi adds ano"
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "query": "can an ace be low in a straight",
+      "matches": 10,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 55,
+          "section": null,
+          "excerpt": "A visual reference to the ten familiar hand labels, followed by the kicker, shared-board, and ace-low situations that often confuse new viewers. For viewers of standard 52-card no-limit Texas hold'em. All hands, stacks, payouts, and graphics on this page are fictional teaching examples, not footage or results from Nola"
+        },
+        {
+          "url": "/poker/omaha-hi-lo-workshop/",
+          "score": 34,
+          "section": "/poker/omaha-hi-lo-workshop/#two-and-three",
+          "excerpt": "In standard four-card Omaha hi-lo, use exactly two hole cards and three board cards for each five-card hand. The high and low selections may differ. A qualifying low has five distinct ranks of eight or lower, with the ace low; straights and flushes do not spoil the low. When nobody qualifies, the high winner takes the "
+        },
+        {
+          "url": "/poker/stud-and-lowball-workshop/",
+          "score": 31,
+          "section": "/poker/stud-and-lowball-workshop/#read-a-low",
+          "excerpt": "Fictional comparison: under ace-to-five rules, 7-6-4-2-A loses to 7-5-4-3-2. Both are seven-lows, so compare their next highest cards: the five is lower than the six. Having an ace does not automatically make the first hand better. Do not add the card ranks and compare totals. In razz, a nine-low can win. The absence o"
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "query": "which full house wins",
+      "matches": 11,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 85,
+          "section": "/poker/hand-rankings/#ties",
+          "excerpt": "First compare the category. Within the same category compare the defining ranks, then any kickers from highest to lowest. A full house compares its three-of-a-kind rank first. Two pair compares the higher pair, then the lower pair, then the fifth card. A flush compares all five cards in descending order until they diff"
+        },
+        {
+          "url": "/poker/comics/poker-hand-rankings/",
+          "score": 81,
+          "section": "/poker/comics/poker-hand-rankings/#text",
+          "excerpt": "This text companion explains each category. The list follows standard high-hand poker, as used in full-deck Texas Hold’em. Royal flush A-K-Q-J-10, all in one suit. Straight flush Five consecutive ranks in one suit. Four of a kind Four matching ranks and a fifth card. Full house Three matching ranks plus a pair. Flush F"
+        },
+        {
+          "url": "/poker/no-limit-holdem-guide/",
+          "score": 22,
+          "section": "/poker/no-limit-holdem-guide/#which-five-cards-win",
+          "excerpt": "Hold’em uses conventional high-poker rankings. The strongest valid five-card category wins. Standard high-poker hand rankings Rank Example Meaning Straight flush 9♣ 8♣ 7♣ 6♣ 5♣ Five consecutive cards of one suit Four of a kind K♠ K♥ K♦ K♣ 3♠ Four cards of one rank Full house Q♠ Q♥ Q♦ 7♣ 7♦ Three of one rank plus a pair"
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "query": "what is a kicker",
+      "matches": 19,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/glossary/#kicker",
+          "score": 82,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/comics/best-five-cards-win/",
+          "score": 61,
+          "section": "/poker/comics/best-five-cards-win/#practice",
+          "excerpt": "A kicker matters when it belongs to the best five-card hand. With a pair, compare the pair first, then the three side cards in order. With a straight, all five places are already occupied: compare the highest card in each straight. There is no extra kicker. Try more examples in Which hand wins? and Reading the board . "
+        },
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 57,
+          "section": null,
+          "excerpt": "A visual reference to the ten familiar hand labels, followed by the kicker, shared-board, and ace-low situations that often confuse new viewers. For viewers of standard 52-card no-limit Texas hold'em. All hands, stacks, payouts, and graphics on this page are fictional teaching examples, not footage or results from Nola"
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "query": "best five cards from seven",
+      "matches": 11,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 79,
+          "section": "/poker/hand-rankings/#ties",
+          "excerpt": "First compare the category. Within the same category compare the defining ranks, then any kickers from highest to lowest. A full house compares its three-of-a-kind rank first. Two pair compares the higher pair, then the lower pair, then the fifth card. A flush compares all five cards in descending order until they diff"
+        },
+        {
+          "url": "/poker/comics/poker-hand-rankings/",
+          "score": 63,
+          "section": "/poker/comics/poker-hand-rankings/#rules",
+          "excerpt": "The hand categories are in the correct order, but some AI-drawn card faces have inconsistent ranks or suits. Use the written definitions below as your reference. A royal flush is the highest straight flush. Aces can be high or low in a straight: A-K-Q-J-10 or 5-4-3-2-A. They cannot wrap around in Q-K-A-2-3. At a Hold’e"
+        },
+        {
+          "url": "/poker/no-limit-holdem-guide/",
+          "score": 23,
+          "section": "/poker/no-limit-holdem-guide/#which-five-cards-win",
+          "excerpt": "Hold’em uses conventional high-poker rankings. The strongest valid five-card category wins. Standard high-poker hand rankings Rank Example Meaning Straight flush 9♣ 8♣ 7♣ 6♣ 5♣ Five consecutive cards of one suit Four of a kind K♠ K♥ K♦ K♣ 3♠ Four cards of one rank Full house Q♠ Q♥ Q♦ 7♣ 7♦ Three of one rank plus a pair"
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "query": "can I check facing a bet",
+      "matches": 19,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/betting-with-a-purpose/",
+          "score": 38,
+          "section": "/poker/betting-with-a-purpose/#purpose",
+          "excerpt": "A value bet aims to get called by a worse hand. A bluff aims to make a better hand fold. These describe an intention relative to the opponent's possible hands, not just the strength of your own two cards. The same pair can be a reasonable value candidate in one assumed situation and an unhelpful bet in another. When no"
+        },
+        {
+          "url": "/poker/betting-and-pots/",
+          "score": 34,
+          "section": "/poker/betting-and-pots/#actions",
+          "excerpt": "Check adds nothing when no wager needs matching. Bet opens the wagering on a street. Call matches what is outstanding, limited by the caller's available chips. Raise increases the wager. Fold gives up the hand and its claim to the pot; earlier contributions stay in. Checking and folding are different. A check may lead "
+        },
+        {
+          "url": "/poker/free-poker-learning-path/",
+          "score": 27,
+          "section": "/poker/free-poker-learning-path/#round-practice-flop",
+          "excerpt": "The same three seats reached the flop with 6 in the pot. Payments on this new round start at zero. The small blind acts first. Try checking around, then restart and add a bet or raise. Use counters or paper. Choose an action for the next seat, move only the extra counters, then name who still needs a turn. Compare with"
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "query": "how much more to call",
+      "matches": 67,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/glossary/#call",
+          "score": 82,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/betting-and-pots/",
+          "score": 72,
+          "section": "/poker/betting-and-pots/#actions",
+          "excerpt": "Check adds nothing when no wager needs matching. Bet opens the wagering on a street. Call matches what is outstanding, limited by the caller's available chips. Raise increases the wager. Fold gives up the hand and its claim to the pot; earlier contributions stay in. Checking and folding are different. A check may lead "
+        },
+        {
+          "url": "/poker/poker-math-reference/",
+          "score": 65,
+          "section": "/poker/poker-math-reference/#call-price",
+          "excerpt": "Call threshold = extra call / final pot after that call. Include wagers already in front of the players. Do not add a bet twice, and do not count a side pot you cannot win. For a first bet B into a pot P, a full call makes the final pot P + 2B. A fictional river price The pot is 120 before an opponent bets 90. It now c"
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "query": "small blind calling a raise",
+      "matches": 18,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/first-decisions/",
+          "score": 63,
+          "section": "/poker/first-decisions/#turn-order",
+          "excerpt": "The button is a marker identifying the dealer position, even when a staff member deals. The small blind and big blind are forced wagers posted before the cards. The cutoff is the seat immediately before the button in preflop action order. At a table with three or more players, preflop action begins clockwise after the "
+        },
+        {
+          "url": "/poker/follow-along/",
+          "score": 31,
+          "section": "/poker/follow-along/#scene-1-title",
+          "excerpt": "Six-handed hold’em. Blinds 100/200, no ante. The button starts with 6,000 chips and the big blind with 9,000. Everyone folds to the button, who raises to 500. The small blind folds; the big blind calls. The flop pot is 1,100 = 500 + 500 + 100 . Button’s cards Flop The big blind checks. The button bets 400. The big blin"
+        },
+        {
+          "url": "/poker/short-stack-decisions/",
+          "score": 23,
+          "section": "/poker/short-stack-decisions/#short-stack-start",
+          "excerpt": "At 15 big blinds, “What can I shove?” is only one question. You may be first in, facing a raise, completing the small blind or considering a call for your tournament life. Start by defining the available actions and what you are trying to maximize: chips or modeled prize equity. After-play study, not an at-table aid. T"
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "query": "who acts first after the flop",
+      "matches": 19,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/first-decisions/",
+          "score": 78,
+          "section": "/poker/first-decisions/#turn-order",
+          "excerpt": "The button is a marker identifying the dealer position, even when a staff member deals. The small blind and big blind are forced wagers posted before the cards. The cutoff is the seat immediately before the button in preflop action order. At a table with three or more players, preflop action begins clockwise after the "
+        },
+        {
+          "url": "/poker/first-flop-decisions/",
+          "score": 61,
+          "section": "/poker/first-flop-decisions/#whose-turn",
+          "excerpt": "In a heads-up pot between the big blind and the button, the big blind acts first after the flop. Imagine you are on the button, you raised before the flop, and the big blind now checks. There is no wager to match on this street. Checking is an active choice. It may preserve a hand's chance to win at showdown while avoi"
+        },
+        {
+          "url": "/poker/comics/why-acting-last-helps/",
+          "score": 31,
+          "section": "/poker/comics/why-acting-last-helps/#rules",
+          "excerpt": "On the flop, turn and river, action begins with the first player still able to act clockwise from the dealer button. If the button is still in the hand and has chips to act with, that player acts after the others. Before the flop, the blinds come after the button in the initial action order at a table with three or mor"
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "query": "four spades is that a flush",
+      "matches": 12,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 59,
+          "section": "/poker/hand-rankings/#ties",
+          "excerpt": "First compare the category. Within the same category compare the defining ranks, then any kickers from highest to lowest. A full house compares its three-of-a-kind rank first. Two pair compares the higher pair, then the lower pair, then the fifth card. A flush compares all five cards in descending order until they diff"
+        },
+        {
+          "url": "/poker/reading-the-board/",
+          "score": 15,
+          "section": "/poker/reading-the-board/#draws",
+          "excerpt": "An open-ended straight draw can complete at either end. A gutshot needs an internal rank. A backdoor draw needs both the turn and river to cooperate. Count physical cards, not attractive-sounding hand labels. Then ask whether those cards would actually win against the opponent. Do not count the same card twice Fictiona"
+        },
+        {
+          "url": "/poker/omaha-and-mixed-games/",
+          "score": 15,
+          "section": "/poker/omaha-and-mixed-games/#two-card-rule",
+          "excerpt": "In a fictional Omaha hand, you hold ace of spades, king of diamonds, queen of clubs and jack of hearts. The board is two of spades, seven of spades, nine of spades, jack of spades and three of diamonds. You do not have a flush: using four board spades and one hole spade is illegal in Omaha. Only one of your hole cards "
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "query": "how to calculate pot odds",
+      "matches": 23,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/pot-odds-workshop/",
+          "score": 77,
+          "section": null,
+          "excerpt": "PokerStars Learn: pot odds provides background on the call-price relationship. The examples and calculations here are independently constructed. Decimal percentages are rounded. Prepared with AI assistance. No actual hand, personal result or solver validation is claimed."
+        },
+        {
+          "url": "/poker/glossary/#pot-odds",
+          "score": 77,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "https://upswingpoker.com/pot-odds-step-by-step/",
+          "score": 65,
+          "section": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "query": "pot ods",
+      "matches": 26,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/glossary/#pot-odds",
+          "score": 122,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/pot-odds-workshop/",
+          "score": 72,
+          "section": null,
+          "excerpt": "PokerStars Learn: pot odds provides background on the call-price relationship. The examples and calculations here are independently constructed. Decimal percentages are rounded. Prepared with AI assistance. No actual hand, personal result or solver validation is claimed."
+        },
+        {
+          "url": "https://upswingpoker.com/pot-odds-step-by-step/",
+          "score": 60,
+          "section": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "query": "break even equity",
+      "matches": 18,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/pot-odds-workshop/",
+          "score": 67,
+          "section": "/poker/pot-odds-workshop/#bluffs",
+          "excerpt": "For a deliberately simplified heads-up river model, you bet B into a pot P. The opponent either folds or calls. You always lose when called, and there are no ties, deductions or tournament effects. The bluff breaks even when the fold probability equals B / (P + B) . Risk six to win ten Betting 6 BB into 10 BB needs 6 /"
+        },
+        {
+          "url": "/poker/poker-math-reference/",
+          "score": 59,
+          "section": "/poker/poker-math-reference/#call-price",
+          "excerpt": "Call threshold = extra call / final pot after that call. Include wagers already in front of the players. Do not add a bet twice, and do not count a side pot you cannot win. For a first bet B into a pot P, a full call makes the final pot P + 2B. A fictional river price The pot is 120 before an opponent bets 90. It now c"
+        },
+        {
+          "url": "https://upswingpoker.com/pot-odds-step-by-step/",
+          "score": 55,
+          "section": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "query": "implied odds",
+      "matches": 7,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "https://www.thepokerbank.com/strategy/mathematics/implied-odds/",
+          "score": 40,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/cash-game-study/",
+          "score": 38,
+          "section": "/poker/cash-game-study/#future-money",
+          "excerpt": "The implied-odds article below introduces future payments after a draw completes. When reviewing its logic, ask whether the opponent would actually continue, whether the draw can make a second-best hand, and how much is available to win. A large opposing stack does not mean that stack will be paid to you. Start with th"
+        },
+        {
+          "url": "/poker/pot-odds-workshop/",
+          "score": 37,
+          "section": "/poker/pot-odds-workshop/#draws",
+          "excerpt": "Suppose exactly nine of 47 unseen cards would complete a particular draw on the turn. The next-card probability is 9 / 47 = 19.1% . If the same nine target cards remain relevant and you are guaranteed both remaining cards without another payment, the chance of hitting at least one is 1 − (38 / 47 × 37 / 46) = 35.0% . N"
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "query": "how to count outs",
+      "matches": 34,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/poker-math-reference/",
+          "score": 62,
+          "section": "/poker/poker-math-reference/#stacks-and-outs",
+          "excerpt": "Stack in BB = stack / current big blind. A 28,500 stack at a 1,000 big blind is 28.5 BB. State when the stack was measured. SPR = effective chips remaining / pot at the same decision. Heads-up, 450 effective chips behind a 150 pot gives SPR 3. It is a situation descriptor, not a promise that a particular hand should co"
+        },
+        {
+          "url": "/poker/topics/strategy/",
+          "score": 50,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/cash-game-costs/",
+          "score": 34,
+          "section": "/poker/cash-game-costs/#session-ledger",
+          "excerpt": "Fictional session record Buy-in: 200. Top-up: 100. Cash-out: 260. Stack balance: -40 . Suppose 8 in tips were paid from those chips and pot deductions also came from the chips. Those costs are already reflected in the -40. A further 28 time charge was paid separately from a wallet, not from the chips. Including that ma"
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "query": "UTG position",
+      "matches": 5,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/glossary/#under-the-gun",
+          "score": 37,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/holdem-basics/",
+          "score": 22,
+          "section": "/poker/holdem-basics/#position",
+          "excerpt": "At a staffed table the dealer distributes the cards while a marker identifies the dealer-button position. Preflop, action starts with the first eligible player clockwise after the big blind. After the flop, it starts with the first remaining player clockwise after the button. Folded seats are skipped. A common six-hand"
+        },
+        {
+          "url": "/poker/position-and-stacks/",
+          "score": 18,
+          "section": "/poker/position-and-stacks/#seat-order",
+          "excerpt": "These are common naming conventions, not universal seat names. At a six-handed table, the first seat is also sometimes called the lojack. At nine-handed tables, middle-position labels vary. Count the players and locate the button rather than trying to memorize one graphic. Initial preflop order in an ordinary hand, bef"
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "query": "what does BB mean",
+      "matches": 41,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/glossary/#big-blind",
+          "score": 32,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/short-stack-decisions/",
+          "score": 25,
+          "section": "/poker/short-stack-decisions/#short-stack-start",
+          "excerpt": "At 15 big blinds, “What can I shove?” is only one question. You may be first in, facing a raise, completing the small blind or considering a call for your tournament life. Start by defining the available actions and what you are trying to maximize: chips or modeled prize equity. After-play study, not an at-table aid. T"
+        },
+        {
+          "url": "/poker/choosing-a-tournament/",
+          "score": 25,
+          "section": "/poker/choosing-a-tournament/#stack-comparison",
+          "excerpt": "Fictional comparison: Event A starts with 30,000 chips at blinds of 100/200. Event B starts with 50,000 chips at 200/500. Their starting depths are 30,000 / 200 = 150 BB and 50,000 / 500 = 100 BB . The smaller chip count is the deeper starting stack. Two fictional schedules, with no breaks during the first hour Schedul"
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "query": "SPR",
+      "matches": 5,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "https://www.pokerstars.com/poker/learn/lesson/introduction-to-stack-to-pot-ratio-spr/",
+          "score": 20,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/position-and-stacks/",
+          "score": 17,
+          "section": null,
+          "excerpt": "Follow position, heads-up action order, effective stacks and stack-to-pot ratio without mistaking a seat label for a strategy. For watching standard 52-card no-limit hold’em. All hands, stacks and event examples here are fictional, not accounts of Nolan’s results. No live-play assistance or recommended betting ranges."
+        },
+        {
+          "url": "/poker/poker-math-reference/",
+          "score": 17,
+          "section": "/poker/poker-math-reference/#stacks-and-outs",
+          "excerpt": "Stack in BB = stack / current big blind. A 28,500 stack at a 1,000 big blind is 28.5 BB. State when the stack was measured. SPR = effective chips remaining / pot at the same decision. Heads-up, 450 effective chips behind a 150 pot gives SPR 3. It is a situation descriptor, not a promise that a particular hand should co"
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "query": "what is ICM",
+      "matches": 26,
+      "hit_top_three": false,
+      "top_three": [
+        {
+          "url": "/poker/short-stack-decisions/",
+          "score": 25,
+          "section": "/poker/short-stack-decisions/#icm-call",
+          "excerpt": "Complete fictional setup: four players remain in a standard no-limit Hold’em tournament. Finishing prizes are $50, $30, $20 and $0 . Starting stacks before posting, in the order small blind, C, you in the big blind, D , are 40, 30, 20 and 10 BB . Blinds are 0.5/1 BB with no ante . C and D fold; the small blind shoves. "
+        },
+        {
+          "url": "/poker/practice-room/",
+          "score": 25,
+          "section": "/poker/practice-room/#icm-check-title",
+          "excerpt": "09 / A profitable chip gamble. Use the workshop's three equal 10-unit stacks and $50/$30/$20 prizes. In its no-blinds, no-ties transfer gamble, keeping the state is worth $33.33, winning is worth $43.33 and losing pays $20. Is a 55% win probability enough under standard ICM?"
+        },
+        {
+          "url": "https://blog.gtowizard.com/icm-basics/",
+          "score": 20,
+          "section": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "id": "Q21",
+      "query": "GTO",
+      "matches": 48,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "https://www.gtoplus.com/",
+          "score": 70,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/choosing-study-tools/",
+          "score": 57,
+          "section": null,
+          "excerpt": "An equity calculator, a solver and a trainer can all display impressive numbers while answering different questions. Start with the question you need to answer, not the product with the most features."
+        },
+        {
+          "url": "/poker/topics/study/",
+          "score": 45,
+          "section": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "id": "Q22",
+      "query": "c bet",
+      "matches": 7,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/glossary/#c-bet",
+          "score": 32,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/limped-multiway-pots/",
+          "score": 17,
+          "section": "/poker/limped-multiway-pots/#postflop",
+          "excerpt": "A continuation bet, or c-bet , is a bet by the preflop aggressor on a later street. Raising before the flop gives you no entitlement to win it afterward. Before betting into several opponents, ask who has the strongest hands on this board and what continues against your chosen size. One GTO Wizard study compared an eig"
+        },
+        {
+          "url": "/poker/glossary/",
+          "score": 13,
+          "section": "/poker/glossary/#analysis",
+          "excerpt": "Draw A holding needing further cards to complete a combination such as a straight or flush. Gutshot / open-ended A straight draw missing an internal rank / one with either end available. Winning outs still need checking. Range Possible holdings assigned to a player, often with weights. It is a model, not hidden-card kn"
+        }
+      ]
+    },
+    {
+      "id": "Q23",
+      "query": "MTT",
+      "matches": 100,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/tournaments/",
+          "score": 32,
+          "section": "/poker/tournaments/#chips",
+          "excerpt": "In an ordinary tournament, the entry purchases a starting stack and the payout structure determines the cash awards. The chips are units for playing the event, not dollars that can be cashed out at their printed value. Do not read a 100,000-chip win as $100,000. Fictional result: a cash is not always a profit Two entri"
+        },
+        {
+          "url": "/poker/tournament-formats/",
+          "score": 32,
+          "section": "/poker/tournament-formats/#labels",
+          "excerpt": "“No-limit hold’em” identifies how cards and betting work. “Bounty,” “satellite,” “freezeout” and “turbo” describe other parts of an event. The same poker game can use very different entry and prize arrangements. A vlog title is often too short to explain them all. Start with three questions: can a player enter again, w"
+        },
+        {
+          "url": "/poker/first-live-tournament/",
+          "score": 32,
+          "section": null,
+          "excerpt": "The unfamiliar part of a first tournament may not be the cards. It may be finding the registration desk, knowing when to sit down, or asking what a dealer's announcement means. Prepare for those moments before trying to learn every strategic detail. For the whole beginner route, use the first-session and first-month gu"
+        }
+      ]
+    },
+    {
+      "id": "Q24",
+      "query": "PLO8",
+      "matches": 5,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/omaha-hi-lo-workshop/",
+          "score": 32,
+          "section": "/poker/omaha-hi-lo-workshop/#two-and-three",
+          "excerpt": "In standard four-card Omaha hi-lo, use exactly two hole cards and three board cards for each five-card hand. The high and low selections may differ. A qualifying low has five distinct ranks of eight or lower, with the ace low; straights and flushes do not spoil the low. When nobody qualifies, the high winner takes the "
+        },
+        {
+          "url": "https://www.pagat.com/poker/variants/omaha.html",
+          "score": 20,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "https://www.pokerstars.com/poker/games/omaha/high-low/",
+          "score": 20,
+          "section": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "id": "Q25",
+      "query": "learn poker free",
+      "matches": 27,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/free-poker-learning-path/",
+          "score": 37,
+          "section": null,
+          "excerpt": "Learn to follow a no-limit Texas hold’em hand and explain your next decision. Poker Foundations is a free first course: start with the cards, then connect betting, position, the board and possible opposing hands through six core lessons. For complete beginners and players who know the rules but lose track of the action"
+        },
+        {
+          "url": "/poker/",
+          "score": 25,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "https://www.pokerstars.com/poker/school/",
+          "score": 25,
+          "section": null,
+          "excerpt": null
+        }
+      ]
+    },
+    {
+      "id": "Q26",
+      "query": "first live tournment",
+      "matches": 29,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/first-live-tournament/",
+          "score": 72,
+          "section": "/poker/first-live-tournament/#taking-a-seat",
+          "excerpt": "Before taking a seat, check the table and seat assignment with staff. Tell the dealer that this is your first live tournament. Ask which denominations you have, what the current blinds and ante are, and where the button is. These are procedural questions, not requests for advice about which hand to play. Under TDA rule"
+        },
+        {
+          "url": "/poker/first-live-cash-game/",
+          "score": 53,
+          "section": null,
+          "excerpt": "Before taking a seat, know the game, the permitted buy-in, the charges and your own stopping point. You do not need a tournament entry or a software subscription to understand a cash-game session. You can also decide not to play. For the whole beginner route, use the first-session and first-month guide . It connects ru"
+        },
+        {
+          "url": "/poker/getting-started/",
+          "score": 43,
+          "section": "/poker/getting-started/#live",
+          "excerpt": "Ask the poker-room desk what game is running, the minimum and maximum buy-in, how the waiting list works, where chips are purchased, whether there are house-specific betting-line or straddle rules, how rake is taken, and whom to call if a rule question arises. When seated, identify chip denominations before the first h"
+        }
+      ]
+    },
+    {
+      "id": "Q27",
+      "query": "tournament reentry budget",
+      "matches": 6,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/tournament-trip-budget/",
+          "score": 50,
+          "section": "/poker/tournament-trip-budget/#local",
+          "excerpt": "Profile: the player lives 30 road miles away and attends Event #12. One $400 entry is the entire poker allocation. No hotel or re-entry is planned. The driving inputs are assumptions: 60 miles round trip, 28 miles per gallon and $3.50 per gallon. Fuel is 60 ÷ 28 × $3.50 = $7.50 . The model assumes a route without tolls"
+        },
+        {
+          "url": "/poker/registration-and-reentry/",
+          "score": 42,
+          "section": "/poker/registration-and-reentry/#worked-ledger",
+          "excerpt": "Fictional costs, not a suggested budget Two entries at $300 each cost $600 . With $90 of transport and food, the outing has cost $690 before any return. A $500 payout would leave a $100 tournament loss and a $190 loss including those trip costs . Counting only the last entry would conceal part of the cost. The overnigh"
+        },
+        {
+          "url": "/poker/getting-started/",
+          "score": 27,
+          "section": "/poker/getting-started/#cost",
+          "excerpt": "Learn four quantities before you sit down: blinds, buy-in, table size, and effective stack. “$1/$2 NLHE, 9-handed, $100-$300” tells you the forced blinds and the allowed initial buy-in range, but not how deep the opponents are, how large the rake is, whether straddles are common, or how aggressively the table is playin"
+        }
+      ]
+    },
+    {
+      "id": "Q28",
+      "query": "cash game rake fees",
+      "matches": 6,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/cash-game-study/",
+          "score": 54,
+          "section": "/poker/cash-game-study/#game-description",
+          "excerpt": "Record the stakes, game, number of players, positions, effective stacks, antes or straddles and the exact action. A fictional 300-chip stack with a 3-chip big blind is 100 BB, but that alone does not tell you which ranges, bet sizes or fees a reference assumed. In an ordinary cash game, chips have a fixed redemption va"
+        },
+        {
+          "url": "/poker/cash-game-costs/",
+          "score": 46,
+          "section": null,
+          "excerpt": "The amount printed next to the blinds is not the full cost of a cash game. First identify what gets charged, when it gets charged and whether the amount you are reviewing already includes it. This is a bookkeeping guide with invented schedules, not a ranking of rooms or a prediction of profitability. Obtain the schedul"
+        },
+        {
+          "url": "/poker/thunder-valley-poker-guide/",
+          "score": 36,
+          "section": "/poker/thunder-valley-poker-guide/#registration",
+          "excerpt": "Thunder Valley’s poker page advertises an online waiting list. That listing alone does not establish a tournament entry, a paid seat or a guarantee that your game will run. Confirm which list you are joining and how the desk expects you to check in. [2] If you are entering a tournament Ask these questions for the speci"
+        }
+      ]
+    },
+    {
+      "id": "Q29",
+      "query": "real time assistance",
+      "matches": 21,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/tournament-trip-budget/",
+          "score": 26,
+          "section": "/poker/tournament-trip-budget/#overnight",
+          "excerpt": "Profile: the player drives 150 miles each way to the Saturday morning Mini Main flight and books Saturday night. If they advance, Sunday’s noon restart does not require a late 150-mile drive followed by an immediate return. The base plan has one entry; one additional entry is optional. Driving assumptions are 300 miles"
+        },
+        {
+          "url": "/poker/getting-started/",
+          "score": 19,
+          "section": "/poker/getting-started/#format",
+          "excerpt": "A beginner’s first major choice is not which starting hands to play. It is what kind of poker environment to enter. Cash games and tournaments use the same hand rankings and core Hold’em mechanics, but they place very different meanings on chips, time, and elimination. Live and online poker differ again in pace, interf"
+        },
+        {
+          "url": "/poker/poker-rules-and-fair-play/",
+          "score": 15,
+          "section": "/poker/poker-rules-and-fair-play/#online-tools",
+          "excerpt": "PokerStars' third-party-tools policy distinguishes tools permitted generally, tools prohibited always, and tools restricted while its software is open. That last category is not limited to the seconds when a player faces a decision. A tool's marketing claim that it is compliant is not the operator's approval. GGPoker's"
+        }
+      ]
+    },
+    {
+      "id": "Q30",
+      "query": "kikcer poker",
+      "matches": 19,
+      "hit_top_three": true,
+      "top_three": [
+        {
+          "url": "/poker/glossary/#kicker",
+          "score": 82,
+          "section": null,
+          "excerpt": null
+        },
+        {
+          "url": "/poker/comics/best-five-cards-win/",
+          "score": 61,
+          "section": "/poker/comics/best-five-cards-win/#practice",
+          "excerpt": "A kicker matters when it belongs to the best five-card hand. With a pair, compare the pair first, then the three side cards in order. With a straight, all five places are already occupied: compare the highest card in each straight. There is no extra kicker. Try more examples in Which hand wins? and Reading the board . "
+        },
+        {
+          "url": "/poker/hand-rankings/",
+          "score": 57,
+          "section": null,
+          "excerpt": "A visual reference to the ten familiar hand labels, followed by the kicker, shared-board, and ace-low situations that often confuse new viewers. For viewers of standard 52-card no-limit Texas hold'em. All hands, stacks, payouts, and graphics on this page are fictional teaching examples, not footage or results from Nola"
+        }
+      ]
+    }
+  ]
+}

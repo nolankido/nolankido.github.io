@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import poker_search_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -14,6 +15,7 @@ def change():
 
 
 def before(path, data):
+    data = poker_search_history.before(path, data)
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
     item = change()['paths'].get(str(path))
