@@ -44,7 +44,7 @@ class SearchSectionsTests(unittest.TestCase):
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
         self.assertEqual(len(self.index),173)
-        self.assertEqual(sum(map(len,self.index.values())),1130)
+        self.assertEqual(sum(map(len,self.index.values())),1131)
         self.assertIn(['in-depth-title','Read in depth.'],self.index['/poker/'])
         self.assertIn(['in-depth-title','Four guides to read in sections.'],self.index['/poker/library/'])
         excluded={p['path'] for p in self.pages if p.get('noindex') or p.get('living_well_kind')=='experiment'}

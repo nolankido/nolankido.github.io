@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "hands": [
+    {
+      "id": "a",
+      "title": "Hand A: follow the hand from the button",
+      "hero_seat": 3,
+      "opponent_seat": 5,
+      "hero": ["Ah", "Th"],
+      "board": ["Tc", "7h", "2h", "4c", "9s"],
+      "opponent": ["9c", "9d"],
+      "stops": [
+        {
+          "street": "Preflop",
+          "board_count": 0,
+          "paid": [0, 0, 0, 0, 1, 2],
+          "street_paid": 0,
+          "wager": 2,
+          "setup": "You are on the button. The first seat, next seat and cutoff fold. The small blind posted 1 and the big blind posted 2. It is your turn; neither blind has taken a turn yet.",
+          "prompt": "How much would calling add? If you instead raise to a total of 6, how much do you add, and who still has an initial decision? Explain why the button does not end this preflop round.",
+          "answer": ["Calling adds 2 - 0 = 2. Raising to 6 adds 6 because you have paid nothing this round. The small blind and big blind still have initial decisions; either could raise and return the action to you. Being on the button does not put you last preflop.", "If you said 4 for the raise, you counted the increase over the big blind rather than your own total contribution. If you said the round was over, you skipped two players."],
+          "repairs": [["/poker/first-decisions/#chips-owed", "Count the additional chips"], ["/poker/starting-hand-decisions/#position", "Follow the players still to act"]]
+        },
+        {
+          "street": "Flop",
+          "board_count": 3,
+          "paid": [0, 0, 0, 6, 1, 6],
+          "street_paid": 0,
+          "wager": 0,
+          "setup": "Scripted continuation: you raise to 6, the small blind folds and the big blind calls by adding 4. The pot is 13. The flop is dealt, and the big blind checks to you.",
+          "prompt": "Name your current best five and a possible improvement. Is checking available? If you bet for value, which response would help, and what would you need to compare the bet with checking?",
+          "answer": ["Your best five are T-T-A-7-2: a pair of tens. Your two hearts plus two board hearts give a heart-flush draw, not a made flush. Checking is available because no one has bet on this round.", "A value bet needs calls from worse hands. You would need assumptions about which worse and better hands call, how often, and what can happen later to compare betting with checking. A pair plus a draw alone does not establish that a particular bet is best. Confusing four hearts with five overstates your current hand; naming only a worse hand without its response does not explain value."],
+          "repairs": [["/poker/first-flop-decisions/#made-and-drawing", "Separate the made hand and draw"], ["/poker/betting-with-a-purpose/#value", "Explain the response a value bet needs"]]
+        },
+        {
+          "street": "Turn",
+          "board_count": 4,
+          "paid": [0, 0, 0, 10, 1, 10],
+          "street_paid": 0,
+          "wager": 0,
+          "setup": "Scripted continuation: you bet 4 on the flop and the big blind calls 4. The pot becomes 21. The turn is the four of clubs. The big blind checks to you again.",
+          "prompt": "Rebuild your best five. Has the heart flush arrived? What does the opponent's check establish, and what does it leave unknown? If you both check, who acts first on the river?",
+          "answer": ["Your best five are now T-T-A-7-4. You still have four hearts among your available cards, so the flush has not arrived. The new card replaces the two as a kicker; it does not change the pair into a different category.", "The check establishes that this opponent declined to bet at this turn. It does not identify their cards or measure how often they hold a strong hand. If you check, both players have checked and the round ends. The big blind, the first remaining seat clockwise from the button, acts first on the river."],
+          "repairs": [["/poker/turn-and-river-decisions/#turn-reset", "Review what the new card changes"], ["/poker/ranges-for-beginners/#known-and-possible", "Separate observed action from assumptions"]]
+        },
+        {
+          "street": "River",
+          "board_count": 5,
+          "paid": [0, 0, 0, 10, 1, 17],
+          "street_paid": 0,
+          "wager": 7,
+          "setup": "Scripted continuation: you check the turn. The river is the nine of spades. From the pot of 21, the big blind bets 7. The displayed pot now includes that bet. It is your turn.",
+          "candidates": [{"label": "Candidate A", "values": ["Ah", "Kd"]}, {"label": "Candidate B", "values": ["Qh", "Jh"]}, {"label": "Candidate C", "values": ["9c", "9d"]}],
+          "prompt": "Name your best five and what happened to the draw. Which candidate conflicts with a known card? Which legal candidate is weaker and which is stronger? Count the call and final pot, calculate the break-even equity, and state what is still missing before judging a call. Is checking available?",
+          "answer": ["You have T-T-A-9-7, still one pair. The heart draw missed. Candidate A is impossible because you hold the ace of hearts. B is legal and weaker: its queen-high hand loses to your pair. C is legal and stronger: three nines beat your pair. These are alternatives to compare, not a complete range or a probability estimate.", "Calling adds 7 - 0 = 7. The pot is 21 + 7 = 28 before your call and 35 after it. The break-even equity is 7 / 35 = 20% when this heads-up cash-style call ends the betting, with no fees or prize effects. That is a price, not your measured chance of winning. You still need an appropriate opponent range and frequencies, including any ties. Checking is unavailable while facing the bet; fold, call or a legal raise are the relevant actions.", "If you subtracted your earlier 10 from this call, you mixed betting rounds. If you divided by 28, you omitted your own additional 7 from the final pot. One possible missed draw does not show that you meet the price."],
+          "repairs": [["/poker/turn-and-river-decisions/#catching-a-bluff", "Separate call price from equity"], ["/poker/ranges-for-beginners/#known-and-possible", "Check candidates before assigning frequencies"]]
+        }
+      ],
+      "finish_paid": [0, 0, 0, 17, 1, 17],
+      "winner_seat": 5,
+      "ending": ["Scripted ending: you call 7. The big blind shows nine of clubs and nine of diamonds, making three nines, and wins the 35-chip pot. You contributed 17 across the hand and finish with 83. The big blind finishes with 118; the folded small blind has 99. The other three players still have 100 each, preserving all 600 counters.", "This reveal settles this showdown. It does not establish the opponent's earlier frequencies or prove that calling was a mistake. Compare your explanation written before the reveal with the stated facts, not just the loss."]
+    },
+    {
+      "id": "b",
+      "title": "Hand B: return later from the small blind",
+      "hero_seat": 4,
+      "opponent_seat": 2,
+      "hero": ["Kh", "Qh"],
+      "board": ["Qd", "8h", "3h", "5h", "2s"],
+      "opponent": ["Jh", "Th"],
+      "stops": [
+        {
+          "street": "Preflop",
+          "board_count": 0,
+          "paid": [0, 0, 6, 0, 1, 2],
+          "street_paid": 1,
+          "wager": 6,
+          "setup": "You are the small blind and posted 1. The big blind posted 2. The first two seats fold, the cutoff raises to 6 and the button folds. It is your turn. The big blind has not taken a turn.",
+          "prompt": "How many additional chips would calling cost? Who still has an initial decision? If only you and the cutoff reach the flop, who acts first after the flop? Explain what changed from the button hand.",
+          "answer": ["Calling adds 6 - 1 = 5. Your posted 1 counts toward this preflop wager. The big blind still has an initial decision and could raise; your call does not complete their turn.", "With only you and the cutoff remaining, you act first after the flop. You are now out of position rather than on the button. The same two-card category would not erase this change in prior action and order. If you said 6, you omitted the blind already paid; if you said the cutoff acts first, you carried preflop order into the next round."],
+          "repairs": [["/poker/first-decisions/#chips-owed", "Count only the additional chips"], ["/poker/starting-hand-decisions/#position", "Rebuild the action order"]]
+        },
+        {
+          "street": "Flop",
+          "board_count": 3,
+          "paid": [0, 0, 13, 0, 6, 2],
+          "street_paid": 0,
+          "wager": 7,
+          "setup": "Scripted continuation: you call by adding 5 and the big blind folds. The pot is 14. On the flop you check, and the cutoff bets 7. The pot now includes the bet.",
+          "prompt": "Name your best five and draw. How much would a call add? Can you check again? Explain why the chips you paid preflop do or do not reduce this call.",
+          "answer": ["Your best five are Q-Q-K-8-3, a pair of queens, with four hearts among your available cards: a heart-flush draw. Calling adds 7 - 0 = 7. The preflop 6 is already in the pot from a different betting round.", "Checking is unavailable now because the cutoff's bet created a new decision for you. Your earlier check did not finish the round or pay the bet. If you counted only 1 more chip, you incorrectly reused preflop chips. If you called this a flush, you counted four hearts as five."],
+          "repairs": [["/poker/first-flop-decisions/#made-and-drawing", "Name the current hand and draw"], ["/poker/first-decisions/#chips-owed", "Reset the contribution for a new round"]]
+        },
+        {
+          "street": "Turn",
+          "board_count": 4,
+          "paid": [0, 0, 13, 0, 13, 2],
+          "street_paid": 0,
+          "wager": 0,
+          "setup": "Scripted continuation: you call 7. The pot is 28. The turn is the five of hearts, and you act first. No one has bet this round.",
+          "candidates": [{"label": "A possible worse caller", "values": ["Jh", "Th"]}, {"label": "A possible better caller", "values": ["Ah", "Jh"]}],
+          "prompt": "Name your best five now. Compare the two possible holdings with yours. If both would call a proposed bet, does naming the worse caller alone establish a good value bet? What else would you compare with checking?",
+          "answer": ["You have a king-high flush: K-Q-8-5-3, all hearts. Unlike Hand A, the turn completed your draw. Jack-ten of hearts makes a weaker jack-high flush; ace-jack of hearts makes a stronger ace-high flush. These candidate holdings are separate alternatives, not cards held at the same time.", "A worse caller is relevant to value, but naming one does not establish that betting is best. You need the relative frequencies of worse and better callers, other responses, the amount bet and possible river action. Checking remains available. If your reason was simply 'a flush must bet,' it skipped the comparison and missing assumptions."],
+          "repairs": [["/poker/turn-and-river-decisions/#turn-reset", "Rebuild the hand when a draw arrives"], ["/poker/betting-with-a-purpose/#value", "Compare the responses with checking"]]
+        },
+        {
+          "street": "River",
+          "board_count": 5,
+          "paid": [0, 0, 27, 0, 13, 2],
+          "street_paid": 0,
+          "wager": 14,
+          "setup": "Scripted continuation: you check the turn and the cutoff checks behind. The river is the two of spades. You check; the cutoff bets 14 into the pot of 28. It is your turn again.",
+          "candidates": [{"label": "Candidate A", "values": ["Qh", "Jd"]}, {"label": "Candidate B", "values": ["Ah", "Jh"]}, {"label": "Candidate C", "values": ["Jh", "Th"]}],
+          "prompt": "Name your best five. Classify the candidates as impossible, legal and stronger, or legal and weaker. Did the checked turn rule out the stronger hand? Count the call and final pot, calculate the break-even equity and explain why the result will not measure the opponent's range.",
+          "answer": ["Your best five remain the king-high heart flush, K-Q-8-5-3. Candidate A conflicts with your queen of hearts. B is legal and its ace-high flush beats yours. C is legal and its jack-high flush loses to yours. The checked turn does not physically rule out B or supply a frequency for it.", "Calling adds 14 - 0 = 14. The pot is 28 + 14 = 42 before calling and 56 afterward. The break-even equity is 14 / 56 = 25% under the same heads-up, final-call, no-fee cash-style assumptions as Hand A. A made flush does not by itself establish equity against an unspecified betting range.", "The changed bet is half the earlier pot, rather than Hand A's one-third pot. Reusing 20% would ignore that change. One later reveal tells you the holding in this scripted hand, not the frequencies of all possible hands that might take this line."],
+          "repairs": [["/poker/turn-and-river-decisions/#catching-a-bluff", "Calculate the changed call price"], ["/poker/ranges-for-beginners/#known-and-possible", "Keep possibility separate from frequency"]]
+        }
+      ],
+      "finish_paid": [0, 0, 27, 0, 27, 2],
+      "winner_seat": 4,
+      "ending": ["Scripted ending: you call 14. The cutoff shows jack of hearts and ten of hearts. Your king-high flush beats the jack-high flush, and you receive the 56-chip pot. You contributed 27, so your net gain is 56 - 27 = 29 and you finish with 129. The cutoff has 73 and the folded big blind 98. The other three stacks remain 100, preserving 600 counters.", "Winning this ending does not prove that the call was best against the opponent's unknown range. Review your explanation before seeing the result. Name one way this hand differed from Hand A and one question you would still need to answer."]
+    }
+  ]
+}

@@ -40,6 +40,13 @@ The site does not save progress or issue completion credentials.
 
 ## A meaningful finish
 
+Implemented October 16: the existing checkpoint now begins with two connected
+final hands. Explain Hand A at four street-by-street stops before revealing the
+result. Hand B changes position, draw completion and call price for a later
+attempt. The existing individual situations support precise repairs. Both sets
+of hand prompts are included without solutions in the six-stage study card.
+These are fixed self-checks, not a validated assessment or automatic score.
+
 After the six lessons, attempt the beginner checkpoint with the lessons closed.
 Use the specific repair link when an explanation fails. On a later visit, try
 the changed situation. Finishing means reaching a useful self-check and choosing

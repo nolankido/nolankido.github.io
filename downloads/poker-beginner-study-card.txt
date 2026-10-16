@@ -202,3 +202,110 @@ One question for the next visit:
 Completing this card does not establish profitable play or readiness to risk money.
 Fictional practice is enough. Do not upload private hand notes or identifying information.
 Prepared with AI assistance. October 15, 2026. Blank educational worksheet.
+
+CONNECTED FINAL HANDS
+Attempt Hand A after the six lessons. Try Hand B on a later visit.
+Explain each stop before looking at feedback or later streets.
+Six players each start with 100 counters, blinds 1/2, no antes, fees or prize effects.
+Seat order: first seat, next seat, cutoff, button, small blind, big blind.
+Card codes: A ace, K king, Q queen, J jack, T ten; h hearts, d diamonds, c clubs, s spades.
+The scripted actions are teaching facts, not recommended strategy. These two hands are fixed.
+
+Hand A: follow the hand from the button
+Your cards: Ah Th
+
+Preflop
+You are on the button. The first seat, next seat and cutoff fold. The small blind posted 1 and the big blind posted 2. It is your turn; neither blind has taken a turn yet.
+Board so far: none
+Pot now: 3; your chips paid this round: 0; wager to match: 2
+How much would calling add? If you instead raise to a total of 6, how much do you add, and who still has an initial decision? Explain why the button does not end this preflop round.
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-a-preflop-answer
+
+Flop
+Scripted continuation: you raise to 6, the small blind folds and the big blind calls by adding 4. The pot is 13. The flop is dealt, and the big blind checks to you.
+Board so far: Tc 7h 2h
+Pot now: 13; your chips paid this round: 0; wager to match: 0
+Name your current best five and a possible improvement. Is checking available? If you bet for value, which response would help, and what would you need to compare the bet with checking?
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-a-flop-answer
+
+Turn
+Scripted continuation: you bet 4 on the flop and the big blind calls 4. The pot becomes 21. The turn is the four of clubs. The big blind checks to you again.
+Board so far: Tc 7h 2h 4c
+Pot now: 21; your chips paid this round: 0; wager to match: 0
+Rebuild your best five. Has the heart flush arrived? What does the opponent's check establish, and what does it leave unknown? If you both check, who acts first on the river?
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-a-turn-answer
+
+River
+Scripted continuation: you check the turn. The river is the nine of spades. From the pot of 21, the big blind bets 7. The displayed pot now includes that bet. It is your turn.
+Board so far: Tc 7h 2h 4c 9s
+Pot now: 28; your chips paid this round: 0; wager to match: 7
+Candidate A: Ah Kd
+Candidate B: Qh Jh
+Candidate C: 9c 9d
+Name your best five and what happened to the draw. Which candidate conflicts with a known card? Which legal candidate is weaker and which is stronger? Count the call and final pot, calculate the break-even equity, and state what is still missing before judging a call. Is checking available?
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-a-river-answer
+
+My explanation before the result:
+One thing the result shows; one thing it does not establish:
+Reveal only afterward: https://nolankido.com/poker/beginner-checkpoint/#course-hand-a-ending
+
+Hand B: return later from the small blind
+Your cards: Kh Qh
+
+Preflop
+You are the small blind and posted 1. The big blind posted 2. The first two seats fold, the cutoff raises to 6 and the button folds. It is your turn. The big blind has not taken a turn.
+Board so far: none
+Pot now: 9; your chips paid this round: 1; wager to match: 6
+How many additional chips would calling cost? Who still has an initial decision? If only you and the cutoff reach the flop, who acts first after the flop? Explain what changed from the button hand.
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-b-preflop-answer
+
+Flop
+Scripted continuation: you call by adding 5 and the big blind folds. The pot is 14. On the flop you check, and the cutoff bets 7. The pot now includes the bet.
+Board so far: Qd 8h 3h
+Pot now: 21; your chips paid this round: 0; wager to match: 7
+Name your best five and draw. How much would a call add? Can you check again? Explain why the chips you paid preflop do or do not reduce this call.
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-b-flop-answer
+
+Turn
+Scripted continuation: you call 7. The pot is 28. The turn is the five of hearts, and you act first. No one has bet this round.
+Board so far: Qd 8h 3h 5h
+Pot now: 28; your chips paid this round: 0; wager to match: 0
+A possible worse caller: Jh Th
+A possible better caller: Ah Jh
+Name your best five now. Compare the two possible holdings with yours. If both would call a proposed bet, does naming the worse caller alone establish a good value bet? What else would you compare with checking?
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-b-turn-answer
+
+River
+Scripted continuation: you check the turn and the cutoff checks behind. The river is the two of spades. You check; the cutoff bets 14 into the pot of 28. It is your turn again.
+Board so far: Qd 8h 3h 5h 2s
+Pot now: 42; your chips paid this round: 0; wager to match: 14
+Candidate A: Qh Jd
+Candidate B: Ah Jh
+Candidate C: Jh Th
+Name your best five. Classify the candidates as impossible, legal and stronger, or legal and weaker. Did the checked turn rule out the stronger hand? Count the call and final pot, calculate the break-even equity and explain why the result will not measure the opponent's range.
+My first explanation:
+One correction after comparing:
+Compare: https://nolankido.com/poker/beginner-checkpoint/#course-hand-b-river-answer
+
+My explanation before the result:
+One thing the result shows; one thing it does not establish:
+Reveal only afterward: https://nolankido.com/poker/beginner-checkpoint/#course-hand-b-ending
+
+Without looking, I could explain:
+One repair and the section to revisit:
+On my later attempt, what changed:
+These are self-check notes, not a skill score. No answers are sent to the website.

@@ -795,9 +795,9 @@
     "source": "poker/free-poker-learning-path.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-15",
+    "updated": "2026-10-16",
     "poker_guide": true,
-    "revision": "Organized Poker Foundations around six short lessons with worked examples, open explanation tasks and next steps; expanded the private-use study card with the changed situations."
+    "revision": "Added two connected final hands with explanations at each street, precise repairs and a changed later attempt in the private-use study card."
   },
   {
     "id": "poker-cash-game-study",
@@ -1230,8 +1230,9 @@
     "source": "poker/beginner-checkpoint.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
-    "poker_guide": true
+    "updated": "2026-10-16",
+    "poker_guide": true,
+    "revision": "Added two connected final hands with explanations at each street, precise repairs and a changed later attempt in the private-use study card."
   },
   {
     "id": "poker-no-limit-holdem-guide",

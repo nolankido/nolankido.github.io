@@ -152,7 +152,7 @@ class PokerCourseTests(unittest.TestCase):
 
     def test_only_the_course_has_optional_practice_javascript(self):
         lessons = {course.ROUTE} | {'/poker/' + slug + '/' for slug, _ in course.LESSONS}
-        paths = {build.output_path(route) for route in lessons}
+        paths = {build.output_path(route) for route in lessons | {'/poker/beginner-checkpoint/'}}
         for path, source in self.outputs.items():
             if path.suffix == '.html':
                 self.assertEqual('/assets/poker-course.js?v=' in source, path == build.output_path(course.ROUTE), path)
