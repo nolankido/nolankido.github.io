@@ -21,6 +21,7 @@ import poker_checkpoint
 import poker_reading
 import poker_discovery
 import poker_course
+import poker_progress
 import poker_practice
 import poker_hand_lab
 import poker_round_practice
@@ -162,6 +163,7 @@ def build_outputs() -> dict[Path, str]:
     values['poker_cash_study_sheet'] = text((ROOT / 'downloads/poker-cash-study.md').read_text(encoding='utf-8'))
     values['poker_beginner_practice'] = poker_practice.render(ROOT)
     values['poker_foundations_syllabus'] = poker_course.syllabus(ROOT)
+    values['poker_progress'] = poker_progress.render(ROOT)
     values.update(poker_quality.supplement(resource_entries))
     values.update(poker_collections.supplement(collections, resource_entries))
     # Count the visible generated shortlist and worksheet content, including
@@ -388,6 +390,7 @@ def build_outputs() -> dict[Path, str]:
         extra += practical_path.head(p, ROOT)
         extra += poker_discovery.head(p, ROOT)
         extra += poker_course.head(p, ROOT)
+        extra += poker_progress.head(p, ROOT)
         extra += poker_practice.head(p, ROOT)
         extra += poker_hand_lab.head(p, ROOT)
         extra += poker_round_practice.head(p, ROOT)

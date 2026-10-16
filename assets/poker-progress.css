@@ -1,0 +1,46 @@
+/* Study Desk only. The course and its teaching controls are unchanged. */
+#course-progress .section-content { min-width:0; }
+#course-progress [data-progress-enhanced][hidden], #progress-import-preview[hidden], #progress-download[hidden], #progress-revisit-empty[hidden], #progress-fallback[hidden] { display:none!important; }
+#course-progress select, #course-progress textarea, #course-progress input[type="file"] { box-sizing:border-box; width:100%; max-width:100%; min-width:0; min-height:44px; padding:10px; color:var(--basalt); background:var(--paper-light); border:1px solid var(--line-dark); font:inherit; }
+#course-progress select { white-space:normal; }
+#course-progress textarea { display:block; resize:vertical; line-height:1.5; }
+#course-progress label { display:block; margin:10px 0 8px; font-weight:600; }
+#course-progress button, #progress-download { box-sizing:border-box; min-height:44px; padding:10px 14px; white-space:normal; font:inherit; cursor:pointer; }
+#course-progress a, #course-progress p, #course-progress h3 { overflow-wrap:anywhere; }
+#course-progress :where(a,button,input,select,textarea,summary,h3):focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+.progress-next { padding:18px; margin:24px 0 16px; background:var(--paper-light); border:1px solid var(--line-dark); }
+.progress-next p:last-child { margin-bottom:0; }
+#progress-resume { max-width:100%; white-space:normal; line-height:1.5; }
+#progress-status:empty, #progress-storage-status:empty, #progress-transfer-status:empty { margin:0; }
+.progress-lessons { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 28px; list-style:none; padding:0; margin:24px 0; }
+.progress-lesson { min-width:0; padding:18px 0; border-top:1px solid var(--line-dark); }
+.progress-lesson h3 { font-size:1.12rem; line-height:1.4; margin-bottom:10px; }
+.progress-lesson p { margin-bottom:12px; }
+.progress-lesson-links { display:flex; flex-wrap:wrap; gap:10px 18px; }
+.progress-lesson-links a { display:inline-flex; align-items:center; min-height:44px; padding:4px 0; }
+.progress-state-control label { font-size:.9rem; }
+.progress-state-print { display:none; }
+.progress-revisit { border-top:1px solid var(--line-dark); padding-top:20px; }
+#progress-revisit-list li { margin:10px 0; }
+#progress-revisit-list a { display:inline-flex; align-items:center; min-height:44px; }
+#course-progress .poker-details > div { padding:4px 18px 18px; }
+#course-progress .progress-checkbox { display:flex; align-items:center; gap:12px; min-height:44px; }
+#progress-remember { width:20px; height:20px; margin:0; flex:0 0 20px; }
+.progress-buttons { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:16px 0; }
+#progress-transfer h3 { margin-top:24px; }
+#progress-transfer h3:first-child { margin-top:8px; }
+#progress-review-import { margin-top:12px; }
+#progress-import-preview { padding:16px; margin-top:20px; border:1px solid var(--line-dark); }
+#progress-import-preview h3 { margin-top:0; }
+#progress-import-lessons { padding-left:20px; }
+@media(max-width:760px) {
+  .progress-lessons { grid-template-columns:minmax(0,1fr); gap:0; }
+  .progress-next, #course-progress .poker-details > div { padding:14px; }
+}
+@media print {
+  .progress-tools, .progress-state-control, #progress-next-field, #progress-status, #progress-fallback { display:none!important; }
+  .progress-lessons { display:block; }
+  .progress-lesson { break-inside:avoid; }
+  .progress-state-print { display:block; }
+  .progress-next { background:white; }
+}

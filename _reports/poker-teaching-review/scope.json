@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "material_commit": "74f438934beca0ab2563af0dfe279923d588f0f1",
+  "material_commit": "8505785a02c2565e3dd97215f8ce7dc63aa6db43",
   "prepared_utc": "2026-10-16",
   "human_review": "pending",
   "source_files": {
@@ -9,7 +9,7 @@
     "_source/poker/final-hands.json": "82cc67cdc3fee7443ac001080dc37688f22ee82e67cc55e919b90c80da7bf04c",
     "_source/poker/free-poker-learning-path.html": "51cf9fb08da150f8301a97eddc39760146a28efbe45fa4cafc9c9b6dafe087b6",
     "_source/poker/beginner-checkpoint.html": "cf657e86912bb1b6867422781648577ecc7762ed2e3f4c903313385dfe2bfd31",
-    "_scripts/poker_course.py": "bb7c5e2277e2b05640ab73f41099b8b1051e04a3bc9472fa898489a91919b6e3",
+    "_scripts/poker_course.py": "e14ca35ebcd4e652160a9819f574289ee5a1e14b3bda5b1100f97aa7f9c194fc",
     "_scripts/poker_lessons.py": "934f7658058a778693a096cb2e323833cd20e9b3d4244fe80c6b89838100834e",
     "_scripts/poker_final_hands.py": "2523ea5089d261cb995f98ec27dc384f423b0abc7f7788ca370a89f9132d37f0",
     "_source/poker/first-decisions.html": "d3cb4a41627b6406c30d6d5f2723a4722121db837a87b661a582fb4609c354f1",
@@ -43,5 +43,5 @@
     "README.md": "f125c6c7dd543a6a18b93e4be35b356fa32bef17fccb7593ec071235640ccd35",
     "build_packet.py": "31834f51901e30eaadaca50faac19324a7fbae7d7dc90d9c22c59816f72951bf"
   },
-  "fingerprint": "7449fd7a4632eace38d9e5c5b3d9d4e1554c0abf6febd97e61c5909aa5fe53fa"
+  "fingerprint": "0ab8f0afd7bb03e99c1c09f6900f1625a74aa8cff15e4da3779a1f0969501495"
 }

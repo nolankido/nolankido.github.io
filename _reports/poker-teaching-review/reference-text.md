@@ -1,14 +1,14 @@
 # Full source-article text for the reviewer
 
-Material commit: `74f438934beca0ab2563af0dfe279923d588f0f1`.
-Packet fingerprint: `7449fd7a4632eace38d9e5c5b3d9d4e1554c0abf6febd97e61c5909aa5fe53fa`.
+Material commit: `8505785a02c2565e3dd97215f8ce7dc63aa6db43`.
+Packet fingerprint: `0ab8f0afd7bb03e99c1c09f6900f1625a74aa8cff15e4da3779a1f0969501495`.
 Prepared 2026-10-16 UTC. **Human review: pending.**
 
 Plain text extraction from the six source articles. The short-lesson additions and final hands are in packet.md. Follow source links when table layout or a diagram matters; this text extraction is not an accessibility audit.
 
 ## first-decisions
 
-https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-decisions.html
+https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-decisions.html
 
 Knowing the hand rankings is a start. The next step is looking at a table and understanding what you can do, what it costs, and what your cards actually make. Work through one small decision at a time.
 
@@ -264,7 +264,7 @@ Continue the free learning pathAll Poker guidesSend a correction
 
 ## starting-hand-decisions
 
-https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/starting-hand-decisions.html
+https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/starting-hand-decisions.html
 
 “Should I play these cards?” becomes a much better question when you can describe the table around them. Learn how position, earlier action, the price and stack depth change what a starting hand can do. Then use eight small exercises to practice seeing those differences.
 
@@ -510,7 +510,7 @@ Review the first decisionsLearn to read preflop chartsContinue the free learning
 
 ## first-flop-decisions
 
-https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/first-flop-decisions.html
+https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/first-flop-decisions.html
 
 The flop gives you three new cards and a new decision. Start by naming what you have, what could change, whose turn it is and what continuing would cost. These eight lessons turn those questions into a repeatable way to study a hand.
 
@@ -748,7 +748,7 @@ Review starting-hand decisionsExplore board readingContinue the free learning pa
 
 ## turn-and-river-decisions
 
-https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/turn-and-river-decisions.html
+https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/turn-and-river-decisions.html
 
 The turn leaves one card to come. The river leaves none. That small change transforms the questions worth asking: what can still improve, what already wins at showdown, and what a bet or call could actually accomplish.
 
@@ -946,7 +946,7 @@ Review flop decisionsContinue to the river Decision LabExplore beginner lessonsS
 
 ## ranges-for-beginners
 
-https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/ranges-for-beginners.html
+https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/ranges-for-beginners.html
 
 “They might have aces” names one possibility. It does not explain what else the opponent could hold, which hands your cards beat, or how often each hand takes this action. A range is a way to make those missing parts visible.
 
@@ -1134,7 +1134,7 @@ Return to the beginner pathStudy combinationsTry the river Decision LabSend a co
 
 ## betting-with-a-purpose
 
-https://github.com/nolankido/nolankido.github.io/blob/74f438934beca0ab2563af0dfe279923d588f0f1/_source/poker/betting-with-a-purpose.html
+https://github.com/nolankido/nolankido.github.io/blob/8505785a02c2565e3dd97215f8ce7dc63aa6db43/_source/poker/betting-with-a-purpose.html
 
 “I have a good hand” describes your cards. “I want a worse hand to call this amount” explains a reason to bet. Learning the difference makes both your own study notes and a commentator's explanation easier to question.
 

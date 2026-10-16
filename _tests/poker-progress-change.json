@@ -1,0 +1,414 @@
+{
+  "commit": "ca0264c251f2c999a8375d9e748521fe46ef22fe",
+  "paths": {
+    ".github/workflows/site-checks.yml": {
+      "old_sha256": "4a580d7a4dfe618a6a4831e0be01c18e90581bd67b2f4ca9154b81bcfd3ed821",
+      "new_sha256": "bf50014108faf6c3e039f3e71ffbd005ad02112a73a02b07d1a6e4cf03aeeade",
+      "edits": [
+        {
+          "start": 1567,
+          "end": 1615,
+          "old": "",
+          "new": "          node --check assets/poker-progress.js\n"
+        },
+        {
+          "start": 3214,
+          "end": 3237,
+          "old": "",
+          "new": " poker_progress_browser"
+        }
+      ]
+    },
+    "_scripts/build.py": {
+      "old_sha256": "7f9aa03eaa55b500100f85d26f8708a7902e4d1a9819fe790a3c466b9df8368d",
+      "new_sha256": "f7b6211e33fca03aee3b2676f035742053bb5e624a8d55276a9e9151f8ae9347",
+      "edits": [
+        {
+          "start": 663,
+          "end": 685,
+          "old": "",
+          "new": "import poker_progress\n"
+        },
+        {
+          "start": 7823,
+          "end": 7882,
+          "old": "",
+          "new": "    values['poker_progress'] = poker_progress.render(ROOT)\n"
+        },
+        {
+          "start": 27282,
+          "end": 27328,
+          "old": "",
+          "new": "        extra += poker_progress.head(p, ROOT)\n"
+        }
+      ]
+    },
+    "_scripts/check_live.py": {
+      "old_sha256": "1d90a76cac124305a51b0d0e1d445d06e1de5c809d07ad5235d67576d6b115bc",
+      "new_sha256": "c1f257331600d65b0dae475346e1a62b41c0c28787e8e8fa3bc4c3cad8c3cb1f",
+      "edits": [
+        {
+          "start": 3762,
+          "end": 3834,
+          "old": "",
+          "new": "    assets += ['assets/poker-progress.css', 'assets/poker-progress.js']\n"
+        }
+      ]
+    },
+    "_scripts/poker_beginner_path.py": {
+      "old_sha256": "51da1afb69a11ead8e77badd897c19bdb8d93957cdc058c782640e1f0b92e69b",
+      "new_sha256": "052df5f9b99abb7c4b1864b2352142d42a4c745a4548c98616787c8607326435",
+      "edits": [
+        {
+          "start": 4054,
+          "end": 4299,
+          "old": "/nav><p>Keep your place in your own notes. This path does not save progress or send answers",
+          "new": "p><a href=\"/poker/study/#course-progress\">Keep lesson marks and a next task in the Study desk</a></p>'\n            '</nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent"
+        }
+      ]
+    },
+    "_scripts/poker_course.py": {
+      "old_sha256": "bb7c5e2277e2b05640ab73f41099b8b1051e04a3bc9472fa898489a91919b6e3",
+      "new_sha256": "e14ca35ebcd4e652160a9819f574289ee5a1e14b3bda5b1100f97aa7f9c194fc",
+      "edits": [
+        {
+          "start": 12557,
+          "end": 12724,
+          "old": "save your progress.",
+          "new": "your answers.',\n             'Optional lesson marks can stay in your browser through the Study desk:',\n             'https://nolankido.com/poker/study/#course-progress"
+        }
+      ]
+    },
+    "_source/pages.json": {
+      "old_sha256": "23bb0c21a9fcdb0c4d23b16dc362d0380841d94e74bd913c3b2328d614d14359",
+      "new_sha256": "678b3332707359e5f225629235ba09b004b02cfec5183ce0cf8443e70bdc5e0a",
+      "edits": [
+        {
+          "start": 4189,
+          "end": 4190,
+          "old": "3",
+          "new": "6"
+        },
+        {
+          "start": 14273,
+          "end": 14275,
+          "old": "08",
+          "new": "16"
+        }
+      ]
+    },
+    "_source/poker/beginner-learning-path.html": {
+      "old_sha256": "89a3c23517fc255980cf0ac8f51e5cf100873cd87f2b7f048b0360b273e680ad",
+      "new_sha256": "5d2f0b13fbb2e5c3ca57c68c7be0a59e4634b3232f4f4cd25f63fd83101cfaf4",
+      "edits": [
+        {
+          "start": 9094,
+          "end": 9350,
+          "old": "website does not save your progress, collect your answers or send a reminder",
+          "new": "<a href=\"/poker/study/#course-progress\">Study desk can optionally remember your lesson marks and next task on this device</a>, with a progress file you can export and reopen. Exercise answers are not saved or collected, and the site does not send reminders"
+        }
+      ]
+    },
+    "_source/poker/study.html": {
+      "old_sha256": "ee49d8d76e7d0926222df1b2eae02fe3a7eb4ffffd1e88e2d37c4677b44a8724",
+      "new_sha256": "8903b4b6413379b1556f6e16624d50ffe469ab46aba81d264f1e0a16981027dc",
+      "edits": [
+        {
+          "start": 501,
+          "end": 556,
+          "old": "",
+          "new": "#course-progress\">Resume Poker Foundations</a><a href=\""
+        },
+        {
+          "start": 1211,
+          "end": 1229,
+          "old": "",
+          "new": "${poker_progress}\n"
+        }
+      ]
+    },
+    "_source/privacy.html": {
+      "old_sha256": "1858670859c05c840f63cdaf0f2c76289a484f37a8f36b152de09e655ea9e67a",
+      "new_sha256": "00378a0fd9f4b690e00f30d372a3709df10ecbe2e9af4b288516e9b289574fe8",
+      "edits": [
+        {
+          "start": 143,
+          "end": 144,
+          "old": "3",
+          "new": "6"
+        },
+        {
+          "start": 1942,
+          "end": 3341,
+          "old": "",
+          "new": "          <h2>Optional Poker Foundations progress</h2>\n          <p>The <a href=\"/poker/study/#course-progress\">Poker Study desk</a> lets you mark six lessons and choose a next reading or practice task. Those choices remain in the open page unless you choose to remember them on this device. That option uses one entry in your browser's local storage. It contains the lesson marks you choose, your next task, and the course and file-format versions. It contains no names, written answers, hand histories, scores, or record of the pages you visit.</p>\n          <p>The progress tool does not send these choices to this website, analytics, or another service. You can stop remembering them or reset the record from the same controls. Other people using the same browser profile on this device may be able to see it. Browser clearing, private browsing, or storage limits may remove it, so keep an exported copy if the record matters to you.</p>\n          <p>Exporting downloads a small progress file. Importing a file reads it in the current page and shows a preview before replacing your choices; it does not upload the file or enable device saving. Manual copy and paste use the complete progress text shown in the tool. Your browser and any app you use to keep or share a copy have their own data handling. Ordinary pageview analytics still operates as described above, without progress events.</p>\n"
+        }
+      ]
+    },
+    "_source/search-entrypoints.json": {
+      "old_sha256": "e9ba1000f0330f2294fd7147e2bfa343c7373c5e87cd2dee5d0468bbc036f33f",
+      "new_sha256": "fd9f79c44e333a40febaa7f7086ba79a26497b08fcff52eb89349389285c5d29",
+      "edits": [
+        {
+          "start": 2809,
+          "end": 2810,
+          "old": "2",
+          "new": "6"
+        }
+      ]
+    },
+    "downloads/poker-beginner-study-card.txt": {
+      "old_sha256": "d77caefc4d7668328cee2ef0bcce81f0619253033c012ec44b725bc54873e23b",
+      "new_sha256": "7030f58baf1b7354af3183fe8cf284eab4efb4a541ca6d4976ab0f3e48f4d058",
+      "edits": [
+        {
+          "start": 232,
+          "end": 367,
+          "old": "save your progress.",
+          "new": "your answers.\nOptional lesson marks can stay in your browser through the Study desk:\nhttps://nolankido.com/poker/study/#course-progress"
+        }
+      ]
+    },
+    "find/index.html": {
+      "old_sha256": "eba1229f4c047e7a93e0247e268e468b2d9ac9394517eea6da8bcf5753217440",
+      "new_sha256": "1c9ed5bf1c1f7adc07b4035ac7a8aaafd457793f2c1acfcaa6fd020a6f50555a",
+      "edits": [
+        {
+          "start": 114803,
+          "end": 114858,
+          "old": "",
+          "new": "progress-heading\",\"Your next Poker Foundations task.\",\""
+        }
+      ]
+    },
+    "poker/betting-with-a-purpose/index.html": {
+      "old_sha256": "3f9d9cd74f3de7708408001a68a384a21cc859a9105c280800f165a414a59cc7",
+      "new_sha256": "5dc9fe9c644ae25c14741a11b17e532a2fe38e883b1142f4b920782008bb824c",
+      "edits": [
+        {
+          "start": 9769,
+          "end": 9999,
+          "old": "/nav><p>Keep your place in your own notes. This path does not save progress or send answers",
+          "new": "p><a href=\"/poker/study/#course-progress\">Keep lesson marks and a next task in the Study desk</a></p></nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent"
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "old_sha256": "d6333d3d97d9e5cf4ed328593903e8d7e7c9550401e1d09b4f3b6c17b546cd5d",
+      "new_sha256": "97a10717e703bcb98f81659c8e9a0dd6336a0c129ce6b003512f5f963223fed1",
+      "edits": [
+        {
+          "start": 262756,
+          "end": 262969,
+          "old": "website does not save your progress, collect your answers or send a reminder",
+          "new": "Study desk can optionally remember your lesson marks and next task on this device , with a progress file you can export and reopen. Exercise answers are not saved or collected, and the site does not send reminders"
+        }
+      ]
+    },
+    "poker/first-decisions/index.html": {
+      "old_sha256": "c07bc8f63448d80f4fe42e61db5c93b1dad49bfc81cf8543c15232661c7b6405",
+      "new_sha256": "afdec99a263f3310a53b41df3a6b0b9e690e15db232ec718c46a956b302c6ac1",
+      "edits": [
+        {
+          "start": 10070,
+          "end": 10300,
+          "old": "/nav><p>Keep your place in your own notes. This path does not save progress or send answers",
+          "new": "p><a href=\"/poker/study/#course-progress\">Keep lesson marks and a next task in the Study desk</a></p></nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent"
+        }
+      ]
+    },
+    "poker/first-flop-decisions/index.html": {
+      "old_sha256": "cbc520aa2bfc647ed1c114915a6af1a13632781a2afeec359237806475511610",
+      "new_sha256": "2ff08b0cf39e26ba6418436649add8f22a5971f13a103dc0adb3b348a0c45c72",
+      "edits": [
+        {
+          "start": 10132,
+          "end": 10362,
+          "old": "/nav><p>Keep your place in your own notes. This path does not save progress or send answers",
+          "new": "p><a href=\"/poker/study/#course-progress\">Keep lesson marks and a next task in the Study desk</a></p></nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent"
+        }
+      ]
+    },
+    "poker/free-poker-learning-path/index.html": {
+      "old_sha256": "13f027d72b4f9b159ed66496c4b980c67e8e9545dbfc0b53647569cb4a5d39c2",
+      "new_sha256": "0171191be048092bac27bf1e9504cdaa90f3b166822424ecaa392480b80feb02",
+      "edits": [
+        {
+          "start": 22653,
+          "end": 22909,
+          "old": "website does not save your progress, collect your answers or send a reminder",
+          "new": "<a href=\"/poker/study/#course-progress\">Study desk can optionally remember your lesson marks and next task on this device</a>, with a progress file you can export and reopen. Exercise answers are not saved or collected, and the site does not send reminders"
+        },
+        {
+          "start": 24317,
+          "end": 24452,
+          "old": "save your progress.",
+          "new": "your answers.\nOptional lesson marks can stay in your browser through the Study desk:\nhttps://nolankido.com/poker/study/#course-progress"
+        }
+      ]
+    },
+    "poker/ranges-for-beginners/index.html": {
+      "old_sha256": "1d2e0dcb505251f1e0b59a55c948ec27636203f09391c64f300d2e25db844f09",
+      "new_sha256": "e96c5f7e4688e50c62fee866fb16cbd50f8d271aede115d45e10d83598449b0e",
+      "edits": [
+        {
+          "start": 9919,
+          "end": 10149,
+          "old": "/nav><p>Keep your place in your own notes. This path does not save progress or send answers",
+          "new": "p><a href=\"/poker/study/#course-progress\">Keep lesson marks and a next task in the Study desk</a></p></nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent"
+        }
+      ]
+    },
+    "poker/starting-hand-decisions/index.html": {
+      "old_sha256": "084668b5b8e3c7036195abb07584da203f67dfd86e048cdc0fcc924f8e6991ae",
+      "new_sha256": "5bcd2ea08ca12183714b80d3d002d17d1b7f373d1c0f384f64951c199b6e237c",
+      "edits": [
+        {
+          "start": 10123,
+          "end": 10353,
+          "old": "/nav><p>Keep your place in your own notes. This path does not save progress or send answers",
+          "new": "p><a href=\"/poker/study/#course-progress\">Keep lesson marks and a next task in the Study desk</a></p></nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent"
+        }
+      ]
+    },
+    "poker/study/index.html": {
+      "old_sha256": "c6438f22f4111bb7c70789258d562043be7d6c4a190e1fff7027c8b9278dce0f",
+      "new_sha256": "4d10cd221816e8819a141bc18e25547d8d3ab16427b5054d43dc9741eddc4708",
+      "edits": [
+        {
+          "start": 2969,
+          "end": 3117,
+          "old": "",
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/poker-progress.css?v=eaea29052803\">\n  <script defer src=\"/assets/poker-progress.js?v=17477d4879d2\"></script>\n"
+        },
+        {
+          "start": 3951,
+          "end": 3952,
+          "old": "2",
+          "new": "6"
+        },
+        {
+          "start": 7595,
+          "end": 7650,
+          "old": "",
+          "new": "#course-progress\">Resume Poker Foundations</a><a href=\""
+        },
+        {
+          "start": 8305,
+          "end": 26976,
+          "old": "",
+          "new": "<section class=\"section folio-row progress-companion\" id=\"course-progress\" aria-labelledby=\"progress-heading\"><div class=\"section-meta\"><p class=\"section-label\">Resume / Practice / Keep</p></div><div class=\"section-content\"><h2 class=\"section-title\" id=\"progress-heading\">Your next Poker Foundations task.</h2><p>Keep a place in the six lessons and choose what to revisit. These marks are your own notes, not a skill score. Reading a page or answering an exercise does not change them.</p><p class=\"small-copy\">Lesson and practice links open in a new tab so this desk stays open. Use these tools before or after play.</p><div class=\"progress-next\"><div id=\"progress-next-field\" data-progress-enhanced hidden><label for=\"progress-next\">What would you like to do next?</label><select id=\"progress-next\"><option value=\"read:first-decisions\">Read lesson 1: Cards, actions and the pot</option><option value=\"practice:first-decisions\">Practice lesson 1: Cards, actions and the pot</option><option value=\"read:starting-hand-decisions\">Read lesson 2: Your starting hand in context</option><option value=\"practice:starting-hand-decisions\">Practice lesson 2: Your starting hand in context</option><option value=\"read:first-flop-decisions\">Read lesson 3: Your first decisions after the flop</option><option value=\"practice:first-flop-decisions\">Practice lesson 3: Your first decisions after the flop</option><option value=\"read:turn-and-river-decisions\">Read lesson 4: The turn, river and showdown</option><option value=\"practice:turn-and-river-decisions\">Practice lesson 4: The turn, river and showdown</option><option value=\"read:ranges-for-beginners\">Read lesson 5: Your first range</option><option value=\"practice:ranges-for-beginners\">Practice lesson 5: Your first range</option><option value=\"read:betting-with-a-purpose\">Read lesson 6: Betting with a purpose</option><option value=\"practice:betting-with-a-purpose\">Practice lesson 6: Betting with a purpose</option><option value=\"foundations\">Open the Poker Foundations course map</option><option value=\"checkpoint\">Try the beginner checkpoint</option></select></div><p><a href=\"/poker/first-decisions/#course-first-pass-title\" target=\"_blank\" rel=\"noopener\" aria-label=\"Read lesson 1: Cards, actions and the pot (opens in a new tab)\" class=\"button\" id=\"progress-resume\">Read lesson 1: Cards, actions and the pot</a></p></div><p id=\"progress-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p><p id=\"progress-summary\">Choose a lesson or use the blank study card to keep your own record.</p><ol class=\"progress-lessons\"><li class=\"progress-lesson\"><h3 id=\"progress-title-first-decisions\">1. Cards, actions and the pot</h3><p class=\"small-copy\">Name your legal actions, count an additional call and build the best five cards.</p><p class=\"progress-lesson-links\"><a href=\"/poker/first-decisions/#course-first-pass-title\" target=\"_blank\" rel=\"noopener\" aria-label=\"Read lesson (opens in a new tab)\" data-progress-read=\"first-decisions\" aria-describedby=\"progress-title-first-decisions\">Read lesson</a> <a href=\"/poker/beginner-checkpoint/#situation-one\" target=\"_blank\" rel=\"noopener\" aria-label=\"Practice (opens in a new tab)\" data-progress-practice=\"first-decisions\" aria-describedby=\"progress-title-first-decisions\">Practice</a></p><div class=\"progress-state-control\" data-progress-enhanced hidden><label for=\"progress-status-first-decisions\">Your note for lesson 1</label><select id=\"progress-status-first-decisions\" data-progress-lesson=\"first-decisions\"><option value=\"not-started\">Not started</option><option value=\"working\">Working on it</option><option value=\"practiced\">Practiced</option><option value=\"revisit\">Revisit</option></select></div><p class=\"progress-state-print\" id=\"progress-print-first-decisions\">Your note: Not started</p></li><li class=\"progress-lesson\"><h3 id=\"progress-title-starting-hand-decisions\">2. Your starting hand in context</h3><p class=\"small-copy\">Describe position and earlier action before judging two private cards.</p><p class=\"progress-lesson-links\"><a href=\"/poker/starting-hand-decisions/#course-first-pass-title\" target=\"_blank\" rel=\"noopener\" aria-label=\"Read lesson (opens in a new tab)\" data-progress-read=\"starting-hand-decisions\" aria-describedby=\"progress-title-starting-hand-decisions\">Read lesson</a> <a href=\"/poker/beginner-checkpoint/#situation-two\" target=\"_blank\" rel=\"noopener\" aria-label=\"Practice (opens in a new tab)\" data-progress-practice=\"starting-hand-decisions\" aria-describedby=\"progress-title-starting-hand-decisions\">Practice</a></p><div class=\"progress-state-control\" data-progress-enhanced hidden><label for=\"progress-status-starting-hand-decisions\">Your note for lesson 2</label><select id=\"progress-status-starting-hand-decisions\" data-progress-lesson=\"starting-hand-decisions\"><option value=\"not-started\">Not started</option><option value=\"working\">Working on it</option><option value=\"practiced\">Practiced</option><option value=\"revisit\">Revisit</option></select></div><p class=\"progress-state-print\" id=\"progress-print-starting-hand-decisions\">Your note: Not started</p></li><li class=\"progress-lesson\"><h3 id=\"progress-title-first-flop-decisions\">3. Your first decisions after the flop</h3><p class=\"small-copy\">Name a made hand and a draw separately, then read the action.</p><p class=\"progress-lesson-links\"><a href=\"/poker/first-flop-decisions/#course-first-pass-title\" target=\"_blank\" rel=\"noopener\" aria-label=\"Read lesson (opens in a new tab)\" data-progress-read=\"first-flop-decisions\" aria-describedby=\"progress-title-first-flop-decisions\">Read lesson</a> <a href=\"/poker/beginner-checkpoint/#situation-three\" target=\"_blank\" rel=\"noopener\" aria-label=\"Practice (opens in a new tab)\" data-progress-practice=\"first-flop-decisions\" aria-describedby=\"progress-title-first-flop-decisions\">Practice</a></p><div class=\"progress-state-control\" data-progress-enhanced hidden><label for=\"progress-status-first-flop-decisions\">Your note for lesson 3</label><select id=\"progress-status-first-flop-decisions\" data-progress-lesson=\"first-flop-decisions\"><option value=\"not-started\">Not started</option><option value=\"working\">Working on it</option><option value=\"practiced\">Practiced</option><option value=\"revisit\">Revisit</option></select></div><p class=\"progress-state-print\" id=\"progress-print-first-flop-decisions\">Your note: Not started</p></li><li class=\"progress-lesson\"><h3 id=\"progress-title-turn-and-river-decisions\">4. The turn, river and showdown</h3><p class=\"small-copy\">Rebuild the best five after each new card and distinguish a call price from a reason to call.</p><p class=\"progress-lesson-links\"><a href=\"/poker/turn-and-river-decisions/#course-first-pass-title\" target=\"_blank\" rel=\"noopener\" aria-label=\"Read lesson (opens in a new tab)\" data-progress-read=\"turn-and-river-decisions\" aria-describedby=\"progress-title-turn-and-river-decisions\">Read lesson</a> <a href=\"/poker/beginner-checkpoint/#situation-four\" target=\"_blank\" rel=\"noopener\" aria-label=\"Practice (opens in a new tab)\" data-progress-practice=\"turn-and-river-decisions\" aria-describedby=\"progress-title-turn-and-river-decisions\">Practice</a></p><div class=\"progress-state-control\" data-progress-enhanced hidden><label for=\"progress-status-turn-and-river-decisions\">Your note for lesson 4</label><select id=\"progress-status-turn-and-river-decisions\" data-progress-lesson=\"turn-and-river-decisions\"><option value=\"not-started\">Not started</option><option value=\"working\">Working on it</option><option value=\"practiced\">Practiced</option><option value=\"revisit\">Revisit</option></select></div><p class=\"progress-state-print\" id=\"progress-print-turn-and-river-decisions\">Your note: Not started</p></li><li class=\"progress-lesson\"><h3 id=\"progress-title-ranges-for-beginners\">5. Your first range</h3><p class=\"small-copy\">Separate known cards, possible opposing hands and assumptions about their frequency.</p><p class=\"progress-lesson-links\"><a href=\"/poker/ranges-for-beginners/#course-first-pass-title\" target=\"_blank\" rel=\"noopener\" aria-label=\"Read lesson (opens in a new tab)\" data-progress-read=\"ranges-for-beginners\" aria-describedby=\"progress-title-ranges-for-beginners\">Read lesson</a> <a href=\"/poker/beginner-checkpoint/#situation-five\" target=\"_blank\" rel=\"noopener\" aria-label=\"Practice (opens in a new tab)\" data-progress-practice=\"ranges-for-beginners\" aria-describedby=\"progress-title-ranges-for-beginners\">Practice</a></p><div class=\"progress-state-control\" data-progress-enhanced hidden><label for=\"progress-status-ranges-for-beginners\">Your note for lesson 5</label><select id=\"progress-status-ranges-for-beginners\" data-progress-lesson=\"ranges-for-beginners\"><option value=\"not-started\">Not started</option><option value=\"working\">Working on it</option><option value=\"practiced\">Practiced</option><option value=\"revisit\">Revisit</option></select></div><p class=\"progress-state-print\" id=\"progress-print-ranges-for-beginners\">Your note: Not started</p></li><li class=\"progress-lesson\"><h3 id=\"progress-title-betting-with-a-purpose\">6. Betting with a purpose</h3><p class=\"small-copy\">Say which worse hands might call or better hands might fold, and compare betting with checking.</p><p class=\"progress-lesson-links\"><a href=\"/poker/betting-with-a-purpose/#course-first-pass-title\" target=\"_blank\" rel=\"noopener\" aria-label=\"Read lesson (opens in a new tab)\" data-progress-read=\"betting-with-a-purpose\" aria-describedby=\"progress-title-betting-with-a-purpose\">Read lesson</a> <a href=\"/poker/beginner-checkpoint/#situation-six\" target=\"_blank\" rel=\"noopener\" aria-label=\"Practice (opens in a new tab)\" data-progress-practice=\"betting-with-a-purpose\" aria-describedby=\"progress-title-betting-with-a-purpose\">Practice</a></p><div class=\"progress-state-control\" data-progress-enhanced hidden><label for=\"progress-status-betting-with-a-purpose\">Your note for lesson 6</label><select id=\"progress-status-betting-with-a-purpose\" data-progress-lesson=\"betting-with-a-purpose\"><option value=\"not-started\">Not started</option><option value=\"working\">Working on it</option><option value=\"practiced\">Practiced</option><option value=\"revisit\">Revisit</option></select></div><p class=\"progress-state-print\" id=\"progress-print-betting-with-a-purpose\">Your note: Not started</p></li></ol><section class=\"progress-revisit\" data-progress-enhanced hidden aria-labelledby=\"progress-revisit-heading\"><h3 id=\"progress-revisit-heading\">To revisit</h3><p id=\"progress-revisit-empty\">Nothing is marked Revisit. You can change any lesson note above.</p><ul id=\"progress-revisit-list\"></ul></section><div class=\"progress-tools\" data-progress-enhanced hidden><details class=\"poker-details\" id=\"progress-storage\"><summary>Remember on this device or reset</summary><div><label class=\"progress-checkbox\" for=\"progress-remember\"><input type=\"checkbox\" id=\"progress-remember\">Remember on this device</label><p class=\"small-copy\">Off by default. When checked, only these six marks and your next task are saved in this browser and updated when you change them. Enabling it replaces this tool’s earlier saved record. No answers, names or hand histories are recorded. Anyone using this browser profile can see the saved marks.</p><p id=\"progress-storage-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p><div class=\"progress-buttons\"><button type=\"button\" id=\"progress-forget\">Remove saved copy</button><button type=\"button\" id=\"progress-reset\">Reset marks and stop saving</button></div><p class=\"small-copy\">Remove saved copy keeps the marks in this open page. Reset also clears the six marks and the next task. Each action affects only this tool’s saved record. Browser data can be cleared or unavailable; export a copy when you want to keep it.</p></div></details><details class=\"poker-details\" id=\"progress-transfer\"><summary>Keep or restore a progress file</summary><div><h3>Keep a copy</h3><p>A progress file contains only the six marks, your chosen next task and the course version. It does not include answers or a saving preference.</p><div class=\"progress-buttons\"><a id=\"progress-download\" download=\"poker-foundations-progress.json\" hidden>Download progress file</a><button type=\"button\" id=\"progress-select-export\">Select the complete progress text</button></div><label for=\"progress-export-text\">Complete progress file</label><textarea id=\"progress-export-text\" rows=\"9\" readonly spellcheck=\"false\" aria-describedby=\"progress-export-help\"></textarea><p class=\"small-copy\" id=\"progress-export-help\">You can copy the selected text with your device’s Copy command and keep it in your own notes. Paste the complete text below on a later visit to restore it.</p><h3>Restore a copy</h3><label for=\"progress-import-file\">Choose a progress file to review</label><input type=\"file\" id=\"progress-import-file\" accept=\".json,application/json\"><p class=\"small-copy\">The file is read in this browser. It is not uploaded. You review it before replacing anything.</p><label for=\"progress-import-text\">Or paste the complete progress text</label><textarea id=\"progress-import-text\" rows=\"7\" maxlength=\"8192\" spellcheck=\"false\" autocomplete=\"off\"></textarea><button type=\"button\" id=\"progress-review-import\">Review pasted progress</button><p id=\"progress-transfer-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p><section id=\"progress-import-preview\" hidden aria-labelledby=\"progress-import-preview-title\"><h3 id=\"progress-import-preview-title\" tabindex=\"-1\">Review this progress</h3><p id=\"progress-import-summary\"></p><ul id=\"progress-import-lessons\"></ul><p id=\"progress-import-saving\" class=\"small-copy\"></p><div class=\"progress-buttons\"><button type=\"button\" id=\"progress-apply-import\">Replace the current record</button><button type=\"button\" id=\"progress-cancel-import\">Cancel</button></div></section></div></details></div><p id=\"progress-fallback\">The lesson links and blank study card work without JavaScript. Progress controls become available when scripts run.</p><p><a href=\"/downloads/poker-beginner-study-card.txt\" download>Download the complete blank study card (TXT)</a> or <a href=\"/poker/free-poker-learning-path/\">return to the free course</a>.</p><p class=\"small-copy\">The course remains usable without saving anything. Progress stays in this page unless you choose device saving or keep a copy yourself. It is not sent to the site. See the <a href=\"/privacy/\">privacy notice</a> for ordinary pageview analytics and browser storage.</p><script type=\"application/json\" id=\"poker-progress-data\">{\"format\":\"nolan-kido-poker-progress\",\"version\":1,\"course\":\"poker-foundations\",\"revision\":\"0e4001fd1c7456e3d6954c8300888c0cb164197f9bb263ffc31226812e7c6828\",\"storageKey\":\"nolan-kido:poker-foundations:progress:v1\",\"maxBytes\":8192,\"states\":[{\"id\":\"not-started\",\"label\":\"Not started\"},{\"id\":\"working\",\"label\":\"Working on it\"},{\"id\":\"practiced\",\"label\":\"Practiced\"},{\"id\":\"revisit\",\"label\":\"Revisit\"}],\"lessons\":[{\"id\":\"first-decisions\",\"title\":\"Cards, actions and the pot\",\"goal\":\"Name your legal actions, count an additional call and build the best five cards.\",\"read\":\"/poker/first-decisions/#course-first-pass-title\",\"practice\":\"/poker/beginner-checkpoint/#situation-one\"},{\"id\":\"starting-hand-decisions\",\"title\":\"Your starting hand in context\",\"goal\":\"Describe position and earlier action before judging two private cards.\",\"read\":\"/poker/starting-hand-decisions/#course-first-pass-title\",\"practice\":\"/poker/beginner-checkpoint/#situation-two\"},{\"id\":\"first-flop-decisions\",\"title\":\"Your first decisions after the flop\",\"goal\":\"Name a made hand and a draw separately, then read the action.\",\"read\":\"/poker/first-flop-decisions/#course-first-pass-title\",\"practice\":\"/poker/beginner-checkpoint/#situation-three\"},{\"id\":\"turn-and-river-decisions\",\"title\":\"The turn, river and showdown\",\"goal\":\"Rebuild the best five after each new card and distinguish a call price from a reason to call.\",\"read\":\"/poker/turn-and-river-decisions/#course-first-pass-title\",\"practice\":\"/poker/beginner-checkpoint/#situation-four\"},{\"id\":\"ranges-for-beginners\",\"title\":\"Your first range\",\"goal\":\"Separate known cards, possible opposing hands and assumptions about their frequency.\",\"read\":\"/poker/ranges-for-beginners/#course-first-pass-title\",\"practice\":\"/poker/beginner-checkpoint/#situation-five\"},{\"id\":\"betting-with-a-purpose\",\"title\":\"Betting with a purpose\",\"goal\":\"Say which worse hands might call or better hands might fold, and compare betting with checking.\",\"read\":\"/poker/betting-with-a-purpose/#course-first-pass-title\",\"practice\":\"/poker/beginner-checkpoint/#situation-six\"}],\"destinations\":[{\"id\":\"read:first-decisions\",\"label\":\"Read lesson 1: Cards, actions and the pot\",\"href\":\"/poker/first-decisions/#course-first-pass-title\"},{\"id\":\"practice:first-decisions\",\"label\":\"Practice lesson 1: Cards, actions and the pot\",\"href\":\"/poker/beginner-checkpoint/#situation-one\"},{\"id\":\"read:starting-hand-decisions\",\"label\":\"Read lesson 2: Your starting hand in context\",\"href\":\"/poker/starting-hand-decisions/#course-first-pass-title\"},{\"id\":\"practice:starting-hand-decisions\",\"label\":\"Practice lesson 2: Your starting hand in context\",\"href\":\"/poker/beginner-checkpoint/#situation-two\"},{\"id\":\"read:first-flop-decisions\",\"label\":\"Read lesson 3: Your first decisions after the flop\",\"href\":\"/poker/first-flop-decisions/#course-first-pass-title\"},{\"id\":\"practice:first-flop-decisions\",\"label\":\"Practice lesson 3: Your first decisions after the flop\",\"href\":\"/poker/beginner-checkpoint/#situation-three\"},{\"id\":\"read:turn-and-river-decisions\",\"label\":\"Read lesson 4: The turn, river and showdown\",\"href\":\"/poker/turn-and-river-decisions/#course-first-pass-title\"},{\"id\":\"practice:turn-and-river-decisions\",\"label\":\"Practice lesson 4: The turn, river and showdown\",\"href\":\"/poker/beginner-checkpoint/#situation-four\"},{\"id\":\"read:ranges-for-beginners\",\"label\":\"Read lesson 5: Your first range\",\"href\":\"/poker/ranges-for-beginners/#course-first-pass-title\"},{\"id\":\"practice:ranges-for-beginners\",\"label\":\"Practice lesson 5: Your first range\",\"href\":\"/poker/beginner-checkpoint/#situation-five\"},{\"id\":\"read:betting-with-a-purpose\",\"label\":\"Read lesson 6: Betting with a purpose\",\"href\":\"/poker/betting-with-a-purpose/#course-first-pass-title\"},{\"id\":\"practice:betting-with-a-purpose\",\"label\":\"Practice lesson 6: Betting with a purpose\",\"href\":\"/poker/beginner-checkpoint/#situation-six\"},{\"id\":\"foundations\",\"label\":\"Open the Poker Foundations course map\",\"href\":\"/poker/free-poker-learning-path/\"},{\"id\":\"checkpoint\",\"label\":\"Try the beginner checkpoint\",\"href\":\"/poker/beginner-checkpoint/\"}],\"defaultNext\":\"read:first-decisions\"}</script></div></section>\n"
+        }
+      ]
+    },
+    "poker/turn-and-river-decisions/index.html": {
+      "old_sha256": "5d97b8b2f3a852c6f913a25cd16718ad8a7d48e3841475772a49d05a3115a29c",
+      "new_sha256": "63e44c01cd11011895f7eb9169554783b5f4156a126bb7b320963b09484c1179",
+      "edits": [
+        {
+          "start": 9990,
+          "end": 10220,
+          "old": "/nav><p>Keep your place in your own notes. This path does not save progress or send answers",
+          "new": "p><a href=\"/poker/study/#course-progress\">Keep lesson marks and a next task in the Study desk</a></p></nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent"
+        }
+      ]
+    },
+    "privacy/index.html": {
+      "old_sha256": "b4c5d1226dbfd580158d57cc12d6b0f452596ea2d2a7ae6dccc8f8be7e2f881b",
+      "new_sha256": "68c38ed9fe96f37451444da7345b27f8750a2c2a704faa658dd16e641d31f21c",
+      "edits": [
+        {
+          "start": 2904,
+          "end": 2905,
+          "old": "3",
+          "new": "6"
+        },
+        {
+          "start": 5051,
+          "end": 5052,
+          "old": "3",
+          "new": "6"
+        },
+        {
+          "start": 6850,
+          "end": 8249,
+          "old": "",
+          "new": "          <h2>Optional Poker Foundations progress</h2>\n          <p>The <a href=\"/poker/study/#course-progress\">Poker Study desk</a> lets you mark six lessons and choose a next reading or practice task. Those choices remain in the open page unless you choose to remember them on this device. That option uses one entry in your browser's local storage. It contains the lesson marks you choose, your next task, and the course and file-format versions. It contains no names, written answers, hand histories, scores, or record of the pages you visit.</p>\n          <p>The progress tool does not send these choices to this website, analytics, or another service. You can stop remembering them or reset the record from the same controls. Other people using the same browser profile on this device may be able to see it. Browser clearing, private browsing, or storage limits may remove it, so keep an exported copy if the record matters to you.</p>\n          <p>Exporting downloads a small progress file. Importing a file reads it in the current page and shows a preview before replacing your choices; it does not upload the file or enable device saving. Manual copy and paste use the complete progress text shown in the tool. Your browser and any app you use to keep or share a copy have their own data handling. Ordinary pageview analytics still operates as described above, without progress events.</p>\n"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "4db42fee374ad485cb0866d83feb754c6efa5700d53ffb6153d9bf0ac3e3e219",
+      "new_sha256": "ea04f6c54fadfafcc86eae6766d9f044aca676f360df39b1cbc571508c110eff",
+      "edits": [
+        {
+          "start": 940,
+          "end": 941,
+          "old": "3",
+          "new": "6"
+        },
+        {
+          "start": 2980,
+          "end": 2981,
+          "old": "2",
+          "new": "6"
+        }
+      ]
+    }
+  },
+  "pages": {
+    "poker-study": {
+      "old": {
+        "id": "poker-study",
+        "path": "/poker/study/",
+        "title": "The study desk.",
+        "seo_title": "Poker Study Desk: Hand Reviews & Practice | Nolan Kido",
+        "description": "Review one poker hand, check a calculation or prepare a study session. Use worked exercises and blank worksheets away from play, with assumptions visible.",
+        "section": "poker",
+        "kicker": "Poker / Between sessions",
+        "source": "poker/study.html",
+        "updated": "2026-10-12",
+        "entry_summary": "Review one poker hand, check a calculation or prepare a study session. Use worked exercises and blank worksheets away from play, with assumptions visible."
+      },
+      "new": {
+        "id": "poker-study",
+        "path": "/poker/study/",
+        "title": "The study desk.",
+        "seo_title": "Poker Study Desk: Hand Reviews & Practice | Nolan Kido",
+        "description": "Review one poker hand, check a calculation or prepare a study session. Use worked exercises and blank worksheets away from play, with assumptions visible.",
+        "section": "poker",
+        "kicker": "Poker / Between sessions",
+        "source": "poker/study.html",
+        "updated": "2026-10-16",
+        "entry_summary": "Review one poker hand, check a calculation or prepare a study session. Use worked exercises and blank worksheets away from play, with assumptions visible."
+      }
+    },
+    "privacy": {
+      "old": {
+        "id": "privacy",
+        "path": "/privacy/",
+        "title": "Privacy, in plain language.",
+        "seo_title": "Privacy | Nolan Kido",
+        "description": "How nolankido.com handles website visits and contact-form messages.",
+        "kicker": "Privacy",
+        "source": "privacy.html",
+        "updated": "2026-10-13"
+      },
+      "new": {
+        "id": "privacy",
+        "path": "/privacy/",
+        "title": "Privacy, in plain language.",
+        "seo_title": "Privacy | Nolan Kido",
+        "description": "How nolankido.com handles website visits and contact-form messages.",
+        "kicker": "Privacy",
+        "source": "privacy.html",
+        "updated": "2026-10-16"
+      }
+    }
+  },
+  "new_files": {
+    "_scripts/poker_progress.py": "e52620a5c7a1455d3f8fe9f70a3877747cc3f369f2e8e0bc0794456534341930",
+    "assets/poker-progress.css": "eaea29052803c9706b5881d31c0a930382ca3dae7e42c402138b7d52a7c090fa",
+    "assets/poker-progress.js": "17477d4879d253c484ec882f0905bf00e1c1031427f71175c3fd9e519e1da682"
+  }
+}

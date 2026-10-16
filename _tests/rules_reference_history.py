@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 import json
 import poker_search_history
+import poker_progress_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +31,7 @@ def before(path, data):
 
 
 def pages(records):
+    records = poker_progress_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[p['id']]['old']) if p['id'] in pairs and p == pairs[p['id']]['new'] else deepcopy(p) for p in records]
 

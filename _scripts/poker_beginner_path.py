@@ -56,4 +56,5 @@ def navigation(page, pages):
             '<nav aria-label="Beginner practice path"><ol>' + ''.join(items) + '</ol>'
             f'<p><a href="{PATH}">See the goals and readiness checks</a></p>'
             f'<p><a href="{DOWNLOAD}" download>Download your blank study card (TXT)</a></p>'
-            '</nav><p>Keep your place in your own notes. This path does not save progress or send answers.</p></details>')
+            '<p><a href="/poker/study/#course-progress">Keep lesson marks and a next task in the Study desk</a></p>'
+            '</nav><p>Optional lesson marks stay in this browser only when you choose to remember them. Exercise answers are not saved or sent.</p></details>')
