@@ -16,6 +16,29 @@ BASE = '1d6afff35e16d74a04415f8bc85dafe6f5b369bd'
 LEGACY_SHA = 'c8ad7e80e8f0d9be0a13421c2f2c45beb6744e6f447a70a08ea36c83628df987'
 
 
+def snapshot_text(root, path):
+    try:
+        return subprocess.check_output(['git', 'show', BASE + ':' + path], cwd=root,
+                                       stderr=subprocess.DEVNULL).decode()
+    except subprocess.CalledProcessError:
+        # A shallow checkout can lack the parent commit. Reverse only the exact
+        # reviewed delta and verify both hashes; never fetch or guess old text.
+        delta = json.loads((root / '_tests/poker-search-change.json').read_text())
+        if delta['commit'] != BASE: raise ValueError('Wrong snapshot reconstruction')
+        item = delta['paths'][path]
+        raw = (root / path).read_bytes()
+        if sha256(raw).hexdigest() != item['new_sha256']:
+            raise ValueError('Cannot reconstruct a snapshot from changed bytes: ' + path)
+        text = raw.decode()
+        for edit in reversed(item['edits']):
+            if text[edit['start']:edit['end']] != edit['new']:
+                raise ValueError('Snapshot edit does not match')
+            text = text[:edit['start']] + edit['old'] + text[edit['end']:]
+        if sha256(text.encode()).hexdigest() != item['old_sha256']:
+            raise ValueError('Reconstructed snapshot hash does not match')
+        return text
+
+
 class Cards(HTMLParser):
     def __init__(self, text):
         super().__init__(convert_charrefs=True)
@@ -72,13 +95,13 @@ def evaluate(root=ROOT, baseline=False):
     cases = queries['cases']
     if len(cases) != 30 or len({c['id'] for c in cases}) != 30 or any(not c['reason'] or not c['acceptable_paths'] for c in cases):
         raise ValueError('Keep 30 distinct declared targets with relevance reasons')
-    index_text = subprocess.check_output(['git', 'show', BASE + ':poker/find/index.html'], cwd=root).decode() if baseline else (root / 'poker/find/index.html').read_text()
+    index_text = snapshot_text(root, 'poker/find/index.html') if baseline else (root / 'poker/find/index.html').read_text()
     rows = Cards(index_text).rows
     destinations = {r['url'] for r in rows}
     for case in cases:
         if not all(p in destinations for p in case['acceptable_paths']):
             raise ValueError('No actual destination for ' + case['id'])
-    legacy = subprocess.check_output(['git', 'show', BASE + ':assets/poker-finder.js'], cwd=root).decode() if baseline else None
+    legacy = snapshot_text(root, 'assets/poker-finder.js') if baseline else None
     if legacy and sha256(legacy.encode()).hexdigest() != LEGACY_SHA:
         raise ValueError('Legacy formula is not the frozen source')
     result = subprocess.run(['node', '-e', ENGINE], cwd=root,

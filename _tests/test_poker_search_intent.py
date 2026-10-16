@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 import unittest
+from unittest.mock import patch
 from test_site import ROOT, build
 import poker_search_history as history
 
@@ -54,6 +55,14 @@ const original=JSON.stringify(cards);ranked('two pair lose');assert.equal(JSON.s
 '''
         result = subprocess.run(['node', '-e', code], input=json.dumps(rows), cwd=ROOT, text=True, capture_output=True)
         self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_frozen_baseline_is_reproducible_without_parent_git_objects(self):
+        missing = subprocess.CalledProcessError(128, ['git', 'show'])
+        with patch.object(evaluation.subprocess, 'check_output', side_effect=missing):
+            self.assertEqual(evaluation.evaluate(baseline=True), json.loads((FOLDER / 'baseline.json').read_text()))
+            with patch.object(evaluation.Path, 'read_bytes', return_value=b'Unreviewed bytes'):
+                with self.assertRaisesRegex(ValueError, 'changed bytes'):
+                    evaluation.snapshot_text(ROOT, 'assets/poker-finder.js')
 
     def test_all_prior_source_and_output_bytes_are_preserved_except_reviewed_delta(self):
         b = self.baseline

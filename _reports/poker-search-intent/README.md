@@ -97,7 +97,11 @@ python _tests/finder_browser.py
 ```
 
 The baseline evaluator extracts constants from the pinned old script and uses
-its original matching/ranking formula. The six-match audit failure is an explicit
+its original matching/ranking formula. In a shallow checkout without the parent
+Git objects, it reconstructs that snapshot only from the exact reviewed delta,
+checking both hashes; it never fetches history or accepts modified input bytes.
+The same 18/30 baseline is tested with Git-object access deliberately disabled.
+The six-match audit failure is an explicit
 regression assertion. The candidate imports the exact browser core and prepares
 the same card text parsed from the committed index. Browser regressions check
 the real result order, visible sentence, section URL and unrelated-word rejection
