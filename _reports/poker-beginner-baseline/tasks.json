@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "status": "draft-human-review-pending",
+  "tasks": [
+    {
+      "id": "T1", "lesson": "first-decisions", "skill": "S1",
+      "hero": ["As", "Jc"], "board": ["Ad", "8s", "4c"],
+      "setup": "On the flop, the other remaining player bets 9 counters. You paid 8 before the flop and nothing on this flop. There are no all-ins or side pots.",
+      "prompt": "Name your current best five cards. Can you check now? How many more counters would calling require, and why?",
+      "expected_rank": [1, 14, 11, 8, 4],
+      "call": {"wager": 9, "paid_this_round": 0, "additional": 9},
+      "points": ["Pair of aces with jack, eight and four; exactly five available cards.", "Checking is unavailable while facing this unmatched bet; a legal response includes folding or calling.", "Calling adds 9, not 1 or 17; the 8 paid before the flop is from a different betting round."]
+    },
+    {
+      "id": "T2", "lesson": "starting-hand-decisions", "skill": "S2",
+      "hero": ["Qc", "Jc"], "board": [],
+      "setup": "Six seats in clockwise order are first, next, cutoff, button, small blind, big blind. You are the big blind. Blinds are 1 and 2. First and next fold; cutoff raises to 8 total; button calls 8; small blind folds. You posted 2 and have not yet taken your initial turn. Assume enough counters, no all-ins or side pots.",
+      "prompt": "Does posting the big blind count as your initial decision? What do you add to call 8? After you call and these three players see the flop, who acts first? Explain.",
+      "call": {"wager": 8, "paid_this_round": 2, "additional": 6},
+      "alternate_call": {"wager": 12, "paid_this_round": 2, "additional": 10},
+      "points": ["Posting is not the initial decision; you still have that turn after the small blind folds.", "Call adds 6 for a total of 8; the alternate raise requires 10 more. The same private cards do not fix the price.", "You, the big blind, act first postflop among big blind, cutoff and button, clockwise after the button; this was a six-player deal."]
+    },
+    {
+      "id": "T3", "lesson": "first-flop-decisions", "skill": "S3",
+      "hero": ["9s", "8s"], "board": ["9d", "6s", "2s"],
+      "setup": "On the flop, the other remaining player bets 6 counters. You have paid nothing on this flop. There are no all-ins or side pots.",
+      "prompt": "Describe your current best five and any spade draw. What might another spade change, and what would it still not establish? Can you check in response to this bet?",
+      "expected_rank": [1, 9, 8, 6, 2],
+      "points": ["Pair of nines with eight, six and two, with four available spades; not a completed flush.", "Another spade would make a flush available, but improvement does not guarantee winning against every possible opposing hand or later board.", "Cannot check past an unmatched bet; the observed bet changes the available response, without proving the opponent's cards."]
+    },
+    {
+      "id": "T4", "lesson": "turn-and-river-decisions", "skill": "S4",
+      "hero": ["Ks", "Js"], "board": ["Kh", "Ts", "4s", "3d", "8c"],
+      "setup": "On the river, the pot held 40 counters before the other remaining player bet 20. You have paid nothing on the river. There are no fees, all-ins, side pots, further bets or prize effects.",
+      "prompt": "Name your final best five. What does calling cost now, and what would the pot contain after your call? Calculate the break-even share of that final pot. Does that price establish whether calling is profitable? Explain what remains unknown.",
+      "expected_rank": [1, 13, 11, 10, 8],
+      "call": {"wager": 20, "paid_this_round": 0, "additional": 20},
+      "river": {"pot_before_bet": 40, "bet": 20, "current_pot": 60, "final_pot": 80, "price": "1/4"},
+      "points": ["Pair of kings with jack, ten and eight; four spades do not complete a flush.", "Call costs 20; current pot 60 becomes 80; 20/80 = 25% break-even pot share under the stated assumptions.", "Price is not estimated equity. Opposing holdings/frequencies and ties affect expected pot share; without them there is no automatic profitable-call conclusion."]
+    },
+    {
+      "id": "T5", "lesson": "ranges-for-beginners", "skill": "S5",
+      "hero": ["Ad", "Qc"], "board": ["Qd", "8s", "5c", "3h", "2d"],
+      "setup": "On the river the other remaining player checks. Consider the three candidate holdings below; no probabilities or response frequencies are supplied.",
+      "candidates": [["Ad", "Jh"], ["Kh", "Kd"], ["Jc", "Tc"]],
+      "expected_comparisons": ["impossible", "stronger", "weaker"],
+      "prompt": "Which candidates are physically possible, and which possible ones beat your current hand? Does the check exclude the stronger candidate? If one weaker candidate is revealed once, what does that tell you about how often weaker hands occur next time?",
+      "expected_rank": [1, 12, 14, 8, 5],
+      "points": ["Candidate 1 is impossible because you hold the ace of diamonds; candidate 2's kings beat your queens; candidate 3's queen-high loses.", "A check alone does not logically exclude kings or establish a holding or its probability.", "One compatible weaker reveal does not establish future weaker-hand frequencies or justify assuming all checks are weak."]
+    },
+    {
+      "id": "T6", "lesson": "betting-with-a-purpose", "skill": "S6",
+      "hero": ["Td", "9d"], "board": ["Tc", "8c", "5s", "3h", "Qh"],
+      "setup": "On the river the other remaining player checks. For this fictional question only, assume both candidate holdings below would call a proposed bet of 6. Their relative frequencies and all other responses are unknown.",
+      "candidates": [["9c", "9h"], ["Qs", "Jh"]],
+      "expected_comparisons": ["weaker", "stronger"],
+      "prompt": "Which candidate helps the value-bet argument, and why? Does knowing it would call establish that betting is better than checking? What else is needed? If the stronger candidate calls and wins this time, does that result alone settle whether the bet was well reasoned?",
+      "expected_rank": [1, 10, 12, 9, 8],
+      "points": ["The nines are worse than your tens and would call by the stated assumption, so they are a relevant value target; the queens are stronger.", "A possible worse caller is not enough: need frequencies, other calls/folds/raises, and comparison with checking; no unique optimal action follows.", "A loss to the stronger candidate does not alone grade the prior reasoning; distinguish known assumptions from unknown frequencies and one outcome."]
+    }
+  ]
+}
