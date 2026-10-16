@@ -37,7 +37,7 @@ def reveal_short_answer(page):
     answer = page.locator('#course-lesson-answer')
     if answer.get_attribute('open') is None:
         enter(page, answer.locator('summary'))
-    expect(answer.locator('div')).to_be_visible()
+    expect(answer.locator(':scope > div')).to_be_visible()
 
 
 def check_position_maps(page, shots=None, width=390):
