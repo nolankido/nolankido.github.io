@@ -192,6 +192,17 @@
     "updated": "2026-10-15"
   },
   {
+    "id": "poker-school",
+    "path": "/poker/school/",
+    "title": "Poker School is in development.",
+    "seo_title": "Poker School: A Practical Hold’em Course in Development | Nolan Kido",
+    "description": "Explore a proposed beginner Hold’em course, keep the free Poker Foundations lessons, and request occasional course availability updates.",
+    "kicker": "Poker / Future learning",
+    "source": "poker/school.html",
+    "section": "poker",
+    "updated": "2026-10-16"
+  },
+  {
     "id": "poker-comics",
     "path": "/poker/comics/",
     "title": "Poker comics.",

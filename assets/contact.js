@@ -1,8 +1,13 @@
 /* Contact behavior: recoverable verification, explicit acceptance, no message persistence. */
 (() => {
   'use strict';
-  const form = document.getElementById('contact-form');
+  const form = document.getElementById('contact-form') || document.getElementById('poker-interest-form');
   if (!form) return;
+  const pokerInterest = form.id === 'poker-interest-form';
+  const interestAction = pokerInterest ? form.elements.namedItem('interest_action') : null;
+  const interestConsent = pokerInterest ? form.elements.namedItem('interest_consent') : null;
+  const interestGoal = pokerInterest ? form.elements.namedItem('interest_goal') : null;
+  if (pokerInterest && (!interestAction || !interestConsent || !interestGoal)) return;
   const fields = document.getElementById('contact-fields');
   const button = document.getElementById('contact-submit');
   const error = document.getElementById('form-error');
@@ -27,6 +32,26 @@
   let loadTimer = null;
   let verificationTimer = null;
   let verificationError = false;
+  function buttonLabel() {
+    if (!pokerInterest) return originalLabel;
+    return interestAction.value === 'remove' ? 'Request removal' : 'Request course emails';
+  }
+  function interestMode() {
+    if (!pokerInterest) return;
+    const removal = interestAction.value === 'remove';
+    document.getElementById('interest-consent-group').hidden = removal;
+    document.getElementById('interest-goal-group').hidden = removal;
+    interestConsent.required = !removal;
+    if (removal) {
+      interestConsent.checked = false;
+      interestConsent.setCustomValidity('');
+    }
+    if (!busy) button.textContent = buttonLabel();
+  }
+  if (pokerInterest) {
+    interestAction.addEventListener('change', interestMode);
+    interestMode();
+  }
 
   function verificationMessage(message, canRetry = false) {
     verification.textContent = message;
@@ -48,7 +73,7 @@
     button.disabled = value;
     fields.disabled = value;
     form.setAttribute('aria-busy', String(value));
-    button.textContent = value ? 'Sending…' : originalLabel;
+    button.textContent = value ? 'Sending…' : buttonLabel();
   }
   function clearVerificationTimer() {
     window.clearTimeout(verificationTimer);
@@ -201,9 +226,20 @@
     event.preventDefault();
     if (busy || complete) return;
     clearError();
-    for (const name of ['name', 'email', 'message']) {
-      const input = form.elements.namedItem(name);
-      input.setCustomValidity(input.value.trim() ? '' : 'Please complete this field.');
+    if (pokerInterest) {
+      const email = form.elements.namedItem('email');
+      email.setCustomValidity(email.value.trim() ? '' : 'Please enter an email address.');
+      if (!['register', 'remove'].includes(interestAction.value)) {
+        showError('Choose whether to request updates or stop updates.');
+        return;
+      }
+      interestConsent.setCustomValidity(interestAction.value === 'register' && !interestConsent.checked
+        ? 'Check this box to explicitly request course emails.' : '');
+    } else {
+      for (const name of ['name', 'email', 'message']) {
+        const input = form.elements.namedItem(name);
+        input.setCustomValidity(input.value.trim() ? '' : 'Please complete this field.');
+      }
     }
     if (!form.reportValidity()) return;
     if (form.elements.namedItem('_honeypot').checked) {
@@ -216,7 +252,22 @@
       return;
     }
     const value = name => form.elements.namedItem(name).value.trim();
-    const payload = {
+    const payload = pokerInterest ? {
+      name: value('name'), email: value('email'),
+      reason: 'Poker School course email request',
+      context: 'Course interest form',
+      message: interestAction.value === 'remove'
+        ? 'Please stop sending Poker School course emails to this address.'
+        : 'Please record my request for occasional Poker School course availability and beta invitation emails.',
+      interest_action: interestAction.value,
+      interest_goal: interestAction.value === 'remove' ? '' : interestGoal.value,
+      consent: interestAction.value === 'register' ? 'explicit opt-in checked' : 'removal request',
+      consent_statement: interestAction.value === 'register'
+        ? 'I would like occasional emails about Poker School availability and pilot invitations. I can ask to stop emails using this form.'
+        : 'No marketing consent required for a removal request.',
+      'cf-turnstile-response': token,
+      _email: {from: 'Nolan Kido Website', subject: '[NK Poker School] Course email request', template: {title: true, footer: true}}
+    } : {
       name: value('name'), email: value('email'), reason: value('reason'),
       context: value('context'), message: value('message'),
       'cf-turnstile-response': token,
@@ -241,6 +292,7 @@
       window.clearTimeout(loadTimer);
       discardWidget();
       form.reset();
+      if (pokerInterest) interestMode();
       form.hidden = true;
       success.hidden = false;
       success.focus();
