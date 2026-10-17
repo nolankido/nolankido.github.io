@@ -51,3 +51,7 @@ No existing site data, pages, scripts, CSS, course answers or privacy settings a
 ## Next evidence step
 
 Qualified review should first identify confusing prompts, unasked reasoning requirements and unsuitable prerequisites, then record changes against exact case IDs and commits. After acceptance, actual consenting adult beginners can supply observations under the separately approved plan. Keep observations attached to the cases actually used; a larger bank alone is not evidence of improved understanding.
+
+## Offline qualified-review handoff
+
+The [qualified review and observation handoff](review-workflow.md) and [local-only review-round tool](review_round.py) provide an 18-case first-pass triage, a separate full 72-case review packet, question/key separation and case-bound source fingerprints. Completed review records must stay private and cannot be treated as verified human signatures. A first-pass subset cannot approve unreviewed cases. The tool always reports that publication is not authorized; both the qualified six-lesson review and case-scoped human assessment remain pending.
