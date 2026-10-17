@@ -23,6 +23,8 @@ The task-brief builder is a deterministic five-field local template and makes no
 
 ## X: initial evidence-led six-post thread
 
+Each post and follow-up has been checked against the standard 280-character post limit. Review again in the chosen publishing service.
+
 **Post 1 (hook):**
 
 A good prompt is not the same as a good plan.
@@ -49,42 +51,37 @@ For a meeting summary: compare it with original notes and confirm ownership with
 
 **Post 5:**
 
-There’s a concrete reason I care about different checks.
+One reason I care about distinct checks: an AI-assisted site change passed a build and 347 unit/content tests. An HTML5 parser still caught an extra closing tag.
 
-One AI-assisted change to my website passed a build and 347 unit/content tests. A later HTML5 parser still caught an extra closing tag. The defect was fixed before publication.
-
-That’s one documented failure, not a claim that a test count proves safety.
+We fixed it before release. That's one documented defect, not a general claim about AI.
 
 **Post 6 (links):**
 
-You can use the free brief builder here:
+Try the free local brief builder:
 https://nolankido.com/technology/task-brief/
 
-And inspect the recorded website check and its limitations here:
+See the recorded website defect and fix:
 https://nolankido.com/technology/checking-ai-website-changes/
 
-If you try the brief, I’m interested in which required field was hardest to answer.
+Which brief field would be hardest for you to answer?
 
 ### X follow-up 1: explain why the check matters
 
-The most valuable line in an AI task brief may be the one people skip: “How will I check it?”
+The most useful line in an AI task brief may be “How will I check it?”
 
-“Make it accurate” is not a check.
+“Make it accurate” isn’t a test.
 
-“Compare each decision with the original notes, and mark unsupported owners or dates as TBD” is something you can actually do.
+“Compare decisions to the notes; mark unsupported owners and dates TBD” is.
 
-Free editable brief: https://nolankido.com/technology/task-brief/
+Try the free builder: https://nolankido.com/technology/task-brief/
 
 ### X follow-up 2: distinguish a passing test from evidence
 
-I’ve seen the same distinction in my own website work:
-
-A successful build shows that the files can be generated. An HTML parser examines structure. A browser test exercises behavior. A published-file check confirms what people receive.
+A build checks whether files are generated. An HTML parser checks markup. A browser test checks behavior. A deployed-byte check checks delivery.
 
 They answer different questions.
 
-I wrote up one actual defect and repair, including the limits of the evidence:
-https://nolankido.com/technology/checking-ai-website-changes/
+One documented defect and repair: https://nolankido.com/technology/checking-ai-website-changes/
 
 ## Instagram: 25–35-second authentic screen demonstration
 
