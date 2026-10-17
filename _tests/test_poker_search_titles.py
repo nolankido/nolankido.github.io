@@ -9,6 +9,7 @@ from test_site import ROOT, build
 import poker_search_titles_history as history
 import poker_study_list_history as study_history
 import poker_progress_history as progress_history
+import poker_school_history as school
 
 
 def load(name, path):
@@ -80,7 +81,7 @@ assert.equal(rank('',changed)[0].index,0);
         sources = {p.relative_to(ROOT).as_posix(): p.read_bytes() for d in capture.PREFIXES
                    for p in (ROOT / d).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
         sources = progress_history.source_records(sources)
-        outputs = {str(p): s.encode() for p, s in self.outputs.items()}
+        outputs = {str(p): s.encode() for p, s in school.outputs(self.outputs).items()}
         self.assertEqual((len(sources), len(outputs)), (b['source_count'], b['output_count']))
         self.assertEqual(capture.fingerprint({p: history.before(p, s) for p, s in sources.items()}), b['source_fingerprint'])
         self.assertEqual(capture.fingerprint({p: history.before(p, s) for p, s in outputs.items()}), b['output_fingerprint'])

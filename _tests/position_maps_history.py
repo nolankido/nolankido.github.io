@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import poker_school_history
 import rules_reference_history
 import poker_progress_history
 
@@ -37,6 +38,7 @@ def pages(records):
 
 
 def outputs(records):
+    records = poker_school_history.outputs(records)
     return {path: before(path, text) for path, text in records.items()}
 
 

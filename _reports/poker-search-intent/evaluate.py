@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / '_tests'))
 import poker_search_titles_history as title_history
 import poker_study_list_history as study_history
 import poker_progress_history as progress_history
+import poker_school_history as school_history
 FOLDER = Path('_reports/poker-search-intent')
 BASE = '1d6afff35e16d74a04415f8bc85dafe6f5b369bd'
 LEGACY_SHA = 'c8ad7e80e8f0d9be0a13421c2f2c45beb6744e6f447a70a08ea36c83628df987'
@@ -97,8 +98,8 @@ process.stdout.write(JSON.stringify(result));
 '''
 
 
-def evaluate(root=ROOT, baseline=False, prior_release=False, titles_release=False, study_list_release=False):
-    if sum((baseline, prior_release, titles_release, study_list_release)) > 1:
+def evaluate(root=ROOT, baseline=False, prior_release=False, titles_release=False, study_list_release=False, progress_release=False):
+    if sum((baseline, prior_release, titles_release, study_list_release, progress_release)) > 1:
         raise ValueError('Choose one historical release')
     queries = json.loads((root / FOLDER / 'queries.json').read_text())
     cases = queries['cases']
@@ -106,6 +107,9 @@ def evaluate(root=ROOT, baseline=False, prior_release=False, titles_release=Fals
         raise ValueError('Keep 30 distinct declared targets with relevance reasons')
     index_text = snapshot_text(root, 'poker/find/index.html') if baseline else (root / 'poker/find/index.html').read_text()
     script = (root / 'assets/poker-finder.js').read_text()
+    if progress_release:
+        index_text = school_history.before('poker/find/index.html', index_text)
+        script = school_history.before('assets/poker-finder.js', script)
     if study_list_release:
         index_text = progress_history.before('poker/find/index.html', index_text)
         script = progress_history.before('assets/poker-finder.js', script)
@@ -124,7 +128,7 @@ def evaluate(root=ROOT, baseline=False, prior_release=False, titles_release=Fals
     if legacy and sha256(legacy.encode()).hexdigest() != LEGACY_SHA:
         raise ValueError('Legacy formula is not the frozen source')
     result = subprocess.run(['node', '-e', ENGINE], cwd=root,
-                            input=json.dumps({'rows': rows, 'cases': cases, 'legacy': legacy, 'script': script if prior_release or titles_release or study_list_release else None}),
+                            input=json.dumps({'rows': rows, 'cases': cases, 'legacy': legacy, 'script': script if prior_release or titles_release or study_list_release or progress_release else None}),
                             text=True, capture_output=True, check=True)
     results = json.loads(result.stdout)
     return {'scope': queries['status'], 'baseline_commit': BASE,
@@ -141,9 +145,10 @@ if __name__ == '__main__':
     parser.add_argument('--prior-release', action='store_true', help='Replay the frozen 29/30 release')
     parser.add_argument('--titles-release', action='store_true', help='Replay the frozen 30/30 title-ranking release')
     parser.add_argument('--study-list-release', action='store_true', help='Replay the frozen study-list release')
+    parser.add_argument('--progress-release', action='store_true', help='Replay the frozen pre-School progress release')
     parser.add_argument('--write', action='store_true')
     args = parser.parse_args()
-    report = evaluate(baseline=args.baseline, prior_release=args.prior_release, titles_release=args.titles_release, study_list_release=args.study_list_release)
+    report = evaluate(baseline=args.baseline, prior_release=args.prior_release, titles_release=args.titles_release, study_list_release=args.study_list_release, progress_release=args.progress_release)
     if args.write:
         if args.baseline or args.prior_release:
             target = ROOT / FOLDER / ('baseline.json' if args.baseline else 'results.json')
@@ -151,11 +156,14 @@ if __name__ == '__main__':
             target = ROOT / '_reports/poker-search-titles/results.json'
         elif args.study_list_release:
             target = ROOT / '_reports/poker-study-list/search-results.json'
-        else:
+        elif args.progress_release:
             target = ROOT / '_reports/poker-progress/search-results.json'
+        else:
+            target = ROOT / '_reports/poker-school/search-results.json'
         text = json.dumps(report, ensure_ascii=False, indent=2) + '\n'
-        if (args.baseline or args.prior_release or args.titles_release or args.study_list_release) and target.exists() and target.read_text() != text:
+        if (args.baseline or args.prior_release or args.titles_release or args.study_list_release or args.progress_release) and target.exists() and target.read_text() != text:
             raise ValueError('The frozen baseline would change; use a separately labeled evaluation round')
+        target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(text)
     print(str(report['target_hits_top_three']) + '/30 declared targets in the first three results')
     for row in report['results']:

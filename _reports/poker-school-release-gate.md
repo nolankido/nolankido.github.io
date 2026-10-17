@@ -1,42 +1,52 @@
-# Poker School Turn 1: Release gate and next engineering steps
+# Poker School: release engineering and evidence boundaries
 
-**State (October 16, 2026, Hawaii):** Implementation on draft PR #110; NOT MERGED; no production deployment. The course-interest form is now isolated from the original contact script, and the previously frozen course and privacy sources have been restored. Parent release at start: `9021d4604c9427c37dc6c788753ddf9675dfc7ba`. Current branch can advance while this document remains the issue record.
+**Publication receipt:** use PR #110's exact commit, required Site checks, Pages deployment and published-byte result. This file describes the candidate and its checks; it is not a deployment or mailing-list receipt.
 
-## What has been implemented
+## What the candidate changes
 
-- Proposed five-stage course and free/paid distinction at `/poker/school/`.
-- Small optional offers from Poker homepage, the free course and the Study Desk.
-- Interest request with explicitly unchecked marketing-email consent, removal path without consent, optional learning category and name, Formspark and Cloudflare Turnstile.
-- Consent and manual-processing disclosures in Privacy; existing backend processes requests only when a person reviews them.
-- Focused static and form contract tests, new offline Playwright cases, and an operator procedure in `_reports/poker-school-offer.md`.
-- A SHA-bound additive scope guard, `_scripts/poker_school_release.py`, pins every original tracked Git blob from main commit `9021d46`, rejects unknown edits and deletions, and preserves byte-for-byte the original contact, privacy and frozen teaching sources. The new school page and its JS/CSS are independently included in the live byte-check inventory.
-- No mailing-list enrollment API, subscriber account, checkout, billing, personal tracking event, marketing promise, or real provider submission.
+The proposed course and optional interest request live at `/poker/school/`. Poker home and the Study Desk point to that page. The existing free Poker Foundations course, its teaching-review inputs, `assets/contact.js`, and the general privacy page retain the exact bytes of main commit `9021d4604c9427c37dc6c788753ddf9675dfc7ba`. The separate request script is loaded only on the School page. Its supplemental privacy text explains manual handling, explicit opt-in and removal requests.
 
-## Exact QA observations
+No existing free material is paywalled. No course price, launch date, paid access, personal teaching credentials, participant results or profit claims are introduced. Qualified human teaching review and actual beginner observations remain pending.
 
-1. One-off branch-generated-site workflow `39017035468` **passed** and committed new HTML, sitemap, search payloads and cache tokens to the feature branch (commit `815fa5cf76fcea957e1c66e3960db1744821e9ed`). The temporary generator has been removed.
-2. Normal full site checks for commit `c6b9d1753b9cbfa53cada9cdc6a964a16e062830`: run `39017078558`, **FAILED**. Python stage ran **791 tests** and found **143 failures and 9 errors**; browser matrix was skipped. This is a release blocker, not merely a cosmetic warning.
-3. Most failures are frozen predecessor/source/body/search/inventory contracts. Examples: old tests expect 472 live targets, new manifest has 473; many earlier tests compare all older pages, HTML heading indexes and output digests without an exception for an added route; unchanged version of the free course is pinned to an independent human teaching-review source hash; other tests forbid scripts outside contact. The old source/privacy/contact script bytes also changed. Some reported errors arise downstream of the teaching-review scope mismatch. **Do not refresh all baselines just to make tests pass.**
-4. An additional isolated browser test was started under one temporary workflow; its outcome belongs in the GitHub Actions run receipt. Both temporary workflows have been removed from the branch and must not be restored as permanent infrastructure.
+## Historical release compatibility
 
-## Priority fixes before any merge
+Earlier versions of this PR failed the full suite because the new page was not represented in the historical replay chain. The last pre-repair candidate, `3f4db484`, had 101 failures and 5 errors across 794 unit tests. Those failed runs are historical evidence, not an instruction to waive the release gate.
 
-1. **Completed: separate shared concerns.** Poker School now has page-scoped `assets/poker-school-interest.js`; the approved parent `assets/contact.js` is restored unchanged. Its existing form still passes the focused browser regression.
-2. **Completed: respect the teaching lock.** The optional course CTA was removed from `_source/poker/free-poker-learning-path.html`, which is back to its exact reviewed-parent bytes. The landing page remains linked from the Poker homepage and Study Desk. Qualified human teaching review is still pending.
-3. **Partly completed: implement the additive release contract.** `_reports/poker-school-main-blobs.json` pins all 1,207 original tracked blobs. `_scripts/poker_school_release.py` rejects any undeclared change, addition or deletion; it does not waive legacy history tests. Next create an exact, reviewed additive history adapter for the new route and old source views; do not edit historical baselines merely to suppress failures.
-4. **Partly completed: live asset coverage.** The new school page, CSS and JS are listed in `_scripts/check_live.py` for eventual published-byte verification. The remaining work is to update strict earlier route and script-scope tests through a bounded, reviewed history adapter. They must continue rejecting unexpected scripts and changes.
-5. **Run independent end-to-end validation.** Unit tests, HTML validation, accessibility, browser flows for consent and removal at mobile widths and with no JavaScript, and regression tests for the old contact form. No real Formspark submissions during automated tests. Review any Code Review findings on the exact final commit.
-6. **Final release gate and evidence.** `python _scripts/build.py --check`, all project unit tests, all browser groups, PR aggregate `checks` success, publish to main via reviewed merge, independent Pages deployment and published-byte verification at the exact main SHA. Remove temporary infrastructure before merge.
+`_tests/poker_school_history.py` and `_tests/poker-school-change.json` now describe a bounded, test-only view of the exact pre-School release. A file is reversed only when its entire SHA-256 matches the reviewed new bytes. The adapter verifies each replacement offset and the restored file's old hash. New files, generated pages and metadata records are removed from older views only on an exact match. Unknown or modified bytes remain visible. The deployed build never invokes this adapter.
 
-Do not declare the page live until step 6 completes. Keep PR #110 as **draft** with this blocker record. No visitor interest or education outcome should be claimed from synthetic tests.
+The predecessor's source inventory, 221 generated outputs and public metadata are pinned separately. Independent tests reconstruct their hashes and compare restored Git blobs to the original 1,207-file inventory. Corrupted edits, unexpected changes, modified additions and altered new-page metadata are rejected. Existing `*-baseline.json`, `*-change.json` and historical search-result files have not been refreshed to manufacture success.
 
-## Functional and product constraints
+The current search audit includes 194 HTML pages. The current live-response inventory includes 475 targets, including the School page and both new assets. These are inventory checks, not traffic, engagement or learning outcomes.
 
-- Product wording remains provisional. Price, date, coaching and paid lessons are undefined. Poker Foundations stays free.
-- Interest emails require explicit affirmative consent. Requests to stop emails must never require opting in. Form acceptance is not list enrollment or removal.
-- Keep submitted personal information out of GitHub, URLs, tracker events, browser storage and public reports.
-- Course completion or a correct test answer is not demonstrated learning or profitable play; human review and genuine beginner observations are still future dependencies.
+## Reproducing the compatibility record
 
-## Guard lifecycle and future change safety
+From a complete local checkout containing the pinned parent Git object:
 
-`_scripts/poker_school_release.py` is an **explicit, one-release forensic audit**, not a permanent rule for every future change to nolankido.com. Execute it on the exact PR #110 candidate before a release decision and preserve its results. The general `_tests/test_poker_school_release.py` suite tests its SHA algorithm, unexpected-delta rejection and immutable baseline metadata as pure behaviors without comparing every future site revision against October 16 forever. Subsequent approved work must not be blocked simply because it modifies the public site's contact, privacy or instructional files under a new reviewed release. The ordinary full-site suite remains the required gate for a merge; this audit cannot override a failed CI result.
+```sh
+python _reports/poker-school/capture_history.py
+```
+
+The default command is read-only. It executes the actual parent metadata/build pipeline, verifies the committed parent output, checks the candidate's declared changes, and reproduces the record. `--write` is only for preparing this unapproved candidate before its exact revision is reviewed. Never overwrite historical baselines to hide an unexpected change. A later approved release needs its own explicit compatibility step.
+
+The one-release `_scripts/poker_school_release.py` checks the tracked path inventory and protected files. It does not replace the exact-content tests or authorize publication. Its pure algorithm and mutation tests remain in the regular suite; its frozen whole-tree inventory is intentionally not imposed on every future site revision.
+
+## Functional and release verification
+
+Run the ordinary committed-build, HTML, search, unit and browser checks. The existing browser suite now covers School opt-in, removal without consent, switching back to registration, missing/expired verification, provider rejection, rate limits, network failure, timeouts, duplicate submission, no-script access, enlarged text and the pinned accessibility checker. All form-service requests in these tests are intercepted and mocked.
+
+The original contact behavior remains independently tested. Link validation still checks every internal destination and fragment; repeated target parsing is cached only within that one immutable-output test to avoid redundant work.
+
+```sh
+python _scripts/build.py --check
+python _tests/check_html5.py
+python _scripts/check_search.py
+python -m unittest discover -s _tests -p 'test_*.py' -v
+node --check assets/poker-school-interest.js
+python _tests/browser.py
+```
+
+The full five-group browser matrix and aggregate `checks` job are required before merge. Verify Pages and all published-response bytes at the exact main commit afterward. Use PR comments for final run IDs so recording a receipt does not silently change the tested tree.
+
+## Operational limits
+
+Formspark acceptance is not verified email ownership, mailing-list enrollment, completed removal, inbox delivery or a message read by Nolan. Actual incoming requests must be processed privately under `_reports/poker-school-offer.md`. This release adds no automated mailing provider, billing, account or at-table assistance. No real test submissions or marketing emails are sent during software verification.

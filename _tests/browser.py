@@ -193,6 +193,93 @@ class BrowserTests(unittest.TestCase):
         finally:
             context.close()
 
+    def school_request(self, action='register'):
+        self.render('/poker/school/', width=390)
+        self.page.wait_for_function('window.challengeOptions !== undefined')
+        self.page.locator('#interest-email').fill('visitor@example.com')
+        self.page.locator('#interest-action').select_option(action)
+        if action == 'register':
+            self.page.locator('#interest-goal').select_option('tournaments')
+            self.page.locator('#interest-consent').check()
+
+    def test_poker_school_recovery_names_the_actual_request_button(self):
+        for action, label in [('register', 'Request course emails'), ('remove', 'Request removal')]:
+            with self.subTest(action=action):
+                self.school_request(action)
+                self.page.locator('#contact-submit').click()
+                expect(self.page.locator('#form-error')).to_contain_text(label)
+                self.assertNotIn('Send message', self.page.locator('#form-error').inner_text())
+                self.assertEqual(self.posts, [])
+                self.verify()
+                self.page.evaluate("window.challengeOptions['expired-callback']()")
+                self.page.locator('#contact-submit').click()
+                expect(self.page.locator('#form-error')).to_contain_text(label)
+                self.assertEqual(self.posts, [])
+
+    def test_poker_school_failures_preserve_fields_without_claiming_success(self):
+        for state in [400, 429, 500, 'network', 'hang']:
+            with self.subTest(state=state):
+                self.service = state
+                self.school_request()
+                self.verify()
+                if state == 'hang':
+                    self.page.evaluate("const original = window.setTimeout; window.setTimeout = (fn, ms, ...args) => original(fn, ms === 15000 ? 100 : ms, ...args)")
+                self.page.locator('#contact-submit').click()
+                expect(self.page.locator('#form-error')).to_be_visible()
+                expect(self.page.locator('#form-error')).to_contain_text('email address and selections')
+                expect(self.page.locator('#interest-email')).to_have_value('visitor@example.com')
+                expect(self.page.locator('#interest-goal')).to_have_value('tournaments')
+                expect(self.page.locator('#interest-consent')).to_be_checked()
+                expect(self.page.locator('#contact-submit')).to_be_enabled()
+                expect(self.page.locator('#form-success')).to_be_hidden()
+                before = len(self.posts)
+                self.page.locator('#contact-submit').click()
+                self.assertEqual(len(self.posts), before)
+
+    def test_poker_school_switching_back_to_register_requires_new_consent(self):
+        self.school_request()
+        self.page.locator('#interest-action').select_option('remove')
+        self.page.locator('#interest-action').select_option('register')
+        expect(self.page.locator('#interest-consent')).not_to_be_checked()
+        self.verify()
+        self.page.locator('#contact-submit').click()
+        self.assertEqual(self.posts, [])
+        self.page.locator('#interest-consent').check()
+        self.page.locator('#contact-submit').click()
+        expect(self.page.locator('#form-success')).to_be_visible()
+        expect(self.page.locator('#form-success')).to_contain_text('not confirmation of addition')
+
+    def test_poker_school_duplicate_submit_is_blocked(self):
+        self.service = 'hang'
+        self.school_request()
+        self.verify()
+        self.page.evaluate("const form = document.getElementById('poker-interest-form'); form.requestSubmit(); form.requestSubmit();")
+        expect(self.page.locator('#contact-submit')).to_be_disabled()
+        expect(self.page.locator('#interest-action')).to_be_disabled()
+        self.assertEqual(len(self.posts), 1)
+        self.assertEqual(self.posts[0]['interest_goal'], 'tournaments')
+        self.assertEqual(self.posts[0]['consent'], 'explicit opt-in checked')
+
+    def test_poker_school_accessibility_and_enlarged_text(self):
+        axe_path = os.environ.get('AXE_PATH')
+        if not axe_path or not Path(axe_path).is_file():
+            self.skipTest('Set AXE_PATH to the pinned axe-core used by Site checks')
+        for action in ['register', 'remove']:
+            with self.subTest(action=action):
+                self.school_request(action)
+                self.page.add_script_tag(path=axe_path)
+                result = self.page.evaluate("async () => await axe.run(document, {runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa']})")
+                self.assertEqual(result['violations'], [])
+                self.page.locator('#interest-email').focus()
+                self.assertEqual(self.page.evaluate('document.activeElement.id'), 'interest-email')
+                self.page.set_viewport_size({'width': 320, 'height': 900})
+                self.page.add_style_tag(content='html { font-size: 200% !important; }')
+                self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'), 320)
+                self.page.emulate_media(media='print')
+                expect(self.page.locator('#poker-interest-form')).to_be_hidden()
+                expect(self.page.locator('#school-plan-title')).to_be_visible()
+                self.page.emulate_media(media='screen')
+
     def test_missing_token_retry_then_success(self):
         self.contact(); self.fill()
         expect(self.page.locator('#form-success')).to_be_hidden()
@@ -348,7 +435,7 @@ class BrowserTests(unittest.TestCase):
                     self.render(p['path'], width)
                     self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'), width)
                     expect(self.page.locator('h1')).to_be_visible()
-                    if width == 390 and p['id'] in ['home', 'contact', 'trustworthy-tools'] and os.environ.get('SCREENSHOT_DIR'):
+                    if width == 390 and p['id'] in ['home', 'contact', 'trustworthy-tools', 'poker-school'] and os.environ.get('SCREENSHOT_DIR'):
                         out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                         self.page.screenshot(path=str(out / (p['id'] + '-mobile.png')), full_page=True)
         self.render('/', 1440)

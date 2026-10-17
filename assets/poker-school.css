@@ -27,3 +27,5 @@
   .poker-school-compare { display: block; }
   .poker-school-compare article { break-inside: avoid; margin-bottom: 18px; }
 }
+/* Large text must wrap rather than push the request heading off a narrow screen. */
+.page-poker-school :where(.section-title, .page-title, h3) { overflow-wrap: anywhere; }

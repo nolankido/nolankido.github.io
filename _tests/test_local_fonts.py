@@ -100,7 +100,7 @@ class LocalFontsTests(unittest.TestCase):
             self.assertEqual(reference.split('<body',1)[1],text.split('<body',1)[1])
             self.assertEqual(history.font_reference(path,text.encode()),reference.encode())
             pages+=1
-        self.assertEqual(pages,193)
+        self.assertEqual(pages,194)
         self.assertEqual(history.font_reference('assets/site-fonts.css',font_delivery.local_declarations(ROOT)),font_delivery.declarations(ROOT))
 
 if __name__=='__main__':unittest.main()
