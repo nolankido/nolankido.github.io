@@ -103,7 +103,7 @@ class PokerProgressTests(unittest.TestCase):
         targets = live.targets(ROOT)
         for route in ['/poker/study/', '/assets/poker-progress.js', '/assets/poker-progress.css']:
             self.assertIn(route, targets)
-        self.assertEqual(len(targets), 472)
+        self.assertEqual(len(targets), 475)
         privacy = self.outputs[Path('privacy/index.html')]
         for phrase in ['Optional Poker Foundations progress', 'one entry in your browser', 'without progress events', 'does not upload the file or enable device saving']:
             self.assertIn(phrase, privacy)
