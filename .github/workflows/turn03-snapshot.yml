@@ -1,0 +1,24 @@
+name: Temporary Turn 03 source snapshot
+on:
+  push:
+    branches: [grow-site-turn03-task-brief-20261017]
+    paths: [.github/workflows/turn03-snapshot.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 9a9eaba7359cd9c3e4e7a92fffdd34f991a303df
+          persist-credentials: false
+      - name: Export exact reviewed production tree
+        run: git archive --format=tar.gz HEAD > "$RUNNER_TEMP/turn03-base.tar.gz"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: turn03-base
+          path: ${{ runner.temp }}/turn03-base.tar.gz
+          retention-days: 1
+          if-no-files-found: error
