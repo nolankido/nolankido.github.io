@@ -1,0 +1,162 @@
+diff --git a/_reports/website-growth/capture_turn02.py b/_reports/website-growth/capture_turn02.py
+new file mode 100644
+index 0000000..06cfe3e
+--- /dev/null
++++ b/_reports/website-growth/capture_turn02.py
+@@ -0,0 +1,97 @@
++"""Reproduce the exact homepage compatibility record. Read-only unless --write."""
++from __future__ import annotations
++import argparse
++import difflib
++import hashlib
++import io
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tarfile
++
++ROOT = Path(__file__).resolve().parents[2]
++BASE = '8f63c0436a45256cb2987cd93f77a9ef6e85df1b'
++TREE = '016ad310e376ed25b8dd6ec2a8cbdb7d3e691417'
++PATHS = ('_source/home.html', '_source/pages.json', 'assets/first-steps.css',
++         'index.html', 'creative/index.html', 'sitemap.xml')
++SOURCE_PREFIXES = ('_source/', '_scripts/', 'assets/', 'downloads/')
++PROTECTED = ('_source/site.json', '_source/layout.html', '_source/identity.json',
++             '_source/start-here.html', '_source/privacy.html', 'assets/contact.js',
++             'ANALYTICS.md', '_source/poker/free-poker-learning-path.html')
++sys.path[:0] = [str(ROOT / '_tests'), str(ROOT / '_scripts')]
++from test_site import Page, build
++
++
++def digest(raw):
++    return hashlib.sha256(raw if isinstance(raw, bytes) else raw.encode('utf-8')).hexdigest()
++
++
++def fingerprint(records):
++    return digest(json.dumps(sorted((str(p), digest(v)) for p, v in records.items()), separators=(',', ':')))
++
++
++def capture(ref=BASE):
++    tree = subprocess.check_output(['git', 'rev-parse', ref + '^{tree}'], cwd=ROOT, text=True).strip()
++    if tree != TREE:
++        raise ValueError('Base tree is not the approved homepage predecessor')
++    packed = subprocess.check_output(['git', 'archive', '--format=tar', ref], cwd=ROOT)
++    with tarfile.open(fileobj=io.BytesIO(packed)) as archive:
++        old = {m.name: archive.extractfile(m).read() for m in archive.getmembers() if m.isfile()}
++    sources = {p.relative_to(ROOT).as_posix(): p.read_bytes()
++               for folder in SOURCE_PREFIXES for p in (ROOT / folder).rglob('*')
++               if p.is_file() and '__pycache__' not in p.parts}
++    base_sources = {p: v for p, v in old.items() if p.startswith(SOURCE_PREFIXES)}
++    if set(sources) != set(base_sources):
++        raise ValueError('Unexpected source inventory change')
++    if {p for p in sources if sources[p] != base_sources[p]} != set(PATHS[:3]):
++        raise ValueError('Unexpected source, asset or script change')
++    outputs = build.build_outputs()
++    if any((ROOT / p).read_bytes() != v.encode('utf-8') for p, v in outputs.items()):
++        raise ValueError('Rebuild generated files before capturing this candidate')
++    base_outputs = {p: old[str(p)] for p in outputs}
++    if {str(p) for p, v in outputs.items() if v.encode('utf-8') != base_outputs[p]} != set(PATHS[3:]):
++        raise ValueError('Unexpected generated-output change')
++    changes = {}
++    for path in PATHS:
++        before, after = old[path].decode('utf-8'), (ROOT / path).read_text(encoding='utf-8')
++        blines, alines = before.splitlines(keepends=True), after.splitlines(keepends=True)
++        bpos, apos = [0], [0]
++        for line in blines: bpos.append(bpos[-1] + len(line))
++        for line in alines: apos.append(apos[-1] + len(line))
++        edits = [{'start': apos[c], 'end': apos[d], 'old': before[bpos[a]:bpos[b]], 'new': after[apos[c]:apos[d]]}
++                 for tag, a, b, c, d in difflib.SequenceMatcher(a=blines, b=alines, autojunk=False).get_opcodes()
++                 if tag != 'equal']
++        changes[path] = {'old_sha256': digest(before), 'new_sha256': digest(after), 'edits': edits}
++    new_home = next(p for p in build.public_pages() if p['id'] == 'home')
++    base_home = next(p for p in json.loads(old['_source/pages.json']) if p['id'] == 'home')
++    old_home = dict(new_home, updated=base_home['updated'])
++    if any(old_home[k] != v for k, v in base_home.items()):
++        raise ValueError('Homepage metadata changed beyond its actual revision date')
++    page = Page(old['index.html'].decode('utf-8'))
++    return {
++        'version': 1, 'base_commit': BASE, 'base_tree': TREE, 'paths': changes,
++        'pages': {'home': {'old': old_home, 'new': new_home}},
++        'base_output_count': len(base_outputs), 'base_output_fingerprint': fingerprint(base_outputs),
++        'base_source_count': len(base_sources), 'base_source_fingerprint': fingerprint(base_sources),
++        'base_home_links': sorted({a['href'] for a in page.tags('a') if 'href' in a}),
++        'base_home_ids': sorted({a['id'] for _, a in page.elements if 'id' in a}),
++        'protected_source_hashes': {p: digest(old[p]) for p in PROTECTED},
++    }
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--write', action='store_true', help='Prepare an unapproved candidate record')
++    parser.add_argument('--base-ref', default=BASE, help='Exported workspaces may name a ref with the exact approved tree')
++    args = parser.parse_args()
++    try:
++        expected = json.dumps(capture(args.base_ref), ensure_ascii=False, indent=2) + '\n'
++        path = ROOT / '_tests/homepage-growth-change.json'
++        if args.write:
++            path.write_text(expected, encoding='utf-8')
++        elif path.read_text(encoding='utf-8') != expected:
++            raise ValueError('The committed compatibility record does not reproduce')
++        print('PASS: exact six-file homepage delta; no historical baseline overwritten.')
++    except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as error:
++        raise SystemExit('Homepage capture failed: ' + str(error))
+diff --git a/_reports/website-growth/turn-02-homepage.md b/_reports/website-growth/turn-02-homepage.md
+new file mode 100644
+index 0000000..14e1590
+--- /dev/null
++++ b/_reports/website-growth/turn-02-homepage.md
+@@ -0,0 +1,53 @@
++# Website growth: Turn 02 homepage selection
++
++October 17, 2026. Engineering release candidate; use the pull request and deployed-file receipt for final publication status. Actual visitor clarity and growth remain unmeasured.
++
++## Reader-facing change
++
++The homepage now has one primary selection, in this order:
++
++| Purpose | Destination | What a visitor can do |
++|---|---|---|
++| Use a free tool | `/technology/task-brief/` | Define a task, finish line, boundaries and checks before asking AI |
++| Inspect a recorded case | `/technology/checking-ai-website-changes/` | Inspect a real defect, its repair and the limits of the checks |
++| Understand the approach | `/notes/keep-the-judgment/` | Read the argument for keeping purpose and judgment in human hands |
++
++The former overlapping practical-work invitation and extra answer-checking paragraph are consolidated into this selection and a native **More tools and reading** disclosure. All previous homepage links remain available, including the calculator, fictional hand review and weekly-reset worksheet. All previous fragment IDs survive. The secondary disclosure can open by keyboard without JavaScript.
++
++The four sections retain their established order. Technology still starts with the task brief; Living Well now starts with the weekly-reset guide rather than its worksheet collection; Poker now starts with first-live-tournament preparation rather than a calculator; Creative Work still starts with its creative brief. The two former first-step destinations remain in the secondary links.
++
++## Boundaries
++
++Nolan's name, introduction, personal biography, brand statement, primary navigation, public/private boundaries and existing Start Here page are unchanged. No portrait, credential, testimonial, personal experience or measured time-saving claim was added. The existing recorded website case is not a substitute for Turn 04's new ordinary-task evidence.
++
++No new public URL, JavaScript, form, account, analytics event, third-party service or signup was introduced. Existing analytics and Poker School consent are unchanged. The homepage date reflects its actual revision; no article was redated or republished. The shared first-step stylesheet gains homepage-only layout rules; the Creative page changes only its stylesheet cache token.
++
++## Engineering checks
++
++The production delta is limited to six files: three source/asset inputs, the homepage, the Creative page's stylesheet cache token, and sitemap freshness. The new test-only history adapter reverses only whole-file SHA-256 matches and verifies both offsets and restored hashes. It keeps older release records intact. Independent tests compare all 222 previous generated outputs and all 487 previous source/asset/download files after only this exact delta. Unknown edits remain visible.
++
++The same suite checks all former homepage destinations and anchors, the three distinct primary choices, four first actions, private-boundary preservation, and false or corrupt history records. Browser regressions cover keyboard disclosure, all primary destinations, script-free reading, and reflow with 200% root text size plus increased text spacing. Existing real-HTTP first-step and practical-work journeys are updated to follow the new visible routes, including opening the secondary group before visiting the calculator.
++
++Useful commands:
++
++```sh
++python _scripts/build.py --check
++python _tests/check_html5.py
++python _scripts/check_search.py
++python -m unittest discover -s _tests -p 'test_*.py' -v
++python _tests/browser.py
++python _tests/first_steps_browser.py
++python _tests/practical_discovery_browser.py
++```
++
++`capture_turn02.py` reproduces the new compatibility record from the pinned parent. Its default is read-only; `--write` is only for preparing an unapproved candidate before review. No earlier `*-baseline.json` or `*-change.json` is refreshed. The normal full Site checks and published-response checks remain mandatory. Offline browser rendering is not a substitute for the runner's real URL-journey tests.
++
++## Human check still needed
++
++Ask three to five people unfamiliar with the site: What does Nolan do? What would you open first, and why? What do you expect to get from that page? Can you find another interest without assistance?
++
++Record their actual words and obstacles privately, not in this public repository. Do not describe this engineering pass as a proven increase in comprehension, visitors, conversion or brand recognition. No participant observation has been completed in this turn.
++
++## Next turn
++
++Turn 03 strengthens the existing AI task brief with three clearly illustrative examples and better output readability. It should reuse this homepage entry point rather than adding a second generator or another homepage card.
