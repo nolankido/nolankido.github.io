@@ -1,0 +1,506 @@
+{
+  "version": 1,
+  "base_commit": "9021d4604c9427c37dc6c788753ddf9675dfc7ba",
+  "paths": {
+    ".github/workflows/site-checks.yml": {
+      "old_sha256": "bf50014108faf6c3e039f3e71ffbd005ad02112a73a02b07d1a6e4cf03aeeade",
+      "new_sha256": "0cca1c4731e3a4fc3bbf92ba825b0a66b466165d4ec07069c10586ee0c1dcd75",
+      "edits": [
+        {
+          "start": 1218,
+          "end": 1273,
+          "old": "",
+          "new": "          node --check assets/poker-school-interest.js\n"
+        }
+      ]
+    },
+    "_reports/poker-search-intent/evaluate.py": {
+      "old_sha256": "bfc59e991cbd7fdd3f5f052e5d94ed77b833b21e8fdb3978cfc91ca14e2333b5",
+      "new_sha256": "c5e1d7679856b2405557417dbb4551faf8179206c09b57090783bc556558e5bf",
+      "edits": [
+        {
+          "start": 624,
+          "end": 670,
+          "old": "",
+          "new": "import poker_school_history as school_history\n"
+        },
+        {
+          "start": 5906,
+          "end": 6014,
+          "old": "):\n    if sum((baseline, prior_release, titles_release, study_list",
+          "new": ", progress_release=False):\n    if sum((baseline, prior_release, titles_release, study_list_release, progress"
+        },
+        {
+          "start": 6588,
+          "end": 6766,
+          "old": "",
+          "new": "    if progress_release:\n        index_text = school_history.before('poker/find/index.html', index_text)\n        script = school_history.before('assets/poker-finder.js', script)\n"
+        },
+        {
+          "start": 7991,
+          "end": 8011,
+          "old": "",
+          "new": "or progress_release "
+        },
+        {
+          "start": 9106,
+          "end": 9227,
+          "old": "",
+          "new": "    parser.add_argument('--progress-release', action='store_true', help='Replay the frozen pre-School progress release')\n"
+        },
+        {
+          "start": 9472,
+          "end": 9512,
+          "old": "",
+          "new": ", progress_release=args.progress_release"
+        },
+        {
+          "start": 9893,
+          "end": 10003,
+          "old": "",
+          "new": "        elif args.progress_release:\n            target = ROOT / '_reports/poker-progress/search-results.json'\n"
+        },
+        {
+          "start": 10061,
+          "end": 10067,
+          "old": "progress",
+          "new": "school"
+        },
+        {
+          "start": 10257,
+          "end": 10282,
+          "old": "",
+          "new": " or args.progress_release"
+        },
+        {
+          "start": 10444,
+          "end": 10501,
+          "old": "",
+          "new": "        target.parent.mkdir(parents=True, exist_ok=True)\n"
+        }
+      ]
+    },
+    "_reports/search-audit.json": {
+      "old_sha256": "61901a54cfae7fd4fb1ba3ea8927bc8b77b357c2cf16ff4e7663027e2760dc9a",
+      "new_sha256": "3c4b659f624840b53f6edbdd191e77009b9247681936cfd72c9afbb2878ecae9",
+      "edits": [
+        {
+          "start": 111,
+          "end": 139,
+          "old": "3,\n  \"breadcrumb_pages\": 191",
+          "new": "4,\n  \"breadcrumb_pages\": 192"
+        },
+        {
+          "start": 202,
+          "end": 257,
+          "old": "8,\n  \"unique_titles\": 193,\n  \"unique_descriptions\": 193",
+          "new": "9,\n  \"unique_titles\": 194,\n  \"unique_descriptions\": 194"
+        }
+      ]
+    },
+    "_scripts/build.py": {
+      "old_sha256": "f7b6211e33fca03aee3b2676f035742053bb5e624a8d55276a9e9151f8ae9347",
+      "new_sha256": "255ff3b38c8e2c08637f3e8042d920eb11eb0b580867db355f9f1057f11020f6",
+      "edits": [
+        {
+          "start": 18055,
+          "end": 18584,
+          "old": "",
+          "new": "        if p['id'] == 'poker-school':\n            interest_version = hashlib.sha256((ROOT / 'assets/poker-school-interest.js').read_bytes()).hexdigest()[:12]\n            extra += f'\\n  <script src=\"/assets/poker-school-interest.js?v={interest_version}\" defer></script>'\n        if p['id'] == 'poker-school':\n            school_css_version = hashlib.sha256((ROOT / 'assets/poker-school.css').read_bytes()).hexdigest()[:12]\n            extra += f'\\n  <link rel=\"stylesheet\" href=\"/assets/poker-school.css?v={school_css_version}\">'\n"
+        }
+      ]
+    },
+    "_scripts/check_live.py": {
+      "old_sha256": "c1f257331600d65b0dae475346e1a62b41c0c28787e8e8fa3bc4c3cad8c3cb1f",
+      "new_sha256": "5817f9f6e612fc3d1c621302c01098dad9fda2052aa08674836f819728003c58",
+      "edits": [
+        {
+          "start": 3834,
+          "end": 3911,
+          "old": "",
+          "new": "    assets += ['assets/poker-school.css', 'assets/poker-school-interest.js']\n"
+        }
+      ]
+    },
+    "_source/pages.json": {
+      "old_sha256": "678b3332707359e5f225629235ba09b004b02cfec5183ce0cf8443e70bdc5e0a",
+      "new_sha256": "d6c89048d171fa355d7e72e4b0e091e3db55780b10fd581581a177a2f282260f",
+      "edits": [
+        {
+          "start": 8048,
+          "end": 8537,
+          "old": "",
+          "new": "  },\n  {\n    \"id\": \"poker-school\",\n    \"path\": \"/poker/school/\",\n    \"title\": \"Poker School is in development.\",\n    \"seo_title\": \"Poker School: A Practical Hold’em Course in Development | Nolan Kido\",\n    \"description\": \"Explore a proposed beginner Hold’em course, keep the free Poker Foundations lessons, and request occasional course availability updates.\",\n    \"kicker\": \"Poker / Future learning\",\n    \"source\": \"poker/school.html\",\n    \"section\": \"poker\",\n    \"updated\": \"2026-10-16\"\n"
+        }
+      ]
+    },
+    "_source/poker/home.html": {
+      "old_sha256": "d607115e26e31c1ee1718d6e0e927f5e898188c6d87c75a6ace6813093528465",
+      "new_sha256": "bf85092a3c9debff2025c871d7528edae071a2ac45f5da9ce8883bf32e7389ff",
+      "edits": [
+        {
+          "start": 1190,
+          "end": 1230,
+          "old": "",
+          "new": "</a><a href=\"#poker-school\">Poker School"
+        },
+        {
+          "start": 3386,
+          "end": 4343,
+          "old": "",
+          "new": "</div>\n</section>\n<section class=\"section folio-row\" id=\"poker-school\" aria-labelledby=\"poker-school-preview-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Future / Guided learning</p></div>\n  <div class=\"section-content\"><p class=\"reader-eyebrow\">In development / Optional</p><h2 id=\"poker-school-preview-title\" class=\"section-title\">A more guided way to learn.</h2><p>I'm exploring a future Poker School course with original narrated hand walkthroughs, connected practice and a clearer path from the first cards to following a live game. The free Poker Foundations lessons are not moving behind a paywall.</p>\n  <div class=\"link-row\"><a class=\"text-link\" href=\"/poker/school/\">See the proposed course and request updates</a><a class=\"text-link\" href=\"/poker/free-poker-learning-path/\">Keep learning for free</a></div>\n  <p class=\"small-copy\">The course is not available to purchase. Launch date, pricing and curriculum are not confirmed.</p>"
+        }
+      ]
+    },
+    "_source/poker/study.html": {
+      "old_sha256": "8903b4b6413379b1556f6e16624d50ffe469ab46aba81d264f1e0a16981027dc",
+      "new_sha256": "bd6d547fe0e7d2563d244c01052c86dfba5c8c4b9f5ade121f19cc216033d27f",
+      "edits": [
+        {
+          "start": 13654,
+          "end": 14242,
+          "old": "",
+          "new": "</section>\n\n<section class=\"section folio-row\" aria-labelledby=\"poker-study-school-note\">\n  <div class=\"section-meta\"><p class=\"section-label\">Optional / More guided learning</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-study-school-note\">Looking for a guided course later?</h2><p>These study tools remain free and private. A future Poker School course is being explored, with no paid release announced. <a href=\"/poker/school/\">See the provisional plan or request occasional course emails</a>. No study record is sent when you follow that link.</p></div>\n"
+        }
+      ]
+    },
+    "find/index.html": {
+      "old_sha256": "1c9ed5bf1c1f7adc07b4035ac7a8aaafd457793f2c1acfcaa6fd020a6f50555a",
+      "new_sha256": "5ab646e7ceaa95ce5a71d8140366a2f0ca287eb37a48f58ed3300ca4c6322208",
+      "edits": [
+        {
+          "start": 55301,
+          "end": 55302,
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "start": 81114,
+          "end": 81635,
+          "old": "",
+          "new": "</p></li><li class=\"find-item\" data-kind=\"collection\" data-interests=\"poker\" data-search-title=\"Poker School: A Practical Hold’em Course in Development | Nolan Kido\"><p class=\"find-kind\">Collection / reference <span aria-hidden=\"true\">/</span> <span class=\"find-subjects\">Poker</span></p><h3><a href=\"/poker/school/\">Poker School is in development.</a></h3><p class=\"find-description\">Explore a proposed beginner Hold’em course, keep the free Poker Foundations lessons, and request occasional course availability updates."
+        },
+        {
+          "start": 113217,
+          "end": 116313,
+          "old": "viewer-learning-title\",\"What brought you to the table?\",\"in-depth-title\",\"Read in depth.\",\"online-resources-title\",\"The poker web, organized by subject.\",\"full-study-title\",\"Find a passage. Check a calculation.\",\"after-play-title\",\"Turn one answer into useful practice.\",\"poker-comics-title\",\"Learn the game in pictures.\",\"poker-stories-title\",\"Poker with Nolan.\",\"poker-approach-title\",\"Useful context, not a promise of certainty.\"],\"comics/\":[\"intro\",\"Poker, one panel at a time.\",\"next\",\"Keep learning.\"],\"comics/learn-no-limit-holdem/\":[\"rules\",\"Rules notes\",\"text\",\"Text version\",\"next\",\"What comes next?\"],\"comics/poker-hand-rankings/\":[\"rules\",\"Before using this as a reference\",\"text\",\"The rankings, strongest to weakest\",\"compare\",\"The category comes first\"],\"comics/one-hand-four-streets/\":[\"rules\",\"A few details to keep straight\",\"text\",28],\"comics/best-five-cards-win/\":[\"rules\",\"Count five cards, every time\",\"text\",28,\"practice\",\"Does the kicker count?\"],\"comics/why-acting-last-helps/\":[\"rules\",\"The button acts last after the flop\",\"text\",28,\"practice\",\"What can you do with that information?\"],\"comics/good-decision-bad-river/\":[\"rules\",\"A result is not a verdict on the decision\",\"text\",28,\"practice\",\"Review the hand before judging yourself\"],\"reviewing-a-hand/\":[\"record\",\"First, preserve the situation.\",\"decision\",\"Pause at one decision.\",\"assumptions\",\"Separate the record from the interpretation.\",\"alternatives\",\"Compare the alternatives before choosing a verdict.\",\"after-the-session\",\"After the session: revisit the explanation, not the memory.\",\"review-sheet\",\"Leave one useful next step.\",\"reader-next-heading\",26],\"start-here/\":[\"quick-start\",\"Follow the hand in three passes.\",\"situation\",\"Read the situation first.\",\"action\",\"Follow the action, one street at a time.\",\"terms\",\"A few terms worth knowing.\",\"interpretation\",\"Keep three kinds of information separate.\",\"viewer-library\",\"Find the explanation you need.\",\"after-play-workshops-title\",\"Move from following the action to checking the reasoning.\"],\"study/\":[\"study-intro\",\"What do you need for this study session?\",\"progress-heading\",\"Your next Poker Foundations task.\",\"study-routes-title\",\"Choose the explanation your record needs.\",\"hand-review-title\",\"The hand-review sheet\",\"session-debrief-title\",\"The session-debrief sheet\",\"field-study-title\",\"A useful note starts before the analysis.\",\"collection-study-title\",\"A route through the wider resource library.\",\"workshops-title\",\"Workshops and three Decision Labs.\",\"creator-workbench-title\",\"A smaller study cycle and a clearer episode.\",\"study-limits\",\"A worksheet is not the verdict.",
+          "new": "poker-school-preview-title\",\"A more guided way to learn.\",\"viewer-learning-title\",\"What brought you to the table?\",\"in-depth-title\",\"Read in depth.\",\"online-resources-title\",\"The poker web, organized by subject.\",\"full-study-title\",\"Find a passage. Check a calculation.\",\"after-play-title\",\"Turn one answer into useful practice.\",\"poker-comics-title\",\"Learn the game in pictures.\",\"poker-stories-title\",\"Poker with Nolan.\",\"poker-approach-title\",\"Useful context, not a promise of certainty.\"],\"school/\":[\"school-overview-title\",\"From your first hand to your first live game.\",\"school-plan-title\",\"A course built around doing, not collecting articles.\",\"school-free-paid-title\",\"The free course stays free.\",\"school-interest-title\",\"Ask for occasional course updates.\",\"school-questions-title\",\"What this would, and would not, offer.\"],\"comics/\":[\"intro\",\"Poker, one panel at a time.\",\"next\",\"Keep learning.\"],\"comics/learn-no-limit-holdem/\":[\"rules\",\"Rules notes\",\"text\",\"Text version\",\"next\",\"What comes next?\"],\"comics/poker-hand-rankings/\":[\"rules\",\"Before using this as a reference\",\"text\",\"The rankings, strongest to weakest\",\"compare\",\"The category comes first\"],\"comics/one-hand-four-streets/\":[\"rules\",\"A few details to keep straight\",\"text\",28],\"comics/best-five-cards-win/\":[\"rules\",\"Count five cards, every time\",\"text\",28,\"practice\",\"Does the kicker count?\"],\"comics/why-acting-last-helps/\":[\"rules\",\"The button acts last after the flop\",\"text\",28,\"practice\",\"What can you do with that information?\"],\"comics/good-decision-bad-river/\":[\"rules\",\"A result is not a verdict on the decision\",\"text\",28,\"practice\",\"Review the hand before judging yourself\"],\"reviewing-a-hand/\":[\"record\",\"First, preserve the situation.\",\"decision\",\"Pause at one decision.\",\"assumptions\",\"Separate the record from the interpretation.\",\"alternatives\",\"Compare the alternatives before choosing a verdict.\",\"after-the-session\",\"After the session: revisit the explanation, not the memory.\",\"review-sheet\",\"Leave one useful next step.\",\"reader-next-heading\",26],\"start-here/\":[\"quick-start\",\"Follow the hand in three passes.\",\"situation\",\"Read the situation first.\",\"action\",\"Follow the action, one street at a time.\",\"terms\",\"A few terms worth knowing.\",\"interpretation\",\"Keep three kinds of information separate.\",\"viewer-library\",\"Find the explanation you need.\",\"after-play-workshops-title\",\"Move from following the action to checking the reasoning.\"],\"study/\":[\"study-intro\",\"What do you need for this study session?\",\"progress-heading\",\"Your next Poker Foundations task.\",\"study-routes-title\",\"Choose the explanation your record needs.\",\"hand-review-title\",\"The hand-review sheet\",\"session-debrief-title\",\"The session-debrief sheet\",\"field-study-title\",\"A useful note starts before the analysis.\",\"collection-study-title\",\"A route through the wider resource library.\",\"workshops-title\",\"Workshops and three Decision Labs.\",\"creator-workbench-title\",\"A smaller study cycle and a clearer episode.\",\"study-limits\",\"A worksheet is not the verdict.\",\"poker-study-school-note\",\"Looking for a guided course later?"
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "old_sha256": "97a10717e703bcb98f81659c8e9a0dd6336a0c129ce6b003512f5f963223fed1",
+      "new_sha256": "759854823d6ef0bd312ac2e431d389107672a38b47551708a72fe0fb14da3416",
+      "edits": [
+        {
+          "start": 11263,
+          "end": 11264,
+          "old": "4",
+          "new": "5"
+        },
+        {
+          "start": 12509,
+          "end": 13362,
+          "old": "",
+          "new": "</p><button type=\"button\" class=\"finder-save\" aria-pressed=\"false\" hidden>Add to study list</button></article>\n<article class=\"reader-card finder-card\" data-finder-card data-id=\"poker-school\" data-kind=\"guide\" data-free=\"true\" data-topics=\"\" data-search-title=\"Poker School: A Practical Hold’em Course in Development | Nolan Kido\" data-search=\"Poker School is in development. Explore a proposed beginner Hold’em course, keep the free Poker Foundations lessons, and request occasional course availability updates. Poker / Future learning On this site · Section overview\" tabindex=\"-1\"><p class=\"reader-eyebrow\">On this site · Section overview</p><h3><a href=\"/poker/school/\">Poker School is in development.</a></h3><p>Explore a proposed beginner Hold’em course, keep the free Poker Foundations lessons, and request occasional course availability updates."
+        },
+        {
+          "start": 985856,
+          "end": 985857,
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    "poker/index.html": {
+      "old_sha256": "83ea4da2006a8b014bf75a84a57e83942512ddd59dc2df79c26c317b5315d197",
+      "new_sha256": "18fabb782ed58b0bb268a6ed31f85fca6ba0965a11623b80334076f3469d37d5",
+      "edits": [
+        {
+          "start": 7669,
+          "end": 7709,
+          "old": "",
+          "new": "<a href=\"#poker-school\">Poker School</a>"
+        },
+        {
+          "start": 10833,
+          "end": 11790,
+          "old": "",
+          "new": "</div>\n</section>\n<section class=\"section folio-row\" id=\"poker-school\" aria-labelledby=\"poker-school-preview-title\">\n  <div class=\"section-meta\"><p class=\"section-label\">Future / Guided learning</p></div>\n  <div class=\"section-content\"><p class=\"reader-eyebrow\">In development / Optional</p><h2 id=\"poker-school-preview-title\" class=\"section-title\">A more guided way to learn.</h2><p>I'm exploring a future Poker School course with original narrated hand walkthroughs, connected practice and a clearer path from the first cards to following a live game. The free Poker Foundations lessons are not moving behind a paywall.</p>\n  <div class=\"link-row\"><a class=\"text-link\" href=\"/poker/school/\">See the proposed course and request updates</a><a class=\"text-link\" href=\"/poker/free-poker-learning-path/\">Keep learning for free</a></div>\n  <p class=\"small-copy\">The course is not available to purchase. Launch date, pricing and curriculum are not confirmed.</p>"
+        }
+      ]
+    },
+    "poker/study/index.html": {
+      "old_sha256": "adb7a6fde258ea841ac870bef8fde84c1acd7ae266b5a66e5e73e181f14fdf77",
+      "new_sha256": "33b86084413af26603b369b1e3a087066f7fb0adeefff844c715dc75525ec2be",
+      "edits": [
+        {
+          "start": 42240,
+          "end": 42828,
+          "old": "",
+          "new": "</section>\n\n<section class=\"section folio-row\" aria-labelledby=\"poker-study-school-note\">\n  <div class=\"section-meta\"><p class=\"section-label\">Optional / More guided learning</p></div>\n  <div class=\"section-content\"><h2 class=\"section-title\" id=\"poker-study-school-note\">Looking for a guided course later?</h2><p>These study tools remain free and private. A future Poker School course is being explored, with no paid release announced. <a href=\"/poker/school/\">See the provisional plan or request occasional course emails</a>. No study record is sent when you follow that link.</p></div>\n"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "ea04f6c54fadfafcc86eae6766d9f044aca676f360df39b1cbc571508c110eff",
+      "new_sha256": "0a459e09a545572f3e45884a0634c29bf916e9557f40202a289fe4ec7287e16d",
+      "edits": [
+        {
+          "start": 1631,
+          "end": 1733,
+          "old": "",
+          "new": "  </url>\n  <url>\n    <loc>https://nolankido.com/poker/school/</loc>\n    <lastmod>2026-10-16</lastmod>\n"
+        }
+      ]
+    }
+  },
+  "new_files": {
+    "_scripts/poker_school_release.py": "f6a1a6b0682fc93c350620e07f31110e40f37c9ab714bc7b06630bf5b0e2e02a",
+    "_source/poker/school.html": "cb379e037909ffa40bc220ed132faa245f539b9d67bd95d98d5804659a701111",
+    "assets/poker-school-interest.js": "29e21d3192cf87ecb3d22f545dc275620b929817d3943fd2f8201597555be8a3",
+    "assets/poker-school.css": "34e472faa988f39cd95201cc8aec677cb8d5883a3a03f07af76e64f81ce8a821"
+  },
+  "new_outputs": {
+    "poker/school/index.html": "22f5e94178f5e7031d60b343ac98e1f91bddab585c711e30539ebd94049dba61"
+  },
+  "new_pages": [
+    {
+      "id": "poker-school",
+      "path": "/poker/school/",
+      "title": "Poker School is in development.",
+      "seo_title": "Poker School: A Practical Hold’em Course in Development | Nolan Kido",
+      "description": "Explore a proposed beginner Hold’em course, keep the free Poker Foundations lessons, and request occasional course availability updates.",
+      "kicker": "Poker / Future learning",
+      "source": "poker/school.html",
+      "section": "poker",
+      "updated": "2026-10-16"
+    }
+  ],
+  "base_outputs": {
+    "index.html": "8bea0eb52feb2f1ac25de0ff1a240d4703870db537aa0a3847390bca4c2ba3f5",
+    "start-here/index.html": "b1d6ec8ee2d4240fa10a085a741663dfa514fb9c038fbba8ebadc03bea8eb07c",
+    "find/index.html": "1c9ed5bf1c1f7adc07b4035ac7a8aaafd457793f2c1acfcaa6fd020a6f50555a",
+    "follow/index.html": "32c6c9bbe6d39bd3b7169707cd483f12ac291f5897052dc05d03486545147bef",
+    "about/index.html": "175c05b6bec604c8f56613214cdb65b50db4b3b86d86bf653724ddafcaf2bc93",
+    "notes/index.html": "39d2aa8d18ee951e5e5992819c0b3f5719b3d89c106cafcf23f5fbce173151a0",
+    "resources/index.html": "764e77b8d8d758a479e4e1a9fc89aa48ee87ab0c7baf5ad640f6560bc6944432",
+    "contact/index.html": "b555091e2e9618d6acc1894efc473dabac26c2db8a6b46abc2c913ad879f809a",
+    "bio/index.html": "c0ad60c0b9e3748a4acd87dc8d8ef631c44d0446bac61b0e9f9d7110b9dc31f4",
+    "card/index.html": "239cb11a0b783f6bc3d19f05a37f0eee27ae23e33382337fec84932bda34b7bc",
+    "privacy/index.html": "68c38ed9fe96f37451444da7345b27f8750a2c2a704faa658dd16e641d31f21c",
+    "404.html": "8fca39553cf5b383c8017faca2526eff12a918749ba003e41716879900d3b8b8",
+    "notes/trustworthy-tools/index.html": "ba1f7b7ed78819733c378baa73f02270b0925bdd6a972c6e3cafa5a465b75203",
+    "notes/decision-quality/index.html": "eeb2a8466671d00188632ee55d8f0479c0f982545113143c47e18c3657329db3",
+    "notes/learning-from-the-beginning/index.html": "adf5f5caaca9412210502c6993028292e97c283460ed353062bf136b9b5d38d7",
+    "notes/generous-explanations/index.html": "1a29019deaa6a7102b0b253799aaca760aef10a186a5f3924905db887c51b366",
+    "notes/finishing-is-a-decision/index.html": "c7f55005e792387d54fb291789f54a6586dfd3e7e3139f508f661ccfb11bad8a",
+    "poker/index.html": "83ea4da2006a8b014bf75a84a57e83942512ddd59dc2df79c26c317b5315d197",
+    "poker/comics/index.html": "2a1b7c42b42d2898aff8883506175adba8f5531dff773d00f91a51ab57a73cb0",
+    "poker/comics/learn-no-limit-holdem/index.html": "8c2c5a6fbd7ee258112ffaca89070908677f9ea60246176dbc70b911a9e437b0",
+    "poker/comics/poker-hand-rankings/index.html": "b0ec55ef11cf36d7d8662ce1044a2acf30b31eb404252bc4768a9b49adcff085",
+    "poker/comics/one-hand-four-streets/index.html": "15ef9476372fe5ed815832c2cfb1b91448daf6707cae558b221c92cab01cd542",
+    "poker/comics/best-five-cards-win/index.html": "2ae41db4756a9a6b530f17d94b8654c33b3f7c615a00ba58f700dd9f12cf9592",
+    "poker/comics/why-acting-last-helps/index.html": "d47318bf61406eaf57b932a6990af8777a37dfeb815b57f1cec27d45371a4a76",
+    "poker/comics/good-decision-bad-river/index.html": "7f10d63a5fc382aac1147b7e7b9fb7eca9e430d6dbf807eafb81dd899affc808",
+    "poker/reviewing-a-hand/index.html": "e7fc1634124d8f01f95156b0983d6d20e62d17037d3c42eba789047b7b9a8bf3",
+    "technology/index.html": "b53cbfa867f4cc28a8ef1ccea457d70ee1401d8861a1e432b67da900cca5d96c",
+    "creative/index.html": "3318513542bb83ce48ea4c2f953677253f483c3d5517c150fffd9c3d5d97be12",
+    "poker/start-here/index.html": "467eaf14c0a8a6bb8dba19c4b2561cea6e809b4a74739289f99506d493f90867",
+    "poker/study/index.html": "adb7a6fde258ea841ac870bef8fde84c1acd7ae266b5a66e5e73e181f14fdf77",
+    "poker/holdem-basics/index.html": "8a82300afc8708900028dfd8e57b723d390252228c3d54204a61fc1e6e6e004c",
+    "poker/hand-rankings/index.html": "72cab8bc367222234a80f55c9e5fae8a2d1c0a4805cd2d5fce62d393a2f6ead6",
+    "poker/betting-and-pots/index.html": "546ac1c49567c7aefe1d56a70b28eeffff061f89a7ac4839607179c01c24b4c4",
+    "poker/tournaments/index.html": "7f27a7ecf4f57e647f07f9b1ec0fdd2ecde47ac5f2ebb4279ffa3bb0eeb941da",
+    "poker/poker-math/index.html": "f4761876ec938b7e26de56c5c132c6660d252808d551a51d0c253979bad5f05b",
+    "poker/glossary/index.html": "d89f97cae757251913c4829af84589346bceb41af4a05d864d1a41e3dd037969",
+    "poker/viewer-questions/index.html": "cbff38768e73d23afb26047847e6f506e5fe563c010c2f6a02427ab70e524cfa",
+    "poker/position-and-stacks/index.html": "ec362076f63d136a16b8d4eb1b7747892e3a8d4a287d1ca70590df6541878153",
+    "poker/reading-the-board/index.html": "19548bd527a7a844da3831cd0bb7a8a1ca1c211b5fd1afbd1a52023d09579dbe",
+    "poker/ranges-and-bets/index.html": "af09b607107ce07762b3b855e76576c6a0b9e8f53fd52e4cd435710477824c86",
+    "poker/tournament-formats/index.html": "785afdd5484fa4b412ea36101b30064bc039967728faedc953872e3f63e6deae",
+    "poker/table-etiquette/index.html": "b2ece8b32ac3199bf38589b5e5e9833601661df720e3ea0ef8b7c40cc2591a0c",
+    "poker/follow-along/index.html": "62244d238edc35f2a324dd8a2bdb8da9b65cba03e9dbd683f8a21a7d0957d685",
+    "poker/pot-odds-workshop/index.html": "fd28983cf72a9c48a42a0e60c0931ff240eba8e31e84851f45a1b00ea595e1a4",
+    "poker/short-stack-decisions/index.html": "5a57c98393a2582397037e75090b5d0137a51123255eb5b569037fe6546d4f6b",
+    "poker/tournament-equity/index.html": "1f76f0a055c0acade6e543e2b2f808bbfbd401d787fc72ada04dd87d2da02a4c",
+    "poker/range-combinations/index.html": "34f934c062b649abee290180f10449a8b7a550012995425fdf0391f83c002ab6",
+    "poker/variance-and-results/index.html": "9df45150bde4d967227b18d57f9d23bb52895b7ee36d70ea35243220ec7b5f9d",
+    "poker/hand-to-vlog/index.html": "17efeabe9b7c70c89ded81081df4795518ba2e1aff4f2e9a376e83c5cdd40b71",
+    "poker/practice-room/index.html": "ef00ed09db6026074aa965d95022045f61c3aa6b59181f805deec0b337a088eb",
+    "poker/library/index.html": "4ebb9d51eec2d7e788f9d03f7fc09633b36002f6c9f9f43073cafe623286d9ac",
+    "poker/decision-lab/index.html": "9f10a2890d7855abb277554e1b171a65fde156ce01793f0a5e08e9466a4834f7",
+    "poker/flush-and-redraw/index.html": "1916e315dd6a66b39675cbbde28199b4a6fb17a1cf48b5ff1af234e7ba36f416",
+    "poker/side-pot-lab/index.html": "8dd1da653d4377ef199747a2f7bb4e3ccf66716a797b99849df260bff1661006",
+    "poker/decision-labs/index.html": "1b467ee224f01dca0045a206bea0b73660f03b4e9de525890e98fdc8a69e2770",
+    "poker/resources/index.html": "481cd242a4d6bf1ccf017f88f8d945fe68cdb5fab94015aab4ae02483fd3b830",
+    "poker/first-live-tournament/index.html": "1ee0a1647827901c18a0b0b4384686a41ef8706328bf34747bdbaf0e6a77c9fb",
+    "poker/choosing-a-tournament/index.html": "73a27f978f2143a51c93c81fe7bab7cebef1589cbdbf74bc8e46df7c9aad2293",
+    "poker/registration-and-reentry/index.html": "60eb30107ba68b88957e014e343b93854d8bf3be4b03c05e9151c7950dbf2989",
+    "poker/tournament-day/index.html": "c3f0d34c1b9f975dc2c6a8394b903df3749cddc69ab35be3c7510ee21e7314c8",
+    "poker/recording-hands/index.html": "cc9ede56642c930d1d75449feac4e9b46e4135eed6526896d3a782c1f6b327ea",
+    "poker/choosing-study-tools/index.html": "caa046b0f988e1174f5a6f52791262d2bbe7fd127e4001cd4b0831b0ec621ec3",
+    "poker/evaluating-poker-advice/index.html": "5f76882f73d867e1ad7f4f5209db28dd3c725668b8c3f50d065357759fa01525",
+    "poker/live-tournament-guide/index.html": "41d32476f860aeb93a4cacc95ba55c45a280aad1c74c5ea75f100671b4ce2e47",
+    "poker/tournament-checklists/index.html": "9846f21bdc6626111b7903ba3359305eff13f6e0619cbf1e8926c9ee71d8e5c8",
+    "poker/free-poker-learning-path/index.html": "0171191be048092bac27bf1e9504cdaa90f3b166822424ecaa392480b80feb02",
+    "poker/cash-game-study/index.html": "dcb17c2eb5a4f4ff88da76af59479a861f5490bf9805bdaae0888c6a6eef4930",
+    "poker/omaha-and-mixed-games/index.html": "b0f31a12670a7afafdc5475ce70a9b24f651a0903226bdcde8f245d5d2b4a12b",
+    "poker/poker-books-and-courses/index.html": "4e2cc7051b4f13087f5c2a6b50309c154c350d05b6b074ee90e384d05a4344bb",
+    "poker/poker-research-guide/index.html": "fdf5f5c719da9cac9e3573b7e10ee3f5c812b6aea000bd6a3d35e30d687e033a",
+    "poker/resource-collections/index.html": "cc206a0d155ce608f03623192a5975fe5694bc26e94c84112b1a62aeb438f684",
+    "poker/poker-math-reference/index.html": "67f653dd0f1452a1af4ee2095882c7d1066583363611a5f74cdd2d496417e898",
+    "poker/reading-preflop-charts/index.html": "2816f5cf0d7e54eeb43a050de126a3cb448d5f260eec19edd4a9bbac1226f7ab",
+    "poker/poker-rules-and-fair-play/index.html": "62b218525c9c98d0864e4e16464fffdacfe156a9c1eb53e2bf2c6eaeb0ecd3cf",
+    "poker/find/index.html": "97a10717e703bcb98f81659c8e9a0dd6336a0c129ce6b003512f5f963223fed1",
+    "poker/topics/index.html": "ac7d827187740f8fdd42efae9c4653b5d3ec4e955db03f5de56a7dd382168c22",
+    "poker/omaha-hi-lo-workshop/index.html": "0c6de897e52c39c150bc4a3031ec23991ecceebc0df47a34586ea03b3253771b",
+    "poker/stud-and-lowball-workshop/index.html": "11d9f464f7ed87116fd2ab54e2c72dc5aa7030377b76ef0180b4d6b97794e5eb",
+    "poker/multiway-pot-workshop/index.html": "5468129dde1dc4fe861d5df63a7265caca226cace16a002cd15e91d4eb0bdcd2",
+    "poker/poker-media-study/index.html": "d72ffeeac2d4c0b6c9918f814d2d71cb9be16c796e3a64f86b3ccce84694a2b5",
+    "poker/poker-access-and-protection/index.html": "07ddcde3a3e66b4510c19566529ebaa89b661b0998e178aee34ec1e6fb20c9cb",
+    "poker/study-calculators/index.html": "cdff20d7c007ff3bc1887e3d35e8e97b110923aff54c02dd7510c721228a8b56",
+    "poker/resource-quality/index.html": "27a98a08e9e07b12ef04e618e01fb6bc650dedadd863d95dbe15e9c4d0d479a3",
+    "poker/first-live-cash-game/index.html": "f75304f1f0332bceb59d76e49bd9fe6447c41ad67d57f6c74d63d0f87b6a2ce1",
+    "poker/cash-game-costs/index.html": "26ee87dc8024e5cedc5157ccf61757d0010ee37bcb9619679be1c113dd6b4619",
+    "poker/cash-game-study-path/index.html": "4deb8a3b36ea7551b2da94b2001989d83ae1f9f8934e0440475536d505e35a2f",
+    "notes/keep-the-judgment/index.html": "6441a23a7b2a1956c5b9542e47a7a11535f41584cbb891b264869d4f057346cb",
+    "technology/task-brief/index.html": "c96ebb56369452d7d1de04d187cbeb32480db16890c22eb560d7ecbb83852f6c",
+    "technology/ai-time-savings/index.html": "0a573d5000d41c94ad9e91ec62bdfb0c30460d77d5405d2193b92a64031406db",
+    "technology/checking-ai-website-changes/index.html": "5b564ee1ec3eb6f409cbba0951fef9f822b2b70bfe6a864b808c22c881280208",
+    "technology/check-ai-summary/index.html": "5636e0becb3faead64e90442c8a6e2ab88ceff65644c8f6469ed5cb45df35953",
+    "technology/should-i-use-ai/index.html": "f26063649f7784ad72d8cce666795cc1cb84d2032ae272c507744133532813f1",
+    "technology/check-ai-answers/index.html": "0dd7628a26e5f5538ad50767b597cdb7e0f902d9b7eefb4e509fab33298c27b0",
+    "poker/first-decisions/index.html": "afdec99a263f3310a53b41df3a6b0b9e690e15db232ec718c46a956b302c6ac1",
+    "poker/starting-hand-decisions/index.html": "5bcd2ea08ca12183714b80d3d002d17d1b7f373d1c0f384f64951c199b6e237c",
+    "poker/first-flop-decisions/index.html": "2ff08b0cf39e26ba6418436649add8f22a5971f13a103dc0adb3b348a0c45c72",
+    "poker/turn-and-river-decisions/index.html": "63e44c01cd11011895f7eb9169554783b5f4156a126bb7b320963b09484c1179",
+    "poker/ranges-for-beginners/index.html": "e96c5f7e4688e50c62fee866fb16cbd50f8d271aede115d45e10d83598449b0e",
+    "poker/betting-with-a-purpose/index.html": "5dc9fe9c644ae25c14741a11b17e532a2fe38e883b1142f4b920782008bb824c",
+    "poker/beginner-checkpoint/index.html": "10e39decb49aa966475134da6af84fd54b930b7a660077bfe63102367ad3b28a",
+    "poker/no-limit-holdem-guide/index.html": "8ddded8cf7980526cceaf438bac706cb8bf64f00adf4625b7c22b56f145f6c0a",
+    "poker/poker-under-uncertainty/index.html": "ae4ca5320ba6c9ae87b0f72810dedf2c98b2caa93002e008f2166c7801e342bc",
+    "poker/getting-started/index.html": "a820ebe3d582aed59779590b300dc164c0f7a5af7aef2923c0b59249d6ee98ff",
+    "poker/tournament-trip-budget/index.html": "1065e0a1c1257a84d61c3fc65c3e9620ee7ca4d928a1d8d947d95b139d9c6cd5",
+    "poker/thunder-valley-poker-guide/index.html": "87fb626229d83ff6bc065f499939475e23ec8be6935608bbeeb13732e94d527e",
+    "poker/limped-multiway-pots/index.html": "6b4252b1a62ceedd37abdc2e017077814f8dad71a98e316f76ad1e3053cc8218",
+    "poker/beginner-practice/index.html": "c955be0fda5865ea4453591849e83d36b0f74f7eae5e1871bf204aaa4e2c838c",
+    "poker/topics/learn/index.html": "d51be014aa4958615df96b679cca5d7c5a44f2d9b9a0ab09bd55dea84fb22c35",
+    "poker/topics/cash-games/index.html": "874127f222f396ad6da2c9f880e53d38f2799411364b17a52e0f3527263c08f7",
+    "poker/topics/tournaments/index.html": "3265e762e0afcd39e2a7dc1763f1e2b9212bf1b2ed7d6545c138278fd0cd40b9",
+    "poker/topics/strategy/index.html": "b2847288b265b90c75b57cd7bd06ae9d492c319a79c9a62e7cb825f923538114",
+    "poker/topics/variants/index.html": "b938926b18c78537906d12c0fee518a74b9ee30a7010b47d587ad55c8d521419",
+    "poker/topics/study/index.html": "13aec59a51fe3d36468a013114b55aa22be02f3b38942077d26e7b0e370d2b0d",
+    "poker/topics/places-to-play/index.html": "96ba91e03385aecb9d88815f30bc6460e242b598fbae2367d7110ba97d302017",
+    "poker/topics/poker-world/index.html": "902b2d623c1cbd68889371bca2db674e05166d2a37c713145d7368babd043c22",
+    "poker/topics/research/index.html": "0d83c89d538ea29d2b5b74e872e2cded0401311ccd9478bec4abadbe9b7fad17",
+    "poker/topics/safer-play/index.html": "0a93091ee84dffbdcc65ed8c07fa064898b004bcf12ffd3c3efdd5a2a2ab3456",
+    "living-well/index.html": "b3d0436e6ab4f9aedb1f0e99a9a855e2ba2e12e611264835615a0c28f0b2a928",
+    "living-well/free-resources/index.html": "cc678267b9cc653c414fe88b74d27a699f84770c3c7e151045b3f319e33d3faa",
+    "living-well/ideas/index.html": "765098112dc30cf952a9bcc5f40e0aaba243cff3f2428f018c5b9f7cb76defa4",
+    "living-well/guides/index.html": "2c18e6a6453e1b76fc9ac748d5508297a2e88e8ff3758b8da4d2a9f85a1baaad",
+    "living-well/field-notes/index.html": "7c6cf1c983c45fcbdaefd8ab42e2011963812f5d01ceff2aad35eb7a0f7aee87",
+    "living-well/topics/index.html": "4ff6629b20fc100b27815c96416328a52fd407abf2c12235786799b8c4e6a28a",
+    "living-well/worksheets/index.html": "a8b8c86056e184f9aec78be0791aa4914a7ba93f36e171f927499d71229cc29a",
+    "living-well/conversations/index.html": "4359d588829239ef68458d98429e6beb8cf534d255bce68a3a595e498e9b0974",
+    "living-well/editorial-standards/index.html": "1921dd4ca209142b3e21160ad7bb04ac28947dc118b95f0dda381412bdc7f598",
+    "living-well/sources/index.html": "0a76e20536c1cddf5ce714f12fc606835af76b725d211db3969489461e86282f",
+    "living-well/topics/meaning/index.html": "8e92129aa2770705508db52a6f36c9daa2e5932b88f8fa71a6d3a11a5346cf65",
+    "living-well/topics/attention/index.html": "cdeb785d30cbc15ccf62801b422ff551f9f87f99988d9a564522fd2e547d6c8a",
+    "living-well/topics/everyday-ai/index.html": "9ba69a48c66e36ccc692ba7423a1cae983b3e1a74c36e55d4a19d50b3e2d2182",
+    "living-well/topics/relationships/index.html": "d9e1d567fcdc8e02997ef90573ca562fa6919e0eddfe7e38d5336c308214996f",
+    "living-well/topics/choices/index.html": "cb7db5466dc2565e11cb84318e2d0816ee158677ca8e824dfb5d7a19fb4cb28d",
+    "living-well/what-i-mean-by-living-well/index.html": "d3d6a6273e99985052d460493853612910a6ad23de035a1e64564098aa2b5583",
+    "living-well/spiritually-curious/index.html": "435a7bcd33b9b412fcae302010ee9acb8264a5a238be74541ef2a346067cb3ea",
+    "living-well/time-you-save/index.html": "9d93ed18223ec90277797e182ab4816c039dabccb739ce91ba213666cee8a8df",
+    "living-well/weekly-reset/index.html": "341c903b6d115db024542f2b3001b1d494e493ecdac9b70a94058de7d4ad8763",
+    "living-well/decide-what-matters/index.html": "4a11bb72617b05272e7a932b6698a40a9cfc5c710857d87502b4820e25e548eb",
+    "living-well/preserve-family-story/index.html": "b9eb5a66bfd5ea646796c530fa0d0313dabd5e74fe5bcd00f6e8fb7b983a09e0",
+    "living-well/what-to-decide-yourself/index.html": "4880ef94671f8288cd6f56d8fd8bd2ae1b1faa1c0a0a59373d5be3e15c486624",
+    "living-well/growth-without-self-rejection/index.html": "46a95fefac2c23229b75be71dd21eacdb483d6cfa15d4a9d609e1adc16b4437e",
+    "living-well/ordinary-moments/index.html": "05bb906259d9a1be04a50176ea44b5e4576c6dce300fe734cc1d8d4b1029d9b4",
+    "living-well/ai-generated-reflections/index.html": "b3afeae8e4738774f43533e87f637522d5144ca52c631773cbaa9cded6a0b09b",
+    "living-well/quiet-morning/index.html": "48dce8f0e8c425cc0a6d414e39c5bb68a1280dce57b6228ba7d7871aa9866654",
+    "living-well/documenting-your-life/index.html": "5554386fc53a1fca8eb52c264cdcfa434d4971c7807069ca96b7ac2f118fd118",
+    "living-well/free-afternoon/index.html": "a10697e76be6b2dbafa872f401a39e77288e02046a948540ac7cc1a16acd39b7",
+    "living-well/household-friction/index.html": "9b065188f3ff7b9ce013da82ee27f63811348bba5f642a81a353c2f1aee390a0",
+    "living-well/thoughtful-friend/index.html": "45a5d992d016b2c75711461a569a6d9be6d534e2e6851f9fe9bad5f5fe86b70c",
+    "living-well/two-good-lives/index.html": "d5b19e33d78434fc3df6b91cd6621f6b9a8080f828368ab8e1c091bdb9cea0c9",
+    "living-well/notebook-or-ai/index.html": "92d09a8ebd428fece5368d7fe6db03cca0b44241a039eb4843bf00c303400bfe",
+    "living-well/phone-simplification/index.html": "5fb9523950f5369439c170fec7653343a5f3be04c9909f8212b49fb39f71e392",
+    "living-well/household-experiment/index.html": "c3212d52de7121902ed63873143a9152de5cba3505cfa821b0443bc90e693c63",
+    "living-well/spiritual-curiosity-reading-path/index.html": "e2179eeaae7d37ebf4b928a10e17499378bb8796320d2d95baf1bcbacf074693",
+    "living-well/technology-that-helps-you-notice/index.html": "df1a8c80868aa4849fceec7ce30d334d46672a7b505aaf5cdfc6f61dac918244",
+    "living-well/technology-for-real-life/index.html": "ae1d619c3ab8814c6bf145afd43a4db8b6b6792824dfd99392b68506aae0e3b9",
+    "living-well/scattered-notes-to-next-step/index.html": "54b66df6d9c0e85ce4565b3a234d783231fe913338dcceaa1974b524eded996c",
+    "living-well/shared-plan-people-can-use/index.html": "d47defeeaf005313b9216cc7ea1be0ae8709b301c0ed5712b23016a264a798e3",
+    "living-well/find-the-document-you-need/index.html": "3c64f08626fb9fa33a4978164a8be7f27d4a5c877489c4959a1846dbaf248270",
+    "living-well/rough-idea-to-small-creation/index.html": "253f7f92be88d01b3bb74242058a2e3b51c045b92cfbac6ad6e95524db1308aa",
+    "living-well/make-digital-reading-easier/index.html": "fc6cea845e142fa614b516398d61b6d9bc67ec28685554745cc930096bc09a1d",
+    "living-well/reflection-with-your-judgment-intact/index.html": "4a9a0ec741a9e1a54ef786d9586af39b3592c9372ecffa625a8c0ccaff90c17f",
+    "living-well/did-the-tool-actually-help/index.html": "54721c4203fa8957f0c9adf9e3eb44bcc60f542c2f559ec406680742626e1d63",
+    "living-well/meditation-without-buying-a-lifestyle/index.html": "f51f2a48d083934996d0efb530124972ff70fb39b896e0508b5605464e75d681",
+    "living-well/consciousness-which-question/index.html": "7a153c94266f1b93fcbb9a5e6c53e0feb0522c7f51adb68e5c31bae2833bf36d",
+    "living-well/a-tool-you-can-put-down/index.html": "4d5383cf5fe7e016fe552820dd7f8b009a6c50c2bc21a21cf21c61c624da77c1",
+    "living-well/learning-with-ai-without-skipping-understanding/index.html": "50adc2e9517bd99083eebbfc1913d3afb12a6fe52ca3872bc6b1ca11ebb832fa",
+    "living-well/read-a-poem-without-a-lesson/index.html": "2e69374c41ddbff4d409c8738a71e7a85bfc320e18f59716374a91ebf79f7e3c",
+    "living-well/ai-and-personal-productivity/index.html": "b7f1eea5dcc83299802dcbebb4950b55dc90463bd3106fa4f0ff95e510d5fb15",
+    "living-well/free-resources/meaning/index.html": "5d64b0b7a49a26255f391b94aa34b19e3b1453bbacec93c65957c992aa2672f1",
+    "living-well/free-resources/attention/index.html": "d5bd66a15f6bb0784d8ceac8aa542456f70b7f4681ffeec3b1668562783aa62a",
+    "living-well/free-resources/everyday-ai/index.html": "631d68e169eba2c50942825e17273c5de91f1cb4ac4256ff87e8924214242f8c",
+    "living-well/free-resources/world/index.html": "5ec6a3aa106fe36a5d7fea9956cd23acd44393bf1b54c7e89b4b55a8cfa76da8",
+    "living-well/free-resources/care/index.html": "d3ee4d0779a6cd00872e370f007995dda01f026b0019860bb92b3569971d652e",
+    "living-well/free-resources/thinking/index.html": "40ffeb0986f056e1f500f699a537d27662165d2320d9e63f790a18f014334748",
+    "living-well/free-resources/traditions/index.html": "184f26e1afd7357e0b4fc2119002c07e67908efe0743e68f347bff011e80edad",
+    "living-well/free-resources/learning/index.html": "f21bca2d5d92e3fb5f01752ca3a400188d7756848765945ddd83c6bfa0e974c0",
+    "living-well/free-resources/books-creativity/index.html": "5c4c04530247095d819dfa16e1854ad20a73a5dd36c91f15aa9237617f69f8b1",
+    "living-well/free-resources/digital-life/index.html": "4a19f2fcd86d8d5ec28b2d43a4c3a09d9a443539d8ebcdd406feb49bffbfec16",
+    "living-well/free-resources/everyday-tools/index.html": "7d3a7e8061c2ff639833761e1e0d615d6f45f704aeb22049b186b6888a47543c",
+    "living-well/free-resources/contribution/index.html": "af04a336cbf63d01799804442515a5cccd9b4e23a98a77d65657b8d72e58e864",
+    "living-well/free-resources/notes-documents/index.html": "5a6c2072daf5d25285a3aeaa5a4fd3b49f0ce8ec1982382e5d772acfdbd145fb",
+    "living-well/free-resources/reading-access/index.html": "d9e65f7c9dd40612bf5de59dc1136eb49e01c35f56ee7e5d375211fe15434821",
+    "living-well/free-resources/creative-tools/index.html": "cde645e32e0650a217ebe5080e1d032166014c5128d6dc03443b17d9bb85f88c",
+    "living-well/free-resources/files-recovery/index.html": "b155e40c1e1903086c07288c7682bd9c160a3391dc14bf3811123e5f0267fb54",
+    "living-well/find/index.html": "483206dc6408d3dc31c9f003b2fdf9951868209046c8d66df1b25c144137cb80",
+    "living-well/tasks/organize-notes/index.html": "e050742189467d6b8e8deca5c874a840c4e0be62f27d392f209c1d0d9d79bda7",
+    "living-well/tasks/find-a-document/index.html": "247e196b0bdc4f02b8590cd42bd11f16151e84d0752041d05b122f27ecaf9717",
+    "living-well/tasks/read-and-understand/index.html": "aad536a90f7c492a8c51be9bb8a803b50abf7bb644e98446f1c156d665d1c0b5",
+    "living-well/tasks/share-and-coordinate/index.html": "aa6399b87e86abac8b7fafd964e2b7ef2f9ec6c2609f41e10ad10a1aae095448",
+    "living-well/tasks/make-something/index.html": "b88a978e19ff3851e77e945aec8ff5abeeca168a351685ad21ff1f7084cdafad",
+    "living-well/tasks/protect-and-recover/index.html": "c79068213bc8e467993fdaf48c88100695e94e01981ca911c233f0d400d9cc33",
+    "living-well/tasks/learn-and-reflect/index.html": "fa49bf8067d6eaba804708a4ad50c987e2ea3885dea801d3d35ed3adbe6e4275",
+    "living-well/tasks/help-and-connect/index.html": "dc1ea528331db167f99f9aa0ef41b64154e56cb86625a0a3f159b6cafb0599a1",
+    "living-well/tasks/notice-the-world/index.html": "e05834006e57e80db91e36bb1dc22ffee9d40e5572f16259c42be90945cc9af2",
+    "feed.xml": "ba511115cc593966c73c95ffe05839e54eb4616286ff98c171c275ae4db13924",
+    "sitemap.xml": "ea04f6c54fadfafcc86eae6766d9f044aca676f360df39b1cbc571508c110eff",
+    "downloads/poker-resource-directory.json": "80519d584ab95e5816fb88f3a4fd4b6d9201dabbfb8fe0e49c616bcd0676f8eb",
+    "downloads/poker-resource-directory.md": "74b3aa9f96500339656d9743669cecb5d473b7c8ba75846d2b245b2e9401d4eb",
+    "downloads/poker-math-reference.md": "f43b50dc4a9345ef509fc54ea716a3b0196469c276158969ae3385757702473b",
+    "downloads/poker-beginner-study-card.txt": "7030f58baf1b7354af3183fe8cf284eab4efb4a541ca6d4976ab0f3e48f4d058",
+    "poker/feed.xml": "106c8c61469fde1af7bdfc148796320fe2e1651b65937dd955472a4233f8256d",
+    "downloads/living-well-weekly-reset.md": "4a13a34cdab57295918642f61461a2c44698868c76c520f6708c9850d37bd7f3",
+    "downloads/living-well-values-before-advice.md": "683f03905f9fc03c3c501a6141a2b1e3381d2e613059e59b39d21adb2f61e685",
+    "downloads/living-well-family-story.md": "fc672e9cbd9fb80b9c546f82f6fd5333cf0af31e4ba338e54482d5772686bd9d",
+    "downloads/living-well-small-experiment.md": "e3d37e3f0e9cb4175c5bde55baf20d61475d454bfc3075d43c92a566e1637124",
+    "downloads/living-well-attention-check.md": "5eddb32ade07f6c5ed481add9e2a864a474232ff74de46037d9eab993e120dd9",
+    "downloads/living-well-scattered-notes-to-next-step.txt": "5ebd39e74645bfd669f568fcba0f2de02664d3a7b65c8fd27ba3689902aff8d9",
+    "downloads/living-well-shared-plan-people-can-use.txt": "9e41863ada25ac9dbf6798246864984c11e81a2184103dd49bf66ec6a58277d7",
+    "downloads/living-well-find-the-document-you-need.txt": "6039f5a1c964ad6e2c9fe579ce0302e81ff085feaebbeff8eb4bb75781becb8a",
+    "downloads/living-well-rough-idea-to-small-creation.txt": "e4bbc3dcc8b4ce7a2b89a5993a35cf2a676fc9d83b09c7e7a477a0248b2f8702",
+    "downloads/living-well-make-digital-reading-easier.txt": "5dc9ad1b4baae6e8f8e6e77d9b95be2c6aa50afe1d3e94f9acacdc50fde5fe5c",
+    "downloads/living-well-reflection-with-your-judgment-intact.txt": "e715b8f849eabf2d18830d4f853f8d781c9b13a10c9f10b8b2790916b342b6f8",
+    "downloads/living-well-did-the-tool-actually-help.txt": "183192a71f463187be4352b5f0d8648d1ecfafba3aa7cd95a592409906d2876f",
+    "living-well/feed.xml": "bb266e64ccf63dc8aea65cfe4267492062051d46b0359e91942dd4f52e60d9d3",
+    "technology/feed.xml": "a82be078634ff137f6e18cf485e48d2af6b74b7066479656c2168b9c136184f6",
+    "writing.xml": "61c234ae5a1ae796c3ccb36925f604114df2e9f27ff165739ad0dec51b8ff586",
+    "nolan-kido.vcf": "066d198ba3277e3c7614a4571e9ad67e2099f9eb08f5e4976a74fea462621f9d",
+    "downloads/nolan-kido-short-bio.txt": "6e8fe94abda0bccc526a685ed0efab4281da560e8713e07dd004c1c2d19e0b3b",
+    "downloads/nolan-kido-long-bio.txt": "999bb2b2039f08d00d49af9f3b4a296068aca615dde7a3698d24935d17baad94",
+    "downloads/practical-ai-workbook.txt": "c793d8d20e0006f522d081d34b901cc97d5bb741c2dd4861e2eceb20b8966e23",
+    "assets/site-core.css": "10383d71aabb5f4fcba8b133a1cb34c22851ccf148b7ff8760dacde2aaf1a648",
+    "assets/site-fonts.css": "e5da049df0af15fc3a53872b32149dc015e6183b4561d40082b2921b9c3580f4"
+  },
+  "base_source_count": 483,
+  "base_source_fingerprint": "faad060bef00b21d6fca688c1007c980b095e8eec0a6167b70145e86d9656222",
+  "base_pages_fingerprint": "c86b62abe9659006e9a4e98c2ab6663d60d8361792dd8cafe917ccd4b985ec4d"
+}

@@ -1,8 +1,8 @@
 """Offline additive Poker School release guard.
 
 The frozen Git blob inventory comes from main commit 9021d46. This module
-rejects undeclared new/removed/changed files, preserving all prior source
-and output bytes. The guard never authorizes publication by itself.
+rejects undeclared path changes. Exact prior content is independently checked
+by test_poker_school_history. This guard alone never authorizes publication.
 """
 import hashlib
 import json
@@ -13,45 +13,64 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "9021d4604c9427c37dc6c788753ddf9675dfc7ba"
 FROZEN = "_reports/poker-school-main-blobs.json"
 MODIFIED = frozenset((
-    "_scripts/build.py",
-    "_scripts/check_live.py",
-    "_source/pages.json",
-    "_source/poker/home.html",
-    "_source/poker/study.html",
-    "_tests/browser.py",
-    "_tests/test_checkpoint.py",
-    "_tests/test_content.py",
-    "_tests/test_getting_started.py",
-    "_tests/test_hand_lab.py",
-    "_tests/test_learning_path.py",
-    "_tests/test_local_fonts.py",
-    "_tests/test_multiway_essay.py",
-    "_tests/test_poker_course.py",
-    "_tests/test_poker_practice.py",
-    "_tests/test_poker_progress.py",
-    "_tests/test_practical_navigation.py",
-    "_tests/test_round_practice.py",
-    "_tests/test_short_stack_flagship.py",
-    "_tests/test_site.py",
-    "_tests/test_thunder_valley.py",
-    "_tests/test_tournament_budget.py",
-    "_tests/test_uncertainty.py",
-    "find/index.html",
-    "poker/find/index.html",
-    "poker/index.html",
-    "poker/study/index.html",
-    "sitemap.xml",
+    '.github/workflows/site-checks.yml',
+    '_reports/poker-search-intent/evaluate.py',
+    '_reports/search-audit.json',
+    '_scripts/build.py',
+    '_scripts/check_live.py',
+    '_source/pages.json',
+    '_source/poker/home.html',
+    '_source/poker/study.html',
+    '_tests/browser.py',
+    '_tests/choice_history.py',
+    '_tests/local_fonts_history.py',
+    '_tests/poker_progress_history.py',
+    '_tests/position_maps_history.py',
+    '_tests/rules_reference_history.py',
+    '_tests/test_checkpoint.py',
+    '_tests/test_content.py',
+    '_tests/test_getting_started.py',
+    '_tests/test_hand_lab.py',
+    '_tests/test_learning_path.py',
+    '_tests/test_local_fonts.py',
+    '_tests/test_multiway_essay.py',
+    '_tests/test_poker_course.py',
+    '_tests/test_poker_practice.py',
+    '_tests/test_poker_progress.py',
+    '_tests/test_poker_search_intent.py',
+    '_tests/test_poker_search_titles.py',
+    '_tests/test_practical_navigation.py',
+    '_tests/test_round_practice.py',
+    '_tests/test_search_public_titles.py',
+    '_tests/test_search_sections.py',
+    '_tests/test_short_stack_flagship.py',
+    '_tests/test_site.py',
+    '_tests/test_study_list_release.py',
+    '_tests/test_thunder_valley.py',
+    '_tests/test_tournament_budget.py',
+    '_tests/test_uncertainty.py',
+    'find/index.html',
+    'poker/find/index.html',
+    'poker/index.html',
+    'poker/study/index.html',
+    'sitemap.xml',
 ))
 ADDED = frozenset((
-    "_reports/poker-school-offer.md",
-    "_reports/poker-school-release-gate.md",
-    "_reports/poker-school-main-blobs.json",
-    "_scripts/poker_school_release.py",
-    "_source/poker/school.html",
-    "_tests/test_poker_school.py",
-    "_tests/test_poker_school_release.py",
-    "assets/poker-school-interest.js", "assets/poker-school.css",
-    "poker/school/index.html",
+    '_reports/poker-school-main-blobs.json',
+    '_reports/poker-school-offer.md',
+    '_reports/poker-school-release-gate.md',
+    '_reports/poker-school/capture_history.py',
+    '_reports/poker-school/search-results.json',
+    '_scripts/poker_school_release.py',
+    '_source/poker/school.html',
+    '_tests/poker-school-change.json',
+    '_tests/poker_school_history.py',
+    '_tests/test_poker_school.py',
+    '_tests/test_poker_school_history.py',
+    '_tests/test_poker_school_release.py',
+    'assets/poker-school-interest.js',
+    'assets/poker-school.css',
+    'poker/school/index.html',
 ))
 PROTECTED = (
     "assets/contact.js", "_source/privacy.html",
@@ -91,7 +110,10 @@ def verify(base, current):
 
 
 def audit(root=ROOT):
-    frozen = json.loads((root / FROZEN).read_text(encoding="utf-8"))
+    raw_inventory = (root / FROZEN).read_bytes()
+    if hashlib.sha256(raw_inventory).hexdigest() != '3b04cb26ffe77c204ecc2c00cfc9477aa4147730e6eadb35293416030f2b779e':
+        raise ValueError("The pinned original inventory changed")
+    frozen = json.loads(raw_inventory)
     if frozen.get("version") != 1 or frozen.get("base_commit") != BASE:
         raise ValueError("Wrong baseline revision")
     base = frozen.get("tracked_base_blobs")

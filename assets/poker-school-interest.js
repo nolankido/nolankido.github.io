@@ -243,12 +243,12 @@
     }
     if (!form.reportValidity()) return;
     if (form.elements.namedItem('_honeypot').checked) {
-      showError('The form could not be submitted. Copy your message before reloading the page.');
+      showError('The request could not be submitted. Note your email address and selected request before reloading the page.');
       return;
     }
     if (!token || performance.now() - tokenTime >= 270000) {
       if (token) resetChallenge();
-      showError('Please let the anti-spam check finish, then select Send message again. Use Retry verification if it cannot finish.', true);
+      showError('Please let the anti-spam check finish, then select ' + buttonLabel() + ' again. Use Retry verification if it cannot finish.', true);
       return;
     }
     const value = name => form.elements.namedItem(name).value.trim();
@@ -298,11 +298,11 @@
       success.focus();
     } catch (failure) {
       if (failure.name === 'AbortError' || !failure.status || failure.status >= 500 || failure.status === 408) {
-        showError('We could not confirm whether the message was accepted. Your text is still here. Check your connection before retrying; another attempt could send a duplicate.');
+        showError('We could not confirm whether your request was accepted. Your email address and selections are still here. Check your connection before retrying; another attempt could send a duplicate.');
       } else if (failure.status === 429) {
-        showError('The service is receiving too many requests. Keep this page open and try again later. Your message is still here.');
+        showError('The service is receiving too many requests. Keep this page open and try again later. Your email address and selections are still here.');
       } else {
-        showError('The message was not accepted. Please complete a fresh verification check and try again. Your message is still here.');
+        showError('The request was not accepted. Please complete a fresh verification check and try again. Your email address and selections are still here.');
       }
       token = '';
     } finally {

@@ -41,7 +41,7 @@ class HandLabTests(unittest.TestCase):
         b = self.baseline
         self.assertEqual((b['commit'],len(b['pages']),len(b['outputs']),len(b['files'])), ('dd80b250369b61da19220f23c58324c2936dfd8f',193,221,468))
         self.assertEqual(history.pages(self.pages), b['pages'])
-        self.assertEqual(len(self.pages),193)
+        self.assertEqual(len(self.pages),194)
         previous = history.outputs(self.outputs)
         self.assertEqual(set(map(str, previous)),set(b['outputs']))
         for path,text in previous.items():

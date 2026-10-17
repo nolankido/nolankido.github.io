@@ -3,6 +3,7 @@ from copy import deepcopy
 from functools import lru_cache
 from hashlib import sha256
 import json
+import poker_school_history
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,7 @@ def change():
 
 
 def before(path, data):
+    data = poker_school_history.before(path, data)
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode()
     item = change()['paths'].get(str(path))
@@ -28,6 +30,7 @@ def before(path, data):
 
 
 def pages(records):
+    records = poker_school_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[p['id']]['old'])
             if p['id'] in pairs and p == pairs[p['id']]['new'] else deepcopy(p)
@@ -35,12 +38,14 @@ def pages(records):
 
 
 def source_records(records):
+    records = poker_school_history.source_records(records)
     added = change()['new_files']
     return {p: raw for p, raw in records.items()
             if added.get(str(p)) != sha256(raw).hexdigest()}
 
 
 def files(paths):
+    paths = poker_school_history.files(paths)
     def keep(path):
         key = Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
         return change()['new_files'].get(key) != sha256((ROOT / path).read_bytes()).hexdigest()

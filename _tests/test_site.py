@@ -61,6 +61,7 @@ class SiteTests(unittest.TestCase):
             self.assertNotRegex(self.outputs[path], r'\$\{[a-z_]+\}')
 
     def test_all_internal_links_assets_and_fragments(self):
+        target_ids = {}
         for path, page in self.pages.items():
             for tag, attrs in page.elements:
                 for key in ['href', 'src']:
@@ -78,7 +79,9 @@ class SiteTests(unittest.TestCase):
                     with self.subTest(page=str(path), link=attrs[key]):
                         self.assertTrue(target.is_file(), str(target))
                         if url.fragment and target.suffix == '.html':
-                            ids = [a.get('id') for _, a in Page(target.read_text()).elements]
+                            if target not in target_ids:
+                                target_ids[target] = {a.get('id') for _, a in Page(target.read_text()).elements}
+                            ids = target_ids[target]
                             if target == ROOT / 'poker/find/index.html' and '=' in url.fragment:
                                 # Finder fragments encode finite editorial filters, never queries.
                                 pairs = parse_qsl(url.fragment, keep_blank_values=True)
