@@ -78,12 +78,20 @@ try:
             for parent in ['/', '/technology/', '/resources/', '/notes/', '/find/']:
                 page.goto(base + parent)
                 a = page.locator('a[href="' + ROUTE + '"]').first
+                # Open the native disclosure before activating its secondary link.
+                if parent == '/':
+                    details = page.locator('details.practical-home')
+                    expect(details).not_to_have_attribute('open', '')
+                    page.locator('#practical-home-title').focus()
+                    page.keyboard.press('Enter')
+                    expect(details).to_have_attribute('open', '')
                 # The site finder intentionally keeps its native browse groups folded.
                 if parent == '/find/':
                     if page.locator('#browse-technology').get_attribute('open') is None:
                         page.locator('#browse-technology summary').focus()
                         page.keyboard.press('Enter')
-                a.focus(); page.keyboard.press('Enter')
+                expect(a).to_be_visible()
+                a.focus(); expect(a).to_be_focused(); page.keyboard.press('Enter')
                 expect(page).to_have_url(base + ROUTE)
                 report['entry_journeys'] += 1
             for parent in [ROUTE, '/resources/']:
