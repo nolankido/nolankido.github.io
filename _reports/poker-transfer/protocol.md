@@ -12,16 +12,16 @@ Give one new case per consenting adult beginner, matched to the lesson they were
 
 | Anonymous session code | Skill | Case ID | Participant section |
 | --- | --- | --- | --- |
-| P01 | S1 | S1-A | [S1-A](participant-cards.md#s1-a-flop-wager-after-a-preflop-payment) |
-| P02 | S2 | S2-B | [S2-B](participant-cards.md#s2-b-a-two-player-flop-after-a-button-raise) |
-| P03 | S3 | S3-A | [S3-A](participant-cards.md#s3-a-private-and-shared-cards-on-the-flop) |
-| P04 | S4 | S4-B | [S4-B](participant-cards.md#s4-b-river-bet-holding-pocket-sevens) |
-| P05 | S5 | S5-A | [S5-A](participant-cards.md#s5-a-three-candidate-river-holdings) |
-| P06 | S6 | S6-B | [S6-B](participant-cards.md#s6-b-a-river-bet-with-two-possible-responses) |
-| P07, optional | S1 | S1-B | [S1-B](participant-cards.md#s1-b-big-blind-facing-a-raise) |
-| P08, optional | S2 | S2-A | [S2-A](participant-cards.md#s2-a-action-after-a-button-call) |
+| P01 | S1 | S1-A | [S1-A](cards/S1-A.md) |
+| P02 | S2 | S2-B | [S2-B](cards/S2-B.md) |
+| P03 | S3 | S3-A | [S3-A](cards/S3-A.md) |
+| P04 | S4 | S4-B | [S4-B](cards/S4-B.md) |
+| P05 | S5 | S5-A | [S5-A](cards/S5-A.md) |
+| P06 | S6 | S6-B | [S6-B](cards/S6-B.md) |
+| P07, optional | S1 | S1-B | [S1-B](cards/S1-B.md) |
+| P08, optional | S2 | S2-A | [S2-A](cards/S2-A.md) |
 
-Only show the **assigned** case, never this allocation table, the answer-bearing [self-study version](self-study.md), the key or any other case. Ask about earlier exposure to both the specific prompt and similar poker exercises. Do not call a prompt unfamiliar solely because the card pair is new.
+Open only the **one-case file** linked in the assignment table (or copy only that single case into a separate document), never the combined participant packet or this allocation table on a participant-controlled screen. Never show the answer-bearing [self-study version](self-study.md), the key or another case. Ask about earlier exposure to both the specific prompt and similar poker exercises. Do not call a prompt unfamiliar solely because the card pair is new.
 
 ## One session, with assistance labeled
 
@@ -30,7 +30,7 @@ Only show the **assigned** case, never this allocation table, the answer-bearing
 3. Record any facilitator hint, navigation assistance, repair link or prompt repetition separately, in sequence. An assisted answer is not an independent answer. If the participant chooses not to continue, stop.
 4. After the first explanation is recorded, use only the matching section of [facilitator-key.md](facilitator-key.md) to identify supported / error / not demonstrated for its three proposed reasoning points. An incorrect reason with a correct number remains an explanation error. If an unreviewed flaw is found, flag and stop using that item until corrected and reviewed.
 5. Allow the person to view the precise repair on the public lesson and attempt an explanation again if desired. Record this as assisted, not as new independent transfer evidence. Preserve the original first-response outcome.
-6. Optional later follow-up can use the participant's unused paired form only if separately consented and reviewed. Record exact interval, new exposures, hints and case identity. An immediately repeated prompt is not retention testing. Without genuine later observations, leave all later-follow-up fields blank.
+6. Optional later follow-up can use the participant's unused paired form only if separately consented and reviewed. **Make a new full private [session-form.md](session-form.md) copy for that case**, linked by anonymous participant code. Record all three reasoning points independently on the new form, along with exact interval, prior and new exposures, hints and case identity. An immediately repeated prompt is not retention testing. Without genuine later observations, leave all later-follow-up fields blank.
 
 ## Aggregation and limits
 

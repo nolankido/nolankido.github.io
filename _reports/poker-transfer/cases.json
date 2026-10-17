@@ -38,6 +38,11 @@
         9,
         7,
         3
+      ],
+      "point_repairs": [
+        "/poker/first-decisions/#best-five",
+        "/poker/first-decisions/#legal-actions",
+        "/poker/first-decisions/#chips-owed"
       ]
     },
     {
@@ -63,7 +68,12 @@
         "The hand cards do not determine the price. The current wager and what you paid on this round do."
       ],
       "misconception": "Adding the full raise total twice or checking against an unmatched wager.",
-      "repair": "/poker/first-decisions/#chips-owed"
+      "repair": "/poker/first-decisions/#chips-owed",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#legal-actions",
+        "/poker/first-decisions/#chips-owed"
+      ]
     },
     {
       "id": "S2-A",
@@ -75,7 +85,7 @@
         "8c"
       ],
       "board": [],
-      "setup": "Six seats clockwise are first, next, cutoff, button, small blind and big blind. You are on the button. First folds, next raises to 7, cutoff calls 7 and you call 7. The small blind folds. The big blind has only posted the blind of 2 and has not acted. Assume no all-ins.",
+      "setup": "Six seats clockwise are first, next, cutoff, button, small blind and big blind. You are on the button. First folds, next raises to 7, cutoff calls 7 and you call 7. The small blind folds. The big blind posted 2 before the cards were dealt. Assume no all-ins.",
       "prompt": "Who still has an initial decision? Could a raise by that player make you act again? If everyone remaining reaches the flop without a further raise, which seat acts first?",
       "points": [
         "The big blind still has an initial decision; posting a blind was forced, not a choice to call the raise.",
@@ -83,7 +93,12 @@
         "If next, cutoff, button and big blind remain, the big blind acts first after the flop, clockwise left of the button."
       ],
       "misconception": "Assuming the button completes preflop action by calling.",
-      "repair": "/poker/starting-hand-decisions/#position"
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position"
+      ]
     },
     {
       "id": "S2-B",
@@ -95,15 +110,20 @@
         "5s"
       ],
       "board": [],
-      "setup": "Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop. The small blind checks first.",
-      "prompt": "Was the small blind's forced post already their initial decision? Who acts second on the flop, and what does the check allow that a bet would not? Explain the difference between preflop and postflop order.",
+      "setup": "Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop. No action on this flop has been described.",
+      "prompt": "Was the small blind's forced post already their initial decision? Who acts first and who acts second on the flop? If the first player checks, what may the second player do that would be unavailable while facing a bet? Explain the difference between preflop and postflop order.",
       "points": [
         "Posting the small blind does not itself use the player's preflop decision; their later call does.",
         "With only small blind and button active on the flop, the small blind acts first and the button acts second.",
         "Facing a check, the button may check or make a legal bet; there is no unmatched wager to call."
       ],
       "misconception": "Assuming the button is first on the flop or that a check requires a call.",
-      "repair": "/poker/starting-hand-decisions/#position"
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position",
+        "/poker/first-decisions/#legal-actions"
+      ]
     },
     {
       "id": "S3-A",
@@ -134,6 +154,11 @@
         11,
         8,
         2
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#whose-turn"
       ]
     },
     {
@@ -166,6 +191,11 @@
         9,
         7,
         2
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#whose-turn"
       ]
     },
     {
@@ -208,6 +238,11 @@
         10,
         9,
         7
+      ],
+      "point_repairs": [
+        "/poker/turn-and-river-decisions/#river-reset",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#catching-a-bluff"
       ]
     },
     {
@@ -250,6 +285,11 @@
         13,
         12,
         9
+      ],
+      "point_repairs": [
+        "/poker/turn-and-river-decisions/#river-reset",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#catching-a-bluff"
       ]
     },
     {
@@ -302,6 +342,11 @@
         "impossible",
         "weaker",
         "stronger"
+      ],
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/ranges-for-beginners/#known-and-possible",
+        "/poker/ranges-for-beginners/#one-reveal"
       ]
     },
     {
@@ -354,6 +399,11 @@
         "impossible",
         "stronger",
         "weaker"
+      ],
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/ranges-for-beginners/#known-and-possible",
+        "/poker/ranges-for-beginners/#one-reveal"
       ]
     },
     {
@@ -401,6 +451,11 @@
       "expected_comparisons": [
         "weaker",
         "stronger"
+      ],
+      "point_repairs": [
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#takeaway"
       ]
     },
     {
@@ -419,7 +474,7 @@
         "6c",
         "2d"
       ],
-      "setup": "On the river, your opponent checks. In this fictional contrast, suppose a worse holding below folds to your proposed bet of 8 while the stronger holding calls. Their frequencies and all other responses are unknown.",
+      "setup": "On the river, your opponent checks. In this fictional contrast, suppose Candidate 1 below folds to your proposed bet of 8 while Candidate 2 calls. Their frequencies and all other responses are unknown.",
       "candidates": [
         [
           "Kh",
@@ -448,6 +503,11 @@
       "expected_comparisons": [
         "weaker",
         "stronger"
+      ],
+      "point_repairs": [
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#takeaway"
       ]
     }
   ]

@@ -16,7 +16,13 @@ Call: 7 minus 0 already paid = 7 more.
 
 **Likely misconception:** Treating earlier-street chips as credit on this street.
 
-**Exact repair:** https://nolankido.com/poker/first-decisions/#chips-owed
+**Starting repair:** https://nolankido.com/poker/first-decisions/#chips-owed
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/first-decisions/#best-five)
+2. [Point 2 repair](https://nolankido.com/poker/first-decisions/#legal-actions)
+3. [Point 3 repair](https://nolankido.com/poker/first-decisions/#chips-owed)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -32,7 +38,13 @@ Call: 11 minus 3 already paid = 8 more.
 
 **Likely misconception:** Adding the full raise total twice or checking against an unmatched wager.
 
-**Exact repair:** https://nolankido.com/poker/first-decisions/#chips-owed
+**Starting repair:** https://nolankido.com/poker/first-decisions/#chips-owed
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/first-decisions/#chips-owed)
+2. [Point 2 repair](https://nolankido.com/poker/first-decisions/#legal-actions)
+3. [Point 3 repair](https://nolankido.com/poker/first-decisions/#chips-owed)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -46,7 +58,13 @@ Call: 11 minus 3 already paid = 8 more.
 
 **Likely misconception:** Assuming the button completes preflop action by calling.
 
-**Exact repair:** https://nolankido.com/poker/starting-hand-decisions/#position
+**Starting repair:** https://nolankido.com/poker/starting-hand-decisions/#position
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/starting-hand-decisions/#position)
+2. [Point 2 repair](https://nolankido.com/poker/starting-hand-decisions/#position)
+3. [Point 3 repair](https://nolankido.com/poker/starting-hand-decisions/#position)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -60,7 +78,13 @@ Call: 11 minus 3 already paid = 8 more.
 
 **Likely misconception:** Assuming the button is first on the flop or that a check requires a call.
 
-**Exact repair:** https://nolankido.com/poker/starting-hand-decisions/#position
+**Starting repair:** https://nolankido.com/poker/starting-hand-decisions/#position
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/starting-hand-decisions/#position)
+2. [Point 2 repair](https://nolankido.com/poker/starting-hand-decisions/#position)
+3. [Point 3 repair](https://nolankido.com/poker/first-decisions/#legal-actions)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -76,7 +100,13 @@ Computed high-hand vector (category 0 to 8, ranks 2 to 14): `[1,12,11,8,2]`.
 
 **Likely misconception:** Calling four cards a flush or checking through a bet.
 
-**Exact repair:** https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+**Starting repair:** https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing)
+2. [Point 2 repair](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing)
+3. [Point 3 repair](https://nolankido.com/poker/first-flop-decisions/#whose-turn)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -92,7 +122,13 @@ Computed high-hand vector (category 0 to 8, ranks 2 to 14): `[0,13,10,9,7,2]`.
 
 **Likely misconception:** Confusing a promising draw with a made hand or calling a check.
 
-**Exact repair:** https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+**Starting repair:** https://nolankido.com/poker/first-flop-decisions/#made-and-drawing
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing)
+2. [Point 2 repair](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing)
+3. [Point 3 repair](https://nolankido.com/poker/first-flop-decisions/#whose-turn)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -110,7 +146,13 @@ River: 18 before, 6 bet, 6 call, 30 after; fraction 1/5.
 
 **Likely misconception:** Using the pot price as if it were measured winning probability.
 
-**Exact repair:** https://nolankido.com/poker/turn-and-river-decisions/#river-reset
+**Starting repair:** https://nolankido.com/poker/turn-and-river-decisions/#river-reset
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/turn-and-river-decisions/#river-reset)
+2. [Point 2 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
+3. [Point 3 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -128,7 +170,13 @@ River: 30 before, 20 bet, 20 call, 70 after; fraction 2/7.
 
 **Likely misconception:** Using hand category rather than a conditional price and range comparison.
 
-**Exact repair:** https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
+**Starting repair:** https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/turn-and-river-decisions/#river-reset)
+2. [Point 2 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
+3. [Point 3 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -146,7 +194,13 @@ Candidate status in order: impossible, weaker, stronger.
 
 **Likely misconception:** Allowing known cards in an opposing holding or treating a check as proof of weakness.
 
-**Exact repair:** https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
+**Starting repair:** https://nolankido.com/poker/ranges-for-beginners/#known-and-possible
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/ranges-for-beginners/#remove-known-cards)
+2. [Point 2 repair](https://nolankido.com/poker/ranges-for-beginners/#known-and-possible)
+3. [Point 3 repair](https://nolankido.com/poker/ranges-for-beginners/#one-reveal)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -164,7 +218,13 @@ Candidate status in order: impossible, stronger, weaker.
 
 **Likely misconception:** Generalizing a single showdown or ignoring physical card removal.
 
-**Exact repair:** https://nolankido.com/poker/ranges-for-beginners/#remove-known-cards
+**Starting repair:** https://nolankido.com/poker/ranges-for-beginners/#remove-known-cards
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/ranges-for-beginners/#remove-known-cards)
+2. [Point 2 repair](https://nolankido.com/poker/ranges-for-beginners/#known-and-possible)
+3. [Point 3 repair](https://nolankido.com/poker/ranges-for-beginners/#one-reveal)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -182,7 +242,13 @@ Candidate status in order: weaker, stronger.
 
 **Likely misconception:** Concluding that one worse caller guarantees a good value bet.
 
-**Exact repair:** https://nolankido.com/poker/betting-with-a-purpose/#purpose
+**Starting repair:** https://nolankido.com/poker/betting-with-a-purpose/#purpose
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
+2. [Point 2 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
+3. [Point 3 repair](https://nolankido.com/poker/betting-with-a-purpose/#takeaway)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -200,6 +266,12 @@ Candidate status in order: weaker, stronger.
 
 **Likely misconception:** Confusing a fold of a worse hand with profitable bluffing.
 
-**Exact repair:** https://nolankido.com/poker/betting-with-a-purpose/#purpose
+**Starting repair:** https://nolankido.com/poker/betting-with-a-purpose/#purpose
+
+**Repair by reasoning point:**
+
+1. [Point 1 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
+2. [Point 2 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
+3. [Point 3 repair](https://nolankido.com/poker/betting-with-a-purpose/#takeaway)
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.

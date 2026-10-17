@@ -81,6 +81,14 @@ def check():
         assert item["repair"].startswith("/poker/" + item["lesson"] + "/#")
         anchor = item["repair"].split("#")[1]
         assert anchor in REPAIRS[skill]
+        assert len(item.get("point_repairs", [])) == 3
+        for link in item["point_repairs"]:
+            assert isinstance(link, str) and link.startswith("/poker/") and link.count("#") == 1
+            repair_path, repair_anchor = link.split("#")
+            lesson = repair_path.rstrip("/").split("/")[-1]
+            assert lesson in LESSONS
+            repair_source = (ROOT / "_source/poker" / (lesson + ".html")).read_text()
+            assert 'id="' + repair_anchor + '"' in repair_source
         lesson_source = (ROOT / "_source/poker" / (item["lesson"] + ".html")).read_text()
         assert 'id="' + anchor + '"' in lesson_source
         if board:
@@ -124,8 +132,20 @@ def check():
     assert all(case_id in protocol for case_id in assigned)
     assert all("P" + str(n).zfill(2) in protocol for n in range(1, 9))
     assert "T1–T6" in protocol and "not" in protocol.lower()
+    assert all(f"(cards/{case_id}.md)" in protocol for case_id in assigned)
+    assert "new full private" in protocol
     assert "Assigned case (S1-A through S6-B)" in (FOLDER / "session-form.md").read_text(encoding="utf-8")
+    assert "Consent status" in (FOLDER / "session-form.md").read_text(encoding="utf-8")
+    assert "later paired" in (FOLDER / "session-form.md").read_text(encoding="utf-8")
+    assert "Prior similar-problem exposure" in (FOLDER / "summary-form.md").read_text(encoding="utf-8")
     assert all(f"| {case['id']} |" in (FOLDER / "summary-form.md").read_text(encoding="utf-8") for case in items)
+    for case in items:
+        isolated = (FOLDER / "cards" / (case["id"] + ".md")).read_text(encoding="utf-8")
+        assert isolated.count("### ") == 1
+        assert "### " + case["id"] + ":" in isolated
+        assert "one-case" not in isolated or "One fictional case" in isolated
+        assert not any(point in isolated for point in case["points"])
+        assert not any("### " + other["id"] + ":" in isolated for other in items if other is not case)
     for name in ("participant-cards.md", "facilitator-key.md", "self-study.md"):
         body = (FOLDER / name).read_text(encoding="utf-8")
         for case in items:
@@ -136,6 +156,9 @@ def check():
     assert all(p not in participant for case in items for p in case["points"])
     guide = (FOLDER / "facilitator-key.md").read_text()
     assert all(case["misconception"] in guide for case in items)
+    assert guide.count("[Point 3 repair]") == len(items)
+    assert "has not acted" not in items[2]["setup"] and "checks first" not in items[3]["setup"]
+    assert "worse holding below folds" not in items[11]["setup"]
     form = (FOLDER / "review-form.md").read_text()
     for item in items:
         assert form.count("| " + item["id"] + " | unreviewed |") == 1

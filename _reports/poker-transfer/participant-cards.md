@@ -28,7 +28,7 @@ Private cards: 6h, 6c. Shared cards: not dealt.
 
 ### S2-A: Action after a button call
 
-Six seats clockwise are first, next, cutoff, button, small blind and big blind. You are on the button. First folds, next raises to 7, cutoff calls 7 and you call 7. The small blind folds. The big blind has only posted the blind of 2 and has not acted. Assume no all-ins.
+Six seats clockwise are first, next, cutoff, button, small blind and big blind. You are on the button. First folds, next raises to 7, cutoff calls 7 and you call 7. The small blind folds. The big blind posted 2 before the cards were dealt. Assume no all-ins.
 
 Private cards: 9c, 8c. Shared cards: not dealt.
 
@@ -39,11 +39,11 @@ Private cards: 9c, 8c. Shared cards: not dealt.
 
 ### S2-B: A two-player flop after a button raise
 
-Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop. The small blind checks first.
+Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop. No action on this flop has been described.
 
 Private cards: Ac, 5s. Shared cards: not dealt.
 
-**Try without opening an answer:** Was the small blind's forced post already their initial decision? Who acts second on the flop, and what does the check allow that a bet would not? Explain the difference between preflop and postflop order.
+**Try without opening an answer:** Was the small blind's forced post already their initial decision? Who acts first and who acts second on the flop? If the first player checks, what may the second player do that would be unavailable while facing a bet? Explain the difference between preflop and postflop order.
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.
 
@@ -138,7 +138,7 @@ Candidate 2: Ks, 6d.
 
 ### S6-B: A river bet with two possible responses
 
-On the river, your opponent checks. In this fictional contrast, suppose a worse holding below folds to your proposed bet of 8 while the stronger holding calls. Their frequencies and all other responses are unknown.
+On the river, your opponent checks. In this fictional contrast, suppose Candidate 1 below folds to your proposed bet of 8 while Candidate 2 calls. Their frequencies and all other responses are unknown.
 
 Private cards: Ah, 5d. Shared cards: Ac, 9h, 8s, 6c, 2d.
 

@@ -8,20 +8,22 @@ Actual dates/time zone: ______  Consent and storage process (private): ______
 
 Planned recruited: ______  Actual consented: ______  Completed/partial/withdrawn: ______
 
-| Case | Assigned | Independent attempted | Independent explanation supported (all three) | Hint/repair used | Incomplete or skipped | Prior case/key exposure | Notes without identifiers |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| S1-A | | | | | | | |
-| S1-B | | | | | | | |
-| S2-A | | | | | | | |
-| S2-B | | | | | | | |
-| S3-A | | | | | | | |
-| S3-B | | | | | | | |
-| S4-A | | | | | | | |
-| S4-B | | | | | | | |
-| S5-A | | | | | | | |
-| S5-B | | | | | | | |
-| S6-A | | | | | | | |
-| S6-B | | | | | | | |
+| Case | Assigned | Independent attempted | Independent explanation supported (all three) | Hint/repair used | Incomplete or skipped | Prior case/key exposure | Prior similar-problem exposure | Notes without identifiers |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| S1-A | | | | | | | | |
+| S1-B | | | | | | | | |
+| S2-A | | | | | | | | |
+| S2-B | | | | | | | | |
+| S3-A | | | | | | | | |
+| S3-B | | | | | | | | |
+| S4-A | | | | | | | | |
+| S4-B | | | | | | | | |
+| S5-A | | | | | | | | |
+| S5-B | | | | | | | | |
+| S6-A | | | | | | | | |
+| S6-B | | | | | | | | |
+
+Preserve exact-case/key exposure, prior **similar-problem** exposure, and unsure exposure separately. Do not treat a new card combination as proof of unfamiliarity.
 
 Describe specific first-response errors and whether a later explanation changed after a named repair: ______
 

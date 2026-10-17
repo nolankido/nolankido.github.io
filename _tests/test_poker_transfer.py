@@ -19,6 +19,7 @@ class PokerTransferTests(unittest.TestCase):
         self.assertEqual(len(module.LESSONS), 6)
         self.assertIn("separate A/B protocol", text)
         self.assertTrue((ROOT / "_reports/poker-transfer/session-form.md").exists())
+        self.assertEqual(len(list((ROOT / "_reports/poker-transfer/cards").glob("S?-?.md"))), 12)
         for slug in module.LESSONS:
             self.assertTrue((ROOT / "_source/poker" / (slug + ".html")).exists())
 

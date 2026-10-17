@@ -6,6 +6,10 @@ Release commit: ______  Packet/reviewer decision and scope: ______  Date/time an
 
 Anonymous participant code: ______  Assigned case (S1-A through S6-B): ______  Skill: ______
 
+Consent status (confirmed / not confirmed / withdrawn / not recorded): ______  Evidence retained separately (anonymous reference only): ______
+
+Record type: first independent attempt / separately consented later paired-form attempt. If later, paired first-case ID and exact elapsed interval: ______  Intervening learning or exposure: ______
+
 Device, browser and relevant access aids: ______  Lesson seen: ______
 
 Time since last exposure to the lesson, if known: ______  Prior exposure to this exact case: yes / no / unsure
@@ -28,7 +32,7 @@ Any subsequent explanation after assistance (not independent): ______
 
 Time taken and breaks, if measured: ______  Confusion, skipped steps or accessibility issues: ______
 
-Later follow-up (only if actually performed and consented): date/time ______  Paired case ID ______  Interval ______  New exposures ______  Independent result ______  Assistance ______
+For a later paired task, create a separate full copy of this same form and use its three reasoning-point fields. Do not overwrite this case's first-response labels or summarize a later result without its point-by-point record.
 
 Reviewer-identified item flaws or deviations, including case ID and follow-up action: ______
 
