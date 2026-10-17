@@ -87,6 +87,15 @@ class QualifiedReviewRoundTests(unittest.TestCase):
         with self.assertRaises(module.ReviewError):
             module.select("full", "S1-A")
 
+    def test_assembled_reviewer_documents_are_fingerprint_bound(self):
+        for name in ("01-independent-questions.md", "02-facilitator-key.md", "03-review-form.md"):
+            destination = self.base / name.replace(".", "-")
+            module.make_packet(destination, source_commit=TEST_SHA)
+            target = destination / name
+            target.write_text(target.read_text() + "\nUnapproved packet change.\n")
+            with self.assertRaises(module.ReviewError):
+                module.audit_packet(destination)
+
     def test_record_is_exactly_bound_to_a_manifest(self):
         manifest, _ = self.prepare()
         self.assertEqual(manifest["case_source_sha256"],

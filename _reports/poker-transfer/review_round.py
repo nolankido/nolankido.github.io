@@ -74,6 +74,14 @@ def git_head():
     commit = result.stdout.strip()
     if result.returncode or not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ReviewError("Use a Git checkout with a pinned commit for the review pack")
+    scoped = subprocess.run([
+        "git", "status", "--porcelain", "--",
+        "_reports/poker-transfer/cases.json", "_reports/poker-transfer/cards",
+        "_reports/poker-transfer/facilitator-key.md",
+        "_reports/poker-transfer/review_round.py",
+    ], cwd=ROOT, capture_output=True, text=True, check=False)
+    if scoped.returncode or scoped.stdout.strip():
+        raise ReviewError("Commit the review source, key, cards and generator before preparing a packet")
     return commit
 
 
@@ -204,10 +212,16 @@ def make_packet(destination, mode="triage", case_list=None, source_commit=None):
             "question_sha256": sha(card.encode("utf-8")),
             "key_sha256": sha(answer_keys[case_id].encode("utf-8")),
         })
+    rendered_bundles = {
+        "01-independent-questions.md": first_pass(ids, questions).encode("utf-8"),
+        "02-facilitator-key.md": facilitator(ids, answer_keys).encode("utf-8"),
+        "03-review-form.md": review_sheet(ids, mode).encode("utf-8"),
+    }
     manifest = {
         "schema": 1, "status": "draft-human-review-pending",
         "source_commit": source_commit, "case_source_sha256": source_hash,
         "mode": mode, "case_ids": ids, "entries": entries,
+        "bundle_sha256": {name: sha(content) for name, content in rendered_bundles.items()},
         "qualified_review_decision": None, "learner_observations": None,
         "note": "A content hash is not human attestation or publication approval.",
     }
@@ -237,9 +251,8 @@ def make_packet(destination, mode="triage", case_list=None, source_commit=None):
     except OSError:
         pass
     private_write(destination / "manifest.json", manifest_bytes)
-    private_write(destination / "01-independent-questions.md", first_pass(ids, questions).encode("utf-8"))
-    private_write(destination / "02-facilitator-key.md", facilitator(ids, answer_keys).encode("utf-8"))
-    private_write(destination / "03-review-form.md", review_sheet(ids, mode).encode("utf-8"))
+    for filename, content in rendered_bundles.items():
+        private_write(destination / filename, content)
     private_write(destination / "review-record.json", readable(record))
     return {"case_count": len(ids), "mode": mode, "status": "draft-human-review-pending",
             "source_commit": source_commit, "output": str(destination),
@@ -264,6 +277,13 @@ def audit_packet(directory):
         raise ReviewError("Review record no longer matches the generated manifest")
     if record.get("source_commit") != manifest.get("source_commit"):
         raise ReviewError("Review record points to a different material commit")
+    bundles = manifest.get("bundle_sha256")
+    expected_names = {"01-independent-questions.md", "02-facilitator-key.md", "03-review-form.md"}
+    if not isinstance(bundles, dict) or set(bundles) != expected_names:
+        raise ReviewError("The assembled reviewer bundle manifest is incomplete")
+    for filename in expected_names:
+        if sha((directory / filename).read_bytes()) != bundles[filename]:
+            raise ReviewError("An assembled reviewer file was changed: " + filename)
     if len(manifest.get("entries", [])) != len(ids):
         raise ReviewError("Missing case entries in the manifest")
     answer_keys = keys()

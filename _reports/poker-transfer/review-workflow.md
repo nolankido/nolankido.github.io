@@ -16,7 +16,7 @@ Use a two-stage review before inviting people to test the material:
 
 [review_round.py](review_round.py) prepares a case-bound reviewer bundle with the question file separate from the facilitator key, a human-readable case checklist, a blank machine-readable response file, and a manifest of the exact Git commit and SHA-256 fingerprints of case definitions, question text and answer-key sections.
 
-The script runs on the reviewer's own machine with Python 3.12 or later and standard-library modules. It makes **no network requests**, records no observations, and has no ability to publish anything or to create a signature. The recipient can inspect material offline and store any completed review record privately. A SHA-256 digest detects changes to the reviewed material; it cannot authenticate a person's qualifications or signature.
+The script runs on the reviewer's own machine with Python 3.12 or later and standard-library modules. It refuses to prepare material from locally changed case sources, cards, key or generator: commit any proposed corrections first, then generate from a pinned revision. The audit also checks the assembled first-pass questions, answer key and blank review sheet against hashes in the manifest. It makes **no network requests**, records no observations, and has no ability to publish anything or to create a signature. The recipient can inspect material offline and store any completed review record privately. A SHA-256 digest detects changes to the reviewed material; it cannot authenticate a person's qualifications or signature.
 
 From a clone of the repository on the exact commit to review, run:
 
