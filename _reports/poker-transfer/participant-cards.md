@@ -41,7 +41,7 @@ Private cards: 9c, 8c. Shared cards: not dealt.
 
 Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop with at least 30 counters each still behind; neither player is all-in. No action on this flop has been described.
 
-Private cards: Ac, 5s. Shared cards: not dealt.
+Private cards: Ac, 5s. Shared cards: not shown (the flop is dealt).
 
 **Try without opening an answer:** Was the small blind's forced post already their initial decision? Who acts first and who acts second on the flop? If the first player checks, what may the second player do that would be unavailable while facing a bet? Explain the difference between preflop and postflop order.
 

@@ -143,7 +143,7 @@ def check():
         isolated = (FOLDER / "cards" / (case["id"] + ".md")).read_text(encoding="utf-8")
         assert case["setup"] in isolated and case["prompt"] in isolated
         assert "Private cards: " + ", ".join(case["hero"]) in isolated
-        assert "Shared cards: " + (", ".join(case["board"]) or "not dealt") + "." in isolated
+        assert "Shared cards: " + (", ".join(case["board"]) or case.get("board_note", "not dealt")) + "." in isolated
         for n, candidate in enumerate(case.get("candidates", []), 1):
             assert f"Candidate {n}: " + ", ".join(candidate) + "." in isolated
         assert isolated.count("### ") == 1
@@ -162,6 +162,7 @@ def check():
             section = body[start:end if end != -1 else len(body)]
             if name != "facilitator-key.md":
                 assert case["setup"] in section and case["prompt"] in section
+                assert "Shared cards: " + (", ".join(case["board"]) or case.get("board_note", "not dealt")) + "." in section
             else:
                 assert all(point in section for point in case["points"])
             if name != "participant-cards.md":

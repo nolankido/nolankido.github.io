@@ -123,7 +123,8 @@
         "/poker/starting-hand-decisions/#position",
         "/poker/starting-hand-decisions/#position",
         "/poker/first-decisions/#legal-actions"
-      ]
+      ],
+      "board_note": "not shown (the flop is dealt)"
     },
     {
       "id": "S3-A",
