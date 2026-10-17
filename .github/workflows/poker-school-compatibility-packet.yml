@@ -52,11 +52,13 @@ jobs:
           test "$actual" = eeb998a904b52629cbd102686051937db870ba2c
           python _scripts/poker_school_release.py
           echo "VERIFIED_TREE=$actual"
-      - name: Stage only to the isolated review branch
+      - name: Stage source only without modifying any workflow
         run: |
+          git restore --source=3f4db4841d970e885b845289abc4edd3761de1bb --staged --worktree .github/workflows/site-checks.yml
+          test "$(git write-tree)" = 601afd9062c5a775df57d0b6ef2f28ec56e5ad5e
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Stage exactly reproduced Poker School compatibility candidate'
+          git commit -m 'Stage source-only Poker School compatibility candidate'
           git push origin HEAD:refs/heads/audit/poker-school-ready-20261017
           echo "STAGED_COMMIT=$(git rev-parse HEAD)"
           echo "STAGED_TREE=$(git rev-parse HEAD^{tree})"
