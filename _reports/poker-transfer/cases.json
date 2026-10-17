@@ -215,7 +215,7 @@
         "3c",
         "9d"
       ],
-      "setup": "At the river, the pot has 18 counters before an opponent bets 6. You paid nothing this river. There are no fees, all-ins, side pots or later bets.",
+      "setup": "At a heads-up river, only you and one opponent remain. The pot has 18 counters before an opponent bets 6. You paid nothing this river. There are no fees, all-ins, side pots or later bets.",
       "prompt": "Name your best five and explain whether the spade draw completed. What does a call cost? What would the final pot be, and what fraction of that pot is the call? Does that fraction tell you whether to call?",
       "river": {
         "pot_before": 18,
@@ -486,7 +486,7 @@
           "9s"
         ]
       ],
-      "prompt": "Which candidate is weaker than you, and which is stronger? Does a fold from the weaker holding prove the bet was a successful bluff or a good value bet? What comparison is missing?",
+      "prompt": "Which candidate is weaker than you, and which is stronger? Does the described fold prove the bet was a successful bluff or a good value bet? What comparison is missing?",
       "points": [
         "Kh-Kd makes one pair of kings, weaker than your pair of aces. 9c-9s makes three nines, stronger than your aces.",
         "Folding the worse holding is not evidence of forcing a better hand to fold, and gives up that holding's possible call value.",

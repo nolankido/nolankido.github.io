@@ -8,6 +8,8 @@ Six players begin a new hand with 1/3 blinds. You posted the big blind of 3 and 
 
 Private cards: 6h, 6c. Shared cards: not dealt.
 
+Private card names: six of hearts; six of clubs.
+
 **Try without opening an answer:** How many extra counters would you put in to call? Is checking an option at this point? Explain the difference between the total wager and what you must add. Would different private cards change that call price?
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.

@@ -4,9 +4,11 @@
 
 ### S4-A: River bet with ace and ten
 
-At the river, the pot has 18 counters before an opponent bets 6. You paid nothing this river. There are no fees, all-ins, side pots or later bets.
+At a heads-up river, only you and one opponent remain. The pot has 18 counters before an opponent bets 6. You paid nothing this river. There are no fees, all-ins, side pots or later bets.
 
 Private cards: As, Ts. Shared cards: Ah, 7s, 4s, 3c, 9d.
+
+Private card names: ace of spades; ten of spades. Shared card names: ace of hearts; seven of spades; four of spades; three of clubs; nine of diamonds.
 
 **Try without opening an answer:** Name your best five and explain whether the spade draw completed. What does a call cost? What would the final pot be, and what fraction of that pot is the call? Does that fraction tell you whether to call?
 

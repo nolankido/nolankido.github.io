@@ -8,9 +8,20 @@ On a fictional river, the other player checks. The three candidate opposing hold
 
 Private cards: Ah, Kd. Shared cards: Ks, 9c, 6d, 4h, 2c.
 
+Private card names: ace of hearts; king of diamonds. Shared card names: king of spades; nine of clubs; six of diamonds; four of hearts; two of clubs.
+
 Candidate 1: Ah, Qs.
+
+Candidate 1 card names: ace of hearts; queen of spades.
+
 Candidate 2: Qc, Qd.
+
+Candidate 2 card names: queen of clubs; queen of diamonds.
+
 Candidate 3: Kh, 2d.
+
+Candidate 3 card names: king of hearts; two of diamonds.
+
 
 **Try without opening an answer:** Identify the impossible holding. Of the possible holdings, which beats your final hand? Does a check rule that holding out, or tell you how often it appears?
 

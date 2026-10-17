@@ -10,6 +10,8 @@ In a fictional heads-up flop, you paid 5 counters preflop. On the flop you have 
 
 Private cards: Kc, 7h. Shared cards: Ks, 9d, 3c.
 
+Private card names: king of clubs; seven of hearts. Shared card names: king of spades; nine of diamonds; three of clubs.
+
 **Try without opening an answer:** Name your best five now. Which actions are available in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?
 
 <details><summary>Check the reasoning and follow a repair</summary>
@@ -40,6 +42,8 @@ Mistake to watch for: Treating earlier-street chips as credit on this street.
 Six players begin a new hand with 1/3 blinds. You posted the big blind of 3 and no other chips. A player makes a legal raise to 11 total. You still have enough counters and no other bets or all-ins intervene.
 
 Private cards: 6h, 6c. Shared cards: not dealt.
+
+Private card names: six of hearts; six of clubs.
 
 **Try without opening an answer:** How many extra counters would you put in to call? Is checking an option at this point? Explain the difference between the total wager and what you must add. Would different private cards change that call price?
 
@@ -72,6 +76,8 @@ Six seats clockwise are first, next, cutoff, button, small blind and big blind. 
 
 Private cards: 9c, 8c. Shared cards: not dealt.
 
+Private card names: nine of clubs; eight of clubs.
+
 **Try without opening an answer:** Who still has an initial decision? Could a raise by that player make you act again? If everyone remaining reaches the flop without a further raise, which seat acts first?
 
 <details><summary>Check the reasoning and follow a repair</summary>
@@ -102,6 +108,8 @@ Mistake to watch for: Assuming the button completes preflop action by calling.
 Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop with at least 30 counters each still behind; neither player is all-in. No action on this flop has been described.
 
 Private cards: Ac, 5s. Shared cards: not shown (the flop is dealt).
+
+Private card names: ace of clubs; five of spades.
 
 **Try without opening an answer:** Was the small blind's forced post already their initial decision? Who acts first and who acts second on the flop? If the first player checks, what may the second player do that would be unavailable while facing a bet? Explain the difference between preflop and postflop order.
 
@@ -134,6 +142,8 @@ The flop has been dealt. Your opponent bets 4 and you have not yet put counters 
 
 Private cards: Qc, Jc. Shared cards: Qd, 8c, 2c.
 
+Private card names: queen of clubs; jack of clubs. Shared card names: queen of diamonds; eight of clubs; two of clubs.
+
 **Try without opening an answer:** Describe the hand you already have and the possible club improvement separately. Is a club flush complete? Which of check, fold, call and legal raise can you choose against the bet?
 
 <details><summary>Check the reasoning and follow a repair</summary>
@@ -165,6 +175,8 @@ You are heads-up on the flop. The other player checks. Neither player has bet on
 
 Private cards: Th, 9h. Shared cards: Kh, 7c, 2h.
 
+Private card names: ten of hearts; nine of hearts. Shared card names: king of hearts; seven of clubs; two of hearts.
+
 **Try without opening an answer:** Name your strongest five-card hand right now. How many hearts can you use? Is it a finished flush or a draw? Which actions are available after the opponent checks?
 
 <details><summary>Check the reasoning and follow a repair</summary>
@@ -192,9 +204,11 @@ Mistake to watch for: Confusing a promising draw with a made hand or calling a c
 
 ### S4-A: River bet with ace and ten
 
-At the river, the pot has 18 counters before an opponent bets 6. You paid nothing this river. There are no fees, all-ins, side pots or later bets.
+At a heads-up river, only you and one opponent remain. The pot has 18 counters before an opponent bets 6. You paid nothing this river. There are no fees, all-ins, side pots or later bets.
 
 Private cards: As, Ts. Shared cards: Ah, 7s, 4s, 3c, 9d.
+
+Private card names: ace of spades; ten of spades. Shared card names: ace of hearts; seven of spades; four of spades; three of clubs; nine of diamonds.
 
 **Try without opening an answer:** Name your best five and explain whether the spade draw completed. What does a call cost? What would the final pot be, and what fraction of that pot is the call? Does that fraction tell you whether to call?
 
@@ -227,6 +241,8 @@ On the river, a heads-up pot contains 30 before your opponent bets 20. You have 
 
 Private cards: 7d, 7c. Shared cards: Kh, Qh, 9d, 5c, 2s.
 
+Private card names: seven of diamonds; seven of clubs. Shared card names: king of hearts; queen of hearts; nine of diamonds; five of clubs; two of spades.
+
 **Try without opening an answer:** State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Does holding a pair mean you should call?
 
 <details><summary>Check the reasoning and follow a repair</summary>
@@ -258,9 +274,20 @@ On a fictional river, the other player checks. The three candidate opposing hold
 
 Private cards: Ah, Kd. Shared cards: Ks, 9c, 6d, 4h, 2c.
 
+Private card names: ace of hearts; king of diamonds. Shared card names: king of spades; nine of clubs; six of diamonds; four of hearts; two of clubs.
+
 Candidate 1: Ah, Qs.
+
+Candidate 1 card names: ace of hearts; queen of spades.
+
 Candidate 2: Qc, Qd.
+
+Candidate 2 card names: queen of clubs; queen of diamonds.
+
 Candidate 3: Kh, 2d.
+
+Candidate 3 card names: king of hearts; two of diamonds.
+
 
 **Try without opening an answer:** Identify the impossible holding. Of the possible holdings, which beats your final hand? Does a check rule that holding out, or tell you how often it appears?
 
@@ -293,9 +320,20 @@ You reach the river. The other player checks. Consider the three example holding
 
 Private cards: Jc, 9d. Shared cards: Jd, 8c, 3h, 2s, 6c.
 
+Private card names: jack of clubs; nine of diamonds. Shared card names: jack of diamonds; eight of clubs; three of hearts; two of spades; six of clubs.
+
 Candidate 1: 9d, As.
+
+Candidate 1 card names: nine of diamonds; ace of spades.
+
 Candidate 2: Ks, Kc.
+
+Candidate 2 card names: king of spades; king of clubs.
+
 Candidate 3: Ad, 7c.
+
+Candidate 3 card names: ace of diamonds; seven of clubs.
+
 
 **Try without opening an answer:** Which holding cannot exist alongside your cards? Which possible hand is ahead of yours? What does the check tell you about which holding is present? Suppose the weaker possible holding appears at showdown once: does that prove all future checks are weak? Explain.
 
@@ -328,8 +366,16 @@ On the river, your opponent checks. In this fictional comparison only, assume bo
 
 Private cards: Qs, Qh. Shared cards: Kd, 9c, 5h, 3s, 2c.
 
+Private card names: queen of spades; queen of hearts. Shared card names: king of diamonds; nine of clubs; five of hearts; three of spades; two of clubs.
+
 Candidate 1: Jd, Jh.
+
+Candidate 1 card names: jack of diamonds; jack of hearts.
+
 Candidate 2: Ks, 6d.
+
+Candidate 2 card names: king of spades; six of diamonds.
+
 
 **Try without opening an answer:** Which candidate supports a value-bet explanation? Which would be ahead of you? Does the existence of one weaker caller prove the bet earns more than checking? Explain what else you would need to compare betting with checking.
 
@@ -362,10 +408,18 @@ On the river, your opponent checks. In this fictional contrast, suppose Candidat
 
 Private cards: Ah, 5d. Shared cards: Ac, 9h, 8s, 6c, 2d.
 
+Private card names: ace of hearts; five of diamonds. Shared card names: ace of clubs; nine of hearts; eight of spades; six of clubs; two of diamonds.
+
 Candidate 1: Kh, Kd.
+
+Candidate 1 card names: king of hearts; king of diamonds.
+
 Candidate 2: 9c, 9s.
 
-**Try without opening an answer:** Which candidate is weaker than you, and which is stronger? Does a fold from the weaker holding prove the bet was a successful bluff or a good value bet? What comparison is missing?
+Candidate 2 card names: nine of clubs; nine of spades.
+
+
+**Try without opening an answer:** Which candidate is weaker than you, and which is stronger? Does the described fold prove the bet was a successful bluff or a good value bet? What comparison is missing?
 
 <details><summary>Check the reasoning and follow a repair</summary>
 

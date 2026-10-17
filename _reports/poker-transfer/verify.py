@@ -9,6 +9,8 @@ import re
 ROOT = Path(__file__).resolve().parents[2]
 FOLDER = Path(__file__).resolve().parent
 VALUES = {c: n for n, c in enumerate("23456789TJQKA", 2)}
+RANK_NAMES = dict(zip("23456789TJQKA", ("two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace")))
+SUIT_NAMES = {"s": "spades", "h": "hearts", "d": "diamonds", "c": "clubs"}
 SKILLS = ["S1", "S2", "S3", "S4", "S5", "S6"]
 LESSONS = ["first-decisions", "starting-hand-decisions", "first-flop-decisions",
            "turn-and-river-decisions", "ranges-for-beginners", "betting-with-a-purpose"]
@@ -17,6 +19,16 @@ REPAIRS = {
     "S4": {"river-reset", "catching-a-bluff"}, "S5": {"known-and-possible", "remove-known-cards"},
     "S6": {"purpose"},
 }
+
+def card_names(cards):
+    return "; ".join(RANK_NAMES[c[0]] + " of " + SUIT_NAMES[c[1]] for c in cards)
+
+def check_names(section, case):
+    assert "Private card names: " + card_names(case["hero"]) + "." in section
+    if case["board"]:
+        assert "Shared card names: " + card_names(case["board"]) + "." in section
+    for n, cards in enumerate(case.get("candidates", []), 1):
+        assert f"Candidate {n} card names: " + card_names(cards) + "." in section
 
 def five(cards):
     ranks = sorted((VALUES[c[0]] for c in cards), reverse=True)
@@ -141,6 +153,7 @@ def check():
     assert all(f"| {case['id']} |" in (FOLDER / "summary-form.md").read_text(encoding="utf-8") for case in items)
     for case in items:
         isolated = (FOLDER / "cards" / (case["id"] + ".md")).read_text(encoding="utf-8")
+        check_names(isolated, case)
         assert case["setup"] in isolated and case["prompt"] in isolated
         assert "Private cards: " + ", ".join(case["hero"]) in isolated
         assert "Shared cards: " + (", ".join(case["board"]) or case.get("board_note", "not dealt")) + "." in isolated
@@ -161,6 +174,7 @@ def check():
             end = body.find("\n### ", start + 1)
             section = body[start:end if end != -1 else len(body)]
             if name != "facilitator-key.md":
+                check_names(section, case)
                 assert case["setup"] in section and case["prompt"] in section
                 assert "Shared cards: " + (", ".join(case["board"]) or case.get("board_note", "not dealt")) + "." in section
             else:
@@ -177,6 +191,8 @@ def check():
     assert guide.count("[Point 3 repair]") == len(items)
     assert "has not acted" not in items[2]["setup"] and "checks first" not in items[3]["setup"]
     assert "worse holding below folds" not in items[11]["setup"]
+    assert "weaker holding" not in items[11]["prompt"]
+    assert "only you and one opponent remain" in items[6]["setup"]
     # The setup supplies the scene, not the missing-input reasoning being elicited.
     assert "frequenc" not in items[10]["setup"].lower()
     assert "frequenc" not in items[11]["setup"].lower()

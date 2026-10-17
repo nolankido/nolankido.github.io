@@ -8,6 +8,8 @@ Six players are dealt a hand. The first three seats fold. You open-raise on the 
 
 Private cards: Ac, 5s. Shared cards: not shown (the flop is dealt).
 
+Private card names: ace of clubs; five of spades.
+
 **Try without opening an answer:** Was the small blind's forced post already their initial decision? Who acts first and who acts second on the flop? If the first player checks, what may the second player do that would be unavailable while facing a bet? Explain the difference between preflop and postflop order.
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.

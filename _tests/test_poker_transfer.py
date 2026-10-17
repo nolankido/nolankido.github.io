@@ -13,6 +13,11 @@ module = module_from_spec(SPEC)
 SPEC.loader.exec_module(module)
 
 class PokerTransferTests(unittest.TestCase):
+    def test_rejects_missing_full_card_names(self):
+        with self.changed_packet("cards/S3-A.md", "queen of clubs", "Qc"):
+            with self.assertRaises(AssertionError):
+                module.check()
+
     @contextmanager
     def changed_packet(self, filename, before, after):
         with tempfile.TemporaryDirectory() as folder:

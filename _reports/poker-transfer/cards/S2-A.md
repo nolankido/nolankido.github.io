@@ -8,6 +8,8 @@ Six seats clockwise are first, next, cutoff, button, small blind and big blind. 
 
 Private cards: 9c, 8c. Shared cards: not dealt.
 
+Private card names: nine of clubs; eight of clubs.
+
 **Try without opening an answer:** Who still has an initial decision? Could a raise by that player make you act again? If everyone remaining reaches the flop without a further raise, which seat acts first?
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.

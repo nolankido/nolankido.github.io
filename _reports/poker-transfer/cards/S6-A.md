@@ -8,8 +8,16 @@ On the river, your opponent checks. In this fictional comparison only, assume bo
 
 Private cards: Qs, Qh. Shared cards: Kd, 9c, 5h, 3s, 2c.
 
+Private card names: queen of spades; queen of hearts. Shared card names: king of diamonds; nine of clubs; five of hearts; three of spades; two of clubs.
+
 Candidate 1: Jd, Jh.
+
+Candidate 1 card names: jack of diamonds; jack of hearts.
+
 Candidate 2: Ks, 6d.
+
+Candidate 2 card names: king of spades; six of diamonds.
+
 
 **Try without opening an answer:** Which candidate supports a value-bet explanation? Which would be ahead of you? Does the existence of one weaker caller prove the bet earns more than checking? Explain what else you would need to compare betting with checking.
 
