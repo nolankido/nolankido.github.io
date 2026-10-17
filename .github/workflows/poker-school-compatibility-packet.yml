@@ -1,0 +1,29 @@
+name: Poker School compatibility packet
+on:
+  push:
+    branches: [audit/poker-school-compatibility-20261017]
+permissions:
+  contents: read
+jobs:
+  packet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Export exact review revisions and offline test dependencies
+        run: |
+          mkdir -p "$RUNNER_TEMP/poker-packet/wheels"
+          git archive --format=tar.gz --output="$RUNNER_TEMP/poker-packet/base.tar.gz" 9021d4604c9427c37dc6c788753ddf9675dfc7ba
+          git archive --format=tar.gz --output="$RUNNER_TEMP/poker-packet/candidate.tar.gz" 3f4db4841d970e885b845289abc4edd3761de1bb
+          git bundle create "$RUNNER_TEMP/poker-packet/history.bundle" --all
+          python -m pip download --dest "$RUNNER_TEMP/poker-packet/wheels" html5lib==1.1
+          du -h "$RUNNER_TEMP/poker-packet/"*
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: poker-school-compatibility-packet
+          path: ${{ runner.temp }}/poker-packet/
+          retention-days: 1
+          if-no-files-found: error
