@@ -1,14 +1,16 @@
 # Blank private transfer-session record
 
-**Template only. Do not fill in this public repository.** Use one private copy per consenting participant. Keep real contact details and consent evidence separately.
+**Template only. Do not fill in this public repository.** Use one private copy per consenting participant and case attempt. Keep real contact details and consent evidence separately.
 
 Release commit: ______  Packet/reviewer decision and scope: ______  Date/time and time zone: ______
 
-Anonymous participant code: ______  Assigned case (S1-A through S6-B): ______  Skill: ______
+Anonymous participant code: ______  Assigned case (S1-A through S6-L): ______  Skill: ______
 
 Consent status (confirmed / not confirmed / withdrawn / not recorded): ______  Evidence retained separately (anonymous reference only): ______
 
-Record type: first independent attempt / separately consented later paired-form attempt. If later, paired first-case ID and exact elapsed interval: ______  Intervening learning or exposure: ______
+Approved selection plan and exact case revision: ______
+
+Record type: first independent attempt / separately consented later paired-form or planned-case attempt. If later, paired first-case ID and exact elapsed interval: ______  Intervening learning or exposure: ______
 
 Device, browser and relevant access aids: ______
 
@@ -47,6 +49,8 @@ Assisted reasoning point 2: supported / error / not demonstrated / not attempted
 Assisted reasoning point 3: supported / error / not demonstrated / not attempted. Evidence: ______
 
 Time taken and breaks, if measured: ______  Confusion, skipped steps or accessibility issues: ______
+
+Form letters do not imply equivalent difficulty. Use only the exact case approved in the session plan.
 
 For a later paired task, create a separate full copy of this same form and use its three reasoning-point fields. Do not overwrite this case's first-response labels or summarize a later result without its point-by-point record.
 

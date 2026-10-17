@@ -1,6 +1,6 @@
 # Poker Foundations transfer task S5-A
 
-**Draft for qualified review. One fictional case only.** This card contains no answer or other case. If a facilitator shows it to a participant, first confirm the case has been approved for that exact teaching revision and ask about previous exposure. No gambling account or wager is needed.
+**Draft for qualified review. One fictional case only.** This card contains no answer or other case. For a supervised session, use the exact reviewer-approved case and record previous exposure. No gambling account or wager is needed.
 
 ### S5-A: Three candidate river holdings
 
@@ -21,7 +21,6 @@ Candidate 2 card names: queen of clubs; queen of diamonds.
 Candidate 3: Kh, 2d.
 
 Candidate 3 card names: king of hearts; two of diamonds.
-
 
 **Try without opening an answer:** Identify the impossible holding. Of the possible holdings, which beats your final hand? Does a check rule that holding out, or tell you how often it appears?
 
