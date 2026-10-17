@@ -405,8 +405,9 @@ def main(argv=None):
         else:
             result = audit_packet(args.packet)
         print(json.dumps(result, indent=2))
-        if args.command == "audit" and result["status"] != "full_review_record_claimed_authentication_required":
-            return 2
+        if args.command == "audit":
+            # A claimed signoff is not authenticated. Never return exit 0 as a review clearance.
+            return 3 if result["status"] == "full_review_record_claimed_authentication_required" else 2
         return 0
     except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:
         print("REVIEW GATE FAILED: " + str(exc), file=sys.stderr)

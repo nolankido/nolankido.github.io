@@ -256,6 +256,16 @@ class QualifiedReviewRoundTests(unittest.TestCase):
             module.make_packet(self.packet, source_commit=TEST_SHA)
         self.assertEqual((self.packet / "existing.txt").read_text(), "keep this")
 
+    def test_even_complete_looking_review_never_returns_success_exit(self):
+        _, record = self.prepare("full")
+        self.complete_fixture(record)
+        from contextlib import redirect_stdout
+        from io import StringIO
+        with redirect_stdout(StringIO()) as output:
+            exit_code = module.main(["audit", "--packet", str(self.packet)])
+        self.assertEqual(exit_code, 3)
+        self.assertIn('"release_authorized": false', output.getvalue())
+
     def test_audit_pending_has_nonzero_cli_exit(self):
         self.prepare()
         from contextlib import redirect_stdout

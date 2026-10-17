@@ -50,7 +50,7 @@ Run:
 
     python _reports/poker-transfer/review_round.py audit --packet ../poker-review-full
 
-The checker rejects changed source, card, key, manifest or case identity, incomplete case scope, missing evidence for claimed decisions, open issues marked accepted, malformed dates, and conflicting case results. A blank record reports human_review_pending and exits with code 2. Errors exit with code 1.
+The checker rejects changed source, card, key, manifest or case identity, incomplete case scope, missing evidence for claimed decisions, open issues marked accepted, malformed dates, and conflicting case results. A blank record reports human_review_pending and exits with code 2. Invalid records exit with code 1. Even a fully completed-looking record exits with code 3 to require independent authentication of the signoff. **The audit command never returns exit code 0 as publication clearance.**
 
 Even a fully filled, consistent record returns **full_review_record_claimed_authentication_required** rather than permission to publish. Someone independent must verify the actual reviewer's identity, qualifications, signed decisions, case scope, and underlying course approval. The result always includes release_authorized: false. A triage or custom scope **cannot** receive a full-bank clearance. A reviewed bank is not a measure of retention, mastery or profitable decisions.
 
