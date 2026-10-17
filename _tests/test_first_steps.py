@@ -11,8 +11,8 @@ import build
 import check_live
 STARTS={
  'technology':'/technology/task-brief/',
- 'living-well':'/living-well/worksheets/#weekly-reset',
- 'poker':'/poker/study-calculators/',
+ 'living-well':'/living-well/weekly-reset/',
+ 'poker':'/poker/first-live-tournament/',
  'creative':'/creative/#creative-brief',
 }
 class FirstStepTests(unittest.TestCase):

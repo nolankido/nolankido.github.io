@@ -30,7 +30,7 @@ class IdentityTests(unittest.TestCase):
 
     def test_curated_entries_keep_canonical_titles_and_status(self):
         by_path = {p['path']: p for p in self.pages}
-        for relative in ['index.html', 'start-here/index.html']:
+        for relative in ['start-here/index.html']:
             content = self.outputs[Path(relative)]
             self.assertEqual(content.count('class="identity-reading"'), 3)
             for item in self.config['selected']:

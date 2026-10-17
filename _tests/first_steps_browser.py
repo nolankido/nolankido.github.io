@@ -12,7 +12,7 @@ class QuietHandler(SimpleHTTPRequestHandler):
 server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=str(ROOT)))
 Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port)
-starts={'technology':'/technology/task-brief/','living-well':'/living-well/worksheets/#weekly-reset','poker':'/poker/study-calculators/','creative':'/creative/#creative-brief'}
+starts={'technology':'/technology/task-brief/','living-well':'/living-well/weekly-reset/','poker':'/poker/first-live-tournament/','creative':'/creative/#creative-brief'}
 errors=[];missing=[];report={'keyboard_journeys':0,'downloads':0,'layouts':0,'expanded_spacing':0,'axe_scans':0}
 def route(r):
  if urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()

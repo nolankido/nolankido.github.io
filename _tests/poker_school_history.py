@@ -8,6 +8,7 @@ from copy import deepcopy
 from functools import lru_cache
 from hashlib import sha256
 import json
+import homepage_growth_history
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +24,7 @@ def change():
 
 
 def before(path, data):
+    data = homepage_growth_history.before(path, data)
     item = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode('utf-8')
@@ -40,6 +42,7 @@ def before(path, data):
 
 
 def pages(records):
+    records = homepage_growth_history.pages(records)
     return [deepcopy(p) for p in records if p not in change()['new_pages']]
 
 
