@@ -3,6 +3,7 @@ from functools import lru_cache
 import json
 from pathlib import Path
 import study_titles_history
+import turn04_public_source_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -13,6 +14,7 @@ def change():
 
 
 def before(path, data):
+    data = turn04_public_source_history.before(path, data)
     data = study_titles_history.before(path, data)
     if str(path) not in {'_source/technology/home.html', 'technology/index.html'}:
         return data
