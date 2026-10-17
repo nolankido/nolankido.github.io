@@ -28,6 +28,8 @@ The production delta is limited to six files: three source/asset inputs, the hom
 
 The same suite checks all former homepage destinations and anchors, the three distinct primary choices, four first actions, private-boundary preservation, and false or corrupt history records. Browser regressions cover keyboard disclosure, all primary destinations, script-free reading, and reflow with 200% root text size plus increased text spacing. Existing real-HTTP first-step and practical-work journeys are updated to follow the new visible routes, including opening the secondary group before visiting the calculator.
 
+The enlarged-text regression uses both fallback fonts and embedded test-only copies of the site's actual local fonts, with the secondary group open and closed at 320, 390, 768 and 1440 pixels. The actual-font check exposed a tablet-width overflow in a long word; the homepage now permits wrapping in destination descriptions and section labels instead of clipping them. No font files or new scripts are added to production by this test.
+
 Useful commands:
 
 ```sh
