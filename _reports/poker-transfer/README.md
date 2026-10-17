@@ -1,35 +1,53 @@
-# Poker Foundations: two-form transfer practice and diagnostic repair
+# Poker Foundations: 72-case practice bank
 
-**October 16, 2026. Draft content and mechanical QA only.** No qualified human teaching review, actual adult beginner session, study result or retention claim is implied. This extends the earlier observation kit without changing its evidence, its six original follow-up problems or any published Poker Foundations lesson.
+**Expanded October 16, 2026, Hawaii time. Draft content and mechanical QA only.** The bank now contains **72 cases, twelve per skill**, including the original 12 A/B cases and 60 additional C–L cases. Qualified human teaching review and actual beginner observations remain pending. This completes the roadmap's authored case-count milestone, not a finding about learning or retention.
 
-## Why this is the next improvement
+## Use the bank
 
-The six-stage course already offers a worked example, a changed first attempt, practice situations, a checkpoint and an optional private progress tracker. Repeatedly recognizing the same answer is not the same as explaining a new case. This package adds **two new situations for each of six skills**, an answer-free participant file and a separate reasoning key with misconception-specific, point-by-point repairs. The cases deliberately change card combinations, betting quantities, action sequences or hypothetical opponent responses relative to the earlier six probes; that engineering comparison alone cannot establish that any particular person finds them unfamiliar. Participants must be asked about previous exposure.
+For self-study, choose a small [skill-specific practice file](self-study.md). Each question has its own closed answer and precise lesson links. The complete self-study file also retains all cases in one copy. No monetary stakes, account or submission is needed.
 
-For a supervised independent attempt, open only one isolated [case file](cards/S1-A.md) assigned by the [A/B protocol](protocol.md). The combined [participant-cards.md](participant-cards.md) is a facilitator index, not a participant-controlled reading page. Use it only to select and copy one case, or [self-study.md](self-study.md) for private practice with answers in closed disclosures. [facilitator-key.md](facilitator-key.md) supplies proposed explanation points and exact live repair links. [review-form.md](review-form.md) is an unsigned qualification and teaching-clarity gate. Keep this draft outside the site's main navigation until a qualified reviewer accepts the new prompts and keys. Publication in this *public GitHub repository* is not reviewer approval, and it is not a secure place for learner records.
+For a supervised independent attempt, show only the assigned individual [learner card](cards/S1-A.md). The [combined question file](participant-cards.md) is a facilitator index. The [coverage index](coverage.md) contains instructor design notes that may cue answers, and the [facilitator key](facilitator-key.md) contains all reasoning. Keep both off the learner's screen until the first explanation is recorded.
 
-## Proposed research use (not performed)
-
-After the original 18-criterion teaching packet and these new prompts are independently approved, use this pack's [separate A/B protocol](protocol.md), [blank private session form](session-form.md) and [blank aggregate form](summary-form.md). The older [beginner observation kit](../poker-beginner-baseline/README.md) assigns T1–T6 only; using its original protocol unchanged would **not** administer the new S1-A through S6-B problems. Recruit 6 to 8 consenting adult beginners only after review. Show only the assigned new case, record the first reason before hints, the exact repair visited and elapsed time, and label prior exposure. Where practical, reserve the paired form for a genuinely later reattempt, not a repeat immediately after feedback. Do not assume a delayed test is unfamiliar. Randomized assignment, comparable difficulty and validated scoring are **not established** by this draft.
-
-A single response, short break or browser test does not prove learning gain, readiness to risk money, seven-day retention or the effectiveness of the course. With small samples, report raw observed difficulties, assistance and incomplete answers, not percentages framed as population effects. Adapt the site only to observed, independently reviewed patterns; do not fabricate participants, feedback, timestamps or reviewer signoff.
-
-## Coverage
-
-| Skill | Form A | Form B | Precise lesson repair |
+| Skill | Cases | Self-study | First isolated card |
 | --- | --- | --- | --- |
-| S1 Call and action | Flop wager after a preflop payment | Big blind facing a raise | [Lesson](https://nolankido.com/poker/first-decisions/#chips-owed) |
-| S2 Position and turn order | Action after a button call | A two-player flop after a button raise | [Lesson](https://nolankido.com/poker/starting-hand-decisions/#position) |
-| S3 Made hand vs draw | Private and shared cards on the flop | Two suited private cards on the flop | [Lesson](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing) |
-| S4 River price vs equity | River bet with ace and ten | River bet holding pocket sevens | [Lesson](https://nolankido.com/poker/turn-and-river-decisions/#river-reset) |
-| S5 Physical blockers vs inference | Three candidate river holdings | A checked river and one later reveal | [Lesson](https://nolankido.com/poker/ranges-for-beginners/#known-and-possible) |
-| S6 Bet purpose vs checking | A checked river and two possible callers | A river bet with two possible responses | [Lesson](https://nolankido.com/poker/betting-with-a-purpose/#purpose) |
+| Calls and available actions | S1-A through S1-L | [Twelve cases](study/S1.md) | [S1-A](cards/S1-A.md) |
+| Position and turn order | S2-A through S2-L | [Twelve cases](study/S2.md) | [S2-A](cards/S2-A.md) |
+| Made hands and draws | S3-A through S3-L | [Twelve cases](study/S3.md) | [S3-A](cards/S3-A.md) |
+| River price and expected pot share | S4-A through S4-L | [Twelve cases](study/S4.md) | [S4-A](cards/S4-A.md) |
+| Known cards and opposing ranges | S5-A through S5-L | [Twelve cases](study/S5.md) | [S5-A](cards/S5-A.md) |
+| Betting purpose and checking | S6-A through S6-L | [Twelve cases](study/S6.md) | [S6-A](cards/S6-A.md) |
 
-Cases and expected mechanical fields live in [cases.json](cases.json). [verify.py](verify.py) uses only Python's standard library. It independently enumerates legal best-five selections for each 5- or 7-card holding, validates full card uniqueness, compares possible opponent holdings, checks current-round call increments and river pot fractions, checks the 6-by-2 skills/links, and checks document sections and the individual answer-free case files. It also binds each reasoning point to an existing repair anchor. It does not verify whether every prose instruction is pedagogically clear, prove a participant did not previously see a case, or validate strategic EV when frequencies are unknown.
+Every case has three proposed explanation points and a repair link for each point. Additional links support points spanning more than one concept. Card names are written in full alongside compact codes. The new cases vary action context, board structure, hand comparisons, draws or assumptions about responses. Their instructor-only focus tags describe intended coverage; they do not demonstrate equivalent difficulty or prove a learner has not seen a similar problem.
+
+## What remains unchanged in the original observation plan
+
+The original A/B question source, answers and repair mappings from [PR #107](https://github.com/nolankido/nolankido.github.io/pull/107) are retained exactly and checked by a source fingerprint. The earlier [T1–T6 observation kit](../poker-beginner-baseline/README.md) is separate. Neither has acquired learner results through this expansion.
+
+The [separate A/B protocol](protocol.md) retains its original proposed allocation. Adding C–L cases does not silently assign them to those sessions. A qualified reviewer must approve the exact cases and a recorded selection plan before supervised use. The expanded [review form](review-form.md) starts with every case unreviewed. Review of a subset approves only that subset. Form letters are stable identifiers, not calibrated or interchangeable tests.
+
+Use a private [session form](session-form.md) for each actual attempt and a private copy of the [aggregate form](summary-form.md) for the exact selected cases. Preserve independent and assisted attempts, all three reasoning points, exact-case/answer-key/similar-problem exposure, lesson revision and elapsed intervals separately. Any later attempt needs a new full record with its own case ID. Unused blank rows are not zero outcomes. No real learner records belong in this public repository.
+
+Keep this draft outside the site's main navigation until a qualified reviewer accepts the new prompts and keys. This public GitHub pack is available for inspection; repository publication is not teaching approval. No reviewer signoff, learner feedback, study result, mastery, money-play readiness or retention claim has been generated.
+
+## One source, separate views
+
+[cases.json](cases.json), schema version 2, is the source for all 72 cases. [build_packet.py](build_packet.py) deterministically renders the individual cards, combined question file, separate key, complete self-study copy, six skill copies, coverage index and blank review/summary forms. Edit the source and regenerate rather than separately editing those outputs.
+
+[verify.py](verify.py) independently checks unique legal cards, best-five ranks, possible opponent comparisons, current-round call increments, zero-owed action options, clockwise position records, one-card straight-completion ranks, suit counts and exact river fractions. It checks every repair against the actual lesson anchor and rejects drift in every generated view. The original A/B case source is protected by a fixed fingerprint tied to the preceding release.
+
+Focused regression tests also cross-check every legal holding against the site's separately implemented JavaScript hand evaluator. Mutation checks verify rejection of incorrect calls, action order, hand comparisons, river fractions, missing observations, changed baseline cases and view drift. These checks do not establish that prose is unambiguous, scoreability is valid, possible hands have equal frequencies or an action is optimal.
 
 ```sh
+python _reports/poker-transfer/build_packet.py
+python _reports/poker-transfer/build_packet.py --check
 python _reports/poker-transfer/verify.py
 python -m unittest discover -s _tests -p test_poker_transfer.py -v
 ```
 
-The independent review and observation gates from cycles 2 and 3 remain pending. No existing site data, pages, scripts, CSS, course answers or privacy settings are modified by this preparation commit. For mechanical rules, see [PokerStars Hold'em rules](https://www.pokerstars.com/poker/games/texas-holdem/) and [hand rankings](https://www.pokerstars.com/poker/games/rules/hand-rankings/). These are rules references, not learning-effectiveness evidence.
+All scripts use Python's standard library; the independent evaluator cross-check uses the already required Node runtime. The full repository release gate also remains required.
+
+No existing site data, pages, scripts, CSS, course answers or privacy settings are modified by this draft-bank expansion. Public HTML is checked through the ordinary committed-build and release checks. Mechanical rules references: [PokerStars Hold'em rules](https://www.pokerstars.com/poker/games/texas-holdem/) and [hand rankings](https://www.pokerstars.com/poker/games/rules/hand-rankings/), checked October 17, 2026 UTC. These support the game mechanics, not teaching-effectiveness claims.
+
+## Next evidence step
+
+Qualified review should first identify confusing prompts, unasked reasoning requirements and unsuitable prerequisites, then record changes against exact case IDs and commits. After acceptance, actual consenting adult beginners can supply observations under the separately approved plan. Keep observations attached to the cases actually used; a larger bank alone is not evidence of improved understanding.

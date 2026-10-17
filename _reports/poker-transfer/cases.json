@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "status": "draft-qualified-human-review-pending",
   "course": "poker-foundations",
   "baseline_commit": "b923b06d4bc67ceb2ff1058262e219c996659c05",
@@ -83,6 +83,542 @@
       ]
     },
     {
+      "id": "S1-C",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "An ante and a raised pot",
+      "hero": [
+        "Jd",
+        "8s"
+      ],
+      "board": [],
+      "setup": "In a fictional six-player hand, blinds are 2/4 and each player also posts a separate ante of 1. You are the small blind and have posted those two required payments. An earlier player raises to 9 total. It is now your turn, with no intervening raise. Everyone has at least 60 counters behind; there are no all-ins or side pots.",
+      "prompt": "How many new counters would calling add? Explain which of your earlier payments counts toward matching 9. Can you check here, and what are the available response families?",
+      "points": [
+        "Calling adds 7 counters: the current wager of 9 minus your small blind of 2.",
+        "The separate ante is already in the pot but does not count toward the preflop wager; it cannot reduce the call to 6.",
+        "You face an unmatched wager, so checking is unavailable; you may fold, call or make a legal raise."
+      ],
+      "misconception": "Subtracting an ante from the additional call as though it were part of the live blind.",
+      "repair": "/poker/first-decisions/#chips-owed",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#turn-order",
+        "/poker/first-decisions/#legal-actions"
+      ],
+      "focus": "Separate ante from live blind credit",
+      "design_note": "This case requires separating two payments made before the cards, rather than distinguishing a previous street from the current one.",
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/first-decisions/#chips-owed"
+        ],
+        []
+      ],
+      "call": {
+        "to": 9,
+        "paid": 2,
+        "answer": 7
+      },
+      "action": {
+        "owed": 7,
+        "check_allowed": false,
+        "legal_actions": [
+          "fold",
+          "call",
+          "raise"
+        ]
+      }
+    },
+    {
+      "id": "S1-D",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "A preflop turn in the big blind",
+      "hero": [
+        "Qs",
+        "8d"
+      ],
+      "board": [],
+      "setup": "In a fictional six-player hand with 1/3 blinds and no ante, you posted the big blind of 3. The first player calls 3, the next two players fold, the button calls 3 and the small blind folds. Every remaining player has at least 80 counters behind; no raise or all-in has occurred.",
+      "prompt": "How many extra counters are needed to match the current wager? Name the actions that keep your hand live, including what an increase above 3 would be called. Did posting your blind already use up this voluntary decision?",
+      "points": [
+        "You owe zero extra counters because your posted 3 already matches the live preflop wager.",
+        "You may check or make a legal raise; increasing the live big-blind wager is a raise, even though nobody raised earlier.",
+        "Posting the forced blind did not use up your opportunity to act, so the dealer must wait for your decision."
+      ],
+      "misconception": "Treating a matched blind as a completed voluntary turn, or calling its increase a bet.",
+      "repair": "/poker/first-decisions/#turn-order",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#legal-actions",
+        "/poker/first-decisions/#turn-order"
+      ],
+      "focus": "Zero owed with a live preflop wager",
+      "design_note": "This tests the big blind option when nothing extra is owed, including why an increase is still a raise rather than a first postflop bet.",
+      "call": {
+        "to": 3,
+        "paid": 3,
+        "answer": 0
+      },
+      "action": {
+        "owed": 0,
+        "check_allowed": true,
+        "legal_actions": [
+          "check",
+          "raise"
+        ]
+      }
+    },
+    {
+      "id": "S1-E",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "A response to your flop bet",
+      "hero": [
+        "7s",
+        "7d"
+      ],
+      "board": [
+        "Ac",
+        "9h",
+        "2d"
+      ],
+      "setup": "Only you and one opponent remain in this fictional hand with 1/2 blinds. On the flop you act first and bet 5. The opponent raises to 16 total. Both players have at least 80 counters behind at your next decision; the raise is a full legal raise, with no all-ins or side pots.",
+      "prompt": "How many new counters would a call add, and what would your total flop contribution become? Does your original bet count toward that amount? Name your available responses, including whether checking is possible.",
+      "points": [
+        "Calling adds 11 counters, bringing your total contribution on this flop from 5 to 16.",
+        "Your original 5 counts because it was paid on this same betting round; the announced 16 is a total, not 16 more.",
+        "The raise creates a new unmatched wager for you, so you may fold, call or legally reraise, but cannot check."
+      ],
+      "misconception": "Adding the entire raise total again or assuming that an earlier bet removes the need for another decision.",
+      "repair": "/poker/first-decisions/#chips-owed",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#round-complete"
+      ],
+      "focus": "Original bettor responds to a raise",
+      "design_note": "The learner starts as the bettor and must credit that same-street bet when the opponent raises.",
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/first-decisions/#legal-actions"
+        ]
+      ],
+      "expected_rank": [
+        1,
+        7,
+        14,
+        9,
+        2
+      ],
+      "call": {
+        "to": 16,
+        "paid": 5,
+        "answer": 11
+      },
+      "action": {
+        "owed": 11,
+        "check_allowed": false,
+        "legal_actions": [
+          "fold",
+          "call",
+          "raise"
+        ]
+      }
+    },
+    {
+      "id": "S1-F",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "The action returns on the flop",
+      "hero": [
+        "Kd",
+        "Qh"
+      ],
+      "board": [
+        "Ks",
+        "6c",
+        "2h"
+      ],
+      "setup": "Two players remain in this fictional hand with 1/2 blinds. On the flop you act first and check. Your opponent then bets 9. Both players have at least 70 counters behind when the action returns to you; there are no all-ins or side pots.",
+      "prompt": "What responses are now available? Did your earlier check surrender the ability to raise this bet? How many new counters would calling require, and did checking contribute anything toward that price?",
+      "points": [
+        "Facing the bet, your response families are fold, call or legal raise; another check cannot match it.",
+        "An earlier check keeps the hand live and does not surrender the right to make a legal raise when a later bet returns the action.",
+        "Calling adds 9 counters because you contributed zero on this flop; a check was not a payment."
+      ],
+      "misconception": "Treating a check as either a contribution or a promise never to raise on that street.",
+      "repair": "/poker/first-decisions/#round-complete",
+      "point_repairs": [
+        "/poker/first-decisions/#legal-actions",
+        "/poker/first-decisions/#round-complete",
+        "/poker/first-decisions/#chips-owed"
+      ],
+      "focus": "Rights and price after an earlier check",
+      "design_note": "This changes the prior action from a payment to a check and asks whether that action constrains the later legal response.",
+      "expected_rank": [
+        1,
+        13,
+        12,
+        6,
+        2
+      ],
+      "call": {
+        "to": 9,
+        "paid": 0,
+        "answer": 9
+      },
+      "action": {
+        "owed": 9,
+        "check_allowed": false,
+        "legal_actions": [
+          "fold",
+          "call",
+          "raise"
+        ]
+      }
+    },
+    {
+      "id": "S1-G",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "A river with a paired board",
+      "hero": [
+        "Ac",
+        "4h"
+      ],
+      "board": [
+        "As",
+        "Kd",
+        "Kh",
+        "9s",
+        "2c"
+      ],
+      "setup": "In this fictional hand with 1/2 blinds, two players reach the river. The opponent acts first and checks. You have not acted on the river. Both players have at least 50 counters behind; no river wager, all-in or side pot exists.",
+      "prompt": "List your best five cards and say how many private cards are used. Must your other private card be included? How many counters are owed now, and which actions can keep your hand live?",
+      "points": [
+        "Your best five are two aces, two kings and the nine: two pair, aces and kings, with a nine kicker.",
+        "Only your private ace is used; the shared nine is a better fifth card than your four, and hold'em does not require both private cards.",
+        "You owe zero counters and may check or make a legal bet; keeping your hand live does not require betting."
+      ],
+      "misconception": "Forcing both private cards into the hand or believing a player must bet to keep a checked-to hand live.",
+      "repair": "/poker/first-decisions/#best-five",
+      "point_repairs": [
+        "/poker/first-decisions/#best-five",
+        "/poker/first-decisions/#best-five",
+        "/poker/first-decisions/#legal-actions"
+      ],
+      "focus": "One private card and an unwagered river",
+      "design_note": "This requires discarding an unused private card from the best five while separately recognizing a zero-price river option.",
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        [
+          "/poker/first-decisions/#chips-owed"
+        ]
+      ],
+      "expected_rank": [
+        2,
+        14,
+        13,
+        9
+      ],
+      "call": {
+        "to": 0,
+        "paid": 0,
+        "answer": 0
+      },
+      "action": {
+        "owed": 0,
+        "check_allowed": true,
+        "legal_actions": [
+          "check",
+          "bet"
+        ]
+      }
+    },
+    {
+      "id": "S1-H",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "Three players on the flop",
+      "hero": [
+        "Ah",
+        "Jh"
+      ],
+      "board": [
+        "Ac",
+        "8d",
+        "3s"
+      ],
+      "setup": "This fictional hand with 1/2 blinds has three players left: you in the small blind, the big blind and the button. Each began the flop with 200 counters. You check, the big blind bets 4, the button raises to 12, and you call 12. The big blind then makes a full legal raise to 30, and the button calls 30. It is your turn again. There are no all-ins or side pots.",
+      "prompt": "How many extra counters would calling now add? Explain why your earlier call did or did not finish your decisions on this round. Can you check now, and what responses remain available?",
+      "points": [
+        "You have paid 12 on the flop and face a total of 30, so a call adds 18 counters.",
+        "The later full raise returned action to you; having already called once did not finish the betting round.",
+        "You may fold, call or make a legal reraise, but cannot check while 18 remains unmatched."
+      ],
+      "misconception": "Paying only the first call or overlooking a new decision created by a later full raise.",
+      "repair": "/poker/first-decisions/#round-complete",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#round-complete",
+        "/poker/first-decisions/#legal-actions"
+      ],
+      "focus": "A caller responds to a later full reraise",
+      "design_note": "This asks the learner to retain the latest same-street contribution through two separate increases of the wager.",
+      "expected_rank": [
+        1,
+        14,
+        11,
+        8,
+        3
+      ],
+      "call": {
+        "to": 30,
+        "paid": 12,
+        "answer": 18
+      },
+      "action": {
+        "owed": 18,
+        "check_allowed": false,
+        "legal_actions": [
+          "fold",
+          "call",
+          "raise"
+        ]
+      }
+    },
+    {
+      "id": "S1-I",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "A preflop raise to 10",
+      "hero": [
+        "Kd",
+        "Ts"
+      ],
+      "board": [],
+      "setup": "A fictional six-player hand uses 1/3 blinds and no ante. The first player raises to 10 total; the next two players fold. You are on the button, have paid nothing preflop, and now have the turn. Both blinds remain. All players still in the hand have at least 70 counters behind, and no short all-in or other raise has occurred.",
+      "prompt": "What would calling cost? Name the available response families and say whether checking is one of them. If you choose a full reraise, what is the smallest legal new total and how do you calculate it?",
+      "points": [
+        "Calling costs 10 new counters because you have paid nothing on this preflop round.",
+        "Facing the raise, you may fold, call or make a legal reraise; checking cannot match the wager.",
+        "The raise from 3 to 10 increased the wager by 7, so a full reraise must reach at least 17 total, not merely add another big blind."
+      ],
+      "misconception": "Using the big blind as the minimum reraise increment after a larger full raise.",
+      "repair": "/poker/first-decisions/#chips-owed",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#legal-actions",
+        "/poker/first-decisions/#check-min-raise"
+      ],
+      "focus": "Call price versus minimum full reraise",
+      "design_note": "This separates a matching call from the minimum legal increase, using the last full raise increment rather than the blind size.",
+      "full_raise": {
+        "previous_total": 3,
+        "current_total": 10,
+        "last_full_increment": 7,
+        "minimum_total": 17
+      },
+      "call": {
+        "to": 10,
+        "paid": 0,
+        "answer": 10
+      },
+      "action": {
+        "owed": 10,
+        "check_allowed": false,
+        "legal_actions": [
+          "fold",
+          "call",
+          "raise"
+        ]
+      }
+    },
+    {
+      "id": "S1-J",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "Five shared cards and a river bet",
+      "hero": [
+        "4c",
+        "2d"
+      ],
+      "board": [
+        "Js",
+        "Tc",
+        "9d",
+        "8h",
+        "7s"
+      ],
+      "setup": "Only you and one opponent remain on the river in this fictional hand with 1/2 blinds. The opponent acts first and bets 8. You have paid nothing on the river. Both players have at least 60 counters behind; there are no all-ins or side pots.",
+      "prompt": "List your best five cards and the number of private cards they use. Can an unused private card break a tie between identical best-five hands? Which responses are available to this bet, and how much would a call add?",
+      "points": [
+        "Your best five are the shared jack, ten, nine, eight and seven, a jack-high straight using zero private cards.",
+        "An unused private card cannot break a tie between identical best-five hands; there is no sixth-card tiebreaker.",
+        "Playing the board does not remove the wager: calling adds 8, and the response families are fold, call or legal raise, not check."
+      ],
+      "misconception": "Adding a private-card tiebreaker or treating a shared straight as an exemption from responding to a bet.",
+      "repair": "/poker/first-decisions/#best-five",
+      "point_repairs": [
+        "/poker/first-decisions/#best-five",
+        "/poker/hand-rankings/#ties",
+        "/poker/first-decisions/#legal-actions"
+      ],
+      "focus": "Board plays while a wager is outstanding",
+      "design_note": "This tests zero private cards and the absence of a sixth-card tiebreaker without confusing hand construction with permission to check.",
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/first-decisions/#chips-owed"
+        ]
+      ],
+      "expected_rank": [
+        4,
+        11
+      ],
+      "call": {
+        "to": 8,
+        "paid": 0,
+        "answer": 8
+      },
+      "action": {
+        "owed": 8,
+        "check_allowed": false,
+        "legal_actions": [
+          "fold",
+          "call",
+          "raise"
+        ]
+      }
+    },
+    {
+      "id": "S1-K",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "Two players at the river",
+      "hero": [
+        "9h",
+        "7d"
+      ],
+      "board": [
+        "Kd",
+        "Qd",
+        "9s",
+        "6h",
+        "2s"
+      ],
+      "setup": "The river has been dealt in this fictional hand with 1/2 blinds and two players remaining. Your opponent acts first and checks. You have not acted this river, and each player has at least 40 counters behind. There are no all-ins or side pots.",
+      "prompt": "How many new counters are owed at this moment? Name the actions that keep your hand live. If you choose to check, what happens next, and does declining to bet mean that you have folded?",
+      "points": [
+        "You owe zero counters because no river wager has been made.",
+        "You may check or make a legal bet; a call or raise would require an existing wager.",
+        "If you check, both players have checked the final street and the hand proceeds to showdown; checking did not fold your cards."
+      ],
+      "misconception": "Confusing a river check with surrendering the hand or expecting another shared card after the river.",
+      "repair": "/poker/first-decisions/#round-complete",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#legal-actions",
+        "/poker/turn-and-river-decisions/#checking-behind"
+      ],
+      "focus": "A check completes the final betting round",
+      "design_note": "This moves the no-wager decision to the final street and asks the learner to distinguish showdown from folding or dealing another card.",
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/first-decisions/#legal-actions"
+        ]
+      ],
+      "expected_rank": [
+        1,
+        9,
+        13,
+        12,
+        7
+      ],
+      "call": {
+        "to": 0,
+        "paid": 0,
+        "answer": 0
+      },
+      "action": {
+        "owed": 0,
+        "check_allowed": true,
+        "legal_actions": [
+          "check",
+          "bet"
+        ]
+      }
+    },
+    {
+      "id": "S1-L",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "A flop bet and a caller",
+      "hero": [
+        "9s",
+        "6d"
+      ],
+      "board": [
+        "Qc",
+        "9c",
+        "4h"
+      ],
+      "setup": "This fictional hand with 1/2 blinds has three players left: the big blind, the cutoff and you on the button. Each began the flop with 100 counters. The big blind bets 6 and the cutoff calls 6. You have contributed nothing on the flop, and it is your turn. There are no all-ins or side pots.",
+      "prompt": "How much does calling add, and should the other caller's payment be added to your price? What responses are available? If you only call, does that finish this flop round, and does it pay for all later cards?",
+      "points": [
+        "Calling adds 6 counters, not 12; each player matches the current wager rather than the sum of other players' contributions.",
+        "Your response families are fold, call or legal raise; checking cannot match the bet.",
+        "A call here completes the flop round, but later streets can create new wagers and new costs before showdown."
+      ],
+      "misconception": "Adding every opponent payment to the call price or treating a completed flop call as a ticket to every remaining card.",
+      "repair": "/poker/first-decisions/#chips-owed",
+      "point_repairs": [
+        "/poker/first-decisions/#chips-owed",
+        "/poker/first-decisions/#legal-actions",
+        "/poker/first-decisions/#round-complete"
+      ],
+      "focus": "A completed call does not prepay later streets",
+      "design_note": "This distinguishes the price of one multiway call, completion of the current round, and possible costs on later streets.",
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/starting-hand-decisions/#price-and-action"
+        ]
+      ],
+      "expected_rank": [
+        1,
+        9,
+        12,
+        6,
+        4
+      ],
+      "call": {
+        "to": 6,
+        "paid": 0,
+        "answer": 6
+      },
+      "action": {
+        "owed": 6,
+        "check_allowed": false,
+        "legal_actions": [
+          "fold",
+          "call",
+          "raise"
+        ]
+      }
+    },
+    {
       "id": "S2-A",
       "skill": "S2",
       "lesson": "starting-hand-decisions",
@@ -132,6 +668,581 @@
         "/poker/first-decisions/#legal-actions"
       ],
       "board_note": "not shown (the flop is dealt)"
+    },
+    {
+      "id": "S2-C",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "Two folds before the cutoff",
+      "hero": [
+        "Th",
+        "8d"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every player began with 100 counters; there are no all-ins. You are the cutoff. Under the gun folds and the hijack folds. No other voluntary action has occurred.",
+      "prompt": "Whose turn is next? Name, in order, the other players who still have an initial decision after yours. If you enter the pot, do the two folds establish the private cards or future choices of the players still behind?",
+      "points": [
+        "The cutoff acts next, after the folds from under the gun and the hijack.",
+        "The button, small blind and big blind still have their initial decisions, in that order.",
+        "Those folds do not establish the private cards or future responses of the three players still behind you."
+      ],
+      "misconception": "Treating earlier folds as though the whole table had already yielded the pot or revealed the remaining hands.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position"
+      ],
+      "focus": "Pending seats after earlier folds",
+      "design_note": "This identifies the remaining initial decisions at the cutoff and separates observed folds from unknown actions still behind.",
+      "action_order": {
+        "stage": "preflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "button",
+          "small blind",
+          "big blind",
+          "cutoff"
+        ],
+        "folded": [
+          "under the gun",
+          "hijack"
+        ],
+        "acted": [],
+        "next": "cutoff",
+        "hero": "cutoff",
+        "responders": [
+          "button",
+          "small blind",
+          "big blind"
+        ]
+      }
+    },
+    {
+      "id": "S2-D",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "A raiser and caller before the small blind",
+      "hero": [
+        "Ad",
+        "Tc"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every player began with 100 counters; there are no all-ins. You are the small blind. Under the gun and the hijack fold, the cutoff raises to 8, and the button calls 8. The big blind has only posted its blind.",
+      "prompt": "Who acts next, and who still has an initial decision after you? If you call, is the current preflop round necessarily finished? If all four remaining players see the flop, give their full initial action order on that new street.",
+      "points": [
+        "The small blind acts next, with the big blind still to take its initial decision.",
+        "Your call does not necessarily finish preflop action because the big blind can make a legal raise and return action to earlier players.",
+        "If all four see the flop, the small blind acts first after the fixed dealer button, followed by the big blind, cutoff and button."
+      ],
+      "misconception": "Assuming a small-blind call closes action because several other players already contributed.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#price-and-action",
+        "/poker/starting-hand-decisions/#position"
+      ],
+      "focus": "A small-blind call leaves action behind",
+      "design_note": "This places the learner between completed voluntary entries and an unacted blind, then asks how the order changes on the flop.",
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/first-decisions/#round-complete"
+        ],
+        []
+      ],
+      "action_order": {
+        "stage": "preflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "button",
+          "small blind",
+          "big blind",
+          "cutoff"
+        ],
+        "folded": [
+          "under the gun",
+          "hijack"
+        ],
+        "acted": [
+          "cutoff",
+          "button"
+        ],
+        "next": "small blind",
+        "hero": "small blind",
+        "responders": [
+          "big blind"
+        ]
+      }
+    },
+    {
+      "id": "S2-E",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "A raise reaches the big blind",
+      "hero": [
+        "Kh",
+        "Jd"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every player began with 100 counters; there are no all-ins. You are the big blind. Under the gun and the hijack fold, the cutoff raises to 6, and both the button and small blind fold.",
+      "prompt": "Who has the next decision, and is any other initial response still pending? If you only call, does that complete preflop action? If you both see the flop, state the order there and explain whether acting last preflop makes you last postflop.",
+      "points": [
+        "The big blind has the next decision; the cutoff already raised and every other seat has folded.",
+        "A call matches the only opponent's wager and completes this preflop round, assuming no new raise.",
+        "On the flop the big blind acts before the cutoff; the last initial preflop decision does not make you last on the next street."
+      ],
+      "misconception": "Carrying the big blind's last preflop turn into the postflop order.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#price-and-action",
+        "/poker/starting-hand-decisions/#position"
+      ],
+      "focus": "Last preflop versus first postflop",
+      "design_note": "This contrasts a genuinely closing big-blind call with the learner's earlier position on the following street.",
+      "action_order": {
+        "stage": "preflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "big blind",
+          "cutoff"
+        ],
+        "folded": [
+          "button",
+          "small blind",
+          "under the gun",
+          "hijack"
+        ],
+        "acted": [
+          "cutoff"
+        ],
+        "next": "big blind",
+        "hero": "big blind",
+        "responders": []
+      }
+    },
+    {
+      "id": "S2-F",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "Three seats reach the flop",
+      "hero": [
+        "8h",
+        "7s"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every remaining player has at least 50 counters behind; there are no all-ins or side pots. You are the hijack. Both blinds and under the gun folded before the flop. Only you, the cutoff and the button remain. The flop is dealt and nobody has acted on it.",
+      "prompt": "Who acts first, next and last on this flop? Which seats must be skipped? Would whichever player acted last preflop automatically get the first flop decision? Explain the rule you use.",
+      "points": [
+        "The hijack acts first, skipping the folded small blind, big blind and under-the-gun seats clockwise after the button.",
+        "The cutoff follows the hijack, and the button has the last initial flop decision.",
+        "The new street starts with the first remaining player clockwise after the dealer button, not automatically with the last preflop actor."
+      ],
+      "misconception": "Starting a new street at a folded blind or at the last preflop actor.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position",
+        "/poker/first-decisions/#turn-order"
+      ],
+      "focus": "Skip folded early seats on a new street",
+      "design_note": "This removes both blinds and the earliest remaining seat, requiring the learner to find the postflop starting point from the fixed button.",
+      "board_note": "not shown (the flop is dealt)",
+      "action_order": {
+        "stage": "postflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "button",
+          "hijack",
+          "cutoff"
+        ],
+        "folded": [
+          "small blind",
+          "big blind",
+          "under the gun"
+        ],
+        "acted": [],
+        "next": "hijack",
+        "hero": "hijack",
+        "responders": [
+          "cutoff",
+          "button"
+        ]
+      }
+    },
+    {
+      "id": "S2-G",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "Two remaining seats with the button folded",
+      "hero": [
+        "Kc",
+        "8h"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every remaining player has at least 50 counters behind; there are no all-ins or side pots. You are the hijack. The button, both blinds and under the gun folded before the flop. Only you and the cutoff remain. The flop is dealt and no flop action has occurred.",
+      "prompt": "Who acts first and second? Which player has the last initial flop decision, and does that make that player the dealer button? What information does acting later provide, and what does it leave unknown?",
+      "points": [
+        "The hijack acts first and the cutoff acts second, following the original clockwise order while skipping folded seats.",
+        "The cutoff has the last initial flop decision among the survivors, but does not become the dealer button during this hand.",
+        "Acting later lets the cutoff observe your action before deciding; it does not reveal your private cards or prove which holding you have."
+      ],
+      "misconception": "Moving the dealer button after folds or treating position as knowledge of an opponent's private cards.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/first-decisions/#turn-order",
+        "/poker/starting-hand-decisions/#position"
+      ],
+      "focus": "Relative position when the button folded",
+      "design_note": "This distinguishes being last among the remaining players from occupying the button, while limiting what acting later actually reveals.",
+      "board_note": "not shown (the flop is dealt)",
+      "action_order": {
+        "stage": "postflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "hijack",
+          "cutoff"
+        ],
+        "folded": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun"
+        ],
+        "acted": [],
+        "next": "hijack",
+        "hero": "hijack",
+        "responders": [
+          "cutoff"
+        ]
+      }
+    },
+    {
+      "id": "S2-H",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "A small-blind check on the flop",
+      "hero": [
+        "Qd",
+        "Td"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every remaining player has at least 50 counters behind; there are no all-ins or side pots. You are the big blind. Under the gun, the hijack and the cutoff folded before the flop. Only the small blind, you and the button remain. On the flop, the small blind checks. No other flop action has occurred.",
+      "prompt": "Whose turn is next? Which player still follows your first decision? If you also check, is the betting round over, or can another action still create a decision for you? Explain.",
+      "points": [
+        "The big blind acts next, immediately after the small blind's check in the remaining clockwise order.",
+        "The button still has its initial flop decision after yours.",
+        "Your check would not end the round because the button still has a turn and may bet, returning a decision to the earlier checkers."
+      ],
+      "misconception": "Skipping an unacted seat or ending a multiway round before the last player has had an opportunity.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position",
+        "/poker/first-decisions/#round-complete"
+      ],
+      "focus": "A check advances action without skipping a seat",
+      "design_note": "This begins after one postflop action and requires preserving the unacted player behind rather than declaring two checks complete.",
+      "board_note": "not shown (the flop is dealt)",
+      "action_order": {
+        "stage": "postflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "button",
+          "small blind",
+          "big blind"
+        ],
+        "folded": [
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "acted": [
+          "small blind"
+        ],
+        "next": "big blind",
+        "hero": "big blind",
+        "responders": [
+          "button"
+        ]
+      }
+    },
+    {
+      "id": "S2-I",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "A flop bet before the cutoff",
+      "hero": [
+        "Jd",
+        "7c"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every remaining player has at least 50 counters behind; there are no all-ins or side pots. You are the cutoff and made the last raise preflop. The big blind and button called; the other seats folded. On the flop the big blind bets 5. You and the button have not acted on the flop.",
+      "prompt": "Who responds next and who follows that player? Does your preflop raise change the clockwise flop order or require opponents to check to you? If you call, could the remaining player still return the action to you?",
+      "points": [
+        "The cutoff responds next, and the button follows; the big blind has already made the opening flop action.",
+        "Being the preflop raiser does not change seat order or require an earlier postflop player to check.",
+        "If you call, the button can still make a legal raise, which can return action to you after the big blind responds."
+      ],
+      "misconception": "Assuming the prior raiser owns the first postflop action or that calling before the button closes the round.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/first-decisions/#turn-order",
+        "/poker/first-decisions/#round-complete"
+      ],
+      "focus": "Preflop aggression does not assign the next turn",
+      "design_note": "This puts the prior raiser after an opponent's flop bet and before another unacted player, separating betting history from seat order.",
+      "board_note": "not shown (the flop is dealt)",
+      "action_order": {
+        "stage": "postflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "button",
+          "big blind",
+          "cutoff"
+        ],
+        "folded": [
+          "small blind",
+          "under the gun",
+          "hijack"
+        ],
+        "acted": [
+          "big blind"
+        ],
+        "next": "cutoff",
+        "hero": "cutoff",
+        "responders": [
+          "button"
+        ]
+      }
+    },
+    {
+      "id": "S2-J",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "Six players before the first decision",
+      "hero": [
+        "7h",
+        "5c"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every player began with 100 counters; there are no all-ins. You are under the gun. The cards have been dealt. The small blind has posted 1 and the big blind has posted 2; no player has folded, called or raised.",
+      "prompt": "Which seat acts first and why? List the five seats that follow your first decision in order. Did either blind post already count as that player's voluntary decision?",
+      "points": [
+        "Under the gun acts first preflop, as the first seat clockwise after the big blind.",
+        "The remaining initial order is hijack, cutoff, button, small blind and big blind.",
+        "Neither forced blind post is a voluntary decision; both blind seats still have their initial opportunity to act."
+      ],
+      "misconception": "Starting preflop at the dealer button or skipping the blinds because they already placed counters.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/first-decisions/#turn-order",
+        "/poker/starting-hand-decisions/#position",
+        "/poker/first-decisions/#turn-order"
+      ],
+      "focus": "Locate the initial preflop starting seat",
+      "design_note": "This starts before any voluntary action and requires reconstructing the complete initial order, including the unacted blind seats.",
+      "action_order": {
+        "stage": "preflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "folded": [],
+        "acted": [],
+        "next": "under the gun",
+        "hero": "under the gun",
+        "responders": [
+          "hijack",
+          "cutoff",
+          "button",
+          "small blind",
+          "big blind"
+        ]
+      }
+    },
+    {
+      "id": "S2-K",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "The action reaches the two blinds",
+      "hero": [
+        "5s",
+        "4d"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every player began with 100 counters; there are no all-ins. You are the small blind. Under the gun, the hijack, the cutoff and the button all fold. Only you and the big blind remain.",
+      "prompt": "Who acts now and who still follows? If both blinds continue to the flop, who acts first on it? Should the dealer button move during this hand because only two players remain? Explain.",
+      "points": [
+        "The small blind acts now, followed by the big blind in this initial preflop order.",
+        "If both continue, the small blind also acts first on the flop, with the big blind second.",
+        "The button remains at its original seat; a six-player hand reduced to two survivors does not acquire the special starting order of a table dealt heads-up."
+      ],
+      "misconception": "Applying the heads-up button exception midway through a six-player hand.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/first-decisions/#turn-order",
+        "/poker/first-decisions/#turn-order"
+      ],
+      "focus": "Two survivors do not change the original positions",
+      "design_note": "This contrasts two surviving blinds from a six-player hand with the special order of a hand originally dealt to a heads-up table.",
+      "action_order": {
+        "stage": "preflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "small blind",
+          "big blind"
+        ],
+        "folded": [
+          "button",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "acted": [],
+        "next": "small blind",
+        "hero": "small blind",
+        "responders": [
+          "big blind"
+        ]
+      }
+    },
+    {
+      "id": "S2-L",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "A raise and call before the cutoff",
+      "hero": [
+        "Qc",
+        "7s"
+      ],
+      "board": [],
+      "setup": "This fictional hand began with six players. Seats clockwise, starting at the dealer button, are button, small blind, big blind, under the gun, hijack and cutoff. Blinds are 1/2, with no ante or fees. Every player began with 100 counters; there are no all-ins. You are the cutoff. Under the gun raises to 8 and the hijack calls 8. No other voluntary action has occurred.",
+      "prompt": "Whose turn is next? Which players still have an initial decision after you, and can one of them change the wager? Is this an unopened pot for selecting a preflop reference? Explain which earlier action must be retained in the record.",
+      "points": [
+        "The cutoff acts next, after the under-the-gun raise and hijack call.",
+        "The button, small blind and big blind still follow, and a legal raise by one of them can create another decision for earlier players.",
+        "This pot already has a voluntary raise and call; an unopened-cutoff reference omits that action and does not describe this decision."
+      ],
+      "misconception": "Using an unopened-pot reference simply because the current player occupies the cutoff.",
+      "repair": "/poker/starting-hand-decisions/#position",
+      "point_repairs": [
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#position",
+        "/poker/starting-hand-decisions/#earlier-action"
+      ],
+      "focus": "Combine seat order with earlier voluntary action",
+      "design_note": "This keeps the cutoff seat but replaces folds with a raise and call, requiring a different action context rather than a position-only label.",
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/first-decisions/#round-complete"
+        ],
+        []
+      ],
+      "action_order": {
+        "stage": "preflop",
+        "seats": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "active": [
+          "button",
+          "small blind",
+          "big blind",
+          "under the gun",
+          "hijack",
+          "cutoff"
+        ],
+        "folded": [],
+        "acted": [
+          "under the gun",
+          "hijack"
+        ],
+        "next": "cutoff",
+        "hero": "cutoff",
+        "responders": [
+          "button",
+          "small blind",
+          "big blind"
+        ]
+      }
     },
     {
       "id": "S3-A",
@@ -218,6 +1329,532 @@
         ],
         [],
         []
+      ]
+    },
+    {
+      "id": "S3-C",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "A flop after a check",
+      "hero": [
+        "4h",
+        "2h"
+      ],
+      "board": [
+        "Jh",
+        "9h",
+        "7h"
+      ],
+      "setup": "In this fictional hand, the flop is dealt and the other player checks. No bet has been made on this flop.",
+      "prompt": "Name your best five-card hand now. How many hearts can you use, and does your hand need another heart to qualify as a flush? Does this hand description establish that you are ahead of every possible opponent? Explain.",
+      "points": [
+        "Your best five are jack, nine, seven, four and two of hearts, a jack-high flush.",
+        "All five available cards are hearts. The flush is already complete; another heart is not needed to make the category.",
+        "A completed flush is not proof that you are ahead. An opponent can hold higher hearts that make a stronger flush on this same board."
+      ],
+      "misconception": "Treating every suited hand as unfinished, or treating a completed flush as a guaranteed winner.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        5,
+        11,
+        9,
+        7,
+        4,
+        2
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/hand-rankings/#ties"
+      ],
+      "focus": "Five available hearts already make a flush",
+      "design_note": "Unlike the four-suit-card draws in A and B, this case requires recognizing a completed flush while keeping completion separate from a guaranteed lead.",
+      "draw": {
+        "suit": "h",
+        "suit_count": 5,
+        "completion_ranks": []
+      },
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#ties"
+        ],
+        [],
+        [
+          "/poker/first-flop-decisions/#shared-improvement"
+        ]
+      ]
+    },
+    {
+      "id": "S3-D",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Jack and ten on a new flop",
+      "hero": [
+        "Jd",
+        "Th"
+      ],
+      "board": [
+        "9c",
+        "8s",
+        "2d"
+      ],
+      "setup": "Only your private cards and these three shared flop cards are known in this fictional hand. All other card locations are unknown.",
+      "prompt": "Name your best five now. Which next-card ranks would complete a straight, and how many physical cards of those ranks are not among the known cards? Would drawing one of those cards prove that you will win the hand? Explain.",
+      "points": [
+        "Your made hand is jack-high: jack, ten, nine, eight and two. Four consecutive ranks do not yet make a five-card straight.",
+        "A seven or a queen completes a straight on the next card. None is known, so the four sevens and four queens give eight physical completion cards.",
+        "Completing a straight is an improvement, not a guaranteed win. Opposing cards and any later shared card still affect the showdown."
+      ],
+      "misconception": "Calling four consecutive ranks a straight or treating eight completion cards as eight guaranteed winning cards.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        0,
+        11,
+        10,
+        9,
+        8,
+        2
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#straight-completions",
+        "/poker/first-flop-decisions/#straight-completions"
+      ],
+      "focus": "Two ranks can complete the straight",
+      "design_note": "This replaces suit counting with an explicit two-ended straight completion count and separates improvement from winning.",
+      "draw": {
+        "suit": null,
+        "suit_count": 0,
+        "completion_ranks": [
+          "7",
+          "Q"
+        ]
+      },
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "S3-E",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "King and queen on a new flop",
+      "hero": [
+        "Ks",
+        "Qc"
+      ],
+      "board": [
+        "9h",
+        "Tc",
+        "3d"
+      ],
+      "setup": "Only your two private cards and the displayed flop are known in this fictional hand. All other card locations are unknown.",
+      "prompt": "What is your strongest five-card hand now? Which next-card rank completes a straight, and how many physical cards of that rank are unaccounted for? Would an eight also complete a straight? Show the ranks that support your answer.",
+      "points": [
+        "Your current hand is king-high: king, queen, ten, nine and three, with no completed straight.",
+        "A jack fills the gap between ten and queen, making nine, ten, jack, queen and king. All four jacks are outside the known cards.",
+        "An eight leaves eight, nine, ten, queen and king with the jack still missing. It does not produce five consecutive ranks."
+      ],
+      "misconception": "Counting an endpoint card that leaves an internal gap as a straight completion.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        0,
+        13,
+        12,
+        10,
+        9,
+        3
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#straight-completions",
+        "/poker/first-flop-decisions/#straight-completions"
+      ],
+      "focus": "One internal rank is missing from the straight",
+      "design_note": "This contrasts with the two-ended case by requiring a missing internal rank and rejecting a plausible but incomplete sequence.",
+      "draw": {
+        "suit": null,
+        "suit_count": 0,
+        "completion_ranks": [
+          "J"
+        ]
+      },
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "S3-F",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Ace and two with three shared cards",
+      "hero": [
+        "As",
+        "2d"
+      ],
+      "board": [
+        "3c",
+        "4h",
+        "5s"
+      ],
+      "setup": "The flop is dealt in a fictional hand. Use the five displayed cards to describe the hand already present.",
+      "prompt": "Name your strongest current five-card hand. Explain how the ace is used when naming that hand's strength. Compare your hand with a six-high straight: which hand is stronger, and why?",
+      "points": [
+        "Ace, two, three, four and five already make a straight; no further card is needed to complete it.",
+        "The ace works below the two in this sequence, so this is a five-high straight, also called a wheel.",
+        "A six-high straight wins the comparison. The ace does not act as a high kicker or raise the height of this five-high straight."
+      ],
+      "misconception": "Treating an ace-low straight as ace-high or adding a kicker to compare straights.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        4,
+        5
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/hand-rankings/#compare",
+        "/poker/hand-rankings/#compare"
+      ],
+      "focus": "An ace can complete a five-high straight",
+      "design_note": "This adds a completed straight whose ace must be read low, rather than another unfinished suit draw.",
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "S3-G",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Ace and eight after the flop is checked",
+      "hero": [
+        "Ah",
+        "8h"
+      ],
+      "board": [
+        "Kh",
+        "7c",
+        "2d"
+      ],
+      "setup": "In a fictional heads-up hand, the opponent checks this flop before you act. Both players have ample counters, and neither is all-in.",
+      "prompt": "Name your current five-card hand. Count the hearts and explain how many later hearts would be needed for a flush, including whether a single heart on the turn would finish it. If you check now, have you secured both later shared cards without any possible further payment? Explain.",
+      "points": [
+        "Your current hand is ace-high: ace, king, eight, seven and two, with no pair or flush.",
+        "Three hearts are available. Both the turn and river would have to be hearts to make five; one turn heart would leave only four.",
+        "Checking behind ends this flop betting round, but a turn bet can create another payment decision. It does not secure both later cards without any further bet."
+      ],
+      "misconception": "Treating three suited cards as a one-card flush draw or a flop check as payment for all future cards.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        0,
+        14,
+        13,
+        8,
+        7,
+        2
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#paying-again"
+      ],
+      "focus": "Three hearts need two future shared hearts",
+      "design_note": "This tests the two-card requirement of a backdoor flush possibility and connects it to the possibility of a later payment.",
+      "draw": {
+        "suit": "h",
+        "suit_count": 3,
+        "completion_ranks": []
+      },
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        [
+          "/poker/first-flop-decisions/#whose-turn"
+        ]
+      ]
+    },
+    {
+      "id": "S3-H",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Pocket sixes and a queen on the flop",
+      "hero": [
+        "6d",
+        "6c"
+      ],
+      "board": [
+        "Qh",
+        "6s",
+        "2h"
+      ],
+      "setup": "This fictional hand has reached the flop. Your two private cards and the three shared cards are the only cards shown.",
+      "prompt": "Name your best five-card hand. Count the hearts available to you: if both remaining shared cards were hearts, how many hearts could you then use, and would that make a flush? Does your current made hand prove that no possible opponent is ahead? Explain.",
+      "points": [
+        "Your two private sixes and the shared six make three of a kind, with queen and two as the other cards.",
+        "You have two hearts available, both shared. Even two more hearts would give only four, so these private cards cannot make a heart flush on this board.",
+        "Three sixes are not a guaranteed lead. An opponent with two queens can have three queens, which outrank your three sixes."
+      ],
+      "misconception": "Overlooking the third matching rank or assuming two hearts on the board let every holding complete a heart flush.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        3,
+        6,
+        12,
+        2
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/hand-rankings/#compare"
+      ],
+      "focus": "Three matching sixes and insufficient hearts",
+      "design_note": "This adds three of a kind and a suit-count impossibility, rather than assuming every visible pair of suited cards gives the learner a flush draw.",
+      "draw": {
+        "suit": "h",
+        "suit_count": 2,
+        "completion_ranks": []
+      },
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "S3-I",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Ace and jack on the final board",
+      "hero": [
+        "Ac",
+        "Jd"
+      ],
+      "board": [
+        "8c",
+        "8d",
+        "8h",
+        "Ks",
+        "2c"
+      ],
+      "setup": "The river is dealt in this fictional open-card comparison. Consider each candidate holding separately against your hand.",
+      "prompt": "Name your best five, including both side cards. Does your private jack belong in that best five, and why? Compare your final hand with each candidate: do the three shared eights force everyone to tie?",
+      "points": [
+        "Your best five are three eights, ace and king: three of a kind with ace and king kickers.",
+        "The shared king is higher than your private jack, so the jack is omitted. You use only the private ace alongside four shared cards.",
+        "Candidate 1 also has eights with ace and king and ties you. Candidate 2 has eights with king and queen and loses; shared three of a kind does not force equal kickers."
+      ],
+      "misconception": "Using both private cards automatically or declaring a tie before comparing the side cards.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        3,
+        8,
+        14,
+        13
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/hand-rankings/#compare",
+        "/poker/hand-rankings/#compare"
+      ],
+      "focus": "Shared three of a kind still requires kicker comparison",
+      "design_note": "This moves the made-hand check to shared three of a kind, where one private card is displaced and opposing side cards determine ties.",
+      "candidates": [
+        [
+          "Ah",
+          "Qd"
+        ],
+        [
+          "Qh",
+          "Td"
+        ]
+      ],
+      "expected_comparisons": [
+        "tie",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S3-J",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Pocket kings with three shared cards",
+      "hero": [
+        "Kh",
+        "Kd"
+      ],
+      "board": [
+        "Ks",
+        "8c",
+        "8d"
+      ],
+      "setup": "Use your private cards with this fictional flop. For the last question, compare the five-card categories as stated.",
+      "prompt": "Name your best five-card hand. Are the two eights unused kickers, or do they form part of the hand category? Compare your hand with a full house containing three eights and two kings: which matching rank is compared first, and which hand is stronger?",
+      "points": [
+        "Your five cards are king, king, king, eight and eight: kings full of eights, a full house.",
+        "The two eights are the pair needed alongside the three kings to make a full house; they are not unused kickers.",
+        "Full houses compare the rank of the three matching cards first. Three kings outrank three eights, so kings full of eights beats eights full of kings."
+      ],
+      "misconception": "Describing a full house as only three of a kind or comparing its pair before its three matching cards.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        6,
+        13,
+        8
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/hand-rankings/#compare",
+        "/poker/hand-rankings/#compare"
+      ],
+      "focus": "Full houses compare the three matching cards first",
+      "design_note": "This adds a full house and its comparison rule, extending the made-hand identification beyond the pair and high-card examples.",
+      "point_extra_repairs": [
+        [
+          "/poker/first-flop-decisions/#made-and-drawing"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "S3-K",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Pocket sevens on the final board",
+      "hero": [
+        "7h",
+        "7d"
+      ],
+      "board": [
+        "Ac",
+        "Ad",
+        "Kc",
+        "Kh",
+        "2s"
+      ],
+      "setup": "The river is dealt in a fictional hand. Consider each candidate holding separately as an open-card comparison.",
+      "prompt": "Choose your best five. Is your private pair of sevens one of the pairs used, and what role can a seven still play? Compare your hand with each candidate and explain the card that decides each result.",
+      "points": [
+        "Your best five are ace, ace, king, king and seven: aces and kings with a seven kicker.",
+        "The two higher shared pairs take four places. Your pair of sevens is not used as a pair, but one seven improves the final side card above the shared two.",
+        "Candidate 1 uses a queen kicker with the same aces and kings and beats you. Candidate 2 uses a six kicker with those pairs and loses to your seven."
+      ],
+      "misconception": "Keeping a private pair in the best five when two higher shared pairs replace it.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        2,
+        14,
+        13,
+        7
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#counterfeited",
+        "/poker/first-flop-decisions/#counterfeited",
+        "/poker/hand-rankings/#compare"
+      ],
+      "focus": "Two higher board pairs replace the private pair",
+      "design_note": "This requires rebuilding the final five after two shared pairs displace a private pair, with that private rank surviving only as a kicker.",
+      "candidates": [
+        [
+          "Qs",
+          "9d"
+        ],
+        [
+          "6c",
+          "5d"
+        ]
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "S3-L",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "Ten and five on the final board",
+      "hero": [
+        "Th",
+        "5c"
+      ],
+      "board": [
+        "Ah",
+        "Qh",
+        "7h",
+        "Qs",
+        "2h"
+      ],
+      "setup": "This fictional hand has reached the river. Examine each opposing candidate separately; the displayed holdings are examples for comparing final hands.",
+      "prompt": "Name your best five-card hand. What hand does Candidate 1 make from its private cards and the shared board, and which hand wins? Compare Candidate 2 with your hand, then explain whether your final hand alone establishes that you are ahead.",
+      "points": [
+        "Your best five are ace, queen, ten, seven and two of hearts, an ace-high flush. The private ten joins four shared hearts; the private five is unused.",
+        "Candidate 1 joins its queen to the two shared queens and its seven to the shared seven, making queens full of sevens. That full house beats your flush.",
+        "Candidate 2 makes a lower flush, ace, queen, nine, seven and two of hearts. Your flush wins at the first different rank, ten versus nine. The completed flush therefore does not establish the result against every possible holding."
+      ],
+      "misconception": "Treating the completion of a flush as the same event as winning against any opponent.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        5,
+        14,
+        12,
+        10,
+        7,
+        2
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/first-flop-decisions/#shared-improvement",
+        "/poker/hand-rankings/#ties"
+      ],
+      "focus": "One private heart makes a flush that can lose",
+      "design_note": "This uses one private heart and four shared hearts, then compares the flush with a full house assembled from two different private ranks and with a lower flush.",
+      "candidates": [
+        [
+          "Qd",
+          "7s"
+        ],
+        [
+          "9h",
+          "8c"
+        ]
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#ties"
+        ],
+        [
+          "/poker/hand-rankings/#rankings"
+        ],
+        [
+          "/poker/first-flop-decisions/#shared-improvement"
+        ]
       ]
     },
     {
@@ -326,6 +1963,678 @@
         ],
         [],
         []
+      ]
+    },
+    {
+      "id": "S4-C",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Two low private cards at the river",
+      "hero": [
+        "2c",
+        "3d"
+      ],
+      "board": [
+        "As",
+        "Kd",
+        "Qh",
+        "Jc",
+        "Ts"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 24 counters before the opponent bets 6. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. Consider each displayed candidate separately.",
+      "prompt": "Choose your best five and say how many private cards it uses. What does calling cost, what is the final pot, and what fraction is the call? Against each displayed candidate, do you win outright, tie or lose, and what share of the pot does a tie give you? Is the call fraction your chance of winning outright?",
+      "points": [
+        "The shared board supplies ace, king, queen, jack and ten, an ace-high straight. Neither private card is used.",
+        "Calling adds 6 and makes 24 + 6 + 6 = 36 counters. The call is 6/36 = 1/6, about 16.67%, of the final pot.",
+        "Both candidates tie your straight, giving you half the pot rather than an outright win. The 1/6 price is a break-even share for the call model, not your chance of winning outright."
+      ],
+      "misconception": "Treating zero outright wins as zero pot share or using private cards to break a shared straight tie.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        4,
+        14
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#shared-pot"
+      ],
+      "focus": "A shared straight returns a tie share",
+      "design_note": "Unlike the original one-pair river cases, this uses no private cards and separates a guaranteed split in the shown comparisons from winning the pot outright.",
+      "river": {
+        "pot_before": 24,
+        "bet": 6,
+        "paid": 0,
+        "call": 6,
+        "after": 36,
+        "num": 1,
+        "den": 6
+      },
+      "candidates": [
+        [
+          "8h",
+          "8d"
+        ],
+        [
+          "Ac",
+          "7c"
+        ]
+      ],
+      "expected_comparisons": [
+        "tie",
+        "tie"
+      ],
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/hand-rankings/#compare"
+        ]
+      ]
+    },
+    {
+      "id": "S4-D",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "King and jack facing a river bet",
+      "hero": [
+        "Kh",
+        "Jd"
+      ],
+      "board": [
+        "Kc",
+        "9h",
+        "6d",
+        "4s",
+        "2c"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 20 counters before the opponent bets 10. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. The three candidate holdings below are separate comparison examples.",
+      "prompt": "Name your best five and classify each candidate as ahead of you, behind you, or tied. Find the call cost, final pot and call fraction. Can counting the three example outcomes establish your equity against this bettor? Explain what the count leaves out.",
+      "points": [
+        "Your best five are king, king, jack, nine and six. Candidate 1 has a lower kicker and loses, Candidate 2 ties, and Candidate 3 makes three nines and beats you.",
+        "A call costs 10 and makes 20 + 10 + 10 = 40. The price is 10/40 = 1/4, or 25%, of the final pot.",
+        "One win example, one tie example and one loss example do not define the bettor's range or its frequencies. Equal weighting was not established, so the examples do not measure your equity or justify a call."
+      ],
+      "misconception": "Treating a list with one win, one tie and one loss as three equally likely outcomes.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        1,
+        13,
+        11,
+        9,
+        6
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/ranges-for-beginners/#equal-weights"
+      ],
+      "focus": "Win, tie and loss examples are not a distribution",
+      "design_note": "This adds a tied candidate and tests whether the learner keeps unweighted outcome examples separate from the equity needed for the price comparison.",
+      "river": {
+        "pot_before": 20,
+        "bet": 10,
+        "paid": 0,
+        "call": 10,
+        "after": 40,
+        "num": 1,
+        "den": 4
+      },
+      "candidates": [
+        [
+          "Ks",
+          "8d"
+        ],
+        [
+          "Kd",
+          "Jh"
+        ],
+        [
+          "9c",
+          "9s"
+        ]
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "tie",
+        "stronger"
+      ],
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/turn-and-river-decisions/#catching-a-bluff"
+        ]
+      ]
+    },
+    {
+      "id": "S4-E",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Ace and two facing a river bet",
+      "hero": [
+        "As",
+        "2d"
+      ],
+      "board": [
+        "3c",
+        "4h",
+        "5d",
+        "Qh",
+        "9s"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 42 counters before the opponent bets 21. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. Compare the two candidate holdings separately after working out the call price.",
+      "prompt": "Name your best five and explain how the ace is used. What does a call cost, what final pot would it make, and what is the call fraction? Compare the candidates with your hand: does each produce a whole-pot win, a tie, or a loss for you, and what share would you receive in any comparison that ties?",
+      "points": [
+        "Your best hand is ace, two, three, four and five, a five-high straight. The ace is low in this sequence.",
+        "Calling costs 21 and makes 42 + 21 + 21 = 84. The call is 21/84 = 1/4, or 25%, of the final pot.",
+        "Candidate 1 makes a seven-high straight and wins. Candidate 2 ties your five-high straight, so you receive half of 84, or 42 counters, in that comparison. A tie contributes a half share, not a whole-pot win."
+      ],
+      "misconception": "Comparing an ace-low straight as though its ace were high, or crediting a tied hand with the whole pot.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        4,
+        5
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#shared-pot"
+      ],
+      "focus": "A low straight can lose or split",
+      "design_note": "This integrates ace-low straight ranking with the distinction between a tied pot share and an outright win.",
+      "river": {
+        "pot_before": 42,
+        "bet": 21,
+        "paid": 0,
+        "call": 21,
+        "after": 84,
+        "num": 1,
+        "den": 4
+      },
+      "candidates": [
+        [
+          "6c",
+          "7d"
+        ],
+        [
+          "Ac",
+          "2s"
+        ]
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "tie"
+      ],
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/hand-rankings/#compare"
+        ]
+      ]
+    },
+    {
+      "id": "S4-F",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Pocket eights on the final board",
+      "hero": [
+        "8h",
+        "8d"
+      ],
+      "board": [
+        "Ac",
+        "Ad",
+        "Kc",
+        "Kh",
+        "3s"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 60 counters before the opponent bets 15. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. The candidates are separate examples of possible opposing cards.",
+      "prompt": "Choose your final best five and explain the role of your private eights. Find the extra call, final pot and call fraction. Which candidates beat, tie or lose to you, and is the label \"two pair\" sufficient to decide whether to call?",
+      "points": [
+        "Your best five are ace, ace, king, king and eight. The board's two higher pairs replace your private pair; one eight remains as the kicker.",
+        "A call adds 15 and makes 60 + 15 + 15 = 90. The price is 15/90 = 1/6, about 16.67%, of that pot.",
+        "Candidate 1 beats you with a queen kicker, Candidate 2 loses with a seven kicker, and Candidate 3 ties with an eight kicker. The shared label \"two pair\" does not determine the outcome or supply the frequencies needed to assess a call."
+      ],
+      "misconception": "Keeping the pocket pair as one of the final pairs or treating matching hand-category names as equal strength.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        2,
+        14,
+        13,
+        8
+      ],
+      "point_repairs": [
+        "/poker/first-flop-decisions/#counterfeited",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/hand-rankings/#compare"
+      ],
+      "focus": "Displaced pocket pairs alter the river comparison",
+      "design_note": "This applies the price calculation after rebuilding two pair and shows why even the same named category can win, lose or tie.",
+      "river": {
+        "pot_before": 60,
+        "bet": 15,
+        "paid": 0,
+        "call": 15,
+        "after": 90,
+        "num": 1,
+        "den": 6
+      },
+      "candidates": [
+        [
+          "Qs",
+          "Jd"
+        ],
+        [
+          "7c",
+          "6d"
+        ],
+        [
+          "8s",
+          "2h"
+        ]
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker",
+        "tie"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        [
+          "/poker/turn-and-river-decisions/#catching-a-bluff"
+        ]
+      ]
+    },
+    {
+      "id": "S4-G",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Two hearts facing a river bet",
+      "hero": [
+        "Th",
+        "6h"
+      ],
+      "board": [
+        "Ah",
+        "9h",
+        "4c",
+        "4h",
+        "2d"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 40 counters before the opponent bets 40. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. Treat each displayed candidate as a separate hypothetical opponent.",
+      "prompt": "Name your final best five. Work out the call cost, final pot and call fraction. Compare both candidate hands with yours: does completing the heart hand by itself justify a call against the actual bettor? Explain.",
+      "points": [
+        "Your best five are ace, ten, nine, six and four of hearts, an ace-high flush.",
+        "Calling costs 40 and makes 40 + 40 + 40 = 120. The call is 40/120 = 1/3, about 33.33%, of the final pot.",
+        "Candidate 1 makes nines full of fours and beats your flush. Candidate 2 has the lower flush ace, nine, eight, seven and four and loses. Your completed flush alone does not identify the actual bettor's hand or its frequencies, so it does not justify the call."
+      ],
+      "misconception": "Letting the success of a draw replace the range comparison required by a river call.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        5,
+        14,
+        10,
+        9,
+        6,
+        4
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/first-flop-decisions/#shared-improvement"
+      ],
+      "focus": "A made flush still needs an opposing-hand comparison",
+      "design_note": "This connects a completed flush on a paired board with a large river price, including one stronger and one weaker possible holding.",
+      "river": {
+        "pot_before": 40,
+        "bet": 40,
+        "paid": 0,
+        "call": 40,
+        "after": 120,
+        "num": 1,
+        "den": 3
+      },
+      "candidates": [
+        [
+          "9c",
+          "9d"
+        ],
+        [
+          "8h",
+          "7h"
+        ]
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker"
+      ],
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/hand-rankings/#ties",
+          "/poker/turn-and-river-decisions/#catching-a-bluff"
+        ]
+      ]
+    },
+    {
+      "id": "S4-H",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Ace and seven on the final board",
+      "hero": [
+        "Ac",
+        "7d"
+      ],
+      "board": [
+        "9c",
+        "9d",
+        "9h",
+        "9s",
+        "2c"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 48 counters before the opponent bets 16. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. For the final accounting question, suppose Candidate 1 is revealed at showdown after you call.",
+      "prompt": "Name your best five and compare both candidates with your hand. Calculate the call cost, final pot and call fraction. In the stated Candidate 1 showdown, how much of the final pot comes back to you, and how much more is that than the counters you add by calling now?",
+      "points": [
+        "Your best five are four nines with an ace kicker. Candidate 1 has the same ace kicker and ties; Candidate 2 has a king kicker and loses. Your seven cannot break the ace-kicker tie.",
+        "Calling adds 16 and makes 48 + 16 + 16 = 80. The call fraction is 16/80 = 1/5, or 20%.",
+        "The tie returns half of 80, or 40 counters. That includes your new 16-counter call, so the return exceeds this decision's new payment by 24; it is not 40 counters of new profit."
+      ],
+      "misconception": "Using a sixth card to break a tie or treating the returned pot share as entirely new profit.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        7,
+        9,
+        14
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#shared-pot"
+      ],
+      "focus": "One kicker with four of a kind and split-pot accounting",
+      "design_note": "This adds shared four of a kind and asks the learner to distinguish a split-pot return from the net effect of the current call.",
+      "river": {
+        "pot_before": 48,
+        "bet": 16,
+        "paid": 0,
+        "call": 16,
+        "after": 80,
+        "num": 1,
+        "den": 5
+      },
+      "candidates": [
+        [
+          "Ah",
+          "6h"
+        ],
+        [
+          "Kc",
+          "Qd"
+        ]
+      ],
+      "expected_comparisons": [
+        "tie",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S4-I",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Ace and queen after the river arrives",
+      "hero": [
+        "Ac",
+        "Qc"
+      ],
+      "board": [
+        "Kd",
+        "9c",
+        "6c",
+        "4h",
+        "2s"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 32 counters before the opponent bets 8. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. The candidate cards below are separate hypothetical comparisons.",
+      "prompt": "Name your best five and say whether the club draw completed or can still improve after a call. Find the call cost, final pot and call fraction. Compare the two candidates with your existing hand: does the missed draw mean that you have no ability to win at showdown?",
+      "points": [
+        "Your final hand is ace-high: ace, king, queen, nine and six. Only four clubs are available, and a river call cannot bring another shared card.",
+        "A call costs 8 and makes 32 + 8 + 8 = 48. Its fraction is 8/48 = 1/6, about 16.67%.",
+        "Candidate 1 has only king-high and loses to your ace-high. Candidate 2 makes a pair of sevens and beats you. The missed draw still has showdown value against some hands, without establishing its equity against the actual bettor."
+      ],
+      "misconception": "Equating an unpaired missed draw with no showdown value or buying a nonexistent sixth community card.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        0,
+        14,
+        13,
+        12,
+        9,
+        6
+      ],
+      "point_repairs": [
+        "/poker/turn-and-river-decisions/#river-reset",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#ace-high"
+      ],
+      "focus": "An unpaired missed draw can still win a comparison",
+      "design_note": "This extends the original missed-draw case from a surviving pair to an unpaired high-card hand that can still beat a specified opponent.",
+      "river": {
+        "pot_before": 32,
+        "bet": 8,
+        "paid": 0,
+        "call": 8,
+        "after": 48,
+        "num": 1,
+        "den": 6
+      },
+      "candidates": [
+        [
+          "Jh",
+          "Th"
+        ],
+        [
+          "7h",
+          "7d"
+        ]
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        [
+          "/poker/hand-rankings/#compare"
+        ]
+      ]
+    },
+    {
+      "id": "S4-J",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Nine and two on the final board",
+      "hero": [
+        "9h",
+        "2d"
+      ],
+      "board": [
+        "Ah",
+        "Kh",
+        "Qh",
+        "8h",
+        "4h"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 28 counters before the opponent bets 7. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. Consider each candidate separately when comparing the final five cards.",
+      "prompt": "Choose your strongest five and say which private cards, if any, you use. Calculate the call cost, final pot and call fraction. Compare both candidates: does seeing five hearts on the board force a split pot?",
+      "points": [
+        "Your best five are ace, king, queen, nine and eight of hearts. The private nine replaces the shared four; the private two is unused.",
+        "Calling costs 7 and makes 28 + 7 + 7 = 42. The call is 7/42 = 1/6, about 16.67%, of the final pot.",
+        "Candidate 1 makes A-K-Q-J-8 of hearts and beats your A-K-Q-9-8 at jack versus nine. Candidate 2 makes A-K-Q-8-7 of hearts and loses at the first different rank, your nine versus its eight. A five-heart board does not force a tie when a private heart improves the best five."
+      ],
+      "misconception": "Playing all five shared flush cards automatically when a private card improves the flush.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        5,
+        14,
+        13,
+        12,
+        9,
+        8
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#ties",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/hand-rankings/#ties"
+      ],
+      "focus": "One private heart can improve a shared flush",
+      "design_note": "This contrasts with the shared-straight split by requiring a private card to replace a weaker shared flush card.",
+      "river": {
+        "pot_before": 28,
+        "bet": 7,
+        "paid": 0,
+        "call": 7,
+        "after": 42,
+        "num": 1,
+        "den": 6
+      },
+      "candidates": [
+        [
+          "Jh",
+          "3c"
+        ],
+        [
+          "7h",
+          "6d"
+        ]
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S4-K",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Pocket queens and a counter conversion",
+      "hero": [
+        "Qs",
+        "Qd"
+      ],
+      "board": [
+        "Ac",
+        "9h",
+        "7s",
+        "4c",
+        "2d"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 50 counters before the opponent bets 25. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. For the final question, make a second version by doubling every counter amount while leaving the cards and the no-fee model unchanged.",
+      "prompt": "Name your final best five. What does the original call cost, what is the final pot, and what fraction is the call? In the doubled-counter version, does the call fraction change, and does either calculation supply your equity against the opponent? Explain.",
+      "points": [
+        "Your best five are queen, queen, ace, nine and seven: one pair of queens with ace, nine and seven kickers.",
+        "The original call costs 25 and makes 50 + 25 + 25 = 100. The price is 25/100 = 1/4, or 25%.",
+        "Doubling gives a 50-counter call into a final 200, still 1/4. Scaling the counter amounts preserves the fraction; neither calculation provides the opponent's holdings or frequencies needed to estimate your equity."
+      ],
+      "misconception": "Confusing a larger absolute call with a different proportional price or treating that price as measured equity.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        1,
+        12,
+        14,
+        9,
+        7
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#catching-a-bluff"
+      ],
+      "focus": "Counter scaling preserves the price fraction",
+      "design_note": "This adds a scale comparison so the learner must explain a constant proportion and distinguish it from an equity estimate.",
+      "river": {
+        "pot_before": 50,
+        "bet": 25,
+        "paid": 0,
+        "call": 25,
+        "after": 100,
+        "num": 1,
+        "den": 4
+      }
+    },
+    {
+      "id": "S4-L",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "King and ten facing a larger river bet",
+      "hero": [
+        "Kc",
+        "Td"
+      ],
+      "board": [
+        "Kh",
+        "9d",
+        "8c",
+        "4s",
+        "2h"
+      ],
+      "setup": "This is a fictional heads-up cash-game chip exercise with no money at stake. The river pot contains 9 counters before the opponent bets 18. Neither player had paid anything on this river before that bet. Both players have ample counters remaining after the bet; neither is all-in. There are no fees or side pots, and a call closes the action. The three candidate holdings are examples considered separately.",
+      "prompt": "Name your best five and compare each candidate with it. Find the call cost, final pot and call fraction. Is that fraction automatically the chance that this bettor is bluffing, and do the weaker candidate cards alone reveal why the opponent would bet them? Explain.",
+      "points": [
+        "Your best five are king, king, ten, nine and eight. Candidate 1 has a pair of aces and beats you; Candidate 2 has only king-high and loses; Candidate 3 has kings with a lower kicker and also loses.",
+        "Calling adds 18 and makes 9 + 18 + 18 = 45. The price is 18/45 = 2/5, or 40%, of the final pot.",
+        "The 40% is a required average pot share in this call model, not an observed bluff frequency. The example cards supply neither their betting frequencies nor the opponent's purpose, so a weaker holding is not by itself proof of a bluff."
+      ],
+      "misconception": "Reading a break-even pot share as the opponent's bluff rate or inferring betting intent from one weaker possible hand.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        1,
+        13,
+        10,
+        9,
+        8
+      ],
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/turn-and-river-decisions/#catching-a-bluff",
+        "/poker/turn-and-river-decisions/#catching-a-bluff"
+      ],
+      "focus": "Break-even equity differs from a bluff frequency",
+      "design_note": "This uses both a weaker made hand and an unpaired hand to separate a winning showdown comparison from a claim about the bettor's intent or frequency.",
+      "river": {
+        "pot_before": 9,
+        "bet": 18,
+        "paid": 0,
+        "call": 18,
+        "after": 45,
+        "num": 2,
+        "den": 5
+      },
+      "candidates": [
+        [
+          "As",
+          "Ac"
+        ],
+        [
+          "Qs",
+          "Jc"
+        ],
+        [
+          "Kd",
+          "7h"
+        ]
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker",
+        "weaker"
       ]
     },
     {
@@ -457,6 +2766,736 @@
       ]
     },
     {
+      "id": "S5-C",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "Four river alternatives with aces",
+      "hero": [
+        "Ac",
+        "Jh"
+      ],
+      "board": [
+        "Ad",
+        "Tc",
+        "6s",
+        "3h",
+        "2d"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. Consider the four candidate holdings separately.",
+      "candidates": [
+        [
+          "Ac",
+          "Ks"
+        ],
+        [
+          "As",
+          "Kh"
+        ],
+        [
+          "Qc",
+          "Qd"
+        ],
+        [
+          "Ah",
+          "Jd"
+        ]
+      ],
+      "prompt": "Which candidate is physically impossible, and which exact known card excludes it? Compare each legal candidate with your best five, including any tie. Does holding one ace exclude every opposing ace or allow you to infer an exact holding from the check?",
+      "points": [
+        "Candidate 1 is impossible because it repeats your ace of clubs. The other aces are different cards, so Candidates 2 and 4 are physically possible.",
+        "Your best five are A-A-J-T-6. Candidate 2 has A-A-K-T-6 and wins on the king kicker. Candidate 3 has Q-Q-A-T-6 and loses. Candidate 4 also has A-A-J-T-6 and ties.",
+        "An exact ace removes holdings containing that card, not all ace holdings. The check does not identify which legal holding is present or prove the opponent has no ace."
+      ],
+      "misconception": "Treating one known suit of a rank as if every card of that rank were unavailable.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "exact-card-versus-rank-removal",
+      "design_note": "This case requires distinguishing one blocked ace from legal aces with different suits, then separating a kicker win from a tie.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#compare",
+        "/poker/ranges-for-beginners/#known-and-possible"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/ranges-for-beginners/#four-holdings"
+        ],
+        [
+          "/poker/hand-rankings/#ties"
+        ],
+        [
+          "/poker/ranges-for-beginners/#remove-known-cards"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        14,
+        11,
+        10,
+        6
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "stronger",
+        "weaker",
+        "tie"
+      ]
+    },
+    {
+      "id": "S5-D",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "A river with two shared eights",
+      "hero": [
+        "8c",
+        "7h"
+      ],
+      "board": [
+        "8d",
+        "8s",
+        "Qh",
+        "4c",
+        "2d"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. The four rows are alternative holdings for the same opponent.",
+      "candidates": [
+        [
+          "8d",
+          "Ac"
+        ],
+        [
+          "8h",
+          "As"
+        ],
+        [
+          "Qc",
+          "Jd"
+        ],
+        [
+          "Kc",
+          "Ks"
+        ]
+      ],
+      "prompt": "Which candidate reuses a board card? Compare the best five for every legal candidate with yours. Does the number of legal rows establish how often each one checks?",
+      "points": [
+        "Candidate 1 is impossible because the eight of diamonds is already on the board. A shared card excludes an opposing holding just as a private card does.",
+        "Your best five are 8-8-8-Q-7. Candidate 2 has 8-8-8-A-Q and wins with the ace kicker. Candidate 3 has Q-Q-8-8-J, and Candidate 4 has K-K-8-8-Q; both two-pair hands lose to your three eights.",
+        "Three legal rows establish three listed possibilities, not equal probabilities or observed checking rates. Which holdings reach this decision and choose to check remains a separate question."
+      ],
+      "misconception": "Ignoring shared-card blockers or turning a list of legal holdings into equal checking frequencies.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "shared-card-removal-and-trips",
+      "design_note": "This case moves the blocked card to the board and requires comparing three of a kind with a higher-kicker three-of-a-kind hand and two different two-pair hands.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#compare",
+        "/poker/ranges-for-beginners/#equal-weights"
+      ],
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/ranges-for-beginners/#known-and-possible"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        3,
+        8,
+        12,
+        7
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "stronger",
+        "weaker",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S5-E",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "Four hearts among the shared cards",
+      "hero": [
+        "Ah",
+        "9c"
+      ],
+      "board": [
+        "Kh",
+        "Jh",
+        "7h",
+        "4h",
+        "2s"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. Consider the four listed candidates.",
+      "candidates": [
+        [
+          "Ah",
+          "Qh"
+        ],
+        [
+          "Qh",
+          "Th"
+        ],
+        [
+          "Ks",
+          "Kc"
+        ],
+        [
+          "9h",
+          "8h"
+        ]
+      ],
+      "prompt": "Which exact holding must be removed? State your best five and compare every legal candidate. Does your ace of hearts remove all opposing heart holdings, or establish how often the remaining examples check?",
+      "points": [
+        "Candidate 1 is impossible because it includes your ace of hearts. The queen, ten, nine and eight of hearts used in the other candidates are not among the known cards.",
+        "Your A-K-J-7-4 heart flush beats all three legal examples. Candidate 2 makes a K-Q-J-T-7 heart flush; Candidate 3 makes K-K-K-J-7; Candidate 4 makes a K-J-9-8-7 heart flush.",
+        "Holding the ace of hearts removes that exact card, not the whole suit. Neither the suit blocker nor these three comparisons supplies the checking frequency of any candidate."
+      ],
+      "misconception": "Treating an ace of one suit as if it removed every flush in that suit or measured how often a flush checks.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "suit-blocker-with-other-flushes",
+      "design_note": "This case distinguishes a blocked ace-high flush from several legal lower flushes and a three-of-a-kind hand.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#compare",
+        "/poker/ranges-for-beginners/#equal-weights"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/hand-rankings/#ties"
+        ],
+        [
+          "/poker/ranges-for-beginners/#known-and-possible"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        5,
+        14,
+        13,
+        11,
+        7,
+        4
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "weaker",
+        "weaker",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S5-F",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "Four alternatives after a river check",
+      "hero": [
+        "4c",
+        "3d"
+      ],
+      "board": [
+        "As",
+        "Ks",
+        "Qs",
+        "Js",
+        "Ts"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. Treat each candidate row as a separate possibility.",
+      "candidates": [
+        [
+          "As",
+          "2c"
+        ],
+        [
+          "Ah",
+          "Ad"
+        ],
+        [
+          "9s",
+          "8s"
+        ],
+        [
+          "Qc",
+          "Qd"
+        ]
+      ],
+      "prompt": "Which candidate conflicts with a known card? For every legal candidate, identify the best five and the showdown comparison. Suppose Candidate 4 is revealed after one check-through: what does that observation establish about which hands will check on a later, different board?",
+      "points": [
+        "Candidate 1 is impossible because the ace of spades is already a shared card. The other three candidates do not repeat any known card.",
+        "Your best hand and every legal candidate's best hand are the board's ace-high straight flush. All three legal candidates tie you; neither a pocket pair nor lower private spades improves this board.",
+        "The reveal establishes the opposing cards in that one observed hand. It does not establish a checking distribution on a different board or a general rule that checked hands are weak."
+      ],
+      "misconception": "Adding a private-card tiebreaker to a shared royal flush or generalizing one reveal to later boards.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "shared-best-five-and-one-reveal",
+      "design_note": "This case makes every legal comparison a board-playing tie, so a revealed pocket pair cannot be interpreted as a distinct showdown strength.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#ties",
+        "/poker/ranges-for-beginners/#one-reveal"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/hand-rankings/#rankings"
+        ],
+        [
+          "/poker/ranges-for-beginners/#known-and-possible"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        8,
+        14
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "tie",
+        "tie",
+        "tie"
+      ]
+    },
+    {
+      "id": "S5-G",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "Several rows with ace and king",
+      "hero": [
+        "Ah",
+        "Kd"
+      ],
+      "board": [
+        "Ac",
+        "9s",
+        "6h",
+        "4d",
+        "2c"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. The four rows are alternatives, not cards held together.",
+      "candidates": [
+        [
+          "As",
+          "Kh"
+        ],
+        [
+          "Ad",
+          "Kc"
+        ],
+        [
+          "As",
+          "Kc"
+        ],
+        [
+          "Qs",
+          "Qh"
+        ]
+      ],
+      "prompt": "Are all four candidates physically possible, and how does each compare with your best five? Are Candidates 1, 2 and 3 one exact physical holding or three exact combinations under the ace-king label? Does listing four rows give each a one-quarter chance after the check?",
+      "points": [
+        "All four candidates are legal. Your A-A-K-9-6 ties Candidates 1, 2 and 3, each of which also makes A-A-K-9-6. Candidate 4 has Q-Q-A-9-6 and loses.",
+        "Candidates 1, 2 and 3 are three different exact combinations of ace-king, despite sharing a broad hand label and the same final rank. Their repeated cards across alternative rows are allowed because the rows are not simultaneous holdings.",
+        "One-quarter per row would be an additional model assumption. Counting distinct combinations alone does not establish how often each reaches this river and checks."
+      ],
+      "misconception": "Confusing a broad hand label with one exact combination or assuming equally likely rows after an action.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "exact-combinations-versus-hand-labels",
+      "design_note": "This case uses overlapping legal alternatives under one hand label to separate physical combination identity, equal final rank and likelihood.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/ranges-for-beginners/#four-holdings",
+        "/poker/ranges-for-beginners/#equal-weights"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#ties"
+        ],
+        [],
+        [
+          "/poker/ranges-for-beginners/#known-and-possible"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        14,
+        13,
+        9,
+        6
+      ],
+      "expected_comparisons": [
+        "tie",
+        "tie",
+        "tie",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S5-H",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "A note about an unseen folded hand",
+      "hero": [
+        "Qd",
+        "Jc"
+      ],
+      "board": [
+        "Qs",
+        "9h",
+        "7d",
+        "4c",
+        "2h"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. Earlier, without seeing any folded cards, you guessed that a folded player held the ace of hearts. Consider the four candidates for the remaining opponent.",
+      "candidates": [
+        [
+          "Ah",
+          "Ad"
+        ],
+        [
+          "Kc",
+          "Tc"
+        ],
+        [
+          "Kd",
+          "Kh"
+        ],
+        [
+          "Qh",
+          "9c"
+        ]
+      ],
+      "prompt": "Which candidates are physically possible using only cards actually shown? Can your guess about the folded player exclude Candidate 1? Compare each candidate with your best five, then explain whether the current check identifies one of them.",
+      "points": [
+        "All four candidates remain physically possible. An unconfirmed guess about a folded ace of hearts is not an additional known card and cannot physically exclude Candidate 1.",
+        "Your Q-Q-J-9-7 loses to Candidate 1's A-A-Q-9-7, Candidate 3's K-K-Q-9-7 and Candidate 4's Q-Q-9-9-7. It beats Candidate 2's K-Q-T-9-7.",
+        "The check is an observed action, not an exposed holding. It does not identify one candidate or rule out the candidates that beat you."
+      ],
+      "misconception": "Promoting a guess about unseen folded cards to a certain blocker or treating a check as a hand reveal.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "guessed-cards-versus-known-cards",
+      "design_note": "This case tests whether an unsupported read about a folded player is incorrectly treated as physical card removal.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#compare",
+        "/poker/ranges-for-beginners/#known-and-possible"
+      ],
+      "point_extra_repairs": [
+        [],
+        [],
+        []
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        12,
+        11,
+        9,
+        7
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker",
+        "stronger",
+        "stronger"
+      ]
+    },
+    {
+      "id": "S5-I",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "Four alternatives after a river bet",
+      "hero": [
+        "Ts",
+        "9c"
+      ],
+      "board": [
+        "Kh",
+        "8d",
+        "6s",
+        "4h",
+        "2c"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent bets 6 counters into a pot of 24. Both players had 60 counters behind before that bet, with no all-ins or side pots. No money is wagered. You face the bet; checking is unavailable. Consider the four candidate holdings separately.",
+      "candidates": [
+        [
+          "Ts",
+          "7s"
+        ],
+        [
+          "Ah",
+          "Qc"
+        ],
+        [
+          "Js",
+          "9d"
+        ],
+        [
+          "7d",
+          "3d"
+        ]
+      ],
+      "prompt": "Which exact holding is physically excluded? Compare every legal candidate with your best five. Does removing one candidate by itself make calling better justified, and what would you need to know before drawing that conclusion?",
+      "points": [
+        "Candidate 1 is impossible because it repeats your ten of spades. Its exclusion is certain from the cards, independently of any view about the opponent's betting choices.",
+        "Your best five are K-T-9-8-6. Candidate 2 makes A-K-Q-8-6 and Candidate 3 makes K-J-9-8-6, so both beat you. Candidate 4 makes K-8-7-6-4 and loses.",
+        "Removing one holding is not automatically favorable to a call. A useful comparison needs the remaining possible holdings and how often they reach this bet; the number removed does not supply those weights or your winning share."
+      ],
+      "misconception": "Assuming that holding any blocker automatically makes a call more favorable.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "removal-without-a-strategic-conclusion",
+      "design_note": "This case changes the observed action to a bet and asks why physical removal alone cannot determine whether calling improved.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#compare",
+        "/poker/ranges-for-beginners/#known-and-possible"
+      ],
+      "point_extra_repairs": [
+        [],
+        [],
+        [
+          "/poker/ranges-for-beginners/#equal-weights",
+          "/poker/turn-and-river-decisions/#catching-a-bluff"
+        ]
+      ],
+      "context": "facing_bet",
+      "expected_rank": [
+        0,
+        13,
+        10,
+        9,
+        8,
+        6
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "stronger",
+        "stronger",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S5-J",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "Paired kings with six and five",
+      "hero": [
+        "6s",
+        "5d"
+      ],
+      "board": [
+        "6c",
+        "5h",
+        "Kc",
+        "Kd",
+        "2s"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. Consider the four candidate holdings separately.",
+      "candidates": [
+        [
+          "Kc",
+          "Qh"
+        ],
+        [
+          "6s",
+          "Ah"
+        ],
+        [
+          "Kh",
+          "Jd"
+        ],
+        [
+          "6d",
+          "Qd"
+        ]
+      ],
+      "prompt": "Which candidates repeat a known card, and where is each conflicting card? Choose your best five and compare the legal candidates, explaining which kicker counts. Do the physical exclusions establish the relative probabilities of the surviving candidates after the check?",
+      "points": [
+        "Candidate 1 repeats the board's king of clubs. Candidate 2 repeats your six of spades. Both are impossible; Candidates 3 and 4 are legal.",
+        "Your best five are K-K-6-6-5, not three pairs. Candidate 3 has K-K-K-J-6 and wins with three kings. Candidate 4 has K-K-6-6-Q and wins on the queen kicker.",
+        "Two physical exclusions do not establish the relative likelihood of the surviving holdings. Their chances after checking need a model or evidence about how they reach and take that action."
+      ],
+      "misconception": "Keeping three pairs in a five-card comparison or converting two blockers into an unsupported probability ratio.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "two-removals-and-three-pair-selection",
+      "design_note": "This case combines one private and one shared exclusion with a best-five comparison where a third pair cannot serve as an extra hand category.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#ties",
+        "/poker/ranges-for-beginners/#equal-weights"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [
+          "/poker/ranges-for-beginners/#known-and-possible"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        2,
+        13,
+        6,
+        5
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "impossible",
+        "stronger",
+        "stronger"
+      ]
+    },
+    {
+      "id": "S5-K",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "One later reveal from a river bet",
+      "hero": [
+        "Tc",
+        "Td"
+      ],
+      "board": [
+        "Jh",
+        "8s",
+        "4d",
+        "3c",
+        "2h"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent bets 5 counters into a pot of 20. Both players had 50 counters behind before the bet, with no all-ins or side pots. No money is wagered. Checking is unavailable while you face the bet. Consider these three alternative holdings before any reveal.",
+      "candidates": [
+        [
+          "Js",
+          "9h"
+        ],
+        [
+          "8d",
+          "8c"
+        ],
+        [
+          "Ac",
+          "Kh"
+        ]
+      ],
+      "prompt": "Compare all three legal candidates with your best five. During later hand review Candidate 3 is shown: what fact does that reveal establish, and does it establish equal likelihood among the three rows? Does this result alone justify an earlier call?",
+      "points": [
+        "Your T-T-J-8-4 loses to Candidate 1's J-J-9-8-4 and Candidate 2's 8-8-8-J-4. It beats Candidate 3's A-K-J-8-4. All three holdings are physically possible.",
+        "The reveal establishes that Candidate 3 occurred in that one hand. It does not establish that the three candidates were equally likely at the betting decision or validate the rest of the proposed range.",
+        "One favorable showdown does not establish that calling was justified from the information available earlier. That judgment needs the call price and a defensible model of the possible betting hands and their frequencies."
+      ],
+      "misconception": "Using a favorable single showdown to validate an entire betting model and the prior call.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "revealed-result-versus-prior-model",
+      "design_note": "This case asks the learner to separate a known later result from both the earlier range weights and the justification for the earlier decision.",
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/ranges-for-beginners/#one-reveal",
+        "/poker/turn-and-river-decisions/#catching-a-bluff"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/ranges-for-beginners/#remove-known-cards"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ],
+        [
+          "/poker/ranges-for-beginners/#one-reveal"
+        ]
+      ],
+      "context": "facing_bet",
+      "expected_rank": [
+        1,
+        10,
+        11,
+        8,
+        4
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "stronger",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S5-L",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "An earlier note and the final shared card",
+      "hero": [
+        "9d",
+        "8c"
+      ],
+      "board": [
+        "Qs",
+        "Jh",
+        "7d",
+        "3h",
+        "2c"
+      ],
+      "setup": "In this fictional heads-up river exercise, the opponent checks to you last to act. Checking back is legal and would end betting. No money is wagered. You wrote these four alternatives before the river was dealt. The final shared card is the two of clubs.",
+      "candidates": [
+        [
+          "Ac",
+          "2c"
+        ],
+        [
+          "Qh",
+          "Th"
+        ],
+        [
+          "9h",
+          "8h"
+        ],
+        [
+          "As",
+          "Ad"
+        ]
+      ],
+      "prompt": "Which earlier candidate must now be removed because of the river card? Compare the remaining candidates with your best five, including any tie. Does surviving the physical-card check prove that a holding reached this river or tell you how often it checks?",
+      "points": [
+        "Candidate 1 must be removed because the two of clubs is now a known shared card. A range note must be updated when a new known card makes one of its exact holdings impossible.",
+        "Your best five are Q-J-9-8-7. Candidate 2 makes Q-Q-J-T-7 and wins. Candidate 3 also makes Q-J-9-8-7 and ties. Candidate 4 makes A-A-Q-J-7 and wins.",
+        "A legal combination is only physically possible. Its survival does not prove it followed the earlier action history or establish how often it checks at this decision."
+      ],
+      "misconception": "Keeping a newly blocked holding in an old range note or equating physical possibility with reaching the decision.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "focus": "new-board-card-updates-the-range",
+      "design_note": "This case requires revising a previously written candidate list after a newly exposed river card while preserving a legal tie.",
+      "point_repairs": [
+        "/poker/ranges-for-beginners/#remove-known-cards",
+        "/poker/hand-rankings/#compare",
+        "/poker/ranges-for-beginners/#known-and-possible"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/hand-rankings/#ties"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        0,
+        12,
+        11,
+        9,
+        8,
+        7
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "stronger",
+        "tie",
+        "stronger"
+      ]
+    },
+    {
       "id": "S6-A",
       "skill": "S6",
       "lesson": "betting-with-a-purpose",
@@ -566,6 +3605,853 @@
         "/poker/betting-with-a-purpose/#purpose",
         "/poker/betting-with-a-purpose/#takeaway"
       ]
+    },
+    {
+      "id": "S6-C",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Three responses to a bet of six",
+      "hero": [
+        "9c",
+        "9d"
+      ],
+      "board": [
+        "Jh",
+        "7s",
+        "4c",
+        "3h",
+        "2d"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 24 counters and both players have 60 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 6. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume Candidate 1 folds, Candidate 2 calls and Candidate 3 calls. These stipulated responses exclude raises.",
+      "candidates": [
+        [
+          "Ts",
+          "Th"
+        ],
+        [
+          "8c",
+          "8d"
+        ],
+        [
+          "Qs",
+          "Qd"
+        ]
+      ],
+      "prompt": "Compare all three candidates with your final hand. Which response supplies a value target, which supplies a bluff target, and which call costs you the new bet? Does having both types of target establish that betting is better than checking?",
+      "points": [
+        "Your best five are 9-9-J-7-4. Candidate 2 has 8-8-J-7-4 and is assumed to call, supplying a possible value target.",
+        "Candidate 1 has T-T-J-7-4 and beats you, so its assumed fold supplies a bluff target. Candidate 3 has Q-Q-J-7-4 and also beats you; its assumed call loses your new six counters.",
+        "These targets describe useful responses in different alternatives. Their existence alone does not compare betting with checking: the possible holdings and their frequencies at this decision are still needed."
+      ],
+      "misconception": "Assuming that naming both a value target and a bluff target proves a bet beats checking.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "mixed-value-and-bluff-responses",
+      "design_note": "This case lets one proposed bet obtain a weaker call in one alternative and a stronger fold in another, while also retaining a losing call.",
+      "point_repairs": [
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#bluff",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        9,
+        11,
+        7,
+        4
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker",
+        "stronger"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "fold"
+        },
+        {
+          "candidate": 2,
+          "action": "call"
+        },
+        {
+          "candidate": 3,
+          "action": "call"
+        }
+      ]
+    },
+    {
+      "id": "S6-D",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Three callers on a double-paired board",
+      "hero": [
+        "Qc",
+        "8d"
+      ],
+      "board": [
+        "Qs",
+        "Qh",
+        "Jh",
+        "Jc",
+        "2s"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 40 counters and both players have 100 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 5. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume each of the three candidates calls the proposed bet. These stipulated responses exclude raises.",
+      "candidates": [
+        [
+          "Qd",
+          "9s"
+        ],
+        [
+          "Js",
+          "Jd"
+        ],
+        [
+          "As",
+          "Kd"
+        ]
+      ],
+      "prompt": "Compare the best five for all three candidates with yours. Which call supplies value, which loses the new bet, and what does the tied call change compared with checking? Do three listed callers by themselves determine the average benefit of betting?",
+      "points": [
+        "Your Q-Q-Q-J-J ties Candidate 1's Q-Q-Q-J-J. Candidate 2 has J-J-J-J-Q and beats you. Candidate 3 has Q-Q-J-J-A and loses.",
+        "Candidate 3 supplies a weaker call and Candidate 2 a losing call. Candidate 1 ties, so its call is not value from a worse hand: with no fees, equal five-counter contributions are split back and your share of the existing pot is unchanged.",
+        "The number of listed callers does not give their frequencies. A complete comparison with checking needs the possible holdings and how often each response occurs, including any alternatives not represented here."
+      ],
+      "misconception": "Counting an equal hand as a weaker value caller or breaking a full-house tie with an unused private card.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "tied-call-is-not-a-value-call",
+      "design_note": "This case introduces a tied full-house caller beside a losing quads caller and a weaker caller, requiring separate treatment of all three outcomes.",
+      "point_repairs": [
+        "/poker/hand-rankings/#ties",
+        "/poker/betting-with-a-purpose/#value",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#rankings"
+        ],
+        [
+          "/poker/betting-with-a-purpose/#purpose"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        6,
+        12,
+        11
+      ],
+      "expected_comparisons": [
+        "tie",
+        "stronger",
+        "weaker"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "call"
+        },
+        {
+          "candidate": 2,
+          "action": "call"
+        },
+        {
+          "candidate": 3,
+          "action": "call"
+        }
+      ]
+    },
+    {
+      "id": "S6-E",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Three alternatives on a shared straight",
+      "hero": [
+        "Ac",
+        "5d"
+      ],
+      "board": [
+        "6s",
+        "7h",
+        "8c",
+        "9d",
+        "Ts"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 30 counters and both players have 100 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 10. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume Candidate 1 calls, Candidate 2 folds and Candidate 3 calls. These stipulated responses exclude raises.",
+      "candidates": [
+        [
+          "Jc",
+          "Qd"
+        ],
+        [
+          "2h",
+          "3h"
+        ],
+        [
+          "Ah",
+          "4c"
+        ]
+      ],
+      "prompt": "Compare every candidate with your best five. What does Candidate 2's fold change relative to checking, and is it a fold by a hand that beats you? Does Candidate 3's call supply value from a worse hand? What is needed to compare the bet with checking overall?",
+      "points": [
+        "Your best five are the board's ten-high straight. Candidate 1 makes a queen-high straight and beats you. Candidates 2 and 3 both play the ten-high board straight and tie you.",
+        "Candidate 2's fold wins the existing pot instead of splitting it, but does not make a stronger hand fold. Candidate 3's tied call supplies no value from a worse hand; equal new contributions are split back under these no-fee assumptions.",
+        "Candidate 1's call loses the ten-counter bet. The comparison must weigh that cost against the benefit of tied hands folding and any other responses. These example rows do not establish the needed frequencies."
+      ],
+      "misconception": "Treating every fold as a stronger-hand fold or every call as value, even when the board creates ties.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "folding-a-tied-hand",
+      "design_note": "This case distinguishes a tied fold that gains an otherwise shared pot from a tied call and a losing call against an improved straight.",
+      "point_repairs": [
+        "/poker/hand-rankings/#ties",
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/betting-with-a-purpose/#value"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        4,
+        10
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "tie",
+        "tie"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "call"
+        },
+        {
+          "candidate": 2,
+          "action": "fold"
+        },
+        {
+          "candidate": 3,
+          "action": "call"
+        }
+      ]
+    },
+    {
+      "id": "S6-F",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Three holdings and a proposed bet",
+      "hero": [
+        "As",
+        "9h"
+      ],
+      "board": [
+        "Ac",
+        "Td",
+        "7s",
+        "4h",
+        "2c"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 32 counters and both players have 80 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 8. No money is wagered; no fees, side pots or tournament prizes are modeled. Consider the three candidate holdings. Their responses to the proposed bet have not been assigned.",
+      "candidates": [
+        [
+          "Ah",
+          "8d"
+        ],
+        [
+          "Tc",
+          "Th"
+        ],
+        [
+          "Qc",
+          "Jc"
+        ]
+      ],
+      "prompt": "Compare all three candidates with your best five. Which could support a value-bet explanation if they called, and what must you learn about their responses? Does beating two listed holdings establish that betting earns more than checking?",
+      "points": [
+        "Your A-A-T-9-7 beats Candidate 1's A-A-T-8-7 and Candidate 3's A-Q-J-T-7. It loses to Candidate 2's T-T-T-A-7.",
+        "Candidates 1 and 3 could be value targets if they call the proposed amount. Being weaker does not supply that call assumption; their responses, including folds or raises where allowed, must be modeled or supported.",
+        "Beating two listed hands does not establish a better bet. Checking already wins against those hands, and the comparison needs their frequencies and their responses to this amount, as well as the cost of responses from hands that beat you."
+      ],
+      "misconception": "Inferring that a physically weaker holding will call even though no response assumption was supplied.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "holding-strength-without-response-data",
+      "design_note": "This case deliberately leaves every response unspecified so the learner must distinguish conditional value targets from assumed callers.",
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/betting-with-a-purpose/#value",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/betting-with-a-purpose/#purpose"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        14,
+        10,
+        9,
+        7
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger",
+        "weaker"
+      ],
+      "responses": [
+        {
+          "candidate": 1
+        },
+        {
+          "candidate": 2
+        },
+        {
+          "candidate": 3
+        }
+      ]
+    },
+    {
+      "id": "S6-G",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "A revised river bet amount",
+      "hero": [
+        "Kc",
+        "Jd"
+      ],
+      "board": [
+        "Kh",
+        "8c",
+        "6s",
+        "3d",
+        "2h"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 36 counters and both players have 100 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 12. No money is wagered; no fees, side pots or tournament prizes are modeled. An earlier study note about a bet of 4 assumed Candidate 1 would call. For the current bet of 12 only, assume Candidates 1 and 3 fold and Candidate 2 calls. These current responses exclude raises.",
+      "candidates": [
+        [
+          "Kd",
+          "Tc"
+        ],
+        [
+          "8h",
+          "8s"
+        ],
+        [
+          "As",
+          "Qd"
+        ]
+      ],
+      "prompt": "Compare all three candidates with your final hand. Does increasing the bet from 4 to 12 triple the value obtained from Candidate 1 under the stated change? What happens on the current call, and what further information is needed before comparing this bet with checking across the full decision?",
+      "points": [
+        "Your K-K-J-8-6 beats Candidate 1's K-K-T-8-6 and Candidate 3's A-K-Q-8-6. Candidate 2 has 8-8-8-K-6 and beats you.",
+        "Candidate 1 now folds, so it contributes no new counters to the larger bet. Tripling a bet does not triple payment from a hand whose assumed response changes from calling to folding.",
+        "The current call from Candidate 2 loses twelve new counters, while checking would already win against Candidates 1 and 3. Comparing the current bet with checking requires the full set of possible holdings, their frequencies and their responses to the twelve-counter bet; these examples alone do not establish that it improves on checking."
+      ],
+      "misconception": "Scaling value with bet size while ignoring a changed caller response.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "response-changes-with-bet-size",
+      "design_note": "This case changes the stated response of one candidate when the amount increases, so the learner must not preserve a smaller-bet caller assumption.",
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/betting-with-a-purpose/#size",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/betting-with-a-purpose/#value"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        13,
+        11,
+        8,
+        6
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger",
+        "weaker"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "fold"
+        },
+        {
+          "candidate": 2,
+          "action": "call"
+        },
+        {
+          "candidate": 3,
+          "action": "fold"
+        }
+      ]
+    },
+    {
+      "id": "S6-H",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "A call followed by a reveal",
+      "hero": [
+        "Ks",
+        "Td"
+      ],
+      "board": [
+        "Kc",
+        "9h",
+        "6c",
+        "4d",
+        "2s"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 28 counters and both players have 70 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 7. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume each listed candidate calls the proposed bet, with no raises.",
+      "candidates": [
+        [
+          "Kh",
+          "8d"
+        ],
+        [
+          "9s",
+          "9d"
+        ],
+        [
+          "Qs",
+          "Qc"
+        ]
+      ],
+      "prompt": "Compare all three candidates with your best five and identify any value targets. Suppose Candidate 2 is revealed after the bet is called: does that result alone disprove a value-bet purpose? What is needed to assess the earlier bet against checking?",
+      "points": [
+        "Your K-K-T-9-6 beats Candidate 1's K-K-9-8-6 and Candidate 3's Q-Q-K-9-6. Both are assumed to call and are possible value targets.",
+        "Candidate 2 has 9-9-9-K-6 and beats you, so its call loses the new bet. That single result does not erase the possible weaker callers or by itself disprove a value-bet intention.",
+        "The earlier comparison with checking depends on the possible holdings, responses and frequencies at that decision. A losing result does not establish a bad bet, just as naming weaker callers does not establish a profitable one."
+      ],
+      "misconception": "Judging the validity of a value-bet explanation solely from one losing showdown.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "losing-result-and-value-intention",
+      "design_note": "This case reveals a losing caller after a proposed value bet and asks the learner to retain the distinction between intention, expected comparison and one result.",
+      "point_repairs": [
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/hand-rankings/#compare",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [
+          "/poker/betting-with-a-purpose/#size"
+        ],
+        [
+          "/poker/ranges-for-beginners/#one-reveal"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        13,
+        10,
+        9,
+        6
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger",
+        "weaker"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "call"
+        },
+        {
+          "candidate": 2,
+          "action": "call"
+        },
+        {
+          "candidate": 3,
+          "action": "call"
+        }
+      ]
+    },
+    {
+      "id": "S6-I",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "A pair of twos and three responses",
+      "hero": [
+        "2h",
+        "2c"
+      ],
+      "board": [
+        "Ac",
+        "Kd",
+        "Qh",
+        "9s",
+        "4d"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 32 counters and both players have 80 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 8. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume Candidate 1 folds, Candidate 2 calls and Candidate 3 folds. These stipulated responses exclude raises.",
+      "candidates": [
+        [
+          "Js",
+          "Jh"
+        ],
+        [
+          "Ah",
+          "8h"
+        ],
+        [
+          "7c",
+          "6c"
+        ]
+      ],
+      "prompt": "Compare all three candidates with your best five. Which fold could support a bluff explanation, and does having a made pair prevent that purpose? What does the other fold establish, and what is missing from a comparison with checking?",
+      "points": [
+        "Your 2-2-A-K-Q loses to Candidate 1's J-J-A-K-Q and Candidate 2's A-A-K-Q-9. It beats Candidate 3's A-K-Q-9-7.",
+        "Candidate 1's assumed fold supports a bluff explanation because its jacks beat your twos. A bet can aim to fold a better hand even when the betting hand is a made pair.",
+        "Candidate 3 folds a hand you would beat by checking, while Candidate 2 calls and costs your new eight counters. An overall comparison needs the frequencies of these and other possible holdings and responses; one fold or a made pair does not establish the preferred action."
+      ],
+      "misconception": "Assuming that every bet with a made pair must be for value, or that every fold shows a successful stronger-hand bluff.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "made-pair-used-as-a-bluff",
+      "design_note": "This case uses a small made pair as a possible bluffing hand, with one stronger fold, one weaker fold and one losing call.",
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/betting-with-a-purpose/#bluff",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/betting-with-a-purpose/#purpose"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        1,
+        2,
+        14,
+        13,
+        12
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "stronger",
+        "weaker"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "fold"
+        },
+        {
+          "candidate": 2,
+          "action": "call"
+        },
+        {
+          "candidate": 3,
+          "action": "fold"
+        }
+      ]
+    },
+    {
+      "id": "S6-J",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Two private hearts on the final board",
+      "hero": [
+        "Ah",
+        "Jh"
+      ],
+      "board": [
+        "Kh",
+        "8h",
+        "6c",
+        "4d",
+        "2s"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 28 counters and both players have 70 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 7. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume Candidate 1 folds, Candidate 2 folds and Candidate 3 calls. These stipulated responses exclude raises.",
+      "candidates": [
+        [
+          "Qs",
+          "Qd"
+        ],
+        [
+          "As",
+          "9c"
+        ],
+        [
+          "8s",
+          "8d"
+        ]
+      ],
+      "prompt": "What hand do you actually have now, and can a later shared card still complete a flush? Compare all candidates and identify which fold could support a bluff explanation. What does checking retain against Candidate 2, and what else is needed to compare the bet overall?",
+      "points": [
+        "You have A-K-J-8-6, an ace-high hand, not a flush. There are only four hearts among your seven cards and no further community card after the river.",
+        "Candidate 1 has Q-Q-K-8-6 and beats you, so its assumed fold supports a bluff explanation. Candidate 2 has A-K-9-8-6 and loses to your jack kicker. Candidate 3 has 8-8-8-K-6 and beats you.",
+        "Checking would still win against Candidate 2; its fold is not a stronger-hand fold. Candidate 3's call loses the new seven counters. The full comparison needs the frequencies of the possible holdings and responses, including the showdown value retained by checking."
+      ],
+      "misconception": "Treating a missed river draw as having no possible showdown value or as still having a card to come.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "missed-draw-with-showdown-value",
+      "design_note": "This case requires recognizing a missed flush draw while preserving an ace-high kicker win that matters when comparing betting with checking.",
+      "point_repairs": [
+        "/poker/first-flop-decisions/#made-and-drawing",
+        "/poker/betting-with-a-purpose/#bluff",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/turn-and-river-decisions/#river-reset"
+        ],
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        0,
+        14,
+        13,
+        11,
+        8,
+        6
+      ],
+      "expected_comparisons": [
+        "stronger",
+        "weaker",
+        "stronger"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "fold"
+        },
+        {
+          "candidate": 2,
+          "action": "fold"
+        },
+        {
+          "candidate": 3,
+          "action": "call"
+        }
+      ]
+    },
+    {
+      "id": "S6-K",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Two private ranks on a paired river",
+      "hero": [
+        "8c",
+        "7c"
+      ],
+      "board": [
+        "8h",
+        "7d",
+        "Ks",
+        "Kh",
+        "2d"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 36 counters and both players have 90 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 9. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume Candidate 1 folds, Candidate 2 calls and Candidate 3 folds. These stipulated responses exclude raises.",
+      "candidates": [
+        [
+          "Ac",
+          "Qd"
+        ],
+        [
+          "Kd",
+          "3s"
+        ],
+        [
+          "8d",
+          "Ah"
+        ]
+      ],
+      "prompt": "Choose your best five and compare each candidate, explaining the kicker where it matters. Which response supports a bluff explanation even though you can name two pairs? Which other outcomes must you include before comparing betting with checking?",
+      "points": [
+        "Your best five are K-K-8-8-7. Candidate 1 has K-K-A-Q-8 and loses. Candidate 2 has K-K-K-8-7 and wins. Candidate 3 has K-K-8-8-A and wins on the ace kicker; your second private rank does not add a third pair to the best five.",
+        "Candidate 3's assumed fold is a fold by a better two-pair hand, so it can support a bluff explanation. Calling your own hand two pair does not determine the bet's purpose.",
+        "Candidate 1's fold adds no new opposing counters and checking would already beat it. Candidate 2's call loses nine new counters. Compare those possibilities and the stronger fold using a full response model and frequencies before claiming betting improves on checking."
+      ],
+      "misconception": "Using the two-pair label to skip kicker comparisons or to label every bet as value.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "counterfeited-two-pair-and-purpose",
+      "design_note": "This case makes a same-two-pair kicker loss the bluff target while a different candidate loses to checking and a third wins when calling.",
+      "point_repairs": [
+        "/poker/hand-rankings/#ties",
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [
+          "/poker/betting-with-a-purpose/#bluff"
+        ],
+        [
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        2,
+        13,
+        8,
+        7
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger",
+        "stronger"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "fold"
+        },
+        {
+          "candidate": 2,
+          "action": "call"
+        },
+        {
+          "candidate": 3,
+          "action": "fold"
+        }
+      ]
+    },
+    {
+      "id": "S6-L",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "A call with two listed explanations",
+      "hero": [
+        "Jh",
+        "Td"
+      ],
+      "board": [
+        "Jc",
+        "Ts",
+        "9h",
+        "4c",
+        "2d"
+      ],
+      "setup": "In this fictional heads-up river exercise, the pot is 24 counters and both players have 60 behind. The opponent checks to you last to act. Checking is legal and would end betting. You are considering a bet of 6. No money is wagered; no fees, side pots or tournament prizes are modeled. For this comparison only, assume Candidates 1 and 2 call and Candidate 3 folds. These stipulated responses exclude raises.",
+      "candidates": [
+        [
+          "Js",
+          "9d"
+        ],
+        [
+          "8s",
+          "7s"
+        ],
+        [
+          "Ah",
+          "Kd"
+        ]
+      ],
+      "prompt": "Compare each candidate with your best five. If you bet and get called, does that action identify one exact holding or tell you whether you are ahead? Replace the reason \"to find out where I am\" with a specific target and state what remains unknown when comparing the bet with checking.",
+      "points": [
+        "Your J-J-T-T-9 beats Candidate 1's J-J-9-9-T and Candidate 3's A-K-J-T-9. Candidate 2 makes a jack-high straight, J-T-9-8-7, and beats you.",
+        "Both Candidate 1 and Candidate 2 call under the stated assumptions, yet one loses to you and one wins. The call therefore does not identify an exact hand or settle whether you are ahead.",
+        "A testable value intention is to get Candidate 1's worse two pair to call six counters. Candidate 2's call would beat you and must also be counted, and Candidate 3 folds a hand checking would beat. Their frequencies and any other possible responses remain necessary for comparing the bet with checking."
+      ],
+      "misconception": "Betting for information as though one observed call reveals a unique hand or guarantees that the caller is weaker.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "focus": "call-does-not-identify-one-hand",
+      "design_note": "This case gives the same observed calling action to holdings on opposite sides of the showdown comparison, requiring an explicit value target instead of an information-only reason.",
+      "point_repairs": [
+        "/poker/hand-rankings/#compare",
+        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [],
+        [
+          "/poker/ranges-for-beginners/#known-and-possible"
+        ],
+        [
+          "/poker/betting-with-a-purpose/#value",
+          "/poker/ranges-for-beginners/#equal-weights"
+        ]
+      ],
+      "context": "checked_to_hero",
+      "expected_rank": [
+        2,
+        11,
+        10,
+        9
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger",
+        "weaker"
+      ],
+      "responses": [
+        {
+          "candidate": 1,
+          "action": "call"
+        },
+        {
+          "candidate": 2,
+          "action": "call"
+        },
+        {
+          "candidate": 3,
+          "action": "fold"
+        }
+      ]
     }
+  ],
+  "expansion_baseline_commit": "8fc1d78b76e313be721d9bded0cb16d98501b81f",
+  "forms": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L"
   ]
 }

@@ -1,6 +1,6 @@
 # Poker Foundations transfer task S1-B
 
-**Draft for qualified review. One fictional case only.** This card contains no answer or other case. If a facilitator shows it to a participant, first confirm the case has been approved for that exact teaching revision and ask about previous exposure. No gambling account or wager is needed.
+**Draft for qualified review. One fictional case only.** This card contains no answer or other case. For a supervised session, use the exact reviewer-approved case and record previous exposure. No gambling account or wager is needed.
 
 ### S1-B: Big blind facing a raise
 

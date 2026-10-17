@@ -1,6 +1,12 @@
-# Independent A/B transfer observation protocol
+# Original A/B allocation and expanded-bank observation boundary
 
 **Draft for qualified review. Not part of the older T1–T6 beginner baseline. No sessions have occurred.** This supplemental protocol uses the new S1-A through S6-B cases from [participant-cards.md](participant-cards.md). The earlier [baseline protocol](../poker-beginner-baseline/protocol.md) assigns only T1–T6 and must not be used unchanged to record these new cases. Its original forms and results remain separate.
+
+## Expanded bank: C–L cases
+
+The original A/B allocation below remains exactly the proposed first round. The 60 added C–L cases are available in the [coverage index](coverage.md) and individual card files. They are not automatically substituted into this allocation. Before using any expanded case, record an explicit selection plan with the actual case IDs, lesson revisions, intended first/later use, exact packet commit and qualified reviewer approval. Retain the original allocation and label an amended or later round separately.
+
+Letters identify cases within a skill, not matched tests. Do not presume adjacent letters, equal counts or shared skills imply comparable difficulty. Show one isolated case at a time, record all exposure fields, and keep later attempts in a new full private session record. The existing [session form](session-form.md) and [aggregate form](summary-form.md) include all 72 IDs; copy only reviewed rows used in the actual plan. Blank, unused rows are not results.
 
 ## Prerequisites
 
@@ -30,7 +36,7 @@ Open only the **one-case file** linked in the assignment table (or copy only tha
 3. Record any facilitator hint, navigation assistance, repair link or prompt repetition separately, in sequence. An assisted answer is not an independent answer. Mark whether an independent attempt occurred before help and whether any subsequent assisted attempt occurred, and record its three reasoning points separately from the original first-response labels. If the participant chooses not to continue, stop.
 4. After the first explanation is recorded, use only the matching section of [facilitator-key.md](facilitator-key.md) to identify supported / error / not demonstrated for its three proposed reasoning points. An incorrect reason with a correct number remains an explanation error. If an unreviewed flaw is found, flag and stop using that item until corrected and reviewed.
 5. Allow the person to view the precise repair on the public lesson and attempt an explanation again if desired. Record this as assisted, not as new independent transfer evidence. Preserve the original first-response outcome.
-6. Optional later follow-up can use the participant's unused paired form only if separately consented and reviewed. **Make a new full private [session-form.md](session-form.md) copy for that case**, linked by anonymous participant code. Record all three reasoning points independently on the new form, along with exact interval, prior and new exposures, hints and case identity. An immediately repeated prompt is not retention testing. Without genuine later observations, leave all later-follow-up fields blank.
+6. For the original A/B allocation, optional later follow-up can use the participant's unused paired form only if separately consented and reviewed. An expanded-bank follow-up must use the exact separately reviewed case in its recorded selection plan. **Make a new full private [session-form.md](session-form.md) copy for that case**, linked by anonymous participant code. Record all three reasoning points independently on the new form, along with exact interval, prior and new exposures, hints and case identity. An immediately repeated prompt is not retention testing. Without genuine later observations, leave all later-follow-up fields blank.
 
 ## Aggregation and limits
 

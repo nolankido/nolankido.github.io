@@ -1,6 +1,6 @@
 # Poker Foundations transfer task S6-A
 
-**Draft for qualified review. One fictional case only.** This card contains no answer or other case. If a facilitator shows it to a participant, first confirm the case has been approved for that exact teaching revision and ask about previous exposure. No gambling account or wager is needed.
+**Draft for qualified review. One fictional case only.** This card contains no answer or other case. For a supervised session, use the exact reviewer-approved case and record previous exposure. No gambling account or wager is needed.
 
 ### S6-A: A checked river and two possible callers
 
@@ -17,7 +17,6 @@ Candidate 1 card names: jack of diamonds; jack of hearts.
 Candidate 2: Ks, 6d.
 
 Candidate 2 card names: king of spades; six of diamonds.
-
 
 **Try without opening an answer:** Which candidate supports a value-bet explanation? Which would be ahead of you? Does the existence of one weaker caller prove the bet earns more than checking? Explain what else you would need to compare betting with checking.
 
