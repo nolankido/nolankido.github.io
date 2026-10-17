@@ -162,7 +162,7 @@ class PokerCourseTests(unittest.TestCase):
             self.assertNotIn(forbidden, js)
         self.assertIn('/' + course.CSS, check_live.targets())
         self.assertIn('/' + course.SCRIPT, check_live.targets())
-        self.assertEqual(len(check_live.targets()), 472)
+        self.assertEqual(len(check_live.targets()), 475)
 
     def test_invalid_cards_stages_repairs_and_duplicate_scenes_are_rejected(self):
         variants = []

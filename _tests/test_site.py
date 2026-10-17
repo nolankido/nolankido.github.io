@@ -61,6 +61,7 @@ class SiteTests(unittest.TestCase):
             self.assertNotRegex(self.outputs[path], r'\$\{[a-z_]+\}')
 
     def test_all_internal_links_assets_and_fragments(self):
+        target_ids = {}
         for path, page in self.pages.items():
             for tag, attrs in page.elements:
                 for key in ['href', 'src']:
@@ -78,7 +79,9 @@ class SiteTests(unittest.TestCase):
                     with self.subTest(page=str(path), link=attrs[key]):
                         self.assertTrue(target.is_file(), str(target))
                         if url.fragment and target.suffix == '.html':
-                            ids = [a.get('id') for _, a in Page(target.read_text()).elements]
+                            if target not in target_ids:
+                                target_ids[target] = {a.get('id') for _, a in Page(target.read_text()).elements}
+                            ids = target_ids[target]
                             if target == ROOT / 'poker/find/index.html' and '=' in url.fragment:
                                 # Finder fragments encode finite editorial filters, never queries.
                                 pairs = parse_qsl(url.fragment, keep_blank_values=True)
@@ -123,6 +126,7 @@ class SiteTests(unittest.TestCase):
             other_scripts = [src for src in scripts if src != 'https://cloud.umami.is/script.js']
             allowed = {Path('technology/should-i-use-ai/index.html'): '/assets/ai-task-choice.js', Path('bio/index.html'): '/assets/public-profile.js', Path('technology/ai-time-savings/index.html'): '/assets/workflow-time.js', Path('technology/task-brief/index.html'): '/assets/task-brief.js', Path('find/index.html'): '/assets/site-find.js', Path('living-well/find/index.html'): '/assets/living-well-directory.js', Path('poker/find/index.html'): '/assets/poker-finder.js', Path('poker/study-calculators/index.html'): '/assets/poker-study-tools.js', Path('poker/resources/index.html'): '/assets/poker-resources.js', Path('contact/index.html'): '/assets/contact.js', Path('poker/library/index.html'): '/assets/poker-library.js'}
             allowed[Path('poker/beginner-practice/index.html')] = '/assets/poker-beginner-practice.js'
+            allowed[Path('poker/school/index.html')] = '/assets/poker-school-interest.js'
             allowed[Path('poker/study/index.html')] = '/assets/poker-progress.js'
             expected_scripts = [allowed[path]] if path in allowed else []
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.outputs[path], re.S)[1])
