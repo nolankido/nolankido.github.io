@@ -1,0 +1,239 @@
+diff --git a/_source/home.html b/_source/home.html
+index 94d461a..4bded2d 100644
+--- a/_source/home.html
++++ b/_source/home.html
+@@ -8,16 +8,17 @@
+   </div>
+ </section>
+ <section class="section folio-row identity-selection" aria-labelledby="selected-reading-title">
+-  <div class="section-meta"><p class="section-label">A way into my thinking</p></div>
++  <div class="section-meta"><p class="section-label">Use / Inspect / Understand</p></div>
+   <div class="section-content">
+     <h2 class="section-title" id="selected-reading-title">Start with something useful.</h2>
+-    <p class="section-deck">A position on using AI, a practical test of usefulness, and a poker decision to think through.</p>
+-    ${identity_reading}
++    <p class="section-deck">Try a tool, inspect a real example, or read the thinking behind the work. Choose what helps today.</p>
++    <div class="identity-readings">
++      <article class="identity-reading" data-home-choice="use"><p class="note-category">01 / Use a free tool</p><h3><a href="/technology/task-brief/">Build a brief before asking AI.</a></h3><p>Turn a vague request into a task with a finish line, boundaries, and checks.</p><p class="reading-date">A local browser tool. No account. No AI runs here.</p></article>
++      <article class="identity-reading" data-home-choice="inspect"><p class="note-category">02 / Inspect a recorded case</p><h3><a href="/technology/checking-ai-website-changes/">See what a passing check missed.</a></h3><p>Follow a real website repair and inspect the evidence, including what the checks could not establish.</p><p class="reading-date">A documented defect, not a claim of time savings.</p></article>
++      <article class="identity-reading" data-home-choice="understand"><p class="note-category">03 / Understand the approach</p><h3><a href="/notes/keep-the-judgment/">Let AI do more. Keep the judgment.</a></h3><p>Delegate production without giving up the purpose, boundaries, and decisions you need to stand behind.</p><p class="reading-date">An essay on what to keep in human hands.</p></article>
++    </div>
++    <details class="practical-home"><summary id="practical-home-title">More tools and reading</summary><nav aria-label="More useful starting points"><a href="/technology/check-ai-answers/">Check an AI answer</a><a href="/technology/ai-time-savings/">Compare the full workflow time</a><a href="/living-well/did-the-tool-actually-help/">Decide whether a tool helped</a><a href="/poker/reviewing-a-hand/">Review a fictional poker hand</a><a href="/living-well/worksheets/#weekly-reset">Open the weekly-reset worksheet</a><a href="/poker/study-calculators/">Check poker calculations</a></nav><p class="small-copy">For review away from play: poker calculators with their assumptions visible.</p></details>
+     <p class="small-copy identity-reading-footer"><a href="/start-here/">Choose an interest</a>, <a href="/notes/">browse the writing</a>, or <a href="/resources/">find a useful resource</a>.</p>
+-    ${practical_home}
+-<!-- AI answer review: start -->
+-    <p class="small-copy"><strong>Have an AI answer you want to use?</strong> <a href="/technology/check-ai-answers/">Choose a check for its facts, numbers, writing, or code</a>, with examples and a blank evidence record.</p>
+-<!-- AI answer review: end -->
+   </div>
+ </section>
+ <section class="section folio-row destination-section" aria-labelledby="destinations-title">
+@@ -32,10 +33,10 @@
+         <div class="destination-links"><a class="destination-action" id="technology-destination-action" href="/technology/">Explore technology <span aria-hidden="true">→</span></a><div class="destination-first"><p class="destination-first-label">A useful first step</p><a class="destination-first-link" href="/technology/task-brief/">Build an AI task brief <span aria-hidden="true">→</span></a><p class="destination-first-note">A browser tool for defining the task, boundaries, and checks. No AI runs here.</p></div></div>
+       </article>
+       <article class="destination destination-living-well" aria-labelledby="living-well-destination-title">
+-        <span class="destination-label">02 / More room for living</span><h3 id="living-well-destination-title">Living Well</h3><p id="living-well-destination-description">Meaning, attention, spirituality, and everyday life. Questions to explore without turning yourself into a project.</p><div class="destination-links"><a class="destination-action" id="living-well-destination-action" href="/living-well/">Explore Living Well <span aria-hidden="true">→</span></a><div class="destination-first"><p class="destination-first-label">A useful first step</p><a class="destination-first-link" href="/living-well/worksheets/#weekly-reset">Make room in your week <span aria-hidden="true">→</span></a><p class="destination-first-note">A blank weekly-reset worksheet to use privately in your own notes.</p></div></div>
++        <span class="destination-label">02 / More room for living</span><h3 id="living-well-destination-title">Living Well</h3><p id="living-well-destination-description">Meaning, attention, spirituality, and everyday life. Questions to explore without turning yourself into a project.</p><div class="destination-links"><a class="destination-action" id="living-well-destination-action" href="/living-well/">Explore Living Well <span aria-hidden="true">→</span></a><div class="destination-first"><p class="destination-first-label">A useful first step</p><a class="destination-first-link" href="/living-well/weekly-reset/">Make room in your week <span aria-hidden="true">→</span></a><p class="destination-first-note">A small reset for what matters, what can wait, and one manageable next action.</p></div></div>
+       </article>
+       <article class="destination destination-poker" aria-labelledby="poker-destination-title">
+-        <span class="destination-label">03 / Play, study &amp; uncertainty</span><h3 id="poker-destination-title">Poker</h3><p id="poker-destination-description">Tournament poker, decisions behind the hands, and resources for learning the game.</p><div class="destination-links"><a class="destination-action" id="poker-destination-action" href="/poker/">Explore poker <span aria-hidden="true">→</span></a><div class="destination-first"><p class="destination-first-label">A useful first step</p><a class="destination-first-link" href="/poker/study-calculators/">Check the poker math <span aria-hidden="true">→</span></a><p class="destination-first-note">Study calculators with visible assumptions. For review away from play, not strategy advice.</p></div></div>
++        <span class="destination-label">03 / Play, study &amp; uncertainty</span><h3 id="poker-destination-title">Poker</h3><p id="poker-destination-description">Tournament poker, decisions behind the hands, and resources for learning the game.</p><div class="destination-links"><a class="destination-action" id="poker-destination-action" href="/poker/">Explore poker <span aria-hidden="true">→</span></a><div class="destination-first"><p class="destination-first-label">A useful first step</p><a class="destination-first-link" href="/poker/first-live-tournament/">Prepare for your first tournament <span aria-hidden="true">→</span></a><p class="destination-first-note">Know what to bring, what happens on arrival, and which venue rules to check.</p></div></div>
+       </article>
+       <article class="destination destination-creative" aria-labelledby="creative-destination-title">
+         <span class="destination-label">04 / Make an idea connect</span><h3 id="creative-destination-title">Creative Work</h3><p id="creative-destination-description">Writing, design, and visual storytelling, with attention to the person on the other side.</p><div class="destination-links"><a class="destination-action" id="creative-destination-action" href="/creative/">Explore creative work <span aria-hidden="true">→</span></a><div class="destination-first"><p class="destination-first-label">A useful first step</p><a class="destination-first-link" href="/creative/#creative-brief">Plan a small creative piece <span aria-hidden="true">→</span></a><p class="destination-first-note">A blank brief for the reader, idea, material, and finish line.</p></div></div>
+diff --git a/_source/pages.json b/_source/pages.json
+index 3ad1e89..8f6a012 100644
+--- a/_source/pages.json
++++ b/_source/pages.json
+@@ -6,7 +6,7 @@
+     "seo_title": "Nolan Kido | Practical AI, Useful Things & a Good Life",
+     "description": "A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.",
+     "source": "home.html",
+-    "updated": "2026-10-12"
++    "updated": "2026-10-17"
+   },
+   {
+     "id": "start-here",
+diff --git a/_tests/browser.py b/_tests/browser.py
+index f078689..9500551 100644
+--- a/_tests/browser.py
++++ b/_tests/browser.py
+@@ -364,6 +364,55 @@ class BrowserTests(unittest.TestCase):
+         self.assertEqual(self.posts[0]['reason'], '')
+         self.assertEqual(self.posts[0]['context'], '')
+ 
++    def test_homepage_choices_secondary_links_and_keyboard(self):
++        self.render('/', width=390)
++        choices = self.page.locator('.identity-reading')
++        expect(choices).to_have_count(3)
++        for role, destination in [
++            ('use', '/technology/task-brief/'),
++            ('inspect', '/technology/checking-ai-website-changes/'),
++            ('understand', '/notes/keep-the-judgment/')]:
++            link = self.page.locator('[data-home-choice="' + role + '"] a')
++            expect(link).to_have_attribute('href', destination)
++            link.focus()
++            expect(link).to_be_focused()
++            expect(link).to_be_in_viewport()
++        details = self.page.locator('details.practical-home')
++        expect(details).not_to_have_attribute('open', '')
++        summary = self.page.locator('#practical-home-title')
++        summary.focus(); self.page.keyboard.press('Enter')
++        expect(details).to_have_attribute('open', '')
++        for link in details.locator('a').all():
++            expect(link).to_be_visible()
++            link.focus(); expect(link).to_be_focused()
++        expect(self.page.locator('.destination-living-well .destination-first-link')).to_have_attribute('href', '/living-well/weekly-reset/')
++        expect(self.page.locator('.destination-poker .destination-first-link')).to_have_attribute('href', '/poker/first-live-tournament/')
++        summary.focus(); self.page.keyboard.press('Enter')
++        expect(details).not_to_have_attribute('open', '')
++        self.assertEqual(self.context.cookies(), [])
++
++    def test_homepage_without_scripts_and_with_enlarged_text(self):
++        context = self.browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 900})
++        context.route('**/*', lambda route: route.abort())
++        page = context.new_page()
++        try:
++            page.set_content(html_for('/'))
++            expect(page.locator('h1')).to_have_text('Nolan Kido')
++            expect(page.locator('[data-home-choice] a')).to_have_count(3)
++            summary = page.locator('#practical-home-title')
++            summary.focus(); page.keyboard.press('Enter')
++            expect(page.locator('details.practical-home')).to_have_attribute('open', '')
++            expect(page.locator('.practical-home a')).to_have_count(6)
++            # DOM insertion is test-only; the production page has no new script.
++            page.evaluate("()=>{const s=document.createElement('style');s.textContent='html{font-size:200%!important} *{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}';document.head.appendChild(s)}")
++            for width in (320, 390, 768, 1440):
++                page.set_viewport_size({'width': width, 'height': 1000})
++                self.assertLessEqual(page.evaluate('document.documentElement.scrollWidth'), width)
++                for link in page.locator('[data-home-choice] a').all():
++                    expect(link).to_be_visible()
++        finally:
++            context.close()
++
+     def test_duplicate_submit_prevention(self):
+         self.service = 'hang'
+         self.contact(); self.fill(); self.verify()
+diff --git a/_tests/first_steps_browser.py b/_tests/first_steps_browser.py
+index 497e2b7..4ba465c 100644
+--- a/_tests/first_steps_browser.py
++++ b/_tests/first_steps_browser.py
+@@ -12,7 +12,7 @@ class QuietHandler(SimpleHTTPRequestHandler):
+ server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=str(ROOT)))
+ Thread(target=server.serve_forever,daemon=True).start()
+ base='http://127.0.0.1:'+str(server.server_port)
+-starts={'technology':'/technology/task-brief/','living-well':'/living-well/worksheets/#weekly-reset','poker':'/poker/study-calculators/','creative':'/creative/#creative-brief'}
++starts={'technology':'/technology/task-brief/','living-well':'/living-well/weekly-reset/','poker':'/poker/first-live-tournament/','creative':'/creative/#creative-brief'}
+ errors=[];missing=[];report={'keyboard_journeys':0,'downloads':0,'layouts':0,'expanded_spacing':0,'axe_scans':0}
+ def route(r):
+  if urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()
+diff --git a/_tests/poker_school_history.py b/_tests/poker_school_history.py
+index 3c1208c..cc5a4fb 100644
+--- a/_tests/poker_school_history.py
++++ b/_tests/poker_school_history.py
+@@ -8,6 +8,7 @@ from copy import deepcopy
+ from functools import lru_cache
+ from hashlib import sha256
+ import json
++import homepage_growth_history
+ from pathlib import Path
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+@@ -23,6 +24,7 @@ def change():
+ 
+ 
+ def before(path, data):
++    data = homepage_growth_history.before(path, data)
+     item = change()['paths'].get(str(path))
+     binary = isinstance(data, bytes)
+     raw = data if binary else data.encode('utf-8')
+@@ -40,6 +42,7 @@ def before(path, data):
+ 
+ 
+ def pages(records):
++    records = homepage_growth_history.pages(records)
+     return [deepcopy(p) for p in records if p not in change()['new_pages']]
+ 
+ 
+diff --git a/_tests/practical_discovery_browser.py b/_tests/practical_discovery_browser.py
+index ce9f511..8661a13 100644
+--- a/_tests/practical_discovery_browser.py
++++ b/_tests/practical_discovery_browser.py
+@@ -87,7 +87,10 @@ try:
+             if not args.offline:
+                 for path in ['/technology/task-brief/', '/technology/ai-time-savings/', '/technology/checking-ai-website-changes/']:
+                     page.goto(base + '/')
+-                    page.locator('nav[aria-label="Selected practical AI work"] a[href="' + path + '"]').focus()
++                    if path == '/technology/ai-time-savings/':
++                        page.locator('#practical-home-title').click()
++                    selector = '.practical-home' if path == '/technology/ai-time-savings/' else '.identity-readings'
++                    page.locator(selector + ' a[href="' + path + '"]').focus()
+                     page.keyboard.press('Enter')
+                     expect(page).to_have_url(base + path)
+                     report['keyboard_journeys'] += 1
+diff --git a/_tests/test_first_steps.py b/_tests/test_first_steps.py
+index ded5b78..459fb33 100644
+--- a/_tests/test_first_steps.py
++++ b/_tests/test_first_steps.py
+@@ -11,8 +11,8 @@ import build
+ import check_live
+ STARTS={
+  'technology':'/technology/task-brief/',
+- 'living-well':'/living-well/worksheets/#weekly-reset',
+- 'poker':'/poker/study-calculators/',
++ 'living-well':'/living-well/weekly-reset/',
++ 'poker':'/poker/first-live-tournament/',
+  'creative':'/creative/#creative-brief',
+ }
+ class FirstStepTests(unittest.TestCase):
+diff --git a/_tests/test_identity.py b/_tests/test_identity.py
+index f9c9638..b00b96d 100644
+--- a/_tests/test_identity.py
++++ b/_tests/test_identity.py
+@@ -30,7 +30,7 @@ class IdentityTests(unittest.TestCase):
+ 
+     def test_curated_entries_keep_canonical_titles_and_status(self):
+         by_path = {p['path']: p for p in self.pages}
+-        for relative in ['index.html', 'start-here/index.html']:
++        for relative in ['start-here/index.html']:
+             content = self.outputs[Path(relative)]
+             self.assertEqual(content.count('class="identity-reading"'), 3)
+             for item in self.config['selected']:
+diff --git a/_tests/test_poker_school_history.py b/_tests/test_poker_school_history.py
+index ff43c22..3cf78ca 100644
+--- a/_tests/test_poker_school_history.py
++++ b/_tests/test_poker_school_history.py
+@@ -8,6 +8,7 @@ from unittest.mock import patch
+ 
+ from test_site import ROOT, build
+ import poker_school_history as school
++import homepage_growth_history as homepage
+ 
+ 
+ def fingerprint(records):
+@@ -49,7 +50,7 @@ class PokerSchoolHistoryTests(unittest.TestCase):
+ 
+     def test_unknown_edits_cannot_be_hidden_by_the_adapter(self):
+         for path, item in self.data['paths'].items():
+-            raw = (ROOT / path).read_bytes()
++            raw = homepage.before(path, (ROOT / path).read_bytes())
+             self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'], path)
+             old = school.before(path, raw)
+             self.assertEqual(sha256(old).hexdigest(), item['old_sha256'], path)
+diff --git a/assets/first-steps.css b/assets/first-steps.css
+index ff4cffe..cb4856a 100644
+--- a/assets/first-steps.css
++++ b/assets/first-steps.css
+@@ -34,3 +34,13 @@
+   .destination, .creative-brief-card, .creative-template pre { background: white; color: black; }
+   .creative-brief-card { break-inside: avoid; }
+ }
++
++/* Homepage growth: one primary selection; secondary routes stay native. */
++.page-home .identity-reading h3 a { display: inline-flex; align-items: center; min-height: 44px; }
++.page-home .practical-home summary { cursor: pointer; min-height: 44px; padding: 8px 0; font: 600 .94rem/1.6 var(--sans); }
++.page-home .practical-home summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
++.page-home .practical-home[open] > p { margin-top: 12px; }
++/* Keep enlarged text readable instead of clipping long headings or links. */
++.page-home :is(.section-title, .brand-statement, .destination a) { overflow-wrap: anywhere; }
++.page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }
++.page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }
