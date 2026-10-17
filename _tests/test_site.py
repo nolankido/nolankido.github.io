@@ -123,6 +123,7 @@ class SiteTests(unittest.TestCase):
             other_scripts = [src for src in scripts if src != 'https://cloud.umami.is/script.js']
             allowed = {Path('technology/should-i-use-ai/index.html'): '/assets/ai-task-choice.js', Path('bio/index.html'): '/assets/public-profile.js', Path('technology/ai-time-savings/index.html'): '/assets/workflow-time.js', Path('technology/task-brief/index.html'): '/assets/task-brief.js', Path('find/index.html'): '/assets/site-find.js', Path('living-well/find/index.html'): '/assets/living-well-directory.js', Path('poker/find/index.html'): '/assets/poker-finder.js', Path('poker/study-calculators/index.html'): '/assets/poker-study-tools.js', Path('poker/resources/index.html'): '/assets/poker-resources.js', Path('contact/index.html'): '/assets/contact.js', Path('poker/library/index.html'): '/assets/poker-library.js'}
             allowed[Path('poker/beginner-practice/index.html')] = '/assets/poker-beginner-practice.js'
+            allowed[Path('poker/school/index.html')] = '/assets/poker-school-interest.js'
             allowed[Path('poker/study/index.html')] = '/assets/poker-progress.js'
             expected_scripts = [allowed[path]] if path in allowed else []
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.outputs[path], re.S)[1])
