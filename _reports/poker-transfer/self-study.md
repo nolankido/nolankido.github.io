@@ -32,6 +32,8 @@ Mistake to watch for: Treating earlier-street chips as credit on this street.
 
 3. [Revisit point 3](https://nolankido.com/poker/first-decisions/#chips-owed).
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 [Revisit this explanation](https://nolankido.com/poker/first-decisions/#chips-owed).
 
 </details>
@@ -164,6 +166,8 @@ Mistake to watch for: Calling four cards a flush or checking through a bet.
 
 3. [Revisit point 3](https://nolankido.com/poker/first-flop-decisions/#whose-turn).
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 [Revisit this explanation](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing).
 
 </details>
@@ -196,6 +200,8 @@ Mistake to watch for: Confusing a promising draw with a made hand or calling a c
 2. [Revisit point 2](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing).
 
 3. [Revisit point 3](https://nolankido.com/poker/first-flop-decisions/#whose-turn).
+
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
 
 [Revisit this explanation](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing).
 
@@ -230,6 +236,8 @@ Mistake to watch for: Using the pot price as if it were measured winning probabi
 
 3. [Revisit point 3](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff).
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 [Revisit this explanation](https://nolankido.com/poker/turn-and-river-decisions/#river-reset).
 
 </details>
@@ -262,6 +270,8 @@ Mistake to watch for: Using hand category rather than a conditional price and ra
 2. [Revisit point 2](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff).
 
 3. [Revisit point 3](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff).
+
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
 
 [Revisit this explanation](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff).
 
@@ -307,7 +317,9 @@ Mistake to watch for: Allowing known cards in an opposing holding or treating a 
 
 2. [Revisit point 2](https://nolankido.com/poker/ranges-for-beginners/#known-and-possible).
 
-3. [Revisit point 3](https://nolankido.com/poker/ranges-for-beginners/#one-reveal).
+3. [Revisit point 3](https://nolankido.com/poker/ranges-for-beginners/#equal-weights).
+
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
 
 [Revisit this explanation](https://nolankido.com/poker/ranges-for-beginners/#known-and-possible).
 
@@ -355,6 +367,8 @@ Mistake to watch for: Generalizing a single showdown or ignoring physical card r
 
 3. [Revisit point 3](https://nolankido.com/poker/ranges-for-beginners/#one-reveal).
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 [Revisit this explanation](https://nolankido.com/poker/ranges-for-beginners/#remove-known-cards).
 
 </details>
@@ -393,9 +407,11 @@ Mistake to watch for: Concluding that one worse caller guarantees a good value b
 
 1. [Revisit point 1](https://nolankido.com/poker/betting-with-a-purpose/#purpose).
 
-2. [Revisit point 2](https://nolankido.com/poker/betting-with-a-purpose/#purpose).
+2. [Revisit point 2](https://nolankido.com/poker/hand-rankings/#compare).
 
 3. [Revisit point 3](https://nolankido.com/poker/betting-with-a-purpose/#takeaway).
+
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
 
 [Revisit this explanation](https://nolankido.com/poker/betting-with-a-purpose/#purpose).
 

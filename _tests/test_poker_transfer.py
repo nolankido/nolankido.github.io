@@ -13,6 +13,16 @@ module = module_from_spec(SPEC)
 SPEC.loader.exec_module(module)
 
 class PokerTransferTests(unittest.TestCase):
+    def test_rejects_missing_lesson_exposure_counts(self):
+        with self.changed_packet("summary-form.md", "Assigned lesson seen (yes / no / unsure)", "Other exposure"):
+            with self.assertRaises(AssertionError):
+                module.check()
+
+    def test_rejects_missing_point_level_outcomes(self):
+        with self.changed_packet("summary-form.md", "| S5-A | assisted |", "| S5-A | combined |"):
+            with self.assertRaises(AssertionError):
+                module.check()
+
     def test_rejects_missing_full_card_names(self):
         with self.changed_packet("cards/S3-A.md", "queen of clubs", "Qc"):
             with self.assertRaises(AssertionError):

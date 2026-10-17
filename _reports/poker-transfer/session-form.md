@@ -10,9 +10,11 @@ Consent status (confirmed / not confirmed / withdrawn / not recorded): ______  E
 
 Record type: first independent attempt / separately consented later paired-form attempt. If later, paired first-case ID and exact elapsed interval: ______  Intervening learning or exposure: ______
 
-Device, browser and relevant access aids: ______  Lesson seen: ______
+Device, browser and relevant access aids: ______
 
-Time since last exposure to the lesson, if known: ______  Prior exposure to this exact case: yes / no / unsure
+Assigned lesson seen: yes / no / unsure. Lesson and teaching revision actually seen (or unknown): ______
+
+Time since last exposure to the lesson: exact elapsed interval ______ / unknown. If the lesson was not seen, mark not applicable.  Prior exposure to this exact case: yes / no / unsure
 
 Prior exposure to this case's answer key: yes / no / unsure
 

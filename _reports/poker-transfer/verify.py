@@ -94,7 +94,9 @@ def check():
         anchor = item["repair"].split("#")[1]
         assert anchor in REPAIRS[skill]
         assert len(item.get("point_repairs", [])) == 3
-        for link in item["point_repairs"]:
+        extra = item.get("point_extra_repairs", [[], [], []])
+        assert len(extra) == 3 and all(isinstance(links, list) for links in extra)
+        for link in item["point_repairs"] + [link for links in extra for link in links]:
             assert isinstance(link, str) and link.startswith("/poker/") and link.count("#") == 1
             repair_path, repair_anchor = link.split("#")
             lesson = repair_path.rstrip("/").split("/")[-1]
@@ -183,6 +185,9 @@ def check():
                 label = "Point {} repair" if name == "facilitator-key.md" else "Revisit point {}"
                 for n, link in enumerate(case["point_repairs"], 1):
                     assert f"[{label.format(n)}](https://nolankido.com{link})" in section
+                for n, links in enumerate(case.get("point_extra_repairs", [[], [], []]), 1):
+                    for link in links:
+                        assert f"Additional point {n} repair: [Compare the best five cards](https://nolankido.com{link})." in section
     participant = (FOLDER / "participant-cards.md").read_text()
     assert "<details>" not in participant and "Computed high-hand vector" not in participant
     assert all(p not in participant for case in items for p in case["points"])
@@ -199,6 +204,11 @@ def check():
     assert "frequenc" not in items[8]["setup"].lower()
     assert "at least 30 counters each still behind" in items[3]["setup"]
     assert items[11]["point_repairs"][0] == "/poker/hand-rankings/#compare"
+    assert items[8]["point_repairs"][2] == "/poker/ranges-for-beginners/#equal-weights"
+    assert items[10]["point_repairs"][1] == "/poker/hand-rankings/#compare"
+    for case_id in ("S5-A", "S5-B", "S6-A"):
+        case = next(case for case in items if case["id"] == case_id)
+        assert "/poker/hand-rankings/#compare" in case["point_extra_repairs"][0]
     session = (FOLDER / "session-form.md").read_text()
     summary = (FOLDER / "summary-form.md").read_text()
     for field in ("this exact case", "this case's answer key", "a similar problem"):
@@ -210,8 +220,18 @@ def check():
                    "Prior answer-key exposure (yes / no / unsure)",
                    "Prior similar-problem exposure (yes / no / unsure)"):
         assert column in summary
-    rows = [line for line in summary.splitlines() if line.startswith("| ")]
-    assert len(rows) == 14 and len({row.count("|") for row in rows}) == 1
+    assert "Assigned lesson seen: yes / no / unsure" in session
+    assert "Assigned lesson seen (yes / no / unsure)" in summary
+    assert "Exact elapsed interval(s) and count(s)" in summary
+    assert "Unknown interval count" in summary
+    assert "Actual lesson/revision and counts (or unknown)" in summary
+    assert "supported / error / not demonstrated / not attempted" in summary
+    for phase in ("independent", "assisted"):
+        for case in items:
+            assert f"| {case['id']} | {phase} |" in summary
+    for part in summary.split("### ")[1:]:
+        rows = [line for line in part.splitlines() if line.startswith("| ")]
+        assert len(rows) in (14, 26) and len({row.count("|") for row in rows}) == 1
     assert "overlapping" in summary and "separate tables" in summary
     form = (FOLDER / "review-form.md").read_text()
     for item in items:

@@ -24,6 +24,8 @@ Call: 7 minus 0 already paid = 7 more.
 2. [Point 2 repair](https://nolankido.com/poker/first-decisions/#legal-actions)
 3. [Point 3 repair](https://nolankido.com/poker/first-decisions/#chips-owed)
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
 ### S1-B: Big blind facing a raise
@@ -108,6 +110,8 @@ Computed high-hand vector (category 0 to 8, ranks 2 to 14): `[1,12,11,8,2]`.
 2. [Point 2 repair](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing)
 3. [Point 3 repair](https://nolankido.com/poker/first-flop-decisions/#whose-turn)
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
 ### S3-B: Two suited private cards on the flop
@@ -129,6 +133,8 @@ Computed high-hand vector (category 0 to 8, ranks 2 to 14): `[0,13,10,9,7,2]`.
 1. [Point 1 repair](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing)
 2. [Point 2 repair](https://nolankido.com/poker/first-flop-decisions/#made-and-drawing)
 3. [Point 3 repair](https://nolankido.com/poker/first-flop-decisions/#whose-turn)
+
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -154,6 +160,8 @@ River: 18 before, 6 bet, 6 call, 30 after; fraction 1/5.
 2. [Point 2 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
 3. [Point 3 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
 ### S4-B: River bet holding pocket sevens
@@ -178,6 +186,8 @@ River: 30 before, 20 bet, 20 call, 70 after; fraction 2/7.
 2. [Point 2 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
 3. [Point 3 repair](https://nolankido.com/poker/turn-and-river-decisions/#catching-a-bluff)
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
 ### S5-A: Three candidate river holdings
@@ -200,7 +210,9 @@ Candidate status in order: impossible, weaker, stronger.
 
 1. [Point 1 repair](https://nolankido.com/poker/ranges-for-beginners/#remove-known-cards)
 2. [Point 2 repair](https://nolankido.com/poker/ranges-for-beginners/#known-and-possible)
-3. [Point 3 repair](https://nolankido.com/poker/ranges-for-beginners/#one-reveal)
+3. [Point 3 repair](https://nolankido.com/poker/ranges-for-beginners/#equal-weights)
+
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
@@ -226,6 +238,8 @@ Candidate status in order: impossible, stronger, weaker.
 2. [Point 2 repair](https://nolankido.com/poker/ranges-for-beginners/#known-and-possible)
 3. [Point 3 repair](https://nolankido.com/poker/ranges-for-beginners/#one-reveal)
 
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
+
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
 ### S6-A: A checked river and two possible callers
@@ -247,8 +261,10 @@ Candidate status in order: weaker, stronger.
 **Repair by reasoning point:**
 
 1. [Point 1 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
-2. [Point 2 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
+2. [Point 2 repair](https://nolankido.com/poker/hand-rankings/#compare)
 3. [Point 3 repair](https://nolankido.com/poker/betting-with-a-purpose/#takeaway)
+
+Additional point 1 repair: [Compare the best five cards](https://nolankido.com/poker/hand-rankings/#compare).
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 

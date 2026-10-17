@@ -43,6 +43,13 @@
         "/poker/first-decisions/#best-five",
         "/poker/first-decisions/#legal-actions",
         "/poker/first-decisions/#chips-owed"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
@@ -160,6 +167,13 @@
         "/poker/first-flop-decisions/#made-and-drawing",
         "/poker/first-flop-decisions/#made-and-drawing",
         "/poker/first-flop-decisions/#whose-turn"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
@@ -197,6 +211,13 @@
         "/poker/first-flop-decisions/#made-and-drawing",
         "/poker/first-flop-decisions/#made-and-drawing",
         "/poker/first-flop-decisions/#whose-turn"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
@@ -244,6 +265,13 @@
         "/poker/turn-and-river-decisions/#river-reset",
         "/poker/turn-and-river-decisions/#catching-a-bluff",
         "/poker/turn-and-river-decisions/#catching-a-bluff"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
@@ -291,6 +319,13 @@
         "/poker/turn-and-river-decisions/#river-reset",
         "/poker/turn-and-river-decisions/#catching-a-bluff",
         "/poker/turn-and-river-decisions/#catching-a-bluff"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
@@ -347,7 +382,14 @@
       "point_repairs": [
         "/poker/ranges-for-beginners/#remove-known-cards",
         "/poker/ranges-for-beginners/#known-and-possible",
-        "/poker/ranges-for-beginners/#one-reveal"
+        "/poker/ranges-for-beginners/#equal-weights"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
@@ -405,6 +447,13 @@
         "/poker/ranges-for-beginners/#remove-known-cards",
         "/poker/ranges-for-beginners/#known-and-possible",
         "/poker/ranges-for-beginners/#one-reveal"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
@@ -455,8 +504,15 @@
       ],
       "point_repairs": [
         "/poker/betting-with-a-purpose/#purpose",
-        "/poker/betting-with-a-purpose/#purpose",
+        "/poker/hand-rankings/#compare",
         "/poker/betting-with-a-purpose/#takeaway"
+      ],
+      "point_extra_repairs": [
+        [
+          "/poker/hand-rankings/#compare"
+        ],
+        [],
+        []
       ]
     },
     {
