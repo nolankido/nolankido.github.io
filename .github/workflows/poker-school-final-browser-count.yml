@@ -1,0 +1,50 @@
+name: Stage final Poker School native-search regression
+on:
+  push:
+    branches: [audit/poker-school-compatibility-20261017]
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 0e35172498d7c68039978a72160d21136644c452
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Apply exact native-search test delta
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('_tests/search_sections_browser.py')
+          s = p.read_text()
+          assert s.count('173') == 2
+          s = s.replace('to_have_count(173)', 'to_have_count(174)').replace("report['no_script_pages']=173", "report['no_script_pages']=174")
+          a = "        expect(page.locator('.find-item')).to_have_count(174)\n"
+          assert s.count(a) == 1
+          s = s.replace(a, a + "        # The new School page remains a usable native result without scripts.\n        expect(page.locator('#browse-poker h3 a[href=\"/poker/school/\"]')).to_have_count(1)\n")
+          p.write_text(s)
+          p = Path('_scripts/poker_school_release.py')
+          s = p.read_text()
+          a = "    '_tests/rules_reference_history.py',\n"
+          assert s.count(a) == 1
+          p.write_text(s.replace(a, a + "    '_tests/search_sections_browser.py',\n"))
+          PY
+          python _reports/poker-school/capture_history.py --write
+          python _scripts/build.py --check
+          git add -A
+          test "$(git write-tree)" = 0516a44df873ccce8c4ce9924d5fc38d0883edfc
+          python _scripts/poker_school_release.py
+      - name: Stage the exact correction for connector promotion
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Fix the current native search fallback inventory for Poker School'
+          git push origin HEAD:refs/heads/audit/poker-school-browser-final-20261017
+          echo "STAGED_COMMIT=$(git rev-parse HEAD)"
+          echo "STAGED_TREE=$(git rev-parse HEAD^{tree})"
