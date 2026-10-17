@@ -49,6 +49,7 @@ class QualifiedReviewRoundTests(unittest.TestCase):
                 case[field] = "accept"
             case["disposition"] = "accept"
             case["independent_evidence"] = "synthetic test evidence, not a human review"
+            case["reasoning_point_evidence"] = ["synthetic point 1", "synthetic point 2", "synthetic point 3"]
         self.update_record(record)
 
     def test_triage_is_exactly_eighteen_and_answers_remain_separate(self):
@@ -142,6 +143,17 @@ class QualifiedReviewRoundTests(unittest.TestCase):
         for dimension in module.DIMENSIONS:
             record["cases"][0][dimension] = "accept"
         record["cases"][0]["disposition"] = "accept"
+        self.update_record(record)
+        with self.assertRaises(module.ReviewError):
+            module.audit_packet(self.packet)
+
+    def test_accepted_case_requires_all_three_independent_reasoning_points(self):
+        _, record = self.prepare()
+        for dimension in module.DIMENSIONS:
+            record["cases"][0][dimension] = "accept"
+        record["cases"][0]["disposition"] = "accept"
+        record["cases"][0]["independent_evidence"] = "synthetic summary"
+        record["cases"][0]["reasoning_point_evidence"] = ["point 1", "", "point 3"]
         self.update_record(record)
         with self.assertRaises(module.ReviewError):
             module.audit_packet(self.packet)

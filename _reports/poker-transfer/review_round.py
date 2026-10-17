@@ -129,7 +129,18 @@ def first_pass(ids, questions):
         "These are individual learner cards reproduced from the pinned source. "
         "No case or course has yet been qualified for a supervised session.",
     ]
-    sections.extend(questions[case_id].rstrip() for case_id in ids)
+    for case_id in ids:
+        card = questions[case_id]
+        old_header = ("**Draft for qualified review. One fictional case only.** "
+                      "This card contains no answer or other case. For a supervised session, "
+                      "use the exact reviewer-approved case and record previous exposure. "
+                      "No gambling account or wager is needed.")
+        if old_header not in card:
+            raise ReviewError("Unexpected learner-card introduction for " + case_id)
+        reviewed_header = ("**Reviewer first pass only.** This section contains one "
+                           "draft question, with no answer. It is not approval to "
+                           "administer the case to a learner.")
+        sections.append(card.replace(old_header, reviewed_header).rstrip())
     return "\n\n---\n\n".join(sections) + "\n"
 
 
@@ -146,8 +157,9 @@ def facilitator(ids, answer_keys):
 def review_sheet(ids, mode):
     lines = [
         "# Qualified reviewer response template",
-        "Blank template, not a signed review. Complete and retain privately. "
-        "The packet fingerprint and exact commit are in manifest.json.",
+        "Blank template, not a signed review. Make a private working copy of this "
+        "form before writing any answers; leave this original blank for bundle "
+        "integrity checks. The packet fingerprint and exact commit are in manifest.json.",
         "## Reviewer and revision",
         "Reviewer private reference: ______",
         "Relevant rules and beginner-teaching qualifications: ______",
@@ -172,7 +184,10 @@ def review_sheet(ids, mode):
             "Mechanics: unreviewed  Clarity: unreviewed  Reasoning: unreviewed  "
             "Repairs: unreviewed  Accessibility: unreviewed",
             "Disposition: unreviewed",
-            "Independent evidence for each of three explanation points: ______",
+            "Independent evidence for reasoning point 1: ______",
+            "Independent evidence for reasoning point 2: ______",
+            "Independent evidence for reasoning point 3: ______",
+            "Overall independent mechanics/teaching evidence: ______",
             "Issue IDs, severity, disagreement and resolution: ______",
             "Exact case hash: see manifest.json (do not copy another case's conclusion)",
         ])
@@ -239,6 +254,7 @@ def make_packet(destination, mode="triage", case_list=None, source_commit=None):
                 "id": entry["id"], "case_sha256": entry["case_sha256"],
                 **{dimension: "unreviewed" for dimension in DIMENSIONS},
                 "disposition": "unreviewed", "independent_evidence": "",
+                "reasoning_point_evidence": ["", "", ""],
                 "open_issue_ids": [],
             }
             for entry in entries
@@ -322,6 +338,12 @@ def audit_packet(directory):
         if not isinstance(evidence, str) or (
                 disposition != "unreviewed" and not evidence.strip()):
             raise ReviewError("A reviewed case requires independent evidence")
+        point_evidence = decision.get("reasoning_point_evidence")
+        if (not isinstance(point_evidence, list) or len(point_evidence) != 3
+                or any(not isinstance(point, str) for point in point_evidence)):
+            raise ReviewError("Each case requires three separate point-evidence fields")
+        if disposition == "accept" and not all(point.strip() for point in point_evidence):
+            raise ReviewError("Cannot accept without evidence for all three points: " + case_id)
         counts[disposition] += 1
     course = record.get("course_review")
     reviewer = record.get("reviewer")

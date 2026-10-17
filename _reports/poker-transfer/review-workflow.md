@@ -30,7 +30,7 @@ To review only an explicitly selected subset, never implicitly all 72:
 
     python _reports/poker-transfer/review_round.py prepare --mode custom --cases S1-A,S2-B,S3-A --out ../poker-review-selected
 
-Each output directory contains five files:
+Each output directory contains five files. **Keep those source packet files unchanged** so the audit can verify them. If using the readable review form, copy 03-review-form.md to a separate private working file before entering any findings; the machine-readable review-record.json is the editable source for the audit:
 
 | Local file | Reader and purpose |
 | --- | --- |
@@ -44,7 +44,7 @@ Each output directory contains five files:
 
 ## Checking a real review record
 
-A reviewer must actually inspect the listed cases, provide an independent reason and issue references, disclose relevant teaching/rules qualifications and conflicts, and record confirmation privately. Fill the local review-record.json as an accurate transcription of that review, not as an automatic score. Each reviewed case has five criteria and an explicit overall disposition. An accepted case cannot have an incomplete/adverse criterion or unresolved issue, and every non-unreviewed case requires written evidence.
+A reviewer must actually inspect the listed cases, provide an independent reason and issue references, disclose relevant teaching/rules qualifications and conflicts, and record confirmation privately. Fill the local review-record.json as an accurate transcription of that review, not as an automatic score. Each reviewed case has five criteria, three separate reasoning-point evidence fields, and an explicit overall disposition. An accepted case cannot have an incomplete/adverse criterion, missing evidence for even one reasoning point, or an unresolved issue. Every non-unreviewed case requires an independent written summary.
 
 Run:
 
