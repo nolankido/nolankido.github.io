@@ -12,10 +12,10 @@ Adults new to no-limit Texas Hold'em, including people who know hand rankings bu
 Before using reviewed practice as premium teaching, the exact content requires qualified human teaching review and real beginner observation. The 72-case bank remains an AI-authored, mechanically checked draft.
 
 ## Entry points
-The Poker homepage points toward the possible course after the free course introduction. Small optional links from Poker Foundations and Study Desk do not interrupt learning. The School page visibly differentiates free from possible paid content.
+The Poker homepage points toward the possible course after the free course introduction. An optional link from the Study Desk does not interrupt learning. The frozen Poker Foundations source is unchanged to preserve its reviewed teaching scope. The School page visibly differentiates free from possible paid content.
 
 ## Request form and privacy
-The existing Formspark destination and Cloudflare Turnstile are reused. `assets/contact.js` now recognizes a separate form ID while leaving the public contact form's field requirements and payload unchanged.
+The existing Formspark destination and Cloudflare Turnstile are reused. The course-interest form uses a separate, page-scoped `assets/poker-school-interest.js`. The original `assets/contact.js` stays byte-identical to the approved parent, as do the original privacy page and frozen Poker Foundations teaching source. The School page carries explicit supplemental request terms and links to the existing general privacy notice.
 
 - Required email and action, `register` or `remove`.
 - Register requires an explicit initially unchecked consent box.

@@ -1,6 +1,6 @@
 # Poker School Turn 1: Release gate and next engineering steps
 
-**State (October 16, 2026, Hawaii):** Implementation on draft PR #110; NOT MERGED; no production deployment. Parent release at start: `9021d4604c9427c37dc6c788753ddf9675dfc7ba`. Current branch can advance while this document remains the issue record.
+**State (October 16, 2026, Hawaii):** Implementation on draft PR #110; NOT MERGED; no production deployment. The course-interest form is now isolated from the original contact script, and the previously frozen course and privacy sources have been restored. Parent release at start: `9021d4604c9427c37dc6c788753ddf9675dfc7ba`. Current branch can advance while this document remains the issue record.
 
 ## What has been implemented
 
@@ -9,6 +9,7 @@
 - Interest request with explicitly unchecked marketing-email consent, removal path without consent, optional learning category and name, Formspark and Cloudflare Turnstile.
 - Consent and manual-processing disclosures in Privacy; existing backend processes requests only when a person reviews them.
 - Focused static and form contract tests, new offline Playwright cases, and an operator procedure in `_reports/poker-school-offer.md`.
+- A SHA-bound additive scope guard, `_scripts/poker_school_release.py`, pins every original tracked Git blob from main commit `9021d46`, rejects unknown edits and deletions, and preserves byte-for-byte the original contact, privacy and frozen teaching sources. The new school page and its JS/CSS are independently included in the live byte-check inventory.
 - No mailing-list enrollment API, subscriber account, checkout, billing, personal tracking event, marketing promise, or real provider submission.
 
 ## Exact QA observations
@@ -20,10 +21,10 @@
 
 ## Priority fixes before any merge
 
-1. **Separate shared concerns.** Decide whether to move Poker School's form logic to its own page-scoped asset so existing `assets/contact.js` and `/contact/` behavior remain byte-identical. The preferred design is minimal impact on the established general contact path.
-2. **Respect the teaching review lock.** Either remove the optional course CTA from the signed-off/revision-fingerprinted `_source/poker/free-poker-learning-path.html` and link from the Poker homepage instead, or generate a genuinely new reviewed source-scope packet and revalidate all affected lesson inputs. Do not silently rewrite a signed-off hash. Reviewer acceptance is still pending.
-3. **Introduce an explicit additive public-route release contract.** List every intentional new source, generated target and index addition, and independently prove that **all old entries, source paragraphs, redirects, and approved assets** remain byte-for-byte or semantically unchanged where required. Old history baselines should remain reproducible, with a verified reversible adapter for the new, bounded delta. Scope edits only to the historical invariants genuinely touched.
-4. **Adjust the live/search and script scope invariants narrowly.** The new route is intended to add one page, not change pre-existing search titles, anchors, or content; show that via a targeted comparison and check the new page can be crawled. Explicitly whitelist only the new form route for its page-specific script.
+1. **Completed: separate shared concerns.** Poker School now has page-scoped `assets/poker-school-interest.js`; the approved parent `assets/contact.js` is restored unchanged. Its existing form still passes the focused browser regression.
+2. **Completed: respect the teaching lock.** The optional course CTA was removed from `_source/poker/free-poker-learning-path.html`, which is back to its exact reviewed-parent bytes. The landing page remains linked from the Poker homepage and Study Desk. Qualified human teaching review is still pending.
+3. **Partly completed: implement the additive release contract.** `_reports/poker-school-main-blobs.json` pins all 1,207 original tracked blobs. `_scripts/poker_school_release.py` rejects any undeclared change, addition or deletion; it does not waive legacy history tests. Next create an exact, reviewed additive history adapter for the new route and old source views; do not edit historical baselines merely to suppress failures.
+4. **Partly completed: live asset coverage.** The new school page, CSS and JS are listed in `_scripts/check_live.py` for eventual published-byte verification. The remaining work is to update strict earlier route and script-scope tests through a bounded, reviewed history adapter. They must continue rejecting unexpected scripts and changes.
 5. **Run independent end-to-end validation.** Unit tests, HTML validation, accessibility, browser flows for consent and removal at mobile widths and with no JavaScript, and regression tests for the old contact form. No real Formspark submissions during automated tests. Review any Code Review findings on the exact final commit.
 6. **Final release gate and evidence.** `python _scripts/build.py --check`, all project unit tests, all browser groups, PR aggregate `checks` success, publish to main via reviewed merge, independent Pages deployment and published-byte verification at the exact main SHA. Remove temporary infrastructure before merge.
 
