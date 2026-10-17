@@ -130,6 +130,43 @@ class QualifiedReviewRoundTests(unittest.TestCase):
             with self.assertRaises(module.ReviewError):
                 module.audit_packet(self.packet)
 
+    def test_duplicate_facilitator_anchors_are_rejected(self):
+        folder_copy = self.base / "duplicated-key"
+        shutil.copytree(module.FOLDER, folder_copy)
+        key_file = folder_copy / "facilitator-key.md"
+        text = key_file.read_text()
+        marker = '<a id="s1-a"></a>'
+        self.assertIn(marker, text)
+        key_file.write_text(text.replace(marker, marker + "\n\n" + marker, 1))
+        with patch.object(module, "FOLDER", folder_copy):
+            with self.assertRaises(module.ReviewError):
+                module.keys()
+
+    def test_crlf_case_sources_and_cards_audit_consistently(self):
+        folder_copy = self.base / "crlf-packet"
+        shutil.copytree(module.FOLDER, folder_copy)
+        for relative in ("cases.json", "cards/S1-A.md"):
+            file = folder_copy / relative
+            normalized = file.read_text(encoding="utf-8")
+            file.write_bytes(normalized.replace("\n", "\r\n").encode("utf-8"))
+        with patch.object(module, "FOLDER", folder_copy):
+            manifest, _ = self.prepare()
+            self.assertEqual(
+                manifest["case_source_sha256"],
+                hashlib.sha256((module.FOLDER / "cases.json").read_text(
+                    encoding="utf-8").encode("utf-8")).hexdigest()
+            )
+            self.assertEqual(module.audit_packet(self.packet)["status"], "human_review_pending")
+
+    def test_rejects_nonstring_course_review_reference(self):
+        _, record = self.prepare("full")
+        self.complete_fixture(record)
+        for invalid in (None, 123, [], {"id": "something"}):
+            record["course_review"]["evidence_reference"] = invalid
+            self.update_record(record)
+            with self.assertRaises(module.ReviewError):
+                module.audit_packet(self.packet)
+
     def test_incomplete_criteria_cannot_be_accepted(self):
         _, record = self.prepare()
         record["cases"][0]["disposition"] = "accept"
