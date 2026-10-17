@@ -285,9 +285,12 @@ def build_outputs() -> dict[Path, str]:
             for asset, kind in [('task-brief.css', 'style'), ('task-brief.js', 'script')]:
                 version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
                 extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style' else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
-        if p['id'] in {'contact', 'poker-school'}:
+        if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
+        if p['id'] == 'poker-school':
+            interest_version = hashlib.sha256((ROOT / 'assets/poker-school-interest.js').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <script src="/assets/poker-school-interest.js?v={interest_version}" defer></script>'
         if p['id'] == 'poker-school':
             school_css_version = hashlib.sha256((ROOT / 'assets/poker-school.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker-school.css?v={school_css_version}">'

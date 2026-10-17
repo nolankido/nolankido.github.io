@@ -32,15 +32,17 @@ class PokerSchoolTests(unittest.TestCase):
         self.assertIn('id="interest-consent" name="interest_consent" type="checkbox" value="yes" required', text)
         self.assertIn('id="contact-fields" disabled', text)
         self.assertIn('data-sitekey="0x4AAAAAAFI2X8NC1cauc_zz"', text)
-        self.assertIn('/privacy/#poker-school-requests', text)
-        self.assertIn('not instant mailing-list enrollment', self.outputs[Path('privacy/index.html')])
-        self.assertNotIn('localStorage', (ROOT / 'assets/contact.js').read_text())
+        self.assertIn('/privacy/', text)
+        self.assertIn('existing form provider and site operator', text)
+        self.assertIn('not sent to the site', text)
+        self.assertNotIn('localStorage', (ROOT / 'assets/poker-school-interest.js').read_text())
 
     def test_assets_and_course_entrypoints(self):
         text = self.outputs[Path('poker/school/index.html')]
         self.assertIn('/assets/poker-school.css?v=', text)
-        self.assertIn('/assets/contact.js?v=', text)
-        for path in ['poker/index.html', 'poker/free-poker-learning-path/index.html', 'poker/study/index.html']:
+        self.assertIn('/assets/poker-school-interest.js?v=', text)
+        self.assertNotIn('/assets/contact.js?v=', text)
+        for path in ['poker/index.html', 'poker/study/index.html']:
             self.assertIn('href="/poker/school/"', self.outputs[Path(path)], path)
         for path in ['poker/index.html', 'poker/study/index.html']:
             self.assertIn('href="/poker/free-poker-learning-path/"', self.outputs[Path(path)], path)
@@ -49,7 +51,8 @@ class PokerSchoolTests(unittest.TestCase):
         form = self.outputs[Path('contact/index.html')]
         self.assertIn('id="contact-form"', form)
         self.assertIn('name="message" rows="7" required', form)
-        self.assertIn("if (!pokerInterest) return originalLabel", (ROOT / 'assets/contact.js').read_text())
+        self.assertNotIn('poker-interest-form', (ROOT / 'assets/contact.js').read_text())
+        self.assertIn('/assets/contact.js?v=', form)
 
 
 if __name__ == '__main__':

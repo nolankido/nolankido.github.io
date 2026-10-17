@@ -122,7 +122,8 @@ class BrowserTests(unittest.TestCase):
                 return Promise.resolve({ok: window.testService >= 200 && window.testService < 300, status: window.testService});
               };
             }""", {'service': self.service, 'block': self.block_challenge})
-            self.page.add_script_tag(content=(ROOT / 'assets/contact.js').read_text())
+            script = 'assets/poker-school-interest.js' if route == '/poker/school/' else 'assets/contact.js'
+            self.page.add_script_tag(content=(ROOT / script).read_text())
 
     def tearDown(self):
         self.context.close()
