@@ -1,0 +1,454 @@
+{
+  "version": 1,
+  "status": "draft-qualified-human-review-pending",
+  "course": "poker-foundations",
+  "baseline_commit": "b923b06d4bc67ceb2ff1058262e219c996659c05",
+  "cases": [
+    {
+      "id": "S1-A",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "The flop resets the price",
+      "hero": [
+        "Kc",
+        "7h"
+      ],
+      "board": [
+        "Ks",
+        "9d",
+        "3c"
+      ],
+      "setup": "In a fictional heads-up flop, you paid 5 counters preflop. On the flop you have paid zero. The other player bets 7. You have enough chips, with no all-ins or side pots.",
+      "prompt": "Name your best five now. Can you check in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?",
+      "call": {
+        "to": 7,
+        "paid": 0,
+        "answer": 7
+      },
+      "points": [
+        "Your five cards form one pair of kings, with nine, seven and three as kickers.",
+        "You cannot check while facing an unmatched bet; folding, calling or a legal raise are the available action families.",
+        "The call costs 7 on this street. The five paid preflop is already in the pot, not credit for the flop."
+      ],
+      "misconception": "Treating earlier-street chips as credit on this street.",
+      "repair": "/poker/first-decisions/#chips-owed",
+      "expected_rank": [
+        1,
+        13,
+        9,
+        7,
+        3
+      ]
+    },
+    {
+      "id": "S1-B",
+      "skill": "S1",
+      "lesson": "first-decisions",
+      "title": "The blind is already in",
+      "hero": [
+        "6h",
+        "6c"
+      ],
+      "board": [],
+      "setup": "Six players begin a new hand with 1/3 blinds. You posted the big blind of 3 and no other chips. A player makes a legal raise to 11 total. You still have enough counters and no other bets or all-ins intervene.",
+      "prompt": "How many extra counters would you put in to call? Is checking an option at this point? Explain the difference between the total wager and what you must add.",
+      "call": {
+        "to": 11,
+        "paid": 3,
+        "answer": 8
+      },
+      "points": [
+        "The big blind's 3 already counts on this preflop round, so calling adds 8 and reaches 11 total.",
+        "Checking is not an option against a raise that exceeds your current contribution.",
+        "The hand cards do not determine the price. The current wager and what you paid on this round do."
+      ],
+      "misconception": "Adding the full raise total twice or checking against an unmatched wager.",
+      "repair": "/poker/first-decisions/#chips-owed"
+    },
+    {
+      "id": "S2-A",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "The blind has not decided yet",
+      "hero": [
+        "9c",
+        "8c"
+      ],
+      "board": [],
+      "setup": "Six seats clockwise are first, next, cutoff, button, small blind and big blind. You are on the button. First folds, next raises to 7, cutoff calls 7 and you call 7. The small blind folds. The big blind has only posted the blind of 2 and has not acted. Assume no all-ins.",
+      "prompt": "Who still has an initial decision? Could a raise by that player make you act again? If everyone remaining reaches the flop without a further raise, which seat acts first?",
+      "points": [
+        "The big blind still has an initial decision; posting a blind was forced, not a choice to call the raise.",
+        "If the big blind raises, the earlier players still in the hand may face a new decision.",
+        "If next, cutoff, button and big blind remain, the big blind acts first after the flop, clockwise left of the button."
+      ],
+      "misconception": "Assuming the button completes preflop action by calling.",
+      "repair": "/poker/starting-hand-decisions/#position"
+    },
+    {
+      "id": "S2-B",
+      "skill": "S2",
+      "lesson": "starting-hand-decisions",
+      "title": "The button does not lead the flop",
+      "hero": [
+        "Ac",
+        "5s"
+      ],
+      "board": [],
+      "setup": "Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop. The small blind checks first.",
+      "prompt": "Was the small blind's forced post already their initial decision? Who acts second on the flop, and what does the check allow that a bet would not? Explain the difference between preflop and postflop order.",
+      "points": [
+        "Posting the small blind does not itself use the player's preflop decision; their later call does.",
+        "With only small blind and button active on the flop, the small blind acts first and the button acts second.",
+        "Facing a check, the button may check or make a legal bet; there is no unmatched wager to call."
+      ],
+      "misconception": "Assuming the button is first on the flop or that a check requires a call.",
+      "repair": "/poker/starting-hand-decisions/#position"
+    },
+    {
+      "id": "S3-A",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "A pair and a draw are different",
+      "hero": [
+        "Qc",
+        "Jc"
+      ],
+      "board": [
+        "Qd",
+        "8c",
+        "2c"
+      ],
+      "setup": "The flop has been dealt. Your opponent bets 4 and you have not yet put counters into this betting round. Assume you both have chips behind.",
+      "prompt": "Describe the hand you already have and the possible club improvement separately. Is a club flush complete? Which of check, fold, call and legal raise can you choose against the bet?",
+      "points": [
+        "You currently have a pair of queens with jack, eight and two kickers.",
+        "Two clubs in your hand and two on the board make four clubs, not a completed five-card flush.",
+        "Checking is unavailable against a live bet; calling, folding and a legal raise are possible action families."
+      ],
+      "misconception": "Calling four cards a flush or checking through a bet.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        1,
+        12,
+        11,
+        8,
+        2
+      ]
+    },
+    {
+      "id": "S3-B",
+      "skill": "S3",
+      "lesson": "first-flop-decisions",
+      "title": "A draw without a pair",
+      "hero": [
+        "Th",
+        "9h"
+      ],
+      "board": [
+        "Kh",
+        "7c",
+        "2h"
+      ],
+      "setup": "You are heads-up on the flop. The other player checks. Neither player has bet on this flop yet.",
+      "prompt": "Name your strongest five-card hand right now. How many hearts can you use? Is it a finished flush or a draw? Can you choose to check after the opponent checks?",
+      "points": [
+        "Your best five are king, ten, nine, seven and two high: no pair.",
+        "You can use four hearts now, two private and two shared. Another heart could make a flush, but not guarantee winning.",
+        "No wager is outstanding, so you may check or make a legal bet; calling is not the current action."
+      ],
+      "misconception": "Confusing a promising draw with a made hand or calling a check.",
+      "repair": "/poker/first-flop-decisions/#made-and-drawing",
+      "expected_rank": [
+        0,
+        13,
+        10,
+        9,
+        7,
+        2
+      ]
+    },
+    {
+      "id": "S4-A",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "A missed river draw at a new price",
+      "hero": [
+        "As",
+        "Ts"
+      ],
+      "board": [
+        "Ah",
+        "7s",
+        "4s",
+        "3c",
+        "9d"
+      ],
+      "setup": "At the river, the pot has 18 counters before an opponent bets 6. You paid nothing this river. There are no fees, all-ins, side pots or later bets.",
+      "prompt": "Name your best five and explain whether the spade draw completed. What does a call cost? What would the final pot be, and what fraction of that pot is the call? Does that fraction tell you whether to call?",
+      "river": {
+        "pot_before": 18,
+        "bet": 6,
+        "paid": 0,
+        "call": 6,
+        "after": 30,
+        "num": 1,
+        "den": 5
+      },
+      "points": [
+        "You finish with one pair of aces, ten, nine and seven kickers. There are only four spades, not a flush.",
+        "A call adds 6; 18 + 6 + 6 = 30 total, making the call one fifth, or 20%, of that final pot.",
+        "That is the required pot share under the model, not your estimated equity or a recommendation. Opponent holdings and frequencies remain unknown."
+      ],
+      "misconception": "Using the pot price as if it were measured winning probability.",
+      "repair": "/poker/turn-and-river-decisions/#river-reset",
+      "expected_rank": [
+        1,
+        14,
+        10,
+        9,
+        7
+      ]
+    },
+    {
+      "id": "S4-B",
+      "skill": "S4",
+      "lesson": "turn-and-river-decisions",
+      "title": "Same concept, different denominator",
+      "hero": [
+        "7d",
+        "7c"
+      ],
+      "board": [
+        "Kh",
+        "Qh",
+        "9d",
+        "5c",
+        "2s"
+      ],
+      "setup": "On the river, a heads-up pot contains 30 before your opponent bets 20. You have put nothing on this river. Assume no fees, all-ins, side pots or more betting.",
+      "prompt": "State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Does holding a pair mean you should call?",
+      "river": {
+        "pot_before": 30,
+        "bet": 20,
+        "paid": 0,
+        "call": 20,
+        "after": 70,
+        "num": 2,
+        "den": 7
+      },
+      "points": [
+        "Your best hand is a pair of sevens, with king, queen and nine kickers.",
+        "Calling costs 20 and makes a final 70-counter pot; 20/70 = 2/7, about 28.57%.",
+        "Pair strength alone does not determine the action. The call price must be compared with a reasoned range-based estimate, which is not supplied."
+      ],
+      "misconception": "Using hand category rather than a conditional price and range comparison.",
+      "repair": "/poker/turn-and-river-decisions/#catching-a-bluff",
+      "expected_rank": [
+        1,
+        7,
+        13,
+        12,
+        9
+      ]
+    },
+    {
+      "id": "S5-A",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "One blocked card, two possible rivals",
+      "hero": [
+        "Ah",
+        "Kd"
+      ],
+      "board": [
+        "Ks",
+        "9c",
+        "6d",
+        "4h",
+        "2c"
+      ],
+      "setup": "On a fictional river, the other player checks. The three candidate opposing holdings below are just examples. Their frequencies have not been supplied.",
+      "candidates": [
+        [
+          "Ah",
+          "Qs"
+        ],
+        [
+          "Qc",
+          "Qd"
+        ],
+        [
+          "Kh",
+          "2d"
+        ]
+      ],
+      "prompt": "Identify the impossible holding. Of the possible holdings, which beats your final hand? Does a check rule that holding out, or tell you how often it appears?",
+      "points": [
+        "Ah-Qs is impossible because you hold Ah; Qc-Qd is a weaker pair of queens; Kh-2d makes two pair, kings and twos, beating your one pair of kings.",
+        "A check alone does not reveal or exclude the stronger holding.",
+        "No candidate frequency was supplied, so this list cannot be treated as a probability distribution."
+      ],
+      "misconception": "Allowing known cards in an opposing holding or treating a check as proof of weakness.",
+      "repair": "/poker/ranges-for-beginners/#known-and-possible",
+      "expected_rank": [
+        1,
+        13,
+        14,
+        9,
+        6
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "weaker",
+        "stronger"
+      ]
+    },
+    {
+      "id": "S5-B",
+      "skill": "S5",
+      "lesson": "ranges-for-beginners",
+      "title": "A reveal is not a frequency table",
+      "hero": [
+        "Jc",
+        "9d"
+      ],
+      "board": [
+        "Jd",
+        "8c",
+        "3h",
+        "2s",
+        "6c"
+      ],
+      "setup": "You reach the river. The other player checks. Consider the three example holdings below, without assigning likelihoods.",
+      "candidates": [
+        [
+          "9d",
+          "As"
+        ],
+        [
+          "Ks",
+          "Kc"
+        ],
+        [
+          "Ad",
+          "7c"
+        ]
+      ],
+      "prompt": "Which holding cannot exist alongside your cards? Which possible hand is ahead of yours? Suppose the weaker possible holding appears at showdown once: does that prove all future checks are weak? Explain.",
+      "points": [
+        "9d-As is blocked by your own 9d; Ks-Kc makes a pair of kings stronger than your jacks; Ad-7c makes only ace-high and is weaker.",
+        "A check can be consistent with more than one holding, including a stronger one.",
+        "One revealed hand is one observation, not an established distribution for later opponents or decisions."
+      ],
+      "misconception": "Generalizing a single showdown or ignoring physical card removal.",
+      "repair": "/poker/ranges-for-beginners/#remove-known-cards",
+      "expected_rank": [
+        1,
+        11,
+        9,
+        8,
+        6
+      ],
+      "expected_comparisons": [
+        "impossible",
+        "stronger",
+        "weaker"
+      ]
+    },
+    {
+      "id": "S6-A",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "Possible worse callers do not prove value",
+      "hero": [
+        "Qs",
+        "Qh"
+      ],
+      "board": [
+        "Kd",
+        "9c",
+        "5h",
+        "3s",
+        "2c"
+      ],
+      "setup": "On the river, your opponent checks. In this fictional comparison only, assume both example holdings below would call a proposed bet of 5. Nothing is specified about their frequencies, raises, other holdings or the payoff from checking.",
+      "candidates": [
+        [
+          "Jd",
+          "Jh"
+        ],
+        [
+          "Ks",
+          "6d"
+        ]
+      ],
+      "prompt": "Which candidate supports a value-bet explanation? Which would be ahead of you? Does the existence of one weaker caller prove the bet earns more than checking?",
+      "points": [
+        "Jd-Jh is a worse pair of jacks and is assumed to call, so it is a possible value target.",
+        "Ks-6d makes a pair of kings, ahead of your queens, and is also assumed to call.",
+        "Without frequencies and other possible responses, the comparison of betting with checking is underdetermined; no profitable-bet claim follows."
+      ],
+      "misconception": "Concluding that one worse caller guarantees a good value bet.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "expected_rank": [
+        1,
+        12,
+        13,
+        9,
+        5
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger"
+      ]
+    },
+    {
+      "id": "S6-B",
+      "skill": "S6",
+      "lesson": "betting-with-a-purpose",
+      "title": "A fold is an outcome, not the full argument",
+      "hero": [
+        "Ah",
+        "5d"
+      ],
+      "board": [
+        "Ac",
+        "9h",
+        "8s",
+        "6c",
+        "2d"
+      ],
+      "setup": "On the river, your opponent checks. In this fictional contrast, suppose a worse holding below folds to your proposed bet of 8 while the stronger holding calls. Their frequencies and all other responses are unknown.",
+      "candidates": [
+        [
+          "Kh",
+          "Kd"
+        ],
+        [
+          "9c",
+          "9s"
+        ]
+      ],
+      "prompt": "Which candidate is weaker than you, and which is stronger? Does a fold from the weaker holding prove the bet was a successful bluff or a good value bet? What comparison is missing?",
+      "points": [
+        "Kh-Kd makes one pair of kings, weaker than your pair of aces. 9c-9s makes three nines, stronger than your aces.",
+        "Folding the worse holding is not evidence of forcing a better hand to fold, and gives up that holding's possible call value.",
+        "Compare the outcomes of betting and checking across possible holdings and responses, with frequencies; one fold does not establish the better action."
+      ],
+      "misconception": "Confusing a fold of a worse hand with profitable bluffing.",
+      "repair": "/poker/betting-with-a-purpose/#purpose",
+      "expected_rank": [
+        1,
+        14,
+        9,
+        8,
+        6
+      ],
+      "expected_comparisons": [
+        "weaker",
+        "stronger"
+      ]
+    }
+  ]
+}
