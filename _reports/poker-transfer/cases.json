@@ -8,7 +8,7 @@
       "id": "S1-A",
       "skill": "S1",
       "lesson": "first-decisions",
-      "title": "The flop resets the price",
+      "title": "Flop wager after a preflop payment",
       "hero": [
         "Kc",
         "7h"
@@ -18,7 +18,7 @@
         "9d",
         "3c"
       ],
-      "setup": "In a fictional heads-up flop, you paid 5 counters preflop. On the flop you have paid zero. The other player bets 7. You have enough chips, with no all-ins or side pots.",
+      "setup": "In a fictional heads-up flop, you paid 5 counters preflop. On the flop you have paid zero. The other player bets 7. Both players have at least 30 counters behind at this decision, with no all-ins or side pots.",
       "prompt": "Name your best five now. Can you check in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?",
       "call": {
         "to": 7,
@@ -44,7 +44,7 @@
       "id": "S1-B",
       "skill": "S1",
       "lesson": "first-decisions",
-      "title": "The blind is already in",
+      "title": "Big blind facing a raise",
       "hero": [
         "6h",
         "6c"
@@ -69,7 +69,7 @@
       "id": "S2-A",
       "skill": "S2",
       "lesson": "starting-hand-decisions",
-      "title": "The blind has not decided yet",
+      "title": "Action after a button call",
       "hero": [
         "9c",
         "8c"
@@ -89,7 +89,7 @@
       "id": "S2-B",
       "skill": "S2",
       "lesson": "starting-hand-decisions",
-      "title": "The button does not lead the flop",
+      "title": "A two-player flop after a button raise",
       "hero": [
         "Ac",
         "5s"
@@ -109,7 +109,7 @@
       "id": "S3-A",
       "skill": "S3",
       "lesson": "first-flop-decisions",
-      "title": "A pair and a draw are different",
+      "title": "Private and shared cards on the flop",
       "hero": [
         "Qc",
         "Jc"
@@ -119,7 +119,7 @@
         "8c",
         "2c"
       ],
-      "setup": "The flop has been dealt. Your opponent bets 4 and you have not yet put counters into this betting round. Assume you both have chips behind.",
+      "setup": "The flop has been dealt. Your opponent bets 4 and you have not yet put counters into this betting round. Both players have at least 30 counters behind when you face this bet, with no all-ins or side pots.",
       "prompt": "Describe the hand you already have and the possible club improvement separately. Is a club flush complete? Which of check, fold, call and legal raise can you choose against the bet?",
       "points": [
         "You currently have a pair of queens with jack, eight and two kickers.",
@@ -140,7 +140,7 @@
       "id": "S3-B",
       "skill": "S3",
       "lesson": "first-flop-decisions",
-      "title": "A draw without a pair",
+      "title": "Two suited private cards on the flop",
       "hero": [
         "Th",
         "9h"
@@ -172,7 +172,7 @@
       "id": "S4-A",
       "skill": "S4",
       "lesson": "turn-and-river-decisions",
-      "title": "A missed river draw at a new price",
+      "title": "River bet with ace and ten",
       "hero": [
         "As",
         "Ts"
@@ -214,7 +214,7 @@
       "id": "S4-B",
       "skill": "S4",
       "lesson": "turn-and-river-decisions",
-      "title": "Same concept, different denominator",
+      "title": "River bet holding pocket sevens",
       "hero": [
         "7d",
         "7c"
@@ -256,7 +256,7 @@
       "id": "S5-A",
       "skill": "S5",
       "lesson": "ranges-for-beginners",
-      "title": "One blocked card, two possible rivals",
+      "title": "Three candidate river holdings",
       "hero": [
         "Ah",
         "Kd"
@@ -308,7 +308,7 @@
       "id": "S5-B",
       "skill": "S5",
       "lesson": "ranges-for-beginners",
-      "title": "A reveal is not a frequency table",
+      "title": "A checked river and one later reveal",
       "hero": [
         "Jc",
         "9d"
@@ -360,7 +360,7 @@
       "id": "S6-A",
       "skill": "S6",
       "lesson": "betting-with-a-purpose",
-      "title": "Possible worse callers do not prove value",
+      "title": "A checked river and two possible callers",
       "hero": [
         "Qs",
         "Qh"
@@ -407,7 +407,7 @@
       "id": "S6-B",
       "skill": "S6",
       "lesson": "betting-with-a-purpose",
-      "title": "A fold is an outcome, not the full argument",
+      "title": "A river bet with two possible responses",
       "hero": [
         "Ah",
         "5d"

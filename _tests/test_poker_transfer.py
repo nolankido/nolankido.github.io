@@ -17,6 +17,8 @@ class PokerTransferTests(unittest.TestCase):
         self.assertIn("No existing site data, pages, scripts, CSS", text)
         self.assertIn("pending", text.lower())
         self.assertEqual(len(module.LESSONS), 6)
+        self.assertIn("separate A/B protocol", text)
+        self.assertTrue((ROOT / "_reports/poker-transfer/session-form.md").exists())
         for slug in module.LESSONS:
             self.assertTrue((ROOT / "_source/poker" / (slug + ".html")).exists())
 

@@ -2,7 +2,7 @@
 
 **Draft, not reviewed or calibrated.** All scenarios and holdings are fictional. This key is public source code, so ask each participant whether they saw it before a session. Do not present it until after an independent explanation. These points are proposed qualitative observation criteria, not an automatic mastery grade or advice on how to wager.
 
-### S1-A: The flop resets the price
+### S1-A: Flop wager after a preflop payment
 
 1. Your five cards form one pair of kings, with nine, seven and three as kickers.
 
@@ -20,7 +20,7 @@ Call: 7 minus 0 already paid = 7 more.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S1-B: The blind is already in
+### S1-B: Big blind facing a raise
 
 1. The big blind's 3 already counts on this preflop round, so calling adds 8 and reaches 11 total.
 
@@ -36,7 +36,7 @@ Call: 11 minus 3 already paid = 8 more.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S2-A: The blind has not decided yet
+### S2-A: Action after a button call
 
 1. The big blind still has an initial decision; posting a blind was forced, not a choice to call the raise.
 
@@ -50,7 +50,7 @@ Call: 11 minus 3 already paid = 8 more.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S2-B: The button does not lead the flop
+### S2-B: A two-player flop after a button raise
 
 1. Posting the small blind does not itself use the player's preflop decision; their later call does.
 
@@ -64,7 +64,7 @@ Call: 11 minus 3 already paid = 8 more.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S3-A: A pair and a draw are different
+### S3-A: Private and shared cards on the flop
 
 1. You currently have a pair of queens with jack, eight and two kickers.
 
@@ -80,7 +80,7 @@ Computed high-hand vector (category 0 to 8, ranks 2 to 14): `[1,12,11,8,2]`.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S3-B: A draw without a pair
+### S3-B: Two suited private cards on the flop
 
 1. Your best five are king, ten, nine, seven and two high: no pair.
 
@@ -96,7 +96,7 @@ Computed high-hand vector (category 0 to 8, ranks 2 to 14): `[0,13,10,9,7,2]`.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S4-A: A missed river draw at a new price
+### S4-A: River bet with ace and ten
 
 1. You finish with one pair of aces, ten, nine and seven kickers. There are only four spades, not a flush.
 
@@ -114,7 +114,7 @@ River: 18 before, 6 bet, 6 call, 30 after; fraction 1/5.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S4-B: Same concept, different denominator
+### S4-B: River bet holding pocket sevens
 
 1. Your best hand is a pair of sevens, with king, queen and nine kickers.
 
@@ -132,7 +132,7 @@ River: 30 before, 20 bet, 20 call, 70 after; fraction 2/7.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S5-A: One blocked card, two possible rivals
+### S5-A: Three candidate river holdings
 
 1. Ah-Qs is impossible because you hold Ah; Qc-Qd is a weaker pair of queens; Kh-2d makes two pair, kings and twos, beating your one pair of kings.
 
@@ -150,7 +150,7 @@ Candidate status in order: impossible, weaker, stronger.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S5-B: A reveal is not a frequency table
+### S5-B: A checked river and one later reveal
 
 1. 9d-As is blocked by your own 9d; Ks-Kc makes a pair of kings stronger than your jacks; Ad-7c makes only ace-high and is weaker.
 
@@ -168,7 +168,7 @@ Candidate status in order: impossible, stronger, weaker.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S6-A: Possible worse callers do not prove value
+### S6-A: A checked river and two possible callers
 
 1. Jd-Jh is a worse pair of jacks and is assumed to call, so it is a possible value target.
 
@@ -186,7 +186,7 @@ Candidate status in order: weaker, stronger.
 
 **Observation labels:** unassisted / hinted / shown; explanation supported / error / not demonstrated; familiar / previously exposed / unknown exposure; returned after stated interval / not returned.
 
-### S6-B: A fold is an outcome, not the full argument
+### S6-B: A river bet with two possible responses
 
 1. Kh-Kd makes one pair of kings, weaker than your pair of aces. 9c-9s makes three nines, stronger than your aces.
 

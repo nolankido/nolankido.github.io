@@ -115,6 +115,17 @@ def check():
     assert sum("river" in i for i in items) == 2
     assert sum("candidates" in i for i in items) == 4
     assert sum("call" in i for i in items) == 2
+    for protocol_file in ("protocol.md", "session-form.md", "summary-form.md"):
+        content = (FOLDER / protocol_file).read_text(encoding="utf-8")
+        assert "No sessions" in content or "No sessions or results" in content or "No field" in content or "No sessions have occurred" in content or "Template only" in content
+        assert all(s in content for s in SKILLS) if protocol_file == "protocol.md" else True
+    protocol = (FOLDER / "protocol.md").read_text(encoding="utf-8")
+    assigned = ("S1-A", "S2-B", "S3-A", "S4-B", "S5-A", "S6-B", "S1-B", "S2-A")
+    assert all(case_id in protocol for case_id in assigned)
+    assert all("P" + str(n).zfill(2) in protocol for n in range(1, 9))
+    assert "T1–T6" in protocol and "not" in protocol.lower()
+    assert "Assigned case (S1-A through S6-B)" in (FOLDER / "session-form.md").read_text(encoding="utf-8")
+    assert all(f"| {case['id']} |" in (FOLDER / "summary-form.md").read_text(encoding="utf-8") for case in items)
     for name in ("participant-cards.md", "facilitator-key.md", "self-study.md"):
         body = (FOLDER / name).read_text(encoding="utf-8")
         for case in items:
