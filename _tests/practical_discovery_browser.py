@@ -87,7 +87,10 @@ try:
             if not args.offline:
                 for path in ['/technology/task-brief/', '/technology/ai-time-savings/', '/technology/checking-ai-website-changes/']:
                     page.goto(base + '/')
-                    page.locator('nav[aria-label="Selected practical AI work"] a[href="' + path + '"]').focus()
+                    if path == '/technology/ai-time-savings/':
+                        page.locator('#practical-home-title').click()
+                    selector = '.practical-home' if path == '/technology/ai-time-savings/' else '.identity-readings'
+                    page.locator(selector + ' a[href="' + path + '"]').focus()
                     page.keyboard.press('Enter')
                     expect(page).to_have_url(base + path)
                     report['keyboard_journeys'] += 1

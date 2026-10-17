@@ -364,6 +364,72 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual(self.posts[0]['reason'], '')
         self.assertEqual(self.posts[0]['context'], '')
 
+    def test_homepage_choices_secondary_links_and_keyboard(self):
+        self.render('/', width=390)
+        choices = self.page.locator('.identity-reading')
+        expect(choices).to_have_count(3)
+        for role, destination in [
+            ('use', '/technology/task-brief/'),
+            ('inspect', '/technology/checking-ai-website-changes/'),
+            ('understand', '/notes/keep-the-judgment/')]:
+            link = self.page.locator('[data-home-choice="' + role + '"] a')
+            expect(link).to_have_attribute('href', destination)
+            link.focus()
+            expect(link).to_be_focused()
+            expect(link).to_be_in_viewport()
+        details = self.page.locator('details.practical-home')
+        expect(details).not_to_have_attribute('open', '')
+        summary = self.page.locator('#practical-home-title')
+        summary.focus(); self.page.keyboard.press('Enter')
+        expect(details).to_have_attribute('open', '')
+        for link in details.locator('a').all():
+            expect(link).to_be_visible()
+            link.focus(); expect(link).to_be_focused()
+        expect(self.page.locator('.destination-living-well .destination-first-link')).to_have_attribute('href', '/living-well/weekly-reset/')
+        expect(self.page.locator('.destination-poker .destination-first-link')).to_have_attribute('href', '/poker/first-live-tournament/')
+        summary.focus(); self.page.keyboard.press('Enter')
+        expect(details).not_to_have_attribute('open', '')
+        self.assertEqual(self.context.cookies(), [])
+
+    def test_homepage_without_scripts_and_with_enlarged_text(self):
+        from time import monotonic, sleep
+        for actual_fonts in (False, True):
+            context = self.browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 900})
+            context.route('**/*', lambda route: route.abort())
+            page = context.new_page()
+            try:
+                html = html_for('/')
+                if actual_fonts:
+                    # Test-only embedded copies of the existing local fonts.
+                    for font in (ROOT / 'assets/fonts').glob('*.woff2'):
+                        html = html.replace('/' + font.relative_to(ROOT).as_posix(),
+                            'data:font/woff2;base64,' + base64.b64encode(font.read_bytes()).decode())
+                page.set_content(html)
+                deadline = monotonic() + 10
+                while page.evaluate('document.fonts.status') != 'loaded' and monotonic() < deadline:
+                    sleep(.05)
+                self.assertEqual(page.evaluate('document.fonts.status'), 'loaded')
+                if actual_fonts:
+                    self.assertTrue(page.evaluate("document.fonts.check('16px \"Schibsted Grotesk\"')"))
+                expect(page.locator('h1')).to_have_text('Nolan Kido')
+                expect(page.locator('[data-home-choice] a')).to_have_count(3)
+                summary = page.locator('#practical-home-title')
+                summary.focus(); page.keyboard.press('Enter')
+                expect(page.locator('details.practical-home')).to_have_attribute('open', '')
+                expect(page.locator('.practical-home a')).to_have_count(6)
+                # DOM insertion is test-only; the production page has no new script.
+                page.evaluate("()=>{const s=document.createElement('style');s.textContent='html{font-size:200%!important} *{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}';document.head.appendChild(s)}")
+                for width in (320, 390, 768, 1440):
+                    page.set_viewport_size({'width': width, 'height': 1000})
+                    for opened in (False, True):
+                        page.locator('details.practical-home').evaluate('(e, open)=>e.open=open', opened)
+                        self.assertLessEqual(page.evaluate('document.documentElement.scrollWidth'), width,
+                                             (actual_fonts, width, opened))
+                        for link in page.locator('[data-home-choice] a').all():
+                            expect(link).to_be_visible()
+            finally:
+                context.close()
+
     def test_duplicate_submit_prevention(self):
         self.service = 'hang'
         self.contact(); self.fill(); self.verify()

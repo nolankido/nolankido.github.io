@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "base_commit": "8f63c0436a45256cb2987cd93f77a9ef6e85df1b",
+  "base_tree": "016ad310e376ed25b8dd6ec2a8cbdb7d3e691417",
+  "paths": {
+    "_source/home.html": {
+      "old_sha256": "3be73532517265baf0c2e8b0d2038213ca9394e532b156a880c96f64a277fb7e",
+      "new_sha256": "ef9cce787cb1fbe2637c3b7bf4ab9e76b96537f1d434d8c1f14f9badd4000288",
+      "edits": [
+        {
+          "start": 750,
+          "end": 840,
+          "old": "  <div class=\"section-meta\"><p class=\"section-label\">A way into my thinking</p></div>\n",
+          "new": "  <div class=\"section-meta\"><p class=\"section-label\">Use / Inspect / Understand</p></div>\n"
+        },
+        {
+          "start": 964,
+          "end": 3019,
+          "old": "    <p class=\"section-deck\">A position on using AI, a practical test of usefulness, and a poker decision to think through.</p>\n    ${identity_reading}\n",
+          "new": "    <p class=\"section-deck\">Try a tool, inspect a real example, or read the thinking behind the work. Choose what helps today.</p>\n    <div class=\"identity-readings\">\n      <article class=\"identity-reading\" data-home-choice=\"use\"><p class=\"note-category\">01 / Use a free tool</p><h3><a href=\"/technology/task-brief/\">Build a brief before asking AI.</a></h3><p>Turn a vague request into a task with a finish line, boundaries, and checks.</p><p class=\"reading-date\">A local browser tool. No account. No AI runs here.</p></article>\n      <article class=\"identity-reading\" data-home-choice=\"inspect\"><p class=\"note-category\">02 / Inspect a recorded case</p><h3><a href=\"/technology/checking-ai-website-changes/\">See what a passing check missed.</a></h3><p>Follow a real website repair and inspect the evidence, including what the checks could not establish.</p><p class=\"reading-date\">A documented defect, not a claim of time savings.</p></article>\n      <article class=\"identity-reading\" data-home-choice=\"understand\"><p class=\"note-category\">03 / Understand the approach</p><h3><a href=\"/notes/keep-the-judgment/\">Let AI do more. Keep the judgment.</a></h3><p>Delegate production without giving up the purpose, boundaries, and decisions you need to stand behind.</p><p class=\"reading-date\">An essay on what to keep in human hands.</p></article>\n    </div>\n    <details class=\"practical-home\"><summary id=\"practical-home-title\">More tools and reading</summary><nav aria-label=\"More useful starting points\"><a href=\"/technology/check-ai-answers/\">Check an AI answer</a><a href=\"/technology/ai-time-savings/\">Compare the full workflow time</a><a href=\"/living-well/did-the-tool-actually-help/\">Decide whether a tool helped</a><a href=\"/poker/reviewing-a-hand/\">Review a fictional poker hand</a><a href=\"/living-well/worksheets/#weekly-reset\">Open the weekly-reset worksheet</a><a href=\"/poker/study-calculators/\">Check poker calculations</a></nav><p class=\"small-copy\">For review away from play: poker calculators with their assumptions visible.</p></details>\n"
+        },
+        {
+          "start": 3215,
+          "end": 3215,
+          "old": "    ${practical_home}\n<!-- AI answer review: start -->\n    <p class=\"small-copy\"><strong>Have an AI answer you want to use?</strong> <a href=\"/technology/check-ai-answers/\">Choose a check for its facts, numbers, writing, or code</a>, with examples and a blank evidence record.</p>\n<!-- AI answer review: end -->\n",
+          "new": ""
+        },
+        {
+          "start": 4967,
+          "end": 5777,
+          "old": "        <span class=\"destination-label\">02 / More room for living</span><h3 id=\"living-well-destination-title\">Living Well</h3><p id=\"living-well-destination-description\">Meaning, attention, spirituality, and everyday life. Questions to explore without turning yourself into a project.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"living-well-destination-action\" href=\"/living-well/\">Explore Living Well <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/living-well/worksheets/#weekly-reset\">Make room in your week <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">A blank weekly-reset worksheet to use privately in your own notes.</p></div></div>\n",
+          "new": "        <span class=\"destination-label\">02 / More room for living</span><h3 id=\"living-well-destination-title\">Living Well</h3><p id=\"living-well-destination-description\">Meaning, attention, spirituality, and everyday life. Questions to explore without turning yourself into a project.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"living-well-destination-action\" href=\"/living-well/\">Explore Living Well <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/living-well/weekly-reset/\">Make room in your week <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">A small reset for what matters, what can wait, and one manageable next action.</p></div></div>\n"
+        },
+        {
+          "start": 5890,
+          "end": 6653,
+          "old": "        <span class=\"destination-label\">03 / Play, study &amp; uncertainty</span><h3 id=\"poker-destination-title\">Poker</h3><p id=\"poker-destination-description\">Tournament poker, decisions behind the hands, and resources for learning the game.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"poker-destination-action\" href=\"/poker/\">Explore poker <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/poker/study-calculators/\">Check the poker math <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">Study calculators with visible assumptions. For review away from play, not strategy advice.</p></div></div>\n",
+          "new": "        <span class=\"destination-label\">03 / Play, study &amp; uncertainty</span><h3 id=\"poker-destination-title\">Poker</h3><p id=\"poker-destination-description\">Tournament poker, decisions behind the hands, and resources for learning the game.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"poker-destination-action\" href=\"/poker/\">Explore poker <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/poker/first-live-tournament/\">Prepare for your first tournament <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">Know what to bring, what happens on arrival, and which venue rules to check.</p></div></div>\n"
+        }
+      ]
+    },
+    "_source/pages.json": {
+      "old_sha256": "d6c89048d171fa355d7e72e4b0e091e3db55780b10fd581581a177a2f282260f",
+      "new_sha256": "af2d0ab7373fe777257c4d38ecb198c0f2f39823f966d8c909b9c03347950e77",
+      "edits": [
+        {
+          "start": 351,
+          "end": 379,
+          "old": "    \"updated\": \"2026-10-12\"\n",
+          "new": "    \"updated\": \"2026-10-17\"\n"
+        }
+      ]
+    },
+    "assets/first-steps.css": {
+      "old_sha256": "1ed3886f11b668fa820e2c5c32c9777c13358982c7de48507d1824f331b76950",
+      "new_sha256": "93c45ef2a8c8317fe682be1ecefcaa6204dd5daf1199998aba0edb8b041dc0c2",
+      "edits": [
+        {
+          "start": 2713,
+          "end": 3519,
+          "old": "",
+          "new": "\n/* Homepage growth: one primary selection; secondary routes stay native. */\n.page-home .identity-reading h3 a { display: inline-flex; align-items: center; min-height: 44px; }\n.page-home .practical-home summary { cursor: pointer; min-height: 44px; padding: 8px 0; font: 600 .94rem/1.6 var(--sans); }\n.page-home .practical-home summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }\n.page-home .practical-home[open] > p { margin-top: 12px; }\n/* Keep enlarged text readable instead of clipping long headings or links. */\n.page-home :is(.section-title, .section-label, .brand-statement, .destination a, .destination p) { overflow-wrap: anywhere; }\n.page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }\n.page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }\n"
+        }
+      ]
+    },
+    "index.html": {
+      "old_sha256": "8bea0eb52feb2f1ac25de0ff1a240d4703870db537aa0a3847390bca4c2ba3f5",
+      "new_sha256": "6b21d6f51fcdac546d825f94fb727b22ab9abfa1f46972ae428631091ba9dc9f",
+      "edits": [
+        {
+          "start": 2645,
+          "end": 2717,
+          "old": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=1ed3886f11b6\">\n",
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=93c45ef2a8c8\">\n"
+        },
+        {
+          "start": 2875,
+          "end": 4310,
+          "old": "  <script type=\"application/ld+json\">{\"@context\": \"https://schema.org\", \"@type\": \"WebPage\", \"name\": \"Nolan Kido | Practical AI, Useful Things & a Good Life\", \"url\": \"https://nolankido.com/\", \"description\": \"A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.\", \"isPartOf\": {\"@type\": \"WebSite\", \"@id\": \"https://nolankido.com/#website\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/\", \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}}, \"about\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\", \"description\": \"Nolan Kido works with AI to build useful tools and make complicated ideas clearer. His interests connect practical technology, thoughtful living, tournament poker, and creative work.\"}, \"mainEntity\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\", \"description\": \"Nolan Kido works with AI to build useful tools and make complicated ideas clearer. His interests connect practical technology, thoughtful living, tournament poker, and creative work.\"}, \"dateModified\": \"2026-10-12\", \"@id\": \"https://nolankido.com/#webpage\", \"inLanguage\": \"en-US\"}</script>\n",
+          "new": "  <script type=\"application/ld+json\">{\"@context\": \"https://schema.org\", \"@type\": \"WebPage\", \"name\": \"Nolan Kido | Practical AI, Useful Things & a Good Life\", \"url\": \"https://nolankido.com/\", \"description\": \"A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.\", \"isPartOf\": {\"@type\": \"WebSite\", \"@id\": \"https://nolankido.com/#website\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/\", \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}}, \"about\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\", \"description\": \"Nolan Kido works with AI to build useful tools and make complicated ideas clearer. His interests connect practical technology, thoughtful living, tournament poker, and creative work.\"}, \"mainEntity\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\", \"description\": \"Nolan Kido works with AI to build useful tools and make complicated ideas clearer. His interests connect practical technology, thoughtful living, tournament poker, and creative work.\"}, \"dateModified\": \"2026-10-17\", \"@id\": \"https://nolankido.com/#webpage\", \"inLanguage\": \"en-US\"}</script>\n"
+        },
+        {
+          "start": 6595,
+          "end": 6685,
+          "old": "  <div class=\"section-meta\"><p class=\"section-label\">A way into my thinking</p></div>\n",
+          "new": "  <div class=\"section-meta\"><p class=\"section-label\">Use / Inspect / Understand</p></div>\n"
+        },
+        {
+          "start": 6809,
+          "end": 8864,
+          "old": "    <p class=\"section-deck\">A position on using AI, a practical test of usefulness, and a poker decision to think through.</p>\n    <div class=\"identity-readings\"><article class=\"identity-reading\"><p class=\"note-category\">Essay / Practical AI</p><h3><a href=\"/notes/keep-the-judgment/\">Let AI do more. Keep the judgment.</a></h3><p>Delegate more of the production without giving up the purpose, boundaries, and decisions you need to stand behind.</p><p class=\"reading-date\">Published <time datetime=\"2026-10-11\">October 11, 2026</time></p></article><article class=\"identity-reading\"><p class=\"note-category\">Practical guide / Everyday life</p><h3><a href=\"/living-well/did-the-tool-actually-help/\">Did the tool actually make life easier?</a></h3><p>Look at the effort a tool removes and the work it adds before deciding to keep it.</p><p class=\"reading-date\">Published <time datetime=\"2026-10-10\">October 10, 2026</time></p></article><article class=\"identity-reading\"><p class=\"note-category\">Fictional hand / Poker</p><h3><a href=\"/poker/reviewing-a-hand/\">Review a hand, not just the result.</a></h3><p>Separate a decision from its outcome, with a worked hand and a blank review sheet.</p><p class=\"reading-date\">Published <time datetime=\"2026-10-05\">October 5, 2026</time></p></article></div>\n",
+          "new": "    <p class=\"section-deck\">Try a tool, inspect a real example, or read the thinking behind the work. Choose what helps today.</p>\n    <div class=\"identity-readings\">\n      <article class=\"identity-reading\" data-home-choice=\"use\"><p class=\"note-category\">01 / Use a free tool</p><h3><a href=\"/technology/task-brief/\">Build a brief before asking AI.</a></h3><p>Turn a vague request into a task with a finish line, boundaries, and checks.</p><p class=\"reading-date\">A local browser tool. No account. No AI runs here.</p></article>\n      <article class=\"identity-reading\" data-home-choice=\"inspect\"><p class=\"note-category\">02 / Inspect a recorded case</p><h3><a href=\"/technology/checking-ai-website-changes/\">See what a passing check missed.</a></h3><p>Follow a real website repair and inspect the evidence, including what the checks could not establish.</p><p class=\"reading-date\">A documented defect, not a claim of time savings.</p></article>\n      <article class=\"identity-reading\" data-home-choice=\"understand\"><p class=\"note-category\">03 / Understand the approach</p><h3><a href=\"/notes/keep-the-judgment/\">Let AI do more. Keep the judgment.</a></h3><p>Delegate production without giving up the purpose, boundaries, and decisions you need to stand behind.</p><p class=\"reading-date\">An essay on what to keep in human hands.</p></article>\n    </div>\n    <details class=\"practical-home\"><summary id=\"practical-home-title\">More tools and reading</summary><nav aria-label=\"More useful starting points\"><a href=\"/technology/check-ai-answers/\">Check an AI answer</a><a href=\"/technology/ai-time-savings/\">Compare the full workflow time</a><a href=\"/living-well/did-the-tool-actually-help/\">Decide whether a tool helped</a><a href=\"/poker/reviewing-a-hand/\">Review a fictional poker hand</a><a href=\"/living-well/worksheets/#weekly-reset\">Open the weekly-reset worksheet</a><a href=\"/poker/study-calculators/\">Check poker calculations</a></nav><p class=\"small-copy\">For review away from play: poker calculators with their assumptions visible.</p></details>\n"
+        },
+        {
+          "start": 9060,
+          "end": 9060,
+          "old": "    <aside class=\"practical-home\" aria-labelledby=\"practical-home-title\"><h3 id=\"practical-home-title\">See the work behind the ideas.</h3><p>Two free browser tools and one recorded case. Try a task, inspect a result, or check the reasoning.</p><nav aria-label=\"Selected practical AI work\"><a href=\"/technology/task-brief/\">Build an AI task brief</a><a href=\"/technology/ai-time-savings/\">Compare AI workflow time</a><a href=\"/technology/checking-ai-website-changes/\">Inspect a recorded build case</a></nav></aside>\n<!-- AI answer review: start -->\n    <p class=\"small-copy\"><strong>Have an AI answer you want to use?</strong> <a href=\"/technology/check-ai-answers/\">Choose a check for its facts, numbers, writing, or code</a>, with examples and a blank evidence record.</p>\n<!-- AI answer review: end -->\n",
+          "new": ""
+        },
+        {
+          "start": 10812,
+          "end": 11622,
+          "old": "        <span class=\"destination-label\">02 / More room for living</span><h3 id=\"living-well-destination-title\">Living Well</h3><p id=\"living-well-destination-description\">Meaning, attention, spirituality, and everyday life. Questions to explore without turning yourself into a project.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"living-well-destination-action\" href=\"/living-well/\">Explore Living Well <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/living-well/worksheets/#weekly-reset\">Make room in your week <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">A blank weekly-reset worksheet to use privately in your own notes.</p></div></div>\n",
+          "new": "        <span class=\"destination-label\">02 / More room for living</span><h3 id=\"living-well-destination-title\">Living Well</h3><p id=\"living-well-destination-description\">Meaning, attention, spirituality, and everyday life. Questions to explore without turning yourself into a project.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"living-well-destination-action\" href=\"/living-well/\">Explore Living Well <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/living-well/weekly-reset/\">Make room in your week <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">A small reset for what matters, what can wait, and one manageable next action.</p></div></div>\n"
+        },
+        {
+          "start": 11735,
+          "end": 12498,
+          "old": "        <span class=\"destination-label\">03 / Play, study &amp; uncertainty</span><h3 id=\"poker-destination-title\">Poker</h3><p id=\"poker-destination-description\">Tournament poker, decisions behind the hands, and resources for learning the game.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"poker-destination-action\" href=\"/poker/\">Explore poker <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/poker/study-calculators/\">Check the poker math <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">Study calculators with visible assumptions. For review away from play, not strategy advice.</p></div></div>\n",
+          "new": "        <span class=\"destination-label\">03 / Play, study &amp; uncertainty</span><h3 id=\"poker-destination-title\">Poker</h3><p id=\"poker-destination-description\">Tournament poker, decisions behind the hands, and resources for learning the game.</p><div class=\"destination-links\"><a class=\"destination-action\" id=\"poker-destination-action\" href=\"/poker/\">Explore poker <span aria-hidden=\"true\">→</span></a><div class=\"destination-first\"><p class=\"destination-first-label\">A useful first step</p><a class=\"destination-first-link\" href=\"/poker/first-live-tournament/\">Prepare for your first tournament <span aria-hidden=\"true\">→</span></a><p class=\"destination-first-note\">Know what to bring, what happens on arrival, and which venue rules to check.</p></div></div>\n"
+        }
+      ]
+    },
+    "creative/index.html": {
+      "old_sha256": "3318513542bb83ce48ea4c2f953677253f483c3d5517c150fffd9c3d5d97be12",
+      "new_sha256": "341bb41ffeff77ac0912012b9b1ac7018cd9b5e86291f3f5289c85ed8e60c6eb",
+      "edits": [
+        {
+          "start": 2675,
+          "end": 2747,
+          "old": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=1ed3886f11b6\">\n",
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=93c45ef2a8c8\">\n"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "0a459e09a545572f3e45884a0634c29bf916e9557f40202a289fe4ec7287e16d",
+      "new_sha256": "1ac355df62da78bb8706e1449da6362fb56ca96cdce443e0c8c9fc591f6e2331",
+      "edits": [
+        {
+          "start": 146,
+          "end": 180,
+          "old": "    <lastmod>2026-10-12</lastmod>\n",
+          "new": "    <lastmod>2026-10-17</lastmod>\n"
+        }
+      ]
+    }
+  },
+  "pages": {
+    "home": {
+      "old": {
+        "id": "home",
+        "path": "/",
+        "title": "Nolan Kido",
+        "seo_title": "Nolan Kido | Practical AI, Useful Things & a Good Life",
+        "description": "A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.",
+        "source": "home.html",
+        "updated": "2026-10-12"
+      },
+      "new": {
+        "id": "home",
+        "path": "/",
+        "title": "Nolan Kido",
+        "seo_title": "Nolan Kido | Practical AI, Useful Things & a Good Life",
+        "description": "A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.",
+        "source": "home.html",
+        "updated": "2026-10-17"
+      }
+    }
+  },
+  "base_output_count": 222,
+  "base_output_fingerprint": "1dd66a999f4cc5d8a2de36c9975e686a7a632fde236973d560535b5a782a8db6",
+  "base_source_count": 487,
+  "base_source_fingerprint": "28bae9e84b06ec22a10f0cd9814b41b177e8861198240f035c055f64a0eb530d",
+  "base_home_links": [
+    "#main",
+    "/",
+    "/about/",
+    "/contact/",
+    "/creative/",
+    "/creative/#creative-brief",
+    "/find/",
+    "/follow/",
+    "/living-well/",
+    "/living-well/did-the-tool-actually-help/",
+    "/living-well/worksheets/#weekly-reset",
+    "/notes/",
+    "/notes/keep-the-judgment/",
+    "/poker/",
+    "/poker/reviewing-a-hand/",
+    "/poker/study-calculators/",
+    "/privacy/",
+    "/resources/",
+    "/start-here/",
+    "/start-here/#reading-this-site",
+    "/technology/",
+    "/technology/ai-time-savings/",
+    "/technology/check-ai-answers/",
+    "/technology/checking-ai-website-changes/",
+    "/technology/task-brief/"
+  ],
+  "base_home_ids": [
+    "connection-title",
+    "creative-destination-action",
+    "creative-destination-description",
+    "creative-destination-title",
+    "destinations-title",
+    "home-title",
+    "living-well-destination-action",
+    "living-well-destination-description",
+    "living-well-destination-title",
+    "main",
+    "poker-destination-action",
+    "poker-destination-description",
+    "poker-destination-title",
+    "practical-home-title",
+    "selected-reading-title",
+    "technology-destination-action",
+    "technology-destination-description",
+    "technology-destination-title"
+  ],
+  "protected_source_hashes": {
+    "_source/site.json": "5e01a8eae2c9593a0dace992e5a13ffbc22b1ab5e0c635ac9bf0db6507c16d65",
+    "_source/layout.html": "bd1376a41c4ba351216ff2ba60c31c19e5d8d0897b6145646c1ed7fe8fc8412f",
+    "_source/identity.json": "b2cad9e36a15b86176637b608aee10767724bf32f2750e9db05a4f21af0fe536",
+    "_source/start-here.html": "b40f31252b4ab086f4707fd29b407ee860e892fe5555a5fba93b74641c79a18a",
+    "_source/privacy.html": "00378a0fd9f4b690e00f30d372a3709df10ecbe2e9af4b288516e9b289574fe8",
+    "assets/contact.js": "65b6fc99c23c947f4bcc9b427bc04b08dfabd6333c8c26e9ad6c506adc370858",
+    "ANALYTICS.md": "c007f86ca770ab81bb315ea82237e03a193aa65cc183ac343657b71520472278",
+    "_source/poker/free-poker-learning-path.html": "51cf9fb08da150f8301a97eddc39760146a28efbe45fa4cafc9c9b6dafe087b6"
+  }
+}

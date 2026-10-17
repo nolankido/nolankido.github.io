@@ -34,3 +34,13 @@
   .destination, .creative-brief-card, .creative-template pre { background: white; color: black; }
   .creative-brief-card { break-inside: avoid; }
 }
+
+/* Homepage growth: one primary selection; secondary routes stay native. */
+.page-home .identity-reading h3 a { display: inline-flex; align-items: center; min-height: 44px; }
+.page-home .practical-home summary { cursor: pointer; min-height: 44px; padding: 8px 0; font: 600 .94rem/1.6 var(--sans); }
+.page-home .practical-home summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+.page-home .practical-home[open] > p { margin-top: 12px; }
+/* Keep enlarged text readable instead of clipping long headings or links. */
+.page-home :is(.section-title, .section-label, .brand-statement, .destination a, .destination p) { overflow-wrap: anywhere; }
+.page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+.page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }

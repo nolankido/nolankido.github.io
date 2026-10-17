@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from test_site import ROOT, build
 import poker_school_history as school
+import homepage_growth_history as homepage
 
 
 def fingerprint(records):
@@ -49,7 +50,7 @@ class PokerSchoolHistoryTests(unittest.TestCase):
 
     def test_unknown_edits_cannot_be_hidden_by_the_adapter(self):
         for path, item in self.data['paths'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = homepage.before(path, (ROOT / path).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'], path)
             old = school.before(path, raw)
             self.assertEqual(sha256(old).hexdigest(), item['old_sha256'], path)
