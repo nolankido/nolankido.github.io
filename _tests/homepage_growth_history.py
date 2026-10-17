@@ -8,6 +8,7 @@ from functools import lru_cache
 from hashlib import sha256
 import json
 from pathlib import Path
+import task_brief_growth_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '8f63c0436a45256cb2987cd93f77a9ef6e85df1b'
@@ -22,6 +23,7 @@ def change():
 
 
 def before(path, data):
+    data = task_brief_growth_history.before(path, data)
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode('utf-8')
     item = change()['paths'].get(str(path))
@@ -42,6 +44,7 @@ def before(path, data):
 
 
 def pages(records):
+    records = task_brief_growth_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[p['id']]['old'])
             if p['id'] in pairs and p == pairs[p['id']]['new'] else deepcopy(p)

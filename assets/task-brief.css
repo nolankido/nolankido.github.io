@@ -20,6 +20,14 @@
 .page-task-brief textarea:focus-visible, .page-task-brief button:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .brief-scope, .brief-confirm { border-left: 3px solid var(--red); padding: 14px 20px; margin-block: 24px; }
 .brief-result { border-top: 2px solid var(--line-dark); margin-top: 32px; padding-top: 24px; }
+.brief-preview { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 24px 0; }
+.brief-preview-part { min-width: 0; background: var(--paper); border: 1px solid var(--line-dark); padding: 14px 16px; overflow-wrap: anywhere; }
+.brief-preview-part h4 { margin: 0 0 10px; font: 600 .8rem/1.4 var(--sans); letter-spacing: .035em; }
+.brief-preview-part p { margin: 0; white-space: pre-wrap; font: .94rem/1.6 var(--sans); }
+.brief-preview-part:last-child { grid-column: 1/-1; }
+.brief-example .brief-help { overflow-wrap: anywhere; }
+.brief-example-use { margin-top: 12px; }
+
 #brief-text { min-height: 340px; overflow-wrap: anywhere; }
 #brief-status, #brief-copy-status { font: .9rem/1.55 var(--sans); }
 .brief-example, .brief-template { border-top: 1px solid var(--line-dark); padding: 18px 0; }
@@ -29,5 +37,5 @@
 .brief-example dd { margin: 6px 0 0; line-height: 1.65; }
 .brief-template pre { white-space: pre-wrap; overflow-wrap: anywhere; font: .9rem/1.6 var(--sans); }
 .page-task-brief [hidden] { display: none !important; }
-@media (max-width: 760px) { .brief-fields { grid-template-columns: minmax(0,1fr); gap: 20px; } }
+@media (max-width: 760px) { .brief-fields, .brief-preview { grid-template-columns: minmax(0,1fr); gap: 20px; } .brief-preview-part:last-child { grid-column: auto; } }
 @media print { #brief-workspace, .entry-jumps, .brief-example-use { display: none !important; } .brief-example, .brief-template { break-inside: auto; } }

@@ -86,8 +86,11 @@ class TaskBriefTests(unittest.TestCase):
         source=(ROOT/'_source/technology/task-brief.html').read_text()
         blank=unescape(re.search(r'<pre>(.*?)</pre>',source,re.S)[1]).strip()+'\n'
         self.assertEqual(blank,(ROOT/'downloads/ai-task-brief.txt').read_text())
-        self.assertEqual(source.count('data-brief-example='),3)
-        self.assertEqual(source.count('Illustrative starting point, not a personal case study.'),3)
+        self.assertEqual(source.count('data-brief-example='),6)
+        self.assertEqual(source.count('Illustrative starting point, not a personal case study.'),5)
+        self.assertIn('Illustrative starting point, not a personal development claim.', source)
+        for example in ['meeting', 'article', 'website', 'writing', 'planning', 'learning']:
+            self.assertIn('data-brief-example="' + example + '"', source)
         self.assertIn('work without it',source)
         self.assertIn('do not paste confidential',source.lower())
 
