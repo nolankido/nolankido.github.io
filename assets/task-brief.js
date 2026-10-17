@@ -15,7 +15,9 @@
     }
     if (Object.keys(errors).length) return {text: '', errors};
     clean.limits ||= 'No additional task-specific constraints supplied. Keep the working instructions below.';
-    return {text: Object.keys(FIELDS).map(key => HEADINGS[key] + '\n' + clean[key]).join('\n\n') + '\n\nWORKING INSTRUCTIONS\n' + INSTRUCTIONS + '\n', errors};
+    const sections = Object.keys(FIELDS).map(key => ({heading: HEADINGS[key], content: clean[key]}));
+    sections.push({heading: 'WORKING INSTRUCTIONS', content: INSTRUCTIONS});
+    return {text: sections.map(section => section.heading + '\n' + section.content).join('\n\n') + '\n', sections, errors};
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = {assemble, FIELDS, INSTRUCTIONS};
   if (typeof document === 'undefined') return;
@@ -25,8 +27,23 @@
   const inputs = Object.fromEntries(Object.keys(FIELDS).map(key => [key, get(key)]));
   if (Object.values(inputs).some(input => !input)) return;
   const result = get('result'), output = get('text'), status = get('status'), copyStatus = get('copy-status');
-  const confirmation = get('confirm');
+  const confirmation = get('confirm'), preview = get('preview');
   let pending = null, initiator = null;
+  // The text export and the readable preview derive from the same validated
+  // section data. Untrusted field content is always assigned with textContent.
+  function showPreview(sections) {
+    preview.replaceChildren();
+    for (const section of sections) {
+      const part = document.createElement('section');
+      part.className = 'brief-preview-part';
+      const heading = document.createElement('h4');
+      heading.textContent = section.heading;
+      const value = document.createElement('p');
+      value.textContent = section.content;
+      part.append(heading, value);
+      preview.appendChild(part);
+    }
+  }
   function clearErrors() {
     for (const key of Object.keys(FIELDS)) {
       inputs[key].removeAttribute('aria-invalid');
@@ -37,6 +54,7 @@
   function invalidate(message = '') {
     result.hidden = true;
     output.value = '';
+    preview.replaceChildren();
     copyStatus.textContent = '';
     status.textContent = message;
   }
@@ -84,6 +102,7 @@
       return;
     }
     output.value = built.text;
+    showPreview(built.sections);
     copyStatus.textContent = '';
     result.hidden = false;
     status.textContent = 'Brief assembled from your entries. No AI has run. Review it before using it.';
@@ -127,12 +146,18 @@
       copyStatus.textContent = 'Automatic copy is unavailable. The brief is selected; use your device’s Copy command.';
     }
   });
+  get('select').addEventListener('click', () => {
+    if (result.hidden || !output.value) return;
+    output.focus(); output.select();
+    copyStatus.textContent = 'Complete text selected. Use your device’s Copy command, then check the destination before pasting.';
+  });
   get('download').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
     let url;
     const link = document.createElement('a');
     try {
-      url = URL.createObjectURL(new Blob([output.value], {type: 'text/plain;charset=utf-8'}));
+      const snapshot = output.value;
+      url = URL.createObjectURL(new Blob([snapshot], {type: 'text/plain;charset=utf-8'}));
       link.href = url; link.download = 'ai-task-brief.txt'; link.hidden = true;
       editor.appendChild(link); link.click();
       copyStatus.textContent = 'Text download requested. Keep the file somewhere appropriate for its contents.';

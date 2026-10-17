@@ -56,7 +56,12 @@ try:
     expect(page.locator('#brief-result-title')).to_be_focused()
     content=page.locator('#brief-text').input_value()
     assert content.startswith('PURPOSE\nHelp a first-time reader')
-    assert 'Do not publish, send, book, buy' in content;report['functional']+=1
+    assert 'Do not publish, send, book, buy' in content
+    preview=page.locator('#brief-preview')
+    expect(preview.locator('.brief-preview-part')).to_have_count(6)
+    assert [h.inner_text() for h in preview.locator('h4').all()]==['PURPOSE','MATERIAL I WILL PROVIDE','DELIVERABLE AND STOPPING POINT','CHECK BEFORE USING','TASK BOUNDARIES','WORKING INSTRUCTIONS']
+    assert 'Help a first-time reader' in preview.locator('.brief-preview-part').first.inner_text()
+    report['functional']+=2
     # Clipboard success is explicit and writes precisely the reviewed output.
     page.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText: async text => { window.copiedBrief = text; }}})")
     page.locator('#brief-copy').click();expect(page.locator('#brief-copy-status')).to_contain_text('Brief copied')
@@ -67,12 +72,18 @@ try:
     expect(page.locator('#brief-text')).to_be_focused()
     assert page.locator('#brief-text').evaluate('(el)=>el.selectionEnd-el.selectionStart')==len(content)
     report['functional']+=2
+    page.locator('#brief-select').click()
+    expect(page.locator('#brief-copy-status')).to_contain_text('Complete text selected')
+    expect(page.locator('#brief-text')).to_be_focused()
+    assert page.locator('#brief-text').evaluate('(el)=>el.selectionEnd-el.selectionStart')==len(content)
+    report['functional']+=1
     with page.expect_download() as item:page.locator('#brief-download').click()
     download=item.value;assert download.suggested_filename=='ai-task-brief.txt'
     assert Path(download.path()).read_text()==content;report['functional']+=1
     page.locator('#brief-goal').fill('<img src=x onerror=alert(1)> & a literal task')
     expect(page.locator('#brief-result')).to_be_hidden()
     assert page.locator('#brief-text').input_value()==''
+    expect(page.locator('#brief-preview .brief-preview-part')).to_have_count(0)
     page.locator('#brief-build').click();assert '<img src=x' in page.locator('#brief-text').input_value()
     assert page.locator('#brief-editor img').count()==0;report['functional']+=1
     # Changing examples and clearing never discard work without an explicit second action.
@@ -101,14 +112,15 @@ try:
     page.evaluate("window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}))")
     assert page.locator('#brief-goal').input_value()=='';report['functional']+=1
     # All examples are readable and independently usable; no hidden preset data.
-    for key in ['writing','planning','learning']:
+    for key in ['meeting','article','website','writing','planning','learning']:
         card=page.locator('[data-brief-example="'+key+'"]')
         if card.get_attribute('open') is None:card.locator('summary').click()
         card.locator('button').click()
         if page.locator('#brief-confirm').is_visible():page.locator('#brief-confirm-yes').click()
         page.locator('#brief-build').click();expect(page.locator('#brief-result')).to_be_visible()
-        assert len(page.locator('#brief-text').input_value())>1000
-    report['functional']+=3
+        assert len(page.locator('#brief-text').input_value())>600
+        expect(page.locator('#brief-preview .brief-preview-part')).to_have_count(6)
+    report['functional']+=6
     # Reflow checks for blank, assembled and confirmation states.
     spacing='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}'
     screenshots=Path(os.environ.get('SCREENSHOT_DIR','/mnt/data/task-brief-previews'));screenshots.mkdir(parents=True,exist_ok=True)
@@ -149,7 +161,7 @@ try:
         c.route('**/*',fallback_route)
         p=c.new_page();render(p,False)
         expect(p.locator('#brief-editor')).to_be_hidden();expect(p.locator('#brief-unavailable')).to_be_visible()
-        assert p.locator('.brief-example').count()==3
+        assert p.locator('.brief-example').count()==6
         p.locator('.brief-template summary').click()
         assert p.locator('.brief-template pre').inner_text().strip()+'\n'==(ROOT/'downloads/ai-task-brief.txt').read_text()
         if not args.offline:
