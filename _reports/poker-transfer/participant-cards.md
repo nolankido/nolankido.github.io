@@ -10,7 +10,7 @@ In a fictional heads-up flop, you paid 5 counters preflop. On the flop you have 
 
 Private cards: Kc, 7h. Shared cards: Ks, 9d, 3c.
 
-**Try without opening an answer:** Name your best five now. Can you check in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?
+**Try without opening an answer:** Name your best five now. Which actions are available in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.
 
@@ -21,7 +21,7 @@ Six players begin a new hand with 1/3 blinds. You posted the big blind of 3 and 
 
 Private cards: 6h, 6c. Shared cards: not dealt.
 
-**Try without opening an answer:** How many extra counters would you put in to call? Is checking an option at this point? Explain the difference between the total wager and what you must add.
+**Try without opening an answer:** How many extra counters would you put in to call? Is checking an option at this point? Explain the difference between the total wager and what you must add. Would different private cards change that call price?
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.
 
@@ -39,7 +39,7 @@ Private cards: 9c, 8c. Shared cards: not dealt.
 
 ### S2-B: A two-player flop after a button raise
 
-Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop. No action on this flop has been described.
+Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop with at least 30 counters each still behind; neither player is all-in. No action on this flop has been described.
 
 Private cards: Ac, 5s. Shared cards: not dealt.
 
@@ -65,7 +65,7 @@ You are heads-up on the flop. The other player checks. Neither player has bet on
 
 Private cards: Th, 9h. Shared cards: Kh, 7c, 2h.
 
-**Try without opening an answer:** Name your strongest five-card hand right now. How many hearts can you use? Is it a finished flush or a draw? Can you choose to check after the opponent checks?
+**Try without opening an answer:** Name your strongest five-card hand right now. How many hearts can you use? Is it a finished flush or a draw? Which actions are available after the opponent checks?
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.
 
@@ -94,7 +94,7 @@ Private cards: 7d, 7c. Shared cards: Kh, Qh, 9d, 5c, 2s.
 
 ### S5-A: Three candidate river holdings
 
-On a fictional river, the other player checks. The three candidate opposing holdings below are just examples. Their frequencies have not been supplied.
+On a fictional river, the other player checks. The three candidate opposing holdings below are just examples.
 
 Private cards: Ah, Kd. Shared cards: Ks, 9c, 6d, 4h, 2c.
 
@@ -109,7 +109,7 @@ Candidate 3: Kh, 2d.
 
 ### S5-B: A checked river and one later reveal
 
-You reach the river. The other player checks. Consider the three example holdings below, without assigning likelihoods.
+You reach the river. The other player checks. Consider the three example holdings below.
 
 Private cards: Jc, 9d. Shared cards: Jd, 8c, 3h, 2s, 6c.
 
@@ -117,28 +117,28 @@ Candidate 1: 9d, As.
 Candidate 2: Ks, Kc.
 Candidate 3: Ad, 7c.
 
-**Try without opening an answer:** Which holding cannot exist alongside your cards? Which possible hand is ahead of yours? Suppose the weaker possible holding appears at showdown once: does that prove all future checks are weak? Explain.
+**Try without opening an answer:** Which holding cannot exist alongside your cards? Which possible hand is ahead of yours? What does the check tell you about which holding is present? Suppose the weaker possible holding appears at showdown once: does that prove all future checks are weak? Explain.
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.
 
 
 ### S6-A: A checked river and two possible callers
 
-On the river, your opponent checks. In this fictional comparison only, assume both example holdings below would call a proposed bet of 5. Nothing is specified about their frequencies, raises, other holdings or the payoff from checking.
+On the river, your opponent checks. In this fictional comparison only, assume both example holdings below would call a proposed bet of 5.
 
 Private cards: Qs, Qh. Shared cards: Kd, 9c, 5h, 3s, 2c.
 
 Candidate 1: Jd, Jh.
 Candidate 2: Ks, 6d.
 
-**Try without opening an answer:** Which candidate supports a value-bet explanation? Which would be ahead of you? Does the existence of one weaker caller prove the bet earns more than checking?
+**Try without opening an answer:** Which candidate supports a value-bet explanation? Which would be ahead of you? Does the existence of one weaker caller prove the bet earns more than checking? Explain what else you would need to compare betting with checking.
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.
 
 
 ### S6-B: A river bet with two possible responses
 
-On the river, your opponent checks. In this fictional contrast, suppose Candidate 1 below folds to your proposed bet of 8 while Candidate 2 calls. Their frequencies and all other responses are unknown.
+On the river, your opponent checks. In this fictional contrast, suppose Candidate 1 below folds to your proposed bet of 8 while Candidate 2 calls.
 
 Private cards: Ah, 5d. Shared cards: Ac, 9h, 8s, 6c, 2d.
 

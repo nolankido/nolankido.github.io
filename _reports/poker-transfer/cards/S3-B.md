@@ -8,6 +8,6 @@ You are heads-up on the flop. The other player checks. Neither player has bet on
 
 Private cards: Th, 9h. Shared cards: Kh, 7c, 2h.
 
-**Try without opening an answer:** Name your strongest five-card hand right now. How many hearts can you use? Is it a finished flush or a draw? Can you choose to check after the opponent checks?
+**Try without opening an answer:** Name your strongest five-card hand right now. How many hearts can you use? Is it a finished flush or a draw? Which actions are available after the opponent checks?
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.

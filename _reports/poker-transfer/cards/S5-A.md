@@ -4,7 +4,7 @@
 
 ### S5-A: Three candidate river holdings
 
-On a fictional river, the other player checks. The three candidate opposing holdings below are just examples. Their frequencies have not been supplied.
+On a fictional river, the other player checks. The three candidate opposing holdings below are just examples.
 
 Private cards: Ah, Kd. Shared cards: Ks, 9c, 6d, 4h, 2c.
 

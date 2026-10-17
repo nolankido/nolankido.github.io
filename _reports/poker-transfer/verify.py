@@ -86,7 +86,7 @@ def check():
             assert isinstance(link, str) and link.startswith("/poker/") and link.count("#") == 1
             repair_path, repair_anchor = link.split("#")
             lesson = repair_path.rstrip("/").split("/")[-1]
-            assert lesson in LESSONS
+            assert lesson in LESSONS + ["hand-rankings"]
             repair_source = (ROOT / "_source/poker" / (lesson + ".html")).read_text()
             assert 'id="' + repair_anchor + '"' in repair_source
         lesson_source = (ROOT / "_source/poker" / (item["lesson"] + ".html")).read_text()
@@ -141,6 +141,11 @@ def check():
     assert all(f"| {case['id']} |" in (FOLDER / "summary-form.md").read_text(encoding="utf-8") for case in items)
     for case in items:
         isolated = (FOLDER / "cards" / (case["id"] + ".md")).read_text(encoding="utf-8")
+        assert case["setup"] in isolated and case["prompt"] in isolated
+        assert "Private cards: " + ", ".join(case["hero"]) in isolated
+        assert "Shared cards: " + (", ".join(case["board"]) or "not dealt") + "." in isolated
+        for n, candidate in enumerate(case.get("candidates", []), 1):
+            assert f"Candidate {n}: " + ", ".join(candidate) + "." in isolated
         assert isolated.count("### ") == 1
         assert "### " + case["id"] + ":" in isolated
         assert "one-case" not in isolated or "One fictional case" in isolated
@@ -151,6 +156,18 @@ def check():
         for case in items:
             assert body.count("### " + case["id"] + ":") == 1, (name, case["id"])
         assert "No monetary stakes" in body or "fictional" in body.lower()
+        for case in items:
+            start = body.index("### " + case["id"] + ":")
+            end = body.find("\n### ", start + 1)
+            section = body[start:end if end != -1 else len(body)]
+            if name != "facilitator-key.md":
+                assert case["setup"] in section and case["prompt"] in section
+            else:
+                assert all(point in section for point in case["points"])
+            if name != "participant-cards.md":
+                label = "Point {} repair" if name == "facilitator-key.md" else "Revisit point {}"
+                for n, link in enumerate(case["point_repairs"], 1):
+                    assert f"[{label.format(n)}](https://nolankido.com{link})" in section
     participant = (FOLDER / "participant-cards.md").read_text()
     assert "<details>" not in participant and "Computed high-hand vector" not in participant
     assert all(p not in participant for case in items for p in case["points"])
@@ -159,6 +176,26 @@ def check():
     assert guide.count("[Point 3 repair]") == len(items)
     assert "has not acted" not in items[2]["setup"] and "checks first" not in items[3]["setup"]
     assert "worse holding below folds" not in items[11]["setup"]
+    # The setup supplies the scene, not the missing-input reasoning being elicited.
+    assert "frequenc" not in items[10]["setup"].lower()
+    assert "frequenc" not in items[11]["setup"].lower()
+    assert "frequenc" not in items[8]["setup"].lower()
+    assert "at least 30 counters each still behind" in items[3]["setup"]
+    assert items[11]["point_repairs"][0] == "/poker/hand-rankings/#compare"
+    session = (FOLDER / "session-form.md").read_text()
+    summary = (FOLDER / "summary-form.md").read_text()
+    for field in ("this exact case", "this case's answer key", "a similar problem"):
+        assert re.search(r"Prior exposure to " + re.escape(field) + r": yes / no / unsure", session)
+    for n in range(1, 4):
+        assert f"Assisted reasoning point {n}:" in session
+    for column in ("Assisted attempted (any help)", "Assisted explanation supported (all three)",
+                   "Prior exact-case exposure (yes / no / unsure)",
+                   "Prior answer-key exposure (yes / no / unsure)",
+                   "Prior similar-problem exposure (yes / no / unsure)"):
+        assert column in summary
+    rows = [line for line in summary.splitlines() if line.startswith("| ")]
+    assert len(rows) == 14 and len({row.count("|") for row in rows}) == 1
+    assert "overlapping" in summary and "separate tables" in summary
     form = (FOLDER / "review-form.md").read_text()
     for item in items:
         assert form.count("| " + item["id"] + " | unreviewed |") == 1

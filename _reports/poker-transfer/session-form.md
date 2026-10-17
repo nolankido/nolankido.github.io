@@ -14,9 +14,17 @@ Device, browser and relevant access aids: ______  Lesson seen: ______
 
 Time since last exposure to the lesson, if known: ______  Prior exposure to this exact case: yes / no / unsure
 
-Prior exposure to a similar problem or answer key: ______  Accommodations or deviations: ______
+Prior exposure to this case's answer key: yes / no / unsure
 
-First independent attempt (record before any hint): ______
+Prior exposure to a similar problem: yes / no / unsure
+
+Accommodations or deviations: ______
+
+First response before any assistance (or mark not attempted): ______
+
+Independent attempt made before assistance: yes / no. All three reasoning points supported before assistance: yes / no / incomplete.
+
+Assisted attempt made (any prompt repetition, navigation help, hint or repair): yes / no. All three reasoning points supported after assistance: yes / no / incomplete / not attempted.
 
 Reasoning point 1: supported / error / not demonstrated / not attempted. Evidence: ______
 
@@ -29,6 +37,12 @@ Confidence, as reported: sure / partly sure / guessing / not reported
 Assistance sequence, including exact words, prompt repetitions, navigation and repair links: ______
 
 Any subsequent explanation after assistance (not independent): ______
+
+Assisted reasoning point 1: supported / error / not demonstrated / not attempted. Evidence: ______
+
+Assisted reasoning point 2: supported / error / not demonstrated / not attempted. Evidence: ______
+
+Assisted reasoning point 3: supported / error / not demonstrated / not attempted. Evidence: ______
 
 Time taken and breaks, if measured: ______  Confusion, skipped steps or accessibility issues: ______
 

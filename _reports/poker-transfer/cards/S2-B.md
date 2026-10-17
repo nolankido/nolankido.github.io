@@ -4,7 +4,7 @@
 
 ### S2-B: A two-player flop after a button raise
 
-Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop. No action on this flop has been described.
+Six players are dealt a hand. The first three seats fold. You open-raise on the button to 6. The small blind calls the extra chips; the big blind folds. The two of you reach the flop with at least 30 counters each still behind; neither player is all-in. No action on this flop has been described.
 
 Private cards: Ac, 5s. Shared cards: not dealt.
 

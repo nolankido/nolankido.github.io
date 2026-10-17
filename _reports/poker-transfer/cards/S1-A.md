@@ -8,6 +8,6 @@ In a fictional heads-up flop, you paid 5 counters preflop. On the flop you have 
 
 Private cards: Kc, 7h. Shared cards: Ks, 9d, 3c.
 
-**Try without opening an answer:** Name your best five now. Can you check in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?
+**Try without opening an answer:** Name your best five now. Which actions are available in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.

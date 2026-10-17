@@ -270,7 +270,7 @@ Candidate status in order: weaker, stronger.
 
 **Repair by reasoning point:**
 
-1. [Point 1 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
+1. [Point 1 repair](https://nolankido.com/poker/hand-rankings/#compare)
 2. [Point 2 repair](https://nolankido.com/poker/betting-with-a-purpose/#purpose)
 3. [Point 3 repair](https://nolankido.com/poker/betting-with-a-purpose/#takeaway)
 

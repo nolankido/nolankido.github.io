@@ -4,7 +4,7 @@
 
 ### S6-B: A river bet with two possible responses
 
-On the river, your opponent checks. In this fictional contrast, suppose Candidate 1 below folds to your proposed bet of 8 while Candidate 2 calls. Their frequencies and all other responses are unknown.
+On the river, your opponent checks. In this fictional contrast, suppose Candidate 1 below folds to your proposed bet of 8 while Candidate 2 calls.
 
 Private cards: Ah, 5d. Shared cards: Ac, 9h, 8s, 6c, 2d.
 
