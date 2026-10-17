@@ -1,0 +1,53 @@
+name: Temporary homepage candidate preparation
+on:
+  push:
+    branches: [improve-homepage-growth-turn02-20261017]
+    paths: [.github/workflows/homepage-turn02-apply.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Check the temporary transport scope before applying
+        shell: bash
+        run: |
+          python - <<'PY'
+          import subprocess
+          expected = {'.github/workflows/homepage-turn02-apply.yml', '_reports/website-growth/turn02-source-a.patch', '_reports/website-growth/turn02-source-b.patch', '_reports/website-growth/turn02-source-c.patch'}
+          actual = set(subprocess.check_output(['git', 'diff', '--name-only', '8f63c0436a45256cb2987cd93f77a9ef6e85df1b', 'HEAD'], text=True).splitlines())
+          if actual != expected:
+              raise SystemExit('Unexpected source transport delta: ' + repr(actual))
+          PY
+          git apply --check --whitespace=error-all _reports/website-growth/turn02-source-a.patch _reports/website-growth/turn02-source-b.patch _reports/website-growth/turn02-source-c.patch
+          git apply --whitespace=error-all _reports/website-growth/turn02-source-a.patch _reports/website-growth/turn02-source-b.patch _reports/website-growth/turn02-source-c.patch
+      - name: Rebuild and verify the candidate
+        run: |
+          python -m pip install -r requirements-test.txt
+          python _scripts/build.py
+          python _reports/website-growth/capture_turn02.py --write
+          python _scripts/build.py --check
+          python _tests/check_html5.py
+          python -m unittest discover -s _tests -p 'test_homepage_growth.py' -v
+          python -m unittest discover -s _tests -p 'test_poker_school_history.py' -v
+          python _reports/website-growth/capture_turn02.py
+      - name: Remove transport files and require the exact locally tested tree
+        run: |
+          git rm -- .github/workflows/homepage-turn02-apply.yml _reports/website-growth/turn02-source-a.patch _reports/website-growth/turn02-source-b.patch _reports/website-growth/turn02-source-c.patch
+          git add -A
+          git diff --cached --check
+          actual=$(git write-tree)
+          test "$actual" = ea36e832983f8aef4377d38ea334945c04dd8b3b || { echo "Unexpected candidate tree: $actual"; git diff --cached --stat; exit 1; }
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refine homepage around use, inspect and understand with exact preservation tests'
+          git push origin HEAD:improve-homepage-growth-turn02-20261017
