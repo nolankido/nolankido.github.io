@@ -9,6 +9,7 @@ from urllib.parse import urlsplit
 
 from test_site import ROOT, Page, build
 import poker_progress_history as history
+import poker_school_history as school
 
 
 def load(name, path):
@@ -34,11 +35,13 @@ class PokerProgressTests(unittest.TestCase):
         self.assertEqual(b['commit'], 'ca0264c251f2c999a8375d9e748521fe46ef22fe')
         sources = {p.relative_to(ROOT).as_posix(): p.read_bytes() for d in capture.PREFIXES
                    for p in (ROOT / d).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+        sources = school.source_records(sources)
+        prior_outputs = school.outputs(self.outputs)
         old_sources = history.source_records(sources)
-        self.assertEqual((len(old_sources), len(self.outputs)), (480, 221))
+        self.assertEqual((len(old_sources), len(prior_outputs)), (480, 221))
         self.assertEqual(len(sources), 483)
         self.assertEqual(capture.fingerprint({p: history.before(p, raw) for p, raw in old_sources.items()}), b['source_fingerprint'])
-        self.assertEqual(capture.fingerprint({str(p): history.before(str(p), raw.encode()) for p, raw in self.outputs.items()}), b['output_fingerprint'])
+        self.assertEqual(capture.fingerprint({str(p): history.before(str(p), raw.encode()) for p, raw in prior_outputs.items()}), b['output_fingerprint'])
         self.assertEqual(set(history.change()['paths']), capture.SOURCE_EDITS | capture.OUTPUT_EDITS | capture.EXTRA_EDITS)
         self.assertEqual(set(history.change()['new_files']), capture.NEW_FILES)
         self.assertEqual(set(history.change()['pages']), {'privacy', 'poker-study'})
@@ -47,7 +50,7 @@ class PokerProgressTests(unittest.TestCase):
 
     def test_unknown_changes_are_not_removed_from_historical_views(self):
         for path, item in history.change()['paths'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = school.before(path, (ROOT / path).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'], path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), item['old_sha256'], path)
             mutation = raw + b'Unreviewed change'
@@ -103,7 +106,7 @@ class PokerProgressTests(unittest.TestCase):
         targets = live.targets(ROOT)
         for route in ['/poker/study/', '/assets/poker-progress.js', '/assets/poker-progress.css']:
             self.assertIn(route, targets)
-        self.assertEqual(len(targets), 472)
+        self.assertEqual(len(targets), 475)
         privacy = self.outputs[Path('privacy/index.html')]
         for phrase in ['Optional Poker Foundations progress', 'one entry in your browser', 'without progress events', 'does not upload the file or enable device saving']:
             self.assertIn(phrase, privacy)
@@ -123,7 +126,7 @@ class PokerProgressTests(unittest.TestCase):
         self.assertEqual(len(evidence['cases']), 28)
 
     def test_search_preserves_all_declared_results_and_passages(self):
-        current = evaluation.evaluate()
+        current = evaluation.evaluate(progress_release=True)
         previous = evaluation.evaluate(study_list_release=True)
         self.assertEqual(previous, json.loads((ROOT / '_reports/poker-study-list/search-results.json').read_text()))
         self.assertEqual(current, json.loads((ROOT / '_reports/poker-progress/search-results.json').read_text()))

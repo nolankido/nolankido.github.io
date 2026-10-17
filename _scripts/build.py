@@ -288,6 +288,12 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
+        if p['id'] == 'poker-school':
+            interest_version = hashlib.sha256((ROOT / 'assets/poker-school-interest.js').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <script src="/assets/poker-school-interest.js?v={interest_version}" defer></script>'
+        if p['id'] == 'poker-school':
+            school_css_version = hashlib.sha256((ROOT / 'assets/poker-school.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/poker-school.css?v={school_css_version}">'
         if p['path'].startswith('/poker/'):
             reader_version = hashlib.sha256((ROOT / 'assets/poker-reader.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker-reader.css?v={reader_version}">'

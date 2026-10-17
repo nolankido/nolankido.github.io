@@ -34,6 +34,7 @@ jobs:
           node --check assets/task-brief.js
           node --check assets/site-find.js
           node --check assets/contact.js
+          node --check assets/poker-school-interest.js
           node --check assets/poker-library.js
           node --check assets/poker-finder.js
           node --check assets/poker-study-tools.js
