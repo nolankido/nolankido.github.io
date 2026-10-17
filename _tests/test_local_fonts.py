@@ -72,7 +72,7 @@ class LocalFontsTests(unittest.TestCase):
             self.assertNotIn('fonts.gstatic.com',text);self.assertNotIn('fonts.googleapis.com',text)
         targets=check_live.targets()
         for p in history.change()['new_files']:self.assertEqual(targets['/'+p],(200,(ROOT/p).read_bytes()))
-        self.assertEqual(len(targets),472)
+        self.assertEqual(len(targets), 475)
         privacy=self.outputs[Path('privacy/index.html')]
         self.assertIn(history.change()['privacy_new'],privacy)
         self.assertIn('Updated October 13, 2026',privacy)

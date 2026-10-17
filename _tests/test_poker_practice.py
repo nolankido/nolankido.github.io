@@ -186,7 +186,7 @@ class PokerPracticeTests(unittest.TestCase):
         for token in ['fetch(', 'XMLHttpRequest', 'localStorage', 'sessionStorage', 'document.cookie', 'innerHTML', 'eval(', 'pushState', 'replaceState']:
             self.assertNotIn(token, js)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 472)
+        self.assertEqual(len(targets), 475)
         for path in [practice.ROUTE, '/' + practice.SCRIPT, '/' + practice.CSS]:
             self.assertIn(path, targets)
 

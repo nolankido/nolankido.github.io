@@ -161,7 +161,7 @@ class HandLabTests(unittest.TestCase):
         js=(ROOT/lab.SCRIPT).read_text()
         for token in ['fetch(', 'XMLHttpRequest','localStorage','sessionStorage','document.cookie','innerHTML','eval(','pushState','replaceState','Math.random']:
             self.assertNotIn(token,js)
-        targets=check_live.targets();self.assertEqual(len(targets),472)
+        targets=check_live.targets();self.assertEqual(len(targets), 475)
         for asset in [lab.CSS,lab.SCRIPT]:self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         css=(ROOT/lab.CSS).read_text()
         self.assertIn('@media print',css)
