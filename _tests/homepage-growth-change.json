@@ -53,25 +53,25 @@
     },
     "assets/first-steps.css": {
       "old_sha256": "1ed3886f11b668fa820e2c5c32c9777c13358982c7de48507d1824f331b76950",
-      "new_sha256": "ec5932df14c94fea4c64820bfd5e455ffab44a12258bf51e7d0a4af56d470323",
+      "new_sha256": "93c45ef2a8c8317fe682be1ecefcaa6204dd5daf1199998aba0edb8b041dc0c2",
       "edits": [
         {
           "start": 2713,
-          "end": 3487,
+          "end": 3519,
           "old": "",
-          "new": "\n/* Homepage growth: one primary selection; secondary routes stay native. */\n.page-home .identity-reading h3 a { display: inline-flex; align-items: center; min-height: 44px; }\n.page-home .practical-home summary { cursor: pointer; min-height: 44px; padding: 8px 0; font: 600 .94rem/1.6 var(--sans); }\n.page-home .practical-home summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }\n.page-home .practical-home[open] > p { margin-top: 12px; }\n/* Keep enlarged text readable instead of clipping long headings or links. */\n.page-home :is(.section-title, .brand-statement, .destination a) { overflow-wrap: anywhere; }\n.page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }\n.page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }\n"
+          "new": "\n/* Homepage growth: one primary selection; secondary routes stay native. */\n.page-home .identity-reading h3 a { display: inline-flex; align-items: center; min-height: 44px; }\n.page-home .practical-home summary { cursor: pointer; min-height: 44px; padding: 8px 0; font: 600 .94rem/1.6 var(--sans); }\n.page-home .practical-home summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }\n.page-home .practical-home[open] > p { margin-top: 12px; }\n/* Keep enlarged text readable instead of clipping long headings or links. */\n.page-home :is(.section-title, .section-label, .brand-statement, .destination a, .destination p) { overflow-wrap: anywhere; }\n.page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }\n.page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }\n"
         }
       ]
     },
     "index.html": {
       "old_sha256": "8bea0eb52feb2f1ac25de0ff1a240d4703870db537aa0a3847390bca4c2ba3f5",
-      "new_sha256": "5bfefbdae0fcd2904e6b7fc4cc0a8abd337bc5e31ec8e4198326d886d754b2dd",
+      "new_sha256": "6b21d6f51fcdac546d825f94fb727b22ab9abfa1f46972ae428631091ba9dc9f",
       "edits": [
         {
           "start": 2645,
           "end": 2717,
           "old": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=1ed3886f11b6\">\n",
-          "new": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=ec5932df14c9\">\n"
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=93c45ef2a8c8\">\n"
         },
         {
           "start": 2875,
@@ -113,13 +113,13 @@
     },
     "creative/index.html": {
       "old_sha256": "3318513542bb83ce48ea4c2f953677253f483c3d5517c150fffd9c3d5d97be12",
-      "new_sha256": "8db3570c36aa821e6f788640ef17d1f393f1cca5cf5ac4e61fd31f1fb73055b2",
+      "new_sha256": "341bb41ffeff77ac0912012b9b1ac7018cd9b5e86291f3f5289c85ed8e60c6eb",
       "edits": [
         {
           "start": 2675,
           "end": 2747,
           "old": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=1ed3886f11b6\">\n",
-          "new": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=ec5932df14c9\">\n"
+          "new": "  <link rel=\"stylesheet\" href=\"/assets/first-steps.css?v=93c45ef2a8c8\">\n"
         }
       ]
     },

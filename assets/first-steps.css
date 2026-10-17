@@ -41,6 +41,6 @@
 .page-home .practical-home summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .page-home .practical-home[open] > p { margin-top: 12px; }
 /* Keep enlarged text readable instead of clipping long headings or links. */
-.page-home :is(.section-title, .brand-statement, .destination a) { overflow-wrap: anywhere; }
+.page-home :is(.section-title, .section-label, .brand-statement, .destination a, .destination p) { overflow-wrap: anywhere; }
 .page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }
 .page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }
