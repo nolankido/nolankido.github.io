@@ -90,7 +90,7 @@ class BrowserTests(unittest.TestCase):
         self.page.set_viewport_size({'width': width, 'height': 900})
         self.page.on('pageerror', lambda error: self.errors.append(str(error)))
         self.page.set_content(html_for(route))
-        if route == '/contact/':
+        if route in ('/contact/', '/poker/school/'):
             self.page.evaluate("""config => {
               window.testPosts = [];
               window.testService = config.service;
@@ -142,6 +142,55 @@ class BrowserTests(unittest.TestCase):
 
     def verify(self):
         self.page.evaluate("window.challengeOptions.callback('test-token')")
+
+    def test_poker_school_requires_explicit_consent(self):
+        self.render('/poker/school/')
+        expect(self.page.locator('#contact-fields')).to_be_enabled()
+        self.page.wait_for_function('window.challengeOptions !== undefined')
+        self.page.locator('#interest-email').fill('visitor@example.com')
+        self.page.evaluate("window.challengeOptions.callback('test-token')")
+        self.page.locator('#contact-submit').click()
+        self.assertEqual(self.posts, [])
+        expect(self.page.locator('#form-success')).to_be_hidden()
+        self.page.locator('#interest-consent').check()
+        self.page.locator('#interest-goal').select_option('tournaments')
+        self.page.locator('#contact-submit').click()
+        expect(self.page.locator('#form-success')).to_be_visible()
+        self.assertEqual(len(self.posts), 1)
+        self.assertEqual(self.posts[0]['interest_action'], 'register')
+        self.assertEqual(self.posts[0]['interest_goal'], 'tournaments')
+        self.assertEqual(self.posts[0]['consent'], 'explicit opt-in checked')
+        self.assertEqual(self.posts[0]['email'], 'visitor@example.com')
+        self.assertNotIn('visitor@example.com', self.page.url)
+
+    def test_poker_school_removal_does_not_require_opt_in(self):
+        self.render('/poker/school/', width=390)
+        self.page.wait_for_function('window.challengeOptions !== undefined')
+        self.page.locator('#interest-action').select_option('remove')
+        expect(self.page.locator('#interest-consent-group')).to_be_hidden()
+        expect(self.page.locator('#interest-goal-group')).to_be_hidden()
+        self.page.locator('#interest-email').fill('visitor@example.com')
+        self.page.evaluate("window.challengeOptions.callback('test-token')")
+        self.page.locator('#contact-submit').click()
+        expect(self.page.locator('#form-success')).to_be_visible()
+        self.assertEqual(len(self.posts), 1)
+        self.assertEqual(self.posts[0]['interest_action'], 'remove')
+        self.assertEqual(self.posts[0]['interest_goal'], '')
+        self.assertEqual(self.posts[0]['consent'], 'removal request')
+        self.assertIn('stop sending', self.posts[0]['message'])
+
+    def test_poker_school_without_scripts_remains_readable(self):
+        context = self.browser.new_context(java_script_enabled=False)
+        context.route('**/*', lambda r: r.abort())
+        page = context.new_page()
+        try:
+            page.set_content(html_for('/poker/school/'))
+            self.assertIn('The free course stays free', page.locator('body').inner_text())
+            expect(page.locator('#contact-submit')).to_be_disabled()
+            expect(page.locator('noscript')).to_be_visible()
+            self.assertGreaterEqual(page.locator('a[href="/poker/free-poker-learning-path/"]').count(), 1)
+        finally:
+            context.close()
 
     def test_missing_token_retry_then_success(self):
         self.contact(); self.fill()
