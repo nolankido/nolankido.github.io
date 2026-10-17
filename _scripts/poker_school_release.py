@@ -27,6 +27,7 @@ MODIFIED = frozenset((
     '_tests/poker_progress_history.py',
     '_tests/position_maps_history.py',
     '_tests/rules_reference_history.py',
+    '_tests/search_sections_browser.py',
     '_tests/test_checkpoint.py',
     '_tests/test_content.py',
     '_tests/test_getting_started.py',
