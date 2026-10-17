@@ -12,7 +12,7 @@ Private cards: Kc, 7h. Shared cards: Ks, 9d, 3c.
 
 Private card names: king of clubs; seven of hearts. Shared card names: king of spades; nine of diamonds; three of clubs.
 
-**Try without opening an answer:** Name your best five now. Which actions are available in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?
+**Try without opening an answer:** Name your best five now. Which actions are available in response to this bet? How many new counters would a call require? Explain how, if at all, the earlier payment affects that amount.
 
 <details><summary>Check the reasoning and follow a repair</summary>
 
@@ -243,7 +243,7 @@ Private cards: 7d, 7c. Shared cards: Kh, Qh, 9d, 5c, 2s.
 
 Private card names: seven of diamonds; seven of clubs. Shared card names: king of hearts; queen of hearts; nine of diamonds; five of clubs; two of spades.
 
-**Try without opening an answer:** State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Does holding a pair mean you should call?
+**Try without opening an answer:** State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Is your current hand description enough to choose an action? Explain.
 
 <details><summary>Check the reasoning and follow a repair</summary>
 

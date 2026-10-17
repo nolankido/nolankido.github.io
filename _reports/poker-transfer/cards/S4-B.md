@@ -10,6 +10,6 @@ Private cards: 7d, 7c. Shared cards: Kh, Qh, 9d, 5c, 2s.
 
 Private card names: seven of diamonds; seven of clubs. Shared card names: king of hearts; queen of hearts; nine of diamonds; five of clubs; two of spades.
 
-**Try without opening an answer:** State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Does holding a pair mean you should call?
+**Try without opening an answer:** State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Is your current hand description enough to choose an action? Explain.
 
 **Private note:** First explanation: ______. Confidence: sure / partly sure / guessing. Prompt or help received: ______. Unclear step: ______.

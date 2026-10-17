@@ -19,7 +19,7 @@
         "3c"
       ],
       "setup": "In a fictional heads-up flop, you paid 5 counters preflop. On the flop you have paid zero. The other player bets 7. Both players have at least 30 counters behind at this decision, with no all-ins or side pots.",
-      "prompt": "Name your best five now. Which actions are available in response to this bet? How many new counters would a call require, and why does the earlier five not reduce it?",
+      "prompt": "Name your best five now. Which actions are available in response to this bet? How many new counters would a call require? Explain how, if at all, the earlier payment affects that amount.",
       "call": {
         "to": 7,
         "paid": 0,
@@ -263,7 +263,7 @@
         "2s"
       ],
       "setup": "On the river, a heads-up pot contains 30 before your opponent bets 20. You have put nothing on this river. Assume no fees, all-ins, side pots or more betting.",
-      "prompt": "State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Does holding a pair mean you should call?",
+      "prompt": "State your best five. How many new counters would calling require, what is the pot after a call, and what fraction of that pot is the call? Is your current hand description enough to choose an action? Explain.",
       "river": {
         "pot_before": 30,
         "bet": 20,
