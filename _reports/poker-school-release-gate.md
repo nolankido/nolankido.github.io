@@ -36,3 +36,7 @@ Do not declare the page live until step 6 completes. Keep PR #110 as **draft** w
 - Interest emails require explicit affirmative consent. Requests to stop emails must never require opting in. Form acceptance is not list enrollment or removal.
 - Keep submitted personal information out of GitHub, URLs, tracker events, browser storage and public reports.
 - Course completion or a correct test answer is not demonstrated learning or profitable play; human review and genuine beginner observations are still future dependencies.
+
+## Guard lifecycle and future change safety
+
+`_scripts/poker_school_release.py` is an **explicit, one-release forensic audit**, not a permanent rule for every future change to nolankido.com. Execute it on the exact PR #110 candidate before a release decision and preserve its results. The general `_tests/test_poker_school_release.py` suite tests its SHA algorithm, unexpected-delta rejection and immutable baseline metadata as pure behaviors without comparing every future site revision against October 16 forever. Subsequent approved work must not be blocked simply because it modifies the public site's contact, privacy or instructional files under a new reviewed release. The ordinary full-site suite remains the required gate for a merge; this audit cannot override a failed CI result.
