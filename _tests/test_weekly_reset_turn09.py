@@ -25,6 +25,19 @@ class WeeklyResetTurn09Tests(unittest.TestCase):
         self.assertIn('<pre>'+escape(sheet)+'</pre>',self.page)
         self.assertIn('<pre>'+escape(sheet)+'</pre>',self.outputs[Path('living-well/worksheets/index.html')])
         self.assertIn('id="weekly-reset-worksheet"',self.page)
+    def test_exact_parent_reconstruction_rejects_other_changes(self):
+        import turn09_weekly_reset_history as history
+        from hashlib import sha256
+        for path, spec in history.change().items():
+            current=(ROOT/path).read_bytes()
+            self.assertEqual(sha256(current).hexdigest(),spec['new_sha256'],path)
+            original=history.before(path,current)
+            self.assertEqual(sha256(original).hexdigest(),spec['old_sha256'],path)
+            self.assertEqual(history.before(path,current+b'!'),current+b'!')
+        restored=history.pages(build.public_pages())
+        item=next(p for p in restored if p['path']=='/living-well/weekly-reset/')
+        self.assertEqual(item['updated'],'2026-10-09')
+        self.assertIn('clearly fictional paper-first',item['revision'])
     def test_no_new_collection_and_existing_anchors_remain(self):
         for item in ('<form','<textarea','<input','fetch(','localStorage','sessionStorage'):
             self.assertNotIn(item,self.entry['quick_start']['intro']+self.entry['quick_start']['example'])
