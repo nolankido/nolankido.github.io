@@ -3,7 +3,6 @@
   "base_commit": "e6d61d4070bae76c54e1b676422e716ff8adaac6",
   "paths": {
     "_source/technology/check-ai-answers.html": {
-      "old_sha256": "dd3fc00393028b269f6ad29126c014b0637bc6ce252e371d916962ea3328c43d",
       "new_sha256": "0aa386fe58bd86a80154334b53846096f02a9cc5d06b9186fd284e51d306bbac",
       "edits": [
         {
@@ -30,10 +29,10 @@
           "old": "",
           "new": "    <p class=\"editorial-note\"><strong>Revision, October 17, 2026:</strong> A short verification procedure and explicit evidence statuses were added. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed.</p>\n"
         }
-      ]
+      ],
+      "old_git_sha": "b06328174509e895ee8440692b9f1ca5f19d935b"
     },
     "technology/check-ai-answers/index.html": {
-      "old_sha256": "0dd7628a26e5f5538ad50767b597cdb7e0f902d9b7eefb4e509fab33298c27b0",
       "new_sha256": "0252d26bb95fa964392187d0e19e1dd0b3dfbdc1dba6836ec21405ef42835ab0",
       "edits": [
         {
@@ -60,7 +59,8 @@
           "old": "",
           "new": "    <p class=\"editorial-note\"><strong>Revision, October 17, 2026:</strong> A short verification procedure and explicit evidence statuses were added. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed.</p>\n"
         }
-      ]
+      ],
+      "old_git_sha": "fd345564ce952aacad1aa9f780db21155734d1b2"
     }
   }
 }

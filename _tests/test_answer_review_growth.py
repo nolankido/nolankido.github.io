@@ -1,6 +1,6 @@
 """Turn 07 reading and exact predecessor checks."""
 import sys,unittest
-from hashlib import sha256
+from hashlib import sha1,sha256
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_tests'))
@@ -10,7 +10,8 @@ class GuideGrowth(unittest.TestCase):
   for path,item in history.record().items():
    raw=(ROOT/path).read_bytes()
    self.assertEqual(sha256(raw).hexdigest(),item['new_sha256'])
-   self.assertEqual(sha256(history.before(path,raw)).hexdigest(),item['old_sha256'])
+   old=history.before(path,raw)
+   self.assertEqual(sha1(b'blob '+str(len(old)).encode()+b'\0'+old).hexdigest(),item['old_git_sha'])
  def test_unknown_changes(self):
   for path in history.record():
    raw=(ROOT/path).read_bytes()

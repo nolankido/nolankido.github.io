@@ -1,6 +1,6 @@
 """Test-only exact-SHA predecessor for Turn 07's AI answer-checking revision."""
 from functools import lru_cache
-from hashlib import sha256
+from hashlib import sha1,sha256
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[1]
@@ -23,6 +23,7 @@ def before(path,data):
             raise ValueError('Corrupt answer checking predecessor offsets')
         value=value[:a]+edit['old']+value[b:]
     prior=value.encode('utf-8')
-    if sha256(prior).hexdigest()!=item['old_sha256']:
+    git_sha=sha1(b'blob '+str(len(prior)).encode()+b'\0'+prior).hexdigest()
+    if git_sha!=item['old_git_sha']:
         raise ValueError('Corrupt answer checking predecessor digest')
     return prior if binary else value
