@@ -31,5 +31,5 @@ class GuideGrowth(unittest.TestCase):
   self.assertEqual(page['updated'],'2026-10-17')
   self.assertIn('"dateModified": "2026-10-17"',raw)
   xml=(ROOT/'sitemap.xml').read_text()
-  self.assertIn('<loc>https://nolankido.com/technology/check-ai-answers/</loc>\\n    <lastmod>2026-10-17</lastmod>',xml)
+  self.assertIn('<loc>https://nolankido.com/technology/check-ai-answers/</loc>\n    <lastmod>2026-10-17</lastmod>',xml)
 if __name__=='__main__':unittest.main()
