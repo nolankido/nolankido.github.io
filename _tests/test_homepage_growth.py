@@ -103,7 +103,7 @@ class HomepageGrowthTests(unittest.TestCase):
 
     def test_unknown_changes_remain_visible_and_reversal_is_exact(self):
         for path, record in self.record['paths'].items():
-            raw = task_growth.before(path, (ROOT / path).read_bytes())
+            raw = task_growth.before(path, task_nav_history.before(path, (ROOT / path).read_bytes()))
             self.assertEqual(digest(raw), record['new_sha256'], path)
             previous = history.before(path, raw)
             self.assertEqual(digest(previous), record['old_sha256'], path)
