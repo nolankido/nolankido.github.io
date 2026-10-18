@@ -88,7 +88,7 @@ def wildcard_root_blocked(directives):
         elif field in ("allow", "disallow") and agents:
             rules_seen = True
             if (field == "disallow" and "*" in agents
-                    and re.fullmatch(r"/(?:\\*)*", value)):
+                    and re.fullmatch(r"/(?:\*)*", value)):
                 return True
     return False
 
@@ -125,7 +125,7 @@ def check(root=ROOT):
             errors.append(route + ": sitemap entry count")
         else:
             revision = revisions[0]
-            if not isinstance(revision, str) or not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", revision):
+            if not isinstance(revision, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", revision):
                 errors.append(route + ": invalid sitemap lastmod")
             else:
                 try:
