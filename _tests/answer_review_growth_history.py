@@ -22,6 +22,13 @@ def before(path,data):
         if type(a) is not int or type(b) is not int or not 0<=a<=b<=len(value) or value[a:b]!=edit['new']:
             raise ValueError('Corrupt answer checking predecessor offsets')
         value=value[:a]+edit['old']+value[b:]
+    # Recompute-derived reading time changes separately from edited body text.
+    # The reviewed guide grew from 10 to 12 minutes; restore the prior header.
+    if str(path)=='technology/check-ai-answers/index.html':
+        current=' · About 12 min read</p>'
+        if value.count(current)!=1:
+            raise ValueError('Unexpected answer guide reading-time header')
+        value=value.replace(current,' · About 10 min read</p>',1)
     prior=value.encode('utf-8')
     git_sha=sha1(b'blob '+str(len(prior)).encode()+b'\0'+prior).hexdigest()
     if git_sha!=item['old_git_sha']:
