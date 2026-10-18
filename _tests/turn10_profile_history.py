@@ -29,6 +29,6 @@ def pages(records):
     dates['about'] = '2026-10-12'
     output = deepcopy(records)
     for p in output:
-        if p.get('id') in dates:
+        if p.get('id') in dates and p.get('updated') == '2026-10-17':
             p['updated'] = dates[p['id']]
     return output
