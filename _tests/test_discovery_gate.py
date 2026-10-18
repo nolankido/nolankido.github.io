@@ -69,6 +69,25 @@ class DiscoveryGuardTests(unittest.TestCase):
         path.write_text(path.read_text() + "\nDisallow: / # temporary\n")
         self.rejects("blanket root Disallow")
 
+    def test_wildcard_root_disallow_is_a_blanket_block(self):
+        path = self.root / "robots.txt"
+        path.write_text(path.read_text() + "\nDisallow: /* # blocks all URLs\n")
+        self.rejects("blanket root Disallow")
+
+    def test_image_preview_none_does_not_deindex_page(self):
+        self.replace(
+            "poker/hand-rankings/index.html",
+            "<head>", '<head><meta name="ROBOTS" content="max-image-preview:none">',
+        )
+        self.assertEqual(guard.check(self.root)["status"], "pass")
+
+    def test_multiple_robots_directives_detect_noindex(self):
+        self.replace(
+            "poker/hand-rankings/index.html", "<head>",
+            '<head><meta name="robots" content="max-image-preview:none, NOINDEX">',
+        )
+        self.rejects("noindex")
+
     def test_commented_disallow_is_not_active(self):
         path = self.root / "robots.txt"
         path.write_text(path.read_text() + "\n# Disallow: /\n")
