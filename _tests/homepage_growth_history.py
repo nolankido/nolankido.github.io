@@ -24,6 +24,8 @@ def change():
 
 
 def before(path, data):
+    import answer_review_growth_history as growth_history
+    data = growth_history.before(path, data)
     data = turn04_public_source_history.before(path, data)
     data = task_brief_growth_history.before(path, data)
     binary = isinstance(data, bytes)

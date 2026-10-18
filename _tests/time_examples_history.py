@@ -17,6 +17,8 @@ def change():
 
 
 def before(path, data):
+    import answer_review_growth_history as growth_history
+    data = growth_history.before(path, data)
     data = before_search_addresses(path, data)
     path = str(path)
     if path not in {SCRIPT, PAGE}:
