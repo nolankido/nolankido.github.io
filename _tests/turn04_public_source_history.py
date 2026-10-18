@@ -6,6 +6,7 @@ change remains visible. No older release records or fingerprints are changed.
 from pathlib import Path
 from functools import lru_cache
 import base64,hashlib,json
+import turn10_profile_history
 
 ROOT=Path(__file__).resolve().parents[1]
 @lru_cache(maxsize=1)
@@ -13,6 +14,7 @@ def change():
     return json.loads((ROOT/'_tests/turn04-public-source-change.json').read_text())
 
 def before(path,data):
+    data=turn10_profile_history.before(path,data)
     entry=change()['paths'].get(str(path))
     if not entry: return data
     binary=isinstance(data,bytes)
