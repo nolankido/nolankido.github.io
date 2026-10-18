@@ -1,0 +1,13 @@
+# Website growth, Turn 06: Search discovery guard
+October 17, 2026. Public release record; no private search-query or visitor records included.
+
+## Evidence
+Seven priority pages returned HTTP 200, self-referencing canonicals and indexable content in the live audit. Search Console URL Inspection reported five indexed priority pages, Hand Rankings discovered but not indexed, and Poker School unknown to Google. A later tracker inspection reported both latter URLs unknown; external indexing states can change. Search Console's submitted sitemap has no warnings or errors. Bing Webmaster API access is not configured. Neither an indexed status nor schema validity proves traffic or citations.
+
+## Improvement
+The new `_scripts/check_discovery.py` validates all seven priority generated pages and the two Poker homepage links, canonical sitemap entries, metadata, structured page URL, and lack of noindex or blanket robots exclusion. `_tests/test_discovery_gate.py` supplies positive and negative test cases. CI runs the guard before browser tests. It uses no network access or visitor tracking, and makes no changes to public pages or URLs.
+
+## Further actions
+Review Google Search Console's URL Inspection of Hand Rankings and School and request indexing at most once when appropriate; it does not guarantee indexing. Track these alongside the five indexed pages. Set up Bing Webmaster Tools separately. Prefer improving distinctive, original content and actual links over duplicate pages, invented schema images, bot-focused keyword text, or special AI markup. Complete Turn 07 by improving the reader-facing answer-verification guide.
+
+This checks generated release files, not external crawler delivery, index inclusion, Search rankings, AI answers or conversion.
