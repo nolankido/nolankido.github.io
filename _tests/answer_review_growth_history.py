@@ -14,9 +14,19 @@ def before(path,data):
     item=record().get(str(path))
     binary=isinstance(data,bytes)
     raw=data if binary else data.encode('utf-8')
-    if item is None or sha256(raw).hexdigest()!=item['new_sha256']:
+    if item is None:
+        return data
+    current_sha=sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+    if (current_sha != item.get('new_git_sha') if item.get('new_git_sha') else sha256(raw).hexdigest() != item['new_sha256']):
         return data
     value=raw.decode('utf-8')
+    # The renderer's schema update occurs before all text-body diffs.
+    # Remove it first so the recorded body offsets remain stable.
+    if str(path)=='technology/check-ai-answers/index.html':
+        schema_change='"dateModified": "2026-10-17", '
+        if value.count(schema_change)!=1:
+            raise ValueError('Unexpected answer checking dateModified count')
+        value=value.replace(schema_change,'',1)
     for edit in reversed(item['edits']):
         a,b=edit['start'],edit['end']
         if type(a) is not int or type(b) is not int or not 0<=a<=b<=len(value) or value[a:b]!=edit['new']:
