@@ -119,9 +119,12 @@ class HomepageGrowthTests(unittest.TestCase):
         self.assertEqual(history.pages([home]), [self.record['pages']['home']['old']])
         unknown = deepcopy(home); unknown['description'] += ' Unreviewed claim'
         self.assertEqual(history.pages([unknown]), [unknown])
+        import turn10_profile_history
         for page in records:
             if page['id'] not in {'home', 'task-brief'}:
-                self.assertEqual(history.pages([page]), [page])
+                # Later About/Bio revision dates are independently approved;
+                # restore those dates before checking this earlier release.
+                self.assertEqual(history.pages([page]), turn10_profile_history.pages([page]))
         task = next(p for p in records if p['id'] == 'task-brief')
         self.assertEqual(history.pages([task]), [task_growth.change()['page']['old']])
 
