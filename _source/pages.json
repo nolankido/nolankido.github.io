@@ -46,7 +46,7 @@
     "description": "Meet Nolan Kido: practical AI, useful tools, writing, tournament poker, and a life beyond the screen. Explore his approach and try the work on this site.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-17"
   },
   {
     "id": "notes",
@@ -86,7 +86,7 @@
     "description": "Short and extended biographies of Nolan Kido, with copyable text, downloads, and selected practical-AI work for introductions and profiles.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-17"
   },
   {
     "id": "card",
