@@ -24,4 +24,12 @@ class GuideGrowth(unittest.TestCase):
    self.assertIn(term,raw)
   self.assertEqual(raw.count('class="review-example" id="'),6)
   self.assertNotIn('<form',raw)
+  import json,re
+  manifest=json.loads((ROOT/'_source/pages.json').read_text())
+  page=next(x for x in manifest if x['id']=='ai-answer-review')
+  self.assertEqual(page['date'],'2026-10-12')
+  self.assertEqual(page['updated'],'2026-10-17')
+  self.assertIn('"dateModified": "2026-10-17"',raw)
+  xml=(ROOT/'sitemap.xml').read_text()
+  self.assertIn('<loc>https://nolankido.com/technology/check-ai-answers/</loc>\\n    <lastmod>2026-10-17</lastmod>',xml)
 if __name__=='__main__':unittest.main()

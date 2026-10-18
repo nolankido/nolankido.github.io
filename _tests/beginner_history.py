@@ -37,6 +37,8 @@ def before(path, data):
 
 
 def pages(records):
+    import answer_review_growth_history as growth_history
+    records = growth_history.pages(records)
     records = preflop_history.pages(records)
     return [p for p in records if p != change()['page']]
 

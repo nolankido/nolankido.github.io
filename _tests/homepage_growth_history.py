@@ -48,6 +48,8 @@ def before(path, data):
 
 
 def pages(records):
+    import answer_review_growth_history as growth_history
+    records = growth_history.pages(records)
     records = task_brief_growth_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[p['id']]['old'])

@@ -44,3 +44,15 @@ def before(path,data):
     if git_sha!=item['old_git_sha']:
         raise ValueError('Corrupt answer checking predecessor digest')
     return prior if binary else value
+
+def pages(records):
+    """Remove only the reviewed update date for frozen historical manifests."""
+    result=[]
+    for page in records:
+        if page.get('id')=='ai-answer-review' and page.get('updated')=='2026-10-17':
+            p=dict(page)
+            p.pop('updated')
+            result.append(p)
+        else:
+            result.append(page)
+    return result
