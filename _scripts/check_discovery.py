@@ -25,7 +25,7 @@ def check(root=ROOT):
     errors=[]
     robots=(root/'robots.txt').read_text()
     if 'Sitemap: https://nolankido.com/sitemap.xml' not in robots:errors.append('Missing sitemap declaration')
-    if re.search(r'(?im)^\\s*Disallow:\\s*/\\s*$',robots):errors.append('Blanket robots block')
+    if re.search(r'(?im)^\s*Disallow:\s*/\s*$',robots):errors.append('Blanket robots block')
     tree=ET.fromstring((root/'sitemap.xml').read_text())
     ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
     locs=[n.text for n in tree.findall('.//s:loc',ns)]
@@ -40,7 +40,7 @@ def check(root=ROOT):
         if page.h1!=1:errors.append(route+': h1 count')
         if [a.get('href') for a in page.links if a.get('rel')=='canonical']!=[canonical]:errors.append(route+': canonical')
         if [a.get('content') for a in page.meta if a.get('property')=='og:url']!=[canonical]:errors.append(route+': og:url')
-        if any(re.search(r'\\bnoindex\\b',a.get('content',''),re.I) for a in page.meta if a.get('name') in ('robots','googlebot')):errors.append(route+': noindex')
+        if any(re.search(r'\bnoindex\b',a.get('content',''),re.I) for a in page.meta if a.get('name') in ('robots','googlebot')):errors.append(route+': noindex')
         try: schemas=[json.loads(value) for value in page.schemas]
         except json.JSONDecodeError:errors.append(route+': invalid JSON-LD');schemas=[]
         if not any(isinstance(s,dict) and s.get('url')==canonical for s in schemas):errors.append(route+': schema URL')
