@@ -74,6 +74,21 @@ class DiscoveryGuardTests(unittest.TestCase):
         path.write_text(path.read_text() + "\nDisallow: /* # blocks all URLs\n")
         self.rejects("blanket root Disallow")
 
+    def test_named_crawler_root_block_does_not_block_everyone(self):
+        path = self.root / "robots.txt"
+        path.write_text(
+            path.read_text() + "\nUser-agent: ExampleBot\nDisallow: /\n"
+        )
+        self.assertEqual(guard.check(self.root)["status"], "pass")
+
+    def test_consecutive_agents_include_wildcard_in_root_block(self):
+        path = self.root / "robots.txt"
+        path.write_text(
+            path.read_text()
+            + "\nUser-agent: ExampleBot\nUser-agent: *\nDisallow: /*\n"
+        )
+        self.rejects("blanket root Disallow")
+
     def test_image_preview_none_does_not_deindex_page(self):
         self.replace(
             "poker/hand-rankings/index.html",
@@ -124,6 +139,22 @@ class DiscoveryGuardTests(unittest.TestCase):
             + match.group(2) + xml[match.end():]
         )
         self.rejects("invalid sitemap lastmod")
+
+    def test_rejects_basic_and_week_sitemap_dates(self):
+        path = self.root / "sitemap.xml"
+        xml = path.read_text()
+        match = re.search(
+            r"(<loc>https://nolankido.com/poker/hand-rankings/</loc>\\s*"
+            r"<lastmod>)[^<]+(</lastmod>)", xml,
+        )
+        self.assertIsNotNone(match)
+        for value in ("20261017", "2026-W42-6"):
+            with self.subTest(value=value):
+                path.write_text(
+                    xml[:match.start()] + match.group(1) + value
+                    + match.group(2) + xml[match.end():]
+                )
+                self.rejects("invalid sitemap lastmod")
 
     def test_metadata_description_removed(self):
         path = self.root / "technology/task-brief/index.html"
