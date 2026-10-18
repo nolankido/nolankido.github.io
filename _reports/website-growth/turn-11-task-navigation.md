@@ -17,3 +17,7 @@ All six flagship resources are accessible from the Start Here and Resources comb
 The site build, search index, six-route selection, exact historical compatibility and browser access paths must pass before merging. Whole-file SHA-bound adapters restore only exact reviewed predecessors, not arbitrary modified bytes. Previous baselines stay untouched.
 
 CI does not measure human comprehension. A small set of unfamiliar readers should find a named task, obtain something useful, and stop without help. Record real obstacles privately, not search text. Final Poker labels can be refined after Turn 12's instructional review.
+
+## Corrective validation
+
+The first full CI attempt exposed a metadata-predecessor ordering issue and punctuation that conflicted with existing editorial checks. The source punctuation and SHA-bound test-only reversal order have been corrected without changing any historical golden snapshot. A fresh exact-head Site checks run is required for release; passing focused tests alone is insufficient.
