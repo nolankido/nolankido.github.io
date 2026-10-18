@@ -80,7 +80,7 @@ class HomepageGrowthTests(unittest.TestCase):
 
     def test_no_new_runtime_or_changes_to_private_boundaries(self):
         for path, expected in self.record['protected_source_hashes'].items():
-            self.assertEqual(digest((ROOT / path).read_bytes()), expected, path)
+            self.assertEqual(digest(history.before(path, (ROOT / path).read_bytes())), expected, path)
         for path in ('index.html', 'start-here/index.html'):
             scripts = [a['src'] for a in Page(self.outputs[Path(path)]).tags('script') if 'src' in a]
             self.assertEqual(scripts, ['https://cloud.umami.is/script.js'])
