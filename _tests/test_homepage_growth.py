@@ -10,6 +10,7 @@ import html5lib
 from test_site import ROOT, Page, build
 import homepage_growth_history as history
 import task_brief_growth_history as task_growth
+import turn11_task_navigation_history as task_nav_history
 
 PRIMARY = {
     'use': '/technology/task-brief/',
@@ -121,7 +122,8 @@ class HomepageGrowthTests(unittest.TestCase):
         self.assertEqual(history.pages([unknown]), [unknown])
         for page in records:
             if page['id'] not in {'home', 'task-brief'}:
-                self.assertEqual(history.pages([page]), [page])
+                expected = task_nav_history.pages([page]) if page['id'] in {'start-here', 'resources', 'find'} else [page]
+                self.assertEqual(history.pages([page]), expected)
         task = next(p for p in records if p['id'] == 'task-brief')
         self.assertEqual(history.pages([task]), [task_growth.change()['page']['old']])
 

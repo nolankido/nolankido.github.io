@@ -9,6 +9,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import task_brief_growth_history
+import turn11_task_navigation_history as task_nav_history
 import turn04_public_source_history
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +47,7 @@ def before(path, data):
 
 
 def pages(records):
+    records = task_nav_history.pages(records)
     records = task_brief_growth_history.pages(records)
     pairs = change()['pages']
     return [deepcopy(pairs[p['id']]['old'])
