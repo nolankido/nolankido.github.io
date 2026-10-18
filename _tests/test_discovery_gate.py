@@ -22,6 +22,16 @@ class TestDiscovery(unittest.TestCase):
  def test_robots(self):
   p=self.root/'robots.txt';p.write_text(p.read_text()+'\nDisallow: /\n')
   with self.assertRaisesRegex(ValueError,'robots'):guard.check(self.root)
+ def test_none_disallows_indexing(self):
+  self.change('poker/hand-rankings/index.html','<head>','<head><meta name="robots" content="none">')
+  with self.assertRaisesRegex(ValueError,'noindex'):guard.check(self.root)
+ def test_commented_sitemap_is_not_active(self):
+  self.change('robots.txt','Sitemap: https://nolankido.com/sitemap.xml','# Sitemap: https://nolankido.com/sitemap.xml')
+  with self.assertRaisesRegex(ValueError,'Missing sitemap'):guard.check(self.root)
+ def test_prefetch_is_not_a_navigation_link(self):
+  self.change('poker/index.html','href="/poker/hand-rankings/"','href="/poker/removed/"')
+  p=self.root/'poker/index.html';p.write_text(p.read_text().replace('<head>','<head><link rel="prefetch" href="/poker/hand-rankings/">',1))
+  with self.assertRaisesRegex(ValueError,'missing link'):guard.check(self.root)
  def test_internal_link(self):
   self.change('poker/index.html','href="/poker/hand-rankings/"','href="/poker/removed/"')
   with self.assertRaisesRegex(ValueError,'missing link'):guard.check(self.root)
