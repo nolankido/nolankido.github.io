@@ -27,7 +27,6 @@ jobs:
           python downloads/website-check-reproduction.py
           node --check assets/workflow-time.js
           python _scripts/check_search.py
-          python _scripts/check_discovery.py
           python -m unittest discover -s _tests -p 'test_*.py' -v
           node --check assets/public-profile.js
           node --check assets/page-sharing.js

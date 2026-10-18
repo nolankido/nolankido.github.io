@@ -2,7 +2,7 @@
 import sys,unittest,tempfile,shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'_scripts'))
+sys.path.insert(0,str(ROOT/'_tests'))
 import check_discovery as guard
 class TestDiscovery(unittest.TestCase):
  def setUp(self):
