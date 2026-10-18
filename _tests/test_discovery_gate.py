@@ -32,6 +32,12 @@ class TestDiscovery(unittest.TestCase):
   self.change('poker/index.html','href="/poker/hand-rankings/"','href="/poker/removed/"')
   p=self.root/'poker/index.html';p.write_text(p.read_text().replace('<head>','<head><link rel="prefetch" href="/poker/hand-rankings/">',1))
   with self.assertRaisesRegex(ValueError,'missing link'):guard.check(self.root)
+ def test_comment_on_broad_block(self):
+  p=self.root/'robots.txt';p.write_text(p.read_text()+'\nDisallow: / # temporary block\n')
+  with self.assertRaisesRegex(ValueError,'Blanket robots block'):guard.check(self.root)
+ def test_uppercase_robots_meta(self):
+  self.change('poker/hand-rankings/index.html','<head>','<head><meta name="ROBOTS" content="NOINDEX">')
+  with self.assertRaisesRegex(ValueError,'noindex'):guard.check(self.root)
  def test_internal_link(self):
   self.change('poker/index.html','href="/poker/hand-rankings/"','href="/poker/removed/"')
   with self.assertRaisesRegex(ValueError,'missing link'):guard.check(self.root)
