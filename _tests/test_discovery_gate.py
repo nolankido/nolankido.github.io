@@ -144,7 +144,7 @@ class DiscoveryGuardTests(unittest.TestCase):
         path = self.root / "sitemap.xml"
         xml = path.read_text()
         match = re.search(
-            r"(<loc>https://nolankido.com/poker/hand-rankings/</loc>\\s*"
+            r"(<loc>https://nolankido.com/poker/hand-rankings/</loc>\s*"
             r"<lastmod>)[^<]+(</lastmod>)", xml,
         )
         self.assertIsNotNone(match)
