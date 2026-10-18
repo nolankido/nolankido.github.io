@@ -67,5 +67,7 @@
         }
       ]
     }
-  }
+  },
+  "old_entry_sha256": "cc0d8cc62634f256fc3c8abbf4d97b8bce810937bde0ee546106b319f6262332",
+  "new_entry_sha256": "3246072a380964bc5b7aca53b74e1a7572af231a33851cc4d643cab0ddb1ad31"
 }
