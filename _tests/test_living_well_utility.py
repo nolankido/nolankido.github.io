@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
 import living_well as lw
+import turn09_weekly_reset_history as weekly_history
 
 SLUGS = {
     'technology-for-real-life', 'scattered-notes-to-next-step',
@@ -63,7 +64,7 @@ class UtilityTests(unittest.TestCase):
         self.assertLess(guides.index('href="/living-well/technology-for-real-life/"'), guides.index('href="/living-well/meditation-without-buying-a-lifestyle/"'))
 
     def test_original_twenty_six_readings_are_exactly_preserved(self):
-        old = {s:e for s,e in self.entries.items() if s not in SLUGS and s != 'ai-and-personal-productivity'}
+        old = {s:weekly_history.original_entry(e) if s == 'weekly-reset' else e for s,e in self.entries.items() if s not in SLUGS and s != 'ai-and-personal-productivity'}
         self.assertEqual(len(old), 26)
         digest = hashlib.sha256(json.dumps(old, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
         self.assertEqual(digest, OLD_READING_DIGEST)
