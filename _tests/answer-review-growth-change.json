@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "base_commit": "e6d61d4070bae76c54e1b676422e716ff8adaac6",
+  "paths": {
+    "_source/technology/check-ai-answers.html": {
+      "old_sha256": "dd3fc00393028b269f6ad29126c014b0637bc6ce252e371d916962ea3328c43d",
+      "new_sha256": "0aa386fe58bd86a80154334b53846096f02a9cc5d06b9186fd284e51d306bbac",
+      "edits": [
+        {
+          "start": 281,
+          "end": 680,
+          "old": "    <p class=\"intro\">Choose a check that fits the answer: a source for a factual claim, a separate calculation for a number, and a realistic test for working code.</p>\n",
+          "new": "    <p class=\"intro\">To check an AI answer, identify the specific claim you might rely on, find evidence outside the answer, and test whether that evidence supports the claim under the right conditions. Recalculate numbers from the inputs; open citations and read their relevant passages; test code with a case that could fail. Record what remains unresolved before using or sharing the result.</p>\n"
+        },
+        {
+          "start": 1156,
+          "end": 2682,
+          "old": "",
+          "new": "    <h3 id=\"review-fast-method\">A quick first pass: claim, evidence, decision</h3>\n    <ol class=\"review-steps review-fast-list\">\n      <li><strong>Name one claim and the intended action.</strong> “The meeting is confirmed” matters differently from “This sounds like a friendly invitation.”</li>\n      <li><strong>Find an independent check.</strong> Open the original notice or record, recompute from source inputs, or run a test with an independently known expected result. Another chatbot agreeing is not confirmation.</li>\n      <li><strong>Compare the exact claim with the evidence.</strong> Look for dates, conditions, units, missing people, uncertainty, and differences between a proposal and a commitment.</li>\n      <li><strong>Choose an evidence status before acting.</strong> Mark the claim supported, contradicted, or unresolved; write what was actually checked, and leave consequential work paused when the required evidence is missing.</li>\n    </ol>\n    <p><strong>Worked mini-check, fictional:</strong> An AI summary says “The Sunday meetup is confirmed.” The supplied source says “We may meet Sunday if the weather allows.” The stronger claim is <strong>contradicted by the source wording</strong>: a conditional possibility became a confirmation. A responsible revision says “A Sunday meetup is possible, weather permitting.” Whether it ultimately happens remains <strong>unresolved</strong> until someone confirms it. The <a href=\"#review-summary\">summary method</a> examines this failure more closely.</p>\n\n"
+        },
+        {
+          "start": 17768,
+          "end": 18799,
+          "old": "",
+          "new": "    <h3 id=\"review-outcomes\">What the three evidence statuses mean</h3>\n    <dl class=\"review-verdicts\">\n      <dt>Supported for a stated purpose</dt><dd>A relevant, independent source or test supports the exact claim under the conditions you checked. Record the source, date, version, and any limits. This does not certify the entire answer.</dd>\n      <dt>Contradicted</dt><dd>The evidence disagrees with the claim. Correct or remove it; do not quietly substitute a different assertion without checking that assertion too.</dd>\n      <dt>Unresolved</dt><dd>A source is absent, unclear, outdated, or insufficient for the proposed use. State what would resolve it, or do not rely on the claim.</dd>\n    </dl>\n    <p><strong>Keep the status proportional to the consequence.</strong> A low-stakes brainstorming draft may tolerate explicit uncertainty. A legal, medical, financial, safety or irreversible action calls for suitably qualified independent review. A prompt, citation, or checklist cannot provide that authorization.</p>\n\n"
+        },
+        {
+          "start": 20118,
+          "end": 20380,
+          "old": "",
+          "new": "    <p class=\"editorial-note\"><strong>Revision, October 17, 2026:</strong> A short verification procedure and explicit evidence statuses were added. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed.</p>\n"
+        }
+      ]
+    },
+    "technology/check-ai-answers/index.html": {
+      "old_sha256": "0dd7628a26e5f5538ad50767b597cdb7e0f902d9b7eefb4e509fab33298c27b0",
+      "new_sha256": "0252d26bb95fa964392187d0e19e1dd0b3dfbdc1dba6836ec21405ef42835ab0",
+      "edits": [
+        {
+          "start": 9516,
+          "end": 9915,
+          "old": "    <p class=\"intro\">Choose a check that fits the answer: a source for a factual claim, a separate calculation for a number, and a realistic test for working code.</p>\n",
+          "new": "    <p class=\"intro\">To check an AI answer, identify the specific claim you might rely on, find evidence outside the answer, and test whether that evidence supports the claim under the right conditions. Recalculate numbers from the inputs; open citations and read their relevant passages; test code with a case that could fail. Record what remains unresolved before using or sharing the result.</p>\n"
+        },
+        {
+          "start": 10391,
+          "end": 11917,
+          "old": "",
+          "new": "    <h3 id=\"review-fast-method\">A quick first pass: claim, evidence, decision</h3>\n    <ol class=\"review-steps review-fast-list\">\n      <li><strong>Name one claim and the intended action.</strong> “The meeting is confirmed” matters differently from “This sounds like a friendly invitation.”</li>\n      <li><strong>Find an independent check.</strong> Open the original notice or record, recompute from source inputs, or run a test with an independently known expected result. Another chatbot agreeing is not confirmation.</li>\n      <li><strong>Compare the exact claim with the evidence.</strong> Look for dates, conditions, units, missing people, uncertainty, and differences between a proposal and a commitment.</li>\n      <li><strong>Choose an evidence status before acting.</strong> Mark the claim supported, contradicted, or unresolved; write what was actually checked, and leave consequential work paused when the required evidence is missing.</li>\n    </ol>\n    <p><strong>Worked mini-check, fictional:</strong> An AI summary says “The Sunday meetup is confirmed.” The supplied source says “We may meet Sunday if the weather allows.” The stronger claim is <strong>contradicted by the source wording</strong>: a conditional possibility became a confirmation. A responsible revision says “A Sunday meetup is possible, weather permitting.” Whether it ultimately happens remains <strong>unresolved</strong> until someone confirms it. The <a href=\"#review-summary\">summary method</a> examines this failure more closely.</p>\n\n"
+        },
+        {
+          "start": 27003,
+          "end": 28034,
+          "old": "",
+          "new": "    <h3 id=\"review-outcomes\">What the three evidence statuses mean</h3>\n    <dl class=\"review-verdicts\">\n      <dt>Supported for a stated purpose</dt><dd>A relevant, independent source or test supports the exact claim under the conditions you checked. Record the source, date, version, and any limits. This does not certify the entire answer.</dd>\n      <dt>Contradicted</dt><dd>The evidence disagrees with the claim. Correct or remove it; do not quietly substitute a different assertion without checking that assertion too.</dd>\n      <dt>Unresolved</dt><dd>A source is absent, unclear, outdated, or insufficient for the proposed use. State what would resolve it, or do not rely on the claim.</dd>\n    </dl>\n    <p><strong>Keep the status proportional to the consequence.</strong> A low-stakes brainstorming draft may tolerate explicit uncertainty. A legal, medical, financial, safety or irreversible action calls for suitably qualified independent review. A prompt, citation, or checklist cannot provide that authorization.</p>\n\n"
+        },
+        {
+          "start": 31177,
+          "end": 31439,
+          "old": "",
+          "new": "    <p class=\"editorial-note\"><strong>Revision, October 17, 2026:</strong> A short verification procedure and explicit evidence statuses were added. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed.</p>\n"
+        }
+      ]
+    }
+  }
+}
