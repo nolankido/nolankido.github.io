@@ -72,7 +72,7 @@ class ResourceTests(unittest.TestCase):
             expected = '2026-10-14' if slug == 'ai-and-personal-productivity' else '2026-10-10' if e.get('series') == 'technology-for-real-life' else ('2026-10-09' if slug in new else '2026-10-08')
             self.assertEqual(e['published'], expected)
             if slug in revised:
-                self.assertEqual(e['updated'], '2026-10-09')
+                self.assertEqual(e['updated'], '2026-10-17' if slug == 'weekly-reset' else '2026-10-09')
                 self.assertTrue(e['revision'])
         self.assertEqual(lw.entry_label(self.entries['spiritual-curiosity-reading-path']), 'Reading path')
         body = self.outputs[Path('living-well/weekly-reset/index.html')]
