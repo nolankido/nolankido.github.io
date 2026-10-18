@@ -307,6 +307,20 @@ def source_notes(entry: dict) -> str:
 def article(entry: dict, entries: list[dict]) -> str:
     by_slug = {e['slug']: e for e in entries}
     body = '<article class="lw-article" aria-label="' + escape(entry['title'], quote=True) + '"><div class="article-body shell prose"><p class="article-lead">' + entry['lead'] + '</p>'
+    if entry.get('quick_start'):
+        quick = entry['quick_start']
+        worksheet = next((content for slug, _, _, _, content in SHEETS if slug == entry['slug']), None)
+        if worksheet is None:
+            raise ValueError('Quick-start guide requires its existing blank worksheet')
+        body += ('<aside class="lw-callout lw-quick-start" aria-label="Small weekly reset">'
+                 '<p><strong>' + escape(quick['label']) + '</strong></p>'
+                 '<p>' + escape(quick['intro']) + '</p><ol>'
+                 + ''.join('<li>' + escape(step) + '</li>' for step in quick['steps'])
+                 + '</ol><p><strong>One illustrative filled example:</strong> ' + escape(quick['example']) + '</p>'
+                 '<p><a href="/downloads/living-well-' + escape(entry['slug'], quote=True) + '.md" download>Save the editable blank worksheet (.md)</a>. The full worksheet is optional; use only the prompts that help.</p>'
+                 '<details class="lw-preview" id="weekly-reset-worksheet"><summary>Preview the exact blank worksheet, then print or copy it</summary>'
+                 '<pre>' + escape(worksheet) + '</pre></details>'
+                 '<p class="small-copy">Your answers remain in your own notes; this page has no answer fields or submission. Printing this page includes the guide. No new tracking, account or AI call is needed.</p></aside>')
     body += utility.brief(entry)
     if entry['kind'] == 'experiment':
         body += '<aside class="lw-callout"><p><strong>Status: proposed experiment.</strong> This is a ready-to-try plan, not a completed trial, personal result, or claim of effectiveness. No findings are being reported.</p></aside>'
