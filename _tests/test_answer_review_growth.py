@@ -9,7 +9,8 @@ class GuideGrowth(unittest.TestCase):
  def test_previous_bytes(self):
   for path,item in history.record().items():
    raw=(ROOT/path).read_bytes()
-   self.assertEqual(sha256(raw).hexdigest(),item['new_sha256'])
+   actual=sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest() if 'new_git_sha' in item else sha256(raw).hexdigest()
+   self.assertEqual(actual,item.get('new_git_sha',item.get('new_sha256')))
    old=history.before(path,raw)
    self.assertEqual(sha1(b'blob '+str(len(old)).encode()+b'\0'+old).hexdigest(),item['old_git_sha'])
  def test_unknown_changes(self):
