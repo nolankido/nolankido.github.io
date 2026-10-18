@@ -26,7 +26,7 @@ def check(root=ROOT):
     errors=[]
     robots=(root/'robots.txt').read_text()
     directives=[line.split('#',1)[0].strip() for line in robots.splitlines()]
-    if not any(re.fullmatch(r'Sitemap:\\s*https://nolankido\\.com/sitemap\\.xml\\s*',line,re.I) for line in directives):errors.append('Missing sitemap declaration')
+    if not any(re.fullmatch(r'Sitemap:\s*https://nolankido\.com/sitemap\.xml\s*',line,re.I) for line in directives):errors.append('Missing sitemap declaration')
     if re.search(r'(?im)^\s*Disallow:\s*/\s*$',robots):errors.append('Blanket robots block')
     tree=ET.fromstring((root/'sitemap.xml').read_text())
     ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
