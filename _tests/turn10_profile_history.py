@@ -16,3 +16,19 @@ def before(path,data):
     if hashlib.sha256(original).hexdigest()!=rec['old_sha256']:
         raise ValueError('Corrupt Turn 10 historical record: '+str(path))
     return original if binary else original.decode('utf-8')
+
+
+def pages(records):
+    """For older manifest snapshots, restore only About/Bio revision dates."""
+    import json as _json
+    from copy import deepcopy
+    previous = _json.loads(before('_source/pages.json', (ROOT / '_source/pages.json').read_text()))
+    dates = {p['id']: p['updated'] for p in previous if p['id'] in {'about', 'bio'}}
+    # Older rendered manifests had a separate About update applied by the
+    # earlier publication layer. Preserve that pre-Turn-10 metadata boundary.
+    dates['about'] = '2026-10-12'
+    output = deepcopy(records)
+    for p in output:
+        if p.get('id') in dates:
+            p['updated'] = dates[p['id']]
+    return output
