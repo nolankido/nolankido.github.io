@@ -44,3 +44,21 @@ def pages(records):
             p['revision']='Added a clearly fictional paper-first and optional AI worked example, including the checks needed before using a draft.'
         result.append(p)
     return result
+
+
+def original_entry(entry):
+    """A specific approved guide, restored for the frozen 26-entry digest."""
+    from copy import deepcopy
+    if entry.get('slug')!='weekly-reset':return deepcopy(entry)
+    raw=json.dumps(entry,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()
+    record=json.loads((ROOT/'_tests/turn09-weekly-reset-change.json').read_text())
+    if sha256(raw).hexdigest()!=record['new_entry_sha256']:
+        return deepcopy(entry)
+    prior=deepcopy(entry)
+    prior.pop('quick_start')
+    prior['updated']='2026-10-09'
+    prior['revision']='Added a clearly fictional paper-first and optional AI worked example, including the checks needed before using a draft.'
+    restored=json.dumps(prior,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()
+    if sha256(restored).hexdigest()!=record['old_entry_sha256']:
+        raise ValueError('Turn 09 source-entry predecessor mismatch')
+    return prior
