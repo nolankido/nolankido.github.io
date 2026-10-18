@@ -72,7 +72,7 @@ class SearchEntryTests(unittest.TestCase):
             if p['id'] in self.entries:
                 self.assertFalse(p.get('date'))
                 self.assertFalse(p.get('noindex'))
-                expected_date = {'poker-library': '2026-10-15', 'poker-study': '2026-10-16'}.get(p['id'], '2026-10-12')
+                expected_date = {'poker-library': '2026-10-15', 'poker-study': '2026-10-16', 'start-here': '2026-10-17', 'resources': '2026-10-17'}.get(p['id'], '2026-10-12')
                 self.assertEqual(p['updated'], expected_date)
                 self.assertEqual(raw.count('class="entry-summary"'), 1)
                 self.assertIn('<p class="entry-summary">' + escape(p['description']) + '</p>', raw)
