@@ -67,6 +67,32 @@ class Parsed(HTMLParser):
             self.schemas[-1] += data
 
 
+def wildcard_root_blocked(directives):
+    """Reject root-wide exclusions only when they apply to the wildcard group.
+
+    Consecutive User-agent entries share a group until rules begin. Named bot
+    exclusions must not be mistaken for a rule applying to all crawlers.
+    """
+    agents = []
+    rules_seen = False
+    for line in directives:
+        if ":" not in line:
+            continue
+        field, value = (part.strip() for part in line.split(":", 1))
+        field = field.lower()
+        if field == "user-agent":
+            if rules_seen:
+                agents = []
+                rules_seen = False
+            agents.append(value.lower())
+        elif field in ("allow", "disallow") and agents:
+            rules_seen = True
+            if (field == "disallow" and "*" in agents
+                    and re.fullmatch(r"/(?:\\*)*", value)):
+                return True
+    return False
+
+
 def check(root=ROOT):
     """Raise ValueError on any broken priority-page discovery invariant."""
     root = Path(root)
@@ -81,8 +107,7 @@ def check(root=ROOT):
             r"Sitemap:\s*https://nolankido\.com/sitemap\.xml", line, re.I)
             for line in directives):
         errors.append("robots.txt: missing active canonical sitemap declaration")
-    if any(re.fullmatch(r"Disallow:\s*/(?:\*+)?\s*", line, re.I)
-           for line in directives):
+    if wildcard_root_blocked(directives):
         errors.append("robots.txt: blanket root Disallow")
 
     tree = ET.fromstring((root / "sitemap.xml").read_text(encoding="utf-8"))
@@ -99,10 +124,14 @@ def check(root=ROOT):
         if len(revisions) != 1:
             errors.append(route + ": sitemap entry count")
         else:
-            try:
-                date.fromisoformat(revisions[0])
-            except (TypeError, ValueError):
+            revision = revisions[0]
+            if not isinstance(revision, str) or not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", revision):
                 errors.append(route + ": invalid sitemap lastmod")
+            else:
+                try:
+                    date.fromisoformat(revision)
+                except ValueError:
+                    errors.append(route + ": invalid sitemap lastmod")
 
         file = root / route.lstrip("/") / "index.html"
         if not file.is_file():
