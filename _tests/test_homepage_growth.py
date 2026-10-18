@@ -10,6 +10,7 @@ import html5lib
 from test_site import ROOT, Page, build
 import homepage_growth_history as history
 import task_brief_growth_history as task_growth
+import answer_review_growth_history as guide_growth
 
 PRIMARY = {
     'use': '/technology/task-brief/',
@@ -102,7 +103,7 @@ class HomepageGrowthTests(unittest.TestCase):
 
     def test_unknown_changes_remain_visible_and_reversal_is_exact(self):
         for path, record in self.record['paths'].items():
-            raw = task_growth.before(path, (ROOT / path).read_bytes())
+            raw = task_growth.before(path, guide_growth.before(path, (ROOT / path).read_bytes()))
             self.assertEqual(digest(raw), record['new_sha256'], path)
             previous = history.before(path, raw)
             self.assertEqual(digest(previous), record['old_sha256'], path)
@@ -121,7 +122,7 @@ class HomepageGrowthTests(unittest.TestCase):
         self.assertEqual(history.pages([unknown]), [unknown])
         for page in records:
             if page['id'] not in {'home', 'task-brief'}:
-                self.assertEqual(history.pages([page]), [page])
+                self.assertEqual(history.pages([page]), guide_growth.pages([page]))
         task = next(p for p in records if p['id'] == 'task-brief')
         self.assertEqual(history.pages([task]), [task_growth.change()['page']['old']])
 
