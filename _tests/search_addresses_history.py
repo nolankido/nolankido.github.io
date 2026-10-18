@@ -1,8 +1,9 @@
 """Reverse only the frozen local-address search change on its three paths."""
+import time_decision_history
+import turn10_profile_history
 from functools import lru_cache
 import json
 from pathlib import Path
-import turn10_profile_history
 from poker_titles_history import before as before_poker_titles
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,7 +15,9 @@ def change():
 
 
 def before(path, data):
-    data = before_poker_titles(path,turn10_profile_history.before(path,data))
+    data = turn10_profile_history.before(path, data)
+    data = time_decision_history.before(path, data)
+    data = before_poker_titles(path, data)
     path = str(path)
     if path not in {'assets/site-find.js', '_source/find.html', 'find/index.html'}:
         return data
