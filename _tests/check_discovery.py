@@ -81,7 +81,7 @@ def check(root=ROOT):
             r"Sitemap:\s*https://nolankido\.com/sitemap\.xml", line, re.I)
             for line in directives):
         errors.append("robots.txt: missing active canonical sitemap declaration")
-    if any(re.fullmatch(r"Disallow:\s*/\s*", line, re.I)
+    if any(re.fullmatch(r"Disallow:\s*/(?:\*+)?\s*", line, re.I)
            for line in directives):
         errors.append("robots.txt: blanket root Disallow")
 
@@ -135,7 +135,8 @@ def check(root=ROOT):
         if og_urls != [canonical]:
             errors.append(route + ": Open Graph URL mismatch")
         if any(
-            re.search(r"\b(?:noindex|none)\b", m.get("content", ""), re.I)
+            any(item.strip().split(":", 1)[0].lower() in ("noindex", "none")
+                for item in m.get("content", "").split(","))
             for m in parsed.meta
             if m.get("name", "").lower() in ("robots", "googlebot")
         ):
