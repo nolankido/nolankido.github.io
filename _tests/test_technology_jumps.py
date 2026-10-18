@@ -12,13 +12,14 @@ import beginner_history
 import build
 import technology_jumps_history as history
 import study_titles_history
+import turn04_public_source_history
 from test_site import Page
 
 
 class TechnologyJumpsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.outputs = {p: study_titles_history.before(p, data) for p, data in build.build_outputs().items()}
+        cls.outputs = {p: study_titles_history.before(p, turn04_public_source_history.before(p, data)) for p, data in build.build_outputs().items()}
         cls.baseline = json.loads((ROOT / '_tests/technology-jumps-baseline.json').read_text())
 
     def test_only_the_existing_technology_opening_navigation_changes(self):

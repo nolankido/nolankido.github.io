@@ -44,7 +44,10 @@ class SearchSectionsTests(unittest.TestCase):
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
         self.assertEqual(len(self.index),174)
-        self.assertEqual(sum(map(len,self.index.values())),1140)
+        # Turn 04 adds exactly one visible heading on the Technology overview.
+        # Historical 1,140-entry baselines remain pinned separately.
+        self.assertEqual(sum(map(len,self.index.values())),1141)
+        self.assertIn(['notes-to-plan-title', 'From scattered advice to one usable weekly plan.'], self.index['/technology/'])
         self.assertIn(['progress-heading','Your next Poker Foundations task.'],self.index['/poker/study/'])
         self.assertIn(['in-depth-title','Read in depth.'],self.index['/poker/'])
         self.assertIn(['in-depth-title','Four guides to read in sections.'],self.index['/poker/library/'])

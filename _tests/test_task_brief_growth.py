@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import task_brief_growth_history as history
+import turn04_public_source_history
 
 CHANGED = {'_source/pages.json','_source/technology/task-brief.html',
            'assets/task-brief.js','assets/task-brief.css',
@@ -27,7 +28,7 @@ class TaskBriefGrowthTests(unittest.TestCase):
         self.assertEqual(set(record['paths']), CHANGED)
         for path,item in record['paths'].items():
             with self.subTest(path=path):
-                raw=(ROOT / path).read_bytes()
+                raw=turn04_public_source_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(sha256(raw).hexdigest(),item['new_sha256'])
                 old=history.before(path,raw)
                 self.assertEqual(sha256(old).hexdigest(),item['old_sha256'])
