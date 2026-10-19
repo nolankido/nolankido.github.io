@@ -1,0 +1,36 @@
+name: PR122 recovery source bundle
+on:
+  push:
+    branches: [recovery-export-pr122-20261019]
+    paths: [.github/workflows/recovery-export-pr122.yml]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Export the exact reviewed public refs
+        shell: bash
+        run: |
+          set -euo pipefail
+          main=caa8916ad5738ad53fc39c7df4329a33ed435efa
+          navigation=26e5d67abec04c33ff18cdd07849b153b8b747d5
+          test "$(git rev-parse origin/main)" = "$main"
+          test "$(git rev-parse origin/website-growth-turn11-task-first-20261017)" = "$navigation"
+          git branch recovery-main "$main"
+          git branch recovery-navigation "$navigation"
+          mkdir -p "$RUNNER_TEMP/pr122-export"
+          git bundle create "$RUNNER_TEMP/pr122-export/source.bundle" recovery-main recovery-navigation
+          printf 'main=%s\nnavigation=%s\n' "$main" "$navigation" > "$RUNNER_TEMP/pr122-export/refs.txt"
+          git bundle verify "$RUNNER_TEMP/pr122-export/source.bundle"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pr122-recovery-source
+          path: ${{ runner.temp }}/pr122-export/
+          retention-days: 1
+          if-no-files-found: error
