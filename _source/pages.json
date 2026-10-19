@@ -1150,7 +1150,8 @@
     "section": "technology",
     "worked_guide": true,
     "date": "2026-10-12",
-    "updated": "2026-10-19"
+    "updated": "2026-10-19",
+    "revision": "Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed."
   },
   {
     "id": "poker-first-decisions",

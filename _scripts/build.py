@@ -200,6 +200,11 @@ def build_outputs() -> dict[Path, str]:
             if p.get('poker_topic'):
                 topic = next(t for t in topics if t['id'] == p['poker_topic'])
                 page_values = {**values, 'poker_topic_detail': poker_topics.detail(topic)}
+            if p.get('worked_guide') and p.get('revision'):
+                page_values = {**page_values,
+                               'worked_guide_updated': text(p['updated']),
+                               'worked_guide_update_label': text(date_label(p['updated'])),
+                               'worked_guide_revision': text(p['revision'])}
             body = fill(source.read_text(encoding='utf-8'), page_values)
         if p['path'].startswith('/poker/'):
             body = clean_body(body)
