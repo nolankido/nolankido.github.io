@@ -200,6 +200,11 @@ def build_outputs() -> dict[Path, str]:
             if p.get('poker_topic'):
                 topic = next(t for t in topics if t['id'] == p['poker_topic'])
                 page_values = {**values, 'poker_topic_detail': poker_topics.detail(topic)}
+            if p.get('worked_guide') and p.get('revision'):
+                page_values = {**page_values,
+                               'worked_guide_updated': text(p['updated']),
+                               'worked_guide_update_label': text(date_label(p['updated'])),
+                               'worked_guide_revision': text(p['revision'])}
             body = fill(source.read_text(encoding='utf-8'), page_values)
         if p['path'].startswith('/poker/'):
             body = clean_body(body)
@@ -350,6 +355,8 @@ def build_outputs() -> dict[Path, str]:
             schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date']})
             header = header.replace('</section>', f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · {practical_discovery.publication_label(p)} · About {poker_library.minutes(body)} min read</p>' + poker_reading.section_outline(body) + '</section>', 1)
             extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
+            if p.get('updated'):
+                extra += f'\n  <meta property="article:modified_time" content="{p["updated"]}">'
         if p['id'] in {'ai-time-savings', 'ai-website-verification'}:
             version = hashlib.sha256((ROOT / 'assets/workflow-evidence.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/workflow-evidence.css?v={version}">'

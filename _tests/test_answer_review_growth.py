@@ -18,7 +18,7 @@ class GuideGrowth(unittest.TestCase):
     def test_previous_bytes_and_idempotence(self):
         self.assertEqual(set(history.record()), {
             '_source/pages.json', '_source/technology/check-ai-answers.html',
-            'technology/check-ai-answers/index.html', 'sitemap.xml'})
+            'technology/check-ai-answers/index.html', 'sitemap.xml', '_scripts/build.py'})
         for path, item in history.record().items():
             with self.subTest(path=path):
                 raw = (ROOT / path).read_bytes()
@@ -74,7 +74,8 @@ class GuideGrowth(unittest.TestCase):
         self.assertEqual(len(changed), 1)
         old, new = changed[0]
         self.assertEqual(new['id'], 'ai-answer-review')
-        self.assertEqual({**old, 'updated': '2026-10-19'}, new)
+        self.assertEqual({**old, 'updated': '2026-10-19', 'revision': new['revision']}, new)
+        self.assertIn('unfaithful summary', new['revision'])
         self.assertEqual(new['date'], '2026-10-12')
         for name in ('about', 'bio'):
             self.assertEqual(next(p for p in current if p['id'] == name),
@@ -105,7 +106,10 @@ class GuideGrowth(unittest.TestCase):
                      'What the three evidence statuses mean', 'Supported for a stated purpose',
                      'Worked mini-check, fictional', 'unresolved, not contradicted',
                      'Missing support is not itself a contradiction.',
-                     'Revision, October 19, 2026:', 'Do not turn missing evidence into a negative fact.'):
+                     'October 19, 2026</time>:', 'Do not turn missing evidence into a negative fact.',
+                     'Send meetup questions to the organizer.',
+                     'A different question: is a summary faithful?',
+                     'That summary is not faithful to its supplied source'):
             self.assertIn(term, raw)
         steps = re.search(r'<ol class="review-steps review-fast-list">(.*?)</ol>', raw, re.S)
         self.assertIsNotNone(steps)
@@ -114,6 +118,27 @@ class GuideGrowth(unittest.TestCase):
         self.assertIn('"dateModified": "2026-10-19"', raw)
         self.assertNotIn('contradicted by the source wording', raw)
         self.assertNotIn('<form', raw)
+
+    def test_revision_note_uses_canonical_metadata_and_escapes_text(self):
+        sys.path.insert(0, str(ROOT / '_scripts'))
+        import build
+        original_pages = build.public_pages()
+        page = next(p for p in original_pages if p['id'] == 'ai-answer-review')
+        current = build.build_outputs()[Path('technology/check-ai-answers/index.html')]
+        self.assertIn(build.text(page['revision']), current)
+        self.assertEqual(current.count(build.text(page['revision'])), 1)
+        self.assertIn('<time datetime="2026-10-19">October 19, 2026</time>', current)
+        changed = deepcopy(original_pages)
+        guide = next(p for p in changed if p['id'] == 'ai-answer-review')
+        guide['revision'] = 'Independent review marker <script>not executable</script> & context'
+        guide['updated'] = '2026-10-20'
+        with patch.object(build, 'public_pages', return_value=changed):
+            rendered = build.build_outputs()[Path('technology/check-ai-answers/index.html')]
+        self.assertIn(build.text(guide['revision']), rendered)
+        self.assertNotIn(guide['revision'], rendered)
+        self.assertIn('<time datetime="2026-10-20">October 20, 2026</time>', rendered)
+        self.assertNotIn('October 19, 2026</time>', rendered)
+        self.assertEqual(page['updated'], '2026-10-19')
 
     def test_bios_calculator_download_and_release_workflow_are_unchanged(self):
         for path, expected in history.change()['protected_hashes'].items():

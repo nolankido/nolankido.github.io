@@ -47,6 +47,8 @@ try:
                 expect(page.locator('#review-fast-method')).to_be_visible()
                 expect(page.locator('.review-verdicts > dt')).to_have_count(3)
                 expect(page.locator('main')).to_contain_text('unresolved, not contradicted')
+                expect(page.locator('main')).to_contain_text('Send meetup questions to the organizer.')
+                expect(page.locator('main')).to_contain_text('That summary is not faithful to its supplied source')
                 assert page.evaluate('document.documentElement.scrollWidth') <= width
                 links = page.locator('.review-picker a')
                 expect(links).to_have_count(6)
