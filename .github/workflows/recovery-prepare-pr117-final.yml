@@ -1,0 +1,81 @@
+name: Prepare final PR117 candidate
+on:
+  push:
+    branches: [recovery-export-pr117-20261019]
+    paths: [.github/workflows/recovery-prepare-pr117-final.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Prepare exact final review tree without changing the live branch
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          base=2f124944fe27569521382d06965b7dff8e5f618a
+          prior=5be3a18cc128810da9c3ca64f138fa0dcd378d3b
+          test "$(git rev-parse origin/main)" = "$base"
+          test "$(git rev-parse origin/website-growth-turn07-ai-answer-guide-20261017)" = "$prior"
+          cp .github/pr117-review.patch.xz.b64 "$RUNNER_TEMP/pr117-review.patch.xz.b64"
+          git checkout --detach "$prior"
+          python - <<'PY'
+          import base64,hashlib,lzma,os
+          from pathlib import Path
+          tmp=Path(os.environ['RUNNER_TEMP'])
+          patch=lzma.decompress(base64.b64decode((tmp/'pr117-review.patch.xz.b64').read_text().strip(),validate=True))
+          assert hashlib.sha256(patch).hexdigest()=='01fc454628175daa81f4f1e3f227087ed591c916c61a8f2ba305c4707a718222'
+          (tmp/'pr117-review.patch').write_bytes(patch)
+          PY
+          git apply --index "$RUNNER_TEMP/pr117-review.patch"
+          test "$(git write-tree)" = bb43b9e35dfb8cab82c7fda8176f2bea58b72767
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('_scripts/build.py');s=p.read_text()
+          marker="        if p['id'] in {'ai-time-savings', 'ai-website-verification'}:"
+          assert s.count(marker)==1
+          addition="            if p.get('updated'):\n                extra += f'\\n  <meta property=\"article:modified_time\" content=\"{p[\"updated\"]}\">'\n"
+          p.write_text(s.replace(marker,addition+marker,1))
+          PY
+          python _scripts/build.py
+          python - <<'PY'
+          import difflib,hashlib,json,subprocess
+          from pathlib import Path
+          path=Path('_tests/answer-review-growth-change.json')
+          rec=json.loads(path.read_text())
+          assert rec['base_commit']=='2f124944fe27569521382d06965b7dff8e5f618a'
+          for name,item in rec['paths'].items():
+              old=subprocess.check_output(['git','show',rec['base_commit']+':'+name])
+              new=Path(name).read_bytes()
+              assert hashlib.sha256(old).hexdigest()==item['old_sha256']
+              a=old.decode();b=new.decode();al=a.splitlines(keepends=True);bl=b.splitlines(keepends=True)
+              ap=[0];bp=[0]
+              for line in al:ap.append(ap[-1]+len(line))
+              for line in bl:bp.append(bp[-1]+len(line))
+              edits=[{'start':bp[j1],'end':bp[j2],'old':a[ap[i1]:ap[i2]],'new':b[bp[j1]:bp[j2]]} for tag,i1,i2,j1,j2 in difflib.SequenceMatcher(a=al,b=bl,autojunk=False).get_opcodes() if tag!='equal']
+              item['new_sha256']=hashlib.sha256(new).hexdigest();item['edits']=edits
+          path.write_text(json.dumps(rec,indent=2,ensure_ascii=False)+'\n')
+          PY
+          git add -u
+          tree=$(git write-tree)
+          test "$tree" = 33a8840da38d6172828287c659ed967e72bb604a
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p test_answer_review_growth.py -v
+          python -m unittest discover -s _tests -p test_content.py -v
+          test "$(git write-tree)" = "$tree"
+          git diff --exit-code
+          candidate=$(printf '%s\n' 'Clarify answer checks and render consistent revision metadata' '' 'Separate source-silent factual claims from unfaithful summaries. Render escaped revision notes from the manifest and expose the corresponding article modification date. Preserve all six exercises, profile content, calculator, downloads and browser runtime. Exact historical records include the bounded renderer change. Full final-head CI and review are required before release.' | git -c user.name=nolankido -c user.email=212063387+nolankido@users.noreply.github.com commit-tree "$tree" -p "$prior")
+          target=refs/heads/recovery-prepared-pr117-final-20261019
+          test -z "$(git ls-remote --heads origin "$target")"
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push origin "$candidate:$target"
+          echo "CANDIDATE_SHA=$candidate"
+          echo "CANDIDATE_TREE=$tree"
+          echo 'Only the isolated final preparation branch was written; main and PR117 were unchanged.'
