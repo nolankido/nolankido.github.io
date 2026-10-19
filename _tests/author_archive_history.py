@@ -4,6 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 import json
 import re
+import turn10_profile_history
 import practical_path_history
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,7 +22,7 @@ def pages(records):
     return result
 
 def before(path, data):
-    data = practical_path_history.before(path, data)
+    data = practical_path_history.before(path, turn10_profile_history.before(path,data))
     path = str(path)
     if path not in {'notes/index.html', 'about/index.html', 'sitemap.xml'}:
         return data

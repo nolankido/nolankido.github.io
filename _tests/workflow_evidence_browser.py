@@ -30,9 +30,8 @@ try:
   context.route('**/*',route)
   page=context.new_page();page.set_default_timeout(10000);page.set_default_navigation_timeout(15000)
   page.on('pageerror',lambda e:errors.append(str(e)))
-  # The existing preview remains an actual historical capture. Independently
-  # compare full normal-result pixels with its original export handler and the
-  # current script, in separate pages with all external requests blocked.
+  # Verify the unchanged numeric totals visually against the previous handler.
+  # The new decision and sensitivity region is intentionally not pixel-identical.
   probe=browser.new_context(viewport={'width':1440,'height':1000},device_scale_factor=1,reduced_motion='reduce')
   probe.route('**/*',lambda r:r.abort())
   current_script=(ROOT/'assets/workflow-time.js').read_text()
@@ -47,12 +46,12 @@ try:
    p.locator('#time-example-picker').evaluate('el=>{el.hidden=true}')
    for key,value in zip(['manual','assisted','review','count','setup','upkeep'],['30','8','7','6','60','15']):p.locator('#time-'+key).fill(value)
    p.locator('#time-calculate').click();p.evaluate('document.activeElement.blur()')
-   capture=p.locator('#time-result').screenshot();captures.append(capture)
+   capture=p.locator('.time-totals').screenshot();captures.append(capture)
    if os.environ.get('SCREENSHOT_DIR'):
     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
     (out/f'time-export-normal-{label}.png').write_bytes(capture)
    p.close()
-  assert captures[0]==captures[1],'The normal calculator result changed beyond export recovery'
+  assert captures[0]==captures[1],'The original numeric totals changed beyond export recovery'
   probe.close();report['export_normal_capture_equivalence']+=1
   def render(p,path,execute=True):
    if args.offline:
@@ -68,6 +67,10 @@ try:
   expect(page.locator('#time-result-title')).to_have_text('15 min saved in this window');expect(page.locator('#time-result-title')).to_be_focused()
   expect(page.locator('#time-threshold')).to_contain_text('repetition 5; strictly positive time savings start at repetition 6')
   expect(page.locator('#time-quality-note')).to_contain_text('Quality is unverified');report['functional']+=1
+  expect(page.locator('#time-decision')).to_contain_text('MEASURE MORE')
+  expect(page.locator('#time-review-budget')).to_contain_text('9.5 min')
+  expect(page.locator('#time-sensitivity')).to_contain_text('3 min saved')
+  report['functional']+=3
   text=page.locator('#time-report').input_value()
   page.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async t=>{window.copiedTime=t;}}})")
   page.locator('#time-copy').click();expect(page.locator('#time-copy-status')).to_contain_text('Comparison copied');assert page.evaluate('window.copiedTime')==text

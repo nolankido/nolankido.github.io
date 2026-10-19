@@ -136,6 +136,35 @@
     const precision = v.reduction !== 0 && Math.abs(v.reduction) < 0.05 ? "less than 0.1% " + (v.reduction > 0 ? "less" : "more") + " time" :
       Math.abs(v.reduction).toFixed(1) + "% " + (v.reduction >= 0 ? "less" : "more") + " time";
     byId("time-percent").textContent = precision + " versus the usual method";
+    // A deliberately small sensitivity test: two extra review minutes per run.
+    // Integer hundredths preserve the calculator's exact break-even arithmetic.
+    const reviewNow = parse(input.review, "review");
+    const reviewBudgetNumerator = v.count * (parse(input.manual, "manual") - parse(input.assisted, "assisted")) - v.overhead;
+    const stressNet = v.net - 200 * v.count;
+    const decision = quality.value === "fail" ?
+      "STOP OR REDESIGN: the assisted result failed your quality check. Time savings do not make it an acceptable replacement." :
+      quality.value === "unknown" ?
+      "MEASURE MORE: check that both methods meet the same acceptance standard before acting on this time estimate." :
+      v.net < 0 ?
+      "ADJUST OR STOP: the assisted workflow costs more time at these inputs. Keep it only if a separate benefit justifies that cost." :
+      v.net === 0 ?
+      "RECONSIDER: the methods break even on time. Compare reliability, privacy, cost, and effort before deciding." :
+      basis.value === "estimate" ?
+      "TRIAL AND MEASURE: the model favors assisted work, but the inputs are estimates, not measured savings." :
+      "CONSIDER KEEPING: your entered times favor assisted work and you marked quality as met. Verify repeatability and non-time costs.";
+    byId("time-decision").textContent = decision;
+    const budget = reviewBudgetNumerator < 0 ?
+      "At this repetition count, even zero review minutes per task would not break even." :
+      "At this repetition count, review can take at most about " +
+      moneyFree(Math.floor(reviewBudgetNumerator / v.count)) +
+      " per task before modeled savings disappear; you entered " + moneyFree(reviewNow) + ".";
+    byId("time-review-budget").textContent = budget + " This holds production effort, setup and total upkeep fixed.";
+    const stress = stressNet > 0 ? moneyFree(stressNet) + " saved" :
+      stressNet === 0 ? "break-even" : moneyFree(-stressNet) + " extra time";
+    const sensitivity = "What if verification takes 2 more minutes per task? The modeled result becomes " +
+      stress + " across " + v.count.toLocaleString("en-US") +
+      " repetitions. This is an illustration, not observed variation.";
+    byId("time-sensitivity").textContent = sensitivity;
     const basisText = basis.value === "estimate" ? "Planning estimate, not a measured outcome." : "User-entered observations, not independently verified or a causal experiment.";
     byId("time-basis-note").textContent = basisText;
     if (exampleNote) { exampleNote.textContent = exampleOrigin; exampleNote.hidden = !exampleOrigin; }
@@ -144,7 +173,7 @@
       "", ...keys.map(k => k + ": " + input[k].trim() + (k === "count" ? " repetitions" : " minutes")),
       "", outcome, "Usual total: " + moneyFree(v.usual), "Changed total: " + moneyFree(v.changed),
       "Per-task difference before overhead: " + moneyFree(v.perRun), "Fixed overhead: " + moneyFree(v.overhead),
-      precision, threshold, "", gate,
+      precision, threshold, "", gate, "", "Decision: " + decision, budget, sensitivity,
       "Model: N*(usual - assisted - review) - setup - upkeep. Compare the same task and quality. Count active effort consistently and avoid double-counting waiting. This is not a financial ROI or quality score."].join("\n") + "\n";
     result.hidden = false; status.textContent = "Comparison ready. Read the quality condition and assumptions.";
     byId("time-result-title").focus();

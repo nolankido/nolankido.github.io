@@ -10,6 +10,7 @@ from pathlib import Path
 import json
 import poker_course_history
 import preflop_history
+import turn10_profile_history
 
 ROOT = Path(__file__).resolve().parents[1]
 ID = 'poker-first-decisions'
@@ -37,9 +38,8 @@ def before(path, data):
 
 
 def pages(records):
-    import answer_review_growth_history as growth_history
-    records = growth_history.pages(records)
-    records = preflop_history.pages(records)
+    import answer_review_growth_history as guide_growth
+    records = preflop_history.pages(turn10_profile_history.pages(guide_growth.pages(records)))
     return [p for p in records if p != change()['page']]
 
 

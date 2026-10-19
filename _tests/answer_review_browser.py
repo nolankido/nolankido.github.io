@@ -43,6 +43,10 @@ try:
                 page.set_viewport_size({'width': width, 'height': 950})
                 page.goto(base + ROUTE)
                 expect(page.locator('h1')).to_be_visible()
+                expect(page.locator('.review-fast-list > li')).to_have_count(4)
+                expect(page.locator('#review-fast-method')).to_be_visible()
+                expect(page.locator('.review-verdicts > dt')).to_have_count(3)
+                expect(page.locator('main')).to_contain_text('unresolved, not contradicted')
                 assert page.evaluate('document.documentElement.scrollWidth') <= width
                 links = page.locator('.review-picker a')
                 expect(links).to_have_count(6)

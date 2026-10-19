@@ -1,4 +1,5 @@
 """Reverse only the frozen example controls, origin note, and script additions."""
+import time_decision_history
 from functools import lru_cache
 from hashlib import sha256
 import json
@@ -17,8 +18,9 @@ def change():
 
 
 def before(path, data):
-    import answer_review_growth_history as growth_history
-    data = growth_history.before(path, data)
+    import answer_review_growth_history as guide_growth
+    data = guide_growth.before(path, data)
+    data = time_decision_history.before(path, data)
     data = before_search_addresses(path, data)
     path = str(path)
     if path not in {SCRIPT, PAGE}:

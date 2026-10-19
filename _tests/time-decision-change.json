@@ -1,0 +1,80 @@
+{
+  "_source/technology/ai-time-savings.html": {
+    "old_sha256": "4f60753870e68c84c98137181b0fa65b96dffa010c664ccc8721d98ba6fa4451",
+    "new_sha256": "697041e1ec92d52a1fc4afe907d8c8e3a86a1467f7766700d92753a679a3632f",
+    "edits": [
+      {
+        "start": 6464,
+        "end": 6680,
+        "old": "",
+        "new": "section class=\"time-interpretation\" aria-label=\"Decision and sensitivity\"><h3>What should you do with this result?</h3><p id=\"time-decision\"></p><p id=\"time-review-budget\"></p><p id=\"time-sensitivity\"></p></section><"
+      },
+      {
+        "start": 10171,
+        "end": 11118,
+        "old": "",
+        "new": "How a small assumption changes the decision</h3><p><strong>Fictional repeated-task example:</strong> With 30 minutes usually, 8 minutes assisted production, 7 minutes review, six repetitions, 60 minutes setup and 15 minutes upkeep, the assisted workflow saves 15 minutes. With the same production and overhead but <strong>10 minutes of review</strong> instead of 7, it costs 3 minutes more than the usual workflow. Review time is not a trivial footnote: 6 × 3 = 18 additional minutes, enough to reverse the original 15-minute advantage.</p><p>At these inputs, the largest review budget that still breaks even is <strong>9.5 minutes per repetition</strong>. Keep this separate from the quality check: a shorter workflow that fails your acceptance standard is not an acceptable substitute. The new result explanation supplies a proposed next step and a hypothetical 2-minute review stress test; neither is a prediction or a measured result.</p>\n<h3>"
+      }
+    ]
+  },
+  "assets/workflow-time.js": {
+    "old_sha256": "68e9a668e7e4b6bfd7ee19d21befe8b8c2dd8bb067650f884f73e4af7db8a45e",
+    "new_sha256": "864c9b2020e72dc5475d36060ccb1e56a335290cfdfde7b59dfee2cb795bd64e",
+    "edits": [
+      {
+        "start": 8906,
+        "end": 11180,
+        "old": "",
+        "new": "// A deliberately small sensitivity test: two extra review minutes per run.\n    // Integer hundredths preserve the calculator's exact break-even arithmetic.\n    const reviewNow = parse(input.review, \"review\");\n    const reviewBudgetNumerator = v.count * (parse(input.manual, \"manual\") - parse(input.assisted, \"assisted\")) - v.overhead;\n    const stressNet = v.net - 200 * v.count;\n    const decision = quality.value === \"fail\" ?\n      \"STOP OR REDESIGN: the assisted result failed your quality check. Time savings do not make it an acceptable replacement.\" :\n      quality.value === \"unknown\" ?\n      \"MEASURE MORE: check that both methods meet the same acceptance standard before acting on this time estimate.\" :\n      v.net < 0 ?\n      \"ADJUST OR STOP: the assisted workflow costs more time at these inputs. Keep it only if a separate benefit justifies that cost.\" :\n      v.net === 0 ?\n      \"RECONSIDER: the methods break even on time. Compare reliability, privacy, cost, and effort before deciding.\" :\n      basis.value === \"estimate\" ?\n      \"TRIAL AND MEASURE: the model favors assisted work, but the inputs are estimates, not measured savings.\" :\n      \"CONSIDER KEEPING: your entered times favor assisted work and you marked quality as met. Verify repeatability and non-time costs.\";\n    byId(\"time-decision\").textContent = decision;\n    const budget = reviewBudgetNumerator < 0 ?\n      \"At this repetition count, even zero review minutes per task would not break even.\" :\n      \"At this repetition count, review can take at most about \" +\n      moneyFree(Math.floor(reviewBudgetNumerator / v.count)) +\n      \" per task before modeled savings disappear; you entered \" + moneyFree(reviewNow) + \".\";\n    byId(\"time-review-budget\").textContent = budget + \" This holds production effort, setup and total upkeep fixed.\";\n    const stress = stressNet > 0 ? moneyFree(stressNet) + \" saved\" :\n      stressNet === 0 ? \"break-even\" : moneyFree(-stressNet) + \" extra time\";\n    const sensitivity = \"What if verification takes 2 more minutes per task? The modeled result becomes \" +\n      stress + \" across \" + v.count.toLocaleString(\"en-US\") +\n      \" repetitions. This is an illustration, not observed variation.\";\n    byId(\"time-sensitivity\").textContent = sensitivity;\n    "
+      },
+      {
+        "start": 12024,
+        "end": 12074,
+        "old": "",
+        "new": ", \"\", \"Decision: \" + decision, budget, sensitivity"
+      }
+    ]
+  },
+  "technology/ai-time-savings/index.html": {
+    "old_sha256": "0a573d5000d41c94ad9e91ec62bdfb0c30460d77d5405d2193b92a64031406db",
+    "new_sha256": "dfe7c94f77c09c3da10622264cdb76c04ff7bfe7420c1fb5c1f59c9c54fecc68",
+    "edits": [
+      {
+        "start": 2916,
+        "end": 2917,
+        "old": "",
+        "new": "8"
+      },
+      {
+        "start": 2918,
+        "end": 2920,
+        "old": "8e",
+        "new": "4c"
+      },
+      {
+        "start": 2921,
+        "end": 2926,
+        "old": "a668",
+        "new": "b2020"
+      },
+      {
+        "start": 2928,
+        "end": 2928,
+        "old": "e4",
+        "new": ""
+      },
+      {
+        "start": 16407,
+        "end": 16623,
+        "old": "",
+        "new": "section class=\"time-interpretation\" aria-label=\"Decision and sensitivity\"><h3>What should you do with this result?</h3><p id=\"time-decision\"></p><p id=\"time-review-budget\"></p><p id=\"time-sensitivity\"></p></section><"
+      },
+      {
+        "start": 20110,
+        "end": 21057,
+        "old": "",
+        "new": "<h3>How a small assumption changes the decision</h3><p><strong>Fictional repeated-task example:</strong> With 30 minutes usually, 8 minutes assisted production, 7 minutes review, six repetitions, 60 minutes setup and 15 minutes upkeep, the assisted workflow saves 15 minutes. With the same production and overhead but <strong>10 minutes of review</strong> instead of 7, it costs 3 minutes more than the usual workflow. Review time is not a trivial footnote: 6 × 3 = 18 additional minutes, enough to reverse the original 15-minute advantage.</p><p>At these inputs, the largest review budget that still breaks even is <strong>9.5 minutes per repetition</strong>. Keep this separate from the quality check: a shorter workflow that fails your acceptance standard is not an acceptable substitute. The new result explanation supplies a proposed next step and a hypothetical 2-minute review stress test; neither is a prediction or a measured result.</p>\n"
+      }
+    ]
+  }
+}

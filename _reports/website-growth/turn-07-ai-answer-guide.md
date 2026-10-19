@@ -1,11 +1,21 @@
-# Website growth, Turn 07: AI answer-checking guide
+# Website growth, Turn 07: usable AI answer verification
 
-Revised October 17, 2026 at the existing /technology/check-ai-answers/ route. The original October 12 publication date is retained.
+Prepared October 19, 2026, at the existing `/technology/check-ai-answers/` route. Original publication: October 12, 2026. Integrated production predecessor: `2f124944fe27569521382d06965b7dff8e5f618a`.
 
-The reader now gets a direct answer on how to check AI answers, a four-step procedure that begins with a concrete claim and independent evidence, a clearly fictional meetup claim comparison, and supported/contradicted/unresolved evidence statuses with a decision to stop when verification is inadequate.
+## Reader improvement
 
-The existing six worked examples, NIST reference, downloadable review record, self-canonical, privacy and no-script access are retained. The canonical page manifest now records an October 17 update, Article JSON-LD exposes `dateModified`, and sitemap `lastmod` agrees; the initial October 12 `datePublished` remains unchanged. This is instructional synthesis, not an actual user's case, empirical accuracy benchmark, or guarantee. The visible revision note distinguishes what changed without fabricating results.
+The opening gives a four-step procedure: identify the claim and intended use, find an independent check, compare the exact claim with that evidence, and choose a supported / contradicted / unresolved status before acting. A fictional meetup example distinguishes missing confirmation from direct contradiction. An uncertain source does not prove the opposite claim. The three status definitions explain what to record and when to withhold reliance.
 
-The pinned test-only SHA history adapter reverses precisely the reviewed changes to the source and rendered HTML for historical golden tests. Unknown files or altered bytes are not concealed. No new public route, tracking, input form, production JavaScript or external service is introduced.
+All six previously published exercises, their complete explanations, the NIST reference, original anchors and destinations, and the blank review-record download are preserved. No new form, account, production script, stylesheet, tracking event, external service, or public route is introduced. These are instructional examples, not observed user results or a validated accuracy benchmark.
 
-Full build, search and HTML checks, browser regressions, code review, deployed-byte verification, and human comprehension feedback remain distinct release/outcome gates.
+## Bounded integration
+
+Exactly four production paths differ from the predecessor: `_source/technology/check-ai-answers.html`, `_source/pages.json`, `technology/check-ai-answers/index.html`, and `sitemap.xml`. Only the guide gains the October 19 revision date; October 12 remains its publication date. The already-published About/Bio dates and content, calculator logic and page, biography downloads, and existing release workflow remain byte-identical.
+
+The unmerged Turn 07 history adapter was replaced with an integrated, exact-SHA predecessor bound to the actual published main. It restores only four complete approved files and one complete approved metadata record. A changed description, extra metadata, wrong path, corrupt recorded edit, or arbitrary byte mutation remains detectable. Earlier published baseline records were not refreshed. The newer guide reversal runs before the existing profile, calculator and older release histories, including independently entered test chains.
+
+## Verification scope
+
+Nine focused regression tests cover the restored predecessor, unknown-byte refusal, corrupt recorded edit rejection, complete-record metadata matching, unchanged profile dates, the six byte-identical exercises, the missing-evidence/contradiction distinction, protected production assets, and retained links without added runtime code. The existing browser suite now verifies the four visible steps, three evidence statuses and corrected example with JavaScript enabled and disabled, alongside its established mobile, keyboard, disclosure, download and accessibility checks.
+
+Require the complete unit suite, deterministic build, HTML/search validation, all five browser groups, final-head code review, and independent published-byte verification before counting this work as released. Human comprehension and search acquisition remain separate outcomes to observe, not benefits inferred from passing software tests.

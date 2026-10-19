@@ -1,4 +1,5 @@
 """Restore only the frozen download handler and its one generated cache version."""
+import time_decision_history
 from functools import lru_cache
 from pathlib import Path
 import json
@@ -15,6 +16,7 @@ def baseline():
 
 
 def before(path,data):
+    data = time_decision_history.before(path, data)
     data=find_submission_history.before(path,data)
     path=str(path)
     if path not in {SCRIPT,PAGE}:return data

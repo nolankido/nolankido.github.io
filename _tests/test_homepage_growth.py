@@ -103,7 +103,7 @@ class HomepageGrowthTests(unittest.TestCase):
 
     def test_unknown_changes_remain_visible_and_reversal_is_exact(self):
         for path, record in self.record['paths'].items():
-            raw = task_growth.before(path, guide_growth.before(path, (ROOT / path).read_bytes()))
+            raw = task_growth.before(path, (ROOT / path).read_bytes())
             self.assertEqual(digest(raw), record['new_sha256'], path)
             previous = history.before(path, raw)
             self.assertEqual(digest(previous), record['old_sha256'], path)
@@ -120,9 +120,12 @@ class HomepageGrowthTests(unittest.TestCase):
         self.assertEqual(history.pages([home]), [self.record['pages']['home']['old']])
         unknown = deepcopy(home); unknown['description'] += ' Unreviewed claim'
         self.assertEqual(history.pages([unknown]), [unknown])
+        import turn10_profile_history
         for page in records:
             if page['id'] not in {'home', 'task-brief'}:
-                self.assertEqual(history.pages([page]), guide_growth.pages([page]))
+                # Later About/Bio revision dates are independently approved;
+                # restore those dates before checking this earlier release.
+                self.assertEqual(history.pages([page]), turn10_profile_history.pages(guide_growth.pages([page])))
         task = next(p for p in records if p['id'] == 'task-brief')
         self.assertEqual(history.pages([task]), [task_growth.change()['page']['old']])
 
