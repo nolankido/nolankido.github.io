@@ -1,0 +1,52 @@
+name: Prepare reviewed PR117 candidate
+on:
+  push:
+    branches: [recovery-export-pr117-20261019]
+    paths: [.github/workflows/recovery-prepare-pr117-review.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Reconcile source fidelity and single-source revision metadata
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          base=2f124944fe27569521382d06965b7dff8e5f618a
+          prior=5be3a18cc128810da9c3ca64f138fa0dcd378d3b
+          test "$(git rev-parse origin/main)" = "$base"
+          test "$(git rev-parse origin/website-growth-turn07-ai-answer-guide-20261017)" = "$prior"
+          cp .github/pr117-review.patch.xz.b64 "$RUNNER_TEMP/pr117-review.patch.xz.b64"
+          git checkout --detach "$prior"
+          python - <<'PY'
+          import base64,hashlib,lzma,os
+          from pathlib import Path
+          tmp=Path(os.environ['RUNNER_TEMP'])
+          encoded=(tmp/'pr117-review.patch.xz.b64').read_text().strip()
+          patch=lzma.decompress(base64.b64decode(encoded,validate=True))
+          assert hashlib.sha256(patch).hexdigest()=='01fc454628175daa81f4f1e3f227087ed591c916c61a8f2ba305c4707a718222'
+          (tmp/'pr117-review.patch').write_bytes(patch)
+          PY
+          git apply --index "$RUNNER_TEMP/pr117-review.patch"
+          tree=$(git write-tree)
+          test "$tree" = bb43b9e35dfb8cab82c7fda8176f2bea58b72767
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p test_answer_review_growth.py -v
+          test "$(git write-tree)" = "$tree"
+          git diff --exit-code
+          candidate=$(printf '%s\n' 'Clarify guide claim scope and render canonical revision metadata' '' 'Separate source-silent factual claims from unfaithful summaries. Render the visible worked-guide revision from escaped manifest values, extend exact predecessor coverage to the bounded build delta, and test single-source rendering. No changes to the six original exercises, biographies, calculator, downloads, scripts or styles.' | git -c user.name=nolankido -c user.email=212063387+nolankido@users.noreply.github.com commit-tree "$tree" -p "$prior")
+          target=refs/heads/recovery-prepared-pr117-review-20261019
+          test -z "$(git ls-remote --heads origin "$target")"
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push origin "$candidate:$target"
+          echo "CANDIDATE_SHA=$candidate"
+          echo "CANDIDATE_TREE=$tree"
+          echo 'Only an isolated preparation branch was written. Main and PR117 were not changed.'
