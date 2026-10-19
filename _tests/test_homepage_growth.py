@@ -10,6 +10,7 @@ import html5lib
 from test_site import ROOT, Page, build
 import homepage_growth_history as history
 import task_brief_growth_history as task_growth
+import answer_review_growth_history as guide_growth
 
 PRIMARY = {
     'use': '/technology/task-brief/',
@@ -124,7 +125,7 @@ class HomepageGrowthTests(unittest.TestCase):
             if page['id'] not in {'home', 'task-brief'}:
                 # Later About/Bio revision dates are independently approved;
                 # restore those dates before checking this earlier release.
-                self.assertEqual(history.pages([page]), turn10_profile_history.pages([page]))
+                self.assertEqual(history.pages([page]), turn10_profile_history.pages(guide_growth.pages([page])))
         task = next(p for p in records if p['id'] == 'task-brief')
         self.assertEqual(history.pages([task]), [task_growth.change()['page']['old']])
 

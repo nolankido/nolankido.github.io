@@ -25,6 +25,8 @@ def change():
 
 
 def before(path, data):
+    import answer_review_growth_history as guide_growth
+    data = guide_growth.before(path, data)
     data = turn10_profile_history.before(path,data)
     item = change()['paths'].get(str(path))
     if not item:
@@ -43,6 +45,8 @@ def before(path, data):
 
 
 def pages(records):
+    import answer_review_growth_history as guide_growth
+    records = guide_growth.pages(records)
     records=turn10_profile_history.pages(records)
     pair = change()['page']
     return [deepcopy(pair['old']) if page == pair['new'] else deepcopy(page)

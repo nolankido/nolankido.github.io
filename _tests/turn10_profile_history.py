@@ -7,6 +7,8 @@ ROOT=Path(__file__).resolve().parents[1]
 def records():
     return json.loads((ROOT/'_tests/turn10-profile-change.json').read_text())
 def before(path,data):
+    import answer_review_growth_history as guide_growth
+    data = guide_growth.before(path, data)
     rec=records().get(str(path))
     if not rec:return data
     binary=isinstance(data,bytes)
@@ -19,6 +21,8 @@ def before(path,data):
 
 
 def pages(records):
+    import answer_review_growth_history as guide_growth
+    records = guide_growth.pages(records)
     """For older manifest snapshots, restore only About/Bio revision dates."""
     import json as _json
     from copy import deepcopy

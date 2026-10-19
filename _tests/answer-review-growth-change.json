@@ -1,0 +1,165 @@
+{
+  "version": 2,
+  "base_commit": "2f124944fe27569521382d06965b7dff8e5f618a",
+  "paths": {
+    "_source/pages.json": {
+      "old_sha256": "7823c1927d51a5c22f65f78807f32dc4e217e34f2f971f184f681bb2982b9481",
+      "new_sha256": "346fba8f0ca2691b7e9b7a3fd969accf619ee4fdba44fbe99c6059a7e50b892e",
+      "edits": [
+        {
+          "start": 51394,
+          "end": 51713,
+          "old": "    \"date\": \"2026-10-12\"\n",
+          "new": "    \"date\": \"2026-10-12\",\n    \"updated\": \"2026-10-19\",\n    \"revision\": \"Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed.\"\n"
+        }
+      ]
+    },
+    "_source/technology/check-ai-answers.html": {
+      "old_sha256": "dd3fc00393028b269f6ad29126c014b0637bc6ce252e371d916962ea3328c43d",
+      "new_sha256": "0a91c0dcf74093ba4ef5a8c19c031a2d80fae4a1e813d0add5fdb1659c79b453",
+      "edits": [
+        {
+          "start": 281,
+          "end": 680,
+          "old": "    <p class=\"intro\">Choose a check that fits the answer: a source for a factual claim, a separate calculation for a number, and a realistic test for working code.</p>\n",
+          "new": "    <p class=\"intro\">To check an AI answer, identify the specific claim you might rely on, find evidence outside the answer, and test whether that evidence supports the claim under the right conditions. Recalculate numbers from the inputs; open citations and read their relevant passages; test code with a case that could fail. Record what remains unresolved before using or sharing the result.</p>\n"
+        },
+        {
+          "start": 1156,
+          "end": 3477,
+          "old": "",
+          "new": "    <h3 id=\"review-fast-method\">A quick first pass: claim, evidence, decision</h3>\n    <ol class=\"review-steps review-fast-list\">\n      <li><strong>Name one claim and the intended action.</strong> “The meeting is confirmed” matters differently from “This sounds like a friendly invitation.”</li>\n      <li><strong>Find an independent check.</strong> Open the original notice or record, recompute from source inputs, or run a test with an independently known expected result. Another chatbot agreeing is not confirmation.</li>\n      <li><strong>Compare the exact claim with the evidence.</strong> Look for dates, conditions, units, missing people, uncertainty, and differences between a proposal and a commitment.</li>\n      <li><strong>Choose an evidence status before acting.</strong> Mark the claim supported, contradicted, or unresolved; write what was actually checked, and leave consequential work paused when the required evidence is missing.</li>\n    </ol>\n    <p><strong>Worked mini-check, fictional:</strong> An AI answer says “The Sunday meetup is confirmed.” The only supplied source says “Send meetup questions to the organizer.” It says nothing about confirmation. The confirmation claim is <strong>unresolved, not contradicted</strong>: the available evidence establishes neither that it is confirmed nor that it is unconfirmed. Ask the organizer or find a current event-status notice before relying on it.</p>\n    <p><strong>What would change the status?</strong> A current organizer notice saying “The Sunday meetup is not confirmed” would contradict the confirmation claim. A current notice saying “The Sunday meetup is confirmed” would support it for the purpose and time checked. In either case, record the actual notice and its date. Do not turn missing evidence into a negative fact.</p>\n    <p><strong>A different question: is a summary faithful?</strong> If the source says “We may meet Sunday if the weather allows,” summarizing it as “The Sunday meetup is confirmed” changes a conditional possibility into a commitment. That summary is not faithful to its supplied source and needs correction, regardless of what another source might say. A faithful version is “A Sunday meetup is possible, weather permitting.” The <a href=\"#review-summary\">summary method</a> examines this separate check.</p>\n\n"
+        },
+        {
+          "start": 18563,
+          "end": 19641,
+          "old": "",
+          "new": "    <h3 id=\"review-outcomes\">What the three evidence statuses mean</h3>\n    <dl class=\"review-verdicts\">\n      <dt>Supported for a stated purpose</dt><dd>A relevant, independent source or test supports the exact claim under the conditions you checked. Record the source, date, version, and any limits. This does not certify the entire answer.</dd>\n      <dt>Contradicted</dt><dd>The evidence disagrees with the claim. Correct or remove it; do not quietly substitute a different assertion without checking that assertion too.</dd>\n      <dt>Unresolved</dt><dd>A source is absent, unclear, outdated, or insufficient for the proposed use. Missing support is not itself a contradiction. State what would resolve it, or do not rely on the claim.</dd>\n    </dl>\n    <p><strong>Keep the status proportional to the consequence.</strong> A low-stakes brainstorming draft may tolerate explicit uncertainty. A legal, medical, financial, safety or irreversible action calls for suitably qualified independent review. A prompt, citation, or checklist cannot provide that authorization.</p>\n\n"
+        },
+        {
+          "start": 20960,
+          "end": 21124,
+          "old": "",
+          "new": "    <p class=\"editorial-note\"><strong>Revision, <time datetime=\"${worked_guide_updated}\">${worked_guide_update_label}</time>:</strong> ${worked_guide_revision}</p>\n"
+        }
+      ]
+    },
+    "technology/check-ai-answers/index.html": {
+      "old_sha256": "0dd7628a26e5f5538ad50767b597cdb7e0f902d9b7eefb4e509fab33298c27b0",
+      "new_sha256": "2f90647e551fce4d1848c01a622faf4afa35d7f66c43dedbd3547eaedb862a27",
+      "edits": [
+        {
+          "start": 2909,
+          "end": 2972,
+          "old": "",
+          "new": "  <meta property=\"article:modified_time\" content=\"2026-10-19\">\n"
+        },
+        {
+          "start": 3474,
+          "end": 5277,
+          "old": "  <script type=\"application/ld+json\">{\"@context\": \"https://schema.org\", \"@type\": \"Article\", \"name\": \"How to Check AI Answers: Facts, Math & Code | Nolan Kido\", \"url\": \"https://nolankido.com/technology/check-ai-answers/\", \"description\": \"Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.\", \"isPartOf\": {\"@type\": \"WebSite\", \"@id\": \"https://nolankido.com/#website\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/\", \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}}, \"headline\": \"How to check an AI answer.\", \"datePublished\": \"2026-10-12\", \"@id\": \"https://nolankido.com/technology/check-ai-answers/#article\", \"inLanguage\": \"en-US\", \"author\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}, \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}, \"mainEntityOfPage\": {\"@type\": \"WebPage\", \"@id\": \"https://nolankido.com/technology/check-ai-answers/#webpage\", \"url\": \"https://nolankido.com/technology/check-ai-answers/\", \"breadcrumb\": {\"@type\": \"BreadcrumbList\", \"@id\": \"https://nolankido.com/technology/check-ai-answers/#breadcrumb\", \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"Home\", \"item\": \"https://nolankido.com/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Technology\", \"item\": \"https://nolankido.com/technology/\"}, {\"@type\": \"ListItem\", \"position\": 3, \"name\": \"How to check an AI answer.\", \"item\": \"https://nolankido.com/technology/check-ai-answers/\"}]}}}</script>\n",
+          "new": "  <script type=\"application/ld+json\">{\"@context\": \"https://schema.org\", \"@type\": \"Article\", \"name\": \"How to Check AI Answers: Facts, Math & Code | Nolan Kido\", \"url\": \"https://nolankido.com/technology/check-ai-answers/\", \"description\": \"Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.\", \"isPartOf\": {\"@type\": \"WebSite\", \"@id\": \"https://nolankido.com/#website\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/\", \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}}, \"dateModified\": \"2026-10-19\", \"headline\": \"How to check an AI answer.\", \"datePublished\": \"2026-10-12\", \"@id\": \"https://nolankido.com/technology/check-ai-answers/#article\", \"inLanguage\": \"en-US\", \"author\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}, \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}, \"mainEntityOfPage\": {\"@type\": \"WebPage\", \"@id\": \"https://nolankido.com/technology/check-ai-answers/#webpage\", \"url\": \"https://nolankido.com/technology/check-ai-answers/\", \"breadcrumb\": {\"@type\": \"BreadcrumbList\", \"@id\": \"https://nolankido.com/technology/check-ai-answers/#breadcrumb\", \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"Home\", \"item\": \"https://nolankido.com/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Technology\", \"item\": \"https://nolankido.com/technology/\"}, {\"@type\": \"ListItem\", \"position\": 3, \"name\": \"How to check an AI answer.\", \"item\": \"https://nolankido.com/technology/check-ai-answers/\"}]}}}</script>\n"
+        },
+        {
+          "start": 6854,
+          "end": 8140,
+          "old": "    <section class=\"page-hero shell\"><p class=\"page-kicker\">Practical AI / Verification</p><h1 class=\"page-title\">How to check an AI answer.</h1><p class=\"note-meta\">Published <time datetime=\"2026-10-12\">October 12, 2026</time> · Worked guide · About 10 min read</p><details class=\"reader-outline\"><summary>On this page <span class=\"reader-outline-count\">9 sections</span></summary><nav aria-label=\"On this page\"><ol><li><a href=\"#review-start\">What would make this answer worth using?</a></li><li><a href=\"#review-research\">Open the source. Then check the claim.</a></li><li><a href=\"#review-numbers\">Recompute it, including the work that disappeared.</a></li><li><a href=\"#review-summary\">Keep conditions, ownership, and uncertainty intact.</a></li><li><a href=\"#review-writing\">Check the commitments, not just the tone.</a></li><li><a href=\"#review-code\">Test a claim that could fail.</a></li><li><a href=\"#review-advice\">Separate facts from the life you want.</a></li><li><a href=\"#review-record\">Leave a record you can inspect later.</a></li><li><a href=\"#review-sources\">What supports this guide?</a></li></ol></nav></details><p class=\"search-author\">By <a href=\"/about/\" rel=\"author\">Nolan Kido</a> · <a href=\"/start-here/#reading-this-site\">About this writing</a></p></section>\n",
+          "new": "    <section class=\"page-hero shell\"><p class=\"page-kicker\">Practical AI / Verification</p><h1 class=\"page-title\">How to check an AI answer.</h1><p class=\"note-meta\">Published <time datetime=\"2026-10-12\">October 12, 2026</time> · Worked guide · About 13 min read</p><details class=\"reader-outline\"><summary>On this page <span class=\"reader-outline-count\">9 sections</span></summary><nav aria-label=\"On this page\"><ol><li><a href=\"#review-start\">What would make this answer worth using?</a></li><li><a href=\"#review-research\">Open the source. Then check the claim.</a></li><li><a href=\"#review-numbers\">Recompute it, including the work that disappeared.</a></li><li><a href=\"#review-summary\">Keep conditions, ownership, and uncertainty intact.</a></li><li><a href=\"#review-writing\">Check the commitments, not just the tone.</a></li><li><a href=\"#review-code\">Test a claim that could fail.</a></li><li><a href=\"#review-advice\">Separate facts from the life you want.</a></li><li><a href=\"#review-record\">Leave a record you can inspect later.</a></li><li><a href=\"#review-sources\">What supports this guide?</a></li></ol></nav></details><p class=\"search-author\">By <a href=\"/about/\" rel=\"author\">Nolan Kido</a> · <a href=\"/start-here/#reading-this-site\">About this writing</a></p></section>\n"
+        },
+        {
+          "start": 9609,
+          "end": 10008,
+          "old": "    <p class=\"intro\">Choose a check that fits the answer: a source for a factual claim, a separate calculation for a number, and a realistic test for working code.</p>\n",
+          "new": "    <p class=\"intro\">To check an AI answer, identify the specific claim you might rely on, find evidence outside the answer, and test whether that evidence supports the claim under the right conditions. Recalculate numbers from the inputs; open citations and read their relevant passages; test code with a case that could fail. Record what remains unresolved before using or sharing the result.</p>\n"
+        },
+        {
+          "start": 10484,
+          "end": 12805,
+          "old": "",
+          "new": "    <h3 id=\"review-fast-method\">A quick first pass: claim, evidence, decision</h3>\n    <ol class=\"review-steps review-fast-list\">\n      <li><strong>Name one claim and the intended action.</strong> “The meeting is confirmed” matters differently from “This sounds like a friendly invitation.”</li>\n      <li><strong>Find an independent check.</strong> Open the original notice or record, recompute from source inputs, or run a test with an independently known expected result. Another chatbot agreeing is not confirmation.</li>\n      <li><strong>Compare the exact claim with the evidence.</strong> Look for dates, conditions, units, missing people, uncertainty, and differences between a proposal and a commitment.</li>\n      <li><strong>Choose an evidence status before acting.</strong> Mark the claim supported, contradicted, or unresolved; write what was actually checked, and leave consequential work paused when the required evidence is missing.</li>\n    </ol>\n    <p><strong>Worked mini-check, fictional:</strong> An AI answer says “The Sunday meetup is confirmed.” The only supplied source says “Send meetup questions to the organizer.” It says nothing about confirmation. The confirmation claim is <strong>unresolved, not contradicted</strong>: the available evidence establishes neither that it is confirmed nor that it is unconfirmed. Ask the organizer or find a current event-status notice before relying on it.</p>\n    <p><strong>What would change the status?</strong> A current organizer notice saying “The Sunday meetup is not confirmed” would contradict the confirmation claim. A current notice saying “The Sunday meetup is confirmed” would support it for the purpose and time checked. In either case, record the actual notice and its date. Do not turn missing evidence into a negative fact.</p>\n    <p><strong>A different question: is a summary faithful?</strong> If the source says “We may meet Sunday if the weather allows,” summarizing it as “The Sunday meetup is confirmed” changes a conditional possibility into a commitment. That summary is not faithful to its supplied source and needs correction, regardless of what another source might say. A faithful version is “A Sunday meetup is possible, weather permitting.” The <a href=\"#review-summary\">summary method</a> examines this separate check.</p>\n\n"
+        },
+        {
+          "start": 27891,
+          "end": 28969,
+          "old": "",
+          "new": "    <h3 id=\"review-outcomes\">What the three evidence statuses mean</h3>\n    <dl class=\"review-verdicts\">\n      <dt>Supported for a stated purpose</dt><dd>A relevant, independent source or test supports the exact claim under the conditions you checked. Record the source, date, version, and any limits. This does not certify the entire answer.</dd>\n      <dt>Contradicted</dt><dd>The evidence disagrees with the claim. Correct or remove it; do not quietly substitute a different assertion without checking that assertion too.</dd>\n      <dt>Unresolved</dt><dd>A source is absent, unclear, outdated, or insufficient for the proposed use. Missing support is not itself a contradiction. State what would resolve it, or do not rely on the claim.</dd>\n    </dl>\n    <p><strong>Keep the status proportional to the consequence.</strong> A low-stakes brainstorming draft may tolerate explicit uncertainty. A legal, medical, financial, safety or irreversible action calls for suitably qualified independent review. A prompt, citation, or checklist cannot provide that authorization.</p>\n\n"
+        },
+        {
+          "start": 32112,
+          "end": 32472,
+          "old": "",
+          "new": "    <p class=\"editorial-note\"><strong>Revision, <time datetime=\"2026-10-19\">October 19, 2026</time>:</strong> Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed.</p>\n"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "old_sha256": "d836beacbf413d8b07f077daf0c25e7f05cfb490ce213b5f38956b833a4d798f",
+      "new_sha256": "0ebc8f7a846a70b0c7f6054c78392b42a4f7e9a8e0670aedadb1de716bac46ea",
+      "edits": [
+        {
+          "start": 10102,
+          "end": 10136,
+          "old": "    <lastmod>2026-10-12</lastmod>\n",
+          "new": "    <lastmod>2026-10-19</lastmod>\n"
+        }
+      ]
+    },
+    "_scripts/build.py": {
+      "old_sha256": "255ff3b38c8e2c08637f3e8042d920eb11eb0b580867db355f9f1057f11020f6",
+      "new_sha256": "9eea4af35592d4119d070359dcf711b24bfe3c448f9ab918610432de62871e38",
+      "edits": [
+        {
+          "start": 10511,
+          "end": 10861,
+          "old": "",
+          "new": "            if p.get('worked_guide') and p.get('revision'):\n                page_values = {**page_values,\n                               'worked_guide_updated': text(p['updated']),\n                               'worked_guide_update_label': text(date_label(p['updated'])),\n                               'worked_guide_revision': text(p['revision'])}\n"
+        },
+        {
+          "start": 24085,
+          "end": 24215,
+          "old": "",
+          "new": "            if p.get('updated'):\n                extra += f'\\n  <meta property=\"article:modified_time\" content=\"{p[\"updated\"]}\">'\n"
+        }
+      ]
+    }
+  },
+  "page_pairs": [
+    {
+      "old": {
+        "id": "ai-answer-review",
+        "path": "/technology/check-ai-answers/",
+        "title": "How to check an AI answer.",
+        "seo_title": "How to Check AI Answers: Facts, Math & Code | Nolan Kido",
+        "description": "Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.",
+        "kicker": "Practical AI / Verification",
+        "source": "technology/check-ai-answers.html",
+        "section": "technology",
+        "worked_guide": true,
+        "date": "2026-10-12"
+      },
+      "new": {
+        "id": "ai-answer-review",
+        "path": "/technology/check-ai-answers/",
+        "title": "How to check an AI answer.",
+        "seo_title": "How to Check AI Answers: Facts, Math & Code | Nolan Kido",
+        "description": "Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.",
+        "kicker": "Practical AI / Verification",
+        "source": "technology/check-ai-answers.html",
+        "section": "technology",
+        "worked_guide": true,
+        "date": "2026-10-12",
+        "updated": "2026-10-19",
+        "revision": "Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed."
+      }
+    }
+  ],
+  "protected_hashes": {
+    "downloads/ai-answer-review.txt": "1f7536ae05f048840810982268585f77fd30f8e447ae4d466b392de989c91dcd",
+    "assets/answer-review.css": "3a73141190cb49974164510513c1aa70786f4074741e3702829efc17c23eef30",
+    "about/index.html": "d9392c2b92e8a0a6aa863c304abc3663107f15ebdb05c3ff088b11cd361b82b1",
+    "bio/index.html": "33d86a0119a76043573d4422d28e84f76c85b7d65088a6394c5f92f149e9302a",
+    "assets/workflow-time.js": "864c9b2020e72dc5475d36060ccb1e56a335290cfdfde7b59dfee2cb795bd64e",
+    "technology/ai-time-savings/index.html": "dfe7c94f77c09c3da10622264cdb76c04ff7bfe7420c1fb5c1f59c9c54fecc68",
+    ".github/workflows/site-checks.yml": "0cca1c4731e3a4fc3bbf92ba825b0a66b466165d4ec07069c10586ee0c1dcd75"
+  }
+}

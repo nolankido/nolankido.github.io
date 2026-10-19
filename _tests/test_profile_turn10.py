@@ -6,19 +6,20 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 sys.path.insert(0,str(ROOT/'_tests'))
 import build,turn10_profile_history as history
+import answer_review_growth_history as guide_growth
 class TestTurn10(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
   cls.outputs=build.build_outputs()
  def test_exact_history_only_for_six_approved_files(self):
   for path, rec in history.records().items():
-   data=(ROOT/path).read_bytes()
+   data=guide_growth.before(path,(ROOT/path).read_bytes())
    self.assertEqual(sha256(data).hexdigest(),rec['new_sha256'],path)
    self.assertEqual(sha256(history.before(path,data)).hexdigest(),rec['old_sha256'],path)
    self.assertEqual(history.before(path,data+b'changed'),data+b'changed',path)
   self.assertEqual(history.before('index.html',b'unchanged'),b'unchanged')
  def test_manifest_only_dates_change(self):
-  current=json.loads((ROOT/'_source/pages.json').read_text())
+  current=json.loads(guide_growth.before('_source/pages.json',(ROOT/'_source/pages.json').read_text()))
   old=json.loads(history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text()))
   changes=[]
   for old_p,new_p in zip(old,current):

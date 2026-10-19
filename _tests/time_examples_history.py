@@ -18,6 +18,8 @@ def change():
 
 
 def before(path, data):
+    import answer_review_growth_history as guide_growth
+    data = guide_growth.before(path, data)
     data = time_decision_history.before(path, data)
     data = before_search_addresses(path, data)
     path = str(path)

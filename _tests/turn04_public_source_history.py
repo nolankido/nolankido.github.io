@@ -15,6 +15,8 @@ def change():
     return json.loads((ROOT/'_tests/turn04-public-source-change.json').read_text())
 
 def before(path,data):
+    import answer_review_growth_history as guide_growth
+    data = guide_growth.before(path, data)
     data = turn10_profile_history.before(path, data)
     data = time_decision_history.before(path, data)
     entry=change()['paths'].get(str(path))
