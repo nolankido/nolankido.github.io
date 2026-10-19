@@ -1,0 +1,52 @@
+name: Prepare PR117 integrated candidate
+on:
+  push:
+    branches: [recovery-export-pr117-20261019]
+    paths: [.github/workflows/recovery-prepare-pr117.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Apply checksum-bound patch to the pinned published predecessor
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          base=2f124944fe27569521382d06965b7dff8e5f618a
+          prior=f807ab981105ad4b729e7db8ca6fd50911b2b590
+          test "$(git rev-parse origin/main)" = "$base"
+          test "$(git rev-parse origin/website-growth-turn07-ai-answer-guide-20261017)" = "$prior"
+          cp .github/pr117.patch.xz.b64 "$RUNNER_TEMP/pr117.patch.xz.b64"
+          git checkout --detach "$base"
+          python - <<'PY'
+          import base64,hashlib,lzma,os
+          from pathlib import Path
+          tmp=Path(os.environ['RUNNER_TEMP'])
+          encoded=(tmp/'pr117.patch.xz.b64').read_text().strip()
+          patch=lzma.decompress(base64.b64decode(encoded,validate=True))
+          assert hashlib.sha256(patch).hexdigest()=='385ec95ca9395cffdb4cef7c28ab22c90d7abde5b39d9c575e7a6932baf64a52'
+          (tmp/'pr117.patch').write_bytes(patch)
+          PY
+          git apply --index "$RUNNER_TEMP/pr117.patch"
+          tree=$(git write-tree)
+          test "$tree" = f2832f848357a3a0831b337fb72d3f6c3afb7ba7
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p test_answer_review_growth.py -v
+          test "$(git write-tree)" = "$tree"
+          git diff --exit-code
+          candidate=$(printf '%s\n' 'Integrate actionable AI answer guide with current published site' '' 'Preserve profile and calculator releases, clarify unsupported versus contradicted claims, and bind the guide predecessor to the actual published main. Update only the guide revision date. Require full final-head CI and code review before release.' | git -c user.name=nolankido -c user.email=212063387+nolankido@users.noreply.github.com commit-tree "$tree" -p "$prior" -p "$base")
+          target=refs/heads/recovery-prepared-pr117-20261019
+          test -z "$(git ls-remote --heads origin "$target")"
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push origin "$candidate:$target"
+          echo "CANDIDATE_SHA=$candidate"
+          echo "CANDIDATE_TREE=$tree"
+          echo 'Only an isolated preparation branch was written. Main and PR117 were not changed.'
