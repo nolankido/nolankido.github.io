@@ -72,6 +72,12 @@ def wildcard_root_blocked(directives):
 
     Consecutive User-agent entries share a group until rules begin. Named bot
     exclusions must not be mistaken for a rule applying to all crawlers.
+
+    This bounded site policy rejects a wildcard catch-all Disallow even when
+    Allow rules could carve out exceptions; it is not a general can-fetch API.
+    Per Google's grouping rules, unsupported records (including Crawl-delay,
+    Request-rate and Sitemap) do not end a user-agent header. Only Allow and
+    Disallow start its rules. See the primary references in the contract tests.
     """
     agents = []
     rules_seen = False
@@ -88,7 +94,7 @@ def wildcard_root_blocked(directives):
         elif field in ("allow", "disallow") and agents:
             rules_seen = True
             if (field == "disallow" and "*" in agents
-                    and re.fullmatch(r"/(?:\*)*", value)):
+                    and re.fullmatch(r"/(?:\*+\$?)?", value)):
                 return True
     return False
 
