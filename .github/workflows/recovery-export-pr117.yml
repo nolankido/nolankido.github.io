@@ -1,0 +1,37 @@
+name: PR117 recovery source bundle
+on:
+  push:
+    branches: [recovery-export-pr117-20261019]
+    paths: [.github/workflows/recovery-export-pr117.yml]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Bundle only the two reviewed public source histories
+        shell: bash
+        run: |
+          set -euo pipefail
+          main=2f124944fe27569521382d06965b7dff8e5f618a
+          guide=f807ab981105ad4b729e7db8ca6fd50911b2b590
+          git cat-file -e "$main^{commit}"
+          git cat-file -e "$guide^{commit}"
+          git update-ref refs/heads/recovery-main "$main"
+          git update-ref refs/heads/recovery-guide "$guide"
+          mkdir -p "$RUNNER_TEMP/recovery-export"
+          git bundle create "$RUNNER_TEMP/recovery-export/source.bundle" refs/heads/recovery-main refs/heads/recovery-guide
+          git bundle verify "$RUNNER_TEMP/recovery-export/source.bundle"
+          printf 'main=%s\nguide=%s\n' "$main" "$guide" > "$RUNNER_TEMP/recovery-export/refs.txt"
+          python -m pip download --no-deps --dest "$RUNNER_TEMP/recovery-export/dependencies" html5lib==1.1 six==1.17.0 webencodings==0.5.1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pr117-recovery-source
+          path: ${{ runner.temp }}/recovery-export/
+          retention-days: 1
+          if-no-files-found: error
