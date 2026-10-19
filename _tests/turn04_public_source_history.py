@@ -3,8 +3,9 @@
 This SHA-bound adapter runs in tests, not in the public site. Any unrelated
 change remains visible. No older release records or fingerprints are changed.
 """
+import time_decision_history
+import turn10_profile_history
 from pathlib import Path
-import turn11_task_navigation_history as task_nav_history
 from functools import lru_cache
 import base64,hashlib,json
 
@@ -14,7 +15,10 @@ def change():
     return json.loads((ROOT/'_tests/turn04-public-source-change.json').read_text())
 
 def before(path,data):
-    data=task_nav_history.before(path,data)
+    import answer_review_growth_history as guide_growth
+    data = guide_growth.before(path, data)
+    data = turn10_profile_history.before(path, data)
+    data = time_decision_history.before(path, data)
     entry=change()['paths'].get(str(path))
     if not entry: return data
     binary=isinstance(data,bytes)

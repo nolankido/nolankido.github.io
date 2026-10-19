@@ -8,9 +8,9 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
-import turn11_task_navigation_history as task_nav_history
 import poker_course_history
 import preflop_history
+import turn10_profile_history
 
 ROOT = Path(__file__).resolve().parents[1]
 ID = 'poker-first-decisions'
@@ -23,7 +23,6 @@ def change():
 
 
 def before(path, data):
-    data = task_nav_history.before(path, data)
     data = preflop_history.before(path, data)
     entry = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
@@ -39,8 +38,8 @@ def before(path, data):
 
 
 def pages(records):
-    records = task_nav_history.pages(records)
-    records = preflop_history.pages(records)
+    import answer_review_growth_history as guide_growth
+    records = preflop_history.pages(turn10_profile_history.pages(guide_growth.pages(records)))
     return [p for p in records if p != change()['page']]
 
 

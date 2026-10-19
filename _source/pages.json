@@ -26,7 +26,7 @@
     "description": "Search specific published pages, guides and section headings across Nolan Kido’s interests locally without sending or saving your search text.",
     "source": "find.html",
     "kicker": "Search the site",
-    "updated": "2026-10-17"
+    "updated": "2026-10-19"
   },
   {
     "id": "follow",
@@ -46,7 +46,7 @@
     "description": "Meet Nolan Kido: practical AI, useful tools, writing, tournament poker, and a life beyond the screen. Explore his approach and try the work on this site.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-17"
   },
   {
     "id": "notes",
@@ -86,7 +86,7 @@
     "description": "Short and extended biographies of Nolan Kido, with copyable text, downloads, and selected practical-AI work for introductions and profiles.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-17"
   },
   {
     "id": "card",
@@ -1149,7 +1149,9 @@
     "source": "technology/check-ai-answers.html",
     "section": "technology",
     "worked_guide": true,
-    "date": "2026-10-12"
+    "date": "2026-10-12",
+    "updated": "2026-10-19",
+    "revision": "Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed."
   },
   {
     "id": "poker-first-decisions",

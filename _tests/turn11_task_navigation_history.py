@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 @lru_cache(maxsize=1)
 def change():
     data=json.loads((ROOT/'_tests/turn11-task-navigation-change.json').read_text())
-    if data['version']!=1 or data['base_commit']!='e6d61d4070bae76c54e1b676422e716ff8adaac6':
+    if data['version']!=1 or data['base_commit']!='caa8916ad5738ad53fc39c7df4329a33ed435efa':
         raise ValueError('Unknown navigation release history')
     return data
 def before(path,data):

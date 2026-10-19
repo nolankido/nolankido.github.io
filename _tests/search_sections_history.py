@@ -12,6 +12,8 @@ ROOT=Path(__file__).resolve().parents[1]
 def change():return json.loads((ROOT/'_tests/search-sections-change.json').read_text())
 
 def before(path,data):
+    import answer_review_growth_history as growth_history
+    data = growth_history.before(path, data)
     data=before_case_sources(path,data)
     path=str(path);c=change()
     if path not in set(c['patches'])|{'find/index.html','assets/site.css','assets/site-core.css'}|set(c['anchor_pages']):return data

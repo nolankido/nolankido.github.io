@@ -45,6 +45,52 @@ try:
                     link = page.locator('.reader-next a[href="' + choice['path'] + '"]')
                     link.focus(); page.keyboard.press('Enter')
                     expect(page).to_have_url(base + choice['path'])
+            task_routes = 0
+            role_routes = 0
+            quick_downloads = 0
+            tool_routes = 0
+            for target in ['/technology/task-brief/', '/technology/check-ai-answers/',
+                           '/living-well/weekly-reset/', '/poker/first-live-tournament/']:
+                page.goto(base + '/start-here/')
+                expect(page.locator('.task-route-list > li')).to_have_count(4)
+                link = page.locator('.task-route-list a[href="' + target + '"]')
+                expect(link).to_be_visible()
+                link.focus(); page.keyboard.press('Enter')
+                expect(page).to_have_url(base + target)
+                expect(page.locator('h1')).to_be_visible()
+                task_routes += 1
+            for parent, selector, target in [
+                ('/find/', '.section-deck a[href="/start-here/#start-tasks-title"]', '/start-here/#start-tasks-title'),
+                ('/find/', '.section-deck a[href="/resources/"]', '/resources/'),
+                ('/resources/', 'section[aria-labelledby="resources-entry-title"] a[href="/start-here/#start-tasks-title"]', '/start-here/#start-tasks-title'),
+            ]:
+                page.goto(base + parent)
+                link = page.locator(selector)
+                expect(link).to_be_visible()
+                link.focus(); page.keyboard.press('Enter')
+                expect(page).to_have_url(base + target)
+                if '#' in target:
+                    expect(page.locator('#' + target.split('#')[1])).to_be_visible()
+                role_routes += 1
+            for target in ['/downloads/ai-task-brief.txt', '/downloads/ai-answer-review.txt',
+                           '/downloads/living-well-weekly-reset.md']:
+                page.goto(base + '/resources/')
+                link = page.locator('section[aria-labelledby="resources-entry-title"] a[download][href="' + target + '"]')
+                expect(link).to_be_visible()
+                link.focus()
+                with page.expect_download() as download:
+                    page.keyboard.press('Enter')
+                assert download.value.suggested_filename == Path(target).name
+                assert Path(download.value.path()).read_bytes() == (ROOT / target.lstrip('/')).read_bytes()
+                quick_downloads += 1
+            for target in ['/technology/ai-time-savings/', '/poker/hand-rankings/']:
+                page.goto(base + '/resources/')
+                link = page.locator('section[aria-labelledby="resources-entry-title"] a[href="' + target + '"]')
+                expect(link).to_be_visible()
+                link.focus(); page.keyboard.press('Enter')
+                expect(page).to_have_url(base + target)
+                expect(page.locator('h1')).to_be_visible()
+                tool_routes += 1
             page.goto(base + '/resources/')
             page.get_by_role('link', name='Thinking worksheets', exact=True).click()
             expect(page).to_have_url(base + '/resources/#thinking-worksheets')
@@ -52,7 +98,7 @@ try:
                 with page.expect_download() as download:
                     page.locator('a[href="/downloads/' + slug + '.md"]').click()
                 assert Path(download.value.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
-            results.append({'javascript': javascript, 'keyboard_routes': 28, 'downloads': 3})
+            results.append({'javascript': javascript, 'keyboard_routes': 28, 'downloads': 3, 'task_routes': task_routes, 'role_routes': role_routes, 'quick_downloads': quick_downloads, 'tool_routes': tool_routes})
             context.close()
         context = browser.new_context()
         context.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())

@@ -2,7 +2,9 @@
 from pathlib import Path
 from hashlib import sha256
 from html.parser import HTMLParser
-import sys,unittest
+import sys,unittest,json,zlib
+from copy import deepcopy
+from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build
@@ -55,4 +57,54 @@ class TaskRouteTests(unittest.TestCase):
    self.assertEqual(sha256(history.before(path,raw)).hexdigest(),entry['old_sha256'])
    self.assertEqual(history.before(path,raw+b'!'),raw+b'!')
   self.assertEqual(history.before('index.html',b'unchanged'),b'unchanged')
+ def test_published_guide_profile_calculator_and_baselines_are_unchanged(self):
+  protected=history.change()['protected_hashes']
+  self.assertEqual(len(protected),22)
+  for path,digest in protected.items():
+   with self.subTest(path=path):
+    self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),digest)
+ def test_exact_nine_path_scope_and_three_metadata_records(self):
+  self.assertEqual(history.change()['base_commit'],'caa8916ad5738ad53fc39c7df4329a33ed435efa')
+  self.assertEqual(set(history.change()['paths']),{
+   '_source/start-here.html','_source/resources.html','_source/find.html',
+   '_source/pages.json','_source/search-entrypoints.json','start-here/index.html',
+   'resources/index.html','find/index.html','sitemap.xml'})
+  self.assertEqual(set(history.change()['pages']),{'start-here','resources','find'})
+  for key,pair in history.change()['pages'].items():
+   self.assertEqual(pair['new']['updated'],'2026-10-19')
+  finder=next(p for p in build.public_pages() if p['id']=='find')
+  self.assertTrue(finder['noindex'])
+  self.assertIn('<meta name="robots" content="noindex',self.page('/find/'))
+ def test_latest_dates_do_not_republish_articles(self):
+  current=json.loads((ROOT/'_source/pages.json').read_text())
+  previous=json.loads(history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text()))
+  changes=[a['id'] for a,b in zip(current,previous) if a!=b]
+  self.assertEqual(changes,['find'])
+  for key in ['about','bio','ai-answer-review']:
+   self.assertEqual(next(p for p in current if p['id']==key),next(p for p in previous if p['id']==key))
+ def test_page_history_requires_exact_record_and_does_not_mutate(self):
+  for pair in history.change()['pages'].values():
+   original=deepcopy(pair['new'])
+   self.assertEqual(history.pages([original]),[pair['old']])
+   self.assertEqual(original,pair['new'])
+   for key,value in [('noindex',not original.get('noindex',False)),('description','Unreviewed change'),('path','/unreviewed/')]:
+    changed=deepcopy(original);changed[key]=value
+    self.assertEqual(history.pages([changed]),[changed])
+   changed=deepcopy(original);changed.pop('description')
+   self.assertEqual(history.pages([changed]),[changed])
+ def test_corrupt_snapshot_is_not_accepted_as_a_predecessor(self):
+  path='_source/start-here.html';raw=(ROOT/path).read_bytes()
+  for field,value in [('old_sha256','0'*64),('old_zlib_base64','not-valid-base64')]:
+   corrupt=deepcopy(history.change());corrupt['paths'][path][field]=value
+   with patch.object(history,'change',return_value=corrupt):
+    with self.assertRaises((ValueError,zlib.error)):history.before(path,raw)
+ def test_three_roles_have_direct_native_cross_links(self):
+  finder=Reader(self.page('/find/'))
+  self.assertIn('/start-here/#start-tasks-title',finder.links)
+  self.assertIn('/resources/',finder.links)
+  for route in ['/start-here/','/resources/','/find/']:
+   new=self.page(route);path=str(build.output_path(route));old=history.before(path,new)
+   self.assertEqual(Reader(new).scripts,Reader(old).scripts)
+   self.assertLessEqual(set(Reader(old).ids),set(Reader(new).ids))
+   self.assertLessEqual(set(Reader(old).links),set(Reader(new).links))
 if __name__=='__main__':unittest.main()
