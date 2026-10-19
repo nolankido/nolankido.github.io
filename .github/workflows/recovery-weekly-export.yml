@@ -1,0 +1,34 @@
+name: Weekly Reset recovery source
+on:
+  push:
+    branches: [recovery-weekly-reset-20261019]
+    paths: [.github/workflows/recovery-weekly-export.yml]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Export only the two requested source refs
+        run: |
+          set -euo pipefail
+          main=b5cfbd5d6abee0ce1082cf14deecb508f0996e6e
+          reset=4a8a0aa1daaf960e195a26c5ad444133404d96f3
+          git cat-file -e "$main^{commit}"
+          git cat-file -e "$reset^{commit}"
+          git update-ref refs/heads/export-main "$main"
+          git update-ref refs/heads/export-reset "$reset"
+          mkdir -p "$RUNNER_TEMP/weekly-source"
+          git bundle create "$RUNNER_TEMP/weekly-source/source.bundle" refs/heads/export-main refs/heads/export-reset
+          printf 'main=%s\nreset=%s\n' "$main" "$reset" > "$RUNNER_TEMP/weekly-source/refs.txt"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: weekly-reset-source
+          path: ${{ runner.temp }}/weekly-source/
+          retention-days: 1
+          if-no-files-found: error
