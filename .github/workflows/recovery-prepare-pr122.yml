@@ -1,0 +1,92 @@
+name: Prepare PR122 integrated candidate
+on:
+  push:
+    branches: [recovery-export-pr122-20261019]
+    paths: [.github/workflows/recovery-prepare-pr122.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Build the checksum-bound navigation candidate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          base=caa8916ad5738ad53fc39c7df4329a33ed435efa
+          prior=26e5d67abec04c33ff18cdd07849b153b8b747d5
+          test "$(git rev-parse origin/main)" = "$base"
+          test "$(git rev-parse origin/website-growth-turn11-task-first-20261017)" = "$prior"
+          gh api repos/nolankido/nolankido.github.io/git/blobs/8382df934566d73a1afa72f2a98207ecf2b5c9e7 --jq .content > "$RUNNER_TEMP/nav-patch.b64"
+          python - <<'PY'
+          import base64,hashlib,lzma,os
+          from pathlib import Path
+          tmp=Path(os.environ['RUNNER_TEMP'])
+          encoded=''.join((tmp/'nav-patch.b64').read_text().split())
+          patch=lzma.decompress(base64.b64decode(encoded,validate=True))
+          assert hashlib.sha256(patch).hexdigest()=='c2b66bb21dc5a398217e6d3b67417d008a0a437dab90cde354deb43d4bade4b0'
+          (tmp/'navigation.patch').write_bytes(patch)
+          PY
+          git checkout --detach "$base"
+          python - <<'PY' > "$RUNNER_TEMP/base-pages.json"
+          import json,sys
+          sys.path.insert(0,'_scripts')
+          import build
+          print(json.dumps(build.public_pages(),ensure_ascii=False))
+          PY
+          git apply --index "$RUNNER_TEMP/navigation.patch"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('_tests/test_search_entrypoints.py');s=p.read_text()
+          old="'start-here': '2026-10-17', 'resources': '2026-10-17'"
+          new="'start-here': '2026-10-19', 'resources': '2026-10-19'"
+          assert s.count(old)==1
+          p.write_text(s.replace(old,new,1))
+          PY
+          python _scripts/build.py
+          python - <<'PY'
+          import base64,hashlib,json,os,subprocess,sys,zlib
+          from pathlib import Path
+          sys.path.insert(0,'_scripts')
+          import build
+          base='caa8916ad5738ad53fc39c7df4329a33ed435efa'
+          sha=lambda b:hashlib.sha256(b).hexdigest()
+          paths=['_source/start-here.html','_source/resources.html','_source/find.html','_source/pages.json','_source/search-entrypoints.json','start-here/index.html','resources/index.html','find/index.html','sitemap.xml']
+          record={'version':1,'base_commit':base,'paths':{},'pages':{}}
+          for p in paths:
+              a=subprocess.check_output(['git','show',base+':'+p]);b=Path(p).read_bytes()
+              assert a!=b,p
+              record['paths'][p]={'old_sha256':sha(a),'new_sha256':sha(b),'old_zlib_base64':base64.b64encode(zlib.compress(a,9)).decode()}
+          previous=json.loads((Path(os.environ['RUNNER_TEMP'])/'base-pages.json').read_text())
+          current=build.public_pages()
+          assert [p['id'] for p in previous]==[p['id'] for p in current]
+          for a,b in zip(previous,current):
+              if a!=b:record['pages'][a['id']]={'old':a,'new':b}
+          assert set(record['pages'])=={'start-here','resources','find'}
+          protected=['_scripts/build.py','_source/technology/check-ai-answers.html','technology/check-ai-answers/index.html','_source/about.html','_source/bio.html','about/index.html','bio/index.html','downloads/nolan-kido-short-bio.txt','downloads/nolan-kido-long-bio.txt','_source/site.json','assets/workflow-time.js','technology/ai-time-savings/index.html','assets/site-find.js','.github/workflows/site-checks.yml','downloads/ai-answer-review.txt','downloads/ai-task-brief.txt','downloads/living-well-weekly-reset.md','_source/home.html','index.html','_tests/answer-review-growth-change.json','_tests/turn10-profile-change.json','_tests/time-decision-change.json']
+          record['protected_hashes']={p:sha(subprocess.check_output(['git','show',base+':'+p])) for p in protected}
+          assert all(sha(Path(p).read_bytes())==v for p,v in record['protected_hashes'].items())
+          Path('_tests/turn11-task-navigation-change.json').write_text(json.dumps(record,indent=2,ensure_ascii=False)+'\n')
+          PY
+          git add -A
+          tree=$(git write-tree)
+          test "$tree" = 12ae673e8e605e28233716de5d3914f5b178c5bd
+          python _scripts/build.py --check
+          python -m unittest discover -s _tests -p test_turn11_task_navigation.py -v
+          test "$(git write-tree)" = "$tree"
+          git diff --exit-code
+          candidate=$(printf '%s\n' 'Integrate task-first Start Here, Resources and Search with published guide' '' 'Preserve guide, profiles, calculator, downloads and frozen baseline records. Date only the three navigation utilities, connect their roles with native links, and qualify every task and download journey in existing browser suites. The unchanged full release workflow and exact-head review remain required before release.' | git -c user.name=nolankido -c user.email=212063387+nolankido@users.noreply.github.com commit-tree "$tree" -p "$prior" -p "$base")
+          target=refs/heads/recovery-prepared-pr122-20261019
+          test -z "$(git ls-remote --heads origin "$target")"
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push origin "$candidate:$target"
+          echo "CANDIDATE_SHA=$candidate"
+          echo "CANDIDATE_TREE=$tree"
+          echo 'Only the isolated preparation branch was written. Main and PR122 are unchanged.'
