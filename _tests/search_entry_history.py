@@ -9,6 +9,7 @@ from html import escape
 from pathlib import Path
 import json
 import re
+import turn11_task_navigation_history as task_nav_history
 import author_archive_history
 import poker_progress_history
 
@@ -26,10 +27,11 @@ def baseline():
 @lru_cache(maxsize=1)
 def config():
     path = '_source/search-entrypoints.json'
-    return json.loads(poker_progress_history.before(path, (ROOT / path).read_text()))['entries']
+    return json.loads(poker_progress_history.before(path, task_nav_history.before(path, (ROOT / path).read_text())))['entries']
 
 
 def pages(records):
+    records = task_nav_history.pages(records)
     records = author_archive_history.pages(records)
     original = {p['id']: p for p in baseline()['pages']}
     result = deepcopy(records)
@@ -44,6 +46,7 @@ def pages(records):
 
 
 def before(path, data):
+    data = task_nav_history.before(path, data)
     data = author_archive_history.before(path, data)
     path = str(path)
     if not path.endswith('.html') and path != 'sitemap.xml':

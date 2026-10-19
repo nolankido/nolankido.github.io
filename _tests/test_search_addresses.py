@@ -81,8 +81,8 @@ assert.equal(current.score({...base,path:'/poker/hand-rankings/',sections:[['alp
     def test_frozen_adapter_cannot_hide_search_logic_or_source_edits(self):
         for path, old, new in [('assets/site-find.js', 'addressMatch ? 500', 'addressMatch ? 1500'),
                                ('assets/site-find.js', 'const stops =', 'const changed = 1; const stops ='),
-                               ('_source/find.html', 'words in page addresses', 'private worksheet answers'),
-                               ('find/index.html', 'words in page addresses', 'private worksheet answers'),
+                               ('_source/find.html', 'visible section headings', 'private worksheet answers'),
+                               ('find/index.html', 'visible section headings', 'private worksheet answers'),
                                ('find/index.html', 'Keep access and recovery simple', 'Unexpected heading')]:
             value = (ROOT / path).read_text()
             modified = value.replace(old, new, 1)

@@ -12,6 +12,7 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_tests'))
 import answer_review_growth_history as history
+import turn11_task_navigation_history as task_nav_history
 
 
 class GuideGrowth(unittest.TestCase):
@@ -21,7 +22,7 @@ class GuideGrowth(unittest.TestCase):
             'technology/check-ai-answers/index.html', 'sitemap.xml', '_scripts/build.py'})
         for path, item in history.record().items():
             with self.subTest(path=path):
-                raw = (ROOT / path).read_bytes()
+                raw = task_nav_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'])
                 old = history.before(path, raw)
                 self.assertEqual(sha256(old).hexdigest(), item['old_sha256'])
@@ -66,7 +67,7 @@ class GuideGrowth(unittest.TestCase):
             self.assertEqual(history.pages([missing]), [missing])
 
     def test_only_guide_revision_changes_and_profile_dates_survive(self):
-        raw = (ROOT / '_source/pages.json').read_text()
+        raw = task_nav_history.before('_source/pages.json', (ROOT / '_source/pages.json').read_text())
         current = json.loads(raw)
         previous = json.loads(history.before('_source/pages.json', raw))
         self.assertEqual([p['id'] for p in previous], [p['id'] for p in current])

@@ -7,6 +7,7 @@ from hashlib import sha256
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import turn04_public_source_history as history
+import turn11_task_navigation_history as task_nav_history
 import build
 from test_site import Page
 
@@ -33,7 +34,7 @@ class PublicSourceCaseTests(unittest.TestCase):
         self.assertEqual(set(record['paths']),{'_source/technology/home.html','technology/index.html','find/index.html'})
         for path,item in record['paths'].items():
             with self.subTest(path=path):
-                original=(ROOT/path).read_bytes()
+                original=task_nav_history.before(path,(ROOT/path).read_bytes())
                 self.assertEqual(sha256(original).hexdigest(),item['new_sha256'])
                 previous=history.before(path,original)
                 self.assertEqual(sha256(previous).hexdigest(),item['old_sha256'])

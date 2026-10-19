@@ -102,12 +102,20 @@ try:
                 report['entry_journeys'] += 1
             for parent in [ROUTE, '/resources/']:
                 page.goto(base + parent)
-                with page.expect_download() as info:
-                    page.locator('a[download][href="/downloads/ai-answer-review.txt"]').click()
-                download = info.value
-                assert download.suggested_filename == 'ai-answer-review.txt'
-                assert Path(download.path()).read_bytes() == (ROOT / 'downloads/ai-answer-review.txt').read_bytes()
-                report['downloads'] += 1
+                # The redesigned Resources page intentionally offers a quick
+                # download and a second link in the detailed guide entry.
+                # Test each visible choice, rather than using an ambiguous
+                # strict-mode selector that matches both.
+                targets = page.locator('a[download][href="/downloads/ai-answer-review.txt"]')
+                expect(targets).to_have_count(2 if parent == '/resources/' else 1)
+                for target in targets.all():
+                    expect(target).to_be_visible()
+                    with page.expect_download() as info:
+                        target.click()
+                    download = info.value
+                    assert download.suggested_filename == 'ai-answer-review.txt'
+                    assert Path(download.path()).read_bytes() == (ROOT / 'downloads/ai-answer-review.txt').read_bytes()
+                    report['downloads'] += 1
             ctx.close()
         browser.close()
     assert not errors, errors

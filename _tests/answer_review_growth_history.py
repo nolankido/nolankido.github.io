@@ -5,6 +5,7 @@ published main that immediately preceded this guide release. Unknown versions
 and altered metadata remain visible to the older preservation tests.
 """
 from copy import deepcopy
+import turn11_task_navigation_history as task_nav_history
 from functools import lru_cache
 from hashlib import sha256
 import json
@@ -27,6 +28,7 @@ def record():
 
 
 def before(path, data):
+    data = task_nav_history.before(path, data)
     item = record().get(str(path))
     if item is None:
         return data
@@ -51,6 +53,7 @@ def before(path, data):
 
 def pages(records):
     """Restore only an exactly matching approved guide metadata record."""
+    records = task_nav_history.pages(records)
     pairs = change()['page_pairs']
     result = []
     for page in records:
