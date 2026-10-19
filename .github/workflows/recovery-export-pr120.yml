@@ -1,0 +1,33 @@
+name: PR120 recovery source bundle
+on:
+  push:
+    branches: [recovery-export-pr120-20261019]
+    paths: [.github/workflows/recovery-export-pr120.yml]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Export only the two approved source refs
+        run: |
+          set -euo pipefail
+          git cat-file -e b5cfbd5d6abee0ce1082cf14deecb508f0996e6e^{commit}
+          git cat-file -e 4a8a0aa1daaf960e195a26c5ad444133404d96f3^{commit}
+          git update-ref refs/heads/recovery-main b5cfbd5d6abee0ce1082cf14deecb508f0996e6e
+          git update-ref refs/heads/recovery-weekly 4a8a0aa1daaf960e195a26c5ad444133404d96f3
+          mkdir -p "$RUNNER_TEMP/pr120-source"
+          git bundle create "$RUNNER_TEMP/pr120-source/source.bundle" refs/heads/recovery-main refs/heads/recovery-weekly
+          printf 'main=b5cfbd5d6abee0ce1082cf14deecb508f0996e6e\nweekly=4a8a0aa1daaf960e195a26c5ad444133404d96f3\n' > "$RUNNER_TEMP/pr120-source/refs.txt"
+          sha256sum "$RUNNER_TEMP/pr120-source/source.bundle" > "$RUNNER_TEMP/pr120-source/source.sha256"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pr120-recovery-source
+          path: ${{ runner.temp }}/pr120-source/
+          retention-days: 1
+          if-no-files-found: error
