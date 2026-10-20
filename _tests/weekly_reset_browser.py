@@ -5,13 +5,15 @@ from urllib.parse import urlsplit
 import json
 import os
 from playwright.sync_api import expect
+from accessibility_evidence import accessibility_status, incomplete_evidence, violation_evidence
 
 
 def check_weekly_reset(browser, base, root, out):
     sheet = (root / 'downloads/living-well-weekly-reset.md').read_bytes()
     report = {'layouts': 0, 'text_spacing': 0, 'keyboard_toggles': 0,
               'downloads': 0, 'print_checks': 0, 'accessibility_scans': 0,
-              'accessibility_incomplete': [], 'javascript_modes': [],
+              'accessibility_incomplete': [], 'accessibility_status': 'not_run',
+              'javascript_modes': [],
               'worksheet_sha256': sha256(sheet).hexdigest(), 'errors': [],
               'bad_responses': [], 'writes': [], 'violations': []}
     for javascript in (True, False):
@@ -62,11 +64,19 @@ def check_weekly_reset(browser, base, root, out):
                 report['text_spacing'] += 1
                 spacing.evaluate('(node) => node.remove()')
                 if javascript and width in (390, 1440) and os.environ.get('AXE_PATH'):
+                    report['accessibility_status'] = 'scan_failed'
                     page.add_script_tag(path=os.environ['AXE_PATH'])
                     result = page.evaluate("async () => await axe.run(document.querySelector('.lw-quick-start'), {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa']}})")
+                    context_fields = dict(page_path='/living-well/weekly-reset/',
+                        width=width, scope='.lw-quick-start', javascript=javascript)
+                    pending = incomplete_evidence(result, **context_fields)
+                    violations = violation_evidence(result, **context_fields)
                     report['accessibility_scans'] += 1
-                    report['violations'].extend(result['violations'])
-                    report['accessibility_incomplete'].extend({'width': width, 'id': item['id']} for item in result['incomplete'])
+                    report['violations'].extend(violations)
+                    report['accessibility_incomplete'].extend(pending)
+                    report['accessibility_status'] = accessibility_status(
+                        report['accessibility_scans'], report['violations'],
+                        report['accessibility_incomplete'])
                 page.emulate_media(media='print')
                 expect(pre).to_be_visible()
                 assert pre.text_content() == sheet.decode('utf-8')
@@ -96,11 +106,16 @@ def check_weekly_reset(browser, base, root, out):
                 assert page.evaluate('localStorage.length + sessionStorage.length') == 0
                 print(json.dumps({'weekly_reset_case': {'width': width, 'javascript': javascript, 'status': 'pass'}}), flush=True)
             except Exception:
+                report['status'] = 'failed'
+                (out / 'weekly-reset-browser.json').write_text(json.dumps(report, indent=2) + '\n')
                 page.screenshot(path=str(out / f'weekly-reset-failure-{width}-{javascript}.png'), full_page=True)
                 raise
             finally:
                 context.close()
-    assert not report['errors'] and not report['bad_responses'] and not report['writes'] and not report['violations'], report
-    report['status'] = 'pass'
+    failed = bool(report['errors'] or report['bad_responses'] or report['writes'] or report['violations'])
+    report['status'] = 'failed' if failed else 'pass'
+    report['accessibility_status'] = accessibility_status(
+        report['accessibility_scans'], report['violations'], report['accessibility_incomplete'])
     (out / 'weekly-reset-browser.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps({'weekly_reset': report}))
+    assert not failed, report
