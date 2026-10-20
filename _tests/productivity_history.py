@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 import json
 import holdem_essay_history as essay
+import turn09_weekly_reset_history as weekly_history
 ROOT=Path(__file__).resolve().parents[1]
 OUTPUT='living-well/ai-and-personal-productivity/index.html'
 @lru_cache(maxsize=1)
@@ -27,7 +28,7 @@ def restore(records,field,key,new):
         pair=c[field].get(r[key]);result.append(deepcopy(pair['old']) if pair and r==pair['new'] else deepcopy(r))
     return result
 def pages(records):return restore(essay.pages(records),'pages','id','page')
-def entries(records):return restore(records,'entries','slug','entry')
+def entries(records):return restore([weekly_history.original_entry(r) for r in records],'entries','slug','entry')
 def outputs(records):
     return {p:before(p,v) for p,v in essay.outputs(records).items() if change()['new_outputs'].get(str(p))!=sha256(v.encode()).hexdigest()}
 def files(paths):

@@ -9,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build
 import turn11_task_navigation_history as history
+import turn09_weekly_reset_history as weekly_history
 TASKS={'/technology/task-brief/','/technology/check-ai-answers/','/living-well/weekly-reset/','/poker/first-live-tournament/'}
 OTHER={'/technology/ai-time-savings/','/poker/hand-rankings/'}
 class Reader(HTMLParser):
@@ -53,7 +54,7 @@ class TaskRouteTests(unittest.TestCase):
   self.assertEqual(len(set(read.ids)),len(read.ids))
  def test_bounded_history_refuses_unapproved_edits(self):
   for path,entry in history.change()['paths'].items():
-   raw=(ROOT/path).read_bytes();self.assertEqual(sha256(raw).hexdigest(),entry['new_sha256'])
+   raw=weekly_history.before(path,(ROOT/path).read_bytes());self.assertEqual(sha256(raw).hexdigest(),entry['new_sha256'])
    self.assertEqual(sha256(history.before(path,raw)).hexdigest(),entry['old_sha256'])
    self.assertEqual(history.before(path,raw+b'!'),raw+b'!')
   self.assertEqual(history.before('index.html',b'unchanged'),b'unchanged')

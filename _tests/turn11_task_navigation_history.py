@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from copy import deepcopy
 import base64,zlib,json
+import turn09_weekly_reset_history as weekly_history
 ROOT=Path(__file__).resolve().parents[1]
 @lru_cache(maxsize=1)
 def change():
@@ -12,6 +13,7 @@ def change():
         raise ValueError('Unknown navigation release history')
     return data
 def before(path,data):
+    data=weekly_history.before(path,data)
     item=change()['paths'].get(str(path))
     if item is None:return data
     binary=isinstance(data,bytes)
@@ -22,6 +24,7 @@ def before(path,data):
         raise ValueError('Corrupt Turn 11 predecessor: '+str(path))
     return restored if binary else restored.decode('utf-8')
 def pages(records):
+    records=weekly_history.pages(records)
     changes=change()['pages']
     return [deepcopy(changes[p['id']]['old']) if p['id'] in changes and p==changes[p['id']]['new'] else deepcopy(p) for p in records]
 def outputs(records):

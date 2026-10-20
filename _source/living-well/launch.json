@@ -171,6 +171,16 @@
       "topic": "everyday-ai",
       "kind": "guide",
       "lead": "A weekly reset should leave you with less to carry, not a new system to maintain. Start with a page you can finish, understand, and put away.",
+      "quick_start": {
+        "label": "The small version: three moves, then stop",
+        "intro": "Use paper or an ordinary note. You do not need an AI account or another habit to maintain.",
+        "steps": [
+          "Check: confirm the dates and promises that matter this week against the original calendar or message. Mark anything uncertain as to check.",
+          "Choose: write one manageable next action, not a plan for every hour.",
+          "Release: name one task that can wait and something you will deliberately leave unplanned."
+        ],
+        "example": "Fictional completed mini-note: Confirmed: Thursday appointment at 3 p.m., checked against its confirmation. Next action: put the library book in my bag. Can wait: photo sorting. Leave open: Friday evening. These are invented teaching details, not anyone’s actual schedule or observed outcome."
+      },
       "sections": [
         {
           "heading": "Begin with a small enough purpose",
@@ -236,8 +246,8 @@
         "notebook-or-ai"
       ],
       "published": "2026-10-08",
-      "updated": "2026-10-09",
-      "revision": "Added a clearly fictional paper-first and optional AI worked example, including the checks needed before using a draft."
+      "updated": "2026-10-19",
+      "revision": "Added a three-move paper-first starting point, a clearly fictional completed note, and a preview of the existing blank worksheet; the original guide remains below."
     },
     {
       "slug": "decide-what-matters",
