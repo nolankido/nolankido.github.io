@@ -1,0 +1,30 @@
+name: Export reviewed search-repair source
+on:
+  push:
+    branches: [helper-search-source-20261020]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 3d58eef8d5d878885bfbcfe67b6565a17cd9defb
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Export exact public main and source fingerprints
+        run: |
+          set -eu
+          test "$(git rev-parse HEAD)" = 3d58eef8d5d878885bfbcfe67b6565a17cd9defb
+          mkdir -p "$RUNNER_TEMP/search-source"
+          git branch source-main HEAD
+          git bundle create "$RUNNER_TEMP/search-source/source.bundle" source-main
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/search-source/refs.txt"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: search-repair-source
+          path: ${{ runner.temp }}/search-source/
+          retention-days: 1
+          if-no-files-found: error
