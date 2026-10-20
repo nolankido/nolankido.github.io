@@ -1,0 +1,63 @@
+name: Weekly Reset focused browser acceptance
+on:
+  push:
+    branches: [recovery-weekly-reset-20261019]
+    paths: [.github/workflows/recovery-weekly-browser.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 92fdcbee0e9e356c58183db748049be87d00f78d
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install existing browser dependencies
+        run: |
+          test "$(git rev-parse HEAD^{tree})" = 9483ea783dec3797bb54ed748e92b107ce05c1c0
+          python -m pip install -r requirements-test.txt
+          python -m playwright install --with-deps chromium
+          npm install --prefix "$RUNNER_TEMP/nk-qa" --no-audit --no-fund axe-core@4.10.3
+      - name: Exercise the exact helper without skipping either script mode
+        env:
+          AXE_PATH: ${{ runner.temp }}/nk-qa/node_modules/axe-core/axe.min.js
+          SCREENSHOT_DIR: ${{ runner.temp }}/weekly-reset-previews
+        run: |
+          mkdir -p "$SCREENSHOT_DIR"
+          python -u - <<'PY'
+          from functools import partial
+          from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+          from pathlib import Path
+          from threading import Thread
+          import os, sys
+          from playwright.sync_api import sync_playwright
+          root = Path.cwd()
+          sys.path.insert(0, str(root / '_tests'))
+          from weekly_reset_browser import check_weekly_reset
+          class QuietHandler(SimpleHTTPRequestHandler):
+              def log_message(self, *args):
+                  pass
+          server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(root)))
+          Thread(target=server.serve_forever, daemon=True).start()
+          try:
+              with sync_playwright() as pw:
+                  browser = pw.chromium.launch(headless=True)
+                  check_weekly_reset(browser, 'http://127.0.0.1:' + str(server.server_port), root, Path(os.environ['SCREENSHOT_DIR']))
+                  browser.close()
+          finally:
+              server.shutdown()
+              server.server_close()
+          PY
+      - name: Preserve focused browser evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: weekly-reset-focused-browser
+          path: ${{ runner.temp }}/weekly-reset-previews/
+          retention-days: 1
+          if-no-files-found: error
