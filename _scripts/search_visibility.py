@@ -5,6 +5,7 @@ not manufacture credentials, ratings, social profiles, dates, or search claims.
 """
 from __future__ import annotations
 from copy import deepcopy
+import re
 from html import escape
 from html.parser import HTMLParser
 from urllib.parse import urlsplit
@@ -103,6 +104,14 @@ def decorate(page: dict, pages: list[dict], site: dict, schema: dict, header: st
         raise ValueError('Search identity needs the canonical HTTPS origin without a trailing slash')
     url = origin + page['path']
     result = deepcopy(schema)
+    # The page catalog records calendar days, not an actual profile edit time.
+    # Google's optional ProfilePage dateModified expects a DateTime. Omit a
+    # day-only value rather than invent midnight or the current build time.
+    # Preserve independently supplied timestamps and all other page types.
+    if (result.get('@type') == 'ProfilePage'
+            and isinstance(result.get('dateModified'), str)
+            and re.fullmatch(r'\d{4}-\d{2}-\d{2}', result['dateModified'])):
+        result.pop('dateModified')
     person = {'@type': 'Person', '@id': origin + '/about/#nolan-kido',
               'name': site['name'], 'url': origin + '/about/'}
     result['@id'] = url + '#webpage'

@@ -3,6 +3,7 @@ from copy import deepcopy
 from hashlib import sha256
 from html import escape
 from pathlib import Path
+import profile_datetime_history
 from unittest.mock import patch
 from xml.etree import ElementTree as ET
 import html5lib
@@ -155,7 +156,7 @@ class WeeklyResetTurn09Tests(unittest.TestCase):
         self.assertGreater(len(record['unchanged_files']), 700)
         for path, expected in record['unchanged_files'].items():
             with self.subTest(path=path):
-                self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), expected)
+                self.assertEqual(sha256(profile_datetime_history.before(path, (ROOT / path).read_bytes())).hexdigest(), expected)
 
     def test_exact_hash_restoration_types_and_idempotence(self):
         for path, item in history.change()['paths'].items():

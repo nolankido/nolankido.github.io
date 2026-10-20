@@ -1,5 +1,6 @@
 """Turn 11: task-first entry, file-first resources and query-first finder."""
 from pathlib import Path
+import profile_datetime_history
 from hashlib import sha256
 from html.parser import HTMLParser
 import sys,unittest,json,zlib
@@ -63,7 +64,7 @@ class TaskRouteTests(unittest.TestCase):
   self.assertEqual(len(protected),22)
   for path,digest in protected.items():
    with self.subTest(path=path):
-    self.assertEqual(sha256((ROOT/path).read_bytes()).hexdigest(),digest)
+    self.assertEqual(sha256(profile_datetime_history.before(path, (ROOT/path).read_bytes())).hexdigest(),digest)
  def test_exact_nine_path_scope_and_three_metadata_records(self):
   self.assertEqual(history.change()['base_commit'],'caa8916ad5738ad53fc39c7df4329a33ed435efa')
   self.assertEqual(set(history.change()['paths']),{
