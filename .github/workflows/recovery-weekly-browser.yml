@@ -34,6 +34,7 @@ jobs:
           from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
           from pathlib import Path
           from threading import Thread
+          from urllib.parse import urlsplit
           import os, sys
           from playwright.sync_api import sync_playwright
           root = Path.cwd()
@@ -44,10 +45,26 @@ jobs:
                   pass
           server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(root)))
           Thread(target=server.serve_forever, daemon=True).start()
+          base = 'http://127.0.0.1:' + str(server.server_port)
+          out = Path(os.environ['SCREENSHOT_DIR'])
           try:
               with sync_playwright() as pw:
                   browser = pw.chromium.launch(headless=True)
-                  check_weekly_reset(browser, 'http://127.0.0.1:' + str(server.server_port), root, Path(os.environ['SCREENSHOT_DIR']))
+                  check_weekly_reset(browser, base, root, out)
+                  # A normal viewport capture avoids fixed-header overlap in a
+                  # screenshot of a tall element. The page itself is unchanged.
+                  context = browser.new_context(viewport={'width': 390, 'height': 1000})
+                  context.route('**/*', lambda route: route.continue_() if urlsplit(route.request.url).hostname == '127.0.0.1' else route.abort())
+                  page = context.new_page()
+                  page.goto(base + '/living-well/weekly-reset/')
+                  page.evaluate('document.fonts.ready')
+                  page.evaluate("() => { document.activeElement.blur(); const header = document.querySelector('.site-header'); const starter = document.querySelector('.lw-quick-start'); window.scrollTo(0, starter.getBoundingClientRect().top + window.scrollY - header.getBoundingClientRect().height - 20); }")
+                  page.screenshot(path=str(out / 'weekly-reset-mobile-first-moves.png'))
+                  summary = page.locator('#weekly-reset-worksheet summary')
+                  summary.click()
+                  page.evaluate("() => { document.activeElement.blur(); const header = document.querySelector('.site-header'); const preview = document.querySelector('#weekly-reset-worksheet'); window.scrollTo(0, preview.getBoundingClientRect().top + window.scrollY - header.getBoundingClientRect().height - 20); }")
+                  page.screenshot(path=str(out / 'weekly-reset-mobile-worksheet.png'))
+                  context.close()
                   browser.close()
           finally:
               server.shutdown()
