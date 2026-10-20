@@ -1,0 +1,72 @@
+name: Prepare integrated Weekly Reset
+on:
+  push:
+    branches: [recovery-weekly-reset-20261019]
+    paths: [.github/workflows/recovery-weekly-prepare.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: b5cfbd5d6abee0ce1082cf14deecb508f0996e6e
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reproduce reviewed source and exact predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(gh api repos/$GITHUB_REPOSITORY/git/ref/heads/main --jq .object.sha)" = b5cfbd5d6abee0ce1082cf14deecb508f0996e6e
+          test "$(gh api repos/$GITHUB_REPOSITORY/pulls/120 --jq .head.sha)" = 4a8a0aa1daaf960e195a26c5ad444133404d96f3
+          blob() { gh api "repos/$GITHUB_REPOSITORY/git/blobs/$1" --jq .content | base64 --decode > "$2"; test "$(git hash-object "$2")" = "$1"; }
+          blob 3740f7f3b9b26a8dcf6605b1ee0b4780448789ef "$RUNNER_TEMP/weekly-integrate.py"
+          blob 2d718387f62a5a56f23a07e30480edc9189971c4 "$RUNNER_TEMP/weekly-history.py"
+          python "$RUNNER_TEMP/weekly-integrate.py"
+          python _scripts/build.py
+          python "$RUNNER_TEMP/weekly-history.py"
+          blob fee5ae5c44f6af3cd855ab128954f31c9b50a4ed _tests/test_weekly_reset_turn09.py
+          blob 94a23df0473051325003f13475f306829281f7ac _tests/weekly_reset_browser.py
+          blob 20a88ae988c78e6e02876ab9907b2ad54e3319e4 _reports/website-growth/turn-09-weekly-reset.md
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('_tests/living_well_browser.py');s=p.read_text()
+          old='            nojs.close()\n            browser.close()'
+          assert s.count(old)==1
+          s=s.replace(old,'            nojs.close()\n            from weekly_reset_browser import check_weekly_reset\n            check_weekly_reset(browser, base, ROOT, out)\n            browser.close()')
+          p.write_text(s)
+          PY
+          python _scripts/build.py --check
+          python -m pip install -r requirements-test.txt
+          PYTHONPATH=_tests:_scripts python -m unittest test_weekly_reset_turn09 test_turn11_task_navigation test_answer_review_growth test_homepage_growth test_task_brief_growth test_productivity test_living_well_resources test_living_well_utility
+          git add -A
+          git diff --cached --check
+          tree=$(git write-tree)
+          echo "PREPARED_TREE=$tree"
+          test "$tree" = 8567bee6f1d8cd566f093755a72df909625da88f
+      - name: Save candidate to an isolated create-only branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          main=b5cfbd5d6abee0ce1082cf14deecb508f0996e6e
+          old=4a8a0aa1daaf960e195a26c5ad444133404d96f3
+          test "$(gh api repos/$GITHUB_REPOSITORY/git/ref/heads/main --jq .object.sha)" = "$main"
+          test "$(gh api repos/$GITHUB_REPOSITORY/pulls/120 --jq .head.sha)" = "$old"
+          git config user.name nolankido
+          git config user.email 212063387+nolankido@users.noreply.github.com
+          tree=$(git write-tree)
+          test "$tree" = 8567bee6f1d8cd566f093755a72df909625da88f
+          commit=$(printf '%s\n\n%s\n' 'Integrate paper-first Weekly Reset with the published navigation release' 'Preserve seven original sections, the single worksheet source, profiles, calculator and guide. Add bounded starter validation, honest dates, accurate reading estimates and native worksheet browser journeys. Full exact-head release checks remain required before publication.' | git commit-tree "$tree" -p "$old" -p "$main")
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          echo "::add-mask::$auth"
+          ref=refs/heads/recovery-prepared-weekly-reset-20261019
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push --force-with-lease="$ref:" origin "$commit:$ref"
+          echo "PREPARED_COMMIT=$commit"
+          echo "PREPARED_TREE=$tree"
