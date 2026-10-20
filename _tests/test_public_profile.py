@@ -133,7 +133,7 @@ class PublicProfileTests(unittest.TestCase):
         for path in ['feed.xml','writing.xml','technology/feed.xml','living-well/feed.xml','poker/feed.xml']:
             self.assertNotIn('/bio/',self.outputs[Path(path)])
         p=next(p for p in build.public_pages() if p['id']=='bio')
-        self.assertEqual(p['updated'],'2026-10-11')
+        self.assertEqual(p['updated'],'2026-10-17')
         self.assertEqual(p['title'],'A brief introduction.')
         self.assertIn('Nolan Kido',p['seo_title'])
         self.assertIn('Introductions',p['seo_title'])

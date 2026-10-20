@@ -217,6 +217,8 @@ def run():
             from living_well_directory_browser import check_directory
             check_directory(context, nojs, base, ROOT, out)
             nojs.close()
+            from weekly_reset_browser import check_weekly_reset
+            check_weekly_reset(browser, base, ROOT, out)
             browser.close()
         report = {'pages': len(pages), 'viewport_widths': [320, 390, 620, 768, 1024, 1440], 'axe_enabled': bool(os.environ.get('AXE_PATH')), 'violations': violations, 'javascript_errors': errors, 'failed_local_responses': bad_responses, 'write_requests': writes}
         (out / 'living-well-browser.json').write_text(json.dumps(report, indent=2) + '\n')

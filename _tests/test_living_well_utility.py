@@ -64,7 +64,7 @@ class UtilityTests(unittest.TestCase):
         self.assertLess(guides.index('href="/living-well/technology-for-real-life/"'), guides.index('href="/living-well/meditation-without-buying-a-lifestyle/"'))
 
     def test_original_twenty_six_readings_are_exactly_preserved(self):
-        old = {s:weekly_history.original_entry(e) if s == 'weekly-reset' else e for s,e in self.entries.items() if s not in SLUGS and s != 'ai-and-personal-productivity'}
+        old = {s:weekly_history.original_entry(e) for s,e in self.entries.items() if s not in SLUGS and s != 'ai-and-personal-productivity'}
         self.assertEqual(len(old), 26)
         digest = hashlib.sha256(json.dumps(old, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
         self.assertEqual(digest, OLD_READING_DIGEST)

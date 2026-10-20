@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import task_brief_growth_history as history
+import turn10_profile_history
+import answer_review_growth_history as guide_growth
 import turn04_public_source_history
 
 CHANGED = {'_source/pages.json','_source/technology/task-brief.html',
@@ -59,8 +61,10 @@ class TaskBriefGrowthTests(unittest.TestCase):
         self.assertEqual(history.pages([newer]),[history.change()['page']['old']])
         altered=deepcopy(newer);altered['noindex']=True
         self.assertEqual(history.pages([altered]),[altered])
-        self.assertEqual([p for p in items if p['id']!='task-brief'],
-            history.pages([p for p in items if p['id']!='task-brief']))
+        others=[p for p in items if p['id']!='task-brief']
+        # Later approved About/Bio revisions are reversed by their exact
+        # predecessor view before checking Turn 03's preservation boundary.
+        self.assertEqual(turn10_profile_history.pages(guide_growth.pages(others)),history.pages(others))
 
     def test_six_static_examples_have_complete_reviewable_fields(self):
         source=(ROOT/'_source/technology/task-brief.html').read_text()

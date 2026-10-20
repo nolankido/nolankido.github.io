@@ -10,6 +10,7 @@ import html5lib
 from test_site import ROOT, Page, build
 import homepage_growth_history as history
 import task_brief_growth_history as task_growth
+import answer_review_growth_history as guide_growth
 
 PRIMARY = {
     'use': '/technology/task-brief/',
@@ -80,7 +81,7 @@ class HomepageGrowthTests(unittest.TestCase):
 
     def test_no_new_runtime_or_changes_to_private_boundaries(self):
         for path, expected in self.record['protected_source_hashes'].items():
-            self.assertEqual(digest((ROOT / path).read_bytes()), expected, path)
+            self.assertEqual(digest(history.before(path, (ROOT / path).read_bytes())), expected, path)
         for path in ('index.html', 'start-here/index.html'):
             scripts = [a['src'] for a in Page(self.outputs[Path(path)]).tags('script') if 'src' in a]
             self.assertEqual(scripts, ['https://cloud.umami.is/script.js'])
@@ -119,9 +120,12 @@ class HomepageGrowthTests(unittest.TestCase):
         self.assertEqual(history.pages([home]), [self.record['pages']['home']['old']])
         unknown = deepcopy(home); unknown['description'] += ' Unreviewed claim'
         self.assertEqual(history.pages([unknown]), [unknown])
+        import turn10_profile_history
         for page in records:
             if page['id'] not in {'home', 'task-brief'}:
-                self.assertEqual(history.pages([page]), [page])
+                # Later About/Bio revision dates are independently approved;
+                # restore those dates before checking this earlier release.
+                self.assertEqual(history.pages([page]), turn10_profile_history.pages(guide_growth.pages([page])))
         task = next(p for p in records if p['id'] == 'task-brief')
         self.assertEqual(history.pages([task]), [task_growth.change()['page']['old']])
 

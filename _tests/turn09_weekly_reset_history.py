@@ -1,64 +1,56 @@
-"""Exact SHA-scoped predecessor reconstruction for Turn 09 historical tests only.
+"""Exact test-only predecessor for the integrated Weekly Reset release.
 
-Never refresh historical baselines; reject unknown/new bytes by leaving them unchanged.
+The six reviewed production changes restore the actual published parent only
+when their complete hashes match. Unknown edits and partial metadata remain
+visible. Published historical baseline records are never refreshed here.
 """
-from pathlib import Path
+from copy import deepcopy
 from functools import lru_cache
 from hashlib import sha256
-import base64, json
-ROOT=Path(__file__).resolve().parents[1]
+from pathlib import Path
+import base64
+import json
+import zlib
+
+ROOT = Path(__file__).resolve().parents[1]
+BASE = 'b5cfbd5d6abee0ce1082cf14deecb508f0996e6e'
+
+
 @lru_cache(maxsize=1)
 def change():
-    record=json.loads((ROOT/'_tests/turn09-weekly-reset-change.json').read_text())
-    if record.get('base_commit')!='e6d61d4070bae76c54e1b676422e716ff8adaac6':
-        raise ValueError('Unknown Turn 09 predecessor')
-    return record['paths']
+    record = json.loads((ROOT / '_tests/turn09-weekly-reset-change.json').read_text(encoding='utf-8'))
+    if record.get('version') != 2 or record.get('base_commit') != BASE:
+        raise ValueError('Unknown integrated weekly-reset predecessor')
+    return record
 
-def before(path,data):
-    item=change().get(str(path))
-    if item is None:return data
-    binary=isinstance(data,bytes)
-    raw=data if binary else data.encode('utf-8')
-    if sha256(raw).hexdigest()!=item['new_sha256']:return data
-    for edit in reversed(item['edits']):
-        old=base64.b64decode(edit['old'],validate=True)
-        new=base64.b64decode(edit['new'],validate=True)
-        s,e=edit['start'],edit['end']
-        if not 0<=s<=e<=len(raw) or raw[s:e]!=new:
-            raise ValueError('Turn 09 edit span mismatch: '+str(path))
-        raw=raw[:s]+old+raw[e:]
-    if sha256(raw).hexdigest()!=item['old_sha256']:
-        raise ValueError('Turn 09 original digest mismatch: '+str(path))
-    return raw if binary else raw.decode('utf-8')
+
+def before(path, data):
+    item = change()['paths'].get(str(path))
+    if item is None:
+        return data
+    binary = isinstance(data, bytes)
+    raw = data if binary else data.encode('utf-8')
+    if sha256(raw).hexdigest() != item['new_sha256']:
+        return data
+    restored = zlib.decompress(base64.b64decode(item['old_zlib_base64'], validate=True))
+    if sha256(restored).hexdigest() != item['old_sha256']:
+        raise ValueError('Corrupt Weekly Reset predecessor: ' + str(path))
+    return restored if binary else restored.decode('utf-8')
+
 
 def pages(records):
-    """Restore exactly the approved revised metadata in historical page snapshots."""
-    from copy import deepcopy
-    result=[]
+    pairs = change()['page_pairs']
+    result = []
     for page in records:
-        p=deepcopy(page)
-        if (p.get('id')=='living-well-weekly-reset'
-            and p.get('updated')=='2026-10-17'
-            and p.get('revision')=='Put a three-move paper-first reset and fictional filled example before the full guide; preview and download use the existing single worksheet source.'):
-            p['updated']='2026-10-09'
-            p['revision']='Added a clearly fictional paper-first and optional AI worked example, including the checks needed before using a draft.'
-        result.append(p)
+        match = next((pair for pair in pairs if page == pair['new']), None)
+        result.append(deepcopy(match['old'] if match else page))
     return result
 
 
 def original_entry(entry):
-    """A specific approved guide, restored for the frozen 26-entry digest."""
-    from copy import deepcopy
-    if entry.get('slug')!='weekly-reset':return deepcopy(entry)
-    raw=json.dumps(entry,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()
-    record=json.loads((ROOT/'_tests/turn09-weekly-reset-change.json').read_text())
-    if sha256(raw).hexdigest()!=record['new_entry_sha256']:
-        return deepcopy(entry)
-    prior=deepcopy(entry)
-    prior.pop('quick_start')
-    prior['updated']='2026-10-09'
-    prior['revision']='Added a clearly fictional paper-first and optional AI worked example, including the checks needed before using a draft.'
-    restored=json.dumps(prior,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()
-    if sha256(restored).hexdigest()!=record['old_entry_sha256']:
-        raise ValueError('Turn 09 source-entry predecessor mismatch')
-    return prior
+    pair = change()['entry_pair']
+    return deepcopy(pair['old'] if entry == pair['new'] else entry)
+
+
+def outputs(records):
+    return {path: before(path, value) for path, value in records.items()}

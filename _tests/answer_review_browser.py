@@ -43,6 +43,12 @@ try:
                 page.set_viewport_size({'width': width, 'height': 950})
                 page.goto(base + ROUTE)
                 expect(page.locator('h1')).to_be_visible()
+                expect(page.locator('.review-fast-list > li')).to_have_count(4)
+                expect(page.locator('#review-fast-method')).to_be_visible()
+                expect(page.locator('.review-verdicts > dt')).to_have_count(3)
+                expect(page.locator('main')).to_contain_text('unresolved, not contradicted')
+                expect(page.locator('main')).to_contain_text('Send meetup questions to the organizer.')
+                expect(page.locator('main')).to_contain_text('That summary is not faithful to its supplied source')
                 assert page.evaluate('document.documentElement.scrollWidth') <= width
                 links = page.locator('.review-picker a')
                 expect(links).to_have_count(6)
@@ -96,12 +102,20 @@ try:
                 report['entry_journeys'] += 1
             for parent in [ROUTE, '/resources/']:
                 page.goto(base + parent)
-                with page.expect_download() as info:
-                    page.locator('a[download][href="/downloads/ai-answer-review.txt"]').click()
-                download = info.value
-                assert download.suggested_filename == 'ai-answer-review.txt'
-                assert Path(download.path()).read_bytes() == (ROOT / 'downloads/ai-answer-review.txt').read_bytes()
-                report['downloads'] += 1
+                # The redesigned Resources page intentionally offers a quick
+                # download and a second link in the detailed guide entry.
+                # Test each visible choice, rather than using an ambiguous
+                # strict-mode selector that matches both.
+                targets = page.locator('a[download][href="/downloads/ai-answer-review.txt"]')
+                expect(targets).to_have_count(2 if parent == '/resources/' else 1)
+                for target in targets.all():
+                    expect(target).to_be_visible()
+                    with page.expect_download() as info:
+                        target.click()
+                    download = info.value
+                    assert download.suggested_filename == 'ai-answer-review.txt'
+                    assert Path(download.path()).read_bytes() == (ROOT / 'downloads/ai-answer-review.txt').read_bytes()
+                    report['downloads'] += 1
             ctx.close()
         browser.close()
     assert not errors, errors

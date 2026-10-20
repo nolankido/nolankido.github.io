@@ -4,7 +4,6 @@ An entire-file SHA must match the approved candidate before any reversal. No
 fuzzy source replacement or schema-level downgrade can conceal later changes.
 This does not run in the published website.
 """
-import turn09_weekly_reset_history
 import base64
 from copy import deepcopy
 from functools import lru_cache
@@ -12,6 +11,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import zlib
+import turn10_profile_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '9a9eaba7359cd9c3e4e7a92fffdd34f991a303df'
@@ -25,7 +25,9 @@ def change():
 
 
 def before(path, data):
-    data = turn09_weekly_reset_history.before(path,data)
+    import answer_review_growth_history as guide_growth
+    data = guide_growth.before(path, data)
+    data = turn10_profile_history.before(path,data)
     item = change()['paths'].get(str(path))
     if not item:
         return data
@@ -43,7 +45,9 @@ def before(path, data):
 
 
 def pages(records):
-    records = turn09_weekly_reset_history.pages(records)
+    import answer_review_growth_history as guide_growth
+    records = guide_growth.pages(records)
+    records=turn10_profile_history.pages(records)
     pair = change()['page']
     return [deepcopy(pair['old']) if page == pair['new'] else deepcopy(page)
             for page in records]
