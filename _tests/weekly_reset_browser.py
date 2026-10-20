@@ -52,7 +52,12 @@ def check_weekly_reset(browser, base, root, out):
                     else: expect(pre).not_to_be_visible()
                     report['keyboard_toggles'] += 1
                 assert pre.text_content() == sheet.decode('utf-8')
-                spacing = page.add_style_tag(content='* { line-height:1.5!important; letter-spacing:.12em!important; word-spacing:.16em!important; } p { margin-bottom:2em!important; }')
+                # No-script contexts do not dispatch the load event awaited
+                # by add_style_tag. Insert through the test driver without
+                # enabling page JavaScript, keeping both modes fully tested.
+                spacing = page.evaluate_handle(
+                    "css => { const style = document.createElement('style'); style.textContent = css; document.head.append(style); return style; }",
+                    '* { line-height:1.5!important; letter-spacing:.12em!important; word-spacing:.16em!important; } p { margin-bottom:2em!important; }')
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                 report['text_spacing'] += 1
                 spacing.evaluate('(node) => node.remove()')
@@ -89,6 +94,7 @@ def check_weekly_reset(browser, base, root, out):
                 report['downloads'] += 1
                 assert context.cookies() == []
                 assert page.evaluate('localStorage.length + sessionStorage.length') == 0
+                print(json.dumps({'weekly_reset_case': {'width': width, 'javascript': javascript, 'status': 'pass'}}), flush=True)
             except Exception:
                 page.screenshot(path=str(out / f'weekly-reset-failure-{width}-{javascript}.png'), full_page=True)
                 raise
