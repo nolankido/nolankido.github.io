@@ -16,7 +16,7 @@ The field is recommended, not required. This removes the reproduced invalid-valu
 
 Twelve focused tests cover the old defect, corrected JSON-LD, exact visible/other-head preservation, input copying, real timestamp preservation, other schema dates, absent-date behavior, unchanged sitemap revision, exact production inventory, unknown mutation refusal, corrupt history and upstream date validation.
 
-An exact-hash test-only adapter reverses only the two approved files, the decorator and the generated About page, before older release-preservation checks. It never accepts an altered file and does not refresh a published baseline. Two older inventory assertions use that approved predecessor view; all their original expected hashes remain unchanged. The new scope check protects all 714 tracked production/configuration paths against the published parent, with only the two approved deltas normalized.
+An exact-hash test-only adapter reverses only the two approved files, the decorator and the generated About page, before older release-preservation checks. It never accepts an altered file and does not refresh a published baseline. Three older inventory assertions use that approved predecessor view; all their original expected hashes remain unchanged. The new scope check protects all 714 tracked production/configuration paths against the published parent, with only the two approved deltas normalized.
 
 Required before merge: deterministic build, HTML/search validation, complete unit suite, all five hosted browser groups, and review of the final candidate. After merge: verify Pages and public response bytes. A temporary source-export/preparation workflow must stay on helper branches and is not part of this release.
 

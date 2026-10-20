@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_tests'))
 import answer_review_growth_history as history
 import turn11_task_navigation_history as task_nav_history
+import profile_datetime_history
 
 
 class GuideGrowth(unittest.TestCase):
@@ -143,7 +144,7 @@ class GuideGrowth(unittest.TestCase):
 
     def test_bios_calculator_download_and_release_workflow_are_unchanged(self):
         for path, expected in history.change()['protected_hashes'].items():
-            self.assertEqual(sha256((ROOT / path).read_bytes()).hexdigest(), expected, path)
+            self.assertEqual(sha256(profile_datetime_history.before(path, (ROOT / path).read_bytes())).hexdigest(), expected, path)
 
     def test_all_old_links_and_ids_survive_without_new_runtime(self):
         path = 'technology/check-ai-answers/index.html'
