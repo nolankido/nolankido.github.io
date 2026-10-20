@@ -13,7 +13,7 @@ This is an evidence-reporting problem, not proof that page colors fail. Keep the
 
 ## Narrow change
 
-Only `_tests` and this report change. The shared standard-library helper retains the configured route, viewport width, script mode, exact scan scope, rule IDs, node selector paths and related check targets. Nested frame/shadow selectors are preserved without mutating the source result. HTML, element text, arbitrary check data, free-form messages and remote URLs are not copied. Selectors are diagnostic data and may themselves contain identifiers; these fixtures must never use confidential participant input.
+Only `_tests` and this report change. The shared standard-library helper projects both incomplete findings and violations onto an explicit allowlist. It retains the configured route, viewport width, script mode, exact scan scope, rule IDs, node selector paths and related check targets. Nested frame/shadow selectors are preserved without mutating the source result. HTML, element text, arbitrary check data, free-form messages and remote URLs are not copied. Selectors are diagnostic data and may themselves contain identifiers; these fixtures must never use confidential participant input.
 
 The Weekly Reset wrapper now writes a separate `accessibility_status`: `not_run`, `scan_failed`, `violations_found`, `manual_review_required`, or `no_automated_findings`. None is a conformance certificate. Incomplete rules stay pending and do not become passes merely because no automated violation was raised. Functional failures still fail the browser job; their partial diagnostic JSON is saved before re-raising.
 
@@ -27,7 +27,7 @@ The connected browser and authenticated analytics remain unavailable in this ses
 
 ## Qualification and next step
 
-Sixteen synthetic helper tests cover result scope, selectors, related nodes, immutability, redaction boundaries, no-scan state, unresolved state, violation precedence and malformed-result rejection. Run them with:
+Twenty-one synthetic helper tests cover result scope, selectors, related nodes, immutability, redaction boundaries, no-scan state, unresolved state, violation precedence and malformed-result rejection. Run them with:
 
 ```text
 python -m unittest discover -s _tests -p 'test_accessibility_evidence.py' -v
@@ -38,3 +38,7 @@ Before merge: run the complete unchanged Site checks workflow, confirm all five 
 After the artifact identifies the exact unresolved element, assess that element with its actual colors and background at the recorded state. Only a demonstrated problem should trigger a design change. Continue the separately consented visitor study and obtain an authenticated search export when available; do not replace those evidence classes with this diagnostic.
 
 Reference: W3C, Understanding WCAG 2.2 SC 1.4.3, https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html . Use specified foreground/background values, applicable 4.5:1 or 3:1 thresholds, and do not round a sub-threshold ratio up to a pass.
+
+## Failure-path review correction
+
+Review identified that the newly saved failure report would still contain raw axe violation objects even though incomplete items were redacted. Both arrays now use the same explicit projection before they can reach JSON or stdout. The helper keeps rule IDs, impacts, selector paths and check IDs for failed findings while excluding their HTML, free-form messages and data. Five added synthetic tests cover failure redaction, immutability, empty failures, malformed node refusal and mixed unresolved/failed results. A violation still fails the browser job. The correction does not claim that a violation was observed on the actual website.

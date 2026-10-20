@@ -38,16 +38,13 @@ def _rules(value, field):
     return value
 
 
-def incomplete_evidence(result, *, page_path, width, scope, javascript):
-    """Return review records for each incomplete rule, never inferred passes.
-
-    page_path and scope are explicit test configuration, not a URL inferred
-    from the remote browser. The caller must not use real participant inputs.
-    """
+def _finding_evidence(result, field, *, page_path, width, scope, javascript):
+    """Project axe findings to a bounded, context-specific diagnostic schema."""
     if not isinstance(result, dict):
         raise ValueError('axe result must be an object')
     _rules(result.get('violations'), 'violations')
-    items = _rules(result.get('incomplete'), 'incomplete')
+    _rules(result.get('incomplete'), 'incomplete')
+    items = result[field]
     if (not isinstance(page_path, str) or not page_path.startswith('/')
             or page_path.startswith('//') or '?' in page_path or '#' in page_path):
         raise ValueError('page_path must be a local path without a query or fragment')
@@ -60,7 +57,7 @@ def incomplete_evidence(result, *, page_path, width, scope, javascript):
     for item in items:
         nodes = item.get('nodes')
         if not isinstance(nodes, list) or not nodes:
-            raise ValueError('incomplete rule must identify its nodes')
+            raise ValueError(field + ' rule must identify its nodes')
         saved = []
         for node in nodes:
             if not isinstance(node, dict):
@@ -93,9 +90,22 @@ def incomplete_evidence(result, *, page_path, width, scope, javascript):
         records.append({
             'path': page_path, 'width': width, 'javascript': javascript,
             'scope': scope, 'id': item['id'], 'impact': impact,
-            'review_status': 'manual_review_required', 'nodes': saved,
+            'review_status': ('manual_review_required' if field == 'incomplete'
+                              else 'automated_violation'), 'nodes': saved,
         })
     return records
+
+
+def incomplete_evidence(result, *, page_path, width, scope, javascript):
+    """Retain unresolved targets, never an inferred pass or raw page content."""
+    return _finding_evidence(result, 'incomplete', page_path=page_path,
+                             width=width, scope=scope, javascript=javascript)
+
+
+def violation_evidence(result, *, page_path, width, scope, javascript):
+    """Retain failure targets without persisting axe HTML, messages or data."""
+    return _finding_evidence(result, 'violations', page_path=page_path,
+                             width=width, scope=scope, javascript=javascript)
 
 
 def accessibility_status(scans, violations, incomplete):

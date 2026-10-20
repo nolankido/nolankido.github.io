@@ -6,7 +6,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from accessibility_evidence import accessibility_status, incomplete_evidence
+from accessibility_evidence import accessibility_status, incomplete_evidence, violation_evidence
 
 
 def fixture():
@@ -145,6 +145,48 @@ class AccessibilityEvidenceTests(unittest.TestCase):
         self.assertIsNone(self.save(result)[0]['impact'])
         result['incomplete'][0]['impact'] = 'approved'
         with self.assertRaises(ValueError): self.save(result)
+
+
+    def violation(self, result):
+        return violation_evidence(result, page_path='/living-well/weekly-reset/',
+            width=1440, scope='.lw-quick-start', javascript=True)
+
+    def test_violation_report_is_projected_without_raw_payload(self):
+        result = fixture()
+        result['violations'] = result.pop('incomplete')
+        result['incomplete'] = []
+        saved = self.violation(result)
+        self.assertEqual(saved[0]['review_status'], 'automated_violation')
+        self.assertEqual(saved[0]['nodes'][0]['target'], ['.lw-quick-start > p:nth-child(2)'])
+        for forbidden in ['PRIVATE INPUT', 'example.invalid', 'html', 'message', 'data', 'failureSummary']:
+            self.assertNotIn(forbidden, json.dumps(saved))
+        self.assertEqual(accessibility_status(1, saved, []), 'violations_found')
+
+    def test_violation_serialization_does_not_mutate_source(self):
+        result = fixture()
+        result['violations'] = deepcopy(result['incomplete'])
+        before = deepcopy(result)
+        saved = self.violation(result)
+        saved[0]['nodes'][0]['target'].append('changed')
+        self.assertEqual(result, before)
+
+    def test_empty_violations_does_not_create_a_false_failure(self):
+        self.assertEqual(self.violation(fixture()), [])
+
+    def test_malformed_violation_nodes_do_not_leak_or_disappear(self):
+        result = fixture()
+        result['violations'] = [{'id': 'color-contrast', 'nodes': [], 'html': 'PRIVATE INPUT'}]
+        with self.assertRaises(ValueError): self.violation(result)
+
+    def test_mixed_failures_and_incomplete_stay_separate_and_redacted(self):
+        result = fixture()
+        result['violations'] = deepcopy(result['incomplete'])
+        result['violations'][0]['id'] = 'other-rule'
+        violations, incomplete = self.violation(result), self.save(result)
+        self.assertEqual([x['id'] for x in violations], ['other-rule'])
+        self.assertEqual([x['id'] for x in incomplete], ['color-contrast'])
+        self.assertNotIn('PRIVATE INPUT', json.dumps({'violations': violations, 'incomplete': incomplete}))
+        self.assertEqual(accessibility_status(2, violations, incomplete), 'violations_found')
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ from urllib.parse import urlsplit
 import json
 import os
 from playwright.sync_api import expect
-from accessibility_evidence import accessibility_status, incomplete_evidence
+from accessibility_evidence import accessibility_status, incomplete_evidence, violation_evidence
 
 
 def check_weekly_reset(browser, base, root, out):
@@ -67,11 +67,12 @@ def check_weekly_reset(browser, base, root, out):
                     report['accessibility_status'] = 'scan_failed'
                     page.add_script_tag(path=os.environ['AXE_PATH'])
                     result = page.evaluate("async () => await axe.run(document.querySelector('.lw-quick-start'), {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa']}})")
-                    pending = incomplete_evidence(
-                        result, page_path='/living-well/weekly-reset/', width=width,
-                        scope='.lw-quick-start', javascript=javascript)
+                    context_fields = dict(page_path='/living-well/weekly-reset/',
+                        width=width, scope='.lw-quick-start', javascript=javascript)
+                    pending = incomplete_evidence(result, **context_fields)
+                    violations = violation_evidence(result, **context_fields)
                     report['accessibility_scans'] += 1
-                    report['violations'].extend(result['violations'])
+                    report['violations'].extend(violations)
                     report['accessibility_incomplete'].extend(pending)
                     report['accessibility_status'] = accessibility_status(
                         report['accessibility_scans'], report['violations'],
