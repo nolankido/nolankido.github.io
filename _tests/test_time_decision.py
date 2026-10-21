@@ -6,10 +6,11 @@ import unittest,sys,json,subprocess
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_tests'))
 import time_decision_history
+import feedback_context_history
 class TimeDecisionTests(unittest.TestCase):
  def test_real_release_only_restores_whole_sha_approved_files(self):
   for path,rec in time_decision_history.change().items():
-   raw=(ROOT/path).read_bytes()
+   raw=feedback_context_history.before(path,(ROOT/path).read_bytes())
    self.assertEqual(sha256(raw).hexdigest(),rec['new_sha256'])
    self.assertEqual(sha256(time_decision_history.before(path,raw)).hexdigest(),rec['old_sha256'])
    self.assertEqual(sha256(time_decision_history.before(path,raw+b" ")).hexdigest(),sha256(raw+b" ").hexdigest())

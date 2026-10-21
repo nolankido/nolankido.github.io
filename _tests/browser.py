@@ -84,7 +84,7 @@ class BrowserTests(unittest.TestCase):
     def posts(self):
         return self.page.evaluate('window.testPosts || []')
 
-    def render(self, route, width=1280):
+    def render(self, route, width=1280, *, feedback_hash='', existing_context='', prepare=None):
         if self.page: self.page.close()
         self.page = self.context.new_page()
         self.page.set_viewport_size({'width': width, 'height': 900})
@@ -122,6 +122,11 @@ class BrowserTests(unittest.TestCase):
                 return Promise.resolve({ok: window.testService >= 200 && window.testService < 300, status: window.testService});
               };
             }""", {'service': self.service, 'block': self.block_challenge})
+            if route == '/contact/':
+                self.page.evaluate("value => { window.location.hash = value; }", feedback_hash)
+                self.page.locator('#contact-context').evaluate('(node, value) => { node.value = value; }', existing_context)
+                if prepare:
+                    prepare(self.page)
             script = 'assets/poker-school-interest.js' if route == '/poker/school/' else 'assets/contact.js'
             self.page.add_script_tag(content=(ROOT / script).read_text())
 
@@ -143,6 +148,100 @@ class BrowserTests(unittest.TestCase):
 
     def verify(self):
         self.page.evaluate("window.challengeOptions.callback('test-token')")
+
+    def test_feedback_all_six_routes_are_visible_editable_and_not_sent(self):
+        pages = {p['id']: p for p in build.public_pages()}
+        for page_id in build.FEEDBACK_PAGES:
+            with self.subTest(page_id=page_id):
+                self.render('/contact/', feedback_hash='#report-' + page_id)
+                expect(self.page.locator('#contact-context')).to_have_value('https://nolankido.com' + pages[page_id]['path'])
+                expect(self.page.locator('#contact-source-title')).to_have_text(pages[page_id]['title'])
+                expect(self.page.locator('#contact-source-notice')).to_be_visible()
+                expect(self.page.locator('#contact-feedback-help')).to_be_visible()
+                for name in ['name', 'email', 'message', 'reason']:
+                    self.assertEqual(self.page.locator('[name="' + name + '"]').input_value(), '')
+                self.assertEqual(self.posts, [])
+                self.page.locator('#contact-context').fill('My own description')
+                self.page.evaluate("window.location.hash = '#report-ai-time-savings'")
+                expect(self.page.locator('#contact-context')).to_have_value('My own description')
+                self.page.locator('#contact-context').fill('')
+                expect(self.page.locator('#contact-context')).to_have_value('')
+                self.assertEqual(self.posts, [])
+
+    def test_feedback_blank_unknown_and_injected_hashes_leave_general_contact_alone(self):
+        values = ['', '#main', '#report-unknown', '#report-task-brief?message=private',
+                  '#report-task-brief&context=private', '#report-task-brief/extra',
+                  '#report-task-brief%20', '#report-https://example.invalid/',
+                  '#report-' + 'a' * 65, '#report-<img src=x>']
+        for fragment in values:
+            with self.subTest(fragment=fragment):
+                self.render('/contact/', feedback_hash=fragment)
+                expect(self.page.locator('#contact-context')).to_have_value('')
+                expect(self.page.locator('#contact-source-notice')).to_be_hidden()
+                expect(self.page.locator('#contact-feedback-help')).to_be_hidden()
+                self.assertEqual(self.posts, [])
+
+    def test_feedback_does_not_replace_a_restored_context(self):
+        self.render('/contact/', feedback_hash='#report-task-brief', existing_context='Existing draft context')
+        expect(self.page.locator('#contact-context')).to_have_value('Existing draft context')
+        expect(self.page.locator('#contact-source-notice')).to_be_hidden()
+        self.assertEqual(self.posts, [])
+
+    def test_feedback_malformed_authored_marker_cannot_seed_an_external_or_private_value(self):
+        for path in ['//example.invalid/', 'https://example.invalid/', '/technology/?q=private',
+                     '/technology/#private', '/technology/%2Fprivate/', '/a/' + 'x' * 180 + '/']:
+            with self.subTest(path=path):
+                self.render('/contact/', feedback_hash='#report-task-brief', prepare=lambda page:
+                    page.locator('#report-task-brief').evaluate('(node, value) => { node.dataset.feedbackPath = value; }', path))
+                expect(self.page.locator('#contact-context')).to_have_value('')
+                expect(self.page.locator('#contact-source-notice')).to_be_hidden()
+                self.assertEqual(self.posts, [])
+
+    def test_feedback_submission_uses_the_readers_final_context_only(self):
+        for context in ['Edited context', '']:
+            with self.subTest(context=context):
+                self.render('/contact/', feedback_hash='#report-task-brief')
+                self.fill()
+                self.page.locator('#contact-context').fill(context)
+                self.assertEqual(self.posts, [])
+                self.page.locator('#contact-submit').click()
+                self.assertEqual(self.posts, [])
+                self.verify()
+                self.page.locator('#contact-submit').click()
+                self.assertEqual(len(self.posts), 1)
+                self.assertEqual(self.posts[0]['context'], context)
+                self.assertEqual(self.posts[0]['reason'], 'Other')
+                self.assertEqual(set(self.posts[0]), {'name', 'email', 'reason', 'context', 'message', 'cf-turnstile-response', '_email'})
+                expect(self.page.locator('#form-success')).to_be_visible()
+
+    def test_feedback_failed_send_retains_edits_and_never_sends_automatically(self):
+        self.service = 500
+        self.render('/contact/', feedback_hash='#report-ai-answer-review')
+        self.fill()
+        self.page.locator('#contact-context').fill('Review the worked example')
+        self.verify()
+        self.page.locator('#contact-submit').click()
+        self.assertEqual(len(self.posts), 1)
+        expect(self.page.locator('#contact-context')).to_have_value('Review the worked example')
+        expect(self.page.locator('#contact-message')).to_have_value('An illustrative test message, never sent to a real service.')
+        expect(self.page.locator('#form-success')).to_be_hidden()
+
+    def test_feedback_mobile_spacing_and_keyboard(self):
+        for width in [320, 390, 768, 1440]:
+            with self.subTest(width=width):
+                self.render('/contact/', width, feedback_hash='#report-living-well-weekly-reset')
+                self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'), width)
+                field = self.page.locator('#contact-context')
+                field.focus()
+                expect(field).to_be_focused()
+                self.page.keyboard.press('ControlOrMeta+A')
+                self.page.keyboard.type('Keyboard correction')
+                expect(field).to_have_value('Keyboard correction')
+                self.page.add_style_tag(content='* { line-height:1.5!important; letter-spacing:.12em!important; word-spacing:.16em!important; } p { margin-bottom:2em!important; }')
+                self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'), width)
+                if os.environ.get('SCREENSHOT_DIR') and width in [390, 1440]:
+                    out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
+                    self.page.screenshot(path=str(out / ('feedback-contact-' + str(width) + '.png')), full_page=True)
 
     def test_poker_school_requires_explicit_consent(self):
         self.render('/poker/school/')
