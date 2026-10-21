@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "base_commit": "82c0a82df9969c2255e3c3ebbaacf290faeef78e",
+  "paths": {
+    "assets/task-brief.js": {
+      "old_sha256": "055f5fd4cdaa03ab3e4e738db27c95951d19e07a6c7a2c7b4f17cfdb1870283e",
+      "new_sha256": "119e38373e406c46538601ab0b36a04e3a8b7b7afb30fd8f89818559e9abe060",
+      "edits": [
+        [
+          4816,
+          4860,
+          ""
+        ]
+      ]
+    },
+    "technology/task-brief/index.html": {
+      "old_sha256": "884e084bb1a79a4feff2bb3d1ce955f2df5c823ea7a7b449e012de484712c1d2",
+      "new_sha256": "4c33a84c8ee7c1404af762dafbf4d91ae190bcf7d393dfa4463c5845f99c654f",
+      "edits": [
+        [
+          2863,
+          2873,
+          "MDU1ZjVmZA=="
+        ],
+        [
+          2874,
+          2875,
+          "Y2RhYQ=="
+        ]
+      ]
+    }
+  },
+  "production_count": 714,
+  "production_fingerprint": "631a9b1a2ca125798abb1b8d5578125f3c92e3491c7bdc116b89328bada79b29"
+}

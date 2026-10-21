@@ -83,6 +83,7 @@
       const hadResult = !result.hidden;
       dismiss();
       input.removeAttribute('aria-invalid');
+      get(key + '-error').textContent = '';
       get(key + '-error').hidden = true;
       invalidate(hadResult ? 'Entries changed. Assemble again to update your brief.' : '');
     });

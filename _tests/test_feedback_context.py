@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import feedback_context_history as history
+import task_brief_error_history
 
 EXPECTED = {
     'task-brief': '/technology/task-brief/',
@@ -51,7 +52,7 @@ class FeedbackContextTests(unittest.TestCase):
         self.assertEqual(set(build.FEEDBACK_PAGES), set(EXPECTED))
         for page_id, route in EXPECTED.items():
             path = build.output_path(route)
-            new = self.outputs[path]
+            new = task_brief_error_history.before(path, self.outputs[path])
             old = history.before(path, new)
             label = build.FEEDBACK_PAGES[page_id]
             start = '<a href="/contact/">' + label + '</a>'
@@ -158,7 +159,7 @@ class FeedbackContextTests(unittest.TestCase):
 
     def test_exact_reversal_preserves_type_and_unknown_changes_stay_visible(self):
         for path, item in history.change()['paths'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = task_brief_error_history.before(path, (ROOT / path).read_bytes())
             self.assertEqual(digest(raw), item['new_sha256'])
             before = history.before(path, raw)
             self.assertEqual(digest(before), item['old_sha256'])

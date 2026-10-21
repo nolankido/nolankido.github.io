@@ -48,6 +48,43 @@ try:
     page.locator('#brief-build').focus();page.keyboard.press('Enter')
     expect(page.locator('#brief-goal')).to_be_focused();expect(page.locator('#brief-goal')).to_have_attribute('aria-invalid','true')
     expect(page.locator('#brief-result')).to_be_hidden();report['functional']+=1
+    # An explicitly described hidden error still contributes to the browser's
+    # accessible description. Editing must clear its text, not only hide it.
+    report['error_description_checks'] = 0
+    for key in ['goal', 'materials', 'output', 'review']:
+        field = page.locator('#brief-' + key)
+        help_text = page.locator('#brief-' + key + '-help').inner_text()
+        expect(field).to_have_accessible_description(help_text + ' Add a short answer to this required field.')
+        field.fill('Fictional ' + key + ' for a sorting checklist.')
+        expect(field).to_have_accessible_description(help_text)
+        expect(page.locator('#brief-' + key + '-error')).to_have_text('')
+        expect(page.locator('#brief-' + key + '-error')).to_be_hidden()
+        assert field.get_attribute('aria-invalid') is None
+        report['error_description_checks'] += 1
+    # Clearing a prior warning does not mean an unfinished field is validated.
+    # A fresh Assemble must still report whitespace-only required content.
+    page.locator('#brief-review').fill('   ')
+    page.locator('#brief-build').click()
+    expect(page.locator('#brief-review')).to_be_focused()
+    expect(page.locator('#brief-review')).to_have_attribute('aria-invalid', 'true')
+    page.locator('#brief-review').fill('Compare every item with the supplied source.')
+    expect(page.locator('#brief-review')).to_have_accessible_description(page.locator('#brief-review-help').inner_text())
+    report['error_description_checks'] += 1
+    # Programmatic length injection exercises the optional field's existing
+    # validator without changing its normal native maxlength restriction.
+    page.locator('#brief-limits').evaluate("node => { node.value = 'x'.repeat(601); }")
+    page.locator('#brief-build').click()
+    expect(page.locator('#brief-limits')).to_have_attribute('aria-invalid', 'true')
+    expect(page.locator('#brief-limits')).to_have_accessible_description(
+        page.locator('#brief-limits-help').inner_text() + ' Shorten this to 600 characters or fewer.')
+    page.locator('#brief-limits').fill('')
+    expect(page.locator('#brief-limits')).to_have_accessible_description(page.locator('#brief-limits-help').inner_text())
+    expect(page.locator('#brief-limits-error')).to_have_text('')
+    page.locator('#brief-build').click()
+    expect(page.locator('#brief-result')).to_be_visible()
+    report['error_description_checks'] += 1
+    page.locator('#brief-clear').click()
+    page.locator('#brief-confirm-yes').click()
     page.locator('[data-brief-example="writing"] summary').click()
     page.locator('[data-use-example="writing"]').click()
     expect(page.locator('#brief-goal')).to_be_focused()
