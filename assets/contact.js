@@ -259,6 +259,32 @@
       if (!complete) resetChallenge();
     }
   });
+  // The hash selects an authored public-page marker, never arbitrary text,
+  // a query-string value, a referrer, or data from the originating tool.
+  // Run once: back/forward restoration and later edits must not be overwritten.
+  const sourceHash = window.location.hash;
+  if (/^#report-[a-z0-9-]{1,64}$/.test(sourceHash)) {
+    const source = document.getElementById(sourceHash.slice(1));
+    const context = form.elements.namedItem('context');
+    const message = form.elements.namedItem('message');
+    const notice = document.getElementById('contact-source-notice');
+    const title = document.getElementById('contact-source-title');
+    const help = document.getElementById('contact-feedback-help');
+    const path = source?.dataset.feedbackPath;
+    const label = source?.dataset.feedbackTitle;
+    if (source?.tagName === 'SPAN' && source.hidden && context && !context.value
+        && message && notice && title && help && typeof path === 'string'
+        && /^\/(?:[a-z0-9-]+\/)+$/.test(path)
+        && typeof label === 'string' && label.trim()
+        && ('https://nolankido.com' + path).length <= context.maxLength) {
+      context.value = 'https://nolankido.com' + path;
+      title.textContent = label;
+      context.setAttribute('aria-describedby', 'contact-source-notice');
+      message.setAttribute('aria-describedby', 'contact-feedback-help');
+      notice.hidden = false;
+      help.hidden = false;
+    }
+  }
   form.noValidate = true;
   fields.disabled = false;
   if (initialization) initialization.hidden = true;

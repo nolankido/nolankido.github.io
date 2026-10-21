@@ -23,6 +23,8 @@ def change():
 
 
 def before(path, data):
+    import feedback_context_history
+    data = feedback_context_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data

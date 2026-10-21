@@ -4,6 +4,7 @@ from hashlib import sha256
 from html import escape
 from pathlib import Path
 import profile_datetime_history
+import feedback_context_history
 from unittest.mock import patch
 from xml.etree import ElementTree as ET
 import html5lib
@@ -160,7 +161,7 @@ class WeeklyResetTurn09Tests(unittest.TestCase):
 
     def test_exact_hash_restoration_types_and_idempotence(self):
         for path, item in history.change()['paths'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = feedback_context_history.before(path, (ROOT / path).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'])
             restored = history.before(path, raw)
             self.assertEqual(sha256(restored).hexdigest(), item['old_sha256'])
@@ -185,7 +186,7 @@ class WeeklyResetTurn09Tests(unittest.TestCase):
         self.assertEqual(history.original_entry(e), e)
 
     def test_corrupt_history_is_rejected(self):
-        path = PAGE; raw = (ROOT / path).read_bytes()
+        path = PAGE; raw = feedback_context_history.before(path, (ROOT / path).read_bytes())
         for field, value in [('old_sha256', '0' * 64), ('old_zlib_base64', 'not base64')]:
             changed = deepcopy(history.change()); changed['paths'][path][field] = value
             with patch.object(history, 'change', return_value=changed), self.assertRaises((ValueError, zlib.error)):
