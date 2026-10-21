@@ -1,0 +1,30 @@
+name: Export reviewed brief-error source
+on:
+  push:
+    branches: [maintenance-export-brief-error-20261021]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 82c0a82df9969c2255e3c3ebbaacf290faeef78e
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Export exact public production source
+        run: |
+          set -eu
+          test "$(git rev-parse HEAD)" = 82c0a82df9969c2255e3c3ebbaacf290faeef78e
+          mkdir -p "$RUNNER_TEMP/brief-source"
+          git branch source-main HEAD
+          git bundle create "$RUNNER_TEMP/brief-source/source.bundle" source-main
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/brief-source/refs.txt"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: brief-error-source-82c0a82d
+          path: ${{ runner.temp }}/brief-source/
+          retention-days: 1
+          if-no-files-found: error
