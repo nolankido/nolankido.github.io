@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 import base64
 import json
+import task_brief_error_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '9ada5f1041f54a311f5142cb520d5f75edf3e2cd'
@@ -22,6 +23,7 @@ def change():
 
 
 def before(path, data):
+    data = task_brief_error_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data

@@ -17,6 +17,7 @@ import task_brief_growth_history as history
 import turn10_profile_history
 import answer_review_growth_history as guide_growth
 import turn04_public_source_history
+import task_brief_error_history
 
 CHANGED = {'_source/pages.json','_source/technology/task-brief.html',
            'assets/task-brief.js','assets/task-brief.css',
@@ -41,7 +42,7 @@ class TaskBriefGrowthTests(unittest.TestCase):
 
     def test_corrupted_snapshot_fails_and_wrong_input_cannot_be_reversed(self):
         record=history.change()
-        raw=(ROOT/'assets/task-brief.js').read_bytes()
+        raw=task_brief_error_history.before('assets/task-brief.js', (ROOT/'assets/task-brief.js').read_bytes())
         for mode in ('wrong_digest','invalid_zlib','wrong_old_digest'):
             broken=deepcopy(record)
             item=broken['paths']['assets/task-brief.js']
