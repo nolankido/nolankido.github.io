@@ -11,6 +11,7 @@ from pathlib import Path
 import base64
 import json
 import zlib
+import task_brief_walkthrough_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'b5cfbd5d6abee0ce1082cf14deecb508f0996e6e'
@@ -41,6 +42,7 @@ def before(path, data):
 
 
 def pages(records):
+    records = task_brief_walkthrough_history.pages(records)
     pairs = change()['page_pairs']
     result = []
     for page in records:

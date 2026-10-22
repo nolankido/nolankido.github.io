@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 import task_brief_error_history as history
+import task_brief_walkthrough_history as walkthrough
 
 OLD = "      input.removeAttribute('aria-invalid');\n      get(key + '-error').hidden = true;"
 NEW = "      input.removeAttribute('aria-invalid');\n      get(key + '-error').textContent = '';\n      get(key + '-error').hidden = true;"
@@ -24,7 +25,7 @@ class TaskBriefErrorStateTests(unittest.TestCase):
 
     def test_rendered_page_changes_only_the_script_content_version(self):
         path = 'technology/task-brief/index.html'
-        page = (ROOT / path).read_text()
+        page = walkthrough.before(path, (ROOT / path).read_text())
         script = (ROOT / 'assets/task-brief.js').read_bytes()
         old_script = history.before('assets/task-brief.js', script)
         current = '/assets/task-brief.js?v=' + sha256(script).hexdigest()[:12]
@@ -62,7 +63,7 @@ console.log('Seven current/parent assembly cases match.');
 
     def test_reversal_is_exact_idempotent_and_type_preserving(self):
         for name, item in history.change()['paths'].items():
-            raw = (ROOT / name).read_bytes()
+            raw = walkthrough.before(name, (ROOT / name).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'])
             old = history.before(name, raw)
             self.assertEqual(sha256(old).hexdigest(), item['old_sha256'])

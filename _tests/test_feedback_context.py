@@ -139,7 +139,8 @@ class FeedbackContextTests(unittest.TestCase):
         self.assertNotIn('hashchange', section)
 
     def test_output_inventory_is_unchanged_and_exactly_seven_pages_change(self):
-        changed = [str(p) for p, value in self.outputs.items() if history.before(p, value) != value]
+        prior = {p: task_brief_error_history.before(p, value) for p, value in self.outputs.items()}
+        changed = [str(p) for p, value in prior.items() if history.before(p, value) != value]
         expected = {'contact/index.html'} | {str(build.output_path(r)) for r in EXPECTED.values()}
         self.assertEqual(set(changed), expected)
         self.assertEqual(len(self.outputs), 222)

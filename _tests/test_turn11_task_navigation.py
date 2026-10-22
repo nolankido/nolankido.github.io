@@ -1,6 +1,7 @@
 """Turn 11: task-first entry, file-first resources and query-first finder."""
 from pathlib import Path
 import profile_datetime_history
+import task_brief_walkthrough_history
 from hashlib import sha256
 from html.parser import HTMLParser
 import sys,unittest,json,zlib
@@ -78,8 +79,9 @@ class TaskRouteTests(unittest.TestCase):
   self.assertTrue(finder['noindex'])
   self.assertIn('<meta name="robots" content="noindex',self.page('/find/'))
  def test_latest_dates_do_not_republish_articles(self):
-  current=json.loads((ROOT/'_source/pages.json').read_text())
-  previous=json.loads(history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text()))
+  raw=task_brief_walkthrough_history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text())
+  current=json.loads(raw)
+  previous=json.loads(history.before('_source/pages.json',raw))
   changes=[a['id'] for a,b in zip(current,previous) if a!=b]
   self.assertEqual(changes,['find'])
   for key in ['about','bio','ai-answer-review']:

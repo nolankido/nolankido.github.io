@@ -18,6 +18,7 @@ import turn10_profile_history
 import answer_review_growth_history as guide_growth
 import turn04_public_source_history
 import task_brief_error_history
+import task_brief_walkthrough_history as walkthrough
 
 CHANGED = {'_source/pages.json','_source/technology/task-brief.html',
            'assets/task-brief.js','assets/task-brief.css',
@@ -55,7 +56,7 @@ class TaskBriefGrowthTests(unittest.TestCase):
                     with self.assertRaises(ValueError): history.before('assets/task-brief.js',raw)
 
     def test_metadata_is_bounded_and_does_not_relabel_other_pages(self):
-        items=build.public_pages()
+        items=walkthrough.pages(build.public_pages())
         newer=next(p for p in items if p['id']=='task-brief')
         self.assertEqual(newer,history.change()['page']['new'])
         self.assertEqual(newer['updated'],'2026-10-17')
@@ -68,7 +69,7 @@ class TaskBriefGrowthTests(unittest.TestCase):
         self.assertEqual(turn10_profile_history.pages(guide_growth.pages(others)),history.pages(others))
 
     def test_six_static_examples_have_complete_reviewable_fields(self):
-        source=(ROOT/'_source/technology/task-brief.html').read_text()
+        source=walkthrough.before('_source/technology/task-brief.html', (ROOT/'_source/technology/task-brief.html').read_text())
         self.assertEqual(source.count('data-brief-example='),6)
         for key in EXAMPLES:
             m=re.search(r'<details class="brief-example" data-brief-example="'+key+r'">(.*?)</details>',source,re.S)
