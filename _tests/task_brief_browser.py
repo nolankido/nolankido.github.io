@@ -179,6 +179,27 @@ try:
                 page.add_script_tag(path=os.environ['AXE_PATH'])
                 scan=page.evaluate("async()=>await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})")
                 assert scan['violations']==[],scan['violations'];report['axe']+=1
+    # The optional walkthrough is ordinary HTML and never edits a draft.
+    report['walkthrough_checks'] = 0
+    page.locator('#brief-goal').fill('Keep this unsubmitted example draft.')
+    for width in [320,390,768,1440]:
+        page.set_viewport_size({'width':width,'height':950})
+        guide=page.locator('#brief-walkthrough')
+        summary=guide.locator('summary')
+        summary.focus();page.keyboard.press('Enter')
+        expect(guide.locator('ol')).to_be_visible()
+        expect(guide.locator('li')).to_have_count(4)
+        assert page.locator('#brief-goal').input_value()=='Keep this unsubmitted example draft.'
+        assert page.evaluate('document.documentElement.scrollWidth')<=width
+        style=page.add_style_tag(content=spacing)
+        assert page.evaluate('document.documentElement.scrollWidth')<=width
+        style.evaluate('(el)=>el.remove()')
+        if width in [390,1440]:
+            guide.scroll_into_view_if_needed()
+            page.screenshot(path=str(screenshots/f'task-brief-walkthrough-{width}.png'),full_page=False)
+        summary.focus();page.keyboard.press('Enter')
+        expect(guide.locator('ol')).to_be_hidden()
+        report['walkthrough_checks']+=1
     if not args.offline:
         for route_path in ['/technology/','/resources/','/start-here/']:
             page.goto(base+route_path)
@@ -190,7 +211,9 @@ try:
     context.close()
     # Both disabled scripts and a failed asset preserve the three examples and blank text.
     for mode in ['disabled','blocked']:
-        c=browser.new_context(java_script_enabled=mode!='disabled')
+        # Disable smooth-scroll animation in these no-script fallback fixtures;
+        # pointer actionability must not depend on a disabled page's animation clock.
+        c=browser.new_context(java_script_enabled=mode!='disabled', reduced_motion='reduce')
         def fallback_route(r):
             if 'task-brief.js' in r.request.url:r.abort()
             elif not args.offline and urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()
@@ -199,7 +222,14 @@ try:
         p=c.new_page();render(p,False)
         expect(p.locator('#brief-editor')).to_be_hidden();expect(p.locator('#brief-unavailable')).to_be_visible()
         assert p.locator('.brief-example').count()==6
-        p.locator('.brief-template summary').click()
+        guide=p.locator('#brief-walkthrough')
+        guide.locator('summary').focus();p.keyboard.press('Enter')
+        expect(guide.locator('ol')).to_be_visible()
+        expect(guide).to_contain_text('Without JavaScript:')
+        expect(guide.locator('a[href="#brief-example-meeting"]')).to_have_count(1)
+        expect(p.locator('#brief-example-meeting')).to_have_count(1)
+        report['walkthrough_checks']+=1
+        p.locator('#brief-blank .brief-template summary').click()
         assert p.locator('.brief-template pre').inner_text().strip()+'\n'==(ROOT/'downloads/ai-task-brief.txt').read_text()
         if not args.offline:
             # Build notes and the original worksheet section both offer this file.

@@ -4,6 +4,7 @@ from hashlib import sha256
 from pathlib import Path
 import base64
 import json
+import task_brief_walkthrough_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '82c0a82df9969c2255e3c3ebbaacf290faeef78e'
@@ -20,6 +21,7 @@ def change():
 
 
 def before(path, data):
+    data = task_brief_walkthrough_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data
