@@ -1,0 +1,32 @@
+name: Prepare bounded brief walkthrough
+on:
+  push:
+    branches: [maintenance-prepare-brief-walkthrough-20261021]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Preserve reviewed preparation inputs outside checkout
+        run: |
+          mkdir -p "$RUNNER_TEMP/walkthrough"
+          cp _reports/maintenance/walkthrough/* "$RUNNER_TEMP/walkthrough/"
+      - name: Reproduce pinned candidate and store Git objects only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$RUNNER_TEMP/walkthrough/prepare.py" "$RUNNER_TEMP/walkthrough"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: prepared-brief-walkthrough-tree
+          path: ${{ runner.temp }}/walkthrough/candidate.json
+          retention-days: 1
+          if-no-files-found: error
