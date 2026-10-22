@@ -5,6 +5,7 @@ from html import escape
 from pathlib import Path
 import profile_datetime_history
 import feedback_context_history
+import task_brief_walkthrough_history
 from unittest.mock import patch
 from xml.etree import ElementTree as ET
 import html5lib
@@ -131,8 +132,9 @@ class WeeklyResetTurn09Tests(unittest.TestCase):
                       self.outputs[Path('living-well/guides/index.html')])
 
     def test_only_weekly_reset_metadata_changes_and_dates_are_consistent(self):
-        restored = history.pages(self.pages)
-        pairs = [(a, b) for a, b in zip(restored, self.pages) if a != b]
+        current = task_brief_walkthrough_history.pages(self.pages)
+        restored = history.pages(current)
+        pairs = [(a, b) for a, b in zip(restored, current) if a != b]
         self.assertEqual(len(pairs), 1)
         self.assertEqual(pairs[0][1]['path'], ROUTE)
         self.assertEqual(self.entry['published'], '2026-10-08')
