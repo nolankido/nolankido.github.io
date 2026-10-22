@@ -1,0 +1,77 @@
+name: Prepare walkthrough history correction
+on:
+  push:
+    branches: [maintenance-qualify-walkthrough-history-20261021]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install existing pinned test dependencies
+        run: python -m pip install -r requirements-test.txt
+      - name: Reproduce two exact history comparisons and store objects only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64, hashlib, json, os, subprocess, sys
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          base = 'c4a19073720aedb530211dd2ca564a2134af2eac'
+          tree = '75e2d74ad15c5c9cbddb1d4c2d226c60f08d6a44'
+          expected = 'f1ba18274110fd1d9bd470ada5f3b7d064b21d13'
+          repo = 'nolankido/nolankido.github.io'
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          subprocess.run(['git', 'checkout', '--detach', base], check=True)
+          assert git('rev-parse', 'HEAD^{tree}') == tree
+          changes = {
+              '_tests/test_turn11_task_navigation.py': [
+                  ('import profile_datetime_history\n', 'import profile_datetime_history\nimport task_brief_walkthrough_history\n'),
+                  ("  current=json.loads((ROOT/'_source/pages.json').read_text())\n  previous=json.loads(history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text()))", "  raw=task_brief_walkthrough_history.before('_source/pages.json',(ROOT/'_source/pages.json').read_text())\n  current=json.loads(raw)\n  previous=json.loads(history.before('_source/pages.json',raw))")],
+              '_tests/test_weekly_reset_turn09.py': [
+                  ('import feedback_context_history\n', 'import feedback_context_history\nimport task_brief_walkthrough_history\n'),
+                  ('        restored = history.pages(self.pages)\n        pairs = [(a, b) for a, b in zip(restored, self.pages) if a != b]', '        current = task_brief_walkthrough_history.pages(self.pages)\n        restored = history.pages(current)\n        pairs = [(a, b) for a, b in zip(restored, current) if a != b]')]
+          }
+          for name, edits in changes.items():
+              path = Path(name)
+              content = path.read_text()
+              for old, new in edits:
+                  assert content.count(old) == 1, name
+                  content = content.replace(old, new, 1)
+              path.write_text(content)
+          subprocess.run(['git', 'add', '--', *changes], check=True)
+          assert git('diff', '--cached', '--name-only').splitlines() == sorted(changes)
+          assert git('write-tree') == expected
+          for pattern in ('test_turn11_task_navigation.py', 'test_weekly_reset_turn09.py'):
+              subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', '_tests', '-p', pattern, '-v'], check=True)
+          token = os.environ['GH_TOKEN']
+          assert os.environ['GITHUB_REPOSITORY'] == repo
+          def post(endpoint, body):
+              req = Request('https://api.github.com/repos/' + repo + '/git/' + endpoint,
+                  data=json.dumps(body).encode(), method='POST',
+                  headers={'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json',
+                           'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28'})
+              with urlopen(req, timeout=45) as response:
+                  return json.load(response)
+          elements = []
+          for name in changes:
+              raw = Path(name).read_bytes()
+              sha = hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest()
+              blob = post('blobs', {'content': base64.b64encode(raw).decode(), 'encoding': 'base64'})
+              assert blob['sha'] == sha
+              elements.append({'path': name, 'mode': '100644', 'type': 'blob', 'sha': sha})
+          result = post('trees', {'base_tree': tree, 'tree': elements})
+          assert result['sha'] == expected
+          print('CANDIDATE_TREE=' + expected)
+          print('Only Git objects stored. No repository reference changed.')
+          PY
