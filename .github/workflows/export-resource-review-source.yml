@@ -1,0 +1,31 @@
+name: Export pinned resource review source
+on:
+  push:
+    branches: [maintenance-resource-review-source-20261023]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 9c77098763f7f7e43d80a8e6994283484593b78e
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Export exact existing Git objects only
+        run: |
+          set -eu
+          test "$(git rev-parse HEAD)" = 9c77098763f7f7e43d80a8e6994283484593b78e
+          test "$(git rev-parse HEAD^{tree})" = f1ba18274110fd1d9bd470ada5f3b7d064b21d13
+          mkdir -p "$RUNNER_TEMP/source-export"
+          git update-ref refs/heads/source-main HEAD
+          git bundle create "$RUNNER_TEMP/source-export/source.bundle" refs/heads/source-main
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/source-export/refs.txt"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: resource-review-source-9c770987
+          path: ${{ runner.temp }}/source-export/
+          retention-days: 1
+          if-no-files-found: error
