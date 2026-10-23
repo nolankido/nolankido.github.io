@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 import base64
 import json
+import resource_review_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '564a9d7eaf634497767ade3db4bcb6a3b2bd9c61'
@@ -22,6 +23,7 @@ def change():
 
 
 def before(path, data):
+    data = resource_review_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "directory": "https://nolankido.com/poker/resources/",
-  "latest_listing_review": "2026-10-16",
+  "latest_listing_review": "2026-10-23",
   "scope": "Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.",
   "entries": [
     {
@@ -183,7 +183,7 @@
       "level": "All levels",
       "description": "Official starting point for APPT event information and links to individual stops.",
       "notes": "Free refers to reading the page, not participating. Dates, eligibility and registration conditions need an event-specific check.",
-      "reviewed_on": "2026-10-08",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -197,7 +197,7 @@
       "level": "All levels",
       "description": "Official series information, reports, and routes to tournament rules.",
       "notes": "This directory does not copy or guarantee event dates or prize details.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -211,7 +211,7 @@
       "level": "All levels",
       "description": "Official EPT event pages and festival information.",
       "notes": "Dates and local event requirements should be reconfirmed before travel.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -225,7 +225,7 @@
       "level": "All levels",
       "description": "Organizer-controlled entry point for festival information, schedules and event updates.",
       "notes": "The public hub was inspected, not bookings or entry eligibility. Check the specific year, structure, terms and latest organizer updates before making plans.",
-      "reviewed_on": "2026-10-08",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -239,7 +239,7 @@
       "level": "All levels",
       "description": "Operator information for poker events and schedules, adding a European cardroom source to the directory.",
       "notes": "A source for event confirmation, not a travel recommendation. Recheck venue, year, structure and entry conditions with the organizer.",
-      "reviewed_on": "2026-10-08",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -253,7 +253,7 @@
       "level": "All levels",
       "description": "Follow the tour's event listings to festival schedules, venue information and tournament coverage.",
       "notes": "Use the organizer's current event page rather than treating this directory as a copied calendar.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -267,7 +267,7 @@
       "level": "All levels",
       "description": "Official high-roller tour information, events, coverage, and standings.",
       "notes": "Event information is distinct from access to a paid broadcast.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -281,7 +281,7 @@
       "level": "All levels",
       "description": "The cardroom's source for tournament series, daily events, poker updates and links to event details.",
       "notes": "Check the exact event and structure with the room before acting. No copied schedule, travel advice or guarantee of availability.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -295,7 +295,7 @@
       "level": "All levels",
       "description": "Navigate the organizer's DeepStack festivals, event schedules, structure sheets and results links.",
       "notes": "Series pages can change. Verify final event terms directly; linked PDFs were not independently audited.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -309,7 +309,7 @@
       "level": "All levels",
       "description": "Find the tour's events and follow links to the corresponding festival details.",
       "notes": "Use this live source rather than a copied date list when making plans.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -323,7 +323,7 @@
       "level": "All levels",
       "description": "The organizer's schedule for bracelet, Circuit, and Super Circuit events.",
       "notes": "Schedules change. Confirm the exact event, structure, and registration details with the organizer.",
-      "reviewed_on": "2026-10-07",
+      "reviewed_on": "2026-10-23",
       "review_method": "page"
     },
     {
@@ -1021,10 +1021,10 @@
       "kind": "Official rules",
       "level": "All levels",
       "description": "Official access point for longform and shortform tournament rules, illustrated material and translation links.",
-      "notes": "Search-index description checked; direct page retrieval timed out. Downloads and translations were not individually reviewed. Check the document version and the event rules actually adopted.",
+      "notes": "Public download page and translation index inspected. Linked rule files and individual translations were not reviewed. Check each document's version and the event rules actually adopted.",
       "access": "Free",
-      "reviewed_on": "2026-10-08",
-      "review_method": "index"
+      "reviewed_on": "2026-10-23",
+      "review_method": "page"
     },
     {
       "id": "db-poker-books",

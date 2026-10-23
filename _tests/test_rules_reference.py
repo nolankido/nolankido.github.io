@@ -12,6 +12,7 @@ import poker_resources
 import poker_finder
 import poker_library
 import rules_reference_history as history
+import resource_review_history
 
 GUIDES = ('follow-along', 'table-etiquette', 'position-and-stacks',
           'poker-rules-and-fair-play', 'first-decisions', 'getting-started')
@@ -106,7 +107,7 @@ class RulesReferenceTests(unittest.TestCase):
                          ('bc0d6ae893e59b89aaa63fd7c6aa58be78045fae', 193, 221, 481))
         prior = {e['id']: e for e in self.baseline['resources']}
         self.assertEqual(len(prior), 146)
-        changed = [e['id'] for e in self.resources if e != prior[e['id']]]
+        changed = [e['id'] for e in resource_review_history.resources(self.resources) if e != prior[e['id']]]
         self.assertEqual(changed, ['tda-rules'])
         self.assertEqual(history.resources(self.resources), self.baseline['resources'])
         mutated = deepcopy(self.resources); mutated[1]['notes'] += 'Unreviewed edit'

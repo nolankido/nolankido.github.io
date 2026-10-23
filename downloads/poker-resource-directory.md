@@ -2,7 +2,7 @@
 
 Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.
 
-146 unique resources. Most recent individual listing review: 2026-10-16.
+146 unique resources. Most recent individual listing review: 2026-10-23.
 
 This is not a claim that all resources were rechecked on that date.
 
@@ -172,7 +172,7 @@ Official starting point for APPT event information and links to individual stops
 
 Before you use it: Free refers to reading the page, not participating. Dates, eligibility and registration conditions need an event-specific check.
 
-Listing review: 2026-10-08 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-appt-official
 
 ## Asian Poker Tour series
@@ -185,7 +185,7 @@ Official series information, reports, and routes to tournament rules.
 
 Before you use it: This directory does not copy or guarantee event dates or prize details.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-apt-schedule
 
 ## European Poker Tour schedule
@@ -198,7 +198,7 @@ Official EPT event pages and festival information.
 
 Before you use it: Dates and local event requirements should be reconfirmed before travel.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-ept-schedule
 
 ## Irish Poker Open: official event hub
@@ -211,7 +211,7 @@ Organizer-controlled entry point for festival information, schedules and event u
 
 Before you use it: The public hub was inspected, not bookings or entry eligibility. Check the specific year, structure, terms and latest organizer updates before making plans.
 
-Listing review: 2026-10-08 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-irish-open-official
 
 ## King's Resort: official poker information
@@ -224,7 +224,7 @@ Operator information for poker events and schedules, adding a European cardroom 
 
 Before you use it: A source for event confirmation, not a travel recommendation. Recheck venue, year, structure and entry conditions with the organizer.
 
-Listing review: 2026-10-08 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-kings-poker-official
 
 ## MSPT events and tournament information
@@ -237,7 +237,7 @@ Follow the tour's event listings to festival schedules, venue information and to
 
 Before you use it: Use the organizer's current event page rather than treating this directory as a copied calendar.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-mspt-events
 
 ## PokerGO Tour
@@ -250,7 +250,7 @@ Official high-roller tour information, events, coverage, and standings.
 
 Before you use it: Event information is distinct from access to a paid broadcast.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-pgt
 
 ## Thunder Valley poker information and events
@@ -263,7 +263,7 @@ The cardroom's source for tournament series, daily events, poker updates and lin
 
 Before you use it: Check the exact event and structure with the room before acting. No copied schedule, travel advice or guarantee of availability.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-thunder-valley-poker
 
 ## Venetian DeepStack tournament series
@@ -276,7 +276,7 @@ Navigate the organizer's DeepStack festivals, event schedules, structure sheets 
 
 Before you use it: Series pages can change. Verify final event terms directly; linked PDFs were not independently audited.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-venetian-deepstack
 
 ## World Poker Tour schedule
@@ -289,7 +289,7 @@ Find the tour's events and follow links to the corresponding festival details.
 
 Before you use it: Use this live source rather than a copied date list when making plans.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-wpt-schedule
 
 ## WSOP and Circuit schedule
@@ -302,7 +302,7 @@ The organizer's schedule for bracelet, Circuit, and Super Circuit events.
 
 Before you use it: Schedules change. Confirm the exact event, structure, and registration details with the organizer.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-wsop-schedule
 
 ## Wynn Las Vegas poker schedules and structures
@@ -950,9 +950,9 @@ Poker Tournament Directors Association | rules | Official rules | Free | All lev
 
 Official access point for longform and shortform tournament rules, illustrated material and translation links.
 
-Before you use it: Search-index description checked; direct page retrieval timed out. Downloads and translations were not individually reviewed. Check the document version and the event rules actually adopted.
+Before you use it: Public download page and translation index inspected. Linked rule files and individual translations were not reviewed. Check each document's version and the event rules actually adopted.
 
-Listing review: 2026-10-08 (index).
+Listing review: 2026-10-23 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-tda-rule-downloads
 
 ## D&B Poker book catalogue
