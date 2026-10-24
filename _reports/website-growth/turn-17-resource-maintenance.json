@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-10-23",
+  "base_commit": "9c77098763f7f7e43d80a8e6994283484593b78e",
+  "catalogue_count": 146,
+  "queued_before": 14,
+  "direct_catalogue_pages_read": 12,
+  "inconclusive_catalogue_reads": 2,
+  "supplemental_pages_read": 1,
+  "review_mode": "Manual inspection of original-publisher public web text; not a bulk HTTP-status certification",
+  "no_resource_ids_added_or_removed": true,
+  "no_destination_urls_changed": true,
+  "no_prices_dates_or_guarantees_copied": true,
+  "other_134_records_unchanged": true,
+  "entries": [
+    {
+      "id": "tda-rule-downloads",
+      "url": "https://www.pokertda.com/poker-tda-rules/",
+      "publisher": "Poker Tournament Directors Association",
+      "previous_reviewed_on": "2026-10-08",
+      "outcome": "page_read",
+      "observed_content": "Official download index distinguishes longform and shortform files and links to foreign-language translations and historical editions. The linked translation board was also readable.",
+      "limitations": "Linked rule files, DOCX/PDF contents and individual translations were not inspected. The separate tda-rules source-version record is unchanged.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_method_and_scope_note"
+    },
+    {
+      "id": "nj-dge-information",
+      "url": "https://www.njoag.gov/about/divisions-and-offices/division-of-gaming-enforcement-home/internet-gaming-information/",
+      "publisher": "New Jersey Division of Gaming Enforcement",
+      "previous_reviewed_on": "2026-10-08",
+      "outcome": "inconclusive",
+      "observed_content": "The read returned HTTP 403 Forbidden, without usable page content.",
+      "limitations": "Access refusal does not establish a dead or unsafe link. Retain the complete existing listing and review date.",
+      "proposed_reviewed_on": "2026-10-08",
+      "catalogue_change": "none"
+    },
+    {
+      "id": "apt-schedule",
+      "url": "https://www.theasianpokertour.com/",
+      "publisher": "Asian Poker Tour",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Organizer hub contains series links, news and routes to tournament rules.",
+      "limitations": "Public hub only; no player registration, linked structure audit or participation eligibility check.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "ept-schedule",
+      "url": "https://www.pokerstarslive.com/ept/",
+      "publisher": "PokerStars Live",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Official EPT schedule names tour stops and links to their festival pages.",
+      "limitations": "Landing-page scope only. No individual stop, fee, hotel or eligibility verification.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "mspt-events",
+      "url": "https://msptpoker.com/",
+      "publisher": "MSPT",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Tour hub lists upcoming events and links to event schedules and venue information.",
+      "limitations": "Linked structures and registration were not inspected; no guarantees or copied event dates are added.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "pgt",
+      "url": "https://www.pgt.com/",
+      "publisher": "PokerGO Tour",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Official hub exposes event listings, coverage, schedule navigation and standings.",
+      "limitations": "Public information only; no paid broadcast or product testing.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "thunder-valley-poker",
+      "url": "https://www.thundervalleyresort.com/casino/poker",
+      "publisher": "Thunder Valley Casino Resort",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Cardroom page includes poker updates, series information, a daily tournament schedule link and room information.",
+      "limitations": "The web reader reports a crawl from October 22, reviewed October 23. Landing-page review, not a check of every linked structure or current event availability.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "venetian-deepstack",
+      "url": "https://www.venetianlasvegas.com/resort/casino/poker/deepstack-extravaganza-poker-tournament.html",
+      "publisher": "The Venetian Resort",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Official series page describes DeepStack categories and provides schedule, structure and results links.",
+      "limitations": "Linked PDF documents and individual event terms were not independently checked.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "wpt-schedule",
+      "url": "https://www.worldpokertour.com/event/schedule",
+      "publisher": "World Poker Tour",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Official tour schedule contains named events and links to their festival details.",
+      "limitations": "No registration, qualification offer or event-specific eligibility check; no schedule copied to the directory.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "wsop-schedule",
+      "url": "https://www.wsop.com/schedule/",
+      "publisher": "World Series of Poker",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "page_read",
+      "observed_content": "Organizer schedule presents bracelet, Circuit and Super Circuit categories with individual event links.",
+      "limitations": "No tickets, qualifiers or registration flows opened; individual dates and structures remain separate checks.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "wynn-poker",
+      "url": "https://www.wynnlasvegas.com/casino/poker",
+      "publisher": "Wynn Las Vegas",
+      "previous_reviewed_on": "2026-10-07",
+      "outcome": "inconclusive",
+      "observed_content": "The read returned HTTP 403 Forbidden, without usable page content.",
+      "limitations": "Retain the original listing, page-review basis and October 7 date. This attempt is not a completed recheck.",
+      "proposed_reviewed_on": "2026-10-07",
+      "catalogue_change": "none"
+    },
+    {
+      "id": "appt-official",
+      "url": "https://www.pokerstarslive.com/appt/",
+      "publisher": "PokerStars Live",
+      "previous_reviewed_on": "2026-10-08",
+      "outcome": "page_read",
+      "observed_content": "Official APPT hub lists tour stops and links to individual event information.",
+      "limitations": "Free means public reading. No event participation, eligibility or registration verification.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "irish-open-official",
+      "url": "https://irishpokeropen.com/",
+      "publisher": "Irish Poker Open",
+      "previous_reviewed_on": "2026-10-08",
+      "outcome": "page_read",
+      "observed_content": "Organizer hub provides schedule navigation, upcoming-stop links and event updates.",
+      "limitations": "No booking, payment, satellite or eligibility review.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    },
+    {
+      "id": "kings-poker-official",
+      "url": "https://kings-resort.com/poker",
+      "publisher": "King's Resort",
+      "previous_reviewed_on": "2026-10-08",
+      "outcome": "page_read",
+      "observed_content": "Official poker landing page contains festival entries, schedule navigation and event information routes.",
+      "limitations": "Some live tables are dynamically loaded. No claim about live cash-game counts, registration or event-specific terms.",
+      "proposed_reviewed_on": "2026-10-23",
+      "catalogue_change": "date_only"
+    }
+  ],
+  "supplemental": [
+    {
+      "url": "https://www.pokertda.com/forum/index.php?board=27.0",
+      "scope": "Foreign-language translation topic index only; individual topic contents and files not reviewed."
+    }
+  ],
+  "publication_status": "candidate_not_released"
+}

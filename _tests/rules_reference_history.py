@@ -4,6 +4,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 import json
+import resource_review_history
 import poker_school_history
 import poker_search_history
 import poker_progress_history
@@ -43,5 +44,6 @@ def outputs(records):
 
 
 def resources(records):
+    records = resource_review_history.resources(records)
     pairs = change()['resources']
     return [deepcopy(pairs[r['id']]['old']) if r['id'] in pairs and r == pairs[r['id']]['new'] else deepcopy(r) for r in records]

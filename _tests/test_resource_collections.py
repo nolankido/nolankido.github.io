@@ -7,6 +7,7 @@ import copy
 import json
 import tempfile
 import unittest
+import resource_review_history
 from test_site import ROOT, Page, build
 import poker_collections
 import poker_resources
@@ -123,7 +124,7 @@ class CollectionTests(unittest.TestCase):
         batch = json.loads((ROOT / '_reports/resource-expansion-batch-004.json').read_text())
         self.assertEqual(len(batch['accepted_ids']), 24)
         self.assertTrue(set(batch['accepted_ids']) <= {r['id'] for r in self.resources})
-        for r in self.resources:
+        for r in resource_review_history.resources(self.resources):
             if r['id'] in batch['accepted_ids']:
                 self.assertEqual(r['reviewed_on'], '2026-10-08')
                 self.assertEqual(r['review_method'], 'page')
