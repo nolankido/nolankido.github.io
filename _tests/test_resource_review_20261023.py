@@ -14,15 +14,16 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import poker_resources
 import resource_review_history as history
+import resource_followup_history as followup
 
 
 class ResourceReviewTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.raw = (ROOT / '_source/poker/resources.json').read_text()
+        cls.raw = followup.before('_source/poker/resources.json', (ROOT / '_source/poker/resources.json').read_text())
         cls.current = json.loads(cls.raw)['entries']
         cls.previous = json.loads(history.before('_source/poker/resources.json', cls.raw))['entries']
-        cls.entries = poker_resources.load(ROOT)
+        cls.entries = followup.resources(poker_resources.load(ROOT))
         cls.outputs = build.build_outputs()
 
     def test_only_twelve_reviewed_records_change_with_one_scope_correction(self):
@@ -65,7 +66,7 @@ class ResourceReviewTests(unittest.TestCase):
         self.assertTrue((history.IDS - {'tda-rule-downloads'}) <= {r['id'] for r in later})
 
     def test_all_generated_copies_use_the_current_single_catalogue(self):
-        payload = json.loads(self.outputs[Path('downloads/poker-resource-directory.json')])
+        payload = json.loads(followup.before('downloads/poker-resource-directory.json', self.outputs[Path('downloads/poker-resource-directory.json')]))
         self.assertEqual({r['id']: r for r in payload['entries']}, {r['id']: r for r in self.entries})
         entry = next(r for r in self.entries if r['id'] == 'tda-rule-downloads')
         for name in ['downloads/poker-resource-directory.md', 'poker/find/index.html', 'poker/resources/index.html']:
@@ -95,7 +96,7 @@ class ResourceReviewTests(unittest.TestCase):
 
     def test_byte_reversal_preserves_types_and_unknown_changes_remain_visible(self):
         for name, item in history.change()['paths'].items():
-            raw = (ROOT / name).read_bytes()
+            raw = followup.before(name, (ROOT / name).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'])
             old = history.before(name, raw)
             self.assertEqual(sha256(old).hexdigest(), item['old_sha256'])

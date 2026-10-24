@@ -1,0 +1,5 @@
+# Turn 18: two checked directory sources
+
+Reviewed October 24, 2026. New Jersey DGE's Internet Gaming Information page and Wynn Las Vegas Poker's official room page were readable through a second permitted public extractor, although the initial URL fetch returned HTTP 403. The DGE landing page describes approved-site information, permit holders, and filing a complaint with the operator before escalating an Internet-gaming dispute. Wynn's landing page describes cash games, tournament series, daily tournament information and schedule/structure links.
+
+The listed reviews cover only those original public pages, not their linked documents, specific licenses, event schedules, eligibility, payments or live availability. Exactly two review records changed; 144 other records and all 146 destination URLs/IDs remain unchanged. Generated directory, finder and export surfaces were rebuilt from one catalogue. No website scripting, Task Brief interface, tracking, storage, stylesheet, sitemap or publication date changed. These are editorial checks, not real visitor observations or growth data.

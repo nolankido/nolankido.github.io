@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-24",
+  "base_commit": "fbfd99915d6b11332b0bf771c8ad7103d8be0d93",
+  "ids": [
+    "nj-dge-information",
+    "wynn-poker"
+  ],
+  "source_checks": "two direct public landing-page text reads",
+  "limits": "linked files, status, schedules, approvals and eligibility not verified",
+  "status": "candidate, not yet published"
+}
