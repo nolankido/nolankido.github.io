@@ -1,0 +1,26 @@
+name: Stage two resource review corrections
+on:
+  push:
+    branches: [maintenance-stage-resource-followup-20261024]
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: cp _maintenance/stage-resource-followup.py "$RUNNER_TEMP/stage-resource-followup.py"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: fbfd99915d6b11332b0bf771c8ad7103d8be0d93
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Check and stage reviewed files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python "$RUNNER_TEMP/stage-resource-followup.py"
