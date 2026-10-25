@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "base_commit": "a6aa35f61f65f96bb18a632ac77a6008987421b7",
+  "paths": {
+    "assets/task-brief.css": {
+      "new_sha256": "809d7f40751bec652062d1cb3d7442633e18ee66c41e6abdf08a0c40eec65996",
+      "old_sha256": "5c177eb7a6457ff7fe4dd8d509e5db4f04abd1c8d36e409a641df029be892ba5",
+      "new": "min-height: 44px; box-sizing: border-box; padding-block: 8px;",
+      "old": "min-height: 28px;"
+    },
+    "technology/task-brief/index.html": {
+      "new_sha256": "38309cde704dd236fe2698a9ca5c8c91fe78716845296279135fae9ff53a5049",
+      "old_sha256": "70f71c03942a95bf1b5852fde69253d33fcceb9d3a6aee40d49d125f11f1b002",
+      "new": "/assets/task-brief.css?v=809d7f40751b",
+      "old": "/assets/task-brief.css?v=5c177eb7a645"
+    }
+  }
+}

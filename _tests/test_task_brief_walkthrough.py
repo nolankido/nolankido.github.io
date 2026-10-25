@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import task_brief_walkthrough_history as history
+import task_brief_disclosure_history as disclosure
 
 SOURCE = '_source/technology/task-brief.html'
 PAGE = 'technology/task-brief/index.html'
@@ -93,7 +94,7 @@ class TaskBriefWalkthroughTests(unittest.TestCase):
 
     def test_exact_reversal_preserves_type_and_does_not_hide_unknown_changes(self):
         for name, item in history.change()['paths'].items():
-            raw = (ROOT / name).read_bytes()
+            raw = disclosure.before(name, (ROOT / name).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'])
             old = history.before(name, raw)
             self.assertEqual(sha256(old).hexdigest(), item['old_sha256'])

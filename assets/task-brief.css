@@ -31,7 +31,7 @@
 #brief-text { min-height: 340px; overflow-wrap: anywhere; }
 #brief-status, #brief-copy-status { font: .9rem/1.55 var(--sans); }
 .brief-example, .brief-template { border-top: 1px solid var(--line-dark); padding: 18px 0; }
-.brief-example summary, .brief-template summary { cursor: pointer; font: 600 1.05rem/1.5 var(--sans); min-height: 28px; }
+.brief-example summary, .brief-template summary { cursor: pointer; font: 600 1.05rem/1.5 var(--sans); min-height: 44px; box-sizing: border-box; padding-block: 8px; }
 .brief-example dl { margin: 20px 0; }
 .brief-example dt { font-weight: 600; margin-top: 16px; }
 .brief-example dd { margin: 6px 0 0; line-height: 1.65; }

@@ -186,6 +186,11 @@ try:
         page.set_viewport_size({'width':width,'height':950})
         guide=page.locator('#brief-walkthrough')
         summary=guide.locator('summary')
+        # Native disclosure affordances need a usable tap area even on a
+        # narrow screen; keep the built-in summary marker and keyboard action.
+        for target in page.locator('.brief-example summary, .brief-template summary').all():
+            bounds=target.bounding_box()
+            assert bounds and bounds['height']>=44, ('small-brief-disclosure',width,bounds)
         summary.focus();page.keyboard.press('Enter')
         expect(guide.locator('ol')).to_be_visible()
         expect(guide.locator('li')).to_have_count(4)
