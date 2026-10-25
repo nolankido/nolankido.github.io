@@ -23,6 +23,8 @@ def change():
 
 
 def before(path, data):
+    import task_brief_print_history
+    data = task_brief_print_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data

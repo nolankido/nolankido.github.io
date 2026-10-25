@@ -6,6 +6,7 @@ from unittest.mock import patch
 import unittest
 
 import task_brief_disclosure_history as history
+import task_brief_print_history as printing
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -14,7 +15,7 @@ class TaskBriefDisclosureTests(unittest.TestCase):
     def test_two_exact_production_deltas_and_predecessors(self):
         self.assertEqual(set(history.change()['paths']), history.PATHS)
         for name, record in history.change()['paths'].items():
-            raw = (ROOT / name).read_bytes()
+            raw = printing.before(name, (ROOT / name).read_bytes())
             self.assertEqual(sha256(raw).hexdigest(), record['new_sha256'])
             older = history.before(name, raw)
             self.assertEqual(sha256(older).hexdigest(), record['old_sha256'])

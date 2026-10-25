@@ -12,6 +12,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 import task_brief_error_history as history
 import task_brief_walkthrough_history as walkthrough
+import task_brief_print_history as printing
 
 OLD = "      input.removeAttribute('aria-invalid');\n      get(key + '-error').hidden = true;"
 NEW = "      input.removeAttribute('aria-invalid');\n      get(key + '-error').textContent = '';\n      get(key + '-error').hidden = true;"
@@ -19,14 +20,14 @@ NEW = "      input.removeAttribute('aria-invalid');\n      get(key + '-error').t
 
 class TaskBriefErrorStateTests(unittest.TestCase):
     def test_runtime_repair_is_only_clearing_the_edited_error_text(self):
-        script = (ROOT / 'assets/task-brief.js').read_text()
+        script = printing.before('assets/task-brief.js', (ROOT / 'assets/task-brief.js').read_text())
         self.assertEqual(script.count(NEW), 1)
         self.assertEqual(script.replace(NEW, OLD, 1), history.before('assets/task-brief.js', script))
 
     def test_rendered_page_changes_only_the_script_content_version(self):
         path = 'technology/task-brief/index.html'
         page = walkthrough.before(path, (ROOT / path).read_text())
-        script = (ROOT / 'assets/task-brief.js').read_bytes()
+        script = printing.before('assets/task-brief.js', (ROOT / 'assets/task-brief.js').read_bytes())
         old_script = history.before('assets/task-brief.js', script)
         current = '/assets/task-brief.js?v=' + sha256(script).hexdigest()[:12]
         previous = '/assets/task-brief.js?v=' + sha256(old_script).hexdigest()[:12]

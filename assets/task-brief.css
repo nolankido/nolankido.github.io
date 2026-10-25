@@ -25,6 +25,7 @@
 .brief-preview-part h4 { margin: 0 0 10px; font: 600 .8rem/1.4 var(--sans); letter-spacing: .035em; }
 .brief-preview-part p { margin: 0; white-space: pre-wrap; font: .94rem/1.6 var(--sans); }
 .brief-preview-part:last-child { grid-column: 1/-1; }
+.brief-print-note { display: none; }
 .brief-example .brief-help { overflow-wrap: anywhere; }
 .brief-example-use { margin-top: 12px; }
 
@@ -38,4 +39,24 @@
 .brief-template pre { white-space: pre-wrap; overflow-wrap: anywhere; font: .9rem/1.6 var(--sans); }
 .page-task-brief [hidden] { display: none !important; }
 @media (max-width: 760px) { .brief-fields, .brief-preview { grid-template-columns: minmax(0,1fr); gap: 20px; } .brief-preview-part:last-child { grid-column: auto; } }
-@media print { #brief-workspace, .entry-jumps, .brief-example-use { display: none !important; } .brief-example, .brief-template { break-inside: auto; } }
+@media print {
+  html:has(.page-task-brief) { background: white; }
+  #brief-workspace, .entry-jumps, .brief-example-use { display: none !important; }
+  .brief-example, .brief-template { break-inside: auto; }
+  #brief-blank .brief-template::details-content { content-visibility: visible !important; display: block !important; }
+  /* Print the existing validated preview, never a second copy of the inputs. */
+  .page-task-brief:has(#brief-result:not([hidden])) #main > :not(#brief-workspace),
+  .page-task-brief:has(#brief-result:not([hidden])) #brief-workspace > .section-meta,
+  .page-task-brief:has(#brief-result:not([hidden])) #brief-workspace > .section-content > :not(#brief-editor),
+  .page-task-brief:has(#brief-result:not([hidden])) #brief-editor > :not(#brief-result),
+  .page-task-brief:has(#brief-result:not([hidden])) #brief-result > :not(#brief-result-title):not(.brief-print-note):not(#brief-preview) { display: none !important; }
+  .page-task-brief:has(#brief-result:not([hidden])) #brief-workspace { display: block !important; padding: 0; border: 0; }
+  #brief-result { margin: 0; padding: 0; border: 0; color: black; }
+  #brief-result-title { margin: 0 0 8pt; font: 600 22pt/1.2 var(--sans); }
+  .brief-print-note { display: block; margin: 0 0 8pt; font: 9pt/1.4 var(--sans); color: black; }
+  .brief-print-note a { color: black; overflow-wrap: anywhere; }
+  #brief-preview { display: block; margin: 18pt 0 0; }
+  #brief-preview .brief-preview-part { padding: 0; margin: 0 0 16pt; border: 0; background: white; color: black; break-inside: auto; }
+  #brief-preview h4 { margin: 0 0 5pt; font: 600 10pt/1.35 var(--sans); break-after: avoid; }
+  #brief-preview p { font: 11pt/1.45 var(--sans); orphans: 2; widows: 2; }
+}

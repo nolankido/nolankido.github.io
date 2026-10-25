@@ -152,6 +152,17 @@
     output.focus(); output.select();
     copyStatus.textContent = 'Complete text selected. Use your device’s Copy command, then check the destination before pasting.';
   });
+  get('print').addEventListener('click', () => {
+    if (result.hidden || !output.value) return;
+    try {
+      if (typeof window.print !== 'function') throw new Error('Unavailable');
+      copyStatus.textContent = 'Print requested. Check the preview, then choose a printer or Save as PDF if your browser offers it.';
+      window.print();
+    } catch (_) {
+      output.focus(); output.select();
+      copyStatus.textContent = 'Printing is unavailable. Save as text or copy the selected brief into your own notes.';
+    }
+  });
   get('download').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
     let url;
