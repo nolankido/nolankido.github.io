@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "base_commit": "f3067cc36286eb4adbe7aa15024f49a414008d4d",
+  "paths": {
+    "_source/technology/task-brief.html": {
+      "new_sha256": "037275484fcd3e44015634932718cd16f81edcb43b92c95eb510cc0b309b0614",
+      "old_sha256": "65f7706200084cb5f7cd11b9c5b06c06106bc5957e7b0ca6051bf404100c1414",
+      "edits": [[7808, 8003, ""], [8840, 8899, ""], [9229, 9413, "TmVpdGhlciBzZW5kcw=="]]
+    },
+    "assets/task-brief.css": {
+      "new_sha256": "57707dd227c72c92b59444e06157f3d67c4cbd72debf8dc087633116b2b333b7",
+      "old_sha256": "809d7f40751bec652062d1cb3d7442633e18ee66c41e6abdf08a0c40eec65996",
+      "edits": [[2648, 2685, ""], [3648, 5383, "QG1lZGlhIHByaW50IHsgI2JyaWVmLXdvcmtzcGFjZSwgLmVudHJ5LWp1bXBzLCAuYnJpZWYtZXhhbXBsZS11c2UgeyBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7IH0gLmJyaWVmLWV4YW1wbGUsIC5icmllZi10ZW1wbGF0ZSB7IGJyZWFrLWluc2lkZTogYXV0bzsgfSB9Cg=="]]
+    },
+    "assets/task-brief.js": {
+      "new_sha256": "95f5b8a46ba9d8dbfc62631be2fb85b2ae976bc9103ed67873085a25e14a5341",
+      "old_sha256": "119e38373e406c46538601ab0b36a04e3a8b7b7afb30fd8f89818559e9abe060",
+      "edits": [[8157, 8687, ""]]
+    },
+    "technology/task-brief/index.html": {
+      "new_sha256": "54a63337a2cc037eec8f8a0ba05c84a80dfe25ba2d903b44829a59e95d4db5b9",
+      "old_sha256": "38309cde704dd236fe2698a9ca5c8c91fe78716845296279135fae9ff53a5049",
+      "edits": [[2803, 2815, "ODA5ZDdmNDA3NTFi"], [2863, 2875, "MTE5ZTM4MzczZTQw"], [15986, 16181, ""], [17018, 17077, ""], [17407, 17591, "TmVpdGhlciBzZW5kcw=="]]
+    }
+  },
+  "production_count": 714,
+  "production_fingerprint": "863ed95ebf41da978881016692e5ee0815b953365a0e343233d4d5f04ee4fb04"
+}

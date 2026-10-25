@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import task_brief_walkthrough_history as history
 import task_brief_disclosure_history as disclosure
+import task_brief_print_history as printing
 
 SOURCE = '_source/technology/task-brief.html'
 PAGE = 'technology/task-brief/index.html'
@@ -35,8 +36,9 @@ class TaskBriefWalkthroughTests(unittest.TestCase):
         self.assertNotIn(' open', self.source.split('id="brief-walkthrough"')[1].split('>')[0])
 
     def test_existing_example_text_and_controls_remain_byte_identical(self):
-        original = history.before(SOURCE, self.source)
-        current = re.sub(r'<details class="brief-template" id="brief-walkthrough">.*?</details>', '', self.source, count=1, flags=re.S)
+        source = printing.before(SOURCE, self.source)
+        original = history.before(SOURCE, source)
+        current = re.sub(r'<details class="brief-template" id="brief-walkthrough">.*?</details>', '', source, count=1, flags=re.S)
         current = current.replace(' id="brief-example-meeting"', '', 1)
         self.assertEqual(current, original)
         self.assertEqual(self.source.count('data-brief-example='), 6)

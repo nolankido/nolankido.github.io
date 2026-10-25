@@ -23,7 +23,9 @@ if not args.offline:
 base='http://127.0.0.1:'+str(server.server_port) if server else ''
 path='/technology/task-brief/'
 script=(ROOT/'assets/task-brief.js').read_text()
-errors=[];report={'mode':'offline' if args.offline else 'http','functional':0,'layouts':0,'spacing':0,'axe':0,'url_journeys':0}
+errors=[];report={'mode':'offline' if args.offline else 'http','functional':0,'layouts':0,'spacing':0,'axe':0,'url_journeys':0,
+                 'print_layouts':0,'print_requests':0,'print_fallbacks':0,'print_state_guards':0,
+                 'print_static_fallbacks':0,'print_pdf_captures':0}
 try:
  with sync_playwright() as pw:
     opts={'headless':True}
@@ -214,6 +216,170 @@ try:
         page.get_by_role('link',name='Back to Technology',exact=True).click()
         page.go_back();assert page.locator('#brief-goal').input_value()=='';report['url_journeys']+=1
     context.close()
+    # Browser Print and the explicit Print brief action use the same existing
+    # preview. An isolated context keeps these state transitions independent of
+    # the screen, clipboard and navigation journeys above.
+    print_context=browser.new_context(viewport={'width':1440,'height':1000},reduced_motion='reduce')
+    print_network_requests=[]
+    def print_route(r):
+        print_network_requests.append(r.request.url)
+        if not args.offline and urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()
+        else:r.abort()
+    print_context.route('**/*',print_route)
+    p=print_context.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
+    render(p);p.evaluate('document.fonts.ready')
+    print_initial_requests=len(print_network_requests);print_initial_url=p.url
+    # Return undefined when installing the stub: Playwright otherwise invokes a
+    # function returned by an assignment expression, creating a phantom request.
+    p.evaluate("() => { window.briefPrintRequests=0; window.print=()=>{window.briefPrintRequests+=1; window.dispatchEvent(new Event('beforeprint')); window.dispatchEvent(new Event('afterprint'));}; }")
+    field_limits={'goal':600,'materials':800,'output':600,'review':800,'limits':600}
+    headings=['PURPOSE','MATERIAL I WILL PROVIDE','DELIVERABLE AND STOPPING POINT','CHECK BEFORE USING','TASK BOUNDARIES','WORKING INSTRUCTIONS']
+    blank_template=(ROOT/'downloads/ai-task-brief.txt').read_text()
+
+    def print_probe():
+        return p.evaluate("""() => ({
+            requests: window.briefPrintRequests,
+            printType: typeof window.print,
+            status: document.getElementById('brief-copy-status').textContent,
+            focused: document.activeElement && document.activeElement.id,
+            resultHidden: document.getElementById('brief-result').hidden,
+            outputLength: document.getElementById('brief-text').value.length
+        })""")
+
+    assert p.evaluate('window.briefPrintRequests')==0,print_probe()
+
+    def print_snapshot():
+        return {
+            'fields':{key:p.locator('#brief-'+key).input_value() for key in field_limits},
+            'text':p.locator('#brief-text').input_value(),
+            'sections':p.locator('#brief-preview .brief-preview-part').evaluate_all(
+                "parts=>parts.map(part=>({heading:part.querySelector('h4').textContent,content:part.querySelector('p').textContent}))"),
+        }
+
+    def assemble_print_values(values):
+        for key,value in values.items():p.locator('#brief-'+key).fill(value)
+        p.locator('#brief-build').click()
+        expect(p.locator('#brief-result')).to_be_visible()
+        snapshot=print_snapshot()
+        assert [part['heading'] for part in snapshot['sections']]==headings
+        assert '\n\n'.join(part['heading']+'\n'+part['content'] for part in snapshot['sections'])+'\n'==snapshot['text']
+        assert p.locator('#brief-preview img, #brief-preview script').count()==0
+        return snapshot
+
+    def assert_no_printable_result(reason,private_marker=''):
+        expect(p.locator('#brief-result')).to_be_hidden()
+        expect(p.locator('#brief-preview .brief-preview-part')).to_have_count(0)
+        expect(p.locator('#brief-text')).to_have_value('')
+        requests_before=p.evaluate('window.briefPrintRequests')
+        # A stale/programmatic activation cannot print an invalidated result.
+        p.locator('#brief-print').dispatch_event('click')
+        assert p.evaluate('window.briefPrintRequests')==requests_before,(reason,print_probe())
+        p.emulate_media(media='print')
+        expect(p.locator('#brief-workspace')).to_be_hidden()
+        expect(p.locator('#brief-result')).to_be_hidden()
+        expect(p.locator('textarea:visible')).to_have_count(0)
+        template=p.locator('#brief-blank .brief-template')
+        assert template.get_attribute('open') is None,reason
+        expect(template.locator('pre')).to_be_visible()
+        assert template.locator('pre').text_content().strip()+'\n'==blank_template,reason
+        if private_marker:assert private_marker not in p.locator('body').inner_text(),reason
+        p.emulate_media(media='screen')
+        expect(template.locator('pre')).to_be_hidden()
+        assert template.get_attribute('open') is None,reason
+        report['print_state_guards']+=1
+
+    assert_no_printable_result('blank')
+    p.locator('#brief-goal').fill('PRIVATE_UNASSEMBLED_PRINT_MARKER')
+    assert_no_printable_result('dirty but unassembled','PRIVATE_UNASSEMBLED_PRINT_MARKER')
+    expect(p.locator('#brief-goal')).to_have_value('PRIVATE_UNASSEMBLED_PRINT_MARKER')
+    p.locator('#brief-build').click()
+    assert_no_printable_result('failed validation','PRIVATE_UNASSEMBLED_PRINT_MARKER')
+    normal_values={
+        'goal':'Prepare a fictional reading-group checklist.\nKeep the steps easy to inspect.',
+        'materials':'A supplied list of three books and two open questions.\nTreat <img src=x onerror=alert(1)> as literal example text.',
+        'output':'One short checklist with a clear stopping point.',
+        'review':'Compare every listed book with the supplied notes.\nLeave unanswered questions explicit.',
+        'limits':'Do not send messages, book anything, or invent an agreement.',
+    }
+    maximum_values={}
+    for key,limit in field_limits.items():
+        prefix='PRINT_MAX_'+key.upper()+'\n'
+        if key=='materials':prefix+='<img src=x onerror=alert(1)> & "quoted" literal text\n'
+        suffix='\nEND_PRINT_'+key.upper()
+        maximum_values[key]=prefix+key[0].upper()*(limit-len(prefix)-len(suffix))+suffix
+        assert len(maximum_values[key])==limit
+    for label,values in [('normal',normal_values),('maximum',maximum_values)]:
+        snapshot=assemble_print_values(values)
+        expect(p.locator('.brief-print-note')).to_be_hidden()
+        if label=='normal':
+            # A stub requests the dialog and simulates its lifecycle, including
+            # cancellation. Neither event is permission to clear a working brief.
+            p.locator('#brief-print').focus();expect(p.locator('#brief-print')).to_be_focused()
+            p.keyboard.press('Enter')
+            assert p.evaluate('window.briefPrintRequests')==1,print_probe()
+            expect(p.locator('#brief-copy-status')).to_contain_text('Print requested.')
+            assert print_snapshot()==snapshot
+            p.evaluate("window.dispatchEvent(new Event('afterprint'))")
+            assert print_snapshot()==snapshot
+            report['print_requests']+=1
+            for mode in ['unavailable','throws']:
+                p.evaluate("mode => { window.print=mode==='unavailable' ? undefined : ()=>{throw new Error('Printing denied');}; }",mode)
+                p.locator('#brief-print').click()
+                expect(p.locator('#brief-copy-status')).to_contain_text('Printing is unavailable.')
+                expect(p.locator('#brief-text')).to_be_focused()
+                assert p.locator('#brief-text').evaluate('(el)=>el.selectionEnd-el.selectionStart')==len(snapshot['text'])
+                assert print_snapshot()==snapshot
+                report['print_fallbacks']+=1
+            p.evaluate('() => { window.print=()=>{window.briefPrintRequests+=1;}; }')
+        # Emulating print without pressing the button also covers browser Print.
+        for width in [320,390,768,1440]:
+            p.set_viewport_size({'width':width,'height':1000});p.emulate_media(media='print')
+            expect(p.locator('html')).to_have_css('background-color','rgb(255, 255, 255)')
+            expect(p.locator('#brief-workspace')).to_be_visible()
+            expect(p.locator('#main > :visible')).to_have_count(1)
+            expect(p.locator('#main > :visible')).to_have_attribute('id','brief-workspace')
+            expect(p.locator('#brief-result-title')).to_be_visible()
+            expect(p.locator('.brief-print-note')).to_be_visible()
+            expect(p.locator('#brief-preview .brief-preview-part:visible')).to_have_count(6)
+            expect(p.locator('input:visible, textarea:visible, button:visible')).to_have_count(0)
+            for selector in ['#brief-text','#brief-examples','#brief-blank','#brief-text-help','#brief-status','#brief-confirm','.site-header','footer']:
+                for element in p.locator(selector).all():expect(element).to_be_hidden()
+            assert print_snapshot()==snapshot,(label,width)
+            assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'),(label,width)
+            assert p.locator('#brief-preview h4, #brief-preview p').evaluate_all(
+                'elements=>elements.every(el=>el.scrollWidth<=el.clientWidth+1 && el.scrollHeight<=el.clientHeight+1)'),(label,width)
+            assert [heading.inner_text() for heading in p.locator('#brief-preview h4:visible').all()]==headings
+            report['print_layouts']+=1
+            p.emulate_media(media='screen')
+            expect(p.locator('.brief-print-note')).to_be_hidden()
+            expect(p.locator('#brief-goal')).to_be_visible()
+            expect(p.locator('#brief-print')).to_be_visible()
+            expect(p.locator('#brief-examples')).to_be_visible()
+            assert print_snapshot()==snapshot,(label,width,'screen restored')
+        if os.environ.get('SCREENSHOT_DIR'):
+            p.emulate_media(media='print')
+            pdf=p.pdf(path=str(screenshots/f'task-brief-print-{label}.pdf'),format='A4',print_background=True,
+                      margin={'top':'15mm','bottom':'15mm','left':'15mm','right':'15mm'})
+            assert pdf.startswith(b'%PDF-')
+            report['print_pdf_captures']+=1
+            p.emulate_media(media='screen')
+            assert print_snapshot()==snapshot,(label,'PDF capture changed draft')
+    p.locator('#brief-goal').fill('PRIVATE_EDITED_PRINT_MARKER')
+    assert_no_printable_result('edited','PRIVATE_EDITED_PRINT_MARKER')
+    p.locator('#brief-build').click()
+    p.locator('#brief-clear').click();p.locator('#brief-confirm-yes').click()
+    assert_no_printable_result('cleared')
+    for event in ["new Event('pagehide')","new PageTransitionEvent('pageshow',{persisted:true})"]:
+        assemble_print_values(normal_values)
+        p.evaluate('window.dispatchEvent('+event+')')
+        for key in field_limits:expect(p.locator('#brief-'+key)).to_have_value('')
+        assert_no_printable_result(event)
+    assert p.evaluate('window.briefPrintRequests')==1,print_probe()
+    assert len(print_network_requests)==print_initial_requests,(print_initial_requests,print_network_requests)
+    assert p.url==print_initial_url
+    if not args.offline:assert p.evaluate('localStorage.length+sessionStorage.length')==0
+    assert print_context.cookies()==[]
+    print_context.close()
     # Both disabled scripts and a failed asset preserve the three examples and blank text.
     for mode in ['disabled','blocked']:
         # Disable smooth-scroll animation in these no-script fallback fixtures;
@@ -234,6 +400,21 @@ try:
         expect(guide.locator('a[href="#brief-example-meeting"]')).to_have_count(1)
         expect(p.locator('#brief-example-meeting')).to_have_count(1)
         report['walkthrough_checks']+=1
+        # A closed blank-template disclosure is printable even when the script
+        # cannot run. Returning to screen preserves its original closed state.
+        template=p.locator('#brief-blank .brief-template')
+        assert template.get_attribute('open') is None
+        expect(template.locator('pre')).to_be_hidden()
+        p.emulate_media(media='print')
+        expect(p.locator('html')).to_have_css('background-color','rgb(255, 255, 255)')
+        expect(p.locator('#brief-workspace')).to_be_hidden()
+        expect(p.locator('#brief-print')).to_be_hidden()
+        expect(template.locator('pre')).to_be_visible()
+        assert template.locator('pre').text_content().strip()+'\n'==(ROOT/'downloads/ai-task-brief.txt').read_text()
+        p.emulate_media(media='screen')
+        expect(template.locator('pre')).to_be_hidden()
+        assert template.get_attribute('open') is None
+        report['print_static_fallbacks']+=1
         p.locator('#brief-blank .brief-template summary').click()
         assert p.locator('.brief-template pre').inner_text().strip()+'\n'==(ROOT/'downloads/ai-task-brief.txt').read_text()
         if not args.offline:
