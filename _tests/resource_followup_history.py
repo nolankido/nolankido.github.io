@@ -14,6 +14,10 @@ def change():
         raise ValueError('Unknown exact review predecessor')
     return r
 def before(path,data):
+    # Newer, separately hash-gated UI changes must be reversed before checking
+    # the preserved source-review snapshots from this earlier release.
+    import task_brief_disclosure_history
+    data=task_brief_disclosure_history.before(path,data)
     item=change()['paths'].get(str(path))
     if item is None:return data
     binary=isinstance(data,bytes);raw=data if binary else data.encode('utf-8')
