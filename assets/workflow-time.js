@@ -38,6 +38,7 @@
   const byId = id => document.getElementById(id);
   const fields = Object.fromEntries(keys.map(k => [k, byId("time-" + k)]));
   const result = byId("time-result"), status = byId("time-status"), report = byId("time-report");
+  const printReport = byId("time-print-report");
   const quality = byId("time-quality"), basis = byId("time-basis");
   const examplePicker = byId("time-example-picker"), exampleConfirm = byId("time-example-confirm");
   const exampleNote = byId("time-example-origin");
@@ -50,6 +51,7 @@
   function invalidate() {
     dismissExample();
     result.hidden = true; report.value = ""; byId("time-copy-status").textContent = "";
+    if (printReport) printReport.textContent = "";
     byId("time-clear-confirm").hidden = true;
   }
   function clearErrors() {
@@ -175,6 +177,8 @@
       "Per-task difference before overhead: " + moneyFree(v.perRun), "Fixed overhead: " + moneyFree(v.overhead),
       precision, threshold, "", gate, "", "Decision: " + decision, budget, sensitivity,
       "Model: N*(usual - assisted - review) - setup - upkeep. Compare the same task and quality. Count active effort consistently and avoid double-counting waiting. This is not a financial ROI or quality score."].join("\n") + "\n";
+    // Print exactly the validated export, with no separate calculation or input cache.
+    if (printReport) printReport.textContent = report.value;
     result.hidden = false; status.textContent = "Comparison ready. Read the quality condition and assumptions.";
     byId("time-result-title").focus();
   });
@@ -187,6 +191,21 @@
       if (!result.hidden && report.value === text) byId("time-copy-status").textContent = "Comparison copied. Review it before sharing.";
     } catch (_) {
       if (!result.hidden && report.value === text) { report.focus(); report.select(); byId("time-copy-status").textContent = "Automatic copy is unavailable. Copy the selected text manually."; }
+    }
+  });
+  const printButton = byId("time-print");
+  if (printButton) printButton.addEventListener("click", () => {
+    if (result.hidden || !report.value) return;
+    const text = report.value;
+    try {
+      if (!printReport || typeof root.print !== "function") throw new Error("Unavailable");
+      byId("time-copy-status").textContent = "Print requested. Check the preview, then choose a printer or Save as PDF if your browser offers it.";
+      root.print();
+    } catch (_) {
+      if (!result.hidden && report.value === text) {
+        report.focus(); report.select();
+        byId("time-copy-status").textContent = "Printing is unavailable. Save as text or copy the selected comparison into your own notes.";
+      }
     }
   });
   byId("time-download").addEventListener("click", () => {

@@ -9,3 +9,19 @@
 .page-ai-website-verification .reader-outline ol{padding-left:1.5rem;margin:.8rem 0 0}
 .page-ai-website-verification .reader-outline li{padding:.3rem 0;font-size:1rem;line-height:1.5}
 @media print{.page-ai-time-savings .entry-jumps,.page-ai-website-verification .entry-jumps,.page-ai-website-verification .reader-outline{display:none!important}}
+
+/* A printable comparison uses the same complete text as Copy and Save as text. */
+.page-ai-time-savings #time-print-report{display:none}
+@media print{
+  html:has(.page-ai-time-savings){background:white}
+  .page-ai-time-savings section[aria-labelledby="time-workspace"]{display:none!important}
+  .page-ai-time-savings section[aria-labelledby="time-worksheet"] details::details-content{content-visibility:visible!important;display:block!important}
+  .page-ai-time-savings:has(#time-result:not([hidden])) #main>:not([aria-labelledby="time-workspace"]),
+  .page-ai-time-savings:has(#time-result:not([hidden])) section[aria-labelledby="time-workspace"]>.section-content>:not(#time-editor),
+  .page-ai-time-savings:has(#time-result:not([hidden])) #time-editor>:not(#time-result),
+  .page-ai-time-savings:has(#time-result:not([hidden])) #time-result>:not(#time-print-report){display:none!important}
+  .page-ai-time-savings:has(#time-result:not([hidden])) section[aria-labelledby="time-workspace"]{display:block!important;padding:0;border:0}
+  .page-ai-time-savings #time-result{margin:0;padding:0;border:0;break-inside:auto;color:black}
+  .page-ai-time-savings #time-print-report{display:block;margin:0;padding:0;border:0;background:white;color:black;white-space:pre-wrap;overflow-wrap:anywhere;font:11pt/1.45 var(--sans);break-inside:auto;orphans:2;widows:2}
+  .page-ai-time-savings #time-print-report::first-line{font-weight:600;font-size:16pt}
+}

@@ -18,7 +18,7 @@ if not args.offline:
  Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port) if server else ''
 calc='/technology/ai-time-savings/';case='/technology/checking-ai-website-changes/'
-report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0,'case_source_keyboard_journeys':0,'editable_examples':0,'example_replacement_recovery':0,'example_downloads':0};errors=[]
+report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0,'case_source_keyboard_journeys':0,'editable_examples':0,'example_replacement_recovery':0,'example_downloads':0,'print_layouts':0,'print_report_equivalence':0,'print_requests':0,'print_fallbacks':0,'print_state_guards':0,'print_static_fallbacks':0,'print_pdf_captures':0};errors=[]
 faulthandler.dump_traceback_later(300,exit=True)
 try:
  with sync_playwright() as pw:
@@ -212,6 +212,160 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
      with page.expect_download() as item:link.click()
      assert Path(item.value.path()).read_bytes()==(ROOT/href.lstrip('/')).read_bytes();report['downloads']+=1
   context.close()
+  # Printing must carry the entire canonical record, including its final model
+  # limitations. A fixed-height textarea cannot provide this printed record.
+  print_context=browser.new_context(accept_downloads=True,reduced_motion='reduce')
+  print_requests=[]
+  def print_route(r):
+   print_requests.append(r.request.url)
+   r.continue_() if not args.offline and urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort()
+  print_context.route('**/*',print_route)
+  p=print_context.new_page();p.set_default_timeout(10000);p.on('pageerror',lambda e:errors.append(str(e)))
+  render(p,calc);p.evaluate('document.fonts.ready');p.wait_for_timeout(100)
+  print_initial_requests=len(print_requests);print_initial_url=p.url
+  p.evaluate("""() => { window.timePrintRequests=0; window.print=()=>{
+   window.timePrintRequests+=1;
+   window.dispatchEvent(new Event('beforeprint'));
+   window.dispatchEvent(new Event('afterprint'));
+  }; }""")
+  print_keys=['manual','assisted','review','count','setup','upkeep']
+  worksheet_text=(ROOT/'downloads/workflow-time-review.txt').read_text()
+  normal_values=['30','8','7','6','60','15']
+  def print_probe():
+   return p.evaluate("""() => ({requests:window.timePrintRequests,printType:typeof window.print,
+    status:document.getElementById('time-copy-status').textContent,focused:document.activeElement.id,
+    resultHidden:document.getElementById('time-result').hidden,
+    reportLength:document.getElementById('time-report').value.length,
+    printLength:document.getElementById('time-print-report').textContent.length})""")
+  assert p.evaluate('window.timePrintRequests')==0,print_probe()
+  def print_snapshot():
+   return {'fields':{k:p.locator('#time-'+k).input_value() for k in print_keys},
+           'basis':p.locator('#time-basis').input_value(),'quality':p.locator('#time-quality').input_value(),
+           'report':p.locator('#time-report').input_value(),'print':p.locator('#time-print-report').text_content(),
+           'origin':p.locator('#time-example-origin').text_content()}
+  def calculate_print(values,basis='estimate',quality='unknown'):
+   for key,value in zip(print_keys,values):p.locator('#time-'+key).fill(value)
+   p.locator('#time-basis').select_option(basis);p.locator('#time-quality').select_option(quality)
+   p.locator('#time-calculate').click();expect(p.locator('#time-result')).to_be_visible()
+   snapshot=print_snapshot();assert snapshot['report'] and snapshot['print']==snapshot['report']
+   expect(p.locator('#time-print-report')).to_be_hidden()
+   for key,value in zip(print_keys,values):
+    assert key+': '+value+(' repetitions' if key=='count' else ' minutes') in snapshot['print']
+   assert snapshot['print'].startswith('WORKFLOW TIME COMPARISON\nhttps://nolankido.com/technology/ai-time-savings/\n')
+   assert 'Decision: ' in snapshot['print'] and 'What if verification takes 2 more minutes per task?' in snapshot['print']
+   assert snapshot['print'].endswith('This is not a financial ROI or quality score.\n')
+   return snapshot
+  def no_printable_result(reason,private_marker=''):
+   expect(p.locator('#time-result')).to_be_hidden();expect(p.locator('#time-report')).to_have_value('')
+   expect(p.locator('#time-print-report')).to_have_text('')
+   count=p.evaluate('window.timePrintRequests');p.locator('#time-print').dispatch_event('click')
+   assert p.evaluate('window.timePrintRequests')==count,(reason,print_probe())
+   p.emulate_media(media='print')
+   expect(p.locator('html')).to_have_css('background-color','rgb(255, 255, 255)')
+   expect(p.locator('#time-editor')).to_be_hidden();expect(p.locator('#time-print-report')).to_be_hidden()
+   expect(p.locator('input:visible, select:visible, textarea:visible, button:visible')).to_have_count(0)
+   worksheet=p.locator('section[aria-labelledby="time-worksheet"] details')
+   assert worksheet.get_attribute('open') is None,reason
+   expect(worksheet.locator('pre')).to_be_visible();assert worksheet.locator('pre').text_content()==worksheet_text
+   if private_marker:assert private_marker not in p.locator('body').inner_text(),reason
+   p.emulate_media(media='screen');expect(worksheet.locator('pre')).to_be_hidden()
+   assert worksheet.get_attribute('open') is None,reason
+   report['print_state_guards']+=1
+  no_printable_result('blank')
+  p.locator('#time-manual').fill('99999.99')
+  no_printable_result('uncomputed entries','99999.99');expect(p.locator('#time-manual')).to_have_value('99999.99')
+  p.locator('#time-calculate').click();no_printable_result('incomplete validation','99999.99')
+  print_cases=[('normal',normal_values,'estimate','unknown'),
+               ('decimal-break-even',['0.3','0.1','0.1','2','0.2','0'],'estimate','pass'),
+               ('maximum',['100000']*6,'observed','fail'),
+               ('fictional',normal_values,'estimate','unknown')]
+  for label,values,basis,quality in print_cases:
+   if label in ['fictional','maximum']:
+    example_label='Repeated task' if label=='fictional' else 'Review costs more'
+    p.get_by_role('button',name=example_label,exact=True).click()
+    expect(p.locator('#time-example-confirm')).to_be_visible();p.locator('#time-example-yes').click()
+   snapshot=calculate_print(values,basis,quality)
+   if label=='normal':
+    assert 'Planning estimate, not a measured outcome.' in snapshot['print']
+    assert 'Quality is unverified' in snapshot['print'] and '9.5 min' in snapshot['print']
+    with p.expect_download() as item:p.locator('#time-download').click()
+    assert Path(item.value.path()).read_text()==snapshot['print'];report['downloads']+=1
+    p.locator('#time-print').focus();expect(p.locator('#time-print')).to_be_focused();p.keyboard.press('Enter')
+    assert p.evaluate('window.timePrintRequests')==1,print_probe()
+    expect(p.locator('#time-copy-status')).to_contain_text('Print requested.')
+    assert print_snapshot()==snapshot
+    p.evaluate("window.dispatchEvent(new Event('afterprint'))")
+    assert print_snapshot()==snapshot;report['print_requests']+=1
+    for mode in ['unavailable','throws']:
+     p.evaluate("mode => { window.print=mode==='unavailable' ? undefined : ()=>{throw new Error('Printing denied');}; }",mode)
+     p.locator('#time-print').click();expect(p.locator('#time-copy-status')).to_contain_text('Printing is unavailable.')
+     expect(p.locator('#time-report')).to_be_focused()
+     assert p.locator('#time-report').evaluate('(e)=>e.selectionEnd-e.selectionStart')==len(snapshot['report'])
+     assert print_snapshot()==snapshot;report['print_fallbacks']+=1
+    p.evaluate('() => { window.print=()=>{window.timePrintRequests+=1;}; }')
+   elif label=='decimal-break-even':assert 'No net time saved in this window' in snapshot['print']
+   elif label=='maximum':
+    assert 'User-entered observations, not independently verified or a causal experiment.' in snapshot['print']
+    assert 'Quality check not met' in snapshot['print'] and 'STOP OR REDESIGN' in snapshot['print']
+    assert '10,000,200,000 min extra time' in snapshot['print']
+    assert 'Fictional example starting point: Review costs more.' in snapshot['print']
+   else:
+    assert 'Fictional example starting point: Repeated task.' in snapshot['print']
+    assert 'illustrative, not observed results' in snapshot['print']
+   report['print_report_equivalence']+=1
+   # Browser Print is covered independently of the explicit button. Returning
+   # from print preview, including cancellation, must preserve the comparison.
+   for width in [320,390,768,1440]:
+    p.set_viewport_size({'width':width,'height':1000});p.emulate_media(media='print')
+    expect(p.locator('html')).to_have_css('background-color','rgb(255, 255, 255)')
+    expect(p.locator('#time-print-report')).to_be_visible()
+    expect(p.locator('#main > :visible')).to_have_count(1)
+    expect(p.locator('#main > :visible')).to_have_attribute('aria-labelledby','time-workspace')
+    expect(p.locator('#time-result > :visible')).to_have_count(1)
+    expect(p.locator('#time-result > :visible')).to_have_attribute('id','time-print-report')
+    expect(p.locator('input:visible, select:visible, textarea:visible, button:visible')).to_have_count(0)
+    for selector in ['#time-print-help','#time-example-picker','#time-example-confirm','#time-clear-confirm','#time-copy-status',
+                     'section[aria-labelledby="time-examples"]','section[aria-labelledby="time-method"]',
+                     'section[aria-labelledby="time-worksheet"]','.site-header','footer']:
+     for element in p.locator(selector).all():expect(element).to_be_hidden()
+    assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'),(label,width)
+    assert p.locator('#time-print-report').evaluate('(e)=>e.scrollWidth<=e.clientWidth+1 && e.scrollHeight<=e.clientHeight+1'),(label,width)
+    assert print_snapshot()==snapshot,(label,width)
+    report['print_layouts']+=1
+    p.emulate_media(media='screen')
+    expect(p.locator('#time-print-report')).to_be_hidden();expect(p.locator('#time-print-help')).to_be_visible()
+    expect(p.locator('#time-manual')).to_be_visible();expect(p.locator('#time-print')).to_be_visible()
+    expect(p.locator('section[aria-labelledby="time-examples"]')).to_be_visible()
+    assert print_snapshot()==snapshot,(label,width,'screen restored')
+   if os.environ.get('SCREENSHOT_DIR') and label in ['normal','maximum']:
+    out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+    p.emulate_media(media='print')
+    pdf=p.pdf(path=str(out/f'workflow-time-print-{label}.pdf'),format='A4',print_background=True,
+              margin={'top':'15mm','bottom':'15mm','left':'15mm','right':'15mm'})
+    assert pdf.startswith(b'%PDF-');report['print_pdf_captures']+=1
+    p.emulate_media(media='screen');assert print_snapshot()==snapshot
+  # The printed copy shares the existing invalidation rules, including basis,
+  # quality and fictional-example replacement. Stale records must not survive.
+  p.locator('#time-review').fill('99999.99');no_printable_result('edited numeric entry','99999.99')
+  for key,value in [('basis','observed'),('quality','pass')]:
+   calculate_print(normal_values);p.locator('#time-'+key).select_option(value);no_printable_result('changed '+key)
+  calculate_print(normal_values);p.locator('#time-review').fill('<script>');p.locator('#time-calculate').click()
+  no_printable_result('invalid nonnumeric value','<script>')
+  calculate_print(normal_values);p.locator('#time-clear').click();p.locator('#time-clear-yes').click()
+  no_printable_result('cleared')
+  calculate_print(normal_values);p.get_by_role('button',name='One-off task',exact=True).click()
+  before_cancel=print_snapshot();p.locator('#time-example-no').click();assert print_snapshot()==before_cancel
+  p.get_by_role('button',name='One-off task',exact=True).click();p.locator('#time-example-yes').click()
+  no_printable_result('example replaced')
+  for event in ["new Event('pagehide')","new PageTransitionEvent('pageshow',{persisted:true})"]:
+   calculate_print(normal_values);p.evaluate('window.dispatchEvent('+event+')')
+   for key in print_keys:expect(p.locator('#time-'+key)).to_have_value('')
+   no_printable_result(event)
+  assert p.evaluate('window.timePrintRequests')==1,print_probe()
+  assert len(print_requests)==print_initial_requests,(print_initial_requests,print_requests)
+  assert p.url==print_initial_url
+  if not args.offline:assert p.evaluate('localStorage.length+sessionStorage.length')==0
+  assert print_context.cookies()==[];print_context.close()
   # Exercise native evidence links with and without JavaScript. An exact URL
   # allowlist receives a local stub, so the test cannot contact GitHub or mutate it.
   evidence_urls=[
@@ -258,6 +412,22 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
    # Exercise the worksheet explicitly rather than assuming one details element.
    worksheet=p.locator('section[aria-labelledby="time-worksheet"] details')
    expect(worksheet).to_have_count(1)
+   # The complete worksheet also prints while its native disclosure is closed,
+   # including when JavaScript is disabled or the calculator asset is blocked.
+   assert worksheet.get_attribute('open') is None
+   expect(worksheet.locator('pre')).to_be_hidden();p.emulate_media(media='print')
+   expect(p.locator('html')).to_have_css('background-color','rgb(255, 255, 255)')
+   expect(p.locator('#time-editor')).to_be_hidden();expect(p.locator('#time-print-report')).to_be_hidden()
+   expect(worksheet.locator('pre')).to_be_visible()
+   assert worksheet.locator('pre').text_content()==(ROOT/'downloads/workflow-time-review.txt').read_text()
+   assert worksheet.get_attribute('open') is None
+   if mode=='disabled' and os.environ.get('SCREENSHOT_DIR'):
+    out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+    pdf=p.pdf(path=str(out/'workflow-time-print-worksheet.pdf'),format='A4',print_background=True,
+              margin={'top':'15mm','bottom':'15mm','left':'15mm','right':'15mm'})
+    assert pdf.startswith(b'%PDF-');report['print_pdf_captures']+=1
+   p.emulate_media(media='screen');expect(worksheet.locator('pre')).to_be_hidden()
+   assert worksheet.get_attribute('open') is None;report['print_static_fallbacks']+=1
    worksheet.locator('summary').focus();p.keyboard.press('Enter')
    expect(worksheet).to_have_attribute('open','')
    assert worksheet.locator('pre').inner_text()==(ROOT/'downloads/workflow-time-review.txt').read_text()

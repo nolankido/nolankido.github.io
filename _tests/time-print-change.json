@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "base_commit": "83b76d0b5670c9c022b5e7cef72d0f0a47089c98",
+  "paths": {
+    "_source/technology/ai-time-savings.html": {
+      "new_sha256": "d5ea291ac0a9cbeaf6cae0785f7ad03d0af57a4ebeed2bc486dbad9470c5645c",
+      "old_sha256": "697041e1ec92d52a1fc4afe907d8c8e3a86a1467f7766700d92753a679a3632f",
+      "edits": [
+        [
+          6864,
+          6898,
+          ""
+        ],
+        [
+          7058,
+          7156,
+          ""
+        ],
+        [
+          7160,
+          7351,
+          ""
+        ]
+      ]
+    },
+    "assets/workflow-evidence.css": {
+      "new_sha256": "971e2590f178a54a1f3cbf7fa848d2e40aaf8de5f9d65079bdbfa93baeab0a24",
+      "old_sha256": "1b1578f269666ccffebb6fdc9d1e50ee569b3576cbe7d01c08c682b5f2678d8e",
+      "edits": [
+        [
+          3424,
+          4868,
+          ""
+        ]
+      ]
+    },
+    "assets/workflow-time.js": {
+      "new_sha256": "88f4c30bf53a7c1d2aabf158f569f39a0cde03fa9426abc9e650f17ffb784b1b",
+      "old_sha256": "864c9b2020e72dc5475d36060ccb1e56a335290cfdfde7b59dfee2cb795bd64e",
+      "edits": [
+        [
+          2229,
+          2278,
+          ""
+        ],
+        [
+          2966,
+          3017,
+          ""
+        ],
+        [
+          12408,
+          12557,
+          ""
+        ],
+        [
+          13361,
+          14090,
+          ""
+        ]
+      ]
+    },
+    "technology/ai-time-savings/index.html": {
+      "new_sha256": "1c93e829354aeaba91f8ac8b67175370778c7ee57081b87df19867f11f251a52",
+      "old_sha256": "7d43d87e93b91b0267ee2d59df4c3d937a4df3b5295c35e3bb714e5f8cd9f53d",
+      "edits": [
+        [
+          2853,
+          2855,
+          ""
+        ],
+        [
+          2856,
+          2858,
+          "YjE="
+        ],
+        [
+          2859,
+          2863,
+          ""
+        ],
+        [
+          2865,
+          2865,
+          "ZjI2OTY2"
+        ],
+        [
+          2917,
+          2919,
+          "Ng=="
+        ],
+        [
+          2921,
+          2922,
+          "OWIy"
+        ],
+        [
+          2923,
+          2928,
+          "MjBlNw=="
+        ],
+        [
+          16808,
+          16842,
+          ""
+        ],
+        [
+          17002,
+          17100,
+          ""
+        ],
+        [
+          17104,
+          17295,
+          ""
+        ]
+      ]
+    },
+    "technology/checking-ai-website-changes/index.html": {
+      "new_sha256": "ceda166518142b8a509833c193abe43c763130042b87ee214b97f96e8aac5f4e",
+      "old_sha256": "5b564ee1ec3eb6f409cbba0951fef9f822b2b70bfe6a864b808c22c881280208",
+      "edits": [
+        [
+          2927,
+          2929,
+          ""
+        ],
+        [
+          2930,
+          2932,
+          "YjE="
+        ],
+        [
+          2933,
+          2937,
+          ""
+        ],
+        [
+          2939,
+          2939,
+          "ZjI2OTY2"
+        ]
+      ]
+    }
+  },
+  "production_count": 714,
+  "production_fingerprint": "ac79554cd6dcb2770e45db1901c8f49e05e7adfd19bf03233d25e81db53547b8"
+}
