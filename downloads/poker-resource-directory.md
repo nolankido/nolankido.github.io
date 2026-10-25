@@ -2,7 +2,7 @@
 
 Public-resource directory snapshot. Individual review dates and limitations remain attached. Access and destinations can change. Inclusion is not a product test, partnership or permission to use tools during play.
 
-146 unique resources. Most recent individual listing review: 2026-10-23.
+146 unique resources. Most recent individual listing review: 2026-10-24.
 
 This is not a claim that all resources were rechecked on that date.
 
@@ -313,9 +313,9 @@ Wynn Las Vegas | events | Official event information | Free | All levels
 
 Find the room's tournament information, festival schedules, structure links and poker frequently asked questions.
 
-Before you use it: Public landing page inspected. Linked structure PDFs and individual dates require their own current check.
+Before you use it: Official Wynn poker landing page reviewed for cash games, tournament series, daily tournament information and schedule/structure links. Linked schedules and structures, registration details and live game availability were not independently checked.
 
-Listing review: 2026-10-07 (page).
+Listing review: 2026-10-24 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-wynn-poker
 
 ## A beginner's guide to poker combinatorics
@@ -846,9 +846,9 @@ New Jersey Division of Gaming Enforcement | rules | Official rules | Free | All 
 
 Official starting point for authorized Internet gaming sites, permit-holder information and dispute procedures.
 
-Before you use it: Search-index text inspected; direct retrieval returned 403. The older nj.gov address returned 404. No linked provider list, individual approval or personal eligibility was verified. Recheck the official page.
+Before you use it: Official information page reviewed: approved-site and permit-holder listings, best-practice links, and the requirement to complain to the operator before filing an Internet gaming dispute with DGE. Linked lists, forms, individual approvals and eligibility were not checked.
 
-Listing review: 2026-10-08 (index).
+Listing review: 2026-10-24 (page).
 Directory context: https://nolankido.com/poker/resources/#resource-nj-dge-information
 
 ## Pagat: betting, table stakes and showdown

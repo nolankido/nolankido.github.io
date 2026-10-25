@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 import base64
 import json
+import resource_followup_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '9c77098763f7f7e43d80a8e6994283484593b78e'
@@ -29,6 +30,7 @@ def change():
 
 
 def before(path, data):
+    data = resource_followup_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data
@@ -51,6 +53,7 @@ def before(path, data):
 
 
 def resources(records):
+    records = resource_followup_history.resources(records)
     pairs = change()['resources']
     return [deepcopy(pairs[r['id']]['old'])
             if r['id'] in pairs and r == pairs[r['id']]['new'] else deepcopy(r)

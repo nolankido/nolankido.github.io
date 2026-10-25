@@ -16,6 +16,7 @@ import poker_reference
 import check_live
 import poker_finder_submission_history as submission_history
 import poker_search_history
+import resource_followup_history
 
 NEW = ('poker-math-reference', 'reading-preflop-charts', 'poker-rules-and-fair-play')
 
@@ -63,7 +64,8 @@ class FinderTests(unittest.TestCase):
             for key in ('title','description','notes','access'): self.assertEqual(e[key], r[key])
             self.assertEqual(e['reviewed'], r['reviewed_on'])
             self.assertEqual(e['method'], 'Public page read' if r['review_method'] == 'page' else 'Search index only')
-        self.assertIn('Search index only', self.content)
+        self.assertIn('Search index only', resource_followup_history.before('poker/find/index.html', self.content))
+        self.assertNotIn('Search index only', self.content)
 
     def test_render_escapes_titles_search_text_and_cautions(self):
         items = copy.deepcopy(self.items[:1])

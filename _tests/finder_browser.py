@@ -181,10 +181,11 @@ def study_list_browser(browser, origin, errors, dest):
             assert page.evaluate('__studyTest.created.length === 0 && __studyTest.writes.length === 0')
             guide_id = 'poker-reading-preflop-charts'
             public_id = page.locator('[data-kind="resource"]').filter(has_text='Public page read').first.get_attribute('data-id')
-            index_id = page.locator('[data-kind="resource"]').filter(has_text='Search index only').first.get_attribute('data-id')
-            assert public_id and index_id and public_id != index_id
+            reviewed_id = 'external-nj-dge-information'
+            assert public_id and reviewed_id and public_id != reviewed_id
+            expect(page.locator(f'[data-id="{reviewed_id}"]')).to_contain_text('Public page read')
             records = {}
-            for identifier, query in [(guide_id, 'pre-flop'), (public_id, None), (index_id, None)]:
+            for identifier, query in [(guide_id, 'pre-flop'), (public_id, None), (reviewed_id, None)]:
                 records[identifier] = add_shelf_card(page, identifier, query)
             expect(page.locator('#finder-shelf-list li')).to_have_count(3)
             expect(page.locator('#finder-shelf-count')).to_contain_text('3 of 12')
@@ -198,7 +199,8 @@ def study_list_browser(browser, origin, errors, dest):
                 assert button.bounding_box()['height'] >= 44
             content = assert_shelf_export(page, records)
             assert 'Before you use it:' in content
-            assert 'Public page read' in content and 'Search index only' in content
+            assert content.count('Public page read') >= 2 and 'Search index only' not in content
+            assert 'complain to the operator before filing' in content
             assert re.search(r'\d{4}-\d{2}-\d{2}', content)
             assert 'https://nolankido.com/poker/resources/#resource-' in content
             # Real teaching answers are not part of a catalogue-only export.

@@ -10,6 +10,7 @@ import unittest
 from test_site import ROOT, Page, build
 from test_resource_collections import lows, high
 import poker_finder, poker_library, poker_resources, poker_quality, check_live
+import resource_followup_history
 
 NEW = ('omaha-hi-lo-workshop','stud-and-lowball-workshop','multiway-pot-workshop','poker-media-study','poker-access-and-protection')
 class FullResourceTests(unittest.TestCase):
@@ -134,7 +135,7 @@ class FullResourceTests(unittest.TestCase):
         self.assertIn(str(counts['index'])+' search-index',values['poker_review_summary'])
         for r in self.resources:
             if r['review_method']=='index':self.assertIn(r['id'],values['poker_review_limits'])
-        r=next(r for r in self.resources if r['id']=='nj-dge-information')
+        r=next(r for r in resource_followup_history.resources(self.resources) if r['id']=='nj-dge-information')
         self.assertEqual(r['review_method'],'index');self.assertIn('403',r['notes'])
         r=next(r for r in self.resources if r['id']=='mit-combo-lecture')
         self.assertIn('not reviewed',r['notes'])

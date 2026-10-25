@@ -69,7 +69,8 @@ def main():
             path=Path(tmp)/'study.md';download.save_as(path);content=path.read_text()
             assert 'PRIVATE_SEARCH_TOKEN' not in content
             assert 'conditional probabilities' not in content
-            assert '403' in content and 'Search index only' in content
+            assert 'Public page read' in content and 'Search index only' not in content
+            assert 'complain to the operator before filing' in content
             assert 'https://nolankido.com/poker/multiway-pot-workshop/' in content
         assert len(traffic)==initial
         assert page.url==original_url+'#kind=resource'
