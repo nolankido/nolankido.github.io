@@ -29,4 +29,4 @@ Local verification completed:
 - Three A4 PDFs were rendered and visually inspected: a one-page normal comparison, one-page maximum-value comparison with fictional-origin text, and five-page script-disabled article with the complete blank worksheet. Final model and quality limitations are retained.
 - JavaScript syntax and whitespace checks passed. The existing numeric-output screenshot comparison also passed unchanged.
 
-Final-head hosted checks, automated review, merge and live deployment receipts are recorded in the pull request. Local browser/PDF checks cover Chromium and a simulated print dialog, not physical printers or all browser engines. No participant records or completed-study claims are included.
+The pull request tracks final-head hosted checks and automated review. Merge and live deployment receipts will establish the final release status. Local browser/PDF checks cover Chromium and a simulated print dialog, not physical printers or all browser engines. No participant records or completed-study claims are included.
