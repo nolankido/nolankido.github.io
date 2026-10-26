@@ -47,6 +47,9 @@ class RegionalLinkTests(unittest.TestCase):
         source = (ROOT / '_source/poker/resources.html').read_text()
         self.assertEqual(source.count('id="regional-operator-links"'), 1)
         self.assertEqual(self.page.count('id="regional-operator-links"'), 1)
+        self.assertIn('<div id="regional-operator-links"', source)
+        self.assertIn('<div id="regional-operator-links"', self.page)
+        self.assertNotIn('<aside id="regional-operator-links"', self.page)
         self.assertEqual(self.page.count('class="small-copy resource-caution resource-region"'), 18)
         for phrase in ('different destinations by region', 'does not verify the specific policy',
                        'check its publisher and heading', 'no alternate operator is endorsed'):
