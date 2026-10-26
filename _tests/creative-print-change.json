@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "base_commit": "e30cbee4656917c105724614c6ea8821a21af002",
+  "paths": {
+    "assets/first-steps.css": {
+      "old_sha256": "93c45ef2a8c8317fe682be1ecefcaa6204dd5daf1199998aba0edb8b041dc0c2",
+      "new_sha256": "01f4d68b70794dcbaff0157fb78e4f04df7a4b26d7aedac9e29e53d2253f7708",
+      "edits": [
+        {
+          "start": 2714,
+          "new": "/* Print the complete blank creative brief, even when its screen disclosure is closed. */\n@media print {\n  .page-creative .creative-template::details-content { content-visibility: visible !important; display: block !important; }\n  .page-creative .creative-template > :not(summary) { display: block !important; }\n  .page-creative .creative-template summary { cursor: default; list-style: none; break-after: avoid; }\n  .page-creative .creative-template summary::marker { content: \"\"; }\n  .page-creative .creative-template summary::-webkit-details-marker { display: none; }\n  .page-creative .creative-template pre { overflow: visible; break-inside: auto; background: white; color: black; }\n  .page-creative .creative-print-help { display: none; }\n}\n\n",
+          "old": ""
+        }
+      ]
+    },
+    "_source/creative/home.html": {
+      "old_sha256": "fc941c84ae887f829541ce5656ddc17992bf15e834473a77abcbccf412608846",
+      "new_sha256": "c2918a35f7f98301e307c7895ebfed109fa13e270fcc6b34d9f3837e6118c1aa",
+      "edits": [
+        {
+          "start": 2422,
+          "new": "    <p class=\"small-copy creative-print-help\">For a paper copy, use your browser’s Print command or Save as PDF. The entire blank brief prints even while this preview is closed. Complete your copy privately.</p>\n",
+          "old": ""
+        }
+      ]
+    },
+    "creative/index.html": {
+      "old_sha256": "341bb41ffeff77ac0912012b9b1ac7018cd9b5e86291f3f5289c85ed8e60c6eb",
+      "new_sha256": "74a43970b3417d1a5d247e01764bdaa995829ee2cf7cd5d30adfa82cf3987a4c",
+      "edits": [
+        {
+          "start": 2732,
+          "new": "01f4d68b7079",
+          "old": "93c45ef2a8c8"
+        },
+        {
+          "start": 9825,
+          "new": "    <p class=\"small-copy creative-print-help\">For a paper copy, use your browser’s Print command or Save as PDF. The entire blank brief prints even while this preview is closed. Complete your copy privately.</p>\n",
+          "old": ""
+        }
+      ]
+    },
+    "index.html": {
+      "old_sha256": "6b21d6f51fcdac546d825f94fb727b22ab9abfa1f46972ae428631091ba9dc9f",
+      "new_sha256": "30d5083ce24ec9c54ba534eff480df5ce12300ec25830ce5c6941007306f3b7c",
+      "edits": [
+        {
+          "start": 2702,
+          "new": "01f4d68b7079",
+          "old": "93c45ef2a8c8"
+        }
+      ]
+    }
+  }
+}

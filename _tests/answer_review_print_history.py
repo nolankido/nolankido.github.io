@@ -30,6 +30,8 @@ def change():
 
 
 def before(path, data):
+    import creative_print_history
+    data = creative_print_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data
