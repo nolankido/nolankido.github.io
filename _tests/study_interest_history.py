@@ -21,6 +21,8 @@ def change():
     return record
 
 def before(path,data):
+    import study_inquiry_history
+    data=study_inquiry_history.before(path,data)
     item=change()['paths'].get(str(path))
     if item is None:return data
     binary=isinstance(data,bytes)
