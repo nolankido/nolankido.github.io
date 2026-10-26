@@ -1,4 +1,4 @@
-"""Restore only the three exact parent files before this region-routing UI note.
+"""Restore only the exact parent files before this region-routing UI and CI change.
 
 This historical adapter is test-only. Unknown bytes are never rewritten.
 """
@@ -9,7 +9,7 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '4bf860988f903a11becaf008bc6446c6bbde34bb'
-PATHS = {'_scripts/poker_resources.py', '_source/poker/resources.html', 'poker/resources/index.html'}
+PATHS = {'_scripts/poker_resources.py', '_source/poker/resources.html', 'poker/resources/index.html', '.github/workflows/site-checks.yml'}
 
 @lru_cache(maxsize=1)
 def change():

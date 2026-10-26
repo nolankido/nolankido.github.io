@@ -16,7 +16,7 @@ Selected original PokerStars policy, hand-ranking and Omaha rule pages were read
 - Offer three local learning fallbacks: hand rankings, Omaha and mixed games, and rules/fair play. The local guidance is not a substitute for the current operator policy on software use or live play.
 - Keep every existing category, filter, keyboard target, compact view, print path, downloadable export and script-free directory. Add no tracking, outbound requests, storage, affiliate link, payment or new provider.
 
-Only three production paths change: the resource renderer, the source template and the generated directory page. The existing catalogue and downloaded directory snapshots remain exact prior bytes. Historical release reconstruction gains a SHA256-gated, test-only three-path predecessor. New unit and browser checks ensure 18 affected cards, no live-tour false positives, preserved external destinations, text spacing, keyboard navigation, no-script behavior and print visibility.
+Three user-facing production paths change: the resource renderer, the source template and the generated directory page. One CI workflow line now schedules the previously standalone directory browser test. The existing catalogue and downloaded directory snapshots remain exact prior bytes. Historical release reconstruction gains a SHA256-gated, test-only four-path predecessor. New unit and browser checks ensure 18 affected cards, no live-tour false positives, preserved external destinations, text spacing, keyboard navigation, no-script behavior and print visibility.
 
 ## Release and evidence limits
 

@@ -44,6 +44,17 @@
           "count": 18
         }
       ]
+    },
+    ".github/workflows/site-checks.yml": {
+      "old_sha256": "0cca1c4731e3a4fc3bbf92ba825b0a66b466165d4ec07069c10586ee0c1dcd75",
+      "new_sha256": "c5106a45c6ab16714c6ffd0b767a527eaab171a9c1eb6f53cb6574266c3b73b9",
+      "edits": [
+        {
+          "new": "suites: poker_browser resources_browser workshops_browser",
+          "old": "suites: poker_browser workshops_browser",
+          "count": 1
+        }
+      ]
     }
   }
 }
