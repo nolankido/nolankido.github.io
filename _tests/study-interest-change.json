@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "base_commit": "1c6a1f1123ce8000ca6f43a016d3bb8714f18d58",
+  "paths": {
+    "_source/start-here.html": {
+      "old_sha256": "3e4bd6cd7f084e4fb540dfcb542e0fbe7d7d438f3657983028c369925b6a8189",
+      "new_sha256": "9b54378a1597a0f4d490fa3b76abe4b2b5cc0f1e7b4fdd2fa1a8729d98ea830a",
+      "old": "",
+      "new": "\n<section id=\"study-interest\" aria-labelledby=\"study-interest-title\">\n<h3 id=\"study-interest-title\">Help make these guides easier to use</h3>\n<p>If you are an adult new to this site, you can help me find unclear steps. I am inviting interest in an optional 25-minute usability session using two fictional tasks and your usual device. You may decline a topic, skip a task, or stop. No personal accounts or payments are part of the exercises.</p>\n<p>To express interest, <a href=\"/contact/#contact-form\">use the existing contact form</a> and include \"Website usability study\" in your message. Please do not send task answers, completed worksheets, private records, or sensitive details. An inquiry is not consent to participate or be recorded. Before a session, I would explain any notes, withdrawal and deletion arrangements. No audio, video or screen recording is planned by default. <a href=\"/privacy/\">How contact messages are handled</a>.</p>\n</section>"
+    },
+    "start-here/index.html": {
+      "old_sha256": "8e84d9b8eabcf295f3f67f382cb9edaafcc029e822669b7644062caa7ddf9946",
+      "new_sha256": "30fe70f62c84f830537995f79988ae8bd0e3e59969cae9ca91b3a5b7d0718a44",
+      "old": "",
+      "new": "\n<section id=\"study-interest\" aria-labelledby=\"study-interest-title\">\n<h3 id=\"study-interest-title\">Help make these guides easier to use</h3>\n<p>If you are an adult new to this site, you can help me find unclear steps. I am inviting interest in an optional 25-minute usability session using two fictional tasks and your usual device. You may decline a topic, skip a task, or stop. No personal accounts or payments are part of the exercises.</p>\n<p>To express interest, <a href=\"/contact/#contact-form\">use the existing contact form</a> and include \"Website usability study\" in your message. Please do not send task answers, completed worksheets, private records, or sensitive details. An inquiry is not consent to participate or be recorded. Before a session, I would explain any notes, withdrawal and deletion arrangements. No audio, video or screen recording is planned by default. <a href=\"/privacy/\">How contact messages are handled</a>.</p>\n</section>"
+    }
+  }
+}
