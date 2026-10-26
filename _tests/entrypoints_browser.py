@@ -122,7 +122,8 @@ try:
                 else:
                     expect(page.locator('#contact-context')).to_have_value('')
                     expect(page.locator('#study-inquiry')).to_be_hidden()
-                    expect(page.locator('#contact-fields')).to_be_disabled()
+                    expect(page.locator('#contact-fields')).to_have_attribute('disabled', '')
+                    expect(page.locator('#contact-name')).to_be_disabled()
                 expect(form.locator('input[name="name"][required]')).to_have_count(1)
                 expect(form.locator('input[name="email"][required]')).to_have_count(1)
                 expect(form.locator('textarea[name="message"][required]')).to_have_count(1)
