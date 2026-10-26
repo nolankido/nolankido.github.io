@@ -74,16 +74,44 @@ def main():
                         spacing.evaluate('(el)=>el.remove()')
                     checks+=1
             # Both disabled JavaScript and a failed library script leave every guide accessible.
+            # A prior hosted run timed out on the long grid's smooth-scroll click.
+            # Test real pointer and keyboard activation after stable scroll, instead
+            # of letting an animated scroll race Playwright's actionability checks.
+            fallback_cases=0
             for nojs in [True,False]:
-                fallback=browser.new_context(java_script_enabled=not nojs)
-                fallback.route('**/*',lambda r:r.abort() if 'poker-library.js' in r.request.url or urlsplit(r.request.url).hostname!='127.0.0.1' else r.continue_())
-                p=fallback.new_page();p.goto(origin+'/poker/library/')
-                expect(p.locator('#library-controls')).to_be_hidden()
-                expect(p.locator('#library-grid [data-library-card]:visible')).to_have_count(total)
-                p.locator('#library-grid a[href="/poker/decision-lab/"]').click()
-                panel=p.locator('details.lab-answer').first
-                panel.locator('summary').click();expect(panel.locator('div')).to_be_visible()
-                fallback.close()
+                for width in [320,390,1440]:
+                    fallback=browser.new_context(
+                        java_script_enabled=not nojs,
+                        reduced_motion='reduce',
+                        viewport={'width':width,'height':900},
+                    )
+                    fallback.route('**/*',lambda r:r.abort() if 'poker-library.js' in r.request.url or urlsplit(r.request.url).hostname!='127.0.0.1' else r.continue_())
+                    p=fallback.new_page();p.goto(origin+'/poker/library/')
+                    expect(p.locator('#library-controls')).to_be_hidden()
+                    expect(p.locator('#library-grid [data-library-card]:visible')).to_have_count(total)
+                    link=p.locator('#library-grid a[href="/poker/decision-lab/"]')
+                    expect(link).to_be_visible()
+                    if width==390:
+                        link.focus();expect(link).to_be_focused()
+                        p.keyboard.press('Enter')
+                    else:
+                        link.scroll_into_view_if_needed()
+                        expect(link).to_be_in_viewport()
+                        link.click()
+                    expect(p).to_have_url(origin+'/poker/decision-lab/')
+                    panel=p.locator('details.lab-answer').first
+                    summary=panel.locator('summary')
+                    if width==390:
+                        summary.focus();expect(summary).to_be_focused()
+                        p.keyboard.press('Enter')
+                    else:
+                        summary.scroll_into_view_if_needed()
+                        summary.click()
+                    expect(panel.locator('div')).to_be_visible()
+                    assert p.evaluate('localStorage.length===0 && sessionStorage.length===0')
+                    assert fallback.cookies()==[]
+                    fallback_cases+=1
+                    fallback.close()
             if os.environ.get('AXE_PATH'):
                 for route in ['/poker/library/','/poker/decision-lab/']:
                     page.goto(origin+route);page.add_script_tag(path=os.environ['AXE_PATH'])
@@ -93,7 +121,7 @@ def main():
                     assert not result['violations'],[(v['id'],v['help']) for v in result['violations']]
             assert not errors,errors
             context.close();browser.close()
-        print(f'PASS: {total} searchable guides; topic/search intersections; empty/reset/XSS checks; no requests, storage, cookies or URL changes from filtering; {checks} reader viewports; five keyboard disclosures; blocked-script/no-JavaScript fallbacks.')
+        print(f'PASS: {total} searchable guides; topic/search intersections; empty/reset/XSS checks; no requests, storage, cookies or URL changes from filtering; {checks} reader viewports; five keyboard disclosures; blocked-script/no-JavaScript fallbacks across {fallback_cases} viewport/mode cases (pointer and keyboard).')
     finally:server.shutdown();server.server_close()
 
 if __name__=='__main__':
