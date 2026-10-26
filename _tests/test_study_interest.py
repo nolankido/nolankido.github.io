@@ -85,7 +85,7 @@ class StudyInterestTests(unittest.TestCase):
         forms=[a for t,a in p if t=='form']
         self.assertEqual(len(forms),1)
         self.assertEqual(forms[0]['id'],'contact-form')
-        fields={a.get('name') for t,a in p if a.get('required') is not None}
+        fields={a.get('name') for t,a in p if 'required' in a}
         self.assertEqual(fields,{'name','email','message'})
         self.assertIn('Turnstile', (ROOT/'_source/privacy.html').read_text())
         self.assertIn('Formspark', (ROOT/'_source/privacy.html').read_text())
