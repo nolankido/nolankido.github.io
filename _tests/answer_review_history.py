@@ -39,6 +39,8 @@ def pages(records):
 
 
 def before(path, data):
+    import practical_ai_print_history
+    data = practical_ai_print_history.before(path, data)
     import answer_review_growth_history as growth_history
     data = growth_history.before(path, data)
     data = search_entry_history.before(path, data)
