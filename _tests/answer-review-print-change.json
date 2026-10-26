@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "base_commit": "2809bbf4a234331ab6413323f3d100ccc823bd0f",
+  "paths": {
+    "_source/technology/check-ai-answers.html": {
+      "new_sha256": "033d62ed9d181db6d9a3e8017b582e7c2092792c6c07777d8ebc2e5a83242327",
+      "old_sha256": "0a91c0dcf74093ba4ef5a8c19c031a2d80fae4a1e813d0add5fdb1659c79b453",
+      "edits": [
+        [
+          19749,
+          19780,
+          ""
+        ],
+        [
+          20110,
+          20119,
+          ""
+        ],
+        [
+          20141,
+          20141,
+          "b3BlbiB0aGUgZXhhbXBsZXMgeW91IHdhbnQgdG8gaW5jbHVkZSBiZWZvcmUg"
+        ],
+        [
+          20143,
+          20144,
+          "aW5n"
+        ],
+        [
+          20173,
+          20304,
+          ""
+        ]
+      ]
+    },
+    "assets/answer-review.css": {
+      "new_sha256": "47697e0944103c51a72ad20920c17a5635f8e5e8ea7d9f558a1b7a2d2f773246",
+      "old_sha256": "3a73141190cb49974164510513c1aa70786f4074741e3702829efc17c23eef30",
+      "edits": [
+        [
+          1860,
+          1920,
+          ""
+        ],
+        [
+          1958,
+          2008,
+          ""
+        ],
+        [
+          2024,
+          2035,
+          ""
+        ],
+        [
+          2038,
+          2040,
+          ""
+        ],
+        [
+          2104,
+          2165,
+          ""
+        ],
+        [
+          2168,
+          3069,
+          ""
+        ]
+      ]
+    },
+    "technology/check-ai-answers/index.html": {
+      "new_sha256": "0f77f99ddbd3f43276774052031ff06be662479cda793990d74106ff6902b71b",
+      "old_sha256": "9a7fca9221dbae70010528293cb5ab18b42fcd94cacee68e7e39bc4f5dd33d59",
+      "edits": [
+        [
+          3031,
+          3032,
+          "M2E="
+        ],
+        [
+          3033,
+          3040,
+          "MzE="
+        ],
+        [
+          3042,
+          3042,
+          "MTk="
+        ],
+        [
+          3043,
+          3043,
+          "Y2I="
+        ],
+        [
+          29081,
+          29112,
+          ""
+        ],
+        [
+          31266,
+          31275,
+          ""
+        ],
+        [
+          31297,
+          31297,
+          "b3BlbiB0aGUgZXhhbXBsZXMgeW91IHdhbnQgdG8gaW5jbHVkZSBiZWZvcmUg"
+        ],
+        [
+          31299,
+          31300,
+          "aW5n"
+        ],
+        [
+          31329,
+          31460,
+          ""
+        ]
+      ]
+    }
+  },
+  "production_count": 714,
+  "production_fingerprint": "01bc62933eca2e3119667580a0b58241131b156b1ed15082b2910e54abeec203"
+}

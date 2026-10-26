@@ -150,13 +150,23 @@ class GuideGrowth(unittest.TestCase):
         path = 'technology/check-ai-answers/index.html'
         current = (ROOT / path).read_text()
         previous = history.before(path, current)
+
+        # The page-scoped stylesheet uses a content-addressed cache token. This
+        # release changes that stylesheet, so compare the stable asset identity
+        # while the exact print-history contract checks both approved versions.
+        normalize = lambda s: re.sub(
+            r'(/assets/answer-review\.css)\?v=[0-9a-f]{12}', r'\1?v=<content>', s)
+        normalized_current = normalize(current)
+        normalized_previous = normalize(previous)
+
         for pattern in (r'\bid="([^"]+)"', r'\bhref="([^"]+)"'):
-            self.assertLessEqual(set(re.findall(pattern, previous)), set(re.findall(pattern, current)))
+            self.assertLessEqual(set(re.findall(pattern, normalized_previous)),
+                                 set(re.findall(pattern, normalized_current)))
         for pattern in (r'<script\b[^>]*>.*?</script>', r'<link\b[^>]*rel="stylesheet"[^>]*>'):
             # JSON-LD is metadata, not executable runtime.
             strip = lambda s: re.sub(r'<script type="application/ld\+json">.*?</script>', '', s)
-            self.assertEqual(re.findall(pattern, strip(current), re.S),
-                             re.findall(pattern, strip(previous), re.S))
+            self.assertEqual(re.findall(pattern, strip(normalized_current), re.S),
+                             re.findall(pattern, strip(normalized_previous), re.S))
 
 
 if __name__ == '__main__':

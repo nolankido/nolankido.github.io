@@ -20,7 +20,8 @@ class Quiet(SimpleHTTPRequestHandler):
 server = ThreadingHTTPServer(('127.0.0.1', 0), partial(Quiet, directory=str(ROOT)))
 Thread(target=server.serve_forever, daemon=True).start()
 base = 'http://127.0.0.1:' + str(server.server_port)
-report = {'layouts': 0, 'text_spacing': 0, 'examples': 0, 'picker_journeys': 0, 'entry_journeys': 0, 'downloads': 0, 'axe': []}
+report = {'layouts': 0, 'text_spacing': 0, 'examples': 0, 'picker_journeys': 0, 'entry_journeys': 0, 'downloads': 0, 'axe': [],
+          'print_layouts': 0, 'print_state_guards': 0, 'print_static_fallbacks': 0, 'print_pdf_captures': 0}
 errors = []
 writes = []
 try:
@@ -117,6 +118,64 @@ try:
                     assert Path(download.path()).read_bytes() == (ROOT / 'downloads/ai-answer-review.txt').read_bytes()
                     report['downloads'] += 1
             ctx.close()
+
+        # Browser Print now expands every authored example and the complete blank
+        # record without changing the disclosure state seen on screen. Test the
+        # same result with scripts enabled and disabled.
+        for scripts in [True, False]:
+            print_ctx = browser.new_context(java_script_enabled=scripts, accept_downloads=True,
+                                            reduced_motion='reduce', viewport={'width': 1440, 'height': 950})
+            def print_route(r):
+                if r.request.method not in {'GET', 'HEAD'}:
+                    writes.append(r.request.url)
+                r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort()
+            print_ctx.route('**/*', print_route)
+            p = print_ctx.new_page(); p.set_default_timeout(15000)
+            p.on('pageerror', lambda e: errors.append(str(e)))
+            for width in [320, 390, 768, 1440]:
+                p.set_viewport_size({'width': width, 'height': 950})
+                p.goto(base + ROUTE)
+                examples = p.locator('.review-example')
+                expect(examples).to_have_count(6)
+                sheet = p.locator('.review-sheet')
+                details = examples.all() + [sheet]
+                for detail in details:
+                    assert detail.get_attribute('open') is None
+                    for child in detail.locator(':scope > :not(summary)').all():
+                        expect(child).to_be_hidden()
+                p.emulate_media(media='print')
+                expect(p.locator('html')).to_have_css('background-color', 'rgb(255, 255, 255)')
+                expect(p.locator('.review-picker')).to_be_hidden()
+                expect(p.locator('.review-download-action')).to_be_hidden()
+                for detail in details:
+                    assert detail.get_attribute('open') is None
+                    expect(detail.locator('summary')).to_be_visible()
+                    for child in detail.locator(':scope > :not(summary)').all():
+                        expect(child).to_be_visible()
+                expect(sheet.locator('pre')).to_be_visible()
+                assert sheet.locator('pre').text_content() == (ROOT / 'downloads/ai-answer-review.txt').read_text()
+                for selector in ['.site-bar', '.site-header', 'footer']:
+                    for element in p.locator(selector).all():
+                        expect(element).to_be_hidden()
+                assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'), (scripts, width)
+                assert p.locator('.review-sheet pre').evaluate('el=>el.scrollWidth<=el.clientWidth+1'), (scripts, width)
+                report['print_layouts'] += 1
+                if not scripts:
+                    report['print_static_fallbacks'] += 1
+                if scripts and width == 1440 and os.environ.get('SCREENSHOT_DIR'):
+                    out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
+                    pdf = p.pdf(path=str(out / 'answer-review-print-complete.pdf'), format='A4',
+                                print_background=True,
+                                margin={'top': '15mm', 'bottom': '15mm', 'left': '15mm', 'right': '15mm'})
+                    assert pdf.startswith(b'%PDF-')
+                    report['print_pdf_captures'] += 1
+                p.emulate_media(media='screen')
+                for detail in details:
+                    assert detail.get_attribute('open') is None
+                    for child in detail.locator(':scope > :not(summary)').all():
+                        expect(child).to_be_hidden()
+                report['print_state_guards'] += 1
+            print_ctx.close()
         browser.close()
     assert not errors, errors
     assert not writes, writes
