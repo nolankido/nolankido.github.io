@@ -23,6 +23,8 @@ def change():
     return result
 
 def before(path, data):
+    import practical_ai_print_history
+    data = practical_ai_print_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data

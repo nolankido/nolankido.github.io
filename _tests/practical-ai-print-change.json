@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "base_commit": "17794dbd423e80215a7c17f50e6606785e8064ba",
+  "paths": {
+    "assets/summary-review.css": {
+      "old_sha256": "968164542ca1145c01bfb38158b93cac03ebf1153d2b4793263dcc41e83574d6",
+      "new_sha256": "99655c61211163352c9894a5718ad70552d51a3ee914f45f7054b9480e1b66b3",
+      "old": "",
+      "new": "\n/* Complete paper copy when the native exercise disclosures are closed. */\n@media print {\n  .page-ai-summary-review .entry-jumps,\n  .page-ai-summary-review a[download] { display:none!important; }\n  .page-ai-summary-review .section-content details::details-content {\n    content-visibility:visible!important; display:block!important;\n  }\n  .page-ai-summary-review .section-content details { break-inside:auto; background:white; color:black; }\n  .page-ai-summary-review .section-content details > summary { list-style:none; }\n  .page-ai-summary-review .section-content details > summary::marker { content:\"\"; }\n  .page-ai-summary-review .section-content details > summary::-webkit-details-marker { display:none; }\n  .page-ai-summary-review .section-content details > p,\n  .page-ai-summary-review .section-content details > pre { display:block!important; }\n  .page-ai-summary-review .section-content details > pre {\n    white-space:pre-wrap; overflow-wrap:anywhere; break-inside:auto; background:white; color:black;\n  }\n}\n"
+    },
+    "technology/check-ai-summary/index.html": {
+      "old_sha256": "5636e0becb3faead64e90442c8a6e2ab88ceff65644c8f6469ed5cb45df35953",
+      "new_sha256": "de2992d81ba6fc94704128567f775877253c35b76f6f786e987c4fe92e10c266",
+      "old": "/assets/summary-review.css?v=968164542ca1",
+      "new": "/assets/summary-review.css?v=99655c612111"
+    },
+    "assets/ai-task-choice.css": {
+      "old_sha256": "5ceb0f32f3befb6d4c24c2a47178c4590120d2e94e5fe9e8f9753e2ec482711c",
+      "new_sha256": "f6f615cc463e08e3be6efdb40d4f65ae742270cbe079af11dbdea56b2accc57e",
+      "old": "",
+      "new": "\n/* Print the entire private-use worksheet even when its disclosure is closed. */\n@media print {\n  .page-ai-task-choice a[download] { display:none!important; }\n  .page-ai-task-choice .choice-sheet::details-content {\n    content-visibility:visible!important; display:block!important;\n  }\n  .page-ai-task-choice .choice-sheet { break-inside:auto; background:white; color:black; }\n  .page-ai-task-choice .choice-sheet > summary { list-style:none; }\n  .page-ai-task-choice .choice-sheet > summary::marker { content:\"\"; }\n  .page-ai-task-choice .choice-sheet > summary::-webkit-details-marker { display:none; }\n  .page-ai-task-choice .choice-sheet > pre {\n    display:block!important; white-space:pre-wrap; overflow-wrap:anywhere;\n    break-inside:auto; background:white; color:black;\n  }\n}\n"
+    },
+    "technology/should-i-use-ai/index.html": {
+      "old_sha256": "f26063649f7784ad72d8cce666795cc1cb84d2032ae272c507744133532813f1",
+      "new_sha256": "eb1eb05bb3a32f241d5e07d803fa7b9f4bed2c4519b25c8985f1a2421c8eac8b",
+      "old": "/assets/ai-task-choice.css?v=5ceb0f32f3be",
+      "new": "/assets/ai-task-choice.css?v=f6f615cc463e"
+    }
+  }
+}

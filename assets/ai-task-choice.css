@@ -20,3 +20,19 @@
 .page-ai-task-choice #choice-error{font-weight:600}
 @media(max-width:720px){.page-ai-task-choice .choice-questions{grid-template-columns:1fr}}
 @media print{.page-ai-task-choice #choice-form,.page-ai-task-choice .choice-jumps,.page-ai-task-choice #choice-error{display:none!important}.page-ai-task-choice .folio-row{display:block}.page-ai-task-choice .section-meta{display:none}.page-ai-task-choice .choice-result{break-inside:avoid}.page-ai-task-choice details>pre{display:block!important}}
+
+/* Print the entire private-use worksheet even when its disclosure is closed. */
+@media print {
+  .page-ai-task-choice a[download] { display:none!important; }
+  .page-ai-task-choice .choice-sheet::details-content {
+    content-visibility:visible!important; display:block!important;
+  }
+  .page-ai-task-choice .choice-sheet { break-inside:auto; background:white; color:black; }
+  .page-ai-task-choice .choice-sheet > summary { list-style:none; }
+  .page-ai-task-choice .choice-sheet > summary::marker { content:""; }
+  .page-ai-task-choice .choice-sheet > summary::-webkit-details-marker { display:none; }
+  .page-ai-task-choice .choice-sheet > pre {
+    display:block!important; white-space:pre-wrap; overflow-wrap:anywhere;
+    break-inside:auto; background:white; color:black;
+  }
+}

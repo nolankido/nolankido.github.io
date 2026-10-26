@@ -15,7 +15,7 @@ class Quiet(SimpleHTTPRequestHandler):
 server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)))
 Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port)
-report={'offline':args.offline,'scenarios':0,'layouts':0,'spacing':0,'downloads':0,'journeys':0,'fallbacks':0,'privacy':0,'axe':[]}
+report={'offline':args.offline,'scenarios':0,'layouts':0,'spacing':0,'downloads':0,'journeys':0,'fallbacks':0,'privacy':0,'print_layouts':0,'print_pdfs':0,'axe':[]}
 errors=[]
 try:
     with sync_playwright() as pw:
@@ -88,8 +88,27 @@ try:
             expect(page.locator('.choice-sheet pre')).to_have_text((ROOT/'downloads/should-i-use-ai.txt').read_text())
             with page.expect_download() as item:page.locator('a[download][href="/downloads/should-i-use-ai.txt"]').click()
             assert Path(item.value.path()).read_bytes()==(ROOT/'downloads/should-i-use-ai.txt').read_bytes();report['downloads']+=1
-        page.emulate_media(media='print');expect(page.locator('#choice-form')).to_be_hidden()
-        page.emulate_media(media='screen');ctx.close()
+        # Browser Print must include the actual downloadable worksheet,
+        # even though its native disclosure remains closed on screen.
+        for width in [320,390,768,1440]:
+            load();page.set_viewport_size({'width':width,'height':1000})
+            expect(page.locator('.choice-sheet')).not_to_have_attribute('open','')
+            page.emulate_media(media='print')
+            expect(page.locator('#choice-form')).to_be_hidden()
+            assert page.locator('.choice-sheet').evaluate("(el)=>getComputedStyle(el,'::details-content').contentVisibility")=='visible'
+            expect(page.locator('.choice-sheet pre')).to_be_visible()
+            expect(page.locator('.choice-sheet pre')).to_have_text((ROOT/'downloads/should-i-use-ai.txt').read_text())
+            expect(page.locator('a[download][href="/downloads/should-i-use-ai.txt"]')).to_be_hidden()
+            assert page.evaluate('document.documentElement.scrollWidth')<=width,('print',width)
+            if width==390:
+                pdf=page.pdf(format='A4',print_background=False)
+                assert pdf.startswith(b'%PDF') and len(pdf)>10000
+                report['print_pdfs']+=1
+            report['print_layouts']+=1
+            page.emulate_media(media='screen')
+            expect(page.locator('.choice-sheet')).not_to_have_attribute('open','')
+            expect(page.locator('.choice-sheet pre')).to_be_hidden()
+        ctx.close()
         for mode in ['disabled','blocked']:
             c=browser.new_context(java_script_enabled=mode!='disabled',accept_downloads=True,reduced_motion='reduce')
             def fallback(r):
@@ -99,6 +118,14 @@ try:
             c.route('**/*',fallback);p=c.new_page();render(p,PATH,False)
             expect(p.locator('#choice-form')).to_be_hidden();expect(p.locator('#choice-fallback')).to_be_visible()
             expect(p.locator('.choice-rules li')).to_have_count(4);expect(p.locator('.choice-example')).to_have_count(4)
+            # Print completion does not depend on the optional task picker.
+            expect(p.locator('.choice-sheet')).not_to_have_attribute('open','')
+            p.emulate_media(media='print')
+            assert p.locator('.choice-sheet').evaluate("(el)=>getComputedStyle(el,'::details-content').contentVisibility")=='visible'
+            expect(p.locator('.choice-sheet pre')).to_be_visible()
+            expect(p.locator('.choice-sheet pre')).to_have_text((ROOT/'downloads/should-i-use-ai.txt').read_text())
+            p.emulate_media(media='screen')
+            expect(p.locator('.choice-sheet pre')).to_be_hidden()
             p.locator('.choice-sheet summary').focus();p.keyboard.press('Enter');expect(p.locator('.choice-sheet pre')).to_be_visible()
             if not args.offline:
                 with p.expect_download() as item:p.locator('a[download][href="/downloads/should-i-use-ai.txt"]').click()
