@@ -73,6 +73,17 @@ class RegionalLinkTests(unittest.TestCase):
                 for altered in (raw + b'!', b'!' + raw, raw[1:]):
                     self.assertEqual(history.before(name, altered), altered)
 
+    def test_independent_history_chains_undo_regional_edits(self):
+        import study_inquiry_history
+        import answer_review_print_history
+        for name in history.PATHS:
+            raw = (ROOT / name).read_bytes()
+            with self.subTest(name=name):
+                prior = history.before(name, raw)
+                self.assertEqual(study_inquiry_history.before(name, raw), prior)
+                self.assertEqual(study_inquiry_history.before(name, prior), prior)
+                self.assertNotEqual(answer_review_print_history.before(name, raw), raw)
+
     def test_corrupt_parent_fingerprint_and_insertion_fail_closed(self):
         name = 'poker/resources/index.html'
         raw = (ROOT / name).read_bytes()

@@ -14,8 +14,6 @@ def change():
         raise ValueError('Unknown exact review predecessor')
     return r
 def before(path,data):
-    import regional_link_history
-    data=regional_link_history.before(path,data)
     # Newer, separately hash-gated UI changes must be reversed before checking
     # the preserved source-review snapshots from this earlier release.
     import task_brief_disclosure_history
