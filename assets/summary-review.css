@@ -9,3 +9,21 @@
 .page-ai-summary-review [id] { scroll-margin-top: 2rem; }
 .page-ai-summary-review .entry-jumps { display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin: 1.2rem 0; }
 .page-ai-summary-review .entry-jumps a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Complete paper copy when the native exercise disclosures are closed. */
+@media print {
+  .page-ai-summary-review .entry-jumps,
+  .page-ai-summary-review a[download] { display:none!important; }
+  .page-ai-summary-review .section-content details::details-content {
+    content-visibility:visible!important; display:block!important;
+  }
+  .page-ai-summary-review .section-content details { break-inside:auto; background:white; color:black; }
+  .page-ai-summary-review .section-content details > summary { list-style:none; }
+  .page-ai-summary-review .section-content details > summary::marker { content:""; }
+  .page-ai-summary-review .section-content details > summary::-webkit-details-marker { display:none; }
+  .page-ai-summary-review .section-content details > p,
+  .page-ai-summary-review .section-content details > pre { display:block!important; }
+  .page-ai-summary-review .section-content details > pre {
+    white-space:pre-wrap; overflow-wrap:anywhere; break-inside:auto; background:white; color:black;
+  }
+}
