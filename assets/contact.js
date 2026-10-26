@@ -285,6 +285,22 @@
       help.hidden = false;
     }
   }
+  // An exact authored fragment offers only a fixed, editable context label.
+  // Do not infer a participant, copy private inputs, or send/agree automatically.
+  if (sourceHash === '#study-inquiry') {
+    const notice = document.getElementById('study-inquiry');
+    const context = form.elements.namedItem('context');
+    const message = form.elements.namedItem('message');
+    const topic = 'Website usability study';
+    if (notice?.tagName === 'P' && notice.hidden
+        && context?.tagName === 'INPUT' && !context.value && context.maxLength >= topic.length
+        && message?.tagName === 'TEXTAREA' && !message.value) {
+      context.value = topic;
+      notice.hidden = false;
+      context.setAttribute('aria-describedby', 'study-inquiry');
+      message.setAttribute('aria-describedby', 'study-inquiry');
+    }
+  }
   form.noValidate = true;
   fields.disabled = false;
   if (initialization) initialization.hidden = true;
