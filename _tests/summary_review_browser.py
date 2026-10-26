@@ -19,7 +19,7 @@ if not args.offline:
  server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)))
  Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port) if server else ''
-report={'offline':args.offline,'layouts':0,'text_spacing':0,'answer_disclosures':0,'source_journeys':0,'entry_journeys':0,'downloads':0,'axe':[]}
+report={'offline':args.offline,'layouts':0,'text_spacing':0,'answer_disclosures':0,'source_journeys':0,'entry_journeys':0,'downloads':0,'print_layouts':0,'print_pdfs':0,'axe':[]}
 errors=[];writes=[]
 try:
  with sync_playwright() as pw:
@@ -44,6 +44,27 @@ try:
      assert link.bounding_box()['height']>=44
     assert page.evaluate('document.documentElement.scrollWidth')<=width
     report['layouts']+=1
+    # Keep answers closed on screen, but require the full print copy even
+    # when the reader has never opened a single disclosure.
+    print_panels=page.locator('.page-ai-summary-review .section-content details')
+    expect(print_panels).to_have_count(8)
+    for d in print_panels.all():expect(d).not_to_have_attribute('open','')
+    page.emulate_media(media='print')
+    for d in print_panels.all():
+     assert d.evaluate("(el)=>getComputedStyle(el,'::details-content').contentVisibility")=='visible'
+     expect(d.locator('p,pre').first).to_be_visible()
+    expect(page.locator('.entry-jumps')).to_be_hidden()
+    expect(page.locator('a[download][href="/downloads/ai-summary-review.txt"]')).to_be_hidden()
+    expect(page.locator('.summary-sheet pre')).to_have_text((ROOT/'downloads/ai-summary-review.txt').read_text())
+    assert page.evaluate('document.documentElement.scrollWidth')<=width,('print',width,scripts)
+    if scripts and width==390:
+     pdf=page.pdf(format='A4',print_background=False)
+     assert pdf.startswith(b'%PDF') and len(pdf)>10000
+     report['print_pdfs']+=1
+    report['print_layouts']+=1
+    page.emulate_media(media='screen')
+    for d in print_panels.all():expect(d).not_to_have_attribute('open','')
+    expect(page.locator('.summary-sheet pre')).to_be_hidden()
     findings=page.locator('.summary-finding[id]')
     expect(findings).to_have_count(6)
     for details in findings.all():
