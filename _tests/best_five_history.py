@@ -34,6 +34,8 @@ def change():
 
 
 def before(path, data):
+    import answer_review_print_history
+    data = answer_review_print_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data

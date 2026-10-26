@@ -97,6 +97,19 @@ class AnswerReviewTests(unittest.TestCase):
         self.assertEqual(next(e for e in site_find.entries(ROOT, self.pages) if e['path'] == history.ROUTE)['kind'], 'guide')
         self.assertIn('/assets/social/check-ai-answers.png', self.html)
 
+    def test_complete_print_copy_needs_no_disclosure_state_or_runtime(self):
+        css = (ROOT / 'assets/answer-review.css').read_text()
+        visible = unescape(self.html)
+        self.assertIn('The print version includes all six worked examples and the complete blank record', visible)
+        self.assertIn('class="review-download-action"', self.html)
+        self.assertIn('.review-example::details-content', css)
+        self.assertIn('.review-sheet::details-content', css)
+        self.assertIn('.review-download-action { display: none !important; }', css)
+        self.assertIn('.review-sheet pre { break-inside: auto; overflow: visible;', css)
+        self.assertEqual(len(re.findall(r'<details class="review-example" id="', self.html)), 6)
+        self.assertEqual(len(re.findall(r'<details class="review-example"[^>]*\sopen(?:\s|=|>)', self.html)), 0)
+        self.assertNotRegex(self.html, r'<details class="review-sheet"[^>]*\sopen(?:\s|=|>)')
+
     def test_exact_portable_record_and_no_new_runtime_collection(self):
         sheet = (ROOT / 'downloads/ai-answer-review.txt').read_text()
         self.assertIn('<pre>' + sheet + '</pre>', unescape(self.html))

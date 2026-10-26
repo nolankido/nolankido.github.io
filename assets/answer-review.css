@@ -16,4 +16,21 @@
 .page-ai-answer-review pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9rem; padding: 1rem; max-width: 100%; }
 .page-ai-answer-review [id] { scroll-margin-top: 2rem; }
 @media (max-width: 560px) { .page-ai-answer-review .review-picker { grid-template-columns: minmax(0, 1fr); } }
-@media print { .page-ai-answer-review .review-picker { display: none; } .page-ai-answer-review .review-example { break-inside: avoid; } }
+@media print {
+  html:has(.page-ai-answer-review) { background: white; }
+  .page-ai-answer-review .review-picker,
+  .page-ai-answer-review .review-download-action { display: none !important; }
+  .page-ai-answer-review .review-example { break-inside: avoid; }
+  .page-ai-answer-review .review-sheet { break-inside: auto; }
+  .page-ai-answer-review .review-example::details-content,
+  .page-ai-answer-review .review-sheet::details-content { content-visibility: visible !important; display: block !important; }
+  .page-ai-answer-review .review-example > :not(summary),
+  .page-ai-answer-review .review-sheet > :not(summary) { display: block !important; }
+  .page-ai-answer-review .review-example summary,
+  .page-ai-answer-review .review-sheet summary { cursor: default; list-style: none; break-after: avoid; }
+  .page-ai-answer-review .review-example summary::marker,
+  .page-ai-answer-review .review-sheet summary::marker { content: ""; }
+  .page-ai-answer-review .review-example summary::-webkit-details-marker,
+  .page-ai-answer-review .review-sheet summary::-webkit-details-marker { display: none; }
+  .page-ai-answer-review .review-sheet pre { break-inside: auto; overflow: visible; background: white; color: black; }
+}
