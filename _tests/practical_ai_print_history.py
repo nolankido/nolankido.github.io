@@ -27,6 +27,8 @@ def change():
     return r
 
 def before(path, data):
+    import study_interest_history
+    data = study_interest_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data
