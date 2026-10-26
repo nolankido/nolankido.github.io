@@ -34,6 +34,17 @@ def main():
             assert response.status == 200
             expect(page.locator('#resource-controls')).to_be_visible()
             total = page.locator('[data-resource-card]').count()
+            expect(page.locator('#regional-operator-links')).to_be_visible()
+            expect(page.locator('.resource-region')).to_have_count(18)
+            for ident in ('stars-tool-policy', 'hand-rankings', 'omaha-rules', 'six-plus-rules'):
+                expect(page.locator('#resource-' + ident + ' .resource-region')).to_be_visible()
+            expect(page.locator('#resource-stars-live-rules .resource-region')).to_have_count(0)
+            region_link = page.locator('#resource-hand-rankings .resource-region a')
+            region_link.focus()
+            page.keyboard.press('Enter')
+            expect(page).to_have_url(base + '/poker/resources/#regional-operator-links')
+            expect(page.locator('#regional-operator-links')).to_be_visible()
+            page.goto(base + '/poker/resources/')
             baseline = len(requests); original_url = page.url
             cards = page.locator('[data-resource-card]:visible')
             search = page.locator('#resource-search')
@@ -123,6 +134,8 @@ def main():
                 p = fallback.new_page(); p.goto(base + '/poker/resources/')
                 expect(p.locator('#resource-controls')).to_be_hidden()
                 expect(p.locator('[data-resource-card]:visible')).to_have_count(total)
+                expect(p.locator('#regional-operator-links')).to_be_visible()
+                expect(p.locator('#resource-stars-tool-policy .resource-region')).to_be_visible()
                 p.locator('#resource-starting-points summary').click()
                 p.locator('#resource-starting-points a[href="#resource-brad-owen-wpt-vlog"]').click()
                 expect(p.locator('#resource-brad-owen-wpt-vlog')).to_be_visible()

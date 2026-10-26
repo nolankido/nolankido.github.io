@@ -8,6 +8,7 @@ import json,sys,unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,poker_resources,resource_followup_history as history
+import regional_link_history
 class FollowupTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -38,8 +39,9 @@ class FollowupTests(unittest.TestCase):
         r=json.loads(out[Path('downloads/poker-resource-directory.json')])['entries']
         self.assertEqual({e['id']:e for e in r},{e['id']:e for e in self.entries})
         for f,v in history.change()['paths'].items():
-            raw=(ROOT/f).read_bytes();old=history.before(f,raw)
-            self.assertEqual(sha256(raw).hexdigest(),v['new_sha256'])
+            raw=(ROOT/f).read_bytes();parent=regional_link_history.before(f,raw)
+            old=history.before(f,raw)
+            self.assertEqual(sha256(parent).hexdigest(),v['new_sha256'])
             self.assertEqual(sha256(old).hexdigest(),v['old_sha256'])
             self.assertEqual(history.before(f,raw+b'x'),raw+b'x')
     def test_corrupt_history_rejected(self):
