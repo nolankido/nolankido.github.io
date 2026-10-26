@@ -168,7 +168,8 @@ probe = '''                page.goto(base+'/poker/hand-rankings/')
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
 '''
 if "viewer-best-five-group" not in browser:
-    browser = replace_once(browser, "                page.goto(base+'/poker/')\n", probe + "                page.goto(base+'/poker/')\n", "best-five browser probe")
+    anchor = "                page.goto(base+'/poker/')\n                feature=page.locator('#featured-work .reader-feature-link')\n"
+    browser = replace_once(browser, anchor, probe + anchor, "best-five browser probe")
 browser = replace_once(
     browser,
     "PASS: 35 populated-poker route/viewport checks; expanded disclosures, text-spacing, chapter URLs, real-work feature, guide return links, escaped text, keyboard spoilers, 2 exact downloads, and no video requests.",
