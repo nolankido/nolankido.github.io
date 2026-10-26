@@ -35,7 +35,7 @@ def run():
         base='http://127.0.0.1:'+str(server.server_port)
         errors=[]; media=[]; violations=[]
         paths=['/poker/','/poker/start-here/','/poker/study/','/poker/reviewing-a-hand/',
-               '/poker/episodes/test-episode/','/poker/hands/test-hand/','/poker/stories/test-story/']
+               '/poker/episodes/test-episode/','/poker/hands/test-hand/','/poker/stories/test-story/','/poker/hand-rankings/']
         try:
             with sync_playwright() as p:
                 opts={'headless':True}
@@ -62,6 +62,13 @@ def run():
                             if result: violations.append({'route':route,'width':width,'violations':result})
                         page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
                         assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(route,width,'spacing')
+                page.goto(base+'/poker/hand-rankings/')
+                page.locator('.viewer-question').evaluate_all('(items)=>items.forEach(x=>x.open=true)')
+                expect(page.locator('.viewer-best-five-group')).to_have_count(8)
+                for group in page.locator('.viewer-best-five-group').all():
+                    expect(group.locator('.viewer-card[data-card]')).to_have_count(5)
+                    assert group.evaluate("e=>e.dataset.bestCards===Array.from(e.querySelectorAll('[data-card]')).map(x=>x.dataset.card).join(' ')")
+                assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                 page.goto(base+'/poker/')
                 feature=page.locator('#featured-work .reader-feature-link')
                 expect(feature).to_have_attribute('href','/poker/stories/test-story/')
@@ -96,7 +103,7 @@ def run():
                 assert not media,media
                 assert not violations,violations
                 browser.close()
-            print('PASS: 35 populated-poker route/viewport checks; expanded disclosures, text-spacing, chapter URLs, real-work feature, guide return links, escaped text, keyboard spoilers, 2 exact downloads, and no video requests. Synthetic content stayed in a temporary directory. Accessibility scans enabled: '+str(bool(os.getenv('AXE_PATH'))))
+            print('PASS: 40 populated-poker route/viewport checks; expanded disclosures, 8 best-five groups, text-spacing, chapter URLs, real-work feature, guide return links, escaped text, keyboard spoilers, 2 exact downloads, and no video requests. Synthetic content stayed in a temporary directory. Accessibility scans enabled: '+str(bool(os.getenv('AXE_PATH'))))
         finally:
             server.shutdown();server.server_close()
 

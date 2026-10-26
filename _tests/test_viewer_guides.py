@@ -26,6 +26,26 @@ class Tags(HTMLParser):
     def handle_starttag(self, tag, attrs):
         self.items.append((tag,dict(attrs)))
 
+
+class BestFiveGroups(HTMLParser):
+    def __init__(self, text):
+        super().__init__(); self.groups=[]; self.current=None; self.depth=0; self.feed(text)
+    def handle_starttag(self, tag, attrs):
+        attrs=dict(attrs); classes=set(attrs.get('class','').split())
+        if self.current is None and tag=='div' and 'viewer-best-five-group' in classes:
+            self.current={'player':attrs['data-player'],'declared':attrs['data-best-cards'],'cards':[]}
+            self.depth=1
+            return
+        if self.current is not None:
+            if tag=='div': self.depth+=1
+            if tag=='span' and attrs.get('data-card'): self.current['cards'].append(attrs['data-card'])
+    def handle_endtag(self, tag):
+        if self.current is not None and tag=='div':
+            self.depth-=1
+            if self.depth==0:
+                self.groups.append(self.current); self.current=None
+
+
 def five(cards):
     ranks = sorted(('23456789TJQKA'.index(c[0])+2 for c in cards),reverse=True)
     counts = Counter(ranks)
@@ -99,16 +119,30 @@ class ViewerGuidesTests(unittest.TestCase):
         self.assertEqual(five('Qs Kd Ah 2s 3c'.split())[0],0)
 
     def test_four_showdown_answers_are_independently_correct(self):
-        cases=[a for _,a in Tags(self.outputs[Path('poker/hand-rankings/index.html')]).items if 'data-winner' in a]
+        text=self.outputs[Path('poker/hand-rankings/index.html')]
+        cases=[a for _,a in Tags(text).items if 'data-winner' in a]
+        groups=BestFiveGroups(text).groups
         self.assertEqual(len(cases),4)
+        self.assertEqual(len(groups),8)
+        self.assertEqual(text.count('class="viewer-board-grid viewer-best-five"'),4)
+        group_index=0
         for a in cases:
             first=a['data-a'].split(); second=a['data-b'].split(); board=a['data-board'].split()
             self.assertEqual(len(set(first+second+board)),9)
             one,two=best(first+board),best(second+board)
             winner='a' if one>two else 'b' if two>one else 'tie'
             self.assertEqual(winner,a['data-winner'])
-        names=[a for _,a in Tags(self.outputs[Path('poker/hand-rankings/index.html')]).items if a.get('role')=='img']
-        self.assertEqual(len(names),86)
+            for player,hole in [('a',first),('b',second)]:
+                group=groups[group_index]; group_index+=1
+                declared=group['declared'].split()
+                self.assertEqual(group['player'],player)
+                self.assertEqual(group['cards'],declared)
+                self.assertEqual(len(declared),5)
+                self.assertEqual(len(set(declared)),5)
+                self.assertTrue(set(declared).issubset(set(hole+board)))
+                self.assertEqual(five(declared),best(hole+board))
+        names=[a for _,a in Tags(text).items if a.get('role')=='img']
+        self.assertEqual(len(names),126)
         self.assertTrue(all(' of ' in a.get('aria-label','') for a in names))
 
     def test_full_hand_bookkeeping_matches_published_totals(self):
