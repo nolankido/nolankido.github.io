@@ -13,7 +13,7 @@ server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=str(RO
 Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port)
 starts={'technology':'/technology/task-brief/','living-well':'/living-well/weekly-reset/','poker':'/poker/first-live-tournament/','creative':'/creative/#creative-brief'}
-errors=[];missing=[];report={'keyboard_journeys':0,'downloads':0,'layouts':0,'expanded_spacing':0,'axe_scans':0}
+errors=[];missing=[];report={'keyboard_journeys':0,'downloads':0,'layouts':0,'expanded_spacing':0,'axe_scans':0,'print_layouts':0,'print_static_fallbacks':0,'print_pdf_captures':0}
 def route(r):
  if urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()
  else:r.abort()
@@ -87,6 +87,35 @@ try:
      target=page.locator('#'+anchor).bounding_box()
      header=page.locator('.site-header').bounding_box()
      assert header['y']+header['height']-1<=target['y']<1000,('obscured-anchor',width,anchor,target,header)
+   # A folded preview must still print the complete blank creative brief.
+   # Neither the screen disclosure state nor the private download changes.
+   for print_width in [320,390,768,1440]:
+    page.set_viewport_size({'width':print_width,'height':1000})
+    page.goto(base+'/creative/')
+    brief=page.locator('.creative-template')
+    expect(brief).not_to_have_attribute('open','')
+    expect(brief.locator('pre')).to_be_hidden()
+    expect(page.locator('.creative-print-help')).to_be_visible()
+    page.emulate_media(media='print')
+    expect(brief.locator('summary')).to_be_visible()
+    expect(brief.locator('pre')).to_be_visible()
+    expect(page.locator('.creative-print-help')).to_be_hidden()
+    expect(page.locator('.creative-brief-card .button')).to_be_hidden()
+    assert brief.get_attribute('open') is None
+    assert brief.locator('pre').text_content()==(ROOT/'downloads/creative-brief.txt').read_text()
+    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),('creative-print-overflow',print_width,js)
+    assert brief.locator('pre').evaluate('node=>node.scrollWidth<=node.clientWidth+1'),('creative-print-template-overflow',print_width,js)
+    report['print_layouts']+=1
+    if not js:report['print_static_fallbacks']+=1
+    if js and print_width==1440 and os.environ.get('SCREENSHOT_DIR'):
+     out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(exist_ok=True,parents=True)
+     pdf=page.pdf(path=str(out/'creative-brief-print-complete.pdf'),format='A4',print_background=True,
+                  margin={'top':'15mm','bottom':'15mm','left':'15mm','right':'15mm'})
+     assert pdf.startswith(b'%PDF-')
+     report['print_pdf_captures']+=1
+    page.emulate_media(media='screen')
+    expect(brief).not_to_have_attribute('open','')
+    expect(brief.locator('pre')).to_be_hidden()
    context.close()
   browser.close()
  assert not errors,errors

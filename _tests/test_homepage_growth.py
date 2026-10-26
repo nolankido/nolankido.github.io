@@ -8,6 +8,7 @@ from unittest.mock import patch
 import html5lib
 
 from test_site import ROOT, Page, build
+import creative_print_history
 import homepage_growth_history as history
 import task_brief_growth_history as task_growth
 import answer_review_growth_history as guide_growth
@@ -103,7 +104,7 @@ class HomepageGrowthTests(unittest.TestCase):
 
     def test_unknown_changes_remain_visible_and_reversal_is_exact(self):
         for path, record in self.record['paths'].items():
-            raw = task_growth.before(path, (ROOT / path).read_bytes())
+            raw = task_growth.before(path, creative_print_history.before(path, (ROOT / path).read_bytes()))
             self.assertEqual(digest(raw), record['new_sha256'], path)
             previous = history.before(path, raw)
             self.assertEqual(digest(previous), record['old_sha256'], path)

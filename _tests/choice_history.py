@@ -4,6 +4,7 @@ No historical digest is refreshed. The independent test_ai_task_choice contract
 also pins the actual pre-release inputs and checks the complete new behaviour.
 """
 from pathlib import Path
+import creative_print_history
 import turn10_profile_history
 import answer_review_history
 import search_entry_history
@@ -68,6 +69,7 @@ NEW_SOURCES |= set(poker_school_history.change()['new_files'])
 NEW_OUTPUTS |= set(poker_school_history.change()['new_outputs'])
 
 def before(path,data):
+    data=creative_print_history.before(path,data)
     data=answer_review_history.before(path,turn10_profile_history.before(path,data))
     path=str(path)
     binary=isinstance(data,bytes)

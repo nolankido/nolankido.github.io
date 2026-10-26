@@ -35,6 +35,17 @@
   .creative-brief-card { break-inside: avoid; }
 }
 
+/* Print the complete blank creative brief, even when its screen disclosure is closed. */
+@media print {
+  .page-creative .creative-template::details-content { content-visibility: visible !important; display: block !important; }
+  .page-creative .creative-template > :not(summary) { display: block !important; }
+  .page-creative .creative-template summary { cursor: default; list-style: none; break-after: avoid; }
+  .page-creative .creative-template summary::marker { content: ""; }
+  .page-creative .creative-template summary::-webkit-details-marker { display: none; }
+  .page-creative .creative-template pre { overflow: visible; break-inside: auto; background: white; color: black; }
+  .page-creative .creative-print-help { display: none; }
+}
+
 /* Homepage growth: one primary selection; secondary routes stay native. */
 .page-home .identity-reading h3 a { display: inline-flex; align-items: center; min-height: 44px; }
 .page-home .practical-home summary { cursor: pointer; min-height: 44px; padding: 8px 0; font: 600 .94rem/1.6 var(--sans); }

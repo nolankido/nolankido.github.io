@@ -8,6 +8,7 @@ from functools import lru_cache
 from hashlib import sha256
 import json
 from pathlib import Path
+import creative_print_history
 import task_brief_growth_history
 import turn04_public_source_history
 
@@ -24,6 +25,7 @@ def change():
 
 
 def before(path, data):
+    data = creative_print_history.before(path, data)
     import answer_review_growth_history as growth_history
     data = growth_history.before(path, data)
     data = turn04_public_source_history.before(path, data)
