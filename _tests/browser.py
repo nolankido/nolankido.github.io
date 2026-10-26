@@ -243,6 +243,76 @@ class BrowserTests(unittest.TestCase):
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
                     self.page.screenshot(path=str(out / ('feedback-contact-' + str(width) + '.png')), full_page=True)
 
+    def test_study_inquiry_populates_only_the_fixed_editable_context(self):
+        for width in [320, 390, 768, 1440]:
+            with self.subTest(width=width):
+                self.render('/contact/', width, feedback_hash='#study-inquiry')
+                expect(self.page.locator('#study-inquiry')).to_be_visible()
+                expect(self.page.locator('#contact-context')).to_have_value('Website usability study')
+                expect(self.page.locator('#contact-context')).to_have_attribute('aria-describedby', 'study-inquiry')
+                expect(self.page.locator('#contact-message')).to_have_attribute('aria-describedby', 'study-inquiry')
+                for field in ['name','email','reason','message']:
+                    self.assertEqual(self.page.locator('[name="'+field+'"]').input_value(), '')
+                self.assertEqual(self.posts, [])
+                field=self.page.locator('#contact-context')
+                field.focus()
+                self.page.keyboard.press('ControlOrMeta+A')
+                self.page.keyboard.type('My own optional context')
+                expect(field).to_have_value('My own optional context')
+                self.page.evaluate("window.location.hash = '#report-task-brief'")
+                expect(field).to_have_value('My own optional context')
+                self.assertEqual(self.posts, [])
+                self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'),width)
+                self.page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
+                self.assertLessEqual(self.page.evaluate('document.documentElement.scrollWidth'),width)
+                if os.environ.get('SCREENSHOT_DIR') and width in [390,1440]:
+                    out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+                    self.page.screenshot(path=str(out / ('study-inquiry-contact-'+str(width)+'.png')),full_page=True)
+
+    def test_study_inquiry_does_not_replace_a_restored_message_or_context(self):
+        self.render('/contact/',feedback_hash='#study-inquiry',existing_context='Keep my draft',
+                    prepare=lambda page: page.locator('#contact-message').evaluate('(el)=>el.value="Unsent draft text"'))
+        expect(self.page.locator('#contact-context')).to_have_value('Keep my draft')
+        expect(self.page.locator('#contact-message')).to_have_value('Unsent draft text')
+        expect(self.page.locator('#study-inquiry')).to_be_hidden()
+        self.assertEqual(self.posts, [])
+        self.render('/contact/',feedback_hash='#study-inquiry',
+                    prepare=lambda page: page.locator('#contact-message').evaluate('(el)=>el.value="Another unsent message"'))
+        expect(self.page.locator('#contact-context')).to_have_value('')
+        expect(self.page.locator('#study-inquiry')).to_be_hidden()
+        self.assertEqual(self.posts, [])
+
+    def test_study_inquiry_unknown_hashes_leave_general_contact_unmodified(self):
+        variants=['#study-inquiry?message=private','#study-inquiry%20',
+                  '#study-inquiry&context=private','#study-inquiry-extra',
+                  '#study-inquiry/other','#study-inquiry#report-task-brief']
+        for fragment in variants:
+            with self.subTest(fragment=fragment):
+                self.render('/contact/',feedback_hash=fragment)
+                expect(self.page.locator('#contact-context')).to_have_value('')
+                expect(self.page.locator('#study-inquiry')).to_be_hidden()
+                expect(self.page.locator('#contact-source-notice')).to_be_hidden()
+                self.assertEqual(self.posts, [])
+
+    def test_study_inquiry_requires_manual_send_and_uses_final_edited_topic(self):
+        for value in ['', 'I would like more information']:
+            with self.subTest(value=value):
+                self.render('/contact/',feedback_hash='#study-inquiry')
+                self.fill()
+                self.page.locator('#contact-context').fill(value)
+                self.assertEqual(self.posts, [])
+                self.page.locator('#contact-submit').click()
+                self.assertEqual(self.posts, [])
+                self.verify()
+                self.page.locator('#contact-submit').click()
+                self.assertEqual(len(self.posts),1)
+                self.assertEqual(self.posts[0]['context'],value)
+                self.assertEqual(self.posts[0]['reason'],'Other')
+                self.assertEqual(set(self.posts[0]),
+                    {'name','email','reason','context','message','cf-turnstile-response','_email'})
+                self.assertNotIn('consent',self.posts[0])
+                expect(self.page.locator('#form-success')).to_be_visible()
+
     def test_poker_school_requires_explicit_consent(self):
         self.render('/poker/school/')
         expect(self.page.locator('#contact-fields')).to_be_enabled()
