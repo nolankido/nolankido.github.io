@@ -1,0 +1,25 @@
+name: Prepare answer review print turn
+
+on:
+  push:
+    branches:
+      - website-growth-answer-review-print-20261025
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out candidate branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Upload working tree
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: answer-review-print-working-tree
+          path: .
+          include-hidden-files: true
+          retention-days: 1
