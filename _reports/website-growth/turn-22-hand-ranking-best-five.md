@@ -22,3 +22,8 @@ The eight selected hands are:
 The unit test independently evaluates each declared five-card group, confirms that it contains five distinct available cards, and verifies that its score equals the best score available from the player's seven cards. It also confirms that the visible card elements exactly match the declared card codes. The browser suite adds the guide to all five viewport and enlarged-spacing passes, opens the four native disclosures, verifies eight groups with five cards each, and checks horizontal overflow and accessibility with the existing poker suite.
 
 The focused authoring workflow runs the site build, HTML validation, search validation, the viewer-guide unit suite and whitespace checks before committing generated output. Full hosted release checks and automated review remain merge gates.
+
+
+## Release-integrity binding
+
+Seven production paths are bound to the exact published parent at commit `501990c1079b89738aa19d9c48def5f1346bc09d`: the source guide, its generated page and five generated reading-time references. A hash-gated, test-only adapter reconstructs the complete predecessor only when every changed file matches its reviewed new hash. Unknown edits pass through unchanged, and corrupt records fail closed. The production inventory fingerprint confirms that no unrelated public path is hidden by this release history.

@@ -28,6 +28,8 @@ def change():
 
 
 def before(path, data):
+    import best_five_history
+    data = best_five_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data
