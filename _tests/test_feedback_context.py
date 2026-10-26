@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import feedback_context_history as history
+import study_inquiry_history as inquiry_history
 import task_brief_error_history
 
 EXPECTED = {
@@ -139,7 +140,7 @@ class FeedbackContextTests(unittest.TestCase):
         self.assertNotIn('hashchange', section)
 
     def test_output_inventory_is_unchanged_and_exactly_seven_pages_change(self):
-        prior = {p: task_brief_error_history.before(p, value) for p, value in self.outputs.items()}
+        prior = {p: task_brief_error_history.before(p, inquiry_history.before(p, value)) for p, value in self.outputs.items()}
         changed = [str(p) for p, value in prior.items() if history.before(p, value) != value]
         expected = {'contact/index.html'} | {str(build.output_path(r)) for r in EXPECTED.values()}
         self.assertEqual(set(changed), expected)

@@ -7,12 +7,13 @@ from unittest.mock import patch
 import re
 import unittest
 import study_interest_history as history
+import study_inquiry_history as inquiry_history
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = '_source/start-here.html'
 PUBLIC = 'start-here/index.html'
 MARK = 'id="study-interest"'
-TARGET = '/contact/#contact-form'
+TARGET = '/contact/#study-inquiry'
 
 class ElementParser(HTMLParser):
     def __init__(self, text):
@@ -28,7 +29,8 @@ class StudyInterestTests(unittest.TestCase):
         for name,item in history.change()['paths'].items():
             with self.subTest(name=name):
                 raw=(ROOT/name).read_bytes()
-                self.assertEqual(sha256(raw).hexdigest(),item['new_sha256'])
+                parent=inquiry_history.before(name,raw)
+                self.assertEqual(sha256(parent).hexdigest(),item['new_sha256'])
                 previous=history.before(name,raw)
                 self.assertEqual(sha256(previous).hexdigest(),item['old_sha256'])
                 self.assertEqual(history.before(Path(name),raw.decode()).encode(),previous)
