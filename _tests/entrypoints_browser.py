@@ -98,7 +98,32 @@ try:
                 with page.expect_download() as download:
                     page.locator('a[href="/downloads/' + slug + '.md"]').click()
                 assert Path(download.value.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
-            results.append({'javascript': javascript, 'keyboard_routes': 28, 'downloads': 3, 'task_routes': task_routes, 'role_routes': role_routes, 'quick_downloads': quick_downloads, 'tool_routes': tool_routes})
+            study_interest_cases = 0
+            # Public invitation is native and available without scripts.
+            # Only open the existing form; do not send a test submission.
+            for width in [320, 390, 768, 1440]:
+                page.set_viewport_size({'width':width,'height':900})
+                page.goto(base + '/start-here/')
+                invitation = page.locator('#study-interest')
+                expect(invitation).to_be_visible()
+                expect(invitation.locator('h3#study-interest-title')).to_be_visible()
+                link = invitation.locator('a[href="/contact/#contact-form"]')
+                expect(link).to_be_visible()
+                link.focus()
+                expect(link).to_be_focused()
+                page.keyboard.press('Enter')
+                expect(page).to_have_url(base + '/contact/#contact-form')
+                form = page.locator('#contact-form')
+                expect(form).to_be_visible()
+                expect(form.locator('input[name="name"][required]')).to_have_count(1)
+                expect(form.locator('input[name="email"][required]')).to_have_count(1)
+                expect(form.locator('textarea[name="message"][required]')).to_have_count(1)
+                expect(page.locator('#form-success')).to_be_hidden()
+                assert page.evaluate('localStorage.length + sessionStorage.length') == 0
+                assert context.cookies() == []
+                assert page.evaluate('document.documentElement.scrollWidth') <= width, ('study-interest',width,javascript)
+                study_interest_cases += 1
+            results.append({'javascript': javascript, 'keyboard_routes': 28, 'downloads': 3, 'task_routes': task_routes, 'role_routes': role_routes, 'quick_downloads': quick_downloads, 'tool_routes': tool_routes, 'study_interest_cases': study_interest_cases})
             context.close()
         context = browser.new_context()
         context.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())
