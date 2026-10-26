@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "base_commit": "4bf860988f903a11becaf008bc6446c6bbde34bb",
+  "paths": {
+    "_scripts/poker_resources.py": {
+      "old_sha256": "4d99ae88e31bb053bff6d575fef3b2ad80ee8cb14db5875e3b4a3b6168915235",
+      "new_sha256": "fcd8cf56227d52928ecf42c816f1ee3646a2964b1312afecef1c205c76540472",
+      "edits": [
+        {
+          "new": "def regional_link_notice(entry: dict) -> str:\n    \"\"\"Link-routing caution for PokerStars web articles, not separate live-tour sites.\"\"\"\n    if urlsplit(entry['url']).hostname not in {'pokerstars.com', 'www.pokerstars.com'}:\n        return ''\n    return (\n        '<p class=\"small-copy resource-caution resource-region\"><strong>Regional link:</strong> '\n        'This PokerStars URL may open a different page in your location. '\n        '<a href=\"#regional-operator-links\">Check what to do</a>.</p>'\n    )\n\n\n",
+          "old": "",
+          "count": 1
+        },
+        {
+          "new": "            + regional_link_notice(entry)\n",
+          "old": "",
+          "count": 1
+        }
+      ]
+    },
+    "_source/poker/resources.html": {
+      "old_sha256": "f468191b3e2ba682671ba2d4c189c1fc3513d813f18feae62e78dbb34659d10c",
+      "new_sha256": "b1293798a1005e93ebe690b42be9039e097799067f542bc9681521cb2448167d",
+      "edits": [
+        {
+          "new": "    <div id=\"regional-operator-links\" class=\"editorial-note\" aria-labelledby=\"regional-operator-title\">\n      <h3 id=\"regional-operator-title\">If an operator link lands on another page</h3>\n      <p>Some PokerStars links may lead to different destinations by region. A general landing page or another brand does not verify the specific policy, hand ranking, or game rules named in a listing. After opening a source, check its publisher and heading. If they differ, do not treat the redirected page as the cited authority.</p>\n      <p>For learning, use <a href=\"/poker/hand-rankings/\">our hand-ranking guide</a> or <a href=\"/poker/omaha-and-mixed-games/\">the variant guide</a>. For restrictions on study tools, begin with <a href=\"/poker/poker-rules-and-fair-play/\">rules and fair play</a>, then confirm the operator's currently applicable policy before using a tool. The original source URLs are retained; no alternate operator is endorsed.</p>\n    </div>\n",
+          "old": "",
+          "count": 1
+        }
+      ]
+    },
+    "poker/resources/index.html": {
+      "old_sha256": "318ebfe974aa93fbf5ed9b79c588cc7a43ba8b1f55bce70bd7d25366ba336f12",
+      "new_sha256": "c1f781bb8fa04b6eed4f58db9d55c86fbf281ff05ddf0d00e4f2e0392cecc81b",
+      "edits": [
+        {
+          "new": "    <div id=\"regional-operator-links\" class=\"editorial-note\" aria-labelledby=\"regional-operator-title\">\n      <h3 id=\"regional-operator-title\">If an operator link lands on another page</h3>\n      <p>Some PokerStars links may lead to different destinations by region. A general landing page or another brand does not verify the specific policy, hand ranking, or game rules named in a listing. After opening a source, check its publisher and heading. If they differ, do not treat the redirected page as the cited authority.</p>\n      <p>For learning, use <a href=\"/poker/hand-rankings/\">our hand-ranking guide</a> or <a href=\"/poker/omaha-and-mixed-games/\">the variant guide</a>. For restrictions on study tools, begin with <a href=\"/poker/poker-rules-and-fair-play/\">rules and fair play</a>, then confirm the operator's currently applicable policy before using a tool. The original source URLs are retained; no alternate operator is endorsed.</p>\n    </div>\n",
+          "old": "",
+          "count": 1
+        },
+        {
+          "new": "<p class=\"small-copy resource-caution resource-region\"><strong>Regional link:</strong> This PokerStars URL may open a different page in your location. <a href=\"#regional-operator-links\">Check what to do</a>.</p>",
+          "old": "",
+          "count": 18
+        }
+      ]
+    },
+    ".github/workflows/site-checks.yml": {
+      "old_sha256": "0cca1c4731e3a4fc3bbf92ba825b0a66b466165d4ec07069c10586ee0c1dcd75",
+      "new_sha256": "c5106a45c6ab16714c6ffd0b767a527eaab171a9c1eb6f53cb6574266c3b73b9",
+      "edits": [
+        {
+          "new": "suites: poker_browser resources_browser workshops_browser",
+          "old": "suites: poker_browser workshops_browser",
+          "count": 1
+        }
+      ]
+    }
+  }
+}

@@ -22,6 +22,10 @@ def change():
     return record
 
 def before(path,data):
+    # Shared predecessor for the independent full-site history chains.
+    # The newest regional link turn must be reversed before older fingerprints.
+    import regional_link_history
+    data=regional_link_history.before(path,data)
     item=change()['paths'].get(str(path))
     if item is None:return data
     binary=isinstance(data,bytes)

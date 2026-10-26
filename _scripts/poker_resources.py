@@ -202,6 +202,17 @@ def resource_format(entry: dict) -> str:
     return matches[0]
 
 
+def regional_link_notice(entry: dict) -> str:
+    """Link-routing caution for PokerStars web articles, not separate live-tour sites."""
+    if urlsplit(entry['url']).hostname not in {'pokerstars.com', 'www.pokerstars.com'}:
+        return ''
+    return (
+        '<p class="small-copy resource-caution resource-region"><strong>Regional link:</strong> '
+        'This PokerStars URL may open a different page in your location. '
+        '<a href="#regional-operator-links">Check what to do</a>.</p>'
+    )
+
+
 def card(entry: dict, selection: str = '') -> str:
     metadata = ' · '.join([entry['kind'], entry['access'], entry['level']])
     method = 'Page read' if entry['review_method'] == 'page' else 'Search index only'
@@ -213,6 +224,7 @@ def card(entry: dict, selection: str = '') -> str:
             f'<h3><a href="{escape(entry["url"], quote=True)}" rel="external">{escape(entry["title"])}</a></h3>'
             f'<p class="reader-card-meta">{escape(metadata)}</p>'
             f'<p class="resource-description">{escape(entry["description"])}</p>'
+            + regional_link_notice(entry)
             + (f'<p class="small-copy resource-caution"><strong>Before you use it:</strong> {escape(entry["notes"])}</p>' if entry['notes'] else '')
             + selection
             + f'<p class="small-copy resource-review">Listing reviewed <time datetime="{entry["reviewed_on"]}">{entry["reviewed_on"]}</time>'
