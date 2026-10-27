@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "parent_commit": "962e489bb557ee6dfda3a48524a4bc8953f3c8e8",
+  "parent_tree": "c58a229171ec97246111faccc80d411969e42010",
+  "paths": {
+    "_source/pages.json": {
+      "parent_sha256": "236dec1ccfe93b80d57f0f65fa365a7341a7e2c046254e032cce53ad69f4d6cb",
+      "current_sha256": "5c8a15936605397bc09a1646c0f860337cc70b62fa55f52cc87101d2e4853c3f",
+      "edits": [
+        {
+          "start": 49044,
+          "end": 49072,
+          "current_sha256": "8856ada00eb5a676dc7d52c738ea017c020496aee1d1fc5d19ae79cc0bb507cb",
+          "old": "    \"updated\": \"2026-10-11\"\n"
+        }
+      ]
+    },
+    "_source/technology/ai-time-savings.html": {
+      "parent_sha256": "d5ea291ac0a9cbeaf6cae0785f7ad03d0af57a4ebeed2bc486dbad9470c5645c",
+      "current_sha256": "76252c105653bf322fd68739c92c49e1a3c4e32ceeb90c9ee31e8cc1bc2622e9",
+      "edits": [
+        {
+          "start": 5857,
+          "end": 9232,
+          "current_sha256": "fc69d1e7a2b0ac208483a9e9a8e823330abb4a800100c9159a1172ce89e3985e",
+          "old": "<section class=\"time-result\" id=\"time-result\" aria-labelledby=\"time-result-title\" hidden><h2 id=\"time-result-title\" tabindex=\"-1\">Your comparison</h2><p id=\"time-basis-note\"></p><p class=\"evidence-note\" id=\"time-quality-note\"></p><dl class=\"time-totals\"><div><dt>Usual total</dt><dd id=\"time-usual-total\"></dd></div><div><dt>Assisted total, including overhead</dt><dd id=\"time-changed-total\"></dd></div><div><dt>Per-task difference before overhead</dt><dd id=\"time-per-run\"></dd></div><div><dt>Setup and upkeep</dt><dd id=\"time-overhead\"></dd></div></dl><p id=\"time-percent\"></p><p id=\"time-threshold\"></p><section class=\"time-interpretation\" aria-label=\"Decision and sensitivity\"><h3>What should you do with this result?</h3><p id=\"time-decision\"></p><p id=\"time-review-budget\"></p><p id=\"time-sensitivity\"></p></section><label for=\"time-report\">Plain-text comparison, including inputs and limitations</label><textarea class=\"time-report\" id=\"time-report\" readonly rows=\"10\" spellcheck=\"false\"></textarea><pre id=\"time-print-report\"></pre><div class=\"time-actions\"><button id=\"time-copy\" type=\"button\">Copy comparison</button><button id=\"time-download\" type=\"button\">Save comparison as text</button><button id=\"time-print\" type=\"button\" aria-describedby=\"time-print-help\">Print comparison</button></div><p class=\"time-help\" id=\"time-print-help\">Print opens your browser’s preview for the complete comparison. Check the preview and destination; this page cannot confirm printing or saving.</p><p id=\"time-copy-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p></section></div></div></section>\n"
+        }
+      ]
+    },
+    "assets/workflow-time.js": {
+      "parent_sha256": "88f4c30bf53a7c1d2aabf158f569f39a0cde03fa9426abc9e650f17ffb784b1b",
+      "current_sha256": "b910050494d16b33230036c6b1df471fc79a1b877097f21bf920badc118872fd",
+      "edits": [
+        {
+          "start": 2346,
+          "end": 2839,
+          "current_sha256": "fe8cf22355f6d90a52bf6bfcdb523b499d37ad4dcbbd7e12889822d56a9d8ee2",
+          "old": ""
+        },
+        {
+          "start": 3323,
+          "end": 5253,
+          "current_sha256": "7415f586d79523c5cda223bf525f088e9c73bdb07866d85c6454d344fe052af0",
+          "old": ""
+        },
+        {
+          "start": 5301,
+          "end": 5326,
+          "current_sha256": "2eb87a4011a11a8d86f52f0aa2498202cb106141c67abe3b90749eefdb84f0d4",
+          "old": ""
+        },
+        {
+          "start": 5846,
+          "end": 6034,
+          "current_sha256": "cc73486479e83cb32aebd2d6fab2149fc8aca206f1da85a37ebf5fea1d39094f",
+          "old": ""
+        },
+        {
+          "start": 7299,
+          "end": 7327,
+          "current_sha256": "d1a96426930bd69301529210b0cbe20f54969f611516acb4b92d91e4a06b38b8",
+          "old": "        if (keys.some(k => fields[k].value) || quality.value !== \"unknown\" || basis.value !== \"estimate\") {\n"
+        },
+        {
+          "start": 7440,
+          "end": 7704,
+          "current_sha256": "abae82ff74929541420d1ce17d0f8d6ab943a38a61eacf8b0a97a016b705037b",
+          "old": "          byId(\"time-example-message\").textContent = \"Load the fictional \" + example.label.toLowerCase() + \" example? This replaces all six values and resets the basis to planning estimates and quality to not yet checked.\";\n"
+        },
+        {
+          "start": 8328,
+          "end": 8564,
+          "current_sha256": "8c815cbe6f018d31c449aa4fc154503e31da24c3fbc2ebd01f72ea65d3785ea9",
+          "old": ""
+        },
+        {
+          "start": 8628,
+          "end": 8718,
+          "current_sha256": "2d2db785f42efed8e0a291952c95eba798c9e3160558c2f915ef733173921893",
+          "old": "    const hadResult = !result.hidden; invalidate();\n"
+        },
+        {
+          "start": 8812,
+          "end": 9032,
+          "current_sha256": "fbdc593e12f40db94d160ed5150f857cc91b12151fa6f32723f98bfbcc16456d",
+          "old": "    status.textContent = hadResult ? \"Inputs changed. Calculate again for an up-to-date comparison.\" : \"\";\n"
+        },
+        {
+          "start": 9110,
+          "end": 9348,
+          "current_sha256": "86ab811d8d3f2694054bd9099580e56fc95007ac08ff351a7aaee2ccf8b7b4ab",
+          "old": "    invalidate(); status.textContent = \"Comparison changed. Calculate again.\";\n"
+        },
+        {
+          "start": 14753,
+          "end": 14867,
+          "current_sha256": "84ba220fc4a56d141c50b95a6ba5c0de0353e3c67d91ad792dc57065bca4258d",
+          "old": "    report.value = [\"WORKFLOW TIME COMPARISON\", \"https://nolankido.com/technology/ai-time-savings/\", basisText,\n"
+        },
+        {
+          "start": 15232,
+          "end": 15331,
+          "current_sha256": "fc53f478263b9e1d6ebdf5cf227615f38524ae969ad848f85c1825759d173979",
+          "old": "      precision, threshold, \"\", gate, \"\", \"Decision: \" + decision, budget, sensitivity,\n"
+        },
+        {
+          "start": 15563,
+          "end": 15666,
+          "current_sha256": "67968d65594b320c9138c91f7b6c3e7d98952568b9e777be548fcc31f900e4f6",
+          "old": "    // Print exactly the validated export, with no separate calculation or input cache.\n    if (printReport) printReport.textContent = report.value;\n"
+        },
+        {
+          "start": 18216,
+          "end": 18316,
+          "current_sha256": "ab486e42aa2de1406177f95ba2d31ed64dcc26a32918fdf3475ffe2692009ebe",
+          "old": "    if (keys.some(k => fields[k].value)) { byId(\"time-clear-confirm\").hidden = false; byId(\"time-clear-no\").focus(); }\n"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "parent_sha256": "1390eccd1abf243e471463ac9a8465b9fc7d8febde436553eee038302b321fa5",
+      "current_sha256": "1a8d6d06e4fa3f16f90c9b1083eee5cc131285ff28d86be7311cdaa82941476f",
+      "edits": [
+        {
+          "start": 9624,
+          "end": 9658,
+          "current_sha256": "8485f57b7c5f0f2fafcb00c3890c7e1f72d3e16c4aae0f4ee7d20f199212e42f",
+          "old": "    <lastmod>2026-10-11</lastmod>\n"
+        }
+      ]
+    },
+    "technology/ai-time-savings/index.html": {
+      "parent_sha256": "1c93e829354aeaba91f8ac8b67175370778c7ee57081b87df19867f11f251a52",
+      "current_sha256": "8cbc867ce87fd91bb5806eb5b60d4dc1047029fa0aa575ef086f4852980c4fa1",
+      "edits": [
+        {
+          "start": 2868,
+          "end": 2940,
+          "current_sha256": "1d1faf960cb346f26e9fe6bbb23b5d7a3d4d30952d326edc25671ec9d25bb6cc",
+          "old": "  <script defer src=\"/assets/workflow-time.js?v=88f4c30bf53a\"></script>\n"
+        },
+        {
+          "start": 3368,
+          "end": 5222,
+          "current_sha256": "4ad5300d9cf952098ec6b9c9dc21f5b003d19d94d2b7bcb55a4fa0445e129468",
+          "old": "  <script type=\"application/ld+json\">{\"@context\": \"https://schema.org\", \"@type\": \"WebPage\", \"name\": \"AI Time Savings Calculator: Count the Full Workflow | Nolan Kido\", \"url\": \"https://nolankido.com/technology/ai-time-savings/\", \"description\": \"Compare AI workflow time including setup, prompting, review, repairs, and upkeep. Free calculator with break-even examples and a private-use worksheet.\", \"isPartOf\": {\"@type\": \"WebSite\", \"@id\": \"https://nolankido.com/#website\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/\", \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}}, \"dateModified\": \"2026-10-11\", \"mainEntity\": {\"@type\": \"WebApplication\", \"@id\": \"https://nolankido.com/technology/ai-time-savings/#application\", \"name\": \"AI Time Savings Calculator\", \"url\": \"https://nolankido.com/technology/ai-time-savings/\", \"description\": \"A free local time comparison including setup, production, review and upkeep. No AI runs here.\", \"applicationCategory\": \"ProductivityApplication\", \"operatingSystem\": \"Web browser\", \"isAccessibleForFree\": true, \"creator\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}}, \"@id\": \"https://nolankido.com/technology/ai-time-savings/#webpage\", \"inLanguage\": \"en-US\", \"breadcrumb\": {\"@type\": \"BreadcrumbList\", \"@id\": \"https://nolankido.com/technology/ai-time-savings/#breadcrumb\", \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"Home\", \"item\": \"https://nolankido.com/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Technology\", \"item\": \"https://nolankido.com/technology/\"}, {\"@type\": \"ListItem\", \"position\": 3, \"name\": \"Does AI actually save you time?\", \"item\": \"https://nolankido.com/technology/ai-time-savings/\"}]}}</script>\n"
+        },
+        {
+          "start": 15665,
+          "end": 19175,
+          "current_sha256": "2d437a32e68b5c89b6425bf445a3eca3a652ae1399888d50bd8b299fc3844c3d",
+          "old": "<section class=\"time-result\" id=\"time-result\" aria-labelledby=\"time-result-title\" hidden><h2 id=\"time-result-title\" tabindex=\"-1\">Your comparison</h2><p id=\"time-basis-note\"></p><!-- Editable time examples: start --><p id=\"time-example-origin\" class=\"evidence-note\" hidden></p><!-- Editable time examples: end --><p class=\"evidence-note\" id=\"time-quality-note\"></p><dl class=\"time-totals\"><div><dt>Usual total</dt><dd id=\"time-usual-total\"></dd></div><div><dt>Assisted total, including overhead</dt><dd id=\"time-changed-total\"></dd></div><div><dt>Per-task difference before overhead</dt><dd id=\"time-per-run\"></dd></div><div><dt>Setup and upkeep</dt><dd id=\"time-overhead\"></dd></div></dl><p id=\"time-percent\"></p><p id=\"time-threshold\"></p><section class=\"time-interpretation\" aria-label=\"Decision and sensitivity\"><h3>What should you do with this result?</h3><p id=\"time-decision\"></p><p id=\"time-review-budget\"></p><p id=\"time-sensitivity\"></p></section><label for=\"time-report\">Plain-text comparison, including inputs and limitations</label><textarea class=\"time-report\" id=\"time-report\" readonly rows=\"10\" spellcheck=\"false\"></textarea><pre id=\"time-print-report\"></pre><div class=\"time-actions\"><button id=\"time-copy\" type=\"button\">Copy comparison</button><button id=\"time-download\" type=\"button\">Save comparison as text</button><button id=\"time-print\" type=\"button\" aria-describedby=\"time-print-help\">Print comparison</button></div><p class=\"time-help\" id=\"time-print-help\">Print opens your browser’s preview for the complete comparison. Check the preview and destination; this page cannot confirm printing or saving.</p><p id=\"time-copy-status\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></p></section></div></div></section>\n"
+        }
+      ]
+    }
+  },
+  "page": {
+    "old": {
+      "id": "ai-time-savings",
+      "section": "technology",
+      "path": "/technology/ai-time-savings/",
+      "title": "Does AI actually save you time?",
+      "seo_title": "AI Time Savings Calculator: Count the Full Workflow | Nolan Kido",
+      "description": "Compare AI workflow time including setup, prompting, review, repairs, and upkeep. Free calculator with break-even examples and a private-use worksheet.",
+      "kicker": "Technology / A practical calculator",
+      "source": "technology/ai-time-savings.html",
+      "updated": "2026-10-11"
+    },
+    "new": {
+      "id": "ai-time-savings",
+      "section": "technology",
+      "path": "/technology/ai-time-savings/",
+      "title": "Does AI actually save you time?",
+      "seo_title": "AI Time Savings Calculator: Count the Full Workflow | Nolan Kido",
+      "description": "Compare AI workflow time including setup, prompting, review, repairs, and upkeep. Free calculator with break-even examples and a private-use worksheet.",
+      "kicker": "Technology / A practical calculator",
+      "source": "technology/ai-time-savings.html",
+      "updated": "2026-10-27"
+    }
+  }
+}

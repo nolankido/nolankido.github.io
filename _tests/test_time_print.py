@@ -9,6 +9,7 @@ import unittest
 
 import time_print_history as history
 import later_release_history as later_history
+import workflow_decision_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -18,7 +19,9 @@ class TimePrintHistoryTests(unittest.TestCase):
         self.assertEqual(set(history.change()['paths']), history.PATHS)
         for name, record in history.change()['paths'].items():
             with self.subTest(path=name):
-                raw = (ROOT / name).read_bytes()
+                # Compare this print release with its actual successor snapshot,
+                # while the separate decision tests pin the current live bytes.
+                raw = workflow_decision_history.before(name, (ROOT / name).read_bytes())
                 self.assertEqual(sha256(raw).hexdigest(), record['new_sha256'])
                 old = history.before(name, raw)
                 self.assertEqual(sha256(old).hexdigest(), record['old_sha256'])

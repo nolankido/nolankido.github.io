@@ -40,6 +40,11 @@
   const result = byId("time-result"), status = byId("time-status"), report = byId("time-report");
   const printReport = byId("time-print-report");
   const quality = byId("time-quality"), basis = byId("time-basis");
+  const personalChoice = byId("time-personal-choice"), personalReason = byId("time-personal-reason");
+  const personalReview = byId("time-personal-review"), personalStatus = byId("time-personal-status");
+  const canRecordDecision = Boolean(personalChoice && personalReason && personalReview && personalStatus);
+  const personalChoices = Object.freeze({keep: "Keep", adjust: "Adjust", stop: "Stop", observe: "Gather more observations"});
+  let comparisonText = "", decisionNeedsReview = false;
   const examplePicker = byId("time-example-picker"), exampleConfirm = byId("time-example-confirm");
   const exampleNote = byId("time-example-origin");
   let exampleOrigin = "", pendingExample = null, exampleTrigger = null;
@@ -48,8 +53,43 @@
     pendingExample = null; exampleTrigger = null;
   }
   const moneyFree = n => (n / 100).toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 2}) + " min";
+  function hasDecisionNotes() {
+    return canRecordDecision && Boolean(personalChoice.value || personalReason.value || personalReview.value);
+  }
+  function hasEntries() {
+    return keys.some(k => fields[k].value) || quality.value !== "unknown" || basis.value !== "estimate" || hasDecisionNotes();
+  }
+  function requireNewDecision() {
+    if (hasDecisionNotes()) {
+      personalChoice.value = "";
+      decisionNeedsReview = true;
+    }
+    return decisionNeedsReview;
+  }
+  function updateReport() {
+    if (!comparisonText) return;
+    let personal = "";
+    if (canRecordDecision) {
+      // Match the declared input limits, including programmatically filled fields.
+      personalReason.value = personalReason.value.slice(0, 1000);
+      personalReview.value = personalReview.value.slice(0, 300);
+      const selected = Object.prototype.hasOwnProperty.call(personalChoices, personalChoice.value) ? personalChoices[personalChoice.value] : "";
+      const note = decisionNeedsReview ?
+        "The comparison changed. Your previous choice was cleared; retained notes are drafts. Choose again after reviewing the new result." :
+        selected ? "Your choice is included in the comparison. The quality condition above still applies; this choice is not independently verified." :
+        "No personal decision recorded. You can save the comparison and decide later; any notes below are drafts.";
+      if (personalStatus.textContent !== note) personalStatus.textContent = note;
+      personal = ["", "YOUR DECISION", "Your decision: " + (selected || "Not recorded"), note,
+        "Reason and remaining uncertainty:", personalReason.value.trim() || "Not recorded",
+        "Next review point:", personalReview.value.trim() || "Not recorded"].join("\n") + "\n";
+    }
+    report.value = comparisonText + personal;
+    if (printReport) printReport.textContent = report.value;
+    byId("time-copy-status").textContent = "";
+  }
   function invalidate() {
     dismissExample();
+    comparisonText = "";
     result.hidden = true; report.value = ""; byId("time-copy-status").textContent = "";
     if (printReport) printReport.textContent = "";
     byId("time-clear-confirm").hidden = true;
@@ -60,6 +100,10 @@
   function reset() {
     invalidate(); clearErrors(); keys.forEach(k => { fields[k].value = ""; });
     quality.value = "unknown"; basis.value = "estimate"; status.textContent = "";
+    decisionNeedsReview = false;
+    if (canRecordDecision) {
+      personalChoice.value = ""; personalReason.value = ""; personalReview.value = ""; personalStatus.textContent = "";
+    }
     exampleOrigin = "";
     if (exampleNote) { exampleNote.hidden = true; exampleNote.textContent = ""; }
   }
@@ -81,10 +125,10 @@
       } catch (_) { button.hidden = true; continue; }
       const example = {values, label: button.dataset.timeLabel};
       button.addEventListener("click", () => {
-        if (keys.some(k => fields[k].value) || quality.value !== "unknown" || basis.value !== "estimate") {
+        if (hasEntries()) {
           byId("time-clear-confirm").hidden = true;
           pendingExample = example; exampleTrigger = button;
-          byId("time-example-message").textContent = "Load the fictional " + example.label.toLowerCase() + " example? This replaces all six values and resets the basis to planning estimates and quality to not yet checked.";
+          byId("time-example-message").textContent = "Load the fictional " + example.label.toLowerCase() + " example? This replaces all six values and resets the basis to planning estimates and quality to not yet checked. It also clears your decision and notes.";
           exampleConfirm.hidden = false;
           byId("time-example-no").focus({preventScroll: true});
           exampleConfirm.scrollIntoView({block: "center", behavior: "instant"});
@@ -100,13 +144,19 @@
     });
     examplePicker.hidden = available === 0;
   }
+  if (canRecordDecision) {
+    personalChoice.addEventListener("change", () => { decisionNeedsReview = false; updateReport(); });
+    [personalReason, personalReview].forEach(field => field.addEventListener("input", updateReport));
+  }
   keys.forEach(k => fields[k].addEventListener("input", () => {
-    const hadResult = !result.hidden; invalidate();
+    const hadResult = !result.hidden, needsDecision = requireNewDecision(); invalidate();
     fields[k].removeAttribute("aria-invalid"); byId("time-" + k + "-error").textContent = "";
-    status.textContent = hadResult ? "Inputs changed. Calculate again for an up-to-date comparison." : "";
+    status.textContent = needsDecision ? "Inputs changed. Calculate again, then choose your decision again. Your notes are kept." :
+      hadResult ? "Inputs changed. Calculate again for an up-to-date comparison." : "";
   }));
   [quality, basis].forEach(el => el.addEventListener("change", () => {
-    invalidate(); status.textContent = "Comparison changed. Calculate again.";
+    const needsDecision = requireNewDecision(); invalidate();
+    status.textContent = needsDecision ? "Comparison changed. Calculate again, then choose your decision again. Your notes are kept." : "Comparison changed. Calculate again.";
   }));
   byId("time-calculate").addEventListener("click", () => {
     invalidate(); clearErrors();
@@ -170,15 +220,15 @@
     const basisText = basis.value === "estimate" ? "Planning estimate, not a measured outcome." : "User-entered observations, not independently verified or a causal experiment.";
     byId("time-basis-note").textContent = basisText;
     if (exampleNote) { exampleNote.textContent = exampleOrigin; exampleNote.hidden = !exampleOrigin; }
-    report.value = ["WORKFLOW TIME COMPARISON", "https://nolankido.com/technology/ai-time-savings/", basisText,
+    comparisonText = ["WORKFLOW TIME COMPARISON", "https://nolankido.com/technology/ai-time-savings/", basisText,
       ...(exampleOrigin ? [exampleOrigin] : []),
       "", ...keys.map(k => k + ": " + input[k].trim() + (k === "count" ? " repetitions" : " minutes")),
       "", outcome, "Usual total: " + moneyFree(v.usual), "Changed total: " + moneyFree(v.changed),
       "Per-task difference before overhead: " + moneyFree(v.perRun), "Fixed overhead: " + moneyFree(v.overhead),
-      precision, threshold, "", gate, "", "Decision: " + decision, budget, sensitivity,
+      precision, threshold, "", gate, "", "Suggested next step: " + decision, budget, sensitivity,
       "Model: N*(usual - assisted - review) - setup - upkeep. Compare the same task and quality. Count active effort consistently and avoid double-counting waiting. This is not a financial ROI or quality score."].join("\n") + "\n";
-    // Print exactly the validated export, with no separate calculation or input cache.
-    if (printReport) printReport.textContent = report.value;
+    // Every output uses one current comparison plus the person's explicit record.
+    updateReport();
     result.hidden = false; status.textContent = "Comparison ready. Read the quality condition and assumptions.";
     byId("time-result-title").focus();
   });
@@ -229,7 +279,7 @@
   });
   byId("time-clear").addEventListener("click", () => {
     dismissExample();
-    if (keys.some(k => fields[k].value)) { byId("time-clear-confirm").hidden = false; byId("time-clear-no").focus(); }
+    if (hasEntries()) { byId("time-clear-confirm").hidden = false; byId("time-clear-no").focus(); }
     else { reset(); fields.manual.focus(); }
   });
   byId("time-clear-yes").addEventListener("click", () => { reset(); status.textContent = "Entries cleared."; fields.manual.focus(); });

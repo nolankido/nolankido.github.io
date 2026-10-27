@@ -19,6 +19,9 @@ if not args.offline:
 base='http://127.0.0.1:'+str(server.server_port) if server else ''
 calc='/technology/ai-time-savings/';case='/technology/checking-ai-website-changes/'
 report={'offline':args.offline,'functional':0,'layouts':0,'spacing':0,'downloads':0,'export_recovery_layouts':0,'export_recovery_spacing':0,'export_normal_capture_equivalence':0,'axe':[],'journeys':0,'case_source_keyboard_journeys':0,'editable_examples':0,'example_replacement_recovery':0,'example_downloads':0,'print_layouts':0,'print_report_equivalence':0,'print_requests':0,'print_fallbacks':0,'print_state_guards':0,'print_static_fallbacks':0,'print_pdf_captures':0};errors=[]
+report.update({'personal_choices':0,'personal_invalidations':0,'personal_unchanged_recalculation':0,
+ 'personal_exports':0,'personal_stale_copy':0,'personal_reset_journeys':0,'personal_layouts':0,
+ 'personal_spacing':0,'personal_literal_notes':0,'personal_lifecycle':0})
 faulthandler.dump_traceback_later(300,exit=True)
 try:
  with sync_playwright() as pw:
@@ -252,8 +255,9 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
    for key,value in zip(print_keys,values):
     assert key+': '+value+(' repetitions' if key=='count' else ' minutes') in snapshot['print']
    assert snapshot['print'].startswith('WORKFLOW TIME COMPARISON\nhttps://nolankido.com/technology/ai-time-savings/\n')
-   assert 'Decision: ' in snapshot['print'] and 'What if verification takes 2 more minutes per task?' in snapshot['print']
-   assert snapshot['print'].endswith('This is not a financial ROI or quality score.\n')
+   assert 'Suggested next step: ' in snapshot['print'] and 'What if verification takes 2 more minutes per task?' in snapshot['print']
+   assert snapshot['print'].count('\nYOUR DECISION\n')==1
+   assert snapshot['print'].split('\nYOUR DECISION\n',1)[0].endswith('This is not a financial ROI or quality score.\n')
    return snapshot
   def no_printable_result(reason,private_marker=''):
    expect(p.locator('#time-result')).to_be_hidden();expect(p.locator('#time-report')).to_have_value('')
@@ -366,6 +370,137 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
   assert p.url==print_initial_url
   if not args.offline:assert p.evaluate('localStorage.length+sessionStorage.length')==0
   assert print_context.cookies()==[];print_context.close()
+  # A person's record is independent of the calculator's recommendation. These
+  # native-control journeys exercise the actual handler and its one export text.
+  decision_context=browser.new_context(accept_downloads=True,reduced_motion='reduce')
+  decision_requests=[]
+  def decision_route(r):
+   decision_requests.append((r.request.method,r.request.url))
+   r.continue_() if not args.offline and urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort()
+  decision_context.route('**/*',decision_route)
+  d=decision_context.new_page();d.set_default_timeout(10000);d.on('pageerror',lambda e:errors.append(str(e)))
+  render(d,calc);d.evaluate('document.fonts.ready');d.wait_for_timeout(100)
+  decision_initial_requests=len(decision_requests);decision_initial_url=d.url
+  decision_keys=['manual','assisted','review','count','setup','upkeep']
+  def decision_snapshot():
+   return {'choice':d.locator('#time-personal-choice').input_value(),
+    'reason':d.locator('#time-personal-reason').input_value(),'review':d.locator('#time-personal-review').input_value(),
+    'report':d.locator('#time-report').input_value(),'print':d.locator('#time-print-report').text_content(),
+    'inputs':[d.locator('#time-'+k).input_value() for k in decision_keys],
+    'basis':d.locator('#time-basis').input_value(),'quality':d.locator('#time-quality').input_value()}
+  def decision_calculate():
+   for key,value in zip(decision_keys,['30','8','7','6','60','15']):d.locator('#time-'+key).fill(value)
+   d.locator('#time-basis').select_option('observed');d.locator('#time-quality').select_option('pass')
+   d.locator('#time-calculate').click();expect(d.locator('#time-result')).to_be_visible()
+  def decision_record():
+   d.locator('#time-personal-choice').select_option('keep')
+   d.locator('#time-personal-reason').fill('Keep a manual review step. The privacy cost is still uncertain.')
+   d.locator('#time-personal-review').fill('After three comparable attempts.')
+  decision_calculate();expect(d.locator('#time-personal-decision')).to_be_visible()
+  expect(d.locator('#time-personal-choice')).to_have_value('')
+  expect(d.locator('#time-decision')).to_contain_text('CONSIDER KEEPING')
+  suggested=d.locator('#time-decision').text_content();quality=d.locator('#time-quality-note').text_content()
+  for value,label in [('', 'Not recorded'),('keep','Keep'),('adjust','Adjust'),('stop','Stop'),('observe','Gather more observations')]:
+   d.locator('#time-personal-choice').focus();d.locator('#time-personal-choice').select_option(value)
+   expect(d.locator('#time-personal-choice')).to_be_focused();expect(d.locator('#time-result')).to_be_visible()
+   expect(d.locator('#time-decision')).to_have_text(suggested);expect(d.locator('#time-quality-note')).to_have_text(quality)
+   current=decision_snapshot();assert '\nYour decision: '+label+'\n' in current['report']
+   assert 'Suggested next step: '+suggested in current['report'];assert current['print']==current['report']
+   report['personal_choices']+=1
+  decision_record();before=decision_snapshot();d.locator('#time-calculate').click()
+  assert decision_snapshot()==before;report['personal_unchanged_recalculation']+=1
+  for key,value in [('manual','31'),('assisted','9'),('review','8'),('count','7'),('setup','61'),('upkeep','16'),('basis','estimate'),('quality','fail')]:
+   decision_calculate();decision_record();before=decision_snapshot()
+   field=d.locator('#time-'+key)
+   if key in ['basis','quality']:field.select_option(value)
+   else:field.fill(value)
+   expect(d.locator('#time-result')).to_be_hidden();expect(d.locator('#time-report')).to_have_value('')
+   expect(d.locator('#time-print-report')).to_have_text('');expect(d.locator('#time-personal-choice')).to_have_value('')
+   expect(d.locator('#time-personal-reason')).to_have_value(before['reason']);expect(d.locator('#time-personal-review')).to_have_value(before['review'])
+   expect(d.locator('#time-status')).to_contain_text('choose your decision again')
+   d.locator('#time-calculate').click();expect(d.locator('#time-personal-choice')).to_have_value('')
+   expect(d.locator('#time-personal-status')).to_contain_text('retained notes are drafts')
+   assert '\nYour decision: Not recorded\n' in d.locator('#time-report').input_value()
+   d.locator('#time-personal-choice').select_option('keep')
+   assert '\nYour decision: Keep\n' in d.locator('#time-report').input_value()
+   assert d.locator('#time-print-report').text_content()==d.locator('#time-report').input_value()
+   if key=='quality':
+    expect(d.locator('#time-quality-note')).to_contain_text('Quality check not met')
+    expect(d.locator('#time-decision')).to_contain_text('STOP OR REDESIGN')
+    assert 'Quality check not met' in d.locator('#time-report').input_value()
+   report['personal_invalidations']+=1
+  decision_calculate();decision_record()
+  literal='<img data-decision-probe="yes" src=x onerror="window.decisionExecuted=true"> & plain text'
+  d.locator('#time-personal-reason').fill(literal)
+  d.locator('#time-personal-review').fill('Review <script>window.decisionExecuted=true</script> after another attempt.')
+  expect(d.locator('#time-personal-review')).to_be_focused()
+  current=decision_snapshot();assert current['reason'] in current['report'] and current['review'] in current['report']
+  assert current['print']==current['report'];expect(d.locator('[data-decision-probe]')).to_have_count(0)
+  assert d.evaluate('window.decisionExecuted === undefined');report['personal_literal_notes']+=1
+  for failure in [False,True]:
+   d.evaluate("""failure=>{Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:text=>{
+    window.pendingDecisionText=text;return new Promise((resolve,reject)=>{window.finishDecisionCopy=failure?()=>reject(new Error('denied')):resolve});
+   }}})}""",failure)
+   d.locator('#time-copy').click();pending=d.locator('#time-report').input_value()
+   d.locator('#time-personal-reason').fill('Changed while '+('failed' if failure else 'successful')+' copy was pending.')
+   d.evaluate('async()=>{window.finishDecisionCopy();await Promise.resolve();await Promise.resolve()}')
+   assert d.locator('#time-report').input_value()!=pending
+   expect(d.locator('#time-copy-status')).to_have_text('');expect(d.locator('#time-personal-reason')).to_be_focused()
+   assert d.locator('#time-print-report').text_content()==d.locator('#time-report').input_value()
+   report['personal_stale_copy']+=1
+  decision_record();d.locator('#time-personal-choice').select_option('adjust');current=decision_snapshot()
+  d.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{window.currentDecisionCopy=text}}})")
+  d.locator('#time-copy').click();expect(d.locator('#time-copy-status')).to_contain_text('Comparison copied')
+  assert d.evaluate('window.currentDecisionCopy')==current['report'];report['personal_exports']+=1
+  with d.expect_download() as item:d.locator('#time-download').click()
+  assert item.value.suggested_filename=='workflow-time-comparison.txt'
+  assert Path(item.value.path()).read_text()==current['report'];report['personal_exports']+=1
+  d.evaluate("window.print=()=>{window.currentDecisionPrint=document.getElementById('time-print-report').textContent}")
+  d.locator('#time-print').press('Enter');assert d.evaluate('window.currentDecisionPrint')==current['report']
+  assert decision_snapshot()==current;report['personal_exports']+=1
+  for width in [320,390,768,1440]:
+   d.set_viewport_size({'width':width,'height':1100})
+   expect(d.locator('.time-personal-record')).to_be_visible()
+   assert d.evaluate('document.documentElement.scrollWidth<=innerWidth'),('personal',width)
+   if os.environ.get('SCREENSHOT_DIR') and width in [390,1440]:
+    out=Path(os.environ['SCREENSHOT_DIR']);out.mkdir(parents=True,exist_ok=True)
+    d.locator('#time-personal-reason').blur();d.locator('.time-personal-record').scroll_into_view_if_needed()
+    d.locator('.time-personal-record').screenshot(path=str(out/f'workflow-personal-decision-{width}.png'))
+   report['personal_layouts']+=1
+   d.evaluate('s=>{const e=document.createElement("style");e.id="personal-spacing";e.textContent=s;document.head.appendChild(e)}',spacing)
+   assert d.evaluate('document.documentElement.scrollWidth<=innerWidth'),('personal-spacing',width)
+   report['personal_spacing']+=1;d.evaluate('document.getElementById("personal-spacing").remove()')
+   d.emulate_media(media='print');expect(d.locator('.time-personal-record')).to_be_hidden()
+   expect(d.locator('#time-print-report')).to_be_visible();assert d.locator('#time-print-report').text_content()==current['report']
+   d.emulate_media(media='screen')
+  before=decision_snapshot();d.locator('#time-clear').click();d.locator('#time-clear-no').click()
+  assert decision_snapshot()==before;report['personal_reset_journeys']+=1
+  d.get_by_role('button',name='One-off task',exact=True).click();d.locator('#time-example-no').click()
+  assert decision_snapshot()==before;report['personal_reset_journeys']+=1
+  d.get_by_role('button',name='One-off task',exact=True).click();d.locator('#time-example-yes').click()
+  for key in ['choice','reason','review']:expect(d.locator('#time-personal-'+key)).to_have_value('')
+  expect(d.locator('#time-result')).to_be_hidden();report['personal_reset_journeys']+=1
+  decision_calculate();decision_record();d.locator('#time-clear').click();d.locator('#time-clear-yes').click()
+  for key in ['choice','reason','review']:expect(d.locator('#time-personal-'+key)).to_have_value('')
+  expect(d.locator('#time-report')).to_have_value('');expect(d.locator('#time-print-report')).to_have_text('')
+  report['personal_reset_journeys']+=1
+  # Retained notes alone still require confirmation before replacement or loss.
+  decision_calculate();decision_record()
+  for key in decision_keys:d.locator('#time-'+key).fill('')
+  d.locator('#time-basis').select_option('estimate');d.locator('#time-quality').select_option('unknown')
+  before=decision_snapshot();d.locator('#time-clear').click();expect(d.locator('#time-clear-confirm')).to_be_visible()
+  d.locator('#time-clear-no').click();assert decision_snapshot()==before;report['personal_reset_journeys']+=1
+  d.get_by_role('button',name='Repeated task',exact=True).click();expect(d.locator('#time-example-confirm')).to_be_visible()
+  d.locator('#time-example-no').click();assert decision_snapshot()==before;report['personal_reset_journeys']+=1
+  for event in ["new Event('pagehide')","new PageTransitionEvent('pageshow',{persisted:true})"]:
+   decision_calculate();decision_record();d.evaluate('window.dispatchEvent('+event+')')
+   for key in ['choice','reason','review']:expect(d.locator('#time-personal-'+key)).to_have_value('')
+   expect(d.locator('#time-result')).to_be_hidden();expect(d.locator('#time-report')).to_have_value('')
+   expect(d.locator('#time-print-report')).to_have_text('');report['personal_lifecycle']+=1
+  assert len(decision_requests)==decision_initial_requests,(decision_initial_requests,decision_requests)
+  assert d.url==decision_initial_url
+  if not args.offline:assert d.evaluate('localStorage.length+sessionStorage.length')==0
+  assert decision_context.cookies()==[];decision_context.close()
   # Exercise native evidence links with and without JavaScript. An exact URL
   # allowlist receives a local stub, so the test cannot contact GitHub or mutate it.
   evidence_urls=[
@@ -408,6 +543,7 @@ HTMLAnchorElement.prototype.click=function(){if(this.download==='workflow-time-c
    ctx.route('**/*',fallback);p=ctx.new_page();p.set_default_timeout(10000);render(p,calc,False)
    expect(p.locator('#time-editor')).to_be_hidden();expect(p.locator('#time-unavailable')).to_be_visible();expect(p.locator('.time-static-example')).to_have_count(3)
    expect(p.locator('#time-example-picker')).to_be_hidden()
+   for key in ['choice','reason','review']:expect(p.locator('#time-personal-'+key)).to_be_hidden()
    # The worksheet and page-sharing panel are distinct native disclosures.
    # Exercise the worksheet explicitly rather than assuming one details element.
    worksheet=p.locator('section[aria-labelledby="time-worksheet"] details')
