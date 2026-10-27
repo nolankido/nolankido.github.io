@@ -43,7 +43,10 @@ class TechnologyJumpsTests(unittest.TestCase):
             self.assertEqual(sha256(history.before(path, raw).encode()).hexdigest(), expected, path)
         self.assertEqual(changed, ['technology/index.html'])
         tracked = subprocess.check_output(['git', 'ls-files', '_source', 'assets', 'downloads'], cwd=ROOT).decode().splitlines()
-        files = beginner_history.files(set(tracked) - {'_source/person-schema.jsonld', 'assets/nolan-kido-identity.jsonld'})
+        files = beginner_history.files(set(tracked) - {
+            '_source/person-schema.jsonld', 'assets/nolan-kido-identity.jsonld',
+            'assets/social/nolan-kido-ai.png',
+        })
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():

@@ -18,7 +18,9 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '59781671d4b2722186195a9d3315da30add8ae6f'
-RELEASE = 'b798277'
+PUBLISHED_RELEASE = '1a62b90dd278b82a2716a429b1265b6dea5ab203'
+LOCAL_EQUIVALENT = 'b798277d990c7dd60c02bf14ee2dff8eefaba2cf'
+RELEASE_TREE = 'ab7bf3d812752dcdc320cc0fd4784e5ac43d3778'
 TARGET = ROOT / '_tests/brand-positioning-change.json'
 
 
@@ -28,6 +30,15 @@ def git(*args: str) -> bytes:
 
 def digest(raw: bytes) -> str:
     return sha256(raw).hexdigest()
+
+
+def pinned_release() -> str:
+    for commit in (PUBLISHED_RELEASE, LOCAL_EQUIVALENT):
+        probe = subprocess.run(['git', 'rev-parse', commit + '^{tree}'], cwd=ROOT,
+                               capture_output=True, text=True)
+        if probe.returncode == 0 and probe.stdout.strip() == RELEASE_TREE:
+            return commit
+    raise ValueError('Published positioning release tree unavailable or inconsistent')
 
 
 def edits(new: str, old: str) -> list[dict]:
@@ -70,12 +81,14 @@ def frozen_page_fields(commit: str) -> dict:
 
 
 def main() -> None:
-    paths = git('diff', '--name-only', BASE, RELEASE).decode().splitlines()
-    record = {'version': 1, 'base_commit': BASE, 'release_commit': git('rev-parse', RELEASE).decode().strip(),
+    release = pinned_release()
+    paths = git('diff', '--name-only', BASE, release).decode().splitlines()
+    record = {'version': 1, 'base_commit': BASE, 'release_commit': PUBLISHED_RELEASE,
+              'release_tree': RELEASE_TREE,
               'paths': {}, 'pages': {}}
     for path in paths:
         old = git('show', BASE + ':' + path)
-        new = git('show', RELEASE + ':' + path)
+        new = git('show', release + ':' + path)
         if old == new:
             raise ValueError('Unchanged path in release diff: ' + path)
         item = {'old_sha256': digest(old), 'new_sha256': digest(new)}
@@ -84,7 +97,7 @@ def main() -> None:
         else:
             item['edits'] = edits(new.decode('utf-8'), old.decode('utf-8'))
         record['paths'][path] = item
-    old_pages, new_pages = frozen_page_fields(BASE), frozen_page_fields(RELEASE)
+    old_pages, new_pages = frozen_page_fields(BASE), frozen_page_fields(release)
     record['pages'] = {key: {'old': old_pages[key], 'new': new_pages[key]}
                        for key in old_pages if old_pages[key] != new_pages[key]}
     TARGET.write_text(json.dumps(record, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')

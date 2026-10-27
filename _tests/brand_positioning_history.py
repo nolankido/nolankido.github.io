@@ -23,12 +23,17 @@ def digest(raw: bytes) -> str:
 @lru_cache(maxsize=1)
 def change() -> dict:
     record = json.loads(CHANGE.read_text(encoding='utf-8'))
-    if record.get('version') != 1 or record.get('base_commit') != '59781671d4b2722186195a9d3315da30add8ae6f':
+    if (record.get('version') != 1 or
+            record.get('base_commit') != '59781671d4b2722186195a9d3315da30add8ae6f' or
+            record.get('release_commit') != '1a62b90dd278b82a2716a429b1265b6dea5ab203' or
+            record.get('release_tree') != 'ab7bf3d812752dcdc320cc0fd4784e5ac43d3778'):
         raise ValueError('Unknown brand history record')
     return record
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import scoped_share_history
+    data = scoped_share_history.before(path, data)
     item = change()['paths'].get(str(path))
     binary = isinstance(data, bytes)
     raw = data if binary else data.encode('utf-8')

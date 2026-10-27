@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import build
 import brand_positioning_history as history
+import scoped_share_history
 
 
 class BrandPositioningHistoryTests(unittest.TestCase):
@@ -24,6 +25,12 @@ class BrandPositioningHistoryTests(unittest.TestCase):
         for path, item in self.change['paths'].items():
             with self.subTest(path=path):
                 raw = (ROOT / path).read_bytes()
+                scoped = scoped_share_history.change()['paths'].get(path)
+                if scoped and sha256(raw).hexdigest() == scoped['current_sha256']:
+                    previous = history.before(path, raw)
+                    self.assertEqual(sha256(previous).hexdigest(), item['old_sha256'])
+                    self.assertEqual(history.before(path, previous), previous)
+                    continue
                 if sha256(raw).hexdigest() != item['new_sha256']:
                     # A later published change must remain visible to the next
                     # history adapter, not fail this archived release's test.

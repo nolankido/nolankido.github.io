@@ -130,7 +130,10 @@ class PresentationTests(unittest.TestCase):
 
     def test_card_alt_cannot_inject_metadata(self):
         config=deepcopy(self.config);config['default']['alt']='"><script>alert(1)</script>'
-        output=presentation.metadata(config,{'id':'home'},'https://nolankido.com')
+        # Home now has its own AI card. Exercise the default on a page that
+        # actually uses it, so this remains an effective escaping check.
+        fallback_id=next(page['id'] for page in self.pages if page['id'] not in config['pages'])
+        output=presentation.metadata(config,{'id':fallback_id},'https://nolankido.com')
         self.assertNotIn('<script>',output)
         self.assertIn('&lt;script&gt;',output)
         self.assertIn('&quot;',output)
