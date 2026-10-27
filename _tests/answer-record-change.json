@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "parent_commit": "b8b4bcd45d66178a8aa5868889781ef3311f0a3b",
+  "parent_tree": "80a4a92d914cee30d84e8e807f3b4f847fb66ec6",
+  "paths": {
+    "_source/pages.json": {
+      "current_sha256": "be91f0965de264c4c8797cb0f1c7d3e279a1321899bde55aee57f8ee5be9807d",
+      "parent_sha256": "5c8a15936605397bc09a1646c0f860337cc70b62fa55f52cc87101d2e4853c3f",
+      "edits": [
+        {
+          "start": 51398,
+          "end": 51623,
+          "current_sha256": "379d1c511569f4990e78c71a0f14c1cc0802b6fbbab06a54e27f9fa779fbcf7b",
+          "old": "19\",\n    \"revision\": \"Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed"
+        }
+      ]
+    },
+    "_source/technology/check-ai-answers.html": {
+      "current_sha256": "28343661aed56a4e1899ce1b440d58cfea3dd2fb68bccedeefbcadf81b5c640c",
+      "parent_sha256": "033d62ed9d181db6d9a3e8017b582e7c2092792c6c07777d8ebc2e5a83242327",
+      "edits": [
+        {
+          "start": 2120,
+          "end": 2300,
+          "current_sha256": "284f8db82b23752d6d84437ff50768fe756311749a4aec7ddaba3b1a33e0581c",
+          "old": ""
+        },
+        {
+          "start": 19821,
+          "end": 23238,
+          "current_sha256": "e84aa5613e060372cf9c6e51479e0766b23cdd5d8c0c63d2d419487179782817",
+          "old": ""
+        }
+      ]
+    },
+    "downloads/ai-answer-review.txt": {
+      "current_sha256": "23ce49de7d9091d93e209878973914198edae3a51662c19a9c29b25836a9aa16",
+      "parent_sha256": "1f7536ae05f048840810982268585f77fd30f8e447ae4d466b392de989c91dcd",
+      "edits": [
+        {
+          "start": 1199,
+          "end": 1318,
+          "current_sha256": "9a2fe72613708259cbffa4edb717fe6f5c177befbe586b618b02d3900a1a4288",
+          "old": ""
+        },
+        {
+          "start": 1484,
+          "end": 1674,
+          "current_sha256": "83826f39cd798634877bc62278aad076239097ead16fadf95e725dfeeb267f4c",
+          "old": ""
+        }
+      ]
+    },
+    "downloads/practical-ai-workbook.txt": {
+      "current_sha256": "8d2e1e59e68156b65f16ef3b9965d6d54ec0cb743bae6999efd0ccf5edcdafb8",
+      "parent_sha256": "c793d8d20e0006f522d081d34b901cc97d5bb741c2dd4861e2eceb20b8966e23",
+      "edits": [
+        {
+          "start": 4642,
+          "end": 4761,
+          "current_sha256": "9a2fe72613708259cbffa4edb717fe6f5c177befbe586b618b02d3900a1a4288",
+          "old": ""
+        },
+        {
+          "start": 4927,
+          "end": 5117,
+          "current_sha256": "83826f39cd798634877bc62278aad076239097ead16fadf95e725dfeeb267f4c",
+          "old": ""
+        }
+      ]
+    },
+    "technology/check-ai-answers/index.html": {
+      "current_sha256": "ba854155dd50d5e6f211244579f2f3c7a0e56874171448f4ee51976ab9e2b831",
+      "parent_sha256": "0f77f99ddbd3f43276774052031ff06be662479cda793990d74106ff6902b71b",
+      "edits": [
+        {
+          "start": 2967,
+          "end": 2969,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "19"
+        },
+        {
+          "start": 4172,
+          "end": 4174,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "19"
+        },
+        {
+          "start": 7106,
+          "end": 7107,
+          "current_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+          "old": "3"
+        },
+        {
+          "start": 11448,
+          "end": 11628,
+          "current_sha256": "284f8db82b23752d6d84437ff50768fe756311749a4aec7ddaba3b1a33e0581c",
+          "old": ""
+        },
+        {
+          "start": 29149,
+          "end": 32566,
+          "current_sha256": "e84aa5613e060372cf9c6e51479e0766b23cdd5d8c0c63d2d419487179782817",
+          "old": ""
+        },
+        {
+          "start": 34013,
+          "end": 34132,
+          "current_sha256": "9a2fe72613708259cbffa4edb717fe6f5c177befbe586b618b02d3900a1a4288",
+          "old": ""
+        },
+        {
+          "start": 34298,
+          "end": 34488,
+          "current_sha256": "83826f39cd798634877bc62278aad076239097ead16fadf95e725dfeeb267f4c",
+          "old": ""
+        },
+        {
+          "start": 36214,
+          "end": 36455,
+          "current_sha256": "c999e55b3eba86c83b9775412330874fcc418848f16adde313453a2004ccd434",
+          "old": "19\">October 19, 2026</time>:</strong> Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed"
+        }
+      ]
+    },
+    "technology/index.html": {
+      "current_sha256": "a439e4d2461a888ce5bbbb9fb5f7130a1e3a46761773d5e119dc65335adca63a",
+      "parent_sha256": "abc89ca6bfaa2e581bdfe807b2e03559843c9f7837a4eca07b214ce80393d986",
+      "edits": [
+        {
+          "start": 17971,
+          "end": 18090,
+          "current_sha256": "9a2fe72613708259cbffa4edb717fe6f5c177befbe586b618b02d3900a1a4288",
+          "old": ""
+        },
+        {
+          "start": 18256,
+          "end": 18446,
+          "current_sha256": "83826f39cd798634877bc62278aad076239097ead16fadf95e725dfeeb267f4c",
+          "old": ""
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "current_sha256": "a007e4d2f458f9e6a4719fe2bf6ce8fe7c608bb62edaa8cfa4b90554126b43e6",
+      "parent_sha256": "1a8d6d06e4fa3f16f90c9b1083eee5cc131285ff28d86be7311cdaa82941476f",
+      "edits": [
+        {
+          "start": 10123,
+          "end": 10125,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "19"
+        }
+      ]
+    }
+  },
+  "page": {
+    "old": {
+      "id": "ai-answer-review",
+      "path": "/technology/check-ai-answers/",
+      "title": "How to check an AI answer.",
+      "seo_title": "How to Check AI Answers: Facts, Math & Code | Nolan Kido",
+      "description": "Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.",
+      "kicker": "Practical AI / Verification",
+      "source": "technology/check-ai-answers.html",
+      "section": "technology",
+      "worked_guide": true,
+      "date": "2026-10-12",
+      "updated": "2026-10-19",
+      "revision": "Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed."
+    },
+    "new": {
+      "id": "ai-answer-review",
+      "path": "/technology/check-ai-answers/",
+      "title": "How to check an AI answer.",
+      "seo_title": "How to Check AI Answers: Facts, Math & Code | Nolan Kido",
+      "description": "Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.",
+      "kicker": "Practical AI / Verification",
+      "source": "technology/check-ai-answers.html",
+      "section": "technology",
+      "worked_guide": true,
+      "date": "2026-10-12",
+      "updated": "2026-10-27",
+      "revision": "Added a completed fictional review record and explicit evidence-status and reasoning fields in the blank worksheet. The example separates an unresolved claim from the human decision about what to do next."
+    }
+  }
+}

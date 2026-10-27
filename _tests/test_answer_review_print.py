@@ -10,6 +10,7 @@ import unittest
 import answer_review_print_history as history
 import later_release_history as later_history
 import best_five_history
+import answer_record_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,7 +20,9 @@ class AnswerReviewPrintHistoryTests(unittest.TestCase):
         self.assertEqual(set(history.change()['paths']), history.PATHS)
         for name, record in history.change()['paths'].items():
             with self.subTest(path=name):
-                raw = (ROOT / name).read_bytes()
+                # Restore the later exact content revision before comparing
+                # this archived print release's frozen successor bytes.
+                raw = answer_record_history.before(name, (ROOT / name).read_bytes())
                 self.assertEqual(sha256(raw).hexdigest(), record['new_sha256'])
                 old = history.before(name, raw)
                 self.assertEqual(sha256(old).hexdigest(), record['old_sha256'])

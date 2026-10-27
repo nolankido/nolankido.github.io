@@ -15,6 +15,7 @@ import answer_review_growth_history as history
 import turn11_task_navigation_history as task_nav_history
 import profile_datetime_history
 import later_release_history as later_history
+import answer_record_history
 
 
 class GuideGrowth(unittest.TestCase):
@@ -104,7 +105,9 @@ class GuideGrowth(unittest.TestCase):
         self.assertEqual(new, old)
 
     def test_first_pass_and_status_distinction_are_explicit(self):
-        raw = (ROOT / 'technology/check-ai-answers/index.html').read_text()
+        path = 'technology/check-ai-answers/index.html'
+        # Preserve this release's original assertions at its exact boundary.
+        raw = answer_record_history.before(path, (ROOT / path).read_text())
         for term in ('A quick first pass: claim, evidence, decision',
                      'What the three evidence statuses mean', 'Supported for a stated purpose',
                      'Worked mini-check, fictional', 'unresolved, not contradicted',
@@ -127,10 +130,13 @@ class GuideGrowth(unittest.TestCase):
         import build
         original_pages = build.public_pages()
         page = next(p for p in original_pages if p['id'] == 'ai-answer-review')
+        original_updated = page['updated']
+        original_stamp = ('<time datetime="' + original_updated + '">' +
+                          build.date_label(original_updated) + '</time>')
         current = build.build_outputs()[Path('technology/check-ai-answers/index.html')]
         self.assertIn(build.text(page['revision']), current)
         self.assertEqual(current.count(build.text(page['revision'])), 1)
-        self.assertIn('<time datetime="2026-10-19">October 19, 2026</time>', current)
+        self.assertIn(original_stamp + ':', current)
         changed = deepcopy(original_pages)
         guide = next(p for p in changed if p['id'] == 'ai-answer-review')
         guide['revision'] = 'Independent review marker <script>not executable</script> & context'
@@ -140,8 +146,8 @@ class GuideGrowth(unittest.TestCase):
         self.assertIn(build.text(guide['revision']), rendered)
         self.assertNotIn(guide['revision'], rendered)
         self.assertIn('<time datetime="2026-10-20">October 20, 2026</time>', rendered)
-        self.assertNotIn('October 19, 2026</time>', rendered)
-        self.assertEqual(page['updated'], '2026-10-19')
+        self.assertNotIn(original_stamp + ':', rendered)
+        self.assertEqual(page['updated'], original_updated)
 
     def test_bios_calculator_download_and_release_workflow_are_unchanged(self):
         for path, expected in history.change()['protected_hashes'].items():

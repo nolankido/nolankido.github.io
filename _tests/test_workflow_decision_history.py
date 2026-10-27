@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import build
+import answer_record_history
 import public_source_review_history as source_history
 import workflow_decision_history as history
 
@@ -18,8 +19,12 @@ class WorkflowDecisionHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
-        cls.pages = build.public_pages()
+        cls.current_raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
+        # Compare this archived layer at its own exact successor boundary.
+        # Keep the unnormalized current files for unknown-mutation checks.
+        cls.raw = {name: answer_record_history.before(name, raw)
+                   for name, raw in cls.current_raw.items()}
+        cls.pages = answer_record_history.pages(build.public_pages())
 
     def test_current_files_and_scope_match_the_published_parent_boundary(self):
         self.assertEqual(set(self.record['paths']), {
@@ -50,7 +55,7 @@ class WorkflowDecisionHistoryTests(unittest.TestCase):
                     self.assertEqual(history.before(path, text), text)
 
     def test_unknown_whole_file_mutations_and_binary_inputs_pass_through(self):
-        for name, raw in self.raw.items():
+        for name, raw in self.current_raw.items():
             midpoint = len(raw) // 2
             for altered in (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:],
                             raw[:midpoint] + b'UNREVIEWED' + raw[midpoint:], b'\xff\x00'):
@@ -194,7 +199,7 @@ class WorkflowDecisionHistoryTests(unittest.TestCase):
 
     def test_current_raw_files_compose_through_the_oldest_common_history_chain(self):
         import beginner_history
-        for name, raw in self.raw.items():
+        for name, raw in self.current_raw.items():
             parent = history.before(name, raw)
             with self.subTest(path=name):
                 self.assertEqual(beginner_history.before(name, raw), beginner_history.before(name, parent))
@@ -203,7 +208,7 @@ class WorkflowDecisionHistoryTests(unittest.TestCase):
 
     def test_deepest_common_chain_keeps_unknown_changes_detectable(self):
         import beginner_history
-        for name, raw in self.raw.items():
+        for name, raw in self.current_raw.items():
             previous = beginner_history.before(name, raw)
             for altered in (b'UNREVIEWED' + raw, raw + b'UNREVIEWED'):
                 with self.subTest(path=name, prefix=altered.startswith(b'UNREVIEWED')):

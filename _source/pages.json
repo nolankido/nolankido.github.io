@@ -1150,8 +1150,8 @@
     "section": "technology",
     "worked_guide": true,
     "date": "2026-10-12",
-    "updated": "2026-10-19",
-    "revision": "Added a four-step verification procedure and evidence statuses, separating an unsupported event-status claim from an unfaithful summary. The six existing exercises remain illustrative; no outside evaluation or improvement in accuracy is claimed."
+    "updated": "2026-10-27",
+    "revision": "Added a completed fictional review record and explicit evidence-status and reasoning fields in the blank worksheet. The example separates an unresolved claim from the human decision about what to do next."
   },
   {
     "id": "poker-first-decisions",
