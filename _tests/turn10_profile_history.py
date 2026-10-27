@@ -7,6 +7,10 @@ ROOT=Path(__file__).resolve().parents[1]
 def records():
     return json.loads((ROOT/'_tests/turn10-profile-change.json').read_text())
 def before(path,data):
+    # First reverse the later, SHA-pinned public positioning release. This
+    # includes the manifest that Turn 10 reads when restoring About/Bio dates.
+    import brand_positioning_history as brand_history
+    data = brand_history.before(path, data)
     import answer_review_growth_history as guide_growth
     data = guide_growth.before(path, data)
     rec=records().get(str(path))

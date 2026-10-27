@@ -3,12 +3,14 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+import subprocess
 import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import beginner_history
+import brand_positioning_history as brand_history
 import build
 import technology_jumps_history as history
 import study_titles_history
@@ -19,14 +21,19 @@ from test_site import Page
 class TechnologyJumpsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.outputs = {p: study_titles_history.before(p, turn04_public_source_history.before(p, data)) for p, data in build.build_outputs().items()}
+        cls.outputs = {p: study_titles_history.before(p, turn04_public_source_history.before(p, brand_history.before(p, data)))
+                       for p, data in build.build_outputs().items()}
         cls.baseline = json.loads((ROOT / '_tests/technology-jumps-baseline.json').read_text())
 
     def test_only_the_existing_technology_opening_navigation_changes(self):
         historical_outputs = beginner_history.outputs(self.outputs)
         b = self.baseline
-        self.assertEqual(sha256(json.dumps(study_titles_history.pages(beginner_history.pages(build.public_pages())), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
+        self.assertEqual(sha256(json.dumps(study_titles_history.pages(beginner_history.pages(brand_history.pages(build.public_pages()))), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
         self.assertEqual((len(b['outputs']), len(b['files'])), (198, 343))
+        # The later, separately tested profile graph did not exist in this
+        # frozen release. Keep it published without retroactively adding it
+        # to the historical Technology navigation inventory.
+        historical_outputs.pop(Path('assets/nolan-kido-identity.jsonld'), None)
         self.assertEqual(set(map(str, historical_outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():
@@ -35,11 +42,12 @@ class TechnologyJumpsTests(unittest.TestCase):
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw).encode()).hexdigest(), expected, path)
         self.assertEqual(changed, ['technology/index.html'])
-        files = beginner_history.files({p.relative_to(ROOT).as_posix() for d in ['_source', 'assets', 'downloads'] for p in (ROOT / d).rglob('*') if p.is_file()})
+        tracked = subprocess.check_output(['git', 'ls-files', '_source', 'assets', 'downloads'], cwd=ROOT).decode().splitlines()
+        files = beginner_history.files(set(tracked) - {'_source/person-schema.jsonld', 'assets/nolan-kido-identity.jsonld'})
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():
-            raw = study_titles_history.before(path, (ROOT / path).read_bytes())
+            raw = study_titles_history.before(path, brand_history.before(path, (ROOT / path).read_bytes()))
             if sha256(raw).hexdigest() != expected:
                 changed.append(path)
             self.assertEqual(sha256(history.before(path, raw)).hexdigest(), expected, path)
