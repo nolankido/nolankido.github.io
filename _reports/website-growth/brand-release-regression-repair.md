@@ -41,18 +41,25 @@ those tests were intended to provide.
 - Update the homepage browser journey to click the approved primary button,
   arrive at `/technology/#ai-works-human-decides`, and check the visible method
   heading before continuing through the existing journey.
+- Keep the full homepage sharing-metadata comparison while allowing exactly
+  the approved card URL and alternative text. All 107 distinct article and
+  subject-hub preview checks remain intact.
+- Increase only the build job's time limit from 15 to 30 minutes after the
+  complete hosted run exhausted its earlier budget. Preserve every test and
+  browser group. An exact SHA-bound reversal keeps the older workflow fixture
+  check meaningful, including rejection of changes to other job limits.
 
 The regression adapter commit is
 [`9be895ec7503d78a3b543dcd761a0a851b339c50`](https://github.com/nolankido/nolankido.github.io/commit/9be895ec7503d78a3b543dcd761a0a851b339c50).
 Its tree, `6ef59a2feba8a7ae28c9514b636b21aacf09f3ee`, exactly matches the
-independently reviewed local candidate. The browser-journey assertion and this
-record follow that commit in the same PR.
+independently reviewed local candidate. The browser-journey assertion, build-job
+time limit and this record follow that commit in the same PR.
 
 ## Verification record
 
 Local preflight checks passed for all 223 committed generated files and the
 static search audit of 194 public pages, including 189 sitemap URLs. The
-25 newly added history, composition and fixture-authoring tests passed. Their
+28 newly added history, composition and fixture-authoring tests passed. Their
 negative cases reject unknown mutations, wrong response types, corrupt
 predecessors, unapproved fixture scope and stale fixture records. A separate
 read-only code review found no must-fix issue in the history repair.
@@ -66,8 +73,9 @@ commit. Keep the existing branch-based Pages configuration.
 
 ## Scope and evidence limits
 
-This repair changes tests, test history helpers, a fixture-authoring script and
-this report. It does not change the approved public page content or runtime
+This repair changes tests, test history helpers, a fixture-authoring script,
+the build job's time budget and this report. It does not change the approved
+public page content or runtime
 behavior. The separate unlinked identity JSON-LD stays separate, and the two
 untracked uploaded portraits are outside the release.
 

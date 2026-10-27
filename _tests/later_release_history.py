@@ -10,6 +10,16 @@ from pathlib import Path
 import brand_positioning_history
 
 ROOT = Path(__file__).resolve().parents[1]
+CHECKS_WORKFLOW = '.github/workflows/site-checks.yml'
+WORKFLOW_BEFORE = 'c5106a45c6ab16714c6ffd0b767a527eaab171a9c1eb6f53cb6574266c3b73b9'
+WORKFLOW_AFTER = 'c81fc3e4f414bd514b6a3edbd68dcf88ec824b03d1eb87bf3813817f490a7ddb'
+BUILD_JOB_BEFORE = (
+    '  build:\n'
+    '    name: Build and HTML checks\n'
+    '    runs-on: ubuntu-latest\n'
+    '    timeout-minutes: 15\n'
+)
+BUILD_JOB_AFTER = BUILD_JOB_BEFORE.replace('timeout-minutes: 15', 'timeout-minutes: 30')
 IDENTITY_PARENT = '9787706ef4409606d37ed73202016b506b99d1eb'
 IDENTITY_RELEASE = '59781671d4b2722186195a9d3315da30add8ae6f'
 IDENTITY_TREE = 'bf4c55a99ba20ef463f2564bc356412649d55062'
@@ -58,6 +68,15 @@ def digest(data):
 
 def before(path, data):
     name = key(path)
+    if name == CHECKS_WORKFLOW and digest(data) == WORKFLOW_AFTER:
+        binary = isinstance(data, bytes)
+        text = data.decode('utf-8') if binary else data
+        if text.count(BUILD_JOB_AFTER) != 1:
+            raise ValueError('Invalid build job timeout reversal')
+        previous = text.replace(BUILD_JOB_AFTER, BUILD_JOB_BEFORE, 1)
+        if digest(previous) != WORKFLOW_BEFORE:
+            raise ValueError('Invalid build job timeout predecessor')
+        data = previous.encode('utf-8') if binary else previous
     data = brand_positioning_history.before(name, data)
     if name != IDENTITY_BUILD or digest(data) != BUILD_AFTER:
         return data

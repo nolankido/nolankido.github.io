@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import poker_resources
 import regional_link_history as history
+import later_release_history
 
 EXPECTED = {
     'stars-poker-rules', 'holdem-rules', 'hand-rankings', 'poker-glossary',
@@ -68,7 +69,8 @@ class RegionalLinkTests(unittest.TestCase):
         for name, item in history.change()['paths'].items():
             raw = (ROOT / name).read_bytes()
             with self.subTest(name=name):
-                self.assertEqual(sha256(raw).hexdigest(), item['new_sha256'])
+                self.assertEqual(sha256(later_release_history.before(name, raw)).hexdigest(),
+                                 item['new_sha256'])
                 old = history.before(name, raw)
                 self.assertEqual(sha256(old).hexdigest(), item['old_sha256'])
                 self.assertEqual(history.before(Path(name), raw.decode()).encode(), old)

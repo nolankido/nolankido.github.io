@@ -13,6 +13,48 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 
 
 class LaterReleaseHistoryTests(unittest.TestCase):
+    def test_build_timeout_reversal_restores_the_exact_regional_successor(self):
+        import regional_link_history
+        current = (ROOT / history.CHECKS_WORKFLOW).read_bytes()
+        self.assertEqual(sha256(current).hexdigest(), history.WORKFLOW_AFTER)
+        previous = history.before(history.CHECKS_WORKFLOW, current)
+        self.assertEqual(sha256(previous).hexdigest(), history.WORKFLOW_BEFORE)
+        regional = regional_link_history.change()['paths'][history.CHECKS_WORKFLOW]
+        self.assertEqual(history.WORKFLOW_BEFORE, regional['new_sha256'])
+        self.assertEqual(sha256(regional_link_history.before(
+            history.CHECKS_WORKFLOW, current)).hexdigest(), regional['old_sha256'])
+        self.assertEqual(history.before(history.CHECKS_WORKFLOW, previous), previous)
+        self.assertEqual(history.before(ROOT / history.CHECKS_WORKFLOW, current.decode()),
+                         previous.decode())
+        self.assertEqual(current.split(b'  browser:\n', 1)[1],
+                         previous.split(b'  browser:\n', 1)[1])
+
+    def test_other_job_timeouts_and_unknown_workflow_bytes_are_not_rewritten(self):
+        raw = (ROOT / history.CHECKS_WORKFLOW).read_bytes()
+        replacements = (
+            (b'    timeout-minutes: 15\n', b'    timeout-minutes: 20\n'),
+            (b'    timeout-minutes: 2\n', b'    timeout-minutes: 3\n'),
+            (b'    timeout-minutes: 10\n', b'    timeout-minutes: 11\n'),
+            (b'    timeout-minutes: 30\n', b'    timeout-minutes: 31\n'),
+        )
+        for old, new in replacements:
+            with self.subTest(timeout=old):
+                self.assertEqual(raw.count(old), 1)
+                changed = raw.replace(old, new, 1)
+                self.assertEqual(history.before(history.CHECKS_WORKFLOW, changed), changed)
+        for changed in (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:]):
+            self.assertEqual(history.before(history.CHECKS_WORKFLOW, changed), changed)
+        self.assertEqual(history.before('.github/workflows/other.yml', raw), raw)
+
+    def test_corrupt_timeout_predecessor_and_replacement_fail_closed(self):
+        raw = (ROOT / history.CHECKS_WORKFLOW).read_bytes()
+        for name, bad in [('WORKFLOW_BEFORE', '0' * 64),
+                          ('BUILD_JOB_AFTER', 'not the approved job'),
+                          ('BUILD_JOB_BEFORE', 'not the approved predecessor')]:
+            with self.subTest(name=name), patch.object(history, name, bad):
+                with self.assertRaises(ValueError):
+                    history.before(history.CHECKS_WORKFLOW, raw)
+
     def test_identity_build_has_an_exact_successor_and_predecessor(self):
         current = (ROOT / history.IDENTITY_BUILD).read_bytes()
         self.assertEqual(sha256(current).hexdigest(), history.BUILD_AFTER)
