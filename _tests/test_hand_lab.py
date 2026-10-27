@@ -16,6 +16,7 @@ import html5lib
 from test_site import ROOT, build
 from test_viewer_guides import best, five
 import check_live
+import later_release_history as later_history
 import poker_finder
 import poker_hand_lab as lab
 import hand_lab_history as history
@@ -161,7 +162,7 @@ class HandLabTests(unittest.TestCase):
         js=(ROOT/lab.SCRIPT).read_text()
         for token in ['fetch(', 'XMLHttpRequest','localStorage','sessionStorage','document.cookie','innerHTML','eval(','pushState','replaceState','Math.random']:
             self.assertNotIn(token,js)
-        targets=check_live.targets();self.assertEqual(len(targets), 475)
+        targets=check_live.targets();self.assertEqual(len(later_history.live_targets(targets)), 475)
         for asset in [lab.CSS,lab.SCRIPT]:self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         css=(ROOT/lab.CSS).read_text()
         self.assertIn('@media print',css)

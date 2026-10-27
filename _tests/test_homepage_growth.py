@@ -12,6 +12,7 @@ import creative_print_history
 import homepage_growth_history as history
 import task_brief_growth_history as task_growth
 import answer_review_growth_history as guide_growth
+import later_release_history as later_history
 
 PRIMARY = {
     'use': '/technology/task-brief/',
@@ -90,14 +91,16 @@ class HomepageGrowthTests(unittest.TestCase):
         self.assertEqual(Page(self.home).tags('img'), [])
 
     def test_entire_previous_build_and_source_inventory_are_reconstructed(self):
-        self.assertEqual(len(self.outputs), self.record['base_output_count'])
-        self.assertEqual(fingerprint(history.outputs(self.outputs)), self.record['base_output_fingerprint'])
+        previous_outputs = history.outputs(self.outputs)
+        self.assertEqual(len(previous_outputs), self.record['base_output_count'])
+        self.assertEqual(fingerprint(previous_outputs), self.record['base_output_fingerprint'])
         sources = {p.relative_to(ROOT).as_posix(): p.read_bytes()
                    for folder in ('_source', '_scripts', 'assets', 'downloads')
                    for p in (ROOT / folder).rglob('*')
                    if p.is_file() and '__pycache__' not in p.parts}
-        self.assertEqual(len(sources), self.record['base_source_count'])
-        self.assertEqual(fingerprint(history.outputs(sources)), self.record['base_source_fingerprint'])
+        previous_sources = history.source_records(sources)
+        self.assertEqual(len(previous_sources), self.record['base_source_count'])
+        self.assertEqual(fingerprint(previous_sources), self.record['base_source_fingerprint'])
         self.assertEqual(set(self.record['paths']), {
             '_source/home.html', '_source/pages.json', 'assets/first-steps.css',
             'index.html', 'creative/index.html', 'sitemap.xml'})
@@ -114,7 +117,9 @@ class HomepageGrowthTests(unittest.TestCase):
         self.assertEqual(history.before('unknown.bin', b'\xff\x00'), b'\xff\x00')
 
     def test_only_actual_homepage_revision_is_reversed_not_other_metadata(self):
-        records = build.public_pages()
+        # This assertion belongs to the archived homepage release, before
+        # the later independently tested positioning and identity changes.
+        records = later_history.pages(build.public_pages())
         home = next(p for p in records if p['id'] == 'home')
         self.assertEqual(home, self.record['pages']['home']['new'])
         self.assertEqual(home['updated'], '2026-10-17')

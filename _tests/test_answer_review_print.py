@@ -8,6 +8,7 @@ import subprocess
 import unittest
 
 import answer_review_print_history as history
+import later_release_history as later_history
 import best_five_history
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,8 +29,9 @@ class AnswerReviewPrintHistoryTests(unittest.TestCase):
 
     def test_complete_production_inventory_restores_the_published_parent(self):
         paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-        rows = sorted((name, sha256(history.before(name, (ROOT / name).read_bytes())).hexdigest())
-                      for name in paths if name and not name.startswith(('_tests/', '_reports/')))
+        paths = later_history.files([name for name in paths if name])
+        rows = sorted((name, sha256(history.before(name, later_history.before(name, (ROOT / name).read_bytes()))).hexdigest())
+                      for name in paths if not name.startswith(('_tests/', '_reports/')))
         self.assertEqual(len(rows), history.change()['production_count'])
         self.assertEqual(sha256(json.dumps(rows, separators=(',', ':')).encode()).hexdigest(),
                          history.change()['production_fingerprint'])

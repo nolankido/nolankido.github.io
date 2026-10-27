@@ -30,10 +30,8 @@ class TechnologyJumpsTests(unittest.TestCase):
         b = self.baseline
         self.assertEqual(sha256(json.dumps(study_titles_history.pages(beginner_history.pages(brand_history.pages(build.public_pages()))), sort_keys=True, ensure_ascii=False).encode()).hexdigest(), b['pages_sha256'])
         self.assertEqual((len(b['outputs']), len(b['files'])), (198, 343))
-        # The later, separately tested profile graph did not exist in this
-        # frozen release. Keep it published without retroactively adding it
-        # to the historical Technology navigation inventory.
-        historical_outputs.pop(Path('assets/nolan-kido-identity.jsonld'), None)
+        # The common history chain removes later additions only when their
+        # exact approved bytes match. A mutated addition must remain visible.
         self.assertEqual(set(map(str, historical_outputs)), set(b['outputs']))
         changed = []
         for path, expected in b['outputs'].items():
@@ -43,10 +41,7 @@ class TechnologyJumpsTests(unittest.TestCase):
             self.assertEqual(sha256(history.before(path, raw).encode()).hexdigest(), expected, path)
         self.assertEqual(changed, ['technology/index.html'])
         tracked = subprocess.check_output(['git', 'ls-files', '_source', 'assets', 'downloads'], cwd=ROOT).decode().splitlines()
-        files = beginner_history.files(set(tracked) - {
-            '_source/person-schema.jsonld', 'assets/nolan-kido-identity.jsonld',
-            'assets/social/nolan-kido-ai.png',
-        })
+        files = beginner_history.files(set(tracked))
         self.assertEqual(files, set(b['files']))
         changed = []
         for path, expected in b['files'].items():

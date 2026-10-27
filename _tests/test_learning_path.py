@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
+import later_release_history as later_history
 import poker_beginner_path as path
 import poker_checkpoint
 import poker_course
@@ -158,7 +159,7 @@ class LearningPathTests(unittest.TestCase):
         self.assertEqual(worksheet.count(b'[ ]'), 6)
         for slug, _ in path.LESSONS: self.assertIn(('https://nolankido.com/poker/' + slug + '/').encode(), worksheet)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 475)
+        self.assertEqual(len(later_history.live_targets(targets)), 475)
         self.assertEqual(targets[path.DOWNLOAD], (200, worksheet))
         self.assertEqual(targets['/' + path.CSS], (200, (ROOT / path.CSS).read_bytes()))
         for p in self.current_pages:

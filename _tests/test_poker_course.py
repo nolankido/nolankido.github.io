@@ -11,6 +11,7 @@ import html5lib
 from test_site import ROOT, build
 from test_viewer_guides import best
 import check_live
+import later_release_history as later_history
 import poker_course as course
 import poker_finder
 import poker_course_history as history
@@ -162,7 +163,7 @@ class PokerCourseTests(unittest.TestCase):
             self.assertNotIn(forbidden, js)
         self.assertIn('/' + course.CSS, check_live.targets())
         self.assertIn('/' + course.SCRIPT, check_live.targets())
-        self.assertEqual(len(check_live.targets()), 475)
+        self.assertEqual(len(later_history.live_targets(check_live.targets())), 475)
 
     def test_invalid_cards_stages_repairs_and_duplicate_scenes_are_rejected(self):
         variants = []

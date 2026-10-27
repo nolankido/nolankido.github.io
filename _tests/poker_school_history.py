@@ -52,16 +52,22 @@ def _keep(path, data, additions):
 
 
 def outputs(records):
+    import later_release_history
+    records = later_release_history.outputs(records)
     added = change()['new_outputs']
     return {p: before(p, data) for p, data in records.items() if _keep(p, data, added)}
 
 
 def source_records(records):
+    import later_release_history
+    records = later_release_history.source_records(records)
     added = change()['new_files']
     return {p: before(p, data) for p, data in records.items() if _keep(p, data, added)}
 
 
 def files(paths):
+    import later_release_history
+    paths = later_release_history.files(paths)
     def keep(path):
         p = Path(path)
         key = p.relative_to(ROOT).as_posix() if p.is_absolute() else p.as_posix()

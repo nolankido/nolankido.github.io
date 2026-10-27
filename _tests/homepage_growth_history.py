@@ -60,4 +60,12 @@ def pages(records):
 
 
 def outputs(records):
+    import later_release_history
+    records = later_release_history.outputs(records)
+    return {path: before(path, value) for path, value in records.items()}
+
+
+def source_records(records):
+    import later_release_history
+    records = later_release_history.source_records(records)
     return {path: before(path, value) for path, value in records.items()}

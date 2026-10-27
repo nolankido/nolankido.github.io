@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / '_tests'))
 import answer_review_growth_history as history
 import turn11_task_navigation_history as task_nav_history
 import profile_datetime_history
+import later_release_history as later_history
 
 
 class GuideGrowth(unittest.TestCase):
@@ -84,7 +85,7 @@ class GuideGrowth(unittest.TestCase):
                              next(p for p in previous if p['id'] == name))
         # Read real XML rather than asserting indentation or escaped newlines.
         namespace = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
-        tree = ET.fromstring((ROOT / 'sitemap.xml').read_text())
+        tree = ET.fromstring(later_history.before('sitemap.xml', (ROOT / 'sitemap.xml').read_text()))
         revisions = {u.findtext('s:loc', namespaces=namespace):
                      u.findtext('s:lastmod', namespaces=namespace)
                      for u in tree.findall('s:url', namespace)}

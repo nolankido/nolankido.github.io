@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import poker_resources
 import resource_review_history as history
+import later_release_history as later_history
 import resource_followup_history as followup
 
 
@@ -88,8 +89,9 @@ class ResourceReviewTests(unittest.TestCase):
 
     def test_complete_production_inventory_reconstructs_verified_release(self):
         paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-        rows = sorted((p, sha256(history.before(p, (ROOT / p).read_bytes())).hexdigest())
-                      for p in paths if p and not p.startswith(('_tests/', '_reports/')))
+        paths = later_history.files([p for p in paths if p])
+        rows = sorted((p, sha256(history.before(p, later_history.before(p, (ROOT / p).read_bytes()))).hexdigest())
+                      for p in paths if not p.startswith(('_tests/', '_reports/')))
         self.assertEqual(len(rows), 714)
         self.assertEqual(sha256(json.dumps(rows, separators=(',', ':')).encode()).hexdigest(),
                          history.change()['production_fingerprint'])

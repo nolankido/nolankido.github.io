@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
+import later_release_history as later_history
 import poker_checkpoint as checkpoint
 import poker_beginner_path
 import poker_library
@@ -196,7 +197,7 @@ class CheckpointTests(unittest.TestCase):
             href=a.get('href','')
             if href.startswith('/poker/') and '#' in href:
                 route,anchor=href.split('#');self.assertIn('id="'+anchor+'"',self.outputs[build.output_path(route)],href)
-        targets=check_live.targets();self.assertEqual(len(targets), 475)
+        targets=check_live.targets();self.assertEqual(len(later_history.live_targets(targets)), 475)
         self.assertEqual(targets['/'+checkpoint.SHEET],(200,(ROOT/checkpoint.SHEET).read_bytes()))
         self.assertEqual(targets[checkpoint.ROUTE],(200,self.current_outputs[build.output_path(checkpoint.ROUTE)].encode()))
         body=(ROOT/'_source/poker/free-poker-learning-path.html').read_text()

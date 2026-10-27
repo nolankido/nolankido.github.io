@@ -25,9 +25,10 @@ def before(path,data):
 
 
 def pages(records):
+    """Restore later reviewed metadata before the earlier profile-date boundary."""
+    import brand_positioning_history as brand_history
     import answer_review_growth_history as guide_growth
-    records = guide_growth.pages(records)
-    """For older manifest snapshots, restore only About/Bio revision dates."""
+    records = guide_growth.pages(brand_history.pages(records))
     import json as _json
     from copy import deepcopy
     previous = _json.loads(before('_source/pages.json', (ROOT / '_source/pages.json').read_text()))

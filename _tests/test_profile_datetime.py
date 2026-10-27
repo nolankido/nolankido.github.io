@@ -16,6 +16,7 @@ import check_search
 import search_visibility
 import profile_datetime_history as history
 import brand_positioning_history as brand_history
+import later_release_history as later_history
 
 
 def digest(value):
@@ -95,11 +96,9 @@ class ProfileDateTimeTests(unittest.TestCase):
         record = history.change()
         self.assertEqual(set(record['paths']), {'_scripts/search_visibility.py', 'about/index.html'})
         tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-        later_identity_graph = {'_source/person-schema.jsonld', 'assets/nolan-kido-identity.jsonld'}
-        later_test_utilities = {'_scripts/freeze_brand_positioning_delta.py', '_scripts/freeze_scoped_share_change.py'}
-        items = [(p, digest(history.before(p, brand_history.before(p, (ROOT / p).read_bytes()))))
-                 for p in tracked if p and p not in later_identity_graph | later_test_utilities and
-                 not p.startswith(('_tests/', '_reports/'))]
+        tracked = later_history.files([p for p in tracked if p])
+        items = [(p, digest(history.before(p, later_history.before(p, (ROOT / p).read_bytes()))))
+                 for p in tracked if not p.startswith(('_tests/', '_reports/'))]
         self.assertEqual(len(items), record['production_count'])
         self.assertEqual(fingerprint(items), record['production_fingerprint'])
 

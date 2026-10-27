@@ -10,6 +10,7 @@ import html5lib
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
+import later_release_history as later_history
 import short_stack_history as history
 import poker_routes_history
 ROUTE='/poker/short-stack-decisions/'
@@ -133,7 +134,7 @@ class ShortStackFlagshipTests(unittest.TestCase):
         entry=next(e for e in site_find.entries(ROOT,self.pages) if e['path']==ROUTE)
         code=r'''const assert=require('node:assert/strict'),s=require('./assets/site-find.js');const d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));for(const q of ['15BB','short stack','10–20 BB'])assert(s.score(d.entry,q)>0);assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);'''
         subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':canonical}),text=True,check=True)
-        targets=check_live.targets();self.assertEqual(len(targets), 475)
+        targets=check_live.targets();self.assertEqual(len(later_history.live_targets(targets)), 475)
         for asset in ['assets/poker-short-stack.css','downloads/short-stack-icm-example.py','downloads/poker-short-stack-record.md']:self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
             if p.suffix=='.html':self.assertEqual('/assets/poker-short-stack.css?' in v,p==build.output_path(ROUTE))

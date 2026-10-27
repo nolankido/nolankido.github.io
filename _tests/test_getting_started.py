@@ -9,6 +9,7 @@ import html5lib
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
+import later_release_history as later_history
 import getting_started_history as history
 import tournament_budget_history
 from test_viewer_guides import best
@@ -122,7 +123,7 @@ assert.equal(Object.getPrototypeOf(s.decodeSections(d.packed)),null);
         self.assertIn('They have not been validated as a teaching curriculum with actual beginners',self.text)
         self.assertNotIn('Correctly rank 20',self.text)
         self.assertNotRegex(self.html,r'|```|'+chr(8212)+r'|<form|<input|<textarea|<iframe')
-        self.assertEqual(len(check_live.targets()), 475)
+        self.assertEqual(len(later_history.live_targets(check_live.targets())), 475)
         for p in [ROUTE,'/assets/poker-session.css','/downloads/poker-first-session.md']:
             self.assertIn(p,check_live.targets())
         worksheet=(ROOT/'downloads/poker-first-session.md').read_text()

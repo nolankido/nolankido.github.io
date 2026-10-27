@@ -9,6 +9,7 @@ import re
 import unittest
 
 import creative_print_history as history
+import later_release_history as later_history
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -17,7 +18,7 @@ class CreativePrintTests(unittest.TestCase):
         self.assertEqual(set(history.change()['paths']), history.PATHS)
         for name, record in history.change()['paths'].items():
             with self.subTest(path=name):
-                new = (ROOT / name).read_bytes()
+                new = later_history.before(name, (ROOT / name).read_bytes())
                 self.assertEqual(sha256(new).hexdigest(), record['new_sha256'])
                 old = history.before(name, new)
                 self.assertEqual(sha256(old).hexdigest(), record['old_sha256'])

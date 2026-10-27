@@ -12,6 +12,7 @@ import html5lib
 from test_site import ROOT, build
 from test_viewer_guides import best, five
 import check_live
+import later_release_history as later_history
 import poker_course
 import poker_finder
 import poker_practice as practice
@@ -186,7 +187,7 @@ class PokerPracticeTests(unittest.TestCase):
         for token in ['fetch(', 'XMLHttpRequest', 'localStorage', 'sessionStorage', 'document.cookie', 'innerHTML', 'eval(', 'pushState', 'replaceState']:
             self.assertNotIn(token, js)
         targets = check_live.targets()
-        self.assertEqual(len(targets), 475)
+        self.assertEqual(len(later_history.live_targets(targets)), 475)
         for path in [practice.ROUTE, '/' + practice.SCRIPT, '/' + practice.CSS]:
             self.assertIn(path, targets)
 

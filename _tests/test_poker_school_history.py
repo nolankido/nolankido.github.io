@@ -10,6 +10,7 @@ from test_site import ROOT, build
 import poker_school_history as school
 import homepage_growth_history as homepage
 import resource_review_history
+import later_release_history as later_history
 
 
 def fingerprint(records):
@@ -35,7 +36,7 @@ class PokerSchoolHistoryTests(unittest.TestCase):
         for path, value in old.items():
             self.assertEqual(sha256(value.encode()).hexdigest(), self.data['base_outputs'][str(path)], str(path))
             self.assertEqual(blob(value.encode()), self.base['tracked_base_blobs'][str(path)], str(path))
-        self.assertEqual(len(self.outputs) - len(old), 1)
+        self.assertEqual(len(later_history.outputs(self.outputs)) - len(old), 1)
         self.assertEqual(set(self.data['new_outputs']), {'poker/school/index.html'})
 
     def test_all_original_sources_assets_and_downloads_survive(self):
@@ -73,7 +74,9 @@ class PokerSchoolHistoryTests(unittest.TestCase):
         self.assertEqual(school.source_records({'unexpected': b'new'}), {'unexpected': b'new'})
 
     def test_only_the_exact_new_metadata_record_is_removed(self):
-        records = build.public_pages()
+        # Inject the unknown change at this archived release boundary, after
+        # undoing the later, independently approved branding metadata.
+        records = later_history.pages(build.public_pages())
         old = school.pages(records)
         encoded = json.dumps(old, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()
         self.assertEqual(sha256(encoded).hexdigest(), self.data['base_pages_fingerprint'])
