@@ -38,8 +38,9 @@ def main():
         if name == 'nolan-kido':
             text(94, 70, 'Nolan Kido', 86, 'bold')
             draw.line((94, 196, 1105, 196), fill=ACCENT, width=2)
-            text(94, 248, 'Build useful things.', 54, 'serif')
-            text(94, 328, 'Make room for a good life.', 54, 'serif')
+            text(94, 248, 'AI Works', 60, 'serif')
+            text(94, 328, 'Human Decides', 60, 'serif')
+            text(94, 446, 'Practical AI for real life.', 29, color=MUTED)
             text(94, 524, 'nolankido.com', 28, color=MUTED)
         elif name == 'keep-the-judgment':
             text(94, 72, 'AN ESSAY / PRACTICAL AI', 23, color=MUTED)

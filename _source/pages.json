@@ -3,10 +3,10 @@
     "id": "home",
     "path": "/",
     "title": "Nolan Kido",
-    "seo_title": "Nolan Kido | Practical AI, Useful Things & a Good Life",
-    "description": "A personal introduction to Nolan Kido: working with AI, building useful things, and exploring thoughtful living, tournament poker, writing, and creative work.",
+    "seo_title": "Nolan Kido | AI Works Human Decides",
+    "description": "Nolan Kido's AI Works Human Decides approach to practical AI in real life: bounded workflows, independent checks, and people making the important calls.",
     "source": "home.html",
-    "updated": "2026-10-17"
+    "updated": "2026-10-26"
   },
   {
     "id": "start-here",
@@ -42,11 +42,11 @@
     "id": "about",
     "path": "/about/",
     "title": "A little about me.",
-    "seo_title": "About Nolan Kido | Practical AI & Creative Work",
-    "description": "Meet Nolan Kido: practical AI, useful tools, writing, tournament poker, and a life beyond the screen. Explore his approach and try the work on this site.",
+    "seo_title": "About Nolan Kido | AI Works Human Decides",
+    "description": "Meet Nolan Kido and his AI Works Human Decides approach to implementing AI in real life. Inspect public tools, an evidence-backed case, and human-review principles.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-17"
+    "updated": "2026-10-26"
   },
   {
     "id": "notes",
@@ -307,11 +307,11 @@
     "id": "technology",
     "path": "/technology/",
     "title": "Practical AI for real life.",
-    "seo_title": "Practical AI for Everyday Life | Nolan Kido",
-    "description": "Use AI for real tasks without handing over your judgment. Try a free task brief builder, inspect worked examples, and check whether a workflow actually helps.",
+    "seo_title": "AI Works Human Decides: Practical AI | Nolan Kido",
+    "description": "Nolan Kido's four-step AI Works Human Decides method: choose a real task, bound AI's role, check the result, and keep decisions with people.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-12"
+    "updated": "2026-10-26"
   },
   {
     "id": "creative",

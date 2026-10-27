@@ -103,7 +103,7 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual(site['url'], 'https://nolankido.com')
         self.assertEqual(site['form_action'], 'https://submit-form.com/uPlTgRTAR')
         self.assertEqual(site['turnstile_sitekey'], '0x4AAAAAAFI2X8NC1cauc_zz')
-        self.assertEqual(site['tagline'], 'Build useful things. Make room for a good life.')
+        self.assertEqual(site['tagline'], 'AI Works Human Decides')
         self.assertIn('Living Well', site['bio_long'])
         for route in ['about/index.html', 'bio/index.html']:
             self.assertIn('Living Well', self.outputs[Path(route)])
