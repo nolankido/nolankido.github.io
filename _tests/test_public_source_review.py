@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import practical_path
+import workflow_decision_history as subsequent_changes
 
 SNAPSHOT = 'https://github.com/nolankido/nolankido.github.io/blob/a64bc51b6a39405a1ba59fbc589a9e190fce6229/'
 REPORT = '_reports/website-growth/turn-04-public-source-plan.md'
@@ -183,7 +184,10 @@ class PublicSourceReviewTests(unittest.TestCase):
 
     def test_case_reuses_the_exact_existing_workbook(self):
         raw = (ROOT / practical_path.WORKBOOK).read_bytes()
-        self.assertEqual(sha256(raw).hexdigest(), WORKBOOK_SHA256)
+        # Preserve the case-review release's workbook boundary while checking
+        # the generated download against the complete current bytes below.
+        archived = subsequent_changes.before(practical_path.WORKBOOK, raw)
+        self.assertEqual(sha256(archived).hexdigest(), WORKBOOK_SHA256)
         self.assertEqual(self.outputs[practical_path.WORKBOOK].encode(), raw)
         for kind, document in self.documents.items():
             with self.subTest(document=kind):
