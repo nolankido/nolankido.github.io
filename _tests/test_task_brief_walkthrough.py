@@ -70,8 +70,9 @@ class TaskBriefWalkthroughTests(unittest.TestCase):
         self.assertNotIn('data-umami-event', self.walk)
 
     def test_only_task_brief_revision_changes_in_manifest_and_sitemap(self):
-        current = json.loads((ROOT / '_source/pages.json').read_text())
-        old = json.loads(history.before('_source/pages.json', (ROOT / '_source/pages.json').read_text()))
+        manifest = (ROOT / '_source/pages.json').read_text()
+        current = json.loads(later_history.before('_source/pages.json', manifest))
+        old = json.loads(history.before('_source/pages.json', manifest))
         changed = [(a, b) for a, b in zip(old, current) if a != b]
         self.assertEqual(len(old), len(current))
         self.assertEqual(len(changed), 1)
@@ -86,6 +87,9 @@ class TaskBriefWalkthroughTests(unittest.TestCase):
         mutated = deepcopy(b); mutated['description'] += ' unreviewed'
         self.assertEqual(history.pages([mutated]), [mutated])
         self.assertIsNot(history.pages([b])[0], a)
+        unreviewed = manifest.replace('"description": "', '"description": "unreviewed ', 1)
+        self.assertNotEqual(unreviewed, manifest)
+        self.assertEqual(later_history.before('_source/pages.json', unreviewed), unreviewed)
 
     def test_complete_production_inventory_restores_the_verified_parent(self):
         paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')

@@ -48,6 +48,10 @@ those tests were intended to provide.
   complete hosted run exhausted its earlier budget. Preserve every test and
   browser group. An exact SHA-bound reversal keeps the older workflow fixture
   check meaningful, including rejection of changes to other job limits.
+- Check the exact current search index of 1,142 headings at 174 destinations,
+  including exactly one approved method heading. Keep both payload limits and
+  the older 1,140-heading fixture unchanged. Apply the same SHA-bound history
+  boundary to the remaining summary-source and task-brief manifest comparisons.
 
 The regression adapter commit is
 [`9be895ec7503d78a3b543dcd761a0a851b339c50`](https://github.com/nolankido/nolankido.github.io/commit/9be895ec7503d78a3b543dcd761a0a851b339c50).
@@ -63,6 +67,12 @@ static search audit of 194 public pages, including 189 sitemap URLs. The
 negative cases reject unknown mutations, wrong response types, corrupt
 predecessors, unapproved fixture scope and stale fixture records. A separate
 read-only code review found no must-fix issue in the history repair.
+
+A separate diagnostic completed the 247 later tests beyond the earlier timeout
+region. It identified three stale expectations in search sections, the summary
+source inventory and the task-brief manifest comparison. After those repairs,
+all 24 tests across the three affected modules passed. These focused results
+are separate from the required complete hosted gate below.
 
 The final PR head must pass the complete unit suite, HTML validation and all
 five existing hosted browser groups before merge. The current receipts belong
