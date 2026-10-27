@@ -55,7 +55,10 @@ class BrandPositioningHistoryTests(unittest.TestCase):
         self.assertEqual(history.before('not-a-release.txt', b'unknown'), b'unknown')
 
     def test_page_metadata_reverses_only_the_three_approved_records(self):
-        pages = build.public_pages()
+        current = build.public_pages()
+        # Compare this archived layer after the newer reviewed changes have
+        # been undone, matching the byte-level comparison above.
+        pages = public_source_review_history.pages(current)
         restored = history.pages(pages)
         for page, previous in zip(pages, restored):
             if page['id'] in self.change['pages']:
@@ -63,7 +66,7 @@ class BrandPositioningHistoryTests(unittest.TestCase):
                     self.assertEqual(previous[key], value)
             else:
                 self.assertEqual(page, previous)
-        altered = deepcopy(pages)
+        altered = deepcopy(current)
         altered[0]['description'] = 'A fabricated result.'
         self.assertEqual(history.pages(altered)[0], altered[0])
 

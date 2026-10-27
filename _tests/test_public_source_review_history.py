@@ -12,14 +12,19 @@ sys.path.insert(0, str(ROOT / '_tests'))
 import brand_positioning_history as brand_history
 import build
 import public_source_review_history as history
+import workflow_decision_history
 
 
 class PublicSourceReviewHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
-        cls.pages = build.public_pages()
+        cls.current_raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
+        # This archived layer receives its exact successor after the later
+        # calculator change. Keep unnormalized current bytes for mutation tests.
+        cls.raw = {name: workflow_decision_history.before(name, raw)
+                   for name, raw in cls.current_raw.items()}
+        cls.pages = workflow_decision_history.pages(build.public_pages())
 
     def test_only_the_four_reviewed_files_and_published_parent_are_recorded(self):
         self.assertEqual(set(self.record['paths']), {
@@ -52,7 +57,7 @@ class PublicSourceReviewHistoryTests(unittest.TestCase):
                     self.assertEqual(history.before(path, text), text)
 
     def test_unknown_mutations_and_binary_inputs_remain_visible(self):
-        for name, raw in self.raw.items():
+        for name, raw in self.current_raw.items():
             midpoint = len(raw) // 2
             altered = (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:],
                        raw[:midpoint] + b'UNREVIEWED' + raw[midpoint:], b'\xff\x00')
@@ -212,7 +217,7 @@ class PublicSourceReviewHistoryTests(unittest.TestCase):
 
     def test_common_output_chain_preserves_unknown_paths_and_current_mutations(self):
         import beginner_history
-        records = {Path(name): raw.decode('utf-8') + 'UNREVIEWED' for name, raw in self.raw.items()}
+        records = {Path(name): raw.decode('utf-8') + 'UNREVIEWED' for name, raw in self.current_raw.items()}
         records[Path('unreviewed.html')] = self.raw['technology/index.html'].decode('utf-8')
         self.assertEqual(beginner_history.outputs(records), records)
 

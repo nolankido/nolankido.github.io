@@ -56,6 +56,8 @@ def key(path: str | Path) -> str:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import workflow_decision_history
+    data = workflow_decision_history.before(path, data)
     name = key(path)
     item = change()['paths'].get(name)
     if item is None:
@@ -89,5 +91,7 @@ def before(path: str | Path, data: bytes | str) -> bytes | str:
 
 def pages(records: list[dict]) -> list[dict]:
     """Restore only the complete approved Technology record, without mutation."""
+    import workflow_decision_history
+    records = workflow_decision_history.pages(records)
     pair = change()['page']
     return [deepcopy(pair['old'] if page == pair['new'] else page) for page in records]
