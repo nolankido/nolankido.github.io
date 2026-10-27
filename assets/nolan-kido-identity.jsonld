@@ -1,0 +1,135 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://nolankido.com/#website",
+      "url": "https://nolankido.com/",
+      "name": "Nolan Kido",
+      "publisher": {
+        "@id": "https://nolankido.com/about/#nolan-kido"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://nolankido.com/about/#nolan-kido",
+      "name": "Nolan Kido",
+      "alternateName": [
+        "Nolan Y. Kido"
+      ],
+      "url": "https://nolankido.com/about/",
+      "jobTitle": "AI Startup Founder and Angel Investor",
+      "description": "AI startup founder and angel investor who builds and uses AI tools in small-business operations and daily life, and publishes the evidence. Former Chief Operating Officer of Hawaii Dental Clinic and Affiliates. Tournament poker player. Honolulu, Hawaiʻi.",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "ORCID",
+        "value": "0009-0008-8141-3662"
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Honolulu",
+          "addressRegion": "HI",
+          "addressCountry": "US"
+        }
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Hawaiʻi at Mānoa",
+        "sameAs": "https://manoa.hawaii.edu/"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "Bachelor of Business Administration",
+          "recognizedBy": {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Hawaiʻi at Mānoa"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "Master of Accounting",
+          "recognizedBy": {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Hawaiʻi at Mānoa"
+          }
+        }
+      ],
+      "affiliation": [
+        {
+          "@type": "OrganizationRole",
+          "roleName": "Research Affiliate",
+          "affiliation": {
+            "@type": "CollegeOrUniversity",
+            "name": "Massachusetts Institute of Technology",
+            "sameAs": "https://www.mit.edu/"
+          }
+        }
+      ],
+      "knowsAbout": [
+        "Practical use of AI in small-business operations",
+        "Verifying AI-generated work",
+        "Human judgment and decision-making with AI",
+        "Dental practice management",
+        "Accounting",
+        "Tournament poker"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/nolankido/",
+        "https://orcid.org/0009-0008-8141-3662",
+        "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=987568",
+        "https://scholar.google.com/citations?user=HVoO0y8AAAAJ",
+        "https://www.researchgate.net/scientific-contributions/Nolan-Y-Kido-2162807176",
+        "https://pokerdb.thehendonmob.com/player.php?a=r&n=967363",
+        "https://github.com/nolankido",
+        "https://www.youtube.com/nolankido",
+        "https://www.instagram.com/nolankido"
+      ]
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://doi.org/10.1111/j.1475-679X.2012.00447.x",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1475-679X.2012.00447.x",
+      "sameAs": "https://doi.org/10.1111/j.1475-679X.2012.00447.x",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "DOI",
+        "value": "10.1111/j.1475-679X.2012.00447.x"
+      },
+      "headline": "The Influence of Elections on the Accounting Choices of Governmental Entities",
+      "author": [
+        {
+          "@id": "https://nolankido.com/about/#nolan-kido"
+        },
+        {
+          "@type": "Person",
+          "name": "Reining Petacchi"
+        },
+        {
+          "@type": "Person",
+          "name": "Joseph Weber"
+        }
+      ],
+      "datePublished": "2012",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "issueNumber": "2",
+        "isPartOf": {
+          "@type": "PublicationVolume",
+          "volumeNumber": "50",
+          "isPartOf": {
+            "@type": "Periodical",
+            "name": "Journal of Accounting Research"
+          }
+        }
+      },
+      "pageStart": "443",
+      "pageEnd": "476"
+    }
+  ]
+}
