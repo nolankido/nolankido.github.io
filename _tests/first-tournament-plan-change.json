@@ -1,0 +1,323 @@
+{
+  "version": 1,
+  "parent_commit": "74e064631e59e7659826144390dc77d49d2022ed",
+  "parent_tree": "24495e6156dd0d5abf71c707fb7bbd0f195e4983",
+  "paths": {
+    "_source/pages.json": {
+      "current_sha256": "a8054aae31450162f9a21a0bddff1045a9b1fa11d2ecb96a7b59818f73665ee5",
+      "parent_sha256": "be91f0965de264c4c8797cb0f1c7d3e279a1321899bde55aee57f8ee5be9807d",
+      "edits": [
+        {
+          "start": 29895,
+          "end": 30102,
+          "current_sha256": "1b520750e3fb2b4f9555c51775c5693f0d1fa2ae8f5f7f0b047ac346bbb9284a",
+          "old": "08\",\n    \"poker_guide\": true"
+        },
+        {
+          "start": 34986,
+          "end": 35154,
+          "current_sha256": "286d0dfdbf7b9fec1d02d4d37ff87b77b229071edd25380e7cce185786791b8c",
+          "old": "08"
+        }
+      ]
+    },
+    "_source/poker/first-live-tournament.html": {
+      "current_sha256": "c3a6033de249b1f2a4507c56fbbaa4284955bc29206dc31e942d09e64df7d166",
+      "parent_sha256": "3c0fda2bb1cf44e462336cb304e0120d406e81b2dd3802d6ff9840db165db814",
+      "edits": [
+        {
+          "start": 541,
+          "end": 3477,
+          "current_sha256": "7d0f1b445e16f3a2a406bf350c2ebab5f18c83fa18dd9c10fee51a9daf5022ee",
+          "old": ""
+        },
+        {
+          "start": 9377,
+          "end": 9668,
+          "current_sha256": "e4750825e86d1119a41ea9c75b164beaba0af9982476f08d56cd2447a9e1d627",
+          "old": ""
+        }
+      ]
+    },
+    "_source/poker/tournament-checklists.html": {
+      "current_sha256": "01880900d28b81f2cda721e08637868ed04957dd35fab74534dcaceb06df2be0",
+      "parent_sha256": "ada4ca5f6dd86d40f6f1e5531d0025137a6ce5b29c91db9c25232dc346e103df",
+      "edits": [
+        {
+          "start": 1167,
+          "end": 1512,
+          "current_sha256": "d8ee091349c4d4e7063fb79770498d22a59d9ee54b1ea29dcf5b5446bd5d3e05",
+          "old": ""
+        },
+        {
+          "start": 3160,
+          "end": 3382,
+          "current_sha256": "4ff2972cd97d21556f4a2b8f21712608354fdefb4079002d8057d563febf6150",
+          "old": "October 8, 2026"
+        }
+      ]
+    },
+    "downloads/poker-event-planner.md": {
+      "current_sha256": "15bed74a56e9f24a03bfbcd2934833d45458f5621dd9e146f956f4ff84bc4f85",
+      "parent_sha256": "77afda5336250ce585dba41d7bbea66f4998852f4305531ec3a68dc62b6ea83d",
+      "edits": [
+        {
+          "start": 671,
+          "end": 721,
+          "current_sha256": "5a4f6c2032925c5f456f9a38c9816f1ab0469c0ed39595b2582b86b624533f51",
+          "old": ""
+        },
+        {
+          "start": 760,
+          "end": 1405,
+          "current_sha256": "b193ece53d8acfc5523a65eb9d95d0556073ba3dadde118d484c913fea28dadb",
+          "old": ""
+        }
+      ]
+    },
+    "find/index.html": {
+      "current_sha256": "576675c835ad28ff80d12c57dcbb5c374e1ea60dc1baf69fdc4a444d87d10a5f",
+      "parent_sha256": "03e6bca243e5f4ce1279f80f4fad941fa65a17648041284f6ca974f95a9899b5",
+      "edits": [
+        {
+          "start": 125292,
+          "end": 125359,
+          "current_sha256": "df5a0f9cc02951422596c8597c3664ab689cd445c0464f7e4b3814fb2b714658",
+          "old": ""
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "current_sha256": "a9620d412c5f7914144d3238f7daa71a46bed70fe03bb987882bd89290c6ff6e",
+      "parent_sha256": "445e4c2e44d6ee876e8f3e8a6d48ec33ab03d92aae70bc5ae948bc5a4333479e",
+      "edits": [
+        {
+          "start": 211937,
+          "end": 219353,
+          "current_sha256": "95997700ae8b86d07261374114a7df7559981cf7a1474293b6a36695cf3b9a03",
+          "old": "For the whole beginner route, use the first-session and first-month guide . It connects rules rehearsal, cost and stopping boundaries with the short foundation lessons.</p><p data-finder-passage data-anchor=\"before-you-go\" data-heading=\"Start with the day, not a promise of winning.\">Choose an event whose game, total entry cost and possible duration you understand. Check whether it can continue on another day. Decide what you are comfortable spending for the whole outing, including transport and food, without relying on a payout. Choosing to watch, or deciding not to enter, is also a complete plan. For a venue-specific example, read the first-timer’s Thunder Valley guide . It connects current official information with registration questions to resolve before traveling. Put a number on the whole outing with the local, overnight and weekend budget examples , then copy the blank trip worksheet before committing. Read the structure-sheet guide before comparing events. A large starting chip count is not enough to judge the pace. Save the official event page and the organizer&#x27;s contact information, then confirm anything that would change your decision to go.</p><p data-finder-passage data-anchor=\"registration\" data-heading=\"Remove the avoidable registration surprises.\">Ask the organizer what identification, membership card, payment method and eligibility checks apply. Confirm the event number and starting flight, not just its headline name. Ask whether advance payment still requires an in-person verification step. As a concrete example, the WSOP registration page describes identification and Caesars Rewards checks. It is an example of one organizer&#x27;s process, not instructions for every room. Allow space in your plan for finding the desk and resolving an issue. Keep your ticket and receipt private. A photograph that includes a barcode, membership number or payment detail is not a suitable public trip update.</p><p data-finder-passage data-anchor=\"taking-a-seat\" data-heading=\"Let the dealer help you get oriented.\">Before taking a seat, check the table and seat assignment with staff. Tell the dealer that this is your first live tournament. Ask which denominations you have, what the current blinds and ante are, and where the button is. These are procedural questions, not requests for advice about which hand to play. Under TDA rules , players are responsible for following the action, acting in turn and making intentions clear. Rather than copying a chip motion you saw in a video, ask staff to explain an unfamiliar procedure before using it. A useful question is specific. “Is the total bet 2,000, and is it my turn?” asks for clarification. “Should I call with this hand?” asks someone else to make part of your decision. Save strategic discussion for a completed-hand review away from play.</p><p data-finder-passage data-anchor=\"unclear-action\" data-heading=\"When something is unclear, ask instead of improvising.\">Before acting, ask the dealer to clarify the action or amount. For a disputed procedure, ask for the floor and describe what happened calmly. Do not reach into another player&#x27;s stack, announce an opponent&#x27;s cards, or try to settle a disagreement with a louder argument. The floor can explain the event&#x27;s applicable procedure. The table-context guide explains common moments such as oversized chips and floor calls. Reading it beforehand is useful; opening a strategy aid at the table is not the purpose of this site.</p><p data-finder-passage data-anchor=\"a-useful-finish\" data-heading=\"Define a useful finish that does not require a cash.\">Pick one process goal: understand the announcements, keep track of your position, or preserve one hand accurately afterward. Avoid making “prove that I belong” the day&#x27;s assignment. A first outing does not have to establish your ability or fund the next one. If one of those questions concerns playing 10–20 BB, review the short-stack lesson after the event . Start with its stack and ante record before comparing actions. When play is over, record what was unfamiliar and one question worth following up. Keep the result separate. The tournament-day guide covers breaks, moves and the end of a day; the printable planning sheets give you a small place to start.</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"Sources and scope\">WSOP: event-specific registration process ; Poker TDA: player responsibilities and tournament procedures . Public reference pages checked October 8, 2026. Planning suggestions and fictional examples are original educational material. Confirm current event details with the organizer; provider documentation is not an independent product test. Published October 8, 2026 . Prepared with AI assistance. Examples are fictional, not personal tournament accounts. Use these guides before or after play, not as assistance during a live hand"
+        }
+      ]
+    },
+    "poker/first-live-tournament/index.html": {
+      "current_sha256": "8b06c2fb216819b5402e05680606100871253b3be6b85b32d3f8b5f074befe3b",
+      "parent_sha256": "4ad2c84264394c558d79a56ed47911c33554eb484fcde99582a8cbb9381f4c90",
+      "edits": [
+        {
+          "start": 3064,
+          "end": 3066,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "08"
+        },
+        {
+          "start": 4030,
+          "end": 4032,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "08"
+        },
+        {
+          "start": 7699,
+          "end": 8032,
+          "current_sha256": "07ce5856cb40d6c2a555f17f172ba743f001d7f7304d1cb596ada634f5326fae",
+          "old": "4 min read</a></span><span>Updated <time datetime=\"2026-10-08\">October 8, 2026</time></span></p><details class=\"reader-outline\"><summary>On this page <span class=\"reader-outline-count\">6 sections</span></summary><nav aria-label=\"On this page\"><ol"
+        },
+        {
+          "start": 9030,
+          "end": 11966,
+          "current_sha256": "7d0f1b445e16f3a2a406bf350c2ebab5f18c83fa18dd9c10fee51a9daf5022ee",
+          "old": ""
+        },
+        {
+          "start": 17866,
+          "end": 18157,
+          "current_sha256": "e4750825e86d1119a41ea9c75b164beaba0af9982476f08d56cd2447a9e1d627",
+          "old": ""
+        }
+      ]
+    },
+    "poker/library/index.html": {
+      "current_sha256": "bf735d7556cfc4af9b708ad5ae5fd0b77b167f325e2ee6de5cca5935001dedf1",
+      "parent_sha256": "9523f1de6204b3a1125d0bf479609328d467960a8b1bf6ca7f87f632956dbbc8",
+      "edits": [
+        {
+          "start": 37259,
+          "end": 37260,
+          "current_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "old": "4"
+        }
+      ]
+    },
+    "poker/poker-access-and-protection/index.html": {
+      "current_sha256": "42332561778b71b8f4b4f5da4b91fe98fef4a12a1d67b0773f0717fb6171e5df",
+      "parent_sha256": "a30a55bf3b0a4cbb618a3286700d9a3c4f025e2bc2a6cefe1efadda86836008c",
+      "edits": [
+        {
+          "start": 21720,
+          "end": 21721,
+          "current_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "old": "4"
+        }
+      ]
+    },
+    "poker/poker-rules-and-fair-play/index.html": {
+      "current_sha256": "d2eaa3aa5c0fb14f670c5031cfdb20c7d55db26611687d7476d49c292b53f14f",
+      "parent_sha256": "81b80ffc06bbfeca40e7320d7e92dfaace65085997a4431d578c4440528fe841",
+      "edits": [
+        {
+          "start": 21773,
+          "end": 21774,
+          "current_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "old": "4"
+        }
+      ]
+    },
+    "poker/thunder-valley-poker-guide/index.html": {
+      "current_sha256": "0e525517342f0d37beb0d2d30cfe8519c4c6d03a73f1825acf2ed88f94a62cf0",
+      "parent_sha256": "87fb626229d83ff6bc065f499939475e23ec8be6935608bbeeb13732e94d527e",
+      "edits": [
+        {
+          "start": 31551,
+          "end": 31552,
+          "current_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "old": "4"
+        }
+      ]
+    },
+    "poker/topics/places-to-play/index.html": {
+      "current_sha256": "2c23b70e2044b9d58fa6d0e9d3c3c6fae6644cbc2ec1bedcaeee1f925fb89f78",
+      "parent_sha256": "5975591ac728116a18880c73474344b3cfa2099b0947db586980ab1541126d76",
+      "edits": [
+        {
+          "start": 7872,
+          "end": 7873,
+          "current_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "old": "4"
+        }
+      ]
+    },
+    "poker/topics/tournaments/index.html": {
+      "current_sha256": "aa248fff4bf46fb5e6d3892777f7cfaeb7c10d1725fa0b35ea8840fdae6042fc",
+      "parent_sha256": "3265e762e0afcd39e2a7dc1763f1e2b9212bf1b2ed7d6545c138278fd0cd40b9",
+      "edits": [
+        {
+          "start": 7985,
+          "end": 7986,
+          "current_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "old": "4"
+        }
+      ]
+    },
+    "poker/tournament-checklists/index.html": {
+      "current_sha256": "f3e016a56c146dfe1c9b96b84fef1466d0c6adfd4561cfe93e27e46b575892d4",
+      "parent_sha256": "9846f21bdc6626111b7903ba3359305eff13f6e0619cbf1e8926c9ee71d8e5c8",
+      "edits": [
+        {
+          "start": 3808,
+          "end": 3810,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "08"
+        },
+        {
+          "start": 7805,
+          "end": 8150,
+          "current_sha256": "d8ee091349c4d4e7063fb79770498d22a59d9ee54b1ea29dcf5b5446bd5d3e05",
+          "old": ""
+        },
+        {
+          "start": 9359,
+          "end": 9409,
+          "current_sha256": "5a4f6c2032925c5f456f9a38c9816f1ab0469c0ed39595b2582b86b624533f51",
+          "old": ""
+        },
+        {
+          "start": 9448,
+          "end": 10093,
+          "current_sha256": "b193ece53d8acfc5523a65eb9d95d0556073ba3dadde118d484c913fea28dadb",
+          "old": ""
+        },
+        {
+          "start": 13739,
+          "end": 13961,
+          "current_sha256": "4ff2972cd97d21556f4a2b8f21712608354fdefb4079002d8057d563febf6150",
+          "old": "October 8, 2026"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "current_sha256": "a82c7f44fb8f5bb8ecba0ff02854df3027a0b3b40d691fc5ac29847fcbdf89ff",
+      "parent_sha256": "a007e4d2f458f9e6a4719fe2bf6ce8fe7c608bb62edaa8cfa4b90554126b43e6",
+      "edits": [
+        {
+          "start": 6064,
+          "end": 6066,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "08"
+        },
+        {
+          "start": 6991,
+          "end": 6993,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "08"
+        }
+      ]
+    }
+  },
+  "pages": {
+    "poker-first-live-tournament": {
+      "old": {
+        "id": "poker-first-live-tournament",
+        "path": "/poker/first-live-tournament/",
+        "title": "Your first live tournament, without the guesswork.",
+        "seo_title": "Your first live tournament, without the guesswork | Nolan Kido Poker",
+        "description": "Prepare for registration, finding your seat, asking procedural questions, and leaving with one useful observation.",
+        "kicker": "Poker / Live tournament field guide",
+        "source": "poker/first-live-tournament.html",
+        "section": "poker",
+        "date": "2026-10-08",
+        "updated": "2026-10-08",
+        "poker_guide": true
+      },
+      "new": {
+        "id": "poker-first-live-tournament",
+        "path": "/poker/first-live-tournament/",
+        "title": "Your first live tournament, without the guesswork.",
+        "seo_title": "Your first live tournament, without the guesswork | Nolan Kido Poker",
+        "description": "Prepare for registration, finding your seat, asking procedural questions, and leaving with one useful observation.",
+        "kicker": "Poker / Live tournament field guide",
+        "source": "poker/first-live-tournament.html",
+        "section": "poker",
+        "date": "2026-10-08",
+        "updated": "2026-10-27",
+        "poker_guide": true,
+        "revision": "Added a six-step first-event plan, early access to the existing planner and a record of confirmed details, unresolved questions and the decision before paying."
+      }
+    },
+    "poker-tournament-checklists": {
+      "old": {
+        "id": "poker-tournament-checklists",
+        "path": "/poker/tournament-checklists/",
+        "title": "Plan the day. Keep the hand. Check the source.",
+        "seo_title": "Plan the day. Keep the hand. Check the source | Nolan Kido Poker",
+        "description": "Three printable, copyable and downloadable private-use sheets for event planning, completed-hand capture and evaluating a poker resource.",
+        "kicker": "Poker / Practical preparation",
+        "source": "poker/tournament-checklists.html",
+        "section": "poker",
+        "date": "2026-10-08",
+        "updated": "2026-10-08"
+      },
+      "new": {
+        "id": "poker-tournament-checklists",
+        "path": "/poker/tournament-checklists/",
+        "title": "Plan the day. Keep the hand. Check the source.",
+        "seo_title": "Plan the day. Keep the hand. Check the source | Nolan Kido Poker",
+        "description": "Three printable, copyable and downloadable private-use sheets for event planning, completed-hand capture and evaluating a poker resource.",
+        "kicker": "Poker / Practical preparation",
+        "source": "poker/tournament-checklists.html",
+        "section": "poker",
+        "date": "2026-10-08",
+        "updated": "2026-10-27",
+        "revision": "Expanded the existing event planner with a source, date, status and follow-up record for consequential questions, plus an explicit entry decision."
+      }
+    }
+  }
+}
