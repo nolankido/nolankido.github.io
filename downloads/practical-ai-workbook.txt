@@ -112,11 +112,16 @@ Evidence outside the AI answer (source/passages, original material or test):
 Date/version/context of that evidence:
 Independent check actually performed:
 Observed result:
+Evidence status (supported for the stated purpose / contradicted / unresolved):
+Why the evidence supports that status:
 Remaining unknowns or limits:
 Change needed:
 
 Repeat section 3 for each consequential claim. A second AI agreeing is not
 independent evidence that the claim is true.
+Use unresolved when evidence is missing or insufficient to decide whether
+the claim is supported or contradicted for the stated purpose.
+Missing support alone is not contradictory evidence.
 
 4. DECIDE THE NEXT STEP
 Named part and purpose I am prepared to use:

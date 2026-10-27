@@ -21,9 +21,31 @@ server = ThreadingHTTPServer(('127.0.0.1', 0), partial(Quiet, directory=str(ROOT
 Thread(target=server.serve_forever, daemon=True).start()
 base = 'http://127.0.0.1:' + str(server.server_port)
 report = {'layouts': 0, 'text_spacing': 0, 'examples': 0, 'picker_journeys': 0, 'entry_journeys': 0, 'downloads': 0, 'axe': [],
-          'print_layouts': 0, 'print_state_guards': 0, 'print_static_fallbacks': 0, 'print_pdf_captures': 0}
+          'print_layouts': 0, 'print_state_guards': 0, 'print_static_fallbacks': 0, 'print_pdf_captures': 0,
+          'completed_record_layouts': 0, 'completed_record_spacing': 0,
+          'completed_record_journeys': 0, 'completed_record_print_layouts': 0}
 errors = []
 writes = []
+
+
+def completed_record(page):
+    """Keep the evidence finding and human next step legible on every surface."""
+    record = page.locator('#review-completed-record')
+    expect(record).to_be_visible()
+    expect(record.locator('#review-completed-title')).to_be_visible()
+    expect(record).to_contain_text('Fictional completed example.')
+    finding = record.locator('.review-completed-fields')
+    expect(finding.locator('strong')).to_have_text('Unresolved.')
+    expect(finding.locator('strong')).to_be_visible()
+    expect(finding).to_contain_text('Its silence does not establish that the event is cancelled or unconfirmed.')
+    decision = record.locator('.review-completed-decision')
+    expect(decision).to_be_visible()
+    expect(decision).to_contain_text('Leave the confirmation claim unused.')
+    expect(decision).to_contain_text('Record its date and wording, check any conditions, and reassess the status.')
+    assert record.evaluate('el=>el.scrollWidth<=el.clientWidth+1')
+    return record
+
+
 try:
     with sync_playwright() as pw:
         opts = {'headless': True}
@@ -51,6 +73,15 @@ try:
                 expect(page.locator('main')).to_contain_text('Send meetup questions to the organizer.')
                 expect(page.locator('main')).to_contain_text('That summary is not faithful to its supplied source')
                 assert page.evaluate('document.documentElement.scrollWidth') <= width
+                record = completed_record(page)
+                report['completed_record_layouts'] += 1
+                record_link = page.locator('a[href="#review-completed-record"]')
+                expect(record_link).to_have_count(1)
+                record_link.focus(); expect(record_link).to_be_focused()
+                page.keyboard.press('Enter')
+                expect(page).to_have_url(base + ROUTE + '#review-completed-record')
+                expect(record.locator('#review-completed-title')).to_be_in_viewport()
+                report['completed_record_journeys'] += 1
                 links = page.locator('.review-picker a')
                 expect(links).to_have_count(6)
                 assert all(a.bounding_box()['height'] >= 44 for a in links.all())
@@ -66,10 +97,13 @@ try:
                 report['layouts'] += 1
                 if scripts and width in [390, 1440] and os.environ.get('SCREENSHOT_DIR'):
                     out = Path(os.environ['SCREENSHOT_DIR']); out.mkdir(parents=True, exist_ok=True)
+                    record.screenshot(path=str(out / f'answer-review-completed-{width}.png'))
                     page.evaluate('window.scrollTo(0,0)')
                     page.screenshot(path=str(out / f'answer-review-{width}.png'), full_page=True)
                 page.evaluate('css=>{const s=document.createElement("style");s.textContent=css;document.head.appendChild(s)}', '*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
                 assert page.evaluate('document.documentElement.scrollWidth') <= width
+                completed_record(page)
+                report['completed_record_spacing'] += 1
                 report['text_spacing'] += 1
                 if scripts and width == 390 and os.environ.get('AXE_PATH'):
                     page.add_script_tag(path=os.environ['AXE_PATH'])
@@ -154,6 +188,8 @@ try:
                         expect(child).to_be_visible()
                 expect(sheet.locator('pre')).to_be_visible()
                 assert sheet.locator('pre').text_content() == (ROOT / 'downloads/ai-answer-review.txt').read_text()
+                completed_record(p)
+                report['completed_record_print_layouts'] += 1
                 for selector in ['.site-bar', '.site-header', 'footer']:
                     for element in p.locator(selector).all():
                         expect(element).to_be_hidden()
