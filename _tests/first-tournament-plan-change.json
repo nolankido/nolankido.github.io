@@ -22,7 +22,7 @@
       ]
     },
     "_source/poker/first-live-tournament.html": {
-      "current_sha256": "c3a6033de249b1f2a4507c56fbbaa4284955bc29206dc31e942d09e64df7d166",
+      "current_sha256": "fe0f9c5383599e804f0106e1e0559b43fa9ba9eec7fec53be46e277306967cfb",
       "parent_sha256": "3c0fda2bb1cf44e462336cb304e0120d406e81b2dd3802d6ff9840db165db814",
       "edits": [
         {
@@ -33,14 +33,14 @@
         },
         {
           "start": 9377,
-          "end": 9668,
-          "current_sha256": "e4750825e86d1119a41ea9c75b164beaba0af9982476f08d56cd2447a9e1d627",
+          "end": 9702,
+          "current_sha256": "f0f5b54990a3f0e53b1fde0d400cf6f44aba120165d99a3816700c5c0e723f3c",
           "old": ""
         }
       ]
     },
     "_source/poker/tournament-checklists.html": {
-      "current_sha256": "01880900d28b81f2cda721e08637868ed04957dd35fab74534dcaceb06df2be0",
+      "current_sha256": "60a51e30967ce6db6febf1c80314cf53dbbc65aa130ab0e098aa20c04580cb44",
       "parent_sha256": "ada4ca5f6dd86d40f6f1e5531d0025137a6ce5b29c91db9c25232dc346e103df",
       "edits": [
         {
@@ -51,8 +51,8 @@
         },
         {
           "start": 3160,
-          "end": 3382,
-          "current_sha256": "4ff2972cd97d21556f4a2b8f21712608354fdefb4079002d8057d563febf6150",
+          "end": 3418,
+          "current_sha256": "a342e170dfbbfaf49edb992831d3eced60e6297e4bd4616c4170ee5a61f8646d",
           "old": "October 8, 2026"
         }
       ]
@@ -88,19 +88,19 @@
       ]
     },
     "poker/find/index.html": {
-      "current_sha256": "a9620d412c5f7914144d3238f7daa71a46bed70fe03bb987882bd89290c6ff6e",
+      "current_sha256": "717a9323fb0528b88a7eb6e79a44164315597093f40ce66185b5ecf9952f8e8c",
       "parent_sha256": "445e4c2e44d6ee876e8f3e8a6d48ec33ab03d92aae70bc5ae948bc5a4333479e",
       "edits": [
         {
           "start": 211937,
-          "end": 219353,
-          "current_sha256": "95997700ae8b86d07261374114a7df7559981cf7a1474293b6a36695cf3b9a03",
+          "end": 219387,
+          "current_sha256": "9bc8853b19b72ec624494e98bbf8112f945ed7ece708f7feb2c4b382051aee56",
           "old": "For the whole beginner route, use the first-session and first-month guide . It connects rules rehearsal, cost and stopping boundaries with the short foundation lessons.</p><p data-finder-passage data-anchor=\"before-you-go\" data-heading=\"Start with the day, not a promise of winning.\">Choose an event whose game, total entry cost and possible duration you understand. Check whether it can continue on another day. Decide what you are comfortable spending for the whole outing, including transport and food, without relying on a payout. Choosing to watch, or deciding not to enter, is also a complete plan. For a venue-specific example, read the first-timer’s Thunder Valley guide . It connects current official information with registration questions to resolve before traveling. Put a number on the whole outing with the local, overnight and weekend budget examples , then copy the blank trip worksheet before committing. Read the structure-sheet guide before comparing events. A large starting chip count is not enough to judge the pace. Save the official event page and the organizer&#x27;s contact information, then confirm anything that would change your decision to go.</p><p data-finder-passage data-anchor=\"registration\" data-heading=\"Remove the avoidable registration surprises.\">Ask the organizer what identification, membership card, payment method and eligibility checks apply. Confirm the event number and starting flight, not just its headline name. Ask whether advance payment still requires an in-person verification step. As a concrete example, the WSOP registration page describes identification and Caesars Rewards checks. It is an example of one organizer&#x27;s process, not instructions for every room. Allow space in your plan for finding the desk and resolving an issue. Keep your ticket and receipt private. A photograph that includes a barcode, membership number or payment detail is not a suitable public trip update.</p><p data-finder-passage data-anchor=\"taking-a-seat\" data-heading=\"Let the dealer help you get oriented.\">Before taking a seat, check the table and seat assignment with staff. Tell the dealer that this is your first live tournament. Ask which denominations you have, what the current blinds and ante are, and where the button is. These are procedural questions, not requests for advice about which hand to play. Under TDA rules , players are responsible for following the action, acting in turn and making intentions clear. Rather than copying a chip motion you saw in a video, ask staff to explain an unfamiliar procedure before using it. A useful question is specific. “Is the total bet 2,000, and is it my turn?” asks for clarification. “Should I call with this hand?” asks someone else to make part of your decision. Save strategic discussion for a completed-hand review away from play.</p><p data-finder-passage data-anchor=\"unclear-action\" data-heading=\"When something is unclear, ask instead of improvising.\">Before acting, ask the dealer to clarify the action or amount. For a disputed procedure, ask for the floor and describe what happened calmly. Do not reach into another player&#x27;s stack, announce an opponent&#x27;s cards, or try to settle a disagreement with a louder argument. The floor can explain the event&#x27;s applicable procedure. The table-context guide explains common moments such as oversized chips and floor calls. Reading it beforehand is useful; opening a strategy aid at the table is not the purpose of this site.</p><p data-finder-passage data-anchor=\"a-useful-finish\" data-heading=\"Define a useful finish that does not require a cash.\">Pick one process goal: understand the announcements, keep track of your position, or preserve one hand accurately afterward. Avoid making “prove that I belong” the day&#x27;s assignment. A first outing does not have to establish your ability or fund the next one. If one of those questions concerns playing 10–20 BB, review the short-stack lesson after the event . Start with its stack and ante record before comparing actions. When play is over, record what was unfamiliar and one question worth following up. Keep the result separate. The tournament-day guide covers breaks, moves and the end of a day; the printable planning sheets give you a small place to start.</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"Sources and scope\">WSOP: event-specific registration process ; Poker TDA: player responsibilities and tournament procedures . Public reference pages checked October 8, 2026. Planning suggestions and fictional examples are original educational material. Confirm current event details with the organizer; provider documentation is not an independent product test. Published October 8, 2026 . Prepared with AI assistance. Examples are fictional, not personal tournament accounts. Use these guides before or after play, not as assistance during a live hand"
         }
       ]
     },
     "poker/first-live-tournament/index.html": {
-      "current_sha256": "8b06c2fb216819b5402e05680606100871253b3be6b85b32d3f8b5f074befe3b",
+      "current_sha256": "b79f2b42daeb2161a176c563c605df285cce81e99787b098053a08607981087c",
       "parent_sha256": "4ad2c84264394c558d79a56ed47911c33554eb484fcde99582a8cbb9381f4c90",
       "edits": [
         {
@@ -129,8 +129,8 @@
         },
         {
           "start": 17866,
-          "end": 18157,
-          "current_sha256": "e4750825e86d1119a41ea9c75b164beaba0af9982476f08d56cd2447a9e1d627",
+          "end": 18191,
+          "current_sha256": "f0f5b54990a3f0e53b1fde0d400cf6f44aba120165d99a3816700c5c0e723f3c",
           "old": ""
         }
       ]
@@ -208,7 +208,7 @@
       ]
     },
     "poker/tournament-checklists/index.html": {
-      "current_sha256": "f3e016a56c146dfe1c9b96b84fef1466d0c6adfd4561cfe93e27e46b575892d4",
+      "current_sha256": "03744313b0b41eb842dde964818eaa82f76bdd70cad07656a3570776dde18022",
       "parent_sha256": "9846f21bdc6626111b7903ba3359305eff13f6e0619cbf1e8926c9ee71d8e5c8",
       "edits": [
         {
@@ -237,8 +237,8 @@
         },
         {
           "start": 13739,
-          "end": 13961,
-          "current_sha256": "4ff2972cd97d21556f4a2b8f21712608354fdefb4079002d8057d563febf6150",
+          "end": 13997,
+          "current_sha256": "a342e170dfbbfaf49edb992831d3eced60e6297e4bd4616c4170ee5a61f8646d",
           "old": "October 8, 2026"
         }
       ]

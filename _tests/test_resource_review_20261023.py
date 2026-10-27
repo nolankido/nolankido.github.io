@@ -16,6 +16,7 @@ import poker_resources
 import resource_review_history as history
 import later_release_history as later_history
 import resource_followup_history as followup
+import first_tournament_plan_history as subsequent_changes
 
 
 class ResourceReviewTests(unittest.TestCase):
@@ -82,10 +83,49 @@ class ResourceReviewTests(unittest.TestCase):
         evaluation = module_from_spec(spec); spec.loader.exec_module(evaluation)
         current = evaluation.evaluate()
         previous = json.loads((ROOT / '_reports/poker-school/search-results.json').read_text())
-        self.assertEqual(current['index_sha256'], sha256((ROOT / 'poker/find/index.html').read_bytes()).hexdigest())
+        index_path = ROOT / 'poker/find/index.html'
+        index_text = index_path.read_text()
+        self.assertEqual(current['index_sha256'], sha256(index_path.read_bytes()).hexdigest())
         self.assertNotEqual(current['index_sha256'], previous['index_sha256'])
-        self.assertEqual({k: v for k, v in current.items() if k != 'index_sha256'},
+
+        # Keep the full recorded result comparison at its reviewed content
+        # boundary. Only the exact approved later index bytes can be reversed;
+        # the current evaluation above always reads the actual current index.
+        predecessor = subsequent_changes.before('poker/find/index.html', index_text)
+        self.assertNotEqual(predecessor, index_text)
+        read_text = Path.read_text
+        def predecessor_text(path, *args, **kwargs):
+            return predecessor if path == index_path else read_text(path, *args, **kwargs)
+        with patch.object(evaluation.Path, 'read_text', predecessor_text):
+            archived = evaluation.evaluate()
+        self.assertEqual(archived['index_sha256'], sha256(predecessor.encode()).hexdigest())
+        self.assertEqual({k: v for k, v in archived.items() if k != 'index_sha256'},
                          {k: v for k, v in previous.items() if k != 'index_sha256'})
+
+        # New public prose may change ranks, scores and excerpts. It must keep
+        # the same declared questions, scorer and successful relevance targets.
+        for key in ('scope', 'baseline_commit', 'query_sha256', 'script_sha256',
+                    'entries', 'total_queries', 'target_hits_top_three'):
+            self.assertEqual(current[key], previous[key], key)
+        self.assertEqual([(r['id'], r['query']) for r in current['results']],
+                         [(r['id'], r['query']) for r in previous['results']])
+        cards = evaluation.Cards(index_text).rows
+        for old, new in zip(previous['results'], current['results']):
+            with self.subTest(query=new['id']):
+                if old['hit_top_three']:
+                    self.assertTrue(new['hit_top_three'])
+                for found in new['top_three']:
+                    candidates = [card for card in cards if card['url'] == found['url']]
+                    self.assertTrue(candidates, found['url'])
+                    if found['excerpt'] is None:
+                        self.assertIsNone(found['section'])
+                    else:
+                        passages = [(card['url'] + '#' + p['anchor'] if p['anchor'] else None,
+                                     p['text'][:320])
+                                    for card in candidates for p in card['passages']]
+                        self.assertIn((found['section'], found['excerpt']), passages)
+        first_visit = next(r for r in current['results'] if r['id'] == 'Q26')
+        self.assertEqual(first_visit['top_three'][0]['url'], '/poker/first-live-tournament/')
 
     def test_complete_production_inventory_reconstructs_verified_release(self):
         paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')

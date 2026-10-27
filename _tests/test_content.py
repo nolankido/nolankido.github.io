@@ -41,8 +41,18 @@ class ContentTests(unittest.TestCase):
                 self.assertIn(p['revision'], unescape(content))
                 schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', content, re.S).group(1))
                 self.assertEqual(schema['dateModified'], p['updated'])
-                self.assertEqual(schema['datePublished'], p['date'])
-                self.assertIn('article:modified_time', content)
+                if schema['@type'] == 'Article':
+                    self.assertEqual(schema['datePublished'], p['date'])
+                    self.assertIn('article:modified_time', content)
+                else:
+                    # The revised printable-sheet collection retains its
+                    # WebPage type; an editorial revision does not make it
+                    # an article or introduce article-only metadata.
+                    self.assertEqual(p['id'], 'poker-tournament-checklists')
+                    self.assertEqual(schema['@type'], 'WebPage')
+                    self.assertIn(f'<time datetime="{p["date"]}">', content)
+                    self.assertNotIn('datePublished', schema)
+                    self.assertNotIn('article:modified_time', content)
         self.assertEqual(outputs, build.build_outputs(), 'A build must not change dates or output by itself')
         sitemap = ET.fromstring(outputs[Path('sitemap.xml')])
         ns = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
