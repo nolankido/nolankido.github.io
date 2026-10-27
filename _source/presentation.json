@@ -4,6 +4,14 @@
     "alt": "Nolan Kido. Build useful things. Make room for a good life. nolankido.com."
   },
   "pages": {
+    "home": {
+      "src": "/assets/social/nolan-kido-ai.png",
+      "alt": "Nolan Kido. AI Works Human Decides. Practical AI for real life. nolankido.com."
+    },
+    "about": {
+      "src": "/assets/social/nolan-kido-ai.png",
+      "alt": "Nolan Kido. AI Works Human Decides. Practical AI for real life. nolankido.com."
+    },
     "keep-the-judgment": {
       "src": "/assets/social/keep-the-judgment.png",
       "alt": "Let AI do more. Keep the judgment. An essay by Nolan Kido on purpose, boundaries, and responsibility."

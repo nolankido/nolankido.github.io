@@ -9,6 +9,7 @@ import html5lib
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections
+import later_release_history as later_history
 import uncertainty_history as history
 import comics_history
 from test_viewer_guides import best
@@ -104,7 +105,7 @@ class UncertaintyTests(unittest.TestCase):
         self.assertEqual({k:v for k,v in idx.items() if k!=ROUTE},old)
         packed=re.search(r'id="find-section-data">(.*?)</script>',self.outputs[Path('find/index.html')],re.S)[1]
         self.assertLessEqual(len(packed.encode()),60000)
-        self.assertEqual(len(check_live.targets()), 475)
+        self.assertEqual(len(later_history.live_targets(check_live.targets())), 475)
         for path in ['/assets/poker-uncertainty.css','/downloads/poker-under-uncertainty-reproduce.py','/downloads/poker-under-uncertainty-evidence.json','/assets/poker/uncertainty-bayes.png']:
             self.assertIn(path,check_live.targets())
 

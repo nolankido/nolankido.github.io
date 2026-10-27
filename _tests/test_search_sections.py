@@ -44,9 +44,12 @@ class SearchSectionsTests(unittest.TestCase):
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
         self.assertEqual(len(self.index),174)
-        # Turn 04 adds exactly one visible heading on the Technology overview.
+        # Turn 04 and the approved positioning release each add one visible
+        # heading on the Technology overview.
         # Historical 1,140-entry baselines remain pinned separately.
-        self.assertEqual(sum(map(len,self.index.values())),1141)
+        self.assertEqual(sum(map(len,self.index.values())),1142)
+        self.assertEqual(self.index['/technology/'].count(
+            ['ai-works-human-decides-title', 'AI Works Human Decides']), 1)
         self.assertIn(['notes-to-plan-title', 'From scattered advice to one usable weekly plan.'], self.index['/technology/'])
         self.assertIn(['progress-heading','Your next Poker Foundations task.'],self.index['/poker/study/'])
         self.assertIn(['in-depth-title','Read in depth.'],self.index['/poker/'])

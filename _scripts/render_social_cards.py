@@ -21,11 +21,11 @@ def main():
     parser.add_argument('--regular', default='DejaVuSans.ttf')
     parser.add_argument('--bold', default='DejaVuSans-Bold.ttf')
     parser.add_argument('--serif', default='DejaVuSerif.ttf')
-    parser.add_argument('--only', nargs='+', choices=['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes', 'check-ai-answers'], help='Render selected cards without changing other approved images')
+    parser.add_argument('--only', nargs='+', choices=['nolan-kido', 'nolan-kido-ai', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes', 'check-ai-answers'], help='Render selected cards without changing other approved images')
     args = parser.parse_args()
     fonts = {'regular': args.regular, 'bold': args.bold, 'serif': args.serif}
     out = ROOT / 'assets/social'; out.mkdir(parents=True, exist_ok=True)
-    for name in (args.only or ['nolan-kido', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes', 'check-ai-answers']):
+    for name in (args.only or ['nolan-kido', 'nolan-kido-ai', 'keep-the-judgment', 'practical-ai', 'task-brief', 'ai-time-savings', 'check-ai-summary', 'checking-ai-website-changes', 'check-ai-answers']):
         image = Image.new('RGB', (1200, 630), PAPER)
         draw = ImageDraw.Draw(image)
         draw.line((56, 48, 56, 580), fill=ACCENT, width=3)
@@ -40,6 +40,13 @@ def main():
             draw.line((94, 196, 1105, 196), fill=ACCENT, width=2)
             text(94, 248, 'Build useful things.', 54, 'serif')
             text(94, 328, 'Make room for a good life.', 54, 'serif')
+            text(94, 524, 'nolankido.com', 28, color=MUTED)
+        elif name == 'nolan-kido-ai':
+            text(94, 70, 'Nolan Kido', 86, 'bold')
+            draw.line((94, 196, 1105, 196), fill=ACCENT, width=2)
+            text(94, 248, 'AI Works', 60, 'serif')
+            text(94, 328, 'Human Decides', 60, 'serif')
+            text(94, 446, 'Practical AI for real life.', 29, color=MUTED)
             text(94, 524, 'nolankido.com', 28, color=MUTED)
         elif name == 'keep-the-judgment':
             text(94, 72, 'AN ESSAY / PRACTICAL AI', 23, color=MUTED)

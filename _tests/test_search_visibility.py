@@ -148,6 +148,10 @@ class SearchVisibilityTests(unittest.TestCase):
     def test_original_about_prose_is_preserved_beside_the_new_work_links(self):
         source=(ROOT/'_source/about.html').read_text()
         prior=re.sub(r'<h2 id="try-the-work">.*?(?=<h2>)','',source,flags=re.S)
+        revised='<p class="intro"><strong>AI Works Human Decides</strong> is how I think about putting AI to use in everyday life and small-business work. Let the technology help with a defined task. Keep the purpose, the checks, and the consequential decisions with people.</p>'
+        previous='<p class="intro">I like making things useful, understanding difficult ideas, and leaving room for a life beyond the work.</p>'
+        self.assertEqual(prior.count(revised), 1)
+        prior=prior.replace(revised, previous, 1)
         self.assertEqual(hashlib.sha256(prior.encode()).hexdigest(),
                          '913c479a365ef5029686c0972d9c985dbe847ff3aa10d63951c7e5c9ba536909')
 

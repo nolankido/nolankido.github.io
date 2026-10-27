@@ -186,8 +186,11 @@ try:
             page.emulate_media(media='screen')
 
         page.goto(base)
-        page.locator('a.button[href="/technology/"]').click()
-        expect(page).to_have_url(base + '/technology/')
+        approach = page.locator('.identity-actions a.button')
+        expect(approach).to_have_attribute('href', '/technology/#ai-works-human-decides')
+        approach.click()
+        expect(page).to_have_url(base + '/technology/#ai-works-human-decides')
+        expect(page.locator('#ai-works-human-decides-title')).to_be_visible()
         page.locator('section[aria-labelledby="working-examples"] a[href="/living-well/did-the-tool-actually-help/"]').click()
         page.locator('.utility-start').focus()
         page.keyboard.press('Enter')

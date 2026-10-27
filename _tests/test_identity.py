@@ -23,10 +23,29 @@ class IdentityTests(unittest.TestCase):
         home = self.outputs[Path('index.html')]
         self.assertLess(home.index('home-title'), home.index('selected-reading-title'))
         self.assertLess(home.index('selected-reading-title'), home.index('destinations-title'))
-        self.assertIn('Build useful things.<br>Make room for a good life.', home)
+        self.assertIn('<p class="hero-copy brand-statement">AI Works Human Decides</p>', home)
         self.assertIn('href="/about/">Meet Nolan', home)
-        self.assertIn('href="/technology/">Start with practical AI', home)
+        self.assertIn('href="/technology/#ai-works-human-decides">How the approach works', home)
+        self.assertIn('href="/technology/">Explore practical AI', home)
         self.assertIn('Food', self.outputs[Path('about/index.html')])
+
+    def test_practical_ai_positioning_is_public_and_matches_machine_metadata(self):
+        for route in ['index.html', 'about/index.html', 'technology/index.html']:
+            content = self.outputs[Path(route)]
+            self.assertIn('AI Works Human Decides', content)
+            self.assertIn('Nolan Kido', content)
+            schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', content).group(1))
+            self.assertIn('AI Works Human Decides', schema['name'])
+            self.assertIn('AI Works Human Decides', schema['description'])
+            self.assertNotIn('Hawaii Dental Clinic and Affiliates', content)
+        method = self.outputs[Path('technology/index.html')]
+        self.assertIn('id="ai-works-human-decides"', method)
+        for path in ['/technology/should-i-use-ai/', '/technology/task-brief/',
+                     '/technology/check-ai-answers/', '/technology/ai-time-savings/',
+                     '/technology/checking-ai-website-changes/']:
+            self.assertIn('href="' + path + '"', method)
+        self.assertIn('Human Decides', self.outputs[Path('card/index.html')])
+        self.assertIn('AI Works Human Decides', self.outputs[Path('bio/index.html')])
 
     def test_curated_entries_keep_canonical_titles_and_status(self):
         by_path = {p['path']: p for p in self.pages}

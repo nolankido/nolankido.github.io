@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import beginner_history
 import build,check_live,font_delivery
+import later_release_history as later_history
 import local_fonts_history as history
 import search_sections_history
 
@@ -72,7 +73,7 @@ class LocalFontsTests(unittest.TestCase):
             self.assertNotIn('fonts.gstatic.com',text);self.assertNotIn('fonts.googleapis.com',text)
         targets=check_live.targets()
         for p in history.change()['new_files']:self.assertEqual(targets['/'+p],(200,(ROOT/p).read_bytes()))
-        self.assertEqual(len(targets), 475)
+        self.assertEqual(len(later_history.live_targets(targets)), 475)
         privacy=self.outputs[Path('privacy/index.html')]
         self.assertIn(history.change()['privacy_new'],privacy)
         self.assertIn('Updated October 13, 2026',privacy)

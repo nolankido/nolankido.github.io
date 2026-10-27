@@ -20,6 +20,8 @@ def change():
     return record
 
 def before(path, data):
+    import later_release_history
+    data = later_release_history.before(path, data)
     item = change()['paths'].get(str(path))
     if item is None:
         return data

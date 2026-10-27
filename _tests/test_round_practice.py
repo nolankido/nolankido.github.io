@@ -9,6 +9,7 @@ from test_site import ROOT, build
 import poker_round_practice as practice
 import poker_finder
 import check_live
+import later_release_history as later_history
 import round_practice_history as history
 
 
@@ -115,7 +116,7 @@ class RoundPracticeTests(unittest.TestCase):
         for key,c in self.cases.items():
             self.assertIn(c['prompt'],sections['round-practice-'+key])
             for worked in c['worked']:self.assertNotIn(worked['reason'],sections['round-practice-'+key])
-        self.assertEqual(len(check_live.targets()), 475)
+        self.assertEqual(len(later_history.live_targets(check_live.targets())), 475)
         self.assertIn('/'+practice.CSS,check_live.targets());self.assertIn('/'+practice.SCRIPT,check_live.targets())
         self.assertNotIn('<form',practice.render(ROOT))
         script=(ROOT/practice.SCRIPT).read_text()

@@ -1,0 +1,449 @@
+{
+  "version": 1,
+  "parent_commit": "1de951bac87c767aaecd6eff2433353d17a44a62",
+  "parent_tree": "85839487e491aacd75c3978e47be17c5416b13d7",
+  "paths": {
+    "404.html": {
+      "parent_sha256": "7e62acf2d025cdb999f3dd86f0f9b3121c739966b8830faa21952266093ef839",
+      "current_sha256": "8fca39553cf5b383c8017faca2526eff12a918749ba003e41716879900d3b8b8",
+      "mode": "social-metadata"
+    },
+    "_scripts/render_social_cards.py": {
+      "parent_sha256": "6dcfbd2769c6104cc066c54e3b89be913a3112f0e44778b1260fbe206573bf3e",
+      "current_sha256": "3693cc015f4d15f66e9d22e25c50931e0f90235a81fd930dfa73d3a567f03176",
+      "mode": "frozen-predecessor",
+      "parent_zlib_base64": "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"
+    },
+    "_source/presentation.json": {
+      "parent_sha256": "0cb918e96588cd1159739b4b1cd4791c055d89d35eec07253ffc0ef8d2480d1c",
+      "current_sha256": "3ca31eb54610a6a48f6ffb39982d9aff701795278b13616b929d81aed3c03605",
+      "mode": "frozen-predecessor",
+      "parent_zlib_base64": "eNqVlMmO2zAMhu/zFITPdubeSxF0Di2mKHopeqZlOlYjS4IoxTAG8+6l7CTO2nQAA95I6v+4vT0BFA21mEwsPsGbvMoHDkpeimdkpsjP7JRG82ydQVttdeNW3m6KcrbFybH4kX/Ca/4J62/w24Utw9fUy8cXUrohXsHPgCpqhSZbtC5AIHk2uqUVTMGn2Mr1q0Jiv+cDCo8b4kXZlshXsaPqT2o2PdlF9F3ZVy4n6hf93ylmVY2D3gXR8ypeIF5w9IK1BWLGEeoRFlxwFnwK3jGVULtkGwyauAS0jQCyd5Z1rY2O44S1B5OTI6lOsN1mfAzhD6mrUN/Uf5r/f+X5F1ObDETnjGhUhjCA6kht94pHl8LCfCEYeVvVQtc+FrzY3pS7no+mkCVmW5htYQ1tIJr0XeQ5gxwTra1PUSS7FOWhPENYinChH3UVdU8V407bDT+GuHC4SfLiiDOEpDyhMSOIMeU0Qnb9fACSaqhkMArEOVbsMIISyZHBB/IYMGpnSynaTtOQ7x514Akt+dzN11ic+h7DWM0+j8GmdFWL402yL9lomoGD1TIVPaGVlOR6DTLq1MAmyZBfssklvSiGUm7UPUONOaSbo0qrKbqGGahmHanaUdCttHFOx38iyUnVSQTVoZX1cacDvQTI0iJxBM2yguKka+icobmjMl8g5UIjhPuo+4Kco5Yw6NiBpL8hewsKLQ8UPl6g2Y8fFGi2OqnPUYgAHHfHvRrNonIq8r4QYxkkm/pazi33tZ822hB0FCuZNtfQ1I/Y7PRCm5f20/vTX+GPAV4="
+    },
+    "about/index.html": {
+      "parent_sha256": "2f35bff41c2af56b3c41c1863f83f93b821c93d8a6c0a4d8e61b213bfc122db0",
+      "current_sha256": "c6209ea9fcf81f05f1b7b382610fbcc1ffc57fd14286a5169442180319d57e6e",
+      "mode": "social-metadata"
+    },
+    "assets/social/nolan-kido.png": {
+      "parent_sha256": "646c36e15b25af45e21d372a6daf2641e5d8cd11fb460411dcf8d21938558877",
+      "current_sha256": "1b49328d0c9dbdcea8037c3866cb9d3a4ce1574debd86031b1792f29033cbe7a",
+      "mode": "frozen-predecessor",
+      "parent_zlib_base64": "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"
+    },
+    "bio/index.html": {
+      "parent_sha256": "93b9158c102ed676eb8e080c120532a1189a070d4bdb6ee42e5efb0679fa7437",
+      "current_sha256": "85de848589b924c55ced2ec8bd02aae51226bd0bf0d338c9a2559359719034a7",
+      "mode": "social-metadata"
+    },
+    "card/index.html": {
+      "parent_sha256": "aa23ff8b92f04cd0b6a5f5b4c231177da4d701bb8878fd0f5d5b509288b76693",
+      "current_sha256": "9f0c785d1bfc01d64d9c958b183f00bb3be21de12f21d38471334711e48cf476",
+      "mode": "social-metadata"
+    },
+    "contact/index.html": {
+      "parent_sha256": "f177ad74b86dce9da60974e667e1998ee7dddc7c9383f5a4d565588ee48fff68",
+      "current_sha256": "9dcf8e7d115b2c18496a52b733345fe4ba234b8e612988c3bafa8a343676947f",
+      "mode": "social-metadata"
+    },
+    "find/index.html": {
+      "parent_sha256": "cd47fb18106964da3c71a9a68feaaf82a37afce19f34c0a5ad49e18e69345a95",
+      "current_sha256": "03e6bca243e5f4ce1279f80f4fad941fa65a17648041284f6ca974f95a9899b5",
+      "mode": "social-metadata"
+    },
+    "follow/index.html": {
+      "parent_sha256": "dcdfc72e9ad0460486279fe442f7dfa51c77d0c7bcebf21a61e30613f89e2514",
+      "current_sha256": "32c6c9bbe6d39bd3b7169707cd483f12ac291f5897052dc05d03486545147bef",
+      "mode": "social-metadata"
+    },
+    "index.html": {
+      "parent_sha256": "db7b680bd1ffe47c42b44a5779a4381d6f450c29703d4cf14930feb232053e25",
+      "current_sha256": "54b43cf234f26fe9d46cf60a2a8603438968c62956d7b670395506672b0bd16d",
+      "mode": "social-metadata"
+    },
+    "living-well/conversations/index.html": {
+      "parent_sha256": "b466a562506dc84d1edf6e4323a287ef80cb82e21626691ca3f5eff491daae4a",
+      "current_sha256": "4359d588829239ef68458d98429e6beb8cf534d255bce68a3a595e498e9b0974",
+      "mode": "social-metadata"
+    },
+    "living-well/editorial-standards/index.html": {
+      "parent_sha256": "ea697c6031607fcadb6f32212fdc150d3badd13b0a30687ba7757985c17b06e0",
+      "current_sha256": "1921dd4ca209142b3e21160ad7bb04ac28947dc118b95f0dda381412bdc7f598",
+      "mode": "social-metadata"
+    },
+    "living-well/field-notes/index.html": {
+      "parent_sha256": "14bbfc111b080db5b3e3691d8384c68eaabfa1d6453324eda0cbde30275737aa",
+      "current_sha256": "7c6cf1c983c45fcbdaefd8ab42e2011963812f5d01ceff2aad35eb7a0f7aee87",
+      "mode": "social-metadata"
+    },
+    "living-well/find/index.html": {
+      "parent_sha256": "51f90a48914e6f401922eff4f6899a18ad2c98f4b2822622cd5aa86e3ce63714",
+      "current_sha256": "483206dc6408d3dc31c9f003b2fdf9951868209046c8d66df1b25c144137cb80",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/attention/index.html": {
+      "parent_sha256": "e6f53ceabc68a2366d9a4c1c0f81d890d9bf3b2c74b3cc7cd22e2c7334b61864",
+      "current_sha256": "d5bd66a15f6bb0784d8ceac8aa542456f70b7f4681ffeec3b1668562783aa62a",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/books-creativity/index.html": {
+      "parent_sha256": "e2e06f7c1fcd6613beb0f670eb6aaf75bbe6990fe88188deb9ae7d2267d53344",
+      "current_sha256": "5c4c04530247095d819dfa16e1854ad20a73a5dd36c91f15aa9237617f69f8b1",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/care/index.html": {
+      "parent_sha256": "1f35015ab3b82c332a1380f4ce8e3ee48ce4e09a08ebcf098d2328b2af2ee930",
+      "current_sha256": "d3ee4d0779a6cd00872e370f007995dda01f026b0019860bb92b3569971d652e",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/contribution/index.html": {
+      "parent_sha256": "e02faa5995d68a5a43d92d8ffb52de7fdebb10eb3891b9499c271d7208439a57",
+      "current_sha256": "af04a336cbf63d01799804442515a5cccd9b4e23a98a77d65657b8d72e58e864",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/creative-tools/index.html": {
+      "parent_sha256": "37153af2371c303c0a0a87a5e4f8944ac7f6a0e81e2ab207e8055662d45defef",
+      "current_sha256": "cde645e32e0650a217ebe5080e1d032166014c5128d6dc03443b17d9bb85f88c",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/digital-life/index.html": {
+      "parent_sha256": "d59f7e14928d47b63a8d451a4f76cb10760772ff2a953ab17a6eeb433675c8a8",
+      "current_sha256": "4a19f2fcd86d8d5ec28b2d43a4c3a09d9a443539d8ebcdd406feb49bffbfec16",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/everyday-ai/index.html": {
+      "parent_sha256": "6501a5f1bed054bf0e42680aa8b565e4ce725e2b865806ff81e4e0eeec1c998b",
+      "current_sha256": "631d68e169eba2c50942825e17273c5de91f1cb4ac4256ff87e8924214242f8c",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/everyday-tools/index.html": {
+      "parent_sha256": "c152cce043e19c90745628a77cfa741b7bbf784e8b65d990d9e9dfb230c4bf9f",
+      "current_sha256": "7d3a7e8061c2ff639833761e1e0d615d6f45f704aeb22049b186b6888a47543c",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/files-recovery/index.html": {
+      "parent_sha256": "cdd3d58864a94ce818bbd5ffd0bb32927273215ed80295392c007af221815e8f",
+      "current_sha256": "b155e40c1e1903086c07288c7682bd9c160a3391dc14bf3811123e5f0267fb54",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/index.html": {
+      "parent_sha256": "7406ac5c8e2111fb4222e69af7444982aebc364eb8720d5e9dbd153970c7dd0b",
+      "current_sha256": "cc678267b9cc653c414fe88b74d27a699f84770c3c7e151045b3f319e33d3faa",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/learning/index.html": {
+      "parent_sha256": "920123ffd6b005a7f26ec1b0c7f0d24ebdd3c005f41f02b6064937f761ca89d2",
+      "current_sha256": "f21bca2d5d92e3fb5f01752ca3a400188d7756848765945ddd83c6bfa0e974c0",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/meaning/index.html": {
+      "parent_sha256": "2d3cf02bd94dc824c1ad0dc354d0976a91baf4383a5cb44c0271ad831b9dc7e9",
+      "current_sha256": "5d64b0b7a49a26255f391b94aa34b19e3b1453bbacec93c65957c992aa2672f1",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/notes-documents/index.html": {
+      "parent_sha256": "7a7d937e82dca708e59328833ab959c887c15967ac0e0e887ac425bb7445d4e6",
+      "current_sha256": "5a6c2072daf5d25285a3aeaa5a4fd3b49f0ce8ec1982382e5d772acfdbd145fb",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/reading-access/index.html": {
+      "parent_sha256": "2f6661a29f06cd64a47cf95399761b1ae7791b962d2e1e0c6fdedcc4bcc2c884",
+      "current_sha256": "d9e65f7c9dd40612bf5de59dc1136eb49e01c35f56ee7e5d375211fe15434821",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/thinking/index.html": {
+      "parent_sha256": "cd1a76be2d94ad3aa22862fba9df55afa3bc247d0c626b5e378ef86cee621846",
+      "current_sha256": "40ffeb0986f056e1f500f699a537d27662165d2320d9e63f790a18f014334748",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/traditions/index.html": {
+      "parent_sha256": "baded4def4441668ca2d3a994351bd04cafd57ca66f7fca6c71d6b069904cea4",
+      "current_sha256": "184f26e1afd7357e0b4fc2119002c07e67908efe0743e68f347bff011e80edad",
+      "mode": "social-metadata"
+    },
+    "living-well/free-resources/world/index.html": {
+      "parent_sha256": "f01a881fa97cb588a8b7d6d1c82f7caca1ddfd0ed9ea5fbe4e3018eb41894cec",
+      "current_sha256": "5ec6a3aa106fe36a5d7fea9956cd23acd44393bf1b54c7e89b4b55a8cfa76da8",
+      "mode": "social-metadata"
+    },
+    "living-well/guides/index.html": {
+      "parent_sha256": "dcba1cf8fd340de1a8f2cad740b4d0248090c98ecfd97ea6ffc9c9778b2e3550",
+      "current_sha256": "0ec5094d76c596608dda8e99b218314fd10a8a843843c44cb9c5c3d7b08815e8",
+      "mode": "social-metadata"
+    },
+    "living-well/ideas/index.html": {
+      "parent_sha256": "abee3630824e12cd313dc240b4c71b4b0069e3b208ba8e09f13ec68a296361fb",
+      "current_sha256": "765098112dc30cf952a9bcc5f40e0aaba243cff3f2428f018c5b9f7cb76defa4",
+      "mode": "social-metadata"
+    },
+    "living-well/sources/index.html": {
+      "parent_sha256": "1791ef119f901faf86fbdc2c86d1eef8fb2a3d4b0f816b5c184119a305211e0b",
+      "current_sha256": "0a76e20536c1cddf5ce714f12fc606835af76b725d211db3969489461e86282f",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/find-a-document/index.html": {
+      "parent_sha256": "755dca8b1db769e7f29cc395165aad66f2ba944215a1004b97cc69e4f4dcb0ad",
+      "current_sha256": "247e196b0bdc4f02b8590cd42bd11f16151e84d0752041d05b122f27ecaf9717",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/help-and-connect/index.html": {
+      "parent_sha256": "6fb10cb8b6c3accd5c14aa2f8fd507cfe8e3cfe5f1617697c4f7d44b894c133d",
+      "current_sha256": "dc1ea528331db167f99f9aa0ef41b64154e56cb86625a0a3f159b6cafb0599a1",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/learn-and-reflect/index.html": {
+      "parent_sha256": "c102f4f6442eb184dd0e0beb4d9483199f2bc44147511316ec4d7d0a39805172",
+      "current_sha256": "fa49bf8067d6eaba804708a4ad50c987e2ea3885dea801d3d35ed3adbe6e4275",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/make-something/index.html": {
+      "parent_sha256": "b4ee555f282ac3f9df31e33d6caac22b049d124c7c317dd76688acf30be62ae8",
+      "current_sha256": "b88a978e19ff3851e77e945aec8ff5abeeca168a351685ad21ff1f7084cdafad",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/notice-the-world/index.html": {
+      "parent_sha256": "33fec21673db1d302304da13e78a76fc10964ec1b8a95518c075859595a4859e",
+      "current_sha256": "e05834006e57e80db91e36bb1dc22ffee9d40e5572f16259c42be90945cc9af2",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/organize-notes/index.html": {
+      "parent_sha256": "4479ab29829effeb70eda78289a178cde8a6b9be6fb260bdaeef8021fa549676",
+      "current_sha256": "e050742189467d6b8e8deca5c874a840c4e0be62f27d392f209c1d0d9d79bda7",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/protect-and-recover/index.html": {
+      "parent_sha256": "7194267cea755ffdc5bd0f6b495b91def47825f7d1ccf19624e01a67f1529e56",
+      "current_sha256": "c79068213bc8e467993fdaf48c88100695e94e01981ca911c233f0d400d9cc33",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/read-and-understand/index.html": {
+      "parent_sha256": "12c6f955d5df237810ab4371a3c527ded5b65ab42f122fd366924be6e2a28343",
+      "current_sha256": "aad536a90f7c492a8c51be9bb8a803b50abf7bb644e98446f1c156d665d1c0b5",
+      "mode": "social-metadata"
+    },
+    "living-well/tasks/share-and-coordinate/index.html": {
+      "parent_sha256": "ae5ccf8f842f739554a9464e51746f6519dbdf615df64fd30e82f6344df9f612",
+      "current_sha256": "aa6399b87e86abac8b7fafd964e2b7ef2f9ec6c2609f41e10ad10a1aae095448",
+      "mode": "social-metadata"
+    },
+    "living-well/topics/attention/index.html": {
+      "parent_sha256": "c1f2b3d0e6baeeb63070745f8545b222f24123348f9e2ecf1b4f9a2590a61859",
+      "current_sha256": "cdeb785d30cbc15ccf62801b422ff551f9f87f99988d9a564522fd2e547d6c8a",
+      "mode": "social-metadata"
+    },
+    "living-well/topics/choices/index.html": {
+      "parent_sha256": "c4fe1a464528fcf1b9ad3ab3874b037a9a3dcd464ac09e41d5eb0658873e744c",
+      "current_sha256": "cb7db5466dc2565e11cb84318e2d0816ee158677ca8e824dfb5d7a19fb4cb28d",
+      "mode": "social-metadata"
+    },
+    "living-well/topics/everyday-ai/index.html": {
+      "parent_sha256": "f8203586edbd2504b0bd0342502291cf6ebfbc0274da753d2a59f440ee5e0a16",
+      "current_sha256": "d87911a8739008fe94d2371d0fe41003846fac2c94960971b8132649864cfc77",
+      "mode": "social-metadata"
+    },
+    "living-well/topics/index.html": {
+      "parent_sha256": "5ae0b96ceb441bfef544ac274ac732499a64c38eb54be8102618bd30dc5a3924",
+      "current_sha256": "4ff6629b20fc100b27815c96416328a52fd407abf2c12235786799b8c4e6a28a",
+      "mode": "social-metadata"
+    },
+    "living-well/topics/meaning/index.html": {
+      "parent_sha256": "c0145d85a81bdc0d66718ff3ee1abf5aa5f0efe4d5ad798ca8928c8c26ad08f5",
+      "current_sha256": "8e92129aa2770705508db52a6f36c9daa2e5932b88f8fa71a6d3a11a5346cf65",
+      "mode": "social-metadata"
+    },
+    "living-well/topics/relationships/index.html": {
+      "parent_sha256": "1246936a8f1c773619b729789f317ad806c56260e8106cca56347c27afe9c7f3",
+      "current_sha256": "d9e1d567fcdc8e02997ef90573ca562fa6919e0eddfe7e38d5336c308214996f",
+      "mode": "social-metadata"
+    },
+    "living-well/worksheets/index.html": {
+      "parent_sha256": "5863c334baf01fb03f725bd4ea1f0ac508bbc70d5ceec14a07a8c711e23367fc",
+      "current_sha256": "a8b8c86056e184f9aec78be0791aa4914a7ba93f36e171f927499d71229cc29a",
+      "mode": "social-metadata"
+    },
+    "notes/index.html": {
+      "parent_sha256": "947a86e62595c499eacbc922bf98987e47970e6b5000851271170b7b2ef1d5f3",
+      "current_sha256": "39d2aa8d18ee951e5e5992819c0b3f5719b3d89c106cafcf23f5fbce173151a0",
+      "mode": "social-metadata"
+    },
+    "poker/beginner-practice/index.html": {
+      "parent_sha256": "4bf8695331ed03cad2be982ac4fb1b211e3a0f2b3edbe01427ddf2208f85eb83",
+      "current_sha256": "c955be0fda5865ea4453591849e83d36b0f74f7eae5e1871bf204aaa4e2c838c",
+      "mode": "social-metadata"
+    },
+    "poker/comics/best-five-cards-win/index.html": {
+      "parent_sha256": "78409a7576b5c676db2736d72ba235cff0f471688536ffe25a69d433ce7d112d",
+      "current_sha256": "2ae41db4756a9a6b530f17d94b8654c33b3f7c615a00ba58f700dd9f12cf9592",
+      "mode": "social-metadata"
+    },
+    "poker/comics/good-decision-bad-river/index.html": {
+      "parent_sha256": "20d56a3977be98d3585ebd082f1e0e04f192cf3de73f07189180be9ae6c8bf52",
+      "current_sha256": "7f10d63a5fc382aac1147b7e7b9fb7eca9e430d6dbf807eafb81dd899affc808",
+      "mode": "social-metadata"
+    },
+    "poker/comics/index.html": {
+      "parent_sha256": "5d05842780caf1c2ba1c1762e442d1ab6171f551684fc66f617bf79431e63846",
+      "current_sha256": "2a1b7c42b42d2898aff8883506175adba8f5531dff773d00f91a51ab57a73cb0",
+      "mode": "social-metadata"
+    },
+    "poker/comics/learn-no-limit-holdem/index.html": {
+      "parent_sha256": "da5a7c8f2927c29066e49d834349db98e1fd0d9b259cfaa61d48290255f3f60b",
+      "current_sha256": "8c2c5a6fbd7ee258112ffaca89070908677f9ea60246176dbc70b911a9e437b0",
+      "mode": "social-metadata"
+    },
+    "poker/comics/one-hand-four-streets/index.html": {
+      "parent_sha256": "29c93cf106770d4cc04d2341c63aae6fb58b09a1d33daead718f3d6e5c03e86a",
+      "current_sha256": "15ef9476372fe5ed815832c2cfb1b91448daf6707cae558b221c92cab01cd542",
+      "mode": "social-metadata"
+    },
+    "poker/comics/poker-hand-rankings/index.html": {
+      "parent_sha256": "a2cfbce0217984a18f26338fb20a28873ead7fdc3fb171a43710191383d67d96",
+      "current_sha256": "b0ec55ef11cf36d7d8662ce1044a2acf30b31eb404252bc4768a9b49adcff085",
+      "mode": "social-metadata"
+    },
+    "poker/comics/why-acting-last-helps/index.html": {
+      "parent_sha256": "970713ffd9752c2e445247435122f0b44d987bed757b6adc6a54ef7b4bcc1296",
+      "current_sha256": "d47318bf61406eaf57b932a6990af8777a37dfeb815b57f1cec27d45371a4a76",
+      "mode": "social-metadata"
+    },
+    "poker/decision-labs/index.html": {
+      "parent_sha256": "576e2613251ac4c354206cedad35deef859644306c4d75e404b7b29f576b6b9d",
+      "current_sha256": "1b467ee224f01dca0045a206bea0b73660f03b4e9de525890e98fdc8a69e2770",
+      "mode": "social-metadata"
+    },
+    "poker/find/index.html": {
+      "parent_sha256": "59fef8e1cdebbda4a885a953fadab07f1d1d028e47767549f470b12320b7c219",
+      "current_sha256": "445e4c2e44d6ee876e8f3e8a6d48ec33ab03d92aae70bc5ae948bc5a4333479e",
+      "mode": "social-metadata"
+    },
+    "poker/library/index.html": {
+      "parent_sha256": "e30c55c97028cc883aa78949a928adf8317dc307e1f273f6ef205baf0377a443",
+      "current_sha256": "9523f1de6204b3a1125d0bf479609328d467960a8b1bf6ca7f87f632956dbbc8",
+      "mode": "social-metadata"
+    },
+    "poker/live-tournament-guide/index.html": {
+      "parent_sha256": "b8733d3b80137e47f383d37b3093fbd47d4833dfebb19262f68423da4e9073c1",
+      "current_sha256": "41d32476f860aeb93a4cacc95ba55c45a280aad1c74c5ea75f100671b4ce2e47",
+      "mode": "social-metadata"
+    },
+    "poker/resource-collections/index.html": {
+      "parent_sha256": "ce84881e96449ba0455642591bb3546cd0c3b89f5bad4b1f96340fc8d7cefaaa",
+      "current_sha256": "cc206a0d155ce608f03623192a5975fe5694bc26e94c84112b1a62aeb438f684",
+      "mode": "social-metadata"
+    },
+    "poker/resource-quality/index.html": {
+      "parent_sha256": "f08e8d0778169a4ad23d947cbc200521fc6ca9d79b1ec77347d682e826d166ba",
+      "current_sha256": "b6015b6d987d97ef05d1faad165f9b91d4d87e0c40597422452dfc0e1f3b353f",
+      "mode": "social-metadata"
+    },
+    "poker/resources/index.html": {
+      "parent_sha256": "0f9fe18cc736e793583ce9eb23c627efe1729b8b78c6f9296ea06a4888182001",
+      "current_sha256": "c1f781bb8fa04b6eed4f58db9d55c86fbf281ff05ddf0d00e4f2e0392cecc81b",
+      "mode": "social-metadata"
+    },
+    "poker/reviewing-a-hand/index.html": {
+      "parent_sha256": "e9a3d0c03631bd11e88cbdbff7e19e0a509b279b6a2ed627bf9fb51c99b3b343",
+      "current_sha256": "e7fc1634124d8f01f95156b0983d6d20e62d17037d3c42eba789047b7b9a8bf3",
+      "mode": "social-metadata"
+    },
+    "poker/school/index.html": {
+      "parent_sha256": "1a3e94bf25d7a27ae1a21dae6824ecbd699614aefe545fac0660a580fa7553b4",
+      "current_sha256": "22f5e94178f5e7031d60b343ac98e1f91bddab585c711e30539ebd94049dba61",
+      "mode": "social-metadata"
+    },
+    "poker/start-here/index.html": {
+      "parent_sha256": "2e647081a8d4e65a4e0cc807f96cddcc471d3d27133b60d17da87f3971d649d1",
+      "current_sha256": "467eaf14c0a8a6bb8dba19c4b2561cea6e809b4a74739289f99506d493f90867",
+      "mode": "social-metadata"
+    },
+    "poker/study-calculators/index.html": {
+      "parent_sha256": "2e1a17f8b74cae93da3bbc379190320968934c9ebaac92c30df38d560c2f416d",
+      "current_sha256": "cdff20d7c007ff3bc1887e3d35e8e97b110923aff54c02dd7510c721228a8b56",
+      "mode": "social-metadata"
+    },
+    "poker/study/index.html": {
+      "parent_sha256": "33a698b8b3fe0859ce6f7940d48de4d222e5b5c919443ffb6fa186eb51e45e58",
+      "current_sha256": "33b86084413af26603b369b1e3a087066f7fb0adeefff844c715dc75525ec2be",
+      "mode": "social-metadata"
+    },
+    "poker/topics/cash-games/index.html": {
+      "parent_sha256": "043e4a9a6da5060bbaf4e8a87938117ad80a0d6e9984ac18a3a4c515186555af",
+      "current_sha256": "874127f222f396ad6da2c9f880e53d38f2799411364b17a52e0f3527263c08f7",
+      "mode": "social-metadata"
+    },
+    "poker/topics/index.html": {
+      "parent_sha256": "7d717e81abf016d5a1a8115f465d5dc8589d68eaad8c7879d39ad255256bdce4",
+      "current_sha256": "ac7d827187740f8fdd42efae9c4653b5d3ec4e955db03f5de56a7dd382168c22",
+      "mode": "social-metadata"
+    },
+    "poker/topics/learn/index.html": {
+      "parent_sha256": "ae5a3ab4470cf010d2db0048e950bcdd29cf47a1e966ec993074a86eddd627c3",
+      "current_sha256": "e1c4e47245a0592eb227dbd1f754187b0320665d6fb4835158b4a74b97f0baa0",
+      "mode": "social-metadata"
+    },
+    "poker/topics/places-to-play/index.html": {
+      "parent_sha256": "cbb203b8e0eaee7ceffc4ebaf10ff9ceaa5155d17d9158d85aefa59629063fe6",
+      "current_sha256": "5975591ac728116a18880c73474344b3cfa2099b0947db586980ab1541126d76",
+      "mode": "social-metadata"
+    },
+    "poker/topics/poker-world/index.html": {
+      "parent_sha256": "a5ef0a305b4b8d175b9a9eb545dd7b5f7025dc1cbbc5ccc01289910ec619476f",
+      "current_sha256": "902b2d623c1cbd68889371bca2db674e05166d2a37c713145d7368babd043c22",
+      "mode": "social-metadata"
+    },
+    "poker/topics/research/index.html": {
+      "parent_sha256": "05746837c96258b4ad5efea106c2714135405a279be0011e714b9a107446d903",
+      "current_sha256": "0d83c89d538ea29d2b5b74e872e2cded0401311ccd9478bec4abadbe9b7fad17",
+      "mode": "social-metadata"
+    },
+    "poker/topics/safer-play/index.html": {
+      "parent_sha256": "a831a25569e67584191677f51a0c515fec1af9df8d19cf889de8334e872eb3e1",
+      "current_sha256": "0a93091ee84dffbdcc65ed8c07fa064898b004bcf12ffd3c3efdd5a2a2ab3456",
+      "mode": "social-metadata"
+    },
+    "poker/topics/strategy/index.html": {
+      "parent_sha256": "7f03df6f155537a81acfbe547a58336c3609009f014f3dba707f1d3baa9193b1",
+      "current_sha256": "b2847288b265b90c75b57cd7bd06ae9d492c319a79c9a62e7cb825f923538114",
+      "mode": "social-metadata"
+    },
+    "poker/topics/study/index.html": {
+      "parent_sha256": "feb5a961d00f0d5561b4de534e02be4ccc5db682aeb17a456ca4a26656bc8701",
+      "current_sha256": "13aec59a51fe3d36468a013114b55aa22be02f3b38942077d26e7b0e370d2b0d",
+      "mode": "social-metadata"
+    },
+    "poker/topics/tournaments/index.html": {
+      "parent_sha256": "5842e61b05bab093a5774316091b0225372d93c4d40a9493a53a4af2452a5c18",
+      "current_sha256": "3265e762e0afcd39e2a7dc1763f1e2b9212bf1b2ed7d6545c138278fd0cd40b9",
+      "mode": "social-metadata"
+    },
+    "poker/topics/variants/index.html": {
+      "parent_sha256": "f33e34871bc1f53afea20158938c320609ed42cb3ae764a738ec17ab0c8bb73d",
+      "current_sha256": "a7475fa1879ba1d50507197c311440ce14ef1cd15150fd15853c75edc7ed2faf",
+      "mode": "social-metadata"
+    },
+    "poker/tournament-checklists/index.html": {
+      "parent_sha256": "e66204ba1efdb5e71ba7317459dc16a2d9162045516f14367933940478405ddc",
+      "current_sha256": "9846f21bdc6626111b7903ba3359305eff13f6e0619cbf1e8926c9ee71d8e5c8",
+      "mode": "social-metadata"
+    },
+    "privacy/index.html": {
+      "parent_sha256": "0e8e8788544d6c3403ffcea644ed2fd4b6e6b9a4be32dd70c4d04a6cac293a5c",
+      "current_sha256": "68c38ed9fe96f37451444da7345b27f8750a2c2a704faa658dd16e641d31f21c",
+      "mode": "social-metadata"
+    },
+    "resources/index.html": {
+      "parent_sha256": "8f77db01556eb1085ad12665ac9ff6aab8313490684f5b848c2ee19cb277f1b1",
+      "current_sha256": "ccdb507c6a836f57e7c43ec106c2e9f1d5326cc5c4bf2b4dd7720f2c4589de77",
+      "mode": "social-metadata"
+    },
+    "start-here/index.html": {
+      "parent_sha256": "74ea7859c6d84f634066c4f7995dd9f11e6761ebf3c1e1844a64a0579f6330bf",
+      "current_sha256": "0a43a6edda4f8640050d0ea87e3392f8afc491013d461b85589aacdb2c335ca4",
+      "mode": "social-metadata"
+    }
+  },
+  "new_asset": {
+    "path": "assets/social/nolan-kido-ai.png",
+    "sha256": "646c36e15b25af45e21d372a6daf2641e5d8cd11fb460411dcf8d21938558877"
+  }
+}

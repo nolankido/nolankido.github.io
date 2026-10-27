@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import feedback_context_history as history
+import later_release_history as later_history
 import study_inquiry_history as inquiry_history
 import task_brief_error_history
 
@@ -140,17 +141,18 @@ class FeedbackContextTests(unittest.TestCase):
         self.assertNotIn('hashchange', section)
 
     def test_output_inventory_is_unchanged_and_exactly_seven_pages_change(self):
-        prior = {p: task_brief_error_history.before(p, inquiry_history.before(p, value)) for p, value in self.outputs.items()}
+        outputs = later_history.outputs(self.outputs)
+        prior = {p: task_brief_error_history.before(p, inquiry_history.before(p, value)) for p, value in outputs.items()}
         changed = [str(p) for p, value in prior.items() if history.before(p, value) != value]
         expected = {'contact/index.html'} | {str(build.output_path(r)) for r in EXPECTED.values()}
         self.assertEqual(set(changed), expected)
-        self.assertEqual(len(self.outputs), 222)
+        self.assertEqual(len(prior), 222)
 
     def test_all_714_production_paths_restore_the_verified_parent(self):
         record = history.change()
         tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-        files = [p for p in tracked if p and not p.startswith(('_tests/', '_reports/'))]
-        actual = [(p, digest(history.before(p, (ROOT / p).read_bytes()))) for p in files]
+        files = later_history.files([p for p in tracked if p and not p.startswith(('_tests/', '_reports/'))])
+        actual = [(p, digest(history.before(p, later_history.before(p, (ROOT / p).read_bytes())))) for p in files]
         self.assertEqual(len(actual), 714)
         self.assertEqual(record['production_count'], 714)
         self.assertEqual(digest(json.dumps(sorted(actual), separators=(',', ':'))),

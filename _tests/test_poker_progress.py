@@ -9,6 +9,7 @@ from urllib.parse import urlsplit
 
 from test_site import ROOT, Page, build
 import poker_progress_history as history
+import later_release_history as later_history
 import poker_school_history as school
 
 
@@ -106,7 +107,7 @@ class PokerProgressTests(unittest.TestCase):
         targets = live.targets(ROOT)
         for route in ['/poker/study/', '/assets/poker-progress.js', '/assets/poker-progress.css']:
             self.assertIn(route, targets)
-        self.assertEqual(len(targets), 475)
+        self.assertEqual(len(later_history.live_targets(targets)), 475)
         privacy = self.outputs[Path('privacy/index.html')]
         for phrase in ['Optional Poker Foundations progress', 'one entry in your browser', 'without progress events', 'does not upload the file or enable device saving']:
             self.assertIn(phrase, privacy)

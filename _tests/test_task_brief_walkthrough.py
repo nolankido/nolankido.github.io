@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import task_brief_walkthrough_history as history
+import later_release_history as later_history
 import task_brief_disclosure_history as disclosure
 import task_brief_print_history as printing
 
@@ -69,8 +70,9 @@ class TaskBriefWalkthroughTests(unittest.TestCase):
         self.assertNotIn('data-umami-event', self.walk)
 
     def test_only_task_brief_revision_changes_in_manifest_and_sitemap(self):
-        current = json.loads((ROOT / '_source/pages.json').read_text())
-        old = json.loads(history.before('_source/pages.json', (ROOT / '_source/pages.json').read_text()))
+        manifest = (ROOT / '_source/pages.json').read_text()
+        current = json.loads(later_history.before('_source/pages.json', manifest))
+        old = json.loads(history.before('_source/pages.json', manifest))
         changed = [(a, b) for a, b in zip(old, current) if a != b]
         self.assertEqual(len(old), len(current))
         self.assertEqual(len(changed), 1)
@@ -85,11 +87,15 @@ class TaskBriefWalkthroughTests(unittest.TestCase):
         mutated = deepcopy(b); mutated['description'] += ' unreviewed'
         self.assertEqual(history.pages([mutated]), [mutated])
         self.assertIsNot(history.pages([b])[0], a)
+        unreviewed = manifest.replace('"description": "', '"description": "unreviewed ', 1)
+        self.assertNotEqual(unreviewed, manifest)
+        self.assertEqual(later_history.before('_source/pages.json', unreviewed), unreviewed)
 
     def test_complete_production_inventory_restores_the_verified_parent(self):
         paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-        rows = sorted((p, sha256(history.before(p, (ROOT / p).read_bytes())).hexdigest())
-                      for p in paths if p and not p.startswith(('_tests/', '_reports/')))
+        paths = later_history.files([p for p in paths if p])
+        rows = sorted((p, sha256(history.before(p, later_history.before(p, (ROOT / p).read_bytes()))).hexdigest())
+                      for p in paths if not p.startswith(('_tests/', '_reports/')))
         self.assertEqual(len(rows), history.change()['production_count'])
         self.assertEqual(sha256(json.dumps(rows, separators=(',', ':')).encode()).hexdigest(), history.change()['production_fingerprint'])
         self.assertEqual(set(history.change()['paths']), {SOURCE, PAGE, '_source/pages.json', 'sitemap.xml'})

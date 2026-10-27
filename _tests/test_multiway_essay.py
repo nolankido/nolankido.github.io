@@ -8,6 +8,7 @@ import html5lib
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import build,check_live,search_sections,site_find
+import later_release_history as later_history
 import multiway_history as history
 import short_stack_history
 ROUTE='/poker/limped-multiway-pots/'
@@ -99,7 +100,7 @@ const d=JSON.parse(require('node:fs').readFileSync(0,'utf8'));
 for(const q of ['limped multiway pots','limpers','isolation'])assert(s.score(d.entry,q)>0);
 assert.deepEqual(JSON.parse(JSON.stringify(s.decodeSections(d.packed))),d.canonical);'''
         subprocess.run(['node','-e',code],cwd=ROOT,input=json.dumps({'entry':dict(entry,subjects=' '.join(entry['interests'])),'packed':json.loads(raw),'canonical':canonical}),text=True,check=True)
-        targets=check_live.targets();self.assertEqual(len(targets), 475)
+        targets=check_live.targets();self.assertEqual(len(later_history.live_targets(targets)), 475)
         for asset in ['assets/poker-multiway.css','downloads/poker-multiway-review.md','assets/social/reader-poker-limped-multiway-pots.png']:self.assertEqual(targets['/'+asset],(200,(ROOT/asset).read_bytes()))
         for p,v in self.outputs.items():
             if p.suffix=='.html':self.assertEqual('/assets/poker-multiway.css?' in v,p==build.output_path(ROUTE))

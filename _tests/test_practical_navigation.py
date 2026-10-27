@@ -14,6 +14,7 @@ import beginner_history
 import build
 import local_fonts_history
 import check_live
+import later_release_history as later_history
 import practical_navigation
 import practical_navigation_history as history
 import time_export_history
@@ -112,7 +113,7 @@ class PracticalNavigationTests(unittest.TestCase):
             restored=history.before(path,raw)
             versioned=time_export_history.before(path,raw)
             self.assertEqual(re.findall(r'<script[^>]*src="([^"]+)"',versioned),re.findall(r'<script[^>]*src="([^"]+)"',restored))
-        self.assertEqual(len(check_live.targets()), 475)
+        self.assertEqual(len(later_history.live_targets(check_live.targets())), 475)
         self.assertEqual(check_live.targets()['/assets/practical-ai-navigation.css'],(200,(ROOT/practical_navigation.CSS).read_bytes()))
         css=(ROOT/practical_navigation.CSS).read_text()
         self.assertIn('@media print',css)

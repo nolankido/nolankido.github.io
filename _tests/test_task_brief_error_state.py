@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 import task_brief_error_history as history
+import later_release_history as later_history
 import task_brief_walkthrough_history as walkthrough
 import task_brief_print_history as printing
 
@@ -37,8 +38,8 @@ class TaskBriefErrorStateTests(unittest.TestCase):
     def test_all_production_paths_restore_the_actual_published_parent(self):
         record = history.change()
         paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-        files = [p for p in paths if p and not p.startswith(('_tests/', '_reports/'))]
-        rows = sorted((p, sha256(history.before(p, (ROOT / p).read_bytes())).hexdigest()) for p in files)
+        files = later_history.files([p for p in paths if p and not p.startswith(('_tests/', '_reports/'))])
+        rows = sorted((p, sha256(history.before(p, later_history.before(p, (ROOT / p).read_bytes()))).hexdigest()) for p in files)
         self.assertEqual(len(rows), record['production_count'])
         self.assertEqual(sha256(json.dumps(rows, separators=(',', ':')).encode()).hexdigest(),
                          record['production_fingerprint'])

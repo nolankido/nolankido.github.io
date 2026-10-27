@@ -92,7 +92,16 @@ class SearchEntryTests(unittest.TestCase):
         for key, retained in json.loads((ROOT / '_source/presentation.json').read_text())['pages'].items():
             self.assertEqual(cfg['pages'][key], retained)
         home = next(p for p in self.pages if p['id'] == 'home')
-        self.assertEqual(presentation.metadata(cfg, home, 'https://nolankido.com'), self.baseline['social']['index.html'])
+        # The later positioning release gives Home its own approved AI card.
+        # Keep the full metadata contract, allowing only that URL and alt text.
+        expected_home = self.baseline['social']['index.html'].replace(
+            'https://nolankido.com/assets/social/nolan-kido.png',
+            'https://nolankido.com/assets/social/nolan-kido-ai.png',
+        ).replace(
+            'Nolan Kido. Build useful things. Make room for a good life. nolankido.com.',
+            'Nolan Kido. AI Works Human Decides. Practical AI for real life. nolankido.com.',
+        )
+        self.assertEqual(presentation.metadata(cfg, home, 'https://nolankido.com'), expected_home)
 
     def test_card_layout_and_status_match_the_complete_current_title(self):
         by_id = {p['id']: p for p in self.pages}

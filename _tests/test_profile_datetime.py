@@ -15,6 +15,8 @@ import build
 import check_search
 import search_visibility
 import profile_datetime_history as history
+import brand_positioning_history as brand_history
+import later_release_history as later_history
 
 
 def digest(value):
@@ -30,8 +32,8 @@ class ProfileDateTimeTests(unittest.TestCase):
     def setUpClass(cls):
         cls.outputs = build.build_outputs()
         cls.site = json.loads((ROOT / '_source/site.json').read_text())
-        cls.page = next(p for p in build.public_pages() if p['id'] == 'about')
-        cls.html = cls.outputs[Path('about/index.html')]
+        cls.page = next(p for p in brand_history.pages(build.public_pages()) if p['id'] == 'about')
+        cls.html = brand_history.before('about/index.html', cls.outputs[Path('about/index.html')])
         cls.old = history.before('about/index.html', cls.html)
 
     def decorate(self, schema):
@@ -85,22 +87,24 @@ class ProfileDateTimeTests(unittest.TestCase):
 
     def test_original_catalog_and_sitemap_revision_stay_intact(self):
         self.assertEqual(self.page['updated'], '2026-10-17')
+        old_sitemap = brand_history.before('sitemap.xml', self.outputs[Path('sitemap.xml')])
         self.assertIn('<loc>https://nolankido.com/about/</loc>\n    <lastmod>2026-10-17</lastmod>',
-                      self.outputs[Path('sitemap.xml')])
+                      old_sitemap)
         self.assertEqual(self.outputs[Path('sitemap.xml')], (ROOT / 'sitemap.xml').read_text())
 
     def test_entire_production_inventory_restores_exact_published_parent(self):
         record = history.change()
         self.assertEqual(set(record['paths']), {'_scripts/search_visibility.py', 'about/index.html'})
         tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode().split('\0')
-        items = [(p, digest(history.before(p, (ROOT / p).read_bytes())))
-                 for p in tracked if p and not p.startswith(('_tests/', '_reports/'))]
+        tracked = later_history.files([p for p in tracked if p])
+        items = [(p, digest(history.before(p, later_history.before(p, (ROOT / p).read_bytes()))))
+                 for p in tracked if not p.startswith(('_tests/', '_reports/'))]
         self.assertEqual(len(items), record['production_count'])
         self.assertEqual(fingerprint(items), record['production_fingerprint'])
 
     def test_current_approved_bytes_and_mutation_rejection(self):
         for path, item in history.change()['paths'].items():
-            raw = (ROOT / path).read_bytes()
+            raw = brand_history.before(path, (ROOT / path).read_bytes())
             self.assertEqual(digest(raw), item['new_sha256'])
             old = history.before(path, raw)
             self.assertEqual(digest(old), item['old_sha256'])
