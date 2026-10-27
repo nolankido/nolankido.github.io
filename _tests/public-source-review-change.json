@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "parent_commit": "a64bc51b6a39405a1ba59fbc589a9e190fce6229",
+  "parent_tree": "3fb7c1bb414db847c972516b5c558ce38712592c",
+  "paths": {
+    "_source/pages.json": {
+      "parent_sha256": "cc2b716a8b9e3e0d589cf59a0200d40d8bebd21445eb54041512ebe3a7932004",
+      "current_sha256": "236dec1ccfe93b80d57f0f65fa365a7341a7e2c046254e032cce53ad69f4d6cb",
+      "edits": [
+        {
+          "start": 13341,
+          "end": 13369,
+          "current_sha256": "8856ada00eb5a676dc7d52c738ea017c020496aee1d1fc5d19ae79cc0bb507cb",
+          "old": "    \"updated\": \"2026-10-26\"\n"
+        }
+      ]
+    },
+    "_source/technology/home.html": {
+      "parent_sha256": "a9986db02d7627e7e9c0a1b01644daa339c1713e2440a4200d18c97061faeea2",
+      "current_sha256": "1555fa9acf190356cb039dd66e154342a63d0c3a43a1a6d2980fc78a55a722ac",
+      "edits": [
+        {
+          "start": 6701,
+          "end": 7001,
+          "current_sha256": "d56abe62f2236fb36e81e21dd9b5f2437929c1a5ff9da07fb1246e4c14c90726",
+          "old": "    <div class=\"entry-jumps\"><a href=\"#notes-case-sources\">Read the sources</a><a href=\"#notes-case-revisions\">See the corrections</a><a href=\"#notes-case-result\">Use the final note</a><a href=\"#notes-case-limits\">Inspect the limits</a></div>\n"
+        },
+        {
+          "start": 8019,
+          "end": 11058,
+          "current_sha256": "3ec203f29fc4998664d18e0935153d1522804adf50eb67a2bd90b9ebc7a55587",
+          "old": ""
+        },
+        {
+          "start": 11897,
+          "end": 14697,
+          "current_sha256": "0d6ba2bede9a7cce92b221381f89cb8bff5285c2009e7627ca854a14381bc0be",
+          "old": ""
+        },
+        {
+          "start": 16339,
+          "end": 17620,
+          "current_sha256": "53c04debb69cde9553a423e841ce3cffea10924b973ec79369b2297fec24bdd8",
+          "old": "    <h3 id=\"notes-case-limits\">4. What this exercise proves and does not prove</h3>\n"
+        },
+        {
+          "start": 18103,
+          "end": 18617,
+          "current_sha256": "07403414b17673470093feb14b5eb052c4bdcbf5f676941a17dc883e1c3e3774",
+          "old": "    <p><a href=\"https://github.com/nolankido/nolankido.github.io/blob/main/_reports/website-growth/turn-04-public-source-plan.md\">Inspect the public source-and-revision record</a>, including the task brief, initial draft, changes and scope limits. For an alternative workflow, <a href=\"/technology/task-brief/\">build a brief from your own permitted inputs</a>.</p>\n"
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "parent_sha256": "d875113e2bb3f59950b7264a3eb158e27577583c31b3a2865ee54a3af1a6e083",
+      "current_sha256": "1390eccd1abf243e471463ac9a8465b9fc7d8febde436553eee038302b321fa5",
+      "edits": [
+        {
+          "start": 2755,
+          "end": 2789,
+          "current_sha256": "8485f57b7c5f0f2fafcb00c3890c7e1f72d3e16c4aae0f4ee7d20f199212e42f",
+          "old": "    <lastmod>2026-10-26</lastmod>\n"
+        }
+      ]
+    },
+    "technology/index.html": {
+      "parent_sha256": "22b6b107fc9c28327ecbe0474e20a22981f0b42b7bf5f9a8d966d0c15cef0078",
+      "current_sha256": "abc89ca6bfaa2e581bdfe807b2e03559843c9f7837a4eca07b214ce80393d986",
+      "edits": [
+        {
+          "start": 3077,
+          "end": 4889,
+          "current_sha256": "e5c5b228ca571415fe64b16768f7db28634265e71bed76f73cdbdd27925dadd4",
+          "old": "  <script type=\"application/ld+json\">{\"@context\": \"https://schema.org\", \"@type\": \"CollectionPage\", \"name\": \"AI Works Human Decides: Practical AI | Nolan Kido\", \"url\": \"https://nolankido.com/technology/\", \"description\": \"Nolan Kido's four-step AI Works Human Decides method: choose a real task, bound AI's role, check the result, and keep decisions with people.\", \"isPartOf\": {\"@type\": \"WebSite\", \"@id\": \"https://nolankido.com/#website\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/\", \"publisher\": {\"@type\": \"Person\", \"@id\": \"https://nolankido.com/about/#nolan-kido\", \"name\": \"Nolan Kido\", \"url\": \"https://nolankido.com/about/\"}}, \"dateModified\": \"2026-10-26\", \"@id\": \"https://nolankido.com/technology/#webpage\", \"inLanguage\": \"en-US\", \"breadcrumb\": {\"@type\": \"BreadcrumbList\", \"@id\": \"https://nolankido.com/technology/#breadcrumb\", \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"Home\", \"item\": \"https://nolankido.com/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Technology\", \"item\": \"https://nolankido.com/technology/\"}]}, \"mainEntity\": {\"@type\": \"ItemList\", \"@id\": \"https://nolankido.com/technology/#practical-ai-path\", \"name\": \"Decide. Brief. Check. Measure.\", \"numberOfItems\": 4, \"itemListElement\": [{\"@type\": \"ListItem\", \"position\": 1, \"name\": \"Decide whether AI fits the task\", \"url\": \"https://nolankido.com/technology/should-i-use-ai/\"}, {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Write a brief with a finish line\", \"url\": \"https://nolankido.com/technology/task-brief/\"}, {\"@type\": \"ListItem\", \"position\": 3, \"name\": \"Check the answer against evidence\", \"url\": \"https://nolankido.com/technology/check-ai-answers/\"}, {\"@type\": \"ListItem\", \"position\": 4, \"name\": \"Compare the whole cost of the task\", \"url\": \"https://nolankido.com/technology/ai-time-savings/\"}]}}</script>\n"
+        },
+        {
+          "start": 25275,
+          "end": 25575,
+          "current_sha256": "d56abe62f2236fb36e81e21dd9b5f2437929c1a5ff9da07fb1246e4c14c90726",
+          "old": "    <div class=\"entry-jumps\"><a href=\"#notes-case-sources\">Read the sources</a><a href=\"#notes-case-revisions\">See the corrections</a><a href=\"#notes-case-result\">Use the final note</a><a href=\"#notes-case-limits\">Inspect the limits</a></div>\n"
+        },
+        {
+          "start": 26593,
+          "end": 29632,
+          "current_sha256": "3ec203f29fc4998664d18e0935153d1522804adf50eb67a2bd90b9ebc7a55587",
+          "old": ""
+        },
+        {
+          "start": 30471,
+          "end": 33271,
+          "current_sha256": "0d6ba2bede9a7cce92b221381f89cb8bff5285c2009e7627ca854a14381bc0be",
+          "old": ""
+        },
+        {
+          "start": 34913,
+          "end": 36194,
+          "current_sha256": "53c04debb69cde9553a423e841ce3cffea10924b973ec79369b2297fec24bdd8",
+          "old": "    <h3 id=\"notes-case-limits\">4. What this exercise proves and does not prove</h3>\n"
+        },
+        {
+          "start": 36677,
+          "end": 37191,
+          "current_sha256": "07403414b17673470093feb14b5eb052c4bdcbf5f676941a17dc883e1c3e3774",
+          "old": "    <p><a href=\"https://github.com/nolankido/nolankido.github.io/blob/main/_reports/website-growth/turn-04-public-source-plan.md\">Inspect the public source-and-revision record</a>, including the task brief, initial draft, changes and scope limits. For an alternative workflow, <a href=\"/technology/task-brief/\">build a brief from your own permitted inputs</a>.</p>\n"
+        }
+      ]
+    }
+  },
+  "page": {
+    "old": {
+      "id": "technology",
+      "path": "/technology/",
+      "title": "Practical AI for real life.",
+      "seo_title": "AI Works Human Decides: Practical AI | Nolan Kido",
+      "description": "Nolan Kido's four-step AI Works Human Decides method: choose a real task, bound AI's role, check the result, and keep decisions with people.",
+      "kicker": "Nolan Kido / Technology",
+      "source": "technology/home.html",
+      "updated": "2026-10-26"
+    },
+    "new": {
+      "id": "technology",
+      "path": "/technology/",
+      "title": "Practical AI for real life.",
+      "seo_title": "AI Works Human Decides: Practical AI | Nolan Kido",
+      "description": "Nolan Kido's four-step AI Works Human Decides method: choose a real task, bound AI's role, check the result, and keep decisions with people.",
+      "kicker": "Nolan Kido / Technology",
+      "source": "technology/home.html",
+      "updated": "2026-10-27"
+    }
+  }
+}
