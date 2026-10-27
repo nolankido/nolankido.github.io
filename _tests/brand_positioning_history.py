@@ -6,7 +6,6 @@ contract while the current site can adopt a deliberately different public voice.
 from __future__ import annotations
 
 import base64
-from copy import deepcopy
 from functools import lru_cache
 from hashlib import sha256
 import json
@@ -32,6 +31,8 @@ def change() -> dict:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import public_source_review_history
+    data = public_source_review_history.before(path, data)
     import scoped_share_history
     data = scoped_share_history.before(path, data)
     item = change()['paths'].get(str(path))
@@ -57,7 +58,8 @@ def before(path: str | Path, data: bytes | str) -> bytes | str:
 
 
 def pages(records: list[dict]) -> list[dict]:
-    result = deepcopy(records)
+    import public_source_review_history
+    result = public_source_review_history.pages(records)
     for page in result:
         mapping = change()['pages'].get(page.get('id'))
         if mapping and all(page.get(key) == value for key, value in mapping['new'].items()):
