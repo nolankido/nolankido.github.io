@@ -21,6 +21,7 @@ import poker_finder
 import poker_hand_lab as lab
 import hand_lab_history as history
 import poker_foundations_history
+import visibility_sprint_history
 
 
 def node(code, data=None):
@@ -42,7 +43,7 @@ class HandLabTests(unittest.TestCase):
         b = self.baseline
         self.assertEqual((b['commit'],len(b['pages']),len(b['outputs']),len(b['files'])), ('dd80b250369b61da19220f23c58324c2936dfd8f',193,221,468))
         self.assertEqual(history.pages(self.pages), b['pages'])
-        self.assertEqual(len(self.pages),194)
+        self.assertEqual(len(visibility_sprint_history.pages(self.pages)),194)
         previous = history.outputs(self.outputs)
         self.assertEqual(set(map(str, previous)),set(b['outputs']))
         for path,text in previous.items():

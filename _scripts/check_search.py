@@ -7,12 +7,14 @@ not merely the source configuration. Run build.py --check separately for drift.
 from __future__ import annotations
 import argparse
 from collections import Counter
+from copy import deepcopy
 from html.parser import HTMLParser
 import json
 from pathlib import Path
 import sys
 from xml.etree import ElementTree as ET
 import build
+import public_identity
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -135,7 +137,20 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             else:
                 check(not breadcrumb and not navs, 'Home and 404 do not need artificial breadcrumbs')
             # Identity markup cannot turn aspirations into credentials or social proof.
-            identity_json = json.dumps(schema)
+            claim_schema = deepcopy(schema)
+            if page['id'] in {'home', 'about'}:
+                for role in ['about', 'mainEntity']:
+                    person = claim_schema.get(role, {})
+                    check(person.get('@type') == 'Person' and person.get('@id') == person_id,
+                          'Public profile links must belong to the shared Person identity')
+                    check(person.pop('sameAs', None) == public_identity.same_as(),
+                          'Person sameAs must contain exactly the verified public-work profiles')
+                if page['id'] == 'about':
+                    visible_profiles = [a.get('href') for a in doc.tags('a')
+                                        if 'me' in a.get('rel', '').split()]
+                    check(visible_profiles == public_identity.same_as(),
+                          'About must visibly link to the same verified public-work profiles')
+            identity_json = json.dumps(claim_schema)
             for key in ['sameAs', 'award', 'aggregateRating', 'reviewRating', 'alumniOf', 'worksFor', 'hasCredential']:
                 check('"' + key + '"' not in identity_json, 'Unsupported identity claim: ' + key)
             if page['id'] == 'about':

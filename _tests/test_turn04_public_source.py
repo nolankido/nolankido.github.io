@@ -13,7 +13,7 @@ from test_site import Page
 
 class PublicSourceCaseTests(unittest.TestCase):
     def test_case_is_traceable_and_has_no_fabricated_personal_result(self):
-        body=(ROOT/'_source/technology/home.html').read_text()
+        body=(ROOT/'_source/technology/ai-weekly-reset.html').read_text()
         self.assertEqual(body.count('id="notes-to-plan-case"'),1)
         for slug in ['weekly-reset','decide-what-matters','what-to-decide-yourself']:
             self.assertIn('/living-well/'+slug+'/', body)
@@ -25,8 +25,12 @@ class PublicSourceCaseTests(unittest.TestCase):
         self.assertNotIn('<script',body)
         for anchor in ['notes-case-sources','notes-case-revisions','notes-case-result','notes-case-limits']:
             self.assertEqual(body.count('id="'+anchor+'"'),1)
-        plan=Page(build.build_outputs()[Path('technology/index.html')])
+        outputs=build.build_outputs()
+        plan=Page(outputs[Path('technology/ai-weekly-reset/index.html')])
         self.assertIn('notes-to-plan-case', {a.get('id') for _,a in plan.elements})
+        hub=Page(outputs[Path('technology/index.html')])
+        self.assertIn('/technology/ai-weekly-reset/', {a.get('href') for _,a in hub.elements})
+        self.assertIn('notes-to-plan-case', {a.get('id') for _,a in hub.elements})
 
     def test_reversal_rejects_mutation_and_reconstructs_frozen_parent(self):
         record=history.change()

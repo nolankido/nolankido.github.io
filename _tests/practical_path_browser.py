@@ -14,6 +14,14 @@ sys.path.insert(0,str(ROOT/'_scripts'))
 import build
 import practical_path
 
+CASE_PATH='/technology/ai-weekly-reset/'
+LEGACY_CASE_FRAGMENTS=(
+    'notes-case-sources','notes-case-source-record','notes-source-commitments',
+    'notes-source-action','notes-source-deadline','notes-source-promises',
+    'notes-source-stop','notes-case-recorded-brief','notes-case-revisions',
+    'notes-case-checks','notes-case-result','notes-case-decision','notes-case-limits',
+)
+
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
 
@@ -22,11 +30,11 @@ Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port)
 report={'layouts':0,'text_spacing':0,'journeys':0,'entry_journeys':0,'previews':0,'downloads':0,'axe':[],
         'case_disclosures':0,'case_source_journeys':0,'case_decisions':0,'case_downloads':0,
-        'case_layouts':0,'case_text_spacing':0}
+        'case_layouts':0,'case_text_spacing':0,'case_entry_journeys':0,'legacy_case_journeys':0}
 errors=[];writes=[]
 try:
     with sync_playwright() as pw:
-        browser=pw.chromium.launch(headless=True)
+        browser=pw.chromium.launch(headless=True,**({'executable_path':os.environ['CHROMIUM_PATH']} if os.environ.get('CHROMIUM_PATH') else {}))
         for scripts in [True,False]:
             ctx=browser.new_context(java_script_enabled=scripts,reduced_motion='reduce')
             ctx.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
@@ -43,7 +51,7 @@ try:
                 for target,heading,next_link in [
                     ('practical-ai-path','#practical-ai-path-title','.ai-path-steps a[href="/technology/should-i-use-ai/"]'),
                     ('working-examples','#working-examples','.practical-work-grid a[href="/technology/task-brief/"]'),
-                    ('technology-path','#technology-path','.everyday-task-grid a[href="/living-well/scattered-notes-to-next-step/"]'),
+                    ('technology-path','#technology-path','section[aria-labelledby="technology-path"] a[href="/technology/organize-public-notes/"]'),
                     ('technology-reading','#technology-reading-title','#technology-reading a[href="/technology/check-ai-summary/"]'),
                 ]:
                     page.goto(base+'/technology/')
@@ -54,6 +62,12 @@ try:
                     page.keyboard.press('Tab')
                     expect(page.locator(next_link).first).to_be_focused()
                     expect(page.locator(next_link).first).to_be_in_viewport()
+                    if target=='technology-path':
+                        # The new recorded example precedes the retained first
+                        # task guide. Both stay in the natural keyboard order.
+                        page.keyboard.press('Tab')
+                        guide=page.locator('.everyday-task-grid a[href="/living-well/scattered-notes-to-next-step/"]')
+                        expect(guide).to_be_focused();expect(guide).to_be_in_viewport()
                     report['entry_journeys']+=1
                 page.goto(base+'/technology/')
                 expect(page.locator('#practical-ai-path .ai-path-steps li')).to_have_count(4)
@@ -74,11 +88,15 @@ try:
                     page.add_script_tag(path=os.environ['AXE_PATH'])
                     audit=page.evaluate("async()=>{const r=await axe.run(document.querySelector('#practical-ai-path'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return {violations:r.violations.map(v=>v.id),incomplete:r.incomplete.map(v=>v.id)}}")
                     assert not audit['violations'],audit;report['axe'].append(audit)
-                # Inspect the recorded sources and corrections with native HTML,
-                # including fragment navigation that opens a closed disclosure.
+                # Follow the retained hub entry to the extracted article, then
+                # inspect the original sources and corrections with native HTML.
                 # Reset the earlier text-spacing overrides before the case baseline.
                 page.reload()
                 page.goto(base+'/technology/#notes-to-plan-case')
+                case_entry=page.locator('#notes-to-plan-case a[href="'+CASE_PATH+'"]')
+                expect(case_entry).to_be_visible();case_entry.focus();expect(case_entry).to_be_focused()
+                page.keyboard.press('Enter');page.wait_for_url(base+CASE_PATH,wait_until='load')
+                report['case_entry_journeys']+=1
                 case=page.locator('#notes-to-plan-case')
                 sources=case.locator('#notes-case-source-record')
                 corrections=case.locator('#notes-case-revisions')
@@ -99,7 +117,7 @@ try:
                     expect(quote).to_be_hidden()
                     link=corrections.locator('[data-case-check="'+label+'"] a[href="#'+target+'"]')
                     link.focus();expect(link).to_be_focused();page.keyboard.press('Enter')
-                    expect(page).to_have_url(base+'/technology/#'+target)
+                    expect(page).to_have_url(base+CASE_PATH+'#'+target)
                     expect(sources).to_have_attribute('open','')
                     expect(quote).to_be_visible();expect(quote).to_be_in_viewport()
                     expect(corrections).to_have_attribute('open','')
@@ -121,12 +139,25 @@ try:
                     expect(disclosure).not_to_have_attribute('open','')
                 decision=case.locator('.entry-jumps a[href="#notes-case-decision"]')
                 decision.focus();page.keyboard.press('Enter')
-                expect(page).to_have_url(base+'/technology/#notes-case-decision')
+                expect(page).to_have_url(base+CASE_PATH+'#notes-case-decision')
                 expect(case.locator('#notes-case-decision')).to_be_in_viewport()
                 expect(case.locator('ol[aria-label="Your decision before using the note"] > li')).to_have_count(3)
                 expect(case.locator('a[download]')).to_be_visible()
                 report['case_decisions']+=1
-            page.goto(base+'/technology/#notes-case-decision')
+            # Every original hub fragment still offers a native route to the
+            # same section in the article, with and without JavaScript.
+            page.set_viewport_size({'width':390,'height':950})
+            for fragment in LEGACY_CASE_FRAGMENTS:
+                page.goto(base+'/technology/#'+fragment)
+                legacy=page.locator('#'+fragment)
+                expect(legacy).to_have_attribute('href',CASE_PATH+'#'+fragment)
+                expect(legacy).to_be_visible();expect(legacy).to_be_in_viewport()
+                legacy.focus();expect(legacy).to_be_focused();page.keyboard.press('Enter')
+                page.wait_for_url(base+CASE_PATH+'#'+fragment,wait_until='load')
+                expect(page.locator('#'+fragment)).to_be_visible()
+                expect(page.locator('#'+fragment)).to_be_in_viewport()
+                report['legacy_case_journeys']+=1
+            page.goto(base+CASE_PATH+'#notes-case-decision')
             with page.expect_download() as event:page.locator('#notes-to-plan-case a[download]').press('Enter')
             assert event.value.suggested_filename=='practical-ai-workbook.txt'
             assert Path(event.value.path()).read_bytes()==(ROOT/practical_path.WORKBOOK).read_bytes()

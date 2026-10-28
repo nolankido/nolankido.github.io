@@ -15,6 +15,7 @@ import author_archive_history as history
 import beginner_history
 import build
 import practical_navigation_history
+import visibility_sprint_history
 
 class ArchiveParser(HTMLParser):
     def __init__(self, text):
@@ -37,7 +38,8 @@ class AuthorArchiveTests(unittest.TestCase):
             schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
             if schema['@type']=='Article': actual.append(p['id'])
         parser=ArchiveParser(self.outputs[Path('notes/index.html')])
-        self.assertEqual(len(actual),104)
+        self.assertEqual(len(actual),len(self.entries))
+        self.assertEqual(len(author_archive.records(visibility_sprint_history.pages(self.pages))),104)
         self.assertCountEqual(parser.ids,actual)
         self.assertEqual(len(parser.ids),len(set(parser.ids)))
 
@@ -59,8 +61,8 @@ class AuthorArchiveTests(unittest.TestCase):
         raw=self.outputs[Path('notes/index.html')]
         schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',raw)[1])
         listing=schema['mainEntity'];parser=ArchiveParser(raw)
-        self.assertEqual(listing['numberOfItems'],104)
-        self.assertEqual([v['position'] for v in listing['itemListElement']],list(range(1,105)))
+        self.assertEqual(listing['numberOfItems'],len(self.entries))
+        self.assertEqual([v['position'] for v in listing['itemListElement']],list(range(1,len(self.entries)+1)))
         by_id={p['id']:p for p in self.entries}
         self.assertEqual([(v['url'],v['name']) for v in listing['itemListElement']], [('https://nolankido.com'+by_id[k]['path'],by_id[k]['title']) for k in parser.ids])
         self.assertEqual(schema['creator']['@id'],'https://nolankido.com/about/#nolan-kido')
@@ -70,7 +72,11 @@ class AuthorArchiveTests(unittest.TestCase):
         self.assertEqual(len(planned),3)
         for p in planned:self.assertEqual(author_archive.label(p),'Proposed experiment')
         recorded=[p for p in self.entries if author_archive.label(p)=='Recorded case']
-        self.assertEqual([p['id'] for p in recorded],['ai-website-verification'])
+        self.assertEqual({p['id'] for p in recorded}, {
+            'ai-website-verification', 'local-ai-review-replies',
+            'ai-book-continuity-checker', 'dinner-on-time', 'ai-weekly-reset',
+            'organize-public-notes', 'local-ai-test-record',
+        })
 
     def test_original_publication_dates_are_visible_for_every_entry(self):
         raw=self.outputs[Path('notes/index.html')]

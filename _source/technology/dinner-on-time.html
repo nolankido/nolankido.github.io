@@ -1,0 +1,55 @@
+<section class="section folio-row" aria-labelledby="dinner-task">
+  <div class="section-meta"><p class="section-label">Everyday planning / Recorded app demonstration</p></div>
+  <div class="section-content prose">
+    <h2 id="dinner-task">When the oven is occupied, the whole dinner plan changes.</h2>
+    <p>Dinner on Time is a cooking-schedule web simulation I developed with ChatGPT/Codex assistance. It coordinates dependent steps around one serving target and explores what happens when the plan is interrupted. In the recorded example, rice preparation has started when the oven becomes unavailable for fifty minutes.</p>
+    <p>The useful task is to reconsider the remaining work while preserving progress already recorded. The person needs to see the consequences, choose a workable target, and retain a clear account of what is still unfinished.</p>
+    <p class="evidence-note"><strong>Evidence: recorded app demonstration with a simulated meal.</strong> AI assisted development. The app runs deterministic logic, with no cloud AI model call or live Alexa integration. The recording does not measure physical cooking or time savings.</p>
+    <div class="entry-jumps"><a href="#dinner-demo">Watch the demonstration</a><a href="#dinner-decisions">Follow the decisions</a><a href="#dinner-method">Reuse the design questions</a></div>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="dinner-demo">
+  <div class="section-meta"><p class="section-label">Dinner on Time / Public video</p></div>
+  <div class="section-content prose">
+    <h2 id="dinner-demo">Watch a disruption become a revised plan.</h2>
+    <figure class="work-preview">
+      <a href="https://vimeo.com/1237048902" aria-label="Watch the Dinner on Time demonstration on Vimeo"><img src="/assets/projects/dinner-on-time-preview.jpg" width="2400" height="1396" alt="Dinner on Time's guided demo before rice preparation starts, with a demo-clock label, a Start rice preparation button, and zero of twelve steps confirmed." loading="lazy" decoding="async"></a>
+      <figcaption>The public video's preview shows the initial guided-demo state. Open the recording to follow the changes.</figcaption>
+    </figure>
+    <p><a class="work-action" href="https://vimeo.com/1237048902">Watch the 2 minute 20 second demonstration on Vimeo</a>. The video includes English captions and computer-generated narration.</p>
+    <p>The recorded sequence starts rice preparation, reports the oven disruption, compares eleven moved future steps, and selects a checked 7:30 serving target. It then adds preparation time, explicitly confirms readiness, and reopens a saved recap after a real reload.</p>
+    <p>The footage was edited to shorten waits. The recap comes from a second segment after reloading. A demo clock drives the walkthrough, and only one of the twelve meal steps is confirmed. Those details matter when reading a screen that looks like an ordinary cooking plan.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="dinner-decisions">
+  <div class="section-meta"><p class="section-label">The design lesson</p></div>
+  <div class="section-content prose">
+    <h2 id="dinner-decisions">Separate what happened, what is predicted, and what you choose.</h2>
+    <p>This case gives me a useful way to think about planning software. Three kinds of information deserve different treatment:</p>
+    <ul>
+      <li><strong>Recorded progress:</strong> a step someone has started or confirmed. Reconsidering a schedule should not silently turn that history back into an untouched plan.</li>
+      <li><strong>Future estimates:</strong> durations, dependencies, and possible finish times. These are the parts to recalculate when a constraint changes.</li>
+      <li><strong>Human choices:</strong> accepting a serving target or confirming that preparation is ready. A calculated time cannot make those decisions on the person's behalf.</li>
+    </ul>
+    <p>The fifty-minute disruption is an input. The later serving target is a choice. Comparing the affected future steps makes that choice easier to inspect: the person can ask what moves, what remains underway, and whether the proposal still fits the meal they want to make.</p>
+    <p>Readiness needs its own answer. A timer reaching its estimate cannot establish that a person has finished the task. Keeping a confirmation separate from the clock is a useful pattern for household plans, project checklists, and any workflow where the software has only part of the information.</p>
+    <p>A saved recap serves a different purpose again. It gives the person something to inspect after leaving and returning. Recovery belongs in the design of a useful tool because interruptions are part of using it.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="dinner-method">
+  <div class="section-meta"><p class="section-label">Try the reasoning on your own task</p></div>
+  <div class="section-content prose">
+    <h2 id="dinner-method">Ask what a changed plan must preserve.</h2>
+    <p>If you use AI to help build a planning tool, describe one interruption before asking for more features. A compact <a href="/technology/task-brief/">task brief</a> can name the original plan, the change, and the result a person should be able to check.</p>
+    <ol>
+      <li><strong>Record the starting state.</strong> Identify completed work, work underway, and work that has not begun. Keep an example small enough to inspect by hand.</li>
+      <li><strong>Change one constraint.</strong> Introduce a delay or unavailable resource. Compare the proposed future steps with the original plan.</li>
+      <li><strong>Locate the person's decision.</strong> Make clear which action accepts the new plan and which action confirms actual progress.</li>
+      <li><strong>Leave and return.</strong> Check whether the saved account explains the accepted plan and unfinished work after reloading.</li>
+    </ol>
+    <p>These are reusable design questions, not a claim that a short demonstration validates every path through an application. For an independent checking example, see <a href="/technology/checking-ai-website-changes/">the website change that passed its first tests and still contained a defect</a>.</p>
+    <p>The next useful evaluation would involve an actual meal: compare planned and observed timings, record the effort of keeping the app current, and ask whether it helps more than a simple written schedule. That evaluation has not been completed here. The <a href="/technology/ai-time-savings/">workflow time calculator</a> can help define what to count.</p>
+    <p class="editorial-note">Prepared with AI assistance from the <a href="https://vimeo.com/1237048902">public Dinner on Time video and its description</a>. The project was prepared for the Build, Ship, Shape: Amazon Developer Hackathon. The design lessons above interpret the recorded scenario; they do not report an observed household outcome.</p>
+    <p><a href="/technology/">Explore practical AI</a> · <a href="/living-well/">Explore Living Well</a> · <a href="/contact/">Send a correction</a></p>
+  </div>
+</section>

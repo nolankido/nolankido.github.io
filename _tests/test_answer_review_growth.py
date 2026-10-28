@@ -16,6 +16,7 @@ import turn11_task_navigation_history as task_nav_history
 import profile_datetime_history
 import later_release_history as later_history
 import answer_record_history
+import visibility_sprint_history
 
 
 class GuideGrowth(unittest.TestCase):
@@ -171,8 +172,12 @@ class GuideGrowth(unittest.TestCase):
                                  set(re.findall(pattern, normalized_current)))
         for pattern in (r'<script\b[^>]*>.*?</script>', r'<link\b[^>]*rel="stylesheet"[^>]*>'):
             # JSON-LD is metadata, not executable runtime.
+            # Rewind only the whole reviewed sprint output before comparing
+            # this older release's runtime and stylesheet inventory. The live
+            # links and IDs are still checked above; unknown mutations survive.
+            runtime_current = normalize(visibility_sprint_history.before(path, current))
             strip = lambda s: re.sub(r'<script type="application/ld\+json">.*?</script>', '', s)
-            self.assertEqual(re.findall(pattern, strip(normalized_current), re.S),
+            self.assertEqual(re.findall(pattern, strip(runtime_current), re.S),
                              re.findall(pattern, strip(normalized_previous), re.S))
 
 

@@ -86,7 +86,8 @@ class SearchVisibilityTests(unittest.TestCase):
                 if p.get('note'):
                     self.assertNotIn('class="search-author"',self.outputs[build.output_path(p['path'])])
         about = check_search.Document(self.outputs[Path('about/index.html')]).schemas[0]
-        self.assertEqual(set(about['mainEntity']), {'@type','@id','name','url','description'})
+        self.assertEqual(set(about['mainEntity']), {'@type','@id','name','url','description','sameAs'})
+        self.assertEqual(about['mainEntity']['sameAs'], ['https://github.com/nolankido', 'https://dev.to/kidon'])
         self.assertEqual(about['mainEntity']['description'], self.site['bio_short'])
         self.assertEqual(about['@type'],'ProfilePage')
 
@@ -147,6 +148,9 @@ class SearchVisibilityTests(unittest.TestCase):
 
     def test_original_about_prose_is_preserved_beside_the_new_work_links(self):
         source=(ROOT/'_source/about.html').read_text()
+        public_links='<p class="small-copy" id="public-work-profiles">You can also explore ${public_work_profiles}.</p>\n'
+        self.assertEqual(source.count(public_links), 1)
+        source=source.replace(public_links, '', 1)
         prior=re.sub(r'<h2 id="try-the-work">.*?(?=<h2>)','',source,flags=re.S)
         revised='<p class="intro"><strong>AI Works Human Decides</strong> is how I think about putting AI to use in everyday life and small-business work. Let the technology help with a defined task. Keep the purpose, the checks, and the consequential decisions with people.</p>'
         previous='<p class="intro">I like making things useful, understanding difficult ideas, and leaving room for a life beyond the work.</p>'

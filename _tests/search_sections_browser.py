@@ -4,9 +4,24 @@ from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 from urllib.parse import urlsplit
-import faulthandler,json,os,re
+import faulthandler,json,os,re,sys
 from playwright.sync_api import sync_playwright,expect
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'_scripts'))
+import build
+import site_find
+
+EXPECTED_SEARCH_PATHS={page['path'] for page in build.public_pages() if site_find.eligible(page)}
+NEW_CASE_PATHS={
+    '/technology/local-ai-review-replies/',
+    '/technology/ai-book-continuity-checker/',
+    '/technology/dinner-on-time/',
+    '/technology/ai-weekly-reset/',
+    '/technology/organize-public-notes/',
+    '/technology/local-ai-test-record/',
+}
+assert NEW_CASE_PATHS <= EXPECTED_SEARCH_PATHS,'The reviewed new articles must remain discoverable'
+
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
 server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)))
@@ -34,7 +49,7 @@ def route_for(mode='normal'):
 faulthandler.dump_traceback_later(180,exit=True)
 try:
     with sync_playwright() as pw:
-        browser=pw.chromium.launch(headless=True)
+        browser=pw.chromium.launch(headless=True,**({'executable_path':os.environ['CHROMIUM_PATH']} if os.environ.get('CHROMIUM_PATH') else {}))
         for width in [320,390,768,1440]:
             context=browser.new_context(viewport={'width':width,'height':950},reduced_motion='reduce')
             context.route('**/*',route_for());page=context.new_page()
@@ -121,13 +136,18 @@ try:
             report['address_data_fallbacks']+=1;context.close()
         context=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':950});context.route('**/*',route_for());page=context.new_page()
         page.goto(base+'/find/');expect(page.locator('#find-controls')).to_be_hidden()
-        expect(page.locator('.find-item')).to_have_count(174)
+        expect(page.locator('.find-item')).to_have_count(len(EXPECTED_SEARCH_PATHS))
+        native_paths=page.locator('.find-item h3 a').evaluate_all('(links)=>links.map(a=>a.getAttribute("href"))')
+        assert len(native_paths)==len(set(native_paths)),'Each searchable page needs exactly one native result'
+        assert set(native_paths)==EXPECTED_SEARCH_PATHS,'The no-script index must cover every eligible public page'
         # The new School page remains a usable native result without scripts.
         expect(page.locator('#browse-poker h3 a[href="/poker/school/"]')).to_have_count(1)
         page.locator('#browse-technology summary').focus();page.keyboard.press('Enter')
+        for path in sorted(NEW_CASE_PATHS):
+            expect(page.locator('#browse-technology h3 a[href="'+path+'"]')).to_be_visible()
         link=page.locator('#browse-technology h3 a').first;destination=link.get_attribute('href')
         link.focus();page.keyboard.press('Enter');page.wait_for_url(base+destination,wait_until='load');expect(page.locator('h1')).to_be_visible()
-        report['no_script_pages']=174;context.close()
+        report['no_script_pages']=len(EXPECTED_SEARCH_PATHS);context.close()
         assert not errors,errors
         browser.close();report['status']='pass';print(json.dumps(report,indent=2))
         if os.environ.get('SCREENSHOT_DIR'):(Path(os.environ['SCREENSHOT_DIR'])/'search-sections-report.json').write_text(json.dumps(report,indent=2)+'\n')

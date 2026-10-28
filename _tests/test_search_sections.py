@@ -16,6 +16,7 @@ import poker_titles_history
 import first_tournament_plan_history as subsequent_changes
 import ranking_practice_history
 import brief_check_history
+import visibility_sprint_history
 from test_site import Page
 
 class SearchSectionsTests(unittest.TestCase):
@@ -46,7 +47,12 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
 
     def test_index_reuses_real_public_anchors_with_bounded_payload(self):
-        self.assertEqual(len(self.index),174)
+        # The old release's exact index is still checked. Current destinations
+        # and packed payload are independently checked below without rewinding.
+        previous_outputs=visibility_sprint_history.outputs(self.outputs)
+        previous_pages=visibility_sprint_history.pages(self.pages)
+        previous_index=search_sections.index(previous_outputs,previous_pages)
+        self.assertEqual(len(previous_index),174)
         # Turn 04 and the approved positioning release each add one visible
         # heading on the Technology overview.
         # Historical 1,140-entry baselines remain pinned separately.
@@ -72,14 +78,14 @@ class SearchSectionsTests(unittest.TestCase):
             self.assertEqual(ranking_index[path],expected,path)
         # The current handoff is a separately checked real destination; the
         # preceding ranking and tournament views keep their original values.
-        self.assertEqual(set(self.index),set(ranking_index))
+        self.assertEqual(set(previous_index),set(ranking_index))
         for path,rows in ranking_index.items():
             expected=(rows[:4]+[['brief-next-check-title','Choose how you will check the answer.']]+rows[4:]
                       if path=='/technology/task-brief/' else rows)
-            self.assertEqual(self.index[path],expected,path)
+            self.assertEqual(previous_index[path],expected,path)
         self.assertEqual(self.index['/technology/'].count(
             ['ai-works-human-decides-title', 'AI Works Human Decides']), 1)
-        self.assertIn(['notes-to-plan-title', 'From scattered advice to one usable weekly plan.'], self.index['/technology/'])
+        self.assertIn(['notes-to-plan-title', 'From scattered advice to one usable weekly plan.'], previous_index['/technology/'])
         self.assertIn(['progress-heading','Your next Poker Foundations task.'],self.index['/poker/study/'])
         self.assertIn(['in-depth-title','Read in depth.'],self.index['/poker/'])
         self.assertIn(['in-depth-title','Four guides to read in sections.'],self.index['/poker/library/'])

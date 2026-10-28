@@ -21,6 +21,7 @@ import check_live
 import follow
 import practical_discovery as discovery
 import time_export_history
+import visibility_sprint_history
 
 
 def records(xml):
@@ -61,9 +62,13 @@ class PracticalDiscoveryTests(unittest.TestCase):
         tree = ET.fromstring(self.outputs[discovery.FEED])
         items = tree.findall('./channel/item')
         expected = {'https://nolankido.com/notes/' + s + '/' for s in self.config['note_ids']}
-        expected.update({'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/', 'https://nolankido.com/technology/should-i-use-ai/', 'https://nolankido.com/technology/check-ai-answers/'})
+        expected.update('https://nolankido.com' + page['path'] for page in discovery.articles(self.pages))
         self.assertEqual({i.findtext('link') for i in items}, expected)
         self.assertEqual(len(items), len(expected))
+        historical = records(visibility_sprint_history.before(discovery.FEED, self.outputs[discovery.FEED]))
+        original_expected = {'https://nolankido.com/notes/' + s + '/' for s in self.config['note_ids']}
+        original_expected.update({'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/', 'https://nolankido.com/technology/should-i-use-ai/', 'https://nolankido.com/technology/check-ai-answers/'})
+        self.assertEqual(set(historical), original_expected)
         original = records(self.outputs[Path('feed.xml')])
         for url, signature in records(self.outputs[discovery.FEED]).items():
             if url in original:

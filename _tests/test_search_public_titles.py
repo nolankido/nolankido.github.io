@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import beginner_history
 import build, site_find
 import search_public_titles_history as history
+import visibility_sprint_history
 from test_site import Page
 
 
@@ -57,7 +58,9 @@ class SearchPublicTitlesTests(unittest.TestCase):
     def test_exact_public_titles_are_escaped_and_invalid_metadata_fails_closed(self):
         expected = {p['path']: p for p in self.pages if site_find.eligible(p)}
         cards = Page(site_find.render(self.items)).tags('li')
-        self.assertEqual(len(cards), 174)
+        self.assertEqual(len(cards), len(expected))
+        self.assertEqual({item['path'] for item in self.items}, set(expected))
+        self.assertEqual(sum(site_find.eligible(p) for p in visibility_sprint_history.pages(self.pages)), 174)
         for item, card in zip(self.items, cards):
             self.assertEqual(item['search_title'], expected[item['path']]['seo_title'])
             self.assertEqual(card['data-search-title'], item['search_title'])

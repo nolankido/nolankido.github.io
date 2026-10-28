@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 
 import brand_positioning_history
+import visibility_sprint_history
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS_WORKFLOW = '.github/workflows/site-checks.yml'
@@ -67,6 +68,7 @@ def digest(data):
 
 
 def before(path, data):
+    data = visibility_sprint_history.before(path, data)
     name = key(path)
     if name == CHECKS_WORKFLOW and digest(data) == WORKFLOW_AFTER:
         binary = isinstance(data, bytes)
@@ -101,18 +103,21 @@ def _keep(path, data, additions):
 
 def outputs(records):
     """Rewind generated outputs, dropping only the exact added JSON-LD asset."""
+    records = visibility_sprint_history.outputs(records)
     return {path: before(path, value) for path, value in records.items()
             if _keep(path, value, OUTPUT_ADDITIONS)}
 
 
 def source_records(records):
     """Rewind source/asset inventories without hiding altered additions."""
+    records = visibility_sprint_history.source_records(records)
     return {path: before(path, value) for path, value in records.items()
             if key(path) not in TEST_UTILITIES and _keep(path, value, SOURCE_ADDITIONS)}
 
 
 def files(paths):
     """Preserve input path types and only exclude known, exact later additions."""
+    paths = visibility_sprint_history.files(paths)
     def keep(path):
         name = key(path)
         if name in TEST_UTILITIES:
@@ -125,6 +130,7 @@ def files(paths):
 
 def live_targets(records):
     """Restore the old target count without dropping an unrecognized response."""
+    records = visibility_sprint_history.live_targets(records)
     def keep(route, response):
         expected = LIVE_TARGET_ADDITIONS.get(route)
         if (expected is None or not isinstance(response, tuple) or len(response) != 2

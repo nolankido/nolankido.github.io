@@ -1,0 +1,77 @@
+<section class="section folio-row" aria-labelledby="continuity-task">
+  <div class="section-meta"><p class="section-label">Public project / Writing with AI</p></div>
+  <div class="section-content prose">
+    <h2 id="continuity-task">Find the passages behind a possible continuity error.</h2>
+    <p>Preflight is my book-series continuity project, built on the open-source canonkeeper engine. It uses AI to extract facts from chapters, connect those facts with quotations, and examine possible conflicts across books. Its useful output is a report an author can investigate: what changed, where each version appears, and what might explain the difference.</p>
+    <p>A recorded audit of six Sherlock Holmes volumes provides a concrete example. It found the changing description of Watson's war wound, but it also made wrong calls and missed planted errors in a separate evaluation. Both parts of that record matter when deciding how to use an AI continuity checker.</p>
+    <div class="entry-jumps"><a href="#continuity-example">See the wound example</a><a href="#continuity-method">Follow the method</a><a href="#continuity-results">Read the measured limits</a><a href="#continuity-try">Inspect the project</a></div>
+    <p><a href="https://preflight-kq1o.onrender.com/sample">Open the published Holmes sample</a> · <a href="https://github.com/nolankido/canonKeeper">Open Preflight and canonkeeper on GitHub</a></p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="continuity-example">
+  <div class="section-meta"><p class="section-label">Recorded audit / Public-domain books</p></div>
+  <div class="section-content prose">
+    <h2 id="continuity-example">Watson's wound moves from shoulder to leg.</h2>
+    <p>In <cite>A Study in Scarlet</cite>, Watson describes a bullet striking his shoulder; another passage refers to his injured left arm. In <cite>The Sign of the Four</cite>, he nurses a wounded leg. The <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/src/canonkeeper/preflight/samples/sherlock-holmes-report.html">saved report</a> puts the passages together and suggests changing the later book's wound reference.</p>
+    <p>The important design choice is the evidence beside the finding. An author can read both passages and decide whether the change is an error, a deliberate development, or a question requiring more context. A confident label without those passages would be harder to challenge.</p>
+    <figure class="work-preview">
+      <a href="/assets/projects/preflight-holmes-report.png"><img src="/assets/projects/preflight-holmes-report.png" width="1200" height="1349" loading="lazy" decoding="async" alt="Archived Preflight report showing the source passages for Watson's wound and the Mrs. Hudson versus Mrs. Turner landlady finding."></a>
+      <figcaption>Original project screenshot, reproduced unchanged. The counters belong to this archived report; its $0.15 figure covers judging, not the complete reading-and-judging cost. <a href="/assets/projects/preflight-holmes-report.png">Open the full-size image</a>.</figcaption>
+    </figure>
+    <p>The accompanying series bible makes extracted facts browsable by character and book. In the <a href="https://preflight-kq1o.onrender.com/sample/bible?view=bybook&amp;focus=John%20Watson%7Cwound&amp;book=The%20Sign%20of%20the%20Four">Watson wound view</a>, the reader can follow the changing descriptions and open their source passages.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="continuity-method">
+  <div class="section-meta"><p class="section-label">From chapters to reviewable findings</p></div>
+  <div class="section-content prose">
+    <h2 id="continuity-method">Extract, compare, then ask what the text supports.</h2>
+    <ol class="evidence-facts">
+      <li><strong>Extract sourced facts.</strong> A model reads chapters into individual claims. The engine checks whether the accompanying quotation exists in the text before retaining the claim.</li>
+      <li><strong>Find possible disagreements.</strong> Local rules collect candidates such as conflicting descriptions, names, or appearances. This stage deliberately raises questions for later review.</li>
+      <li><strong>Judge with context.</strong> A model examines relevant material and can identify a contradiction, clear a change using an explanatory passage, or leave a question for the author.</li>
+      <li><strong>Return to the books.</strong> The report and bible let a person inspect the passages and accept or reject the finding. Suggested fixes remain editorial choices.</li>
+    </ol>
+    <p>The <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/docs/ENGINE.md">engine documentation</a> explains the stages and available providers. Checking that a quotation exists establishes traceability; it does not establish that the model assigned it to the right character or interpreted it correctly.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="continuity-results">
+  <div class="section-meta"><p class="section-label">Findings / Mistakes / Misses</p></div>
+  <div class="section-content prose">
+    <h2 id="continuity-results">Measure the errors the report fails to find.</h2>
+    <p>The <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/README.md#what-it-found-in-sherlock-holmes">October 27 project record</a> describes 3,963 extracted facts from six volumes. Alongside Watson's wound and the Hudson/Turner landlady discrepancy, it records two wrong contradiction calls: Holmes's eye description while disguised, and a maiden name mistaken for a conflicting surname. The <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/src/canonkeeper/preflight/samples/sherlock-holmes-reviews.json">stored corrections</a> preserve those reasons.</p>
+    <p>A separate benchmark planted 20 changes in later books, ran the pipeline again, and compared findings with the planted record. The same run's original and revised scores are both retained:</p>
+    <div class="project-table-scroll" role="region" aria-label="Recorded continuity benchmark scores" tabindex="0">
+      <table>
+        <caption>Holmes seeded benchmark, October 27, 2026</caption>
+        <thead><tr><th scope="col">Scoring record</th><th scope="col">Found / missed</th><th scope="col">False positives</th><th scope="col">Precision / recall</th></tr></thead>
+        <tbody><tr><th scope="row">Original</th><td>7 / 13</td><td>4</td><td>0.64 / 0.35</td></tr><tr><th scope="row">Rescored same output</th><td>8 / 12</td><td>2</td><td>0.80 / 0.40</td></tr></tbody>
+      </table>
+    </div>
+    <p><a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/evals/results/holmes-seed0-2026-10-27/result.raw.md">Original score</a> · <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/evals/results/holmes-seed0-2026-10-27/result.md">Revised score and misses</a> · <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/evals/results/holmes-seed0-2026-10-27/README.md">Protocol and qualifications</a></p>
+    <p>Rescoring changed how name variants and findings about a planted sentence were matched. It did not rerun the model. One additional finding was counted as neither a hit nor a false positive. The record also identifies ambiguous planted changes and a mistaken source fact. These figures describe that specific, imperfect test; they are not an accuracy promise for other novels.</p>
+    <p>Of the 12 misses in the revised record, eight were lost during extraction and four during judgment. That points to a practical lesson: improving the final explanation cannot recover a fact that never entered the comparison. <strong>AI Works Human Decides</strong> here means using the report to direct attention while retaining the author's decision about the text.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="continuity-try">
+  <div class="section-meta"><p class="section-label">Try / Read / Reuse</p></div>
+  <div class="section-content prose">
+    <h2 id="continuity-try">Inspect the sample before supplying a manuscript.</h2>
+    <p>The <a href="https://preflight-kq1o.onrender.com/sample">published sample</a> provides a reading route through an existing audit. The repository also contains the saved HTML report. The hosted demo is intended for public-domain books and its built-in sample, with PayPal sandbox payments. It is not a place to submit a private manuscript or make a live purchase.</p>
+    <p>The repository documents local operation and model configuration. Running without model or payment keys demonstrates the application flow with a rule-based stand-in and simulated payments; those answers are not new model results. Before using a real provider, check where that configuration sends the text.</p>
+    <p>For a smaller writing task, use the same pattern: identify the fact, retain the exact supporting passage, compare another occurrence, and record the reason for the editorial decision. The <a href="/technology/check-ai-summary/">source-to-summary guide</a> works through that source-checking habit.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="continuity-sources">
+  <div class="section-meta"><p class="section-label">Evidence / Scope</p></div>
+  <div class="section-content prose">
+    <h2 id="continuity-sources">A documented project, with its remaining work visible.</h2>
+    <p>This case uses <a href="https://github.com/nolankido/canonKeeper/tree/947e9c3d7dbc9bfa719579ca1e697d4479567684">Preflight and canonkeeper at 947e9c3d</a>. The public record supports a working project, recorded sample outputs, and the stated benchmark. It does not establish that every continuity error is found, that an author saves time, or that the service has paying customers.</p>
+    <p class="editorial-note">Prepared with AI assistance from public code, reports, and project documentation. No new model audit, payment, private manuscript upload, or author trial was performed for this article.</p>
+    <p><a href="/creative/">Explore Creative Work</a> · <a href="/technology/local-ai-review-replies/">See local AI for customer replies</a> · <a href="/technology/">More practical AI</a> · <a href="/contact/">Send a correction</a></p>
+  </div>
+</section>
