@@ -46,5 +46,9 @@ def before(path, data):
 
 
 def pages(records):
+    # This metadata entry point is also called directly by older contracts.
+    # Rewind only the exact later Task Brief record before matching its pair.
+    import brief_check_history
+    records = brief_check_history.pages(records)
     pair = change()['page']
     return [deepcopy(pair['old'] if page == pair['new'] else page) for page in records]

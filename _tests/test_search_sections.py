@@ -15,6 +15,7 @@ import time_examples_history
 import poker_titles_history
 import first_tournament_plan_history as subsequent_changes
 import ranking_practice_history
+import brief_check_history
 from test_site import Page
 
 class SearchSectionsTests(unittest.TestCase):
@@ -62,10 +63,19 @@ class SearchSectionsTests(unittest.TestCase):
             expected=([['first-event-plan-title','A small plan for your first tournament.']]+rows
                       if path=='/poker/first-live-tournament/' else rows)
             self.assertEqual(tournament_index[path],expected,path)
-        self.assertEqual(set(self.index),set(tournament_index))
+        ranking_outputs={p:brief_check_history.before(p,d) for p,d in self.outputs.items()}
+        ranking_index=search_sections.index(ranking_outputs,brief_check_history.pages(self.pages))
+        self.assertEqual(set(ranking_index),set(tournament_index))
         for path,rows in tournament_index.items():
             expected=(rows[:3]+[['practice-next-title','Build one different hand yourself.']]+rows[3:]
                       if path=='/poker/hand-rankings/' else rows)
+            self.assertEqual(ranking_index[path],expected,path)
+        # The current handoff is a separately checked real destination; the
+        # preceding ranking and tournament views keep their original values.
+        self.assertEqual(set(self.index),set(ranking_index))
+        for path,rows in ranking_index.items():
+            expected=(rows[:4]+[['brief-next-check-title','Choose how you will check the answer.']]+rows[4:]
+                      if path=='/technology/task-brief/' else rows)
             self.assertEqual(self.index[path],expected,path)
         self.assertEqual(self.index['/technology/'].count(
             ['ai-works-human-decides-title', 'AI Works Human Decides']), 1)

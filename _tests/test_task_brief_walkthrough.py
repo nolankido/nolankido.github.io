@@ -17,6 +17,7 @@ import task_brief_walkthrough_history as history
 import later_release_history as later_history
 import task_brief_disclosure_history as disclosure
 import task_brief_print_history as printing
+import brief_check_history
 
 SOURCE = '_source/technology/task-brief.html'
 PAGE = 'technology/task-brief/index.html'
@@ -80,7 +81,8 @@ class TaskBriefWalkthroughTests(unittest.TestCase):
         self.assertEqual(b['id'], 'task-brief')
         self.assertEqual(b, {**a, 'updated': '2026-10-21'})
         ns = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
-        xml = ET.fromstring((ROOT / 'sitemap.xml').read_text())
+        xml = ET.fromstring(brief_check_history.before(
+            'sitemap.xml', (ROOT / 'sitemap.xml').read_text()))
         rows = {n.findtext('s:loc', namespaces=ns): n.findtext('s:lastmod', namespaces=ns) for n in xml}
         self.assertEqual(rows['https://nolankido.com/technology/task-brief/'], '2026-10-21')
         self.assertEqual(history.pages(current), old)

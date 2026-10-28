@@ -13,6 +13,7 @@ from playwright.sync_api import sync_playwright, expect
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 from browser import html_for
+from field_guide_browser import wait_for_fonts
 parser=argparse.ArgumentParser();parser.add_argument('--offline',action='store_true');args=parser.parse_args()
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
@@ -428,6 +429,152 @@ try:
                 with p.expect_download() as d:link.click()
                 assert Path(d.value.path()).read_bytes()==(ROOT/'downloads/ai-task-brief.txt').read_bytes()
         c.close();report['functional']+=1
+    # A brief is deliberately ephemeral. The new native handoff must preserve
+    # it during same-page reading, let the reader keep an exact copy, and reach
+    # a usable independent check before the documented page-exit clearing.
+    # These are real HTTP journeys; the offline mode cannot qualify navigation.
+    report.update(answer_handoff_journeys=0,answer_handoff_saved_briefs=0,
+                  answer_handoff_blank_downloads=0,answer_handoff_same_page=0,
+                  answer_handoff_return_clears=0,answer_handoff_method_choices=0,
+                  answer_handoff_records=0,answer_handoff_spacing=0,
+                  answer_handoff_print_layouts=0)
+    if not args.offline:
+        field_keys=['goal','materials','output','review','limits']
+        answer_path='/technology/check-ai-answers/'
+
+        def handoff_enter(p,target):
+            # Keyboard activation follows an observable, usable focus target.
+            # Do not activate a control still offscreen during smooth scrolling.
+            expect(target).to_be_visible()
+            target.focus()
+            expect(target).to_be_focused()
+            expect(target).to_be_in_viewport()
+            p.keyboard.press('Enter')
+
+        def readable_native_target(p,selector,label):
+            # Wait for the actual destination fonts, without scrolling the
+            # target into place or supplying different production styles.
+            wait_for_fonts(p)
+            target=p.locator(selector)
+            expect(target).to_be_in_viewport(ratio=1)
+            bounds=target.evaluate("""el => {
+                const r=el.getBoundingClientRect();
+                const header=document.querySelector('.site-header');
+                const sticky=header && ['fixed','sticky'].includes(getComputedStyle(header).position);
+                return {top:r.top,bottom:r.bottom,height:innerHeight,
+                        headerBottom:sticky?Math.max(0,header.getBoundingClientRect().bottom):0};
+            }""")
+            assert bounds['top']>=bounds['headerBottom']-1,(label,bounds)
+            assert bounds['bottom']<=bounds['height']+1,(label,bounds)
+
+        for javascript in [True,False]:
+            for width in [320,390,768,1440]:
+                c=browser.new_context(java_script_enabled=javascript,accept_downloads=True,
+                                      viewport={'width':width,'height':1000},
+                                      reduced_motion='no-preference' if javascript else 'reduce')
+                journey_requests=[]
+                def handoff_route(r):
+                    journey_requests.append((r.request.method,r.request.url))
+                    if urlsplit(r.request.url).hostname=='127.0.0.1':r.continue_()
+                    else:r.abort()
+                c.route('**/*',handoff_route)
+                p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
+                label={'width':width,'javascript':javascript}
+                try:
+                    response=p.goto(base+path)
+                    assert response and response.status==200,label
+                    wait_for_fonts(p)
+                    if javascript:
+                        handoff_enter(p,p.locator('#brief-example-meeting summary'))
+                        handoff_enter(p,p.locator('[data-use-example="meeting"]'))
+                        goal=p.locator('#brief-goal').input_value()+' HANDOFF_TEST_ONLY'
+                        p.locator('#brief-goal').fill(goal)
+                        handoff_enter(p,p.locator('#brief-build'))
+                        expect(p.locator('#brief-result')).to_be_visible()
+                        fields={key:p.locator('#brief-'+key).input_value() for key in field_keys}
+                        saved_content=p.locator('#brief-text').input_value().encode('utf-8')
+                        with p.expect_download() as download:
+                            handoff_enter(p,p.locator('#brief-download'))
+                        same_page=p.locator('#brief-result-next a[href="#brief-next-check"]')
+                        report['answer_handoff_saved_briefs']+=1
+                    else:
+                        expect(p.locator('#brief-editor')).to_be_hidden()
+                        expect(p.locator('#brief-unavailable')).to_be_visible()
+                        saved_content=(ROOT/'downloads/ai-task-brief.txt').read_bytes()
+                        with p.expect_download() as download:
+                            handoff_enter(p,p.locator('#brief-blank a[download]'))
+                        same_page=p.locator('.entry-jumps a[href="#brief-next-check"]')
+                        report['answer_handoff_blank_downloads']+=1
+                    assert download.value.suggested_filename=='ai-task-brief.txt',label
+                    saved_file=Path(download.value.path())
+                    assert saved_file.read_bytes()==saved_content,label
+                    handoff_enter(p,same_page)
+                    expect(p).to_have_url(base+path+'#brief-next-check')
+                    readable_native_target(p,'#brief-next-check-title',label)
+                    handoff=p.locator('#brief-next-check')
+                    expect(handoff.locator('ol > li')).to_have_count(3)
+                    expect(handoff).to_contain_text('This builder clears its entries when you leave.')
+                    expect(handoff).to_contain_text('Add the chosen check to your saved copy')
+                    if javascript:
+                        assert {key:p.locator('#brief-'+key).input_value() for key in field_keys}==fields,label
+                        assert p.locator('#brief-text').input_value().encode('utf-8')==saved_content,label
+                        report['answer_handoff_same_page']+=1
+                    assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'),label
+                    if javascript and width in [390,1440]:
+                        handoff.screenshot(path=str(screenshots/f'task-brief-next-check-{width}.png'))
+                    # The no-script browser does not emit the stylesheet load
+                    # event awaited by add_style_tag. Use the same driver-only
+                    # insertion as the existing weekly-reset spacing checks.
+                    style=p.evaluate_handle(
+                        'css => { const el=document.createElement("style"); el.textContent=css; document.head.append(el); return el; }',
+                        spacing)
+                    assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'),('handoff spacing',label)
+                    style.evaluate('(el)=>el.remove()')
+                    report['answer_handoff_spacing']+=1
+                    p.emulate_media(media='print')
+                    if javascript:
+                        expect(handoff).to_be_hidden()
+                        expect(p.locator('#brief-result-next')).to_be_hidden()
+                        expect(p.locator('#brief-preview .brief-preview-part:visible')).to_have_count(6)
+                    else:
+                        expect(handoff).to_be_visible()
+                        expect(p.locator('#brief-next-check-title')).to_be_visible()
+                        expect(p.locator('#brief-blank .brief-template pre')).to_be_visible()
+                    assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'),('handoff print',label)
+                    p.emulate_media(media='screen')
+                    report['answer_handoff_print_layouts']+=1
+                    handoff_enter(p,handoff.locator('a[href="'+answer_path+'#review-start"]'))
+                    expect(p).to_have_url(base+answer_path+'#review-start')
+                    readable_native_target(p,'#review-start',label)
+                    expect(p.locator('.review-picker a')).to_have_count(6)
+                    handoff_enter(p,p.locator('.review-picker a[href="#review-summary"]'))
+                    expect(p).to_have_url(base+answer_path+'#review-summary')
+                    readable_native_target(p,'#review-summary',label)
+                    report['answer_handoff_method_choices']+=1
+                    p.go_back();expect(p).to_have_url(base+answer_path+'#review-start')
+                    p.go_back();expect(p).to_have_url(base+path+'#brief-next-check')
+                    if javascript:
+                        for key in field_keys:expect(p.locator('#brief-'+key)).to_have_value('')
+                        expect(p.locator('#brief-result')).to_be_hidden()
+                        expect(p.locator('#brief-text')).to_have_value('')
+                        report['answer_handoff_return_clears']+=1
+                    assert saved_file.read_bytes()==saved_content,('saved file after leaving',label)
+                    handoff_enter(p,p.locator('#brief-next-check a[href="'+answer_path+'#review-record"]'))
+                    expect(p).to_have_url(base+answer_path+'#review-record')
+                    readable_native_target(p,'#review-record',label)
+                    expect(p.locator('#review-completed-record')).to_be_visible()
+                    report['answer_handoff_records']+=1
+                    assert p.evaluate('localStorage.length+sessionStorage.length')==0,label
+                    assert c.cookies()==[],label
+                    assert all(method=='GET' and 'HANDOFF_TEST_ONLY' not in url
+                               for method,url in journey_requests),(label,journey_requests)
+                    report['answer_handoff_journeys']+=1
+                except Exception:
+                    p.screenshot(path=str(screenshots/f'task-brief-handoff-failure-{width}-{javascript}.png'),full_page=True)
+                    (screenshots/'task-brief-handoff-failure.json').write_text(
+                        json.dumps({'case':label,'url':p.url,'requests':journey_requests,'report':report},indent=2)+'\n')
+                    raise
+                finally:c.close()
     assert not errors,errors
     browser.close()
  print('TASK_BRIEF_REPORT='+json.dumps(report))
