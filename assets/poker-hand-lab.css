@@ -1,4 +1,12 @@
 /* Card foundations remain part of the existing course. */
+/* Keep native course bookmarks stable when page scripts are disabled. */
+@media (scripting: none) {
+  .page-poker-free-poker-learning-path {
+    --sans: "Segoe UI", Arial, sans-serif;
+    --serif: Georgia, "Times New Roman", serif;
+    --mono: Consolas, "Liberation Mono", monospace;
+  }
+}
 .hand-foundations { margin:36px 0; padding-top:24px; border-top:3px solid var(--red); }
 .hand-foundations :where(h2,h3) { scroll-margin-top:160px; }
 .hand-lab { border:1px solid var(--line-dark); padding:clamp(14px,3vw,28px); margin:28px 0; background:var(--paper-light); }

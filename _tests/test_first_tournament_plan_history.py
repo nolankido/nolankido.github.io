@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import first_tournament_plan_history as history
+import ranking_practice_history as subsequent_changes
 import build
 
 
@@ -17,8 +18,9 @@ class FirstTournamentPlanHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
-        cls.pages = build.public_pages()
+        cls.raw = {name: subsequent_changes.before(name, (ROOT / name).read_bytes())
+                   for name in history.PATHS}
+        cls.pages = subsequent_changes.pages(build.public_pages())
 
     def test_fifteen_current_files_are_bound_to_the_published_parent(self):
         self.assertEqual(set(self.record['paths']), {

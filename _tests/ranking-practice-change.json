@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "parent_commit": "dfdcdc64dd096f7bdcab0569f19d6cc466c5584b",
+  "parent_tree": "bfce9e3713ff4413450aff2dccb1a0b326f38748",
+  "paths": {
+    "_source/pages.json": {
+      "current_sha256": "a7cbb3b93806e87fac0efcbb4b07ca803240909cc28e77489ecf206f19889b09",
+      "parent_sha256": "a8054aae31450162f9a21a0bddff1045a9b1fa11d2ecb96a7b59818f73665ee5",
+      "edits": [
+        {
+          "start": 15874,
+          "end": 16027,
+          "current_sha256": "a52436094acb7dd771cd0d6a168ce19088c12ee8bb7a9918d38176a437c00ef5",
+          "old": "05\",\n    \"poker_guide\": true"
+        }
+      ]
+    },
+    "_source/poker/hand-rankings.html": {
+      "current_sha256": "4247769f697569b613056fa3b3e893ac616cb768928e25a979f330a41ade4180",
+      "parent_sha256": "12e66e982e63cd7175f38183c2cb51e1f769e6186859d8a86848c7f4f83664e1",
+      "edits": [
+        {
+          "start": 794,
+          "end": 836,
+          "current_sha256": "86ec3fa7bd8d50ceba1fd31fc84b6c6d4801ed42688dfefeeea16cc4ee8d0fd7",
+          "old": ""
+        },
+        {
+          "start": 24552,
+          "end": 25666,
+          "current_sha256": "27618270b4e38b8b1594527cab559ebba80e11ef69fb14f2bf54527759819b70",
+          "old": ""
+        },
+        {
+          "start": 26731,
+          "end": 26930,
+          "current_sha256": "3ee336494903b9cc1ee018e7c5f05b9c4323eabb03798a16e7a88f77255661f9",
+          "old": ""
+        }
+      ]
+    },
+    "assets/poker-hand-lab.css": {
+      "current_sha256": "2eeb2ad0dbf7d8fb2b7b4d828d8ea30dcc97e254b64997ad2450f5260c2ec9c2",
+      "parent_sha256": "4799a6fbbda1ffff1211c951cacc91bf5f2c84e25344c18efeda3cd8d420b996",
+      "edits": [
+        {
+          "start": 59,
+          "end": 350,
+          "current_sha256": "ccd26fc8393e7b6a10229891088a66dbc95b1249c88999489438b4321fa2963f",
+          "old": ""
+        }
+      ]
+    },
+    "find/index.html": {
+      "current_sha256": "7e4b493da15d88f32329e2faa6812d39450b6056f1e4b301ea90601ad8a1f15e",
+      "parent_sha256": "576675c835ad28ff80d12c57dcbb5c374e1ea60dc1baf69fdc4a444d87d10a5f",
+      "edits": [
+        {
+          "start": 116817,
+          "end": 116876,
+          "current_sha256": "1d96138d1406b5e5329974480cedba7302f6185ed926cf8550462ac4065f235e",
+          "old": ""
+        }
+      ]
+    },
+    "poker/find/index.html": {
+      "current_sha256": "15e9469e43fdca9fc6bb1b298f830aa322f2b20163f64b0bb7d5cb44a3173a4f",
+      "parent_sha256": "717a9323fb0528b88a7eb6e79a44164315597093f40ce66185b5ecf9952f8e8c",
+      "edits": [
+        {
+          "start": 56122,
+          "end": 57996,
+          "current_sha256": "5c48968814d1ad99a006ca248edc017361c029a8f2cd0ff3a46385998901f88b",
+          "old": " During an unfinished hand, the leader can change when another board card arrives. A ranking chart answers who wins with the cards available; it does not by itself tell you who should bet or call.</p><p data-finder-passage data-anchor=\"guide-sources\" data-heading=\"References and limits\">PokerStars: traditional hand ranks ; WSOP: five-card comparisons and ties . References checked October 5, 2026. Explanations and examples are written for this site. Event structures and house rulings can differ; this is not a tournament rulebook or a guarantee of profitable play. External references may contain commercial offers; no account or purchase is needed to read this guide. Published October 5, 2026 . Prepared with AI assistance. Use learning materials away from live play; follow the event&#x27;s device and assistance rules"
+        }
+      ]
+    },
+    "poker/free-poker-learning-path/index.html": {
+      "current_sha256": "ad5d64c1ce2add1f41171afb1730129ea6b0ebfd89bff1d50819cb9de8347cd8",
+      "parent_sha256": "0171191be048092bac27bf1e9504cdaa90f3b166822424ecaa392480b80feb02",
+      "edits": [
+        {
+          "start": 3579,
+          "end": 3591,
+          "current_sha256": "ef7e68491d855f2bb7d619de5dabe2525a2c3614e115f8a615126a8ff87b1fd1",
+          "old": "4799a6fbbda1"
+        }
+      ]
+    },
+    "poker/hand-rankings/index.html": {
+      "current_sha256": "d11380676a14613e422127d90b78a6db7ab578a44d1d7b57c243488f37886d44",
+      "parent_sha256": "31fb0b50bf14febb5ac1619f4dd854a077be9d425f331872dc5bbfdb051d2f4b",
+      "edits": [
+        {
+          "start": 3000,
+          "end": 3002,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "05"
+        },
+        {
+          "start": 3970,
+          "end": 3972,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "05"
+        },
+        {
+          "start": 7523,
+          "end": 7951,
+          "current_sha256": "1b1ae2bbca1d47ecaa744dc46edf9f818c48c302c9a5f6de576cf80e829891ad",
+          "old": "05\">October 5, 2026</time></span></p><details class=\"reader-outline\"><summary>On this page <span class=\"reader-outline-count\">4 sections</span></summary><nav aria-label=\"On this page\"><ol><li><a href=\"#rankings\">Strongest to weakest</a></li><li><a href=\"#ties\">Compare only the best five cards</a></li><li><a href=\"#compare\">Four fictional showdowns"
+        },
+        {
+          "start": 8799,
+          "end": 8841,
+          "current_sha256": "86ec3fa7bd8d50ceba1fd31fc84b6c6d4801ed42688dfefeeea16cc4ee8d0fd7",
+          "old": ""
+        },
+        {
+          "start": 32557,
+          "end": 33671,
+          "current_sha256": "27618270b4e38b8b1594527cab559ebba80e11ef69fb14f2bf54527759819b70",
+          "old": ""
+        },
+        {
+          "start": 34736,
+          "end": 34935,
+          "current_sha256": "3ee336494903b9cc1ee018e7c5f05b9c4323eabb03798a16e7a88f77255661f9",
+          "old": ""
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "current_sha256": "76a07cd983941c43dabe1aad3aadba58a6450cdeb3cbf579457fac1817a14103",
+      "parent_sha256": "a82c7f44fb8f5bb8ecba0ff02854df3027a0b3b40d691fc5ac29847fcbdf89ff",
+      "edits": [
+        {
+          "start": 3299,
+          "end": 3301,
+          "current_sha256": "670671cd97404156226e507973f2ab8330d3022ca96e0c93bdbdb320c41adcaf",
+          "old": "05"
+        }
+      ]
+    }
+  },
+  "pages": {
+    "poker-hand-rankings": {
+      "old": {
+        "id": "poker-hand-rankings",
+        "path": "/poker/hand-rankings/",
+        "title": "Which hand wins?",
+        "seo_title": "Poker Hand Rankings: Which Hand Wins? | Nolan Kido",
+        "description": "A visual reference to the ten familiar hand labels, followed by the kicker, shared-board, and ace-low situations that often confuse new viewers.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/hand-rankings.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-05",
+        "poker_guide": true
+      },
+      "new": {
+        "id": "poker-hand-rankings",
+        "path": "/poker/hand-rankings/",
+        "title": "Which hand wins?",
+        "seo_title": "Poker Hand Rankings: Which Hand Wins? | Nolan Kido",
+        "description": "A visual reference to the ten familiar hand labels, followed by the kicker, shared-board, and ace-low situations that often confuse new viewers.",
+        "kicker": "Poker / Viewer library",
+        "source": "poker/hand-rankings.html",
+        "section": "poker",
+        "date": "2026-10-05",
+        "updated": "2026-10-27",
+        "poker_guide": true,
+        "revision": "Connected the showdown explanations to the existing card-building practice and a private correction note."
+      }
+    }
+  }
+}

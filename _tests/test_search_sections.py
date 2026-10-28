@@ -14,6 +14,7 @@ import search_sections_history as history
 import time_examples_history
 import poker_titles_history
 import first_tournament_plan_history as subsequent_changes
+import ranking_practice_history
 from test_site import Page
 
 class SearchSectionsTests(unittest.TestCase):
@@ -51,13 +52,20 @@ class SearchSectionsTests(unittest.TestCase):
         prior_outputs={p:subsequent_changes.before(p,d) for p,d in self.outputs.items()}
         prior_index=search_sections.index(prior_outputs,subsequent_changes.pages(self.pages))
         self.assertEqual(sum(map(len,prior_index.values())),1142)
-        # The current release adds exactly one major heading. Keep all prior
-        # rows, labels and order, and continue checking current destinations,
-        # packed data and payload limits below.
-        self.assertEqual(set(self.index),set(prior_index))
+        # Keep the approved first-event heading at its exact historical view.
+        # The actual current index is checked separately for the practice
+        # heading, including all destinations, packed data and payload limits.
+        tournament_outputs={p:ranking_practice_history.before(p,d) for p,d in self.outputs.items()}
+        tournament_index=search_sections.index(tournament_outputs,ranking_practice_history.pages(self.pages))
+        self.assertEqual(set(tournament_index),set(prior_index))
         for path,rows in prior_index.items():
             expected=([['first-event-plan-title','A small plan for your first tournament.']]+rows
                       if path=='/poker/first-live-tournament/' else rows)
+            self.assertEqual(tournament_index[path],expected,path)
+        self.assertEqual(set(self.index),set(tournament_index))
+        for path,rows in tournament_index.items():
+            expected=(rows[:3]+[['practice-next-title','Build one different hand yourself.']]+rows[3:]
+                      if path=='/poker/hand-rankings/' else rows)
             self.assertEqual(self.index[path],expected,path)
         self.assertEqual(self.index['/technology/'].count(
             ['ai-works-human-decides-title', 'AI Works Human Decides']), 1)

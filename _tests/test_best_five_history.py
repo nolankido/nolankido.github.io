@@ -46,7 +46,7 @@ class BestFiveHistoryTests(unittest.TestCase):
 
     def test_corrupt_records_cannot_reconstruct_history(self):
         name = 'poker/hand-rankings/index.html'
-        raw = (ROOT / name).read_bytes()
+        raw = subsequent_changes.before(name, (ROOT / name).read_bytes())
         corrupt = deepcopy(history.change())
         corrupt['paths'][name]['old_sha256'] = '0' * 64
         with patch.object(history, 'change', return_value=corrupt), self.assertRaises(ValueError):
