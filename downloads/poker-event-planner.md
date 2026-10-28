@@ -16,7 +16,22 @@ Starting stack / starting blinds / ante:
 Expected arrival level and stack in big blinds:
 Registration cutoff and what must be completed by it:
 Identification / membership / payment requirements:
+
+## Confirm a detail that could change the outing
 Unresolved question for the organizer:
+Answer and conditions for this event / flight, if available:
+Official source or organizer response, with its date if stated:
+Date I checked this answer:
+Status (confirmed for this event / unresolved / conflicting):
+What I will do before paying if this stays unresolved:
+
+Repeat this small record for another consequential question if needed.
+A blank field or the absence of a warning is not confirmation.
+If sources conflict, ask the organizer which applies to this event / flight.
+
+## My entry decision
+Enter / wait for confirmation / watch if permitted / choose another day:
+Reason and conditions that still need to be resolved before paying:
 
 ## Plan the day
 Start / scheduled breaks / day-ending condition:

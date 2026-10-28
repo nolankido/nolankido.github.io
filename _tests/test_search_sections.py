@@ -13,6 +13,7 @@ import build,search_sections,site_find
 import search_sections_history as history
 import time_examples_history
 import poker_titles_history
+import first_tournament_plan_history as subsequent_changes
 from test_site import Page
 
 class SearchSectionsTests(unittest.TestCase):
@@ -47,7 +48,17 @@ class SearchSectionsTests(unittest.TestCase):
         # Turn 04 and the approved positioning release each add one visible
         # heading on the Technology overview.
         # Historical 1,140-entry baselines remain pinned separately.
-        self.assertEqual(sum(map(len,self.index.values())),1142)
+        prior_outputs={p:subsequent_changes.before(p,d) for p,d in self.outputs.items()}
+        prior_index=search_sections.index(prior_outputs,subsequent_changes.pages(self.pages))
+        self.assertEqual(sum(map(len,prior_index.values())),1142)
+        # The current release adds exactly one major heading. Keep all prior
+        # rows, labels and order, and continue checking current destinations,
+        # packed data and payload limits below.
+        self.assertEqual(set(self.index),set(prior_index))
+        for path,rows in prior_index.items():
+            expected=([['first-event-plan-title','A small plan for your first tournament.']]+rows
+                      if path=='/poker/first-live-tournament/' else rows)
+            self.assertEqual(self.index[path],expected,path)
         self.assertEqual(self.index['/technology/'].count(
             ['ai-works-human-decides-title', 'AI Works Human Decides']), 1)
         self.assertIn(['notes-to-plan-title', 'From scattered advice to one usable weekly plan.'], self.index['/technology/'])
