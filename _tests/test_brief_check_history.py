@@ -20,6 +20,10 @@ PUBLISHED_PARENT_HASHES = {
         'a7cbb3b93806e87fac0efcbb4b07ca803240909cc28e77489ecf206f19889b09',
     '_source/technology/task-brief.html':
         '037275484fcd3e44015634932718cd16f81edcb43b92c95eb510cc0b309b0614',
+    'assets/task-brief.css':
+        '57707dd227c72c92b59444e06157f3d67c4cbd72debf8dc087633116b2b333b7',
+    'assets/task-brief.js':
+        '95f5b8a46ba9d8dbfc62631be2fb85b2ae976bc9103ed67873085a25e14a5341',
     'find/index.html':
         '7e4b493da15d88f32329e2faa6812d39450b6056f1e4b301ea90601ad8a1f15e',
     'sitemap.xml':
@@ -36,7 +40,7 @@ class BriefCheckHistoryTests(unittest.TestCase):
         cls.raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
         cls.pages = json.loads(cls.raw['_source/pages.json'])
 
-    def test_five_current_files_restore_the_independently_captured_parent(self):
+    def test_seven_current_files_restore_the_independently_captured_parent(self):
         self.assertEqual(set(self.record['paths']), set(PUBLISHED_PARENT_HASHES))
         self.assertEqual(history.PATHS, set(PUBLISHED_PARENT_HASHES))
         self.assertEqual(self.record['parent_commit'],

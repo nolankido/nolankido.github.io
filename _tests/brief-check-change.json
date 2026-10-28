@@ -16,7 +16,7 @@
       ]
     },
     "_source/technology/task-brief.html": {
-      "current_sha256": "a13aca92d878967c8a1d30e4fe3488908925c073c6e327d91f4227ee87e08c96",
+      "current_sha256": "e876406d4887e009d38f59c34fb2539732a040e3588c395c7fc0bc5e3f1c471c",
       "parent_sha256": "037275484fcd3e44015634932718cd16f81edcb43b92c95eb510cc0b309b0614",
       "edits": [
         {
@@ -33,8 +33,32 @@
         },
         {
           "start": 21742,
-          "end": 23346,
-          "current_sha256": "20c580ed98086c2a8443a0c1900c958ab79459a343381a3c1de7cff1c0c8e703",
+          "end": 23347,
+          "current_sha256": "13149fb6bfee81556c5be86fc01cd252484980fd2a0bc7e7cf3c9b6c90e96adf",
+          "old": ""
+        }
+      ]
+    },
+    "assets/task-brief.css": {
+      "current_sha256": "57f1150bb05905286bedfb9d73ed65bf38fce8b43e598afd0ff0559d82077299",
+      "parent_sha256": "57707dd227c72c92b59444e06157f3d67c4cbd72debf8dc087633116b2b333b7",
+      "edits": [
+        {
+          "start": 290,
+          "end": 614,
+          "current_sha256": "3978ff25c0922571e2c7f1f11670db98eb9cc4351a4a9f4044ecbd85d952171f",
+          "old": ""
+        }
+      ]
+    },
+    "assets/task-brief.js": {
+      "current_sha256": "3c31d53367d23338f7710992e3e8ab4c2806adc0ac05cc47bc6e0d4a1092a6c8",
+      "parent_sha256": "95f5b8a46ba9d8dbfc62631be2fb85b2ae976bc9103ed67873085a25e14a5341",
+      "edits": [
+        {
+          "start": 9702,
+          "end": 11062,
+          "current_sha256": "ad071e34c761f3e1fd7caa684388bc573b408586f6ecdb95724636c644bd344c",
           "old": ""
         }
       ]
@@ -64,9 +88,15 @@
       ]
     },
     "technology/task-brief/index.html": {
-      "current_sha256": "e8bc14d4f3459cbcfad4106e015dddba54016750e1f29005a2b4b3385f79a1af",
+      "current_sha256": "aa7da94acb4fc7e4d736d42cb4c24f9a7c4e0cf4bfd35c8cfcb238e3cc1255c3",
       "parent_sha256": "54a63337a2cc037eec8f8a0ba05c84a80dfe25ba2d903b44829a59e95d4db5b9",
       "edits": [
+        {
+          "start": 2805,
+          "end": 2875,
+          "current_sha256": "900834127e3847af869ae81d93e3227140d3e62aeb3372d75713d4a5dfeb194d",
+          "old": "707dd227c7\">\n  <script defer src=\"/assets/task-brief.js?v=95f5b8a46ba9"
+        },
         {
           "start": 4006,
           "end": 4007,
@@ -87,8 +117,8 @@
         },
         {
           "start": 29918,
-          "end": 31522,
-          "current_sha256": "12c772372fd9595e4f5256b237eb7408509f1a2ebf7d12208acaaf28bdca4a15",
+          "end": 31523,
+          "current_sha256": "198f777c0a82a1fced98ecfeb57824dc48bcd34b058586a1cbc3bc3815f079d2",
           "old": ""
         }
       ]

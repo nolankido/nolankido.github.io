@@ -18,6 +18,7 @@ PARENT = '427f258ad895cfc736d3d29944347ea584f04826'
 PARENT_TREE = 'f51ffdb98ccb618896e25d6d729cc7919536a92d'
 PATHS = frozenset({
     '_source/pages.json', '_source/technology/task-brief.html',
+    'assets/task-brief.css', 'assets/task-brief.js',
     'find/index.html', 'sitemap.xml', 'technology/task-brief/index.html',
 })
 PAGE_ID = 'task-brief'

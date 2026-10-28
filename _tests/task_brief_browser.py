@@ -7,6 +7,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
+from time import monotonic
 from urllib.parse import urlsplit
 import json, os, sys, re
 from playwright.sync_api import sync_playwright, expect
@@ -229,6 +230,10 @@ try:
     print_context.route('**/*',print_route)
     p=print_context.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
     render(p);p.evaluate('document.fonts.ready')
+    # The browser can request its favicon after load/font readiness. Finish
+    # that startup activity before enforcing the unchanged zero-request print
+    # boundary; do not discard a later request from the assertion below.
+    if not args.offline:p.wait_for_load_state('networkidle')
     print_initial_requests=len(print_network_requests);print_initial_url=p.url
     # Return undefined when installing the stub: Playwright otherwise invokes a
     # function returned by an assignment expression, creating a phantom request.
@@ -437,15 +442,20 @@ try:
                   answer_handoff_blank_downloads=0,answer_handoff_same_page=0,
                   answer_handoff_return_clears=0,answer_handoff_method_choices=0,
                   answer_handoff_records=0,answer_handoff_spacing=0,
-                  answer_handoff_print_layouts=0)
+                  answer_handoff_print_layouts=0,answer_handoff_cold_arrivals=0,
+                  answer_handoff_delayed_font_arrivals=0,
+                  answer_handoff_scripted_delayed_arrivals=0,
+                  answer_handoff_cancelled_arrivals=0)
     if not args.offline:
         field_keys=['goal','materials','output','review','limits']
         answer_path='/technology/check-ai-answers/'
 
         def handoff_enter(p,target):
             # Keyboard activation follows an observable, usable focus target.
-            # Do not activate a control still offscreen during smooth scrolling.
+            # Position the source control as a reader can before focusing it;
+            # never scroll a link's destination to manufacture an arrival.
             expect(target).to_be_visible()
+            target.scroll_into_view_if_needed()
             target.focus()
             expect(target).to_be_focused()
             expect(target).to_be_in_viewport()
@@ -454,8 +464,22 @@ try:
         def readable_native_target(p,selector,label):
             # Wait for the actual destination fonts, without scrolling the
             # target into place or supplying different production styles.
+            # A matching URL alone does not mean the new document has loaded.
+            p.wait_for_load_state('load')
             wait_for_fonts(p)
             target=p.locator(selector)
+            # Observe native smooth scrolling until it has actually stopped.
+            # Driver polling also works when page scripts are disabled.
+            deadline=monotonic()+5
+            previous=None;stable_since=None
+            while True:
+                position=target.evaluate('el => ({y:scrollY,top:el.getBoundingClientRect().top})')
+                now=monotonic()
+                if previous==position:
+                    if stable_since is not None and now-stable_since>=0.3:break
+                else:stable_since=now;previous=position
+                assert now<deadline,('native scroll did not settle',label,position)
+                p.wait_for_timeout(50)
             expect(target).to_be_in_viewport(ratio=1)
             bounds=target.evaluate("""el => {
                 const r=el.getBoundingClientRect();
@@ -466,6 +490,120 @@ try:
             }""")
             assert bounds['top']>=bounds['headerBottom']-1,(label,bounds)
             assert bounds['bottom']<=bounds['height']+1,(label,bounds)
+
+        def brief_font_mode(p,javascript):
+            fonts=p.evaluate('''() => ({disabled:matchMedia('(scripting: none)').matches,
+                body:['--sans','--serif','--mono'].map(name=>getComputedStyle(document.body).getPropertyValue(name)),
+                root:['--sans','--serif','--mono'].map(name=>getComputedStyle(document.documentElement).getPropertyValue(name)),
+                requests:performance.getEntriesByType('resource').filter(item=>item.name.includes('.woff')).map(item=>item.name)
+            })''')
+            assert fonts['disabled']==(not javascript),fonts
+            if javascript:assert fonts['body']==fonts['root'],fonts
+            else:
+                assert all(body!=root for body,root in zip(fonts['body'],fonts['root'])),fonts
+                assert fonts['requests']==[],fonts
+
+        # Both the public section bookmark and the indexed heading must work
+        # on a fresh arrival, with normal native motion and the shipped fonts.
+        for javascript in [True,False]:
+            for width in [320,390,768,1440]:
+                for fragment in ['brief-next-check','brief-next-check-title']:
+                    c=browser.new_context(java_script_enabled=javascript,
+                                          viewport={'width':width,'height':1000})
+                    c.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
+                    p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
+                    label={'width':width,'javascript':javascript,'fragment':fragment}
+                    try:
+                        response=p.goto(base+path+'#'+fragment)
+                        assert response and response.status==200,label
+                        expect(p).to_have_url(base+path+'#'+fragment)
+                        readable_native_target(p,'#brief-next-check-title',label)
+                        brief_font_mode(p,javascript)
+                        assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'),label
+                        assert p.evaluate('localStorage.length+sessionStorage.length')==0,label
+                        assert c.cookies()==[],label
+                        if not javascript and width==320 and fragment=='brief-next-check-title':
+                            p.screenshot(path=str(screenshots/'task-brief-cold-native-320.png'))
+                        report['answer_handoff_cold_arrivals']+=1
+                    except Exception:
+                        p.screenshot(path=str(screenshots/f'task-brief-cold-failure-{width}-{javascript}-{fragment}.png'))
+                        raise
+                    finally:c.close()
+
+        # Reproduce the specific no-script font race by holding the actual font
+        # definitions until DOMContentLoaded. No CSS or scroll correction is
+        # substituted by the driver, and the browser keeps normal motion.
+        c=browser.new_context(java_script_enabled=False,viewport={'width':320,'height':1000})
+        c.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
+        held=[];c.route('**/site-fonts.css*',lambda r:held.append(r))
+        p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
+        try:
+            response=p.goto(base+path+'#brief-next-check-title',wait_until='domcontentloaded')
+            assert response and response.status==200
+            assert held,'The delayed-font fixture did not intercept the actual font stylesheet'
+            c.unroute('**/site-fonts.css*')
+            for request in held:request.continue_()
+            readable_native_target(p,'#brief-next-check-title',{'width':320,'javascript':False,'fonts':'delayed'})
+            brief_font_mode(p,False)
+            expect(p).to_have_url(base+path+'#brief-next-check-title')
+            p.screenshot(path=str(screenshots/'task-brief-delayed-native-320.png'))
+            report['answer_handoff_delayed_font_arrivals']+=1
+        finally:c.close()
+
+        # The production arrival repair may adjust an untouched initial
+        # bookmark once. Real reader input, scrolling or another destination
+        # must cancel that pending adjustment while fonts are still delayed.
+        for mode in ['arrival','typing','wheel','navigation']:
+            c=browser.new_context(viewport={'width':320,'height':1000})
+            c.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
+            held=[];c.route('**/*.woff2*',lambda r:held.append(r))
+            c.add_init_script('''(() => {
+                const original=window.scrollTo;
+                window.briefArrivalCalls=[];
+                window.scrollTo=function(...args){window.briefArrivalCalls.push(args);return original.apply(window,args);};
+                window.briefWheelEvents=0;
+                addEventListener('wheel',()=>{window.briefWheelEvents+=1;},{passive:true});
+            })();''')
+            p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)))
+            try:
+                response=p.goto(base+path+'#brief-next-check',wait_until='domcontentloaded')
+                assert response and response.status==200,mode
+                expect(p.locator('#brief-editor')).to_be_visible()
+                assert held,('No real font was held',mode)
+                focus_before=p.evaluate('document.activeElement.id')
+                if mode=='typing':
+                    field=p.locator('#brief-goal')
+                    field.scroll_into_view_if_needed();field.focus()
+                    p.keyboard.type('Keep this typed check private.')
+                    expect(field).to_have_value('Keep this typed check private.')
+                elif mode=='wheel':
+                    p.mouse.wheel(0,300)
+                    p.wait_for_function('window.briefWheelEvents>0')
+                elif mode=='navigation':
+                    handoff_enter(p,p.locator('.entry-jumps a[href="#brief-blank"]'))
+                    expect(p).to_have_url(base+path+'#brief-blank')
+                c.unroute('**/*.woff2*')
+                for request in held:request.continue_()
+                p.wait_for_load_state('load');wait_for_fonts(p)
+                p.evaluate('() => new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
+                if mode=='arrival':
+                    readable_native_target(p,'#brief-next-check-title',{'fonts':'delayed','mode':mode})
+                    assert len(p.evaluate('window.briefArrivalCalls'))==1
+                    assert p.evaluate('document.activeElement.id')==focus_before
+                    p.screenshot(path=str(screenshots/'task-brief-scripted-delayed-320.png'))
+                    report['answer_handoff_scripted_delayed_arrivals']+=1
+                else:
+                    assert p.evaluate('window.briefArrivalCalls')==[],mode
+                    if mode=='typing':
+                        expect(p.locator('#brief-goal')).to_be_focused()
+                        expect(p.locator('#brief-goal')).to_have_value('Keep this typed check private.')
+                        expect(p.locator('#brief-result')).to_be_hidden()
+                    if mode=='navigation':expect(p).to_have_url(base+path+'#brief-blank')
+                    report['answer_handoff_cancelled_arrivals']+=1
+            except Exception:
+                p.screenshot(path=str(screenshots/f'task-brief-delayed-{mode}-failure.png'))
+                raise
+            finally:c.close()
 
         for javascript in [True,False]:
             for width in [320,390,768,1440]:
@@ -543,15 +681,23 @@ try:
                     assert p.evaluate('document.documentElement.scrollWidth<=innerWidth'),('handoff print',label)
                     p.emulate_media(media='screen')
                     report['answer_handoff_print_layouts']+=1
-                    handoff_enter(p,handoff.locator('a[href="'+answer_path+'#review-start"]'))
-                    expect(p).to_have_url(base+answer_path+'#review-start')
-                    readable_native_target(p,'#review-start',label)
+                    handoff_enter(p,handoff.locator('a[href="'+answer_path+'"]'))
+                    expect(p).to_have_url(base+answer_path)
+                    readable_native_target(p,'#main h1',label)
                     expect(p.locator('.review-picker a')).to_have_count(6)
                     handoff_enter(p,p.locator('.review-picker a[href="#review-summary"]'))
                     expect(p).to_have_url(base+answer_path+'#review-summary')
                     readable_native_target(p,'#review-summary',label)
                     report['answer_handoff_method_choices']+=1
-                    p.go_back();expect(p).to_have_url(base+answer_path+'#review-start')
+                    p.go_back();expect(p).to_have_url(base+answer_path)
+                    # Keep the guide's context first, then follow its existing
+                    # native link to the completed record in the loaded page.
+                    handoff_enter(p,p.locator('a[href="#review-completed-record"]'))
+                    expect(p).to_have_url(base+answer_path+'#review-completed-record')
+                    readable_native_target(p,'#review-completed-title',label)
+                    expect(p.locator('#review-completed-record')).to_be_visible()
+                    report['answer_handoff_records']+=1
+                    p.go_back();expect(p).to_have_url(base+answer_path)
                     p.go_back();expect(p).to_have_url(base+path+'#brief-next-check')
                     if javascript:
                         for key in field_keys:expect(p.locator('#brief-'+key)).to_have_value('')
@@ -559,11 +705,6 @@ try:
                         expect(p.locator('#brief-text')).to_have_value('')
                         report['answer_handoff_return_clears']+=1
                     assert saved_file.read_bytes()==saved_content,('saved file after leaving',label)
-                    handoff_enter(p,p.locator('#brief-next-check a[href="'+answer_path+'#review-record"]'))
-                    expect(p).to_have_url(base+answer_path+'#review-record')
-                    readable_native_target(p,'#review-record',label)
-                    expect(p.locator('#review-completed-record')).to_be_visible()
-                    report['answer_handoff_records']+=1
                     assert p.evaluate('localStorage.length+sessionStorage.length')==0,label
                     assert c.cookies()==[],label
                     assert all(method=='GET' and 'HANDOFF_TEST_ONLY' not in url
@@ -571,8 +712,16 @@ try:
                     report['answer_handoff_journeys']+=1
                 except Exception:
                     p.screenshot(path=str(screenshots/f'task-brief-handoff-failure-{width}-{javascript}.png'),full_page=True)
+                    arrival=p.evaluate('''() => ({scrollY,fonts:document.fonts.status,
+                        readyState:document.readyState,
+                        headings:Object.fromEntries(['brief-next-check-title','review-start','review-summary','review-record','review-completed-title'].map(id=>{
+                            const el=document.getElementById(id); return [id,el?el.getBoundingClientRect().toJSON():null];
+                        })),
+                        header:document.querySelector('.site-header')?.getBoundingClientRect().toJSON()
+                    })''')
                     (screenshots/'task-brief-handoff-failure.json').write_text(
-                        json.dumps({'case':label,'url':p.url,'requests':journey_requests,'report':report},indent=2)+'\n')
+                        json.dumps({'case':label,'url':p.url,'arrival':arrival,
+                                    'requests':journey_requests,'report':report},indent=2)+'\n')
                     raise
                 finally:c.close()
     assert not errors,errors
