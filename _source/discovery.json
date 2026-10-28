@@ -8,6 +8,11 @@
     "finishing-is-a-decision": ["creative", "living-well"]
   },
   "also_in": {
+    "/technology/ai-book-continuity-checker/": ["creative"],
+    "/technology/dinner-on-time/": ["living-well"],
+    "/technology/ai-weekly-reset/": ["living-well"],
+    "/technology/organize-public-notes/": ["living-well"],
+    "/living-well/ai-and-personal-productivity/": ["technology"],
     "/living-well/technology-for-real-life/": ["technology"],
     "/living-well/decide-what-matters/": ["technology"],
     "/living-well/what-to-decide-yourself/": ["technology"],

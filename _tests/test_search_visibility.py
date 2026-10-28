@@ -18,6 +18,7 @@ import follow
 import poker_content
 import presentation
 import search_visibility as search
+import visibility_discovery_history
 
 
 class SearchVisibilityTests(unittest.TestCase):
@@ -166,7 +167,7 @@ class SearchVisibilityTests(unittest.TestCase):
         self.assertNotIn('measured productivity gain',tool.lower().replace('not a measured productivity gain',''))
 
     def test_original_about_prose_is_preserved_beside_the_new_work_links(self):
-        source=(ROOT/'_source/about.html').read_text()
+        source=visibility_discovery_history.before('_source/about.html',(ROOT/'_source/about.html').read_text())
         public_links='<p class="small-copy" id="public-work-profiles">You can also explore ${public_work_profiles}.</p>\n'
         self.assertEqual(source.count(public_links), 1)
         source=source.replace(public_links, '', 1)

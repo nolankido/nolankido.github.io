@@ -115,6 +115,8 @@ def change() -> dict:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import visibility_discovery_history
+    data = visibility_discovery_history.before(path, data)
     item = change()['paths'].get(key(path))
     if item is None or digest(data) != item['current_sha256']:
         return data
@@ -133,6 +135,8 @@ def _records(records: list[dict], field: str) -> list[dict]:
 
 
 def pages(records: list[dict]) -> list[dict]:
+    import visibility_discovery_history
+    records = visibility_discovery_history.pages(records)
     return _records(records, 'pages')
 
 
@@ -141,4 +145,21 @@ def entries(records: list[dict]) -> list[dict]:
 
 
 def outputs(records: dict) -> dict:
+    import visibility_discovery_history
+    records = visibility_discovery_history.outputs(records)
     return {path: before(path, value) for path, value in records.items()}
+
+
+def source_records(records: dict) -> dict:
+    import visibility_discovery_history
+    return visibility_discovery_history.source_records(records)
+
+
+def files(paths):
+    import visibility_discovery_history
+    return visibility_discovery_history.files(paths)
+
+
+def live_targets(records: dict) -> dict:
+    import visibility_discovery_history
+    return visibility_discovery_history.live_targets(records)

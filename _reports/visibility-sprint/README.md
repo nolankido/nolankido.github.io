@@ -6,7 +6,7 @@ The goal is greater visibility for Nolan Kido's practical use of AI alongside Te
 
 ## Scope and status
 
-The implementation below is prepared for release. The release-verification record will identify the checks and published commit after they have actually completed.
+The core implementation was published in [PR150](https://github.com/nolankido/nolankido.github.io/pull/150), followed by six contextual links from four existing Living Well guides in [PR151](https://github.com/nolankido/nolankido.github.io/pull/151). Both published trees passed the required checks and exact public-response verification. The table records what was implemented and what still needs evidence or measurement.
 
 | Turn | Planned improvement | Disposition in this sprint |
 | --- | --- | --- |
@@ -31,6 +31,13 @@ The implementation below is prepared for release. The release-verification recor
 | 19 | Reinforce public profile connections | Website connections implemented. External profile wording prepared in `profile-link-updates.md`; it has not been posted to another service. |
 | 20 | Choose the next work from observed performance | Pending a meaningful observation window and access to search/citation/referral data. |
 
+## Published follow-ups
+
+- October 28, 2026: PR150 published six source-supported cases and the related identity, hub, archive, feed, search, sitemap, image, and preview improvements. Its full release gate passed 1,163 unit tests and all five browser groups. The [public-response check](https://github.com/nolankido/nolankido.github.io/actions/runs/40664532327/job/122735579913) verified 494 of 494 targets for commit `116359834b8b48dbd1526c68392d89f9dd7bf1a0`.
+- October 28, 2026: PR151 connected notes organization, small creative work, tool evaluation, and personal productivity guidance to the published cases. Its full release gate passed 1,172 unit tests and all five browser groups. The [public-response check](https://github.com/nolankido/nolankido.github.io/actions/runs/40671626565/job/122759561157) verified 494 of 494 targets for commit `1f315095cef741bd1afe6fe3bcba8b11216b0d0e`.
+
+These are implementation receipts, not search-performance results. The current discovery follow-up is described in `discovery-follow-up.md`; its pull request will retain the final tested and published commit receipts.
+
 ## Measurement handoff
 
 The existing public site had 189 sitemap URLs. All 189 returned HTTP 200 in the audit, with unique titles/descriptions and self-canonical URLs. This is a crawl baseline, not proof that any engine indexed those pages. Search Console performance data was unavailable during this audit, so its missing metrics are stored as null rather than zero.
@@ -38,6 +45,7 @@ The existing public site had 189 sitemap URLs. All 189 returned HTTP 200 in the 
 When the native dashboards or an export are available, record the same date range, property, country, and device scope for each comparison:
 
 - Google Search Console: page and query impressions, clicks, average position, and indexed/canonical status for the new URLs. Separate name searches from practical-task searches.
+- Google Search Console's [Generative AI performance report](https://support.google.com/webmasters/answer/16984139), when present: record AI Overview and AI Mode impressions by page over the same period, country, and device scope. An absent report can reflect insufficient impressions; it is not a verified zero. Keep unavailable values distinct from zero, including exports that replace unavailable display values with zeros.
 - Bing Webmaster Tools: indexed/crawled URLs, search performance, and any available AI citation reporting, preserving the provider's definition and reporting window.
 - Existing Umami dashboard: landing pages and identifiable AI referral sources. Direct/unknown visits cannot safely be attributed to AI assistants.
 - Repeated manual answer checks: record the exact prompt, provider, date, locale, account/personalization state, cited URLs, and answer. These are samples, not a population-level visibility score.

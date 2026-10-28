@@ -147,14 +147,20 @@ def _records(records: dict, additions: dict) -> dict:
 
 
 def outputs(records: dict) -> dict:
+    import living_well_case_links_history
+    records = living_well_case_links_history.outputs(records)
     return _records(records, change()['added_outputs'])
 
 
 def source_records(records: dict) -> dict:
+    import living_well_case_links_history
+    records = living_well_case_links_history.source_records(records)
     return _records(records, change()['added_files'])
 
 
 def files(paths):
+    import living_well_case_links_history
+    paths = living_well_case_links_history.files(paths)
     additions = change()['added_files']
     def keep(path):
         name = key(path)
@@ -165,6 +171,8 @@ def files(paths):
 
 def live_targets(records: dict) -> dict:
     """Remove only the exact newly added successful release responses."""
+    import living_well_case_links_history
+    records = living_well_case_links_history.live_targets(records)
     additions = change()['added_targets']
     def keep(route, response):
         item = additions.get(route)

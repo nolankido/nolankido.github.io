@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import practical_path
 import workflow_decision_history as subsequent_changes
+import visibility_discovery_history
 
 SNAPSHOT = 'https://github.com/nolankido/nolankido.github.io/blob/a64bc51b6a39405a1ba59fbc589a9e190fce6229/'
 REPORT = '_reports/website-growth/turn-04-public-source-plan.md'
@@ -99,7 +100,7 @@ class PublicSourceReviewTests(unittest.TestCase):
                 self.assertIn('On October 17, 2026, an AI-assisted editorial pass', text(case))
                 self.assertIsNotNone(case.find('.//a[@href="' + SNAPSHOT + REPORT + '"]'))
         page = next(p for p in build.public_pages() if p['id'] == 'technology')
-        self.assertEqual(page['updated'], '2026-10-27')
+        self.assertEqual(visibility_discovery_history.pages([page])[0]['updated'], '2026-10-27')
         self.assertFalse(page.get('date'))
         case_page = next(p for p in build.public_pages() if p['id'] == 'ai-weekly-reset')
         self.assertEqual(case_page['date'], '2026-10-27')

@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT / '_tests'))
 import build
 import living_well
 import living_well_case_links_history as history
+import visibility_discovery_history as subsequent_changes
 import productivity_history
 import visibility_sprint_history
 
@@ -143,7 +144,7 @@ class LivingWellCaseLinksTests(unittest.TestCase):
         self.assertEqual(history.outputs(restored), restored)
         for name, item in self.record['paths'].items():
             original = git('show', history.PARENT + ':' + name)
-            current = (ROOT / name).read_bytes()
+            current = subsequent_changes.before(name, (ROOT / name).read_bytes())
             with self.subTest(path=name):
                 self.assertEqual(history.digest(current), item['current_sha256'])
                 self.assertEqual(history.digest(original), item['parent_sha256'])
@@ -218,7 +219,7 @@ class LivingWellCaseLinksTests(unittest.TestCase):
                     history.change()
             history.change.cache_clear()
         name = next(iter(self.record['paths']))
-        current = (ROOT / name).read_bytes()
+        current = subsequent_changes.before(name, (ROOT / name).read_bytes())
         for field, value in [('parent_sha256', '0' * 64), ('parent_size', -1),
                              ('parent_zlib_base64', 'invalid base64!'),
                              ('parent_zlib_base64', base64.b64encode(zlib.compress(b'wrong')).decode())]:
@@ -240,7 +241,7 @@ class LivingWellCaseLinksTests(unittest.TestCase):
         self.assertEqual(history.digest(visibility_sprint_history.CHANGE.read_bytes()), VISIBILITY_CAPSULE_SHA256)
         self.assertEqual(visibility_sprint_history.CAPSULE_SHA256, VISIBILITY_CAPSULE_SHA256)
 
-    def test_new_leaf_is_standard_library_only_and_has_no_runtime_importers(self):
+    def test_only_the_explicit_discovery_successor_is_a_history_dependency(self):
         tree = ast.parse(Path(history.__file__).read_text())
         imports = set()
         for node in ast.walk(tree):
@@ -249,7 +250,7 @@ class LivingWellCaseLinksTests(unittest.TestCase):
             elif isinstance(node, ast.ImportFrom):
                 self.assertEqual(node.level, 0)
                 imports.add(node.module.split('.')[0])
-        self.assertFalse(imports - sys.stdlib_module_names)
+        self.assertEqual(imports - sys.stdlib_module_names, {'visibility_discovery_history'})
         for path in (ROOT / '_scripts').rglob('*.py'):
             for node in ast.walk(ast.parse(path.read_text())):
                 if isinstance(node, ast.Import):

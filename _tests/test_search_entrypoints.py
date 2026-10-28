@@ -23,6 +23,7 @@ import practical_navigation_history
 import time_export_history
 import poker_titles_history
 import visibility_sprint_history
+import visibility_discovery_history
 
 
 class SearchEntryTests(unittest.TestCase):
@@ -69,6 +70,7 @@ class SearchEntryTests(unittest.TestCase):
     def test_twelve_hubs_have_matching_visible_and_search_purpose(self):
         self.assertEqual(len(self.entries), 12)
         previous = {p['id']: p for p in visibility_sprint_history.pages(self.pages)}
+        before_discovery = {p['id']: p for p in visibility_discovery_history.pages(self.pages)}
         for p in self.pages:
             raw = self.outputs[build.output_path(p['path'])]
             if p['id'] in self.entries:
@@ -76,7 +78,7 @@ class SearchEntryTests(unittest.TestCase):
                 self.assertFalse(p.get('noindex'))
                 expected_date = {'poker-library': '2026-10-15', 'poker-study': '2026-10-16', 'start-here': '2026-10-19', 'resources': '2026-10-19'}.get(p['id'], '2026-10-12')
                 self.assertEqual(previous[p['id']]['updated'], expected_date)
-                self.assertEqual(p['updated'], '2026-10-27' if p['id'] == 'creative' else expected_date)
+                self.assertEqual(before_discovery[p['id']]['updated'], '2026-10-27' if p['id'] == 'creative' else expected_date)
                 self.assertEqual(raw.count('class="entry-summary"'), 1)
                 self.assertIn('<p class="entry-summary">' + escape(p['description']) + '</p>', raw)
                 self.assertIn('<h1 class="page-title">' + escape(p['title']) + '</h1>', raw)

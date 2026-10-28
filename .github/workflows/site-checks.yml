@@ -10,7 +10,7 @@ jobs:
   build:
     name: Build and HTML checks
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -19,6 +19,8 @@ jobs:
         run: git fetch --no-tags --depth=1 origin 2aae4923318c0028d98266d78f6e4aabea295387
       - name: Fetch published PR150 for contextual-link provenance checks
         run: git fetch --no-tags --depth=1 origin 116359834b8b48dbd1526c68392d89f9dd7bf1a0
+      - name: Fetch published PR151 for discovery provenance checks
+        run: git fetch --no-tags --depth=1 origin 1f315095cef741bd1afe6fe3bcba8b11216b0d0e
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
@@ -126,10 +128,12 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
       - name: Verify published main release independently of browser-test duration
+        id: live-release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -145,3 +149,31 @@ jobs:
             exit 0
           fi
           echo "LIVE_VERIFIED_COMMIT=$GITHUB_SHA"
+          echo "verified-sha=$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+      - name: Notify IndexNow of verified content changes
+        id: indexnow
+        if: ${{ steps.live-release.outputs.verified-sha == github.sha }}
+        continue-on-error: true
+        env:
+          INDEXNOW_BASE: ${{ github.event.before }}
+          INDEXNOW_HEAD: ${{ github.sha }}
+        run: |
+          set -o pipefail
+          # Notify only meaningful changes in this push, not the whole sitemap.
+          if ! [[ "$INDEXNOW_BASE" =~ ^[0-9a-f]{40}$ ]] || [ "$INDEXNOW_BASE" = 0000000000000000000000000000000000000000 ]; then
+            echo '::error::A concrete predecessor is required for an IndexNow change notification.'
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin "$INDEXNOW_BASE"
+          python _scripts/submit_indexnow.py --base "$INDEXNOW_BASE" --head "$INDEXNOW_HEAD" --submit | tee "$RUNNER_TEMP/indexnow-receipt.json"
+      - name: Report an incomplete search-engine notification
+        if: ${{ steps.indexnow.outcome == 'failure' }}
+        run: echo '::warning::The website was published and verified, but IndexNow notification did not complete. Inspect its receipt before a bounded retry.'
+      - name: Retain the IndexNow receipt
+        if: ${{ always() && steps.live-release.outputs.verified-sha == github.sha }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: indexnow-${{ github.sha }}
+          path: ${{ runner.temp }}/indexnow-receipt.json
+          retention-days: 30
+          if-no-files-found: warn

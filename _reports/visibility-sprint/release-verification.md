@@ -1,6 +1,17 @@
-# Visibility sprint: release preparation checks
+# Visibility sprint: preparation and publication checks
 
 Prepared October 27, 2026, Honolulu, before merge. This record covers the local release candidate. Final hosted check, merge, and production-delivery receipts belong in the associated visibility-sprint pull request and GitHub Actions run; this preparation record alone does not establish publication.
+
+## Publication receipts added October 28, 2026
+
+The original preparation record below is retained. Publication has since been verified:
+
+| Release | Required gate | Published commit | Public-response check |
+| --- | --- | --- | --- |
+| [PR150: project cases and visibility](https://github.com/nolankido/nolankido.github.io/pull/150) | [Site checks #564](https://github.com/nolankido/nolankido.github.io/actions/runs/40648149617), 1,163 unit tests and all five browser groups passed | `116359834b8b48dbd1526c68392d89f9dd7bf1a0` | [494/494 exact responses](https://github.com/nolankido/nolankido.github.io/actions/runs/40664532327/job/122735579913) |
+| [PR151: contextual guide links](https://github.com/nolankido/nolankido.github.io/pull/151) | [Site checks #566](https://github.com/nolankido/nolankido.github.io/actions/runs/40666298208), 1,172 unit tests and all five browser groups passed | `1f315095cef741bd1afe6fe3bcba8b11216b0d0e` | [494/494 exact responses](https://github.com/nolankido/nolankido.github.io/actions/runs/40671626565/job/122759561157) |
+
+For each release, the published tree matched the tested tree, GitHub Pages deployment passed, and the public-response job emitted the exact published `LIVE_VERIFIED_COMMIT`. These receipts establish publication of the reviewed implementation. Indexing, rankings, traffic, and AI citations remain unmeasured.
 
 ## Completed local checks
 

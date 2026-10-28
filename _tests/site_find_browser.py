@@ -21,6 +21,13 @@ items=site_find.entries(ROOT,build.public_pages())
 title_queries=[('pot odds calculator','/poker/study-calculators/'),
                ('Texas Holdem rules','/poker/holdem-basics/'),
                ('AI assisted reflection prompts','/living-well/reflection-with-your-judgment-intact/')]
+cross_interest_queries=[
+    ('creative','book continuity','/technology/ai-book-continuity-checker/'),
+    ('living-well','cooking planner','/technology/dinner-on-time/'),
+    ('living-well','weekly reset','/technology/ai-weekly-reset/'),
+    ('living-well','organize notes','/technology/organize-public-notes/'),
+    ('technology','personal productivity','/living-well/ai-and-personal-productivity/'),
+]
 server=None
 if not OFFLINE:
     class Quiet(SimpleHTTPRequestHandler):
@@ -92,6 +99,15 @@ try:
         set_query(page,'family story')
         expect(page.locator('.find-item:visible')).to_have_count(1)
         expect(page.locator('.find-item:visible h3 a')).to_have_attribute('href','/living-well/preserve-family-story/')
+        for interest,query,destination in cross_interest_queries:
+            page.locator('#find-reset').click()
+            page.locator('#find-interest').select_option(interest)
+            set_query(page,query)
+            link=page.locator('.find-item h3 a[href="'+destination+'"]')
+            expect(link).to_have_count(1)
+            expect(link).to_be_visible()
+            page.locator('#find-interest').select_option('poker')
+            expect(link).to_be_hidden()
         for query in ['zznotarealpage','???','the and','<img src=x onerror=alert(1)>']:
             set_query(page,query);expect(page.locator('#find-empty')).to_be_visible()
             expect(page.locator('.find-item:visible')).to_have_count(0)
@@ -171,6 +187,18 @@ try:
                     expect(page.locator('h1')).to_have_text(record['title'])
                     page.go_back();expect(page.locator('#find-query')).to_have_value('')
                     assert page.locator('.find-item:not([hidden])').count()==len(items)
+                for interest,query,destination in cross_interest_queries:
+                    page.locator('#find-interest').select_option(interest)
+                    set_query(page,query)
+                    link=page.locator('.find-item:visible h3 a[href="'+destination+'"]')
+                    expect(link).to_be_visible()
+                    link.focus();page.keyboard.press('Enter')
+                    expect(page).to_have_url(base+destination)
+                    record=next(p for p in build.public_pages() if p['path']==destination)
+                    expect(page.locator('h1')).to_have_text(record['title'])
+                    page.go_back()
+                    expect(page.locator('#find-query')).to_have_value('')
+                    expect(page.locator('#find-interest')).to_have_value('')
         context.close()
         # No-JavaScript and blocked-script visitors have a usable native index.
         for disabled in [True,False]:
@@ -182,12 +210,16 @@ try:
             for group in page.locator('.find-group').all():
                 group.locator('summary').focus();page.keyboard.press('Enter')
                 expect(group.locator('h3 a').first).to_be_visible()
+            for interest,query,destination in cross_interest_queries:
+                link=page.locator('.find-item h3 a[href="'+destination+'"]')
+                expect(link).to_have_count(1)
+                expect(link).to_be_visible()
             if not OFFLINE:
                 page.locator('.find-item a[href="/notes/keep-the-judgment/"]').focus();page.keyboard.press('Enter')
                 expect(page).to_have_url(base+'/notes/keep-the-judgment/')
             context.close()
         browser.close()
     assert not errors,errors
-    print('PASS site discovery: explicit search focus, composition and boundary Enter defaults, live-filter focus, queries, cross-interest filters, escaping, reset, no query transport, 15 layouts + 15 text-spacing checks, disabled/blocked script fallback'+(' (in-memory; URL navigation not run)' if OFFLINE else ', keyboard URL navigation and 404 recovery, 6 descriptive-title keyboard arrivals and private-query history resets'))
+    print('PASS site discovery: explicit search focus, composition and boundary Enter defaults, live-filter focus, queries, 5 project cross-interest filters and unrelated-subject exclusion, escaping, reset, no query transport, 15 layouts + 15 text-spacing checks, disabled/blocked script fallback'+(' (in-memory; URL navigation not run)' if OFFLINE else ', keyboard URL navigation and 404 recovery, 6 descriptive-title and 10 project cross-interest keyboard arrivals with private-query history resets'))
 finally:
     if server:server.shutdown()
