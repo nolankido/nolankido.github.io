@@ -1,6 +1,7 @@
 """Summary review content, truthful publication type, and independent preservation."""
 import choice_history
 import later_release_history as later_history
+import visibility_sprint_history
 from pathlib import Path
 from html import unescape
 from copy import deepcopy
@@ -31,7 +32,7 @@ class SummaryReviewTests(unittest.TestCase):
   self.assertEqual(digest(json.dumps(pages,sort_keys=True).encode()),self.baseline['manifest_digest'])
  def test_164_original_page_bodies_are_identical(self):
   records=[]
-  for p,raw in sorted(self.outputs.items()):
+  for p,raw in sorted(visibility_sprint_history.outputs(self.outputs).items()):
    if p.suffix=='.html' and p.as_posix() not in EXCLUDE_BODIES and p.as_posix() not in choice_history.NEW_OUTPUTS:
     records.append((p.as_posix(),digest(re.search(rb'<body\b[^>]*>(.*?)</body>',choice_history.before(p,raw.encode()),re.S)[1])))
   records.sort(key=lambda x:x[0]);self.assertEqual(len(records),self.baseline['body_count']);self.assertEqual(signature(records),self.baseline['body_digest'])

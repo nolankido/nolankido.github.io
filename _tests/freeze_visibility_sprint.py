@@ -31,7 +31,11 @@ def git(*args, root=ROOT):
 
 
 def production(path):
-    return not path.startswith(('_tests/', '_reports/')) and '__pycache__' not in Path(path).parts
+    # This existing deterministic audit is itself pinned by older releases.
+    # Other reports remain outside this sprint's production boundary.
+    return (path == '_reports/search-audit.json'
+            or (not path.startswith(('_tests/', '_reports/'))
+                and '__pycache__' not in Path(path).parts))
 
 
 def snapshot(root):

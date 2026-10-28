@@ -20,7 +20,7 @@ CHANGE = ROOT / '_tests/visibility-sprint-change.json'
 PARENT = '2aae4923318c0028d98266d78f6e4aabea295387'
 PARENT_TREE = '5cb303f7aec831e6f02f152455dbb2306e83fb37'
 # Set only after the completed source and generated output have been reviewed.
-CAPSULE_SHA256 = '51e75b3e7e513069f55ff05fefca71a9e11ae2c1810b9d4e3c20f215a01ba1c8'
+CAPSULE_SHA256 = '37b02c797b4ad7f1569b1bd1454b87d5f04ce01e56c9ca97926c92c5d8010d68'
 
 
 def digest(data: bytes | str) -> str:

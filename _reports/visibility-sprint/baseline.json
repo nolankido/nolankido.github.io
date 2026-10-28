@@ -24,7 +24,7 @@
     "google_generative_ai_impressions": null,
     "bing_ai_citations": null,
     "ai_referral_visits": null,
-    "access_gap": "Connected GSC Wizard refused access because no active subscription. Native dashboard exports can supply the missing baseline."
+    "access_gap": "Search performance and AI citation/referral data were not available during this audit. Authorized native dashboard exports can supply the missing baseline."
   },
   "interpretation": "Crawl success and schema do not establish indexing, rankings, traffic, citations, or business outcomes."
 }

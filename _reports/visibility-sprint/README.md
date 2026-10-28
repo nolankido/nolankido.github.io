@@ -33,7 +33,7 @@ The implementation below is prepared for release. The release-verification recor
 
 ## Measurement handoff
 
-The existing public site had 189 sitemap URLs. All 189 returned HTTP 200 in the audit, with unique titles/descriptions and self-canonical URLs. This is a crawl baseline, not proof that any engine indexed those pages. The connected Search Console service returned an inactive-subscription error, so its unavailable metrics are stored as null rather than zero.
+The existing public site had 189 sitemap URLs. All 189 returned HTTP 200 in the audit, with unique titles/descriptions and self-canonical URLs. This is a crawl baseline, not proof that any engine indexed those pages. Search Console performance data was unavailable during this audit, so its missing metrics are stored as null rather than zero.
 
 When the native dashboards or an export are available, record the same date range, property, country, and device scope for each comparison:
 

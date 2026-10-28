@@ -17,6 +17,7 @@ import build
 import check_live
 import core_styles
 import public_profile
+import visibility_sprint_history
 
 class Links(HTMLParser):
     def __init__(self, html):
@@ -34,8 +35,9 @@ class PublicProfileTests(unittest.TestCase):
     def test_original_public_body_identity_feeds_and_css_are_preserved(self):
         baseline=json.loads((ROOT/'_tests/public-profile-baseline.json').read_text())
         records=[]
-        for path in sorted((p for p in self.outputs if p.suffix=='.html' and p.as_posix() not in baseline['body_exclusions'] and p.as_posix() not in choice_history.NEW_OUTPUTS), key=lambda p:p.as_posix()):
-            raw=choice_history.before(path,self.outputs[path]).encode()
+        previous_outputs=visibility_sprint_history.outputs(self.outputs)
+        for path in sorted((p for p in previous_outputs if p.suffix=='.html' and p.as_posix() not in baseline['body_exclusions'] and p.as_posix() not in choice_history.NEW_OUTPUTS), key=lambda p:p.as_posix()):
+            raw=choice_history.before(path,previous_outputs[path]).encode()
             body=re.search(rb'<body\b[^>]*>(.*?)</body>',raw,re.S).group(1)
             records.append((path.as_posix(),sha256(body).hexdigest()))
         self.assertEqual(len(records),baseline['unchanged_body_count'])

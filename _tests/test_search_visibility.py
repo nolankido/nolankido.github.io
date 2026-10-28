@@ -118,10 +118,29 @@ class SearchVisibilityTests(unittest.TestCase):
                 search.decorate(page,self.pages,site,schema,'',self.presentation)
 
     def test_generic_brand_art_is_not_misrepresented_as_an_article_illustration(self):
+        actual_images = {
+            'ai-book-continuity-checker': ('/assets/projects/preflight-holmes-report.png', 1200, 1349),
+            'dinner-on-time': ('/assets/projects/dinner-on-time-preview.jpg', 2400, 1396),
+        }
+        seen = set()
         for p in self.pages:
-            schema=check_search.Document(self.outputs[build.output_path(p['path'])]).schemas[0]
+            document=check_search.Document(self.outputs[build.output_path(p['path'])])
+            schema=document.schemas[0]
             if schema['@type']=='Article':
-                self.assertNotIn('image', schema)
+                if p['id'] in actual_images:
+                    path, width, height = actual_images[p['id']]
+                    image = schema['image']
+                    self.assertEqual(image['@type'], 'ImageObject')
+                    self.assertEqual(image['url'], self.site['url'] + path)
+                    self.assertEqual((image['width'], image['height']), (width, height))
+                    visible = [tag for tag in document.tags('img') if tag.get('src') == path]
+                    self.assertEqual(len(visible), 1)
+                    self.assertEqual((visible[0].get('width'), visible[0].get('height')), (str(width), str(height)))
+                    self.assertTrue((ROOT / path.lstrip('/')).is_file())
+                    seen.add(p['id'])
+                else:
+                    self.assertNotIn('image', schema)
+        self.assertEqual(seen, set(actual_images))
         for key in ['technology','task-brief']:
             self.assertIn(key,self.presentation['pages'])
         app=check_search.Document(self.outputs[Path('technology/task-brief/index.html')]).schemas[0]['mainEntity']

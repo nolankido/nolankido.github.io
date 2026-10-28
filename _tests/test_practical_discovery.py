@@ -156,9 +156,14 @@ class PracticalDiscoveryTests(unittest.TestCase):
         self.assertLess(home.index('class="identity-reading'), home.index('class="practical-home"'))
         self.assertEqual(writing.count('class="section folio-row writing-route"'), 4)
         self.assertEqual(writing.count('technology-publication'), len(discovery.articles(self.pages)))
+        # The six reviewed cases reuse the existing publication/return styles.
+        style_ids = discovery.SCOPED_IDS | {
+            'local-ai-review-replies', 'ai-book-continuity-checker', 'dinner-on-time',
+            'ai-weekly-reset', 'organize-public-notes', 'local-ai-test-record',
+        }
         for p in self.pages:
             html = self.outputs[build.output_path(p['path'])]
-            self.assertEqual('/assets/practical-discovery.css?' in html, p['id'] in discovery.SCOPED_IDS)
+            self.assertEqual('/assets/practical-discovery.css?' in html, p['id'] in style_ids)
             self.assertEqual('href="/technology/feed.xml"' in html.split('</head>')[0], (p.get('section') == 'technology' or p['id'] == 'technology'))
         for im in re.findall(r'<img\b[^>]+>', tech):
             self.assertIn('loading="lazy"', im)

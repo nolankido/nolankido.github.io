@@ -15,6 +15,7 @@ import build
 import technology_jumps_history as history
 import study_titles_history
 import turn04_public_source_history
+import visibility_sprint_history
 from test_site import Page
 
 
@@ -79,14 +80,17 @@ class TechnologyJumpsTests(unittest.TestCase):
 
     def test_frozen_adapter_keeps_unreviewed_navigation_and_copy_changes_detectable(self):
         for path in ['_source/technology/home.html', 'technology/index.html']:
-            raw = (ROOT / path).read_text()
-            for old, new in [('Follow the four-step workflow', 'A guaranteed result'),
-                             ('href="#practical-ai-path"', 'href="https://other.example/"'),
-                             ('Useful AI starts with a life', 'An unapproved biography'),
-                             ('href="/contact/">Talk technology', 'href="/missing/">Talk technology')]:
-                changed = raw.replace(old, new, 1)
-                self.assertNotEqual(changed, raw)
-                self.assertNotEqual(history.before(path, changed), history.before(path, raw))
+            current = (ROOT / path).read_text()
+            previous = visibility_sprint_history.before(path, current)
+            for raw, introduction in [(previous, 'Useful AI starts with a life'),
+                                      (current, 'Put AI to work on a real task.')]:
+                for old, new in [('Follow the four-step workflow', 'A guaranteed result'),
+                                 ('href="#practical-ai-path"', 'href="https://other.example/"'),
+                                 (introduction, 'An unapproved biography'),
+                                 ('href="/contact/">Talk technology', 'href="/missing/">Talk technology')]:
+                    changed = raw.replace(old, new, 1)
+                    self.assertNotEqual(changed, raw)
+                    self.assertNotEqual(history.before(path, changed), history.before(path, raw))
         block = history.change()['new']
         self.assertEqual(history.before('about/index.html', block), block)
         self.assertEqual(history.before('assets/example.woff2', b'\xff\x00'), b'\xff\x00')

@@ -2069,6 +2069,127 @@
           415
         ]
       }
+    },
+    "local-ai-review-replies": {
+      "path": "/technology/local-ai-review-replies/",
+      "title": "Building a local AI review reply tool.",
+      "label": "PRACTICAL AI / RECORDED CASE",
+      "src": "/assets/social/reader-local-ai-review-replies.png",
+      "sha256": "126230cfb9d280c1c3a656282ec62558f8855adc62c7c30cff73a988a551b22e",
+      "layout": {
+        "lines": [
+          "Building a local AI review",
+          "reply tool."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1007,
+          352
+        ]
+      }
+    },
+    "ai-book-continuity-checker": {
+      "path": "/technology/ai-book-continuity-checker/",
+      "title": "Using AI to check continuity across a book series.",
+      "label": "PRACTICAL AI / RECORDED CASE",
+      "src": "/assets/social/reader-ai-book-continuity-checker.png",
+      "sha256": "10cbc8122aaca2251a6fd563107985f94135ffb1a4deb8ce765a526c9dc269c7",
+      "layout": {
+        "lines": [
+          "Using AI to check continuity",
+          "across a book series."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1107,
+          339
+        ]
+      }
+    },
+    "dinner-on-time": {
+      "path": "/technology/dinner-on-time/",
+      "title": "Dinner on Time: building a cooking planner with AI.",
+      "label": "PRACTICAL AI / RECORDED CASE",
+      "src": "/assets/social/reader-dinner-on-time.png",
+      "sha256": "1584cd1953f2b0cd65713c0c3e6d52f49f17a36b4b37e555b900994f36a75036",
+      "layout": {
+        "lines": [
+          "Dinner on Time: building a",
+          "cooking planner with AI."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1053,
+          352
+        ]
+      }
+    },
+    "ai-weekly-reset": {
+      "path": "/technology/ai-weekly-reset/",
+      "title": "Using AI to turn guidance into a weekly-reset note.",
+      "label": "PRACTICAL AI / RECORDED CASE",
+      "src": "/assets/social/reader-ai-weekly-reset.png",
+      "sha256": "486beda0d9118c8473db62e7683e71860aaa5211ac51c7f0c45782b1bea8f2ac",
+      "layout": {
+        "lines": [
+          "Using AI to turn guidance",
+          "into a weekly-reset note."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1017,
+          352
+        ]
+      }
+    },
+    "organize-public-notes": {
+      "path": "/technology/organize-public-notes/",
+      "title": "Using AI to turn source notes into a checked action list.",
+      "label": "PRACTICAL AI / RECORDED CASE",
+      "src": "/assets/social/reader-organize-public-notes.png",
+      "sha256": "d6899eb14bfd971bd1700af637f54d90a43753b57af08a4e8a35c156ad4fc931",
+      "layout": {
+        "lines": [
+          "Using AI to turn source",
+          "notes into a checked action",
+          "list."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          185,
+          1088,
+          403
+        ]
+      }
+    },
+    "local-ai-test-record": {
+      "path": "/technology/local-ai-test-record/",
+      "title": "What a local AI test actually measured.",
+      "label": "PRACTICAL AI / RECORDED CASE",
+      "src": "/assets/social/reader-local-ai-test-record.png",
+      "sha256": "b58b7741d95d9e7d00b2f69d38e01b6ec72da56c84ba6e28c29b9cf22b5b880b",
+      "layout": {
+        "lines": [
+          "What a local AI test actually",
+          "measured."
+        ],
+        "font_size": 64,
+        "bounds": [
+          94,
+          205,
+          1110,
+          339
+        ]
+      }
     }
   }
 }
