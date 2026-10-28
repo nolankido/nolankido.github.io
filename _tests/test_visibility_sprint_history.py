@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_tests'))
 sys.path.insert(0, str(ROOT / '_scripts'))
 import visibility_sprint_history as history
+import living_well_case_links_history as subsequent_changes
 
 
 class VisibilitySprintHistoryTests(unittest.TestCase):
@@ -38,7 +39,7 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
 
     def test_changed_files_restore_independently_captured_git_parent_bytes(self):
         for name, item in self.record['paths'].items():
-            raw = (ROOT / name).read_bytes()
+            raw = subsequent_changes.before(name, (ROOT / name).read_bytes())
             original = subprocess.check_output(['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
             with self.subTest(path=name):
                 self.assertEqual(history.digest(raw), item['current_sha256'])
@@ -74,7 +75,7 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
                     history.change()
             history.change.cache_clear()
         name = next(iter(self.record['paths']))
-        current = (ROOT / name).read_bytes()
+        current = subsequent_changes.before(name, (ROOT / name).read_bytes())
         for field, value in [('parent_sha256', '0' * 64), ('parent_size', -1),
                              ('parent_zlib_base64', base64.b64encode(zlib.compress(b'wrong')).decode()),
                              ('parent_zlib_base64', 'not base64!')]:
@@ -155,7 +156,7 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
             old = subprocess.check_output(['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
             self.assertEqual((ROOT / name).read_bytes(), old, name)
 
-    def test_new_leaf_has_no_runtime_or_older_history_dependency(self):
+    def test_only_the_explicit_successor_is_a_history_dependency(self):
         tree = ast.parse(Path(history.__file__).read_text())
         imports = set()
         for node in ast.walk(tree):
@@ -164,7 +165,7 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
             elif isinstance(node, ast.ImportFrom):
                 self.assertEqual(node.level, 0)
                 imports.add(node.module.split('.')[0])
-        self.assertFalse(imports - sys.stdlib_module_names)
+        self.assertEqual(imports - sys.stdlib_module_names, {'living_well_case_links_history'})
         for path in (ROOT / '_scripts').rglob('*.py'):
             for node in ast.walk(ast.parse(path.read_text())):
                 if isinstance(node, ast.Import):
