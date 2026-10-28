@@ -10,6 +10,7 @@ import build,check_live,font_delivery
 import later_release_history as later_history
 import local_fonts_history as history
 import search_sections_history
+import visibility_sprint_history
 
 class LocalFontsTests(unittest.TestCase):
     @classmethod
@@ -101,7 +102,8 @@ class LocalFontsTests(unittest.TestCase):
             self.assertEqual(reference.split('<body',1)[1],text.split('<body',1)[1])
             self.assertEqual(history.font_reference(path,text.encode()),reference.encode())
             pages+=1
-        self.assertEqual(pages,194)
+        self.assertEqual(pages,len(self.pages))
+        self.assertEqual(len(visibility_sprint_history.pages(self.pages)),194)
         self.assertEqual(history.font_reference('assets/site-fonts.css',font_delivery.local_declarations(ROOT)),font_delivery.declarations(ROOT))
 
 if __name__=='__main__':unittest.main()

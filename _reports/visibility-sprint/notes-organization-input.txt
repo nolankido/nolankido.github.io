@@ -1,0 +1,29 @@
+RECORDED NOTES-ORGANIZATION TASK
+Prepared October 27, 2026, Honolulu date.
+
+These were actual working notes for preparing public website articles.
+They contain public project context and explicit gaps, not private correspondence.
+
+INPUT
+
+N1: The personal website needs permanent pages for Review Reply Writer, Preflight/canonKeeper, and Dinner on Time.
+N2: Review Reply Writer has a public repository and a historical Gemma demo; the public article says its old model runs do not validate current-source quality.
+N3: Preflight's public README records a Sherlock Holmes audit with correct findings, incorrect findings, and unresolved cases; the new website page must show those distinctions.
+N4: Dinner on Time has a public Vimeo demonstration of a deterministic Alexa+ experience simulation made with AI assistance; it is not a live Alexa service and has no runtime AI.
+N5: GitHub and DEV are verified public-work profiles for Nolan; the website's main subject order stays Technology, Living Well, Poker, Creative Work.
+N6: We do not have a publishable record of a personal tournament story, completed Living Well trial, local-laptop comparison, or travel plan.
+N7: No deadline, customer adoption, business revenue, human-review result, or time saving has been supplied.
+N8: Case pages need a clear task, actual artifact, source/version, material limits, author link, and links from the relevant existing hubs.
+
+INSTRUCTION GIVEN TO THE ASSISTANT
+
+Organize these notes into a compact actionable publication checklist with columns task, evidence/input, next action, and status (ready to prepare / requires source material / editorial requirement). Preserve unknowns and source note IDs. Prioritize supported publication work, then list blocked personal reports. Do not invent dates, assign responsibility to another person, assert a deployment happened, or invent any result.
+
+RECORD SCOPE
+
+The output saved alongside this file is the actual assistant response produced
+from this task during the website work. It is not a reconstructed response from
+a separate model service. The factual inputs came from the public project
+records linked by the case studies; this task organized the supplied notes and
+did not independently verify those projects. No timing or human quality rating
+was collected for this notes-organization step.

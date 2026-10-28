@@ -6,7 +6,55 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
+    <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>Using AI to check continuity across a book series.</title>
+      <link>https://nolankido.com/technology/ai-book-continuity-checker/</link>
+      <description>Explore Preflight and canonKeeper through a Sherlock Holmes continuity audit, source passages, correct and incorrect findings, and a transparent benchmark.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/ai-book-continuity-checker/</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
+    <item>
+      <title>Using AI to turn guidance into a weekly-reset note.</title>
+      <link>https://nolankido.com/technology/ai-weekly-reset/</link>
+      <description>Inspect a real AI-assisted editing exercise: three public guides, the original draft, five source checks, corrections, and a reusable weekly-reset note.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/ai-weekly-reset/</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
+    <item>
+      <title>Dinner on Time: building a cooking planner with AI.</title>
+      <link>https://nolankido.com/technology/dinner-on-time/</link>
+      <description>See how an AI-assisted cooking planner handles an oven delay, preserves progress, and keeps choices explicit. Recorded app demo with a simulated meal.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/dinner-on-time/</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
+    <item>
+      <title>Building a local AI review reply tool.</title>
+      <link>https://nolankido.com/technology/local-ai-review-replies/</link>
+      <description>Inspect Review Reply Writer, a local AI drafting application for customer reviews. Follow its historical demo, saved-text approval, source records, and limitations.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/local-ai-review-replies/</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
+    <item>
+      <title>What a local AI test actually measured.</title>
+      <link>https://nolankido.com/technology/local-ai-test-record/</link>
+      <description>Read a documented Gemma test on an Ubuntu CPU runner: per-case timings, retained failures, configuration, and the difference between model latency and task time.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/local-ai-test-record/</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
+    <item>
+      <title>Using AI to turn source notes into a checked action list.</title>
+      <link>https://nolankido.com/technology/organize-public-notes/</link>
+      <description>Follow eight public source notes through an actual AI-generated publication checklist. Inspect the prompt, complete output, source checks, and unresolved items.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/organize-public-notes/</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
     <item>
       <title>Limped and multiway pots: how to think through live poker</title>
       <link>https://nolankido.com/poker/limped-multiway-pots/</link>

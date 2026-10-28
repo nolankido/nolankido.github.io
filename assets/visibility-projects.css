@@ -1,0 +1,144 @@
+/* Public project cases, using the site's existing typography and colors. */
+.visibility-projects,
+#technology-projects,
+#creative-work,
+#review-recorded-examples,
+#observed-model-time {
+  scroll-margin-top: 6rem;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 22px;
+  margin: 28px 0 20px;
+}
+.project-card {
+  min-width: 0;
+  border-top: 2px solid currentColor;
+  padding: 18px 0 8px;
+}
+.project-card-label {
+  font-family: var(--font-mono, monospace);
+  font-size: .71rem;
+  line-height: 1.6;
+  letter-spacing: .025em;
+  margin: 0 0 12px;
+}
+.project-card h3 {
+  font-size: 1.2rem;
+  line-height: 1.35;
+  margin: 0 0 12px;
+}
+.visibility-projects .section-title,
+.project-card h3,
+.project-card p {
+  overflow-wrap: anywhere;
+}
+.project-card h3 a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+/* Keep the Technology hub readable when readers enlarge text and spacing. */
+.page-technology :is(.section-title, .section-label, h3, .section-deck, .practical-work p, .ai-path-output) {
+  overflow-wrap: anywhere;
+}
+.page-technology .nav-links a {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.page-technology .brand-mark {
+  min-width: 2em;
+  min-height: 2em;
+}
+.project-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid #d3d7d0;
+}
+.project-table-scroll:focus-visible {
+  outline: 3px solid #356a50;
+  outline-offset: 3px;
+}
+.project-table-scroll table {
+  width: 100%;
+  min-width: 38rem;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+.project-table-scroll th,
+.project-table-scroll td {
+  text-align: left;
+  vertical-align: top;
+  padding: 13px 15px;
+  border-bottom: 1px solid #d3d7d0;
+  line-height: 1.6;
+}
+.project-table-scroll th {
+  font-weight: 600;
+}
+.project-table-scroll tbody tr:last-child td {
+  border-bottom: 0;
+}
+.case-section-links {
+  columns: 2;
+  column-gap: 2rem;
+  padding-left: 1.4rem;
+}
+.case-section-links li {
+  break-inside: avoid;
+  margin-bottom: .55rem;
+}
+.case-previous-sections {
+  margin-top: 1.3rem;
+}
+.record-input {
+  padding: 18px 22px;
+  border-left: 3px solid #356a50;
+  background: #f1f3ec;
+}
+.record-input li + li {
+  margin-top: .65rem;
+}
+.page-organize-public-notes pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: .85rem;
+  line-height: 1.6;
+}
+.page-creative .comic-feature-image img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 760px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .project-card {
+    padding-top: 16px;
+  }
+  .case-section-links {
+    columns: 1;
+  }
+}
+@media print {
+  .project-grid {
+    display: block;
+  }
+  .project-card,
+  .project-table-scroll tr {
+    break-inside: avoid;
+  }
+  .project-table-scroll {
+    overflow: visible;
+  }
+  .project-table-scroll table {
+    min-width: 0;
+    font-size: 9pt;
+  }
+  .project-table-scroll th,
+  .project-table-scroll td {
+    padding: 6px;
+  }
+}

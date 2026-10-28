@@ -12,6 +12,34 @@
       <li><strong>Compare the exact claim with the evidence.</strong> Look for dates, conditions, units, missing people, uncertainty, and differences between a proposal and a commitment.</li>
       <li><strong>Choose an evidence status before acting.</strong> Mark the claim supported, contradicted, or unresolved; write what was actually checked, and leave consequential work paused when the required evidence is missing.</li>
     </ol>
+    <section class="review-recorded-cases" aria-labelledby="review-recorded-examples">
+      <h3 id="review-recorded-examples">Choose a check that can expose the actual failure.</h3>
+      <p>These three public project records show why the check needs to match the claim. They document an earlier model response to a fictional review, a recorded audit of public-domain books, and an actual website defect. None was rerun for this guide.</p>
+      <div class="project-table-scroll" role="region" aria-label="Documented AI failures and useful checks" tabindex="0">
+        <table>
+          <caption>Three failures, three different checks</caption>
+          <thead><tr><th scope="col">Recorded problem</th><th scope="col">Check to perform</th><th scope="col">Evidence and scope</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">A reply loses a precise complaint.</th>
+              <td>Compare the accepted reply with the original review, including amounts and durations. In an earlier Review Reply Writer run, the accepted retry replaced a 25-minute wait with <q>extended wait</q>. Inspect rejected candidates too: the first attempt was wrongly blocked for <q>should have addressed</q>.</td>
+              <td><a href="/technology/local-ai-review-replies/#reply-failure">Follow the review-reply case</a> and its <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-smoke-2026-10-13.json">retained model record</a>. This is historical output from fictional input, with no operator assessment. It does not establish current reply quality.</td>
+            </tr>
+            <tr>
+              <th scope="row">A continuity report mistakes context for contradiction.</th>
+              <td>Read the quoted passage in its scene. Preflight flagged Holmes's eye description while he was disguised, and a maiden name as a conflicting surname. Also examine known missed errors; checking only the findings the model returned cannot measure what it overlooked.</td>
+              <td><a href="/technology/ai-book-continuity-checker/#continuity-results">Inspect the book-continuity case</a>, its <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/src/canonkeeper/preflight/samples/sherlock-holmes-reviews.json">stored corrections</a>, and the separately qualified seeded benchmark. A quotation's existence does not establish a correct interpretation.</td>
+            </tr>
+            <tr>
+              <th scope="row">Passing tests leave malformed HTML unnoticed.</th>
+              <td>Use a check aimed at document structure, then compare the repair. This site's recorded change passed 347 unit/content tests before an HTML5 parser found an extra closing tag. A browser can display readable content while recovering from that defect.</td>
+              <td><a href="/technology/checking-ai-website-changes/">Read the website-repair case</a> and <a href="https://github.com/nolankido/nolankido.github.io/compare/2bf8908339e06f604cea00f0254494e17171ecf4...73782caa4697204690c679626b36427c28201234">inspect the pinned repair</a>. It documents a particular defect and correction, not comprehensive correctness or measured time savings.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>For your task, name what an error would look like before choosing the check. Keep the original input, the observed output, and the reason for your decision together. A useful check can reveal a mistake while leaving other questions unresolved.</p>
+    </section>
     <p class="small-copy"><a href="#review-completed-record">See a completed review record</a> that keeps an unresolved claim separate from the decision about what to do next.</p>
     <p><strong>Worked mini-check, fictional:</strong> An AI answer says “The Sunday meetup is confirmed.” The only supplied source says “Send meetup questions to the organizer.” It says nothing about confirmation. The confirmation claim is <strong>unresolved, not contradicted</strong>: the available evidence establishes neither that it is confirmed nor that it is unconfirmed. Ask the organizer or find a current event-status notice before relying on it.</p>
     <p><strong>What would change the status?</strong> A current organizer notice saying “The Sunday meetup is not confirmed” would contradict the confirmation claim. A current notice saying “The Sunday meetup is confirmed” would support it for the purpose and time checked. In either case, record the actual notice and its date. Do not turn missing evidence into a negative fact.</p>

@@ -74,7 +74,8 @@ class IdentityTests(unittest.TestCase):
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', content).group(1))
             person = schema['mainEntity']
             self.assertEqual(person['@id'], 'https://nolankido.com/about/#nolan-kido')
-            self.assertEqual(set(person), {'@type','@id','name','url','description'})
+            self.assertEqual(set(person), {'@type','@id','name','url','description','sameAs'})
+            self.assertEqual(person['sameAs'], ['https://github.com/nolankido', 'https://dev.to/kidon'])
             if relative.startswith('about'):
                 self.assertEqual(schema['@type'], 'ProfilePage')
 

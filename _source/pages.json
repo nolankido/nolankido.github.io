@@ -6,7 +6,7 @@
     "seo_title": "Nolan Kido | AI Works Human Decides",
     "description": "Nolan Kido's AI Works Human Decides approach to practical AI in real life: bounded workflows, independent checks, and people making the important calls.",
     "source": "home.html",
-    "updated": "2026-10-26"
+    "updated": "2026-10-27"
   },
   {
     "id": "start-here",
@@ -46,7 +46,7 @@
     "description": "Meet Nolan Kido and his AI Works Human Decides approach to implementing AI in real life. Inspect public tools, an evidence-backed case, and human-review principles.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-26"
+    "updated": "2026-10-27"
   },
   {
     "id": "notes",
@@ -318,10 +318,10 @@
     "path": "/creative/",
     "title": "Creative Work",
     "seo_title": "Writing & Visual Storytelling | Nolan Kido",
-    "description": "Writing, design, and visual storytelling. Use a blank creative brief, follow a practical making guide, or read Nolan Kido on explanation and finishing.",
+    "description": "Explore Nolan Kido's poker comics and AI-assisted creative projects, and use a free brief to plan a small piece such as a family story.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-27"
   },
   {
     "id": "poker-start-here",
@@ -1154,7 +1154,7 @@
     "worked_guide": true,
     "date": "2026-10-12",
     "updated": "2026-10-27",
-    "revision": "Added a completed fictional review record and explicit evidence-status and reasoning fields in the blank worksheet. The example separates an unresolved claim from the human decision about what to do next."
+    "revision": "Connected the existing checking method to documented project failures, retaining the original worked exercises and review record."
   },
   {
     "id": "poker-first-decisions",
@@ -1342,5 +1342,77 @@
     "source": "poker/beginner-practice.html",
     "section": "poker",
     "updated": "2026-10-15"
+  },
+  {
+    "id": "local-ai-review-replies",
+    "section": "technology",
+    "path": "/technology/local-ai-review-replies/",
+    "title": "Building a local AI review reply tool.",
+    "seo_title": "Local AI Review Replies with Gemma & Ollama | Nolan Kido",
+    "description": "Inspect Review Reply Writer, a local AI drafting application for customer reviews. Follow its historical demo, saved-text approval, source records, and limitations.",
+    "kicker": "Technology / Local AI project",
+    "source": "technology/local-ai-review-replies.html",
+    "date": "2026-10-27",
+    "evidence_article": true
+  },
+  {
+    "id": "ai-book-continuity-checker",
+    "section": "technology",
+    "path": "/technology/ai-book-continuity-checker/",
+    "title": "Using AI to check continuity across a book series.",
+    "seo_title": "AI Book Continuity Checker: Preflight Case | Nolan Kido",
+    "description": "Explore Preflight and canonKeeper through a Sherlock Holmes continuity audit, source passages, correct and incorrect findings, and a transparent benchmark.",
+    "kicker": "Technology / AI for creative work",
+    "source": "technology/ai-book-continuity-checker.html",
+    "date": "2026-10-27",
+    "evidence_article": true
+  },
+  {
+    "id": "dinner-on-time",
+    "section": "technology",
+    "path": "/technology/dinner-on-time/",
+    "title": "Dinner on Time: building a cooking planner with AI.",
+    "seo_title": "Dinner on Time: AI-Assisted Cooking Planner | Nolan Kido",
+    "description": "See how an AI-assisted cooking planner handles an oven delay, preserves progress, and keeps choices explicit. Recorded app demo with a simulated meal.",
+    "kicker": "Technology / Everyday planning case",
+    "source": "technology/dinner-on-time.html",
+    "date": "2026-10-27",
+    "evidence_article": true
+  },
+  {
+    "id": "ai-weekly-reset",
+    "section": "technology",
+    "path": "/technology/ai-weekly-reset/",
+    "title": "Using AI to turn guidance into a weekly-reset note.",
+    "seo_title": "AI Weekly-Reset Worksheet: Recorded Editing Case | Nolan Kido",
+    "description": "Inspect a real AI-assisted editing exercise: three public guides, the original draft, five source checks, corrections, and a reusable weekly-reset note.",
+    "kicker": "Technology / Recorded editing case",
+    "source": "technology/ai-weekly-reset.html",
+    "date": "2026-10-27",
+    "evidence_article": true
+  },
+  {
+    "id": "organize-public-notes",
+    "section": "technology",
+    "path": "/technology/organize-public-notes/",
+    "title": "Using AI to turn source notes into a checked action list.",
+    "seo_title": "Organize Notes with AI: Actual Input, Output & Review | Nolan Kido",
+    "description": "Follow eight public source notes through an actual AI-generated publication checklist. Inspect the prompt, complete output, source checks, and unresolved items.",
+    "kicker": "Technology / Recorded everyday workflow",
+    "source": "technology/organize-public-notes.html",
+    "date": "2026-10-27",
+    "evidence_article": true
+  },
+  {
+    "id": "local-ai-test-record",
+    "section": "technology",
+    "path": "/technology/local-ai-test-record/",
+    "title": "What a local AI test actually measured.",
+    "seo_title": "Local AI Test Results: Timing, Errors & Limits | Nolan Kido",
+    "description": "Read a documented Gemma test on an Ubuntu CPU runner: per-case timings, retained failures, configuration, and the difference between model latency and task time.",
+    "kicker": "Technology / Public test record",
+    "source": "technology/local-ai-test-record.html",
+    "date": "2026-10-27",
+    "evidence_article": true
   }
 ]

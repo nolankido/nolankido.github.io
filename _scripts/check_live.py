@@ -33,6 +33,9 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/answer-review.css', 'downloads/ai-answer-review.txt']
     assets += ['assets/search-entrypoints.css', 'assets/author-archive.css']
     assets += ['assets/practical-ai-path.css', 'downloads/practical-ai-workbook.txt']
+    assets += ['assets/visibility-projects.css', 'assets/projects/preflight-holmes-report.png',
+               'assets/projects/preflight-LICENSE.txt', 'assets/projects/dinner-on-time-preview.jpg',
+               'downloads/local-ai-test-record.json', 'downloads/public-notes-action-record.txt']
     assets += ['assets/practical-ai-navigation.css', 'downloads/poker-beginner-study-card.txt', 'assets/poker-beginner-path.css']
     assets += ['downloads/poker-beginner-checkpoint.txt', 'assets/poker-comics.css']
     assets += [p.relative_to(root).as_posix() for p in sorted((root / 'assets/poker/comics').glob('*')) if p.is_file()]

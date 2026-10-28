@@ -1,0 +1,30 @@
+{
+  "snapshot_date_honolulu": "2026-10-27",
+  "baseline_commit": "2aae4923318c0028d98266d78f6e4aabea295387",
+  "baseline_tree": "5cb303f7aec831e6f02f152455dbb2306e83fb37",
+  "scope": "Public crawl and repository observations, not search performance.",
+  "sitemap_urls": 189,
+  "http_200_urls": 189,
+  "unique_titles": 189,
+  "unique_descriptions": 189,
+  "self_canonical_urls": 189,
+  "inline_sameAs_pages_before": 0,
+  "url_prefix_counts": {
+    "poker": 91,
+    "living-well": 75,
+    "technology": 7,
+    "notes": 7,
+    "other": 9
+  },
+  "analytics": {
+    "umami_script_present": true,
+    "dashboard_ingestion": "not inspected",
+    "google_search_console_metrics": null,
+    "google_generative_ai_inclusion_setting": "not inspected",
+    "google_generative_ai_impressions": null,
+    "bing_ai_citations": null,
+    "ai_referral_visits": null,
+    "access_gap": "Search performance and AI citation/referral data were not available during this audit. Authorized native dashboard exports can supply the missing baseline."
+  },
+  "interpretation": "Crawl success and schema do not establish indexing, rankings, traffic, citations, or business outcomes."
+}

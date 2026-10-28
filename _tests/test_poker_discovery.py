@@ -10,6 +10,7 @@ from test_site import ROOT, build
 import poker_discovery
 import poker_routes_history as history
 import poker_course_history
+import visibility_sprint_history
 
 
 class PokerDiscoveryTests(unittest.TestCase):
@@ -33,7 +34,7 @@ class PokerDiscoveryTests(unittest.TestCase):
             self.assertEqual(sha256(history.before(path, (ROOT / path).read_bytes())).hexdigest(), digest, path)
 
     def test_every_article_and_feed_is_byte_identical(self):
-        routes = {p['path'] for p in self.pages if p.get('poker_guide') or p.get('poker_entry') or p.get('note') or p.get('living_well_entry') or p.get('evidence_article') or p.get('worked_guide')}
+        routes = {p['path'] for p in visibility_sprint_history.pages(self.pages) if p.get('poker_guide') or p.get('poker_entry') or p.get('note') or p.get('living_well_entry') or p.get('evidence_article') or p.get('worked_guide')}
         for route in routes:
             path = build.output_path(route)
             self.assertEqual(sha256(poker_course_history.before(path,self.outputs[path]).encode()).hexdigest(), self.baseline['outputs'][str(path)], route)

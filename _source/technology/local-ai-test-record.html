@@ -1,0 +1,75 @@
+<section class="section folio-row" aria-labelledby="local-record-summary">
+  <div class="section-meta"><p class="section-label">Local models / Historical test record</p></div>
+  <div class="section-content prose">
+    <h2 id="local-record-summary">A useful measurement starts with the machine and the task.</h2>
+    <p>Review Reply Writer has retained evidence of Gemma generating replies through Ollama. This reference explains one three-case test from October 13, 2026, Hawaii time. Its fictional reviews cover cafe praise, a complaint, and a mixed accommodation experience.</p>
+    <p>The measurements come from a GitHub-hosted Ubuntu CPU runner. They do not describe my MSI laptop or a test of my Windows setup. Here, local inference means the application called Ollama on the same runner.</p>
+    <p class="evidence-note"><strong>Recorded historical execution.</strong> The public files contain model responses, timings, settings, and source fingerprints. They contain no human usefulness assessments, manual time baseline, or matched hosted-model comparison. Later code changes make these historical results rather than a current release check.</p>
+    <div class="entry-jumps"><a href="#local-record-configuration">Inspect the configuration</a><a href="#local-record-results">Read the timings</a><a href="#local-record-time">Understand what time means</a><a href="#local-record-sources">Open the records</a></div>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="local-record-configuration">
+  <div class="section-meta"><p class="section-label">Keep the conditions visible</p></div>
+  <div class="section-content prose">
+    <h2 id="local-record-configuration">The configuration behind these numbers.</h2>
+    <div class="project-table-scroll" role="region" aria-label="Historical local model test configuration" tabindex="0">
+      <table>
+        <caption>Reported configuration for the retained Gemma run</caption>
+        <thead><tr><th scope="col">Item</th><th scope="col">Recorded condition</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Computer</th><td>GitHub-hosted Ubuntu CPU runner; two logical CPUs on an AMD EPYC 9V45 host</td></tr>
+          <tr><th scope="row">Runtime</th><td>Python 3.13.16; Ollama 0.40.3</td></tr>
+          <tr><th scope="row">Model</th><td><code>gemma3:4b</code>, Q4_K_M; exact model digest in the downloadable record</td></tr>
+          <tr><th scope="row">Server setup</th><td><code>OLLAMA_NO_CLOUD=1</code>; context length 4096; one parallel request</td></tr>
+          <tr><th scope="row">Generation settings</th><td>Initial temperature 0.8; retry temperature 0.3; <code>num_predict</code> 500</td></tr>
+          <tr><th scope="row">Material</th><td>Three selected, fictional developer-written reviews</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/REPLY_QUALITY_RESULTS.md">project account</a> supplies the server launch settings. The JSON records context as the server default, not independently inspected. Its <code>local_execution_verified</code> field is false: a loopback connection and model metadata do not constitute a network audit.</p>
+    <p>For a comparable new run, record the actual machine, model digest, settings, source version, and inputs again. Installing the same model name alone does not reproduce these conditions.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="local-record-results">
+  <div class="section-meta"><p class="section-label">Three selected cases</p></div>
+  <div class="section-content prose">
+    <h2 id="local-record-results">What completed, and what earlier failures taught.</h2>
+    <div class="project-table-scroll" role="region" aria-label="Historical Gemma case timings" tabindex="0">
+      <table>
+        <caption>Later retained smoke run: recorded case elapsed time</caption>
+        <thead><tr><th scope="col">Fictional case</th><th scope="col">Attempts</th><th scope="col">Elapsed</th><th scope="col">Final source</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Cafe praise</th><td>1</td><td>19.536 seconds</td><td>Gemma draft</td></tr>
+          <tr><th scope="row">Cafe complaint</th><td>1</td><td>18.157 seconds</td><td>Gemma draft</td></tr>
+          <tr><th scope="row">Mixed stay</th><td>1</td><td>19.325 seconds</td><td>Gemma draft</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>These values convert each JSON <code>elapsed_ms</code> field to seconds. All three drafts passed that version's automated checks without a retry. The complaint preserved the specific wait and ignored question; the mixed reply mentioned both complaints and praise. No person rated the outputs in this record.</p>
+    <p>The <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/QUALITY_RESULTS.md">earlier test</a> remains visible. Its checker wrongly rejected wording about what the barista should have done. An accepted retry softened an exact wait into a general delay. The mixed case ended with a labelled template fallback after two rejected model attempts.</p>
+    <p>Those failures show why a completed response, an automated pass, and a useful reply need separate records. Three selected cases across changed implementations cannot establish a general acceptance rate or a controlled speed improvement. The <a href="/technology/local-ai-review-replies/">full Review Reply Writer case</a> explains the product decisions behind the checks.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="local-record-time">
+  <div class="section-meta"><p class="section-label">Latency / Effort / Cost</p></div>
+  <div class="section-content prose">
+    <h2 id="local-record-time">Nineteen seconds of elapsed processing is not nineteen seconds saved.</h2>
+    <p>The table records case elapsed time around generation and application checks. Model-response receipts have their own durations. Neither measures the person's work preparing a review, checking the draft, correcting it, approving it, or maintaining the setup.</p>
+    <p>For a whole-task comparison, measure those activities and the usual method at an acceptable common quality. Record waiting separately; it counts as occupied time only when it prevents other useful work. The <a href="/technology/ai-time-savings/">time calculator</a> explains this accounting. Missing preparation, review, or baseline measurements must remain unknown, rather than being entered as zero.</p>
+    <p>These records also lack measured hardware, electricity, setup, and human-review costs. They cannot establish a total cost or net saving. There is no matched hosted-model run of these same reviews in the inspected evidence.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="local-record-sources">
+  <div class="section-meta"><p class="section-label">Inspect / Download</p></div>
+  <div class="section-content prose">
+    <h2 id="local-record-sources">Keep the evidence with its limits.</h2>
+    <p><a href="/downloads/local-ai-test-record.json" download>Download the compact factual record (.json)</a>, including model identity, exact timings, historical source fingerprints, and unmeasured fields.</p>
+    <ul>
+      <li><a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-quality-smoke-2026-10-13.json">Later raw test record</a>, used for the timing table.</li>
+      <li><a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-smoke-2026-10-13.json">Earlier raw test record</a>, preserving rejected attempts and fallback.</li>
+    </ul>
+    <p>The links pin the public evidence snapshot at <code>1c5e0487</code>. That snapshot preserves older results; it is not the tested application version. The reports' individual source fingerprints identify the historical code, and the documentation explicitly notes subsequent changes.</p>
+    <p class="editorial-note">Prepared with AI assistance from the linked public records. No new model run, laptop access, paid inference, or human evaluation was performed for this reference.</p>
+    <p><a href="/technology/">Explore practical AI</a> · <a href="/contact/">Send a correction</a></p>
+  </div>
+</section>

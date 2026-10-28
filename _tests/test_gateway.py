@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
+import visibility_sprint_history
 
 class Links(HTMLParser):
     def __init__(self, html):
@@ -48,11 +49,15 @@ class GatewayTests(unittest.TestCase):
         outputs = build.build_outputs()
         technology = outputs[Path('technology/index.html')]
         creative = outputs[Path('creative/index.html')]
-        self.assertIn('Build a brief for one task', technology)
+        # Exact historical wording remains checked through the approved capsule.
+        self.assertIn('Build a brief for one task', visibility_sprint_history.before('technology/index.html', technology))
+        self.assertIn('Build a clearer AI task brief.', technology)
         self.assertIn('href="/technology/task-brief/"', technology)
         self.assertIn('/notes/trustworthy-tools/', technology)
         self.assertIn('/resources/#tool-trust-check', technology)
-        self.assertIn('Start with one person and one thing worth sharing.', creative)
+        self.assertIn('Start with one person and one thing worth sharing.', visibility_sprint_history.before('creative/index.html', creative))
+        self.assertIn('href="#creative-work">Explore selected work', creative)
+        self.assertIn('href="#creative-brief">Plan a small creative piece', creative)
         self.assertIn('href="/downloads/creative-brief.txt" download', creative)
         self.assertIn('/notes/generous-explanations/', creative)
         self.assertIn('/notes/finishing-is-a-decision/', creative)

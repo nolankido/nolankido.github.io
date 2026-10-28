@@ -14,13 +14,24 @@ sys.path.insert(0,str(ROOT/'_scripts'))
 import build
 import author_archive
 
+EXPECTED_ARTICLE_PATHS={page['path'] for page in author_archive.records(build.public_pages())}
+NEW_CASE_PATHS={
+    '/technology/local-ai-review-replies/',
+    '/technology/ai-book-continuity-checker/',
+    '/technology/dinner-on-time/',
+    '/technology/ai-weekly-reset/',
+    '/technology/organize-public-notes/',
+    '/technology/local-ai-test-record/',
+}
+assert NEW_CASE_PATHS <= EXPECTED_ARTICLE_PATHS,'The reviewed new cases must remain in the article archive'
+
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
 
 server=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(ROOT)))
 Thread(target=server.serve_forever,daemon=True).start()
 base='http://127.0.0.1:'+str(server.server_port)
-report={'layouts':0,'text_spacing':0,'groups':0,'journeys':0,'axe':[]}
+report={'layouts':0,'text_spacing':0,'groups':0,'journeys':0,'archive_pages':len(EXPECTED_ARTICLE_PATHS),'axe':[]}
 errors=[];writes=[]
 
 def keyboard_state(page, target, case):
@@ -74,7 +85,7 @@ def keyboard_follow(page, link, destination, case):
 
 try:
     with sync_playwright() as pw:
-        browser=pw.chromium.launch(headless=True)
+        browser=pw.chromium.launch(headless=True,**({'executable_path':os.environ['CHROMIUM_PATH']} if os.environ.get('CHROMIUM_PATH') else {}))
         for scripts in [True,False]:
             ctx=browser.new_context(java_script_enabled=scripts,reduced_motion='reduce')
             ctx.route('**/*',lambda r:r.continue_() if urlsplit(r.request.url).hostname=='127.0.0.1' else r.abort())
@@ -83,13 +94,18 @@ try:
             for width in [320,390,768,1440]:
                 page.set_viewport_size({'width':width,'height':950})
                 page.goto(base+'/notes/')
-                expect(page.locator('.archive-list li')).to_have_count(104)
+                expect(page.locator('.archive-list li')).to_have_count(len(EXPECTED_ARTICLE_PATHS))
+                native_paths=page.locator('.archive-list > li > a').evaluate_all('(links)=>links.map(a=>a.getAttribute("href"))')
+                assert len(native_paths)==len(set(native_paths)),'Each article needs exactly one native archive entry'
+                assert set(native_paths)==EXPECTED_ARTICLE_PATHS,'The native archive must cover every published article'
                 for group in page.locator('.archive-group').all():
                     expect(group).not_to_have_attribute('open','')
                     group.locator('summary').press('Enter')
                     expect(group).to_have_attribute('open','')
                     expect(group.locator('.archive-list')).to_be_visible()
                     report['groups']+=1
+                for path in sorted(NEW_CASE_PATHS):
+                    expect(page.locator('#archive-practical-ai .archive-list > li > a[href="'+path+'"]')).to_be_visible()
                 assert page.evaluate('document.documentElement.scrollWidth')<=width
                 report['layouts']+=1
                 page.evaluate('css=>{const s=document.createElement("style");s.textContent=css;document.head.appendChild(s)}','*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')

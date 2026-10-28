@@ -7,15 +7,21 @@ import unittest
 import sys
 
 import later_release_history as history
+import visibility_sprint_history as subsequent_changes
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 
 
+def release_bytes(path):
+    """Inspect this older release after reversing only the reviewed sprint."""
+    return subsequent_changes.before(path, (ROOT / path).read_bytes())
+
+
 class LaterReleaseHistoryTests(unittest.TestCase):
     def test_build_timeout_reversal_restores_the_exact_regional_successor(self):
         import regional_link_history
-        current = (ROOT / history.CHECKS_WORKFLOW).read_bytes()
+        current = release_bytes(history.CHECKS_WORKFLOW)
         self.assertEqual(sha256(current).hexdigest(), history.WORKFLOW_AFTER)
         previous = history.before(history.CHECKS_WORKFLOW, current)
         self.assertEqual(sha256(previous).hexdigest(), history.WORKFLOW_BEFORE)
@@ -30,7 +36,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
                          previous.split(b'  browser:\n', 1)[1])
 
     def test_other_job_timeouts_and_unknown_workflow_bytes_are_not_rewritten(self):
-        raw = (ROOT / history.CHECKS_WORKFLOW).read_bytes()
+        raw = release_bytes(history.CHECKS_WORKFLOW)
         replacements = (
             (b'    timeout-minutes: 15\n', b'    timeout-minutes: 20\n'),
             (b'    timeout-minutes: 2\n', b'    timeout-minutes: 3\n'),
@@ -47,7 +53,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
         self.assertEqual(history.before('.github/workflows/other.yml', raw), raw)
 
     def test_corrupt_timeout_predecessor_and_replacement_fail_closed(self):
-        raw = (ROOT / history.CHECKS_WORKFLOW).read_bytes()
+        raw = release_bytes(history.CHECKS_WORKFLOW)
         for name, bad in [('WORKFLOW_BEFORE', '0' * 64),
                           ('BUILD_JOB_AFTER', 'not the approved job'),
                           ('BUILD_JOB_BEFORE', 'not the approved predecessor')]:
@@ -56,7 +62,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
                     history.before(history.CHECKS_WORKFLOW, raw)
 
     def test_identity_build_has_an_exact_successor_and_predecessor(self):
-        current = (ROOT / history.IDENTITY_BUILD).read_bytes()
+        current = release_bytes(history.IDENTITY_BUILD)
         self.assertEqual(sha256(current).hexdigest(), history.BUILD_AFTER)
         previous = history.before(history.IDENTITY_BUILD, current)
         self.assertEqual(sha256(previous).hexdigest(), history.BUILD_BEFORE)
@@ -66,14 +72,14 @@ class LaterReleaseHistoryTests(unittest.TestCase):
         self.assertNotIn("outputs[Path('assets/nolan-kido-identity.jsonld')]", previous.decode())
 
     def test_unknown_build_bytes_and_wrong_paths_are_not_rewritten(self):
-        raw = (ROOT / history.IDENTITY_BUILD).read_bytes()
+        raw = release_bytes(history.IDENTITY_BUILD)
         for changed in (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:]):
             self.assertEqual(history.before(history.IDENTITY_BUILD, changed), changed)
         self.assertEqual(history.before('other/build.py', raw), raw)
         self.assertEqual(history.before('other.bin', b'\xff\x00'), b'\xff\x00')
 
     def test_corrupt_build_predecessor_and_insertion_fail_closed(self):
-        raw = (ROOT / history.IDENTITY_BUILD).read_bytes()
+        raw = release_bytes(history.IDENTITY_BUILD)
         for name, bad in [('BUILD_BEFORE', '0' * 64),
                           ('BUILD_INSERTION', 'not the approved insertion')]:
             with self.subTest(name=name), patch.object(history, name, bad):
@@ -161,7 +167,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
 
     def test_current_live_targets_include_the_separately_checked_new_card(self):
         import check_live
-        current = check_live.targets()
+        current = subsequent_changes.live_targets(check_live.targets())
         route = '/assets/social/nolan-kido-ai.png'
         self.assertEqual(len(current), 476)
         self.assertEqual(current[route], (200, (ROOT / route.lstrip('/')).read_bytes()))

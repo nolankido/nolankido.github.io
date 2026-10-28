@@ -45,6 +45,7 @@ import practical_discovery
 import everyday_tasks
 import core_styles
 import public_profile
+import public_identity
 import font_delivery
 import page_sharing
 import ai_task_choice
@@ -54,6 +55,7 @@ import practical_path
 import practical_navigation
 import case_evidence
 import time_examples
+import visibility_projects
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -172,6 +174,7 @@ def build_outputs() -> dict[Path, str]:
     entry_config = entrypoints.load(ROOT, pages)
     practical_config = practical_discovery.load(ROOT, pages)
     values = {k: text(v) for k, v in site.items()}
+    values['public_work_profiles'] = public_identity.links()
     values["practical_home"] = practical_discovery.home_links(practical_config, pages)
     values["practical_work"] = practical_discovery.work_cards(practical_config, pages)
     values['everyday_task_cards'] = everyday_tasks.cards(everyday_tasks.load(ROOT, pages), living_well.load(ROOT))
@@ -286,7 +289,7 @@ def build_outputs() -> dict[Path, str]:
         if p.get('poker_topic') or p['id'] == 'poker-topics':
             schema['@type'] = 'CollectionPage'
         if p['id'] in {'home', 'about'}:
-            person = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/', 'description': site['bio_short']}
+            person = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/', 'description': site['bio_short'], 'sameAs': public_identity.same_as()}
             schema['about'] = person
             schema['mainEntity'] = person
             if p['id'] == 'about':
@@ -439,6 +442,8 @@ def build_outputs() -> dict[Path, str]:
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
         schema = author_archive.schema(p, schema, pages, site)
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
+        schema = visibility_projects.schema(p, schema, body, ROOT, site['url'])
+        extra += visibility_projects.head(p, ROOT)
         extra += practical_path.head(p, ROOT)
         extra += poker_discovery.head(p, ROOT)
         extra += poker_course.head(p, ROOT)

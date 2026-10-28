@@ -52,7 +52,11 @@ class WorkflowEvidenceTests(unittest.TestCase):
         for p in self.pages:
             html=self.outputs[build.output_path(p['path'])]
             self.assertEqual('/assets/workflow-time.js?' in html,p['id']=='ai-time-savings')
-            self.assertEqual('/assets/workflow-evidence.css?' in html,p['id'] in {'ai-time-savings','ai-website-verification'})
+            self.assertEqual('/assets/workflow-evidence.css?' in html,p['id'] in {
+                'ai-time-savings','ai-website-verification',
+                'local-ai-review-replies','ai-book-continuity-checker','dinner-on-time',
+                'ai-weekly-reset','organize-public-notes','local-ai-test-record',
+            })
         targets=check_live.targets()
         for name in ['assets/workflow-time.js','assets/workflow-evidence.css','downloads/workflow-time-review.txt','downloads/website-check-reproduction.py','downloads/website-check-evidence.json']:
             self.assertEqual(targets['/'+name],(200,(ROOT/name).read_bytes()))

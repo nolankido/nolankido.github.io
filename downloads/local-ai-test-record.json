@@ -1,0 +1,117 @@
+{
+  "schema": "nolankido-local-ai-test-record-v1",
+  "description": "A source-grounded summary of a historical three-case Gemma/Ollama test. No new execution was performed for this website reference.",
+  "public_evidence_snapshot": "1c5e0487c331d5202410c9f342557d9355951c3a",
+  "public_evidence_snapshot_is_tested_application_version": false,
+  "run_started_at_utc": "2026-10-14T02:03:21.383570+00:00",
+  "run_date_hawaii": "2026-10-13",
+  "corpus_scope": "Three selected fictional developer-written reviews; not customer data or an unbiased benchmark.",
+  "environment_from_project_documentation": {
+    "location": "GitHub-hosted Ubuntu CPU runner",
+    "host_cpu": "AMD EPYC 9V45",
+    "reported_logical_cpus": 2,
+    "python": "3.13.16",
+    "ollama": "0.40.3",
+    "ollama_no_cloud": "1",
+    "context_length": 4096,
+    "parallel_requests": 1,
+    "source": "https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/REPLY_QUALITY_RESULTS.md"
+  },
+  "environment_from_raw_report": {
+    "python": "3.13.16",
+    "os": "Linux",
+    "architecture": "x86_64"
+  },
+  "model": {
+    "name": "gemma3:4b",
+    "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+    "size": 3350272403,
+    "family": "gemma3",
+    "parameter_size": "3.9B",
+    "quantization": "Q4_K_M"
+  },
+  "generation_parameters": {
+    "model": "gemma3:4b",
+    "temperature_initial": 0.8,
+    "temperature_retry": 0.3,
+    "num_predict": 500,
+    "context": "Ollama server default; not independently inspected",
+    "seed": "Ollama default; repeatable protocol, not guaranteed identical text"
+  },
+  "local_execution_verified": false,
+  "privacy_scope": "The configured cloud-disabled mode and loopback receipts are not an independent network audit.",
+  "results": [
+    {
+      "case_id": "cafe-praise",
+      "final_output_source": "model",
+      "attempts": 1,
+      "case_elapsed_ms": 19536,
+      "case_elapsed_seconds": 19.536,
+      "model_response_total_duration_ns": 19470169957
+    },
+    {
+      "case_id": "cafe-complaint",
+      "final_output_source": "model",
+      "attempts": 1,
+      "case_elapsed_ms": 18157,
+      "case_elapsed_seconds": 18.157,
+      "model_response_total_duration_ns": 18092423938
+    },
+    {
+      "case_id": "stay-mixed",
+      "final_output_source": "model",
+      "attempts": 1,
+      "case_elapsed_ms": 19325,
+      "case_elapsed_seconds": 19.325,
+      "model_response_total_duration_ns": 19261737945
+    }
+  ],
+  "historical_source_fingerprints_sha256": {
+    "review_reply.py": "47b664ef67ed3bdf4abb762fd709ad93b715016409e91dd4dda51a468381076e",
+    "reply_safety.py": "05c1a776b652453bf34eae6c3ea9a59df1467b44d2bd37b4ba02851ff5741d50",
+    "review_quality.py": "95cb3ba3ffeb8097fc750a84b086a3715a31c2392c5dd77ccada83c406503eac",
+    "rrw_workspace.py": "9515df4667c7634fe7ed84ae69a2ed00468ecc23c44731639abf102581d88997",
+    "rrw_model.py": "7f399884f8b4199d6d44f16e3ce049cadcd78f7345b1efdd60f6e1315e271d3a",
+    "rrw_evaluate.py": "76ef37d880322ca3f0c00727982034e95acb39ba8ff551c754852ab8f833e08a",
+    "examples/evaluation_cases.json": "31bf76007f6b9b76e424e29b1ff52119746c2f03a1eed7176a2adf452de7211f"
+  },
+  "earlier_run_results": [
+    {
+      "case_id": "cafe-praise",
+      "final_output_source": "model",
+      "attempts": 1,
+      "case_elapsed_ms": 22083
+    },
+    {
+      "case_id": "cafe-complaint",
+      "final_output_source": "model",
+      "attempts": 2,
+      "case_elapsed_ms": 41779
+    },
+    {
+      "case_id": "stay-mixed",
+      "final_output_source": "fallback",
+      "attempts": 2,
+      "case_elapsed_ms": 41258
+    }
+  ],
+  "unmeasured": {
+    "personal_laptop_performance": null,
+    "human_preparation_minutes": null,
+    "human_review_minutes": null,
+    "human_correction_minutes": null,
+    "manual_baseline_minutes": null,
+    "comparable_hosted_model_run": null,
+    "setup_and_upkeep_minutes": null,
+    "hardware_and_electricity_cost": null,
+    "net_time_saved_minutes": null
+  },
+  "human_assessments_recorded": 0,
+  "current_release_quality_or_platform_pass": false,
+  "sources": [
+    "https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/REPLY_QUALITY_RESULTS.md",
+    "https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/QUALITY_RESULTS.md",
+    "https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-quality-smoke-2026-10-13.json",
+    "https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-smoke-2026-10-13.json"
+  ]
+}

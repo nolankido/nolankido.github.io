@@ -11,6 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build, check_live, font_delivery, page_sharing
+import visibility_sprint_history
 from test_site import Page
 
 PRIVACY_SECTION = '<h2>Keeping and sharing a page</h2><p>Copy-link controls copy only a page\'s permanent address after you press the button. On supported devices, Share page opens your browser\'s sharing interface with the public title and permanent address, not calculator entries or worksheet answers. Your clipboard, browser, and any app you choose have their own data handling. These controls add no sharing analytics events.</p>\n'
@@ -101,7 +102,8 @@ class ReadingDeliveryTests(unittest.TestCase):
                 self.assertEqual(html.count('data-copy-page hidden'), 1)
                 self.assertEqual(html.count('data-share-page hidden'), 1)
                 if p.get('note'): self.assertEqual(html.count('Keep or share this essay'), 1)
-        self.assertEqual(count, 112)
+        self.assertEqual(count, 118)
+        self.assertEqual(sum(page_sharing.eligible(p) for p in visibility_sprint_history.pages(self.pages)), 112)
 
     def test_no_runtime_reading_of_private_inputs_or_tracking_in_share_controls(self):
         js = (ROOT / 'assets/page-sharing.js').read_text()

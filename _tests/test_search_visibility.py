@@ -86,7 +86,8 @@ class SearchVisibilityTests(unittest.TestCase):
                 if p.get('note'):
                     self.assertNotIn('class="search-author"',self.outputs[build.output_path(p['path'])])
         about = check_search.Document(self.outputs[Path('about/index.html')]).schemas[0]
-        self.assertEqual(set(about['mainEntity']), {'@type','@id','name','url','description'})
+        self.assertEqual(set(about['mainEntity']), {'@type','@id','name','url','description','sameAs'})
+        self.assertEqual(about['mainEntity']['sameAs'], ['https://github.com/nolankido', 'https://dev.to/kidon'])
         self.assertEqual(about['mainEntity']['description'], self.site['bio_short'])
         self.assertEqual(about['@type'],'ProfilePage')
 
@@ -117,10 +118,29 @@ class SearchVisibilityTests(unittest.TestCase):
                 search.decorate(page,self.pages,site,schema,'',self.presentation)
 
     def test_generic_brand_art_is_not_misrepresented_as_an_article_illustration(self):
+        actual_images = {
+            'ai-book-continuity-checker': ('/assets/projects/preflight-holmes-report.png', 1200, 1349),
+            'dinner-on-time': ('/assets/projects/dinner-on-time-preview.jpg', 2400, 1396),
+        }
+        seen = set()
         for p in self.pages:
-            schema=check_search.Document(self.outputs[build.output_path(p['path'])]).schemas[0]
+            document=check_search.Document(self.outputs[build.output_path(p['path'])])
+            schema=document.schemas[0]
             if schema['@type']=='Article':
-                self.assertNotIn('image', schema)
+                if p['id'] in actual_images:
+                    path, width, height = actual_images[p['id']]
+                    image = schema['image']
+                    self.assertEqual(image['@type'], 'ImageObject')
+                    self.assertEqual(image['url'], self.site['url'] + path)
+                    self.assertEqual((image['width'], image['height']), (width, height))
+                    visible = [tag for tag in document.tags('img') if tag.get('src') == path]
+                    self.assertEqual(len(visible), 1)
+                    self.assertEqual((visible[0].get('width'), visible[0].get('height')), (str(width), str(height)))
+                    self.assertTrue((ROOT / path.lstrip('/')).is_file())
+                    seen.add(p['id'])
+                else:
+                    self.assertNotIn('image', schema)
+        self.assertEqual(seen, set(actual_images))
         for key in ['technology','task-brief']:
             self.assertIn(key,self.presentation['pages'])
         app=check_search.Document(self.outputs[Path('technology/task-brief/index.html')]).schemas[0]['mainEntity']
@@ -147,6 +167,9 @@ class SearchVisibilityTests(unittest.TestCase):
 
     def test_original_about_prose_is_preserved_beside_the_new_work_links(self):
         source=(ROOT/'_source/about.html').read_text()
+        public_links='<p class="small-copy" id="public-work-profiles">You can also explore ${public_work_profiles}.</p>\n'
+        self.assertEqual(source.count(public_links), 1)
+        source=source.replace(public_links, '', 1)
         prior=re.sub(r'<h2 id="try-the-work">.*?(?=<h2>)','',source,flags=re.S)
         revised='<p class="intro"><strong>AI Works Human Decides</strong> is how I think about putting AI to use in everyday life and small-business work. Let the technology help with a defined task. Keep the purpose, the checks, and the consequential decisions with people.</p>'
         previous='<p class="intro">I like making things useful, understanding difficult ideas, and leaving room for a life beyond the work.</p>'

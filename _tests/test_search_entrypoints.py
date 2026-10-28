@@ -22,6 +22,7 @@ import search_entry_history as history
 import practical_navigation_history
 import time_export_history
 import poker_titles_history
+import visibility_sprint_history
 
 
 class SearchEntryTests(unittest.TestCase):
@@ -67,13 +68,15 @@ class SearchEntryTests(unittest.TestCase):
 
     def test_twelve_hubs_have_matching_visible_and_search_purpose(self):
         self.assertEqual(len(self.entries), 12)
+        previous = {p['id']: p for p in visibility_sprint_history.pages(self.pages)}
         for p in self.pages:
             raw = self.outputs[build.output_path(p['path'])]
             if p['id'] in self.entries:
                 self.assertFalse(p.get('date'))
                 self.assertFalse(p.get('noindex'))
                 expected_date = {'poker-library': '2026-10-15', 'poker-study': '2026-10-16', 'start-here': '2026-10-19', 'resources': '2026-10-19'}.get(p['id'], '2026-10-12')
-                self.assertEqual(p['updated'], expected_date)
+                self.assertEqual(previous[p['id']]['updated'], expected_date)
+                self.assertEqual(p['updated'], '2026-10-27' if p['id'] == 'creative' else expected_date)
                 self.assertEqual(raw.count('class="entry-summary"'), 1)
                 self.assertIn('<p class="entry-summary">' + escape(p['description']) + '</p>', raw)
                 self.assertIn('<h1 class="page-title">' + escape(p['title']) + '</h1>', raw)
@@ -85,8 +88,13 @@ class SearchEntryTests(unittest.TestCase):
     def test_every_article_and_three_subject_hubs_have_a_distinct_preview(self):
         cfg = presentation.load(ROOT, self.pages)
         expected = {p['id'] for p in self.pages if reader_previews.eligible(p)}
-        self.assertEqual(len(expected), 107)
-        self.assertEqual(len(self.cards), 103)
+        previous_pages = visibility_sprint_history.pages(self.pages)
+        self.assertEqual(sum(reader_previews.eligible(p) for p in previous_pages), 107)
+        previous_cards = json.loads(visibility_sprint_history.before(
+            reader_previews.SOURCE, (ROOT / reader_previews.SOURCE).read_text()))['pages']
+        self.assertEqual(len(previous_cards), 103)
+        retained = json.loads((ROOT / '_source/presentation.json').read_text())['pages']
+        self.assertEqual(set(self.cards), expected - set(retained))
         self.assertTrue(expected <= set(cfg['pages']))
         self.assertEqual(len({cfg['pages'][key]['src'] for key in expected}), len(expected))
         for key, retained in json.loads((ROOT / '_source/presentation.json').read_text())['pages'].items():
@@ -114,7 +122,12 @@ class SearchEntryTests(unittest.TestCase):
             self.assertEqual(' '.join(record['layout']['lines']), by_id[key]['title'])
             self.assertEqual(record['path'], by_id[key]['path'])
         # New and deliberately retitled cards each retain the same 25 KB limit.
-        added = [self.cards[k] for k in ['poker-tournament-trip-budget', 'poker-thunder-valley-poker-guide', 'poker-limped-multiway-pots', 'poker', 'poker-free-poker-learning-path']]
+        added = [self.cards[k] for k in [
+            'poker-tournament-trip-budget', 'poker-thunder-valley-poker-guide',
+            'poker-limped-multiway-pots', 'poker', 'poker-free-poker-learning-path',
+            'local-ai-review-replies', 'ai-book-continuity-checker', 'dinner-on-time',
+            'ai-weekly-reset', 'organize-public-notes', 'local-ai-test-record',
+        ]]
         added_bytes = sum(len((ROOT / card['src'].lstrip('/')).read_bytes()) for card in added)
         self.assertLess(total - added_bytes, 1_000_000)
         self.assertLess(total, 1_000_000 + len(added) * 25_000)

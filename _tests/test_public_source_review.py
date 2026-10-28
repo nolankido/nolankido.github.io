@@ -45,11 +45,13 @@ def text(node):
 class PublicSourceReviewTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.source = (ROOT / '_source/technology/home.html').read_text(encoding='utf-8')
+        # The record moved intact to its own permanent page in the visibility
+        # sprint. Source, quotations, corrections, and limits stay live checks.
+        cls.source = (ROOT / '_source/technology/ai-weekly-reset.html').read_text(encoding='utf-8')
         cls.outputs = build.build_outputs()
         cls.documents = {
             'source': html5lib.parseFragment(cls.source, namespaceHTMLElements=False),
-            'generated': html5lib.parse(cls.outputs[Path('technology/index.html')], namespaceHTMLElements=False),
+            'generated': html5lib.parse(cls.outputs[Path('technology/ai-weekly-reset/index.html')], namespaceHTMLElements=False),
         }
         cls.guides = {entry['slug']: entry for entry in
                       json.loads((ROOT / '_source/living-well/launch.json').read_text())['entries']}
@@ -99,6 +101,9 @@ class PublicSourceReviewTests(unittest.TestCase):
         page = next(p for p in build.public_pages() if p['id'] == 'technology')
         self.assertEqual(page['updated'], '2026-10-27')
         self.assertFalse(page.get('date'))
+        case_page = next(p for p in build.public_pages() if p['id'] == 'ai-weekly-reset')
+        self.assertEqual(case_page['date'], '2026-10-27')
+        self.assertEqual(case_page['path'], '/technology/ai-weekly-reset/')
 
     def test_recorded_brief_matches_the_unmodified_october_17_report(self):
         self.assertEqual(sha256((ROOT / REPORT).read_bytes()).hexdigest(), REPORT_SHA256)
@@ -145,6 +150,11 @@ class PublicSourceReviewTests(unittest.TestCase):
     def test_original_anchors_and_native_private_decision_path_remain_available(self):
         anchors = ['notes-to-plan-case', 'notes-to-plan-title', 'notes-case-sources',
                    'notes-case-revisions', 'notes-case-result', 'notes-case-limits']
+        hub = html5lib.parse(self.outputs[Path('technology/index.html')], namespaceHTMLElements=False)
+        for identifier in anchors:
+            retained = self.one(hub, identifier)
+            if identifier not in {'notes-to-plan-case', 'notes-to-plan-title'}:
+                self.assertEqual(retained.get('href'), '/technology/ai-weekly-reset/#' + identifier)
         for kind, document in self.documents.items():
             with self.subTest(document=kind):
                 for identifier in anchors:

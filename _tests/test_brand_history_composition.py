@@ -12,12 +12,15 @@ import answer_review_growth_history as guide_history
 import brand_positioning_history as brand_history
 import build
 import turn10_profile_history as profile_history
+import visibility_sprint_history
 
 
 class BrandHistoryCompositionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = build.public_pages()
+        # These assertions describe the older brand/profile boundary. The
+        # newer leaf separately tests full-record mutation rejection.
+        cls.pages = visibility_sprint_history.pages(build.public_pages())
 
     def test_known_metadata_reaches_the_existing_profile_boundary(self):
         previous = {page['id']: page for page in profile_history.pages(self.pages)}
