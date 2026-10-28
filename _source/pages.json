@@ -370,8 +370,9 @@
     "source": "poker/hand-rankings.html",
     "section": "poker",
     "date": "2026-10-05",
-    "updated": "2026-10-05",
-    "poker_guide": true
+    "updated": "2026-10-27",
+    "poker_guide": true,
+    "revision": "Connected the showdown explanations to the existing card-building practice and a private correction note."
   },
   {
     "id": "poker-betting-and-pots",

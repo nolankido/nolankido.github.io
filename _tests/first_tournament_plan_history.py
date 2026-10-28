@@ -91,6 +91,8 @@ def key(path: str | Path) -> str:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import ranking_practice_history
+    data = ranking_practice_history.before(path, data)
     name = key(path)
     item = change()['paths'].get(name)
     if item is None:
@@ -124,6 +126,8 @@ def before(path: str | Path, data: bytes | str) -> bytes | str:
 
 def pages(records: list[dict]) -> list[dict]:
     """Restore only complete approved page records without mutating input."""
+    import ranking_practice_history
+    records = ranking_practice_history.pages(records)
     pairs = change()['pages']
     result = []
     for page in records:
