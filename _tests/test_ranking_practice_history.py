@@ -11,6 +11,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_tests'))
 import ranking_practice_history as history
+import brief_check_history as subsequent_changes
 
 # Independently captured with git show dfdcdc64:<path>, before generating the
 # reverse spans. These are whole files from the published parent, not hashes
@@ -39,7 +40,8 @@ class RankingPracticeHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
+        cls.raw = {name: subsequent_changes.before(name, (ROOT / name).read_bytes())
+                   for name in history.PATHS}
         cls.pages = json.loads(cls.raw['_source/pages.json'])
 
     def test_eight_current_files_restore_the_independently_captured_parent(self):
@@ -239,7 +241,7 @@ class RankingPracticeHistoryTests(unittest.TestCase):
                        'description': 'UNREVIEWED'}
             self.assertEqual(adapter.pages([altered]), [altered])
 
-    def test_new_leaf_depends_only_on_the_standard_library(self):
+    def test_boundary_depends_only_on_the_standard_library_and_exact_successor(self):
         tree = ast.parse(Path(history.__file__).read_text(encoding='utf-8'))
         imports = set()
         for node in ast.walk(tree):
@@ -248,7 +250,7 @@ class RankingPracticeHistoryTests(unittest.TestCase):
             elif isinstance(node, ast.ImportFrom):
                 self.assertEqual(node.level, 0)
                 imports.add(node.module.split('.')[0])
-        self.assertFalse(imports - sys.stdlib_module_names)
+        self.assertEqual(imports - sys.stdlib_module_names, {'brief_check_history'})
 
 
 if __name__ == '__main__':

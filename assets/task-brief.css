@@ -2,6 +2,15 @@
 .page-task-brief .entry-jumps { display:flex; flex-wrap:wrap; gap:12px 24px; margin:24px 0 0; }
 .page-task-brief .entry-jumps a { display:inline-flex; align-items:center; min-height:44px; }
 #brief-workspace { scroll-margin-top: 24px; }
+#brief-next-check-title { scroll-margin-top: 100px; }
+/* Keep native brief bookmarks stable when page scripts are disabled. */
+@media (scripting: none) {
+  .page-task-brief {
+    --sans: "Segoe UI", Arial, sans-serif;
+    --serif: Georgia, "Times New Roman", serif;
+    --mono: Consolas, "Liberation Mono", monospace;
+  }
+}
 .brief-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin: 28px 0; }
 .brief-field { min-width: 0; }
 .brief-field:last-child { grid-column: 1 / -1; }

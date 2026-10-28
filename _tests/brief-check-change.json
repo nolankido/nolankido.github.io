@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "parent_commit": "427f258ad895cfc736d3d29944347ea584f04826",
+  "parent_tree": "f51ffdb98ccb618896e25d6d729cc7919536a92d",
+  "paths": {
+    "_source/pages.json": {
+      "current_sha256": "4ee21c009b17f729ec565e0b2f62614e7ef58eda43325ed55e7818a7e9283f4a",
+      "parent_sha256": "a7cbb3b93806e87fac0efcbb4b07ca803240909cc28e77489ecf206f19889b09",
+      "edits": [
+        {
+          "start": 48991,
+          "end": 48992,
+          "current_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "old": "1"
+        }
+      ]
+    },
+    "_source/technology/task-brief.html": {
+      "current_sha256": "e876406d4887e009d38f59c34fb2539732a040e3588c395c7fc0bc5e3f1c471c",
+      "parent_sha256": "037275484fcd3e44015634932718cd16f81edcb43b92c95eb510cc0b309b0614",
+      "edits": [
+        {
+          "start": 2790,
+          "end": 2844,
+          "current_sha256": "11125177fbdea184bf491333f2dfc91227cfa99a7e9331f684f3924e66c0c57b",
+          "old": ""
+        },
+        {
+          "start": 9482,
+          "end": 9704,
+          "current_sha256": "0679f76d1c7344c9e86de2d9aff6ae52c2e0e87ad3cba74bfe2333efc241db5b",
+          "old": ""
+        },
+        {
+          "start": 21742,
+          "end": 23347,
+          "current_sha256": "13149fb6bfee81556c5be86fc01cd252484980fd2a0bc7e7cf3c9b6c90e96adf",
+          "old": ""
+        }
+      ]
+    },
+    "assets/task-brief.css": {
+      "current_sha256": "57f1150bb05905286bedfb9d73ed65bf38fce8b43e598afd0ff0559d82077299",
+      "parent_sha256": "57707dd227c72c92b59444e06157f3d67c4cbd72debf8dc087633116b2b333b7",
+      "edits": [
+        {
+          "start": 290,
+          "end": 614,
+          "current_sha256": "3978ff25c0922571e2c7f1f11670db98eb9cc4351a4a9f4044ecbd85d952171f",
+          "old": ""
+        }
+      ]
+    },
+    "assets/task-brief.js": {
+      "current_sha256": "3c31d53367d23338f7710992e3e8ab4c2806adc0ac05cc47bc6e0d4a1092a6c8",
+      "parent_sha256": "95f5b8a46ba9d8dbfc62631be2fb85b2ae976bc9103ed67873085a25e14a5341",
+      "edits": [
+        {
+          "start": 9702,
+          "end": 11062,
+          "current_sha256": "ad071e34c761f3e1fd7caa684388bc573b408586f6ecdb95724636c644bd344c",
+          "old": ""
+        }
+      ]
+    },
+    "find/index.html": {
+      "current_sha256": "b08b676f2bb2a915348d2ce2c00fe3378504db24957ca3adbb11ecedad25b073",
+      "parent_sha256": "7e4b493da15d88f32329e2faa6812d39450b6056f1e4b301ea90601ad8a1f15e",
+      "edits": [
+        {
+          "start": 147369,
+          "end": 147434,
+          "current_sha256": "cd186caf613665d6235ee28d506759350f427db1ae75be98e8c43bc065d5491c",
+          "old": ""
+        }
+      ]
+    },
+    "sitemap.xml": {
+      "current_sha256": "8ad875a44046315357781fdac68d5d189b7252478120cd28d5f7526193b53b2e",
+      "parent_sha256": "76a07cd983941c43dabe1aad3aadba58a6450cdeb3cbf579457fac1817a14103",
+      "edits": [
+        {
+          "start": 9530,
+          "end": 9531,
+          "current_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "old": "1"
+        }
+      ]
+    },
+    "technology/task-brief/index.html": {
+      "current_sha256": "aa7da94acb4fc7e4d736d42cb4c24f9a7c4e0cf4bfd35c8cfcb238e3cc1255c3",
+      "parent_sha256": "54a63337a2cc037eec8f8a0ba05c84a80dfe25ba2d903b44829a59e95d4db5b9",
+      "edits": [
+        {
+          "start": 2805,
+          "end": 2875,
+          "current_sha256": "900834127e3847af869ae81d93e3227140d3e62aeb3372d75713d4a5dfeb194d",
+          "old": "707dd227c7\">\n  <script defer src=\"/assets/task-brief.js?v=95f5b8a46ba9"
+        },
+        {
+          "start": 4006,
+          "end": 4007,
+          "current_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "old": "1"
+        },
+        {
+          "start": 10967,
+          "end": 11021,
+          "current_sha256": "11125177fbdea184bf491333f2dfc91227cfa99a7e9331f684f3924e66c0c57b",
+          "old": ""
+        },
+        {
+          "start": 17659,
+          "end": 17881,
+          "current_sha256": "0679f76d1c7344c9e86de2d9aff6ae52c2e0e87ad3cba74bfe2333efc241db5b",
+          "old": ""
+        },
+        {
+          "start": 29918,
+          "end": 31523,
+          "current_sha256": "198f777c0a82a1fced98ecfeb57824dc48bcd34b058586a1cbc3bc3815f079d2",
+          "old": ""
+        }
+      ]
+    }
+  },
+  "pages": {
+    "task-brief": {
+      "old": {
+        "id": "task-brief",
+        "section": "technology",
+        "path": "/technology/task-brief/",
+        "title": "Build a clearer AI task brief.",
+        "seo_title": "AI Task Brief Builder & Prompt Template | Nolan Kido",
+        "description": "Build a free AI task brief with a clear outcome, permitted inputs, checks and boundaries. Six illustrative examples, readable preview and a plain-text download.",
+        "kicker": "Technology / A practical tool",
+        "source": "technology/task-brief.html",
+        "updated": "2026-10-21"
+      },
+      "new": {
+        "id": "task-brief",
+        "section": "technology",
+        "path": "/technology/task-brief/",
+        "title": "Build a clearer AI task brief.",
+        "seo_title": "AI Task Brief Builder & Prompt Template | Nolan Kido",
+        "description": "Build a free AI task brief with a clear outcome, permitted inputs, checks and boundaries. Six illustrative examples, readable preview and a plain-text download.",
+        "kicker": "Technology / A practical tool",
+        "source": "technology/task-brief.html",
+        "updated": "2026-10-27"
+      }
+    }
+  }
+}

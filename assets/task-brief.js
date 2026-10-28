@@ -185,4 +185,27 @@
   editor.hidden = false;
   window.addEventListener('pagehide', clearAll);
   window.addEventListener('pageshow', event => { if (event.persisted) clearAll(); });
+  // Initial bookmarks can move as the editor opens and fonts finish loading.
+  // Correct only these new destinations, once, without taking focus. A reader
+  // interaction or navigation cancels this scheduled adjustment.
+  const arrivalHash = location.hash;
+  if (['#brief-next-check', '#brief-next-check-title'].includes(arrivalHash)) {
+    const arrival = new AbortController();
+    const cancelArrival = () => arrival.abort();
+    for (const event of ['keydown', 'pointerdown', 'wheel', 'touchstart', 'hashchange', 'pagehide']) {
+      window.addEventListener(event, cancelArrival, {once: true, passive: true, signal: arrival.signal});
+    }
+    const settleArrival = () => document.fonts.ready.then(() => requestAnimationFrame(() => {
+      if (arrival.signal.aborted || location.hash !== arrivalHash) return;
+      const heading = get('next-check-title');
+      if (heading) {
+        const header = document.querySelector('.site-header');
+        const inset = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+        window.scrollTo({top: Math.max(0, scrollY + heading.getBoundingClientRect().top - inset - 20), behavior: 'instant'});
+      }
+      cancelArrival();
+    }));
+    if (document.readyState === 'complete') settleArrival();
+    else window.addEventListener('load', settleArrival, {once: true, signal: arrival.signal});
+  }
 })();

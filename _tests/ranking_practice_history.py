@@ -2,7 +2,7 @@
 
 Whole successor hashes gate checked reverse character spans, and restored
 bytes must match the independently captured whole parent hashes. Unknown
-bytes and metadata stay visible. This leaf has no build or history imports.
+bytes and metadata stay visible. The exact subsequent handoff is reversed first.
 """
 from __future__ import annotations
 
@@ -86,6 +86,8 @@ def key(path: str | Path) -> str:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import brief_check_history
+    data = brief_check_history.before(path, data)
     name = key(path)
     item = change()['paths'].get(name)
     if item is None:
@@ -119,5 +121,7 @@ def before(path: str | Path, data: bytes | str) -> bytes | str:
 
 def pages(records: list[dict]) -> list[dict]:
     """Restore only the complete approved guide record without mutation."""
+    import brief_check_history
+    records = brief_check_history.pages(records)
     pair = change()['pages'][PAGE_ID]
     return [deepcopy(pair['old'] if page == pair['new'] else page) for page in records]
