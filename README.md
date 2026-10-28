@@ -94,11 +94,12 @@ beginner-task audit, research basis and limits of the evaluation.
 
 ## Site architecture
 
-The homepage introduces Nolan first, shows three selected pieces of published
-writing, then opens the four subject libraries in their established order:
+The homepage introduces Nolan first, links three public AI projects and three
+use/inspect/understand choices, then opens the four subject libraries in their established order:
 Technology, Living Well, Poker, Creative Work. `/start-here/` is the cross-site
 orientation page. It is available in the shared utility bar on every page.
-The homepage is not a chronological feed, project portfolio, or popularity counter.
+The introduction remains curated rather than chronological. Each project links
+to its permanent case page and the available evidence.
 
 `_source/identity.json` owns the primary navigation and three curated reading
 choices, plus four cross-subject reading routes on `/notes/` (Writing). The five
@@ -171,6 +172,23 @@ python _scripts/check_live.py --attempts 10 --interval 10
 The live verifier makes GET requests to nolankido.com only. It checks public pages, assets, downloads, the custom 404, and excluded source paths. It does not send form messages. A successful build or artifact upload is not a completed deployment: check Pages job status as well as the live bytes. If the bounded live check times out during a provider delay, inspect the deployment before retrying; do not automatically rewrite or roll back working code.
 
 See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs. Revert faulty changes rather than rewriting history.
+
+### Search-engine change notifications
+
+After a main-branch release passes the public-response check, the workflow uses
+`_scripts/submit_indexnow.py` to notify IndexNow about meaningful changes between
+the push's actual before/after commits. The script selects canonical sitemap URLs,
+verifies the current main commit and deployed public bytes, and checks the root
+ownership file before sending public URLs to the fixed IndexNow endpoint.
+It does not submit unchanged pages or visitor data. Without `--submit`, it makes
+no network requests and prints the proposed change list for two full commit IDs.
+
+The notification receipt is retained as an Actions artifact for 30 days.
+HTTP 200 means the URLs were received; HTTP 202 means receipt with key validation
+pending. Neither proves indexing, ranking, or AI citations. A failed notification
+produces a separate warning while preserving the successful publication receipt.
+Inspect the reason and any requested retry delay before making a bounded retry.
+See `_reports/visibility-sprint/discovery-follow-up.md` for scope and protocol sources.
 
 ## Technology-first subject hierarchy
 

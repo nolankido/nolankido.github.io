@@ -3,20 +3,20 @@
     "id": "home",
     "path": "/",
     "title": "Nolan Kido",
-    "seo_title": "Nolan Kido | AI Works Human Decides",
-    "description": "Nolan Kido's AI Works Human Decides approach to practical AI in real life: bounded workflows, independent checks, and people making the important calls.",
+    "seo_title": "Nolan Kido: Practical AI | AI Works Human Decides",
+    "description": "Practical AI projects for everyday life and small business, plus poker and creative work. Nolan Kido's approach: AI Works Human Decides.",
     "source": "home.html",
-    "updated": "2026-10-27"
+    "updated": "2026-10-28"
   },
   {
     "id": "start-here",
     "path": "/start-here/",
     "title": "A few good places to begin.",
     "seo_title": "Start Here | Nolan Kido",
-    "description": "Choose an interest, read a selected essay, or find something useful. A personal introduction to Nolan Kido and a clear route through the site.",
+    "description": "Choose a useful task or explore Nolan Kido's AI projects: customer replies, book continuity, and a cooking planner. Follow interests in life, poker, and creativity.",
     "kicker": "New here?",
     "source": "start-here.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-28"
   },
   {
     "id": "find",
@@ -33,20 +33,20 @@
     "path": "/follow/",
     "title": "Follow the writing.",
     "seo_title": "Follow the Writing | Nolan Kido",
-    "description": "Follow Nolan Kido’s writing in one combined feed or choose Notes, Living Well, or Poker. Clear feed addresses, no mailing-list signup, and ways to stay in touch.",
+    "description": "Follow Nolan Kido's writing in one combined feed or choose Practical AI, Notes, Living Well, or Poker. Feed addresses and setup help, with no mailing-list signup.",
     "kicker": "Follow & stay connected",
     "source": "follow.html",
-    "updated": "2026-10-11"
+    "updated": "2026-10-28"
   },
   {
     "id": "about",
     "path": "/about/",
     "title": "A little about me.",
-    "seo_title": "About Nolan Kido | AI Works Human Decides",
-    "description": "Meet Nolan Kido and his AI Works Human Decides approach to implementing AI in real life. Inspect public tools, an evidence-backed case, and human-review principles.",
+    "seo_title": "About Nolan Kido: Practical AI | AI Works Human Decides",
+    "description": "Meet Nolan Kido through practical AI projects, poker, and creative work. AI Works Human Decides connects his tools, recorded cases, and approach.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-10-27"
+    "updated": "2026-10-28"
   },
   {
     "id": "notes",
@@ -63,10 +63,10 @@
     "path": "/resources/",
     "title": "Use what helps.",
     "seo_title": "Practical Guides, Worksheets & Resources | Nolan Kido",
-    "description": "Guides, private worksheets, study materials, and outside resources across practical AI, Living Well, poker, and creative work. Choose a useful starting point.",
+    "description": "Find AI worksheets, a workflow time calculator, public notes and model-test records, poker references, and selected resources across Nolan Kido's interests.",
     "kicker": "Resources",
     "source": "resources.html",
-    "updated": "2026-10-12"
+    "updated": "2026-10-28"
   },
   {
     "id": "contact",
@@ -83,10 +83,10 @@
     "path": "/bio/",
     "title": "A brief introduction.",
     "seo_title": "Nolan Kido | Short Biography & Public Introductions",
-    "description": "Short and extended biographies of Nolan Kido, with copyable text, downloads, and selected practical-AI work for introductions and profiles.",
+    "description": "Copy Nolan Kido's public biography and find his practical AI projects, tools, and writing for introductions, profiles, and links.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-10-17"
+    "updated": "2026-10-28"
   },
   {
     "id": "card",
@@ -307,11 +307,11 @@
     "id": "technology",
     "path": "/technology/",
     "title": "Practical AI for real life.",
-    "seo_title": "AI Works Human Decides: Practical AI | Nolan Kido",
-    "description": "Nolan Kido's four-step AI Works Human Decides method: choose a real task, bound AI's role, check the result, and keep decisions with people.",
+    "seo_title": "Practical AI Projects | AI Works Human Decides | Nolan Kido",
+    "description": "Explore Nolan Kido's practical AI projects: local review replies, book continuity checks, and a cooking-planner simulation. AI Works Human Decides guides the work.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-10-27"
+    "updated": "2026-10-28"
   },
   {
     "id": "creative",
