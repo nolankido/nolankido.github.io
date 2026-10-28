@@ -3,6 +3,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
+from time import monotonic
 from urllib.parse import urlsplit
 import json
 import os
@@ -16,6 +17,39 @@ Thread(target=server.serve_forever, daemon=True).start()
 base = 'http://127.0.0.1:' + str(server.server_port)
 config = json.loads((ROOT / '_source/entrypoints.json').read_text())
 errors, missing, results = [], [], []
+
+def wait_for_native_position(page, target, label, deadline):
+    # Observe native motion from the driver. Playwright's action retries use
+    # in-page timers, which can stall when page JavaScript is disabled.
+    previous = None
+    stable_since = None
+    while True:
+        remaining = deadline - monotonic()
+        assert remaining > 0, ('native position did not settle', label, previous)
+        position = target.evaluate('''element => {
+            const r = element.getBoundingClientRect();
+            const header = document.querySelector('.site-header');
+            const sticky = header && ['fixed', 'sticky'].includes(getComputedStyle(header).position);
+            return {y: scrollY, left: r.left, right: r.right, top: r.top, bottom: r.bottom,
+                    width: r.width, height: r.height, viewportWidth: innerWidth,
+                    viewportHeight: innerHeight, fonts: document.fonts.status,
+                    headerBottom: sticky ? Math.max(0, header.getBoundingClientRect().bottom) : 0};
+        }''', timeout=remaining * 1000)
+        now = monotonic()
+        readable = (position['fonts'] == 'loaded' and position['width'] > 0
+                    and position['height'] > 0 and position['left'] >= -1
+                    and position['right'] <= position['viewportWidth'] + 1
+                    and position['top'] >= position['headerBottom'] - 1
+                    and position['bottom'] <= position['viewportHeight'] + 1)
+        if readable and position == previous:
+            if stable_since is not None and now - stable_since >= 0.3:
+                return
+        else:
+            stable_since = now if readable else None
+        previous = position
+        assert now < deadline, ('native position did not settle', label, position)
+        page.wait_for_timeout(min(50, (deadline - now) * 1000))
+
 try:
     with sync_playwright() as pw:
         options = {'headless': True}
@@ -94,9 +128,24 @@ try:
             page.goto(base + '/resources/')
             page.get_by_role('link', name='Thinking worksheets', exact=True).click()
             expect(page).to_have_url(base + '/resources/#thinking-worksheets')
+            # Check the actual anchor arrival before positioning any source
+            # control. Do not scroll its destination to manufacture success.
+            wait_for_native_position(page, page.locator('#thinking-worksheets .section-label'),
+                                     'Thinking worksheets arrival', monotonic() + 5)
             for slug in ['decision-record', 'tool-trust-check', 'learning-loop']:
-                with page.expect_download() as download:
-                    page.locator('a[href="/downloads/' + slug + '.md"]').click()
+                started = monotonic()
+                deadline = started + 30
+                with page.expect_download(timeout=30000) as download:
+                    target = page.locator('a[href="/downloads/' + slug + '.md"]')
+                    # Keep native smooth scrolling and a real pointer click.
+                    # Readiness and clicking share the original 30-second budget.
+                    target.evaluate("element => element.scrollIntoView({block: 'center', inline: 'nearest'})",
+                                    timeout=5000)
+                    wait_for_native_position(page, target, slug + ' download',
+                                             min(deadline, started + 5))
+                    remaining = deadline - monotonic()
+                    assert remaining > 0, ('download click budget exhausted', slug)
+                    target.click(timeout=remaining * 1000)
                 assert Path(download.value.path()).read_bytes() == (ROOT / 'downloads' / (slug + '.md')).read_bytes()
             study_interest_cases = 0
             # Public invitation is native and available without scripts.
