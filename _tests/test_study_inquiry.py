@@ -7,6 +7,7 @@ from unittest.mock import patch
 import unittest
 
 import study_inquiry_history as history
+import regional_link_history as subsequent_changes
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -23,7 +24,7 @@ class StudyInquiryTests(unittest.TestCase):
         self.assertEqual(set(history.change()['paths']),history.PATHS)
         for name,item in history.change()['paths'].items():
             with self.subTest(name=name):
-                current=(ROOT/name).read_bytes()
+                current=subsequent_changes.before(name,(ROOT/name).read_bytes())
                 self.assertEqual(sha256(current).hexdigest(),item['new_sha256'])
                 previous=history.before(name,current)
                 self.assertEqual(sha256(previous).hexdigest(),item['old_sha256'])
@@ -32,9 +33,11 @@ class StudyInquiryTests(unittest.TestCase):
 
     def test_unknown_changes_and_corrupt_edits_fail_closed(self):
         for name in history.PATHS:
-            current=(ROOT/name).read_bytes()
-            for altered in (current+b'!',b'!'+current,current[1:]):
-                self.assertEqual(history.before(name,altered),altered)
+            latest=(ROOT/name).read_bytes()
+            current=subsequent_changes.before(name,latest)
+            for candidate in (latest,current):
+                for altered in (candidate+b'!',b'!'+candidate,candidate[1:]):
+                    self.assertEqual(history.before(name,altered),altered)
             for field,value in [('old_sha256','0'*64),('new_sha256','0'*64)]:
                 bad=deepcopy(history.change())
                 bad['paths'][name][field]=value
