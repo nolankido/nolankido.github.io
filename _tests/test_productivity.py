@@ -1,6 +1,7 @@
 """Research status, fair accounting, source navigation and independent preservation."""
 from copy import deepcopy
 from hashlib import sha256
+from html import escape
 from pathlib import Path
 import json
 import re
@@ -17,12 +18,14 @@ import check_live
 import productivity_history as history
 import holdem_essay_history as essay_history
 import uncertainty_history
+import living_well_case_links_history as subsequent_changes
 SLUG='ai-and-personal-productivity'
 ROUTE='/living-well/'+SLUG+'/'
 class ProductivityTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.outputs=build.build_outputs();cls.pages=build.public_pages();cls.entries=lw.load(ROOT)
+        cls.previous_entries=subsequent_changes.entries(cls.entries)
         cls.entry=next(e for e in cls.entries if e['slug']==SLUG)
         cls.html=cls.outputs[build.output_path(ROUTE)]
         cls.doc=html5lib.parse(cls.html,namespaceHTMLElements=False)
@@ -45,7 +48,13 @@ class ProductivityTests(unittest.TestCase):
         path=build.output_path(ROUTE);altered=dict(self.outputs);altered[path]=altered[path].replace('19 percentage points','90 percentage points')
         self.assertIn(path,history.outputs(altered))
         path=Path('living-well/did-the-tool-actually-help/index.html');raw=self.outputs[path]
-        changed=raw.replace('Added a related research essay','Claimed a completed personal trial')
+        previous=subsequent_changes.before(path,raw)
+        changed=previous.replace('Added a related research essay','Claimed a completed personal trial')
+        self.assertNotEqual(changed,previous)
+        self.assertEqual(history.before(path,changed),changed)
+        revision=next(e['revision'] for e in self.entries if e['slug']=='did-the-tool-actually-help')
+        changed=raw.replace(escape(revision),'Claimed a completed personal trial')
+        self.assertNotEqual(changed,raw)
         self.assertEqual(history.before(path,changed),changed)
     def test_time_example_counts_all_steps_and_evidence_has_the_right_scope(self):
         baseline=sum([18,20,16]);assisted=12+sum([9,11,10])
@@ -66,9 +75,16 @@ class ProductivityTests(unittest.TestCase):
             self.assertIn(sub['id'],ids);self.assertIn('#'+sub['id'],links)
         for s in self.entry['sources']:
             self.assertIn(s['url'],links);self.assertEqual(s['checked'],'2026-10-14')
-        for e in self.entries:
+        for e in self.previous_entries:
             if e['slug'] in ['technology-for-real-life','did-the-tool-actually-help']:
                 self.assertEqual((e['published'],e['updated']),('2026-10-10','2026-10-14'))
+        self.assertEqual(self.entry['updated'],'2026-10-28')
+        self.assertTrue(self.entry['revision'])
+        revision_notes=[''.join(p.itertext()) for p in self.doc.iter('p')
+                        if 'editorial-note' in p.get('class','').split()]
+        self.assertTrue(any(self.entry['revision'] in note for note in revision_notes))
+        reviewed=next(e for e in self.entries if e['slug']=='did-the-tool-actually-help')
+        self.assertEqual(reviewed['updated'],'2026-10-28')
         self.assertIn('/technology/check-ai-answers/',links)
     def test_subsection_navigation_fails_closed_and_titles_are_plain_text(self):
         variants=[]

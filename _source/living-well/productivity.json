@@ -55,6 +55,7 @@
                 "A blank page can make an ordinary request feel larger than it is. Supply the outcome you want, verified dates, the necessary context and the tone you would use yourself. You can replace names with roles and omit account details until you are in the appropriate communication channel.",
                 "<strong>Example prompt:</strong> <em>Draft a polite follow-up under 100 words. I sent the requested information last week and have not received an update. Ask whether anything else is needed and when I can expect the next step. Do not invent a deadline, threaten cancellation, admit fault or add facts.</em>",
                 "Read the draft aloud. Check dates, claims, promises and the recipient before sending. A chatbot’s polished wording is not a reason to add an ultimatum you have not chosen or a contractual position you do not understand. The job is complete when a message you can stand behind reaches the intended person through the correct channel.",
+                "For a business example, <a href=\"/technology/local-ai-review-replies/#reply-boundary\">see how Review Reply Writer separates drafting from owner approval</a>. Its case explains saved replies, policy checks, and manual posting; historical model examples also show why passing an automated check still leaves review work.",
                 "If two sentences in your own words would do, write them. A saved template can be faster on later occasions. For a larger factual draft, the Technology section’s <a href=\"/technology/task-brief/\">task-brief worksheet</a> helps separate the requested output from information the tool must not invent."
               ]
             },
@@ -65,7 +66,8 @@
                 "AI can suggest combinations when a short list of ingredients leaves you undecided. Give available ingredients, equipment, time and any dietary constraints you want to disclose. Ask for a small choice rather than a week of recipes that creates a second shopping project.",
                 "<strong>Example prompt:</strong> <em>I have canned beans, rice, carrots, spinach and basic seasonings. Suggest two simple dinners using these ingredients and a stovetop. Say what preparation each requires. Do not assume extra groceries or promise that everything fits a time limit you cannot justify.</em>",
                 "Check allergens, portion needs, storage history and cooking instructions yourself. A plausible recipe cannot establish whether a particular leftover is safe. Use <a href=\"https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety\">USDA guidance for leftovers</a> rather than a chatbot’s reassurance. When cooking instructions need a safe internal temperature, consult the <a href=\"https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart\">official temperature chart</a> and a food thermometer.",
-                "Judge the workflow by whether you selected something feasible without unnecessary shopping, wasted ingredients or a long exchange. Those are things to observe, not promised outcomes. A meal you already know may be the best answer. The <a href=\"/living-well/household-friction/\">household-friction guide</a> also asks whether the recurring difficulty needs a simpler arrangement rather than another tool."
+                "Judge the workflow by whether you selected something feasible without unnecessary shopping, wasted ingredients or a long exchange. Those are things to observe, not promised outcomes. A meal you already know may be the best answer. The <a href=\"/living-well/household-friction/\">household-friction guide</a> also asks whether the recurring difficulty needs a simpler arrangement rather than another tool.",
+                "<a href=\"/technology/dinner-on-time/#dinner-demo\">Watch Dinner on Time replan around an unavailable oven</a>. AI helped build this deterministic cooking planner simulation. Its public recording shows changed future steps and explicit confirmations; it does not document a completed meal or measured household benefit."
               ]
             },
             {
@@ -75,7 +77,8 @@
                 "A chatbot can help sort a list and propose arrangements, but it should not turn uncertain dates into appointments. Give only the commitments needed for the exercise, mark what is confirmed and include travel, care responsibilities and room for interruptions. Use generic labels where detail adds no planning value.",
                 "<strong>Example prompt:</strong> <em>Sort this task list into confirmed commitments, flexible work and items needing clarification. Identify conflicts and ask about missing constraints. Suggest a smaller plan with unscheduled room. Do not invent dates, assign another person a job or change my calendar.</em>",
                 "Compare the draft with the actual calendar and original messages. Check travel time and the agreement of anyone who shares a task. Do not ask an assistant to reconcile a real work conflict by silently assuming a commitment can be skipped. Confirm the change with whoever is responsible.",
-                "A usable plan should make the next action clearer and reduce commitments when necessary. It need not fill every hour. The <a href=\"/living-well/weekly-reset/\">weekly reset</a> provides a paper-first version, while <a href=\"/living-well/shared-plan-people-can-use/\">a shared plan people can use</a> focuses on access and agreement. For a predictable week, an ordinary calendar may already solve the problem."
+                "A usable plan should make the next action clearer and reduce commitments when necessary. It need not fill every hour. The <a href=\"/living-well/weekly-reset/\">weekly reset</a> provides a paper-first version, while <a href=\"/living-well/shared-plan-people-can-use/\">a shared plan people can use</a> focuses on access and agreement. For a predictable week, an ordinary calendar may already solve the problem.",
+                "For a recorded editing task, <a href=\"/technology/ai-weekly-reset/#notes-case-result\">inspect the weekly-reset exercise and its finished note</a>. It retains passages from three published guides, the initial draft, and five corrections. This documents editing guidance, not a personal planning trial."
               ]
             },
             {
@@ -211,7 +214,9 @@
           "note": "Official guidance distinguishes activity settings, temporary chats, review and retention. Policies and features can change.",
           "checked": "2026-10-14"
         }
-      ]
+      ],
+      "updated": "2026-10-28",
+      "revision": "Added recorded examples for reply approval, cooking schedules, and weekly notes."
     }
   ]
 }

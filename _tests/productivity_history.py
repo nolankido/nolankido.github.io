@@ -28,11 +28,15 @@ def restore(records,field,key,new):
         pair=c[field].get(r[key]);result.append(deepcopy(pair['old']) if pair and r==pair['new'] else deepcopy(r))
     return result
 def pages(records):return restore(essay.pages(records),'pages','id','page')
-def entries(records):return restore([weekly_history.original_entry(r) for r in records],'entries','slug','entry')
+def entries(records):
+    import living_well_case_links_history
+    records=living_well_case_links_history.entries(records)
+    return restore([weekly_history.original_entry(r) for r in records],'entries','slug','entry')
 def outputs(records):
     return {p:before(p,v) for p,v in essay.outputs(records).items() if change()['new_outputs'].get(str(p))!=sha256(v.encode()).hexdigest()}
 def files(paths):
     def original(path):
         key=Path(path).relative_to(ROOT).as_posix() if Path(path).is_absolute() else str(path)
-        return change()['new_files'].get(key)!=sha256((ROOT/path).read_bytes()).hexdigest()
+        raw=essay.before(key,(ROOT/path).read_bytes())
+        return change()['new_files'].get(key)!=sha256(raw).hexdigest()
     return type(paths)(p for p in essay.files(paths) if original(p))

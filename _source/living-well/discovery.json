@@ -215,7 +215,8 @@
           "heading": "Give AI a bounded job, when useful",
           "paragraphs": [
             "For a longer non-sensitive list, an optional prompt is: <em>Group these notes under Next action, Reference, and Question to resolve. Preserve conditions and uncertainty. Do not add deadlines, priorities, promises, or tasks that are not in the notes. Flag ambiguous items instead of deciding what I meant.</em>",
-            "The example above is an editorial illustration, not an executed model response. A prompt expresses what you are requesting; it does not certify the result. Compare each proposed action with the original and remove invented urgency. A phrase such as \"maybe\" must not disappear merely because the output looks cleaner."
+            "The example above is an editorial illustration, not an executed model response. A prompt expresses what you are requesting; it does not certify the result. Compare each proposed action with the original and remove invented urgency. A phrase such as \"maybe\" must not disappear merely because the output looks cleaner.",
+            "For a recorded example, <a href=\"/technology/organize-public-notes/#notes-check\">follow eight preparation notes into a checked action list</a>. The original instruction, unchanged output, and AI-assisted source check show how available work and missing material stayed separate."
           ]
         },
         {
@@ -255,7 +256,9 @@
         "simplest_route": "Use three headings in a paper or digital note. AI grouping is optional.",
         "finish": "You can name one next action and trace it back to the original note without inventing a deadline.",
         "starter": "ORIGINAL NOTES\n[Keep a copy here or record where they are.]\n\nNEXT ACTION\n[What I have actually decided to do.]\n\nKEEP FOR REFERENCE\n[The useful detail and where to find its source.]\n\nQUESTION TO RESOLVE\n[What is unknown, conditional, or still a possibility.]\n\nLEAVE FOR LATER\n[Something that does not need to become a task.]\n\nCHECK\nDid I keep every condition, uncertainty, and genuine commitment?\nCan I close this note and name the next step?\n"
-      }
+      },
+      "updated": "2026-10-28",
+      "revision": "Added a link to a recorded notes checklist and its AI-assisted source check."
     },
     {
       "slug": "shared-plan-people-can-use",
@@ -451,6 +454,7 @@
           "heading": "Finish, review, and release only what you stand behind",
           "paragraphs": [
             "Read the result against the original note. What changed? Which claims need checking? Does the piece still leave room for uncertainty where you intended it? Check permission before using another person's photograph, story, voice, or text.",
+            "For a larger creative review task, <a href=\"/technology/ai-book-continuity-checker/#continuity-results\">inspect Preflight's book-continuity findings and mistakes</a>. The Sherlock Holmes audit and separate seeded benchmark retain useful findings, incorrect flags, and missed issues for an editor to judge.",
             "You can share the piece privately, publish an appropriate version, or decide it was useful only as practice. Finishing does not create an obligation to post. Keep the source note and a clearly named final version somewhere understandable, then put the tools away.",
             "The useful result is a small piece you recognize as your own considered expression. The <a href=\"/living-well/free-resources/books-creativity/\">books and creativity collection</a> offers further starting points, but another resource is optional once the current piece is finished."
           ]
@@ -478,7 +482,9 @@
         "simplest_route": "Write a short draft yourself. Use dictation or an outline suggestion only for a specific obstacle.",
         "finish": "The finished piece says what you mean, uses no invented experiences, and is appropriate to share.",
         "starter": "SMALL CREATIVE BRIEF\nOriginal thought in my words:\nWho this is for:\nOne thing I want to communicate:\nSmall finished form: paragraph / caption / sketch / video outline\n\nDRAFT SHAPE\nOpening:\nOne useful detail or question:\nEnding:\n\nREVIEW BEFORE SHARING\nWhat did I add that was not in the original?\nWhich factual claims need a source?\nWhose permission is needed?\nDoes this still express what I mean?\nShare privately, publish, or keep as practice:\n"
-      }
+      },
+      "updated": "2026-10-28",
+      "revision": "Linked a documented book-continuity audit with incorrect findings and missed issues."
     },
     {
       "slug": "make-digital-reading-easier",
@@ -646,7 +652,8 @@
           "paragraphs": [
             "Include setup, preparing input, checking, correcting, moving the result into use, and maintaining the system. Compare the same task and the same standard of completion. If other people do part of the work, ask about their effort instead of treating your own screen time as the whole cost.",
             "<strong>Illustrative calculation, not measured results:</strong> the old method takes six minutes on each of five uses, or thirty minutes. A new method needs twelve minutes of setup, two minutes per use, one minute of checking per use, and three minutes of maintenance. Its first five uses also total thirty minutes: 12 + 10 + 5 + 3.",
-            "If the next five uses need no additional setup and the other assumptions remain the same, they take eighteen minutes: 10 + 5 + 3. That is twelve minutes less than the old method for those five uses. The arithmetic illustrates why setup and repetition matter; it does not predict savings for a real product or reader."
+            "If the next five uses need no additional setup and the other assumptions remain the same, they take eighteen minutes: 10 + 5 + 3. That is twelve minutes less than the old method for those five uses. The arithmetic illustrates why setup and repetition matter; it does not predict savings for a real product or reader.",
+            "The <a href=\"/technology/local-ai-test-record/#local-record-time\">historical local AI timing record</a> measures elapsed processing around drafting and application checks. It omits preparation, active review, and a comparable manual baseline, so those timings cannot establish time saved on the whole task."
           ]
         },
         {
@@ -689,8 +696,8 @@
         "finish": "You can explain a keep, simplify, stop, or still-unsure decision, including costs and limitations.",
         "starter": "DID THIS HELP?\nTask and human purpose:\nWhat counts as finished:\nEarlier method:\nChange tried:\nActual dates and circumstances:\n\nTOTAL EFFORT\nSetup:\nPreparing input:\nDoing the task:\nChecking and correcting:\nMoving the result into use:\nOngoing maintenance:\nWork done by someone else:\n\nBEYOND TIME\nReliability and mistakes:\nAccess, privacy, cost, or permission tradeoffs:\nWhat became possible outside the tool:\nOther explanations for what changed:\n\nDECISION\nKeep / simplify / stop / still unsure:\nWhy:\nWhat this observation cannot establish:\n"
       },
-      "updated": "2026-10-14",
-      "revision": "Added a related research essay on everyday AI use and fair comparisons of total effort."
+      "updated": "2026-10-28",
+      "revision": "Linked a historical timing record showing the limits of processing time measurements."
     }
   ]
 }

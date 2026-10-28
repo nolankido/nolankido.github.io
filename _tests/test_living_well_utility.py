@@ -13,6 +13,7 @@ import build
 import check_live
 import living_well as lw
 import turn09_weekly_reset_history as weekly_history
+import living_well_case_links_history as subsequent_changes
 
 SLUGS = {
     'technology-for-real-life', 'scattered-notes-to-next-step',
@@ -26,6 +27,7 @@ class UtilityTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.entries = {e['slug']: e for e in lw.load(ROOT)}
+        cls.previous = {e['slug']: e for e in subsequent_changes.entries(list(cls.entries.values()))}
         cls.new = {s:e for s,e in cls.entries.items() if e.get('series') == 'technology-for-real-life'}
         cls.outputs = build.build_outputs()
 
@@ -39,9 +41,14 @@ class UtilityTests(unittest.TestCase):
                 self.assertEqual(e['published'], '2026-10-10')
                 self.assertEqual(e['evidence_status'], 'worked-guide-not-firsthand-result')
                 self.assertTrue(e['outcome'].strip())
+                previous = self.previous[slug]
                 if slug in {'technology-for-real-life','did-the-tool-actually-help'}:
-                    self.assertEqual(e['updated'], '2026-10-14'); self.assertTrue(e['revision'])
-                else: self.assertNotIn('updated', e)
+                    self.assertEqual(previous['updated'], '2026-10-14'); self.assertTrue(previous['revision'])
+                else: self.assertNotIn('updated', previous)
+                if slug in subsequent_changes.SLUGS:
+                    self.assertEqual(e['updated'], '2026-10-28')
+                    self.assertTrue(e['revision'])
+                    self.assertIn(escape(e['revision']), self.outputs[Path('living-well') / slug / 'index.html'])
                 self.assertGreaterEqual(len(e['sections']), 5)
                 text = e['lead'] + ' '.join(' '.join(s['paragraphs']) for s in e['sections'])
                 self.assertGreaterEqual(len(re.findall(r'\b[\w\'-]+\b', re.sub('<[^>]+>', ' ', text))), 390)

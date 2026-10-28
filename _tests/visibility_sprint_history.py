@@ -103,6 +103,8 @@ def change() -> dict:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import living_well_case_links_history
+    data = living_well_case_links_history.before(path, data)
     item = change()['paths'].get(key(path))
     if item is None or digest(data) != item['current_sha256']:
         return data
@@ -117,6 +119,8 @@ def before(path: str | Path, data: bytes | str) -> bytes | str:
 
 def pages(records: list[dict]) -> list[dict]:
     """Restore complete records only; a duplicate added record stays detectable."""
+    import living_well_case_links_history
+    records = living_well_case_links_history.pages(records)
     result = []
     removed = set()
     pairs = change()['pages']
