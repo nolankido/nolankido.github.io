@@ -8,7 +8,7 @@
 }
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
   gap: 22px;
   margin: 28px 0 20px;
 }
@@ -29,12 +29,26 @@
   line-height: 1.35;
   margin: 0 0 12px;
 }
+.visibility-projects .section-title,
+.project-card h3,
 .project-card p {
   overflow-wrap: anywhere;
 }
 .project-card h3 a {
   text-decoration-thickness: 1px;
   text-underline-offset: .18em;
+}
+/* Keep the Technology hub readable when readers enlarge text and spacing. */
+.page-technology :is(.section-title, .section-label, h3, .section-deck, .practical-work p, .ai-path-output) {
+  overflow-wrap: anywhere;
+}
+.page-technology .nav-links a {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.page-technology .brand-mark {
+  min-width: 2em;
+  min-height: 2em;
 }
 .project-table-scroll {
   max-width: 100%;
