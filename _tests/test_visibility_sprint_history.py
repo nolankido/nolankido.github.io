@@ -107,7 +107,10 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
                 with patch.object(Path, 'read_bytes', return_value=altered):
                     self.assertEqual(history.files([name]), [name])
                 if name not in self.record['added_outputs']:
-                    self.assertEqual(history.outputs({name: raw}), {name: raw})
+                    # An exact later revision is reversible in the archived
+                    # output view even if this file was not an output addition.
+                    self.assertEqual(history.outputs({name: raw}),
+                                     {name: history.before(name, raw)})
         unknown = {'unreviewed.txt': b'new material'}
         self.assertEqual(history.source_records(unknown), unknown)
         self.assertEqual(history.outputs(unknown), unknown)
