@@ -123,7 +123,7 @@ STUDY_OLD_BLOBS = {
 
 
 def _blob_sha(raw: bytes) -> str:
-    return sha1(b'blob ' + str(len(raw)).encode('ascii') + b'\\0' + raw).hexdigest()
+    return sha1(b'blob ' + str(len(raw)).encode('ascii') + b'\0' + raw).hexdigest()
 
 
 def _before_review_reply_study(path: str | Path, data: bytes | str) -> bytes | str:
