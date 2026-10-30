@@ -160,6 +160,10 @@ class VisibilityDiscoveryTests(unittest.TestCase):
         self.assertEqual(history.outputs(restored), restored)
         for name, item in self.record['paths'].items():
             current = (ROOT / name).read_bytes()
+            # This later, reviewed case study expands one search-index entry.
+            # Compare this archived PR152 capsule against its exact predecessor.
+            if name == 'find/index.html':
+                current = history._before_review_reply_study(name, current)
             original = git('show', history.PARENT + ':' + name)
             with self.subTest(path=name):
                 self.assertEqual(history.digest(current), item['current_sha256'])
