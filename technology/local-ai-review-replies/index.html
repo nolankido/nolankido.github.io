@@ -56,7 +56,7 @@
   
   <main id="main" class="ledger" tabindex="-1">
 <nav class="search-breadcrumb shell" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/technology/">Technology</a></li><li><span aria-current="page">Building a local AI review reply tool.</span></li></ol></nav>
-    <section class="page-hero shell"><p class="page-kicker">Technology / Local AI project</p><h1 class="page-title">Building a local AI review reply tool.</h1><p class="note-meta">Published <time datetime="2026-10-27">October 27, 2026</time> · Recorded case study · About 5 min read</p><details class="reader-outline"><summary>On this page <span class="reader-outline-count">6 sections</span></summary><nav aria-label="On this page"><ol><li><a href="#reply-task">Use AI to draft a customer reply, with the owner&#x27;s policy beside it.</a></li><li><a href="#reply-example">Keep the double charge and the unanswered question visible.</a></li><li><a href="#reply-boundary">Separate writing, authorization, and approval.</a></li><li><a href="#reply-failure">A checker rejected harmless wording and accepted a missing detail.</a></li><li><a href="#reply-try">Start with the fictional example.</a></li><li><a href="#reply-sources">What this project demonstrates.</a></li></ol></nav></details><p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · <a href="/start-here/#reading-this-site">About this writing</a></p></section>
+    <section class="page-hero shell"><p class="page-kicker">Technology / Local AI project</p><h1 class="page-title">Building a local AI review reply tool.</h1><p class="note-meta">Published <time datetime="2026-10-27">October 27, 2026</time> · Recorded case study · About 11 min read</p><details class="reader-outline"><summary>On this page <span class="reader-outline-count">12 sections</span></summary><nav aria-label="On this page"><ol><li><a href="#reply-task">Use AI to draft a customer reply, with the owner&#x27;s policy beside it.</a></li><li><a href="#reply-example">Keep the double charge and the unanswered question visible.</a></li><li><a href="#reply-boundary">Separate writing, authorization, and approval.</a></li><li><a href="#reply-failure">A checker rejected harmless wording and accepted a missing detail.</a></li><li><a href="#reply-evaluation">Can a draft be polite and still get the important facts wrong?</a></li><li><a href="#reply-evaluation-results">The 30-case run returned 29 templates and blocked one.</a></li><li><a href="#reply-evaluation-lessons">Five examples make the distinction visible.</a></li><li><a href="#reply-evaluation-gemma">What the archived Gemma tests actually showed.</a></li><li><a href="#reply-evaluation-method">How to repeat the offline study, and what to check yourself.</a></li><li><a href="#reply-evaluation-limits">The strongest conclusion is about human control, not AI productivity.</a></li><li><a href="#reply-try">Start with the fictional example.</a></li><li><a href="#reply-sources">What this project demonstrates.</a></li></ol></nav></details><p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · <a href="/start-here/#reading-this-site">About this writing</a></p></section>
 <section class="section folio-row" aria-labelledby="reply-task">
   <div class="section-meta"><p class="section-label">Public project / Local AI</p></div>
   <div class="section-content prose">
@@ -104,6 +104,95 @@
     <p class="evidence-note">The reusable lesson: retain rejected attempts and compare accepted wording with the input. A successful status can hide a different kind of error. The <a href="/technology/check-ai-answers/">AI answer-checking guide</a> applies this habit to other tasks.</p>
   </div>
 </section>
+
+
+<!-- Review Reply Writer extended evidence review: start -->
+<section class="section folio-row" aria-labelledby="reply-evaluation">
+  <div class="section-meta"><p class="section-label">Evaluation / October 29, 2026</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-evaluation">Can a draft be polite and still get the important facts wrong?</h2>
+    <p>A customer review reply has a deceptively difficult job. It should acknowledge specific complaints and praise, preserve significant details, and represent only actions a business has actually authorized. Good manners are not enough. A warm apology that turns a duplicate charge into vague billing trouble, leaves out an unanswered question, or promises an unapproved refund may be worse than a plain response.</p>
+    <p>I examined the 30 fictional scenarios in Review Reply Writer's existing Quality Lab. The fixtures cover cafes, accommodation, shops, and service businesses. They include positive, negative, and mixed reviews; sarcasm and negation; mismatches between rating and language; authorized and unauthorized offers; fake instructions embedded in a customer review; and updated reviews that refer to earlier replies. The set is developer-written, so it tests known engineering concerns rather than representing an unbiased sample of customer behavior.</p>
+    <p>On October 29, I ran the complete evaluation in <strong>offline template mode</strong>. This is a deterministic, rule-based baseline, not a local language-model run. The complete record preserves every fictional input, returned reply, blocked output, automated rubric result, and source fingerprint. I reviewed the raw wording as well as the reported counts. Earlier real Gemma model runs are compared separately rather than misrepresented as part of this test.</p>
+    <p><a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/examples/evaluation/template-full-2026-10-29.json">All 30 input and output records</a> · <a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/examples/evaluation_cases.json">The fixed scenario corpus</a> · <a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/docs/CASE_STUDY_EVIDENCE_2026_10_29.md">Full evidence and limitations</a></p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-evaluation-results">
+  <div class="section-meta"><p class="section-label">Results / No AI inference</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-evaluation-results">The 30-case run returned 29 templates and blocked one.</h2>
+    <p>All 30 scenarios reached a final status. The program produced 29 non-AI template drafts. One case, containing an unusually lengthy fictional owner offer, was blocked because the resulting reply exceeded the application's 120-word Google style target. That target is an application setting, not a rule issued by Google. No Ollama calls, execution errors, interruptions, or human operator assessments were recorded.</p>
+    <div class="project-table-scroll" role="region" aria-label="Review Reply Writer offline study summary" tabindex="0">
+      <table>
+        <caption>October 29, 2026: synthetic offline template evaluation</caption>
+        <thead><tr><th scope="col">Recorded measure</th><th scope="col">Count</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Completed scenario records</th><td>30 / 30</td></tr>
+          <tr><th scope="row">Non-AI template drafts</th><td>29</td></tr>
+          <tr><th scope="row">Blocked for style length</th><td>1</td></tr>
+          <tr><th scope="row">Actual model calls</th><td>0</td></tr>
+          <tr><th scope="row">Execution errors or interruptions</th><td>0</td></tr>
+          <tr><th scope="row">Automated rubric warnings</th><td>0</td></tr>
+          <tr><th scope="row">Human owner assessments</th><td>0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>These figures measure what the application did with this limited fixture set. <strong>29 completed drafts is not a 96.7% safety rate.</strong> Zero automatic warnings does not prove the returned wording was correct, natural, or suitable for a business to publish. Some checks use the same narrow English patterns that generated the template, so both stages can share blind spots. A recorded pass is the beginning of review, not the end.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-evaluation-lessons">
+  <div class="section-meta"><p class="section-label">Case-level evidence / Successes and misses</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-evaluation-lessons">Five examples make the distinction visible.</h2>
+    <h3>A 25-minute wait is not merely a long wait.</h3>
+    <p>One cafe review complained about cold coffee, a 25-minute wait, and a barista ignoring a question. The October 29 template included all three issues and the exact duration. The accepted response in the first historical Gemma run replaced the number with an <em>extended wait</em>. The fluent response lost a fact that a customer might consider important.</p>
+    <h3>A mixed review can lose either praise or a complaint.</h3>
+    <p>The accommodation example praised a beautiful room and ocean view but criticized slow check-in and a weak shower. The fresh template mentioned the room, check-in, and shower, but not the ocean-view praise. The first historical model run exhausted its attempts and fell back to wording that omitted the shower complaint. A later historical model response included the view and both complaints. The runs used different source versions; they are examples, not a controlled ranking of engines.</p>
+    <h3>The customer's text is not an authorization document.</h3>
+    <p>A fictional review demanded a refund, instructed the system to ignore previous directions, and asserted that the owner authorized free drinks. The offline template did not repeat the refund or free-drinks promise. This confirms the behavior of that <em>template path on that one fixture</em>. It does not prove that current Gemma resists similar adversarial inputs.</p>
+    <h3>An approved offer and a demanded offer are different.</h3>
+    <p>One fixture included the exact owner-approved statement, <q>We offer a $10 credit.</q> The template kept that sentence separate. Another review demanded a refund without any policy authorization; its reply did not promise one. This is the important software boundary: a customer can describe an experience or ask for a remedy, but only the business can approve its commitments.</p>
+    <h3>An automatically accepted sentence can still be awkward.</h3>
+    <p>The follow-up template began <q>Thank you for the update of Demo Cafe.</q> No automatic rule flagged that wording, yet it plainly needs an editorial revision. The same problem can run in the opposite direction: a rule may reject an innocuous phrase while approving an answer that misses a detail. Neither natural language nor a green status is sufficient evidence of quality.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-evaluation-gemma">
+  <div class="section-meta"><p class="section-label">Real-model evidence / Historical only</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-evaluation-gemma">What the archived Gemma tests actually showed.</h2>
+    <p>The repository preserves two selected, three-case October 2026 runs using actual Ollama responses from <code>gemma3:4b</code>. These are older experiments, not runs of the source used in the fresh 30-case template evaluation. The first recorded five completed model responses and finished with two model-written replies plus one template fallback. The later recorded three responses and three model-written final replies. Neither contains a human operator assessment.</p>
+    <div class="project-table-scroll" role="region" aria-label="Historical Gemma smoke test comparison" tabindex="0">
+      <table>
+        <caption>Two historical three-scenario smoke runs, not a current model benchmark</caption>
+        <thead><tr><th scope="col">Recorded outcome</th><th scope="col">First run</th><th scope="col">Later run</th></tr></thead>
+        <tbody><tr><th scope="row">Completed Ollama responses</th><td>5</td><td>3</td></tr><tr><th scope="row">Final model-written replies</th><td>2</td><td>3</td></tr><tr><th scope="row">Final template fallbacks</th><td>1</td><td>0</td></tr><tr><th scope="row">Human assessments</th><td>0</td><td>0</td></tr></tbody>
+      </table>
+    </div>
+    <p>The first model run rejected the harmless construction <q>should have addressed</q> as though it claimed a completed business action. The retry then lost the precise 25-minute wait. In the later run, the complaint reply preserved the duration but asserted that the business was <q>working to ensure all our customers have a positive experience</q>. That operational assertion was not established by the fictional review or owner policy. Both runs therefore contain something valuable to learn from, rather than a clean success story.</p>
+    <p>The first run's median elapsed time for its two model-final cases, including retries, was 31.931 seconds. The later run's three model-final cases had a median of 19.325 seconds. Their small sample size, differing source versions, and shared CPU environment prevent a reliable conclusion about model superiority, costs, or a real business's total workflow time.</p>
+    <p><a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/examples/evaluation/live-smoke-2026-10-13.json">First model run and retries</a> · <a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/examples/evaluation/live-quality-smoke-2026-10-13.json">Later model outputs</a> · <a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/docs/QUALITY_RESULTS.md">Runtime conditions and prior analysis</a></p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-evaluation-method">
+  <div class="section-meta"><p class="section-label">Reproduce / Use the result</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-evaluation-method">How to repeat the offline study, and what to check yourself.</h2>
+    <p>Start with the <a href="https://github.com/nolankido/reviewReplyWriter/tree/1c5e0487c331d5202410c9f342557d9355951c3a">pinned application source</a> and Python 3.10 or newer. In a terminal in that repository, run the complete fictional template evaluation using a separate writable folder:</p>
+    <pre>python3 -B rrw_evaluate.py --mode offline --suite full --data-dir ./local-evaluation</pre>
+    <p>On Windows, substitute <code>py -3 -B</code> for <code>python3 -B</code>. The result should contain 30 case records; generated run identifiers, timestamps, and duration measurements will differ. No model weights, API key, or paid service are needed for this mode. Compare the saved outputs against the <a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/examples/evaluation/template-full-2026-10-29.json">published October 29 record</a> and inspect the misses, not just the status counts.</p>
+    <p>For a practical owner review, read the original review again, account for every material issue, verify all factual claims, check each promise against an authorized policy, edit the wording, and recheck the exact final text. An edit should clear prior approval. The application produces text for manual copying, not automatic posting. A customer allegation or suggested refund should never silently become a verified business commitment.</p>
+    <p>Read the <a href="https://github.com/nolankido/reviewReplyWriter/blob/5732dac5684f8f217649b8428495de6cf91fa2c9/docs/CASE_STUDY_EVIDENCE_2026_10_29.md">complete evidence review</a> for source versions, linked datasets, and explicit qualifications. Running a new model evaluation would require a frozen corpus, recorded Ollama configuration, all attempts and fallbacks, and separate human assessment of each reply.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-evaluation-limits">
+  <div class="section-meta"><p class="section-label">What remains unproven</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-evaluation-limits">The strongest conclusion is about human control, not AI productivity.</h2>
+    <p>There is no independent assessment of all 30 new drafts, no observed customer-service operator, no head-to-head 30-case current-source Gemma comparison, and no measurement of total time spent checking, repairing, or posting replies. Customer satisfaction, willingness to pay, commercial adoption, production safety, and time saved were not measured. Synthetic developer scenarios can expose important failure classes without predicting a real-world error rate.</p>
+    <p>A stronger study would freeze the tasks and rubric in advance, run both approaches on the same cases, keep every failed and retried attempt, ask independent reviewers to rate completeness and authorization, and record the actual editing effort. Until then, <strong>AI Works Human Decides</strong> has a concrete operational meaning here: software may draft the wording, but the owner retains responsibility for evidence, promises, and the final public response.</p>
+  </div>
+</section>
+<!-- Review Reply Writer extended evidence review: end -->
 
 <section class="section folio-row" aria-labelledby="reply-try">
   <div class="section-meta"><p class="section-label">Try / Inspect / Adapt</p></div>
