@@ -12,6 +12,8 @@ from functools import lru_cache
 from hashlib import sha256
 import json
 from pathlib import Path
+import subprocess
+from hashlib import sha1
 import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -105,7 +107,41 @@ def change() -> dict:
     return record
 
 
+
+# October 29, 2026: deliberate long-form update to one already-published
+# practical-AI article. Restore only exact recognized blobs before applying
+# the frozen PR152 predecessor. Unknown edits must remain visible. Both
+# original blobs occur at the pinned, CI-fetched PR151 commit (PARENT).
+STUDY_NEW_BLOBS = {
+    '_source/technology/local-ai-review-replies.html': '0f18088f086c70dd03016104f22afc1353dc5b34',
+    'technology/local-ai-review-replies/index.html': '5e7557339494a52140df0a646f54b99146af4ed5',
+}
+STUDY_OLD_BLOBS = {
+    '_source/technology/local-ai-review-replies.html': '1034845cba7b9627fe8e2de1074c04249caaff39',
+    'technology/local-ai-review-replies/index.html': '31d72d70965ec623eb0fdd6674972ebec3789f89',
+}
+
+
+def _blob_sha(raw: bytes) -> str:
+    return sha1(b'blob ' + str(len(raw)).encode('ascii') + b'\\0' + raw).hexdigest()
+
+
+def _before_review_reply_study(path: str | Path, data: bytes | str) -> bytes | str:
+    name = key(path)
+    expected = STUDY_NEW_BLOBS.get(name)
+    if expected is None:
+        return data
+    raw = data if isinstance(data, bytes) else data.encode('utf-8')
+    if _blob_sha(raw) != expected:
+        return data
+    original = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
+    if _blob_sha(original) != STUDY_OLD_BLOBS[name]:
+        raise ValueError('Unrecognized review reply study predecessor: ' + name)
+    return original if isinstance(data, bytes) else original.decode('utf-8')
+
+
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    data = _before_review_reply_study(path, data)
     item = change()['paths'].get(key(path))
     if item is None or digest(data) != item['current_sha256']:
         return data
