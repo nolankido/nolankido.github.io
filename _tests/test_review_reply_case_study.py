@@ -14,6 +14,7 @@ import visibility_discovery_history as history
 
 SOURCE = '_source/technology/local-ai-review-replies.html'
 OUTPUT = 'technology/local-ai-review-replies/index.html'
+FINDER = 'find/index.html'
 EXTRA_ANCHORS = (
     'reply-evaluation',
     'reply-evaluation-results',
@@ -38,6 +39,11 @@ class ReviewReplyCaseStudyTests(unittest.TestCase):
             self.assertIn('href="#' + anchor + '"', html)
         self.assertIn('rel="canonical" href="https://nolankido.com/technology/local-ai-review-replies/"', html)
         self.assertIn('content="2026-10-27"', html)
+        finder = (ROOT / FINDER).read_text(encoding='utf-8')
+        self.assertEqual(finder.count('"local-ai-review-replies/":'), 1)
+        for anchor in EXTRA_ANCHORS:
+            self.assertIn('"' + anchor + '"', finder)
+
 
     def test_claims_distinguish_template_study_from_old_model_runs(self):
         source = (ROOT / SOURCE).read_text(encoding='utf-8')
@@ -59,7 +65,7 @@ class ReviewReplyCaseStudyTests(unittest.TestCase):
         self.assertNotIn('\u2014', source)
 
     def test_older_publication_restores_only_exact_reviewed_blobs(self):
-        for path in (SOURCE, OUTPUT):
+        for path in (SOURCE, OUTPUT, FINDER):
             current = (ROOT / path).read_bytes()
             restored = history.before(path, current)
             self.assertNotEqual(current, restored, path)
