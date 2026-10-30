@@ -92,7 +92,10 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
         for name, expected in self.record['added_files'].items():
             raw = (ROOT / name).read_bytes()
             with self.subTest(path=name):
-                self.assertEqual(history.digest(raw), expected)
+                # A later, exactly identified editorial revision is first
+                # undone for this historical release, never for live content.
+                predecessor = history.before(name, raw)
+                self.assertEqual(history.digest(predecessor), expected)
                 self.assertEqual(history.source_records({name: raw}), {})
                 altered = raw + b'UNREVIEWED'
                 self.assertEqual(history.source_records({name: altered}), {name: altered})
@@ -139,7 +142,12 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
         for route, item in self.record['added_targets'].items():
             response = current[route]
             self.assertEqual(response[0], 200)
-            self.assertEqual(history.digest(response[1]), item['sha256'])
+            predecessor = response[1]
+            if route == '/technology/local-ai-review-replies/':
+                import living_well_case_links_history
+                predecessor = living_well_case_links_history.before(
+                    'technology/local-ai-review-replies/index.html', predecessor)
+            self.assertEqual(history.digest(predecessor), item['sha256'])
             self.assertEqual(history.live_targets({route: response}), {})
             for altered in [(404, response[1]), (200, response[1] + b'UNREVIEWED'),
                             [200, response[1]], (200, ''), (True, response[1])]:
