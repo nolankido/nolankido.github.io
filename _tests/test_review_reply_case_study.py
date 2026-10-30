@@ -67,13 +67,13 @@ class ReviewReplyCaseStudyTests(unittest.TestCase):
     def test_older_publication_restores_only_exact_reviewed_blobs(self):
         for path in (SOURCE, OUTPUT, FINDER):
             current = (ROOT / path).read_bytes()
-            restored = history.before(path, current)
+            restored = history._before_review_reply_study(path, current)
             self.assertNotEqual(current, restored, path)
             self.assertEqual(history._blob_sha(current), history.STUDY_NEW_BLOBS[path])
             self.assertEqual(history._blob_sha(restored), history.STUDY_OLD_BLOBS[path])
-            self.assertEqual(history.before(path, restored), restored)
+            self.assertEqual(history._before_review_reply_study(path, restored), restored)
             mutated = current + b'UNREVIEWED'
-            self.assertEqual(history.before(path, mutated), mutated)
+            self.assertEqual(history._before_review_reply_study(path, mutated), mutated)
 
 
 if __name__ == '__main__':
