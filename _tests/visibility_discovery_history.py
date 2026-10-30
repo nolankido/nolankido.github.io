@@ -115,15 +115,55 @@ def change() -> dict:
 STUDY_NEW_BLOBS = {
     '_source/technology/local-ai-review-replies.html': '0f18088f086c70dd03016104f22afc1353dc5b34',
     'technology/local-ai-review-replies/index.html': '5e7557339494a52140df0a646f54b99146af4ed5',
+    'find/index.html': '58378f58f7f531c18b2feb5eec852e835a7df86a',
 }
 STUDY_OLD_BLOBS = {
     '_source/technology/local-ai-review-replies.html': '1034845cba7b9627fe8e2de1074c04249caaff39',
     'technology/local-ai-review-replies/index.html': '31d72d70965ec623eb0fdd6674972ebec3789f89',
+    'find/index.html': '88d402570c19e1e4e266410a5b7e74234b38194c',
 }
 
 
 def _blob_sha(raw: bytes) -> str:
     return sha1(b'blob ' + str(len(raw)).encode('ascii') + b'\0' + raw).hexdigest()
+
+
+
+# Only the search-section entry for this page changes. The index's other
+# 194 or more canonical page records and all shared label IDs stay intact.
+# The two arrays are fixed snapshots; do not infer a restoration from any
+# unknown or unreviewed text. Check both complete Git blob IDs.
+_STUDY_SECTION_OLD = [
+    'reply-task', "Use AI to draft a customer reply, with the owner's policy beside it.",
+    'reply-example', 'Keep the double charge and the unanswered question visible.',
+    'reply-boundary', 'Separate writing, authorization, and approval.',
+    'reply-failure', 'A checker rejected harmless wording and accepted a missing detail.',
+    'reply-try', 'Start with the fictional example.',
+    'reply-sources', 'What this project demonstrates.',
+    'case-return-title', 15,
+]
+_STUDY_SECTION_NEW = [
+    *_STUDY_SECTION_OLD[:8],
+    'reply-evaluation', 'Can a draft be polite and still get the important facts wrong?',
+    'reply-evaluation-results', 'The 30-case run returned 29 templates and blocked one.',
+    'reply-evaluation-lessons', 'Five examples make the distinction visible.',
+    'reply-evaluation-gemma', 'What the archived Gemma tests actually showed.',
+    'reply-evaluation-method', 'How to repeat the offline study, and what to check yourself.',
+    'reply-evaluation-limits', 'The strongest conclusion is about human control, not AI productivity.',
+    *_STUDY_SECTION_OLD[8:],
+]
+
+
+def _restore_find_index(raw: bytes) -> bytes:
+    token = '"local-ai-review-replies/":'
+    new = (token + json.dumps(_STUDY_SECTION_NEW, ensure_ascii=False, separators=(',', ':'))).encode('utf-8')
+    old = (token + json.dumps(_STUDY_SECTION_OLD, ensure_ascii=False, separators=(',', ':'))).encode('utf-8')
+    if raw.count(new) != 1:
+        raise ValueError('Unrecognized review reply search index successor')
+    previous = raw.replace(new, old, 1)
+    if _blob_sha(previous) != STUDY_OLD_BLOBS['find/index.html']:
+        raise ValueError('Review reply search index restoration did not match predecessor')
+    return previous
 
 
 def _before_review_reply_study(path: str | Path, data: bytes | str) -> bytes | str:
@@ -134,6 +174,9 @@ def _before_review_reply_study(path: str | Path, data: bytes | str) -> bytes | s
     raw = data if isinstance(data, bytes) else data.encode('utf-8')
     if _blob_sha(raw) != expected:
         return data
+    if name == 'find/index.html':
+        restored = _restore_find_index(raw)
+        return restored if isinstance(data, bytes) else restored.decode('utf-8')
     original = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
     if _blob_sha(original) != STUDY_OLD_BLOBS[name]:
         raise ValueError('Unrecognized review reply study predecessor: ' + name)
