@@ -39,6 +39,15 @@ class ReviewReplyCaseStudyTests(unittest.TestCase):
             self.assertIn('href="#' + anchor + '"', html)
         self.assertIn('rel="canonical" href="https://nolankido.com/technology/local-ai-review-replies/"', html)
         self.assertIn('content="2026-10-27"', html)
+        # A full-width pre block previously expanded the page past 320px.
+        # Keep the command copyable without disabling native text wrapping.
+        self.assertIn('<p><code>python3 -B rrw_evaluate.py', source)
+        self.assertNotIn('<pre>python3 -B rrw_evaluate.py', html)
+        # The two source-backed follow-ups are visible from the canonical page.
+        self.assertIn('CASE_STUDY_EDITORIAL_AUDIT_2026_10_30.md', source)
+        self.assertIn('scripts/case_study_probes.py', source)
+        self.assertIn('17 retrospectively selected text observations', source)
+
         finder = (ROOT / FINDER).read_text(encoding='utf-8')
         self.assertEqual(finder.count('"local-ai-review-replies/":'), 1)
         for anchor in EXTRA_ANCHORS:
