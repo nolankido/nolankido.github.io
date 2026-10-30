@@ -49,8 +49,8 @@ class ReviewReplyCaseStudyTests(unittest.TestCase):
         source = (ROOT / SOURCE).read_text(encoding='utf-8')
         for required in (
             '29 non-AI template drafts', 'Actual model calls', '0',
-            'No human owner assessments', 'What the archived Gemma tests actually showed.',
-            'not a controlled ranking of engines', 'no 30-case current-source Gemma comparison',
+            'Human owner assessments', 'What the archived Gemma tests actually showed.',
+            'not a controlled ranking of engines', 'no head-to-head 30-case current-source Gemma comparison',
             'AI Works Human Decides', 'The 30-case run returned 29 templates and blocked one.',
             'not a 96.7% safety rate',
         ):
