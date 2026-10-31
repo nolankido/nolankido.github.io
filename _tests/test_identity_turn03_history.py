@@ -38,6 +38,23 @@ class IdentityTurn03HistoryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'predecessor digest'):
                 history.before(name, current)
 
+    def test_older_output_capsules_receive_only_reviewed_predecessor_bytes(self):
+        import visibility_discovery_history
+        import living_well_case_links_history
+        import visibility_sprint_history
+
+        path = Path('assets/nolan-kido-identity.jsonld')
+        current = (ROOT / path).read_bytes()
+        old = history.before(path, current)
+        for release in (visibility_discovery_history, living_well_case_links_history,
+                        visibility_sprint_history):
+            with self.subTest(release=release.__name__):
+                self.assertEqual(release.outputs({path: current}), {path: old})
+                self.assertEqual(release.outputs({path: old}), {path: old})
+                unreviewed = current + b'UNREVIEWED'
+                self.assertEqual(release.outputs({path: unreviewed}),
+                                 {path: unreviewed})
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -208,7 +208,13 @@ def _records(records: dict, additions: dict) -> dict:
 
 
 def outputs(records: dict) -> dict:
-    return _records(records, change()['added_outputs'])
+    # Later identity releases change the byte content of an existing output.
+    # Rewind only the exact reviewed successor before reconstructing this
+    # historical release's complete output inventory. Unknown edits survive.
+    import identity_turn03_history
+    previous = {path: identity_turn03_history.before(path, value)
+                for path, value in records.items()}
+    return _records(previous, change()['added_outputs'])
 
 
 def source_records(records: dict) -> dict:
