@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_search
+import public_identity
 
 
 class IdentityJsonLdTests(unittest.TestCase):
@@ -27,6 +28,19 @@ class IdentityJsonLdTests(unittest.TestCase):
         self.assertNotIn('Chief Executive Officer', json.dumps(self.data))
         self.assertNotIn('worksFor', person)
         self.assertNotIn('Chief Operating Officer', person['jobTitle'])
+
+    def test_no_unconfirmed_current_home_location_is_exported(self):
+        person = self.graph['Person']
+        self.assertNotIn('homeLocation', person)
+        self.assertNotIn('address', person)
+        self.assertNotIn('Honolulu', person['description'])
+        self.assertNotIn('Las Vegas', person['description'])
+
+    def test_standalone_identity_includes_all_verified_public_work_profiles(self):
+        profiles = self.graph['Person']['sameAs']
+        self.assertEqual(len(profiles), len(set(profiles)))
+        for url in public_identity.same_as():
+            self.assertIn(url, profiles)
 
     def test_stable_identity_matches_existing_article_authorship(self):
         person_id = 'https://nolankido.com/about/#nolan-kido'

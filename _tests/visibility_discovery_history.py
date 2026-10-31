@@ -208,7 +208,22 @@ def _records(records: dict, additions: dict) -> dict:
 
 
 def outputs(records: dict) -> dict:
-    return _records(records, change()['added_outputs'])
+    # Later identity releases change the byte content of an existing output.
+    # Rewind only the exact reviewed successor before reconstructing this
+    # historical release's complete output inventory. Keep this leaf
+    # stdlib-only: its older independent-capsule guarantee forbids importing
+    # successor-history modules. Unknown edits survive unchanged.
+    name = 'assets/nolan-kido-identity.jsonld'
+    successor = '55f464baafdc1c5259e2dd92aa74e4b9ee019d74696f316d8d78f0acf4411e27'
+    predecessor = '721e0658e3caccd81b17882c041ff6693681670c59e7265c971f9819fa0546fc'
+    previous = dict(records)
+    for path, value in records.items():
+        if key(path) == name and digest(value) == successor:
+            original = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
+            if digest(original) != predecessor:
+                raise ValueError('Invalid reviewed identity predecessor in discovery history')
+            previous[path] = original if isinstance(value, bytes) else original.decode('utf-8')
+    return _records(previous, change()['added_outputs'])
 
 
 def source_records(records: dict) -> dict:

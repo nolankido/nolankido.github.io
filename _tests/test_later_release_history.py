@@ -8,6 +8,7 @@ import sys
 
 import later_release_history as history
 import visibility_sprint_history as subsequent_changes
+import identity_turn03_history
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
@@ -93,7 +94,8 @@ class LaterReleaseHistoryTests(unittest.TestCase):
         })
         for name, expected in history.SOURCE_ADDITIONS.items():
             with self.subTest(name=name):
-                self.assertEqual(sha256((ROOT / name).read_bytes()).hexdigest(), expected)
+                reviewed = identity_turn03_history.before(name, (ROOT / name).read_bytes())
+                self.assertEqual(sha256(reviewed).hexdigest(), expected)
 
     def test_output_view_only_omits_the_exact_added_generated_asset(self):
         name = 'assets/nolan-kido-identity.jsonld'
