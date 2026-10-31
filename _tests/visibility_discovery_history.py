@@ -183,7 +183,43 @@ def _before_review_reply_study(path: str | Path, data: bytes | str) -> bytes | s
     return original if isinstance(data, bytes) else original.decode('utf-8')
 
 
+def _before_homepage_turn04(path: str | Path, data: bytes | str) -> bytes | str:
+    # Preserve this archived leaf's stdlib-only rule. The later homepage
+    # change is recognized by complete digests and restores exactly the two
+    # old bytestrings, without importing a successor-history module.
+    pair = {
+        '_source/home.html': (
+            'b139831fc4c8c9bc763eef2662925e64485fe70007cf923ec61c623802ef649e',
+            'f4ec91d422d04775080691076a74b375e72a2c0674a6a2a829fbe4a122d330a4',
+        ),
+        'index.html': (
+            '1ca755dc96a03feee7dc0921c822c5627e390cc4ce47b8c9cbfaa982e021b9af',
+            'e9a95f88b640143c47b179110d656172869b609dc3d7428cffb1af3b419f70ae',
+        ),
+    }.get(key(path))
+    if pair is None or digest(data) != pair[1]:
+        return data
+    binary = isinstance(data, bytes)
+    content = data.decode('utf-8') if binary else data
+    suffix = ' I also build software tools and play tournament poker.</p>\n'
+    opening = '    <nav class="link-row identity-actions" aria-label="Explore Nolan Kido\'s work and interests">'
+    if content.count(suffix) != 1 or content.count(opening) != 1:
+        raise ValueError('Invalid Turn 4 homepage discovery boundary')
+    start = content.index(opening)
+    end = content.index('</nav>\n', start) + len('</nav>\n')
+    old_nav = (
+        '    <div class="link-row identity-actions"><a class="button" href="/technology/#ai-works-human-decides">How the approach works <span aria-hidden="true">→</span></a>'
+        '<a class="text-link" href="/about/">Meet Nolan <span aria-hidden="true">→</span></a>'
+        '<a class="text-link" href="/technology/">Explore practical AI <span aria-hidden="true">→</span></a></div>\n'
+    )
+    previous = (content[:start] + old_nav + content[end:]).replace(suffix, '</p>\n', 1)
+    if digest(previous) != pair[0]:
+        raise ValueError('Invalid Turn 4 homepage discovery predecessor')
+    return previous.encode('utf-8') if binary else previous
+
+
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    data = _before_homepage_turn04(path, data)
     data = _before_review_reply_study(path, data)
     item = change()['paths'].get(key(path))
     if item is None or digest(data) != item['current_sha256']:

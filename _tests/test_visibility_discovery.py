@@ -159,7 +159,9 @@ class VisibilityDiscoveryTests(unittest.TestCase):
         self.assertEqual({str(p): history.digest(value) for p, value in restored.items()}, self.record['parent_outputs'])
         self.assertEqual(history.outputs(restored), restored)
         for name, item in self.record['paths'].items():
-            current = (ROOT / name).read_bytes()
+            # Turn 4's reviewed homepage successor is newer than this frozen
+            # discovery capsule and must be reversed before byte comparisons.
+            current = history._before_homepage_turn04(name, (ROOT / name).read_bytes())
             # This later, reviewed case study expands one search-index entry.
             # Compare this archived PR152 capsule against its exact predecessor.
             if name == 'find/index.html':
