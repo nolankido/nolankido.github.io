@@ -113,8 +113,8 @@ def change() -> dict:
 # the frozen PR152 predecessor. Unknown edits must remain visible. Both
 # original blobs occur at the pinned, CI-fetched PR151 commit (PARENT).
 STUDY_NEW_BLOBS = {
-    '_source/technology/local-ai-review-replies.html': '0f18088f086c70dd03016104f22afc1353dc5b34',
-    'technology/local-ai-review-replies/index.html': '5e7557339494a52140df0a646f54b99146af4ed5',
+    '_source/technology/local-ai-review-replies.html': '6e2e0c92c10ad3c64192369dd3ae23dcb654c2b9',
+    'technology/local-ai-review-replies/index.html': 'e980f495c4ae5d1c3d827d7ff86409ee34098c87',
     'find/index.html': '58378f58f7f531c18b2feb5eec852e835a7df86a',
 }
 STUDY_OLD_BLOBS = {

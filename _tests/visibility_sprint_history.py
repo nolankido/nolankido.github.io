@@ -142,8 +142,18 @@ def pages(records: list[dict]) -> list[dict]:
 
 
 def _records(records: dict, additions: dict) -> dict:
-    return {path: before(path, value) for path, value in records.items()
-            if additions.get(key(path)) != digest(value)}
+    """Evaluate old added-file fingerprints against their exact reviewed predecessor.
+
+    A later, separately attested case-study revision may update a file that
+    originally entered the site in this sprint. Reverse the later revision
+    before comparing the old frozen digest. Unexpected edits stay visible.
+    """
+    result = {}
+    for path, value in records.items():
+        predecessor = before(path, value)
+        if additions.get(key(path)) != digest(predecessor):
+            result[path] = predecessor
+    return result
 
 
 def outputs(records: dict) -> dict:
@@ -165,7 +175,11 @@ def files(paths):
     def keep(path):
         name = key(path)
         expected = additions.get(name)
-        return expected is None or digest((ROOT / name).read_bytes()) != expected
+        if expected is None:
+            return True
+        # Only known, complete later releases are reversible. A modified
+        # addition must not silently become part of an older inventory.
+        return digest(before(name, (ROOT / name).read_bytes())) != expected
     return type(paths)(path for path in paths if keep(path))
 
 
@@ -179,5 +193,11 @@ def live_targets(records: dict) -> dict:
         if (item is None or not isinstance(response, tuple) or len(response) != 2
                 or type(response[0]) is not int or not isinstance(response[1], bytes)):
             return True
-        return response[0] != item['status'] or digest(response[1]) != item['sha256']
+        body = response[1]
+        if route == '/technology/local-ai-review-replies/' and response[0] == 200:
+            # This article was added by PR150 and deliberately revised later.
+            # The exact reviewed successor is reversed before old accounting.
+            body = living_well_case_links_history.before(
+                'technology/local-ai-review-replies/index.html', body)
+        return response[0] != item['status'] or digest(body) != item['sha256']
     return {route: response for route, response in records.items() if keep(route, response)}
