@@ -11,6 +11,7 @@ from pathlib import Path
 import creative_print_history
 import task_brief_growth_history
 import turn04_public_source_history
+import homepage_turn04_history
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '8f63c0436a45256cb2987cd93f77a9ef6e85df1b'
@@ -25,6 +26,7 @@ def change():
 
 
 def before(path, data):
+    data = homepage_turn04_history.before(path, data)
     data = creative_print_history.before(path, data)
     import answer_review_growth_history as growth_history
     data = growth_history.before(path, data)

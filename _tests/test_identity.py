@@ -24,9 +24,11 @@ class IdentityTests(unittest.TestCase):
         self.assertLess(home.index('home-title'), home.index('selected-reading-title'))
         self.assertLess(home.index('selected-reading-title'), home.index('destinations-title'))
         self.assertIn('<p class="hero-copy brand-statement">AI Works Human Decides</p>', home)
+        self.assertIn('I also build software tools and play tournament poker.', home)
         self.assertIn('href="/about/">Meet Nolan', home)
-        self.assertIn('href="/technology/#ai-works-human-decides">How the approach works', home)
-        self.assertIn('href="/technology/">Explore practical AI', home)
+        self.assertIn('href="/technology/#ai-works-human-decides">Practical AI in real life', home)
+        self.assertIn('href="/technology/#technology-projects">Technology projects', home)
+        self.assertIn('href="/poker/#watch">Poker with Nolan', home)
         self.assertIn('Food', self.outputs[Path('about/index.html')])
 
     def test_practical_ai_positioning_is_public_and_matches_machine_metadata(self):
