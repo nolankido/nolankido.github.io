@@ -20,20 +20,11 @@
       ],
       "url": "https://nolankido.com/about/",
       "jobTitle": "AI Startup Founder and Angel Investor",
-      "description": "AI startup founder and angel investor who builds and uses AI tools in small-business operations and daily life, and publishes the evidence. Former Chief Operating Officer of Hawaii Dental Clinic and Affiliates. Tournament poker player. Honolulu, Hawaiʻi.",
+      "description": "AI startup founder and angel investor who builds and uses AI tools in small-business operations and daily life, and publishes the evidence. Former Chief Operating Officer of Hawaii Dental Clinic and Affiliates. Tournament poker player.",
       "identifier": {
         "@type": "PropertyValue",
         "propertyID": "ORCID",
         "value": "0009-0008-8141-3662"
-      },
-      "homeLocation": {
-        "@type": "Place",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Honolulu",
-          "addressRegion": "HI",
-          "addressCountry": "US"
-        }
       },
       "alumniOf": {
         "@type": "CollegeOrUniversity",
@@ -87,6 +78,7 @@
         "https://www.researchgate.net/scientific-contributions/Nolan-Y-Kido-2162807176",
         "https://pokerdb.thehendonmob.com/player.php?a=r&n=967363",
         "https://github.com/nolankido",
+        "https://dev.to/kidon",
         "https://www.youtube.com/nolankido",
         "https://www.instagram.com/nolankido"
       ]

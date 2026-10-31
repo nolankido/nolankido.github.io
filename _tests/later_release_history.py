@@ -9,6 +9,7 @@ from pathlib import Path
 
 import brand_positioning_history
 import visibility_sprint_history
+import identity_turn03_history
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS_WORKFLOW = '.github/workflows/site-checks.yml'
@@ -68,6 +69,7 @@ def digest(data):
 
 
 def before(path, data):
+    data = identity_turn03_history.before(path, data)
     data = visibility_sprint_history.before(path, data)
     name = key(path)
     if name == CHECKS_WORKFLOW and digest(data) == WORKFLOW_AFTER:
@@ -98,7 +100,7 @@ def pages(records):
 
 def _keep(path, data, additions):
     expected = additions.get(key(path))
-    return expected is None or digest(data) != expected
+    return expected is None or digest(identity_turn03_history.before(path, data)) != expected
 
 
 def outputs(records):
