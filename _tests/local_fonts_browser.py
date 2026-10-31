@@ -103,7 +103,7 @@ try:
                         assert not external_fonts,external_fonts
                         assert {urlsplit(u).path for u in requests if '/assets/fonts/' in u} <= {'/'+r['path'] for r in record['files']}
                         print('FONT_KEYBOARD '+json.dumps({'scripts':scripts,'width':width}),flush=True)
-                        page.goto(base+'/');link=page.locator('.identity-actions a[href="/technology/"]');link.focus();expect(link).to_be_focused();page.keyboard.press('Enter');page.wait_for_url(base+'/technology/');expect(page.locator('h1')).to_be_visible();report['keyboard_journeys']+=1
+                        page.goto(base+'/');link=page.locator('.identity-actions a[href="/technology/#technology-projects"]');link.focus();expect(link).to_be_focused();page.keyboard.press('Enter');page.wait_for_url(base+'/technology/#technology-projects');expect(page.locator('h1')).to_be_visible();report['keyboard_journeys']+=1
                         if scripts and width==390 and os.environ.get('AXE_PATH'):
                             page.add_script_tag(path=os.environ['AXE_PATH'])
                             audit=page.evaluate('async()=>{const r=await axe.run(document,{runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa"]}});return {violations:r.violations.map(v=>v.id),incomplete:r.incomplete.map(v=>v.id)}}')
