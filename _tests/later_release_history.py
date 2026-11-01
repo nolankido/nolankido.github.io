@@ -14,6 +14,7 @@ import homepage_turn04_history
 import poker_player_turn05_history
 import profile_links_turn05_history
 import profile_sitemap_turn_history
+import player_find_turn_history
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS_WORKFLOW = '.github/workflows/site-checks.yml'
@@ -73,6 +74,7 @@ def digest(data):
 
 
 def before(path, data):
+    data = player_find_turn_history.before(path, data)
     data = profile_sitemap_turn_history.before(path, data)
     data = profile_links_turn05_history.before(path, data)
     data = poker_player_turn05_history.before(path, data)
@@ -120,6 +122,7 @@ def outputs(records):
 
 def source_records(records):
     """Rewind source/asset inventories without hiding altered additions."""
+    records = player_find_turn_history.source_records(records)
     records = profile_sitemap_turn_history.source_records(records)
     records = visibility_sprint_history.source_records(records)
     return {path: before(path, value) for path, value in records.items()
@@ -128,6 +131,7 @@ def source_records(records):
 
 def files(paths):
     """Preserve input path types and only exclude known, exact later additions."""
+    paths = player_find_turn_history.files(paths)
     paths = profile_sitemap_turn_history.files(paths)
     paths = visibility_sprint_history.files(paths)
     def keep(path):
