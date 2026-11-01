@@ -53,7 +53,7 @@ class PlayerProfileTests(unittest.TestCase):
         self.assertEqual(meta["og:title"], profile.TITLE)
         self.assertEqual(meta["twitter:title"], profile.TITLE)
         self.assertNotIn("noindex", meta.get("robots", ""))
-        records = re.findall(r'<script type="application/ld\\+json">(.*?)</script>', self.html, re.S)
+        records = re.findall(r'<script type="application/ld\+json">(.*?)</script>', self.html, re.S)
         self.assertEqual(len(records), 1)
         data = json.loads(records[0])
         self.assertEqual(data["url"], canonical)
