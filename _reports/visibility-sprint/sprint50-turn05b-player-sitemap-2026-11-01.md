@@ -3,7 +3,7 @@
 **Date:** November 1, 2026
 **Site:** https://nolankido.com/
 **Review branch:** `visibility-sprint-player-sitemap-20261101`
-**Status:** Proposed publication, pending final scoped review and merge.
+**Status:** Merged to main on November 1, 2026. Public live-response verification remains open.
 **Owner rule:** Never restore or use GitHub Actions for this project.
 
 ## Why this change exists
@@ -37,3 +37,11 @@ The existing **on-site Find index is still generated from the core page manifest
 - [Public player page](https://nolankido.com/poker/nolan-kido/)
 - [Poker hub](https://nolankido.com/poker/)
 - [Public WSOP profile](https://www.wsop.com/players/448066374/nolan-kido/)
+
+## Merge and release evidence, November 1
+
+- [PR #160](https://github.com/nolankido/nolankido.github.io/pull/160) squash-merged to `main` at commit `86018bb5245684c153e26ec94a4131537d6264a7`.
+- The merged repository sitemap has **196 URLs, all distinct**, with the player page listed exactly once and lastmod `2026-11-01`. The main builder, static search audit, and read-only live-target collector have the required calls. The existing Poker/About links, reviewed manual profile, and permanent owner prohibition on custom GitHub Actions remain intact.
+- Each of the six modified pre-existing files was independently compared against its exact parent Git blob and successfully reconstructed with pinned, test-only predecessor edits. This is a **source review**, not an executed full Python or browser test suite.
+- A direct public page fetch through the available browser/search tool did **not** provide verifiable new-release bytes. Live availability, site search coverage, and search-engine indexing remain unconfirmed. The site’s in-page Find index was not changed in this release.
+- The repository’s `.github/workflows` directory remains absent. No GitHub Actions workflow was created, restored, dispatched, or relied on.
