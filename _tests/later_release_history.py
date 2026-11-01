@@ -13,6 +13,7 @@ import identity_turn03_history
 import homepage_turn04_history
 import poker_player_turn05_history
 import profile_links_turn05_history
+import profile_sitemap_turn_history
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS_WORKFLOW = '.github/workflows/site-checks.yml'
@@ -72,6 +73,7 @@ def digest(data):
 
 
 def before(path, data):
+    data = profile_sitemap_turn_history.before(path, data)
     data = profile_links_turn05_history.before(path, data)
     data = poker_player_turn05_history.before(path, data)
     data = homepage_turn04_history.before(path, data)
@@ -118,6 +120,7 @@ def outputs(records):
 
 def source_records(records):
     """Rewind source/asset inventories without hiding altered additions."""
+    records = profile_sitemap_turn_history.source_records(records)
     records = visibility_sprint_history.source_records(records)
     return {path: before(path, value) for path, value in records.items()
             if key(path) not in TEST_UTILITIES and _keep(path, value, SOURCE_ADDITIONS)}
@@ -125,6 +128,7 @@ def source_records(records):
 
 def files(paths):
     """Preserve input path types and only exclude known, exact later additions."""
+    paths = profile_sitemap_turn_history.files(paths)
     paths = visibility_sprint_history.files(paths)
     def keep(path):
         name = key(path)
@@ -138,6 +142,7 @@ def files(paths):
 
 def live_targets(records):
     """Restore the old target count without dropping an unrecognized response."""
+    records = profile_sitemap_turn_history.live_targets(records)
     records = visibility_sprint_history.live_targets(records)
     def keep(route, response):
         expected = LIVE_TARGET_ADDITIONS.get(route)
