@@ -20,7 +20,7 @@ HUB = ROOT / "poker/index.html"
 OUTPUT = ROOT / "poker/nolan-kido/index.html"
 ORIGIN = "https://nolankido.com"
 URL = ORIGIN + "/poker/nolan-kido/"
-TITLE = "Nolan Kido: Tournament Poker Player and Vlog | Verified Results"
+TITLE = "Nolan Kido: Tournament Poker Player | Results & Vlog Plans"
 DESCRIPTION = ("Nolan Kido's live tournament poker record, including independent WSOP "
                "and South Point results, plus his approach to reviewing poker hands.")
 OLD_TITLE = "Learn Poker: Free Beginner Course & Resources | Nolan Kido"
@@ -74,7 +74,7 @@ def render() -> str:
         raise ValueError("Profile expects two Poker navigation current-state links")
     prefix = prefix.replace('href="/poker/" aria-current="page"',
                             'href="/poker/" aria-current="location"')
-    pattern = r'<script type="application/ld\\+json">(.*?)</script>'
+    pattern = r'<script type="application/ld\+json">(.*?)</script>'
     match = re.search(pattern, prefix, flags=re.S)
     if match is None or len(re.findall(pattern, prefix, flags=re.S)) != 1:
         raise ValueError("Profile needs exactly one JSON-LD record")
