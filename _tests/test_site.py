@@ -103,7 +103,12 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(len(links), len(notes))
         sitemap = ET.fromstring(self.outputs[Path('sitemap.xml')])
         urls = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
-        self.assertEqual(set(urls), {'https://nolankido.com' + p['path'] for p in self.manifest if not p.get('noindex')})
+        expected = {'https://nolankido.com' + p['path'] for p in self.manifest if not p.get('noindex')}
+        manual = build.player_sitemap.record(ROOT)
+        if manual is not None:
+            expected.add(manual[0])
+        self.assertEqual(set(urls), expected)
+        self.assertEqual(len(urls), len(set(urls)))
         self.assertNotIn('https://nolankido.com/404.html', urls)
 
     def test_contact_and_data_boundaries(self):
