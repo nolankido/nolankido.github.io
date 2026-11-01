@@ -1,7 +1,7 @@
 # Visibility sprint Turn 5: independent tournament poker evidence
 
 Date: October 31, 2026
-Status: Evidence and editorial gate complete; proposed public player page not yet implemented.
+Status: Evidence confirmed; new linked public-record section committed on a review branch November 1, 2026. Release gate pending. The dedicated player route remains future work.
 Purpose: establish a source-checked foundation for a Nolan Kido tournament poker profile without importing private financial or location details.
 
 ## Independent records
@@ -21,3 +21,13 @@ Suggested canonical route: /poker/nolan-kido/ . On implementation, ensure a nati
 This commit is research and publication preparation only. Before presenting a personal page as live, implement it through the site's _source and generation pipeline, preserve historical release contracts, run build/search/unit and browser checks, and verify exact deployed bytes. Recheck the official results immediately before publication. Do not alter source snapshots merely to force historical tests green.
 
 Search visibility and assistant mentions are not measured by this evidence review.
+
+## November 1 implementation of the player record on the existing Poker hub
+
+- Added a sourced, nonpromotional public record headed **Nolan Kido at live poker tournaments** to the existing `/poker/#watch` destination. It records the June 25, 2026 fifth-place South Point Lucky 300 finish and independently listed August 2026 WSOP Circuit Cherokee placements, with direct source links and explicit gross-vs-net limitations.
+- Kept the current free course, viewer resources, route fragments, and accurate disclosure that no tournament stories or vlog episodes are yet published on-site.
+- Changed the editable `_source/poker/home.html` and matching committed `poker/index.html`, with focused regression tests in `_tests/test_visibility_poker_player.py`.
+- Added exact, test-only predecessor restoration in `_tests/poker_player_turn05_history.py`, with dedicated mutation-detection tests. Older review snapshots and production scripts remain untouched.
+- [PR #158](https://github.com/nolankido/nolankido.github.io/pull/158) contains the changes. No new player URL is claimed; the standalone `/poker/nolan-kido/` page has not been implemented in this phase.
+
+**Verification pending:** GitHub Actions full static build, historic suite, browser groups, PR merge and production live-byte check. The page must not be called published until those pass. Neither ranking changes nor AI citation counts have been measured.
