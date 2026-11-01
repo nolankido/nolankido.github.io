@@ -38,6 +38,7 @@ import identity
 import presentation
 import entrypoints
 import site_find
+import player_find
 import search_sections
 import follow
 import search_visibility
