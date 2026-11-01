@@ -27,7 +27,7 @@ def key(path):
 
 def git_blob(data):
     raw = data.encode("utf-8") if isinstance(data, str) else data
-    return sha1(b"blob " + str(len(raw)).encode("ascii") + b"\\0" + raw).hexdigest()
+    return sha1(b"blob " + str(len(raw)).encode("ascii") + bytes([0]) + raw).hexdigest()
 
 
 def before(path, data):
