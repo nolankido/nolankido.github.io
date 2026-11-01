@@ -3,7 +3,7 @@
 **Date:** November 1, 2026
 **Repository:** [nolankido/nolankido.github.io](https://github.com/nolankido/nolankido.github.io)
 **Change:** Include the already public, independently verified player profile in the site's on-page Find index.
-**Status:** Committed for review; merge and public deployment must be checked separately.
+**Status:** Merged to main November 1, 2026. Direct public HTTP release-byte verification remains unconfirmed.
 **Owner constraint:** Never use, restore, dispatch, or rely on GitHub Actions for this website.
 
 ## Scope and motivation
@@ -49,3 +49,11 @@ The on-page Find result uses the same static, browser-local filter as existing s
 ## Next improvements
 
 When a local full-site test environment is available, run `python _scripts/local_release_checks.py --full --browser`, resolve any remaining historical test expectations and verify `/find/`, `/poker/nolan-kido/` and `/sitemap.xml` by exact read-only public responses. After that, prioritize only factual, approved poker episode companions, not speculative result pages.
+
+## Release receipt, November 1
+
+- [PR #161](https://github.com/nolankido/nolankido.github.io/pull/161) squash-merged to `main` at `a86763f659ddcca81437f34ed78bca8644b631eb`.
+- A fresh read of `main` confirms **181** Find result cards across Technology 16, Living Well 69, Poker 93 and Creative Work 3, and exactly one `/poker/nolan-kido/` entry with a visible **Player profiles** filter.
+- The previously merged primary sitemap still contains **196** unique URLs and exactly one player-profile URL. The main builder now includes the player Find adapter, and the local release script includes the focused Find test. The owner prohibition on GitHub Actions is unchanged.
+- All six modified existing files were independently reversed to exact ancestor Git blob bytes during review; no historical snapshots were rewritten. These are structural/repository checks, **not** executed full Python/browser suites.
+- Public web retrieval remained unsuccessful or returned older search-crawl snapshots, so this turn does **not** assert current live bytes, search-engine indexing, ranking gains, or new AI citation traffic.
