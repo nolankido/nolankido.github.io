@@ -43,7 +43,7 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertEqual(paths,set(b['files']));self.assertEqual(len(paths),343)
         changed=[]
         for p,digest in b['files'].items():
-            raw=time_examples_history.before(p,(ROOT/p).read_bytes())
+            raw=time_examples_history.before(p,player_find_turn_history.before(p,(ROOT/p).read_bytes()))
             if sha256(raw).hexdigest()!=digest:changed.append(p)
             self.assertEqual(sha256(history.before(p,raw)).hexdigest(),digest,p)
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
