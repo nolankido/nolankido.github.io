@@ -61,7 +61,7 @@ def entry(root: Path) -> dict | None:
     if not (title and seo_title and description and len(seo_title) <= 100
             and 80 <= len(description) <= 190):
         raise ValueError('Player Find needs bounded, nonempty public titles and description')
-    matches = re.findall(r'<script type="application/ld\\+json">(.*?)</script>', html, re.S)
+    matches = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
     if len(matches) != 1:
         raise ValueError('Player Find requires one structured public record')
     schema = json.loads(matches[0])
