@@ -187,7 +187,7 @@ def build_outputs() -> dict[Path, str]:
     values['summary_review_sheet'] = text((ROOT / 'downloads/ai-summary-review.txt').read_text(encoding='utf-8'))
     values['answer_review_sheet'] = text((ROOT / 'downloads/ai-answer-review.txt').read_text(encoding='utf-8'))
     values['creative_brief'] = text((ROOT / 'downloads/creative-brief.txt').read_text(encoding='utf-8'))
-    values['site_find_index'] = site_find.render(site_find.entries(ROOT, pages))
+    values['site_find_index'] = site_find.render(player_find.add(ROOT, site_find.entries(ROOT, pages)))
     values['identity_reading'] = identity.selected_reading(identity_config, pages)
     values['interest_entrypoints'] = entrypoints.interest_cards(entry_config, pages)
     values['resource_entrypoints'] = entrypoints.resource_cards(entry_config, pages)
