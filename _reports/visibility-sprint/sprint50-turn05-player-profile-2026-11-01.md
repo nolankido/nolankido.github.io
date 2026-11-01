@@ -3,7 +3,7 @@
 **Date:** November 1, 2026
 **Scope:** Public, independently sourced tournament player profile; native linking from Poker and About.
 **Branch:** `visibility-sprint-turn05-player-page-20261101`
-**Status:** Authored and source-reproduced on the review branch. Merge and live checks must be recorded separately.
+**Status:** Merged to GitHub main November 1, 2026. Deployed URL could not be independently fetched in the current session; public live-byte verification remains open.
 
 ## What the change delivers
 
@@ -46,3 +46,11 @@ The new page is deliberately **not** inserted into `_source/pages.json`: the mai
 ## Release checklist
 
 On merge, verify the branch content exists on main and direct HTTPS GETs for `/poker/nolan-kido/`, `/poker/` and `/about/` return the new canonical content. A GitHub merge or Pages build status is not alone proof that the public URL serves the intended bytes. Update the private sprint ledger only after those checks, and record remaining sitemap integration separately.
+
+## November 1 merge receipt and remaining release verification
+
+- [PR #159](https://github.com/nolankido/nolankido.github.io/pull/159) was squash-merged directly to GitHub `main` at commit `9dca4e95343abe3355f84f3903185e1bd68a80dc`.
+- Read-only GitHub fetch of `main` confirmed that `poker/nolan-kido/index.html`, its deterministic compiler, and native links in `poker/index.html` and `about/index.html` are present. It also confirmed the repo's `.github/workflows` directory is absent.
+- The directly assembled profile body, metadata and schema matched the 13,018-character committed page in a separate JavaScript cross-check. Nineteen static scope, identity, source and privacy assertions passed, but the Python/compiler and full browser suites were **not** executed in the current sandbox.
+- The external public-page reader did **not** return a usable result for `https://nolankido.com/poker/nolan-kido/` immediately after merge. That could reflect crawler freshness or deployment and does **not** prove the page is live. Independent public HTTP status and exact bytes remain **unverified**.
+- Do not publish a false assertion of live availability, indexing, search rankings or AI citations. Verify the public route in a later local/browser check. Migrate into the main generated manifest and sitemap only when the full site build can be executed and verified locally, without restoring GitHub Actions.
