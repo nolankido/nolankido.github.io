@@ -11,6 +11,7 @@ import brand_positioning_history
 import visibility_sprint_history
 import identity_turn03_history
 import homepage_turn04_history
+import poker_player_turn05_history
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS_WORKFLOW = '.github/workflows/site-checks.yml'
@@ -70,6 +71,7 @@ def digest(data):
 
 
 def before(path, data):
+    data = poker_player_turn05_history.before(path, data)
     data = homepage_turn04_history.before(path, data)
     data = identity_turn03_history.before(path, data)
     data = visibility_sprint_history.before(path, data)
