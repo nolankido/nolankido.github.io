@@ -39,6 +39,7 @@ def main() -> int:
         ('Deterministic build', ['_scripts/build.py', '--check']),
         ('Player profile build', ['_scripts/build_player_profile.py', '--check']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
+        ('Player Find index contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_find.py', '-q']),
         ('SEO and metadata', ['_scripts/check_search.py']),
     ]
     if args.full:

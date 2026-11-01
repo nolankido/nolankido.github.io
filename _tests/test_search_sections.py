@@ -17,6 +17,7 @@ import first_tournament_plan_history as subsequent_changes
 import ranking_practice_history
 import brief_check_history
 import visibility_sprint_history
+import player_find_turn_history
 from test_site import Page
 
 class SearchSectionsTests(unittest.TestCase):
@@ -27,7 +28,8 @@ class SearchSectionsTests(unittest.TestCase):
         cls.index=search_sections.index(cls.outputs,cls.pages)
 
     def test_only_search_and_frozen_native_anchor_spacing_change(self):
-        historical_outputs = {p:time_examples_history.before(p,d) for p,d in beginner_history.outputs(self.outputs).items()}
+        earlier = {p: player_find_turn_history.before(p, d) for p, d in self.outputs.items()}
+        historical_outputs = {p:time_examples_history.before(p,d) for p,d in beginner_history.outputs(earlier).items()}
         b=self.baseline
         self.assertEqual(poker_titles_history.pages(beginner_history.pages(self.pages)),b['pages'])
         self.assertEqual(set(map(str,historical_outputs)),set(b['outputs']))
@@ -41,7 +43,7 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertEqual(paths,set(b['files']));self.assertEqual(len(paths),343)
         changed=[]
         for p,digest in b['files'].items():
-            raw=time_examples_history.before(p,(ROOT/p).read_bytes())
+            raw=time_examples_history.before(p,player_find_turn_history.before(p,(ROOT/p).read_bytes()))
             if sha256(raw).hexdigest()!=digest:changed.append(p)
             self.assertEqual(sha256(history.before(p,raw)).hexdigest(),digest,p)
         self.assertCountEqual(changed,['_source/find.html','assets/site-find.js','assets/site-find.css','assets/site.css','assets/site-core.css'])
@@ -108,7 +110,7 @@ class SearchSectionsTests(unittest.TestCase):
         # Preserve this release's original budget after the later reviewed
         # title metadata and beginner entry are reversed. Current growth has
         # its own independent bound in test_beginner_decisions.
-        self.assertLess(len(time_examples_history.before(search_sections.PAGE,doc).encode()),145000)
+        self.assertLess(len(time_examples_history.before(search_sections.PAGE,player_find_turn_history.before(search_sections.PAGE,doc)).encode()),145000)
         self.assertIn(['part-5','Keep access and recovery simple'],self.index['/living-well/find-the-document-you-need/'])
 
     def test_only_visible_major_headings_inside_main_are_indexed(self):
