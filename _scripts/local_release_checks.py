@@ -37,6 +37,7 @@ def main() -> int:
 
     tasks = [
         ('Deterministic build', ['_scripts/build.py', '--check']),
+        ('Player profile build', ['_scripts/build_player_profile.py', '--check']),
         ('SEO and metadata', ['_scripts/check_search.py']),
     ]
     if args.full:
