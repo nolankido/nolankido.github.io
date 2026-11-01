@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import json
 import build
+import player_sitemap
 import time
 import urllib.error
 import urllib.request
@@ -23,6 +24,12 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
         route = page['path']
         relative = route.lstrip('/') + ('index.html' if route.endswith('/') else '')
         result[route] = (200, (root / relative).read_bytes())
+    manual_profile = player_sitemap.record(root)
+    if manual_profile is not None:
+        route = player_sitemap.ROUTE
+        if route in result:
+            raise ValueError('Manual player page duplicates an existing generated route')
+        result[route] = (200, (root / player_sitemap.RELATIVE).read_bytes())
     assets = ['downloads/poker-cash-study.md', 'assets/poker-topics.css', 'assets/poker-study-tools.css', 'assets/poker-study-tools.js', 'assets/poker-finder.css', 'assets/poker-finder.js', 'downloads/poker-math-reference.md', 'downloads/poker-resource-directory.md', 'downloads/poker-resource-directory.json', 'assets/poker-fieldguide.css', 'assets/poker-resources.css', 'assets/poker-resources.js', 'assets/poker-reader.css', 'assets/poker-library.js', 'downloads/poker-short-stack-record.md', 'downloads/poker-results-review.md', 'downloads/poker-episode-plan.md', 'downloads/poker-study-cycle.md', 'downloads/poker-watch-along.md', 'downloads/poker-viewer-reference.md', 'assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['poker-event-planner', 'poker-hand-capture', 'poker-resource-check']]
     assets += ['assets/search-visibility.css', 'assets/first-steps.css', 'downloads/creative-brief.txt']

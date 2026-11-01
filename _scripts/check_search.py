@@ -15,6 +15,7 @@ import sys
 from xml.etree import ElementTree as ET
 import build
 import public_identity
+import player_sitemap
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +66,14 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     routes = {origin + page['path'] for page in pages}
     person_id = origin + '/about/#nolan-kido'
     expected_indexed = {origin + p['path'] for p in pages if not p.get('noindex')}
+    try:
+        manual_profile = player_sitemap.record(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append('Manual poker-player profile: ' + str(exc))
+        manual_profile = None
+    if manual_profile is not None:
+        expected_indexed.add(manual_profile[0])
+        totals['manual_player_pages'] += 1
     sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
     actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):

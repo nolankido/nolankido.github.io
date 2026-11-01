@@ -9,6 +9,7 @@ import sys
 import later_release_history as history
 import visibility_sprint_history as subsequent_changes
 import identity_turn03_history
+import profile_sitemap_turn_history
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
@@ -169,7 +170,8 @@ class LaterReleaseHistoryTests(unittest.TestCase):
 
     def test_current_live_targets_include_the_separately_checked_new_card(self):
         import check_live
-        current = subsequent_changes.live_targets(check_live.targets())
+        current = profile_sitemap_turn_history.live_targets(
+            subsequent_changes.live_targets(check_live.targets()))
         route = '/assets/social/nolan-kido-ai.png'
         self.assertEqual(len(current), 476)
         self.assertEqual(current[route], (200, (ROOT / route.lstrip('/')).read_bytes()))
