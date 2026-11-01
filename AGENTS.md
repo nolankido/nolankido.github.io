@@ -18,6 +18,10 @@ GitHub Pages may independently run GitHub-managed deployment jobs even when ther
 4. For full verification, run `python -m unittest discover -s _tests -p 'test_*.py' -v` and browser suites locally with the installed Playwright dependencies. Use direct public GETs to verify deployed URLs and expected source bytes.
 5. Report test scope precisely. Do not claim that the full suite or browsers passed unless they actually ran. Never reenable GitHub Actions as a shortcut.
 
+## Standalone poker player profile
+
+The public `/poker/nolan-kido/` page has its own deterministic local builder because the main site's generated manifest does not yet have a personal-player-profile type. Edit `_source/poker/nolan-kido-profile.html`, then run `python _scripts/build_player_profile.py` and `python _scripts/build_player_profile.py --check`. The generated page deliberately lacks the main generator marker so the main build will not overwrite it. Both Poker and About have native links to it. Keep its documented source citations and gross-versus-net caveat. Do not add the page to the main manifest without first migrating its build ownership and updating the main sitemap and search verification together.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
