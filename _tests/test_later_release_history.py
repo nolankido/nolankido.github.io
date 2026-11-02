@@ -12,6 +12,7 @@ import identity_turn03_history
 import profile_sitemap_turn_history
 import episode_turn06_history
 import turn07_hand_history
+import turn08_laptop_history
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
@@ -19,7 +20,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 
 def release_bytes(path):
     """Inspect this older release after reversing only the reviewed sprint."""
-    return subsequent_changes.before(path, turn07_hand_history.before(path, (ROOT / path).read_bytes()))
+    return subsequent_changes.before(path, turn07_hand_history.before(path, turn08_laptop_history.before(path, (ROOT / path).read_bytes())))
 
 
 class LaterReleaseHistoryTests(unittest.TestCase):
@@ -173,7 +174,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
     def test_current_live_targets_include_the_separately_checked_new_card(self):
         import check_live
         current = profile_sitemap_turn_history.live_targets(
-            episode_turn06_history.live_targets(turn07_hand_history.live_targets(subsequent_changes.live_targets(check_live.targets()))))
+            episode_turn06_history.live_targets(turn07_hand_history.live_targets(turn08_laptop_history.live_targets(subsequent_changes.live_targets(check_live.targets())))))
         route = '/assets/social/nolan-kido-ai.png'
         self.assertEqual(len(current), 476)
         self.assertEqual(current[route], (200, (ROOT / route.lstrip('/')).read_bytes()))
