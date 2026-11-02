@@ -41,6 +41,7 @@ import site_find
 import player_find
 import search_sections
 import follow
+import manual_poker_feed
 import search_visibility
 import practical_discovery
 import everyday_tasks
@@ -494,10 +495,10 @@ def build_outputs() -> dict[Path, str]:
     outputs.update(poker_collections.exports(resource_entries))
     outputs.update(poker_reference.exports())
     outputs[Path('downloads/poker-beginner-study-card.txt')] = poker_course.workbook(ROOT)
-    outputs[Path('poker/feed.xml')] = poker_content.feed(pages, site['url'])
+    outputs[Path('poker/feed.xml')] = manual_poker_feed.add(poker_content.feed(pages, site['url']), ROOT)
     outputs.update(living_well.exports(ROOT, site['url']))
     outputs[practical_discovery.FEED] = practical_discovery.feed(practical_config, pages, outputs, site['url'])
-    outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'])
+    outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'], ROOT)
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     outputs.update(public_profile.exports(site))
     identity_document = json.loads((SOURCE / 'person-schema.jsonld').read_text(encoding='utf-8'))
