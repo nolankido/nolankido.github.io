@@ -23,6 +23,7 @@ import practical_discovery as discovery
 import manual_local_ai_feed
 import time_export_history
 import visibility_sprint_history
+import turn08_laptop_history
 
 
 def records(xml):
@@ -48,7 +49,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
             self.assertEqual(self.outputs[path].encode(), (ROOT / path).read_bytes())
 
     def test_combined_feed_preserves_every_original_record_and_source(self):
-        historical_outputs = beginner_history.outputs(self.outputs)
+        historical_outputs = beginner_history.outputs(turn08_laptop_history.outputs(self.outputs))
         now = records(historical_outputs[follow.OUTPUT])
         historical = {url: now[url] for url in self.baseline['combined_urls']}
         self.assertEqual(len(historical), self.baseline['combined_record_count'])
@@ -67,7 +68,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
         expected.add('https://nolankido.com/technology/local-ai-gaming-laptop/')
         self.assertEqual({i.findtext('link') for i in items}, expected)
         self.assertEqual(len(items), len(expected))
-        historical = records(visibility_sprint_history.before(discovery.FEED, self.outputs[discovery.FEED]))
+        historical = records(visibility_sprint_history.before(discovery.FEED, turn08_laptop_history.before(discovery.FEED, self.outputs[discovery.FEED])))
         original_expected = {'https://nolankido.com/notes/' + s + '/' for s in self.config['note_ids']}
         original_expected.update({'https://nolankido.com/technology/checking-ai-website-changes/', 'https://nolankido.com/technology/check-ai-summary/', 'https://nolankido.com/technology/should-i-use-ai/', 'https://nolankido.com/technology/check-ai-answers/'})
         self.assertEqual(set(historical), original_expected)
