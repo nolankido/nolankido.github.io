@@ -70,7 +70,7 @@ class LocalLaptopCaseTests(unittest.TestCase):
     def test_no_unsubstantiated_hardware_or_laptop_performance_claim(self):
         for phrase in ('I have not run a new timed model benchmark on that laptop',
                        'Ubuntu CPU runner hosted by GitHub', 'unmeasured',
-                       'does not make the work free', 'human approval'):
+                       'does not make the work free', 'human review'):
             self.assertIn(phrase, self.source)
         self.assertNotIn('<iframe', self.html)
         self.assertNotIn('—', self.html)
