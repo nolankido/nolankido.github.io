@@ -16,6 +16,14 @@
       <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
     </item>
     <item>
+      <title>Running local AI on an 18-inch gaming laptop.</title>
+      <link>https://nolankido.com/technology/local-ai-gaming-laptop/</link>
+      <description>A practical Windows guide to Ollama and LM Studio on an MSI gaming laptop: setup, privacy boundaries, repeatable tests, and what remains unmeasured.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/local-ai-gaming-laptop/</guid>
+      <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
+    <item>
       <title>Using AI to check continuity across a book series.</title>
       <link>https://nolankido.com/technology/ai-book-continuity-checker/</link>
       <description>Explore Preflight and canonKeeper through a Sherlock Holmes continuity audit, source passages, correct and incorrect findings, and a transparent benchmark.</description>
