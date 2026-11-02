@@ -42,7 +42,9 @@ class PublicPortlandEpisodeTests(unittest.TestCase):
         self.assertIn('$2,900', self.html)
         self.assertIn('$5,100', self.html)
         self.assertIn('gross tournament payment, not net profit', self.html)
-        self.assertIn('my table read, not a verified solver finding', self.html)
+        self.assertIn('not a verified solver result', self.html)
+        self.assertIn('id="hand-64o-record"', self.html)
+        self.assertIn('id="hand-77-record"', self.html)
 
     def test_canonical_schema_author_and_publication_date(self):
         self.assertEqual([x.get('href') for x in self.doc.tags('link')
