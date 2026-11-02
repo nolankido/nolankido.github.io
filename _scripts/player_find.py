@@ -13,6 +13,7 @@ import re
 
 import player_sitemap
 import poker_episode
+import local_laptop_case
 import site_find
 
 
@@ -101,7 +102,7 @@ def episode_entry(root: Path) -> dict | None:
 
 def add(root: Path, manifest_items: list[dict]) -> list[dict]:
     """Include exactly the separately validated manual Poker pages."""
-    extras = [item for item in (entry(root), episode_entry(root)) if item is not None]
+    extras = [item for item in (entry(root), episode_entry(root), local_laptop_case.find_entry(root)) if item is not None]
     if not extras:
         return manifest_items
     seen = {item['path'] for item in manifest_items}
