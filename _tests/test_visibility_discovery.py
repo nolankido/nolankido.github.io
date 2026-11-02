@@ -22,6 +22,7 @@ import check_live
 import site_find
 import visibility_discovery_history as history
 import player_find_turn_history
+import episode_turn06_history
 import living_well_case_links_history
 import visibility_sprint_history
 
@@ -156,14 +157,14 @@ class VisibilityDiscoveryTests(unittest.TestCase):
     def test_capsule_matches_the_actual_parent_and_complete_render_inventory(self):
         self.assertEqual(git('rev-parse', history.PARENT + '^{tree}').decode().strip(), history.PARENT_TREE)
         self.assertEqual(len(self.record['parent_outputs']), 229)
-        previous_find = {p: player_find_turn_history.before(p, value) for p, value in self.outputs.items()}
+        previous_find = {p: player_find_turn_history.before(p, episode_turn06_history.before(p, value)) for p, value in self.outputs.items()}
         restored = history.outputs(previous_find)
         self.assertEqual({str(p): history.digest(value) for p, value in restored.items()}, self.record['parent_outputs'])
         self.assertEqual(history.outputs(restored), restored)
         for name, item in self.record['paths'].items():
             # Turn 4's reviewed homepage successor is newer than this frozen
             # discovery capsule and must be reversed before byte comparisons.
-            current = history._before_homepage_turn04(name, player_find_turn_history.before(name, (ROOT / name).read_bytes()))
+            current = history._before_homepage_turn04(name, player_find_turn_history.before(name, episode_turn06_history.before(name, (ROOT / name).read_bytes())))
             # This later, reviewed case study expands one search-index entry.
             # Compare this archived PR152 capsule against its exact predecessor.
             if name == 'find/index.html':

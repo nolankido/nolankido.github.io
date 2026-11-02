@@ -10,6 +10,7 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 from xml.etree import ElementTree as ET
+import poker_episode
 
 ROUTE = '/poker/nolan-kido/'
 URL = 'https://nolankido.com' + ROUTE
@@ -98,9 +99,13 @@ def record(root: Path) -> tuple[str, str] | None:
 
 def add_to_sitemap(sitemap: ET.Element, root: Path) -> None:
     item = record(root)
-    if item is None:
-        return
-    url, modified = item
-    entry = ET.SubElement(sitemap, 'url')
-    ET.SubElement(entry, 'loc').text = url
-    ET.SubElement(entry, 'lastmod').text = modified
+    if item is not None:
+        url, modified = item
+        entry = ET.SubElement(sitemap, 'url')
+        ET.SubElement(entry, 'loc').text = url
+        ET.SubElement(entry, 'lastmod').text = modified
+    episode = poker_episode.record(root)
+    if episode is not None:
+        entry = ET.SubElement(sitemap, 'url')
+        ET.SubElement(entry, 'loc').text = episode['url']
+        ET.SubElement(entry, 'lastmod').text = episode['date']

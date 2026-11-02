@@ -74,7 +74,7 @@ class PlayerProfileTests(unittest.TestCase):
         for required in (
             "1,652 entries", "341 entries", "638 entries", "101 entries",
             "gross payout, not net profit", "No bracelet, Circuit ring",
-            "No episode is presented as published", "There are no published vlog episodes",
+            "No episode is presented as published", "The first",
         ):
             self.assertIn(required, self.html)
         self.assertNotIn("homeLocation", self.html)
