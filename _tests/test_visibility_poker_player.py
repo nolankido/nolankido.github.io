@@ -44,7 +44,8 @@ class PokerPlayerEvidenceTests(unittest.TestCase):
     def test_existing_poker_course_and_unpublished_vlog_boundary_remain(self):
         self.assertIn('id="free-course"', self.published)
         self.assertIn('id="watch"', self.published)
-        self.assertIn("No vlog episodes or tournament stories are published on this site yet.", self.published)
+        self.assertIn('href="/poker/episodes/portland-meadows-ep1/"', self.published)
+        self.assertIn("later tournament episodes are not published here yet.", self.published)
         self.assertIn('href="/poker/reviewing-a-hand/"', self.published)
         self.assertNotIn("\u2014", self.source)
 
