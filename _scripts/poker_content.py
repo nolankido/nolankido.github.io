@@ -15,6 +15,7 @@ import json
 import re
 
 from search_visibility import LEGACY_FEED_IDS
+import poker_episode
 
 KINDS = {'episode': 'episodes', 'hand': 'hands', 'story': 'stories'}
 LABELS = {'episode': 'Episode companion', 'hand': 'Hand review', 'story': 'Tournament story'}
@@ -204,11 +205,15 @@ def supplement(data: dict, root: Path) -> dict:
         if len(entries) > 6:
             cards += '<details class="poker-details"><summary>Earlier stories and episodes</summary>' + ''.join(card(e) for e in entries[6:]) + '</details>'
     else:
-        cards = ('<div class="poker-first-read"><p class="note-category">A starting point</p>'
-                 '<h3><a href="/poker/reviewing-a-hand/">Review a hand, not just the result.</a></h3>'
-                 '<p>A worked, clearly fictional hand shows how to keep the action, original thinking, and later analysis separate.</p>'
-                 '<p class="small-copy">No vlog episodes or tournament stories are published on this site yet. '
-                 'This guide and the study resources below are available now.</p></div>')
+        approved_video = poker_episode.record(root)
+        if approved_video is not None:
+            cards = ("<div class=\"poker-content-grid\"><article class=\"poker-content-card\"><p class=\"note-category\">Published video companion</p><h3><a href=\"/poker/episodes/portland-meadows-ep1/\">Portland Meadows Episode 1: From 6.5 big blinds to a trophy</a></h3><p>Watch a real short-stack comeback, 6-4 versus A-K, pocket sevens versus A-T, and a four-way deal. The companion separates the $2,900 reported payment from the advertised $5,100 first-place prize.</p><p class=\"small-copy\">Companion published November 2, 2026. The video opens on YouTube; later tournament episodes are not published here yet.</p></article></div>")
+        else:
+            cards = ('<div class="poker-first-read"><p class="note-category">A starting point</p>'
+                     '<h3><a href="/poker/reviewing-a-hand/">Review a hand, not just the result.</a></h3>'
+                     '<p>A worked, clearly fictional hand shows how to keep the action, original thinking, and later analysis separate.</p>'
+                     '<p class="small-copy">No vlog episodes or tournament stories are published on this site yet. '
+                     'This guide and the study resources below are available now.</p></div>')
     return {'poker_collection': cards,
             'poker_hand_sheet': escape((root / 'downloads/poker-hand-review.md').read_text()),
             'poker_debrief_sheet': escape((root / 'downloads/poker-session-debrief.md').read_text())}
