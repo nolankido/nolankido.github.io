@@ -42,6 +42,7 @@ import player_find
 import search_sections
 import follow
 import manual_poker_feed
+import manual_local_ai_feed
 import search_visibility
 import practical_discovery
 import everyday_tasks
@@ -59,6 +60,7 @@ import case_evidence
 import time_examples
 import visibility_projects
 import player_sitemap
+import local_laptop_case
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -490,6 +492,7 @@ def build_outputs() -> dict[Path, str]:
             if p.get('updated') or p.get('date'):
                 ET.SubElement(item, 'lastmod').text = p.get('updated', p.get('date'))
     player_sitemap.add_to_sitemap(sitemap, ROOT)
+    local_laptop_case.add_to_sitemap(sitemap, ROOT)
     ET.indent(sitemap, space='  ')
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
     outputs.update(poker_collections.exports(resource_entries))
@@ -497,7 +500,7 @@ def build_outputs() -> dict[Path, str]:
     outputs[Path('downloads/poker-beginner-study-card.txt')] = poker_course.workbook(ROOT)
     outputs[Path('poker/feed.xml')] = manual_poker_feed.add(poker_content.feed(pages, site['url']), ROOT)
     outputs.update(living_well.exports(ROOT, site['url']))
-    outputs[practical_discovery.FEED] = practical_discovery.feed(practical_config, pages, outputs, site['url'])
+    outputs[practical_discovery.FEED] = manual_local_ai_feed.add(practical_discovery.feed(practical_config, pages, outputs, site['url']), ROOT)
     outputs[follow.OUTPUT] = follow.combined(outputs, pages, site['url'], ROOT)
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     outputs.update(public_profile.exports(site))

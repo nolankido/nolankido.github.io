@@ -31,7 +31,7 @@ class ManualPlayerSitemapTests(unittest.TestCase):
                 if node.tag.endswith('}loc')]
         self.assertEqual(urls.count(player_sitemap.URL), 1)
         self.assertEqual(len(urls), len(set(urls)))
-        self.assertEqual(len(urls), len([p for p in build.public_pages() if not p.get('noindex')]) + 2)
+        self.assertEqual(len(urls), len([p for p in build.public_pages() if not p.get('noindex')]) + 3)
         route = next(node for node in ET.fromstring(generated) if any(
             child.tag.endswith('}loc') and child.text == player_sitemap.URL for child in node))
         modified = [child.text for child in route if child.tag.endswith('}lastmod')]

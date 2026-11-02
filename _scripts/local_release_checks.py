@@ -39,6 +39,8 @@ def main() -> int:
         ('Deterministic build', ['_scripts/build.py', '--check']),
         ('Player profile build', ['_scripts/build_player_profile.py', '--check']),
         ('Portland video companion build', ['_scripts/build_poker_episode.py', '--check']),
+        ('Local laptop guide build', ['_scripts/build_local_laptop_case.py', '--check']),
+        ('Local laptop article and loopback contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_local_laptop_case.py', '-q']),
         ('Portland video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_portland_episode.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),

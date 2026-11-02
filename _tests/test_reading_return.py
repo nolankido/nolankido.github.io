@@ -12,6 +12,7 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import beginner_history
+import turn08_laptop_history
 import build
 import follow
 import poker_reading
@@ -50,7 +51,7 @@ class ReadingReturnTests(unittest.TestCase):
         self.assertFalse(any('notebook-or-ai' in url for url in self.combined))
 
     def test_source_feeds_are_byte_stable(self):
-        historical_outputs = beginner_history.outputs(self.outputs)
+        historical_outputs = beginner_history.outputs(turn08_laptop_history.outputs(self.outputs))
         baseline=json.loads((ROOT/'_tests/entrypoints-baseline.json').read_text())['files']
         import hashlib
         for path in follow.LEGACY_SOURCES:
@@ -77,8 +78,9 @@ class ReadingReturnTests(unittest.TestCase):
         outputs[Path('feed.xml')]=ET.tostring(tree,encoding='unicode')
         # Derived Technology copies use the same edited canonical source.
         import practical_discovery
+        import manual_local_ai_feed
         config=practical_discovery.load(ROOT,self.pages)
-        outputs[practical_discovery.FEED]=practical_discovery.feed(config,self.pages,outputs,'https://nolankido.com')
+        outputs[practical_discovery.FEED]=manual_local_ai_feed.add(practical_discovery.feed(config,self.pages,outputs,'https://nolankido.com'),ROOT)
         return outputs
 
     def test_duplicate_identity_collapses_but_conflicting_copy_fails(self):

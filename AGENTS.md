@@ -32,6 +32,16 @@ The Portland Meadows Episode 1 source has two stable firsthand decision sections
 
 The separately authored public Episode 1 appears once in `/poker/feed.xml` and once in `/writing.xml`. `_scripts/manual_poker_feed.py` adds that one source-validated RSS item, and `_scripts/follow.py` accepts it only when the standalone companion passes `poker_episode.record(root)`. Two hand sections do **not** create two article publication dates or separate feed items. For a local site update, run `python _scripts/build_poker_episode.py`, then `python _scripts/build.py`, then `python _scripts/local_release_checks.py`. Never use GitHub Actions, other recurring workflows, or paid external APIs.
 
+## Turn 8 local AI gaming-laptop article
+
+The original 3,000+ word practical guide lives at `_source/technology/local-ai-gaming-laptop.html`. Its independently compiled public URL is `/technology/local-ai-gaming-laptop/`, built with `python _scripts/build_local_laptop_case.py` and verified with `--check`. The separately owned source uses an existing Technology article shell, so do not add the page to the main manifest without a reviewed ownership migration. Run `python _scripts/build.py` to update sitemap, Find and feeds after approved source changes.
+
+The source-validated `_scripts/local_laptop_case.py` guards the canonical, shared Person `@id`, article date, native Technology-hub link, download, and explicit benchmark caveats. `downloads/local-ai-loopback-check.py` is an original local-only test with a synthetic prompt, a dry-run, a fixed `127.0.0.1` destination, rejected redirects and cloud model aliases. It does not download models or call a paid endpoint. Never change it to use remote endpoints or handle private client data by default.
+
+Existing October 2026 Gemma smoke results were recorded on a GitHub-hosted Ubuntu CPU runner, **not** on the MSI Crosshair gaming laptop. Do not transfer those timings to a laptop-speed claim. The article does not establish exact CPU/GPU/VRAM specs, energy use, profitability, or a current measured laptop run. Source links refer to official Ollama and LM Studio docs and pinned public project artifacts. Preserve original author privacy and do not expose system reports or internal file paths.
+
+The page is listed once in the existing sitemap, on-page Find index, Technology RSS and combined writing RSS, with a genuine 2026-11-02 publication date. Any future edits must preserve this coherent source-to-page-to-feed chain, and all tests are local-only. **Never use GitHub Actions or another scheduled CI workflow for this project.**
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.

@@ -17,6 +17,7 @@ import profile_sitemap_turn_history
 import player_find_turn_history
 import episode_turn06_history
 import turn07_hand_history
+import turn08_laptop_history
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS_WORKFLOW = '.github/workflows/site-checks.yml'
@@ -76,6 +77,7 @@ def digest(data):
 
 
 def before(path, data):
+    data = turn08_laptop_history.before(path, data)
     data = turn07_hand_history.before(path, data)
     data = episode_turn06_history.before(path, data)
     data = player_find_turn_history.before(path, data)
@@ -119,6 +121,7 @@ def _keep(path, data, additions):
 
 def outputs(records):
     """Rewind generated outputs, dropping only the exact added JSON-LD asset."""
+    records = turn08_laptop_history.outputs(records)
     records = turn07_hand_history.outputs(records)
     records = {path: episode_turn06_history.before(path, value) for path, value in records.items()}
     records = visibility_sprint_history.outputs(records)
@@ -128,6 +131,7 @@ def outputs(records):
 
 def source_records(records):
     """Rewind source/asset inventories without hiding altered additions."""
+    records = turn08_laptop_history.source_records(records)
     records = turn07_hand_history.source_records(records)
     records = episode_turn06_history.source_records(records)
     records = {path: episode_turn06_history.before(path, value) for path, value in records.items()}
@@ -140,6 +144,7 @@ def source_records(records):
 
 def files(paths):
     """Preserve input path types and only exclude known, exact later additions."""
+    paths = turn08_laptop_history.files(paths)
     paths = turn07_hand_history.files(paths)
     paths = episode_turn06_history.files(paths)
     paths = player_find_turn_history.files(paths)
@@ -157,6 +162,7 @@ def files(paths):
 
 def live_targets(records):
     """Restore the old target count without dropping an unrecognized response."""
+    records = turn08_laptop_history.live_targets(records)
     records = turn07_hand_history.live_targets(records)
     records = episode_turn06_history.live_targets(records)
     records = profile_sitemap_turn_history.live_targets(records)

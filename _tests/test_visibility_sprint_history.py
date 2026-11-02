@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import visibility_sprint_history as history
 import episode_turn06_history
 import turn07_hand_history
+import turn08_laptop_history
 import living_well_case_links_history as subsequent_changes
 
 
@@ -33,7 +34,7 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
         tree = subprocess.check_output(['git', 'rev-parse', history.PARENT + '^{tree}'], cwd=ROOT).decode().strip()
         self.assertEqual(self.record['parent_tree'], tree)
         self.assertEqual(len(self.record['parent_outputs']), 223)
-        current = {p: episode_turn06_history.before(p, turn07_hand_history.before(p, v)) for p, v in build.build_outputs().items()}
+        current = {p: episode_turn06_history.before(p, turn07_hand_history.before(p, turn08_laptop_history.before(p, v))) for p, v in build.build_outputs().items()}
         restored = history.outputs(current)
         actual = {str(path): history.digest(value) for path, value in restored.items()}
         self.assertEqual(actual, self.record['parent_outputs'])
@@ -41,7 +42,7 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
 
     def test_changed_files_restore_independently_captured_git_parent_bytes(self):
         for name, item in self.record['paths'].items():
-            raw = subsequent_changes.before(name, episode_turn06_history.before(name, turn07_hand_history.before(name, (ROOT / name).read_bytes())))
+            raw = subsequent_changes.before(name, episode_turn06_history.before(name, turn07_hand_history.before(name, turn08_laptop_history.before(name, (ROOT / name).read_bytes()))))
             original = subprocess.check_output(['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
             with self.subTest(path=name):
                 self.assertEqual(history.digest(raw), item['current_sha256'])
@@ -77,7 +78,7 @@ class VisibilitySprintHistoryTests(unittest.TestCase):
                     history.change()
             history.change.cache_clear()
         name = next(iter(self.record['paths']))
-        current = subsequent_changes.before(name, episode_turn06_history.before(name, turn07_hand_history.before(name, (ROOT / name).read_bytes())))
+        current = subsequent_changes.before(name, episode_turn06_history.before(name, turn07_hand_history.before(name, turn08_laptop_history.before(name, (ROOT / name).read_bytes()))))
         for field, value in [('parent_sha256', '0' * 64), ('parent_size', -1),
                              ('parent_zlib_base64', base64.b64encode(zlib.compress(b'wrong')).decode()),
                              ('parent_zlib_base64', 'not base64!')]:
