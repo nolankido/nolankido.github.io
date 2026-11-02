@@ -61,7 +61,7 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
 
 def render(items: list[dict]) -> str:
     groups = []
-    names = {'essay': 'Essay', 'guide': 'Guide', 'collection': 'Collection / reference', 'profile': 'Player profile'}
+    names = {'essay': 'Essay', 'guide': 'Guide', 'collection': 'Collection / reference', 'profile': 'Player profile', 'episode': 'Video companion'}
     for key, label in INTERESTS.items():
         group = [item for item in items if item['home'] == key]
         cards = []
