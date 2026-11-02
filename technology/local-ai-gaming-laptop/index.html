@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<!-- Local AI article: edit _source/technology/local-ai-gaming-laptop.html; build with _scripts/build_local_laptop_case.py. -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Running Local AI on a Gaming Laptop | Nolan Kido</title>
+  <meta name="description" content="A practical Windows guide to Ollama and LM Studio on an MSI gaming laptop: setup, privacy boundaries, repeatable tests, and what remains unmeasured.">
+  <meta name="theme-color" content="#111b16">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:site_name" content="Nolan Kido">
+  <meta property="og:title" content="Running Local AI on a Gaming Laptop | Nolan Kido">
+  <meta property="og:description" content="A practical Windows guide to Ollama and LM Studio on an MSI gaming laptop: setup, privacy boundaries, repeatable tests, and what remains unmeasured.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nolankido.com/technology/local-ai-gaming-laptop/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://nolankido.com/assets/social/practical-ai.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nolan Kido. Practical AI for real life. Useful tools, clear checks, and your judgment.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nolankido.com/assets/social/practical-ai.png">
+  <meta name="twitter:image:alt" content="Nolan Kido. Practical AI for real life. Useful tools, clear checks, and your judgment.">
+  <meta name="twitter:title" content="Running Local AI on a Gaming Laptop | Nolan Kido">
+  <meta name="twitter:description" content="A practical Windows guide to Ollama and LM Studio on an MSI gaming laptop: setup, privacy boundaries, repeatable tests, and what remains unmeasured.">
+  <link rel="canonical" href="https://nolankido.com/technology/local-ai-gaming-laptop/">
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Writing across the site" href="/writing.xml">
+  <link rel="alternate" type="application/rss+xml" title="Nolan Kido Notes" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/site-fonts.css?v=e5da049df0af">
+  <link rel="stylesheet" href="/assets/site-core.css?v=10383d71aabb">
+  
+  <meta property="article:published_time" content="2026-11-02">
+  <meta property="article:modified_time" content="2026-11-02">
+  <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Practical AI writing" href="/technology/feed.xml">
+  <link rel="stylesheet" href="/assets/page-sharing.css?v=2632f6372419">
+  <script defer src="/assets/page-sharing.js?v=3c95f5f6edcb"></script>
+  <link rel="stylesheet" href="/assets/visibility-projects.css?v=ffd10f910677">
+  <link rel="stylesheet" href="/assets/practical-discovery.css?v=e98c03c74139">
+  <link rel="stylesheet" href="/assets/workflow-evidence.css?v=971e2590f178">
+  <link rel="stylesheet" href="/assets/search-visibility.css?v=c5a767619d13">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "name": "Running Local AI on a Gaming Laptop | Nolan Kido", "url": "https://nolankido.com/technology/local-ai-gaming-laptop/", "description": "A practical Windows guide to Ollama and LM Studio on an MSI gaming laptop: setup, privacy boundaries, repeatable tests, and what remains unmeasured.", "isPartOf": {"@type": "WebSite", "@id": "https://nolankido.com/#website", "name": "Nolan Kido", "url": "https://nolankido.com/", "publisher": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}}, "headline": "Running local AI on an 18-inch gaming laptop.", "datePublished": "2026-11-02", "@id": "https://nolankido.com/technology/local-ai-gaming-laptop/#article", "inLanguage": "en-US", "author": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}, "publisher": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://nolankido.com/technology/local-ai-gaming-laptop/#webpage", "url": "https://nolankido.com/technology/local-ai-gaming-laptop/", "breadcrumb": {"@type": "BreadcrumbList", "@id": "https://nolankido.com/technology/local-ai-gaming-laptop/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nolankido.com/"}, {"@type": "ListItem", "position": 2, "name": "Technology", "item": "https://nolankido.com/technology/"}, {"@type": "ListItem", "position": 3, "name": "Running local AI on an 18-inch gaming laptop.", "item": "https://nolankido.com/technology/local-ai-gaming-laptop/"}]}}, "dateModified": "2026-11-02"}</script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="51bfd4d7-08ac-4299-924b-621af60fa7f1" data-domains="nolankido.com,www.nolankido.com" data-do-not-track="true" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body class="site-page page-local-ai-gaming-laptop">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-bar"><div class="shell"><a href="/">nolankido.com</a><span class="site-edition">Practical AI · A life beyond the screen</span><nav class="utility-navigation" aria-label="Site shortcuts"><a class="utility-find" href="/find/">Search</a><a class="utility-writing" href="/notes/">Writing</a><a class="utility-start" href="/start-here/">Start here</a></nav></div></div>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="Nolan Kido home"><span class="brand-mark" aria-hidden="true">NK</span><span>Nolan Kido</span></a>
+      <ul class="nav-links"><li><a href="/technology/" aria-current="location">Technology</a></li><li><a href="/living-well/">Living Well</a></li><li><a href="/poker/">Poker</a></li><li><a href="/creative/">Creative Work</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul>
+    </nav>
+  </header>
+  
+  <main id="main" class="ledger" tabindex="-1">
+<nav class="search-breadcrumb shell" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/technology/">Technology</a></li><li><span aria-current="page">Running local AI on an 18-inch gaming laptop.</span></li></ol></nav>
+    <section class="page-hero shell"><p class="page-kicker">Technology / Local AI / Windows</p><h1 class="page-title">Running local AI on an 18-inch gaming laptop.</h1><p class="note-meta">Published <time datetime="2026-11-02">November 2, 2026</time> · Practical guide · No measured laptop benchmark</p><p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · <a href="/start-here/#reading-this-site">About this writing</a></p></section>
+<article class="local-laptop-case" aria-labelledby="local-laptop-intro">
+<section class="section folio-row" aria-labelledby="local-laptop-intro">
+  <div class="section-meta"><p class="section-label">Local AI / Windows / Practical workflow</p></div>
+  <div class="section-content prose">
+    <h2 id="local-laptop-intro">Why I run local AI on a gaming laptop.</h2>
+    <p class="intro">I use an 18-inch MSI Crosshair Windows gaming laptop as a practical place to explore local language models, software tools, and experiments. A machine I already use gives me a way to learn what can run under my control without first designing a cloud service. But a gaming laptop is not automatically a private, cheap, or fast AI workstation. Those are separate questions that need checks.</p>
+    <p>The useful distinction is between <strong>where inference runs</strong>, <strong>which data an application sends elsewhere</strong>, <strong>what a model can do well enough</strong>, and <strong>the full cost of the work</strong>. I use those distinctions to decide when to keep a task local and when a hosted service is more sensible.</p>
+    <p><strong>Evidence disclosure:</strong> This is a firsthand description of my approach and a reproducible Windows setup guide. I am not publishing an inventory of my exact laptop GPU, VRAM, RAM, model downloads, personal directory structure, or private usage logs. I have not run a new timed model benchmark on that laptop for this article. The public model-test figures cited below came from a different, clearly identified computer.</p>
+    <nav class="entry-jumps" aria-label="On this local AI guide"><a href="#laptop-hardware">Inspect the hardware</a><a href="#laptop-ollama">Try Ollama</a><a href="#laptop-studio">Compare LM Studio</a><a href="#laptop-measure">Run a bounded local test</a><a href="#laptop-evidence">See the real evidence</a><a href="#laptop-decision">Choose what stays human</a></nav>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-purpose">
+  <div class="section-meta"><p class="section-label">Question / Fit</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-purpose">Start with a task, not a model leaderboard.</h2>
+    <p>A local model is useful only when it can complete a specific, permitted task to an acceptable quality level. I look for bounded work: drafting a short response from a fictional customer review, turning public notes into an organized checklist, suggesting labels for a personal research document, or helping explain a narrow programming error. These are tasks where inputs, expected output, and acceptance rules can be written down.</p>
+    <p>I do not begin with the assumption that a larger model is better. A small model that consistently preserves three required facts can be more useful than a much larger model that consumes more memory and gives a polished answer I must rewrite. Likewise, a task that needs reliable current facts, licensed source material, or specialized professional review may require different tools or no AI at all.</p>
+    <p>My rule is to specify a <strong>finish line</strong> first: Which facts must survive? What would make the output unusable? How will I check its quality? Who may approve it? For a practical example of these boundaries in a real open-source application, read <a href="/technology/local-ai-review-replies/">Review Reply Writer</a>. Its owner-review workflow separates generating text from authorizing business promises and from actually publishing anything.</p>
+    <p>A useful first trial also has a non-AI baseline. If I can produce the same result with a template, a small script, or a regular search more reliably, local inference may simply add another system to maintain.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-hardware">
+  <div class="section-meta"><p class="section-label">Hardware / Honest inventory</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-hardware">An 18-inch laptop is a form factor, not a performance result.</h2>
+    <p>My primary machine is an MSI Crosshair 18 running Windows 11. The large screen is convenient for comparing source material, generated text, a terminal, and a code editor. Gaming hardware can also offer graphics acceleration useful for certain local inference runtimes. That description alone does not establish what model fits in GPU memory or how many tokens per second it will generate.</p>
+    <p>MSI has sold different Crosshair 18 configurations. Their memory, graphics processors, available VRAM, power limits, and thermal behavior are not interchangeable. Rather than publishing a guessed specification, I would record the actual SKU, available system RAM, GPU name and dedicated memory, free disk space, driver version, plugged-in power mode, and cooling condition for each repeatable test.</p>
+    <p>On a Windows machine, the following commands provide a reasonable starting inventory. They are local reads, not benchmarks, and the results may contain a computer name or other identifying text. <strong>Do not paste unredacted hardware inventories into public issues or a website.</strong></p>
+    <pre><code>Get-CimInstance Win32_ComputerSystem |
+  Select-Object TotalPhysicalMemory
+Get-CimInstance Win32_VideoController |
+  Select-Object Name, AdapterRAM
+Get-PSDrive C
+nvidia-smi</code></pre>
+    <p><code>nvidia-smi</code> applies only when a supported NVIDIA GPU and driver are present. Windows' <code>AdapterRAM</code> value is not a dependable universal measure of usable GPU memory, especially on some driver configurations. Verify VRAM against the installed device and actual runtime allocation rather than treating one WMI field as a hard capacity.</p>
+    <p>Model <em>parameters</em> are not equivalent to memory requirements. Quantization, context length, runtime buffers, KV cache, CPU offloading, concurrent requests, and other applications all affect memory use. If a model loads by spilling to system RAM, the program may work yet feel slow. If the cooling system throttles or the laptop runs on battery, results may be different from a plugged-in session.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-ollama">
+  <div class="section-meta"><p class="section-label">Walkthrough / Ollama</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-ollama">One local inference path with Ollama on Windows.</h2>
+    <p>Ollama is a convenient route when I want a command-line model and a local HTTP endpoint that another script can call. Install it from the <a href="https://ollama.com/download/windows">official Windows download page</a>, read the installer and system requirements, and confirm its executable is available. Do not run an unfamiliar script copied from a forum with administrator rights.</p>
+    <p>In PowerShell, check the installation and installed models:</p>
+    <pre><code>ollama --version
+ollama list</code></pre>
+    <p>If the model below is appropriate for your hardware, licensing constraints, and intended use, download it deliberately. A model download requires internet access and disk space; this is not an offline action. The model name is a <em>reproducible example</em>, not a claim that it is the best model or the one currently loaded on my laptop.</p>
+    <pre><code>ollama pull gemma3:4b
+ollama run gemma3:4b</code></pre>
+    <p>Ollama's documented local API typically listens on <code>http://localhost:11434</code>. Confirm it is a local model and local endpoint before calling it. A simple interactive chat proves only that the model can produce an answer. It does not test privacy, quality, throughput stability, or whole-task time. For the API shape and current options, read the <a href="https://docs.ollama.com/api/generate">official Generate endpoint reference</a>.</p>
+    <p>I prefer to first run a <strong>fixed, fictional input</strong>. Real client material, patient information, company credentials, and unpublished manuscripts should not enter this trial. They also should not be pasted into logs just because a process is described as local.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-studio">
+  <div class="section-meta"><p class="section-label">Alternative / LM Studio</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-studio">A visual local workspace with LM Studio.</h2>
+    <p>LM Studio is helpful when I want to compare downloaded models through a desktop interface, inspect settings, and expose a local server without writing a complete application. It supports Windows and documented OpenAI-compatible local API endpoints. Download the software and models from approved sources, review the model license and storage footprint, and load a model that fits the actual machine.</p>
+    <p>After selecting a model, the local server can be started from LM Studio's Developer controls or, with its CLI installed, through PowerShell:</p>
+    <pre><code>lms server start --port 1234
+Invoke-RestMethod http://127.0.0.1:1234/v1/models</code></pre>
+    <p>The second command lists models visible to that server. It does not infer a model's quality or guarantee which model is loaded. For requests from a script, use the identifier actually reported by your server, not a guessed model name. See <a href="https://lmstudio.ai/docs/developer/openai-compat">LM Studio's compatibility endpoint reference</a> and <a href="https://lmstudio.ai/docs/developer/core/server">server instructions</a>.</p>
+    <p>For an offline session, download the model and any required runtime first. LM Studio documents that local chat, document interaction, and local inference can operate without internet; searching for or downloading models and checking for updates can involve network access. An installed desktop app is not proof that every optional plugin, tool, cloud model, or integration is offline. Consult <a href="https://lmstudio.ai/docs/app/offline">its offline-operation documentation</a>.</p>
+    <p>I do not leave a model server listening on the public network by default. Keep binding to the loopback address, avoid enabling public-network serving or permissive CORS without an explicit need, and secure any remotely accessible server. Loopback is a meaningful boundary, not an absolute security guarantee for a compromised device.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-measure">
+  <div class="section-meta"><p class="section-label">Repeat / Check / Record</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-measure">A small local test anyone can rerun, without inventing results.</h2>
+    <p>I have included an original standard-library Python script, <a href="/downloads/local-ai-loopback-check.py" download>download the loopback test (.py)</a>. Its only possible model request is a POST to <code>127.0.0.1</code> on a validated local port. It cannot choose a remote API endpoint, download a model, upload local files, or authorize a purchase. The prompt is a fixed fictional note, so no real customer or book data is required.</p>
+    <p>Start with the dry run. It validates the command and reports empty measurement fields. It does <strong>not</strong> pretend that the model ran.</p>
+    <pre><code>py -3 downloads/local-ai-loopback-check.py --dry-run</code></pre>
+    <p>Only after separately installing Ollama and downloading the named model, make an explicit local call:</p>
+    <pre><code>py -3 downloads/local-ai-loopback-check.py --model gemma3:4b</code></pre>
+    <p>This script prints a small JSON record with the model name, a fingerprint of the fixed prompt, measured request wall time, and token-generation counters if the runtime returns them. It records a hash of the generated text instead of echoing the output. A matching output hash is not a quality score. <strong>Human quality review remains marked not performed</strong> until someone examines the actual response against the expected facts and independently records the judgment.</p>
+    <p>The code has a safe <code>--dry-run</code> mode that I tested without a model. A mocked loopback response also exercised the request, fixed prompt, and token-rate calculation. <strong>I did not run it on my gaming laptop for this publication.</strong> I am not asserting a real 2026 laptop measurement, even if another public benchmark happens to use a similarly named model.</p>
+    <p><strong>What to save privately after a real session:</strong> model and exact digest, runtime and driver versions, measured RAM and VRAM, quantization, context limit, prompt fingerprint, temperature, response token limit, cold versus warm runs, wall time, generation time, number of output tokens, manual quality result, and notable errors. Do not upload real prompt contents when a fingerprint and a reviewable redacted sample will do.</p>
+    <p>If a command fails, preserve the error category and configuration rather than assigning a zero duration. A failed load, an API timeout, a truncated answer, and an answer containing wrong facts are four distinct outcomes.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-evidence">
+  <div class="section-meta"><p class="section-label">Recorded run / Different computer</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-evidence">What existing public evidence actually shows.</h2>
+    <p>The strongest openly inspectable model record associated with my existing projects is a <a href="/technology/local-ai-test-record/">historical Review Reply Writer test</a>. It ran Gemma through Ollama for three fictional reviews on an <strong>Ubuntu CPU runner hosted by GitHub</strong> on October 13, 2026. It did not run on the MSI laptop described above. The retained case times were 19.536 seconds, 18.157 seconds, and 19.325 seconds. These are whole selected case elapsed times under the recorded runner conditions, not laptop throughput or human time saved.</p>
+    <div class="project-table-scroll" role="region" aria-label="Public local-model evidence and unmeasured laptop results" tabindex="0">
+      <table><caption>Do not mix different machines or different definitions of success</caption>
+        <thead><tr><th scope="col">Evidence</th><th scope="col">What is known</th><th scope="col">What is not established</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Historical Gemma smoke run</th><td>Three selected fictional inputs generated responses on a remote GitHub-hosted Ubuntu CPU runner using a loopback Ollama process</td><td>MSI laptop speed, hardware energy use, general quality, or a hosted-model comparison</td></tr>
+          <tr><th scope="row">Later template-mode quality lab</th><td>30 synthetic inputs, 29 template drafts and one style-length block, with zero model calls</td><td>A local-model quality score or AI generation throughput</td></tr>
+          <tr><th scope="row">This gaming laptop article</th><td>Documented setup, example commands, privacy boundaries, and an original offline-safe test utility</td><td>New measured laptop latency, tokens per second, productivity savings, or operating cost</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-quality-smoke-2026-10-13.json">saved three-case JSON</a> and <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/REPLY_QUALITY_RESULTS.md">its evaluation notes</a> allow those historical claims to be inspected. They also expose limits: automated checks can miss an important detail and do not replace human acceptance. The <a href="/technology/local-ai-review-replies/">project case</a> shows how the final business decision stays with the human operator.</p>
+    <p>It would be tempting to copy 19-second figures into a chart titled “My laptop running local AI.” That would be false. The machine, runtime, model digest and benchmark protocol must match before two numbers can be compared. For this article, the missing laptop measurements remain explicitly <strong>unmeasured</strong>.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-privacy">
+  <div class="section-meta"><p class="section-label">Security / Boundaries</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-privacy">Local processing changes the privacy question, but does not end it.</h2>
+    <p>A model doing inference on a local machine can reduce the need to send prompts to a remote model provider. But that does not establish that the <em>whole workflow</em> is private. The application may check for updates, retrieve models, fetch websites, contact remote plugins, load cloud extensions, write logs, or expose an API beyond the local machine. A model can also generate a dangerous command, even when it is running without internet.</p>
+    <p>I use a simple threat checklist before calling a workflow private: Which executable and model files did I obtain? Is the serving address really <code>127.0.0.1</code> or localhost? Is the selected model local rather than a cloud alias? Does any tool have web, filesystem, email, or shell permissions? Which files can it read? Where does it store transcripts, embeddings and crash logs? Could another process on this computer reach the same service?</p>
+    <p>“No remote model API charge” is narrower than “no network access.” Software updates, model downloads, or a network-enabled tool can still use connections. And “no connection” is narrower than “safe.” A model that invents an invoice number, leaks confidential text to a local log, or suggests overwriting a folder still needs a human check and technical permissions.</p>
+    <p>For sensitive business, patient, client or other regulated data, follow the relevant organization's authorization and security requirements; a consumer local model is not automatically approved for that data. I use public or synthetic examples in this article. I do not publish private client material or my machine's private paths as proof of local operation.</p>
+    <p>If a second computer needs access, that becomes a separate security design. Explicit authentication, encrypted transport where applicable, access controls, and a deliberate threat model matter. Do not change the server to <code>0.0.0.0</code> just to make a quick demo work. See <a href="https://lmstudio.ai/docs/developer/core/server/serve-on-network">LM Studio's network-serving warnings</a>.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-tradeoffs">
+  <div class="section-meta"><p class="section-label">Cost / Hardware / Judgment</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-tradeoffs">The real comparison is the cost of a finished, reviewed task.</h2>
+    <p>Local inference may eliminate a per-request model fee for an already downloaded local model. That does not make the work free. The hardware was purchased, electricity is consumed, storage and maintenance have costs, and a person must install, prompt, inspect, repair and approve results. Using a local model slowly is not automatically cheaper than a hosted model finishing quickly, and a hosted model may require account terms or paid usage the user does not want.</p>
+    <p>I distinguish five numbers rather than compressing them into “AI cost”: up-front setup time; marginal machine work and electricity; model waiting time; human verification and rework; and the quality of the final outcome. For electricity, a measured energy figure in kilowatt-hours multiplied by the applicable electricity rate yields an energy estimate. Without a wall-power measurement, neither laptop energy use nor total savings should be filled with a guess.</p>
+    <p>For speed, I separate cold starts from warmed-up runs. I would test the same public prompt at least several times after a deliberate setup, record errors and median elapsed time, and also report a generation-only token rate where the runtime exposes a trustworthy count and duration. Comparing those figures with cloud timings requires matching prompts, hardware/configuration notes, network conditions, and output quality. A raw token rate is not a productivity finding.</p>
+    <p>The <a href="/technology/ai-time-savings/">whole-task time calculator</a> is useful for thinking about this distinction. It models setup, production, review and upkeep with the same quality threshold. I would use it only with measurements or clearly labeled scenarios, never to turn a hypothetical gain into an observed success.</p>
+    <p><strong>When I would not choose local:</strong> the model cannot reliably meet the quality standard; the task needs current authorized external data; downloads or GPU memory are limiting; the device is not available; maintenance consumes more attention than the work saves; or a simpler non-AI process does the job. Choosing not to run a model is a legitimate result of the experiment.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-troubleshoot">
+  <div class="section-meta"><p class="section-label">Practical problems / Repairs</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-troubleshoot">What to check when the local workflow disappoints.</h2>
+    <dl>
+      <dt><strong>The model will not load.</strong></dt><dd>Check the exact model identifier and whether the weights were actually downloaded. Confirm available disk, RAM and GPU memory. Reduce context or choose a smaller, appropriately licensed model before blaming the application. Do not extrapolate from one hardware SKU to another.</dd>
+      <dt><strong>The request cannot connect.</strong></dt><dd>Confirm the runtime is running, use the correct local port, and check whether another process owns it. Check the Windows firewall and local security software. Do not expose a public bind address to work around a loopback misconfiguration.</dd>
+      <dt><strong>The response is slow or inconsistent.</strong></dt><dd>Record model loading separately from generation, inspect actual device allocation, power mode, thermals, context length, and competing programs. Test a fixed public input with controlled settings. A faster response that omits essential details is not an improvement.</dd>
+      <dt><strong>The answer sounds polished but changes a fact.</strong></dt><dd>Compare the response to the supplied source and mark missing or invented details. Try a narrower prompt, require explicit uncertainty, or use a conventional template. Human review is not an optional final decoration.</dd>
+      <dt><strong>Offline behavior is uncertain.</strong></dt><dd>Review the specific runtime's cloud settings, active tools, remote integrations, updates, and outbound connections. A browser showing a loopback URL is not a complete network or security audit.</dd>
+      <dt><strong>The download takes more effort than the job.</strong></dt><dd>Stop and reconsider the task. A local LLM is a tool, not a permanent obligation. Use a smaller model, do the task manually, or defer the experiment.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="laptop-decision">
+  <div class="section-meta"><p class="section-label">AI Works Human Decides / Conclusion</p></div>
+  <div class="section-content prose">
+    <h2 id="laptop-decision">The laptop gives me options. The evidence decides whether they are useful.</h2>
+    <p>Using my Windows gaming laptop for local AI is about control and the ability to inspect a complete small workflow. It lets me try a model without making each experiment depend on a remote inference call, and it makes failures visible while I am still learning. That is valuable even if the final answer sometimes comes from a simpler tool.</p>
+    <p>The proof I want is not a screenshot of a model answering a clever question. It is a record of the actual source, selected model, settings, human acceptance checks, failures, and complete cost of the finished task. My public Review Reply Writer records show one way to preserve that trail. The download here supplies a safe starting point for collecting a new laptop-specific one, without inventing the results first.</p>
+    <p><strong>AI Works Human Decides</strong> means the model can draft or organize, but I remain responsible for whether the information is faithful, whether any action is authorized, and whether the whole process was worthwhile. A faster answer is not automatically a better decision.</p>
+    <p><a href="/technology/local-ai-test-record/">Inspect the public historical model record</a> · <a href="/technology/local-ai-review-replies/">See the local review-reply project</a> · <a href="/technology/check-ai-answers/">Check an AI answer</a> · <a href="/about/">About Nolan Kido</a>.</p>
+    <p class="editorial-note">Original explanatory article prepared with AI assistance, reviewed November 2, 2026. Technical runtime behavior cited from vendor documentation; historical application data linked to pinned public project records. No new laptop model run, power measurement, hosted comparison, cost audit, external upload, or confidential-data processing was performed for this publication. This article contains no paid API integration.</p>
+  </div>
+</section>
+</article>
+  </main>
+  <footer>
+    <div class="shell footer-row">
+      <span class="footer-identity">© 2026 Nolan Kido</span>
+      <nav class="footer-links" aria-label="Footer navigation"><a href="/technology/">Technology</a><a href="/living-well/">Living Well</a><a href="/poker/">Poker</a><a href="/creative/">Creative Work</a><a href="/notes/">Writing</a><a href="/resources/">Resources</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/follow/">Follow writing</a></nav>
+    </div>
+    <p class="footer-types identity-footer">Build useful things. Make room for a good life. <a href="/start-here/#reading-this-site">About the writing on this site</a>.</p>
+  </footer>
+</body>
+</html>
