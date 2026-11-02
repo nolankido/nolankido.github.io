@@ -13,6 +13,7 @@ from xml.etree import ElementTree as ET
 
 from search_visibility import LEGACY_FEED_IDS
 import poker_episode
+import local_laptop_case
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -37,6 +38,14 @@ def combined(outputs: dict, pages: list[dict], origin: str, root: Path | None = 
         published[manual['url']] = {
             'id': 'manual-public-episode', 'path': manual['route'],
             'date': manual['date'], 'noindex': False,
+        }
+    laptop = local_laptop_case.record(approved_root)
+    if laptop is not None:
+        if laptop['url'] in published:
+            raise ValueError('Manual local AI guide must not duplicate a manifest page')
+        published[laptop['url']] = {
+            'id': 'manual-local-ai-guide', 'path': laptop['path'],
+            'date': laptop['date'], 'noindex': False,
         }
     items = {}
     for path in SOURCES:
