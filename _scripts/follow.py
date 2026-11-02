@@ -12,6 +12,9 @@ from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
 from search_visibility import LEGACY_FEED_IDS
+import poker_episode
+
+ROOT = Path(__file__).resolve().parents[1]
 
 LEGACY_SOURCES = (Path('feed.xml'), Path('living-well/feed.xml'), Path('poker/feed.xml'))
 SOURCES = (*LEGACY_SOURCES, Path('technology/feed.xml'))
@@ -19,13 +22,22 @@ OUTPUT = Path('writing.xml')
 ATOM = 'http://www.w3.org/2005/Atom'
 
 
-def combined(outputs: dict, pages: list[dict], origin: str) -> str:
+def combined(outputs: dict, pages: list[dict], origin: str, root: Path | None = None) -> str:
     parsed_origin = urlsplit(origin)
     if parsed_origin.scheme != 'https' or not parsed_origin.netloc or parsed_origin.path or parsed_origin.query or parsed_origin.fragment:
         raise ValueError('Combined feed requires a canonical HTTPS origin')
     published = {origin + p['path']: p for p in pages}
     if len(published) != len(pages):
         raise ValueError('Feed manifest contains duplicate routes')
+    approved_root = ROOT if root is None else root
+    manual = poker_episode.record(approved_root)
+    if manual is not None:
+        if manual['url'] in published:
+            raise ValueError('Manual Poker episode must not duplicate a manifest page')
+        published[manual['url']] = {
+            'id': 'manual-public-episode', 'path': manual['route'],
+            'date': manual['date'], 'noindex': False,
+        }
     items = {}
     for path in SOURCES:
         rss = ET.fromstring(outputs[path])
