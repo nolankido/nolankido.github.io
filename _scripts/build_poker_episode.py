@@ -2,7 +2,7 @@
 """Build the public Portland Meadows vlog companion without changing the main site generator.
 
 The main website build owns its manifest pages. This separately owned public
-profile intentionally does not carry its Generated marker. It inherits the
+companion intentionally does not carry its Generated marker. It inherits the
 current published Poker shell and is checked locally, never with GitHub Actions.
 """
 from __future__ import annotations
@@ -75,7 +75,7 @@ def render() -> str:
     prefix = prefix.replace('href="/poker/" aria-current="page"',
                             'href="/poker/" aria-current="location"')
     prefix = replace_once(prefix, '<meta property="og:type" content="website">', '<meta property="og:type" content="article">')
-    prefix = replace_once(prefix, '  <script type="application/ld+json">', '  <meta property="article:published_time" content="2026-11-02">\\n  <meta property="article:modified_time" content="2026-11-02">\\n  <script type="application/ld+json">')
+    prefix = replace_once(prefix, '  <script type="application/ld+json">', '  <meta property="article:published_time" content="2026-11-02">\n  <meta property="article:modified_time" content="2026-11-02">\n  <script type="application/ld+json">')
     pattern = r'<script type="application/ld\+json">(.*?)</script>'
     match = re.search(pattern, prefix, flags=re.S)
     if match is None or len(re.findall(pattern, prefix, flags=re.S)) != 1:
