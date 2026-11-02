@@ -26,6 +26,12 @@ The public `/poker/nolan-kido/` page has its own deterministic local builder bec
 
 The first public episode uses the source file `_source/poker/portland-meadows-ep1.html` and the independently compiled `/poker/episodes/portland-meadows-ep1/index.html`. Build it locally using `python _scripts/build_poker_episode.py`, then check it with `--check`. The source-validated `_scripts/poker_episode.py` registry allows the Poker hub to advertise the video only when the exact source and canonical Article page exist, and links to the public YouTube video without an iframe. The existing sitemap and on-site Find index include only this verified manual video route. Chapter timestamps reflect the public version 7 edit map and must be reviewed if the video changes. Do not publish unverified scenes, payouts, opponent identities, videos or private drafts. Keep the four-way deal's actual reported $2,900 payment distinct from the $5,100 advertised top prize. Preserve manual page ownership until the main generator has a reviewed migration path. Never use GitHub Actions for release tests.
 
+## Narrated hand records and RSS
+
+The Portland Meadows Episode 1 source has two stable firsthand decision sections, `#hand-64o-record` and `#hand-77-record`. Those records distinguish facts stated in the public video, the author's retrospective account of a read, independently checkable big-blind arithmetic, and missing inputs that prevent a verified solver or ICM conclusion. The event calendar date is not independently established from the public footage, so do not invent one. Link to the released chapter timestamps, but keep private scripts, opponent names, unsupported card suits, confidential finances, and unfinished footage out of the public site.
+
+The separately authored public Episode 1 appears once in `/poker/feed.xml` and once in `/writing.xml`. `_scripts/manual_poker_feed.py` adds that one source-validated RSS item, and `_scripts/follow.py` accepts it only when the standalone companion passes `poker_episode.record(root)`. Two hand sections do **not** create two article publication dates or separate feed items. For a local site update, run `python _scripts/build_poker_episode.py`, then `python _scripts/build.py`, then `python _scripts/local_release_checks.py`. Never use GitHub Actions, other recurring workflows, or paid external APIs.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
