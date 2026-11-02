@@ -20,6 +20,7 @@ import build
 import check_live
 import follow
 import practical_discovery as discovery
+import manual_local_ai_feed
 import time_export_history
 import visibility_sprint_history
 
@@ -63,6 +64,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
         items = tree.findall('./channel/item')
         expected = {'https://nolankido.com/notes/' + s + '/' for s in self.config['note_ids']}
         expected.update('https://nolankido.com' + page['path'] for page in discovery.articles(self.pages))
+        expected.add('https://nolankido.com/technology/local-ai-gaming-laptop/')
         self.assertEqual({i.findtext('link') for i in items}, expected)
         self.assertEqual(len(items), len(expected))
         historical = records(visibility_sprint_history.before(discovery.FEED, self.outputs[discovery.FEED]))
@@ -85,7 +87,7 @@ class PracticalDiscoveryTests(unittest.TestCase):
                     source='technology/second-case.html')
         pages.append(case)
         outputs = dict(self.outputs)
-        outputs[discovery.FEED] = discovery.feed(self.config, pages, outputs, 'https://nolankido.com')
+        outputs[discovery.FEED] = manual_local_ai_feed.add(discovery.feed(self.config, pages, outputs, 'https://nolankido.com'), ROOT)
         combined = follow.combined(outputs, pages, 'https://nolankido.com')
         self.assertEqual(len(records(combined)), len(records(self.outputs[follow.OUTPUT])) + 1)
         self.assertIn('href="/technology/second-case/"', discovery.article_cards(pages))
