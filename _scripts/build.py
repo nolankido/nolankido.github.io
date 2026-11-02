@@ -59,6 +59,7 @@ import case_evidence
 import time_examples
 import visibility_projects
 import player_sitemap
+import local_laptop_case
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source'
@@ -490,6 +491,7 @@ def build_outputs() -> dict[Path, str]:
             if p.get('updated') or p.get('date'):
                 ET.SubElement(item, 'lastmod').text = p.get('updated', p.get('date'))
     player_sitemap.add_to_sitemap(sitemap, ROOT)
+    local_laptop_case.add_to_sitemap(sitemap, ROOT)
     ET.indent(sitemap, space='  ')
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
     outputs.update(poker_collections.exports(resource_entries))
