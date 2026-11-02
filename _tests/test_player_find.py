@@ -35,10 +35,10 @@ class PlayerFindTests(unittest.TestCase):
         self.assertEqual(entry['date'], '')
         self.assertIn('WSOP', entry['description'])
         self.assertIn('tournament poker', entry['description'])
-        self.assertEqual(len(self.items), len(self.manifest_items) + 2)
+        self.assertEqual(len(self.items), len(self.manifest_items) + 3)
         self.assertNotIn(player_sitemap.ROUTE, {p['path'] for p in self.pages})
         self.assertEqual({p['path'] for p in self.items},
-                         {p['path'] for p in self.manifest_items} | {player_sitemap.ROUTE, '/poker/episodes/portland-meadows-ep1/'})
+                         {p['path'] for p in self.manifest_items} | {player_sitemap.ROUTE, '/poker/episodes/portland-meadows-ep1/', '/technology/local-ai-gaming-laptop/'})
 
     def test_existing_find_groups_and_progressive_filter_remain(self):
         html = self.rendered
