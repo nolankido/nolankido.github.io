@@ -77,8 +77,9 @@ class ReadingReturnTests(unittest.TestCase):
         outputs[Path('feed.xml')]=ET.tostring(tree,encoding='unicode')
         # Derived Technology copies use the same edited canonical source.
         import practical_discovery
+        import manual_local_ai_feed
         config=practical_discovery.load(ROOT,self.pages)
-        outputs[practical_discovery.FEED]=practical_discovery.feed(config,self.pages,outputs,'https://nolankido.com')
+        outputs[practical_discovery.FEED]=manual_local_ai_feed.add(practical_discovery.feed(config,self.pages,outputs,'https://nolankido.com'),ROOT)
         return outputs
 
     def test_duplicate_identity_collapses_but_conflicting_copy_fails(self):
