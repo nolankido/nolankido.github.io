@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>Portland Meadows Ep1: From 6.5 BB to a Trophy | Nolan Kido</title>
+      <link>https://nolankido.com/poker/episodes/portland-meadows-ep1/</link>
+      <description>Nolan Kido's Portland Meadows poker-vlog episode: the short-stack comeback, 6-4 versus A-K, sevens versus A-T, four-way deal and official trophy.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/episodes/portland-meadows-ep1/</guid>
+      <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
     <item>
       <title>Using AI to check continuity across a book series.</title>
       <link>https://nolankido.com/technology/ai-book-continuity-checker/</link>
