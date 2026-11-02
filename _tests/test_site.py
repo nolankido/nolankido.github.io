@@ -110,6 +110,9 @@ class SiteTests(unittest.TestCase):
         episode = build.player_sitemap.poker_episode.record(ROOT)
         if episode is not None:
             expected.add(episode['url'])
+        laptop = build.local_laptop_case.record(ROOT)
+        if laptop is not None:
+            expected.add(laptop['url'])
         self.assertEqual(set(urls), expected)
         self.assertEqual(len(urls), len(set(urls)))
         self.assertNotIn('https://nolankido.com/404.html', urls)
