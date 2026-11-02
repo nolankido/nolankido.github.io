@@ -35,7 +35,7 @@ class PlayerFindTests(unittest.TestCase):
         self.assertEqual(entry['date'], '')
         self.assertIn('WSOP', entry['description'])
         self.assertIn('tournament poker', entry['description'])
-        self.assertEqual(len(self.items), len(self.manifest_items) + 3)
+        self.assertEqual(len(self.items), len(self.manifest_items) + 4)
         self.assertNotIn(player_sitemap.ROUTE, {p['path'] for p in self.pages})
         self.assertEqual({p['path'] for p in self.items},
                          {p['path'] for p in self.manifest_items} | {player_sitemap.ROUTE, '/poker/episodes/portland-meadows-ep1/', '/technology/local-ai-gaming-laptop/'})
