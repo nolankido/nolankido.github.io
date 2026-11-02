@@ -17,6 +17,7 @@ import build
 import public_identity
 import player_sitemap
 import poker_episode
+import local_laptop_case
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -83,6 +84,14 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     if approved_episode is not None:
         expected_indexed.add(approved_episode['url'])
         totals['manual_episode_pages'] += 1
+    try:
+        laptop = local_laptop_case.record(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append('Manual local AI guide: ' + str(exc))
+        laptop = None
+    if laptop is not None:
+        expected_indexed.add(laptop['url'])
+        totals['manual_laptop_guides'] += 1
     sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
     actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):
