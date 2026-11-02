@@ -46,7 +46,11 @@ class PokerContentTests(unittest.TestCase):
     def test_empty_catalog_has_real_reader_paths(self):
         result=build.build_outputs()[Path('poker/index.html')]
         if not pc.load(ROOT)['entries']:
-            self.assertIn('No vlog episodes or tournament stories are published on this site yet.',result)
+            if (ROOT / 'poker/episodes/portland-meadows-ep1/index.html').is_file():
+                self.assertIn('Portland Meadows Episode 1: From 6.5 big blinds to a trophy', result)
+                self.assertNotIn('No vlog episodes or tournament stories are published on this site yet.', result)
+            else:
+                self.assertIn('No vlog episodes or tournament stories are published on this site yet.', result)
         for route in ['/poker/start-here/','/poker/study/','/poker/reviewing-a-hand/','/poker/feed.xml']:
             self.assertIn(route,result)
         self.assertNotIn('<iframe',result)
