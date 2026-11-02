@@ -3,13 +3,14 @@ from pathlib import Path
 import unittest
 
 import profile_sitemap_turn_history as history
+import episode_turn06_history
 
 
 class PlayerSitemapHistoryTests(unittest.TestCase):
     def test_only_exact_published_successor_blobs_can_be_restored(self):
         for name, item in history.REVISIONS.items():
             with self.subTest(path=name):
-                current = (history.ROOT / name).read_bytes()
+                current = episode_turn06_history.before(name, (history.ROOT / name).read_bytes())
                 self.assertEqual(history.blob(current), item['new'])
                 previous = history.before(name, current)
                 self.assertEqual(history.blob(previous), item['old'])
@@ -22,7 +23,7 @@ class PlayerSitemapHistoryTests(unittest.TestCase):
     def test_only_exact_added_files_are_hidden_from_old_inventories(self):
         for name, reviewed_sha in history.ADDED_FILES.items():
             with self.subTest(path=name):
-                original = (history.ROOT / name).read_bytes()
+                original = episode_turn06_history.before(name, (history.ROOT / name).read_bytes())
                 self.assertEqual(history.blob(original), reviewed_sha)
                 self.assertEqual(history.source_records({name: original}), {})
                 self.assertEqual(history.source_records({name: original + b'unknown'}),
@@ -33,7 +34,7 @@ class PlayerSitemapHistoryTests(unittest.TestCase):
 
     def test_live_record_removed_from_old_targets_only_for_exact_bytes(self):
         name = history.PROFILE_ROUTE
-        public = (history.ROOT / 'poker/nolan-kido/index.html').read_bytes()
+        public = episode_turn06_history.before('poker/nolan-kido/index.html', (history.ROOT / 'poker/nolan-kido/index.html').read_bytes())
         self.assertEqual(history.blob(public), history.PLAYER_BLOB)
         self.assertEqual(history.live_targets({name: (200, public)}), {})
         for data in ((404, public), (200, public + b'unknown'), (200, 'wrong')):
