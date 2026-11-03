@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>What a second check found in three AI-written replies.</title>
+      <link>https://nolankido.com/technology/review-reply-evidence-audit/</link>
+      <description>An independent audit of three recorded Gemma replies: factual omissions, unauthorized promises, synthetic controls, and human review limits.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/review-reply-evidence-audit/</guid>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
     <item>
       <title>Portland Meadows Ep1: From 6.5 BB to a Trophy | Nolan Kido</title>
       <link>https://nolankido.com/poker/episodes/portland-meadows-ep1/</link>
