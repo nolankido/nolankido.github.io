@@ -3,6 +3,8 @@ import subprocess
 import unittest
 from pathlib import Path
 
+import turn14_freshness_history
+
 import turn13_topic_paths_history as history
 
 
@@ -57,7 +59,7 @@ class Turn13TopicPathTests(unittest.TestCase):
     def test_exact_prior_git_blobs_only_are_restored(self):
         for path, (old_sha, current_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                raw = (ROOT / path).read_bytes()
+                raw = turn14_freshness_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(history.blob(raw), current_sha)
                 prev = history.before(path, raw)
                 self.assertEqual(history.blob(prev), old_sha)
