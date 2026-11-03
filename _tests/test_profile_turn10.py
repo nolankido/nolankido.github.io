@@ -6,6 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 sys.path.insert(0,str(ROOT/'_tests'))
 import build,turn10_profile_history as history
+import turn12_cross_platform_history
 import brand_positioning_history as brand_history
 import answer_review_growth_history as guide_growth
 class TestTurn10(unittest.TestCase):
@@ -14,7 +15,7 @@ class TestTurn10(unittest.TestCase):
   cls.outputs=build.build_outputs()
  def test_exact_history_only_for_six_approved_files(self):
   for path, rec in history.records().items():
-   data=guide_growth.before(path,brand_history.before(path,(ROOT/path).read_bytes()))
+   data=guide_growth.before(path,brand_history.before(path,turn12_cross_platform_history.before(path,(ROOT/path).read_bytes())))
    self.assertEqual(sha256(data).hexdigest(),rec['new_sha256'],path)
    self.assertEqual(sha256(history.before(path,data)).hexdigest(),rec['old_sha256'],path)
    self.assertEqual(history.before(path,data+b'changed'),data+b'changed',path)
@@ -54,7 +55,7 @@ class TestTurn10(unittest.TestCase):
  def test_no_new_tracking_or_input_collection(self):
   for page in ['about/index.html','bio/index.html']:
    new=self.outputs[Path(page)]
-   old=history.before(page,new)
+   old=history.before(page,turn12_cross_platform_history.before(page,new))
    self.assertEqual(new.count('cloud.umami.is/script.js'),old.count('cloud.umami.is/script.js'))
    self.assertEqual(new.count('<script '),old.count('<script '))
    self.assertNotIn('<form',new)

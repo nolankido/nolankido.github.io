@@ -67,7 +67,7 @@ class IdentityJsonLdTests(unittest.TestCase):
     def test_standalone_rich_identity_is_preserved_without_inline_expansion(self):
         original = json.loads((ROOT / '_source/person-schema.jsonld').read_text())
         self.assertEqual(self.data, original)
-        expected = ['https://github.com/nolankido', 'https://dev.to/kidon']
+        expected = public_identity.same_as()
         for path in ['index.html', 'about/index.html']:
             schema = check_search.Document(self.outputs[Path(path)]).schemas[0]
             person = schema['mainEntity']
@@ -88,9 +88,14 @@ class IdentityJsonLdTests(unittest.TestCase):
         self.assertEqual(profile_links, [
             {'href': 'https://github.com/nolankido', 'rel': 'me'},
             {'href': 'https://dev.to/kidon', 'rel': 'me'},
+            {'href': 'https://nolankido.substack.com/', 'rel': 'me'},
+            {'href': 'https://www.youtube.com/@NolanPoker', 'rel': 'me'},
         ])
         self.assertIn('public code on GitHub</a>', html)
         self.assertIn('project writing on DEV</a>', html)
+        self.assertIn('long-form AI writing on Substack</a>', html)
+        self.assertIn('NolanPoker tournament videos on YouTube</a>', html)
+        self.assertIn('AI Works, Human Decides essay on Substack</a>', html)
         self.assertNotIn('<img', html)
 
     def audit_profile_pair(self, change=None):

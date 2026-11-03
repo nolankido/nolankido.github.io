@@ -28,6 +28,7 @@ import turn08_laptop_history
 import turn09_reply_history
 import living_well_case_links_history
 import visibility_sprint_history
+import turn12_cross_platform_history
 
 MEMBERSHIPS = {
     '/technology/ai-book-continuity-checker/': ['creative'],
@@ -160,14 +161,14 @@ class VisibilityDiscoveryTests(unittest.TestCase):
     def test_capsule_matches_the_actual_parent_and_complete_render_inventory(self):
         self.assertEqual(git('rev-parse', history.PARENT + '^{tree}').decode().strip(), history.PARENT_TREE)
         self.assertEqual(len(self.record['parent_outputs']), 229)
-        previous_find = {p: player_find_turn_history.before(p, episode_turn06_history.before(p, turn07_hand_history.before(p, turn08_laptop_history.before(p, turn09_reply_history.before(p, value))))) for p, value in self.outputs.items()}
+        previous_find = {p: player_find_turn_history.before(p, episode_turn06_history.before(p, turn07_hand_history.before(p, turn08_laptop_history.before(p, turn09_reply_history.before(p, turn12_cross_platform_history.before(p, value)))))) for p, value in self.outputs.items()}
         restored = history.outputs(previous_find)
         self.assertEqual({str(p): history.digest(value) for p, value in restored.items()}, self.record['parent_outputs'])
         self.assertEqual(history.outputs(restored), restored)
         for name, item in self.record['paths'].items():
             # Turn 4's reviewed homepage successor is newer than this frozen
             # discovery capsule and must be reversed before byte comparisons.
-            current = history._before_homepage_turn04(name, player_find_turn_history.before(name, episode_turn06_history.before(name, turn07_hand_history.before(name, turn08_laptop_history.before(name, turn09_reply_history.before(name, (ROOT / name).read_bytes()))))))
+            current = history._before_homepage_turn04(name, player_find_turn_history.before(name, episode_turn06_history.before(name, turn07_hand_history.before(name, turn08_laptop_history.before(name, turn09_reply_history.before(name, turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())))))))
             # This later, reviewed case study expands one search-index entry.
             # Compare this archived PR152 capsule against its exact predecessor.
             if name == 'find/index.html':

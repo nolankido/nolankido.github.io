@@ -14,6 +14,7 @@ import episode_turn06_history
 import turn07_hand_history
 import turn08_laptop_history
 import turn09_reply_history
+import turn12_cross_platform_history
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
@@ -99,14 +100,14 @@ class LaterReleaseHistoryTests(unittest.TestCase):
         })
         for name, expected in history.SOURCE_ADDITIONS.items():
             with self.subTest(name=name):
-                reviewed = identity_turn03_history.before(name, (ROOT / name).read_bytes())
+                reviewed = identity_turn03_history.before(name, turn12_cross_platform_history.before(name, (ROOT / name).read_bytes()))
                 self.assertEqual(sha256(reviewed).hexdigest(), expected)
 
     def test_output_view_only_omits_the_exact_added_generated_asset(self):
         name = 'assets/nolan-kido-identity.jsonld'
-        raw = (ROOT / name).read_text()
+        raw = turn12_cross_platform_history.before(name, (ROOT / name).read_text())
         records = {Path(name): raw, Path('unknown.jsonld'): raw,
-                   Path('_source/person-schema.jsonld'): (ROOT / '_source/person-schema.jsonld').read_text()}
+                   Path('_source/person-schema.jsonld'): turn12_cross_platform_history.before('_source/person-schema.jsonld', (ROOT / '_source/person-schema.jsonld').read_text())}
         original = deepcopy(records)
         restored = history.outputs(records)
         self.assertNotIn(Path(name), restored)
@@ -116,7 +117,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
         self.assertEqual(history.outputs(restored), restored)
 
     def test_source_view_only_omits_known_additions_and_named_test_tools(self):
-        records = {name: (ROOT / name).read_bytes() for name in history.SOURCE_ADDITIONS}
+        records = {name: turn12_cross_platform_history.before(name, (ROOT / name).read_bytes()) for name in history.SOURCE_ADDITIONS}
         records.update({name: b'test-only tool' for name in history.TEST_UTILITIES})
         records['assets/unreviewed.png'] = b'unreviewed'
         records['_scripts/freeze_unreviewed.py'] = b'unreviewed tool'
@@ -153,7 +154,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
     def test_oldest_common_inventory_chain_preserves_mutated_additions(self):
         import beginner_history
         name = 'assets/nolan-kido-identity.jsonld'
-        raw = (ROOT / name).read_text()
+        raw = turn12_cross_platform_history.before(name, (ROOT / name).read_text())
         self.assertEqual(beginner_history.outputs({Path(name): raw}), {})
         changed = raw + 'UNREVIEWED'
         self.assertEqual(beginner_history.outputs({Path(name): changed}), {Path(name): changed})
@@ -163,7 +164,7 @@ class LaterReleaseHistoryTests(unittest.TestCase):
     def test_brand_and_identity_reversal_reach_the_latest_old_history_chain(self):
         import regional_link_history
         import brand_positioning_history
-        raw = (ROOT / 'index.html').read_text()
+        raw = turn12_cross_platform_history.before('index.html', (ROOT / 'index.html').read_text())
         self.assertEqual(regional_link_history.before('index.html', raw),
                          brand_positioning_history.before('index.html', raw))
         build = (ROOT / history.IDENTITY_BUILD).read_bytes()
