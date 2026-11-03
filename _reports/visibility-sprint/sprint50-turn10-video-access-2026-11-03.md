@@ -1,7 +1,7 @@
 # Visibility sprint Turn 10: repair the public poker-video viewing path
 
 **Review date:** November 3, 2026  
-**Status:** Source and compiled-output corrections prepared; deployment must be verified separately.  
+**Status:** Merged via [PR #166](https://github.com/nolankido/nolankido.github.io/pull/166) on November 3, 2026; public viewing links verified after deployment.  
 **Public companion:** <https://nolankido.com/poker/episodes/portland-meadows-ep1/>  
 **Owner requirement:** No GitHub Actions, scheduled workflows, paid APIs or invented event details.
 
@@ -30,4 +30,13 @@ The retrieval supported public title and access, not a frame-by-frame check of n
 - The old private-video sign-in wall and the three public replacement titles were observed via read-only public page retrieval.
 - Before the GitHub change, the new source appeared exactly once in the generated HTML; one H1, one JSON-LD record, the existing hand fragments, public links and no iframe/form/em dash were checked in memory.
 - Seven changed or added Python files passed a local Python AST parse. The entire website and browser suites were **not run** because this execution environment has no writable full checkout. Do not present in-memory assertions as a passing full release gate.
-- A post-merge public HTTP retrieval should verify that the companion now exposes the accessible URL. Actual YouTube content, platform permanence, Google indexing, AI citations and search growth remain separate unknowns.
+- Post-merge read-only public HTML extraction on November 3 confirmed the current Episode 1 watch URL, both additional public-upload URLs, and the absence of the private old URL. This verifies the visible links, not an exact-byte match of the whole served HTML or the spoken video contents.
+- Google indexing, AI citations, search growth, platform permanence and scene-by-scene validation of the newer cut remain separate unknowns.
+
+## Merge and live receipt
+
+- Source PR: <https://github.com/nolankido/nolankido.github.io/pull/166>.
+- Squash merge commit: `78ab6414091bbaa6a46d71e2f1100277513819e2`.
+- GitHub `main` readback matched the source blob expected from the reviewed commit.
+- A first public read immediately after merge still returned the older HTML. A later fresh public HTML extraction returned the corrected video link and both additional public-upload links, without the old private-video identifier. This records a real publication-delay observation, not a measured search-engine crawl.
+- No custom GitHub Actions workflow was created, enabled or invoked, and no paid service was subscribed to.
