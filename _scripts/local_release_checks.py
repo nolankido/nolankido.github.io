@@ -40,6 +40,8 @@ def main() -> int:
         ('Player profile build', ['_scripts/build_player_profile.py', '--check']),
         ('Portland video companion build', ['_scripts/build_poker_episode.py', '--check']),
         ('Local laptop guide build', ['_scripts/build_local_laptop_case.py', '--check']),
+        ('Independent reply audit build', ['_scripts/build_reply_audit_case.py', '--check']),
+        ('Independent reply audit contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_reply_audit_case.py', '-q']),
         ('Local laptop article and loopback contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_local_laptop_case.py', '-q']),
         ('Portland video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_portland_episode.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),

@@ -113,6 +113,9 @@ class SiteTests(unittest.TestCase):
         laptop = build.local_laptop_case.record(ROOT)
         if laptop is not None:
             expected.add(laptop['url'])
+        reply_case = build.reply_audit_case.record(ROOT)
+        if reply_case is not None:
+            expected.add(reply_case['url'])
         self.assertEqual(set(urls), expected)
         self.assertEqual(len(urls), len(set(urls)))
         self.assertNotIn('https://nolankido.com/404.html', urls)
