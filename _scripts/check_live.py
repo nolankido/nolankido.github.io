@@ -9,6 +9,7 @@ import build
 import player_sitemap
 import poker_episode
 import local_laptop_case
+import reply_audit_case
 import time
 import urllib.error
 import urllib.request
@@ -44,6 +45,12 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
             raise ValueError('Local AI guide route conflicts with manifest page')
         result[laptop['path']] = (200, (root / local_laptop_case.OUTPUT).read_bytes())
         result['/' + local_laptop_case.TOOL.as_posix()] = (200, (root / local_laptop_case.TOOL).read_bytes())
+    reply_case = reply_audit_case.record(root)
+    if reply_case is not None:
+        if reply_case['path'] in result:
+            raise ValueError('Independent reply case duplicates a manifest route')
+        result[reply_case['path']] = (200, (root / reply_audit_case.OUTPUT).read_bytes())
+        result['/' + reply_audit_case.TOOL.as_posix()] = (200, (root / reply_audit_case.TOOL).read_bytes())
     assets = ['downloads/poker-cash-study.md', 'assets/poker-topics.css', 'assets/poker-study-tools.css', 'assets/poker-study-tools.js', 'assets/poker-finder.css', 'assets/poker-finder.js', 'downloads/poker-math-reference.md', 'downloads/poker-resource-directory.md', 'downloads/poker-resource-directory.json', 'assets/poker-fieldguide.css', 'assets/poker-resources.css', 'assets/poker-resources.js', 'assets/poker-reader.css', 'assets/poker-library.js', 'downloads/poker-short-stack-record.md', 'downloads/poker-results-review.md', 'downloads/poker-episode-plan.md', 'downloads/poker-study-cycle.md', 'downloads/poker-watch-along.md', 'downloads/poker-viewer-reference.md', 'assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['poker-event-planner', 'poker-hand-capture', 'poker-resource-check']]
     assets += ['assets/search-visibility.css', 'assets/first-steps.css', 'downloads/creative-brief.txt']
