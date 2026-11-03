@@ -52,6 +52,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn13_topic_paths_history
+    value = turn13_topic_paths_history.before(path, value)
     name = key(path)
     known = BLOBS.get(name)
     if known is None or blob(value) != known[1]:
