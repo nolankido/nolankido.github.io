@@ -3,6 +3,8 @@ import subprocess
 import unittest
 from pathlib import Path
 
+import turn14_freshness_history
+
 import turn12_cross_platform_history as history
 
 
@@ -10,7 +12,7 @@ class Turn12CrossPlatformHistoryTests(unittest.TestCase):
     def test_exact_current_blobs_restore_committed_parent(self):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                current = (history.ROOT / path).read_bytes()
+                current = turn14_freshness_history.before(path, (history.ROOT / path).read_bytes())
                 self.assertEqual(history.blob(current), new_sha)
                 previous = history.before(path, current)
                 self.assertEqual(history.blob(previous), old_sha)
