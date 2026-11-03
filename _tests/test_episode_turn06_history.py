@@ -5,6 +5,7 @@ import unittest
 
 import episode_turn06_history as history
 import turn07_hand_history
+import turn11_video_discovery_history
 import turn08_laptop_history
 import turn10_video_history
 
@@ -13,7 +14,7 @@ class Turn06HistoryTests(unittest.TestCase):
     def test_all_reviewed_changes_restore_exact_published_parent(self):
         for path, (old_sha, current_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                current = turn07_hand_history.before(path, turn08_laptop_history.before(path, turn10_video_history.before(path, (history.ROOT / path).read_bytes())))
+                current = turn07_hand_history.before(path, turn08_laptop_history.before(path, turn10_video_history.before(path, turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes()))))
                 self.assertEqual(history.blob(current), current_sha)
                 previous = history.before(path, current)
                 self.assertEqual(history.blob(previous), old_sha)
@@ -24,7 +25,7 @@ class Turn06HistoryTests(unittest.TestCase):
 
     def test_unknown_edits_never_collapse_into_older_release(self):
         for path in history.BLOBS:
-            raw = turn07_hand_history.before(path, turn08_laptop_history.before(path, turn10_video_history.before(path, (history.ROOT / path).read_bytes())))
+            raw = turn07_hand_history.before(path, turn08_laptop_history.before(path, turn10_video_history.before(path, turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes()))))
             for altered in (raw + b"UNKNOWN", b"UNKNOWN" + raw, raw[1:]):
                 self.assertEqual(history.before(path, altered), altered)
             self.assertEqual(history.before("unreviewed/" + path, raw), raw)
@@ -32,7 +33,7 @@ class Turn06HistoryTests(unittest.TestCase):
     def test_new_public_sources_removed_only_from_old_inventories(self):
         for path, sha in history.ADDED.items():
             with self.subTest(path=path):
-                current = turn07_hand_history.before(path, turn08_laptop_history.before(path, turn10_video_history.before(path, (history.ROOT / path).read_bytes())))
+                current = turn07_hand_history.before(path, turn08_laptop_history.before(path, turn10_video_history.before(path, turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes()))))
                 self.assertEqual(history.blob(current), sha)
                 self.assertEqual(history.source_records({path: current}), {})
                 mutated = current + b"UNREVIEWED"

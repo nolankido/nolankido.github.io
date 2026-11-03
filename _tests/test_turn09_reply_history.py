@@ -3,13 +3,14 @@ from pathlib import Path
 import subprocess
 import unittest
 import turn09_reply_history as history
+import turn11_video_discovery_history
 
 
 class Turn09ReplyHistoryTests(unittest.TestCase):
     def test_reviewed_changes_restore_exact_previous_source_and_generated_bytes(self):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                current = (history.ROOT / path).read_bytes()
+                current = turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes())
                 self.assertEqual(history.blob(current), new_sha)
                 previous = history.before(path, current)
                 self.assertEqual(history.blob(previous), old_sha)
@@ -19,7 +20,7 @@ class Turn09ReplyHistoryTests(unittest.TestCase):
 
     def test_unreviewed_edits_and_paths_survive_without_faking_history(self):
         for path in history.BLOBS:
-            raw = (history.ROOT / path).read_bytes()
+            raw = turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes())
             for altered in (raw + b'unknown', b'unknown' + raw, raw[1:]):
                 self.assertEqual(history.before(path, altered), altered)
             self.assertEqual(history.before('another/' + path, raw), raw)
@@ -28,7 +29,7 @@ class Turn09ReplyHistoryTests(unittest.TestCase):
     def test_only_reviewed_new_files_are_excluded_from_older_inventories(self):
         for path, sha in history.ADDED.items():
             with self.subTest(path=path):
-                raw = (history.ROOT / path).read_bytes()
+                raw = turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes())
                 self.assertEqual(history.blob(raw), sha)
                 self.assertEqual(history.source_records({path: raw}), {})
                 self.assertEqual(history.source_records({path: raw + b'unknown'}),
@@ -37,12 +38,12 @@ class Turn09ReplyHistoryTests(unittest.TestCase):
 
     def test_only_exact_addition_and_release_bytes_are_rewound(self):
         for route, path in history.NEW_ROUTES.items():
-            raw = (history.ROOT / path).read_bytes()
+            raw = turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes())
             self.assertEqual(history.live_targets({route: (200, raw)}), {})
             self.assertEqual(history.live_targets({route: (200, raw + b'unknown')}),
                              {route: (200, raw + b'unknown')})
         for route, path in history.ROUTES.items():
-            raw = (history.ROOT / path).read_bytes()
+            raw = turn11_video_discovery_history.before(path, (history.ROOT / path).read_bytes())
             self.assertEqual(history.live_targets({route: (200, raw)}),
                              {route: (200, history.before(path, raw))})
 

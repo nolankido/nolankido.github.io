@@ -74,9 +74,12 @@ class PlayerProfileTests(unittest.TestCase):
         for required in (
             "1,652 entries", "341 entries", "638 entries", "101 entries",
             "gross payout, not net profit", "No bracelet, Circuit ring",
-            "No episode is presented as published", "The first",
+            "The videos are edited first-person accounts", "The first",
         ):
             self.assertIn(required, self.html)
+        for video_id in ("qABaiIcvvpU", "I75GOBVXij4", "edNSD5BjIV8"):
+            self.assertIn("watch?v=" + video_id, self.html)
+        self.assertIn("public videos", self.html)
         self.assertNotIn("homeLocation", self.html)
         scripts = [a.get("src") for a in self.doc.tags("script") if a.get("src")]
         self.assertEqual(scripts, ["https://cloud.umami.is/script.js"])

@@ -45,7 +45,10 @@ class PokerPlayerEvidenceTests(unittest.TestCase):
         self.assertIn('id="free-course"', self.published)
         self.assertIn('id="watch"', self.published)
         self.assertIn('href="/poker/episodes/portland-meadows-ep1/"', self.published)
-        self.assertIn("later tournament episodes are not published here yet.", self.published)
+        self.assertIn("other public uploads have no source-checked written companion on this site yet.", self.published)
+        for video_id in ("qABaiIcvvpU", "I75GOBVXij4", "edNSD5BjIV8"):
+            self.assertIn("watch?v=" + video_id, self.source)
+            self.assertIn("watch?v=" + video_id, self.published)
         self.assertIn('href="/poker/reviewing-a-hand/"', self.published)
         self.assertNotIn("\u2014", self.source)
 

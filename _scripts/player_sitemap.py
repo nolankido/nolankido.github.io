@@ -16,7 +16,7 @@ ROUTE = '/poker/nolan-kido/'
 URL = 'https://nolankido.com' + ROUTE
 RELATIVE = Path('poker/nolan-kido/index.html')
 SOURCE = Path('_source/poker/nolan-kido-profile.html')
-MODIFIED = '2026-11-01'
+MODIFIED = '2026-11-03'
 PERSON = 'https://nolankido.com/about/#nolan-kido'
 
 
