@@ -30,4 +30,12 @@ Public pages were inspected on November 3, 2026. The identity links show publish
 - Python syntax was checked for all modified and newly authored Python modules.
 - The full local unittest, HTML and browser suites were unavailable in this read-only workspace. No full-suite pass is claimed.
 - A changed structured-data record is not proof of Google indexing, a knowledge-panel change, an AI-assistant citation, or higher search rankings.
-- Public deployment will be verified and recorded after merging.
+- Public deployment is verified below.
+
+## Post-merge public verification
+
+- [Pull request #168](https://github.com/nolankido/nolankido.github.io/pull/168) merged into main on November 3, 2026, with commit `3f53b3aacd43a4be0e3fd71d8bae6faa87d40532`.
+- GitHub main was checked for the expected generated About-page blob `53f0230fef94558288629b017f99aa2ebb766f4e`.
+- The public [About page](https://nolankido.com/about/) was retrieved after propagation. It presents the new “Public work across platforms” explanation and visible links to both Substack and NolanPoker alongside GitHub and DEV.
+- The public [rich identity document](https://nolankido.com/assets/nolan-kido-identity.jsonld) was retrieved and includes the Substack and NolanPoker URLs. The homepage's matching Person markup was verified in the exact merged Git blob, since the public text extractor omits embedded script data.
+- These observations establish publication, not search indexing, knowledge graph adoption or AI-answer citations.
