@@ -13,7 +13,7 @@ ROUTE = '/poker/episodes/portland-meadows-ep1/'
 URL = 'https://nolankido.com' + ROUTE
 SOURCE = Path('_source/poker/portland-meadows-ep1.html')
 OUTPUT = Path('poker/episodes/portland-meadows-ep1/index.html')
-VIDEO = 'https://www.youtube.com/watch?v=JToB7upHqEM'
+VIDEO = 'https://www.youtube.com/watch?v=qABaiIcvvpU'
 TITLE = 'Portland Meadows: From 6.5 Big Blinds to a Trophy'
 PUBLISHED = '2026-11-02'
 PERSON_ID = 'https://nolankido.com/about/#nolan-kido'
@@ -70,6 +70,8 @@ def record(root: Path) -> dict | None:
     published = output.read_text(encoding='utf-8')
     if not authored.strip() or authored not in published:
         raise ValueError('Poker companion publication must contain the exact approved source')
+    if 'JToB7upHqEM' in authored or 'JToB7upHqEM' in published:
+        raise ValueError('Private superseded video must not be linked from the companion')
     if '<iframe' in published.lower() or '<form' in authored.lower() or '\u2014' in published:
         raise ValueError('Poker companion must remain static and respect editorial boundaries')
     doc = Document(published)

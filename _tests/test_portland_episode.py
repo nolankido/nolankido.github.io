@@ -33,10 +33,13 @@ class PublicPortlandEpisodeTests(unittest.TestCase):
         self.assertEqual(len([x for x in self.doc.tags('nav') if x.get('aria-label') == 'Breadcrumb']), 1)
 
     def test_verified_video_is_linked_not_embedded(self):
-        self.assertEqual(poker_episode.record(ROOT)['video_url'], 'https://www.youtube.com/watch?v=JToB7upHqEM')
-        self.assertIn('Portland Meadows Ep1 v7', self.html)
-        for seconds in (0, 249, 368, 540, 647, 700):
-            self.assertIn('watch?v=JToB7upHqEM&amp;t=' + str(seconds) + 's', self.html)
+        self.assertEqual(poker_episode.record(ROOT)['video_url'], 'https://www.youtube.com/watch?v=qABaiIcvvpU')
+        self.assertIn('I Had 6.5 Big Blinds... Then Won a Trophy', self.html)
+        self.assertNotIn('JToB7upHqEM', self.html)
+        self.assertNotIn('&amp;t=', self.html)
+        self.assertIn('not independently retimed', self.html)
+        self.assertIn('watch?v=I75GOBVXij4', self.html)
+        self.assertIn('watch?v=edNSD5BjIV8', self.html)
         self.assertEqual(self.html.count('class="poker-watch"'), 0)
         self.assertNotIn('youtube-nocookie.com/embed', self.html)
         self.assertIn('$2,900', self.html)
@@ -89,7 +92,7 @@ class PublicPortlandEpisodeTests(unittest.TestCase):
                 original.replace('<link rel="canonical" href="' + poker_episode.URL + '">',
                                  '<link rel="canonical" href="https://example.invalid/">', 1),
                 original.replace('<head>', '<head><meta name="robots" content="noindex">', 1),
-                original.replace('JToB7upHqEM', 'nonpublic000', 1),
+                original.replace('qABaiIcvvpU', 'nonpublic000', 1),
                 original.replace(self.source, '<p>unsupported editing claims</p>', 1)
             ]
             for modified in changes:
