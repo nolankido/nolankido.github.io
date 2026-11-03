@@ -7,6 +7,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_tests'))
 import identity_turn03_history as history
+import turn12_cross_platform_history
 
 
 class IdentityTurn03HistoryTests(unittest.TestCase):
@@ -15,7 +16,7 @@ class IdentityTurn03HistoryTests(unittest.TestCase):
             '_source/person-schema.jsonld', 'assets/nolan-kido-identity.jsonld'})
         for name, (previous_sha, current_sha) in history.REVISIONS.items():
             with self.subTest(path=name):
-                current = (ROOT / name).read_bytes()
+                current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
                 self.assertEqual(history.digest(current), current_sha)
                 old = history.before(name, current)
                 self.assertEqual(history.digest(old), previous_sha)
@@ -26,14 +27,14 @@ class IdentityTurn03HistoryTests(unittest.TestCase):
 
     def test_unreviewed_changes_and_wrong_paths_remain_visible(self):
         for name in history.REVISIONS:
-            current = (ROOT / name).read_bytes()
+            current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
             for changed in (b'UNREVIEWED' + current, current + b'UNREVIEWED', current[1:]):
                 self.assertIs(history.before(name, changed), changed)
             self.assertIs(history.before('other/' + name, current), current)
 
     def test_corrupt_predecessor_digest_fails_closed(self):
         name = '_source/person-schema.jsonld'
-        current = (ROOT / name).read_bytes()
+        current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
         with patch.dict(history.REVISIONS, {name: ('0' * 64, history.digest(current))}):
             with self.assertRaisesRegex(ValueError, 'predecessor digest'):
                 history.before(name, current)
@@ -44,7 +45,7 @@ class IdentityTurn03HistoryTests(unittest.TestCase):
         import visibility_sprint_history
 
         path = Path('assets/nolan-kido-identity.jsonld')
-        current = (ROOT / path).read_bytes()
+        current = turn12_cross_platform_history.before(path, (ROOT / path).read_bytes())
         old = history.before(path, current)
         for release in (visibility_discovery_history, living_well_case_links_history,
                         visibility_sprint_history):

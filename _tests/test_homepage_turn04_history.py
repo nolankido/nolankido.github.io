@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import build
 import homepage_turn04_history as history
+import turn12_cross_platform_history
 import homepage_growth_history
 import later_release_history
 import visibility_discovery_history
@@ -68,7 +69,7 @@ class HomepageTurn04Tests(unittest.TestCase):
     def test_only_exact_home_source_and_output_are_reversible(self):
         self.assertEqual(set(history.REVISIONS), {'_source/home.html', 'index.html'})
         for name, (previous_sha, current_sha) in history.REVISIONS.items():
-            current = (ROOT / name).read_bytes()
+            current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
             with self.subTest(path=name):
                 self.assertEqual(history.digest(current), current_sha)
                 old = history.before(name, current)
@@ -81,7 +82,7 @@ class HomepageTurn04Tests(unittest.TestCase):
 
     def test_older_output_and_source_inventories_see_the_approved_predecessor(self):
         for name in history.REVISIONS:
-            current = (ROOT / name).read_bytes()
+            current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
             old = history.before(name, current)
             for release in (visibility_discovery_history, visibility_sprint_history,
                             later_release_history, homepage_growth_history):
@@ -98,7 +99,7 @@ class HomepageTurn04Tests(unittest.TestCase):
 
     def test_corrupted_predecessor_digest_is_rejected(self):
         name = '_source/home.html'
-        current = (ROOT / name).read_bytes()
+        current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
         with patch.dict(history.REVISIONS, {name: ('0' * 64, history.digest(current))}):
             with self.assertRaisesRegex(ValueError, 'predecessor digest'):
                 history.before(name, current)
