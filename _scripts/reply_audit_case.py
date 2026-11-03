@@ -106,7 +106,7 @@ def record(root: Path) -> dict | None:
     if schema.get('name') != ''.join(page.title) or schema.get('description') != page.description[0]:
         raise ValueError("Independent reply case visible metadata and Article schema must agree")
     if (len(page.description[0]) > 190 or len(page.description[0]) < 80
-            or '<a href="/downloads/local-ai-loopback-check.py"' not in body):
+            or '<a href="/downloads/review-reply-independent-audit.py"' not in body):
         raise ValueError("Independent reply case needs a bounded description and tool link")
     code = script.read_text(encoding='utf-8')
     if not all(token in code for token in ("SOURCE", "EXAMPLES", "NEGATIVE", "human_approval", "--self-test")):
