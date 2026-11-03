@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'_scripts'))
 import beginner_history
 import turn08_laptop_history
+import turn09_reply_history
 import build
 import follow
 import poker_reading
@@ -51,7 +52,7 @@ class ReadingReturnTests(unittest.TestCase):
         self.assertFalse(any('notebook-or-ai' in url for url in self.combined))
 
     def test_source_feeds_are_byte_stable(self):
-        historical_outputs = beginner_history.outputs(turn08_laptop_history.outputs(self.outputs))
+        historical_outputs = beginner_history.outputs(turn08_laptop_history.outputs(turn09_reply_history.outputs(self.outputs)))
         baseline=json.loads((ROOT/'_tests/entrypoints-baseline.json').read_text())['files']
         import hashlib
         for path in follow.LEGACY_SOURCES:
