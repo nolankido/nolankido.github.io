@@ -32,13 +32,16 @@ class RealHandRecordsTests(unittest.TestCase):
         cls.published = HTML.read_text(encoding="utf-8")
         cls.dom = Elements(cls.published)
 
-    def test_two_unique_source_embedded_hand_accounts_and_separate_video_offsets(self):
+    def test_two_unique_hand_accounts_with_source_attribution_and_no_stale_offsets(self):
         self.assertIn(self.source, self.published)
         for anchor in ("hand-64o-record", "hand-77-record",
                        "six-four-decision", "sevens-decision"):
             self.assertEqual(self.dom.ids.get(anchor), 1, anchor)
-        self.assertIn("https://www.youtube.com/watch?v=JToB7upHqEM&t=368s", self.dom.links)
-        self.assertIn("https://www.youtube.com/watch?v=JToB7upHqEM&t=540s", self.dom.links)
+        self.assertIn("https://www.youtube.com/watch?v=qABaiIcvvpU", self.dom.links)
+        self.assertNotIn("https://www.youtube.com/watch?v=JToB7upHqEM", self.dom.links)
+        self.assertTrue(all("&t=" not in url for url in self.dom.links if url))
+        self.assertIn("Archived version 7 narration", self.source)
+        self.assertIn("not been rechecked", self.source)
         self.assertIn("The exact tournament calendar date is not established", self.source)
         self.assertIn("The precise tournament calendar date is not independently documented", self.source)
 
