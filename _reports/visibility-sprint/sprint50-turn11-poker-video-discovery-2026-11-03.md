@@ -37,4 +37,13 @@ The video pages were reachable in direct public checks on November 3, 2026. YouT
 - Static consistency checks confirmed the same three video IDs in both source and generated pages, the complete profile body in its generated HTML, the new player metadata, Find title, sitemap route, and no em dashes in changed prose.
 - Python syntax was checked for all changed or newly authored `.py` modules.
 - The full local Python, HTML and browser test suites could not be executed in the current read-only workspace, so no full-suite pass is claimed.
-- Live-site confirmation must be recorded separately after publishing and retrieving the updated HTML.
+- Live-site confirmation is recorded below using direct public retrieval after the merge.
+
+## Post-merge public verification
+
+- [Pull request #167](https://github.com/nolankido/nolankido.github.io/pull/167) was merged on November 3, 2026, with merge commit `0122add1160f88dd3ef48024067f6fbd77cbbf37`.
+- Public [Poker hub](https://nolankido.com/poker/#watch) was retrieved after deployment and exposes all three exact YouTube watch URLs, the new three-upload explanation, and the link to the source-checked companion.
+- Public [player profile](https://nolankido.com/poker/nolan-kido/) was retrieved after deployment, with the new “Results & Videos” title and the video section containing the new WSOP Circuit item.
+- Public [Find](https://nolankido.com/find/) was retrieved after deployment. The public textual extraction includes the updated source-reviewed-hand-account description; the generated player search-card metadata was additionally checked as an exact GitHub file blob.
+- GitHub main matches the merged commit, with the expected player page blob.
+- These checks verify publication and navigation, not search-engine indexing, AI citation frequency or the full local test suite.
