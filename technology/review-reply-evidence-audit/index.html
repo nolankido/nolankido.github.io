@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<!-- Independent reply audit: edit _source/technology/review-reply-evidence-audit.html; build with _scripts/build_reply_audit_case.py. -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checking AI Replies Against the Source | Nolan Kido</title>
+  <meta name="description" content="An independent audit of three recorded Gemma replies: factual omissions, unauthorized promises, synthetic controls, and human review limits.">
+  <meta name="theme-color" content="#111b16">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:site_name" content="Nolan Kido">
+  <meta property="og:title" content="Checking AI Replies Against the Source | Nolan Kido">
+  <meta property="og:description" content="An independent audit of three recorded Gemma replies: factual omissions, unauthorized promises, synthetic controls, and human review limits.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nolankido.com/technology/review-reply-evidence-audit/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://nolankido.com/assets/social/practical-ai.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nolan Kido. Practical AI for real life. Useful tools, clear checks, and your judgment.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nolankido.com/assets/social/practical-ai.png">
+  <meta name="twitter:image:alt" content="Nolan Kido. Practical AI for real life. Useful tools, clear checks, and your judgment.">
+  <meta name="twitter:title" content="Checking AI Replies Against the Source | Nolan Kido">
+  <meta name="twitter:description" content="An independent audit of three recorded Gemma replies: factual omissions, unauthorized promises, synthetic controls, and human review limits.">
+  <link rel="canonical" href="https://nolankido.com/technology/review-reply-evidence-audit/">
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Writing across the site" href="/writing.xml">
+  <link rel="alternate" type="application/rss+xml" title="Nolan Kido Notes" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/site-fonts.css?v=e5da049df0af">
+  <link rel="stylesheet" href="/assets/site-core.css?v=10383d71aabb">
+  
+  <meta property="article:published_time" content="2026-11-03">
+  <meta property="article:modified_time" content="2026-11-03">
+  <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Practical AI writing" href="/technology/feed.xml">
+  <link rel="stylesheet" href="/assets/page-sharing.css?v=2632f6372419">
+  <script defer src="/assets/page-sharing.js?v=3c95f5f6edcb"></script>
+  <link rel="stylesheet" href="/assets/visibility-projects.css?v=ffd10f910677">
+  <link rel="stylesheet" href="/assets/practical-discovery.css?v=e98c03c74139">
+  <link rel="stylesheet" href="/assets/workflow-evidence.css?v=971e2590f178">
+  <link rel="stylesheet" href="/assets/search-visibility.css?v=c5a767619d13">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "name": "Checking AI Replies Against the Source | Nolan Kido", "url": "https://nolankido.com/technology/review-reply-evidence-audit/", "description": "An independent audit of three recorded Gemma replies: factual omissions, unauthorized promises, synthetic controls, and human review limits.", "isPartOf": {"@type": "WebSite", "@id": "https://nolankido.com/#website", "name": "Nolan Kido", "url": "https://nolankido.com/", "publisher": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}}, "headline": "What a second check found in three AI-written replies.", "datePublished": "2026-11-03", "@id": "https://nolankido.com/technology/review-reply-evidence-audit/#article", "inLanguage": "en-US", "author": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}, "publisher": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://nolankido.com/technology/review-reply-evidence-audit/#webpage", "url": "https://nolankido.com/technology/review-reply-evidence-audit/", "breadcrumb": {"@type": "BreadcrumbList", "@id": "https://nolankido.com/technology/review-reply-evidence-audit/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nolankido.com/"}, {"@type": "ListItem", "position": 2, "name": "Technology", "item": "https://nolankido.com/technology/"}, {"@type": "ListItem", "position": 3, "name": "What a second check found in three AI-written replies.", "item": "https://nolankido.com/technology/review-reply-evidence-audit/"}]}}, "dateModified": "2026-11-03"}</script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="51bfd4d7-08ac-4299-924b-621af60fa7f1" data-domains="nolankido.com,www.nolankido.com" data-do-not-track="true" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body class="site-page page-review-reply-evidence-audit">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-bar"><div class="shell"><a href="/">nolankido.com</a><span class="site-edition">Practical AI · A life beyond the screen</span><nav class="utility-navigation" aria-label="Site shortcuts"><a class="utility-find" href="/find/">Search</a><a class="utility-writing" href="/notes/">Writing</a><a class="utility-start" href="/start-here/">Start here</a></nav></div></div>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="Nolan Kido home"><span class="brand-mark" aria-hidden="true">NK</span><span>Nolan Kido</span></a>
+      <ul class="nav-links"><li><a href="/technology/" aria-current="location">Technology</a></li><li><a href="/living-well/">Living Well</a></li><li><a href="/poker/">Poker</a></li><li><a href="/creative/">Creative Work</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul>
+    </nav>
+  </header>
+  
+  <main id="main" class="ledger" tabindex="-1">
+<nav class="search-breadcrumb shell" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/technology/">Technology</a></li><li><span aria-current="page">What a second check found in three AI-written replies.</span></li></ol></nav>
+    <section class="page-hero shell"><p class="page-kicker">Technology / Practical AI / Independent checking</p><h1 class="page-title">What a second check found in three AI-written replies.</h1><p class="note-meta">Published <time datetime="2026-11-03">November 3, 2026</time> · Recorded workflow · Separate quality screen</p><p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · <a href="/start-here/#reading-this-site">About this writing</a></p></section>
+<article class="local-laptop-case reply-independent-case" aria-labelledby="reply-audit-intro">
+<section class="section folio-row" aria-labelledby="reply-audit-intro">
+  <div class="section-meta"><p class="section-label">Practical AI / Recorded workflow / Separate check</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-intro">Can a polished AI reply keep the facts straight?</h2>
+    <p class="intro">A small business should not judge an AI-written customer reply only by whether it sounds courteous. It needs to preserve what a customer actually reported, avoid promising actions nobody authorized, and remain editable until a person approves the final wording. I revisited three publicly recorded Gemma outputs from my Review Reply Writer project and tested them with an independent, narrow checker.</p>
+    <p>The exercise has an important distinction: the three retained model replies really came from a documented October 2026 model run, but the three deliberately corrupted versions were created later as <strong>synthetic negative controls</strong>. This was not another model inference run, a blind benchmark, a paying-customer pilot, or a test of live business outcomes.</p>
+    <p><strong>What actually happened in this new pass:</strong> the three archived outputs raised zero flags in the selected factual and financial-commitment screen. All three deliberately damaged controls raised a flag. I ran the independent script locally with Python's standard library, with no model request, internet call or private customer information. These numbers describe six specific text checks, not a model success rate.</p>
+    <nav class="entry-jumps" aria-label="On this reply evidence audit"><a href="#reply-audit-source">Evidence</a><a href="#reply-audit-cases">Actual replies</a><a href="#reply-audit-controls">Negative controls</a><a href="#reply-audit-reproduce">Reproduce</a><a href="#reply-audit-human">Human decision</a><a href="#reply-audit-cost">Total cost</a></nav>
+    <p><a href="/technology/local-ai-review-replies/">Start with the application and its approval workflow</a>. This page examines a separate question: what can a second, independently readable check establish about already recorded outputs?</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-source">
+  <div class="section-meta"><p class="section-label">Provenance / Original inputs</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-source">Three real model outputs, three fictional customer reviews.</h2>
+    <p>The historical evidence is the <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-quality-smoke-2026-10-13.json">pinned public smoke-test JSON</a>, with its <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/REPLY_QUALITY_RESULTS.md">original scope notes</a>. It records three Gemma 3 4B draft responses through Ollama on a GitHub-hosted Ubuntu CPU runner in October 2026. It was <strong>not a run on my MSI gaming laptop</strong>, nor a current-source validation of the application.</p>
+    <p>The three inputs describe a fictional café compliment, a fictional café complaint, and a fictional hotel stay with praise and problems. The historical app reported that its automated checks passed, but no customer, business owner or independent human quality assessor evaluated those replies. The output text remained available, so I could examine a narrower set of properties separately without regenerating anything.</p>
+    <div class="project-table-scroll" role="region" aria-label="Three recorded model cases and their bounded checks" tabindex="0">
+      <table>
+        <caption>Original archived outputs, not newly generated replies</caption>
+        <thead><tr><th scope="col">Historical case</th><th scope="col">Details the independent screen looks for</th><th scope="col">Reported generation case time</th><th scope="col">New screen</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Café praise</th><td>Oat milk latte, quick service</td><td>19.536 seconds</td><td>No targeted flag</td></tr>
+          <tr><th scope="row">Café complaint</th><td>Cold coffee, exact 25-minute wait, unanswered question</td><td>18.157 seconds</td><td>No targeted flag</td></tr>
+          <tr><th scope="row">Mixed hotel stay</th><td>Beautiful room, ocean view, check-in problem, weak shower</td><td>19.325 seconds</td><td>No targeted flag</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The times are from the original model run and are not measurements made by this audit. They do not include a controlled human editing session, current application verification, cloud-model comparison, or a dollar value for time saved. Calling a reply <em>unflagged</em> means only that this small program did not detect one of its explicitly targeted problems.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-cases">
+  <div class="section-meta"><p class="section-label">Content / Actual challenge</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-cases">The complaint makes a useful test of fidelity.</h2>
+    <p>One recorded fictional customer said: <q>Cold coffee and a 25 minute wait. The barista ignored my question. Disappointing.</q> The saved Gemma reply refers to the cold coffee, the <q>25-minute wait</q>, and a barista not addressing the customer's question. Those are distinct details. A generic sentence about disappointing service would be smoother than the customer's account but less faithful to it.</p>
+    <p>The original also says the business is <q>working to ensure all our customers have a positive experience</q>. That is not an explicit refund promise, but a business owner should still consider whether such an operational statement is accurate and authorized. The checker below does not decide that question. It also cannot establish whether the apology sounds sincere, whether the wording is suitable for a particular customer, or whether the business should reply publicly at all.</p>
+    <p>The positive café reply mentions both the oat milk latte and quick service. The mixed-stay reply mentions the attractive room, ocean view, difficult check-in and weak shower. These facts can be found in the retained output. They do not establish that the resulting copy is attractive, nonrepetitive, safe in every policy context, or preferred by customers.</p>
+    <p>For the application-level evidence trail, see the original <a href="/technology/local-ai-review-replies/#reply-example">duplicate-charge example</a> and its <a href="/technology/local-ai-review-replies/#reply-boundary">owner-approval controls</a>. Those controls are a different layer from this independent transcript screen. Neither one should be represented as the other.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-controls">
+  <div class="section-meta"><p class="section-label">Negative controls / Known defects</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-controls">Make the checker reject a known mistake.</h2>
+    <p>A checker that agrees with the original output is difficult to evaluate without a counterexample. I deliberately changed copies of the historical fictional complaint reply in three ways. These are <strong>my newly constructed test mutations</strong>, not errors I claim Gemma made in that archived run.</p>
+    <ol>
+      <li><strong>Remove the duration:</strong> replace the exact <q>25-minute wait</q> with a generic <q>wait</q>. The screen flags the missing duration, since duration is an important fact in this particular complaint.</li>
+      <li><strong>Remove the unanswered question:</strong> replace the sentence acknowledging the barista's failure to respond with unrelated positive wording. The screen flags the missing question, even though the remaining apology reads fluently.</li>
+      <li><strong>Invent a refund:</strong> append a sentence claiming the business has issued a refund to the customer's card. The screen flags a possible unauthorized financial action, even though the other facts remain present.</li>
+    </ol>
+    <p>The script detected <strong>three of these three deliberately seeded defects</strong>. That is a check that the narrowly chosen counterexamples are within the program's detection rules. It is not an estimated recall, precision, production safety rate, or proof against more sophisticated omissions and promises.</p>
+    <p>For example, a different wording of the same problem might evade a keyword pattern. The program might also flag harmless quotation of a refund policy without understanding context. This is why its output calls for review rather than automatically approving or rejecting customer communications.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-reproduce">
+  <div class="section-meta"><p class="section-label">Reproduce / No API / No account</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-reproduce">Run the entire six-case check locally.</h2>
+    <p><a href="/downloads/review-reply-independent-audit.py" download>Download the original independent audit script (.py)</a>. It contains the three publicly archived fictional outputs, selected case-specific fact patterns, three new negative-control mutations and one narrow financial-commitment pattern. It uses Python's standard library, makes no network requests, does not access other files and does not send text to a model.</p>
+    <p>Save the script, then run this from the directory where it is saved:</p>
+    <pre><code>py -3 review-reply-independent-audit.py --self-test</code></pre>
+    <p>On systems with the executable named <code>python3</code>, use <code>python3 review-reply-independent-audit.py --self-test</code> instead. The script emits JSON with three archived results and three labeled controls. Its self-test exits unsuccessfully if an original is unexpectedly flagged or one of the seeded counterexamples is missed. It cannot query the current app, update an approval, contact a customer, or post a reply.</p>
+    <div class="project-table-scroll" role="region" aria-label="Independent audit result and interpretation" tabindex="0">
+      <table>
+        <caption>Observed in the offline repeat on November 3, 2026</caption>
+        <thead><tr><th scope="col">Check</th><th scope="col">Observed</th><th scope="col">Meaning</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Archived generated replies</th><td>3 evaluated, 0 targeted flags</td><td>Selected facts and explicit financial promise patterns did not trigger</td></tr>
+          <tr><th scope="row">Synthetic corrupted copies</th><td>3 evaluated, 3 flags</td><td>All three known mutations were detected</td></tr>
+          <tr><th scope="row">Fresh model calls</th><td>0</td><td>No claim about present-day Gemma behavior</td></tr>
+          <tr><th scope="row">Owner or customer approval</th><td>Not performed</td><td>Automated screening is not authorization or useful-customer-copy validation</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>A rerun that prints a different result is worth investigating. Verify that the script has not changed, and inspect which facts or patterns differ. Do not hide a failed self-test to preserve a clean report. All examples remain synthetic customer situations and public historical model text, not real customer files.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-human">
+  <div class="section-meta"><p class="section-label">Boundary / Authorization</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-human">A machine check is not permission to reply.</h2>
+    <p>The practical workflow has distinct checkpoints. A customer provides a review. A model or a template can produce a candidate. A targeted screen can look for selected factual omissions or financial commitments. A business owner must still compare the saved final text with the customer's actual words, current business policy, and the consequences of posting it.</p>
+    <p>I would reject a draft that silently changes a double charge into an incorrect amount, drops a customer's unanswered question, invents a refund, or promises an investigation that no one has authorized. I would also question marketing language that sounds generic or claims an internal improvement without support. A good human review can detect tone, context and authority issues that a small lexical screen will miss.</p>
+    <p>The existing Review Reply Writer application ties approval to the exact saved reply, requires rechecking after edits, and copies approved text for manual posting. The independent script on this page does <strong>not</strong> modify or certify those application controls. Its role is to provide a separate, inspectable observation, not to impersonate an owner or turn a candidate into a published statement.</p>
+    <p>For regulated or confidential business data, do not substitute a publicly shared test or a consumer model for the organization's authorization and security requirements. All inputs here are fictional. The screen intentionally avoids real customer records, browser sessions, credentials, model downloads, cloud APIs and external distribution.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-cost">
+  <div class="section-meta"><p class="section-label">Economics / Realistic claims</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-cost">The recorded model times are not the cost of a finished reply.</h2>
+    <p>On the historical CPU runner the three cases each took roughly 18 to 20 seconds. That is useful evidence about those selected runs under the recorded setup. It does not count model installation, prompts, policy configuration, reading the customer review, correcting the draft, owner authorization, posting, follow-up or ongoing maintenance.</p>
+    <p>Likewise, a script that finishes instantly can still be a bad investment if a person must inspect many false alarms or if it misses a serious unsupported commitment. A time comparison needs equivalent accepted output quality on both the AI and non-AI paths. No such matched study or measured business adoption was performed here.</p>
+    <p>The <a href="/technology/ai-time-savings/">whole-task time calculator</a> can help record these separate costs once they are actually observed. The <a href="/technology/local-ai-gaming-laptop/">Windows local-AI guide</a> explains how to run a controlled local smoke test and why a GitHub-hosted CPU result is not a benchmark on my gaming laptop.</p>
+    <p>If the checker misses known bad cases, improve or stop using it. If a plain template works better than generating and editing a response, keep the template. The goal is an acceptable final answer with a traceable decision, not more AI activity.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-conclusion">
+  <div class="section-meta"><p class="section-label">Conclusion / Independent evidence</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-conclusion">The real result is a more inspectable decision.</h2>
+    <p>This exercise adds an independently reproducible screen to an existing public project. Its result is modest: three historical drafts had no selected flags, and three deliberately damaged copies were caught. The original application and its saved model replies remain unchanged. There is no claim of a paid customer, improved model accuracy, owner satisfaction, new GPU benchmark, or saved human hours.</p>
+    <p><strong>AI Works Human Decides</strong> is concrete here. The model wrote three draft replies in the recorded historical run. A second script asked narrower questions and showed that it could detect known counterexamples. The consequential decision about what to say to a customer still belongs to a person with the actual business policy and source review.</p>
+    <p>Read <a href="/technology/local-ai-review-replies/">the parent application case</a>, <a href="/technology/check-ai-answers/">the broader independent-answer-checking guide</a>, or <a href="/technology/checking-ai-website-changes/">a different actual website-checking failure</a>. To report an incorrect evidence reference, <a href="/contact/">send a correction</a> without including customer or private business information.</p>
+    <p class="editorial-note">Prepared November 3, 2026 with AI assistance using a pinned public test record and a newly executed standard-library offline audit. The model outputs are historical; the mutated outputs are synthetic negative controls; human quality assessment and actual business results are not available.</p>
+  </div>
+</section>
+</article>
+  </main>
+  <footer>
+    <div class="shell footer-row">
+      <span class="footer-identity">© 2026 Nolan Kido</span>
+      <nav class="footer-links" aria-label="Footer navigation"><a href="/technology/">Technology</a><a href="/living-well/">Living Well</a><a href="/poker/">Poker</a><a href="/creative/">Creative Work</a><a href="/notes/">Writing</a><a href="/resources/">Resources</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/follow/">Follow writing</a></nav>
+    </div>
+    <p class="footer-types identity-footer">Build useful things. Make room for a good life. <a href="/start-here/#reading-this-site">About the writing on this site</a>.</p>
+  </footer>
+</body>
+</html>
