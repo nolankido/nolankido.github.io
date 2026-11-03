@@ -42,6 +42,14 @@ Existing October 2026 Gemma smoke results were recorded on a GitHub-hosted Ubunt
 
 The page is listed once in the existing sitemap, on-page Find index, Technology RSS and combined writing RSS, with a genuine 2026-11-02 publication date. Any future edits must preserve this coherent source-to-page-to-feed chain, and all tests are local-only. **Never use GitHub Actions or another scheduled CI workflow for this project.**
 
+## Turn 9: independent AI reply evidence audit
+
+The public `/technology/review-reply-evidence-audit/` article is owned separately from the primary site manifest. Its editable source is `_source/technology/review-reply-evidence-audit.html`; rebuild the public HTML using `python _scripts/build_reply_audit_case.py` and verify with `--check`. `_scripts/reply_audit_case.py` ensures that source, canonical, stable Person ID, November 3, 2026 Article date, Technology link, and offline audit tool stay aligned.
+
+`downloads/review-reply-independent-audit.py` contains only **public historical model outputs for fictional customers**, plus three **deliberately altered negative controls**. The tool is a narrow lexical checker, not a replacement for the Review Reply Writer application's actual approval process. Its offline self-test initially found 0 targeted flags in 3 archived outputs and flagged all 3 deliberately corrupted controls. These numbers are not production error rates, user endorsements, real model runs, benchmark speeds, or authorization. Never upgrade "no targeted flag" into "approved." Rerun `python downloads/review-reply-independent-audit.py --self-test` and review its conditions if changing rules or fixtures.
+
+The article appears once in the existing sitemap, Technology RSS, combined writing feed and browser-local Find directory. Any changes to these must be generated from the verified source. Run the local release checklist, not GitHub Actions. Do not publish private reviews, business policy text, client records, usernames, credentials, current unreleased model results, or personal filesystem paths.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
