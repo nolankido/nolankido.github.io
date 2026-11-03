@@ -74,7 +74,7 @@ class ManualPlayerSitemapTests(unittest.TestCase):
                     '<link rel="canonical" href="' + player_sitemap.URL + '">',
                     '<link rel="canonical" href="https://example.invalid/">', 1)),
                 ('noindex', original.replace('<head>', '<head><meta name="robots" content="noindex">', 1)),
-                ('date', original.replace('"dateModified": "2026-11-01"',
+                ('date', original.replace('"dateModified": "2026-11-03"',
                                           '"dateModified": "2026-01-01"', 1)),
                 ('missing-source-body', original.replace(source, '<div>unverified replacement</div>', 1)),
             ]:

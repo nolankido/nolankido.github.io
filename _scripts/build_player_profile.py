@@ -20,9 +20,9 @@ HUB = ROOT / "poker/index.html"
 OUTPUT = ROOT / "poker/nolan-kido/index.html"
 ORIGIN = "https://nolankido.com"
 URL = ORIGIN + "/poker/nolan-kido/"
-TITLE = "Nolan Kido: Tournament Poker Player | Results & Vlog Plans"
-DESCRIPTION = ("Nolan Kido's live tournament poker record, including independent WSOP "
-               "and South Point results, plus his approach to reviewing poker hands.")
+TITLE = "Nolan Kido: Tournament Poker Player | Results & Videos"
+DESCRIPTION = ("Nolan Kido's tournament poker results, independent WSOP and South Point "
+               "records, public videos, and source-reviewed hand accounts.")
 OLD_TITLE = "Learn Poker: Free Beginner Course & Resources | Nolan Kido"
 OLD_DESCRIPTION = ("Start Poker Foundations, a free Texas Hold’em beginner course. "
                    "Practice decisions, prepare for live play and explore guides and outside resources.")
@@ -85,7 +85,7 @@ def render() -> str:
         "name": TITLE,
         "url": URL,
         "description": DESCRIPTION,
-        "dateModified": "2026-11-01",
+        "dateModified": "2026-11-03",
         "about": {"@type": "Person", "@id": ORIGIN + "/about/#nolan-kido",
                   "name": "Nolan Kido", "url": ORIGIN + "/about/"},
         "breadcrumb": {
