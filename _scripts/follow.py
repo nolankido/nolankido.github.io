@@ -14,6 +14,7 @@ from xml.etree import ElementTree as ET
 from search_visibility import LEGACY_FEED_IDS
 import poker_episode
 import local_laptop_case
+import reply_audit_case
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -46,6 +47,14 @@ def combined(outputs: dict, pages: list[dict], origin: str, root: Path | None = 
         published[laptop['url']] = {
             'id': 'manual-local-ai-guide', 'path': laptop['path'],
             'date': laptop['date'], 'noindex': False,
+        }
+    reply_audit = reply_audit_case.record(approved_root)
+    if reply_audit is not None:
+        if reply_audit['url'] in published:
+            raise ValueError('Independent reply audit must not duplicate a manifest page')
+        published[reply_audit['url']] = {
+            'id': 'manual-reply-evidence-case', 'path': reply_audit['path'],
+            'date': reply_audit['date'], 'noindex': False,
         }
     items = {}
     for path in SOURCES:
