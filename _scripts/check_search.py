@@ -18,6 +18,7 @@ import public_identity
 import player_sitemap
 import poker_episode
 import local_laptop_case
+import reply_audit_case
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,6 +92,14 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
         laptop = None
     if laptop is not None:
         expected_indexed.add(laptop['url'])
+    try:
+        reply_audit = reply_audit_case.record(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append('Independent reply audit: ' + str(exc))
+        reply_audit = None
+    if reply_audit is not None:
+        expected_indexed.add(reply_audit['url'])
+        totals['independent_reply_cases'] += 1
         totals['manual_laptop_guides'] += 1
     sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
     actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
