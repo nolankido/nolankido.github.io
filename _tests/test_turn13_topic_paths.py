@@ -47,7 +47,7 @@ class Turn13TopicPathTests(unittest.TestCase):
                 self.assertTrue((ROOT / target).is_file())
         self.assertIn('href="/technology/#ai-judgment-across-domains"', poker)
         self.assertIn('href="/poker/reviewing-a-hand/"', tech)
-        self.assertIn("does not establish a real-world business error rate", tech)
+        self.assertIn("do not establish a real-world business error rate", tech)
         self.assertIn("do not claim complete, independently verified GTO or ICM solutions", poker)
         for body in (tech, poker):
             self.assertNotIn("\u2014", body)
