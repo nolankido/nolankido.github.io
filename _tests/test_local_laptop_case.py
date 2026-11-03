@@ -20,6 +20,7 @@ from test_site import ROOT, build
 import build_local_laptop_case
 import local_laptop_case
 import manual_local_ai_feed
+import manual_reply_audit_feed
 import practical_discovery
 import follow
 import site_find
@@ -99,11 +100,13 @@ class LocalLaptopCaseTests(unittest.TestCase):
         outputs = build.build_outputs()
         config = practical_discovery.load(ROOT, pages)
         base = practical_discovery.feed(config, pages, outputs, 'https://nolankido.com')
-        tech = manual_local_ai_feed.add(base, ROOT)
+        tech = manual_reply_audit_feed.add(manual_local_ai_feed.add(base, ROOT), ROOT)
         self.assertEqual(tech, outputs[practical_discovery.FEED])
         items = ET.fromstring(tech).findall('./channel/item')
         self.assertEqual([i.findtext('link') for i in items].count(local_laptop_case.URL), 1)
-        self.assertEqual(items[0].findtext('pubDate'), 'Mon, 02 Nov 2026 00:00:00 GMT')
+        matched = [item for item in items if item.findtext('link') == local_laptop_case.URL]
+        self.assertEqual(len(matched), 1)
+        self.assertEqual(matched[0].findtext('pubDate'), 'Mon, 02 Nov 2026 00:00:00 GMT')
         self.assertEqual(outputs[follow.OUTPUT], (ROOT / follow.OUTPUT).read_text(encoding='utf-8'))
         combined = ET.fromstring(outputs[follow.OUTPUT]).findall('./channel/item')
         selected = [i for i in combined if i.findtext('link') == local_laptop_case.URL]
