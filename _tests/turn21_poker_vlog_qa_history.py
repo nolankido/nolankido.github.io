@@ -36,6 +36,8 @@ def blob(value):
 
 
 def before(path, data):
+    import turn22_poker_vlog_fact_gate_history
+    data = turn22_poker_vlog_fact_gate_history.before(path, data)
     pair = BLOBS.get(key(path))
     if pair is None or blob(data) != pair[1]:
         return data
