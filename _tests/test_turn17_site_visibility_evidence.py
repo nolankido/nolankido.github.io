@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 import turn17_site_visibility_evidence_history as history
+import turn21_poker_vlog_qa_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,7 +73,7 @@ class Turn17SiteVisibilityEvidenceTests(unittest.TestCase):
     def test_exact_prior_git_blobs_only(self):
         for path, (old_sha, current_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                raw = (ROOT / path).read_bytes()
+                raw = turn21_poker_vlog_qa_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(history.blob(raw), current_sha)
                 prior = history.before(path, raw)
                 self.assertEqual(history.blob(prior), old_sha)
