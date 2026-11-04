@@ -1,6 +1,24 @@
-# Nolan Kido personal website
+# Nolan Kido | AI Works Human Decides
 
-A small static website for introductions, selected writing, and practical resources. GitHub Pages serves committed HTML. There is no runtime application server or database. Optional, cookie-free Umami Cloud pageview analytics is installed through the shared layout; the site works when analytics is blocked. See `ANALYTICS.md`.
+**Practical AI in real life, with evidence and human judgment.** I build and examine tools for small-business tasks, writing, creative work, and everyday workflows. The public cases show what happened, what was checked, what remains unknown, and which decisions still need a person.
+
+**Website:** [nolankido.com](https://nolankido.com/) | **About:** [Nolan Kido](https://nolankido.com/about/) | **Writing:** [AI Works, Human Decides](https://nolankido.substack.com/p/ai-works-human-decides)
+
+## Start with public evidence
+
+- **Review Reply Writer:** [Local-AI customer review drafting](https://nolankido.com/technology/local-ai-review-replies/) with an owner-approval boundary, archived fictional tests, and limitations. [Source code](https://github.com/nolankido/reviewReplyWriter).
+- **Preflight:** [AI book-continuity checking](https://nolankido.com/technology/ai-book-continuity-checker/) with a source-linked Sherlock Holmes audit that includes correct findings, incorrect flags, and misses. [Source code](https://github.com/nolankido/canonKeeper).
+- **Checking AI-assisted work:** [A recorded website release defect and repair](https://nolankido.com/technology/checking-ai-website-changes/), plus [an identity-metadata correction with before-and-after records](https://nolankido.com/technology/#identity-claim-audit).
+- **Research:** [A coauthored 2012 accounting paper](https://doi.org/10.1111/j.1475-679X.2012.00447.x), evidence of scholarly authorship, not of AI-product performance or a current university appointment.
+- **Outside AI:** [Tournament poker](https://nolankido.com/poker/nolan-kido/), [writing](https://nolankido.com/notes/), and [creative work](https://nolankido.com/creative/). These are distinct interests with their own primary evidence.
+
+This is the source repository for [nolankido.com](https://nolankido.com/), a static GitHub Pages site. The generator uses `_source/` content and `_scripts/build.py`. The public site has no runtime application server or database. Optional, cookie-free Umami pageview analytics is documented in [ANALYTICS.md](ANALYTICS.md).
+
+**Maintainer rule:** Do not add or restore GitHub Actions, cron, other scheduled CI/CD, or paid APIs for this project. [AGENTS.md](AGENTS.md) is authoritative. Build and test locally and verify deployment separately. GitHub Pages may run provider-managed deployments independently of repository-authored workflows.
+
+**Where to look next:** [Site architecture](#site-architecture) | [Manual release process](#release-verification) | [Public identity strategy](_reports/identity-visibility-strategy-2026-11-04.md) | [Browse the public site](https://nolankido.com/start-here/).
+
+The remaining sections are detailed implementation and maintenance records. For a quick evaluation, start with the published work linked above.
 
 ## Beginner Poker course
 
@@ -163,32 +181,35 @@ Provider references:
 
 ## Release verification
 
-Check the current main head before merging, run the tests, and retain the existing branch-based Pages configuration. The `Site checks` workflow uses read-only permissions and does not modify code or hosting settings. On main-branch pushes it runs a bounded public-byte check after local tests, allowing time for Pages propagation. Pull-request checks never query a release as though it were deployed. Superseded commits defer to the newer release's check.
+There are **no repository-authored GitHub Actions workflows** for this project. The former `site-checks.yml` was intentionally removed on November 1, 2026. Do not restore or replace it with a scheduled service. See [AGENTS.md](AGENTS.md) for the permanent restriction.
+
+Before publishing, compare the intended changes with the latest `main` head and run the deterministic build and verification locally:
+
+```sh
+python _scripts/build.py
+python _scripts/build.py --check
+python _scripts/check_search.py
+python _tests/check_html5.py
+python -m unittest discover -s _tests -p 'test_*.py' -v
+```
+
+Run relevant browser tests locally with the installed Playwright browser. Commit authored source and generated output together. Local success does not prove the new public release has propagated.
+
+After a main-branch update, the following command manually checks public responses against the checkout:
 
 ```sh
 python _scripts/check_live.py --attempts 10 --interval 10
 ```
 
-The live verifier makes GET requests to nolankido.com only. It checks public pages, assets, downloads, the custom 404, and excluded source paths. It does not send form messages. A successful build or artifact upload is not a completed deployment: check Pages job status as well as the live bytes. If the bounded live check times out during a provider delay, inspect the deployment before retrying; do not automatically rewrite or roll back working code.
+The live verifier only requests public site pages, assets, downloads and the intended 404 response. It does not submit form messages. A failed or timed-out public check should trigger investigation of deployment state, not an automatic rewrite or rollback. GitHub Pages may run provider-managed deployment tasks independent of repository-authored workflow files.
 
-See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs. Revert faulty changes rather than rewriting history.
+Earlier historical review reports sometimes link jobs from a period when a workflow existed. Those records are evidence of past checks, not current automation or permission to reactivate it. See [SITE_REVIEW.md](SITE_REVIEW.md) for the October 5 historical audit.
 
 ### Search-engine change notifications
 
-After a main-branch release passes the public-response check, the workflow uses
-`_scripts/submit_indexnow.py` to notify IndexNow about meaningful changes between
-the push's actual before/after commits. The script selects canonical sitemap URLs,
-verifies the current main commit and deployed public bytes, and checks the root
-ownership file before sending public URLs to the fixed IndexNow endpoint.
-It does not submit unchanged pages or visitor data. Without `--submit`, it makes
-no network requests and prints the proposed change list for two full commit IDs.
+The existing `_scripts/submit_indexnow.py` is available for manual assessment. Without `--submit`, it reports proposed URLs for two supplied commits and does not make a submission. **No scheduled IndexNow notification runs from this repository.** Do not configure automated submissions. Any actual submission requires separate owner approval and verification that the intended URLs are already live.
 
-The notification receipt is retained as an Actions artifact for 30 days.
-HTTP 200 means the URLs were received; HTTP 202 means receipt with key validation
-pending. Neither proves indexing, ranking, or AI citations. A failed notification
-produces a separate warning while preserving the successful publication receipt.
-Inspect the reason and any requested retry delay before making a bounded retry.
-See `_reports/visibility-sprint/discovery-follow-up.md` for scope and protocol sources.
+An IndexNow response, if independently obtained, confirms at most provider receipt or key-validation status. It does not prove indexing, ranking, traffic or AI-assistant citations. The earlier [discovery protocol](_reports/visibility-sprint/discovery-follow-up.md) describes the historical scope and limits.
 
 ## Technology-first subject hierarchy
 
@@ -217,7 +238,7 @@ episode records, and preserve existing viewer-guide anchors when editing.
 The Poker viewer library now includes three reading routes and six further guides
 on positions/stacks, board texture, ranges/bets, event formats, table context and
 worked viewing scenes. See `VIEWER_NEXT_RELEASE.md`. The directory, links, examples
-and download are covered by the existing CI suite and `test_viewer_next.py`.
+and download are covered by the locally invoked tests and `test_viewer_next.py`.
 No changes to the Technology-first landing page are part of this release.
 
 ## After-play workshops
@@ -318,7 +339,7 @@ python _scripts/check_search.py
 python _tests/search_visibility_browser.py
 ```
 
-The search checker runs in Site checks and reads committed HTML. The browser test
+The search checker runs locally against committed HTML. The browser test
 uses the same `CHROMIUM_PATH`, `AXE_PATH`, and `SCREENSHOT_DIR` options as the other
 suites. Its `--offline` mode checks rendered layouts only when local networking is
 unavailable; it does not claim live navigation or no-script validation. See
@@ -338,8 +359,7 @@ failure and its correction, with a reduced public reproduction and a bounded
 record of what the checks establish. Historical test counts must not be silently
 updated to current counts. Run `python downloads/website-check-reproduction.py`
 with `html5lib==1.1`, and `python _tests/workflow_evidence_browser.py` for the new
-reader and calculator journeys. Both are in Site checks; all 21 earlier browser
-suites remain. See `_reports/workflow-evidence-release.md` for scope and the
+reader and calculator journeys. Both can be run locally; the earlier 21 browser suites remain documented. See `_reports/workflow-evidence-release.md` for scope and the
 Search Console property-access limitation.
 
 ## Practical work previews and writing distribution
@@ -356,7 +376,7 @@ self-link. Existing page sources, sheets, scripts, publication metadata and feed
 stay intact. The exact additions and a separately verified production baseline
 are protected by `test_practical_navigation.py`; historical adapters remove only
 the frozen reviewed blocks on the four named pages. Run
-`_tests/practical_navigation_browser.py` in the existing hosted browser workflow
+`_tests/practical_navigation_browser.py` as a locally invoked browser test
 to check direct arrivals, sibling links, onward choices and private tool return.
 New published Technology evidence articles are included automatically; calculators
 and site edits are not fabricated into new dated articles. Historical section
@@ -404,8 +424,7 @@ python _tests/everyday_tasks_browser.py
 
 The browser suite checks native journeys and downloads with JavaScript enabled
 and disabled, print previews, narrow layouts and text spacing. Its `--offline`
-mode does not claim HTTP, download, or axe results. It is added to Site checks
-without removing the previous 23 suites. See `_reports/everyday-task-review.md`.
+mode does not claim HTTP, download, or axe results. It belongs to the locally run test suite, alongside the 23 previously documented browser checks. See `_reports/everyday-task-review.md`.
 
 ## Local typeface delivery
 
@@ -414,5 +433,5 @@ only its font URLs to the exact content-addressed WOFF2 files in `assets/fonts/`
 with original licenses and `_reports/local-fonts-provenance.json`. Normal builds
 make no font-provider requests. Replacing a typeface or subset requires a new
 review of binary provenance, licenses, descriptor coverage and rendered geometry.
-The full hosted gate includes `local_fonts_browser.py`; the live verifier checks
+The full local test inventory includes `local_fonts_browser.py`; the manually invoked live verifier checks
 every font and license. The privacy notice describes the current local hosting.
