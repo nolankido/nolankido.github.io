@@ -42,6 +42,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn29_source_notes_history
+    value = turn29_source_notes_history.before(path, value)
     pair = BLOBS.get(key(path))
     if pair is None or blob(value) != pair[1]:
         return value
@@ -54,7 +56,9 @@ def before(path, value):
 
 
 def pages(records):
-    """Rewind only the complete recognized bio manifest record."""
+    """Rewind reviewed new page metadata before the old profile record."""
+    import turn29_source_notes_history
+    records = turn29_source_notes_history.pages(records)
     new = dict(OLD_BIO, updated="2026-11-04")
     return [dict(OLD_BIO) if item == new else item for item in records]
 

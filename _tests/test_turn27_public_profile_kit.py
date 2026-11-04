@@ -14,6 +14,7 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
+import turn29_source_notes_history as turn29
 
 SOURCE = ROOT / "_source/bio.html"
 PUBLIC = ROOT / "bio/index.html"
@@ -127,7 +128,7 @@ class ProfileLinkKitTests(unittest.TestCase):
                     item.findtext("{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")
                     for item in root}
         before = rows(old_sitemap)
-        after = rows((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+        after = rows(turn29.before("sitemap.xml", (ROOT / "sitemap.xml").read_text(encoding="utf-8")))
         self.assertEqual(set(before), set(after))
         changed = {url for url in before if before[url] != after[url]}
         self.assertEqual(changed, {"https://nolankido.com/bio/"})
