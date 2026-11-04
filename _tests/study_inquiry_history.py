@@ -22,6 +22,8 @@ def change():
     return record
 
 def before(path,data):
+    import turn30_evidence_index_history
+    data = turn30_evidence_index_history.before(path, data)
     # Shared predecessor for the independent full-site history chains.
     # The newest regional link turn must be reversed before older fingerprints.
     import regional_link_history
