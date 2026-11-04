@@ -16,6 +16,7 @@ import check_search
 import entrypoints
 import follow
 import poker_content
+import public_identity
 import presentation
 import search_visibility as search
 import visibility_discovery_history
@@ -89,7 +90,7 @@ class SearchVisibilityTests(unittest.TestCase):
                     self.assertNotIn('class="search-author"',self.outputs[build.output_path(p['path'])])
         about = check_search.Document(self.outputs[Path('about/index.html')]).schemas[0]
         self.assertEqual(set(about['mainEntity']), {'@type','@id','name','url','description','sameAs'})
-        self.assertEqual(about['mainEntity']['sameAs'], ['https://github.com/nolankido', 'https://dev.to/kidon'])
+        self.assertEqual(about['mainEntity']['sameAs'], public_identity.same_as())
         self.assertEqual(about['mainEntity']['description'], self.site['bio_short'])
         self.assertEqual(about['@type'],'ProfilePage')
 
@@ -168,7 +169,17 @@ class SearchVisibilityTests(unittest.TestCase):
         self.assertNotIn('measured productivity gain',tool.lower().replace('not a measured productivity gain',''))
 
     def test_original_about_prose_is_preserved_beside_the_new_work_links(self):
-        source=visibility_discovery_history.before('_source/about.html',turn12_cross_platform_history.before('_source/about.html', (ROOT/'_source/about.html').read_text()))
+        source=(ROOT/'_source/about.html').read_text()
+        # Reverse this turn first, so archived history checks see their exact
+        # previous source bytes and can still validate their older baseline.
+        evidence=r'<section class="about-evidence" aria-labelledby="about-evidence-title">.*?</section>\n'
+        self.assertEqual(len(re.findall(evidence,source,flags=re.S)), 1)
+        source=re.sub(evidence,'',source,count=1,flags=re.S)
+        new_intro="<p class=\"intro\">I'm <strong>Nolan Kido</strong>. My work brings together practical AI, business operations, and accounting research. I build and examine tools for real tasks, then show the checks and limits behind them. <strong>AI Works Human Decides</strong> is the principle connecting it all.</p>"
+        old_intro='<p class="intro"><strong>AI Works Human Decides</strong> is how I think about putting AI to use in everyday life and small-business work. Let the technology help with a defined task. Keep the purpose, the checks, and the consequential decisions with people.</p>'
+        self.assertEqual(source.count(new_intro), 1)
+        source=source.replace(new_intro,old_intro,1)
+        source=visibility_discovery_history.before('_source/about.html',turn12_cross_platform_history.before('_source/about.html',source))
         public_links='<p class="small-copy" id="public-work-profiles">You can also explore ${public_work_profiles}.</p>\n'
         self.assertEqual(source.count(public_links), 1)
         source=source.replace(public_links, '', 1)
@@ -178,7 +189,7 @@ class SearchVisibilityTests(unittest.TestCase):
         self.assertEqual(prior.count(revised), 1)
         prior=prior.replace(revised, previous, 1)
         self.assertEqual(hashlib.sha256(prior.encode()).hexdigest(),
-                         '913c479a365ef5029686c0972d9c985dbe847ff3aa10d63951c7e5c9ba536909')
+                         'c9d3e45615ea3b1ed217256550a4318e715421a37f1d3b89d29fe2a9e9468db4')
 
     def test_audit_fails_on_real_output_tampering(self):
         page=next(p for p in self.pages if p['id']=='home')

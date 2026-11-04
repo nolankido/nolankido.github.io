@@ -41,12 +41,12 @@
   {
     "id": "about",
     "path": "/about/",
-    "title": "A little about me.",
+    "title": "About Nolan Kido",
     "seo_title": "About Nolan Kido: Practical AI | AI Works Human Decides",
-    "description": "Meet Nolan Kido through practical AI projects, poker, and creative work. AI Works Human Decides connects his tools, recorded cases, and approach.",
+    "description": "Nolan Kido applies AI to real-life and business tasks with AI Works Human Decides. Explore documented projects, published accounting research, and poker.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-11-03"
+    "updated": "2026-11-04"
   },
   {
     "id": "notes",

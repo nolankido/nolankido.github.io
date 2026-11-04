@@ -1,11 +1,15 @@
 {
   "status": "pass",
   "scope": "committed static files, not rankings or indexing confirmation",
+  "manual_player_pages": 1,
+  "manual_episode_pages": 1,
+  "independent_reply_cases": 1,
+  "manual_laptop_guides": 1,
   "pages": 200,
   "breadcrumb_pages": 198,
   "noindex_pages": 5,
   "articles": 110,
-  "sitemap_urls": 195,
+  "sitemap_urls": 199,
   "unique_titles": 200,
   "unique_descriptions": 200,
   "errors": []
