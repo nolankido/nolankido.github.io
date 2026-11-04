@@ -97,9 +97,9 @@ class IdentityEvidenceCaseTests(unittest.TestCase):
                      "https://github.com/nolankido/nolankido.github.io/pull/180",
                      "10.1111/j.1475-679X.2012.00447.x"):
             self.assertIn(item, sheet)
-        for phrase in ("not proof", "human", "no network", "not a truth checker"):
+        for phrase in ("not a current position", "human", "no network", "not a truth checker"):
             self.assertIn(phrase, body.lower())
-        self.assertIn("Search rankings", sheet)
+        self.assertIn("search-traffic growth", sheet)
         self.assertNotIn("\u2014", sheet)
 
     def test_script_five_synthetic_self_checks(self):
