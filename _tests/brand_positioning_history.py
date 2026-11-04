@@ -31,6 +31,8 @@ def change() -> dict:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import turn21_poker_vlog_qa_history
+    data = turn21_poker_vlog_qa_history.before(path, data)
     import turn20_reply_boundaries_history
     data = turn20_reply_boundaries_history.before(path, data)
     import turn19_bio_evidence_routes_history
