@@ -13,6 +13,7 @@ from xml.etree import ElementTree as ET
 
 from search_visibility import LEGACY_FEED_IDS
 import poker_episode
+import poker_standoff_episode
 import local_laptop_case
 import reply_audit_case
 
@@ -39,6 +40,14 @@ def combined(outputs: dict, pages: list[dict], origin: str, root: Path | None = 
         published[manual['url']] = {
             'id': 'manual-public-episode', 'path': manual['route'],
             'date': manual['date'], 'noindex': False,
+        }
+    standoff = poker_standoff_episode.record(approved_root)
+    if standoff is not None:
+        if standoff['url'] in published:
+            raise ValueError('Stand Off companion cannot duplicate an existing dated page')
+        published[standoff['url']] = {
+            'id': 'manual-standoff-episode', 'path': standoff['route'],
+            'date': standoff['date'], 'noindex': False,
         }
     laptop = local_laptop_case.record(approved_root)
     if laptop is not None:
