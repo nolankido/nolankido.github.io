@@ -6,6 +6,7 @@ from pathlib import Path
 
 import turn17_site_visibility_evidence_history as history
 import turn21_poker_vlog_qa_history
+import turn23_technology_metadata_history as turn23_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,7 +63,7 @@ class Turn17SiteVisibilityEvidenceTests(unittest.TestCase):
         self.assertNotIn("guaranteed ranking", body.lower())
 
     def test_page_identity_and_other_paths_are_preserved(self):
-        page = read(PUBLIC)
+        page = turn23_history.before(PUBLIC, read(PUBLIC))
         self.assertIn('<link rel="canonical" href="https://nolankido.com/technology/">', page)
         self.assertIn('"dateModified": "2026-11-03"', page)
         self.assertEqual(page.count('class="project-card"'), 3)
