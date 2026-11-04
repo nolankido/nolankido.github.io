@@ -3,6 +3,7 @@ from pathlib import Path
 import subprocess
 import unittest
 import turn29_source_notes_history as history
+import turn30_evidence_index_history as turn30
 
 
 class SourceNotesHistoryTests(unittest.TestCase):
@@ -10,7 +11,7 @@ class SourceNotesHistoryTests(unittest.TestCase):
         for path, (previous_hash, current_hash) in history.BLOBS.items():
             with self.subTest(path=path):
                 current = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(current), current_hash)
+                self.assertEqual(history.blob(turn30.before(path, current)), current_hash)
                 old = history.before(path, current)
                 self.assertEqual(history.blob(old), previous_hash)
                 self.assertEqual(old, subprocess.check_output(
