@@ -18,7 +18,7 @@ BLOBS = {
 }
 ADDED = {
     "downloads/portland-meadows-standoff-ak-source-ledger.json": "051d44f514d49f8a2fc7e5e8db91dc5cbc6f6162",
-    "downloads/portland-meadows-standoff-ak-gate.py": "09a664ea154e101f813c2e1d599ada1e8064a45c",
+    "downloads/portland-meadows-standoff-ak-gate.py": "c0f8f33eeaaa0bb8a5fde71314a119e039ac5caf",
 }
 OLD_POKER = {
     "id": "poker",
