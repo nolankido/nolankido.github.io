@@ -11,6 +11,7 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
+import turn31_episode_ledger_history as turn31
 
 SOURCE = ROOT / "_source/start-here.html"
 PUBLIC = ROOT / "start-here/index.html"
@@ -166,7 +167,7 @@ class EvidenceByTypeTests(unittest.TestCase):
         def rows(xml):
             root = ET.fromstring(xml)
             return {item.findtext(ns + "loc"): item.findtext(ns + "lastmod") for item in root}
-        older, newer = rows(old_xml), rows(new_xml)
+        older, newer = rows(old_xml), rows(turn31.before("sitemap.xml", new_xml))
         self.assertEqual(set(older), set(newer))
         self.assertEqual({url for url in older if older[url] != newer[url]},
                          {ORIGIN + "/start-here/"})
