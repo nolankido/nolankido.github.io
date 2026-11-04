@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 import turn15_evidence_links_history as history
+import turn16_small_business_pilot_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,7 +71,7 @@ class Turn15EvidenceLinksTests(unittest.TestCase):
     def test_history_restores_only_sha_verified_predecessors(self):
         for path, (old_sha, current_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                content = (ROOT / path).read_bytes()
+                content = turn16_small_business_pilot_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(history.blob(content), current_sha)
                 original = history.before(path, content)
                 self.assertEqual(history.blob(original), old_sha)
