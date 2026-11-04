@@ -53,5 +53,8 @@ def before(path, data):
 
 
 def is_added_file(path, data):
+    import turn25_identity_evidence_history
+    if turn25_identity_evidence_history.is_added_file(path, data):
+        return True
     digest = ADDED.get(key(path))
     return digest is not None and blob(data) == digest
