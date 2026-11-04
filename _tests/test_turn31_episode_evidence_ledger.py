@@ -16,6 +16,7 @@ from xml.etree import ElementTree as ET
 from test_site import ROOT, build
 import build_poker_episode
 import poker_episode
+import turn32_standoff_source_history as turn32
 
 
 SOURCE = ROOT / "_source/poker/portland-meadows-ep1.html"
@@ -186,7 +187,7 @@ class EpisodeEvidenceLedgerTests(unittest.TestCase):
                 node.findtext(ns + "loc"): node.findtext(ns + "lastmod")
                 for node in ET.fromstring(text)
             }
-        before, after = rows(older), rows(current)
+        before, after = rows(older), rows(turn32.before("sitemap.xml", current))
         self.assertEqual(set(before), set(after))
         self.assertEqual({url for url in before if before[url] != after[url]},
                          {poker_episode.URL})
