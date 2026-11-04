@@ -76,7 +76,7 @@ def render() -> str:
     prefix = prefix.replace('href="/poker/" aria-current="page"',
                             'href="/poker/" aria-current="location"')
     prefix = replace_once(prefix, '<meta property="og:type" content="website">', '<meta property="og:type" content="article">')
-    prefix = replace_once(prefix, '  <script type="application/ld+json">', '  <meta property="article:published_time" content="2026-11-02">\n  <meta property="article:modified_time" content="{MODIFIED}">\n  <script type="application/ld+json">')
+    prefix = replace_once(prefix, '  <script type="application/ld+json">', f'  <meta property="article:published_time" content="2026-11-02">\n  <meta property="article:modified_time" content="{MODIFIED}">\n  <script type="application/ld+json">')
     pattern = r'<script type="application/ld\+json">(.*?)</script>'
     match = re.search(pattern, prefix, flags=re.S)
     if match is None or len(re.findall(pattern, prefix, flags=re.S)) != 1:
