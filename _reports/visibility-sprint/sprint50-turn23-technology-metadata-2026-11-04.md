@@ -34,11 +34,12 @@ The description is 156 characters. It names the site owner, core public projects
 - Python syntax parsing passed for all eight new or edited Python test and history files.
 - Static checks confirmed one Technology sitemap date change, one JSON-LD description, three escaped page-description copies, and one Find listing description.
 - The full filesystem-backed generator and unittest suite **could not be executed** in the current read-only runtime. The new regression tests are committed for the next environment with a checked-out repository.
-- The first live requests immediately after merging still returned the prior description. Live publication and cache propagation remained unconfirmed at the time of this check. This is not evidence of a failed merge.
+- The first live requests immediately after merging returned the prior description. A later uncached live fetch confirmed the new Technology page description and the updated browser-local Find listing. These public HTML surfaces have propagated.
+- GitHub main independently confirms the intended November 4 Technology sitemap date in the committed XML file. The external page-extraction service renders sitemap URLs as links and did not expose the live XML dates, so direct verification of the deployed `lastmod` is still outstanding.
 - No GitHub Actions, cron jobs, paid API calls, accounts, private analytics, invented poker facts, or changes to unrelated pages were introduced.
 
 ## Follow-up
 
-Confirm that the live Technology HTML reports the new description and `dateModified`, that the public Find page shows the same summary, and that the public sitemap reports the November 4 Technology date. Then consider further substantive evidence-backed content improvements and actual Search Console measurements if the connected property becomes available.
+The live Technology description and Find summary are confirmed. Independently check the deployed JSON-LD `dateModified` and raw sitemap `lastmod` when a raw-response verifier is available. Then consider further substantive evidence-backed content improvements and actual Search Console measurements if the connected property becomes available.
 
 This turn corrects consistency and relevance of metadata. It does not establish new rankings, traffic, citations in AI answers, or viewer retention.
