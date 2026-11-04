@@ -10,8 +10,8 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 PARENT = "fab6e73fb93552831b39c9011dca813955224124"
 BLOBS = {
-    "_source/poker/home.html": ("7532ba69db61066c227af9ea63613dc20f2bb8ba", "2593a9a41e364299e4df857d9eccab9a8a212e60"),
-    "poker/index.html": ("53b4029d021d54e43fb0e2f78d5d9f104ce018d7", "db8284d6b683cb1a43c811923f1d884067b74b7c"),
+    "_source/poker/home.html": ("7532ba69db61066c227af9ea63613dc20f2bb8ba", "ffa726ac6785306227a2aa83743dd4fc2d828744"),
+    "poker/index.html": ("53b4029d021d54e43fb0e2f78d5d9f104ce018d7", "98e15348b2f077bec0a92f12c05adcaa8bc64f12"),
     "_source/pages.json": ("6a822d309b8763db55d07716e1d0007e6bb04196", "987b73f530fac98f1d8bf4eec6d8259df6ac3622"),
     "sitemap.xml": ("fd753f9bc50c527dd431d285455a65651aed25c0", "2b54d705371288acb4d0735c992759662ec441b5"),
     "_scripts/check_live.py": ("6ff27052edb9dcf174607e0d07c809952eefcfaf", "3cdf363c51c8187c3969c870bc89b6eae1276024"),
