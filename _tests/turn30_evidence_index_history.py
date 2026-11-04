@@ -65,6 +65,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn31_episode_ledger_history
+    value = turn31_episode_ledger_history.before(path, value)
     name = key(path)
     pair = BLOBS.get(name)
     if pair is None or blob(value) != pair[1]:
