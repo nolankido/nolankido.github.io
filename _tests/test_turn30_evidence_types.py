@@ -138,10 +138,14 @@ class EvidenceByTypeTests(unittest.TestCase):
         self.assertEqual(page.count('class="entry-card"'), 4)
         self.assertEqual(page.count('class="identity-reading"'), 3)
         self.assertIn('href="#evidence-types">Check the evidence</a>', page)
+        previous = subprocess.check_output(
+            ["git", "show", "c259d366176f3411e89777646135262178cc75b3:start-here/index.html"],
+            cwd=ROOT
+        ).decode("utf-8")
         for route in ("/technology/task-brief/", "/technology/check-ai-answers/",
                       "/living-well/weekly-reset/", "/poker/first-live-tournament/"):
             self.assertEqual(page.count('href="' + route + '"'),
-                             SOURCE.read_text().count('href="' + route + '"'))
+                             previous.count('href="' + route + '"'), route)
         self.assertIn('id="study-interest"', page)
         self.assertIn("plans, not completed results", page)
 
