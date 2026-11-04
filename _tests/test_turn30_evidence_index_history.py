@@ -4,6 +4,7 @@ import subprocess
 import unittest
 
 import turn30_evidence_index_history as history
+import turn31_episode_ledger_history as turn31
 
 
 class EvidenceIndexHistoryTests(unittest.TestCase):
@@ -16,7 +17,7 @@ class EvidenceIndexHistoryTests(unittest.TestCase):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
                 current = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(current), new_sha)
+                self.assertEqual(history.blob(turn31.before(path, current)), new_sha)
                 original = history.before(path, current)
                 self.assertEqual(history.blob(original), old_sha)
                 self.assertEqual(original, subprocess.check_output(

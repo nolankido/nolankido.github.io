@@ -21,6 +21,7 @@ OUTPUT = ROOT / "poker/episodes/portland-meadows-ep1/index.html"
 ORIGIN = "https://nolankido.com"
 URL = ORIGIN + "/poker/episodes/portland-meadows-ep1/"
 TITLE = "Portland Meadows Ep1: From 6.5 BB to a Trophy | Nolan Kido"
+MODIFIED = "2026-11-04"
 DESCRIPTION = ("Nolan Kido's Portland Meadows poker-vlog episode: the short-stack comeback, "
                "6-4 versus A-K, sevens versus A-T, four-way deal and official trophy.")
 OLD_TITLE = "Learn Poker: Free Beginner Course & Resources | Nolan Kido"
@@ -75,7 +76,7 @@ def render() -> str:
     prefix = prefix.replace('href="/poker/" aria-current="page"',
                             'href="/poker/" aria-current="location"')
     prefix = replace_once(prefix, '<meta property="og:type" content="website">', '<meta property="og:type" content="article">')
-    prefix = replace_once(prefix, '  <script type="application/ld+json">', '  <meta property="article:published_time" content="2026-11-02">\n  <meta property="article:modified_time" content="2026-11-02">\n  <script type="application/ld+json">')
+    prefix = replace_once(prefix, '  <script type="application/ld+json">', f'  <meta property="article:published_time" content="2026-11-02">\n  <meta property="article:modified_time" content="{MODIFIED}">\n  <script type="application/ld+json">')
     pattern = r'<script type="application/ld\+json">(.*?)</script>'
     match = re.search(pattern, prefix, flags=re.S)
     if match is None or len(re.findall(pattern, prefix, flags=re.S)) != 1:
@@ -86,7 +87,7 @@ def render() -> str:
         "@type": "Article", "@id": URL + "#article", "name": TITLE,
         "headline": "Portland Meadows: From 6.5 Big Blinds to a Trophy",
         "url": URL, "description": DESCRIPTION,
-        "datePublished": "2026-11-02", "dateModified": "2026-11-02",
+        "datePublished": "2026-11-02", "dateModified": MODIFIED,
         "author": {"@type": "Person", "@id": ORIGIN + "/about/#nolan-kido",
                    "name": "Nolan Kido", "url": ORIGIN + "/about/"},
         "publisher": {"@type": "Person", "@id": ORIGIN + "/about/#nolan-kido",

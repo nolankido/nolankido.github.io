@@ -2,6 +2,7 @@
 import subprocess
 import unittest
 import turn10_video_history as history
+import turn31_episode_ledger_history as turn31
 
 
 class Turn10VideoHistoryTests(unittest.TestCase):
@@ -9,7 +10,7 @@ class Turn10VideoHistoryTests(unittest.TestCase):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
                 raw = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(raw), new_sha)
+                self.assertEqual(history.blob(turn31.before(path, raw)), new_sha)
                 previous = history.before(path, raw)
                 self.assertEqual(history.blob(previous), old_sha)
                 self.assertEqual(previous, subprocess.check_output(

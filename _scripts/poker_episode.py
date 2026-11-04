@@ -16,6 +16,7 @@ OUTPUT = Path('poker/episodes/portland-meadows-ep1/index.html')
 VIDEO = 'https://www.youtube.com/watch?v=qABaiIcvvpU'
 TITLE = 'Portland Meadows: From 6.5 Big Blinds to a Trophy'
 PUBLISHED = '2026-11-02'
+MODIFIED = '2026-11-04'
 PERSON_ID = 'https://nolankido.com/about/#nolan-kido'
 
 
@@ -84,6 +85,7 @@ def record(root: Path) -> dict | None:
             or schema.get('url') != URL
             or schema.get('@id') != URL + '#article'
             or schema.get('datePublished') != PUBLISHED
+            or schema.get('dateModified') != MODIFIED
             or schema.get('author', {}).get('@id') != PERSON_ID
             or schema.get('mainEntityOfPage', {}).get('url') != URL):
         raise ValueError('Companion structured data needs reviewed article identity and date')
@@ -91,4 +93,4 @@ def record(root: Path) -> dict | None:
     if any(value not in authored for value in required):
         raise ValueError('Companion missing the reviewed hand/deal distinction')
     return {'route': ROUTE, 'url': URL, 'title': TITLE,
-            'date': PUBLISHED, 'video_url': VIDEO}
+            'date': PUBLISHED, 'modified': MODIFIED, 'video_url': VIDEO}
