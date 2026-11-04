@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 import turn16_small_business_pilot_history as history
+import turn17_site_visibility_evidence_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -80,7 +81,7 @@ class Turn16SmallBusinessPilotTests(unittest.TestCase):
     def test_exact_reviewed_predecessor_only(self):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                raw = (ROOT / path).read_bytes()
+                raw = turn17_site_visibility_evidence_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(history.blob(raw), new_sha)
                 old = history.before(path, raw)
                 self.assertEqual(history.blob(old), old_sha)
