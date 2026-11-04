@@ -31,6 +31,8 @@ def blob(value):
 
 
 def before(path, data):
+    import turn32_standoff_source_history
+    data = turn32_standoff_source_history.before(path, data)
     import turn31_episode_ledger_history
     data = turn31_episode_ledger_history.before(path, data)
     name = key(path)
