@@ -20,6 +20,7 @@ import public_profile
 import visibility_sprint_history
 import visibility_discovery_history
 import turn12_cross_platform_history
+import turn27_profile_history
 
 class Links(HTMLParser):
     def __init__(self, html):
@@ -137,7 +138,7 @@ class PublicProfileTests(unittest.TestCase):
         for path in ['feed.xml','writing.xml','technology/feed.xml','living-well/feed.xml','poker/feed.xml']:
             self.assertNotIn('/bio/',self.outputs[Path(path)])
         p=next(p for p in build.public_pages() if p['id']=='bio')
-        self.assertEqual(visibility_discovery_history.pages([p])[0]['updated'],'2026-10-17')
+        self.assertEqual(visibility_discovery_history.pages(turn27_profile_history.pages([p]))[0]['updated'],'2026-10-17')
         self.assertEqual(p['title'],'A brief introduction.')
         self.assertIn('Nolan Kido',p['seo_title'])
         self.assertIn('Introductions',p['seo_title'])
