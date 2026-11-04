@@ -76,6 +76,12 @@ TEXT_BOUNDARIES = {
     "later_read": ("retrospective hypothesis", "not a validated range"),
 }
 
+EXPECTED_FIELDS = {
+    "root": {"schema_version", "title", "author", "public_video_url", "source_kind", "public_release_status", "current_cut_reviewed", "source_clip_and_hole_card_stills_publicly_included", "episode_calendar_date_independently_confirmed", "frame_accurate_video_chapters_verified", "opponent_identification_authorized", "event", "decision", "editorial_rule"},
+    "event": {"format", "buy_in_usd", "starting_stack_chips", "reported_stage", "clock_observation_players_left", "clock_observation_entries", "sb_chips", "bb_chips", "bb_ante_chips", "result", "payout_amount_known", "payout_structure_independently_verified"},
+    "decision": {"hero_position", "hole_cards_reported", "hole_card_suits_from_v9_source", "hole_card_suits_independently_checked_in_current_upload", "starting_stack_approx_chips", "opener_position", "opener_raise_to_chips", "middle_caller_called_chips", "first_decision", "after_flat_approx_chips", "bb_previous_blind_chips", "bb_additional_to_call_before_jam_chips", "action_after_first_decision", "hero_calls_additional_approx_chips", "big_blind_revealed", "opener_revealed", "full_board_verified", "villain_card_suits_verified", "exact_effective_stacks_verified", "numerical_icm_solution_verified", "solver_verdict_verified", "later_read", "immediate_after_hand_opinion", "final_human_review_of_uploaded_video_complete"},
+}
+
 def flag(items: list[dict[str, str]], code: str, path: str, detail: str) -> None:
     items.append({"code": code, "field": path, "detail": detail})
 
@@ -89,6 +95,13 @@ def validate(value: object) -> list[dict[str, str]]:
     if not isinstance(event, dict) or not isinstance(hand, dict):
         return [{"code": "INVALID_DOCUMENT", "field": "event/decision",
                  "detail": "Both event and decision must be objects."}]
+    for label, obj in (("root", value), ("event", event), ("decision", hand)):
+        for field in sorted(set(obj) - EXPECTED_FIELDS[label]):
+            flag(results, "UNREVIEWED_FIELD", label + "." + field,
+                 "This private or unsupported field is not part of the approved public record.")
+        for field in sorted(EXPECTED_FIELDS[label] - set(obj)):
+            flag(results, "MISSING_FIELD", label + "." + field,
+                 "The original public field has been removed.")
     for label, obj, required in (
         ("root", value, SOURCE_VALUES),
         ("event", event, EVENT_VALUES),
