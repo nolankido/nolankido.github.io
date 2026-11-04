@@ -117,7 +117,7 @@ def standoff_episode_entry(root: Path) -> dict | None:
     description = meta.description[0]
     if not title or not seo_title or not 80 <= len(description) <= 190:
         raise ValueError('Stand Off Find requires bounded public titles and summary')
-    matches = re.findall(r'<script type="application/ld\\+json">(.*?)</script>', html, re.S)
+    matches = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
     if len(matches) != 1:
         raise ValueError('Stand Off Find requires one Article schema')
     schema = json.loads(matches[0])
