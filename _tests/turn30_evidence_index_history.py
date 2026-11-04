@@ -80,5 +80,7 @@ def before(path, value):
 
 
 def pages(records):
+    import turn32_standoff_source_history
+    records = turn32_standoff_source_history.pages(records)
     new = dict(OLD_PAGE, updated="2026-11-04")
     return [dict(OLD_PAGE) if page == new else page for page in records]
