@@ -108,4 +108,4 @@ def add_to_sitemap(sitemap: ET.Element, root: Path) -> None:
     if episode is not None:
         entry = ET.SubElement(sitemap, 'url')
         ET.SubElement(entry, 'loc').text = episode['url']
-        ET.SubElement(entry, 'lastmod').text = episode['date']
+        ET.SubElement(entry, 'lastmod').text = episode['modified']
