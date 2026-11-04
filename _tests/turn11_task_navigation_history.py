@@ -13,6 +13,8 @@ def change():
         raise ValueError('Unknown navigation release history')
     return data
 def before(path,data):
+    import turn30_evidence_index_history
+    data=turn30_evidence_index_history.before(path,data)
     data=weekly_history.before(path,data)
     item=change()['paths'].get(str(path))
     if item is None:return data
