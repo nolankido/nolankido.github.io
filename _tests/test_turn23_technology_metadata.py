@@ -12,6 +12,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 import turn23_technology_metadata_history as history
+import turn26_technology_entry_history as turn26_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -111,7 +112,7 @@ class Turn23TechnologyMetadataTests(unittest.TestCase):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
                 current = (ROOT / path).read_bytes()
-                self.assertEqual(history.blob(current), new_sha)
+                self.assertEqual(history.blob(turn26_history.before(path, current)), new_sha)
                 restored = history.before(path, current)
                 self.assertEqual(history.blob(restored), old_sha)
                 self.assertEqual(restored, subprocess.check_output(
