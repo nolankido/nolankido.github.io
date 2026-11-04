@@ -6,6 +6,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 import turn14_freshness_history as history
+import turn15_evidence_links_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -77,7 +78,7 @@ class Turn14SitemapFreshnessTests(unittest.TestCase):
     def test_exact_predecessor_rewinds_only_reviewed_blobs(self):
         for path, (old_sha, current_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                content = (ROOT / path).read_bytes()
+                content = turn15_evidence_links_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(history.blob(content), current_sha)
                 older = history.before(path, content)
                 self.assertEqual(history.blob(older), old_sha)
