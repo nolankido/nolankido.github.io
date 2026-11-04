@@ -45,6 +45,8 @@ def blob(value):
 
 
 def before(path, data):
+    import turn23_technology_metadata_history
+    data = turn23_technology_metadata_history.before(path, data)
     name = key(path)
     pair = BLOBS.get(name)
     if pair is None or blob(data) != pair[1]:
