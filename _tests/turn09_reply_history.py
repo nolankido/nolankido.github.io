@@ -31,6 +31,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn20_reply_boundaries_history as turn20
+    value = turn20.before(path, value)
     name = key(path)
     pair = BLOBS.get(name)
     if pair is None or blob(value) != pair[1]:
@@ -46,30 +48,41 @@ def outputs(records):
 
 
 def source_records(records):
+    import turn20_reply_boundaries_history as turn20
     return {path: before(path, value) for path, value in records.items()
-            if ADDED.get(key(path)) != blob(value)}
+            if ADDED.get(key(path)) != blob(turn20.before(path, value))
+            and not turn20.is_added_file(path, value)}
 
 
 def files(paths):
+    import turn20_reply_boundaries_history as turn20
     def keep(path):
         name = key(path)
+        if not (ROOT / name).is_file():
+            return True
+        raw = (ROOT / name).read_bytes()
+        if turn20.is_added_file(name, raw):
+            return False
         digest = ADDED.get(name)
-        return digest is None or not (ROOT / name).is_file() or blob((ROOT / name).read_bytes()) != digest
+        return digest is None or blob(turn20.before(name, raw)) != digest
     return type(paths)(path for path in paths if keep(path))
 
 
 def live_targets(records):
+    import turn20_reply_boundaries_history as turn20
     result = {}
     for route, response in records.items():
         extra = NEW_ROUTES.get(route)
         if (extra in ADDED and isinstance(response, tuple) and len(response) == 2
                 and type(response[0]) is int and response[0] == 200
-                and isinstance(response[1], bytes) and blob(response[1]) == ADDED[extra]):
+                and isinstance(response[1], bytes)
+                and blob(turn20.before(extra, response[1])) == ADDED[extra]):
             continue
         name = ROUTES.get(route)
         if (name in BLOBS and isinstance(response, tuple) and len(response) == 2
                 and type(response[0]) is int and response[0] == 200
-                and isinstance(response[1], bytes) and blob(response[1]) == BLOBS[name][1]):
+                and isinstance(response[1], bytes)
+                and blob(turn20.before(name, response[1])) == BLOBS[name][1]):
             result[route] = (200, before(name, response[1]))
         else:
             result[route] = response
