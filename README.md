@@ -1,6 +1,24 @@
-# Nolan Kido personal website
+# Nolan Kido | AI Works Human Decides
 
-A small static website for introductions, selected writing, and practical resources. GitHub Pages serves committed HTML. There is no runtime application server or database. Optional, cookie-free Umami Cloud pageview analytics is installed through the shared layout; the site works when analytics is blocked. See `ANALYTICS.md`.
+**Practical AI in real life, with evidence and human judgment.** I build and examine tools for small-business tasks, writing, creative work, and everyday workflows. The public cases show what happened, what was checked, what remains unknown, and which decisions still need a person.
+
+**Website:** [nolankido.com](https://nolankido.com/) | **About:** [Nolan Kido](https://nolankido.com/about/) | **Writing:** [AI Works, Human Decides](https://nolankido.substack.com/p/ai-works-human-decides)
+
+## Start with public evidence
+
+- **Review Reply Writer:** [Local-AI customer review drafting](https://nolankido.com/technology/local-ai-review-replies/) with an owner-approval boundary, archived fictional tests, and limitations. [Source code](https://github.com/nolankido/reviewReplyWriter).
+- **Preflight:** [AI book-continuity checking](https://nolankido.com/technology/ai-book-continuity-checker/) with a source-linked Sherlock Holmes audit that includes correct findings, incorrect flags, and misses. [Source code](https://github.com/nolankido/canonKeeper).
+- **Checking AI-assisted work:** [A recorded website release defect and repair](https://nolankido.com/technology/checking-ai-website-changes/), plus [an identity-metadata correction with before-and-after records](https://nolankido.com/technology/#identity-claim-audit).
+- **Research:** [A coauthored 2012 accounting paper](https://doi.org/10.1111/j.1475-679X.2012.00447.x), evidence of scholarly authorship, not of AI-product performance or a current university appointment.
+- **Outside AI:** [Tournament poker](https://nolankido.com/poker/nolan-kido/), [writing](https://nolankido.com/notes/), and [creative work](https://nolankido.com/creative/). These are distinct interests with their own primary evidence.
+
+This is the source repository for [nolankido.com](https://nolankido.com/), a static GitHub Pages site. The generator uses `_source/` content and `_scripts/build.py`. The public site has no runtime application server or database. Optional, cookie-free Umami pageview analytics is documented in [ANALYTICS.md](ANALYTICS.md).
+
+**Maintainer rule:** Do not add or restore GitHub Actions, cron, other scheduled CI/CD, or paid APIs for this project. [AGENTS.md](AGENTS.md) is authoritative. Build and test locally and verify deployment separately. GitHub Pages may run provider-managed deployments independently of repository-authored workflows.
+
+**Where to look next:** [Site architecture](#site-architecture) | [Manual release process](#release-verification) | [Public identity strategy](_reports/identity-visibility-strategy-2026-11-04.md) | [Browse the public site](https://nolankido.com/start-here/).
+
+The remaining sections are detailed implementation and maintenance records. For a quick evaluation, start with the published work linked above.
 
 ## Beginner Poker course
 
