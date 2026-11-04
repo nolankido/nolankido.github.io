@@ -113,6 +113,27 @@
     <p class="small-copy"><strong>Evidence limit:</strong> This method is an original editorial control built from an existing public video companion. It does not establish improved viewer retention, verified solver decisions, edit speed, permission to film, or the quality of unpublished footage. <a href="/poker/hand-to-vlog/">The creator workbench</a> covers the broader proposed story and graphics workflow.</p>
   </div>
 </section>
+<section class="section folio-row" id="poker-vlog-qa-demo" aria-labelledby="poker-vlog-qa-demo-title">
+  <div class="section-meta"><p class="section-label">Worked example / Offline QA</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="poker-vlog-qa-demo-title">Seven constructed edit conflicts. Seven targeted flags.</h2>
+    <p>To make the <a href="#poker-vlog-qa">truth-to-screen release gate</a> testable, I wrote a small standard-library Python checker for structured edit claims from the <a href="/poker/episodes/portland-meadows-ep1/">public Portland Meadows Episode 1 record</a>. This is a deterministic audit of text fields, not an AI watching my footage. I constructed four fictional, incorrect scene records and paired each with a corrected record. The checker found the seven expected targeted conflicts in the constructed records and none in the corrected examples.</p>
+    <div class="project-table-scroll" role="region" aria-label="Synthetic poker scene before and after findings" tabindex="0">
+      <table>
+        <caption>Reproducible demonstrations, not observed defects in a released video</caption>
+        <thead><tr><th scope="col">Constructed before edit</th><th scope="col">Targeted flags</th><th scope="col">Corrected after edit</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Unverified suits and complete board shown as factual</th><td>2: suits, board</td><td>Omit the unverified details: 0</td></tr>
+          <tr><th scope="row">Pocket sevens shown at 18 BB with a 2 BB button open</th><td>2: stack, raise-to amount</td><td>19.5 BB and 2.5 BB from the reported chips: 0</td></tr>
+          <tr><th scope="row">Advertised $5,100 shown as the amount received</th><td>1: payout conflict</td><td>Report $2,900 after the four-way deal: 0</td></tr>
+          <tr><th scope="row">A verified solver verdict and old version 7 chapter offset are claimed</th><td>2: unsupported solver, unverified chapter timing</td><td>Remove both unsupported assertions: 0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><a href="/downloads/poker-vlog-fact-gate.py" download>Download the standalone Python checker (.py)</a>. Its built-in <code>--self-test</code> reproduces the four comparisons and confirms the expected seven-to-zero flag counts. <code>--example</code> prints a local JSON starter record, and <code>--check SCENES.json</code> checks only supplied structured scene fields. The <a href="/downloads/poker-vlog-truth-to-screen-qa.md" download>worksheet</a> contains the commands and the final human review checklist. No model, account, uploaded video, internet connection or paid API is required.</p>
+    <p class="small-copy"><strong>What this does not establish:</strong> The four before cases are deliberately written test fixtures, not flaws observed in an actual edit or model-generated mistakes. A clean structured result does not confirm that spoken audio matches graphics, establish missing suits, verify solver strategy, secure filming rights or predict viewer retention. The checker's sources are bounded to those three public Episode 1 fact records; other hands require separate human verification.</p>
+  </div>
+</section>
 <!-- AI task choice: start -->
 <section class="section folio-row" aria-labelledby="technology-before-ai"><div class="section-meta"><p class="section-label">Start here / Decide first</p></div><div class="section-content prose"><h2 class="section-title" id="technology-before-ai">Should this task use AI at all?</h2><p>Check the purpose, inputs, consequences, and a simpler alternative before you write a prompt. Six questions lead to a next step, including when to pause or leave AI out.</p><p><a class="button" href="/technology/should-i-use-ai/">Decide whether AI fits this task</a></p></div></section>
 <!-- AI task choice: end -->
