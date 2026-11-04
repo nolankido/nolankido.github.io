@@ -70,7 +70,7 @@ class IdentityEvidenceCaseTests(unittest.TestCase):
             self.assertNotIn("\\u0027", body)
         self.assertEqual((ROOT / "_source/about.html").read_text().count("How I handle credibility claims:"), 1)
         tech = SOURCE.read_text()
-        self.assertIn('href="#identity-claim-audit">How an AI-assisted audit', tech)
+        self.assertIn('href="#identity-claim-audit">See an AI-assisted claim corrected.', tech)
         self.assertLess(tech.index('href="#identity-claim-audit"'), tech.index('id="' + CASE_ID + '"'))
         self.assertLess(tech.index('id="' + CASE_ID + '"'), tech.index('id="site-visibility-evidence"'))
 

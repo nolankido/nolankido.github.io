@@ -4,6 +4,7 @@ import subprocess
 import unittest
 
 import turn25_identity_evidence_history as history
+import turn26_technology_entry_history as turn26_history
 
 
 class IdentityEvidencePredecessorTests(unittest.TestCase):
@@ -16,7 +17,8 @@ class IdentityEvidencePredecessorTests(unittest.TestCase):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
                 current = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(current), new_sha)
+                reviewed = turn26_history.before(path, current)
+                self.assertEqual(history.blob(reviewed), new_sha)
                 old = history.before(path, current)
                 self.assertEqual(history.blob(old), old_sha)
                 self.assertEqual(old, subprocess.check_output(
