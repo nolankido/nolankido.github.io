@@ -7,6 +7,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 import turn21_poker_vlog_qa_history as history
+import turn22_poker_vlog_fact_gate_history as turn22_history
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "_source/technology/home.html"
@@ -116,7 +117,7 @@ class Turn21PokerVlogQATests(unittest.TestCase):
     def test_only_exact_approved_blobs_rewind(self):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                data = (ROOT / path).read_bytes()
+                data = turn22_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(history.blob(data), new_sha)
                 prior = history.before(path, data)
                 self.assertEqual(history.blob(prior), old_sha)
