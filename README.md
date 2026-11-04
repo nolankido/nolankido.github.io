@@ -238,7 +238,7 @@ episode records, and preserve existing viewer-guide anchors when editing.
 The Poker viewer library now includes three reading routes and six further guides
 on positions/stacks, board texture, ranges/bets, event formats, table context and
 worked viewing scenes. See `VIEWER_NEXT_RELEASE.md`. The directory, links, examples
-and download are covered by the existing CI suite and `test_viewer_next.py`.
+and download are covered by the locally invoked tests and `test_viewer_next.py`.
 No changes to the Technology-first landing page are part of this release.
 
 ## After-play workshops
@@ -339,7 +339,7 @@ python _scripts/check_search.py
 python _tests/search_visibility_browser.py
 ```
 
-The search checker runs in Site checks and reads committed HTML. The browser test
+The search checker runs locally against committed HTML. The browser test
 uses the same `CHROMIUM_PATH`, `AXE_PATH`, and `SCREENSHOT_DIR` options as the other
 suites. Its `--offline` mode checks rendered layouts only when local networking is
 unavailable; it does not claim live navigation or no-script validation. See
@@ -377,7 +377,7 @@ self-link. Existing page sources, sheets, scripts, publication metadata and feed
 stay intact. The exact additions and a separately verified production baseline
 are protected by `test_practical_navigation.py`; historical adapters remove only
 the frozen reviewed blocks on the four named pages. Run
-`_tests/practical_navigation_browser.py` in the existing hosted browser workflow
+`_tests/practical_navigation_browser.py` as a locally invoked browser test
 to check direct arrivals, sibling links, onward choices and private tool return.
 New published Technology evidence articles are included automatically; calculators
 and site edits are not fabricated into new dated articles. Historical section
@@ -425,8 +425,7 @@ python _tests/everyday_tasks_browser.py
 
 The browser suite checks native journeys and downloads with JavaScript enabled
 and disabled, print previews, narrow layouts and text spacing. Its `--offline`
-mode does not claim HTTP, download, or axe results. It is added to Site checks
-without removing the previous 23 suites. See `_reports/everyday-task-review.md`.
+mode does not claim HTTP, download, or axe results. It belongs to the locally run test suite, alongside the 23 previously documented browser checks. See `_reports/everyday-task-review.md`.
 
 ## Local typeface delivery
 
