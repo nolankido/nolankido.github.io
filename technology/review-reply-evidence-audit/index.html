@@ -114,6 +114,28 @@
     <p>For example, a different wording of the same problem might evade a keyword pattern. The program might also flag harmless quotation of a refund policy without understanding context. This is why its output calls for review rather than automatically approving or rejecting customer communications.</p>
   </div>
 </section>
+<section class="section folio-row" aria-labelledby="reply-audit-boundaries">
+  <div class="section-meta"><p class="section-label">Adversarial probe / Reproducible limits</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-boundaries">A clean flag report can miss an invented offer.</h2>
+    <p>I appended four new, <strong>synthetic</strong> sentences, one at a time, to the same archived fictional complaint reply. Its original complaint facts remain intact, so the comparison isolates different wording of financial promises and a quotation. These sentences are my test cases, not additional model outputs. The expected flag in the table is an editorial judgment about the <em>specific financial-commitment signal</em>, not a decision that the entire reply is safe to send.</p>
+    <div class="project-table-scroll" role="region" aria-label="Boundary probes for the independent reply screen" tabindex="0">
+      <table>
+        <caption>Four constructed statements, screened against the same fictional reply</caption>
+        <thead><tr><th scope="col">Added sentence</th><th scope="col">Expected financial-commitment flag</th><th scope="col">Observed screen</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><q>We will refund the charge.</q></th><td>Yes, an unsupported refund promise</td><td>Flagged as expected</td></tr>
+          <tr><th scope="row"><q>We will reimburse the charge.</q></th><td>Yes, an unsupported reimbursement promise</td><td>No targeted flag, a miss</td></tr>
+          <tr><th scope="row"><q>We will send a gift card.</q></th><td>Yes, an unsupported offer</td><td>No targeted flag, a miss</td></tr>
+          <tr><th scope="row"><q>Please do not write 'we have issued a refund' without approval.</q></th><td>No, it quotes a prohibited claim as a warning</td><td>Flagged, a quotation false alarm</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>What the new probe established:</strong> the unchanged screen agreed with the editorial expectation once and disagreed three times in these four deliberately selected statements. Two unsupported offers escaped its narrow phrase patterns, and one quoted warning triggered the pattern. These are constructed counterexamples, <strong>not</strong> a sample of model behavior, measured model accuracy, a false-positive rate, or evidence that a real business used the drafts.</p>
+    <p><a href="/downloads/reply-audit-boundary-probes.py" download>Download the additional offline boundary-probe script (.py)</a> and place it beside the <a href="/downloads/review-reply-independent-audit.py" download>original audit script</a>. Run <code>python3 reply-audit-boundary-probes.py --self-test</code> or <code>py -3 reply-audit-boundary-probes.py --self-test</code> from that directory. The new script reads only its public sibling file, performs no model or network calls, and prints JSON with the four observations. Its self-test verifies the described behavior, including the mismatches. A later checker improvement should change the results and the explanatory record together, not hide the mismatches.</p>
+    <p>A <code>no_targeted_flag</code> result therefore cannot authorize a customer message. Keep source facts, policy, commitments and tone in human review, and use a broader review process when a consequence matters.</p>
+  </div>
+</section>
 <section class="section folio-row" aria-labelledby="reply-audit-reproduce">
   <div class="section-meta"><p class="section-label">Reproduce / No API / No account</p></div>
   <div class="section-content prose">
