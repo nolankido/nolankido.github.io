@@ -8,6 +8,7 @@ from pathlib import Path
 
 import turn21_poker_vlog_qa_history as history
 import turn22_poker_vlog_fact_gate_history as turn22_history
+import turn23_technology_metadata_history as turn23_history
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "_source/technology/home.html"
@@ -102,7 +103,8 @@ class Turn21PokerVlogQATests(unittest.TestCase):
         self.assertNotIn("unverified as proven", sheet.lower())
 
     def test_page_identity_and_generator_remain_in_sync(self):
-        page = read(PUBLIC)
+        published = read(PUBLIC)
+        page = turn23_history.before(PUBLIC, published)
         self.assertIn('<link rel="canonical" href="https://nolankido.com/technology/">', page)
         self.assertIn('"dateModified": "2026-11-03"', page)
         self.assertEqual(page.count('class="project-card"'), 3)
@@ -112,7 +114,7 @@ class Turn21PokerVlogQATests(unittest.TestCase):
             self.assertEqual(page.count('id="' + anchor + '"'), 1)
         sys.path.insert(0, str(ROOT / "_scripts"))
         import build
-        self.assertEqual(build.build_outputs()[Path(PUBLIC)], page)
+        self.assertEqual(build.build_outputs()[Path(PUBLIC)], published)
 
     def test_only_exact_approved_blobs_rewind(self):
         for path, (old_sha, new_sha) in history.BLOBS.items():
