@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "record_kind": "conservative proposed scene claims, not an audit of the current audiovisual cut",
+  "author": "Nolan Kido",
+  "companion_url": "https://nolankido.com/poker/episodes/portland-meadows-ep1/",
+  "video_url": "https://www.youtube.com/watch?v=qABaiIcvvpU",
+  "published_companion_date": "2026-11-02",
+  "reviewed_record_date": "2026-11-04",
+  "provenance": "Participant's earlier version 7 retrospective narration and edit notes, as documented in the public companion",
+  "current_public_cut_timestamps_checked": false,
+  "current_public_cut_graphics_checked": false,
+  "event_calendar_date_independently_verified": false,
+  "confirmed_board_runouts": false,
+  "human_release_approval": false,
+  "scope": "A proposal of source-bounded labels for two narrated hands and a deal. The offline checker compares only structured claims with the published first-person companion. It does not analyze current video/audio or validate tournament records.",
+  "scenes": [
+    {
+      "case": "hand_64o",
+      "position": "SB",
+      "hero_hand": "6-4 offsuit",
+      "villain_hand": "A-K suited",
+      "winner": "hero",
+      "big_blind_chips": 15000,
+      "reported_stack_chips": 148000,
+      "stack_bb_display": 9.87,
+      "stack_marked_approximate": true,
+      "individual_suits_displayed": false,
+      "full_board_displayed": false,
+      "solver_verdict_claimed_verified": false,
+      "archived_v7_timecode_reused_for_current_cut": false
+    },
+    {
+      "case": "hand_77",
+      "position": "BB",
+      "hero_hand": "7-7",
+      "villain_hand": "A-T offsuit",
+      "winner": "hero",
+      "big_blind_chips": 30000,
+      "reported_stack_chips": 585000,
+      "stack_bb_display": 19.5,
+      "stack_marked_approximate": true,
+      "button_open_to_chips": 75000,
+      "open_to_bb_display": 2.5,
+      "individual_suits_displayed": false,
+      "full_board_displayed": false,
+      "solver_verdict_claimed_verified": false,
+      "archived_v7_timecode_reused_for_current_cut": false
+    },
+    {
+      "case": "event_payout",
+      "advertised_first_usd": 5100,
+      "received_after_deal_usd": 2900,
+      "net_profit_claimed": false
+    }
+  ]
+}
