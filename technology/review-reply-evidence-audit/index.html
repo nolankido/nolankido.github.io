@@ -66,7 +66,7 @@
     <p class="intro">A small business should not judge an AI-written customer reply only by whether it sounds courteous. It needs to preserve what a customer actually reported, avoid promising actions nobody authorized, and remain editable until a person approves the final wording. I revisited three publicly recorded Gemma outputs from my Review Reply Writer project and tested them with an independent, narrow checker.</p>
     <p>The exercise has an important distinction: the three retained model replies really came from a documented October 2026 model run, but the three deliberately corrupted versions were created later as <strong>synthetic negative controls</strong>. This was not another model inference run, a blind benchmark, a paying-customer pilot, or a test of live business outcomes.</p>
     <p><strong>What actually happened in this new pass:</strong> the three archived outputs raised zero flags in the selected factual and financial-commitment screen. All three deliberately damaged controls raised a flag. I ran the independent script locally with Python's standard library, with no model request, internet call or private customer information. These numbers describe six specific text checks, not a model success rate.</p>
-    <nav class="entry-jumps" aria-label="On this reply evidence audit"><a href="#reply-audit-source">Evidence</a><a href="#reply-audit-cases">Actual replies</a><a href="#reply-audit-controls">Negative controls</a><a href="#reply-audit-reproduce">Reproduce</a><a href="#reply-audit-human">Human decision</a><a href="#reply-audit-cost">Total cost</a></nav>
+    <nav class="entry-jumps" aria-label="On this reply evidence audit"><a href="#reply-audit-source">Evidence</a><a href="#reply-audit-cases">Actual replies</a><a href="#reply-audit-controls">Negative controls</a><a href="#reply-audit-boundaries">Blind spots</a><a href="#reply-audit-reproduce">Reproduce</a><a href="#reply-audit-human">Human decision</a><a href="#reply-audit-cost">Total cost</a></nav>
     <p><a href="/technology/local-ai-review-replies/">Start with the application and its approval workflow</a>. This page examines a separate question: what can a second, independently readable check establish about already recorded outputs?</p>
   </div>
 </section>
@@ -112,6 +112,28 @@
     </ol>
     <p>The script detected <strong>three of these three deliberately seeded defects</strong>. That is a check that the narrowly chosen counterexamples are within the program's detection rules. It is not an estimated recall, precision, production safety rate, or proof against more sophisticated omissions and promises.</p>
     <p>For example, a different wording of the same problem might evade a keyword pattern. The program might also flag harmless quotation of a refund policy without understanding context. This is why its output calls for review rather than automatically approving or rejecting customer communications.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="reply-audit-boundaries">
+  <div class="section-meta"><p class="section-label">Adversarial probe / Reproducible limits</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-audit-boundaries">A clean flag report can miss an invented offer.</h2>
+    <p>I appended four new, <strong>synthetic</strong> sentences, one at a time, to the same archived fictional complaint reply. Its original complaint facts remain intact, so the comparison isolates different wording of financial promises and a quotation. These sentences are my test cases, not additional model outputs. The expected flag in the table is an editorial judgment about the <em>specific financial-commitment signal</em>, not a decision that the entire reply is safe to send.</p>
+    <div class="project-table-scroll" role="region" aria-label="Boundary probes for the independent reply screen" tabindex="0">
+      <table>
+        <caption>Four constructed statements, screened against the same fictional reply</caption>
+        <thead><tr><th scope="col">Added sentence</th><th scope="col">Expected financial-commitment flag</th><th scope="col">Observed screen</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><q>We will refund the charge.</q></th><td>Yes, an unsupported refund promise</td><td>Flagged as expected</td></tr>
+          <tr><th scope="row"><q>We will reimburse the charge.</q></th><td>Yes, an unsupported reimbursement promise</td><td>No targeted flag, a miss</td></tr>
+          <tr><th scope="row"><q>We will send a gift card.</q></th><td>Yes, an unsupported offer</td><td>No targeted flag, a miss</td></tr>
+          <tr><th scope="row"><q>Please do not write 'we have issued a refund' without approval.</q></th><td>No, it quotes a prohibited claim as a warning</td><td>Flagged, a quotation false alarm</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>What the new probe established:</strong> the unchanged screen agreed with the editorial expectation once and disagreed three times in these four deliberately selected statements. Two unsupported offers escaped its narrow phrase patterns, and one quoted warning triggered the pattern. These are constructed counterexamples, <strong>not</strong> a sample of model behavior, measured model accuracy, a false-positive rate, or evidence that a real business used the drafts.</p>
+    <p><a href="/downloads/reply-audit-boundary-probes.py" download>Download the additional offline boundary-probe script (.py)</a> and place it beside the <a href="/downloads/review-reply-independent-audit.py" download>original audit script</a>. Run <code>python3 reply-audit-boundary-probes.py --self-test</code> or <code>py -3 reply-audit-boundary-probes.py --self-test</code> from that directory. The new script reads only its public sibling file, performs no model or network calls, and prints JSON with the four observations. Its self-test verifies the described behavior, including the mismatches. A later checker improvement should change the results and the explanatory record together, not hide the mismatches.</p>
+    <p>A <code>no_targeted_flag</code> result therefore cannot authorize a customer message. Keep source facts, policy, commitments and tone in human review, and use a broader review process when a consequence matters.</p>
   </div>
 </section>
 <section class="section folio-row" aria-labelledby="reply-audit-reproduce">
