@@ -181,32 +181,35 @@ Provider references:
 
 ## Release verification
 
-Check the current main head before merging, run the tests, and retain the existing branch-based Pages configuration. The `Site checks` workflow uses read-only permissions and does not modify code or hosting settings. On main-branch pushes it runs a bounded public-byte check after local tests, allowing time for Pages propagation. Pull-request checks never query a release as though it were deployed. Superseded commits defer to the newer release's check.
+There are **no repository-authored GitHub Actions workflows** for this project. The former `site-checks.yml` was intentionally removed on November 1, 2026. Do not restore or replace it with a scheduled service. See [AGENTS.md](AGENTS.md) for the permanent restriction.
+
+Before publishing, compare the intended changes with the latest `main` head and run the deterministic build and verification locally:
+
+```sh
+python _scripts/build.py
+python _scripts/build.py --check
+python _scripts/check_search.py
+python _tests/check_html5.py
+python -m unittest discover -s _tests -p 'test_*.py' -v
+```
+
+Run relevant browser tests locally with the installed Playwright browser. Commit authored source and generated output together. Local success does not prove the new public release has propagated.
+
+After a main-branch update, the following command manually checks public responses against the checkout:
 
 ```sh
 python _scripts/check_live.py --attempts 10 --interval 10
 ```
 
-The live verifier makes GET requests to nolankido.com only. It checks public pages, assets, downloads, the custom 404, and excluded source paths. It does not send form messages. A successful build or artifact upload is not a completed deployment: check Pages job status as well as the live bytes. If the bounded live check times out during a provider delay, inspect the deployment before retrying; do not automatically rewrite or roll back working code.
+The live verifier only requests public site pages, assets, downloads and the intended 404 response. It does not submit form messages. A failed or timed-out public check should trigger investigation of deployment state, not an automatic rewrite or rollback. GitHub Pages may run provider-managed deployment tasks independent of repository-authored workflow files.
 
-See `SITE_REVIEW.md` for the October 5 review, reproduced failures, repairs, and remaining limits. The original design stylesheet was kept intact; the contact logic and functional CSS now include the tested repairs. Revert faulty changes rather than rewriting history.
+Earlier historical review reports sometimes link jobs from a period when a workflow existed. Those records are evidence of past checks, not current automation or permission to reactivate it. See [SITE_REVIEW.md](SITE_REVIEW.md) for the October 5 historical audit.
 
 ### Search-engine change notifications
 
-After a main-branch release passes the public-response check, the workflow uses
-`_scripts/submit_indexnow.py` to notify IndexNow about meaningful changes between
-the push's actual before/after commits. The script selects canonical sitemap URLs,
-verifies the current main commit and deployed public bytes, and checks the root
-ownership file before sending public URLs to the fixed IndexNow endpoint.
-It does not submit unchanged pages or visitor data. Without `--submit`, it makes
-no network requests and prints the proposed change list for two full commit IDs.
+The existing `_scripts/submit_indexnow.py` is available for manual assessment. Without `--submit`, it reports proposed URLs for two supplied commits and does not make a submission. **No scheduled IndexNow notification runs from this repository.** Do not configure automated submissions. Any actual submission requires separate owner approval and verification that the intended URLs are already live.
 
-The notification receipt is retained as an Actions artifact for 30 days.
-HTTP 200 means the URLs were received; HTTP 202 means receipt with key validation
-pending. Neither proves indexing, ranking, or AI citations. A failed notification
-produces a separate warning while preserving the successful publication receipt.
-Inspect the reason and any requested retry delay before making a bounded retry.
-See `_reports/visibility-sprint/discovery-follow-up.md` for scope and protocol sources.
+An IndexNow response, if independently obtained, confirms at most provider receipt or key-validation status. It does not prove indexing, ranking, traffic or AI-assistant citations. The earlier [discovery protocol](_reports/visibility-sprint/discovery-follow-up.md) describes the historical scope and limits.
 
 ## Technology-first subject hierarchy
 
