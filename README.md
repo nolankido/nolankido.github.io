@@ -359,8 +359,7 @@ failure and its correction, with a reduced public reproduction and a bounded
 record of what the checks establish. Historical test counts must not be silently
 updated to current counts. Run `python downloads/website-check-reproduction.py`
 with `html5lib==1.1`, and `python _tests/workflow_evidence_browser.py` for the new
-reader and calculator journeys. Both are in Site checks; all 21 earlier browser
-suites remain. See `_reports/workflow-evidence-release.md` for scope and the
+reader and calculator journeys. Both can be run locally; the earlier 21 browser suites remain documented. See `_reports/workflow-evidence-release.md` for scope and the
 Search Console property-access limitation.
 
 ## Practical work previews and writing distribution
@@ -434,5 +433,5 @@ only its font URLs to the exact content-addressed WOFF2 files in `assets/fonts/`
 with original licenses and `_reports/local-fonts-provenance.json`. Normal builds
 make no font-provider requests. Replacing a typeface or subset requires a new
 review of binary provenance, licenses, descriptor coverage and rendered geometry.
-The full hosted gate includes `local_fonts_browser.py`; the live verifier checks
+The full local test inventory includes `local_fonts_browser.py`; the manually invoked live verifier checks
 every font and license. The privacy notice describes the current local hosting.
