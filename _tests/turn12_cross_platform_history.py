@@ -48,6 +48,9 @@ def blob(value):
 
 
 def before(path, value):
+    # Undo only reviewed later identity edits before the Turn 12 blob gate.
+    import turn24_identity_claims_history
+    value = turn24_identity_claims_history.before(path, value)
     import turn20_reply_boundaries_history
     value = turn20_reply_boundaries_history.before(path, value)
     import turn19_bio_evidence_routes_history
