@@ -29,6 +29,7 @@ import turn09_reply_history
 import living_well_case_links_history
 import visibility_sprint_history
 import turn12_cross_platform_history
+import turn29_source_notes_history as turn29
 
 MEMBERSHIPS = {
     '/technology/ai-book-continuity-checker/': ['creative'],
@@ -121,7 +122,7 @@ class VisibilityDiscoveryTests(unittest.TestCase):
 
     def test_overview_metadata_revises_seven_existing_pages_without_republishing_articles(self):
         previous = json.loads(git('show', history.PARENT + ':_source/pages.json'))
-        current = json.loads((ROOT / '_source/pages.json').read_text())
+        current = turn29.pages(json.loads((ROOT / '_source/pages.json').read_text()))
         self.assertEqual([p['id'] for p in current], [p['id'] for p in previous])
         effective = {page['id']: page for page in self.pages}
         changed = set()
