@@ -8,6 +8,7 @@ import unittest
 
 from test_site import ROOT, build
 import turn19_bio_evidence_routes_history as history
+import turn27_profile_history as turn27
 
 SOURCE = ROOT / "_source/bio.html"
 PUBLIC = ROOT / "bio/index.html"
@@ -67,9 +68,11 @@ class Turn19EvidenceRoutesTests(unittest.TestCase):
                              site["bio_" + kind] + "\n")
         self.assertEqual(len(re.findall(r'data-profile-copy="[^"]+"', self.html)), 3)
         self.assertEqual(self.html.count("cloud.umami.is/script.js"), 1)
-        self.assertIn('"dateModified": "2026-10-28"', self.html)
+        self.assertIn('"dateModified": "2026-11-04"', self.html)
+        self.assertIn('"dateModified": "2026-10-28"', turn27.before('bio/index.html', self.html))
         manifest = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
-        self.assertEqual(next(p["updated"] for p in manifest if p["id"] == "bio"), "2026-10-28")
+        self.assertEqual(next(p["updated"] for p in manifest if p["id"] == "bio"), "2026-11-04")
+        self.assertEqual(turn27.pages([next(p for p in manifest if p['id'] == 'bio')])[0]['updated'], '2026-10-28')
         self.assertIn('id="profile-short-text"', self.html)
         self.assertIn('id="profile-long-text"', self.html)
         self.assertIn("not endorsements, official creator credentials", history.INSERTION)
@@ -78,7 +81,7 @@ class Turn19EvidenceRoutesTests(unittest.TestCase):
     def test_exact_prior_versions_and_fail_open_mutations(self):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             current = (ROOT / path).read_bytes()
-            self.assertEqual(history.blob(current), new_sha)
+            self.assertEqual(history.blob(turn27.before(path, current)), new_sha)
             previous = history.before(path, current)
             self.assertEqual(history.blob(previous), old_sha)
             self.assertEqual(history.before(path, previous), previous)

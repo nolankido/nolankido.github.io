@@ -35,6 +35,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn27_profile_history
+    value = turn27_profile_history.before(path, value)
     import turn25_identity_evidence_history
     value = turn25_identity_evidence_history.before(path, value)
     name = key(path)

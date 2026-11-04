@@ -39,6 +39,8 @@ def blob(data):
 
 
 def before(path, data):
+    import turn27_profile_history
+    data = turn27_profile_history.before(path, data)
     pair = BLOBS.get(key(path))
     if pair is None or blob(data) != pair[1]:
         return data
