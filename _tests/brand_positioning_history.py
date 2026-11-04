@@ -31,6 +31,8 @@ def change() -> dict:
 
 
 def before(path: str | Path, data: bytes | str) -> bytes | str:
+    import turn19_bio_evidence_routes_history
+    data = turn19_bio_evidence_routes_history.before(path, data)
     import public_source_review_history
     data = public_source_review_history.before(path, data)
     import scoped_share_history
