@@ -4,6 +4,7 @@
     <p>Explore Nolan Kido's AI projects, recorded workflows, and free tools for everyday life, small business, and creative work. Each case identifies the actual artifact, the role AI played, and the evidence behind its conclusions.</p>
     <p>Start with a project that interests you, or use the Decide, Brief, Check, Measure path for a task of your own. <a href="/notes/keep-the-judgment/">Let AI do more. Keep the judgment.</a> explains the approach. For small-business work, <a href="#small-business-ai-pilot">plan one bounded, reviewable AI pilot</a> before expanding.</p>
     <nav class="link-row technology-jumps" aria-label="On this Technology page"><a class="button" href="#technology-projects">See the projects <span aria-hidden="true">↓</span></a><a class="text-link" href="#practical-ai-path">Follow the four-step workflow <span aria-hidden="true">↓</span></a><a class="text-link" href="#working-examples">Try tools and inspect a case <span aria-hidden="true">↓</span></a><a class="text-link" href="#technology-path">Choose an everyday task <span aria-hidden="true">↓</span></a><a class="text-link" href="#technology-reading">Read checking guides <span aria-hidden="true">↓</span></a></nav>
+    <p class="small-copy"><strong>New recorded case:</strong> <a href="#identity-claim-audit">How an AI-assisted audit corrected unsupported public identity claims</a>, with the original before-and-after files and an offline check.</p>
     <p class="small-copy">Have a question or a shared interest? <a href="/contact/">Talk technology</a>.</p>
   </div>
 </section>
@@ -53,6 +54,41 @@
     <p><strong>Example input:</strong> A fictional customer reports a duplicate charge and an unanswered question. <strong>AI may:</strong> draft an acknowledgment that preserves both issues and leaves unknown details open. <strong>AI may not:</strong> invent a refund policy, promise compensation, retrieve private account records, or send the message. <strong>A person checks:</strong> both complaints are represented, every promised action is authorized, and the final reply is appropriate before deciding whether to publish it.</p>
     <p>The <a href="/technology/local-ai-review-replies/">Review Reply Writer case</a> documents an application built around approval and its historical fictional demonstration. The separate <a href="/technology/review-reply-evidence-audit/">evidence audit</a> shows what a limited checker flags and misses. Neither is evidence of client deployment, measured savings, regulatory compliance or a general model reliability rate.</p>
     <p class="small-copy"><strong>When to stop:</strong> unauthorized input, an unsupported promise, a failed acceptance check, or total effort that does not justify the result. For broader risk-management background, see the <a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a>. This educational pilot outline is not a NIST assessment or a substitute for legal, security or professional review.</p>
+  </div>
+</section>
+<section class="section folio-row" id="identity-claim-audit" aria-labelledby="identity-claim-audit-title">
+  <div class="section-meta"><p class="section-label">Recorded AI-assisted work / Identity evidence</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="identity-claim-audit-title">How an AI-assisted audit corrected a public identity claim.</h2>
+    <p><strong>The real task:</strong> I wanted this site to explain who Nolan Kido is and what evidence supports the work, without inflating professional credentials. A separate, already public JSON-LD identity file claimed an AI startup and angel-investor title, two degrees, and an MIT Research Affiliate role. The visible <a href="/about/">About page</a> did not make those claims. In a November 4, 2026 improvement pass, an AI assistant compared the data with the public evidence trail and narrowed the file rather than inventing more impressive claims.</p>
+    <p><strong>The outcome:</strong> <a href="https://github.com/nolankido/nolankido.github.io/pull/180">Pull request #180</a> was merged. The revised source and published JSON-LD were read back and confirmed identical, while the stable Person identifier, scholarly article and existing external links were retained. This is a recorded content correction. It does not establish that a search engine used the standalone asset or that search rankings, AI citations or visitor trust improved.</p>
+    <div class="project-table-scroll" role="region" aria-label="Identity metadata before and after publication audit" tabindex="0">
+      <table>
+        <caption>What the public repository records before and after the correction</caption>
+        <thead><tr><th scope="col">Claim or data</th><th scope="col">Before</th><th scope="col">Published decision</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Startup and investing</th><td><code>jobTitle</code> asserted “AI Startup Founder and Angel Investor.”</td><td>Removed a title without sufficient public corroboration in the reviewed record. This does not assert the title was never true.</td></tr>
+          <tr><th scope="row">Academic credentials</th><td><code>hasCredential</code> and <code>alumniOf</code> listed two University of Hawaiʻi degrees.</td><td>Removed pending a documented credential review. An absence of reviewed evidence does not mean a degree was not earned.</td></tr>
+          <tr><th scope="row">MIT research role</th><td><code>affiliation</code> described “Research Affiliate.”</td><td>Removed. <a href="https://dspace.mit.edu/entities/publication/9e5c8e82-34b0-4931-a8cc-6ea0ae938829">An MIT-hosted manuscript</a> supports a publication record, not employment or an appointment.</td></tr>
+          <tr><th scope="row">Authorship and stable identity</th><td>A shared Person ID, external profiles and a 2012 scholarly article.</td><td>Kept the original author identifier, existing profile links and <a href="https://doi.org/10.1111/j.1475-679X.2012.00447.x">peer-reviewed accounting article</a>. The description now leads with bounded practical-AI work.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 id="identity-claim-method">How the work was checked</h3>
+    <ol>
+      <li><strong>Read the actual published data.</strong> Compare the <a href="https://github.com/nolankido/nolankido.github.io/blob/fa03f1b355d4b71291215168a7960fad97ec3ff0/assets/nolan-kido-identity.jsonld">before record</a> with the <a href="https://github.com/nolankido/nolankido.github.io/blob/a1e2f1c64e185c3d97fc813f47c75968cc769ab9/assets/nolan-kido-identity.jsonld">after record</a>, not a reconstructed story about them.</li>
+      <li><strong>Separate support from inference.</strong> A research paper establishes coauthorship, not an institutional job title. Public code establishes that an artifact exists, not a business outcome. An attractive biography is not a credential verification.</li>
+      <li><strong>Review a narrow edit.</strong> Remove the three categories of unsupported prominent claims, rewrite the description around work visitors can inspect, and preserve unrelated identifiers and the existing scholarly citation. The separate historical COO description stayed historical, not a current position.</li>
+      <li><strong>Check the result independently of the narrative.</strong> Re-read the JSON source and generated asset, parse the graph, compare immutable nodes and stable links, and inspect <a href="https://github.com/nolankido/nolankido.github.io/pull/180/files">the actual committed diff</a>. A code diff can prove changed bytes; it cannot prove the truth of every remaining claim.</li>
+    </ol>
+    <h3 id="identity-claim-reproduce">Reproduce the bounded comparison</h3>
+    <p>Download the two complete public JSON-LD files linked above as <code>before.jsonld</code> and <code>after.jsonld</code>. Save the <a href="/downloads/identity-evidence-gate.py" download>offline Python identity-evidence gate</a> in the same folder. With Python 3.10+ on Windows:</p>
+    <pre>py -3 identity-evidence-gate.py --self-test
+py -3 identity-evidence-gate.py --before before.jsonld --after after.jsonld</pre>
+    <p>The five synthetic self-tests check expected pass and fail scenarios. The second command checks this case's structural invariants, not the accuracy of free-text biography. Exit code 0 means only those invariants passed; code 2 reports structural findings; code 1 is an input or execution error. The script uses no network, account, AI request, visitor data, or paid API. <a href="/downloads/identity-evidence-case-workbook.md" download>Download the case record and reusable evidence worksheet</a> for the sources and a review method to adapt to another public profile.</p>
+    <h3 id="identity-claim-human-gate">What remains a human decision</h3>
+    <p>The owner authorized a broad improvement process; the assistant made the scoped edits and opened the pull request. This release did not include independent human verification of every academic, employer or account-ownership claim. Restoring a professional title or degree requires reviewing a suitable source and choosing precise wording, dates and public disclosure. External account control, search indexing and any improvement in discovery remain unmeasured. <a href="/about/">My About page</a> links evidence people can inspect, without treating an AI-generated description as a credential.</p>
+    <p class="small-copy"><strong>The lesson:</strong> when AI helps publish a professional identity, require an evidence trail and a correction path. A structural checker is not a truth checker. This case concerns one public website, not a benchmark of AI editing quality, search performance, or small-business return on investment.</p>
   </div>
 </section>
 <section class="section folio-row" id="site-visibility-evidence" aria-labelledby="site-visibility-evidence-title">
