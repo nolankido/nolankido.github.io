@@ -4,6 +4,7 @@ import subprocess
 import unittest
 
 import turn26_technology_entry_history as history
+import turn29_source_notes_history as turn29
 
 
 class TechnologyFirstScreenHistoryTests(unittest.TestCase):
@@ -16,7 +17,7 @@ class TechnologyFirstScreenHistoryTests(unittest.TestCase):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
                 current = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(current), new_sha)
+                self.assertEqual(history.blob(turn29.before(path, current)), new_sha)
                 earlier = history.before(path, current)
                 self.assertEqual(history.blob(earlier), old_sha)
                 self.assertEqual(earlier, subprocess.check_output(
