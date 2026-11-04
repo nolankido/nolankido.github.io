@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 from xml.etree import ElementTree as ET
 import poker_episode
+import poker_standoff_episode
 
 ROUTE = '/poker/nolan-kido/'
 URL = 'https://nolankido.com' + ROUTE
@@ -109,3 +110,8 @@ def add_to_sitemap(sitemap: ET.Element, root: Path) -> None:
         entry = ET.SubElement(sitemap, 'url')
         ET.SubElement(entry, 'loc').text = episode['url']
         ET.SubElement(entry, 'lastmod').text = episode['modified']
+    standoff = poker_standoff_episode.record(root)
+    if standoff is not None:
+        entry = ET.SubElement(sitemap, 'url')
+        ET.SubElement(entry, 'loc').text = standoff['url']
+        ET.SubElement(entry, 'lastmod').text = standoff['modified']
