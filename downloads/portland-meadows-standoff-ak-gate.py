@@ -123,17 +123,19 @@ def validate(value: object) -> list[dict[str, str]]:
         if not isinstance(actual, str) or any(phrase.lower() not in actual.lower() for phrase in required):
             flag(results, "MISSING_BOUNDARY", key,
                  "Required provenance or retrospective limit was removed.")
-    if hand.get("after_flat_approx_chips") != (
-            hand.get("starting_stack_approx_chips", 0)
-            - hand.get("opener_raise_to_chips", 0)):
+    def amount(key: str) -> int | None:
+        value = hand.get(key)
+        return value if type(value) is int else None
+    starting, first_call = amount("starting_stack_approx_chips"), amount("opener_raise_to_chips")
+    remainder, second_call = amount("after_flat_approx_chips"), amount("hero_calls_additional_approx_chips")
+    posted, bb_increment = amount("bb_previous_blind_chips"), amount("bb_additional_to_call_before_jam_chips")
+    if starting is None or first_call is None or remainder is None or remainder != starting - first_call:
         flag(results, "STACK_ARITHMETIC", "decision.after_flat_approx_chips",
              "Approximate stack less initial call no longer matches.")
-    if hand.get("hero_calls_additional_approx_chips") != hand.get("after_flat_approx_chips"):
+    if remainder is None or second_call is None or second_call != remainder:
         flag(results, "STACK_ARITHMETIC", "decision.hero_calls_additional_approx_chips",
              "Second decision amount differs from recorded remainder.")
-    if hand.get("bb_additional_to_call_before_jam_chips") != (
-            hand.get("opener_raise_to_chips", 0)
-            - hand.get("bb_previous_blind_chips", 0)):
+    if first_call is None or posted is None or bb_increment is None or bb_increment != first_call - posted:
         flag(results, "BLIND_ARITHMETIC", "decision.bb_additional_to_call_before_jam_chips",
              "Additional call from the posted big blind no longer matches.")
     if not isinstance(hand.get("later_read"), str) or "the hotel" not in hand["later_read"].lower():
