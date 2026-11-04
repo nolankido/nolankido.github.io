@@ -31,7 +31,7 @@ The description is 156 characters. It names the site owner, core public projects
 
 - Confirmed the merged pull request contains exactly 13 files: five production files, one new regression test, one new historical helper, and six earlier test-only compatibility updates.
 - Confirmed the five production files and two new test files on the review branch matched the intended replacement content byte for byte.
-- Python syntax parsing passed for all seven new or edited Python test files.
+- Python syntax parsing passed for all eight new or edited Python test and history files.
 - Static checks confirmed one Technology sitemap date change, one JSON-LD description, three escaped page-description copies, and one Find listing description.
 - The full filesystem-backed generator and unittest suite **could not be executed** in the current read-only runtime. The new regression tests are committed for the next environment with a checked-out repository.
 - The first live requests immediately after merging still returned the prior description. Live publication and cache propagation remained unconfirmed at the time of this check. This is not evidence of a failed merge.
