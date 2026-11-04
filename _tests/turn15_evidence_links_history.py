@@ -35,6 +35,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn30_evidence_index_history
+    value = turn30_evidence_index_history.before(path, value)
     import turn25_identity_evidence_history
     value = turn25_identity_evidence_history.before(path, value)
     # Reviewed later identity claims must be rewound before archived blob checks.

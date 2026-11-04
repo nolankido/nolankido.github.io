@@ -38,6 +38,8 @@ def blob(value):
 
 
 def before(path, data):
+    import turn30_evidence_index_history
+    data = turn30_evidence_index_history.before(path, data)
     known = BLOBS.get(key(path))
     if known is None or blob(data) != known[1]:
         return data

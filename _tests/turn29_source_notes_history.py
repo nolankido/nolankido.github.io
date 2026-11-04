@@ -48,6 +48,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn30_evidence_index_history
+    value = turn30_evidence_index_history.before(path, value)
     name = key(path)
     expected = BLOBS.get(name)
     if expected is None or blob(value) != expected[1]:
@@ -59,6 +61,8 @@ def before(path, value):
 
 
 def pages(records):
+    import turn30_evidence_index_history
+    records = turn30_evidence_index_history.pages(records)
     new = dict(OLD_PAGE, updated="2026-11-04")
     return [dict(OLD_PAGE) if entry == new else entry for entry in records]
 
