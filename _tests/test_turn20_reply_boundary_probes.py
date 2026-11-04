@@ -19,6 +19,7 @@ class Turn20ReplyBoundaryTests(unittest.TestCase):
         self.assertEqual(source.count(history.INSERTION), 1)
         self.assertEqual(public.count(history.INSERTION), 1)
         self.assertEqual(source.count('id="reply-audit-boundaries"'), 1)
+        self.assertEqual(source.count(history.NAV_INSERTION), 1)
         self.assertNotIn("\u2014", source)
         self.assertNotIn("<script", source.lower())
         self.assertNotIn("<iframe", source.lower())
