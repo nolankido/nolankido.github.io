@@ -13,6 +13,7 @@ from xml.etree import ElementTree as ET
 
 import turn23_technology_metadata_history as history
 import turn26_technology_entry_history as turn26_history
+import turn27_profile_history as turn27
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,7 +92,7 @@ class Turn23TechnologyMetadataTests(unittest.TestCase):
             ["git", "show", history.PARENT + ":" + SITEMAP], cwd=ROOT
         ).decode("utf-8")
         old_rows = sitemap_rows(old)
-        new_rows = sitemap_rows(read(SITEMAP))
+        new_rows = sitemap_rows(turn27.before(SITEMAP, read(SITEMAP)))
         self.assertEqual(set(new_rows), set(old_rows))
         self.assertEqual(new_rows[CANONICAL], DATE)
         self.assertEqual(old_rows[CANONICAL], "2026-11-03")
@@ -112,7 +113,7 @@ class Turn23TechnologyMetadataTests(unittest.TestCase):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
                 current = (ROOT / path).read_bytes()
-                self.assertEqual(history.blob(turn26_history.before(path, current)), new_sha)
+                self.assertEqual(history.blob(turn26_history.before(path, turn27.before(path, current))), new_sha)
                 restored = history.before(path, current)
                 self.assertEqual(history.blob(restored), old_sha)
                 self.assertEqual(restored, subprocess.check_output(
