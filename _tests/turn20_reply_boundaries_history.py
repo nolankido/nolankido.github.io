@@ -55,6 +55,9 @@ def before(path, data):
 
 
 def is_added_file(path, data):
+    import turn31_episode_ledger_history
+    if turn31_episode_ledger_history.is_added_file(path, data):
+        return True
     import turn29_source_notes_history
     if turn29_source_notes_history.is_added_file(path, data):
         return True
