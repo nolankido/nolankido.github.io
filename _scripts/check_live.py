@@ -8,6 +8,7 @@ import json
 import build
 import player_sitemap
 import poker_episode
+import poker_standoff_episode
 import local_laptop_case
 import reply_audit_case
 import time
@@ -39,6 +40,12 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
         if route in result:
             raise ValueError('Manual episode conflicts with a manifest route')
         result[route] = (200, (root / poker_episode.OUTPUT).read_bytes())
+    standoff_episode = poker_standoff_episode.record(root)
+    if standoff_episode is not None:
+        route = standoff_episode['route']
+        if route in result:
+            raise ValueError('Stand Off episode conflicts with a manifest or manual route')
+        result[route] = (200, (root / poker_standoff_episode.OUTPUT).read_bytes())
     laptop = local_laptop_case.record(root)
     if laptop is not None:
         if laptop['path'] in result:
