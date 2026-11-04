@@ -4,7 +4,7 @@
     <h2 id="notes-task">Turn scattered preparation notes into a usable action list.</h2>
     <p>During preparation of this website's public project articles, an assistant organized eight working notes into a publication checklist. The notes mixed available project material, editorial requirements, and personal reports for which no publishable record had been supplied. The useful result was a list that kept those differences visible.</p>
     <p>This page preserves the actual instruction, selected unchanged output rows, and a subsequent source check. It documents this notes-organization task. It does not reconstruct a response from another model service or claim a measured productivity benefit.</p>
-    <div class="entry-jumps"><a href="#notes-input">Read the task</a><a href="#notes-output">Inspect the output</a><a href="#notes-check">Check the source mapping</a><a href="#notes-reuse">Use the method</a></div>
+    <div class="entry-jumps"><a href="#notes-input">Read the task</a><a href="#notes-output">Inspect the output</a><a href="#notes-check">Check the source mapping</a><a href="#notes-repro-audit">Reproduce a bounded audit</a><a href="#notes-reuse">Use the method</a></div>
     <p><a href="/downloads/public-notes-action-record.txt" download>Download the complete input, instruction, and verbatim output (.txt)</a></p>
   </div>
 </section>
@@ -55,6 +55,35 @@
       <li><strong>Case requirements, N8:</strong> all six required elements remained, with missing details left unresolved.</li>
     </ul>
     <p>This checks faithfulness to the supplied notes. It does not independently verify those notes, measure usefulness for another person, or establish that an action was performed.</p>
+  </div>
+</section>
+
+<section class="section folio-row" id="notes-repro-audit" aria-labelledby="notes-repro-title">
+  <div class="section-meta"><p class="section-label">Repeatable check / Real record and constructed controls</p></div>
+  <div class="section-content prose">
+    <h2 id="notes-repro-title">Can the action list still be traced to what was actually supplied?</h2>
+    <p>The <a href="/downloads/public-notes-action-record.txt" download>unchanged October 27 input and output</a> provide a small example of AI used for an everyday organizing problem: deciding what can be prepared from the available notes and what must wait. A separate standard-library checker now reads the recorded response and examines its <strong>eleven checklist rows</strong>. It compares the source identifiers N1–N8, the three permitted preparation statuses, and selected conditions that are easy to lose when a model rewrites a plan.</p>
+    <p><strong>Result of this limited comparison:</strong> the archived rows retain the expected note identifiers, status categories and selected explicit limitations. No targeted source-trace issue was identified. This does not independently authenticate the starting notes, show that any item was completed, or establish that the output was useful to someone else.</p>
+    <div class="project-table-scroll" role="region" aria-label="Constructed checklist mistakes and targeted checker responses" tabindex="0">
+      <table>
+        <caption>Four deliberately constructed changes, not mistakes observed in the archived AI response</caption>
+        <thead><tr><th scope="col">Constructed change</th><th scope="col">What must not silently change</th><th scope="col">Checker flag</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Mark the unavailable travel plan ready to prepare</th><td>N6 still says no publishable travel plan was supplied</td><td><code>STATUS_MISMATCH</code></td></tr>
+          <tr><th scope="row">Cite N5 instead of N6 for the travel plan</th><td>Public-profile notes cannot stand in for an unavailable personal record</td><td><code>SOURCE_MISMATCH</code></td></tr>
+          <tr><th scope="row">Remove the “no runtime AI” limit from Dinner on Time</th><td>N4 distinguishes AI-assisted development from the simulation's deterministic runtime</td><td><code>MISSING_BOUNDARY</code></td></tr>
+          <tr><th scope="row">Add an invented date to the unsupported-outcomes task</th><td>N7 supplies no deadline or completed business result</td><td><code>UNSUPPORTED_DATE</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 id="notes-audit-reproduce">Run the same bounded gate without a model or network request</h3>
+    <p>Save <a href="/downloads/source-notes-audit.py" download>the Python checker</a> and <a href="/downloads/public-notes-action-record.txt" download>the original recorded notes and response</a> in one folder. Run the following with Python 3.10 or later on Windows:</p>
+    <pre>py -3 source-notes-audit.py --self-test
+py -3 source-notes-audit.py --check public-notes-action-record.txt</pre>
+    <p>On macOS or Linux replace <code>py -3</code> with <code>python3</code>. The self-test uses one constructed passing checklist and four deliberately altered controls. The second command reads the actual published record, checks the eleven table rows, and prints a JSON report. Exit code <code>0</code> means no targeted flags, <code>2</code> means findings, and <code>1</code> means an input or execution error. The script does not change any files, send a request, run an AI model, or store a user's notes.</p>
+    <h3 id="notes-audit-human-review">What a person must still decide</h3>
+    <p>This checker is deliberately tied to the eleven known rows and their original source IDs. It cannot judge whether the starting notes were true, verify a project deployment, know whether a deadline was authorized outside the record, or approve publication. The synthetic mistakes test the checker, not the model that produced the original list. A person still needs to inspect the underlying sources, decide whether a task should be done, and confirm any commitments before acting.</p>
+    <p class="small-copy">The reusable pattern is to preserve the original input, request traceable actions, independently challenge the status and constraints, and keep approval separate from generation. This case documents an actual notes-organization output with a later deterministic audit. It does not report time savings, user satisfaction, a personal planning trial, or a model error rate.</p>
   </div>
 </section>
 
