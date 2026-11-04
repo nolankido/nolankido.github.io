@@ -27,7 +27,21 @@ class IdentityJsonLdTests(unittest.TestCase):
         self.assertNotIn('CEO', json.dumps(self.data))
         self.assertNotIn('Chief Executive Officer', json.dumps(self.data))
         self.assertNotIn('worksFor', person)
-        self.assertNotIn('Chief Operating Officer', person['jobTitle'])
+        self.assertNotIn('jobTitle', person)
+        self.assertNotIn('AI startup founder', person['description'].lower())
+        self.assertNotIn('angel investor', person['description'].lower())
+
+    def test_unverified_degree_and_institutional_affiliation_are_not_exported(self):
+        person = self.graph['Person']
+        for field in ('alumniOf', 'hasCredential', 'affiliation', 'worksFor'):
+            self.assertNotIn(field, person)
+        # A paper deposited by MIT does not itself establish MIT employment.
+        article = self.graph['ScholarlyArticle']
+        self.assertEqual(article['@id'], 'https://doi.org/10.1111/j.1475-679X.2012.00447.x')
+        self.assertEqual(article['author'][0]['@id'], person['@id'])
+        self.assertNotIn('Massachusetts Institute of Technology', json.dumps(person))
+        self.assertIn('Practical AI', person['description'])
+        self.assertIn('Tournament poker player.', person['description'])
 
     def test_no_unconfirmed_current_home_location_is_exported(self):
         person = self.graph['Person']

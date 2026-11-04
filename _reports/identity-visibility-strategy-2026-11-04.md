@@ -101,7 +101,7 @@ The decision rule is to repeat the content formats that produce relevant discove
 | Turn | Priority | Improvement | Done when |
 | --- | --- | --- | --- |
 | 1 | Highest | **About credibility and discoverability refresh** | Named H1 and snippet, source-linked proof above broad interest sections, consistent identity and passed local checks. Implemented in this turn. |
-| 2 | High | Review the enriched standalone identity JSON-LD against visible About, external records, privacy instructions and current roles | Every public claim has a verified source and explicit owner approval for prominence; conflicting claims are corrected without silent expansion. |
+| 2 | High | Review the enriched standalone identity JSON-LD against visible About, external records, privacy instructions and current roles | **Completed November 4:** unsupported job title, unverified degrees, and inferred MIT affiliation removed; historical COO description retained only in standalone file. See [Turn 24 audit](visibility-sprint/sprint50-turn24-2026-11-04.md). External profile ownership and any future visible credential expansion still need owner review. |
 | 3 | High | Build a definitive practical-AI case about a real operational problem | Before/after artifact, independent verification, errors, boundaries, reproducible process and clearly stated human decision. |
 | 4 | High | Tighten Technology hub's first screen and case navigation | Visitors can identify the best task-specific entry and the strongest case in one scan; no cannibalizing duplicate pages. |
 | 5 | High | Align approved public profiles and publication references | Cross-platform bios use consistent name, tagline, topical focus and specific canonical links. No invented credentials. |
