@@ -8,6 +8,7 @@ from xml.etree import ElementTree as ET
 import turn14_freshness_history as history
 import turn15_evidence_links_history
 import turn16_small_business_pilot_history
+import turn23_technology_metadata_history as turn23_history
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,9 +41,10 @@ class Turn14SitemapFreshnessTests(unittest.TestCase):
             ["git", "show", history.PARENT + ":_source/pages.json"], cwd=ROOT
         ).decode("utf-8")
         previous = {p["path"]: p for p in json.loads(previous_text)}
-        current = {p["path"]: p for p in json.loads(
-            (ROOT / "_source/pages.json").read_text(encoding="utf-8")
-        )}
+        source = turn23_history.before(
+            "_source/pages.json", (ROOT / "_source/pages.json").read_text(encoding="utf-8")
+        )
+        current = {p["path"]: p for p in json.loads(source)}
         self.assertEqual(set(previous), set(current))
         for route, page in current.items():
             before = previous[route]
@@ -57,7 +59,9 @@ class Turn14SitemapFreshnessTests(unittest.TestCase):
             ["git", "show", history.PARENT + ":sitemap.xml"], cwd=ROOT
         ).decode("utf-8")
         previous = sitemap_rows(previous_text)
-        current = sitemap_rows((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+        current = sitemap_rows(turn23_history.before(
+            "sitemap.xml", (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+        ))
         self.assertEqual(set(previous), set(current))
         for url, old_date in previous.items():
             route = url.removeprefix(ORIGIN)
@@ -70,7 +74,7 @@ class Turn14SitemapFreshnessTests(unittest.TestCase):
     def test_schema_freshness_matches_sitemap(self):
         for path in ("index.html", "technology/index.html", "poker/index.html"):
             with self.subTest(path=path):
-                html = (ROOT / path).read_text(encoding="utf-8")
+                html = turn23_history.before(path, (ROOT / path).read_text(encoding="utf-8"))
                 self.assertEqual(html.count('"dateModified": "' + REVIEWED_DATE + '"'), 1)
         # ProfilePage deliberately omits a day-only DateTime. Do not invent one.
         about = (ROOT / "about/index.html").read_text(encoding="utf-8")
