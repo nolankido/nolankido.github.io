@@ -72,6 +72,22 @@ Duplicate this block for **every** hand scene, result graphic, and consequential
 4. Request a revised edit for each `REVISE` or `HOLD` item, with the exact correction and evidence.
 5. Run the release gate again after the final export, when timecodes and graphics can be confirmed.
 
+## Optional offline check for structured scene claims
+
+A companion [Python fact-gate script](https://nolankido.com/downloads/poker-vlog-fact-gate.py) offers a narrow, **deterministic** check for this *one public episode*. It does not parse an MP4, hear the voiceover, read artwork, verify permission to film, or judge poker strategy.
+
+The script recognizes only three public source records: `hand_64o`, `hand_77`, and `event_payout`. Its four deliberately constructed before/after scenes demonstrate **seven targeted flags before revision and zero after**. These are scripted editorial examples, not real production defects, AI model outputs, a general accuracy rate, or evidence that an earlier video was repaired.
+
+Run it from the directory where the Python file is saved. Only Python's standard library is required:
+
+```powershell
+py -3 poker-vlog-fact-gate.py --self-test
+py -3 poker-vlog-fact-gate.py --example > scenes.json
+py -3 poker-vlog-fact-gate.py --check scenes.json
+```
+
+On macOS or Linux replace `py -3` with `python3`. The script reads only the JSON you explicitly name. Exit code `0` means no targeted flags, `2` means findings, and `1` means an input or self-test error. For actual edits, manually compare the current audio, the screen and stronger private sources, then return to the human release gate above. **No targeted flags never means approved.**
+
 ### Scope and limitations
 
 The linked companion contains a player account and its public source boundaries. This worksheet does not prove the strategic quality of either hand, validate a solver result, independently audit a private recording, certify filming rights, or establish better viewer retention. Keep footage, people, business information, and other nonpublic records in your own private production environment.
