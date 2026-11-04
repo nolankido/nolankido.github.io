@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 import turn22_poker_vlog_fact_gate_history as history
+import turn23_technology_metadata_history as turn23_history
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "_source/technology/home.html"
@@ -125,7 +126,7 @@ class Turn22PokerVlogFactGateTests(unittest.TestCase):
                        "No targeted flags never means approved"):
             self.assertIn(phrase.lower(), sheet.lower())
         self.assertNotIn("\u2014", sheet)
-        page = read(PUBLIC)
+        page = turn23_history.before(PUBLIC, read(PUBLIC))
         self.assertIn('<link rel="canonical" href="https://nolankido.com/technology/">', page)
         self.assertIn('"dateModified": "2026-11-03"', page)
         self.assertEqual(page.count('class="project-card"'), 3)
@@ -143,7 +144,7 @@ class Turn22PokerVlogFactGateTests(unittest.TestCase):
         self.assertFalse(history.is_added_file(CHECKER.relative_to(ROOT), CHECKER.read_bytes() + b"x"))
         for path, (previous_sha, current_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                current = (ROOT / path).read_bytes()
+                current = turn23_history.before(path, (ROOT / path).read_bytes())
                 self.assertEqual(history.blob(current), current_sha)
                 previous = history.before(path, current)
                 self.assertEqual(history.blob(previous), previous_sha)
