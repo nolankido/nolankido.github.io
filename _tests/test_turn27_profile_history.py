@@ -4,6 +4,7 @@ import subprocess
 import unittest
 
 import turn27_profile_history as history
+import turn29_source_notes_history as turn29
 
 
 class ProfileKitHistoryTests(unittest.TestCase):
@@ -14,7 +15,7 @@ class ProfileKitHistoryTests(unittest.TestCase):
         for path, (older, newer) in history.BLOBS.items():
             with self.subTest(path=path):
                 raw = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(raw), newer)
+                self.assertEqual(history.blob(turn29.before(path, raw)), newer)
                 previous = history.before(path, raw)
                 self.assertEqual(history.blob(previous), older)
                 self.assertEqual(previous, subprocess.check_output(
