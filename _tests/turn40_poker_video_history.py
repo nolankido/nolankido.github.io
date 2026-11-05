@@ -43,6 +43,8 @@ def original(name, expected):
 
 
 def before(path, value):
+    import turn41_channel_route_history
+    value = turn41_channel_route_history.before(path, value)
     name = key(path)
     pair = records()["files"].get(name)
     if pair is None or blob(value) != pair[1]:
