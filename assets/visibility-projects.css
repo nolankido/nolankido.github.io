@@ -17,6 +17,65 @@
   border-top: 2px solid currentColor;
   padding: 18px 0 8px;
 }
+.project-card:has(.project-preview) {
+  display: flex;
+  flex-direction: column;
+}
+.project-card .project-card-purpose {
+  font: 1.08rem/1.5 var(--serif, Georgia, serif);
+  min-height: 3em;
+}
+.project-preview {
+  margin: 0 0 20px;
+  padding: 12px;
+  border: 1px solid var(--line, #c7cec3);
+  background: var(--paper-light, #fafbf7);
+}
+.project-preview > a {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+}
+.project-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+.project-preview figcaption {
+  margin-top: 10px;
+  font: .76rem/1.55 var(--sans, sans-serif);
+  color: var(--ink-soft, #48534b);
+  overflow-wrap: anywhere;
+}
+.project-preview-text blockquote {
+  display: flex;
+  align-items: center;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  padding: 12px;
+  border-left: 3px solid var(--red, #b42332);
+}
+.project-preview-text blockquote p {
+  margin: 0;
+  font: 1.08rem/1.6 var(--serif, Georgia, serif);
+}
+.project-card .project-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: .55em;
+  min-height: 44px;
+  margin-top: auto;
+  padding: 8px 0;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.project-preview a:focus-visible,
+.project-card-action:focus-visible {
+  outline: 3px solid var(--green, #243d30);
+  outline-offset: 4px;
+}
 .project-card-label {
   font-family: var(--font-mono, monospace);
   font-size: .71rem;
@@ -39,6 +98,10 @@
   text-underline-offset: .18em;
 }
 /* Keep the Technology hub readable when readers enlarge text and spacing. */
+.page-home .section-content p,
+.page-technology .section-content p {
+  overflow-wrap: anywhere;
+}
 .page-technology :is(.section-title, .section-label, h3, .section-deck, .practical-work p, .ai-path-output) {
   overflow-wrap: anywhere;
 }
