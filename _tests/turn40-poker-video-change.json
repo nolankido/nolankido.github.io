@@ -1,0 +1,64 @@
+{
+  "files": {
+    "_reports/identity-visibility-strategy-2026-11-04.md": [
+      "f33d3e4f4660a9e61f5db114cc1fe7ef03e02f91",
+      "fe729daa29469270d5c193d921a7172e3e1d3352"
+    ],
+    "_scripts/build_player_profile.py": [
+      "d68435370b04159624456a96e71dec75b17b8353",
+      "b2d74e7fc8180f9d85309145428fa065e1c59f40"
+    ],
+    "_scripts/local_release_checks.py": [
+      "ae8a2cb3a71f8102b8e48c5b4995576000cb1050",
+      "d3bc7fade71a55251b64cc3ec7a9ada4e1574820"
+    ],
+    "_scripts/player_sitemap.py": [
+      "2f9adad20f9d4c88c64a031354bdec057f07d64d",
+      "3cc96f072e03beb388349da968bd6195cd3a8d68"
+    ],
+    "_source/pages.json": [
+      "b76f47b2f4143fd255c4ce4c5a28989d3a36f711",
+      "46c7652c0173b88cc1e0ff52974c4e2e1aea1c37"
+    ],
+    "_source/poker/home.html": [
+      "e2b9bc21a260fd794d30cb14fd5f4a859dd08f90",
+      "25d1c054ad7fc377c9c0a38d810f0135d7ccff10"
+    ],
+    "_source/poker/nolan-kido-profile.html": [
+      "1be8e16e00cf411ee5d2be8862365b5b9d29fdca",
+      "ff93f9694d7ee608c75142e485d4e4385a3719d5"
+    ],
+    "_tests/test_player_sitemap.py": [
+      "f1bfb892e3e2c7dd9cf2bd5d68792bc209e462d9",
+      "bf5966a3175d071e5a15ad4dde9b600c1921f3c9"
+    ],
+    "_tests/test_turn11_poker_video_discovery.py": [
+      "34f6a361c31b0f99c65e5323909eb5090c519c48",
+      "0b4afa3f54301a04178e1dea29641cc2bdc42293"
+    ],
+    "_tests/test_turn39_home_shortcut.py": [
+      "d634b1b87560e44211909e9e5d5b648ca17ea1bf",
+      "c4af397cc5cf6c476c6c56888d2c347d4cf479d9"
+    ],
+    "_tests/test_visibility_poker_player_page.py": [
+      "1bdacfbeffd27c1f435ffac192c4c61af26f6cda",
+      "3b4b2b35ec35012326c5e64b5c96245405ed9a07"
+    ],
+    "_tests/turn39_home_shortcut_history.py": [
+      "c97feb05b5216a16be8b24cb69a7588f087ffe48",
+      "a51c0fe9c155b10c9cba4ff9c67766a8a919cc77"
+    ],
+    "poker/index.html": [
+      "deb184f59f3009c969edbf500d4aa50d73f30f5f",
+      "2cbd4ec960ceeb69189c815a0797ff90c5085613"
+    ],
+    "poker/nolan-kido/index.html": [
+      "209a9d2ebbb0b7ccab637ae4ed68e1b46dcb570e",
+      "ca9cbc4083869a1e80f0c940a95830973344620c"
+    ],
+    "sitemap.xml": [
+      "897cb6b8e90b746cd07089f656ae363181a5a70d",
+      "e4ff3b4cc520655a461c357297f1891bb925e4fd"
+    ]
+  }
+}

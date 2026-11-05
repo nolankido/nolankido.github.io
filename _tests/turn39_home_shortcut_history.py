@@ -44,6 +44,8 @@ def original(name, expected):
 
 
 def before(path, value):
+    import turn40_poker_video_history
+    value = turn40_poker_video_history.before(path, value)
     name = key(path)
     pair = records()["files"].get(name)
     if pair is None or blob(value) != pair[1]:

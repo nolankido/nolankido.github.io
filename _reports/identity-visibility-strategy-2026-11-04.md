@@ -149,6 +149,10 @@ The connected third-party search-performance analysis was unavailable because it
 
 [Turn 39](visibility-sprint/sprint50-turn39-2026-11-05.md) adds a native, second-position "Check the evidence" link to the homepage's existing hero actions. It leads to Turn 38's source-linked three-part evidence section without adding another page, repeating proof claims or changing metadata. Local viewport tests found the 44-pixel link in the first 900 pixels at 320, 390, 768 and 1280 pixels, without horizontal overflow. This is an improvement in access to evidence, not proof that visitors use it or that search engines will reward it.
 
+## Current poker creator discovery, November 5
+
+[Turn 40](visibility-sprint/sprint50-turn40-2026-11-05.md) adds two newly shared public Portland Meadows video links to both the Poker hub and the independently built player profile. The existing three links and two written companions stay in place, while the later videos are presented as first-person uploads without unsourced hand descriptions, current-video title claims or chapter offsets. This keeps a live creator interest visible on Nolan's own canonical site without presenting it as professional results, official tournament media status or evidence of search/AI-discovery growth. External YouTube metadata and current-cut A/V were not independently checked during this code turn.
+
 ## Release rules
 
 - Do not use GitHub Actions, another scheduled CI service, cron jobs, or paid APIs.
