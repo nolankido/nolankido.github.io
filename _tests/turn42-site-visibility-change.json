@@ -1,0 +1,12 @@
+{
+  "description": "Exact Turn 41 release to Turn 42 public website-visibility evidence case changes; test-only history bridge",
+  "files": {
+    "_scripts/local_release_checks.py": ["86636d10608b63a383ecda6ad92cb8a19722c295", "ed884acf2d3d50a1156c0d1142b49384998768b6"],
+    "_source/about.html": ["60d3cfcb09c7465cb764eb82ddf1d878711e90a4", "90f522748e249aaf7452b3ac98e545c480454a11"],
+    "_source/pages.json": ["46c7652c0173b88cc1e0ff52974c4e2e1aea1c37", "08a01d77bfbc10d27b249bf0303fc49dcfb339de"],
+    "_source/technology/home.html": ["53b0730c408c72cfcd6d01afc87e7643d746d981", "16cd0838e406fda8e2a0b55d3e5b84753776aa32"],
+    "about/index.html": ["67a94c08d27a5280b05acdee60bd563716426640", "ebc842402e305ca9582d7b92ac46279e0b51e293"],
+    "sitemap.xml": ["e4ff3b4cc520655a461c357297f1891bb925e4fd", "7c46100ce9ffb9860ebc6ca0375f35501abb101b"],
+    "technology/index.html": ["222261366df1a6fa2cbdcb4011b540fac8b4409b", "2a15fa31f4c7a01dea427b42d74204687428a129"]
+  }
+}

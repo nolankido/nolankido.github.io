@@ -45,6 +45,8 @@ def original(name, expected):
 
 
 def before(path, value):
+    import turn42_site_visibility_history
+    value = turn42_site_visibility_history.before(path, value)
     name = key(path)
     pair = records()["files"].get(name)
     if pair is None or blob(value) != pair[1]:
