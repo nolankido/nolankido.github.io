@@ -91,9 +91,9 @@ class StandOffSourceReviewTests(unittest.TestCase):
         for url in VIDEOS:
             self.assertIn('href="' + url + '"', self.public)
         self.assertIn('href="#standoff-ak-source-review"', self.public)
-        self.assertIn("Episode 2 has a more limited source review", self.public)
-        self.assertIn("not a timecode-verified companion for the current YouTube cut", self.public)
-        self.assertIn("Only the first video below has a reviewed companion here", self.public)
+        self.assertIn("Episodes 1 and 2 each have a written companion", self.public)
+        self.assertIn("Neither text claims frame-by-frame verification", self.public)
+        self.assertIn("The first two videos have written companions", self.public)
         self.assertEqual(self.public.count('class="poker-content-card"'), 3)
         self.assertIn('href="/poker/episodes/portland-meadows-ep1/"', self.public)
         self.assertNotIn("JToB7upHqEM", self.public)
