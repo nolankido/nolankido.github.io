@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
 import turn39_home_shortcut_history as history
+import turn40_poker_video_history as successor
 
 PARENT = history.PARENT
 NAV = re.compile(r'<nav class="link-row identity-actions"[^>]*>.*?</nav>', re.S)
@@ -99,7 +100,7 @@ class HomepageEvidenceShortcutHistoryTests(unittest.TestCase):
             with self.subTest(path=name):
                 now = (ROOT / name).read_bytes()
                 previous = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
-                self.assertEqual(history.blob(now), new_hash)
+                self.assertEqual(history.blob(successor.before(name, now)), new_hash)
                 self.assertEqual(history.blob(previous), old_hash)
                 self.assertEqual(history.before(name, now), previous)
                 self.assertEqual(history.before(ROOT / name, now.decode()), previous.decode())

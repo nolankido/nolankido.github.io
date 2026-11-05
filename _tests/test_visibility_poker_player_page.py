@@ -74,7 +74,7 @@ class PlayerProfileTests(unittest.TestCase):
         for required in (
             "1,652 entries", "341 entries", "638 entries", "101 entries",
             "gross payout, not net profit", "No bracelet, Circuit ring",
-            "The videos are edited first-person accounts",
+            "they are edited first-person accounts, not official tournament results",
             "Neither written account asserts verified current-cut chapter timestamps.",
         ):
             self.assertIn(required, self.html)
