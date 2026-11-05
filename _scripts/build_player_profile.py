@@ -85,7 +85,7 @@ def render() -> str:
         "name": TITLE,
         "url": URL,
         "description": DESCRIPTION,
-        "dateModified": "2026-11-03",
+        "dateModified": "2026-11-04",
         "about": {"@type": "Person", "@id": ORIGIN + "/about/#nolan-kido",
                   "name": "Nolan Kido", "url": ORIGIN + "/about/"},
         "breadcrumb": {
