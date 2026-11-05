@@ -85,9 +85,9 @@ class StandOffCompanionTests(unittest.TestCase):
                       "not a solver output", "not independently compared"):
             self.assertIn(token.lower(), self.source.lower())
         self.assertIn("The big blind then shoved", self.source)
+        self.assertIn("That was the first decision", self.source)
         self.assertIn("This was the first decision", self.source)
-        self.assertIn("This was the first decision", self.source)
-        self.assertIn("different decision from", self.source)
+        self.assertIn("These arithmetic checks explain why the second call", self.source)
         self.assertIn("currently public YouTube cut", self.source)
         self.assertIn("not asserted as current public-video chapter offsets", self.source)
         self.assertNotIn("v=I75GOBVXij4&amp;t=", self.source)
