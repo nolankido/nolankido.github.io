@@ -44,6 +44,8 @@ def original(name, expected):
 
 
 def before(path, value):
+    import turn35_cross_interest_history
+    value = turn35_cross_interest_history.before(path, value)
     name = key(path)
     pair = records()["files"].get(name)
     if pair is None or blob(value) != pair[1]:
@@ -53,16 +55,24 @@ def before(path, value):
 
 
 def is_added_file(path, value):
+    import turn35_cross_interest_history
+    if turn35_cross_interest_history.is_added_file(path, value):
+        return True
+    value = turn35_cross_interest_history.before(path, value)
     expected = records()["added"].get(key(path))
     return expected is not None and blob(value) == expected
 
 
 def pages(items):
+    import turn35_cross_interest_history
+    items = turn35_cross_interest_history.pages(items)
     old, current = records()["start_here"]
     return [deepcopy(old) if item == current else item for item in items]
 
 
 def live_targets(items):
+    import turn35_cross_interest_history
+    items = turn35_cross_interest_history.live_targets(items)
     added = records()["live_targets"]
     result = {}
     for route, response in items.items():

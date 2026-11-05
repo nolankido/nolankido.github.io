@@ -53,6 +53,7 @@ def main() -> int:
         ('Portland video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_portland_episode.py', '-q']),
         ('Stand Off video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn33_standoff_companion.py', '-q']),
         ('Release integrity regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn34_release_integrity.py', '-q']),
+        ('AI and poker evidence article', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn35_ai_poker_case.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
