@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import check_live
+import turn33_standoff_companion_history as turn33
 
 SOURCE = ROOT / "_source/poker/home.html"
 PUBLIC = ROOT / "poker/index.html"
@@ -178,7 +179,7 @@ class StandOffSourceReviewTests(unittest.TestCase):
         old = subprocess.check_output(
             ["git", "show", BASE + ":sitemap.xml"], cwd=ROOT
         ).decode("utf-8")
-        new = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+        new = turn33.before("sitemap.xml", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         def dates(content):
             return {row.findtext(ns + "loc"): row.findtext(ns + "lastmod")
