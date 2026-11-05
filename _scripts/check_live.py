@@ -91,6 +91,9 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/identity-evidence-gate.py',
                'downloads/identity-evidence-case-workbook.md',
                'downloads/nolan-kido-public-profile-kit.md']
+    assets += ['downloads/gsc-monthly-local-audit.py',
+               'downloads/gsc-synthetic-dates.csv',
+               'downloads/gsc-synthetic-pages.csv']
     assets += ['assets/poker-school.css', 'assets/poker-school-interest.js']
     assets += ['assets/poker-venue.css', 'downloads/thunder-valley-first-visit.md']
     assets += ['assets/poker-multiway.css', 'downloads/poker-multiway-review.md']
