@@ -19,6 +19,12 @@ def forbid_workflows() -> None:
 
 def check(label: str, args: list[str]) -> bool:
     print(f'\n=== {label} ===', flush=True)
+    if '-s' in args and '-p' in args:
+        folder = ROOT / args[args.index('-s') + 1]
+        pattern = args[args.index('-p') + 1]
+        if not any(folder.glob(pattern)):
+            print(f'{label}: FAIL (no tests match {pattern})', flush=True)
+            return False
     result = subprocess.run([sys.executable, *args], cwd=ROOT, check=False)
     print(f'{label}: {"PASS" if result.returncode == 0 else "FAIL"}', flush=True)
     return result.returncode == 0
@@ -26,7 +32,7 @@ def check(label: str, args: list[str]) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--full', action='store_true', help='Run full historical unit tests and HTML parsing (can take time)')
+    parser.add_argument('--full', action='store_true', help='Also run the full historical unit suite (can take time)')
     parser.add_argument('--browser', action='store_true', help='Also run local browser scripts; requires Playwright and browsers')
     args = parser.parse_args()
     try:
@@ -39,20 +45,23 @@ def main() -> int:
         ('Deterministic build', ['_scripts/build.py', '--check']),
         ('Player profile build', ['_scripts/build_player_profile.py', '--check']),
         ('Portland video companion build', ['_scripts/build_poker_episode.py', '--check']),
+        ('Stand Off video companion build', ['_scripts/build_standoff_episode.py', '--check']),
         ('Local laptop guide build', ['_scripts/build_local_laptop_case.py', '--check']),
         ('Independent reply audit build', ['_scripts/build_reply_audit_case.py', '--check']),
         ('Independent reply audit contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_reply_audit_case.py', '-q']),
         ('Local laptop article and loopback contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_local_laptop_case.py', '-q']),
         ('Portland video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_portland_episode.py', '-q']),
+        ('Stand Off video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn33_standoff_companion.py', '-q']),
+        ('Release integrity regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn34_release_integrity.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
         ('Player Find index contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_find.py', '-q']),
         ('SEO and metadata', ['_scripts/check_search.py']),
+        ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
     if args.full:
         tasks.extend([
-            ('HTML5 parsing', ['_tests/check_html5.py']),
             ('Full unit suite', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_*.py', '-q']),
         ])
     else:

@@ -1,0 +1,115 @@
+{
+  "parent": "80170a3909e2a70fcbbb34ea667953b2af77e45f",
+  "files": {
+    "AGENTS.md": [
+      "88ca1bd3f04f320624536c318c7ceca8bf7e9e24",
+      "93094ff2f3c27212389aa69c715ebd4d962918d4"
+    ],
+    "_scripts/check_live.py": [
+      "4bf4433601a9fe6bc01d6bfb9629ae273c01e1aa",
+      "a897793453199d0a37b21b5c19f401448cf09dd5"
+    ],
+    "_scripts/check_search.py": [
+      "cc134efdc4c970c138e50fe273fedf3d4181ba60",
+      "40148fc09cee333c1fc240bd0380a5d65e5de6e2"
+    ],
+    "_scripts/local_release_checks.py": [
+      "5ab712808546a673221230a978eea488d206f155",
+      "205cc8ef3ce65b1f7070f25ee6cdedb3f6bcbe14"
+    ],
+    "_scripts/search_entrypoints.py": [
+      "3849856160eb0939d99ec4d57e44797495618e1f",
+      "ddb75b909c4da50302b30fa4e4afcdd16d6340ce"
+    ],
+    "_source/poker/portland-meadows-ep1.html": [
+      "c8280f318cb7423b762cfa311f74c4e4e81a0a0d",
+      "3093180d33da85b0a837488d9507f8e5d00930e1"
+    ],
+    "_source/technology/local-ai-gaming-laptop.html": [
+      "abce47db5c682cc0f6e78c7d34183c7429570613",
+      "5891c29547ec5843e8be728721a82e5625a6a05f"
+    ],
+    "_source/technology/review-reply-evidence-audit.html": [
+      "2163db231aa31c80d5305b9b8b97efbd7ef8b742",
+      "2b3694cf641f6fd9d25120c2adb2df333f780bcc"
+    ],
+    "_tests/check_html5.py": [
+      "5e5f21a77999c8ae7e18d008deedf11a8480289a",
+      "6b79dd671a02eec03a93a2f19bbdf8d483857889"
+    ],
+    "_tests/test_turn33_standoff_companion.py": [
+      "d7a526f046c7db3cf03bbd796ca2b9fc17a97dac",
+      "491c2eacd4bbc33ea334c45c5c119b1ffae5b11c"
+    ],
+    "_tests/test_turn33_standoff_companion_history.py": [
+      "c0ea51e2654603e21d9ce5063e7ee24b00c750fa",
+      "9deaef8d77b1bec0650006dad630e1d55ff76f9d"
+    ],
+    "_tests/test_visibility_poker_player_page.py": [
+      "af13de5234924b1b9597f2c597058495ec4e5818",
+      "1bdacfbeffd27c1f435ffac192c4c61af26f6cda"
+    ],
+    "_tests/turn09_reply_history.py": [
+      "cfeea68eef59f6dd15799cf7ebe445d70d29f73a",
+      "d109c2f7950bd0d5da2608befdfdb91364d82391"
+    ],
+    "_tests/turn32_standoff_source_history.py": [
+      "aeb0cd399c6f05e988d9fb414737d04f7e54c7df",
+      "7dbcca6323968673d267960b90265d2638578e53"
+    ],
+    "_tests/turn33_standoff_companion_history.py": [
+      "19cb1980183f30ffed20bc6262b58bd55d7425fe",
+      "2c99619e8ba76ef5d8854811cf1a88b01a8184c6"
+    ],
+    "poker/episodes/portland-meadows-ep1/index.html": [
+      "ab85a76f93593a3d3acb567e04e7d833bb9a14d7",
+      "53123638d94de1d08b269f4500952dfd62ce8968"
+    ],
+    "technology/local-ai-gaming-laptop/index.html": [
+      "7c21d5bb63075f98cae1422e3b6ed498a91b08ee",
+      "a4d633fc512c7c124295635502f7b3e6620caa77"
+    ],
+    "technology/organize-public-notes/index.html": [
+      "011fa33ee262b652ed9deac3948421e9abc693ae",
+      "2b90eec6d9cb0a342fcbabebfbd869058dd87b63"
+    ],
+    "technology/review-reply-evidence-audit/index.html": [
+      "aa3544a806b39b62ed9dc29bf0199223102c96fa",
+      "ad721095addb5f8595799ac3223a7f014041b466"
+    ]
+  },
+  "added": {
+    "_tests/test_turn34_release_integrity.py": "bd80260de152686ebba367a5dfbdfb4ea883f27d",
+    "_tests/test_turn34_release_history.py": "3e9ecffca72dbb21effdcad3cd65729e67b529e8"
+  },
+  "start_here": [
+    {
+      "id": "start-here",
+      "path": "/start-here/",
+      "title": "A few good places to begin.",
+      "seo_title": "Start Here: Practical AI, Living Well & Poker | Nolan Kido",
+      "description": "Choose a useful task or explore Nolan Kido's AI projects: customer replies, book continuity, and a cooking planner. Follow interests in life, poker, and creativity.",
+      "kicker": "New here?",
+      "source": "start-here.html",
+      "updated": "2026-10-28",
+      "entry_summary": "Choose a useful task or explore Nolan Kido's AI projects: customer replies, book continuity, and a cooking planner. Follow interests in life, poker, and creativity."
+    },
+    {
+      "id": "start-here",
+      "path": "/start-here/",
+      "title": "A few good places to begin.",
+      "seo_title": "Start Here: Practical AI, Living Well & Poker | Nolan Kido",
+      "description": "Choose a useful task or explore Nolan Kido's AI projects: customer replies, book continuity, and a cooking planner. Follow interests in life, poker, and creativity.",
+      "kicker": "New here?",
+      "source": "start-here.html",
+      "updated": "2026-11-04",
+      "entry_summary": "Choose a useful task or explore Nolan Kido's AI projects: customer replies, book continuity, and a cooking planner. Follow interests in life, poker, and creativity."
+    }
+  ],
+  "live_targets": {
+    "/downloads/source-notes-audit.py": "1d330939c47764341dbddad8f6e39280a60b47a7",
+    "/downloads/identity-evidence-gate.py": "fc79c43d211a74d631e13440c5a69d40516ed89a",
+    "/downloads/identity-evidence-case-workbook.md": "dd741df19073f191190ab347d66220f9f3dbb4f6",
+    "/downloads/nolan-kido-public-profile-kit.md": "8a16fe3707025dbfafa02a9f03d4d9108b65054f"
+  }
+}

@@ -77,8 +77,10 @@
     </dl>
     <p><strong>Download the proposed labels:</strong> <a href="/downloads/portland-meadows-ep1-scene-claims.json" download>Three source-bounded scene claims (.json)</a>. The file deliberately leaves individual card suits, full runouts, solver conclusions and version 7 timestamps out of the facts presented as verified for the current cut.</p>
     <p><strong>Check the structured claims without an AI model:</strong> Download <a href="/downloads/poker-vlog-fact-gate.py" download>the offline Python fact gate</a> to the same folder and run the commands below using Python 3.10 or later on Windows:</p>
-    <pre>py -3 poker-vlog-fact-gate.py --self-test
+    <div class="poker-details">
+      <pre>py -3 poker-vlog-fact-gate.py --self-test
 py -3 poker-vlog-fact-gate.py --check portland-meadows-ep1-scene-claims.json</pre>
+    </div>
     <p>On macOS or Linux, use <code>python3</code> instead of <code>py -3</code>. The gate reads the JSON scene proposals and checks numeric labels, hand identifiers, unsupported visuals, stale chapter offsets and payout distinctions against the archived public companion. A result with no targeted flags does <strong>not</strong> mean the public video, audio or captions have passed review. Its separate self-test uses deliberately constructed mistakes, not observed errors from this upload.</p>
     <p>For the next episode, start with the <a href="/downloads/poker-vlog-truth-to-screen-qa.md" download>truth-to-screen editorial worksheet</a>: capture exact voiceover, displayed cards, current-cut scene offsets, sources and unknowns. A person must review the latest audiovisual export and approve what is actually shown before a new source-checked companion is published. The two other <a href="/poker/#watch">public tournament videos</a> do not yet have that published hand-by-hand verification.</p>
   </section>

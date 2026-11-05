@@ -86,7 +86,7 @@ class StandOffCompanionTests(unittest.TestCase):
             self.assertIn(token.lower(), self.source.lower())
         self.assertIn("The big blind then shoved", self.source)
         self.assertIn("That was the first decision", self.source)
-        self.assertIn("This was the first decision", self.source)
+        self.assertIn("Decision 1: flat A-K or move all-in?", self.source)
         self.assertIn("These arithmetic checks explain why the second call", self.source)
         self.assertIn("currently public YouTube cut", self.source)
         self.assertIn("not asserted as current public-video chapter offsets", self.source)
@@ -154,7 +154,7 @@ class StandOffCompanionTests(unittest.TestCase):
         for page in (hub, player, find):
             self.assertIn('href="' + poker_standoff_episode.ROUTE + '"', page)
         self.assertIn("archived v9", hub)
-        self.assertIn("Reserve Day 1 does not yet have a written hand companion", player)
+        self.assertIn("Public video from the Reserve stop; no source-checked companion here yet.", player)
         entries = player_find.add(ROOT, site_find.entries(ROOT, self.pages))
         manual = [e for e in entries if e["path"] == poker_standoff_episode.ROUTE]
         self.assertEqual(len(manual), 1)

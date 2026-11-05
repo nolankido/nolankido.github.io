@@ -69,6 +69,8 @@ def files(paths):
 
 
 def live_targets(records):
+    import turn34_release_integrity_history
+    records = turn34_release_integrity_history.live_targets(records)
     import turn20_reply_boundaries_history as turn20
     result = {}
     for route, response in records.items():
