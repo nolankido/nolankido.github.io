@@ -145,6 +145,10 @@ The connected third-party search-performance analysis was unavailable because it
 
 [Turn 38](visibility-sprint/sprint50-turn38-2026-11-05.md) carries the About page's source-backed credibility approach into the homepage introduction. A short three-part evidence section appears before the project gallery and links directly to the publisher's 2012 accounting paper, an inspectable practical-AI audit and the source-linked tournament player record. Each entry states the limited claim it supports. The section uses existing responsive card styling, the canonical page and identity data remain unchanged, and local tests pin the scope of the insertion. This is a presentation and source-access improvement, not a measured increase in visitors' trust, search traffic or AI-answer citations.
 
+## Homepage evidence shortcut, November 5
+
+[Turn 39](visibility-sprint/sprint50-turn39-2026-11-05.md) adds a native, second-position "Check the evidence" link to the homepage's existing hero actions. It leads to Turn 38's source-linked three-part evidence section without adding another page, repeating proof claims or changing metadata. Local viewport tests found the 44-pixel link in the first 900 pixels at 320, 390, 768 and 1280 pixels, without horizontal overflow. This is an improvement in access to evidence, not proof that visitors use it or that search engines will reward it.
+
 ## Release rules
 
 - Do not use GitHub Actions, another scheduled CI service, cron jobs, or paid APIs.

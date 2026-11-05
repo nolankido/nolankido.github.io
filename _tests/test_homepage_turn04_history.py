@@ -40,11 +40,11 @@ class HomepageTurn04Tests(unittest.TestCase):
         self.assertIsNotNone(nav)
         self.assertIn('aria-label="Explore Nolan Kido\'s work and interests"', nav.group(0))
         links = re.findall(r'<a\b[^>]*href="([^"]+)"', nav.group(1))
-        self.assertEqual(links, list(PATHS))
+        self.assertEqual(links, [PATHS[0], '#home-proof-title', *PATHS[1:]])
         self.assertEqual(len(set(links)), len(links))
         for link in links:
             url = urlsplit(link)
-            page = build.output_path(url.path)
+            page = build.output_path(url.path or '/')
             with self.subTest(link=link):
                 self.assertIn(page, self.outputs)
                 if url.fragment:

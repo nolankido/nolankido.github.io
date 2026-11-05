@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import check_live
 import turn38_home_proof_history as history
+import turn39_home_shortcut_history as successor
 
 PARENT = "ca1686a83d1ff5b426ed44d49e3a7af46ce85149"
 PROOF = re.compile(
@@ -71,6 +72,7 @@ class HomepageEvidenceTests(unittest.TestCase):
 
     def test_change_is_only_one_publicly_reviewable_section(self):
         for name, current in (('_source/home.html', self.source), ('index.html', self.page)):
+            current = successor.before(name, current)
             before = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
             block = PROOF.search(current).group() + '\n'
             self.assertEqual(current.count(block), 1)
@@ -108,7 +110,7 @@ class HomepageEvidenceHistoryTests(unittest.TestCase):
             with self.subTest(file=name):
                 value = (ROOT / name).read_bytes()
                 before = subprocess.check_output(['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
-                self.assertEqual(history.blob(value), new)
+                self.assertEqual(history.blob(successor.before(name, value)), new)
                 self.assertEqual(history.blob(before), old)
                 self.assertEqual(history.before(name, value), before)
 
@@ -121,7 +123,7 @@ class HomepageEvidenceHistoryTests(unittest.TestCase):
     def test_added_unit_tests_are_explicitly_pinned(self):
         for name, expected in history.records()['added'].items():
             value = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(value), expected)
+            self.assertEqual(history.blob(successor.before(name, value)), expected)
             self.assertTrue(history.is_added_file(name, value))
             self.assertFalse(history.is_added_file(name, value + b'OTHER'))
 
