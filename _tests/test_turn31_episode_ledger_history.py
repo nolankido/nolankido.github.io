@@ -3,6 +3,7 @@ from pathlib import Path
 import subprocess
 import unittest
 import turn31_episode_ledger_history as history
+import turn33_standoff_companion_history as turn33
 import turn32_standoff_source_history as turn32
 
 
@@ -21,7 +22,7 @@ class EpisodeLedgerHistoryTests(unittest.TestCase):
         for path, (old_sha, new_sha) in history.BLOBS.items():
             with self.subTest(path=path):
                 current = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(turn32.before(path, current)), new_sha)
+                self.assertEqual(history.blob(turn32.before(path, turn33.before(path, current))), new_sha)
                 original = history.before(path, current)
                 self.assertEqual(history.blob(original), old_sha)
                 self.assertEqual(original, subprocess.check_output(

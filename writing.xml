@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>Portland Meadows Stand Off: A-K and Two Shoves | Nolan Kido</title>
+      <link>https://nolankido.com/poker/episodes/portland-meadows-standoff/</link>
+      <description>Nolan Kido reviews a Portland Meadows Stand Off A-K hand, a 15,000 flat, two shoves, a 46,000 call, K-K versus Q-Q, and a later rethink.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/episodes/portland-meadows-standoff/</guid>
+      <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
     <item>
       <title>What a second check found in three AI-written replies.</title>
       <link>https://nolankido.com/technology/review-reply-evidence-audit/</link>

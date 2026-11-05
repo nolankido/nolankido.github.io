@@ -4,6 +4,7 @@ import subprocess
 import unittest
 
 import turn32_standoff_source_history as history
+import turn33_standoff_companion_history as turn33
 
 
 class StandOffSourceHistoryTests(unittest.TestCase):
@@ -14,7 +15,7 @@ class StandOffSourceHistoryTests(unittest.TestCase):
         })
         for path, (before_sha, after_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                data = (history.ROOT / path).read_bytes()
+                data = turn33.before(path, (history.ROOT / path).read_bytes())
                 self.assertEqual(history.blob(data), after_sha)
                 earlier = history.before(path, data)
                 self.assertEqual(history.blob(earlier), before_sha)

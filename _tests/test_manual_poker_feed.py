@@ -10,6 +10,7 @@ import follow
 import manual_poker_feed
 import poker_content
 import poker_episode
+import poker_standoff_episode
 
 
 class PublishedEpisodeFeedTests(unittest.TestCase):
@@ -26,7 +27,11 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
         items = ET.fromstring(actual).findall("./channel/item")
         relevant = [item for item in items if item.findtext("link") == poker_episode.URL]
         self.assertEqual(len(relevant), 1)
-        self.assertEqual(items[0].findtext("link"), poker_episode.URL)
+        self.assertEqual(items[0].findtext("link"), poker_standoff_episode.URL)
+        self.assertEqual(items[1].findtext("link"), poker_episode.URL)
+        new = [item for item in items if item.findtext("link") == poker_standoff_episode.URL]
+        self.assertEqual(len(new), 1)
+        self.assertEqual(new[0].findtext("pubDate"), "Wed, 04 Nov 2026 00:00:00 GMT")
         self.assertEqual(relevant[0].findtext("guid"), poker_episode.URL)
         self.assertEqual(relevant[0].findtext("pubDate"), "Mon, 02 Nov 2026 00:00:00 GMT")
         self.assertIn("6-4 versus A-K", relevant[0].findtext("description"))
@@ -36,7 +41,11 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
         self.assertEqual(combined, self.outputs[follow.OUTPUT])
         self.assertEqual(combined, (ROOT / "writing.xml").read_text(encoding="utf-8"))
         channel = ET.fromstring(combined).find("channel")
-        self.assertEqual(channel.findtext("pubDate"), "Mon, 02 Nov 2026 00:00:00 GMT")
+        self.assertEqual(channel.findtext("pubDate"), "Wed, 04 Nov 2026 00:00:00 GMT")
+        new = [item for item in channel.findall("item") if item.findtext("link") == poker_standoff_episode.URL]
+        self.assertEqual(len(new), 1)
+        self.assertEqual(new[0].findtext("pubDate"), "Wed, 04 Nov 2026 00:00:00 GMT")
+        self.assertEqual(new[0].find("source").get("url"), "https://nolankido.com/poker/feed.xml")
         items = channel.findall("item")
         relevant = [item for item in items if item.findtext("link") == poker_episode.URL]
         self.assertEqual(len(relevant), 1)
@@ -48,7 +57,8 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
         with TemporaryDirectory() as directory:
             self.assertEqual(manual_poker_feed.add(old, Path(directory)), old)
             root = Path(directory)
-            for path in (poker_episode.SOURCE, poker_episode.OUTPUT):
+            for path in (poker_episode.SOURCE, poker_episode.OUTPUT,
+                         poker_standoff_episode.SOURCE, poker_standoff_episode.OUTPUT):
                 target = root / path
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / path, target)
@@ -56,6 +66,10 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "twice"):
                 manual_poker_feed.add(self.outputs[Path("poker/feed.xml")], root)
             (root / poker_episode.SOURCE).unlink()
+            with self.assertRaises(ValueError):
+                manual_poker_feed.add(old, root)
+            shutil.copyfile(ROOT / poker_episode.SOURCE, root / poker_episode.SOURCE)
+            (root / poker_standoff_episode.SOURCE).unlink()
             with self.assertRaises(ValueError):
                 manual_poker_feed.add(old, root)
 

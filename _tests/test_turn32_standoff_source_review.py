@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import check_live
+import turn33_standoff_companion_history as turn33
 
 SOURCE = ROOT / "_source/poker/home.html"
 PUBLIC = ROOT / "poker/index.html"
@@ -91,9 +92,9 @@ class StandOffSourceReviewTests(unittest.TestCase):
         for url in VIDEOS:
             self.assertIn('href="' + url + '"', self.public)
         self.assertIn('href="#standoff-ak-source-review"', self.public)
-        self.assertIn("Episode 2 has a more limited source review", self.public)
-        self.assertIn("not a timecode-verified companion for the current YouTube cut", self.public)
-        self.assertIn("Only the first video below has a reviewed companion here", self.public)
+        self.assertIn("Episodes 1 and 2 each have a written companion", self.public)
+        self.assertIn("Neither text claims frame-by-frame verification", self.public)
+        self.assertIn("The first two videos have written companions", self.public)
         self.assertEqual(self.public.count('class="poker-content-card"'), 3)
         self.assertIn('href="/poker/episodes/portland-meadows-ep1/"', self.public)
         self.assertNotIn("JToB7upHqEM", self.public)
@@ -178,7 +179,7 @@ class StandOffSourceReviewTests(unittest.TestCase):
         old = subprocess.check_output(
             ["git", "show", BASE + ":sitemap.xml"], cwd=ROOT
         ).decode("utf-8")
-        new = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+        new = turn33.before("sitemap.xml", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         def dates(content):
             return {row.findtext(ns + "loc"): row.findtext(ns + "lastmod")

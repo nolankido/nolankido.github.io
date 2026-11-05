@@ -13,6 +13,7 @@ import re
 
 import player_sitemap
 import poker_episode
+import poker_standoff_episode
 import local_laptop_case
 import reply_audit_case
 import site_find
@@ -101,9 +102,37 @@ def episode_entry(root: Path) -> dict | None:
             'kind': 'episode', 'date': poker_episode.PUBLISHED}
 
 
+
+def standoff_episode_entry(root: Path) -> dict | None:
+    """A source-bounded Stand Off article, not a verified video transcript."""
+    info = poker_standoff_episode.record(root)
+    if info is None:
+        return None
+    html = (root / poker_standoff_episode.OUTPUT).read_text(encoding="utf-8")
+    meta = _PublicMetadata(html)
+    title = ' '.join(''.join(meta.h1_parts).split())
+    seo_title = ' '.join(''.join(meta.title_parts).split())
+    if len(meta.description) != 1:
+        raise ValueError('Stand Off Find requires one public description')
+    description = meta.description[0]
+    if not title or not seo_title or not 80 <= len(description) <= 190:
+        raise ValueError('Stand Off Find requires bounded public titles and summary')
+    matches = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+    if len(matches) != 1:
+        raise ValueError('Stand Off Find requires one Article schema')
+    schema = json.loads(matches[0])
+    if (schema.get('name') != seo_title or schema.get('description') != description
+            or schema.get('datePublished') != poker_standoff_episode.PUBLISHED):
+        raise ValueError('Stand Off Find must match source-backed Article metadata')
+    return {'path': poker_standoff_episode.ROUTE, 'title': title,
+            'search_title': seo_title, 'description': description,
+            'interests': ['poker'], 'home': 'poker',
+            'kind': 'episode', 'date': poker_standoff_episode.PUBLISHED}
+
+
 def add(root: Path, manifest_items: list[dict]) -> list[dict]:
     """Include exactly the separately validated manual Poker pages."""
-    extras = [item for item in (entry(root), episode_entry(root), local_laptop_case.find_entry(root), reply_audit_case.find_entry(root)) if item is not None]
+    extras = [item for item in (entry(root), episode_entry(root), standoff_episode_entry(root), local_laptop_case.find_entry(root), reply_audit_case.find_entry(root)) if item is not None]
     if not extras:
         return manifest_items
     seen = {item['path'] for item in manifest_items}

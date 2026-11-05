@@ -110,6 +110,9 @@ class SiteTests(unittest.TestCase):
         episode = build.player_sitemap.poker_episode.record(ROOT)
         if episode is not None:
             expected.add(episode['url'])
+        standoff = build.player_sitemap.poker_standoff_episode.record(ROOT)
+        if standoff is not None:
+            expected.add(standoff['url'])
         laptop = build.local_laptop_case.record(ROOT)
         if laptop is not None:
             expected.add(laptop['url'])

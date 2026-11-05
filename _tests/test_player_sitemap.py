@@ -31,7 +31,7 @@ class ManualPlayerSitemapTests(unittest.TestCase):
                 if node.tag.endswith('}loc')]
         self.assertEqual(urls.count(player_sitemap.URL), 1)
         self.assertEqual(len(urls), len(set(urls)))
-        self.assertEqual(len(urls), len([p for p in build.public_pages() if not p.get('noindex')]) + 3)
+        self.assertEqual(len(urls), len([p for p in build.public_pages() if not p.get('noindex')]) + 5)
         route = next(node for node in ET.fromstring(generated) if any(
             child.tag.endswith('}loc') and child.text == player_sitemap.URL for child in node))
         modified = [child.text for child in route if child.tag.endswith('}lastmod')]
@@ -74,7 +74,7 @@ class ManualPlayerSitemapTests(unittest.TestCase):
                     '<link rel="canonical" href="' + player_sitemap.URL + '">',
                     '<link rel="canonical" href="https://example.invalid/">', 1)),
                 ('noindex', original.replace('<head>', '<head><meta name="robots" content="noindex">', 1)),
-                ('date', original.replace('"dateModified": "2026-11-03"',
+                ('date', original.replace('"dateModified": "2026-11-04"',
                                           '"dateModified": "2026-01-01"', 1)),
                 ('missing-source-body', original.replace(source, '<div>unverified replacement</div>', 1)),
             ]:
