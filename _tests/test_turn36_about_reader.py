@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import check_live
 import turn36_about_reader_history as history
+import turn37_link_integrity_history as successor
 
 NAV_PATTERN = re.compile(r'<nav class="about-jump-nav" aria-label="([^"]+)">(.*?)</nav>', re.S)
 SCHEMA_PATTERN = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
@@ -84,7 +85,7 @@ class AboutReaderHistoryTests(unittest.TestCase):
         for name, (old, new) in history.records()["files"].items():
             with self.subTest(path=name):
                 value = (ROOT / name).read_bytes()
-                self.assertEqual(history.blob(value), new)
+                self.assertEqual(history.blob(successor.before(name, value)), new)
                 predecessor = subprocess.check_output([
                     "git", "show", history.PARENT + ":" + name
                 ], cwd=ROOT)
@@ -100,7 +101,7 @@ class AboutReaderHistoryTests(unittest.TestCase):
     def test_added_css_is_exactly_accounted_for(self):
         for name, value in history.records()["added"].items():
             body = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(body), value)
+            self.assertEqual(history.blob(successor.before(name, body)), value)
             self.assertTrue(history.is_added_file(name, body))
             self.assertFalse(history.is_added_file(name, body + b"OTHER"))
         css = (ROOT / "assets/about-reader.css").read_bytes()
