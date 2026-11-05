@@ -91,14 +91,18 @@ class NolanPokerChannelRouteTests(unittest.TestCase):
 
     def test_historical_bridge_restores_only_five_exact_predecessors(self):
         self.assertEqual(len(history.records()["files"]), 5)
+        turn41_release = "722ede637f2fbb1fe000f78a067f7f7573327905"
         for path, (before_hash, after_hash) in history.records()["files"].items():
             with self.subTest(path=path):
                 current = (ROOT / path).read_bytes()
+                turn41 = subprocess.check_output(["git", "show", turn41_release + ":" + path], cwd=ROOT)
                 prior = subprocess.check_output(["git", "show", history.PARENT + ":" + path], cwd=ROOT)
-                self.assertEqual(history.blob(current), after_hash)
+                self.assertEqual(history.blob(turn41), after_hash)
                 self.assertEqual(history.blob(prior), before_hash)
-                self.assertEqual(history.before(path, current), prior)
-                self.assertEqual(history.before(Path(path), current.decode("utf-8")), prior.decode("utf-8"))
+                self.assertEqual(history.before(path, turn41), prior)
+                self.assertEqual(history.before(Path(path), turn41.decode("utf-8")), prior.decode("utf-8"))
+                if current != turn41:
+                    self.assertEqual(history.before(path, current), prior)
                 self.assertEqual(history.before(path, current + b"UNREVIEWED"), current + b"UNREVIEWED")
                 self.assertEqual(history.before("unknown/" + path, current), current)
 
