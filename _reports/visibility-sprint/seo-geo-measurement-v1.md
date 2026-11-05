@@ -50,6 +50,23 @@ Keep `unknown`, blank, or `not_available` distinct from a measured zero.
 
 Do not count testing traffic as an organic outcome. Do not infer a ranking improvement from crawler access or structured data.
 
+## Offline local CSV summary
+
+If a paid Search Console connector is unavailable, use the first-party Search Console interface and the standard-library-only [`gsc-monthly-local-audit.py`](../../downloads/gsc-monthly-local-audit.py) script. It makes **no network request**, requires no subscription or Python package, and writes no output file on its own. Keep downloaded CSVs and computed results outside this public repository. This tool is a local aggregation aid, not a replacement for logging the true reporting dates and first-party chart totals.
+
+1. In the owner's verified Google Search Console property, choose **Search results**, search type **Web**, and an entire completed calendar month. Record the exact property, selected dates, search type, export date and any displayed limitations in a private log. The CSV file does not prove its own selected dates or report completeness.
+2. Export the **Pages** and optionally **Queries** CSV tables for that same date range. The tool accepts standard `Top pages`/`Top queries`, `Clicks`, `Impressions` headers, and common `Page`/`Query` equivalents. If a separate combined **Query + Page** export is independently available, it can also be passed. Do not manufacture pairs by joining the two separate tables.
+3. From a Windows PowerShell window at the repository root, replace the CSV paths with the actual files and run:
+
+   ```powershell
+   py -3 downloads/gsc-monthly-local-audit.py --month 2026-10 --pages "$env:USERPROFILE\Downloads\Pages.csv" --queries "$env:USERPROFILE\Downloads\Queries.csv" > "$env:USERPROFILE\Documents\gsc-2026-10-private.json"
+   ```
+
+4. Read the JSON privately. The `page_export.observed_section_totals` values describe only returned page rows. The `query_export` reports visible name/tagline clicks only if a Queries export was supplied, and its groups may overlap. `query_page_export.visible_nonbrand_technology_clicks` remains `null` unless a combined Query + Page export was supplied. Empty exports also remain unknown, not fabricated zeros.
+5. Record **property-level** Web clicks and impressions directly from the Search Console chart in the private monthly scorecard. The script deliberately leaves these as `null`, because summing page rows can produce misleading sitewide totals. Use the separate generative-AI report and Umami only when the owner has actual access. Never paste the raw queries, page-level performance data, or JSON results into a public PR or issue.
+
+For a private combined Query + Page CSV containing `Query`, `Page`, `Clicks` and `Impressions`, append `--query-pages "<private-path-to-combined-export.csv>"` to the command. The parser accepts UTF-8 with a BOM and comma-grouped counts, rejects ambiguous columns and invalid counts, excludes lookalike domains, and prints aggregate figures without the original query strings or page addresses. The site publishes only the script, its synthetic tests and the measurement method, never private owner results.
+
 ## Assistant answer panel v1.0
 
 **Monthly unbranded practical-AI discovery prompts**, unchanged across months:
