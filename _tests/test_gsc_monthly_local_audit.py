@@ -162,6 +162,61 @@ class GscLocalAuditTests(unittest.TestCase):
         self.assertEqual(result["chart_export"]["days"], 29)
         self.assertEqual(result["property_web_clicks"], 0)
 
+    def test_explicit_month_first_chart_with_single_digit_days(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,1,2\n")
+        rows = [f"10/{n}/2026,2,11" for n in range(1, 32)]
+        chart = self.csv("Dates.csv", "Dates,Clicks,Impressions\n" + "\n".join(rows) + "\n")
+        with self.assertRaises(audit.ExportError):
+            audit.summarize("2026-10", pages, chart=chart)
+        result = audit.summarize("2026-10", pages, chart=chart, chart_date_format="mdy")
+        self.assertEqual(result["chart_export"]["date_format"], "mdy")
+        self.assertTrue(result["chart_export"]["calendar_days_validated"])
+        self.assertEqual(result["property_web_clicks"], 62)
+        self.assertEqual(result["property_web_impressions"], 341)
+
+    def test_explicit_day_first_chart_accepts_leap_day_and_padded_dates(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,0,2\n")
+        chart = self.csv("Dates.csv", "Date,Clicks,Impressions\n" +
+                         "\n".join(f"{n:02d}/02/2028,1,5" for n in range(1, 30)) + "\n")
+        result = audit.summarize("2028-02", pages, chart=chart, chart_date_format="dmy")
+        self.assertEqual(result["chart_export"]["days"], 29)
+        self.assertEqual(result["property_web_clicks"], 29)
+        self.assertEqual(result["chart_export"]["date_format"], "dmy")
+
+    def test_mismatched_mixed_and_invalid_date_formats_fail_closed(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,1,2\n")
+        rows = [f"10/{n}/2026,1,3" for n in range(1, 32)]
+        problems = {
+            "wrong_locale": (rows, "dmy"),
+            "mixed_styles": (["2026-10-01,1,3"] + rows[1:], "mdy"),
+            "impossible_day": (["10/32/2026,1,3"] + rows[1:], "mdy"),
+            "duplicate_normalized": (["10/01/2026,1,3"] + rows, "mdy"),
+        }
+        for label, (case, date_format) in problems.items():
+            with self.subTest(label=label):
+                chart = self.csv("Dates.csv", "Date,Clicks,Impressions\n" + "\n".join(case) + "\n")
+                with self.assertRaises(audit.ExportError):
+                    audit.summarize("2026-10", pages, chart=chart, chart_date_format=date_format)
+        with self.assertRaises(audit.ExportError):
+            audit.summarize("2026-10", pages, chart_date_format="mdy")
+        with self.assertRaises(audit.ExportError):
+            audit.summarize("2026-10", pages, chart_date_format="auto")
+
+    def test_date_format_cli_makes_only_aggregate_private_output(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,1,2\n")
+        chart = self.csv("Dates.csv", "Date,Clicks,Impressions\n" +
+                         "\n".join(f"10/{n}/2026,2,11" for n in range(1, 32)) + "\n")
+        before = set(self.root.iterdir())
+        run = subprocess.run([sys.executable, str(SCRIPT), "--month", "2026-10", "--pages", str(pages),
+                              "--chart", str(chart), "--chart-date-format", "mdy"],
+                             check=True, text=True, capture_output=True)
+        payload = json.loads(run.stdout)
+        self.assertEqual(payload["chart_export"]["date_format"], "mdy")
+        self.assertEqual(payload["property_web_clicks"], 62)
+        self.assertNotIn("10/31/2026", run.stdout)
+        self.assertNotIn(str(self.root), run.stdout)
+        self.assertEqual(before, set(self.root.iterdir()))
+
     def test_partial_duplicate_outside_and_ambiguous_dates_rejected(self):
         pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,1,2\n")
         good_rows = [f"2026-10-{n:02d},1,3" for n in range(1, 32)]
