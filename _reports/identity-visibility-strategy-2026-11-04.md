@@ -141,6 +141,10 @@ The owner-approved portrait, outside-reader and screen-reader comprehension revi
 
 The connected third-party search-performance analysis was unavailable because its trial had expired and a subscription would be required. No paid service was activated. Actual Search Console metrics and the outside-reader study therefore remain unmeasured and uncompleted sprint decisions.
 
+## Homepage evidence at first contact, November 5
+
+[Turn 38](visibility-sprint/sprint50-turn38-2026-11-05.md) carries the About page's source-backed credibility approach into the homepage introduction. A short three-part evidence section appears before the project gallery and links directly to the publisher's 2012 accounting paper, an inspectable practical-AI audit and the source-linked tournament player record. Each entry states the limited claim it supports. The section uses existing responsive card styling, the canonical page and identity data remain unchanged, and local tests pin the scope of the insertion. This is a presentation and source-access improvement, not a measured increase in visitors' trust, search traffic or AI-answer citations.
+
 ## Release rules
 
 - Do not use GitHub Actions, another scheduled CI service, cron jobs, or paid APIs.

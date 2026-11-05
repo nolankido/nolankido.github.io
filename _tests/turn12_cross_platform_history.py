@@ -48,6 +48,8 @@ def blob(value):
 
 
 def before(path, value):
+    import turn38_home_proof_history
+    value = turn38_home_proof_history.before(path, value)
     import turn20_reply_boundaries_history
     value = turn20_reply_boundaries_history.before(path, value)
     import turn19_bio_evidence_routes_history

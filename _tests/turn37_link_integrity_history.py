@@ -40,6 +40,8 @@ def original(name, expected):
 
 
 def before(path, value):
+    import turn38_home_proof_history
+    value = turn38_home_proof_history.before(path, value)
     name = key(path)
     pair = records()["files"].get(name)
     if pair is None or blob(value) != pair[1]:
@@ -49,6 +51,8 @@ def before(path, value):
 
 
 def is_added_file(path, value):
+    import turn38_home_proof_history
+    value = turn38_home_proof_history.before(path, value)
     expected = records()["added"].get(key(path))
     return expected is not None and blob(value) == expected
 

@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import check_live
 import check_internal_links as links
 import turn37_link_integrity_history as history
+import turn38_home_proof_history as successor
 
 
 class InternalLinkTests(unittest.TestCase):
@@ -84,7 +85,7 @@ class InternalLinkHistoryTests(unittest.TestCase):
             with self.subTest(path=name):
                 current = (ROOT / name).read_bytes()
                 prior = subprocess.check_output(['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
-                self.assertEqual(history.blob(current), new)
+                self.assertEqual(history.blob(successor.before(name, current)), new)
                 self.assertEqual(history.blob(prior), old)
                 self.assertEqual(history.before(name, current), prior)
 
@@ -97,7 +98,7 @@ class InternalLinkHistoryTests(unittest.TestCase):
     def test_only_exact_new_files_are_identified(self):
         for name, expected in history.records()['added'].items():
             current = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(current), expected)
+            self.assertEqual(history.blob(successor.before(name, current)), expected)
             self.assertTrue(history.is_added_file(name, current))
             self.assertFalse(history.is_added_file(name, current + b'OTHER'))
         self.assertFalse(history.is_added_file('missing.py', b''))

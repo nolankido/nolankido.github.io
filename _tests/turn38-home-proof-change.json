@@ -1,0 +1,35 @@
+{
+  "files": {
+    "_reports/identity-visibility-strategy-2026-11-04.md": [
+      "a0985b5405b8db9a45d429027ee5f9ea2c67c8ef",
+      "54ef5a7a23adc48e2d204fd436d8d21898980891"
+    ],
+    "_scripts/local_release_checks.py": [
+      "a74a811b4ccf68248fef2290b8e94323ff349c79",
+      "f2cc9d9f2c110a0363ecb7a97b438891808154b2"
+    ],
+    "_source/home.html": [
+      "e08286a2d33a7e9be70d9e8e71d1baf17d934e1e",
+      "d932719e778954505cec0c1e21d9cb6e7cd1ac66"
+    ],
+    "_tests/test_turn37_internal_links.py": [
+      "9a3f498ff6f78bdb47583ac2a68064652fa0716a",
+      "a8657e57592ac579b415edec85fbf433c09aaa75"
+    ],
+    "_tests/turn12_cross_platform_history.py": [
+      "ade27d535ccaba0ee7e1d3fee4a4d1fb26b26d3b",
+      "75b54e6e064035929bfedf34a77526794f61f2e8"
+    ],
+    "_tests/turn37_link_integrity_history.py": [
+      "4481e76834ea2a7f6f50b32652ab587c8ba64ad9",
+      "e258cf94956a6d8053109a6a14aaa06b848f6672"
+    ],
+    "index.html": [
+      "63161055098ddbd7fe6727c37c2ec26becec2e6f",
+      "8d6dad276c9ff8f2defaf1a0ab6f99746240807b"
+    ]
+  },
+  "added": {
+    "_tests/test_turn38_home_proof.py": "5f625600f095a1f0bca0f603b1204df23ba9affc"
+  }
+}
