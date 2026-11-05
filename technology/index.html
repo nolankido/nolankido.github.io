@@ -159,8 +159,8 @@
     </ol>
     <h3 id="identity-claim-reproduce">Reproduce the bounded comparison</h3>
     <p>Download the two complete public JSON-LD files linked above as <code>before.jsonld</code> and <code>after.jsonld</code>. Save the <a href="/downloads/identity-evidence-gate.py" download>offline Python identity-evidence gate</a> in the same folder. With Python 3.10+ on Windows:</p>
-    <pre>py -3 identity-evidence-gate.py --self-test
-py -3 identity-evidence-gate.py --before before.jsonld --after after.jsonld</pre>
+    <div class="worksheet"><pre>py -3 identity-evidence-gate.py --self-test
+py -3 identity-evidence-gate.py --before before.jsonld --after after.jsonld</pre></div>
     <p>The five synthetic self-tests check expected pass and fail scenarios. The second command checks this case's structural invariants, not the accuracy of free-text biography. Exit code 0 means only those invariants passed; code 2 reports structural findings; code 1 is an input or execution error. The script uses no network, account, AI request, visitor data, or paid API. <a href="/downloads/identity-evidence-case-workbook.md" download>Download the case record and reusable evidence worksheet</a> for the sources and a review method to adapt to another public profile.</p>
     <h3 id="identity-claim-human-gate">What remains a human decision</h3>
     <p>The owner authorized a broad improvement process; the assistant made the scoped edits and opened the pull request. This release did not include independent human verification of every academic, employer or account-ownership claim. Restoring a professional title or degree requires reviewing a suitable source and choosing precise wording, dates and public disclosure. External account control, search indexing and any improvement in discovery remain unmeasured. <a href="/about/">My About page</a> links evidence people can inspect, without treating an AI-generated description as a credential.</p>
@@ -203,6 +203,7 @@ py -3 identity-evidence-gate.py --before before.jsonld --after after.jsonld</pre
   <div class="section-content prose">
     <h2 class="section-title" id="poker-vlog-qa-title">How I check an AI-assisted poker vlog edit against the hand record.</h2>
     <p>AI can help arrange a story, draft an overlay or organize a revision list. It cannot establish an unrecorded card suit, reconstruct a missing board, or turn my later analysis into something I knew at the table. My public <a href="/poker/episodes/portland-meadows-ep1/">Portland Meadows Episode 1 companion</a> supplies two documented hands for a practical truth-to-screen check. This is a proposed repeatable release standard, not proof that every earlier upload passed it.</p>
+    <p><a href="/technology/ai-poker-video-evidence/">Read the full AI-and-poker editing case</a> for a new, source-bounded caption draft, the actual arithmetic, a repeatable offline gate and a list of claims that still need human footage review. The proposed captions are not presented as graphics already shown in the video.</p>
     <div class="project-table-scroll" role="region" aria-label="Public poker hand facts and graphics boundaries" tabindex="0">
       <table>
         <caption>What a graphics and narration review can use from the published companion</caption>

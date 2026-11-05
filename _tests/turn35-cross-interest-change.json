@@ -1,0 +1,90 @@
+{
+  "parent": "b0162de5714168fbcc707682eb2cb723ce30e551",
+  "files": {
+    "_reports/identity-visibility-strategy-2026-11-04.md": [
+      "45fc06320e62002ab21b578e5fd761213d606274",
+      "f58efd2e3e052033f3a3c9c58a9758f2de475b0f"
+    ],
+    "_scripts/local_release_checks.py": [
+      "205cc8ef3ce65b1f7070f25ee6cdedb3f6bcbe14",
+      "f9325a6fa59d8bfa3b464a13ce56765973a5d72a"
+    ],
+    "_scripts/visibility_projects.py": [
+      "277aa8d7921d0c7933dfbb1ba9eed610ea8471ac",
+      "1df4322f1a924e2c63404b3f3473d7971776334b"
+    ],
+    "_source/about.html": [
+      "72524ae1e62bc09a762802d44b69f38f7bd075bc",
+      "7ad5f2aa79c6fdc1b1188112f788b709cfbadc8d"
+    ],
+    "_source/pages.json": [
+      "987b73f530fac98f1d8bf4eec6d8259df6ac3622",
+      "b76f47b2f4143fd255c4ce4c5a28989d3a36f711"
+    ],
+    "_source/poker/home.html": [
+      "bde75e96226460c5caa7a8998984678c816ac283",
+      "e2b9bc21a260fd794d30cb14fd5f4a859dd08f90"
+    ],
+    "_source/technology/home.html": [
+      "499be21fb9642250eda75a4da7b27c96d9968ea1",
+      "53b0730c408c72cfcd6d01afc87e7643d746d981"
+    ],
+    "_tests/test_turn34_release_history.py": [
+      "3e9ecffca72dbb21effdcad3cd65729e67b529e8",
+      "54fde19804a6dc28b1854ae21dcacd3faa044df5"
+    ],
+    "_tests/turn34_release_integrity_history.py": [
+      "739b973bca19eb8e767ee904b041a80f8ba42512",
+      "31f0870dd0617815cfa83f032b00294d31272e74"
+    ],
+    "about/index.html": [
+      "445aeb89c0935e26604e41ca0ccbaafa6bbd6bc2",
+      "e04433b29d8f0dd618f55d5010061ab92d629618"
+    ],
+    "find/index.html": [
+      "963ee1e708b7d798742875fae7331389212e72e2",
+      "e96316f5899fe5a893c18c17ab7164d8d7b7023e"
+    ],
+    "notes/index.html": [
+      "1f0a10779ccb66bb05dc58e4811813909c677e64",
+      "4c8a39ac9aced4028794fbcf8550cd297a2db213"
+    ],
+    "poker/index.html": [
+      "f5d4ad00e6ef1b70061384e9f5dd8016b69ead74",
+      "deb184f59f3009c969edbf500d4aa50d73f30f5f"
+    ],
+    "sitemap.xml": [
+      "81b4c5c573f8ecd73305d1275087cfd02159466a",
+      "897cb6b8e90b746cd07089f656ae363181a5a70d"
+    ],
+    "technology/feed.xml": [
+      "14e130d80d43dd5e02002154249d8d29d8895d32",
+      "adcb5b6ff54719dadb80b874bd598084f038ea4e"
+    ],
+    "technology/index.html": [
+      "4e149763aa9fadedfa0be99cad5257a2f3321564",
+      "222261366df1a6fa2cbdcb4011b540fac8b4409b"
+    ],
+    "writing.xml": [
+      "97716614c4b9614291bb9f866c80c6d993fa0646",
+      "20e5e0c86d51aaf344ddffc8f5bdb8a57f0297de"
+    ]
+  },
+  "added": {
+    "_source/technology/ai-poker-video-evidence.html": "c5c740133a35a0e7dd1c86025ab11e391b212f27",
+    "technology/ai-poker-video-evidence/index.html": "9418e51131fc86ce151ff5064680598f38bf55c8",
+    "_tests/test_turn35_ai_poker_case.py": "951877f4efe60277f2862c77f65b6234ad974726"
+  },
+  "page": {
+    "id": "ai-poker-video-evidence",
+    "section": "technology",
+    "path": "/technology/ai-poker-video-evidence/",
+    "title": "What AI can draft for my poker vlog, and what it cannot verify.",
+    "seo_title": "AI and Poker Video Editing: Evidence Before Graphics | Nolan Kido",
+    "description": "A real poker hand record becomes three proposed video captions, with checked chip math, an offline fact gate, and human review limits.",
+    "kicker": "Technology / AI and poker video editing",
+    "source": "technology/ai-poker-video-evidence.html",
+    "date": "2026-11-04",
+    "worked_guide": true
+  }
+}

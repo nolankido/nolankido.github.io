@@ -4,6 +4,7 @@ import subprocess
 import unittest
 
 import turn34_release_integrity_history as history
+import turn35_cross_interest_history as newer
 
 
 class ReleaseHistoryTests(unittest.TestCase):
@@ -11,7 +12,8 @@ class ReleaseHistoryTests(unittest.TestCase):
         for path, (previous_sha, current_sha) in history.records()["files"].items():
             with self.subTest(path=path):
                 current = (history.ROOT / path).read_bytes()
-                self.assertEqual(history.blob(current), current_sha)
+                predecessor = newer.before(path, current)
+                self.assertEqual(history.blob(predecessor), current_sha)
                 previous = subprocess.check_output(
                     ["git", "show", history.PARENT + ":" + path], cwd=history.ROOT)
                 self.assertEqual(history.blob(previous), previous_sha)

@@ -11,6 +11,7 @@ from pathlib import Path
 CASE_IDS = frozenset({
     'local-ai-review-replies', 'ai-book-continuity-checker', 'dinner-on-time',
     'ai-weekly-reset', 'organize-public-notes', 'local-ai-test-record',
+    'ai-poker-video-evidence',
 })
 SCOPED_IDS = CASE_IDS | {'home', 'technology', 'creative', 'ai-answer-review', 'ai-time-savings'}
 IMAGES = {
