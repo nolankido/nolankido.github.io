@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import calendar
 import json
 import re
 import subprocess
@@ -116,7 +117,8 @@ class GscLocalAuditTests(unittest.TestCase):
         for body in (source, rendered):
             self.assertEqual(body.count('href="/downloads/gsc-monthly-local-audit.py"'), 1)
             self.assertEqual(body.count('id="site-visibility-limits"'), 1)
-            self.assertIn("does not fetch Search Console data", body)
+            self.assertIn("With a complete daily chart export", body)
+            self.assertIn("makes no network calls", body)
         self.assertEqual(source.count("A no-cost monthly check:"), 1)
         self.assertEqual(rendered.count("A no-cost monthly check:"), 1)
         paragraph = r'<p><strong>A no-cost monthly check:</strong>.*?</p>'
@@ -136,6 +138,57 @@ class GscLocalAuditTests(unittest.TestCase):
         for forbidden in ("import requests", "import socket", "urllib.request", "http.client",
                           "googleapiclient", "subprocess.run(", "os.system("):
             self.assertNotIn(forbidden, content)
+
+    def test_complete_chart_supplies_property_totals_not_page_row_sums(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\n"
+                         "https://nolankido.com/technology/,3,90\n")
+        days = [f"2026-10-{n:02d},2,100" for n in range(1, 32)]
+        days[0] = '2026-10-01,"1,234","4,321"'
+        chart = self.csv("Chart.csv", "\ufeffDate,Clicks,Impressions,CTR,Position\n" + "\n".join(days) + "\n")
+        result = audit.summarize("2026-10", pages, chart=chart)
+        self.assertEqual(result["property_web_clicks"], 1234 + 30 * 2)
+        self.assertEqual(result["property_web_impressions"], 4321 + 30 * 100)
+        self.assertTrue(result["chart_export"]["calendar_days_validated"])
+        self.assertEqual(result["chart_export"]["days"], 31)
+        self.assertFalse(result["export_date_range_verified"])
+        self.assertEqual(result["page_export"]["observed_section_totals"]["technology"]["clicks"], 3)
+
+    def test_leap_february_chart_and_separate_calendar_validation(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,1,2\n")
+        self.assertEqual(calendar.monthrange(2028, 2)[1], 29)
+        chart = self.csv("Chart.csv", "Date,Clicks,Impressions\n" +
+                         "\n".join(f"2028-02-{n:02d},0,0" for n in range(1, 30)) + "\n")
+        result = audit.summarize("2028-02", pages, chart=chart)
+        self.assertEqual(result["chart_export"]["days"], 29)
+        self.assertEqual(result["property_web_clicks"], 0)
+
+    def test_partial_duplicate_outside_and_ambiguous_dates_rejected(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,1,2\n")
+        good_rows = [f"2026-10-{n:02d},1,3" for n in range(1, 32)]
+        cases = {
+            "missing": good_rows[:-1],
+            "duplicate": good_rows + [good_rows[-1]],
+            "outside": good_rows[:-1] + ["2026-11-01,1,3"],
+            "ambiguous": ["10/01/2026,1,3"] + good_rows[1:],
+        }
+        for label, rows in cases.items():
+            with self.subTest(label=label):
+                chart = self.csv("Chart.csv", "Date,Clicks,Impressions\n" + "\n".join(rows) + "\n")
+                with self.assertRaises(audit.ExportError):
+                    audit.summarize("2026-10", pages, chart=chart)
+
+    def test_chart_cli_keeps_property_totals_private_and_prints_no_dates(self):
+        pages = self.csv("Pages.csv", "Page,Clicks,Impressions\nhttps://nolankido.com/,2,10\n")
+        chart = self.csv("Chart.csv", "Date,Clicks,Impressions\n" +
+                         "\n".join(f"2026-10-{n:02d},3,40" for n in range(1, 32)) + "\n")
+        before = set(self.root.iterdir())
+        run = subprocess.run([sys.executable, str(SCRIPT), "--month", "2026-10", "--pages", str(pages),
+                              "--chart", str(chart)], check=True, text=True, capture_output=True)
+        payload = json.loads(run.stdout)
+        self.assertEqual(payload["property_web_clicks"], 93)
+        self.assertEqual(payload["property_web_impressions"], 1240)
+        self.assertNotIn(str(self.root), run.stdout)
+        self.assertEqual(before, set(self.root.iterdir()))
 
 
 if __name__ == "__main__":
