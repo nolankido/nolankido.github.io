@@ -27,6 +27,7 @@ ALIAS = {
     "clicks": ("clicks",),
     "impressions": ("impressions",),
 }
+CHART_DATE_FORMATS = ("iso", "mdy", "dmy")
 
 
 class ExportError(ValueError):
@@ -107,21 +108,33 @@ def _query_kind(query: str) -> tuple[bool, bool]:
     return person, tagline
 
 
-def _chart_summary(chart: Path | None, month: str, last_day: int) -> dict:
+def _chart_day(value: str, date_format: str, path: Path, row_number: int) -> date:
+    """Interpret a chart date only in the format the owner explicitly selected."""
+    if date_format == "iso":
+        if not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", value):
+            raise ExportError(f"{path.name}: expected YYYY-MM-DD at data row {row_number}")
+        parts = value.split("-")
+        year, month, day = (int(item) for item in parts)
+    else:
+        if not re.fullmatch(r"[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}", value):
+            raise ExportError(f"{path.name}: expected slash-separated {date_format} date at data row {row_number}")
+        first, second, year = (int(item) for item in value.split("/"))
+        month, day = (first, second) if date_format == "mdy" else (second, first)
+    try:
+        return date(year, month, day)
+    except ValueError as exc:
+        raise ExportError(f"{path.name}: invalid {date_format} date at data row {row_number}") from exc
+
+
+def _chart_summary(chart: Path | None, month: str, last_day: int, date_format: str) -> dict:
     """Accept property totals only from a complete, distinct daily chart export."""
     if chart is None:
-        return {"provided": False, "calendar_days_validated": False,
+        return {"provided": False, "date_format": None, "calendar_days_validated": False,
                 "days": None, "clicks": None, "impressions": None}
     rows = _read_export(chart, ("date",))
     observed: set[str] = set()
     for index, row in enumerate(rows, start=2):
-        day = str(row["date"])
-        try:
-            parsed = date.fromisoformat(day)
-        except ValueError as exc:
-            raise ExportError(f"{chart.name}: invalid ISO date on data row {index}") from exc
-        if parsed.isoformat() != day:
-            raise ExportError(f"{chart.name}: dates must be YYYY-MM-DD")
+        day = _chart_day(str(row["date"]), date_format, chart, index).isoformat()
         if not day.startswith(month + "-"):
             raise ExportError(f"{chart.name}: date outside declared month at data row {index}")
         if day in observed:
@@ -130,21 +143,26 @@ def _chart_summary(chart: Path | None, month: str, last_day: int) -> dict:
     expected = {f"{month}-{number:02d}" for number in range(1, last_day + 1)}
     if observed != expected:
         raise ExportError(f"{chart.name}: incomplete daily chart ({len(observed)} of {len(expected)} distinct dates)")
-    return {"provided": True, "calendar_days_validated": True,
+    return {"provided": True, "date_format": date_format, "calendar_days_validated": True,
             "days": len(rows),
             "clicks": sum(int(row["clicks"]) for row in rows),
             "impressions": sum(int(row["impressions"]) for row in rows)}
 
 
 def summarize(month: str, pages: Path, queries: Path | None = None,
-              query_pages: Path | None = None, chart: Path | None = None) -> dict:
+              query_pages: Path | None = None, chart: Path | None = None,
+              chart_date_format: str = "iso") -> dict:
     if not re.fullmatch(r"\d{4}-(?:0[1-9]|1[0-2])", month):
         raise ExportError("--month must be YYYY-MM")
     year, month_number = map(int, month.split("-"))
     if year < 2000:
         raise ExportError("--month must be a valid Search Console reporting month")
+    if chart_date_format not in CHART_DATE_FORMATS:
+        raise ExportError("--chart-date-format must be iso, mdy or dmy")
+    if chart is None and chart_date_format != "iso":
+        raise ExportError("--chart-date-format requires --chart")
     _, last_day = calendar.monthrange(year, month_number)
-    chart_totals = _chart_summary(chart, month, last_day)
+    chart_totals = _chart_summary(chart, month, last_day, chart_date_format)
     page_rows = _read_export(pages, ("page",))
     query_rows = _read_export(queries, ("query",)) if queries is not None else None
     pair_rows = _read_export(query_pages, ("query", "page")) if query_pages is not None else None
@@ -208,7 +226,7 @@ def summarize(month: str, pages: Path, queries: Path | None = None,
         "interpretation": [
             "PRIVATE measurements: do not commit input CSVs or this output to a public repository.",
             "The selected property, Search type, freshness, and page/query date ranges must be verified in Search Console.",
-            "An optional Chart CSV must have one unique ISO date per calendar day; this does not prove the data is settled.",
+            "An optional Chart CSV must have one unique date per calendar day in the selected, explicit date format; this does not prove the data is settled.",
             "Page and query rows can be truncated or withheld; displayed aggregates are observed export rows, not sitewide totals.",
             "Visible query clicks exclude hidden queries and are lower bounds; brand and tagline groups may overlap.",
             "Query+Page metrics require a combined export. Separate Queries and Pages exports cannot be joined.",
@@ -225,10 +243,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--pages", type=Path, required=True, help="Private GSC Web Search 'Pages.csv' export")
     parser.add_argument("--queries", type=Path, help="Optional private GSC 'Queries.csv' export")
     parser.add_argument("--query-pages", type=Path, help="Optional combined Query+Page CSV (must contain both dimensions)")
-    parser.add_argument("--chart", type=Path, help="Optional private complete daily GSC Chart CSV, ISO YYYY-MM-DD dates")
+    parser.add_argument("--chart", type=Path, help="Optional private complete daily GSC Chart/Dates CSV")
+    parser.add_argument("--chart-date-format", choices=CHART_DATE_FORMATS, default="iso",
+                        help="Date format in --chart: iso (YYYY-MM-DD), mdy (M/D/YYYY) or dmy (D/M/YYYY); default iso")
     args = parser.parse_args(argv)
     try:
-        data = summarize(args.month, args.pages, args.queries, args.query_pages, args.chart)
+        data = summarize(args.month, args.pages, args.queries, args.query_pages,
+                         args.chart, args.chart_date_format)
     except ExportError as exc:
         print(f"Export error: {exc}", file=sys.stderr)
         return 2
