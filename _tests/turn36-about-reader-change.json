@@ -1,0 +1,40 @@
+{
+  "files": {
+    "_reports/identity-visibility-strategy-2026-11-04.md": [
+      "f58efd2e3e052033f3a3c9c58a9758f2de475b0f",
+      "c1533d45b4f1a0d5ea353755494e427c2c300003"
+    ],
+    "_scripts/build.py": [
+      "2438cf11a946d581e1fdd4eece2621a64d6b3848",
+      "e49002dc1cec9261268dd52fb4167829f656aee2"
+    ],
+    "_scripts/check_live.py": [
+      "a897793453199d0a37b21b5c19f401448cf09dd5",
+      "8664403914a7b1a58a6c4c4d4fd36b656b3ca1f7"
+    ],
+    "_scripts/local_release_checks.py": [
+      "f9325a6fa59d8bfa3b464a13ce56765973a5d72a",
+      "78117f1f68ab1ad198966439a6c1ca57b1ee2227"
+    ],
+    "_source/about.html": [
+      "7ad5f2aa79c6fdc1b1188112f788b709cfbadc8d",
+      "60d3cfcb09c7465cb764eb82ddf1d878711e90a4"
+    ],
+    "_tests/test_turn35_ai_poker_case.py": [
+      "951877f4efe60277f2862c77f65b6234ad974726",
+      "80fa660755d6b4b2b23a6c441f17c8ea681b66b7"
+    ],
+    "_tests/turn35_cross_interest_history.py": [
+      "9af68cbf68228f2bd8aa15d248929816bb244d17",
+      "fc8315ddef8c5d1bd68f2bae884f4884929ccd8b"
+    ],
+    "about/index.html": [
+      "e04433b29d8f0dd618f55d5010061ab92d629618",
+      "67a94c08d27a5280b05acdee60bd563716426640"
+    ]
+  },
+  "added": {
+    "assets/about-reader.css": "077797b199cad7122417da40c060bcb3aee56e8f",
+    "_tests/test_turn36_about_reader.py": "cc7fe297e2b540cec6f3a3d74ea3eba665a33dff"
+  }
+}
