@@ -1,0 +1,10 @@
+{
+  "description": "Exact Turn 40 release to Turn 41 NolanPoker channel-route changes; test-only historical bridge",
+  "files": {
+    "_scripts/local_release_checks.py": ["d3bc7fade71a55251b64cc3ec7a9ada4e1574820", "86636d10608b63a383ecda6ad92cb8a19722c295"],
+    "_source/poker/home.html": ["25d1c054ad7fc377c9c0a38d810f0135d7ccff10", "e6e52abe0baf44be5e74758fd37fe0656bd2cd0c"],
+    "_source/poker/nolan-kido-profile.html": ["ff93f9694d7ee608c75142e485d4e4385a3719d5", "4670fd2c625d83a068c246f60619fff4420368fd"],
+    "poker/index.html": ["2cbd4ec960ceeb69189c815a0797ff90c5085613", "44e275d254266f2aa7a2210d7cacd2fc8ad5708f"],
+    "poker/nolan-kido/index.html": ["ca9cbc4083869a1e80f0c940a95830973344620c", "480f7355bb76fd7fb547ea48596892496818171c"]
+  }
+}
