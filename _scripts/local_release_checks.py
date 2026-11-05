@@ -60,6 +60,7 @@ def main() -> int:
         ('Homepage evidence and provenance', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_home_proof.py', '-q']),
         ('Homepage evidence shortcut', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn39_home_shortcut.py', '-q']),
         ('Homepage significant-change freshness', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_home_freshness.py', '-q']),
+        ('Free Search Console checker synthetic visitor demo', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_visibility_demo.py', '-q']),
         ('Current public poker video discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_poker_videos.py', '-q']),
         ('NolanPoker channel visitor route', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn41_channel_route.py', '-q']),
         ('Public website-visibility case and source limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn42_site_visibility_case.py', '-q']),
