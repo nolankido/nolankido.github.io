@@ -3,7 +3,7 @@
 
 No network calls, third-party libraries, scheduled execution, or files written.
 Results are PRIVATE traffic measurements, not material for the public site repo.
-The declared month and Web search type cannot be verified from CSV contents.
+The Web search type and data freshness cannot be verified from CSV contents.
 """
 
 from __future__ import annotations
@@ -14,12 +14,14 @@ import csv
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlsplit
 
 
 SECTIONS = ("technology", "poker", "living_well", "creative", "other")
 ALIAS = {
+    "date": ("date", "dates", "day", "top dates"),
     "page": ("top pages", "page", "pages", "url", "landing page"),
     "query": ("top queries", "query", "queries", "search query"),
     "clicks": ("clicks",),
@@ -105,14 +107,44 @@ def _query_kind(query: str) -> tuple[bool, bool]:
     return person, tagline
 
 
+def _chart_summary(chart: Path | None, month: str, last_day: int) -> dict:
+    """Accept property totals only from a complete, distinct daily chart export."""
+    if chart is None:
+        return {"provided": False, "calendar_days_validated": False,
+                "days": None, "clicks": None, "impressions": None}
+    rows = _read_export(chart, ("date",))
+    observed: set[str] = set()
+    for index, row in enumerate(rows, start=2):
+        day = str(row["date"])
+        try:
+            parsed = date.fromisoformat(day)
+        except ValueError as exc:
+            raise ExportError(f"{chart.name}: invalid ISO date on data row {index}") from exc
+        if parsed.isoformat() != day:
+            raise ExportError(f"{chart.name}: dates must be YYYY-MM-DD")
+        if not day.startswith(month + "-"):
+            raise ExportError(f"{chart.name}: date outside declared month at data row {index}")
+        if day in observed:
+            raise ExportError(f"{chart.name}: duplicate date on data row {index}")
+        observed.add(day)
+    expected = {f"{month}-{number:02d}" for number in range(1, last_day + 1)}
+    if observed != expected:
+        raise ExportError(f"{chart.name}: incomplete daily chart ({len(observed)} of {len(expected)} distinct dates)")
+    return {"provided": True, "calendar_days_validated": True,
+            "days": len(rows),
+            "clicks": sum(int(row["clicks"]) for row in rows),
+            "impressions": sum(int(row["impressions"]) for row in rows)}
+
+
 def summarize(month: str, pages: Path, queries: Path | None = None,
-              query_pages: Path | None = None) -> dict:
+              query_pages: Path | None = None, chart: Path | None = None) -> dict:
     if not re.fullmatch(r"\d{4}-(?:0[1-9]|1[0-2])", month):
         raise ExportError("--month must be YYYY-MM")
     year, month_number = map(int, month.split("-"))
     if year < 2000:
         raise ExportError("--month must be a valid Search Console reporting month")
     _, last_day = calendar.monthrange(year, month_number)
+    chart_totals = _chart_summary(chart, month, last_day)
     page_rows = _read_export(pages, ("page",))
     query_rows = _read_export(queries, ("query",)) if queries is not None else None
     pair_rows = _read_export(query_pages, ("query", "page")) if query_pages is not None else None
@@ -161,6 +193,7 @@ def summarize(month: str, pages: Path, queries: Path | None = None,
         "declared_window": {"start": f"{month}-01", "end": f"{month}-{last_day:02d}"},
         "search_type_declared": "web",
         "export_date_range_verified": False,
+        "chart_export": chart_totals,
         "page_export": {"rows": len(page_rows), "outside_site_rows": excluded_pages,
                         "observed_section_totals": section_totals},
         "query_export": {"provided": query_rows is not None,
@@ -170,15 +203,17 @@ def summarize(month: str, pages: Path, queries: Path | None = None,
                               "visible_rows": len(pair_rows) if pair_rows is not None else None,
                               "outside_site_rows": excluded_pairs if pair_rows is not None else None,
                               "visible_nonbrand_technology_clicks": nonbrand_tech},
-        "property_web_clicks": None,
-        "property_web_impressions": None,
+        "property_web_clicks": chart_totals["clicks"],
+        "property_web_impressions": chart_totals["impressions"],
         "interpretation": [
             "PRIVATE measurements: do not commit input CSVs or this output to a public repository.",
-            "The month, Search type, and completeness of exports must be verified manually in Search Console.",
+            "The selected property, Search type, freshness, and page/query date ranges must be verified in Search Console.",
+            "An optional Chart CSV must have one unique ISO date per calendar day; this does not prove the data is settled.",
             "Page and query rows can be truncated or withheld; displayed aggregates are observed export rows, not sitewide totals.",
             "Visible query clicks exclude hidden queries and are lower bounds; brand and tagline groups may overlap.",
             "Query+Page metrics require a combined export. Separate Queries and Pages exports cannot be joined.",
-            "Property Web clicks/impressions require the GSC chart totals; never infer them from page rows.",
+            "Property Web totals come only from a complete supplied daily chart, never summed page rows; otherwise they remain null.",
+            "Values shown as unavailable in Search Console may export as zeros; verify availability at the source.",
             "No actual search uplift, indexing, AI citation, or causal change is inferred.",
         ],
     }
@@ -190,9 +225,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--pages", type=Path, required=True, help="Private GSC Web Search 'Pages.csv' export")
     parser.add_argument("--queries", type=Path, help="Optional private GSC 'Queries.csv' export")
     parser.add_argument("--query-pages", type=Path, help="Optional combined Query+Page CSV (must contain both dimensions)")
+    parser.add_argument("--chart", type=Path, help="Optional private complete daily GSC Chart CSV, ISO YYYY-MM-DD dates")
     args = parser.parse_args(argv)
     try:
-        data = summarize(args.month, args.pages, args.queries, args.query_pages)
+        data = summarize(args.month, args.pages, args.queries, args.query_pages, args.chart)
     except ExportError as exc:
         print(f"Export error: {exc}", file=sys.stderr)
         return 2
