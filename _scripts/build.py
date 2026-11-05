@@ -438,6 +438,9 @@ def build_outputs() -> dict[Path, str]:
                 extra += ('\n  <link rel="stylesheet" href="/assets/' + asset + '?v=' + version + '">'
                           if kind == 'style' else '\n  <script defer src="/assets/' + asset + '?v=' + version + '"></script>')
             schema['about'] = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/'}
+        if p['id'] == 'about':
+            version = hashlib.sha256((ROOT / 'assets/about-reader.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/about-reader.css?v={version}">'
         body += practical_discovery.article_return(p)
         body = page_sharing.decorate(body, p, site["url"])
         body = practical_navigation.decorate(p, body, pages, ROOT)

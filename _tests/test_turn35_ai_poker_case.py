@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import practical_discovery
 import turn35_cross_interest_history as history
+import turn36_about_reader_history as successor
 
 ROUTE = "/technology/ai-poker-video-evidence/"
 SOURCE = ROOT / "_source/technology/ai-poker-video-evidence.html"
@@ -133,7 +134,7 @@ class CrossInterestHistoryTests(unittest.TestCase):
         for name, (older, newer) in history.records()["files"].items():
             with self.subTest(path=name):
                 current = (ROOT / name).read_bytes()
-                self.assertEqual(history.blob(current), newer)
+                self.assertEqual(history.blob(successor.before(name, current)), newer)
                 previous = subprocess.check_output(
                     ["git", "show", history.PARENT + ":" + name], cwd=ROOT)
                 self.assertEqual(history.blob(previous), older)
@@ -152,7 +153,7 @@ class CrossInterestHistoryTests(unittest.TestCase):
     def test_added_files_and_page_require_exact_records(self):
         for name, digest in history.records()["added"].items():
             current = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(current), digest)
+            self.assertEqual(history.blob(successor.before(name, current)), digest)
             self.assertTrue(history.is_added_file(name, current))
             self.assertFalse(history.is_added_file(name, current + b"UNREVIEWED"))
             self.assertFalse(history.is_added_file("other/" + name, current))

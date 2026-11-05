@@ -45,6 +45,8 @@ def original(name, expected):
 
 
 def before(path, value):
+    import turn36_about_reader_history
+    value = turn36_about_reader_history.before(path, value)
     name = key(path)
     pair = records()["files"].get(name)
     if pair is None or blob(value) != pair[1]:
@@ -54,6 +56,10 @@ def before(path, value):
 
 
 def is_added_file(path, value):
+    import turn36_about_reader_history
+    if turn36_about_reader_history.is_added_file(path, value):
+        return True
+    value = turn36_about_reader_history.before(path, value)
     known = records()["added"].get(key(path))
     return known is not None and blob(value) == known
 
@@ -66,6 +72,8 @@ def pages(items):
 
 def live_targets(items):
     """An older live inventory cannot know this one later approved route."""
+    import turn36_about_reader_history
+    items = turn36_about_reader_history.live_targets(items)
     expected = records()["added"].get("technology/ai-poker-video-evidence/index.html")
     result = {}
     for route, response in items.items():

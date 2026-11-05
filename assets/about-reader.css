@@ -1,0 +1,35 @@
+/* Only the About profile's source-linked, keyboard-native section guide. */
+.page-about .about-jump-nav {
+  border-block: 1px solid var(--line-dark);
+  margin: 2rem 0 2.5rem;
+  padding: 1rem 0;
+}
+.page-about .about-jump-label {
+  color: var(--ink-soft);
+  font: .7rem/1.6 var(--mono);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 .4rem;
+}
+.page-about .about-jump-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 0 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+.page-about .about-jump-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font: 550 .9rem/1.45 var(--sans);
+  overflow-wrap: anywhere;
+}
+.page-about h2[id] { scroll-margin-top: 2rem; }
+@media (max-width: 480px) {
+  .page-about .about-jump-nav ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media print {
+  .page-about .about-jump-nav { display: none; }
+}
