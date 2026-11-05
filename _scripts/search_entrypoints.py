@@ -45,7 +45,11 @@ def metadata(pages: list[dict], root: Path) -> list[dict]:
     result = deepcopy(pages)
     for page in result:
         if page['id'] in entries:
+            # Search copy can be older than a substantive page revision.
+            # Preserve the later recorded change instead of backdating content.
+            modified = max(page.get('updated', ''), entries[page['id']]['updated'])
             page.update(entries[page['id']])
+            page['updated'] = modified
             page['entry_summary'] = entries[page['id']]['description']
     return result
 

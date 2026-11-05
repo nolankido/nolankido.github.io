@@ -119,6 +119,12 @@ The website repository's [GitHub README](https://github.com/nolankido/nolankido.
 
 See [Turn 28](visibility-sprint/sprint50-turn28-2026-11-04.md) for change and verification details. Do not infer traffic, ranking or AI-citation growth without first-party measurements.
 
+## Release integrity follow-up, November 4
+
+[Turn 34](visibility-sprint/sprint50-turn34-2026-11-04.md) prioritizes reproducible publication and mobile reading after the second poker companion. The local release audit found an older search-copy date overriding the Start Here evidence index's actual revision, an outdated contents list on the notes case, missing standalone-page validation, and an overflowing command example in the first poker companion. The repairs preserve existing routes, source boundaries and original publication dates. A malformed historical-test helper was also repaired so those tests can run again.
+
+The turn report records the actual local, browser and deployed-response checks and any remaining historical-suite failures. These are publication-quality checks, not evidence of search growth or an outside reader's comprehension. The planned cross-interest case, portrait and outside-reader review remain open.
+
 ## Release rules
 
 - Do not use GitHub Actions, another scheduled CI service, cron jobs, or paid APIs.

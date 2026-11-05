@@ -64,6 +64,8 @@ def before(path, value):
 
 
 def pages(records):
+    import turn34_release_integrity_history
+    records = turn34_release_integrity_history.pages(records)
     reviewed = dict(OLD_POKER, updated="2026-11-04")
     return [dict(OLD_POKER) if item == reviewed else item for item in records]
 

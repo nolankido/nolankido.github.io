@@ -28,12 +28,14 @@
     <p>My primary machine is an MSI Crosshair 18 running Windows 11. The large screen is convenient for comparing source material, generated text, a terminal, and a code editor. Gaming hardware can also offer graphics acceleration useful for certain local inference runtimes. That description alone does not establish what model fits in GPU memory or how many tokens per second it will generate.</p>
     <p>MSI has sold different Crosshair 18 configurations. Their memory, graphics processors, available VRAM, power limits, and thermal behavior are not interchangeable. Rather than publishing a guessed specification, I would record the actual SKU, available system RAM, GPU name and dedicated memory, free disk space, driver version, plugged-in power mode, and cooling condition for each repeatable test.</p>
     <p>On a Windows machine, the following commands provide a reasonable starting inventory. They are local reads, not benchmarks, and the results may contain a computer name or other identifying text. <strong>Do not paste unredacted hardware inventories into public issues or a website.</strong></p>
-    <pre><code>Get-CimInstance Win32_ComputerSystem |
+    <div class="worksheet">
+      <pre><code>Get-CimInstance Win32_ComputerSystem |
   Select-Object TotalPhysicalMemory
 Get-CimInstance Win32_VideoController |
   Select-Object Name, AdapterRAM
 Get-PSDrive C
 nvidia-smi</code></pre>
+    </div>
     <p><code>nvidia-smi</code> applies only when a supported NVIDIA GPU and driver are present. Windows' <code>AdapterRAM</code> value is not a dependable universal measure of usable GPU memory, especially on some driver configurations. Verify VRAM against the installed device and actual runtime allocation rather than treating one WMI field as a hard capacity.</p>
     <p>Model <em>parameters</em> are not equivalent to memory requirements. Quantization, context length, runtime buffers, KV cache, CPU offloading, concurrent requests, and other applications all affect memory use. If a model loads by spilling to system RAM, the program may work yet feel slow. If the cooling system throttles or the laptop runs on battery, results may be different from a plugged-in session.</p>
   </div>
@@ -45,11 +47,15 @@ nvidia-smi</code></pre>
     <h2 id="laptop-ollama">One local inference path with Ollama on Windows.</h2>
     <p>Ollama is a convenient route when I want a command-line model and a local HTTP endpoint that another script can call. Install it from the <a href="https://ollama.com/download/windows">official Windows download page</a>, read the installer and system requirements, and confirm its executable is available. Do not run an unfamiliar script copied from a forum with administrator rights.</p>
     <p>In PowerShell, check the installation and installed models:</p>
-    <pre><code>ollama --version
+    <div class="worksheet">
+      <pre><code>ollama --version
 ollama list</code></pre>
+    </div>
     <p>If the model below is appropriate for your hardware, licensing constraints, and intended use, download it deliberately. A model download requires internet access and disk space; this is not an offline action. The model name is a <em>reproducible example</em>, not a claim that it is the best model or the one currently loaded on my laptop.</p>
-    <pre><code>ollama pull gemma3:4b
+    <div class="worksheet">
+      <pre><code>ollama pull gemma3:4b
 ollama run gemma3:4b</code></pre>
+    </div>
     <p>Ollama's documented local API typically listens on <code>http://localhost:11434</code>. Confirm it is a local model and local endpoint before calling it. A simple interactive chat proves only that the model can produce an answer. It does not test privacy, quality, throughput stability, or whole-task time. For the API shape and current options, read the <a href="https://docs.ollama.com/api/generate">official Generate endpoint reference</a>.</p>
     <p>I prefer to first run a <strong>fixed, fictional input</strong>. Real client material, patient information, company credentials, and unpublished manuscripts should not enter this trial. They also should not be pasted into logs just because a process is described as local.</p>
   </div>
@@ -61,8 +67,10 @@ ollama run gemma3:4b</code></pre>
     <h2 id="laptop-studio">A visual local workspace with LM Studio.</h2>
     <p>LM Studio is helpful when I want to compare downloaded models through a desktop interface, inspect settings, and expose a local server without writing a complete application. It supports Windows and documented OpenAI-compatible local API endpoints. Download the software and models from approved sources, review the model license and storage footprint, and load a model that fits the actual machine.</p>
     <p>After selecting a model, the local server can be started from LM Studio's Developer controls or, with its CLI installed, through PowerShell:</p>
-    <pre><code>lms server start --port 1234
+    <div class="worksheet">
+      <pre><code>lms server start --port 1234
 Invoke-RestMethod http://127.0.0.1:1234/v1/models</code></pre>
+    </div>
     <p>The second command lists models visible to that server. It does not infer a model's quality or guarantee which model is loaded. For requests from a script, use the identifier actually reported by your server, not a guessed model name. See <a href="https://lmstudio.ai/docs/developer/openai-compat">LM Studio's compatibility endpoint reference</a> and <a href="https://lmstudio.ai/docs/developer/core/server">server instructions</a>.</p>
     <p>For an offline session, download the model and any required runtime first. LM Studio documents that local chat, document interaction, and local inference can operate without internet; searching for or downloading models and checking for updates can involve network access. An installed desktop app is not proof that every optional plugin, tool, cloud model, or integration is offline. Consult <a href="https://lmstudio.ai/docs/app/offline">its offline-operation documentation</a>.</p>
     <p>I do not leave a model server listening on the public network by default. Keep binding to the loopback address, avoid enabling public-network serving or permissive CORS without an explicit need, and secure any remotely accessible server. Loopback is a meaningful boundary, not an absolute security guarantee for a compromised device.</p>
@@ -75,9 +83,13 @@ Invoke-RestMethod http://127.0.0.1:1234/v1/models</code></pre>
     <h2 id="laptop-measure">A small local test anyone can rerun, without inventing results.</h2>
     <p>I have included an original standard-library Python script, <a href="/downloads/local-ai-loopback-check.py" download>download the loopback test (.py)</a>. Its only possible model request is a POST to <code>127.0.0.1</code> on a validated local port. It cannot choose a remote API endpoint, download a model, upload local files, or authorize a purchase. The prompt is a fixed fictional note, so no real customer or book data is required.</p>
     <p>Start with the dry run. It validates the command and reports empty measurement fields. It does <strong>not</strong> pretend that the model ran.</p>
-    <pre><code>py -3 downloads/local-ai-loopback-check.py --dry-run</code></pre>
+    <div class="worksheet">
+      <pre><code>py -3 downloads/local-ai-loopback-check.py --dry-run</code></pre>
+    </div>
     <p>Only after separately installing Ollama and downloading the named model, make an explicit local call:</p>
-    <pre><code>py -3 downloads/local-ai-loopback-check.py --model gemma3:4b</code></pre>
+    <div class="worksheet">
+      <pre><code>py -3 downloads/local-ai-loopback-check.py --model gemma3:4b</code></pre>
+    </div>
     <p>This script prints a small JSON record with the model name, a fingerprint of the fixed prompt, measured request wall time, and token-generation counters if the runtime returns them. It records a hash of the generated text instead of echoing the output. A matching output hash is not a quality score. <strong>Human quality review remains marked not performed</strong> until someone examines the actual response against the expected facts and independently records the judgment.</p>
     <p>The code has a safe <code>--dry-run</code> mode that I tested without a model. A mocked loopback response also exercised the request, fixed prompt, and token-rate calculation. <strong>I did not run it on my gaming laptop for this publication.</strong> I am not asserting a real 2026 laptop measurement, even if another public benchmark happens to use a similarly named model.</p>
     <p><strong>What to save privately after a real session:</strong> model and exact digest, runtime and driver versions, measured RAM and VRAM, quantization, context limit, prompt fingerprint, temperature, response token limit, cold versus warm runs, wall time, generation time, number of output tokens, manual quality result, and notable errors. Do not upload real prompt contents when a fingerprint and a reviewable redacted sample will do.</p>

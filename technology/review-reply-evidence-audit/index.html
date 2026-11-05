@@ -142,7 +142,9 @@
     <h2 id="reply-audit-reproduce">Run the entire six-case check locally.</h2>
     <p><a href="/downloads/review-reply-independent-audit.py" download>Download the original independent audit script (.py)</a>. It contains the three publicly archived fictional outputs, selected case-specific fact patterns, three new negative-control mutations and one narrow financial-commitment pattern. It uses Python's standard library, makes no network requests, does not access other files and does not send text to a model.</p>
     <p>Save the script, then run this from the directory where it is saved:</p>
-    <pre><code>py -3 review-reply-independent-audit.py --self-test</code></pre>
+    <div class="worksheet">
+      <pre><code>py -3 review-reply-independent-audit.py --self-test</code></pre>
+    </div>
     <p>On systems with the executable named <code>python3</code>, use <code>python3 review-reply-independent-audit.py --self-test</code> instead. The script emits JSON with three archived results and three labeled controls. Its self-test exits unsuccessfully if an original is unexpectedly flagged or one of the seeded counterexamples is missed. It cannot query the current app, update an approval, contact a customer, or post a reply.</p>
     <div class="project-table-scroll" role="region" aria-label="Independent audit result and interpretation" tabindex="0">
       <table>

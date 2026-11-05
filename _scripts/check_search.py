@@ -17,6 +17,7 @@ import build
 import public_identity
 import player_sitemap
 import poker_episode
+import poker_standoff_episode
 import local_laptop_case
 import reply_audit_case
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
@@ -77,14 +78,15 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     if manual_profile is not None:
         expected_indexed.add(manual_profile[0])
         totals['manual_player_pages'] += 1
-    try:
-        approved_episode = poker_episode.record(root)
-    except (OSError, ValueError, KeyError, TypeError) as exc:
-        errors.append('Manual video companion: ' + str(exc))
-        approved_episode = None
-    if approved_episode is not None:
-        expected_indexed.add(approved_episode['url'])
-        totals['manual_episode_pages'] += 1
+    for registry in (poker_episode, poker_standoff_episode):
+        try:
+            approved_episode = registry.record(root)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            errors.append('Manual video companion ' + registry.ROUTE + ': ' + str(exc))
+            approved_episode = None
+        if approved_episode is not None:
+            expected_indexed.add(approved_episode['url'])
+            totals['manual_episode_pages'] += 1
     try:
         laptop = local_laptop_case.record(root)
     except (OSError, ValueError, KeyError, TypeError) as exc:
@@ -92,6 +94,7 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
         laptop = None
     if laptop is not None:
         expected_indexed.add(laptop['url'])
+        totals['manual_laptop_guides'] += 1
     try:
         reply_audit = reply_audit_case.record(root)
     except (OSError, ValueError, KeyError, TypeError) as exc:
@@ -100,7 +103,6 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     if reply_audit is not None:
         expected_indexed.add(reply_audit['url'])
         totals['independent_reply_cases'] += 1
-        totals['manual_laptop_guides'] += 1
     sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
     actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):

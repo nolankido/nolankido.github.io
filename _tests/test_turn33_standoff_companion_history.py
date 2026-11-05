@@ -4,6 +4,7 @@ import subprocess
 import unittest
 
 import turn33_standoff_companion_history as history
+import turn34_release_integrity_history as turn34
 
 
 class StandOffCompanionHistoryTests(unittest.TestCase):
@@ -11,7 +12,7 @@ class StandOffCompanionHistoryTests(unittest.TestCase):
         self.assertGreaterEqual(len(history.BLOBS), 18)
         for path, (old_sha, current_sha) in history.BLOBS.items():
             with self.subTest(path=path):
-                current = (history.ROOT / path).read_bytes()
+                current = turn34.before(path, (history.ROOT / path).read_bytes())
                 self.assertEqual(history.blob(current), current_sha)
                 previous = history.before(path, current)
                 self.assertEqual(history.blob(previous), old_sha)
