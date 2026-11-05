@@ -135,6 +135,12 @@ The owner-approved portrait, outside-reader and screen-reader comprehension revi
 
 [Turn 36](visibility-sprint/sprint50-turn36-2026-11-04.md) adds a five-link, keyboard-native orientation to the long About page after the existing research, practical-AI, and poker proof ladder. It links to existing section content and gives the interests heading a stable ID. Its dedicated 44-pixel-target style is scoped to About, without changing professional claims, Person schema, or publication dates. Engineering and browser results are not substituted for independent comprehension or a screen-reader participant's experience.
 
+## Public link and fragment integrity, November 4
+
+[Turn 37](visibility-sprint/sprint50-turn37-2026-11-04.md) makes internal navigation an explicit local release contract. Its static audit checks registered public destinations, IDs and duplicate IDs across the generated HTML. It treats Poker Finder's allowlisted URL-fragment filter settings as application state only when the matching controls and restoration code are present, rather than misreporting them as missing page anchors. An existing, publicly linked offline audit download is now included in the exact-byte deployment inventory. Synthetic negative controls verify that invented routes, missing sections, invalid Finder settings and duplicate IDs fail closed. These checks do not establish ranking gains, successful live browser interaction or independent reader comprehension.
+
+The connected third-party search-performance analysis was unavailable because its trial had expired and a subscription would be required. No paid service was activated. Actual Search Console metrics and the outside-reader study therefore remain unmeasured and uncompleted sprint decisions.
+
 ## Release rules
 
 - Do not use GitHub Actions, another scheduled CI service, cron jobs, or paid APIs.

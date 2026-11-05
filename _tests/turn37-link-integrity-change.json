@@ -1,0 +1,29 @@
+{
+  "files": {
+    "_reports/identity-visibility-strategy-2026-11-04.md": [
+      "c1533d45b4f1a0d5ea353755494e427c2c300003",
+      "a0985b5405b8db9a45d429027ee5f9ea2c67c8ef"
+    ],
+    "_scripts/check_live.py": [
+      "8664403914a7b1a58a6c4c4d4fd36b656b3ca1f7",
+      "33afebfd5700f3e77d0ead903648b5a0a12fcd5b"
+    ],
+    "_scripts/local_release_checks.py": [
+      "78117f1f68ab1ad198966439a6c1ca57b1ee2227",
+      "a74a811b4ccf68248fef2290b8e94323ff349c79"
+    ],
+    "_tests/test_turn36_about_reader.py": [
+      "cc7fe297e2b540cec6f3a3d74ea3eba665a33dff",
+      "2cb36018687c618bfb75e85ba2cb7b1d326653ce"
+    ],
+    "_tests/turn36_about_reader_history.py": [
+      "11b39aaf23a73cf6236a37d28d1f72442a4fc998",
+      "8ce00534d8994f9565643f7d3b9a6b67e328c2c1"
+    ]
+  },
+  "added": {
+    "_scripts/check_internal_links.py": "f2fd415975e547cad6799f2f187e55ab3c0cbbb1",
+    "_tests/test_turn37_internal_links.py": "9a3f498ff6f78bdb47583ac2a68064652fa0716a"
+  },
+  "verified_download": "70c1a8b710e96bce23f6442b1b8dba731b068b30"
+}
