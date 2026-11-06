@@ -14,6 +14,10 @@
 .note-article .reader-outline ol { margin: 12px 0 0; padding-left: 24px; }
 .note-article .reader-outline li { padding: 4px 0; font: .95rem/1.55 var(--sans); }
 .note-article .article-body h2[id] { scroll-margin-top: 24px; }
+/* Keep the judgment essay and its native outline usable with enlarged text. */
+.page-keep-the-judgment .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+.page-keep-the-judgment .brand-mark { min-width: 1.8em; min-height: 1.8em; }
+.page-keep-the-judgment .note-article .article-body h2[id] { scroll-margin-top: 5rem; }
 .note-keep { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 18px; }
 .note-keep summary { cursor: pointer; font: 600 .9rem/1.6 var(--sans); }
 .note-keep[open] summary { margin-bottom: 16px; }
