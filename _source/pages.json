@@ -46,7 +46,7 @@
     "description": "Nolan Kido applies AI to real-life and business tasks with AI Works Human Decides. Explore documented projects, published accounting research, and poker.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-11-05"
+    "updated": "2026-11-06"
   },
   {
     "id": "notes",
@@ -86,7 +86,7 @@
     "description": "Copy Nolan Kido's public biography and find his practical AI projects, tools, and writing for introductions, profiles, and links.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-11-04"
+    "updated": "2026-11-06"
   },
   {
     "id": "card",
@@ -311,7 +311,7 @@
     "description": "Explore Nolan Kido's practical AI work: small-business review checks, poker-vlog evidence QA, book continuity, and repeatable tools. AI Works Human Decides.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-11-05"
+    "updated": "2026-11-06"
   },
   {
     "id": "creative",
@@ -1390,6 +1390,20 @@
     "source": "technology/ai-weekly-reset.html",
     "date": "2026-10-27",
     "evidence_article": true
+  },
+  {
+    "id": "ai-website-visibility",
+    "section": "technology",
+    "path": "/technology/ai-website-visibility/",
+    "title": "What AI helped change on my website.",
+    "seo_title": "AI Website Improvements: A Documented Case | Nolan Kido",
+    "description": "Follow Nolan Kido's AI-assisted website changes, public release checks and a free Search Console method, with search outcomes kept separate from publication.",
+    "kicker": "Technology / Recorded website case",
+    "source": "technology/ai-website-visibility.html",
+    "date": "2026-11-03",
+    "updated": "2026-11-06",
+    "evidence_article": true,
+    "revision": "Moved the existing Technology-page case into a dedicated article, preserving its historical checks and search-measurement example."
   },
   {
     "id": "ai-poker-video-evidence",

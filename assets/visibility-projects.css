@@ -105,7 +105,8 @@
 .page-technology :is(.section-title, .section-label, h3, .section-deck, .practical-work p, .ai-path-output) {
   overflow-wrap: anywhere;
 }
-.page-technology .nav-links a {
+.page-technology .nav-links a,
+.page-ai-website-visibility .nav-links a {
   white-space: normal;
   overflow-wrap: anywhere;
 }

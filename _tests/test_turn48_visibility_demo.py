@@ -13,8 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "downloads/gsc-monthly-local-audit.py"
 PAGES = ROOT / "downloads/gsc-synthetic-pages.csv"
 DATES = ROOT / "downloads/gsc-synthetic-dates.csv"
-SOURCE = ROOT / "_source/technology/home.html"
-PUBLIC = ROOT / "technology/index.html"
+SOURCE = ROOT / "_source/technology/ai-website-visibility.html"
+PUBLIC = ROOT / "technology/ai-website-visibility/index.html"
 PROTOCOL = ROOT / "_reports/visibility-sprint/seo-geo-measurement-v1.md"
 
 INTRO = "<p><strong>Try it before exporting private data.</strong>"
@@ -102,8 +102,9 @@ class SyntheticVisibilityDemoTests(unittest.TestCase):
         self.assertIn(r"py -3 .\gsc-monthly-local-audit.py --month 2026-10 --pages .\gsc-synthetic-pages.csv --chart .\gsc-synthetic-dates.csv --chart-date-format mdy", public)
         self.assertIn("not</strong> genuine Google exports", public)
         self.assertIn("using it for another website requires adapting those rules", public)
-        self.assertIn('"dateModified": "2026-11-05"', public)
-        self.assertIn('<link rel="canonical" href="https://nolankido.com/technology/">', public)
+        self.assertIn('"datePublished": "2026-11-03"', public)
+        self.assertIn('"dateModified": "2026-11-06"', public)
+        self.assertIn('<link rel="canonical" href="https://nolankido.com/technology/ai-website-visibility/">', public)
         self.assertNotIn(chr(0x2014), demo_section(public))
         protocol = PROTOCOL.read_text(encoding="utf-8")
         self.assertIn("### Practice with deliberately synthetic data", protocol)
