@@ -80,3 +80,31 @@
 @media print {
   .page-creative .creative-video-feature { background: white; color: black; }
 }
+
+/* A visible fictional scene with an optional completed planning example. */
+.page-creative .creative-example { margin-block: 24px; padding: clamp(18px, 3vw, 28px); border: 1px solid var(--line-dark); background: var(--paper-light); scroll-margin-top: 12.5rem; }
+.page-creative .creative-example > .creative-brief-kind { margin-top: 0; }
+.page-creative .creative-example h3 { margin-block: .5rem 1rem; font-size: 1.4rem; }
+.page-creative .creative-example-draft { margin-block: 1.5rem; padding-left: clamp(14px, 2vw, 24px); border-left: 3px solid var(--green); }
+.page-creative .creative-example-draft h4 { margin-block: 0 1rem; font: 600 1rem/1.5 var(--sans); }
+.page-creative .creative-example-draft p { margin-block: .65rem; font: 1.1rem/1.65 var(--serif); }
+.page-creative .creative-example-details { border-block: 1px solid var(--line-dark); margin-block: 1.5rem; }
+.page-creative .creative-example-details summary { cursor: pointer; min-height: 44px; padding-block: 14px; font: 600 .95rem/1.5 var(--sans); }
+.page-creative .creative-example-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; margin-block: 0 24px; }
+.page-creative .creative-example-fields > div { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
+.page-creative .creative-example-fields dt { font: 600 .94rem/1.5 var(--sans); }
+.page-creative .creative-example-fields dd { margin: .4rem 0 0; font: .94rem/1.65 var(--sans); }
+.page-creative .creative-example :is(h4, summary, dt, dd) { overflow-wrap: anywhere; }
+@media (max-width: 760px) {
+  .page-creative .creative-example-fields { grid-template-columns: minmax(0, 1fr); }
+}
+@media print {
+  .page-creative .creative-example { background: white; color: black; }
+  .page-creative .creative-example-details::details-content { content-visibility: visible !important; display: block !important; }
+  .page-creative .creative-example-details > :not(summary) { display: block !important; }
+  .page-creative .creative-example-details summary { cursor: default; list-style: none; break-after: avoid; }
+  .page-creative .creative-example-details summary::marker { content: ""; }
+  .page-creative .creative-example-details summary::-webkit-details-marker { display: none; }
+  .page-creative .creative-example-fields > div { break-inside: avoid; margin-bottom: 12px; }
+  .page-creative .creative-example-draft { break-inside: avoid; }
+}
