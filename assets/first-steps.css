@@ -55,3 +55,28 @@
 .page-home :is(.section-title, .section-label, .brand-statement, .destination a, .destination p) { overflow-wrap: anywhere; }
 .page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }
 .page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }
+
+/* A published story with separate routes to its written companion and a proposed workflow. */
+.page-creative .creative-video-feature {
+  margin-block: 1.5rem 3rem;
+  padding: clamp(18px, 3vw, 32px);
+  border: 1px solid var(--line-dark);
+  border-top: 3px solid var(--red);
+  background: var(--paper-light);
+}
+.page-creative .creative-video-kind { margin-top: 0; font: .72rem/1.6 var(--mono); text-transform: uppercase; }
+.page-creative .creative-video-feature h3 { margin-block: .5rem 1rem; max-width: 28ch; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+.page-creative .creative-video-feature p { max-width: 65ch; }
+.page-creative .creative-video-feature :is(h3, p, a) { overflow-wrap: anywhere; }
+.page-creative .creative-video-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-block: 1.4rem; }
+.page-creative .creative-video-actions a { min-height: 44px; }
+.page-creative .creative-video-actions .button { white-space: normal; text-align: left; }
+.page-creative .creative-video-actions .text-link { display: inline-flex; align-items: center; }
+.page-creative .creative-video-process { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+/* Allow enlarged text and extra spacing to wrap throughout this page. */
+.page-creative main :is(h2, h3, p, a) { overflow-wrap: anywhere; }
+.page-creative .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+.page-creative .brand-mark { min-width: 1.8em; min-height: 1.8em; }
+@media print {
+  .page-creative .creative-video-feature { background: white; color: black; }
+}
