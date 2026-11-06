@@ -3,12 +3,12 @@
 from pathlib import Path
 import re
 import unittest
-from xml.etree import ElementTree as ET
+import html5lib
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "_source" / "technology" / "home.html"
-OUTPUT = ROOT / "technology" / "index.html"
+SOURCE = ROOT / "_source" / "technology" / "ai-website-visibility.html"
+OUTPUT = ROOT / "technology" / "ai-website-visibility" / "index.html"
 TOOL = ROOT / "downloads" / "gsc-monthly-local-audit.py"
 START = '<h3 id="free-visibility-check">'
 END = '<p><strong>A method you can reuse:</strong>'
@@ -29,12 +29,12 @@ def guide_errors(page: str) -> list[str]:
         return ["missing or duplicated how-to guide"]
     if page.count('href="#free-visibility-check"') != 1:
         errors.append("missing or duplicate introduction route")
-    if page.find('href="#free-visibility-check"') > page.find('id="technology-projects"'):
+    if page.find('href="#free-visibility-check"') > page.find(START):
         errors.append("how-to shortcut is not in the introductory section")
     if content.count("<li>") != 4 or content.count("</li>") != 4:
         errors.append("not exactly four ordered steps")
-    if content.count('<ol>') != 1 or content.count('<div class="worksheet"><pre>') != 1:
-        errors.append("continuous numbered steps or wrapped PowerShell example missing")
+    if content.count('<ol>') != 1 or content.count('<div class="worksheet"><pre>') != 2:
+        errors.append("continuous numbered steps or either wrapped PowerShell example missing")
     for text in ("--chart-date-format mdy", "<code>dmy</code>",
                  "every date in the selected month", "visible nonbrand Technology click lower bound",
                  "a combined Query + Page export", "no measured search improvement",
@@ -68,15 +68,17 @@ class VisibilityGuideTests(unittest.TestCase):
         self.assertEqual(self.source.count('href="/downloads/gsc-monthly-local-audit.py"'), 1)
         self.assertEqual(self.rendered.count('href="/downloads/gsc-monthly-local-audit.py"'), 1)
 
-    def test_original_metadata_route_and_source_case_stay_stable(self):
-        self.assertIn('rel="canonical" href="https://nolankido.com/technology/"', self.rendered)
-        self.assertIn('"dateModified": "2026-11-05"', self.rendered)
+    def test_article_metadata_preserves_case_origin(self):
+        self.assertIn('rel="canonical" href="https://nolankido.com/technology/ai-website-visibility/"', self.rendered)
+        self.assertIn('"datePublished": "2026-11-03"', self.rendered)
+        self.assertIn('"dateModified": "2026-11-06"', self.rendered)
         self.assertEqual(self.rendered.count('id="site-visibility-evidence"'), 1)
         self.assertEqual(self.rendered.count('id="site-visibility-limits"'), 1)
         self.assertNotIn("\u2014", section(self.source))
 
     def test_inserted_markup_has_balanced_structure_and_sequential_steps(self):
-        root = ET.fromstring("<root>" + START + section(self.source) + "</root>")
+        parser = html5lib.HTMLParser(strict=True, namespaceHTMLElements=False)
+        root = parser.parseFragment(START + section(self.source))
         lists = root.findall("ol")
         self.assertEqual(len(lists), 1)
         self.assertEqual(len(lists[0].findall("li")), 4)
