@@ -70,6 +70,7 @@ def main() -> int:
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
         ('Player Find index contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_find.py', '-q']),
         ('Public profile and topical search', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_site_find.py', '-q']),
+        ('Complete author archive and standalone articles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_author_archive_standalone.py', '-q']),
         ('SEO and metadata', ['_scripts/check_search.py']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]

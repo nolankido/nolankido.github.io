@@ -258,7 +258,7 @@ def build_outputs() -> dict[Path, str]:
             body = clean_body(body)
         body = poker_beginner_path.decorate(p, body, ROOT)
         body = poker_checkpoint.decorate(p, body, ROOT)
-        body = author_archive.body(p, body, pages)
+        body = author_archive.body(p, body, pages, ROOT)
         body = practical_path.body(p, body, pages, ROOT)
         nav = identity.navigation(identity_config, p)
         canonical = site['url'] + p['path']
@@ -450,7 +450,7 @@ def build_outputs() -> dict[Path, str]:
         extra += page_sharing.head(p, ROOT)
         extra += practical_navigation.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
-        schema = author_archive.schema(p, schema, pages, site)
+        schema = author_archive.schema(p, schema, pages, site, ROOT)
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
         schema = visibility_projects.schema(p, schema, body, ROOT, site['url'])
         extra += visibility_projects.head(p, ROOT)
