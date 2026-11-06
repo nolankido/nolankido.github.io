@@ -1,5 +1,6 @@
 /* Scoped discovery controls, static index and reading results. */
 .page-find [hidden] { display: none !important; }
+.page-find .nav-links a { white-space: normal; overflow-wrap: anywhere; }
 .find-intro { padding-top: 8px; }
 .find-controls { border: 1px solid var(--line-dark); padding: 24px; margin: 24px 0; background: var(--panel); }
 .find-controls label { display: block; font: 600 1rem/1.5 var(--sans); margin-bottom: 8px; }

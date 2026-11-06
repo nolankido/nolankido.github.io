@@ -46,7 +46,7 @@ class PlayerFindTests(unittest.TestCase):
         links = [a.get('href') for a in parsed.tags('a')]
         self.assertEqual(links.count(player_sitemap.ROUTE), 1)
         self.assertEqual(len([d for d in parsed.tags('details')
-                              if d.get('class') == 'find-group']), 4)
+                              if d.get('class') == 'find-group']), 5)
         self.assertIn('id="browse-poker"><summary>Poker <span class="find-group-count" hidden>(95)</span>', html)
         self.assertIn('<option value="profile">Player profiles</option>', html)
         self.assertIn('data-kind="profile" data-interests="poker"', html)

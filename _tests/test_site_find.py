@@ -42,12 +42,46 @@ class SiteFindTests(unittest.TestCase):
         for p in self.pages:
             if p.get('noindex') or p.get('living_well_kind') == 'experiment':
                 self.assertNotIn(p['path'], paths)
-        for path in ['/contact/', '/bio/', '/find/', '/living-well/field-notes/', '/poker/find/', '/living-well/find/']:
+        for path in ['/contact/', '/privacy/', '/card/', '/find/', '/living-well/field-notes/', '/poker/find/', '/living-well/find/']:
             self.assertNotIn(path, paths)
         rendered = site_find.render(self.items)
         self.assertNotIn('submit-form.com', rendered)
         self.assertNotIn('turnstile', rendered)
         self.assertNotIn('Proposed experiment:', rendered)
+
+    def test_public_identity_uses_manifest_copy_once_before_topic_groups(self):
+        identities = [e for e in self.items if e['kind'] == 'identity']
+        self.assertEqual({e['path'] for e in identities}, {'/about/', '/bio/'})
+        self.assertEqual(len(identities), 2)
+        self.assertEqual(self.items[:2], identities)
+        pages = {p['path']: p for p in self.pages}
+        for entry in identities:
+            page = pages[entry['path']]
+            self.assertEqual((entry['title'], entry['search_title'], entry['description']),
+                             (page['title'], page['seo_title'], page['description']))
+            self.assertEqual(entry['interests'], ['about'])
+            self.assertEqual(entry['home'], 'about')
+            self.assertEqual(entry['date'], '')
+        rendered = site_find.render(self.items)
+        parsed = Page(rendered)
+        groups = [d['id'] for d in parsed.tags('details') if d.get('class') == 'find-group']
+        self.assertEqual(groups, ['browse-about', 'browse-technology', 'browse-living-well', 'browse-poker', 'browse-creative'])
+        links = [a['href'] for a in parsed.tags('a')]
+        for path in ['/about/', '/bio/']:
+            self.assertEqual(links.count(path), 1)
+
+    def test_identity_inclusion_still_rejects_nonpublic_pages_and_fake_article_dates(self):
+        changed = deepcopy(self.pages)
+        for page in changed:
+            if page['id'] in site_find.IDENTITY_IDS:
+                page['date'] = '2026-11-06'
+        identities = [e for e in site_find.entries(ROOT, changed) if e['kind'] == 'identity']
+        self.assertEqual(len(identities), 2)
+        self.assertTrue(all(e['date'] == '' for e in identities))
+        for page in changed:
+            if page['id'] in site_find.IDENTITY_IDS:
+                page['noindex'] = True
+        self.assertFalse(any(e['kind'] == 'identity' for e in site_find.entries(ROOT, changed)))
 
     def test_cross_interest_membership_does_not_duplicate_the_family_story(self):
         record = [e for e in self.items if e['path'] == '/living-well/preserve-family-story/']
@@ -71,7 +105,7 @@ class SiteFindTests(unittest.TestCase):
         self.assertNotIn('name', query)
         for interest in site_find.INTERESTS:
             self.assertTrue(any(o.get('value') == interest for o in parsed.tags('option')))
-        self.assertEqual(len([d for d in parsed.tags('details') if d.get('class') == 'find-group']), 4)
+        self.assertEqual(len([d for d in parsed.tags('details') if d.get('class') == 'find-group']), 5)
         for page in ['index.html','start-here/index.html','notes/index.html','resources/index.html','404.html']:
             self.assertIn('href="/find/"',self.outputs[Path(page)])
         self.assertIn('class="utility-find" href="/find/" aria-current="page"',content)
@@ -123,8 +157,19 @@ class SiteFindTests(unittest.TestCase):
 const assert = require('node:assert/strict');
 const {score, terms, normalize} = require('./assets/site-find.js');
 const records = JSON.parse(require('node:fs').readFileSync(0, 'utf8'));
-const rows=records.map(e=>({...e,subjects:e.interests.join(' ')}));
+const rows=records.map(e=>({...e,searchTitle:e.search_title,subjects:e.interests.join(' ')}));
 const result=q=>rows.filter(r=>score(r,q)>=0);
+const groups=[...new Set(rows.map(r=>r.home))];
+const ranked=q=>result(q).sort((a,b)=>groups.indexOf(a.home)-groups.indexOf(b.home)||score(b,q)-score(a,q));
+for (const query of ['Nolan Kido','who is Nolan Kido','About Nolan']) {
+  assert.equal(ranked(query)[0].path,'/about/');
+  assert.equal(result(query).filter(r=>r.path==='/about/').length,1);
+}
+for (const query of ['biography','short bio']) {
+  assert.equal(ranked(query)[0].path,'/bio/');
+  assert.equal(result(query).filter(r=>r.path==='/bio/').length,1);
+}
+assert.equal(result('who').length,0);
 assert(result('family story').some(r=>r.path==='/living-well/preserve-family-story/'));
 assert(result('how do I review a hand').some(r=>r.path==='/poker/reviewing-a-hand/'));
 assert(result('AI').some(r=>r.path==='/notes/keep-the-judgment/'));

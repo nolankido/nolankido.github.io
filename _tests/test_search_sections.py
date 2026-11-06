@@ -143,7 +143,11 @@ class SearchSectionsTests(unittest.TestCase):
 
     def test_real_missed_queries_ranking_and_section_specificity(self):
         rows=[dict(r,subjects=' '.join(r['interests']),sections=self.index[r['path']]) for r in site_find.entries(ROOT,self.pages)]
-        old=history.before('assets/site-find.js',(ROOT/'assets/site-find.js').read_text())
+        # Compare with the actual pre-section-search script. Reversing patches
+        # from today's script can produce invalid historical JavaScript after
+        # an intentional later change, such as the public identity search.
+        old=subprocess.check_output(['git','show',self.baseline['commit']+':assets/site-find.js'],cwd=ROOT).decode()
+        self.assertEqual(sha256(old.encode()).hexdigest(),self.baseline['files']['assets/site-find.js'])
         code=r'''
 const assert=require('node:assert/strict'),vm=require('node:vm');
 const {rows,old}=JSON.parse(require('node:fs').readFileSync(0,'utf8'));
@@ -162,7 +166,7 @@ assert(current.score({...r,sections:[['cafe','Café recovery']]},'cafe recov')>=
         self.assertEqual(run.returncode,0,run.stderr)
 
     def test_adapter_cannot_hide_unreviewed_search_code_or_index_changes(self):
-        for path,old,new in [('assets/site-find.js','const stops =','const surprise = 1; const stops ='),('assets/site-find.css','.find-intro {','.find-intro { color: red;'),('_source/find.html','Across my interests','Unexpected heading'),('find/index.html','Keep access and recovery simple','Unreviewed section label'),('assets/site.css','scroll-padding-top: 180px','scroll-padding-top: 181px'),('assets/site-core.css','scroll-padding-top: 180px','scroll-padding-top: 181px'),('about/index.html','<body','<!-- unreviewed --><body')]:
+        for path,old,new in [('assets/site-find.js','const stops =','const surprise = 1; const stops ='),('assets/site-find.css','.find-intro {','.find-intro { color: red;'),('_source/find.html','Across the site','Unexpected heading'),('find/index.html','Keep access and recovery simple','Unreviewed section label'),('assets/site.css','scroll-padding-top: 180px','scroll-padding-top: 181px'),('assets/site-core.css','scroll-padding-top: 180px','scroll-padding-top: 181px'),('about/index.html','<body','<!-- unreviewed --><body')]:
             data=(ROOT/path).read_text();modified=data.replace(old,new,1)
             self.assertNotEqual(data,modified,path)
             self.assertNotEqual(history.before(path,data),history.before(path,modified),path)
