@@ -45,6 +45,8 @@ def original(name, expected):
 
 
 def before(path, value):
+    import turn58_nolanpoker_history
+    value = turn58_nolanpoker_history.before(path, value)
     name = key(path)
     pair = records()["files"].get(name)
     if pair is None or blob(value) != pair[1]:
