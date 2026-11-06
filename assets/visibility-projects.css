@@ -106,8 +106,26 @@
   overflow-wrap: anywhere;
 }
 .page-technology .nav-links a,
-.page-ai-website-visibility .nav-links a {
+.page-ai-website-visibility .nav-links a,
+.page-review-reply-evidence-audit .nav-links a {
   white-space: normal;
+  overflow-wrap: anywhere;
+}
+.page-review-reply-evidence-audit .reply-audit-quote {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--green, #243d30);
+  background: var(--paper-light, #fafbf7);
+  overflow-wrap: anywhere;
+}
+.page-review-reply-evidence-audit .reply-audit-quote p {
+  margin: 0;
+}
+.page-review-reply-evidence-audit .reply-audit-quote mark {
+  background: #fff0b3;
+  color: #24332a;
+}
+.page-review-reply-evidence-audit :is(.section-label, h2, h3, p, li, code) {
   overflow-wrap: anywhere;
 }
 .page-technology .brand-mark {

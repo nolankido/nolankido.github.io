@@ -8,6 +8,7 @@ technology article shell to preserve navigation, sharing, and stable identity.
 from __future__ import annotations
 
 import argparse
+from datetime import date
 from html import escape
 import json
 from pathlib import Path
@@ -24,6 +25,7 @@ HEADLINE = "What a second check found in three AI-written replies."
 DESCRIPTION = ("An independent audit of three recorded Gemma replies: factual omissions, "
                "unauthorized promises, synthetic controls, and human review limits.")
 PUBLISHED = "2026-11-03"
+MODIFIED = "2026-11-05"
 PERSON = "https://nolankido.com/about/#nolan-kido"
 OLD_TITLE = "Local AI Test Results: Timing, Errors & Limits | Nolan Kido"
 OLD_DESCRIPTION = ("Read a documented Gemma test on an Ubuntu CPU runner: per-case timings, "
@@ -39,6 +41,11 @@ def once(content: str, old: str, new: str) -> str:
     if content.count(old) != 1:
         raise ValueError("Expected exactly one local AI shell anchor: " + old[:90])
     return content.replace(old, new, 1)
+
+
+def date_label(value: str) -> str:
+    stamp = date.fromisoformat(value)
+    return f'{stamp.strftime("%B")} {stamp.day}, {stamp.year}'
 
 
 def render() -> str:
@@ -71,7 +78,7 @@ def render() -> str:
          '<body class="site-page page-review-reply-evidence-audit">'),
         ('<meta property="article:published_time" content="2026-10-27">',
          '<meta property="article:published_time" content="' + PUBLISHED + '">\n'
-         '  <meta property="article:modified_time" content="' + PUBLISHED + '">'),
+         '  <meta property="article:modified_time" content="' + MODIFIED + '">'),
         ('/assets/social/reader-local-ai-test-record.png',
          '/assets/social/practical-ai.png'),
         ('PRACTICAL AI / RECORDED CASE. What a local AI test actually measured. Nolan Kido. nolankido.com.',
@@ -92,7 +99,7 @@ def render() -> str:
         raise ValueError("Local AI case requires the site's existing author identity")
     schema.update({
         "name": TITLE, "headline": HEADLINE, "url": URL, "description": DESCRIPTION,
-        "datePublished": PUBLISHED, "dateModified": PUBLISHED, "@id": URL + "#article",
+        "datePublished": PUBLISHED, "dateModified": MODIFIED, "@id": URL + "#article",
         "mainEntityOfPage": {
             "@type": "WebPage", "@id": URL + "#webpage", "url": URL,
             "breadcrumb": {
@@ -115,7 +122,8 @@ def render() -> str:
         '<p class="page-kicker">Technology / Practical AI / Independent checking</p>'
         '<h1 class="page-title">' + escape(HEADLINE) + '</h1>'
         '<p class="note-meta">Published <time datetime="' + PUBLISHED +
-        '">November 3, 2026</time> · Recorded workflow · Separate quality screen</p>'
+        '">' + date_label(PUBLISHED) + '</time> · Updated <time datetime="' + MODIFIED +
+        '">' + date_label(MODIFIED) + '</time> · Recorded workflow · Separate quality screen</p>'
         '<p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · '
         '<a href="/start-here/#reading-this-site">About this writing</a></p>'
         '</section>\n'

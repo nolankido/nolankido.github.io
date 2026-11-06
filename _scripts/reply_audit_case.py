@@ -5,6 +5,7 @@ model, tries to detect the owner's hardware, or creates a scheduled workflow.
 """
 from __future__ import annotations
 
+from datetime import date
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -16,7 +17,13 @@ SOURCE = Path("_source/technology/review-reply-evidence-audit.html")
 OUTPUT = Path("technology/review-reply-evidence-audit/index.html")
 TOOL = Path("downloads/review-reply-independent-audit.py")
 PUBLISHED = "2026-11-03"
+MODIFIED = "2026-11-05"
 PERSON = "https://nolankido.com/about/#nolan-kido"
+
+
+def date_label(value: str) -> str:
+    stamp = date.fromisoformat(value)
+    return f'{stamp.strftime("%B")} {stamp.day}, {stamp.year}'
 
 
 class Document(HTMLParser):
@@ -31,6 +38,11 @@ class Document(HTMLParser):
         self.robots = []
         self.description = []
         self.article_dates = []
+        self.modified_dates = []
+        self.header_dates = []
+        self.header_date_labels = []
+        self.hero_depth = 0
+        self.in_header_time = False
         self.schemas = []
         self.in_json = False
         self.jsontext = ''
@@ -38,6 +50,13 @@ class Document(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
+        if tag == 'section':
+            if self.hero_depth or 'page-hero' in values.get('class', '').split():
+                self.hero_depth += 1
+        if tag == 'time' and self.hero_depth:
+            self.header_dates.append(values.get('datetime'))
+            self.header_date_labels.append('')
+            self.in_header_time = True
         if tag == 'title':
             self.in_title = True
         if tag == 'h1':
@@ -54,11 +73,15 @@ class Document(HTMLParser):
                 self.og_url.append(values.get('content'))
             if values.get('property') == 'article:published_time':
                 self.article_dates.append(values.get('content'))
+            if values.get('property') == 'article:modified_time':
+                self.modified_dates.append(values.get('content'))
         if tag == 'script' and values.get('type') == 'application/ld+json':
             self.in_json = True
             self.jsontext = ''
 
     def handle_data(self, data):
+        if self.in_header_time:
+            self.header_date_labels[-1] += data
         if self.in_title:
             self.title.append(data)
         if self.in_h1:
@@ -67,6 +90,10 @@ class Document(HTMLParser):
             self.jsontext += data
 
     def handle_endtag(self, tag):
+        if tag == 'time':
+            self.in_header_time = False
+        if tag == 'section' and self.hero_depth:
+            self.hero_depth -= 1
         if tag == 'title':
             self.in_title = False
         if tag == 'h1':
@@ -91,7 +118,10 @@ def record(root: Path) -> dict | None:
     page = Document(html)
     if (page.canonical != [URL] or page.og_url != [URL] or len(page.h1) != 1
             or len(page.title) == 0 or len(page.description) != 1
-            or page.article_dates != [PUBLISHED] or len(page.schemas) != 1):
+            or page.article_dates != [PUBLISHED] or page.modified_dates != [MODIFIED]
+            or page.header_dates != [PUBLISHED, MODIFIED]
+            or page.header_date_labels != [date_label(PUBLISHED), date_label(MODIFIED)]
+            or len(page.schemas) != 1):
         raise ValueError("Independent reply case canonical, title, description or article dates disagree")
     if any('noindex' in value.lower() or 'none' in value.lower() for value in page.robots):
         raise ValueError("Independent reply case must remain indexable")
@@ -99,7 +129,7 @@ def record(root: Path) -> dict | None:
     if (schema.get('@type') != 'Article' or schema.get('url') != URL
             or schema.get('@id') != URL + '#article'
             or schema.get('datePublished') != PUBLISHED
-            or schema.get('dateModified') != PUBLISHED
+            or schema.get('dateModified') != MODIFIED
             or schema.get('author', {}).get('@id') != PERSON
             or schema.get('mainEntityOfPage', {}).get('url') != URL):
         raise ValueError("Independent reply case must match the shared author identity and date")
@@ -114,7 +144,7 @@ def record(root: Path) -> dict | None:
     if ('href="' + ROUTE + '"') not in (root / 'technology/index.html').read_text(encoding='utf-8'):
         raise ValueError("Technology hub must link to the independent reply audit")
     return {
-        'path': ROUTE, 'url': URL, 'date': PUBLISHED,
+        'path': ROUTE, 'url': URL, 'date': PUBLISHED, 'updated': MODIFIED,
         'title': ''.join(page.h1),
         'seo_title': ''.join(page.title),
         'description': page.description[0],
@@ -127,7 +157,7 @@ def add_to_sitemap(sitemap: ET.Element, root: Path) -> None:
         return
     row = ET.SubElement(sitemap, 'url')
     ET.SubElement(row, 'loc').text = item['url']
-    ET.SubElement(row, 'lastmod').text = item['date']
+    ET.SubElement(row, 'lastmod').text = item['updated']
 
 
 def find_entry(root: Path) -> dict | None:
