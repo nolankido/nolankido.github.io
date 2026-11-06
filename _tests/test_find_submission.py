@@ -40,7 +40,7 @@ class FindSubmissionTests(unittest.TestCase):
         self.assertEqual(results['button'],{'active':'find-results'})
         for name in ['find-interest','find-kind']:self.assertEqual(results[name],{'active':name})
         self.assertEqual(results['live'],{'active':'find-query','pending':0})
-        self.assertEqual(results['reset'],{'active':'find-query','value':'','heading':'Browse the collections.'})
+        self.assertEqual(results['reset'],{'active':'find-query','value':'','heading':'Browse the site.'})
         self.assertEqual(results['leave'],{'value':'','pending':0})
         old=self.run_events('baseline')
         self.assertTrue(old['composing']['prevented'])

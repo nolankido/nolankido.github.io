@@ -1,7 +1,7 @@
 /* Local filtering of the already-rendered public index. No query transport. */
 (() => {
   'use strict';
-  const stops = new Set(['a', 'an', 'the', 'and', 'of', 'to', 'for', 'in', 'on', 'with', 'how', 'do', 'i', 'my', 'is', 'can', 'what']);
+  const stops = new Set(['a', 'an', 'the', 'and', 'of', 'to', 'for', 'in', 'on', 'with', 'how', 'do', 'i', 'my', 'is', 'can', 'what', 'who']);
   const normalize = value => String(value).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
   const words = value => normalize(value).split(/\s+/).filter(Boolean);
   const stem = value => value.length > 5 && value.endsWith('ies') ? value.slice(0, -3) + 'y' : value.length > 4 && value.endsWith('s') && !value.endsWith('ss') ? value.slice(0, -1) : value;
@@ -144,8 +144,8 @@
       count += visible;
     }
     empty.hidden = count > 0;
-    heading.textContent = active ? 'Search results.' : 'Browse the collections.';
-    status.textContent = active ? count + (count === 1 ? ' matching page' : ' matching pages') + ' of ' + total + '. Grouped by collection, with closer title matches first.' : 'Browse ' + total + ' published pages, or narrow the index above.';
+    heading.textContent = active ? 'Search results.' : 'Browse the site.';
+    status.textContent = active ? count + (count === 1 ? ' matching page' : ' matching pages') + ' of ' + total + '. Grouped by area, with closer title matches first.' : 'Browse ' + total + ' published pages, or narrow the index above.';
   }
   function reset(focus) {
     query.value = ''; interest.value = ''; kind.value = ''; filter();

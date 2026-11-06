@@ -23,10 +23,10 @@
     "path": "/find/",
     "title": "Search the site.",
     "seo_title": "Search the Site | Nolan Kido",
-    "description": "Search specific published pages, guides and section headings across Nolan Kido’s interests locally without sending or saving your search text.",
+    "description": "Find Nolan Kido’s biography, projects, guides and writing. Search public page titles and section headings locally without sending or saving your search text.",
     "source": "find.html",
     "kicker": "Search the site",
-    "updated": "2026-10-19"
+    "updated": "2026-11-05"
   },
   {
     "id": "follow",

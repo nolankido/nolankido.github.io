@@ -10,15 +10,16 @@ import json
 from pathlib import Path
 import re
 
-INTERESTS = {'technology': 'Technology', 'living-well': 'Living Well', 'poker': 'Poker', 'creative': 'Creative Work'}
-EXCLUDED = {'home', 'find', 'follow', 'about', 'bio', 'contact', 'privacy', 'card', '404', 'start-here', 'notes', 'resources',
+INTERESTS = {'about': 'About Nolan', 'technology': 'Technology', 'living-well': 'Living Well', 'poker': 'Poker', 'creative': 'Creative Work'}
+IDENTITY_IDS = {'about', 'bio'}
+EXCLUDED = {'home', 'find', 'follow', 'contact', 'privacy', 'card', '404', 'start-here', 'notes', 'resources',
             'living-well-field-notes', 'living-well-editorial-standards', 'living-well-sources', 'poker-find', 'living-well-find'}
 
 
 def eligible(page: dict) -> bool:
     return (page['id'] not in EXCLUDED and not page.get('noindex')
             and page.get('living_well_kind') != 'experiment'
-            and bool(page.get('note') or page.get('section', page['id']) in INTERESTS))
+            and bool(page['id'] in IDENTITY_IDS or page.get('note') or page.get('section', page['id']) in INTERESTS))
 
 
 def entries(root: Path, pages: list[dict]) -> list[dict]:
@@ -47,11 +48,12 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
             raise ValueError('Discovery destinations must be local canonical pages')
         if not all(isinstance(page.get(k), str) and page[k].strip() for k in ('title', 'seo_title', 'description')):
             raise ValueError('Searchable pages need a heading, public search title and summary')
-        interests = list(notes[page['id']] if page.get('note') else [page.get('section', page['id'])])
+        identity = page['id'] in IDENTITY_IDS
+        interests = ['about'] if identity else list(notes[page['id']] if page.get('note') else [page.get('section', page['id'])])
         interests.extend(k for k in extra.get(page['path'], []) if k not in interests)
-        kind = ('essay' if page.get('note') or page.get('living_well_kind') == 'essay' else
+        kind = ('identity' if identity else 'essay' if page.get('note') or page.get('living_well_kind') == 'essay' else
                 'guide' if page.get('evidence_article') or page.get('worked_guide') or page.get('poker_guide') or page.get('living_well_kind') == 'guide' else 'collection')
-        published = page.get('date', '') if kind != 'collection' else ''
+        published = page.get('date', '') if kind not in {'collection', 'identity'} else ''
         if published:
             date.fromisoformat(published)
         result.append({'path': page['path'], 'title': page['title'], 'search_title': page['seo_title'], 'description': page['description'],
@@ -61,7 +63,7 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
 
 def render(items: list[dict]) -> str:
     groups = []
-    names = {'essay': 'Essay', 'guide': 'Guide', 'collection': 'Collection / reference', 'profile': 'Player profile', 'episode': 'Video companion'}
+    names = {'identity': 'About / biography', 'essay': 'Essay', 'guide': 'Guide', 'collection': 'Collection / reference', 'profile': 'Player profile', 'episode': 'Video companion'}
     for key, label in INTERESTS.items():
         group = [item for item in items if item['home'] == key]
         cards = []
