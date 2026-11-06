@@ -74,20 +74,21 @@ class CurrentPokerVideosTests(unittest.TestCase):
         self.assertEqual(build.build_outputs()[Path("poker/index.html")], self.hub)
         self.assertEqual(build_player_profile.render(), self.player)
         self.assertIn(self.player_source, self.player)
-        self.assertEqual(player_sitemap.record(ROOT), (player_sitemap.URL, "2026-11-05"))
+        self.assertEqual(player_sitemap.record(ROOT), (player_sitemap.URL, player_sitemap.MODIFIED))
         self.assertEqual(check_live.targets()["/poker/"], (200, self.hub.encode()))
         self.assertEqual(check_live.targets()["/poker/nolan-kido/"], (200, self.player.encode()))
         pages = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
-        self.assertEqual(next(x["updated"] for x in pages if x["path"] == "/poker/"), "2026-11-05")
-        self.assertEqual(self.player.count('"dateModified": "2026-11-05"'), 1)
+        hub_modified = next(x["updated"] for x in pages if x["path"] == "/poker/")
+        self.assertEqual(self.hub.count('"dateModified": "' + hub_modified + '"'), 1)
+        self.assertEqual(self.player.count('"dateModified": "' + player_sitemap.MODIFIED + '"'), 1)
         tree = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         records = {}
         for entry in tree:
             url = next((x.text for x in entry if x.tag.endswith('}loc')), None)
             date = next((x.text for x in entry if x.tag.endswith('}lastmod')), None)
             records[url] = date
-        self.assertEqual(records['https://nolankido.com/poker/'], '2026-11-05')
-        self.assertEqual(records[player_sitemap.URL], '2026-11-05')
+        self.assertEqual(records['https://nolankido.com/poker/'], hub_modified)
+        self.assertEqual(records[player_sitemap.URL], player_sitemap.MODIFIED)
 
     def test_broken_duplicate_or_wrong_destination_fails_closed(self):
         for value, selector in ((self.hub_source, HUB), (self.player_source, PROFILE)):

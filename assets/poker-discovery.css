@@ -27,6 +27,11 @@
 .poker-foundations-syllabus p { margin:4px 0 0; font:.95rem/1.6 var(--serif); }
 .poker-foundations-card a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
 #free-course { scroll-margin-top:140px; }
+/* Keep the player and video entry points readable with enlarged text. */
+:is(.page-poker,.page-poker-player) main :is(h1,h2,h3,p,li,a,dt,dd) { overflow-wrap:anywhere; }
+:is(.page-poker,.page-poker-player) .nav-links a { white-space:normal; overflow-wrap:anywhere; }
+:is(.page-poker,.page-poker-player) .brand-mark { min-width:1.8em; min-height:1.8em; }
+.page-poker #poker-stories-title { scroll-margin-top:5rem; }
 @media(max-width:700px) { .poker-goal-grid,.poker-long-read-grid { grid-template-columns:minmax(0,1fr); gap:18px; } }
 @media(max-width:700px) { .poker-foundations-syllabus,.poker-course-facts { grid-template-columns:minmax(0,1fr); } .poker-course-facts { gap:14px; } }
 @media print { .poker-hub-jumps { display:none; } .poker-goal-grid,.poker-long-read-grid { display:block; } .poker-goal,.poker-long-read { break-inside:avoid; margin-bottom:24px; } }
