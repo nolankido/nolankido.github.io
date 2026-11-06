@@ -95,6 +95,7 @@
 .page-creative .creative-example-fields dt { font: 600 .94rem/1.5 var(--sans); }
 .page-creative .creative-example-fields dd { margin: .4rem 0 0; font: .94rem/1.65 var(--sans); }
 .page-creative .creative-example :is(h4, summary, dt, dd) { overflow-wrap: anywhere; }
+.page-creative #creative-brief-title { scroll-margin-top: 5rem; }
 @media (max-width: 760px) {
   .page-creative .creative-example-fields { grid-template-columns: minmax(0, 1fr); }
 }
