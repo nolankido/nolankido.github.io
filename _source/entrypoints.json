@@ -86,11 +86,11 @@
     {
       "id": "creative",
       "title": "Writing, art, and making things",
-      "description": "Find something worth reading or looking at, then choose a tool suited to the small thing you want to make.",
+      "description": "Read a creative brief and completed fictional writing example on this site, then explore outside materials and tools if useful.",
       "links": [
         {
-          "path": "/living-well/free-resources/books-creativity/",
-          "kind": "Outside books, art, and reading"
+          "path": "/creative/",
+          "kind": "Creative brief and worked example on this site"
         },
         {
           "path": "/living-well/free-resources/creative-tools/",

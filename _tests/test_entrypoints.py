@@ -65,6 +65,23 @@ class EntryPointTests(unittest.TestCase):
         self.assertIn('id="thinking-worksheets"', page)
         self.assertIn('other people', page)
 
+    def test_creative_resources_start_with_nolans_work_and_preserve_outside_reading(self):
+        page = self.outputs[Path('resources/index.html')]
+        creative = next(group for group in self.config['resources'] if group['id'] == 'creative')
+        self.assertEqual([link['path'] for link in creative['links']],
+                         ['/creative/', '/living-well/free-resources/creative-tools/'])
+        card = page.split('id="resources-creative"', 1)[1].split('</article>', 1)[0]
+        self.assertLess(card.index('href="/creative/"'),
+                        card.index('href="/living-well/free-resources/creative-tools/"'))
+        self.assertIn('Creative brief and worked example on this site', card)
+        self.assertIn('href="/creative/#creative-brief-title"', page)
+        self.assertIn('href="/living-well/free-resources/books-creativity/"', page)
+        self.assertLess(page.index('id="creative-work-resource-note"'),
+                        page.index('id="ai-task-choice-resource"'))
+        self.assertIn('id="creative-brief-title"', self.outputs[Path('creative/index.html')])
+        self.assertIn('Nolan Kido', self.by_path['/resources/']['description'])
+        self.assertIn('creative brief', self.by_path['/resources/']['description'])
+
     def test_home_and_subject_pages_link_to_the_actual_resource_sections(self):
         self.assertIn('href="/resources/">find a useful resource', self.outputs[Path('index.html')])
         for path, anchor in [('technology/index.html', 'technology'), ('creative/index.html', 'creative')]:
