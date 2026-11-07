@@ -9,8 +9,9 @@
 .entry-link-kind { display: block; font: .78rem/1.5 var(--sans); color: var(--ink-soft); margin-bottom: 4px; }
 .entry-jumps { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 20px 0 0; }
 .entry-jumps a { min-height: 28px; display: inline-flex; align-items: center; }
-/* Long labels and headings must wrap with enlarged text on the resource hub. */
-.page-resources .section-content { overflow-wrap: anywhere; }
+/* Long labels and headings must wrap on these reader entry pages. */
+.page-resources .section-content, .page-start-here .section-content { overflow-wrap: anywhere; }
+.page-start-here :is(#start-tasks-title,#start-projects-title,#evidence-types,#start-routes-title,#start-reading-title,#reading-this-site) { scroll-margin-top: 7rem; }
 .reader-next { border-top: 1px solid var(--line-dark); padding-top: 28px; margin-top: 36px; }
 .reader-next h2 { font-size: 1.45rem; line-height: 1.3; margin: 0 0 12px; }
 .reader-next .reader-next-intro { font: .95rem/1.6 var(--sans); color: var(--ink-soft); margin-bottom: 22px; }
@@ -23,6 +24,12 @@
 @media (max-width: 760px) {
   .entry-grid, .reader-next-links { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .entry-card h3 { font-size: 1.3rem; }
+}
+@media (max-width: 620px) {
+  .page-start-here .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .4rem .8rem; }
+  .page-start-here .nav-links li { flex: 0 0 auto; }
+  .page-start-here .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+  .page-start-here .brand-mark { min-width: 1.8em; min-height: 1.8em; }
 }
 @media print {
   .entry-grid, .reader-next-links { display: block; }
