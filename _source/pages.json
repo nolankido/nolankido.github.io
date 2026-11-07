@@ -1138,11 +1138,13 @@
     "path": "/technology/should-i-use-ai/",
     "title": "Should I use AI for this task?",
     "seo_title": "Should I Use AI? Task Decision Guide & Checklist | Nolan Kido",
-    "description": "Decide whether to use AI, choose a simpler method, or pause. Six questions, clear decision rules, four worked examples, and a free private-use worksheet.",
+    "description": "Use six questions to decide whether AI fits a task. Read worked examples, copy or save your completed check, and keep the final decision with a person.",
     "kicker": "Technology / A decision guide",
     "source": "technology/should-i-use-ai.html",
     "date": "2026-10-12",
-    "worked_guide": true
+    "worked_guide": true,
+    "updated": "2026-11-06",
+    "revision": "Added copy and text-download options for completed checks, including the selected answers, reasoning and next-step links."
   },
   {
     "id": "ai-answer-review",

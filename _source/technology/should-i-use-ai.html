@@ -6,7 +6,7 @@
 </div></section>
 <section class="section folio-row" aria-labelledby="choice-workspace"><div class="section-meta"><p class="section-label">Six questions / No personal text</p></div><div class="section-content">
 <h2 class="section-title" id="choice-workspace">Start with the task you have in mind.</h2>
-<p class="section-deck">Choose one answer in each group. You do not need to describe your task or upload a document. Answers stay in this page's memory and clear when you reset or leave.</p>
+<p class="section-deck">Choose one answer in each group. You do not need to describe your task or upload a document. Answers stay in this page's memory and clear when you reset or leave. Copying or saving a completed check creates a separate copy in your clipboard or files; clearing this page does not erase those copies.</p>
 <p id="choice-fallback">The optional interactive check needs JavaScript. The complete rules, worked examples and blank worksheet below work without it.</p>
 <form id="choice-form" hidden novalidate aria-label="Should I use AI for this task?">
 <div class="choice-questions">${ai_choice_questions}</div>
@@ -16,8 +16,16 @@
 </form>
 <section id="choice-result" class="choice-result" aria-labelledby="choice-result-title" hidden>
 <p class="section-label">Your answers / Suggested next step</p><h3 id="choice-result-title" tabindex="-1"></h3><p id="choice-next"></p>
-<h4>What to resolve</h4><ul id="choice-reasons"></ul><p id="choice-boundary"></p><p id="choice-route"></p>
-<p class="small-copy">This follows your selected answers only. It is not independent verification, a measured benefit, or permission from anyone affected.</p>
+<h4>What to resolve</h4><ul id="choice-reasons"></ul><p id="choice-boundary"></p>
+<p class="small-copy" id="choice-limits">This follows your selected answers only. It is not independent verification, a measured benefit, or permission from anyone affected.</p>
+<section id="choice-record-section" class="choice-record-section" aria-labelledby="choice-record-title">
+<h4 id="choice-record-title">Keep your answers and suggested next step.</h4>
+<p>Copy or save this completed check before continuing. It includes all six answers, the guide's reasoning and the next link. Review it before deciding what to do.</p>
+<div class="choice-actions"><button class="button" id="choice-copy" type="button">Copy completed check</button><button class="button" id="choice-download" type="button">Save completed check (.txt)</button><button id="choice-select" type="button">Select text manually</button></div>
+<details class="choice-record-copy" id="choice-record-details"><summary>Read or copy the complete check</summary><pre id="choice-record" tabindex="0"></pre></details>
+<p id="choice-copy-status" class="small-copy" role="status" aria-live="polite" aria-atomic="true"></p>
+</section>
+<p id="choice-route"></p>
 </section>
 </div></section>
 <section class="section folio-row" aria-labelledby="choice-method"><div class="section-meta"><p class="section-label">An inspectable method</p></div><div class="section-content prose">

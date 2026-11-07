@@ -53,7 +53,16 @@
   const result = document.getElementById('choice-result');
   const error = document.getElementById('choice-error');
   const title = document.getElementById('choice-result-title');
+  const record = document.getElementById('choice-record');
+  const recordDetails = document.getElementById('choice-record-details');
+  const copyStatus = document.getElementById('choice-copy-status');
+  const sourceURL = 'https://nolankido.com/technology/should-i-use-ai/';
+  let exportRevision = 0;
   function clearResult() {
+    exportRevision += 1;
+    if (record) record.replaceChildren();
+    if (recordDetails) recordDetails.open = false;
+    if (copyStatus) copyStatus.textContent = '';
     result.hidden = true;
     delete result.dataset.kind;
     ['choice-result-title', 'choice-next', 'choice-reasons', 'choice-boundary', 'choice-route'].forEach(id => {
@@ -92,10 +101,82 @@
     document.getElementById('choice-boundary').textContent = 'No external action is authorized by this result. Keep the final judgment and any send, publish, spend or delete decision with a person.';
     const link = document.createElement('a'); link.href = decision.route; link.textContent = decision.label;
     document.getElementById('choice-route').appendChild(link);
+    if (record) {
+      const selections = Object.keys(OPTIONS).map(key => {
+        const control = form.querySelector('input[name="' + key + '"]:checked');
+        const question = control.closest('fieldset').querySelector('legend').textContent.trim();
+        const answer = control.closest('label').querySelector('span').textContent.trim();
+        return question + '\nAnswer: ' + answer;
+      });
+      record.textContent = ['AI TASK CHECK', 'Selected answers and suggested next step', 'Guide by Nolan Kido', sourceURL,
+        '', 'YOUR SIX ANSWERS', selections.join('\n\n'), '', 'SUGGESTED NEXT STEP', decision.title, decision.next,
+        '', 'WHAT TO RESOLVE', ...decision.reasons.map(reason => '- ' + reason),
+        '', 'CONTINUE', decision.label, new URL(decision.route, sourceURL).href,
+        '', 'LIMITS', document.getElementById('choice-boundary').textContent,
+        document.getElementById('choice-limits').textContent,
+        'This records your selected answers and an editorial suggestion, not a separately recorded final decision. No AI ran, and this guide did not inspect your task or verify your answers.'].join('\n');
+    }
     result.dataset.kind = decision.kind;
     result.hidden = false;
     title.focus();
   });
+  if (record && recordDetails && copyStatus) {
+    function current(request, text) {
+      return request === exportRevision && !result.hidden && Boolean(text) && record.textContent === text;
+    }
+    function selectRecord() {
+      recordDetails.open = true;
+      record.focus({preventScroll: true});
+      record.scrollIntoView({block: 'center', behavior: 'instant'});
+      try {
+        const selection = window.getSelection();
+        if (!selection) return false;
+        const range = document.createRange();
+        range.selectNodeContents(record);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        return selection.toString() === record.textContent;
+      } catch (_) { return false; }
+    }
+    function manualCopy(request, text, message) {
+      if (!current(request, text)) return;
+      copyStatus.textContent = selectRecord() ? message + ' Copy the selected text with your device\'s Copy command.' :
+        message + ' Select and copy the complete check in the open preview.';
+    }
+    document.getElementById('choice-copy').addEventListener('click', async () => {
+      const text = record.textContent;
+      if (result.hidden || !text) return;
+      const request = ++exportRevision;
+      copyStatus.textContent = '';
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Unavailable');
+        await navigator.clipboard.writeText(text);
+        if (current(request, text)) copyStatus.textContent = 'Completed check copied. Review it before sharing.';
+      } catch (_) { manualCopy(request, text, 'Automatic copy is unavailable.'); }
+    });
+    document.getElementById('choice-select').addEventListener('click', () => {
+      const text = record.textContent;
+      if (result.hidden || !text) return;
+      manualCopy(++exportRevision, text, 'Complete check ready to copy.');
+    });
+    document.getElementById('choice-download').addEventListener('click', () => {
+      const text = record.textContent;
+      if (result.hidden || !text) return;
+      const request = ++exportRevision;
+      copyStatus.textContent = '';
+      let url, link;
+      try {
+        url = URL.createObjectURL(new Blob([text], {type: 'text/plain;charset=utf-8'}));
+        link = document.createElement('a'); link.href = url; link.download = 'ai-task-check.txt';
+        link.hidden = true; document.body.appendChild(link); link.click();
+        if (current(request, text)) copyStatus.textContent = 'Text download requested. Check that your browser saved ai-task-check.txt.';
+      } catch (_) { manualCopy(request, text, 'Download is unavailable.'); }
+      finally {
+        if (link) link.remove();
+        if (url) window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+    });
+  }
   form.addEventListener('change', () => {
     const wasVisible = !result.hidden;
     clearResult();

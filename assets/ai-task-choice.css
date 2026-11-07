@@ -8,7 +8,7 @@
 .page-ai-task-choice [aria-invalid=true]{outline:2px solid currentColor;outline-offset:4px}
 .page-ai-task-choice .choice-actions,.page-ai-task-choice .choice-jumps{display:flex;flex-wrap:wrap;gap:.6rem 1rem;margin:1.2rem 0}
 .page-ai-task-choice .choice-actions button,.page-ai-task-choice .choice-jumps a{min-height:44px}
-.page-ai-task-choice .choice-actions button{font:inherit;cursor:pointer}
+.page-ai-task-choice .choice-actions button{font:inherit;cursor:pointer;white-space:normal;max-width:100%;overflow-wrap:anywhere}
 .page-ai-task-choice .choice-result{border:2px solid var(--basalt);padding:1.3rem;margin-top:1.5rem;scroll-margin-top:2rem}
 .page-ai-task-choice .choice-result h3{font-size:clamp(1.4rem,3vw,1.9rem)}
 .page-ai-task-choice .choice-result h4{font-size:1rem;margin-top:1rem}
@@ -16,6 +16,14 @@
 .page-ai-task-choice .choice-example{border-top:1px solid var(--line);padding-top:1.1rem;margin-top:1.3rem}
 .page-ai-task-choice pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem;line-height:1.65}
 .page-ai-task-choice .choice-sheet summary{cursor:pointer;min-height:44px;padding:.8rem 0;font-weight:600}
+.page-ai-task-choice .choice-record-section{border-top:1px solid var(--line);margin-top:1.4rem;padding-top:.5rem}
+.page-ai-task-choice .choice-record-copy summary{cursor:pointer;min-height:44px;padding:.8rem 0;font-weight:600}
+.page-ai-task-choice #choice-record{max-height:24rem;overflow:auto;padding:1rem;border:1px solid var(--line);background:var(--panel);font-family:var(--mono);scroll-margin-top:5rem}
+.page-ai-task-choice #choice-record:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.page-ai-task-choice main{overflow-wrap:anywhere}
+.page-ai-task-choice fieldset label span{min-width:0}
+.page-ai-task-choice .nav-links a{white-space:normal;overflow-wrap:anywhere}
+.page-ai-task-choice .brand-mark{min-width:1.8em;min-height:1.8em}
 #choice-form[hidden],#choice-result[hidden],#choice-fallback[hidden]{display:none!important}
 .page-ai-task-choice #choice-error{font-weight:600}
 @media(max-width:720px){.page-ai-task-choice .choice-questions{grid-template-columns:1fr}}
@@ -24,7 +32,8 @@
 /* Print the entire private-use worksheet even when its disclosure is closed. */
 @media print {
   .page-ai-task-choice a[download] { display:none!important; }
-  .page-ai-task-choice .choice-sheet::details-content {
+  .page-ai-task-choice .choice-sheet::details-content,
+  .page-ai-task-choice .choice-record-copy::details-content {
     content-visibility:visible!important; display:block!important;
   }
   .page-ai-task-choice .choice-sheet { break-inside:auto; background:white; color:black; }
@@ -35,4 +44,12 @@
     display:block!important; white-space:pre-wrap; overflow-wrap:anywhere;
     break-inside:auto; background:white; color:black;
   }
+  .page-ai-task-choice .choice-record-copy{break-inside:auto;background:white;color:black}
+  .page-ai-task-choice .choice-record-copy > summary{list-style:none}
+  .page-ai-task-choice .choice-record-copy > summary::marker{content:""}
+  .page-ai-task-choice .choice-record-copy > summary::-webkit-details-marker{display:none}
+  .page-ai-task-choice #choice-record{display:block!important;max-height:none;overflow:visible;break-inside:auto;background:white;color:black}
+  .page-ai-task-choice .choice-result{break-inside:auto}
+  .page-ai-task-choice .choice-record-section .choice-actions,
+  .page-ai-task-choice #choice-copy-status{display:none!important}
 }
