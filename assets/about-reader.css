@@ -30,6 +30,13 @@
 @media (max-width: 480px) {
   .page-about .about-jump-nav ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+@media (max-width: 620px) {
+  .page-about .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .4rem .8rem; }
+  .page-about .nav-links li { flex: 0 0 auto; grid-column: auto; justify-self: auto; }
+  .page-about .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+  .page-about .brand-mark { min-width: 1.8em; min-height: 1.8em; }
+  .page-about h2[id] { scroll-margin-top: 7rem; }
+}
 @media print {
   .page-about .about-jump-nav { display: none; }
 }
