@@ -401,6 +401,9 @@ def build_outputs() -> dict[Path, str]:
             body += poker_experience.related_work(catalog, p['path'])
         header, living_extra = living_well.decorate(p, ROOT, header, schema)
         extra += living_extra
+        if p['id'] == 'living-well':
+            living_reader_version = hashlib.sha256((ROOT / 'assets/living-well-reader.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/living-well-reader.css?v={living_reader_version}">'
         if (p.get('evidence_article') or p.get('worked_guide')):
             date_value(p['date'])
             schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date']})

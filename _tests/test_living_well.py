@@ -103,5 +103,17 @@ class LivingWellTests(unittest.TestCase):
         for path in ['technology/index.html', 'notes/index.html', 'resources/index.html']:
             self.assertIn('href="/living-well/', self.outputs[Path(path)])
 
+    def test_hub_reader_styles_are_scoped_and_checked_live(self):
+        asset = ROOT / 'assets/living-well-reader.css'
+        version = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+        reference = '/assets/living-well-reader.css?v=' + version
+        for path, content in self.outputs.items():
+            if path.suffix == '.html':
+                expected = 1 if path == Path('living-well/index.html') else 0
+                self.assertEqual(content.count('/assets/living-well-reader.css?v='), expected, path)
+                if expected:
+                    self.assertIn(reference, content)
+        self.assertEqual(check_live.targets()['/assets/living-well-reader.css'], (200, asset.read_bytes()))
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)

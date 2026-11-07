@@ -1,0 +1,14 @@
+/* Living Well hub only: preserve reading and navigation with enlarged text. */
+.page-living-well .section-content,
+.page-living-well .section-meta { overflow-wrap: anywhere; }
+
+@media (max-width: 620px) {
+  .page-living-well .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .4rem .8rem; }
+  .page-living-well .nav-links li { flex: 0 0 auto; grid-column: auto; justify-self: auto; }
+  .page-living-well .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+  .page-living-well .brand-mark { min-width: 1.8em; min-height: 1.8em; }
+
+  /* Add to the shared scroll padding for the taller wrapped sticky header. */
+  .page-living-well #main,
+  .page-living-well .lw-section [id] { scroll-margin-top: 4.5rem; }
+}
