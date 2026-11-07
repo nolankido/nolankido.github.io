@@ -1,6 +1,8 @@
 /* A local utility, scoped to the task-brief page. */
 .page-task-brief .entry-jumps { display:flex; flex-wrap:wrap; gap:12px 24px; margin:24px 0 0; }
 .page-task-brief .entry-jumps a { display:inline-flex; align-items:center; min-height:44px; }
+/* Long section headings and example labels must wrap at large reader font sizes. */
+.page-task-brief .section-content { overflow-wrap: anywhere; }
 #brief-workspace { scroll-margin-top: 24px; }
 #brief-next-check-title { scroll-margin-top: 100px; }
 /* Keep native brief bookmarks stable when page scripts are disabled. */
@@ -48,6 +50,16 @@
 .brief-template pre { white-space: pre-wrap; overflow-wrap: anywhere; font: .9rem/1.6 var(--sans); }
 .page-task-brief [hidden] { display: none !important; }
 @media (max-width: 760px) { .brief-fields, .brief-preview { grid-template-columns: minmax(0,1fr); gap: 20px; } .brief-preview-part:last-child { grid-column: auto; } }
+@media (max-width: 620px) {
+  /* The shared three-column mobile grid can collide at 200% reader text. */
+  .page-task-brief .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .4rem .8rem; }
+  .page-task-brief .nav-links li { flex: 0 0 auto; grid-column: auto; justify-self: auto; }
+  .page-task-brief .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+  .page-task-brief .brand-mark { min-width: 1.8em; min-height: 1.8em; }
+  /* A wrapped sticky header grows with text. Keep native section bookmarks below it. */
+  #brief-workspace, #brief-examples, #brief-blank, #brief-example-meeting,
+  #brief-next-check, #brief-next-check-title, #how-it-works { scroll-margin-top: 4.5rem; }
+}
 @media print {
   html:has(.page-task-brief) { background: white; }
   #brief-workspace, .entry-jumps, .brief-example-use { display: none !important; }
