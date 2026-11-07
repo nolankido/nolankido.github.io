@@ -324,6 +324,9 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] in {'start-here', 'resources'} or p.get('note'):
             entry_version = hashlib.sha256((ROOT / 'assets/entrypoints.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/entrypoints.css?v={entry_version}">'
+        if p['id'] == 'resources':
+            resources_version = hashlib.sha256((ROOT / 'assets/resources-reader.css').read_bytes()).hexdigest()[:12]
+            extra += f'\n  <link rel="stylesheet" href="/assets/resources-reader.css?v={resources_version}">'
         if p.get('note') or p['id'] == 'follow':
             reading_version = hashlib.sha256((ROOT / 'assets/reading.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/reading.css?v={reading_version}">'

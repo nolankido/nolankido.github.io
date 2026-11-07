@@ -1,0 +1,16 @@
+/* Resources entry page: reader text enlargement must preserve its navigation. */
+.page-resources .section-meta { overflow-wrap: anywhere; }
+
+@media (max-width: 620px) {
+  /* The shared three-column mobile grid clips long labels at 200% text. */
+  .page-resources .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .4rem .8rem; }
+  .page-resources .nav-links li { flex: 0 0 auto; grid-column: auto; justify-self: auto; }
+  .page-resources .nav-links a { white-space: normal; overflow-wrap: anywhere; }
+  .page-resources .brand-mark { min-width: 1.8em; min-height: 1.8em; }
+
+  /* Add to the shared scroll padding so the taller sticky header does not obscure anchors. */
+  .page-resources :is(#resources-technology, #resources-living-well,
+    #resources-poker, #resources-creative, #thinking-worksheets, .worksheet[id]) {
+    scroll-margin-top: 4.5rem;
+  }
+}
