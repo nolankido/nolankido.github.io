@@ -1,6 +1,5 @@
 """Static navigation checks detect real errors without flagging Finder state."""
 from pathlib import Path
-import subprocess
 import sys
 import unittest
 from unittest.mock import patch
@@ -9,8 +8,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import check_live
 import check_internal_links as links
+from reviewed_release import read as reviewed_bytes
 import turn37_link_integrity_history as history
-import turn38_home_proof_history as successor
+
+RELEASE = "fc84ca194f6bf88460cac93d8ea7358b3313e274"
 
 
 class InternalLinkTests(unittest.TestCase):
@@ -83,11 +84,9 @@ class InternalLinkHistoryTests(unittest.TestCase):
     def test_exact_predecessors_are_rewindable_for_historical_tests(self):
         for name, (old, new) in history.records()['files'].items():
             with self.subTest(path=name):
-                current = (ROOT / name).read_bytes()
-                prior = subprocess.check_output(['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
-                self.assertEqual(history.blob(successor.before(name, current)), new)
-                self.assertEqual(history.blob(prior), old)
-                self.assertEqual(history.before(name, current), prior)
+                release = reviewed_bytes(RELEASE, name, new)
+                prior = reviewed_bytes(history.PARENT, name, old)
+                self.assertEqual(history.before(name, release), prior)
 
     def test_unknown_changes_are_not_hidden(self):
         for name in history.records()['files']:
@@ -97,16 +96,14 @@ class InternalLinkHistoryTests(unittest.TestCase):
 
     def test_only_exact_new_files_are_identified(self):
         for name, expected in history.records()['added'].items():
-            current = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(successor.before(name, current)), expected)
-            self.assertTrue(history.is_added_file(name, current))
-            self.assertFalse(history.is_added_file(name, current + b'OTHER'))
+            release = reviewed_bytes(RELEASE, name, expected)
+            self.assertTrue(history.is_added_file(name, release))
+            self.assertFalse(history.is_added_file(name, release + b'OTHER'))
         self.assertFalse(history.is_added_file('missing.py', b''))
 
     def test_only_exact_download_is_omitted_from_prior_public_inventory(self):
         route = history.TARGET_ROUTE
-        expected = (ROOT / route.lstrip('/')).read_bytes()
-        self.assertEqual(history.blob(expected), history.records()['verified_download'])
+        expected = reviewed_bytes(RELEASE, route.lstrip('/'), history.records()['verified_download'])
         self.assertEqual(history.live_targets({route: (200, expected)}), {})
         altered = {route: (200, expected + b'OTHER')}
         self.assertEqual(history.live_targets(altered), altered)

@@ -2,7 +2,6 @@
 
 import json
 from pathlib import Path
-import subprocess
 import sys
 import unittest
 from xml.etree import ElementTree as ET
@@ -12,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import check_live
+from reviewed_release import read as reviewed_bytes
 import turn42_site_visibility_history as history
 
 CASE_START = 'id="site-visibility-evidence"'
@@ -19,6 +19,7 @@ CASE_END = '</section>'
 CASE_LINK = '/technology/ai-website-visibility/'
 PR_NUMBERS = (170, 171, 172, 194, 195, 196, 197)
 CHECKS = ("230 generated files", "26 of 26", "13,899 internal links", "206 HTML pages", "201 URLs")
+RELEASE = "8a555c12ae7d38f77721b0344650bcefe6255736"
 
 
 def case_section(text: str) -> str:
@@ -114,13 +115,23 @@ class WebsiteVisibilityCaseTests(unittest.TestCase):
         for path, (prior_hash, current_hash) in history.records()["files"].items():
             with self.subTest(path=path):
                 now = (ROOT / path).read_bytes()
-                prior = subprocess.check_output(["git", "show", history.PARENT + ":" + path], cwd=ROOT)
-                self.assertEqual(history.blob(now), current_hash)
-                self.assertEqual(history.blob(prior), prior_hash)
-                self.assertEqual(history.before(path, now), prior)
-                self.assertEqual(history.before(Path(path), now.decode("utf-8")), prior.decode("utf-8"))
+                release = reviewed_bytes(RELEASE, path, current_hash)
+                prior = reviewed_bytes(history.PARENT, path, prior_hash)
+                self.assertEqual(history.before(path, release), prior)
+                self.assertEqual(history.before(Path(path), release.decode("utf-8")), prior.decode("utf-8"))
+                self.assertEqual(history.before(path, release + b"UNREVIEWED"), release + b"UNREVIEWED")
                 self.assertEqual(history.before(path, now + b"UNREVIEWED"), now + b"UNREVIEWED")
                 self.assertEqual(history.before("not-this-release/" + path, now), now)
+
+    def test_pinned_release_loader_rejects_wrong_bytes_and_mutable_refs(self):
+        path, (_, expected) = next(iter(history.records()["files"].items()))
+        self.assertEqual(history.blob(reviewed_bytes(RELEASE, path, expected)), expected)
+        with self.assertRaises(AssertionError):
+            reviewed_bytes(RELEASE, path, "0" * 40)
+        with self.assertRaises(ValueError):
+            reviewed_bytes("main", path, expected)
+        with self.assertRaises(ValueError):
+            reviewed_bytes(RELEASE, "../" + path, expected)
 
 
 if __name__ == "__main__":

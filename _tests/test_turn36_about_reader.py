@@ -11,8 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import check_live
+from reviewed_release import read as reviewed_bytes
 import turn36_about_reader_history as history
-import turn37_link_integrity_history as successor
+
+RELEASE = "8171c33bdaf354654bd1c1e0920e14d44b38974c"
 
 NAV_PATTERN = re.compile(r'<nav class="about-jump-nav" aria-label="([^"]+)">(.*?)</nav>', re.S)
 SCHEMA_PATTERN = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
@@ -84,13 +86,9 @@ class AboutReaderHistoryTests(unittest.TestCase):
     def test_exact_predecessors_for_each_rewound_file(self):
         for name, (old, new) in history.records()["files"].items():
             with self.subTest(path=name):
-                value = (ROOT / name).read_bytes()
-                self.assertEqual(history.blob(successor.before(name, value)), new)
-                predecessor = subprocess.check_output([
-                    "git", "show", history.PARENT + ":" + name
-                ], cwd=ROOT)
-                self.assertEqual(history.blob(predecessor), old)
-                self.assertEqual(history.before(name, value), predecessor)
+                release = reviewed_bytes(RELEASE, name, new)
+                predecessor = reviewed_bytes(history.PARENT, name, old)
+                self.assertEqual(history.before(name, release), predecessor)
 
     def test_unknown_edits_cannot_be_hidden_from_history(self):
         for name in history.records()["files"]:
@@ -100,11 +98,11 @@ class AboutReaderHistoryTests(unittest.TestCase):
 
     def test_added_css_is_exactly_accounted_for(self):
         for name, value in history.records()["added"].items():
-            body = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(successor.before(name, body)), value)
+            body = reviewed_bytes(RELEASE, name, value)
             self.assertTrue(history.is_added_file(name, body))
             self.assertFalse(history.is_added_file(name, body + b"OTHER"))
-        css = (ROOT / "assets/about-reader.css").read_bytes()
+        css = reviewed_bytes(RELEASE, "assets/about-reader.css",
+                             history.records()["added"]["assets/about-reader.css"])
         self.assertEqual(history.live_targets({"/assets/about-reader.css": (200, css)}), {})
         altered = {"/assets/about-reader.css": (200, css + b"OTHER")}
         self.assertEqual(history.live_targets(altered), altered)

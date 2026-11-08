@@ -1,7 +1,6 @@
 """Mobile-first entry to the existing, bounded homepage evidence path."""
 from pathlib import Path
 import re
-import subprocess
 import sys
 import unittest
 
@@ -9,10 +8,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_live
+from reviewed_release import read as reviewed_bytes
 import turn39_home_shortcut_history as history
-import turn40_poker_video_history as successor
 
 PARENT = history.PARENT
+RELEASE = "7090b4fb62954772a470f6305663eca1ea225cbd"
 NAV = re.compile(r'<nav class="link-row identity-actions"[^>]*>.*?</nav>', re.S)
 SHORTCUT = '<a class="text-link" href="#home-proof-title">Check the evidence <span aria-hidden="true">→</span></a>'
 NAV_LINKS = [
@@ -62,9 +62,11 @@ class HomepageEvidenceShortcutTests(unittest.TestCase):
         self.assertEqual(NAV.search(self.source).group(), NAV.search(self.page).group())
 
     def test_one_exact_insertion_preserves_all_existing_homepage_content(self):
-        for name, current in (('_source/home.html', self.source), ('index.html', self.page)):
+        for name in ('_source/home.html', 'index.html'):
             with self.subTest(file=name):
-                previous = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
+                old_hash, new_hash = history.records()['files'][name]
+                current = reviewed_bytes(RELEASE, name, new_hash).decode('utf-8')
+                previous = reviewed_bytes(PARENT, name, old_hash)
                 self.assertEqual(current.count(SHORTCUT), 1)
                 self.assertEqual(current.replace(SHORTCUT, '', 1).encode('utf-8'), previous)
 
@@ -98,12 +100,10 @@ class HomepageEvidenceShortcutHistoryTests(unittest.TestCase):
     def test_only_exact_reviewed_revisions_rewind(self):
         for name, (old_hash, new_hash) in history.records()['files'].items():
             with self.subTest(path=name):
-                now = (ROOT / name).read_bytes()
-                previous = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
-                self.assertEqual(history.blob(successor.before(name, now)), new_hash)
-                self.assertEqual(history.blob(previous), old_hash)
-                self.assertEqual(history.before(name, now), previous)
-                self.assertEqual(history.before(ROOT / name, now.decode()), previous.decode())
+                release = reviewed_bytes(RELEASE, name, new_hash)
+                previous = reviewed_bytes(PARENT, name, old_hash)
+                self.assertEqual(history.before(name, release), previous)
+                self.assertEqual(history.before(ROOT / name, release.decode()), previous.decode())
 
     def test_unrecognized_modifications_are_never_hidden(self):
         for name in history.records()['files']:
