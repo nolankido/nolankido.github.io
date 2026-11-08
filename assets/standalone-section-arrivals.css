@@ -1,0 +1,17 @@
+/* Native section and skip-link arrivals on the two independently owned pages. */
+.page-poker-player #main,
+.page-poker-player .article-body h2[id],
+.page-poker-player #creator-introduction,
+.page-review-reply-evidence-audit #main,
+.page-review-reply-evidence-audit .reply-independent-case h2[id] {
+  scroll-margin-top: 2rem;
+}
+@media (max-width: 1050px) {
+  .page-poker-player #main,
+  .page-poker-player .article-body h2[id],
+  .page-poker-player #creator-introduction,
+  .page-review-reply-evidence-audit #main,
+  .page-review-reply-evidence-audit .reply-independent-case h2[id] {
+    scroll-margin-top: 5rem;
+  }
+}
