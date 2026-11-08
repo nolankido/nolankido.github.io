@@ -32,7 +32,7 @@ def check(label: str, args: list[str]) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--full', action='store_true', help='Also run the full historical unit suite (can take time)')
+    parser.add_argument('--full', action='store_true', help='Also run historical units in per-module bounded processes (can take time)')
     parser.add_argument('--browser', action='store_true', help='Also run local browser scripts; requires Playwright and browsers')
     args = parser.parse_args()
     try:
@@ -78,7 +78,8 @@ def main() -> int:
     ]
     if args.full:
         tasks.extend([
-            ('Full unit suite', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_*.py', '-q']),
+            ('Full historical unit suite (bounded)', [
+                '_scripts/check_historical_batches.py', '--all', '--timeout-seconds', '90']),
         ])
     else:
         tasks.append(('Poker evidence regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_poker_player*.py', '-q']))
