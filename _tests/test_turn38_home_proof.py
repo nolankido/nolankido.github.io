@@ -1,7 +1,6 @@
 """The first homepage evidence path remains scoped, sourced and understandable."""
 from pathlib import Path
 import re
-import subprocess
 import sys
 import unittest
 
@@ -9,10 +8,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import check_live
+from reviewed_release import read as reviewed_bytes
 import turn38_home_proof_history as history
-import turn39_home_shortcut_history as successor
 
-PARENT = "ca1686a83d1ff5b426ed44d49e3a7af46ce85149"
+PARENT = history.PARENT
+RELEASE = "778c36ce5fe2d5b56397384e2fcf5dc1c0739fd8"
 PROOF = re.compile(
     r'<section class="section folio-row identity-selection home-proof" '
     r'aria-labelledby="home-proof-title">.*?</section>', re.S)
@@ -71,12 +71,16 @@ class HomepageEvidenceTests(unittest.TestCase):
         self.assertNotIn('MIT Research Affiliate', PROOF.search(self.page).group())
 
     def test_change_is_only_one_publicly_reviewable_section(self):
-        for name, current in (('_source/home.html', self.source), ('index.html', self.page)):
-            current = successor.before(name, current)
-            before = subprocess.check_output(['git', 'show', PARENT + ':' + name], cwd=ROOT)
-            block = PROOF.search(current).group() + '\n'
-            self.assertEqual(current.count(block), 1)
-            self.assertEqual(current.replace(block, '', 1).encode('utf-8'), before)
+        # This is an original-release diff assertion. Later homepage edits are
+        # independently tested above, not removed by historical rewinding.
+        for name in ('_source/home.html', 'index.html'):
+            with self.subTest(file=name):
+                old_hash, new_hash = history.records()['files'][name]
+                current = reviewed_bytes(RELEASE, name, new_hash).decode('utf-8')
+                before = reviewed_bytes(PARENT, name, old_hash)
+                block = PROOF.search(current).group() + '\n'
+                self.assertEqual(current.count(block), 1)
+                self.assertEqual(current.replace(block, '', 1).encode('utf-8'), before)
 
     def test_local_build_live_inventory_and_canonical_are_unchanged(self):
         self.assertEqual(build.build_outputs()[Path('index.html')], self.page)
@@ -108,11 +112,9 @@ class HomepageEvidenceHistoryTests(unittest.TestCase):
     def test_exact_complete_reviewed_revisions_and_parents(self):
         for name, (old, new) in history.records()['files'].items():
             with self.subTest(file=name):
-                value = (ROOT / name).read_bytes()
-                before = subprocess.check_output(['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
-                self.assertEqual(history.blob(successor.before(name, value)), new)
-                self.assertEqual(history.blob(before), old)
-                self.assertEqual(history.before(name, value), before)
+                release = reviewed_bytes(RELEASE, name, new)
+                before = reviewed_bytes(history.PARENT, name, old)
+                self.assertEqual(history.before(name, release), before)
 
     def test_unknown_bytes_or_paths_never_rewind(self):
         for name in history.records()['files']:
@@ -122,10 +124,9 @@ class HomepageEvidenceHistoryTests(unittest.TestCase):
 
     def test_added_unit_tests_are_explicitly_pinned(self):
         for name, expected in history.records()['added'].items():
-            value = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(successor.before(name, value)), expected)
-            self.assertTrue(history.is_added_file(name, value))
-            self.assertFalse(history.is_added_file(name, value + b'OTHER'))
+            release = reviewed_bytes(RELEASE, name, expected)
+            self.assertTrue(history.is_added_file(name, release))
+            self.assertFalse(history.is_added_file(name, release + b'OTHER'))
 
 
 if __name__ == '__main__':

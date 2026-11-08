@@ -11,8 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import practical_discovery
+from reviewed_release import read as reviewed_bytes
 import turn35_cross_interest_history as history
-import turn36_about_reader_history as successor
+
+RELEASE = "da8de1e4022490c851a618778c564cedaf70f03c"
 
 ROUTE = "/technology/ai-poker-video-evidence/"
 SOURCE = ROOT / "_source/technology/ai-poker-video-evidence.html"
@@ -133,13 +135,10 @@ class CrossInterestHistoryTests(unittest.TestCase):
     def test_every_rewound_file_has_a_verified_git_predecessor(self):
         for name, (older, newer) in history.records()["files"].items():
             with self.subTest(path=name):
-                current = (ROOT / name).read_bytes()
-                self.assertEqual(history.blob(successor.before(name, current)), newer)
-                previous = subprocess.check_output(
-                    ["git", "show", history.PARENT + ":" + name], cwd=ROOT)
-                self.assertEqual(history.blob(previous), older)
-                self.assertEqual(history.before(name, current), previous)
-                self.assertEqual(history.before(Path(name), current.decode("utf-8")),
+                release = reviewed_bytes(RELEASE, name, newer)
+                previous = reviewed_bytes(history.PARENT, name, older)
+                self.assertEqual(history.before(name, release), previous)
+                self.assertEqual(history.before(Path(name), release.decode("utf-8")),
                                  previous.decode("utf-8"))
                 self.assertEqual(history.before(name, previous), previous)
 
@@ -152,11 +151,10 @@ class CrossInterestHistoryTests(unittest.TestCase):
 
     def test_added_files_and_page_require_exact_records(self):
         for name, digest in history.records()["added"].items():
-            current = (ROOT / name).read_bytes()
-            self.assertEqual(history.blob(successor.before(name, current)), digest)
-            self.assertTrue(history.is_added_file(name, current))
-            self.assertFalse(history.is_added_file(name, current + b"UNREVIEWED"))
-            self.assertFalse(history.is_added_file("other/" + name, current))
+            release = reviewed_bytes(RELEASE, name, digest)
+            self.assertTrue(history.is_added_file(name, release))
+            self.assertFalse(history.is_added_file(name, release + b"UNREVIEWED"))
+            self.assertFalse(history.is_added_file("other/" + name, release))
         page = next(p for p in build.public_pages() if p["id"] == "ai-poker-video-evidence")
         self.assertEqual(page, history.records()["page"])
         self.assertEqual(history.pages([page]), [])
@@ -164,7 +162,8 @@ class CrossInterestHistoryTests(unittest.TestCase):
         self.assertEqual(history.pages([changed]), [changed])
 
     def test_only_exact_new_live_response_is_removed_from_old_inventory(self):
-        body = OUTPUT.read_bytes()
+        name = OUTPUT.relative_to(ROOT).as_posix()
+        body = reviewed_bytes(RELEASE, name, history.records()["added"][name])
         self.assertEqual(history.live_targets({ROUTE: (200, body)}), {})
         for altered in ((404, body), (200, body + b"EXTRA"), (200, "text")):
             self.assertEqual(history.live_targets({ROUTE: altered}), {ROUTE: altered})

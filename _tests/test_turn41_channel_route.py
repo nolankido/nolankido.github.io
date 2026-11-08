@@ -1,7 +1,6 @@
 """Visitors can reach the genuine NolanPoker channel without losing evidence routes."""
 
 from pathlib import Path
-import subprocess
 import sys
 import unittest
 
@@ -12,6 +11,7 @@ sys.path.insert(0, str(ROOT / "_scripts"))
 import build
 import build_player_profile
 import check_live
+from reviewed_release import read as reviewed_bytes
 import turn41_channel_route_history as history
 
 
@@ -91,18 +91,15 @@ class NolanPokerChannelRouteTests(unittest.TestCase):
 
     def test_historical_bridge_restores_only_five_exact_predecessors(self):
         self.assertEqual(len(history.records()["files"]), 5)
-        turn41_release = "722ede637f2fbb1fe000f78a067f7f7573327905"
+        turn41_release = "d5b0a01a0511a1f5bd04332c9c34af681a3cb8e1"
         for path, (before_hash, after_hash) in history.records()["files"].items():
             with self.subTest(path=path):
                 current = (ROOT / path).read_bytes()
-                turn41 = subprocess.check_output(["git", "show", turn41_release + ":" + path], cwd=ROOT)
-                prior = subprocess.check_output(["git", "show", history.PARENT + ":" + path], cwd=ROOT)
-                self.assertEqual(history.blob(turn41), after_hash)
-                self.assertEqual(history.blob(prior), before_hash)
+                turn41 = reviewed_bytes(turn41_release, path, after_hash)
+                prior = reviewed_bytes(history.PARENT, path, before_hash)
                 self.assertEqual(history.before(path, turn41), prior)
                 self.assertEqual(history.before(Path(path), turn41.decode("utf-8")), prior.decode("utf-8"))
-                if current != turn41:
-                    self.assertEqual(history.before(path, current), prior)
+                self.assertEqual(history.before(path, turn41 + b"UNREVIEWED"), turn41 + b"UNREVIEWED")
                 self.assertEqual(history.before(path, current + b"UNREVIEWED"), current + b"UNREVIEWED")
                 self.assertEqual(history.before("unknown/" + path, current), current)
 

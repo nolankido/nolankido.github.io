@@ -2,7 +2,6 @@
 import json
 from pathlib import Path
 import re
-import subprocess
 import sys
 import unittest
 from xml.etree import ElementTree as ET
@@ -13,6 +12,7 @@ import build
 import build_player_profile
 import check_live
 import player_sitemap
+from reviewed_release import read as reviewed_bytes
 import turn40_poker_video_history as history
 
 VIDEOS = (
@@ -104,19 +104,16 @@ class CurrentPokerVideosTests(unittest.TestCase):
 
 class CurrentPokerVideoHistoryTests(unittest.TestCase):
     def test_all_reviewed_predecessors_can_be_restored_exactly(self):
-        # Turn 41 revises these four pages. Verify the exact historical Turn 40
-        # release, not the subsequently edited working copy, against its ledger.
+        # Verify the exact historical release. Future reviewed changes are
+        # covered by current contracts above, not by this predecessor check.
         turn40_release = "be2325c8c539302ed8a55edf63f7314ec696d48e"
         for path, (old_hash, new_hash) in history.records()["files"].items():
             with self.subTest(path=path):
-                current = (ROOT / path).read_bytes()
-                turn40 = subprocess.check_output(["git", "show", turn40_release + ":" + path], cwd=ROOT)
-                prior = subprocess.check_output(["git", "show", history.PARENT + ":" + path], cwd=ROOT)
-                self.assertEqual(history.blob(turn40), new_hash)
-                self.assertEqual(history.blob(prior), old_hash)
+                turn40 = reviewed_bytes(turn40_release, path, new_hash)
+                prior = reviewed_bytes(history.PARENT, path, old_hash)
                 self.assertEqual(history.before(path, turn40), prior)
-                if current != turn40:
-                    self.assertEqual(history.before(path, current), prior)
+                tampered = turn40 + b"UNREVIEWED"
+                self.assertEqual(history.before(path, tampered), tampered)
 
     def test_an_unknown_change_cannot_be_hidden_by_history(self):
         for path in history.records()["files"]:
