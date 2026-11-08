@@ -14,6 +14,7 @@ import episode_turn06_history
 import turn07_hand_history
 import turn08_laptop_history
 import turn09_reply_history
+from reviewed_release import read as reviewed_bytes
 import turn12_cross_platform_history
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,11 +22,32 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 
 
 def release_bytes(path):
-    """Inspect this older release after reversing only the reviewed sprint."""
-    return subsequent_changes.before(path, turn07_hand_history.before(path, turn08_laptop_history.before(path, turn09_reply_history.before(path, (ROOT / path).read_bytes()))))
+    """Read the approved file at its original release, not from today's tree.
+
+    The workflow has been intentionally deleted and must not be restored to
+    satisfy an archival test. The identity builder has changed many times.
+    Both historical file versions are independently pinned by Git blob SHA.
+    """
+    fixtures = {
+        history.CHECKS_WORKFLOW: (
+            'a64bc51b6a39405a1ba59fbc589a9e190fce6229',
+            'd6e583b74815f4f2f93ac8597f67200ee8f9af4a',
+        ),
+        history.IDENTITY_BUILD: (
+            history.IDENTITY_RELEASE,
+            '44dfd573118ce8f98db667dc733e5823c9e110dd',
+        ),
+    }
+    commit, digest = fixtures[path]
+    return reviewed_bytes(commit, path, digest)
 
 
 class LaterReleaseHistoryTests(unittest.TestCase):
+    def test_archived_workflow_is_verified_without_restoring_an_active_workflow(self):
+        self.assertFalse((ROOT / history.CHECKS_WORKFLOW).exists())
+        archived = release_bytes(history.CHECKS_WORKFLOW)
+        self.assertEqual(sha256(archived).hexdigest(), history.WORKFLOW_AFTER)
+
     def test_build_timeout_reversal_restores_the_exact_regional_successor(self):
         import regional_link_history
         current = release_bytes(history.CHECKS_WORKFLOW)
@@ -143,9 +165,13 @@ class LaterReleaseHistoryTests(unittest.TestCase):
 
     def test_files_preserve_unknown_paths_and_collection_types(self):
         known = 'assets/nolan-kido-identity.jsonld'
+        original = reviewed_bytes(history.IDENTITY_RELEASE, known,
+                                  'd7719c7a5e455f99d2d957fbefcc7a67617e764d')
+        self.assertEqual(sha256(original).hexdigest(), history.SOURCE_ADDITIONS[known])
         for values in ([known, 'unreviewed.txt'], {known, 'unreviewed.txt'},
                        (ROOT / known, ROOT / 'unreviewed.txt')):
-            with self.subTest(kind=type(values).__name__):
+            with self.subTest(kind=type(values).__name__), patch.object(
+                    Path, 'read_bytes', return_value=original):
                 result = history.files(values)
                 self.assertIsInstance(result, type(values))
                 self.assertEqual(len(result), 1)
@@ -178,10 +204,11 @@ class LaterReleaseHistoryTests(unittest.TestCase):
         current = profile_sitemap_turn_history.live_targets(
             episode_turn06_history.live_targets(turn07_hand_history.live_targets(turn08_laptop_history.live_targets(turn09_reply_history.live_targets(subsequent_changes.live_targets(check_live.targets()))))))
         route = '/assets/social/nolan-kido-ai.png'
-        self.assertEqual(len(current), 476)
         self.assertEqual(current[route], (200, (ROOT / route.lstrip('/')).read_bytes()))
+        self.assertEqual(sha256(current[route][1]).hexdigest(),
+                         history.LIVE_TARGET_ADDITIONS[route])
         previous = history.live_targets(current)
-        self.assertEqual(len(previous), 475)
+        self.assertEqual(len(previous), len(current) - 1)
         self.assertEqual(set(current) - set(previous), {route})
         self.assertIn(route, current)
 
