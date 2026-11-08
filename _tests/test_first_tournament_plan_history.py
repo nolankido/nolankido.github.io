@@ -2,6 +2,7 @@
 from copy import deepcopy
 import json
 from pathlib import Path
+import subprocess
 import sys
 import unittest
 from unittest.mock import patch
@@ -10,17 +11,53 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import first_tournament_plan_history as history
-import ranking_practice_history as subsequent_changes
-import build
+from reviewed_release import read as reviewed_bytes
+
+
+# This is the complete merged tournament-planning release, not a view of
+# today's site after additional independently reviewed revisions.
+FIRST_TOURNAMENT_RELEASE = 'dfdcdc64dd096f7bdcab0569f19d6cc466c5584b'
+RELEASE_BLOBS = {
+    '_source/pages.json': 'fe24d32ba4499e02bbbc96a700ae95b53bc00317',
+    '_source/poker/first-live-tournament.html': '28a4aba01f1dd40b16007c5fe6039be1f579ab5d',
+    '_source/poker/tournament-checklists.html': '1c9ae0308be1605d2af48092501aee002377defc',
+    'downloads/poker-event-planner.md': 'b0a3b47f0671df6437b3d3ce6db5327f587d4480',
+    'find/index.html': 'dac1446e9678fa919cfa8ba24f392dc6b8f9a7d8',
+    'poker/find/index.html': 'e7e0dbb41b456a26de0c74a2e91240e03be3ed39',
+    'poker/first-live-tournament/index.html': '4131614d0d600cf39151ee818f55fea26d025f3a',
+    'poker/library/index.html': '2ecb757993805a6f9b5b96e1dbe0379f2d9a7995',
+    'poker/poker-access-and-protection/index.html': 'ad5721d76e81ca2143eb04d08ce743f74f32daf7',
+    'poker/poker-rules-and-fair-play/index.html': 'c3c21390f1895eaa7f52320f4d432d2c08658ae0',
+    'poker/thunder-valley-poker-guide/index.html': '781264cfc099a85577800460c6f13ab7f4a61dbf',
+    'poker/topics/places-to-play/index.html': 'f2946154fe25225f92b4f0b3623a6273a1affd73',
+    'poker/topics/tournaments/index.html': '2f0aa0a64c7c628ae8ff101ad1220fb0575827b2',
+    'poker/tournament-checklists/index.html': 'c26f0b7aa186be3f1a9ed1a046aae04058ba3659',
+    'sitemap.xml': '83e8d53254828106b2dfc7068f89ed1ae39bf464',
+}
 
 
 class FirstTournamentPlanHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: subsequent_changes.before(name, (ROOT / name).read_bytes())
+        cls.raw = {name: reviewed_bytes(FIRST_TOURNAMENT_RELEASE, name, RELEASE_BLOBS[name])
                    for name in history.PATHS}
-        cls.pages = subsequent_changes.pages(build.public_pages())
+        cls.pages = json.loads(cls.raw['_source/pages.json'])
+
+    def test_actual_merged_release_has_the_ledger_parent_and_fifteen_exact_predecessors(self):
+        self.assertEqual(subprocess.check_output(
+            ['git', 'rev-parse', FIRST_TOURNAMENT_RELEASE + '^'],
+            cwd=ROOT).decode().strip(), self.record['parent_commit'])
+        self.assertEqual(subprocess.check_output(
+            ['git', 'rev-parse', self.record['parent_commit'] + '^{tree}'],
+            cwd=ROOT).decode().strip(), self.record['parent_tree'])
+        self.assertEqual(set(RELEASE_BLOBS), history.PATHS)
+        for name, item in self.record['paths'].items():
+            with self.subTest(path=name):
+                actual_parent = subprocess.check_output(
+                    ['git', 'show', self.record['parent_commit'] + ':' + name], cwd=ROOT)
+                self.assertEqual(history.digest(actual_parent), item['parent_sha256'])
+                self.assertEqual(history.before(name, self.raw[name]), actual_parent)
 
     def test_fifteen_current_files_are_bound_to_the_published_parent(self):
         self.assertEqual(set(self.record['paths']), {
