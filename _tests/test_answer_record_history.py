@@ -1,7 +1,9 @@
 """The completed review record preserves an exact published predecessor."""
 from copy import deepcopy
+from hashlib import sha256
 import json
 from pathlib import Path
+import subprocess
 import sys
 import unittest
 from unittest.mock import patch
@@ -10,17 +12,43 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import answer_record_history as history
-import first_tournament_plan_history as subsequent_changes
-import build
+from reviewed_release import read as reviewed_bytes
+
+
+# Pin the complete published answer-record release, rather than attempting to
+# reverse every subsequent public-site update from today's working files.
+ANSWER_RECORD_RELEASE = '74e064631e59e7659826144390dc77d49d2022ed'
+LATER_PUBLICATION = '116359834b8b48dbd1526c68392d89f9dd7bf1a0'
+RELEASE_BLOBS = {
+    '_source/pages.json': '9d5e51de1b3e49857bb72d055180fef064e25433',
+    '_source/technology/check-ai-answers.html': '9b9471d06d87599f88c34e87aadcc4762fd75b5d',
+    'downloads/ai-answer-review.txt': '81a23a26adf3496db9d2d1ba389a1fac707d1e5c',
+    'downloads/practical-ai-workbook.txt': '321871d4c24d53777803d86488d190b4b13e07ff',
+    'technology/check-ai-answers/index.html': '4f0952f6bf83e0930741235d26fd6eaa4313bca0',
+    'technology/index.html': '2955785119fb2ce9d662df747f339e2c60e8ce3f',
+    'sitemap.xml': 'ee398d46d96cb8910ee32f91e91ec7fb70c04cef',
+}
+
+# Captured separately from `git show b8b4bcd:<path>`, not calculated from the
+# reverse-span adapter, so the historical parent has an independent oracle.
+PUBLISHED_PARENT_HASHES = {
+    '_source/pages.json': '5c8a15936605397bc09a1646c0f860337cc70b62fa55f52cc87101d2e4853c3f',
+    '_source/technology/check-ai-answers.html': '033d62ed9d181db6d9a3e8017b582e7c2092792c6c07777d8ebc2e5a83242327',
+    'downloads/ai-answer-review.txt': '1f7536ae05f048840810982268585f77fd30f8e447ae4d466b392de989c91dcd',
+    'downloads/practical-ai-workbook.txt': 'c793d8d20e0006f522d081d34b901cc97d5bb741c2dd4861e2eceb20b8966e23',
+    'technology/check-ai-answers/index.html': '0f77f99ddbd3f43276774052031ff06be662479cda793990d74106ff6902b71b',
+    'technology/index.html': 'abc89ca6bfaa2e581bdfe807b2e03559843c9f7837a4eca07b214ce80393d986',
+    'sitemap.xml': '1a8d6d06e4fa3f16f90c9b1083eee5cc131285ff28d86be7311cdaa82941476f',
+}
 
 
 class AnswerRecordHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: subsequent_changes.before(name, (ROOT / name).read_bytes())
+        cls.raw = {name: reviewed_bytes(ANSWER_RECORD_RELEASE, name, RELEASE_BLOBS[name])
                    for name in history.PATHS}
-        cls.pages = subsequent_changes.pages(build.public_pages())
+        cls.pages = json.loads(cls.raw['_source/pages.json'])
 
     def test_seven_current_files_are_bound_to_the_actual_published_parent(self):
         self.assertEqual(set(self.record['paths']), {
@@ -35,7 +63,35 @@ class AnswerRecordHistoryTests(unittest.TestCase):
             with self.subTest(path=name):
                 self.assertEqual(set(item), {'current_sha256', 'parent_sha256', 'edits'})
                 self.assertEqual(history.digest(self.raw[name]), item['current_sha256'])
-                self.assertNotEqual(item['current_sha256'], item['parent_sha256'])
+                self.assertEqual(item['parent_sha256'], PUBLISHED_PARENT_HASHES[name])
+                self.assertNotEqual(item['current_sha256'], PUBLISHED_PARENT_HASHES[name])
+
+    def test_original_git_parent_matches_all_seven_restored_predecessors(self):
+        parent = self.record['parent_commit']
+        self.assertEqual(subprocess.check_output(
+            ['git', 'rev-parse', ANSWER_RECORD_RELEASE + '^'], cwd=ROOT).decode().strip(), parent)
+        self.assertEqual(subprocess.check_output(
+            ['git', 'rev-parse', parent + '^{tree}'], cwd=ROOT).decode().strip(),
+            self.record['parent_tree'])
+        for name in sorted(history.PATHS):
+            with self.subTest(path=name):
+                original = subprocess.check_output(['git', 'show', parent + ':' + name], cwd=ROOT)
+                self.assertEqual(sha256(original).hexdigest(), PUBLISHED_PARENT_HASHES[name])
+                self.assertEqual(history.before(name, self.raw[name]), original)
+
+    def test_next_published_release_composes_only_through_its_reviewed_predecessor(self):
+        import first_tournament_plan_history
+        for name in ('_source/pages.json', '_source/technology/check-ai-answers.html',
+                     'technology/check-ai-answers/index.html', 'technology/index.html', 'sitemap.xml'):
+            with self.subTest(path=name):
+                later = subprocess.check_output(
+                    ['git', 'show', LATER_PUBLICATION + ':' + name], cwd=ROOT)
+                self.assertNotEqual(sha256(later).hexdigest(),
+                                    self.record['paths'][name]['current_sha256'])
+                self.assertEqual(first_tournament_plan_history.before(name, later),
+                                 self.raw[name])
+                self.assertEqual(history.before(name, later),
+                                 history.before(name, self.raw[name]))
 
     def test_exact_reversal_preserves_types_paths_and_idempotence(self):
         for name, item in self.record['paths'].items():
