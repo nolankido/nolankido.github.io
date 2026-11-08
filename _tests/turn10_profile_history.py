@@ -24,19 +24,28 @@ def before(path,data):
     return original if binary else original.decode('utf-8')
 
 
-def pages(records):
+def pages(page_records):
     """Restore later reviewed metadata before the earlier profile-date boundary."""
     import brand_positioning_history as brand_history
     import answer_review_growth_history as guide_growth
-    records = guide_growth.pages(brand_history.pages(records))
+    page_records = guide_growth.pages(brand_history.pages(page_records))
     import json as _json
     from copy import deepcopy
-    previous = _json.loads(before('_source/pages.json', (ROOT / '_source/pages.json').read_text()))
+    # Read the already verified original predecessor from the frozen Turn 10
+    # ledger, not from today's repeatedly revised public page manifest.
+    source = records()['_source/pages.json']
+    try:
+        previous_bytes = zlib.decompress(base64.b64decode(source['old_zlib_b64'], validate=True))
+    except (ValueError, zlib.error) as exc:
+        raise ValueError('Corrupt Turn 10 page metadata predecessor') from exc
+    if hashlib.sha256(previous_bytes).hexdigest() != source['old_sha256']:
+        raise ValueError('Corrupt Turn 10 page metadata predecessor digest')
+    previous = _json.loads(previous_bytes)
     dates = {p['id']: p['updated'] for p in previous if p['id'] in {'about', 'bio'}}
     # Older rendered manifests had a separate About update applied by the
     # earlier publication layer. Preserve that pre-Turn-10 metadata boundary.
     dates['about'] = '2026-10-12'
-    output = deepcopy(records)
+    output = deepcopy(page_records)
     for p in output:
         if p.get('id') in dates and p.get('updated') == '2026-10-17':
             p['updated'] = dates[p['id']]
