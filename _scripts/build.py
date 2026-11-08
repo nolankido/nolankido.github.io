@@ -519,7 +519,7 @@ def build_outputs() -> dict[Path, str]:
     identity_document = json.loads((SOURCE / 'person-schema.jsonld').read_text(encoding='utf-8'))
     outputs[Path('assets/nolan-kido-identity.jsonld')] = json.dumps(identity_document, ensure_ascii=False, indent=2) + '\n'
     outputs[practical_path.WORKBOOK] = practical_path.workbook(pages, ROOT)
-    return search_sections.apply(font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT), pages)
+    return search_sections.apply(font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT), pages, ROOT)
 
 
 def main() -> int:
