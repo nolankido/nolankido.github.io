@@ -4,6 +4,7 @@ from copy import deepcopy
 from hashlib import sha256
 import json
 from pathlib import Path
+import subprocess
 import sys
 import unittest
 from unittest.mock import patch
@@ -11,7 +12,22 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_tests'))
 import brief_check_history as history
-import visibility_sprint_history as subsequent_changes
+from reviewed_release import read as reviewed_bytes
+
+
+# The merged public release contains all seven reviewed files. A sibling
+# commit has the same parent but lacks some generated/task-brief changes.
+BRIEF_CHECK_RELEASE = '2aae4923318c0028d98266d78f6e4aabea295387'
+PARTIAL_SIBLING_RELEASE = '6ec6e4b64669d9c6cfb38f6b45957ee40f57efe3'
+RELEASE_BLOBS = {
+    '_source/pages.json': 'aa3d48989fad84a0f491fd6eb25f2dc12bf17da9',
+    '_source/technology/task-brief.html': '72559951e80b15f8fb1f80513629883be10db627',
+    'assets/task-brief.css': '2c3c548fc44c16f215f0be9ba2fc7fd6ecdae4a0',
+    'assets/task-brief.js': 'd5d08803e4dd0e079bd0545108ad9a4e7abe9ae4',
+    'find/index.html': '4d79868124d5ae09cf97eb0398124d0adea8fd2c',
+    'sitemap.xml': 'c1ae0de7eecae7bd46b4145a772951ee8b36a6ce',
+    'technology/task-brief/index.html': 'ada831e018f77b880538e1af9fcc49860fba8813',
+}
 
 # Independently captured with git show 427f258a:<path>, before generating the
 # reverse spans. These are whole files from the published parent, not hashes
@@ -38,7 +54,7 @@ class BriefCheckHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: subsequent_changes.before(name, (ROOT / name).read_bytes())
+        cls.raw = {name: reviewed_bytes(BRIEF_CHECK_RELEASE, name, RELEASE_BLOBS[name])
                    for name in history.PATHS}
         cls.pages = json.loads(cls.raw['_source/pages.json'])
 
@@ -56,6 +72,31 @@ class BriefCheckHistoryTests(unittest.TestCase):
                 self.assertEqual(item['parent_sha256'], expected)
                 self.assertNotEqual(item['current_sha256'], expected)
                 self.assertEqual(sha256(history.before(name, self.raw[name])).hexdigest(), expected)
+
+    def test_original_parent_git_files_match_all_seven_reconstructed_predecessors(self):
+        parent = self.record['parent_commit']
+        actual_parent = subprocess.check_output(
+            ['git', 'rev-parse', BRIEF_CHECK_RELEASE + '^'], cwd=ROOT).decode().strip()
+        self.assertEqual(actual_parent, parent)
+        for name in sorted(history.PATHS):
+            with self.subTest(path=name):
+                original = subprocess.check_output(
+                    ['git', 'show', parent + ':' + name], cwd=ROOT)
+                self.assertEqual(sha256(original).hexdigest(), PUBLISHED_PARENT_HASHES[name])
+                self.assertEqual(history.before(name, self.raw[name]), original)
+
+    def test_partial_sibling_commit_cannot_replace_the_complete_release(self):
+        sibling_parent = subprocess.check_output(
+            ['git', 'rev-parse', PARTIAL_SIBLING_RELEASE + '^'],
+            cwd=ROOT).decode().strip()
+        self.assertEqual(sibling_parent, self.record['parent_commit'])
+        for name in ('_source/technology/task-brief.html', 'assets/task-brief.css',
+                     'assets/task-brief.js', 'technology/task-brief/index.html'):
+            with self.subTest(path=name):
+                incomplete = subprocess.check_output(
+                    ['git', 'show', PARTIAL_SIBLING_RELEASE + ':' + name], cwd=ROOT)
+                self.assertNotEqual(sha256(incomplete).hexdigest(),
+                                    self.record['paths'][name]['current_sha256'])
 
     def test_reversal_preserves_types_paths_and_idempotence(self):
         for name, raw in self.raw.items():
