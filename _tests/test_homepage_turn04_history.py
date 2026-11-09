@@ -1,6 +1,7 @@
 """Turn 4 three-interest homepage paths and exact historic-release boundary."""
 from pathlib import Path
 import re
+import subprocess
 import sys
 import unittest
 from unittest.mock import patch
@@ -11,11 +12,21 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import build
 import homepage_turn04_history as history
-import turn12_cross_platform_history
 import homepage_growth_history
 import later_release_history
 import visibility_discovery_history
 import visibility_sprint_history
+from reviewed_release import read as reviewed_bytes
+
+
+# Exact merged October 31 Turn 4 release, before later independent homepage
+# work changed the source and generated page again.
+HOMEPAGE_TURN04_RELEASE = '41b050ecf00f9897ec0ff3a5ef09de4fbea8b448'
+RELEASE_BLOBS = {
+    '_source/home.html': '323be2d4d02a90ffc31022bc2d962f486931c5b0',
+    'index.html': 'f44422be7b1dcff55452ad0b62f324656667f826',
+}
+PARENT_TREE = '6d29ea4432397ae0ce325fe2c61058587b10e4df'
 
 PATHS = (
     '/technology/#ai-works-human-decides',
@@ -30,6 +41,25 @@ class HomepageTurn04Tests(unittest.TestCase):
     def setUpClass(cls):
         cls.outputs = build.build_outputs()
         cls.html = cls.outputs[Path('index.html')]
+        cls.released = {name: reviewed_bytes(HOMEPAGE_TURN04_RELEASE, name, blob)
+                        for name, blob in RELEASE_BLOBS.items()}
+
+    def test_original_release_is_bound_to_its_git_parent_and_exact_predecessors(self):
+        self.assertEqual(set(RELEASE_BLOBS), set(history.REVISIONS))
+        self.assertEqual(subprocess.check_output(
+            ['git', 'rev-parse', HOMEPAGE_TURN04_RELEASE + '^'], cwd=ROOT
+        ).decode().strip(), history.PARENT)
+        self.assertEqual(subprocess.check_output(
+            ['git', 'rev-parse', history.PARENT + '^{tree}'], cwd=ROOT
+        ).decode().strip(), PARENT_TREE)
+        for name, (previous_sha, current_sha) in history.REVISIONS.items():
+            with self.subTest(path=name):
+                current = self.released[name]
+                predecessor = subprocess.check_output(
+                    ['git', 'show', history.PARENT + ':' + name], cwd=ROOT)
+                self.assertEqual(history.digest(current), current_sha)
+                self.assertEqual(history.digest(predecessor), previous_sha)
+                self.assertEqual(history.before(name, current), predecessor)
 
     def test_first_screen_links_all_three_aims_to_published_anchors(self):
         hero = self.html.split('id="visibility-projects-title"', 1)[0]
@@ -69,7 +99,7 @@ class HomepageTurn04Tests(unittest.TestCase):
     def test_only_exact_home_source_and_output_are_reversible(self):
         self.assertEqual(set(history.REVISIONS), {'_source/home.html', 'index.html'})
         for name, (previous_sha, current_sha) in history.REVISIONS.items():
-            current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
+            current = self.released[name]
             with self.subTest(path=name):
                 self.assertEqual(history.digest(current), current_sha)
                 old = history.before(name, current)
@@ -82,7 +112,7 @@ class HomepageTurn04Tests(unittest.TestCase):
 
     def test_older_output_and_source_inventories_see_the_approved_predecessor(self):
         for name in history.REVISIONS:
-            current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
+            current = self.released[name]
             old = history.before(name, current)
             for release in (visibility_discovery_history, visibility_sprint_history,
                             later_release_history, homepage_growth_history):
@@ -99,7 +129,7 @@ class HomepageTurn04Tests(unittest.TestCase):
 
     def test_corrupted_predecessor_digest_is_rejected(self):
         name = '_source/home.html'
-        current = turn12_cross_platform_history.before(name, (ROOT / name).read_bytes())
+        current = self.released[name]
         with patch.dict(history.REVISIONS, {name: ('0' * 64, history.digest(current))}):
             with self.assertRaisesRegex(ValueError, 'predecessor digest'):
                 history.before(name, current)
