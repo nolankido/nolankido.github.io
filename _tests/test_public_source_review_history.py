@@ -2,6 +2,8 @@
 from copy import deepcopy
 import json
 from pathlib import Path
+import re
+import subprocess
 import sys
 import unittest
 from unittest.mock import patch
@@ -10,21 +12,57 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
 sys.path.insert(0, str(ROOT / '_tests'))
 import brand_positioning_history as brand_history
-import build
 import public_source_review_history as history
-import workflow_decision_history
+from reviewed_release import read as reviewed_bytes
+
+
+# The published October 27 source-review layer must be tested against its
+# own Git tree. Later Technology rewrites and manifest additions are not part
+# of this boundary, and cannot be recreated by partially reversing today.
+SOURCE_REVIEW_RELEASE = '62b66d520aefd39ea5ad9bcbf134f0085f044339'
+RELEASE_TREE = 'c58a229171ec97246111faccc80d411969e42010'
+RELEASE_BLOBS = {
+    '_source/pages.json': '63d2643dba81da98bd086ac38f0a1d64c13e9759',
+    '_source/technology/home.html': 'c51bb4bb66fa617afb2f8285aeb18daa8fa8ddd7',
+    'technology/index.html': '6fd1e44bd59e1cc75aae2652df328de3f3397d82',
+    'sitemap.xml': '4ebc1a1fbd40db437c4f35cf2b78eb8df2d2b959',
+}
+PARENT_BLOBS = {
+    '_source/pages.json': '4ac979a431290dbb4838de3fc370b2ed4b74a416',
+    '_source/technology/home.html': 'c5406e06ae282dcf1e4c6c1b5c59795ef0030f19',
+    'technology/index.html': '833b66940a14dd89656d9cd37ecb6311dd730d48',
+    'sitemap.xml': 'bcbc4ffc41deddc57b35773d28e0da8fef96f8b5',
+}
+
+
+def git_revision(ref):
+    return subprocess.check_output(
+        ['git', 'rev-parse', ref], cwd=ROOT).decode('ascii').strip()
 
 
 class PublicSourceReviewHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
+        cls.raw = {name: reviewed_bytes(SOURCE_REVIEW_RELEASE, name, blob)
+                   for name, blob in RELEASE_BLOBS.items()}
+        cls.parent_raw = {name: reviewed_bytes(history.PARENT, name, blob)
+                          for name, blob in PARENT_BLOBS.items()}
+        cls.pages = json.loads(cls.raw['_source/pages.json'])
+        # Current bytes belong only to the unknown-change negative controls.
+        # Never feed them into the exact historical predecessor assertions.
         cls.current_raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
-        # This archived layer receives its exact successor after the later
-        # calculator change. Keep unnormalized current bytes for mutation tests.
-        cls.raw = {name: workflow_decision_history.before(name, raw)
-                   for name, raw in cls.current_raw.items()}
-        cls.pages = workflow_decision_history.pages(build.public_pages())
+
+    def test_original_release_and_parent_are_exact_git_trees(self):
+        self.assertEqual(git_revision(SOURCE_REVIEW_RELEASE + '^'), history.PARENT)
+        self.assertEqual(git_revision(SOURCE_REVIEW_RELEASE + '^{tree}'), RELEASE_TREE)
+        self.assertEqual(git_revision(history.PARENT + '^{tree}'), history.PARENT_TREE)
+        self.assertEqual(set(RELEASE_BLOBS), set(PARENT_BLOBS))
+        self.assertEqual(set(RELEASE_BLOBS), history.PATHS)
+        for name, item in self.record['paths'].items():
+            with self.subTest(path=name):
+                self.assertEqual(history.digest(self.raw[name]), item['current_sha256'])
+                self.assertEqual(history.digest(self.parent_raw[name]), item['parent_sha256'])
 
     def test_only_the_four_reviewed_files_and_published_parent_are_recorded(self):
         self.assertEqual(set(self.record['paths']), {
@@ -48,6 +86,7 @@ class PublicSourceReviewHistoryTests(unittest.TestCase):
             with self.subTest(path=name):
                 self.assertIsInstance(previous, bytes)
                 self.assertEqual(history.digest(previous), item['parent_sha256'])
+                self.assertEqual(previous, self.parent_raw[name])
                 self.assertEqual(history.before(name, previous), previous)
                 for path in (name, Path(name), ROOT / name):
                     self.assertEqual(history.before(path, raw), previous)
@@ -57,17 +96,19 @@ class PublicSourceReviewHistoryTests(unittest.TestCase):
                     self.assertEqual(history.before(path, text), text)
 
     def test_unknown_mutations_and_binary_inputs_remain_visible(self):
-        for name, raw in self.current_raw.items():
-            midpoint = len(raw) // 2
-            altered = (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:],
-                       raw[:midpoint] + b'UNREVIEWED' + raw[midpoint:], b'\xff\x00')
-            for value in altered:
-                with self.subTest(path=name, mutation=history.digest(value)):
-                    self.assertEqual(history.before(name, value), value)
-                    self.assertEqual(brand_history.before(name, value), value)
-            text = raw.decode('utf-8') + 'UNREVIEWED'
-            self.assertEqual(history.before(name, text), text)
-            self.assertEqual(brand_history.before(name, text), text)
+        for label, records in (('archived', self.raw), ('current', self.current_raw)):
+            for name, raw in records.items():
+                midpoint = len(raw) // 2
+                altered = (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:],
+                           raw[:midpoint] + b'UNREVIEWED' + raw[midpoint:], b'\xff\x00')
+                for value in altered:
+                    with self.subTest(version=label, path=name,
+                                      mutation=history.digest(value)):
+                        self.assertEqual(history.before(name, value), value)
+                        self.assertEqual(brand_history.before(name, value), value)
+                text = raw.decode('utf-8') + 'UNREVIEWED'
+                self.assertEqual(history.before(name, text), text)
+                self.assertEqual(brand_history.before(name, text), text)
 
     def test_known_bytes_at_unknown_or_external_paths_are_not_rewritten(self):
         raw = self.raw['technology/index.html']
@@ -176,6 +217,18 @@ class PublicSourceReviewHistoryTests(unittest.TestCase):
         self.assertEqual(next(page for page in previous_records if page['id'] == 'technology'),
                          pair['old'])
         self.assertEqual(pair['old'], {**pair['new'], 'updated': '2026-10-26'})
+        # Both published HTML revisions must carry the corresponding source
+        # metadata. Do not substitute today's rebuilt Technology page here.
+        for label, payload, expected in (
+            ('release', self.raw['technology/index.html'], pair['new']),
+            ('parent', self.parent_raw['technology/index.html'], pair['old']),
+        ):
+            with self.subTest(revision=label):
+                match = re.search(rb'<script type="application/ld\+json">(.*?)</script>',
+                                  payload, flags=re.DOTALL)
+                self.assertIsNotNone(match)
+                metadata = json.loads(match.group(1))
+                self.assertEqual(metadata['dateModified'], expected['updated'])
 
     def test_changed_missing_and_additional_metadata_fields_remain_visible(self):
         current = self.record['page']['new']
