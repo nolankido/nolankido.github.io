@@ -4,6 +4,8 @@ from copy import deepcopy
 from hashlib import sha256
 import json
 from pathlib import Path
+import re
+import subprocess
 import sys
 import unittest
 from unittest.mock import patch
@@ -11,7 +13,39 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_tests'))
 import ranking_practice_history as history
-import brief_check_history as subsequent_changes
+from reviewed_release import read as reviewed_bytes
+
+
+# The October 27 ranking-practice release and its parent are immutable Git
+# fixtures. Later edits to the current site are not part of this boundary.
+RANKING_PRACTICE_RELEASE = '2b21716bbd52128523bf740b1a4d2e7f6eba8cf9'
+RELEASE_TREE = 'f51ffdb98ccb618896e25d6d729cc7919536a92d'
+RELEASE_BLOBS = {
+    '_source/pages.json': 'c4802b05906d60174d0926ab38f7353330bf02de',
+    '_source/poker/hand-rankings.html': '7cd9f6c344caa0fe5e01b610dec7a3c3059b3d46',
+    'assets/poker-hand-lab.css': 'f0a0f683ac6a4b33e8c45c89fac655d6fc38a163',
+    'find/index.html': '5b7fe3b8c7bd9681e711e78b7ef0ec46283dc52b',
+    'poker/find/index.html': '3bb3f39e3933092f7767dc6189ebd3b4393e9ec0',
+    'poker/free-poker-learning-path/index.html': 'cd20e682f2a45fc5431be4811590d8e1481f6634',
+    'poker/hand-rankings/index.html': '6c50b7c87dd56fc239809af8c868457679e25fe8',
+    'sitemap.xml': '089a217cc4f15706322d33b1c6fa7cd1616142cf',
+}
+PARENT_BLOBS = {
+    '_source/pages.json': 'fe24d32ba4499e02bbbc96a700ae95b53bc00317',
+    '_source/poker/hand-rankings.html': '744d0a0a16ec12e4dd7dce8997cf8c0da2529bdd',
+    'assets/poker-hand-lab.css': '2d6df15799ed95c73893587a49051de04aa570bd',
+    'find/index.html': 'dac1446e9678fa919cfa8ba24f392dc6b8f9a7d8',
+    'poker/find/index.html': 'e7e0dbb41b456a26de0c74a2e91240e03be3ed39',
+    'poker/free-poker-learning-path/index.html': '763897d39e39cc9cd75d95b77d7eac5da112973c',
+    'poker/hand-rankings/index.html': '763c9a54461a58622bd72634906987f5b737151c',
+    'sitemap.xml': '83e8d53254828106b2dfc7068f89ed1ae39bf464',
+}
+
+
+def git_revision(ref):
+    return subprocess.check_output(
+        ['git', 'rev-parse', ref], cwd=ROOT).decode('ascii').strip()
+
 
 # Independently captured with git show dfdcdc64:<path>, before generating the
 # reverse spans. These are whole files from the published parent, not hashes
@@ -40,11 +74,27 @@ class RankingPracticeHistoryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.record = deepcopy(history.change())
-        cls.raw = {name: subsequent_changes.before(name, (ROOT / name).read_bytes())
-                   for name in history.PATHS}
+        cls.raw = {name: reviewed_bytes(RANKING_PRACTICE_RELEASE, name, blob)
+                   for name, blob in RELEASE_BLOBS.items()}
+        cls.parent_raw = {name: reviewed_bytes(history.PARENT, name, blob)
+                          for name, blob in PARENT_BLOBS.items()}
         cls.pages = json.loads(cls.raw['_source/pages.json'])
+        # Current bytes are only used to check that subsequent unreviewed
+        # mutations remain untouched. They are not historical fixtures.
+        cls.current_raw = {name: (ROOT / name).read_bytes() for name in history.PATHS}
 
-    def test_eight_current_files_restore_the_independently_captured_parent(self):
+    def test_original_release_and_parent_have_exact_git_provenance(self):
+        self.assertEqual(git_revision(RANKING_PRACTICE_RELEASE + '^'), history.PARENT)
+        self.assertEqual(git_revision(RANKING_PRACTICE_RELEASE + '^{tree}'), RELEASE_TREE)
+        self.assertEqual(git_revision(history.PARENT + '^{tree}'), history.PARENT_TREE)
+        self.assertEqual(set(RELEASE_BLOBS), set(PARENT_BLOBS))
+        self.assertEqual(set(RELEASE_BLOBS), history.PATHS)
+        for name, item in self.record['paths'].items():
+            with self.subTest(path=name):
+                self.assertEqual(sha256(self.raw[name]).hexdigest(), item['current_sha256'])
+                self.assertEqual(sha256(self.parent_raw[name]).hexdigest(), item['parent_sha256'])
+
+    def test_eight_release_files_restore_the_independently_captured_parent(self):
         self.assertEqual(set(self.record['paths']), set(PUBLISHED_PARENT_HASHES))
         self.assertEqual(history.PATHS, set(PUBLISHED_PARENT_HASHES))
         self.assertEqual(self.record['parent_commit'],
@@ -57,7 +107,9 @@ class RankingPracticeHistoryTests(unittest.TestCase):
                 self.assertEqual(sha256(self.raw[name]).hexdigest(), item['current_sha256'])
                 self.assertEqual(item['parent_sha256'], expected)
                 self.assertNotEqual(item['current_sha256'], expected)
-                self.assertEqual(sha256(history.before(name, self.raw[name])).hexdigest(), expected)
+                restored = history.before(name, self.raw[name])
+                self.assertEqual(sha256(restored).hexdigest(), expected)
+                self.assertEqual(restored, self.parent_raw[name])
 
     def test_reversal_preserves_types_paths_and_idempotence(self):
         for name, raw in self.raw.items():
@@ -73,14 +125,16 @@ class RankingPracticeHistoryTests(unittest.TestCase):
                     self.assertEqual(history.before(path, text), text)
 
     def test_unknown_bytes_and_unrelated_paths_remain_visible(self):
-        for name, raw in self.raw.items():
-            midpoint = len(raw) // 2
-            for altered in (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:],
-                            raw[:midpoint] + b'UNREVIEWED' + raw[midpoint:], b'\xff\x00'):
-                with self.subTest(path=name, mutation=sha256(altered).hexdigest()):
-                    self.assertIs(history.before(name, altered), altered)
-            text = raw.decode('utf-8') + 'UNREVIEWED'
-            self.assertIs(history.before(name, text), text)
+        for revision, records in (('release', self.raw), ('today', self.current_raw)):
+            for name, raw in records.items():
+                midpoint = len(raw) // 2
+                for altered in (raw + b'UNREVIEWED', b'UNREVIEWED' + raw, raw[1:],
+                                raw[:midpoint] + b'UNREVIEWED' + raw[midpoint:], b'\xff\x00'):
+                    with self.subTest(revision=revision, path=name,
+                                      mutation=sha256(altered).hexdigest()):
+                        self.assertIs(history.before(name, altered), altered)
+                text = raw.decode('utf-8') + 'UNREVIEWED'
+                self.assertIs(history.before(name, text), text)
         raw = self.raw['poker/hand-rankings/index.html']
         for path in ('poker/unreviewed/index.html',
                      ROOT.parent / 'other/poker/hand-rankings/index.html'):
@@ -202,6 +256,19 @@ class RankingPracticeHistoryTests(unittest.TestCase):
                    if pair['old'].get(key) != pair['new'].get(key)}
         self.assertEqual(changed, {'updated', 'revision'})
         self.assertEqual(history.pages(previous), previous)
+        # The historical published HTML is an independent check that the
+        # original page and the frozen manifest agree on modification dates.
+        for label, payload, expected in (
+            ('release', self.raw['poker/hand-rankings/index.html'], pair['new']),
+            ('parent', self.parent_raw['poker/hand-rankings/index.html'], pair['old']),
+        ):
+            with self.subTest(revision=label):
+                match = re.search(rb'<script type="application/ld\+json">(.*?)</script>',
+                                  payload, flags=re.DOTALL)
+                self.assertIsNotNone(match)
+                metadata = json.loads(match.group(1))
+                self.assertEqual(metadata['dateModified'], expected['updated'])
+                self.assertEqual(metadata['datePublished'], expected['date'])
 
     def test_partial_unreviewed_metadata_and_nested_inputs_are_copied(self):
         pair = self.record['pages'][history.PAGE_ID]
