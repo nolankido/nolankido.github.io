@@ -10,7 +10,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 PARENT = "061324dc666d4a5be9b1c0d63b1f11305cbb96f6"
 BLOBS = {
-    "_source/pages.json": ("afac135c04fcf70f0fed662390c9edf97a243e96", "7525b635e03ea5e77433af6df66fae859458cdd9"),
+    "_source/pages.json": ("ad05c6093df60ae15a50244f3b33aae8be2e6e35", "7525b635e03ea5e77433af6df66fae859458cdd9"),
     "_source/technology/organize-public-notes.html": ("701cdca4760a33fd5d820c19e1a76a80e3214f2f", "9a3ba6bfa4e6a7aee91cda569d7f3f6870a345b0"),
     "technology/organize-public-notes/index.html": ("bcd3a521da7a5e9ad6f7bc50443cf4f2d43509a6", "011fa33ee262b652ed9deac3948421e9abc693ae"),
     "find/index.html": ("e41a4cd0cbb8f619ba676b03021720fd08c1ec5b", "09ccf0890effc7194ae75b04c7484e812694a338"),
