@@ -56,6 +56,15 @@
 .page-home .nav-links a { white-space: normal; overflow-wrap: anywhere; }
 .page-home .brand-mark { min-width: 1.8em; min-height: 1.8em; }
 
+/* The evidence grid stacks at 900px. Keep the practical first step reachable
+   without scrolling past three long cards, while preserving desktop hierarchy. */
+.page-home .mobile-start-shortcut { display: none; }
+@media (max-width: 900px) {
+  .page-home .mobile-start-shortcut { display: block; margin: 16px 0 0; }
+  .page-home .mobile-start-shortcut a { display: inline-flex; align-items: center; min-height: 44px; font: 600 .9rem/1.5 var(--sans); text-underline-offset: .2em; }
+  .page-home .mobile-start-shortcut a:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+}
+
 /* A published story with separate routes to its written companion and a proposed workflow. */
 .page-creative .creative-video-feature {
   margin-block: 1.5rem 3rem;
