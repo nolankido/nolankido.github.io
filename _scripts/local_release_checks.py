@@ -65,6 +65,7 @@ def main() -> int:
         ('AI task brief example opening focus', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn102_brief_opening_focus.py', '-q']),
         ('AI task brief assembled preview handoff', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn103_brief_result_handoff.py', '-q']),
         ('AI task brief reviewed-preview export route', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn104_brief_review_to_export.py', '-q']),
+        ('AI task brief visible manual selection', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn105_brief_selection_visibility.py', '-q']),
         ('Homepage significant-change freshness', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_home_freshness.py', '-q']),
         ('Free Search Console checker synthetic visitor demo', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_visibility_demo.py', '-q']),
         ('Current public poker video discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_poker_videos.py', '-q']),
