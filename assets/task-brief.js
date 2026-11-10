@@ -150,6 +150,19 @@
     });
     quickMeeting.hidden = false;
   }
+  function selectVisibleText(message) {
+    output.focus(); output.select();
+    copyStatus.textContent = message;
+    // Native focus can place the selected textarea behind a wrapped sticky header.
+    // Correct the page scroll after selection without moving focus or the selection.
+    const header = typeof document.querySelector === 'function' ? document.querySelector('.site-header') : null;
+    const inset = header && typeof header.getBoundingClientRect === 'function'
+      ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+    const top = typeof output.getBoundingClientRect === 'function' ? output.getBoundingClientRect().top : null;
+    if (Number.isFinite(top) && top < inset + 20 && typeof window.scrollBy === 'function') {
+      window.scrollBy({top: top - inset - 20, behavior: 'instant'});
+    }
+  }
   get('copy').addEventListener('click', async () => {
     if (result.hidden || !output.value) return;
     const snapshot = output.value;
@@ -160,14 +173,12 @@
       if (output.value === snapshot && !result.hidden) copyStatus.textContent = 'Brief copied. Review the destination before pasting.';
     } catch (_) {
       if (output.value !== snapshot || result.hidden) return;
-      output.focus(); output.select();
-      copyStatus.textContent = 'Automatic copy is unavailable. The brief is selected; use your device’s Copy command.';
+      selectVisibleText('Automatic copy is unavailable. The brief is selected; use your device’s Copy command.');
     }
   });
   get('select').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
-    output.focus(); output.select();
-    copyStatus.textContent = 'Complete text selected. Use your device’s Copy command, then check the destination before pasting.';
+    selectVisibleText('Complete text selected. Use your device’s Copy command, then check the destination before pasting.');
   });
   get('print').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
@@ -176,8 +187,7 @@
       copyStatus.textContent = 'Print requested. Check the preview, then choose a printer or Save as PDF if your browser offers it.';
       window.print();
     } catch (_) {
-      output.focus(); output.select();
-      copyStatus.textContent = 'Printing is unavailable. Save as text or copy the selected brief into your own notes.';
+      selectVisibleText('Printing is unavailable. Save as text or copy the selected brief into your own notes.');
     }
   });
   get('download').addEventListener('click', () => {
@@ -191,8 +201,7 @@
       editor.appendChild(link); link.click();
       copyStatus.textContent = 'Text download requested. Keep the file somewhere appropriate for its contents.';
     } catch (_) {
-      output.focus(); output.select();
-      copyStatus.textContent = 'Download unavailable. Copy the selected brief into your own notes.';
+      selectVisibleText('Download unavailable. Copy the selected brief into your own notes.');
     } finally {
       link.remove(); if (url) window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
