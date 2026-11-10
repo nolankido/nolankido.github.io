@@ -13,6 +13,9 @@ from tempfile import TemporaryDirectory
 import unittest
 from xml.etree import ElementTree as ET
 
+from reviewed_release import read as reviewed_bytes
+import turn32_standoff_source_history as history
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
@@ -24,7 +27,9 @@ PUBLIC = ROOT / "poker/index.html"
 LEDGER = ROOT / "downloads/portland-meadows-standoff-ak-source-ledger.json"
 CHECKER = ROOT / "downloads/portland-meadows-standoff-ak-gate.py"
 ANCHOR = '<section class="poker-standoff-source-note" id="standoff-ak-source-review"'
-BASE = "fab6e73fb93552831b39c9011dca813955224124"
+BASE = history.PARENT
+RELEASE = "04a452d5806799778d7ae040549ffceec78871af"
+COMPANION_RELEASE = "80170a3909e2a70fcbbb34ea667953b2af77e45f"
 VIDEOS = (
     "https://www.youtube.com/watch?v=qABaiIcvvpU",
     "https://www.youtube.com/watch?v=I75GOBVXij4",
@@ -37,6 +42,18 @@ def source_section(text):
         raise AssertionError("Stand Off source section is missing or repeated")
     start = text.index(ANCHOR)
     return text[start:text.index("</section>", start) + len("</section>")]
+
+
+def video_cards(text):
+    """Count only videos in the Watch grid, not other Poker hub cards."""
+    matches = re.findall(
+        r'<section class="poker-public-video-list".*?'
+        r'<div class="poker-content-grid">(.*?)</div>', text, re.S
+    )
+    if len(matches) != 1:
+        raise AssertionError("Expected one public-video grid")
+    return re.findall(r'<article class="poker-content-card">.*?</article>',
+                      matches[0], re.S)
 
 
 def gate(*args):
@@ -88,15 +105,35 @@ class StandOffSourceReviewTests(unittest.TestCase):
         parsed.feed(section)
         self.assertEqual(parsed.stack, [])
 
-    def test_video_hub_links_all_three_public_uploads_without_new_companion_claim(self):
+    def test_video_hub_keeps_original_links_and_newer_companion_boundaries(self):
+        original = reviewed_bytes(
+            RELEASE, "poker/index.html", history.BLOBS["poker/index.html"][1]
+        ).decode("utf-8")
+        companion = reviewed_bytes(
+            COMPANION_RELEASE, "poker/index.html",
+            turn33.BLOBS["poker/index.html"][1]
+        ).decode("utf-8")
+
+        self.assertEqual(len(video_cards(original)), 3)
+        self.assertIn("Episode 2 has a more limited source review", original)
+        self.assertIn("not a timecode-verified companion for the current YouTube cut", original)
+        self.assertEqual(len(video_cards(companion)), 3)
+        self.assertIn("Episodes 1 and 2 each have a written companion", companion)
+        self.assertIn("The first two videos have written companions", companion)
+
+        current_cards = video_cards(self.public)
+        self.assertGreaterEqual(len(current_cards), 3)
         for url in VIDEOS:
-            self.assertIn('href="' + url + '"', self.public)
+            self.assertEqual(sum('href="' + url + '"' in card
+                                 for card in current_cards), 1, url)
         self.assertIn('href="#standoff-ak-source-review"', self.public)
-        self.assertIn("Episodes 1 and 2 each have a written companion", self.public)
         self.assertIn("Neither text claims frame-by-frame verification", self.public)
-        self.assertIn("The first two videos have written companions", self.public)
-        self.assertEqual(self.public.count('class="poker-content-card"'), 3)
         self.assertIn('href="/poker/episodes/portland-meadows-ep1/"', self.public)
+        self.assertIn('href="/poker/episodes/portland-meadows-standoff/"', self.public)
+        for url in ("https://www.youtube.com/watch?v=bxpaM_1mWPE",
+                    "https://www.youtube.com/watch?v=HE7VDvO9gDU"):
+            self.assertEqual(sum('href="' + url + '"' in card
+                                 for card in current_cards), 1, url)
         self.assertNotIn("JToB7upHqEM", self.public)
 
     def test_recorded_actions_and_arithmetic_are_bounded(self):
@@ -165,30 +202,38 @@ class StandOffSourceReviewTests(unittest.TestCase):
             self.assertEqual(invalid.returncode, 1)
             self.assertIn("Input error", invalid.stderr)
 
-    def test_modified_poker_hub_metadata_and_only_one_sitemap_entry(self):
+    def test_original_poker_revision_and_current_sitemap_dates_are_coherent(self):
         pages = build.public_pages()
         poker = next(p for p in pages if p["id"] == "poker")
-        self.assertEqual(poker["updated"], "2026-11-04")
+        self.assertGreaterEqual(poker["updated"], "2026-11-04")
         schema = json.loads(re.search(
             r'<script type="application/ld\+json">(.*?)</script>',
             self.public
         ).group(1))
-        self.assertEqual(schema["dateModified"], "2026-11-04")
+        self.assertEqual(schema["dateModified"], poker["updated"])
         self.assertIn('<link rel="canonical" href="https://nolankido.com/poker/">',
                       self.public)
-        old = subprocess.check_output(
-            ["git", "show", BASE + ":sitemap.xml"], cwd=ROOT
+        old = reviewed_bytes(
+            BASE, "sitemap.xml", history.BLOBS["sitemap.xml"][0]
         ).decode("utf-8")
-        new = turn33.before("sitemap.xml", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+        new = reviewed_bytes(
+            RELEASE, "sitemap.xml", history.BLOBS["sitemap.xml"][1]
+        ).decode("utf-8")
+        current = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+
         def dates(content):
-            return {row.findtext(ns + "loc"): row.findtext(ns + "lastmod")
-                    for row in ET.fromstring(content)}
-        before, after = dates(old), dates(new)
+            entries = [(row.findtext(ns + "loc"), row.findtext(ns + "lastmod"))
+                       for row in ET.fromstring(content)]
+            self.assertEqual(len(entries), len({url for url, _ in entries}))
+            return dict(entries)
+
+        before, after, today = dates(old), dates(new), dates(current)
         self.assertEqual(set(before), set(after))
         self.assertEqual({name for name in before if before[name] != after[name]},
                          {"https://nolankido.com/poker/"})
         self.assertEqual(after["https://nolankido.com/poker/"], "2026-11-04")
+        self.assertEqual(today["https://nolankido.com/poker/"], poker["updated"])
 
     def test_compiled_poker_hub_and_read_only_downloads(self):
         generated = build.build_outputs()
