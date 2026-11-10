@@ -55,6 +55,7 @@ function element(id) {
     id, value:'', textContent:'', hidden:true, handlers:{},
     addEventListener(name, fn) { this.handlers[name] = fn; },
     focus() { focused = id; },
+    setSelectionRange(start, end) { this.selectionStart = start; this.selectionEnd = end; },
     removeAttribute() {}, setAttribute() {}, replaceChildren() {},
     appendChild() {}, select() {}
   };

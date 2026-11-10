@@ -128,6 +128,9 @@
       for (const key of Object.keys(FIELDS)) inputs[key].value = values[key];
       status.textContent = 'Illustrative example loaded. Adapt it to your purpose, then assemble the brief.';
       inputs.goal.focus();
+      // Begin at the opening words of a long example, including on phones.
+      inputs.goal.setSelectionRange(0, 0);
+      inputs.goal.scrollTop = 0;
     }, button);
   }
   for (const button of document.querySelectorAll('[data-use-example]')) {
