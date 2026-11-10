@@ -152,6 +152,8 @@
   }
   function selectVisibleText(message) {
     output.focus(); output.select();
+    // Chromium can show the end of an all-text selection; open at the start.
+    output.scrollTop = 0;
     copyStatus.textContent = message;
     // Native focus can place the selected textarea behind a wrapped sticky header.
     // Correct the page scroll after selection without moving focus or the selection.
