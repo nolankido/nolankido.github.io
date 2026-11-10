@@ -14,6 +14,9 @@
   }
 }
 .brief-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin: 28px 0; }
+.brief-quick-start { grid-column: 1 / -1; padding: 18px 20px; border-left: 3px solid var(--green); background: var(--paper-light); }
+.brief-quick-start p { margin: 0; font: .95rem/1.6 var(--sans); }
+.brief-quick-start button { margin-top: 14px; }
 .brief-field { min-width: 0; }
 .brief-field:last-child { grid-column: 1 / -1; }
 .brief-field label, .brief-result label { display: block; font: 600 1rem/1.5 var(--sans); }
@@ -62,7 +65,7 @@
 }
 @media print {
   html:has(.page-task-brief) { background: white; }
-  #brief-workspace, .entry-jumps, .brief-example-use { display: none !important; }
+  #brief-workspace, .entry-jumps, .brief-example-use, .brief-quick-start { display: none !important; }
   .brief-example, .brief-template { break-inside: auto; }
   #brief-blank .brief-template::details-content { content-visibility: visible !important; display: block !important; }
   /* Print the existing validated preview, never a second copy of the inputs. */

@@ -118,20 +118,30 @@
   get('confirm-no').addEventListener('click', () => {
     const back = initiator; dismiss(); initiator = null; if (back) back.focus();
   });
+  function loadExample(card, button) {
+    if (!card || !card.dataset.briefExample) return;
+    const values = {};
+    for (const element of card.querySelectorAll('[data-brief-field]')) values[element.dataset.briefField] = element.textContent;
+    if (Object.keys(FIELDS).some(key => typeof values[key] !== 'string') || Object.keys(assemble(values).errors).length) return;
+    requestChange(() => {
+      clearAll();
+      for (const key of Object.keys(FIELDS)) inputs[key].value = values[key];
+      status.textContent = 'Illustrative example loaded. Adapt it to your purpose, then assemble the brief.';
+      inputs.goal.focus();
+    }, button);
+  }
   for (const button of document.querySelectorAll('[data-use-example]')) {
-    button.addEventListener('click', () => {
-      const card = button.closest('[data-brief-example]');
-      const values = {};
-      for (const element of card.querySelectorAll('[data-brief-field]')) values[element.dataset.briefField] = element.textContent;
-      if (Object.keys(FIELDS).some(key => typeof values[key] !== 'string') || Object.keys(assemble(values).errors).length) return;
-      requestChange(() => {
-        clearAll();
-        for (const key of Object.keys(FIELDS)) inputs[key].value = values[key];
-        status.textContent = 'Illustrative example loaded. Adapt it to your purpose, then assemble the brief.';
-        inputs.goal.focus();
-      }, button);
-    });
+    button.addEventListener('click', () => loadExample(button.closest('[data-brief-example]'), button));
     button.hidden = false;
+  }
+  // Reuse the same reviewed meeting fields without creating a seventh example.
+  const quickMeeting = get('quick-meeting');
+  if (quickMeeting) {
+    quickMeeting.addEventListener('click', () => {
+      const card = document.getElementById('brief-example-meeting');
+      if (card && card.dataset.briefExample === 'meeting') loadExample(card, quickMeeting);
+    });
+    quickMeeting.hidden = false;
   }
   get('copy').addEventListener('click', async () => {
     if (result.hidden || !output.value) return;
