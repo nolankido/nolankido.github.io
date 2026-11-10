@@ -28,7 +28,7 @@
   if (Object.values(inputs).some(input => !input)) return;
   const result = get('result'), output = get('text'), status = get('status'), copyStatus = get('copy-status');
   const confirmation = get('confirm'), preview = get('preview');
-  let pending = null, initiator = null;
+  let pending = null, initiator = null, exportAttempt = 0;
   // The text export and the readable preview derive from the same validated
   // section data. Untrusted field content is always assigned with textContent.
   function showPreview(sections) {
@@ -52,6 +52,7 @@
     }
   }
   function invalidate(message = '') {
+    exportAttempt++;
     result.hidden = true;
     output.value = '';
     preview.replaceChildren();
@@ -89,6 +90,8 @@
     });
   }
   get('build').addEventListener('click', () => {
+    // A new assembly supersedes any clipboard request still in progress.
+    exportAttempt++;
     dismiss(); clearErrors();
     const built = assemble(Object.fromEntries(Object.entries(inputs).map(([k, el]) => [k, el.value])));
     const errors = Object.entries(built.errors);
@@ -167,33 +170,39 @@
   }
   get('copy').addEventListener('click', async () => {
     if (result.hidden || !output.value) return;
+    const attempt = ++exportAttempt;
     const snapshot = output.value;
     copyStatus.textContent = '';
     try {
       if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Unavailable');
       await navigator.clipboard.writeText(snapshot);
-      if (output.value === snapshot && !result.hidden) copyStatus.textContent = 'Brief copied. Review the destination before pasting.';
+      if (attempt === exportAttempt && output.value === snapshot && !result.hidden) {
+        copyStatus.textContent = 'Brief copied to the clipboard. Check the destination after pasting.';
+      }
     } catch (_) {
-      if (output.value !== snapshot || result.hidden) return;
-      selectVisibleText('Automatic copy is unavailable. The brief is selected; use your device’s Copy command.');
+      if (attempt !== exportAttempt || output.value !== snapshot || result.hidden) return;
+      selectVisibleText('Automatic copy is unavailable. The text is selected, not copied by this fallback. Use your device’s Copy command.');
     }
   });
   get('select').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
-    selectVisibleText('Complete text selected. Use your device’s Copy command, then check the destination before pasting.');
+    exportAttempt++;
+    selectVisibleText('Complete text selected, but not copied. Use your device’s Copy command, then check the destination after pasting.');
   });
   get('print').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
+    exportAttempt++;
     try {
       if (typeof window.print !== 'function') throw new Error('Unavailable');
-      copyStatus.textContent = 'Print requested. Check the preview, then choose a printer or Save as PDF if your browser offers it.';
+      copyStatus.textContent = 'Print requested. If the dialog opens, choose Print or Save as PDF, then confirm the result yourself.';
       window.print();
     } catch (_) {
-      selectVisibleText('Printing is unavailable. Save as text or copy the selected brief into your own notes.');
+      selectVisibleText('Printing is unavailable. The text is selected, not copied. Use your device’s Copy command or try Save as text.');
     }
   });
   get('download').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
+    exportAttempt++;
     let url;
     const link = document.createElement('a');
     try {
@@ -201,9 +210,9 @@
       url = URL.createObjectURL(new Blob([snapshot], {type: 'text/plain;charset=utf-8'}));
       link.href = url; link.download = 'ai-task-brief.txt'; link.hidden = true;
       editor.appendChild(link); link.click();
-      copyStatus.textContent = 'Text download requested. Keep the file somewhere appropriate for its contents.';
+      copyStatus.textContent = 'Text download requested. Check your browser’s downloads to confirm the file was saved.';
     } catch (_) {
-      selectVisibleText('Download unavailable. Copy the selected brief into your own notes.');
+      selectVisibleText('Download unavailable. The text is selected, not copied or saved. Use your device’s Copy command, then paste into your notes.');
     } finally {
       link.remove(); if (url) window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
