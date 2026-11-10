@@ -54,6 +54,8 @@
   function hideSelectionCue() {
     const cue = get('selection-cue');
     if (cue) cue.hidden = true;
+    // Do not announce a hidden instruction when the reader revisits the field.
+    output.setAttribute('aria-describedby', 'brief-text-help');
   }
   function invalidate(message = '') {
     exportAttempt++;
@@ -163,7 +165,11 @@
     // Keep a short manual-copy instruction beside the text while it is selected.
     const cue = typeof document.getElementById === 'function'
       ? document.getElementById('brief-selection-cue') : null;
-    if (cue) cue.hidden = false;
+    if (cue) {
+      cue.hidden = false;
+      // Put the immediate Copy instruction first in the focus description.
+      output.setAttribute('aria-describedby', 'brief-selection-cue brief-text-help');
+    }
     output.focus(); output.select();
     // Chromium can show the end of an all-text selection; open at the start.
     output.scrollTop = 0;

@@ -69,6 +69,7 @@ def main() -> int:
         ('AI task brief selection starts at first line', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn106_brief_selection_start.py', '-q']),
         ('AI task brief truthful export outcomes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn107_brief_export_outcomes.py', '-q']),
         ('AI task brief visible copy instruction', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn108_brief_visible_copy_cue.py', '-q']),
+        ('AI task brief readable and accessible manual copy', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn109_brief_copy_accessibility.py', '-q']),
         ('Homepage significant-change freshness', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_home_freshness.py', '-q']),
         ('Free Search Console checker synthetic visitor demo', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_visibility_demo.py', '-q']),
         ('Current public poker video discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_poker_videos.py', '-q']),
