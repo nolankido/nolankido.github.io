@@ -63,6 +63,7 @@ def main() -> int:
         ('Homepage mobile practical shortcut', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn100_mobile_start_shortcut.py', '-q']),
         ('AI task brief one-click quick start', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn101_brief_quick_start.py', '-q']),
         ('AI task brief example opening focus', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn102_brief_opening_focus.py', '-q']),
+        ('AI task brief assembled preview handoff', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn103_brief_result_handoff.py', '-q']),
         ('Homepage significant-change freshness', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_home_freshness.py', '-q']),
         ('Free Search Console checker synthetic visitor demo', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_visibility_demo.py', '-q']),
         ('Current public poker video discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_poker_videos.py', '-q']),

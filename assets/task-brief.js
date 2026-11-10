@@ -107,7 +107,11 @@
     copyStatus.textContent = '';
     result.hidden = false;
     status.textContent = 'Brief assembled from your entries. No AI has run. Review it before using it.';
-    get('result-title').focus();
+    const resultTitle = get('result-title');
+    resultTitle.focus();
+    // A focused result heading at the viewport edge hides the new preview.
+    // Center it so the heading and the start of the review are visible together.
+    if (typeof resultTitle.scrollIntoView === 'function') resultTitle.scrollIntoView({block: 'center', behavior: 'instant'});
   });
   get('clear').addEventListener('click', event => requestChange(() => {
     clearAll(); status.textContent = 'Entries cleared from this page.'; inputs.goal.focus();
