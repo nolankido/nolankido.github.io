@@ -13,10 +13,11 @@ import tempfile
 import unittest
 from xml.etree import ElementTree as ET
 
+from reviewed_release import read as reviewed_bytes
 from test_site import ROOT, build
 import build_poker_episode
 import poker_episode
-import turn32_standoff_source_history as turn32
+import turn31_episode_ledger_history as history
 
 
 SOURCE = ROOT / "_source/poker/portland-meadows-ep1.html"
@@ -25,7 +26,8 @@ LEDGER = ROOT / "downloads/portland-meadows-ep1-scene-claims.json"
 GATE = ROOT / "downloads/poker-vlog-fact-gate.py"
 SHEET = ROOT / "downloads/poker-vlog-truth-to-screen-qa.md"
 LEDGER_ID = "episode-evidence-ledger"
-BASE = "0906e6ae2d51b062dd6d3bf34b86d6be6e432657"
+BASE = history.PARENT
+RELEASE = "fab6e73fb93552831b39c9011dca813955224124"
 
 
 def section(body):
@@ -177,22 +179,26 @@ class EpisodeEvidenceLedgerTests(unittest.TestCase):
         self.assertNotIn("JToB7upHqEM", self.html)
 
     def test_only_episode_lastmod_changes_and_rss_publication_is_preserved(self):
-        older = subprocess.check_output(
-            ["git", "show", BASE + ":sitemap.xml"], cwd=ROOT
-        ).decode("utf-8")
-        current = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+        name = "sitemap.xml"
+        old_sha, new_sha = history.BLOBS[name]
+        older = reviewed_bytes(BASE, name, old_sha).decode("utf-8")
+        released = reviewed_bytes(RELEASE, name, new_sha).decode("utf-8")
+        current = (ROOT / name).read_text(encoding="utf-8")
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+
         def rows(text):
-            return {
-                node.findtext(ns + "loc"): node.findtext(ns + "lastmod")
-                for node in ET.fromstring(text)
-            }
-        before, after = rows(older), rows(turn32.before("sitemap.xml", current))
+            entries = [(node.findtext(ns + "loc"), node.findtext(ns + "lastmod"))
+                       for node in ET.fromstring(text)]
+            self.assertEqual(len(entries), len({url for url, _ in entries}))
+            return dict(entries)
+
+        before, after, now = rows(older), rows(released), rows(current)
         self.assertEqual(set(before), set(after))
         self.assertEqual({url for url in before if before[url] != after[url]},
                          {poker_episode.URL})
         self.assertEqual(after[poker_episode.URL], "2026-11-04")
-        self.assertEqual(build.build_outputs()[Path("sitemap.xml")], current)
+        self.assertEqual(now[poker_episode.URL], poker_episode.MODIFIED)
+        self.assertEqual(build.build_outputs()[Path(name)], current)
         for feed in ("poker/feed.xml", "writing.xml"):
             xml = ET.fromstring((ROOT / feed).read_text(encoding="utf-8"))
             episodes = [item for item in xml.findall("./channel/item")
