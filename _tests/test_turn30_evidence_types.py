@@ -8,10 +8,12 @@ import sys
 import unittest
 from xml.etree import ElementTree as ET
 
+from reviewed_release import read as reviewed_bytes
+import turn30_evidence_index_history as history
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
-import turn31_episode_ledger_history as turn31
 
 SOURCE = ROOT / "_source/start-here.html"
 PUBLIC = ROOT / "start-here/index.html"
@@ -154,24 +156,32 @@ class EvidenceByTypeTests(unittest.TestCase):
         pages = build.public_pages()
         start = next(p for p in pages if p["id"] == "start-here")
         about = next(p for p in pages if p["id"] == "about")
-        self.assertEqual(start["updated"], "2026-11-04")
-        self.assertEqual(about["updated"], "2026-11-04")
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.public).group(1))
-        self.assertEqual(schema["dateModified"], "2026-11-04")
+        self.assertEqual(schema["dateModified"], start["updated"])
         self.assertIn('<link rel="canonical" href="' + ORIGIN + '/start-here/">', self.public)
-        old_xml = subprocess.check_output(["git", "show",
-            "c259d366176f3411e89777646135262178cc75b3:sitemap.xml"], cwd=ROOT
+        name = "sitemap.xml"
+        old_sha, new_sha = history.BLOBS[name]
+        old_xml = reviewed_bytes(history.PARENT, name, old_sha).decode("utf-8")
+        released_xml = reviewed_bytes(
+            "0906e6ae2d51b062dd6d3bf34b86d6be6e432657", name, new_sha
         ).decode("utf-8")
-        new_xml = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+        current_xml = (ROOT / name).read_text(encoding="utf-8")
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+
         def rows(xml):
             root = ET.fromstring(xml)
-            return {item.findtext(ns + "loc"): item.findtext(ns + "lastmod") for item in root}
-        older, newer = rows(old_xml), rows(turn31.before("sitemap.xml", new_xml))
-        self.assertEqual(set(older), set(newer))
-        self.assertEqual({url for url in older if older[url] != newer[url]},
+            entries = [(item.findtext(ns + "loc"), item.findtext(ns + "lastmod"))
+                       for item in root]
+            self.assertEqual(len(entries), len({url for url, _ in entries}))
+            return dict(entries)
+
+        older, released, current = rows(old_xml), rows(released_xml), rows(current_xml)
+        self.assertEqual(set(older), set(released))
+        self.assertEqual({url for url in older if older[url] != released[url]},
                          {ORIGIN + "/start-here/"})
-        self.assertEqual(newer[ORIGIN + "/start-here/"], "2026-11-04")
+        self.assertEqual(released[ORIGIN + "/start-here/"], "2026-11-04")
+        self.assertEqual(current[ORIGIN + "/start-here/"], start["updated"])
+        self.assertEqual(current[ORIGIN + "/about/"], about["updated"])
 
     def test_generated_pages_and_sitemap_match_sources(self):
         outputs = build.build_outputs()
