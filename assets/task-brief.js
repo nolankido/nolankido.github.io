@@ -51,8 +51,13 @@
       get(key + '-error').hidden = true;
     }
   }
+  function hideSelectionCue() {
+    const cue = get('selection-cue');
+    if (cue) cue.hidden = true;
+  }
   function invalidate(message = '') {
     exportAttempt++;
+    hideSelectionCue();
     result.hidden = true;
     output.value = '';
     preview.replaceChildren();
@@ -92,6 +97,7 @@
   get('build').addEventListener('click', () => {
     // A new assembly supersedes any clipboard request still in progress.
     exportAttempt++;
+    hideSelectionCue();
     dismiss(); clearErrors();
     const built = assemble(Object.fromEntries(Object.entries(inputs).map(([k, el]) => [k, el.value])));
     const errors = Object.entries(built.errors);
@@ -154,6 +160,10 @@
     quickMeeting.hidden = false;
   }
   function selectVisibleText(message) {
+    // Keep a short manual-copy instruction beside the text while it is selected.
+    const cue = typeof document.getElementById === 'function'
+      ? document.getElementById('brief-selection-cue') : null;
+    if (cue) cue.hidden = false;
     output.focus(); output.select();
     // Chromium can show the end of an all-text selection; open at the start.
     output.scrollTop = 0;
@@ -163,7 +173,12 @@
     const header = typeof document.querySelector === 'function' ? document.querySelector('.site-header') : null;
     const inset = header && typeof header.getBoundingClientRect === 'function'
       ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
-    const top = typeof output.getBoundingClientRect === 'function' ? output.getBoundingClientRect().top : null;
+    // Position the visible instruction and label, not just the textarea,
+    // below a wrapped mobile header after focus has scrolled the page.
+    const label = cue && typeof document.getElementById === 'function'
+      ? document.getElementById('brief-text-label') : null;
+    const anchor = label && typeof label.getBoundingClientRect === 'function' ? label : output;
+    const top = typeof anchor.getBoundingClientRect === 'function' ? anchor.getBoundingClientRect().top : null;
     if (Number.isFinite(top) && top < inset + 20 && typeof window.scrollBy === 'function') {
       window.scrollBy({top: top - inset - 20, behavior: 'instant'});
     }
@@ -171,6 +186,7 @@
   get('copy').addEventListener('click', async () => {
     if (result.hidden || !output.value) return;
     const attempt = ++exportAttempt;
+    hideSelectionCue();
     const snapshot = output.value;
     copyStatus.textContent = '';
     try {
@@ -192,6 +208,7 @@
   get('print').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
     exportAttempt++;
+    hideSelectionCue();
     try {
       if (typeof window.print !== 'function') throw new Error('Unavailable');
       copyStatus.textContent = 'Print requested. If the dialog opens, choose Print or Save as PDF, then confirm the result yourself.';
@@ -203,6 +220,7 @@
   get('download').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
     exportAttempt++;
+    hideSelectionCue();
     let url;
     const link = document.createElement('a');
     try {
