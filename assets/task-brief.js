@@ -30,6 +30,11 @@
   const confirmation = get('confirm'), preview = get('preview');
   const SELECTED_CUE = 'Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.';
   const PARTIAL_CUE = 'Full brief no longer selected. Choose Select text manually again.';
+  const FALLBACK_TITLES = Object.freeze({
+    selected: ['Selected, not copied.', ' Ctrl+C, Cmd+C, or touch Copy.'],
+    partial: ['Full brief no longer selected.', ' Choose Select text manually again.'],
+    copy: ['Copy command detected.', ' Paste elsewhere to verify.'],
+  });
   let pending = null, initiator = null, exportAttempt = 0;
   // The text export and the readable preview derive from the same validated
   // section data. Untrusted field content is always assigned with textContent.
@@ -53,6 +58,15 @@
       get(key + '-error').hidden = true;
     }
   }
+  function setFallbackTitle(state) {
+    const title = get('export-alternatives-title');
+    const parts = FALLBACK_TITLES[state];
+    if (!title || !parts) return;
+    const strong = document.createElement('strong');
+    strong.textContent = parts[0];
+    // Only fixed, reviewed UI copy enters this group label, never field text.
+    title.replaceChildren(strong, document.createTextNode(parts[1]));
+  }
   function hideSelectionCue() {
     const cue = get('selection-cue');
     if (cue) {
@@ -62,6 +76,7 @@
     // An alternative export action supersedes the temporary manual-copy route.
     const alternatives = get('export-alternatives');
     if (alternatives) alternatives.hidden = true;
+    setFallbackTitle('selected');
     // Do not announce a hidden instruction when the reader revisits the field.
     output.setAttribute('aria-describedby', 'brief-text-help');
   }
@@ -72,6 +87,7 @@
     const save = get('save-alternative'), print = get('print-alternative');
     if (save) save.hidden = unavailable === 'download';
     if (print) print.hidden = unavailable === 'print';
+    setFallbackTitle('selected');
     alternatives.hidden = false;
   }
   function invalidate(message = '') {
@@ -264,9 +280,11 @@
     if (!cue) return;
     if (!allTextSelected() && cue.textContent !== PARTIAL_CUE) {
       cue.textContent = PARTIAL_CUE;
+      setFallbackTitle('partial');
       copyStatus.textContent = 'The complete brief is no longer selected. Choose Select text manually again before copying.';
     } else if (allTextSelected() && cue.textContent === PARTIAL_CUE) {
       cue.textContent = SELECTED_CUE;
+      setFallbackTitle('selected');
       copyStatus.textContent = 'Complete text selected, not copied. Use your device’s Copy command, then paste to verify.';
     }
   }
@@ -282,10 +300,12 @@
     if (!cue) return;
     if (!allTextSelected()) {
       cue.textContent = PARTIAL_CUE;
+      setFallbackTitle('partial');
       copyStatus.textContent = 'Copy command detected with only part of the brief selected. Re-select the full text and copy again, then verify by pasting.';
       return;
     }
     cue.textContent = 'Copy command detected. Paste to check the result.';
+    setFallbackTitle('copy');
     copyStatus.textContent = 'Copy command detected, but this page cannot confirm clipboard contents. Paste to verify before leaving.';
   });
   function printBrief() {
