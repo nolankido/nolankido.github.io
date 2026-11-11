@@ -34,8 +34,12 @@
     selected: ['Selected, not copied.', ' Ctrl+C, Cmd+C, or touch Copy.'],
     partial: ['Full brief no longer selected.', ' Choose Select text manually again.'],
     copy: ['Copy command detected.', ' Paste elsewhere to verify.'],
+    manual: ['Save and print both unavailable.', ' Use Ctrl+C, Cmd+C, or touch Copy.'],
   });
   let pending = null, initiator = null, exportAttempt = 0;
+  // Remember known export failures for this assembled brief. A second failed
+  // route must not offer the first failed route as if it remains available.
+  const unavailableExports = new Set();
   // The text export and the readable preview derive from the same validated
   // section data. Untrusted field content is always assigned with textContent.
   function showPreview(sections) {
@@ -60,7 +64,8 @@
   }
   function setFallbackTitle(state) {
     const title = get('export-alternatives-title');
-    const parts = FALLBACK_TITLES[state];
+    const parts = FALLBACK_TITLES[state === 'selected' && unavailableExports.size === 2
+      ? 'manual' : state];
     if (!title || !parts) return;
     const strong = document.createElement('strong');
     strong.textContent = parts[0];
@@ -83,15 +88,17 @@
   function showExportAlternatives(unavailable = '') {
     const alternatives = get('export-alternatives');
     if (!alternatives) return;
-    // If one export just failed, show only the other usable option.
+    if (unavailable === 'download' || unavailable === 'print') unavailableExports.add(unavailable);
+    // Do not re-offer a route already known to have failed for this brief.
     const save = get('save-alternative'), print = get('print-alternative');
-    if (save) save.hidden = unavailable === 'download';
-    if (print) print.hidden = unavailable === 'print';
+    if (save) save.hidden = unavailableExports.has('download');
+    if (print) print.hidden = unavailableExports.has('print');
     setFallbackTitle('selected');
     alternatives.hidden = false;
   }
   function invalidate(message = '') {
     exportAttempt++;
+    unavailableExports.clear();
     hideSelectionCue();
     result.hidden = true;
     output.value = '';
@@ -132,6 +139,7 @@
   get('build').addEventListener('click', () => {
     // A new assembly supersedes any clipboard request still in progress.
     exportAttempt++;
+    unavailableExports.clear();
     hideSelectionCue();
     dismiss(); clearErrors();
     const built = assemble(Object.fromEntries(Object.entries(inputs).map(([k, el]) => [k, el.value])));
@@ -318,7 +326,9 @@
       window.print();
     } catch (_) {
       showExportAlternatives('print');
-      selectVisibleText('Printing is unavailable. The text is selected, not copied. Use your device’s Copy command or choose Save full brief as .txt above the text.');
+      selectVisibleText(unavailableExports.size === 2
+        ? 'Save and print both failed. The full brief is selected, not copied. Use your device’s Copy command, then paste elsewhere to verify.'
+        : 'Printing is unavailable. The text is selected, not copied. Use your device’s Copy command or choose Save full brief as .txt above the text.');
     }
   }
   function downloadBrief() {
@@ -335,7 +345,9 @@
       copyStatus.textContent = 'Text download requested. Check your browser’s downloads to confirm the file was saved.';
     } catch (_) {
       showExportAlternatives('download');
-      selectVisibleText('Download unavailable. The text is selected, not copied or saved. Use your device’s Copy command or choose Print / Save as PDF above the text.');
+      selectVisibleText(unavailableExports.size === 2
+        ? 'Save and print both failed. The full brief is selected, not copied. Use your device’s Copy command, then paste elsewhere to verify.'
+        : 'Download unavailable. The text is selected, not copied or saved. Use your device’s Copy command or choose Print / Save as PDF above the text.');
     } finally {
       link.remove(); if (url) window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
