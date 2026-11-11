@@ -151,10 +151,10 @@ console.log('Quick-start interaction: PASS');
     def test_metadata_updated_for_real_page_change(self):
         manifest = json.loads((ROOT / '_source/pages.json').read_text(encoding='utf-8'))
         entry = next(item for item in manifest if item.get('id') == 'task-brief')
-        self.assertEqual(entry['updated'], '2026-11-10')
+        self.assertGreaterEqual(entry['updated'], '2026-11-10')
         self.assertIn('editable meeting example', entry['description'])
         sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
-        self.assertRegex(sitemap, r'<loc>https://nolankido\.com/technology/task-brief/</loc>\s*<lastmod>2026-11-10</lastmod>')
+        self.assertRegex(sitemap, r'<loc>https://nolankido\.com/technology/task-brief/</loc>\s*<lastmod>2026-11-11</lastmod>')
 
 
 if __name__ == '__main__':

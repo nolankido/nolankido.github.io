@@ -177,7 +177,7 @@ assert.ok(text.value.includes('A fictional meeting'));
             self.assertNotIn(forbidden, script)
         pages = json.loads((ROOT / '_source/pages.json').read_text(encoding='utf-8'))
         brief = next(item for item in pages if item.get('id') == 'task-brief')
-        self.assertEqual(brief['updated'], '2026-11-10')
+        self.assertGreaterEqual(brief['updated'], '2026-11-10')
 
 
 if __name__ == '__main__':

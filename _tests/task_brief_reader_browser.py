@@ -153,6 +153,27 @@ def main():
                     assert 'WORKING INSTRUCTIONS' in page.locator('#brief-text').input_value()
                     assert page.evaluate('document.documentElement.scrollWidth') <= width + 1, (
                         width, 'assembled brief overflows')
+                    # At 200% text, the next step must not be buried after a
+                    # sixteen-row readonly textarea. Navigation is in-page:
+                    # the completed brief remains available until departure.
+                    next_link = page.locator('#brief-result-next a[href="#brief-next-check"]')
+                    assert next_link.is_visible(), width
+                    assert page.locator('#brief-result-next').bounding_box()['y'] < (
+                        page.locator('#brief-text').bounding_box()['y']), width
+                    saved = page.locator('#brief-text').input_value()
+                    next_link.focus()
+                    page.keyboard.press('Enter')
+                    assert page.evaluate('location.hash') == '#brief-next-check', width
+                    headerBottom, targetTop = page.evaluate('''() => [
+                        document.querySelector('.site-header').getBoundingClientRect().bottom,
+                        document.getElementById('brief-next-check').getBoundingClientRect().top,
+                    ]''')
+                    assert targetTop >= headerBottom - 1, (width, 'check hidden by header',
+                                                           headerBottom, targetTop)
+                    assert page.locator('#brief-text').input_value() == saved, width
+                    assert page.locator('#brief-result').is_visible(), width
+                    assert page.evaluate('document.documentElement.scrollWidth') <= width + 1, (
+                        width, 'handoff overflows')
                     interactive += 1
                     page.close()
                 assert live_context.cookies() == []

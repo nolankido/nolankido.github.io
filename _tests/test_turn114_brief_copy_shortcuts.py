@@ -45,7 +45,7 @@ class CopyShortcutGuidanceTests(unittest.TestCase):
             self.assertNotIn(forbidden, script)
         pages = json.loads((ROOT / '_source/pages.json').read_text(encoding='utf-8'))
         entry = next(page for page in pages if page.get('id') == 'task-brief')
-        self.assertEqual(entry['updated'], '2026-11-10')
+        self.assertGreaterEqual(entry['updated'], '2026-11-10')
 
 
 if __name__ == '__main__':

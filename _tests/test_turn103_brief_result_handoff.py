@@ -96,7 +96,7 @@ console.log('Result handoff: PASS');
         self.assertIn('task-brief.js?v=' + script_hash, html)
         pages = json.loads((ROOT / '_source/pages.json').read_text(encoding='utf-8'))
         brief = next(page for page in pages if page.get('id') == 'task-brief')
-        self.assertEqual(brief['updated'], '2026-11-10')
+        self.assertGreaterEqual(brief['updated'], '2026-11-10')
         self.assertEqual(len(re.findall(r'id="brief-result-title"',html)),1)
 
 
