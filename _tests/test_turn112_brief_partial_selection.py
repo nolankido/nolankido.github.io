@@ -56,7 +56,7 @@ URL.revokeObjectURL=()=>{};
 require('./assets/task-brief.js');
 const output=dom['brief-text'],cue=dom['brief-selection-cue'];
 const feedback=dom['brief-copy-status'];
-const selected='Selected, not copied. Use your device’s Copy command.';
+const selected='Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.';
 const partial='Full brief no longer selected. Choose Select text manually again.';
 const copyAttempt='Copy command detected. Paste to check the result.';
 const nativeCopy={preventDefault(){eventPrevented=true;}};

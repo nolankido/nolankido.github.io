@@ -73,6 +73,7 @@ def main() -> int:
         ('AI task brief extreme reflow navigation', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn110_brief_extreme_reflow.py', '-q']),
         ('AI task brief manual native-copy command', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn111_brief_manual_copy_command.py', '-q']),
         ('AI task brief incomplete-selection warning', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn112_brief_partial_selection.py', '-q']),
+        ('AI task brief keyboard and touch copy guidance', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_brief_copy_shortcuts.py', '-q']),
         ('Homepage significant-change freshness', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_home_freshness.py', '-q']),
         ('Free Search Console checker synthetic visitor demo', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_visibility_demo.py', '-q']),
         ('Current public poker video discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_poker_videos.py', '-q']),

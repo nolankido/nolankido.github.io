@@ -28,7 +28,7 @@
   if (Object.values(inputs).some(input => !input)) return;
   const result = get('result'), output = get('text'), status = get('status'), copyStatus = get('copy-status');
   const confirmation = get('confirm'), preview = get('preview');
-  const SELECTED_CUE = 'Selected, not copied. Use your device’s Copy command.';
+  const SELECTED_CUE = 'Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.';
   const PARTIAL_CUE = 'Full brief no longer selected. Choose Select text manually again.';
   let pending = null, initiator = null, exportAttempt = 0;
   // The text export and the readable preview derive from the same validated

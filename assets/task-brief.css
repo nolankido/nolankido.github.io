@@ -44,7 +44,7 @@
 .brief-example-use { margin-top: 12px; }
 
 #brief-text { min-height: 340px; overflow-wrap: anywhere; }
-.brief-selection-cue { margin: 6px 0 12px; padding: 9px 12px; border-left: 3px solid var(--red); background: var(--paper-light); color: var(--basalt); font: 600 .9rem/1.45 var(--sans); }
+.brief-selection-cue { margin: 6px 0 12px; padding: 9px 12px; border-left: 3px solid var(--red); background: var(--paper-light); color: var(--basalt); font: 600 .9rem/1.45 var(--sans); overflow-wrap: anywhere; }
 #brief-status, #brief-copy-status { font: .9rem/1.55 var(--sans); }
 .brief-example, .brief-template { border-top: 1px solid var(--line-dark); padding: 18px 0; }
 .brief-example summary, .brief-template summary { cursor: pointer; font: 600 1.05rem/1.5 var(--sans); min-height: 44px; box-sizing: border-box; padding-block: 8px; }

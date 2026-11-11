@@ -55,7 +55,7 @@ URL.createObjectURL=()=> 'blob:fictional';
 URL.revokeObjectURL=()=>{};
 require('./assets/task-brief.js');
 const output=dom['brief-text'],cue=dom['brief-selection-cue'];
-const feedback=dom['brief-copy-status'], selectedCue='Selected, not copied. Use your device’s Copy command.';
+const feedback=dom['brief-copy-status'], selectedCue='Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.';
 const attemptedCue='Copy command detected. Paste to check the result.';
 for(const [key,value] of Object.entries({
   goal:'Fictional purpose',materials:'Generic notes',output:'Short summary',
@@ -136,7 +136,7 @@ const event={preventDefault(){throw Error('Native copy must not be prevented');}
         source = (ROOT / '_source/technology/task-brief.html').read_text(encoding='utf-8')
         html = (ROOT / 'technology/task-brief/index.html').read_text(encoding='utf-8')
         script = (ROOT / 'assets/task-brief.js').read_text(encoding='utf-8')
-        self.assertIn('Selected, not copied. Use your device’s Copy command.', source)
+        self.assertIn('Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.', source)
         self.assertIn('id="brief-selection-cue" class="brief-selection-cue" hidden', html)
         self.assertIn('task-brief.js?v=' + sha256(script.encode()).hexdigest()[:12], html)
         self.assertIn("output.addEventListener('copy', () => {", script)
