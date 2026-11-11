@@ -7,7 +7,7 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-COPY_CUE = 'Selected, not copied. Use your device’s Copy command.'
+COPY_CUE = 'Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.'
 
 
 class ManualCopyAccessibilityTests(unittest.TestCase):

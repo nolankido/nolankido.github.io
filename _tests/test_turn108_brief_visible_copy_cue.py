@@ -127,7 +127,7 @@ function checkSelected(message) {
         for html in (source, public):
             self.assertIn('id="brief-text-label" for="brief-text"', html)
             self.assertIn('id="brief-selection-cue" class="brief-selection-cue" hidden', html)
-            self.assertIn('Selected, not copied. Use your device’s Copy command.', html)
+            self.assertIn('Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.', html)
             self.assertEqual(html.count('id="brief-selection-cue"'), 1)
         css = (ROOT / 'assets/task-brief.css').read_text(encoding='utf-8')
         self.assertIn('.brief-selection-cue {', css)
