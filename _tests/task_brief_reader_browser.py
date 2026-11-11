@@ -190,6 +190,18 @@ def main():
                     assert page.locator('#brief-text').input_value() == saved, width
                     assert page.evaluate('document.documentElement.scrollWidth') <= width + 1, (
                         width, 'manual selection overflows')
+                    page.locator('#brief-text').press('ArrowLeft')
+                    title = panel.locator('#brief-export-alternatives-title').inner_text()
+                    assert 'Full brief no longer selected.' in title, width
+                    assert 'Choose Select text manually again.' in title, width
+                    page.locator('#brief-select').click()
+                    title = panel.locator('#brief-export-alternatives-title').inner_text()
+                    assert 'Selected, not copied.' in title, width
+                    assert page.locator('#brief-text').evaluate(
+                        'el => el.selectionStart === 0 && el.selectionEnd === el.value.length'
+                    ), width
+                    assert page.evaluate('document.documentElement.scrollWidth') <= width + 1, (
+                        width, 'selection reset overflows')
                     interactive += 1
                     page.close()
                 assert live_context.cookies() == []
