@@ -64,6 +64,15 @@
   #brief-workspace, #brief-examples, #brief-blank, #brief-example-meeting,
   #brief-next-check, #brief-next-check-title, #how-it-works { scroll-margin-top: 4.5rem; }
 }
+@media (max-width: 240px) {
+  /* Extreme reflow or high page zoom can make the wrapped nav fill nearly
+     half the viewport. Let it scroll away so the working text stays visible. */
+  .page-task-brief .site-header { position: static; }
+  /* Without a sticky header, native in-page jumps need only a small cushion. */
+  html:has(.page-task-brief) { scroll-padding-top: 20px; }
+  #brief-workspace, #brief-examples, #brief-blank, #brief-example-meeting,
+  #brief-next-check, #brief-next-check-title, #how-it-works { scroll-margin-top: 0; }
+}
 @media print {
   html:has(.page-task-brief) { background: white; }
   #brief-workspace, .entry-jumps, .brief-example-use, .brief-quick-start { display: none !important; }
