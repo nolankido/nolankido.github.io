@@ -110,14 +110,16 @@ assert.equal(d('save-alternative').hidden,true); // Mock default, reset on revea
   assert.equal(d('save-alternative').hidden,false);
   assert.match(d('copy-status').textContent,/Printing is unavailable/);
 
-  // If saving fails, point to Print instead, with no false save confirmation.
+  // If saving also fails, do not re-offer the earlier failed Print route.
+  // The selected text and native Copy instruction are the remaining path.
   URL.createObjectURL=()=>{throw Error('Blocked download');};
   d('save-alternative').handlers.click();
   assert.equal(d('export-alternatives').hidden,false);
   assert.equal(d('save-alternative').hidden,true);
-  assert.equal(d('print-alternative').hidden,false);
-  assert.match(d('copy-status').textContent,/Download unavailable/);
-  assert.match(d('copy-status').textContent,/not copied or saved/);
+  assert.equal(d('print-alternative').hidden,true);
+  assert.match(d('copy-status').textContent,/Save and print both failed/);
+  assert.match(d('copy-status').textContent,/selected, not copied/);
+  assert.equal(d('text').selectionEnd,d('text').value.length);
 
   // Changing the draft removes stale controls and prevents old exports.
   d('goal').value='Different fictional goal';
