@@ -144,7 +144,7 @@ assert.equal(d('save-alternative').hidden,true); // Mock default, reset on revea
             self.assertIn('id="brief-export-alternatives" class="brief-export-alternatives" role="group" aria-labelledby="brief-export-alternatives-title" hidden', html)
             self.assertIn('id="brief-save-alternative"', html)
             self.assertIn('id="brief-print-alternative"', html)
-            self.assertIn('without the clipboard', html)
+            self.assertIn('<strong>Selected, not copied.</strong> Ctrl+C, Cmd+C, or touch Copy.', html)
             self.assertIn('A request does not confirm a save.', html)
             self.assertLess(html.index('id="brief-selection-cue"'), html.index('id="brief-export-alternatives"'))
             self.assertLess(html.index('id="brief-export-alternatives"'), html.index('id="brief-text" readonly'))
