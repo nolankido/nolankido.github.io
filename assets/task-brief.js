@@ -30,11 +30,13 @@
   const confirmation = get('confirm'), preview = get('preview');
   const SELECTED_CUE = 'Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.';
   const PARTIAL_CUE = 'Full brief no longer selected. Choose Select text manually again.';
+  const UNCONFIRMED_CUE = 'Full selection not confirmed. In the text box, choose Select all, then Copy.';
   const FALLBACK_TITLES = Object.freeze({
     selected: ['Selected, not copied.', ' Ctrl+C, Cmd+C, or touch Copy.'],
     partial: ['Full brief no longer selected.', ' Choose Select text manually again.'],
     copy: ['Copy command detected.', ' Paste elsewhere to verify.'],
     manual: ['Save and print both unavailable.', ' Use Ctrl+C, Cmd+C, or touch Copy.'],
+    unconfirmed: ['Full selection not confirmed.', ' Select all in the text box, then Copy.'],
   });
   let pending = null, initiator = null, exportAttempt = 0;
   // Remember known export failures for this assembled brief. A second failed
@@ -212,10 +214,19 @@
       // Put the immediate Copy instruction first in the focus description.
       output.setAttribute('aria-describedby', 'brief-selection-cue brief-text-help');
     }
-    output.focus(); output.select();
+    // Some touch browsers or embedded views do not honor a programmatic
+    // text selection. Never announce a complete selection until the range
+    // actually covers the whole plain-text brief.
+    try { output.focus(); output.select(); } catch (_) { /* Native selection remains possible. */ }
     // Chromium can show the end of an all-text selection; open at the start.
     output.scrollTop = 0;
-    copyStatus.textContent = message;
+    if (output.selectionStart === 0 && output.selectionEnd === output.value.length) {
+      copyStatus.textContent = message;
+    } else {
+      if (cue) cue.textContent = UNCONFIRMED_CUE;
+      setFallbackTitle('unconfirmed');
+      copyStatus.textContent = 'Full-text selection could not be confirmed. Focus the text box, press Ctrl+A or Cmd+A, then Ctrl+C or Cmd+C. On touch, touch and hold in the text box, choose Select all, then Copy. Paste elsewhere to verify. Save .txt or Print / PDF may be available above the text.';
+    }
     // Native focus can place the selected textarea behind a wrapped sticky header.
     // Correct the page scroll after selection without moving focus or the selection.
     const header = typeof document.querySelector === 'function' ? document.querySelector('.site-header') : null;
@@ -286,11 +297,13 @@
   function reflectSelectionChange() {
     const cue = activeSelectionCue();
     if (!cue) return;
-    if (!allTextSelected() && cue.textContent !== PARTIAL_CUE) {
+    if (!allTextSelected() && cue.textContent !== PARTIAL_CUE
+        && cue.textContent !== UNCONFIRMED_CUE) {
       cue.textContent = PARTIAL_CUE;
       setFallbackTitle('partial');
       copyStatus.textContent = 'The complete brief is no longer selected. Choose Select text manually again before copying.';
-    } else if (allTextSelected() && cue.textContent === PARTIAL_CUE) {
+    } else if (allTextSelected()
+        && (cue.textContent === PARTIAL_CUE || cue.textContent === UNCONFIRMED_CUE)) {
       cue.textContent = SELECTED_CUE;
       setFallbackTitle('selected');
       copyStatus.textContent = 'Complete text selected, not copied. Use your device’s Copy command, then paste to verify.';
