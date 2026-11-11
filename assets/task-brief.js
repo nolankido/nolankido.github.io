@@ -28,6 +28,7 @@
   if (Object.values(inputs).some(input => !input)) return;
   const result = get('result'), output = get('text'), status = get('status'), copyStatus = get('copy-status');
   const confirmation = get('confirm'), preview = get('preview');
+  const SELECTED_CUE = 'Selected, not copied. Use your device’s Copy command.';
   let pending = null, initiator = null, exportAttempt = 0;
   // The text export and the readable preview derive from the same validated
   // section data. Untrusted field content is always assigned with textContent.
@@ -53,7 +54,10 @@
   }
   function hideSelectionCue() {
     const cue = get('selection-cue');
-    if (cue) cue.hidden = true;
+    if (cue) {
+      cue.hidden = true;
+      cue.textContent = SELECTED_CUE;
+    }
     // Do not announce a hidden instruction when the reader revisits the field.
     output.setAttribute('aria-describedby', 'brief-text-help');
   }
@@ -166,6 +170,7 @@
     const cue = typeof document.getElementById === 'function'
       ? document.getElementById('brief-selection-cue') : null;
     if (cue) {
+      cue.textContent = SELECTED_CUE;
       cue.hidden = false;
       // Put the immediate Copy instruction first in the focus description.
       output.setAttribute('aria-describedby', 'brief-selection-cue brief-text-help');
@@ -210,6 +215,15 @@
     if (result.hidden || !output.value) return;
     exportAttempt++;
     selectVisibleText('Complete text selected, but not copied. Use your device’s Copy command, then check the destination after pasting.');
+  });
+  // A native Copy command starts an OS/browser operation, not a verified write.
+  // Respond only to a complete manual selection; never intercept its default.
+  output.addEventListener('copy', () => {
+    const cue = get('selection-cue');
+    if (result.hidden || !output.value || !cue || cue.hidden ||
+        output.selectionStart !== 0 || output.selectionEnd !== output.value.length) return;
+    cue.textContent = 'Copy command detected. Paste to check the result.';
+    copyStatus.textContent = 'Copy command detected, but this page cannot confirm clipboard contents. Paste to verify before leaving.';
   });
   get('print').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
