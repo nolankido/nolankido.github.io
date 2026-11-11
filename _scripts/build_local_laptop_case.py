@@ -8,6 +8,7 @@ technology article shell to preserve navigation, sharing, and stable identity.
 from __future__ import annotations
 
 import argparse
+from hashlib import sha256
 from html import escape
 import json
 from pathlib import Path
@@ -25,6 +26,7 @@ DESCRIPTION = ("A practical Windows guide to Ollama and LM Studio on an MSI gami
                "setup, privacy boundaries, repeatable tests, and what remains unmeasured.")
 PUBLISHED = "2026-11-02"
 PERSON = "https://nolankido.com/about/#nolan-kido"
+SNAPSHOT_CSS = Path("assets/standalone-evidence-snapshot.css")
 OLD_TITLE = "Local AI Test Results: Timing, Errors & Limits | Nolan Kido"
 OLD_DESCRIPTION = ("Read a documented Gemma test on an Ubuntu CPU runner: per-case timings, "
                    "retained failures, configuration, and the difference between model latency and task time.")
@@ -51,6 +53,11 @@ def render() -> str:
     prefix, tail = shell.split(MAIN, 1)
     old_body, suffix = tail.split(END_MAIN, 1)
     prefix = once(prefix, MARKER, MANUAL)
+    if '/' + SNAPSHOT_CSS.as_posix() in prefix:
+        raise ValueError("Local AI guide cannot inherit its evidence snapshot stylesheet")
+    version = sha256((ROOT / SNAPSHOT_CSS).read_bytes()).hexdigest()[:12]
+    prefix = once(prefix, "</head>",
+                  f'  <link rel="stylesheet" href="/{SNAPSHOT_CSS.as_posix()}?v={version}">\n</head>')
     for old, new in (
         (f"<title>{escape(OLD_TITLE)}</title>", f"<title>{escape(TITLE)}</title>"),
         (f'<meta name="description" content="{escape(OLD_DESCRIPTION, quote=True)}">',

@@ -37,6 +37,7 @@ MANUAL = "<!-- Independent reply audit: edit _source/technology/review-reply-evi
 MAIN = '  <main id="main" class="ledger" tabindex="-1">'
 END_MAIN = "  </main>"
 READER_CSS = Path("assets/standalone-section-arrivals.css")
+SNAPSHOT_CSS = Path("assets/standalone-evidence-snapshot.css")
 
 
 def once(content: str, old: str, new: str) -> str:
@@ -65,6 +66,11 @@ def render() -> str:
     version = sha256((ROOT / READER_CSS).read_bytes()).hexdigest()[:12]
     prefix = once(prefix, "</head>",
                   f'  <link rel="stylesheet" href="/{READER_CSS.as_posix()}?v={version}">\n</head>')
+    if '/' + SNAPSHOT_CSS.as_posix() in prefix:
+        raise ValueError("Reply audit cannot inherit its evidence snapshot stylesheet")
+    snapshot_version = sha256((ROOT / SNAPSHOT_CSS).read_bytes()).hexdigest()[:12]
+    prefix = once(prefix, "</head>",
+                  f'  <link rel="stylesheet" href="/{SNAPSHOT_CSS.as_posix()}?v={snapshot_version}">\n</head>')
     for old, new in (
         (f"<title>{escape(OLD_TITLE)}</title>", f"<title>{escape(TITLE)}</title>"),
         (f'<meta name="description" content="{escape(OLD_DESCRIPTION, quote=True)}">',

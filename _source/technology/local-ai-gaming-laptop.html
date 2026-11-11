@@ -5,7 +5,15 @@
     <h2 id="local-laptop-intro">Why I run local AI on a gaming laptop.</h2>
     <p class="intro">I use an 18-inch MSI Crosshair Windows gaming laptop as a practical place to explore local language models, software tools, and experiments. A machine I already use gives me a way to learn what can run under my control without first designing a cloud service. But a gaming laptop is not automatically a private, cheap, or fast AI workstation. Those are separate questions that need checks.</p>
     <p>The useful distinction is between <strong>where inference runs</strong>, <strong>which data an application sends elsewhere</strong>, <strong>what a model can do well enough</strong>, and <strong>the full cost of the work</strong>. I use those distinctions to decide when to keep a task local and when a hosted service is more sensible.</p>
-    <p><strong>Evidence disclosure:</strong> This is a firsthand description of my approach and a reproducible Windows setup guide. I am not publishing an inventory of my exact laptop GPU, VRAM, RAM, model downloads, personal directory structure, or private usage logs. I have not run a new timed model benchmark on that laptop for this article. The public model-test figures cited below came from a different, clearly identified computer.</p>
+    <p><strong>Scope and privacy:</strong> This is a firsthand description of my approach and a reproducible Windows setup guide. I have not run a new timed model benchmark on that laptop for this article. I am not publishing an inventory of my exact laptop GPU, VRAM, RAM, model downloads, personal directory structure, or private usage logs.</p>
+    <aside class="case-evidence-snapshot" aria-labelledby="laptop-snapshot-title">
+      <h3 id="laptop-snapshot-title">Evidence at a glance</h3>
+      <dl>
+        <div><dt>On this laptop</dt><dd>No timed model benchmark for this article. Its inference speed, energy use, and whole-task savings remain unmeasured.</dd></div>
+        <div><dt>Measured elsewhere</dt><dd>Three historical Gemma replies ran on a GitHub-hosted Ubuntu CPU runner, not the MSI laptop. <a href="#laptop-evidence">Inspect the original records</a>.</dd></div>
+        <div><dt>Try the check</dt><dd>The <a href="#laptop-measure">loopback-only test</a> supports a dry run and a deliberate local request, but supplies no new laptop performance result.</dd></div>
+      </dl>
+    </aside>
     <nav class="entry-jumps" aria-label="On this local AI guide"><a href="#laptop-hardware">Inspect the hardware</a><a href="#laptop-ollama">Try Ollama</a><a href="#laptop-studio">Compare LM Studio</a><a href="#laptop-measure">Run a bounded local test</a><a href="#laptop-evidence">See the real evidence</a><a href="#laptop-decision">Choose what stays human</a></nav>
   </div>
 </section>

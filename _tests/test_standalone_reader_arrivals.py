@@ -242,6 +242,11 @@ class StandaloneReaderArrivalTests(unittest.TestCase):
             asset = root / ASSET
             asset.parent.mkdir(parents=True)
             asset.write_bytes(changed)
+            # The reply page also owns a separate evidence-summary stylesheet.
+            # Keep it unchanged in this fixture so only arrival CSS is versioned.
+            snapshot = root / reply.SNAPSHOT_CSS
+            snapshot.parent.mkdir(parents=True, exist_ok=True)
+            snapshot.write_bytes((ROOT / reply.SNAPSHOT_CSS).read_bytes())
             for route, module in OWNERS.items():
                 with self.subTest(route=route), patch.object(module, 'ROOT', root):
                     rendered = module.render()

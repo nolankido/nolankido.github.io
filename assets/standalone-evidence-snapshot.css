@@ -1,0 +1,35 @@
+/* Short, source-limited evidence summaries for independently owned AI cases. */
+.case-evidence-snapshot {
+  border: 1px solid var(--line-dark);
+  border-top: 3px solid var(--red);
+  background: var(--paper-light);
+  margin: 1.5rem 0;
+  padding: 1.1rem 1.3rem;
+  font: .96rem/1.55 var(--sans);
+}
+.case-evidence-snapshot h3 {
+  margin: 0 0 .8rem;
+  font: 700 1.15rem/1.35 var(--sans);
+  letter-spacing: -.015em;
+}
+.case-evidence-snapshot dl { margin: 0; }
+.case-evidence-snapshot dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: .3rem 1.2rem;
+  padding: .8rem 0;
+  border-top: 1px solid var(--line);
+}
+.case-evidence-snapshot dt {
+  font: 700 .78rem/1.5 var(--sans);
+  color: var(--basalt);
+}
+.case-evidence-snapshot dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.case-evidence-snapshot a { text-underline-offset: .16em; }
+@media (max-width: 600px) {
+  .case-evidence-snapshot { padding: 1rem; }
+  .case-evidence-snapshot dl > div { grid-template-columns: minmax(0, 1fr); }
+}
+@media print {
+  .case-evidence-snapshot { background: white; break-inside: avoid; }
+}
