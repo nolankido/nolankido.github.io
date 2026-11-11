@@ -59,8 +59,20 @@
       cue.hidden = true;
       cue.textContent = SELECTED_CUE;
     }
+    // An alternative export action supersedes the temporary manual-copy route.
+    const alternatives = get('export-alternatives');
+    if (alternatives) alternatives.hidden = true;
     // Do not announce a hidden instruction when the reader revisits the field.
     output.setAttribute('aria-describedby', 'brief-text-help');
+  }
+  function showExportAlternatives(unavailable = '') {
+    const alternatives = get('export-alternatives');
+    if (!alternatives) return;
+    // If one export just failed, show only the other usable option.
+    const save = get('save-alternative'), print = get('print-alternative');
+    if (save) save.hidden = unavailable === 'download';
+    if (print) print.hidden = unavailable === 'print';
+    alternatives.hidden = false;
   }
   function invalidate(message = '') {
     exportAttempt++;
@@ -209,13 +221,15 @@
       }
     } catch (_) {
       if (attempt !== exportAttempt || output.value !== snapshot || result.hidden) return;
-      selectVisibleText('Automatic copy is unavailable. The text is selected, not copied by this fallback. Use your device’s Copy command.');
+      showExportAlternatives();
+      selectVisibleText('Automatic copy is unavailable. The text is selected, not copied by this fallback. Use your device’s Copy command, or choose Save full brief as .txt or Print / Save as PDF above the text.');
     }
   });
   get('select').addEventListener('click', () => {
     if (result.hidden || !output.value) return;
     exportAttempt++;
-    selectVisibleText('Complete text selected, but not copied. Use your device’s Copy command, then check the destination after pasting.');
+    showExportAlternatives();
+    selectVisibleText('Complete text selected, but not copied. Use your device’s Copy command, then check the destination after pasting. Or choose Save full brief as .txt or Print / Save as PDF above the text.');
   });
   function activeSelectionCue() {
     const cue = get('selection-cue');
@@ -253,7 +267,7 @@
     cue.textContent = 'Copy command detected. Paste to check the result.';
     copyStatus.textContent = 'Copy command detected, but this page cannot confirm clipboard contents. Paste to verify before leaving.';
   });
-  get('print').addEventListener('click', () => {
+  function printBrief() {
     if (result.hidden || !output.value) return;
     exportAttempt++;
     hideSelectionCue();
@@ -262,10 +276,11 @@
       copyStatus.textContent = 'Print requested. If the dialog opens, choose Print or Save as PDF, then confirm the result yourself.';
       window.print();
     } catch (_) {
-      selectVisibleText('Printing is unavailable. The text is selected, not copied. Use your device’s Copy command or try Save as text.');
+      showExportAlternatives('print');
+      selectVisibleText('Printing is unavailable. The text is selected, not copied. Use your device’s Copy command or choose Save full brief as .txt above the text.');
     }
-  });
-  get('download').addEventListener('click', () => {
+  }
+  function downloadBrief() {
     if (result.hidden || !output.value) return;
     exportAttempt++;
     hideSelectionCue();
@@ -278,11 +293,18 @@
       editor.appendChild(link); link.click();
       copyStatus.textContent = 'Text download requested. Check your browser’s downloads to confirm the file was saved.';
     } catch (_) {
-      selectVisibleText('Download unavailable. The text is selected, not copied or saved. Use your device’s Copy command, then paste into your notes.');
+      showExportAlternatives('download');
+      selectVisibleText('Download unavailable. The text is selected, not copied or saved. Use your device’s Copy command or choose Print / Save as PDF above the text.');
     } finally {
       link.remove(); if (url) window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
-  });
+  }
+  // Use the same direct user-activated handlers for the standard and nearby
+  // fallback controls. Neither action sends the brief to a service.
+  get('print').addEventListener('click', printBrief);
+  get('download').addEventListener('click', downloadBrief);
+  get('print-alternative')?.addEventListener('click', printBrief);
+  get('save-alternative')?.addEventListener('click', downloadBrief);
   clearAll();
   get('unavailable').hidden = true;
   editor.hidden = false;
