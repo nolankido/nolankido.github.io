@@ -52,6 +52,14 @@ def main():
                         assert metrics["width"] <= metrics["viewport"] + 1, metrics
                         # DOCUMENT_POSITION_FOLLOWING = 4, so the summary precedes the jump links.
                         assert metrics["navBefore"] & 4, metrics
+                        jump_style = page.locator('.entry-jumps').evaluate("""node => ({
+                          display: getComputedStyle(node).display,
+                          gap: getComputedStyle(node).columnGap,
+                          firstHeight: parseFloat(getComputedStyle(node.querySelector('a')).minHeight)
+                        })""")
+                        assert jump_style['display'] == 'flex', (path, jump_style)
+                        assert jump_style['gap'] != 'normal', (path, jump_style)
+                        assert jump_style['firstHeight'] >= 44, (path, jump_style)
                         for anchor in anchor_ids:
                             link = snapshot.locator('a[href="#' + anchor + '"]')
                             expect(link).to_have_count(1)

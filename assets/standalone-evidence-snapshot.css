@@ -26,10 +26,27 @@
 }
 .case-evidence-snapshot dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .case-evidence-snapshot a { text-underline-offset: .16em; }
+/* The independently compiled articles do not inherit the entrypoint-nav CSS. */
+.page-local-ai-gaming-laptop .entry-jumps,
+.page-review-reply-evidence-audit .entry-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+  margin: 1.35rem 0 0;
+  font: .94rem/1.45 var(--sans);
+}
+.page-local-ai-gaming-laptop .entry-jumps a,
+.page-review-reply-evidence-audit .entry-jumps a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
 @media (max-width: 600px) {
   .case-evidence-snapshot { padding: 1rem; }
   .case-evidence-snapshot dl > div { grid-template-columns: minmax(0, 1fr); }
 }
 @media print {
   .case-evidence-snapshot { background: white; break-inside: avoid; }
+  .page-local-ai-gaming-laptop .entry-jumps,
+  .page-review-reply-evidence-audit .entry-jumps { display: none; }
 }
