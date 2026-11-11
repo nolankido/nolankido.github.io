@@ -31,7 +31,7 @@ class TaskBriefReviewToExportTests(unittest.TestCase):
     def test_export_follows_six_section_preview_before_duplicate_text(self):
         expected = ['brief-preview', 'brief-export-intro', 'brief-copy',
                     'brief-download', 'brief-print', 'brief-select',
-                    'brief-copy-status', 'brief-text', 'brief-result-next']
+                    'brief-copy-status', 'brief-result-next', 'brief-text']
         for path in (SOURCE, PAGE):
             with self.subTest(path=path.name):
                 records = self.records(path)
@@ -64,7 +64,7 @@ class TaskBriefReviewToExportTests(unittest.TestCase):
         self.assertIn('#brief-preview .brief-preview-part', css)
         page = PAGE.read_text(encoding='utf-8')
         self.assertEqual(len(re.findall(r'id="brief-result-title"', page)), 1)
-        self.assertIn('2026-11-10', (ROOT / '_source/pages.json').read_text(encoding='utf-8'))
+        self.assertIn('2026-11-11', (ROOT / '_source/pages.json').read_text(encoding='utf-8'))
 
 
 if __name__ == '__main__':
