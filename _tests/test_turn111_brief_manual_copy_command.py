@@ -92,10 +92,9 @@ const event={preventDefault(){throw Error('Native copy must not be prevented');}
   dom['brief-select'].handlers.click();
   assert.equal(cue.textContent,selectedCue);
   output.selectionEnd=output.value.length-1;
-  const beforePartial=feedback.textContent;
   output.handlers.copy(event);
-  assert.equal(cue.textContent,selectedCue);
-  assert.equal(feedback.textContent,beforePartial);
+  assert.match(cue.textContent,/Full brief no longer selected/);
+  assert.match(feedback.textContent,/Copy command detected with only part/);
 
   // Successful automatic copy has separate, stronger evidence.
   await dom['brief-copy'].handlers.click();

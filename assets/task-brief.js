@@ -29,6 +29,7 @@
   const result = get('result'), output = get('text'), status = get('status'), copyStatus = get('copy-status');
   const confirmation = get('confirm'), preview = get('preview');
   const SELECTED_CUE = 'Selected, not copied. Use your device’s Copy command.';
+  const PARTIAL_CUE = 'Full brief no longer selected. Choose Select text manually again.';
   let pending = null, initiator = null, exportAttempt = 0;
   // The text export and the readable preview derive from the same validated
   // section data. Untrusted field content is always assigned with textContent.
@@ -216,12 +217,39 @@
     exportAttempt++;
     selectVisibleText('Complete text selected, but not copied. Use your device’s Copy command, then check the destination after pasting.');
   });
-  // A native Copy command starts an OS/browser operation, not a verified write.
-  // Respond only to a complete manual selection; never intercept its default.
-  output.addEventListener('copy', () => {
+  function activeSelectionCue() {
     const cue = get('selection-cue');
-    if (result.hidden || !output.value || !cue || cue.hidden ||
-        output.selectionStart !== 0 || output.selectionEnd !== output.value.length) return;
+    return !result.hidden && output.value && cue && !cue.hidden ? cue : null;
+  }
+  function allTextSelected() {
+    return output.selectionStart === 0 && output.selectionEnd === output.value.length;
+  }
+  function reflectSelectionChange() {
+    const cue = activeSelectionCue();
+    if (!cue) return;
+    if (!allTextSelected() && cue.textContent !== PARTIAL_CUE) {
+      cue.textContent = PARTIAL_CUE;
+      copyStatus.textContent = 'The complete brief is no longer selected. Choose Select text manually again before copying.';
+    } else if (allTextSelected() && cue.textContent === PARTIAL_CUE) {
+      cue.textContent = SELECTED_CUE;
+      copyStatus.textContent = 'Complete text selected, not copied. Use your device’s Copy command, then paste to verify.';
+    }
+  }
+  // Keyboard, pointer, and native text-control selection changes can all
+  // remove the all-text selection. Announce the transition only once.
+  for (const eventName of ['select', 'keyup', 'pointerup']) {
+    output.addEventListener(eventName, reflectSelectionChange);
+  }
+  // A native Copy command starts an OS/browser operation, not a verified write.
+  // Never intercept its default, even if the selection is incomplete.
+  output.addEventListener('copy', () => {
+    const cue = activeSelectionCue();
+    if (!cue) return;
+    if (!allTextSelected()) {
+      cue.textContent = PARTIAL_CUE;
+      copyStatus.textContent = 'Copy command detected with only part of the brief selected. Re-select the full text and copy again, then verify by pasting.';
+      return;
+    }
     cue.textContent = 'Copy command detected. Paste to check the result.';
     copyStatus.textContent = 'Copy command detected, but this page cannot confirm clipboard contents. Paste to verify before leaving.';
   });
