@@ -81,7 +81,10 @@ class StandaloneCaseSnapshotsTests(unittest.TestCase):
         for case in CASES:
             html = (ROOT / "technology" / case["slug"] / "index.html").read_text(encoding="utf-8")
             self.assertEqual(html.count(link), 1)
-        for needed in ("minmax(0, 1fr)", "@media (max-width: 600px)", "@media print", "overflow-wrap: anywhere"):
+        for needed in ("minmax(0, 1fr)", "@media (max-width: 600px)", "@media print",
+                       "overflow-wrap: anywhere", "gap: .5rem 1.25rem", "min-height: 44px",
+                       ".page-local-ai-gaming-laptop .entry-jumps",
+                       ".page-review-reply-evidence-audit .entry-jumps"):
             self.assertIn(needed, css)
 
     def test_dates_and_canonical_routes_are_unchanged(self):
