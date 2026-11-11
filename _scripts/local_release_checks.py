@@ -81,6 +81,7 @@ def main() -> int:
         ('AI task brief native copy and partial selection state', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn119_brief_selection_state.py', '-q']),
         ('AI task brief exhausted export recovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn120_brief_dual_export_failure.py', '-q']),
         ('AI task brief honest unconfirmed text selection', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn121_brief_unconfirmed_selection.py', '-q']),
+        ('AI task brief keyboard focus-loss copy guidance', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn122_brief_focus_loss.py', '-q']),
         ('Homepage significant-change freshness', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_home_freshness.py', '-q']),
         ('Free Search Console checker synthetic visitor demo', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_visibility_demo.py', '-q']),
         ('Current public poker video discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_poker_videos.py', '-q']),

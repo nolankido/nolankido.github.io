@@ -31,12 +31,14 @@
   const SELECTED_CUE = 'Selected, not copied. Press Ctrl+C or Command+C; on touch, choose Copy.';
   const PARTIAL_CUE = 'Full brief no longer selected. Choose Select text manually again.';
   const UNCONFIRMED_CUE = 'Full selection not confirmed. In the text box, choose Select all, then Copy.';
+  const UNFOCUSED_CUE = 'Text box no longer focused. Choose Select text manually again before copying.';
   const FALLBACK_TITLES = Object.freeze({
     selected: ['Selected, not copied.', ' Ctrl+C, Cmd+C, or touch Copy.'],
     partial: ['Full brief no longer selected.', ' Choose Select text manually again.'],
     copy: ['Copy command detected.', ' Paste elsewhere to verify.'],
     manual: ['Save and print both unavailable.', ' Use Ctrl+C, Cmd+C, or touch Copy.'],
     unconfirmed: ['Full selection not confirmed.', ' Select all in the text box, then Copy.'],
+    unfocused: ['Text box no longer focused.', ' Choose Select text manually again.'],
   });
   let pending = null, initiator = null, exportAttempt = 0;
   // Remember known export failures for this assembled brief. A second failed
@@ -297,6 +299,9 @@
   function reflectSelectionChange() {
     const cue = activeSelectionCue();
     if (!cue) return;
+    // A retained textarea range is not proof that keyboard Copy will target it
+    // after Tab has moved focus to another control.
+    if (document.activeElement && document.activeElement !== output) return;
     if (!allTextSelected() && cue.textContent !== PARTIAL_CUE
         && cue.textContent !== UNCONFIRMED_CUE) {
       cue.textContent = PARTIAL_CUE;
@@ -314,6 +319,26 @@
   for (const eventName of ['select', 'keyup', 'pointerup']) {
     output.addEventListener(eventName, reflectSelectionChange);
   }
+  output.addEventListener('blur', () => {
+    const cue = activeSelectionCue();
+    if (!cue || copyStatus.textContent.startsWith('Copy command detected')) return;
+    cue.textContent = UNFOCUSED_CUE;
+    setFallbackTitle('unfocused');
+    copyStatus.textContent = 'The brief text box lost focus. Choose Select text manually again before using your device’s Copy command. The text has not been copied by this page.';
+  });
+  output.addEventListener('focus', () => {
+    const cue = activeSelectionCue();
+    if (!cue || cue.textContent !== UNFOCUSED_CUE) return;
+    if (allTextSelected()) {
+      cue.textContent = SELECTED_CUE;
+      setFallbackTitle('selected');
+      copyStatus.textContent = 'Complete text selected, not copied. Use your device’s Copy command, then paste to verify.';
+    } else {
+      cue.textContent = UNCONFIRMED_CUE;
+      setFallbackTitle('unconfirmed');
+      copyStatus.textContent = 'Focus returned, but full selection is not confirmed. Choose Select text manually again, or select all in the text box before copying.';
+    }
+  });
   // A native Copy command starts an OS/browser operation, not a verified write.
   // Never intercept its default, even if the selection is incomplete.
   output.addEventListener('copy', () => {
