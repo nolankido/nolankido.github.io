@@ -206,6 +206,27 @@
     if (Number.isFinite(top) && top < inset + 20 && typeof window.scrollBy === 'function') {
       window.scrollBy({top: top - inset - 20, behavior: 'instant'});
     }
+    // Short mobile viewports can otherwise show the nearby fallback controls
+    // while pushing the selected text completely below the fold. Reveal the
+    // beginning of the text but keep the first available export action below
+    // the sticky header. Never move focus or change the selected range.
+    const alternatives = typeof document.getElementById === 'function'
+      ? document.getElementById('brief-export-alternatives') : null;
+    const save = alternatives && !alternatives.hidden ? document.getElementById('brief-save-alternative') : null;
+    const print = alternatives && !alternatives.hidden ? document.getElementById('brief-print-alternative') : null;
+    const firstAction = save && !save.hidden ? save : print && !print.hidden ? print : null;
+    if (firstAction && typeof firstAction.getBoundingClientRect === 'function'
+        && typeof output.getBoundingClientRect === 'function'
+        && Number.isFinite(window.innerHeight) && window.innerHeight > 0
+        && typeof window.scrollBy === 'function') {
+      const textTop = output.getBoundingClientRect().top;
+      const actionTop = firstAction.getBoundingClientRect().top;
+      const minText = Math.min(110, Math.max(64, window.innerHeight * .18));
+      const needed = textTop - (window.innerHeight - minText);
+      const available = actionTop - (inset + 12);
+      const shift = Math.min(needed, available);
+      if (Number.isFinite(shift) && shift > 8) window.scrollBy({top: shift, behavior: 'instant'});
+    }
   }
   get('copy').addEventListener('click', async () => {
     if (result.hidden || !output.value) return;

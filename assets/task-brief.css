@@ -45,11 +45,11 @@
 
 #brief-text { min-height: 340px; overflow-wrap: anywhere; }
 .brief-selection-cue { margin: 6px 0 12px; padding: 9px 12px; border-left: 3px solid var(--red); background: var(--paper-light); color: var(--basalt); font: 600 .9rem/1.45 var(--sans); overflow-wrap: anywhere; }
-.brief-export-alternatives { margin: 8px 0 14px; padding: 12px 14px; border: 1px solid var(--line-dark); background: var(--paper-light); overflow-wrap: anywhere; }
-.brief-export-alternatives p { margin: 0; font: .9rem/1.5 var(--sans); }
-.brief-export-alternatives .brief-help { margin-top: 9px; }
-.brief-fallback-actions { margin: 10px 0 0; gap: 9px; }
-.brief-fallback-actions button { padding: 9px 12px; }
+.brief-export-alternatives { margin: 6px 0 10px; padding: 10px 12px; border: 1px solid var(--line-dark); background: var(--paper-light); overflow-wrap: anywhere; }
+.brief-export-alternatives p { margin: 0; font: .85rem/1.35 var(--sans); }
+.brief-export-alternatives .brief-help { margin-top: 6px; }
+.brief-fallback-actions { margin: 7px 0 0; gap: 8px; }
+.brief-fallback-actions button { padding: 8px 10px; font-size: .88rem; }
 #brief-status, #brief-copy-status { font: .9rem/1.55 var(--sans); }
 .brief-example, .brief-template { border-top: 1px solid var(--line-dark); padding: 18px 0; }
 .brief-example summary, .brief-template summary { cursor: pointer; font: 600 1.05rem/1.5 var(--sans); min-height: 44px; box-sizing: border-box; padding-block: 8px; }
