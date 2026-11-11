@@ -25,7 +25,7 @@ class GatewayTests(unittest.TestCase):
         outputs = build.build_outputs()
         home = outputs[Path('index.html')]
         self.assertEqual(Links(home).destinations, ['/technology/', '/living-well/', '/poker/', '/creative/'])
-        self.assertIn('AI Works Human Decides', home)
+        self.assertIn('AI Works, Human Decides', home)
         self.assertNotIn('destination-notes', home)
         for route in Links(home).destinations:
             self.assertIn(build.output_path(route), outputs)

@@ -109,7 +109,7 @@ class SearchEntryTests(unittest.TestCase):
             'https://nolankido.com/assets/social/nolan-kido-ai.png',
         ).replace(
             'Nolan Kido. Build useful things. Make room for a good life. nolankido.com.',
-            'Nolan Kido. AI Works Human Decides. Practical AI for real life. nolankido.com.',
+            'Nolan Kido. AI Works, Human Decides. Practical AI for real life. nolankido.com.',
         )
         self.assertEqual(presentation.metadata(cfg, home, 'https://nolankido.com'), expected_home)
 

@@ -86,7 +86,7 @@ class HomepageEvidenceTests(unittest.TestCase):
         self.assertEqual(build.build_outputs()[Path('index.html')], self.page)
         self.assertEqual(check_live.targets()['/'], (200, self.page.encode('utf-8')))
         self.assertEqual(self.page.count('rel="canonical" href="https://nolankido.com/"'), 1)
-        self.assertIn('AI Works Human Decides', self.page)
+        self.assertIn('AI Works, Human Decides', self.page)
 
     def test_native_layout_reuses_existing_responsive_cards(self):
         css = (ROOT / 'assets/site-core.css').read_text(encoding='utf-8')

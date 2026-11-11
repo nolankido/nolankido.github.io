@@ -62,7 +62,7 @@ class TechnologyFirstScreenTests(unittest.TestCase):
         self.assertEqual(self.page.count(INTRO), 1)
         self.assertIn('<h2 class="intro" id="technology-intro-title">' + HEADING + '</h2>', self.intro)
         self.assertIn("I'm Nolan Kido.", self.intro)
-        self.assertIn("AI Works Human Decides", self.intro)
+        self.assertIn("AI Works, Human Decides", self.intro)
         self.assertIn("poker-video production", self.intro)
         self.assertNotIn("\u2014", self.intro)
         self.assertNotIn("<script", self.intro)

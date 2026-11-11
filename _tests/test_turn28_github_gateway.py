@@ -14,7 +14,7 @@ class GithubGatewayTests(unittest.TestCase):
 
     def test_first_screen_centers_name_real_ai_work_and_author_home(self):
         text = self.readme
-        self.assertTrue(text.startswith("# Nolan Kido | AI Works Human Decides\n"))
+        self.assertTrue(text.startswith("# Nolan Kido | AI Works, Human Decides\n"))
         start = text.split("## Beginner Poker course", 1)[0]
         self.assertIn("https://nolankido.com/about/", start)
         self.assertIn("https://nolankido.com/technology/local-ai-review-replies/", start)

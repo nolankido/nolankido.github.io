@@ -69,8 +69,15 @@ class AboutReaderTests(unittest.TestCase):
         old = subprocess.check_output([
             "git", "show", history.PARENT + ":about/index.html"
         ], cwd=ROOT).decode("utf-8")
-        self.assertEqual(json.loads(SCHEMA_PATTERN.search(old).group(1)),
-                         json.loads(SCHEMA_PATTERN.search(self.html).group(1)))
+        original_schema = json.loads(SCHEMA_PATTERN.search(old).group(1))
+        current_schema = json.loads(SCHEMA_PATTERN.search(self.html).group(1))
+        # Turn 125 restores punctuation in the canonical brand line only.
+        # Compare all remaining metadata, including the stable public Person ID.
+        self.assertEqual(original_schema, json.loads(
+            json.dumps(current_schema).replace(
+                "AI Works, Human Decides", "AI Works Human Decides"
+            )
+        ))
         self.assertIn('<h1 class="page-title">About Nolan Kido</h1>', self.html)
         self.assertIn('<link rel="canonical" href="https://nolankido.com/about/">', self.html)
         self.assertIn('"@id": "https://nolankido.com/about/#nolan-kido"', self.html)

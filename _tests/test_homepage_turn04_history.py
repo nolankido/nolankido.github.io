@@ -64,7 +64,7 @@ class HomepageTurn04Tests(unittest.TestCase):
     def test_first_screen_links_all_three_aims_to_published_anchors(self):
         hero = self.html.split('id="visibility-projects-title"', 1)[0]
         self.assertIn('<h1 id="home-title">Nolan Kido</h1>', hero)
-        self.assertIn('AI Works Human Decides', hero)
+        self.assertIn('AI Works, Human Decides', hero)
         self.assertIn('I also build software tools and play tournament poker.', hero)
         nav = re.search(r'<nav class="link-row identity-actions"[^>]*>(.*?)</nav>', hero, re.S)
         self.assertIsNotNone(nav)

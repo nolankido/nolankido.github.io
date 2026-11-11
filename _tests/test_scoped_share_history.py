@@ -51,7 +51,7 @@ class ScopedShareHistoryTests(unittest.TestCase):
         general = 'https://nolankido.com/assets/social/nolan-kido.png'
         ai = 'https://nolankido.com/assets/social/nolan-kido-ai.png'
         general_alt = 'Nolan Kido. Build useful things. Make room for a good life. nolankido.com.'
-        ai_alt = 'Nolan Kido. AI Works Human Decides. Practical AI for real life. nolankido.com.'
+        ai_alt = 'Nolan Kido. AI Works, Human Decides. Practical AI for real life. nolankido.com.'
         pages = build.public_pages()
         config = presentation.load(ROOT, pages)
         branded_pages = {page['id'] for page in pages
