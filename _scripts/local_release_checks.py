@@ -77,6 +77,7 @@ def main() -> int:
         ('AI task brief nearby export alternatives', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_brief_export_alternatives.py', '-q']),
         ('AI task brief short viewport export handoff', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn116_brief_short_viewport.py', '-q']),
         ('AI task brief enlarged-text answer-check handoff', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn117_brief_enlarged_handoff.py', '-q']),
+        ('AI task brief visible fallback copy guidance', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn118_brief_visible_fallback_copy.py', '-q']),
         ('Homepage significant-change freshness', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_home_freshness.py', '-q']),
         ('Free Search Console checker synthetic visitor demo', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_visibility_demo.py', '-q']),
         ('Current public poker video discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_poker_videos.py', '-q']),

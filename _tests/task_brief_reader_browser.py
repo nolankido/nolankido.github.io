@@ -174,6 +174,22 @@ def main():
                     assert page.locator('#brief-result').is_visible(), width
                     assert page.evaluate('document.documentElement.scrollWidth') <= width + 1, (
                         width, 'handoff overflows')
+                    # A very large reader font can scroll the standalone
+                    # selection cue out of view. The visible fallback panel
+                    # must itself explain that selection is not a copy.
+                    page.go_back()
+                    page.locator('#brief-select').click()
+                    panel = page.locator('#brief-export-alternatives')
+                    assert panel.is_visible(), width
+                    title = panel.locator('#brief-export-alternatives-title').inner_text()
+                    assert 'Selected, not copied.' in title and 'Ctrl+C' in title, width
+                    assert 'Cmd+C' in title and 'touch Copy' in title, width
+                    assert page.locator('#brief-text').evaluate(
+                        'el => el.selectionStart === 0 && el.selectionEnd === el.value.length'
+                    ), width
+                    assert page.locator('#brief-text').input_value() == saved, width
+                    assert page.evaluate('document.documentElement.scrollWidth') <= width + 1, (
+                        width, 'manual selection overflows')
                     interactive += 1
                     page.close()
                 assert live_context.cookies() == []
