@@ -88,6 +88,7 @@ def main() -> int:
         ('NolanPoker channel visitor route', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn41_channel_route.py', '-q']),
         ('Public website-visibility case and source limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn42_site_visibility_case.py', '-q']),
         ('Website case migration and preserved reader routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn51_visibility_article.py', '-q']),
+        ('Reciprocal website case reader paths', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn123_website_case_links.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
