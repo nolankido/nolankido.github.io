@@ -92,6 +92,7 @@ def main() -> int:
         ('Technology hub direct case routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn124_technology_case_routes.py', '-q']),
         ('Primary identity tagline and search previews', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn125_primary_brand_language.py', '-q']),
         ('Practical AI articles explain the canonical method', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn126_article_method_links.py', '-q']),
+        ('Standalone AI cases summarize evidence and limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn127_evidence_snapshots.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
