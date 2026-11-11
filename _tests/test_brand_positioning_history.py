@@ -115,7 +115,7 @@ class BrandPositioningHistoryTests(unittest.TestCase):
             self.assertNotIn('nolan-kido-headshot.jpg', html)
             self.assertNotIn('/assets/nolan-kido-identity.jsonld', html)
             current_html = self.outputs[Path(relative)]
-            self.assertIn('AI Works Human Decides', current_html)
+            self.assertIn('AI Works, Human Decides', current_html)
             self.assertNotIn('nolan-kido-headshot.jpg', current_html)
         identity = json.loads((ROOT / 'assets/nolan-kido-identity.jsonld').read_text(encoding='utf-8'))
         person = next(node for node in identity['@graph'] if node['@type'] == 'Person')

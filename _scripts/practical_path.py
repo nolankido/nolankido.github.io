@@ -9,8 +9,8 @@ BEGIN = '<!-- Practical AI path: start -->'
 END = '<!-- Practical AI path: end -->'
 CSS = Path('assets/practical-ai-path.css')
 WORKBOOK = Path('downloads/practical-ai-workbook.txt')
-SEO_TITLE = 'Practical AI Projects | AI Works Human Decides | Nolan Kido'
-DESCRIPTION = "Explore Nolan Kido's practical AI work: small-business review checks, poker-vlog evidence QA, book continuity, and repeatable tools. AI Works Human Decides."
+SEO_TITLE = 'Practical AI Projects | AI Works, Human Decides | Nolan Kido'
+DESCRIPTION = "Explore Nolan Kido's practical AI work: small-business review checks, poker-vlog evidence QA, book continuity, and repeatable tools. AI Works, Human Decides."
 STAGES = (
     ('ai-task-choice', 'Decide', 'Decide whether AI fits the task', 'Check the purpose, permitted inputs, consequences and a simpler alternative before starting.', 'A decision to pause, use a simpler method, prepare first or try a bounded draft.', 'should-i-use-ai.txt'),
     ('task-brief', 'Brief', 'Write a brief with a finish line', 'Name the useful result, supplied material, boundaries and checks before delegating production.', 'A written brief that keeps assumptions, permissions and responsibilities visible.', 'ai-task-brief.txt'),

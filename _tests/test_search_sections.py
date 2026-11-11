@@ -90,7 +90,7 @@ class SearchSectionsTests(unittest.TestCase):
                       if path=='/technology/task-brief/' else rows)
             self.assertEqual(previous_index[path],expected,path)
         self.assertEqual(self.index['/technology/'].count(
-            ['ai-works-human-decides-title', 'AI Works Human Decides']), 1)
+            ['ai-works-human-decides-title', 'AI Works, Human Decides']), 1)
         self.assertIn(['notes-to-plan-title', 'From scattered advice to one usable weekly plan.'], previous_index['/technology/'])
         self.assertIn(['progress-heading','Your next Poker Foundations task.'],self.index['/poker/study/'])
         self.assertIn(['in-depth-title','Read in depth.'],self.index['/poker/'])

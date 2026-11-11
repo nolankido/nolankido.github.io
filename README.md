@@ -1,4 +1,4 @@
-# Nolan Kido | AI Works Human Decides
+# Nolan Kido | AI Works, Human Decides
 
 **Practical AI in real life, with evidence and human judgment.** I build and examine tools for small-business tasks, writing, creative work, and everyday workflows. The public cases show what happened, what was checked, what remains unknown, and which decisions still need a person.
 

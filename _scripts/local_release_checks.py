@@ -90,6 +90,7 @@ def main() -> int:
         ('Website case migration and preserved reader routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn51_visibility_article.py', '-q']),
         ('Reciprocal website case reader paths', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn123_website_case_links.py', '-q']),
         ('Technology hub direct case routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn124_technology_case_routes.py', '-q']),
+        ('Primary identity tagline and search previews', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn125_primary_brand_language.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),

@@ -21,8 +21,8 @@ class AboutEvidenceTests(unittest.TestCase):
         self.assertIn("I'm <strong>Nolan Kido</strong>", self.html)
         self.assertLess(self.html.index('id="about-evidence-title"'), self.html.index('id="what-matters-in-the-work"'))
         self.assertEqual(self.html.count('class="identity-reading"'), 3)
-        self.assertIn('AI Works Human Decides', self.html)
-        self.assertEqual(self.page['updated'], '2026-11-04')
+        self.assertIn('AI Works, Human Decides', self.html)
+        self.assertEqual(self.page['updated'], '2026-11-06')
 
     def test_evidence_links_to_existing_work_and_primary_publication(self):
         for link in (
@@ -38,7 +38,7 @@ class AboutEvidenceTests(unittest.TestCase):
         self.assertIn('Tournament cashes are gross results, not profit.', self.html)
 
     def test_metadata_and_structured_profile_stay_consistent(self):
-        self.assertIn('<title>About Nolan Kido: Practical AI | AI Works Human Decides</title>', self.html)
+        self.assertIn('<title>About Nolan Kido: Practical AI | AI Works, Human Decides</title>', self.html)
         self.assertIn('Explore documented projects, published accounting research, and poker.', self.html)
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.html).group(1))
         self.assertEqual(schema['@type'], 'ProfilePage')
