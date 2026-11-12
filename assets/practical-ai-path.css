@@ -1,4 +1,10 @@
 .ai-path-steps { display: grid; gap: 1.5rem; list-style: none; margin: 2rem 0; padding: 0; }
+/* The homepage's primary practical-AI route targets the whole method section.
+   Mark its heading, which is what readers need to recognize after arrival. */
+.page-technology #ai-works-human-decides:target #ai-works-human-decides-title {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
 .ai-path-steps li { border-top: 1px solid var(--line); padding-top: 1rem; min-width: 0; }
 .ai-path-label { font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
 .ai-path-steps h3 { font-size: 1.2rem; line-height: 1.5; margin-block: .6rem; overflow-wrap: anywhere; }
