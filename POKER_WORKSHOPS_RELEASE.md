@@ -39,6 +39,9 @@ are not an accessibility certification, proof of poker optimality or confirmatio
 that private Umami dashboard events were received. Verify Pages deployment and
 published bytes after merging.
 
-The temporary branch integration script/workflow must be removed before merge.
-The existing Site checks workflow stays read-only; its only intentional extension
-is invoking the targeted workshop browser suite alongside the existing suites.
+This document records an October 6 release. Its temporary branch integration
+workflow is retired, and the former Site checks GitHub Actions workflow was
+intentionally removed on November 1, 2026. For current maintenance, do not
+restore or invoke either workflow. Run `python _scripts/local_release_checks.py`
+locally, using `--browser` for the targeted workshop checks, then verify the
+actual published bytes. [AGENTS.md](AGENTS.md) defines the current process.
