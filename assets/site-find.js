@@ -15,7 +15,7 @@
   function matchingSections(record, query) {
     const needles = terms(query);
     if (!needles.length) return [];
-    const base = [...words(record.title + ' ' + record.description + ' ' + record.subjects).map(stem), ...searchTitleWords(record), ...addressWords(record)];
+    const base = [...words(record.title + ' ' + record.description + ' ' + record.subjects + ' ' + (record.aliases || '')).map(stem), ...searchTitleWords(record), ...addressWords(record)];
     return (record.sections || []).map((section, order) => {
       const heading = words(section[1]).map(stem);
       const hits = needles.filter(term => heading.some(word => matches(word, term))).length;
@@ -29,11 +29,13 @@
     if (!needles.length) return -1;
     const title = words(record.title).map(stem);
     const all = [...title, ...words(record.description + ' ' + record.subjects).map(stem)];
+    const aliases = words(record.aliases || '').map(stem);
     const baseMatch = needles.every(term => all.some(word => matches(word, term)));
     const addressMatch = needles.every(term => [...all, ...addressWords(record)].some(word => matches(word, term)));
     const searchTitleMatch = !addressMatch && needles.every(term => [...all, ...searchTitleWords(record), ...addressWords(record)].some(word => matches(word, term)));
-    if (!baseMatch && !searchTitleMatch && !addressMatch && !matchingSections(record, query).length) return -1;
-    return (baseMatch ? 1000 : searchTitleMatch ? 750 : addressMatch ? 500 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
+    const aliasMatch = needles.every(term => [...all, ...aliases].some(word => matches(word, term)));
+    if (!baseMatch && !searchTitleMatch && !addressMatch && !aliasMatch && !matchingSections(record, query).length) return -1;
+    return (baseMatch ? 1000 : searchTitleMatch ? 750 : addressMatch ? 500 : aliasMatch ? 400 : 0) + needles.filter(term => title.some(word => matches(word, term))).length * 10 + (normalize(record.title).includes(normalize(query)) ? 25 : 0);
   }
   function decodeSections(data) {
     if (!data || ![2, 3, 4].includes(data.version) || !data.pages || typeof data.pages !== 'object' || Array.isArray(data.pages)) return {};
@@ -88,6 +90,7 @@
     items: [...group.querySelectorAll('.find-item')].map((node, order) => ({
       node, order, path: node.querySelector('h3 a').getAttribute('href'), title: node.querySelector('h3').textContent,
       searchTitle: node.dataset.searchTitle || '',
+      aliases: node.dataset.findAliases || '',
       description: node.querySelector('.find-description').textContent,
       subjects: node.querySelector('.find-subjects').textContent,
       interests: node.dataset.interests.split(' '), kind: node.dataset.kind, sections: sectionsFor(node)
