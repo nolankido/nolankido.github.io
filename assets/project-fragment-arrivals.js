@@ -43,14 +43,16 @@
         }
       };
 
-      // Correct a hidden arrival on the next frame, then recheck late shifts.
+      // Check immediately, after native fragment positioning, and after late shifts.
       const earlyFrame = requestAnimationFrame(correct);
+      const postArrivalTimeout = setTimeout(correct, 240);
       const timeout = setTimeout(() => {
         correct();
         cancel();
       }, 1300);
       pending.signal.addEventListener('abort', () => {
         cancelAnimationFrame(earlyFrame);
+        clearTimeout(postArrivalTimeout);
         clearTimeout(timeout);
       }, {once: true});
     });

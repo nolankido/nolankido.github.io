@@ -43,7 +43,12 @@ async function arrival({page = 'page-ai-book-continuity-checker', hash = '#conti
     },
     requestAnimationFrame(callback) { const id = ++nextId; frames.set(id, callback); return id; },
     cancelAnimationFrame(id) { frames.delete(id); },
-    setTimeout(callback, delay) { assert.equal(delay, 1300); const id = ++nextId; timers.set(id, callback); return id; },
+    setTimeout(callback, delay) {
+      assert.ok([240, 1300].includes(delay));
+      const id = ++nextId;
+      timers.set(id, {callback, delay});
+      return id;
+    },
     clearTimeout(id) { timers.delete(id); },
     scrollTo({top: requested, behavior}) {
       assert.equal(behavior, 'instant');
@@ -52,12 +57,21 @@ async function arrival({page = 'page-ai-book-continuity-checker', hash = '#conti
     },
   };
   vm.runInNewContext(script, context, {timeout: 1000});
-  // Let the script's document.fonts.ready handler schedule its two passes.
+  // Let the script's document.fonts.ready handler schedule its three passes.
   await Promise.resolve();
   return {
     context, heading, scrolls, frames, timers,
     runEarly() { for (const [id, cb] of [...frames]) { frames.delete(id); cb(); } },
-    runLate() { for (const [id, cb] of [...timers]) { timers.delete(id); cb(); } },
+    runPostArrival() {
+      for (const [id, entry] of [...timers]) {
+        if (entry.delay === 240) { timers.delete(id); entry.callback(); }
+      }
+    },
+    runLate() {
+      for (const [id, entry] of [...timers]) {
+        if (entry.delay === 1300) { timers.delete(id); entry.callback(); }
+      }
+    },
     dispatch(name) {
       for (const {callback, options} of handlers.get(name) || []) {
         if (!options.signal?.aborted) callback();
@@ -75,19 +89,33 @@ test('hidden headings on all three project pages are revealed on the early frame
   ]) {
     const view = await arrival({page, hash});
     assert.equal(view.frames.size, 1);
-    assert.equal(view.timers.size, 1);
+    assert.equal(view.timers.size, 2);
     view.runEarly();
     assert.equal(view.headingTop, 173, page);
     assert.equal(view.scrolls.length, 1, page);
+    view.runPostArrival();
     view.runLate();
     assert.equal(view.scrolls.length, 1, page);
     assert.equal(view.frames.size + view.timers.size, 0);
   }
 });
 
+test('a native fragment restoration after the first frame is corrected promptly', async () => {
+  const view = await arrival();
+  view.runEarly();
+  // Simulate the browser restoring its own fragment position after this frame.
+  view.context.scrollY += 91;
+  assert.equal(view.headingTop, 82);
+  view.runPostArrival();
+  assert.equal(view.headingTop, 173);
+  view.runLate();
+  assert.equal(view.scrolls.length, 2);
+});
+
 test('late layout shift is corrected without another user-triggered scroll', async () => {
   const view = await arrival();
   view.runEarly();
+  view.runPostArrival();
   view.heading.absoluteTop -= 70;
   assert.equal(view.headingTop, 103);
   view.runLate();
@@ -95,20 +123,22 @@ test('late layout shift is corrected without another user-triggered scroll', asy
   assert.equal(view.scrolls.length, 2);
 });
 
-test('a visible heading is not moved by either pass', async () => {
+test('a visible heading is not moved by any pass', async () => {
   const view = await arrival({top: 190});
   view.runEarly();
+  view.runPostArrival();
   view.runLate();
   assert.deepEqual(view.scrolls, []);
   assert.equal(view.headingTop, 190);
 });
 
-test('reader input cancels both corrections before the first frame', async () => {
+test('reader input cancels all corrections before the first frame', async () => {
   for (const event of ['keydown', 'pointerdown', 'wheel', 'touchstart', 'pagehide']) {
     const view = await arrival();
     view.dispatch(event);
     assert.equal(view.frames.size + view.timers.size, 0, event);
     view.runEarly();
+    view.runPostArrival();
     view.runLate();
     assert.deepEqual(view.scrolls, [], event);
   }
@@ -119,6 +149,7 @@ test('reader input after first correction prevents late re-scrolling', async () 
   view.runEarly();
   view.heading.absoluteTop -= 70;
   view.dispatch('wheel');
+  view.runPostArrival();
   view.runLate();
   assert.equal(view.scrolls.length, 1);
   assert.equal(view.headingTop, 103);
