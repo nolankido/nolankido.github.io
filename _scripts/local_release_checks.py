@@ -102,6 +102,7 @@ def main() -> int:
         ('Public wine and game interests have honest, private-safe entrypoints', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn134_hobby_identity_bridge.py', '-q']),
         ('About profile menu reaches all six sections on desktop and mobile', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn135_about_hobby_navigation.py', '-q']),
         ('Homepage proof and practical AI native arrivals visibly identify targets', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn136_home_ai_arrivals.py', '-q']),
+        ('Homepage AI proof links directly to the source-backed project example', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn137_home_project_evidence.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
