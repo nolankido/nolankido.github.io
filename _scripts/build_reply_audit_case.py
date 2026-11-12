@@ -139,6 +139,8 @@ def render() -> str:
         '">' + date_label(MODIFIED) + '</time> · Recorded workflow · Separate quality screen</p>'
         '<p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · '
         '<a href="/start-here/#reading-this-site">About this writing</a></p>'
+        '<p class="evidence-top-jump"><a href="#reply-snapshot-title">'
+        'Jump to evidence summary</a></p>'
         '</section>\n'
     )
     rendered = prefix + MAIN + leading + source + END_MAIN + suffix
