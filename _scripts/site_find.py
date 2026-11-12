@@ -42,6 +42,11 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
             raise ValueError('Discovery interests must be a nonempty list of unique known labels')
     result = []
     for page in pages:
+        aliases = page.get('find_aliases', [])
+        if 'find_aliases' in page and (not eligible(page) or not isinstance(aliases, list) or not 1 <= len(aliases) <= 4
+                                       or any(not isinstance(alias, str) or not re.fullmatch(r'[A-Z][A-Z0-9]{1,11}', alias)
+                                              for alias in aliases) or len(set(aliases)) != len(aliases)):
+            raise ValueError('Find aliases must be unique, short public acronyms on eligible pages')
         if not eligible(page):
             continue
         if not re.fullmatch(r'/(?:[a-z0-9-]+/)+', page['path']):
@@ -57,7 +62,8 @@ def entries(root: Path, pages: list[dict]) -> list[dict]:
         if published:
             date.fromisoformat(published)
         result.append({'path': page['path'], 'title': page['title'], 'search_title': page['seo_title'], 'description': page['description'],
-                       'interests': interests, 'home': interests[0], 'kind': kind, 'date': published})
+                       'interests': interests, 'home': interests[0], 'kind': kind, 'date': published,
+                       'aliases': aliases})
     return sorted(result, key=lambda e: (list(INTERESTS).index(e['home']), e['title'].casefold(), e['path']))
 
 
@@ -69,14 +75,17 @@ def render(items: list[dict]) -> str:
         cards = []
         for item in group:
             subjects = ' · '.join(INTERESTS[k] for k in item['interests'])
+            aliases = item.get('aliases', [])
+            alias_attribute = f' data-find-aliases="{escape(" ".join(aliases), quote=True)}"' if aliases else ''
+            alias_label = '<p class="find-aliases">Related search terms: ' + escape(' · '.join(aliases)) + '</p>' if aliases else ''
             published = ''
             if item['date']:
                 dt = date.fromisoformat(item['date'])
                 published = f'<p class="find-date">Published <time datetime="{escape(item["date"], quote=True)}">{dt.strftime("%B")} {dt.day}, {dt.year}</time></p>'
-            cards.append(f'<li class="find-item" data-kind="{item["kind"]}" data-interests="{" ".join(item["interests"])}" data-search-title="{escape(item["search_title"], quote=True)}">'
+            cards.append(f'<li class="find-item" data-kind="{item["kind"]}" data-interests="{" ".join(item["interests"])}" data-search-title="{escape(item["search_title"], quote=True)}"{alias_attribute}>'
                          f'<p class="find-kind">{names[item["kind"]]} <span aria-hidden="true">/</span> <span class="find-subjects">{escape(subjects)}</span></p>'
                          f'<h3><a href="{escape(item["path"], quote=True)}">{escape(item["title"])}</a></h3>'
-                         f'<p class="find-description">{escape(item["description"])}</p>{published}</li>')
+                         f'<p class="find-description">{escape(item["description"])}</p>{alias_label}{published}</li>')
         groups.append(f'<details class="find-group" id="browse-{key}"><summary>{label} <span class="find-group-count" hidden>({len(group)})</span></summary>'
                       f'<ul class="find-items">{"".join(cards)}</ul></details>')
     return '\n'.join(groups)

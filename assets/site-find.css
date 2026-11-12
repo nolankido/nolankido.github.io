@@ -24,6 +24,7 @@
 .find-kind { font: .76rem/1.6 var(--sans); margin: 0; color: var(--ink-soft); }
 .find-description { font: 1.02rem/1.7 var(--serif); margin: 0; max-width: 70ch; }
 .find-date { font: .78rem/1.6 var(--sans); margin: 10px 0 0; color: var(--ink-soft); }
+.find-aliases { font: .78rem/1.6 var(--sans); margin: 10px 0 0; color: var(--ink-soft); }
 .find-empty { border: 1px solid var(--line-dark); padding: 20px; margin: 20px 0; }
 .find-end { margin-top: 24px; }
 @media (max-width: 620px) {
