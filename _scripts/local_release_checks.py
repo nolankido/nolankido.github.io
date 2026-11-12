@@ -98,6 +98,7 @@ def main() -> int:
         ('Missing links recover to public routes without guessing', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn130_404_recovery.py', '-q']),
         ('Explicit topic acronyms find the matching public articles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn131_find_acronyms.py', '-q']),
         ('Public AI cases link their author to bounded evidence', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn132_case_author_context.py', '-q']),
+        ('About evidence arrives on verifiable work with visible target', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn133_about_evidence_arrival.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
