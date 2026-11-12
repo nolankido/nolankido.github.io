@@ -1,8 +1,13 @@
 /* Keep a direct project-section arrival visible after the page settles. */
 (() => {
   'use strict';
-  const article = document.querySelector('.page-local-ai-review-replies');
-  if (!article) return;
+  const cases = [
+    {article: document.querySelector('.page-local-ai-review-replies'), fragment: /^#reply-[a-z-]+$/},
+    {article: document.querySelector('.page-ai-book-continuity-checker'), fragment: /^#continuity-[a-z-]+$/},
+    {article: document.querySelector('.page-dinner-on-time'), fragment: /^#dinner-[a-z-]+$/},
+  ];
+  const active = cases.find(({article}) => article);
+  if (!active) return;
 
   let arrival = null;
   function followFragment() {
@@ -10,9 +15,9 @@
     arrival = null;
 
     const hash = location.hash;
-    if (!/^#reply-[a-z-]+$/.test(hash)) return;
+    if (!active.fragment.test(hash)) return;
     const heading = document.getElementById(hash.slice(1));
-    if (!heading || !article.contains(heading) ||
+    if (!heading || !active.article.contains(heading) ||
         !heading.matches('.section-content > h2[id]')) return;
 
     const pending = new AbortController();

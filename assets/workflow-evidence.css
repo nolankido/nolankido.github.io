@@ -5,6 +5,12 @@
   outline: 2px solid var(--red);
   outline-offset: 4px;
 }
+/* The other homepage project routes should identify their selected evidence too. */
+.page-ai-book-continuity-checker .section-content > h2[id]:target,
+.page-dinner-on-time .section-content > h2[id]:target {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
 
 /* Native jumps and outline stay on the two evidence pages only. */
 .page-ai-time-savings .entry-jumps,.page-ai-website-verification .entry-jumps{display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;margin-top:1.3rem}
