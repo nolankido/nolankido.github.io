@@ -23,6 +23,13 @@ RULE = (
     "  outline-offset: 4px;\n"
     "}"
 )
+OTHER_CASES_RULE = (
+    ".page-ai-book-continuity-checker .section-content > h2[id]:target,\n"
+    ".page-dinner-on-time .section-content > h2[id]:target {\n"
+    "  outline: 2px solid var(--red);\n"
+    "  outline-offset: 4px;\n"
+    "}"
+)
 INBOUND_SOURCES = (
     "_source/home.html",
     "_source/technology/home.html",
@@ -36,7 +43,7 @@ def arrival_errors(css: str, case: str, sources: list[str]) -> list[str]:
     errors = []
     if css.count(RULE) != 1:
         errors.append("scoped native target outline is missing or duplicated")
-    if ".section-content > h2[id]:target" in css.replace(RULE, ""):
+    if ".section-content > h2[id]:target" in css.replace(RULE, "").replace(OTHER_CASES_RULE, ""):
         errors.append("a broader unscoped target rule was introduced")
     if '<body class="site-page page-local-ai-review-replies">' not in case:
         errors.append("page-scoped selector no longer matches the case")
@@ -95,7 +102,7 @@ class ProjectFragmentArrivalsTests(unittest.TestCase):
         self.assertNotIn("localStorage", self.script)
         self.assertNotIn("fetch(", self.script)
         self.assertIn(f"'{SCRIPT_PATH}'", (ROOT / "_scripts/check_live.py").read_text(encoding="utf-8"))
-        for page in ("index.html", "technology/ai-book-continuity-checker/index.html"):
+        for page in ("index.html", "technology/ai-weekly-reset/index.html"):
             self.assertNotIn(SCRIPT_PATH, (ROOT / page).read_text(encoding="utf-8"))
 
     def test_versioned_stylesheet_updates_only_its_existing_consumers(self):

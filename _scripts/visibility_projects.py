@@ -39,7 +39,7 @@ def head(page, root):
         sha256((root / 'assets' / asset).read_bytes()).hexdigest()[:12] + '">'
         for asset in assets
     )
-    if page['id'] == 'local-ai-review-replies':
+    if page['id'] in {'local-ai-review-replies', 'ai-book-continuity-checker', 'dinner-on-time'}:
         asset = 'project-fragment-arrivals.js'
         version = sha256((root / 'assets' / asset).read_bytes()).hexdigest()[:12]
         links += f'\n  <script defer src="/assets/{asset}?v={version}"></script>'
