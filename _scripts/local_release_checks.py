@@ -95,6 +95,7 @@ def main() -> int:
         ('Standalone AI cases summarize evidence and limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn127_evidence_snapshots.py', '-q']),
         ('Standalone AI cases show bounded evidence before long prose', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn128_early_evidence.py', '-q']),
         ('Mobile evidence summaries have native hero shortcuts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn129_mobile_evidence_jumps.py', '-q']),
+        ('Missing links recover to public routes without guessing', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn130_404_recovery.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
