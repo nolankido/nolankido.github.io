@@ -100,6 +100,7 @@ def main() -> int:
         ('Public AI cases link their author to bounded evidence', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn132_case_author_context.py', '-q']),
         ('About evidence arrives on verifiable work with visible target', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn133_about_evidence_arrival.py', '-q']),
         ('Public wine and game interests have honest, private-safe entrypoints', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn134_hobby_identity_bridge.py', '-q']),
+        ('About profile menu reaches all six sections on desktop and mobile', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn135_about_hobby_navigation.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),

@@ -22,6 +22,7 @@ LINKS = [
     ("about-evidence-title", "Evidence"),
     ("what-matters-in-the-work", "My approach"),
     ("about-interests", "Other interests"),
+    ("wine-games-and-life", "Wine and games"),
     ("try-the-work", "Try the work"),
     ("public-work-elsewhere", "Public profiles"),
 ]
