@@ -48,6 +48,9 @@
 
 /* Homepage growth: one primary selection; secondary routes stay native. */
 .page-home .identity-reading h3 a { display: inline-flex; align-items: center; min-height: 44px; }
+.page-home .identity-reading .home-evidence-project-route { margin-top: 12px; }
+.page-home .home-evidence-project-route a { display: inline-flex; align-items: center; min-height: 44px; font: 600 .9rem/1.5 var(--sans); overflow-wrap: anywhere; }
+.page-home .home-evidence-project-route a:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .page-home .practical-home summary { cursor: pointer; min-height: 44px; padding: 8px 0; font: 600 .94rem/1.6 var(--sans); }
 .page-home .practical-home summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .page-home .practical-home[open] > p { margin-top: 12px; }
