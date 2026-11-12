@@ -112,6 +112,20 @@ test('a native fragment restoration after the first frame is corrected promptly'
   assert.equal(view.scrolls.length, 2);
 });
 
+test('later browser scroll restoration is corrected before the final timer', async () => {
+  const view = await arrival();
+  view.runEarly();
+  view.runPostArrival();
+  // Chrome can reposition the same fragment after both initial checks.
+  view.context.scrollY += 91;
+  assert.equal(view.headingTop, 82);
+  view.dispatch('scroll');
+  assert.equal(view.headingTop, 173);
+  assert.equal(view.scrolls.length, 2);
+  view.runLate();
+  assert.equal(view.scrolls.length, 2);
+});
+
 test('late layout shift is corrected without another user-triggered scroll', async () => {
   const view = await arrival();
   view.runEarly();
@@ -139,6 +153,7 @@ test('reader input cancels all corrections before the first frame', async () => 
     assert.equal(view.frames.size + view.timers.size, 0, event);
     view.runEarly();
     view.runPostArrival();
+    view.dispatch('scroll');
     view.runLate();
     assert.deepEqual(view.scrolls, [], event);
   }
