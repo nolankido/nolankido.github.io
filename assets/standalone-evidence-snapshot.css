@@ -11,7 +11,10 @@
   margin: 0 0 .8rem;
   font: 700 1.15rem/1.35 var(--sans);
   letter-spacing: -.015em;
+  scroll-margin-top: 7rem;
 }
+.case-evidence-snapshot h3:target { outline: 2px solid var(--red); outline-offset: 3px; }
+.evidence-top-jump { display: none; }
 .case-evidence-snapshot dl { margin: 0; }
 .case-evidence-snapshot dl > div {
   display: grid;
@@ -40,6 +43,22 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+}
+@media screen and (max-width: 760px) {
+  .page-local-ai-gaming-laptop .evidence-top-jump,
+  .page-review-reply-evidence-audit .evidence-top-jump {
+    display: block;
+    margin: .75rem 0 0;
+    font: 600 .9rem/1.45 var(--sans);
+  }
+  .evidence-top-jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-bottom: 2px solid var(--red);
+    text-decoration: none;
+  }
+  .case-evidence-snapshot h3 { scroll-margin-top: 11rem; }
 }
 @media (max-width: 600px) {
   .case-evidence-snapshot { padding: 1rem; }
