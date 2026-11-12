@@ -28,10 +28,14 @@ This implementation is not a blanket legal-compliance certification.
 
 ## Verification and maintenance
 
-Run the existing build, unit and browser checks. `test_analytics.py`
-validates coverage, duplicate prevention, the exact website ID and
-privacy attributes without sending synthetic events to production.
-The ordinary Site checks workflow stays read-only.
+Build and test locally with `python _scripts/local_release_checks.py`,
+plus `--browser` where browser behavior changed. The existing
+`test_analytics.py` checks coverage, duplicate prevention, the public
+website ID and privacy flags without sending synthetic events to production.
+The former `.github/workflows/site-checks.yml` was intentionally removed
+on November 1, 2026. Do not restore, dispatch or rely on it, any other CI
+workflow or a scheduled substitute. Verify deployed bytes with direct
+public GETs after publication.
 
 After Pages deployment, open the Umami dashboard for `nolankido.com`,
 visit a public page and check that a pageview appears. Browser blockers
