@@ -99,6 +99,7 @@ class ProjectFragmentArrivalsTests(unittest.TestCase):
         self.assertIn("cancelAnimationFrame(earlyFrame)", self.script)
         self.assertIn("const postArrivalTimeout = setTimeout(correct, 240)", self.script)
         self.assertIn("clearTimeout(postArrivalTimeout)", self.script)
+        self.assertIn("addEventListener('scroll', correct, {passive: true, signal: pending.signal})", self.script)
         self.assertIn("const timeout = setTimeout(() => {\n        correct();", self.script)
         self.assertIn("clearTimeout(timeout)", self.script)
         for event in ("keydown", "pointerdown", "wheel", "touchstart", "pagehide"):

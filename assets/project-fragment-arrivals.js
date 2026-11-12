@@ -43,7 +43,10 @@
         }
       };
 
-      // Check immediately, after native fragment positioning, and after late shifts.
+      // Native fragment restoration may occur after the first two checks.
+      // Recheck browser-driven scrolls only during this bounded arrival window.
+      addEventListener('scroll', correct, {passive: true, signal: pending.signal});
+      // Check immediately, after initial positioning, and after late shifts.
       const earlyFrame = requestAnimationFrame(correct);
       const postArrivalTimeout = setTimeout(correct, 240);
       const timeout = setTimeout(() => {
