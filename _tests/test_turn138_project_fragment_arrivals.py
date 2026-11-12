@@ -95,6 +95,9 @@ class ProjectFragmentArrivalsTests(unittest.TestCase):
         self.assertIn("header.getBoundingClientRect().bottom", self.script)
         self.assertIn("behavior: 'instant'", self.script)
         self.assertIn("pending.signal.aborted", self.script)
+        self.assertIn("const earlyFrame = requestAnimationFrame(correct)", self.script)
+        self.assertIn("cancelAnimationFrame(earlyFrame)", self.script)
+        self.assertIn("const timeout = setTimeout(() => {\n        correct();", self.script)
         self.assertIn("clearTimeout(timeout)", self.script)
         for event in ("keydown", "pointerdown", "wheel", "touchstart", "pagehide"):
             self.assertIn(f"'{event}'", self.script)
