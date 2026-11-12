@@ -34,11 +34,16 @@ def head(page, root):
         assets += ['practical-discovery.css', 'workflow-evidence.css']
     if page['id'] == 'creative':
         assets.append('poker-comics.css')
-    return ''.join(
+    links = ''.join(
         '\n  <link rel="stylesheet" href="/assets/' + asset + '?v=' +
         sha256((root / 'assets' / asset).read_bytes()).hexdigest()[:12] + '">'
         for asset in assets
     )
+    if page['id'] == 'local-ai-review-replies':
+        asset = 'project-fragment-arrivals.js'
+        version = sha256((root / 'assets' / asset).read_bytes()).hexdigest()[:12]
+        links += f'\n  <script defer src="/assets/{asset}?v={version}"></script>'
+    return links
 
 
 class Images(HTMLParser):

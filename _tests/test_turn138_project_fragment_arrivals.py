@@ -15,6 +15,7 @@ import build
 
 CASE_PATH = "technology/local-ai-review-replies/index.html"
 STYLE_PATH = "assets/workflow-evidence.css"
+SCRIPT_PATH = "assets/project-fragment-arrivals.js"
 EXPECTED_ANCHORS = {"reply-example", "reply-boundary", "reply-failure"}
 RULE = (
     ".page-local-ai-review-replies .section-content > h2[id]:target {\n"
@@ -54,6 +55,7 @@ class ProjectFragmentArrivalsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.css = (ROOT / STYLE_PATH).read_text(encoding="utf-8")
+        cls.script = (ROOT / SCRIPT_PATH).read_text(encoding="utf-8")
         cls.case_source = (ROOT / "_source/technology/local-ai-review-replies.html").read_text(encoding="utf-8")
         cls.case = (ROOT / CASE_PATH).read_text(encoding="utf-8")
         cls.sources = [(ROOT / path).read_text(encoding="utf-8") for path in INBOUND_SOURCES]
@@ -72,6 +74,29 @@ class ProjectFragmentArrivalsTests(unittest.TestCase):
         self.assertIn("not feedback from a real cafe", self.case)
         self.assertIn('href="/technology/review-reply-evidence-audit/"', self.case)
         self.assertNotIn("\u2014", self.case_source)
+
+    def test_initial_deep_links_settle_without_overriding_reader_interaction(self):
+        script_version = sha256(self.script.encode("utf-8")).hexdigest()[:12]
+        self.assertIn(f'<script defer src="/{SCRIPT_PATH}?v={script_version}"></script>', self.case)
+        self.assertIn("document.fonts.ready", self.script)
+        self.assertIn("document.readyState === 'complete'", self.script)
+        self.assertIn("addEventListener('load', settle", self.script)
+        self.assertIn("addEventListener('hashchange', followFragment)", self.script)
+        self.assertIn("location.hash !== hash", self.script)
+        self.assertIn(".section-content > h2[id]", self.script)
+        self.assertIn("heading.getBoundingClientRect().top", self.script)
+        self.assertIn("header.getBoundingClientRect().bottom", self.script)
+        self.assertIn("behavior: 'instant'", self.script)
+        self.assertIn("pending.signal.aborted", self.script)
+        self.assertIn("clearTimeout(timeout)", self.script)
+        for event in ("keydown", "pointerdown", "wheel", "touchstart", "pagehide"):
+            self.assertIn(f"'{event}'", self.script)
+        self.assertNotIn(".focus(", self.script)
+        self.assertNotIn("localStorage", self.script)
+        self.assertNotIn("fetch(", self.script)
+        self.assertIn(f"'{SCRIPT_PATH}'", (ROOT / "_scripts/check_live.py").read_text(encoding="utf-8"))
+        for page in ("index.html", "technology/ai-book-continuity-checker/index.html"):
+            self.assertNotIn(SCRIPT_PATH, (ROOT / page).read_text(encoding="utf-8"))
 
     def test_versioned_stylesheet_updates_only_its_existing_consumers(self):
         outputs = build.build_outputs()
