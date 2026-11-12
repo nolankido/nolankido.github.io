@@ -29,7 +29,7 @@
 
     const settle = () => document.fonts.ready.then(() => {
       if (pending.signal.aborted) return;
-      const timeout = setTimeout(() => {
+      const correct = () => {
         if (pending.signal.aborted || location.hash !== hash) return;
         const header = document.querySelector('.site-header');
         const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
@@ -41,9 +41,18 @@
         if (top < headerBottom + 12 || top > innerHeight - 48) {
           scrollTo({top: Math.max(0, scrollY + top - desiredTop), behavior: 'instant'});
         }
+      };
+
+      // Correct a hidden arrival on the next frame, then recheck late shifts.
+      const earlyFrame = requestAnimationFrame(correct);
+      const timeout = setTimeout(() => {
+        correct();
         cancel();
       }, 1300);
-      pending.signal.addEventListener('abort', () => clearTimeout(timeout), {once: true});
+      pending.signal.addEventListener('abort', () => {
+        cancelAnimationFrame(earlyFrame);
+        clearTimeout(timeout);
+      }, {once: true});
     });
     if (document.readyState === 'complete') settle();
     else addEventListener('load', settle, {once: true, signal: pending.signal});
