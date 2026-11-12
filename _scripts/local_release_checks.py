@@ -104,6 +104,7 @@ def main() -> int:
         ('Homepage proof and practical AI native arrivals visibly identify targets', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn136_home_ai_arrivals.py', '-q']),
         ('Homepage AI proof links directly to the source-backed project example', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn137_home_project_evidence.py', '-q']),
         ('Anchored Review Reply Writer sections visibly identify the arrival', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn138_project_fragment_arrivals.py', '-q']),
+        ('Mobile project evidence shortcuts remain labeled and tappable', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn143_project_shortcuts.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
