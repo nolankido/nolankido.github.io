@@ -1,0 +1,56 @@
+{
+  "checked_on": "2026-11-13",
+  "metadata_source": "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v={video_id}&format=json",
+  "source_scope": "Public title, NolanPoker channel identity and thumbnail URL only. No footage, hand, result or chapter verification.",
+  "images_are_local_snapshots": true,
+  "videos": [
+    {
+      "video_id": "-Wm1i70Z3Bs",
+      "title": "I Went for $1.50 Hot Dogs... Then Entered a $120 Poker Tournament",
+      "author_name": "NolanPoker",
+      "thumbnail_url": "https://i.ytimg.com/vi/-Wm1i70Z3Bs/hqdefault.jpg",
+      "local_path": "assets/poker/video-thumbnails/south-point-hot-dogs.jpg",
+      "sha256": "562c33c82ac9a5d1bb601829f60ab2cfbc5f6195ff6e423544950dbe1f2ac877"
+    },
+    {
+      "video_id": "qABaiIcvvpU",
+      "title": "I Had 6.5 Big Blinds... Then Won a Trophy",
+      "author_name": "NolanPoker",
+      "thumbnail_url": "https://i.ytimg.com/vi/qABaiIcvvpU/hqdefault.jpg",
+      "local_path": "assets/poker/video-thumbnails/portland-deepstack.jpg",
+      "sha256": "b9bfe17d6c16f6c8c53e97ad5d8d69a97cc80d6dee7f426af72932bf9396b469"
+    },
+    {
+      "video_id": "I75GOBVXij4",
+      "title": "I Had A-K With 10 Big Blinds. Then TWO Players Shoved.",
+      "author_name": "NolanPoker",
+      "thumbnail_url": "https://i.ytimg.com/vi/I75GOBVXij4/hqdefault.jpg",
+      "local_path": "assets/poker/video-thumbnails/portland-standoff.jpg",
+      "sha256": "d43b17c553d0c8eb56c37cd5a9a4b10b1373afd9f9073049e6e14eef7d4b3e39"
+    },
+    {
+      "video_id": "bxpaM_1mWPE",
+      "title": "I Won Yesterday. Today I Had One Bullet. | Portland Meadows Poker",
+      "author_name": "NolanPoker",
+      "thumbnail_url": "https://i.ytimg.com/vi/bxpaM_1mWPE/hqdefault.jpg",
+      "local_path": "assets/poker/video-thumbnails/portland-episode-3.jpg",
+      "sha256": "baf71458090c65651432913ca70bf1d47ffc9c4cc12a026fce3e44dcf9bf7cf5"
+    },
+    {
+      "video_id": "HE7VDvO9gDU",
+      "title": "I Busted... Then Flipped Into a Final Table | Portland Meadows",
+      "author_name": "NolanPoker",
+      "thumbnail_url": "https://i.ytimg.com/vi/HE7VDvO9gDU/hqdefault.jpg",
+      "local_path": "assets/poker/video-thumbnails/portland-day-4.jpg",
+      "sha256": "8ef439c97cdfcfc551d1417a061529ace5a5452dadb0b0901a0d27228ffe35ab"
+    },
+    {
+      "video_id": "edNSD5BjIV8",
+      "title": "7 BB Near the Money... Then a Massive A-K Pot | WSOP Circuit",
+      "author_name": "NolanPoker",
+      "thumbnail_url": "https://i.ytimg.com/vi/edNSD5BjIV8/hqdefault.jpg",
+      "local_path": "assets/poker/video-thumbnails/reserve-day-1.jpg",
+      "sha256": "83ddd68755529a9fae4134cd614fe5ca1c6728fe13bb555cad2657a138082b6f"
+    }
+  ]
+}

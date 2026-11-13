@@ -111,6 +111,7 @@ def main() -> int:
         ('All Technology evidence tables explain sideways reading', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn147_remaining_table_hints.py', '-q']),
         ('Public South Point video links and provenance boundaries', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn148_south_point_video.py', '-q']),
         ('Mobile-first NolanPoker gallery and retained source notes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn149_nolanpoker_gallery.py', '-q']),
+        ('Local NolanPoker thumbnails and checked public titles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn150_nolanpoker_thumbnails.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
