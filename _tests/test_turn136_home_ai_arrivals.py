@@ -83,11 +83,11 @@ class HomeAiArrivalTests(unittest.TestCase):
         self.assertEqual(outputs[Path("technology/index.html")], self.tech)
         pages = {p["path"]: p for p in json.loads((ROOT / "_source/pages.json").read_text())}
         self.assertEqual(pages["/"]["updated"], "2026-11-10")
-        self.assertEqual(pages["/technology/"]["updated"], "2026-11-06")
+        self.assertEqual(pages["/technology/"]["updated"], "2026-11-13")
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text())
         dates = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in sitemap}
         self.assertEqual(dates["https://nolankido.com/"], "2026-11-10")
-        self.assertEqual(dates["https://nolankido.com/technology/"], "2026-11-06")
+        self.assertEqual(dates["https://nolankido.com/technology/"], "2026-11-13")
         for page in (self.home, self.tech):
             self.assertIn('"@id": "https://nolankido.com/about/#nolan-kido"', page)
 

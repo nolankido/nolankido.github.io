@@ -22,7 +22,7 @@ class AboutEvidenceTests(unittest.TestCase):
         self.assertLess(self.html.index('id="about-evidence-title"'), self.html.index('id="what-matters-in-the-work"'))
         self.assertEqual(self.html.count('class="identity-reading"'), 3)
         self.assertIn('AI Works, Human Decides', self.html)
-        self.assertEqual(self.page['updated'], '2026-11-06')
+        self.assertEqual(self.page['updated'], '2026-11-13')
 
     def test_evidence_links_to_existing_work_and_primary_publication(self):
         for link in (

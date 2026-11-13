@@ -112,10 +112,10 @@ class AboutEvidenceArrivalTests(unittest.TestCase):
     def test_preserved_identity_dates_and_negative_controls(self):
         self.assertEqual(build.build_outputs()[Path("about/index.html")], self.public)
         pages = {p["path"]: p for p in json.loads((ROOT / "_source/pages.json").read_text())}
-        self.assertEqual(pages["/about/"]["updated"], "2026-11-06")
+        self.assertEqual(pages["/about/"]["updated"], "2026-11-13")
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text())
         dates = {n.findtext("{*}loc"): n.findtext("{*}lastmod") for n in sitemap}
-        self.assertEqual(dates["https://nolankido.com/about/"], "2026-11-06")
+        self.assertEqual(dates["https://nolankido.com/about/"], "2026-11-13")
         self.assertIn('"@id": "https://nolankido.com/about/#nolan-kido"', self.public)
         explanation = re.search(re.escape(EXPLANATION) + r".*?</p>", self.source).group(0)
         backwards = self.source.replace(explanation, "", 1).replace(HEADING, HEADING + explanation, 1)

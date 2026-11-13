@@ -60,7 +60,7 @@ class TechnologyCaseRouteTests(unittest.TestCase):
     def test_minor_reader_path_edit_keeps_existing_freshness_dates(self):
         manifest = json.loads((ROOT / "_source/pages.json").read_text())
         dates = {page["path"]: page.get("updated", page.get("date")) for page in manifest}
-        self.assertEqual(dates["/technology/"], "2026-11-06")
+        self.assertEqual(dates["/technology/"], "2026-11-13")
         self.assertEqual(dates[VISIBILITY], "2026-11-06")
         self.assertEqual(dates[VERIFICATION], "2026-10-11")
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text())
