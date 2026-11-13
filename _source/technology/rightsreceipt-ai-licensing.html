@@ -1,0 +1,104 @@
+<section class="section folio-row" aria-labelledby="rightsreceipt-intro">
+  <div class="section-meta"><p class="section-label">PayPal AI Hackathon / Public project</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="rightsreceipt-intro">Can AI decide whether someone may use a creator's image?</h2>
+    <p><strong>No.</strong> AI can help turn a vague request into questions about where, how, and for how long an image may be used. It cannot establish that the seller owns the image, accept terms on either person's behalf, determine whether an invoice was paid, or issue legally valid permission on its own. Those are separate decisions and sources of evidence.</p>
+    <p>I built <strong>RightsReceipt</strong> to make those boundaries explicit. The project was submitted to the <a href="https://devpost.com/software/rightsreceipt">PayPal AI Hackathon on Devpost</a>. Its <a href="https://github.com/nolankido/rightsreceipt-hackathon">public, MIT-licensed source repository</a> contains a self-run judge demonstration and a separate local AI diagnostic. The <a href="https://www.youtube.com/watch?v=AzUeM4lXyuA">public demonstration video</a> introduces the workflow. These links let a reader investigate the project beyond my description here.</p>
+    <p class="evidence-note"><strong>Evidence status, November 13, 2026:</strong> Public submission and source are independently linkable. The submitted project's reported local tests use scripted people and injected payment-like responses, with a separate real classifier inference on synthetic requests. They do <em>not</em> demonstrate a genuine completed PayPal Sandbox transaction, verified paid webhook, production reliability, copyright ownership, or a real-world license.</p>
+    <nav class="entry-jumps project-case-jumps" aria-label="RightsReceipt case shortcuts"><span class="project-case-jumps-title">Inspect the evidence</span><a href="#rightsreceipt-scenario">Follow the example</a><a href="#rightsreceipt-authority">See who decides</a><a href="#rightsreceipt-model">Check the AI test</a><a href="#rightsreceipt-reproduce">Run the source</a><a href="#rightsreceipt-limits">Understand the limits</a></nav>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="rightsreceipt-scenario">
+  <div class="section-meta"><p class="section-label">One invented license / Specific terms</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="rightsreceipt-scenario">A $425 proposal is a test fixture, not a sale.</h2>
+    <p>Imagine the fictional creator Maya Chen receiving a request from the fictional buyer Cedar &amp; Tide to use an image called <em>Harbor After Rain</em>. A message such as “Can we use this in an ad?” does not establish the channel, territory, duration, alterations, exclusivity, attribution, sublicensing, or AI-training rights. Paying any amount would not fill in those gaps.</p>
+    <figure class="work-preview">
+      <img src="/assets/projects/rightsreceipt-harbor.svg" width="1200" height="720" alt="Fictional Harbor After Rain demonstration artwork: a stylized waterfront below rain clouds with distant warm lights." loading="lazy" decoding="async">
+      <figcaption>Project-owned illustration from the <a href="https://github.com/nolankido/rightsreceipt-hackathon/blob/646182a95faf6ab5448f10927ded1650ff38bdf5/public/demo/harbor-after-rain.svg">public RightsReceipt demonstration fixture</a>. Maya, Cedar &amp; Tide, the proposed transaction and the USD 425.00 amount are invented for testing.</figcaption>
+    </figure>
+    <p>The local demonstration starts with human-reviewed sample terms. A deterministic creator pricing policy calculates <strong>USD 425.00</strong> in integer cents, rather than asking a language model to invent a rate. A creator approval and a separate buyer acceptance attach to the exact proposed scope. In the rehearsal, injected provider replies stand in for payment events so application behavior can be tested without a financial transaction.</p>
+    <p>Why use a fictional example? It exposes a difficult workflow in a form other people can reproduce. It also prevents a plausible-looking receipt from being mistaken for proof that a real customer paid or a creator authorized commercial use.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="rightsreceipt-authority">
+  <div class="section-meta"><p class="section-label">Design / Seven authority boundaries</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="rightsreceipt-authority">Seven claims need seven different checks.</h2>
+    <p>My design question was not “Can an AI fill out a license?” It was “What evidence must be true before any part of this deal advances?” The stages below describe the intended workflow and the boundary of the published demonstration.</p>
+    <p class="project-table-hint" id="rightsreceipt-authority-hint"><strong>Reading the table:</strong> On a narrow screen, swipe sideways. On a keyboard, focus the table and use the arrow keys to inspect other columns.</p>
+    <div class="project-table-scroll" role="region" aria-label="Seven RightsReceipt authority stages" aria-describedby="rightsreceipt-authority-hint" tabindex="0">
+      <table>
+        <caption>What each stage may establish, and who has the authority</caption>
+        <thead><tr><th scope="col">Stage</th><th scope="col">Authority</th><th scope="col">What the prototype can record</th><th scope="col">What it cannot assume</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Buyer request</th><td>Buyer</td><td>Text describing intended use</td><td>Consent or complete license terms</td></tr>
+          <tr><th scope="row">Term suggestions</th><td>AI as a reviewer aid</td><td>Extracted words, tentative labels, conflicts and unknown fields</td><td>Resolved rights, accurate interpretation or legal approval</td></tr>
+          <tr><th scope="row">Creator approval</th><td>Creator</td><td>Reviewed terms and approval of a version</td><td>Authenticated identity or proven copyright ownership</td></tr>
+          <tr><th scope="row">Buyer acceptance</th><td>Buyer</td><td>Acceptance tied to the same version</td><td>Payment or unstated permissions</td></tr>
+          <tr><th scope="row">Price</th><td>Creator's configured policy</td><td>A reproducible quote in integer cents</td><td>A model's guess at a fair or binding market price</td></tr>
+          <tr><th scope="row">Payment</th><td>PayPal's authenticated provider state</td><td>Simulated responses and integration logic in the local rehearsal</td><td>Real settlement from a redirect, mock reply or client screen</td></tr>
+          <tr><th scope="row">Permission record</th><td>Consented scope plus verified financial state</td><td>Canonical record with SHA-256 integrity checks and minimized public view</td><td>Legal enforceability or original ownership from a hash alone</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The distinction matters especially between “receipt exists” and “permission is proven.” A SHA-256 integrity check can help detect changed record bytes. It is not a digital signature, government registration, or independent proof that the purported creator owns the rights. This project models evidence handling; it does not replace legal or identity checks.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="rightsreceipt-model">
+  <div class="section-meta"><p class="section-label">Actual inference / Synthetic inputs</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="rightsreceipt-model">A real model can run and still propose the wrong answer.</h2>
+    <p>RightsReceipt has two local demonstrations that should not be confused. The <strong>application rehearsal</strong> runs licensing handlers with scripted participants and injected provider responses. Its rights terms are prepared fixtures, not newly inferred by AI. The separate <strong>read-only AI diagnostic</strong> executes a bundled, hash-checked supervised lexical classifier and a source-span extractor on project-authored synthetic buyer requests.</p>
+    <p>In the publicly reported diagnostic, two synthetic requests generate twelve field suggestions each, or <strong>24 field comparisons</strong>. Those are checks on the demonstration inputs, not 24 independent real customer cases or an accuracy percentage. The classifier's numeric margins are not calibrated probabilities.</p>
+    <p><strong>The revealing failure:</strong> one example includes a request for “Germany only,” yet the classifier still proposes the United States and Canada as a resolved territory. The diagnostic flags the conflict for human review rather than turning that label into authorized scope. This is the kind of visible wrong answer I want in a case study: it shows why a working model is not equivalent to a reliable decision-maker.</p>
+    <p>What would change that assessment? A separate, labeled evaluation set with new phrasing, ambiguous and adversarial requests, errors classified by their consequences, and a clear human escalation policy. The submitted two-request diagnostic does not provide those results. The code and instructions are in the <a href="https://github.com/nolankido/rightsreceipt-hackathon/blob/646182a95faf6ab5448f10927ded1650ff38bdf5/JUDGES.md">pinned public judge guide</a>.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="rightsreceipt-payment">
+  <div class="section-meta"><p class="section-label">Payment state / Simulation versus provider evidence</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="rightsreceipt-payment">A successful local invoice rehearsal is not a paid invoice.</h2>
+    <p>The published project reports three application-handler journeys: a normal simulated licensing path, recovery from an interrupted invoice-send response, and repeat/reset checks. It also reports three database resets and zero external requests from the local smoke. These are meaningful software checks because a lost response could otherwise lead an app to send a second invoice or assume an unconfirmed status. They remain <strong>local, injected-provider evidence</strong>.</p>
+    <p>A genuine payment claim would need more: a real Sandbox buyer payment, an authenticated PayPal invoice-status retrieval referring to the same invoice, and a correctly verified paid webhook. The public repository contains code and instructions intended to support that integration, but its submission explicitly states that the complete separately paid Sandbox journey has <strong>not</strong> been independently demonstrated.</p>
+    <p>This is not just caution about one app. <a href="https://developer.paypal.com/api/rest/webhooks/rest/">PayPal's developer documentation</a> describes subscribed webhook listeners and message-signature verification. A simulated callback or return from a browser payment page cannot establish that an authenticated provider recognized a settlement. Without that evidence, a real permission should not be activated automatically.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="rightsreceipt-reproduce">
+  <div class="section-meta"><p class="section-label">Public source / Inspect and reproduce</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="rightsreceipt-reproduce">Run the bounded tests yourself, without a PayPal account.</h2>
+    <p>The <a href="https://github.com/nolankido/rightsreceipt-hackathon">public source</a> is a sanitized, single-commit snapshot. The commands below pin the snapshot analyzed for this article. Use <strong>Node 22.13 through 22.x</strong>, as specified by that repository, in a clean checkout. No secret, <code>npm install</code>, paid AI API, or PayPal transaction is required for these local demonstrations.</p>
+    <pre><code>git clone https://github.com/nolankido/rightsreceipt-hackathon.git
+cd rightsreceipt-hackathon
+git checkout 646182a95faf6ab5448f10927ded1650ff38bdf5
+node scripts/judge-console-real-smoke.mjs
+node --no-warnings --experimental-strip-types scripts/judge-ai-proof.mjs</code></pre>
+    <p>The first command runs a local browser-console smoke with real application handlers and <em>simulated</em> payment responses. A passing result must still say <code>paymentEvidence: "simulated_only"</code>. The second performs actual local classifier inference on synthetic requests and must report <code>paymentEvidence: "none"</code>. For a human-operated view, run <code>node scripts/judge-local-console.mjs</code> and open the printed localhost URL. Review the <a href="https://github.com/nolankido/rightsreceipt-hackathon/blob/646182a95faf6ab5448f10927ded1650ff38bdf5/JUDGES.md">judge instructions</a> for expected outputs, limitations, and failure behavior.</p>
+    <p><strong>Verification provenance:</strong> The <a href="https://devpost.com/software/rightsreceipt">Devpost submission</a> reports that the public checkout completed the smoke and model proof on Node 22.16.0 on November 10, 2026. This website article relies on that public report and source inspection; publication of this article is <em>not</em> an independent rerun of the project's Node 22 verification or a confirmation of current remote operation.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="rightsreceipt-limits">
+  <div class="section-meta"><p class="section-label">What the project establishes / What comes next</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="rightsreceipt-limits">The useful result is a workflow with visible stopping points.</h2>
+    <p>RightsReceipt is evidence of a <strong>publicly submitted, inspectable prototype</strong> and a precise design principle: the tool can prepare a proposal, but each authority must be checked separately. It does not establish that someone used the service to license an image, that the classifier is accurate in the wild, that the public site currently runs the full product, or that a real PayPal payment and permission grant occurred.</p>
+    <p>Before responsibly using this for a real licensing business, I would require several additional gates:</p>
+    <ol>
+      <li><strong>Identity and rights.</strong> Establish that creators and buyers are authorized and that the offered work may actually be licensed. Do not treat uploaded content as ownership proof.</li>
+      <li><strong>Independent language evaluation.</strong> Test rights-field extraction on new, labeled requests. Treat contradictions, silence, and low confidence as unresolved, not defaults.</li>
+      <li><strong>Real payment acceptance.</strong> Demonstrate a separately paid PayPal Sandbox invoice with authenticated status and validated webhook evidence for the same transaction.</li>
+      <li><strong>Security, privacy and legal review.</strong> Evaluate access, data retention, record authenticity, and enforceability before inviting real people or money into the workflow.</li>
+    </ol>
+    <p>These are future validation requirements, not completed milestones. The page offers no legal advice and makes no claim about copyright ownership.</p>
+    <p><strong>Why I publish cases like this:</strong> Someone looking up my name or asking an AI assistant what I have built should be able to find more than an appealing bio. They should find source, scope, a reproducible demonstration, an identified error, and limits that survive scrutiny. That is how <a href="/technology/#ai-works-human-decides">AI Works, Human Decides</a> becomes an engineering practice instead of a slogan. For a separate method of testing whether AI saves real effort, see <a href="/technology/ai-workflow-pilot/">the workflow pilot and audit kit</a>.</p>
+    <p class="editorial-note">Prepared with AI assistance from the public <a href="https://devpost.com/software/rightsreceipt">hackathon submission</a>, <a href="https://github.com/nolankido/rightsreceipt-hackathon">source snapshot</a>, and <a href="https://developer.paypal.com/api/rest/webhooks/rest/">PayPal developer documentation</a>. The scenario is project-authored fiction. Reported tests are attributed to the project; this article does not claim new model tests, financial transactions, customer outcomes, independent security certification, or improved search rankings. Send <a href="/contact/">a correction with a specific source</a>.</p>
+    <p><a href="/projects/">Browse Nolan Kido's public projects</a> · <a href="/technology/">Explore practical AI</a> · <a href="/creative/">Explore creative work</a></p>
+  </div>
+</section>

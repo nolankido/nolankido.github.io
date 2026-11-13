@@ -46,7 +46,7 @@
     "description": "Nolan Kido applies AI to real-life and business tasks with AI Works, Human Decides. Explore documented projects, published accounting research, and poker.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-11-06"
+    "updated": "2026-11-13"
   },
   {
     "id": "notes",
@@ -322,7 +322,7 @@
     "description": "Explore Nolan Kido's practical AI work: small-business review checks, poker-vlog evidence QA, book continuity, and repeatable tools. AI Works, Human Decides.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-11-06"
+    "updated": "2026-11-13"
   },
   {
     "id": "creative",
@@ -332,7 +332,7 @@
     "description": "Nolan Kido's creative work: NolanPoker videos, poker comics, and AI-assisted writing. Read a writing example and use the free creative brief.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-11-06"
+    "updated": "2026-11-13"
   },
   {
     "id": "poker-start-here",
@@ -1130,6 +1130,18 @@
     "source": "technology/ai-workflow-pilot.html",
     "date": "2026-11-13",
     "worked_guide": true
+  },
+  {
+    "id": "rightsreceipt-case",
+    "section": "technology",
+    "path": "/technology/rightsreceipt-ai-licensing/",
+    "title": "RightsReceipt: where AI stops and permission begins.",
+    "seo_title": "RightsReceipt AI Licensing Case Study | Nolan Kido",
+    "description": "Inside Nolan Kido's public RightsReceipt hackathon prototype: local AI inference, creator approval, simulated PayPal evidence, and honest verification limits.",
+    "kicker": "Technology / Public source-backed case",
+    "source": "technology/rightsreceipt-ai-licensing.html",
+    "date": "2026-11-13",
+    "evidence_article": true
   },
   {
     "id": "ai-website-verification",

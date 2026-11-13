@@ -86,12 +86,12 @@ class WebsiteVisibilityCaseTests(unittest.TestCase):
         for path in (Path("about/index.html"), Path("technology/index.html"), Path("technology/ai-website-visibility/index.html"), Path("sitemap.xml")):
             self.assertEqual(expected[path], (ROOT / path).read_text(encoding="utf-8"), path)
         manifest = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
-        for route in ("/about/", "/technology/", CASE_LINK):
-            self.assertEqual(next(x["updated"] for x in manifest if x["path"] == route), "2026-11-06")
+        for route, expected_revision in (("/about/", "2026-11-13"), ("/technology/", "2026-11-13"), (CASE_LINK, "2026-11-06")):
+            self.assertEqual(next(x["updated"] for x in manifest if x["path"] == route), expected_revision)
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         dated = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in sitemap}
-        for route in ("/about/", "/technology/", CASE_LINK):
-            self.assertEqual(dated["https://nolankido.com" + route], "2026-11-06")
+        for route, expected_revision in (("/about/", "2026-11-13"), ("/technology/", "2026-11-13"), (CASE_LINK, "2026-11-06")):
+            self.assertEqual(dated["https://nolankido.com" + route], expected_revision)
         targets = check_live.targets()
         for route, path in (("/about/", "about/index.html"), ("/technology/", "technology/index.html"), (CASE_LINK, "technology/ai-website-visibility/index.html")):
             self.assertEqual(targets[route], (200, (ROOT / path).read_bytes()))

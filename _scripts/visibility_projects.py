@@ -12,6 +12,7 @@ CASE_IDS = frozenset({
     'local-ai-review-replies', 'ai-book-continuity-checker', 'dinner-on-time',
     'ai-weekly-reset', 'organize-public-notes', 'local-ai-test-record',
     'ai-poker-video-evidence', 'ai-website-visibility',
+    'rightsreceipt-case',
 })
 SCOPED_IDS = CASE_IDS | {'home', 'technology', 'creative', 'ai-answer-review', 'ai-time-savings', 'ai-workflow-pilot'}
 IMAGES = {
@@ -22,6 +23,10 @@ IMAGES = {
     'dinner-on-time': (
         '/assets/projects/dinner-on-time-preview.jpg', 2400, 1396,
         'The public Dinner on Time cooking-planner simulation demonstration.',
+    ),
+    'rightsreceipt-case': (
+        '/assets/projects/rightsreceipt-harbor.svg', 1200, 720,
+        'Project-owned fictional Harbor After Rain artwork from the public RightsReceipt demo.',
     ),
 }
 

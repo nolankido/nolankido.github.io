@@ -459,6 +459,20 @@ def build_outputs() -> dict[Path, str]:
         extra += page_sharing.head(p, ROOT)
         extra += practical_navigation.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
+        if p['id'] == 'rightsreceipt-case':
+            schema['about'] = {
+                '@type': 'SoftwareSourceCode',
+                '@id': 'https://github.com/nolankido/rightsreceipt-hackathon#source',
+                'name': 'RightsReceipt',
+                'codeRepository': 'https://github.com/nolankido/rightsreceipt-hackathon',
+                'programmingLanguage': 'TypeScript',
+                'author': {'@id': site['url'] + '/about/#nolan-kido'},
+            }
+            schema['citation'] = [
+                'https://devpost.com/software/rightsreceipt',
+                'https://github.com/nolankido/rightsreceipt-hackathon/tree/646182a95faf6ab5448f10927ded1650ff38bdf5',
+                'https://developer.paypal.com/api/rest/webhooks/rest/',
+            ]
         schema = author_archive.schema(p, schema, pages, site, ROOT)
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
         schema = visibility_projects.schema(p, schema, body, ROOT, site['url'])

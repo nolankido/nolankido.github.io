@@ -79,7 +79,7 @@ class TechnologyHubTableHintTests(unittest.TestCase):
         self.assertIn(f'href="/{CSS_PATH}?v={self.version}"', self.page)
         self.assertIn('rel="canonical" href="https://nolankido.com/technology/"', self.page)
         pages = {entry["id"]: entry for entry in json.loads((ROOT / "_source/pages.json").read_text())}
-        self.assertEqual(pages["technology"]["updated"], "2026-11-06")
+        self.assertEqual(pages["technology"]["updated"], "2026-11-13")
         for note_id, label, caption in TABLES:
             self.assertIn(
                 f'<div class="project-table-scroll" role="region" aria-label="{label}" '

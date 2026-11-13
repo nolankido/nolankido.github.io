@@ -12,8 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TAGLINE = "AI Works, Human Decides"
 ROUTES = {
     "/": ("index.html", "2026-11-10"),
-    "/about/": ("about/index.html", "2026-11-06"),
-    "/technology/": ("technology/index.html", "2026-11-06"),
+    "/about/": ("about/index.html", "2026-11-13"),
+    "/technology/": ("technology/index.html", "2026-11-13"),
     "/notes/keep-the-judgment/": ("notes/keep-the-judgment/index.html", "2026-11-06"),
 }
 
