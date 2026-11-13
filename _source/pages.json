@@ -341,10 +341,22 @@
     "path": "/creative/",
     "title": "Creative Work",
     "seo_title": "Writing & Visual Storytelling | Nolan Kido",
-    "description": "Nolan Kido's creative work: NolanPoker videos, poker comics, and AI-assisted writing. Read a writing example and use the free creative brief.",
+    "description": "Nolan Kido's creative work: NolanPoker videos, poker comics, AI-assisted writing, and an original incremental game design lab with a free playtest worksheet.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
     "updated": "2026-11-13"
+  },
+  {
+    "id": "incremental-game-loop",
+    "section": "creative",
+    "path": "/creative/incremental-game-loop/",
+    "title": "Build and test an incremental game's first minute.",
+    "seo_title": "Incremental Game Design: First-Minute Pacing Lab | Nolan Kido",
+    "description": "Try a free browser-based incremental game design demo, inspect its click and idle upgrade math, and use a blank first-minute playtest worksheet to test pacing.",
+    "kicker": "Game design / Original playable demonstration",
+    "source": "creative/incremental-game-loop.html",
+    "date": "2026-11-13",
+    "creative_article": true
   },
   {
     "id": "poker-start-here",

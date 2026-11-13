@@ -156,11 +156,11 @@ def build_outputs() -> dict[Path, str]:
         raise ValueError('Page routes and IDs must be unique')
     for p in pages:
         output_path(p['path'])
-        if p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')):
+        if p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')) or p.get('creative_article'):
             date_value(p['date'])
         if p.get('updated'):
             updated = date_value(p['updated'])
-            if (p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide'))) and updated < date_value(p['date']):
+            if (p.get('note') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')) or p.get('creative_article')) and updated < date_value(p['date']):
                 raise ValueError('An update cannot precede publication')
         if p.get('revision') and not p.get('updated'):
             raise ValueError('Substantive revisions need an explicit update date')
@@ -344,6 +344,22 @@ def build_outputs() -> dict[Path, str]:
             for asset, kind in [('task-brief.css', 'style'), ('task-brief.js', 'script')]:
                 version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
                 extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style' else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
+        if p.get('creative_article'):
+            schema.update({'@type': 'Article', 'headline': p['title'], 'datePublished': p['date'],
+                           'author': {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido',
+                                      'name': site['name'], 'url': site['url'] + '/about/'}})
+            extra += f'\n  <meta property="article:published_time" content="{p["date"]}">'
+            header = header.replace('</section>', f'<p class="note-meta">Published <time datetime="{p["date"]}">{date_label(p["date"])}</time> · Original creative guide</p></section>', 1)
+        if p['id'] == 'incremental-game-loop':
+            for asset, kind in [('incremental-game-loop.css', 'style'), ('incremental-game-loop.js', 'script')]:
+                version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style'
+                          else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
+            schema['mainEntity'] = {'@type': 'SoftwareApplication', '@id': canonical + '#game-lab',
+                                    'name': 'First-Minute Incremental Game Lab', 'url': canonical,
+                                    'description': 'Original browser-local teaching game with reproducible click and passive upgrade rules.',
+                                    'applicationCategory': 'GameApplication', 'operatingSystem': 'Web browser',
+                                    'isAccessibleForFree': True}
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
@@ -510,12 +526,12 @@ def build_outputs() -> dict[Path, str]:
         extra += f'\n  <link rel="stylesheet" href="/assets/search-visibility.css?v={search_version}">'
         data = {**values, 'find_current': ' aria-current="page"' if p['id'] == 'find' else '', 'social_metadata': presentation.metadata(presentation_config, p, site['url']), 'writing_current': (' aria-current="page"' if p['id'] == 'notes' else ' aria-current="location"' if p.get('note') else ''), 'body': body, 'primary_nav': nav, 'section_nav': section_navigation(p) or living_well.section_navigation(p), 'page_header': header, 'page_id': text(p['id']),
                 'seo_title': text(p['seo_title']), 'description': text(p['description']), 'canonical': text(canonical),
-                'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')) else 'website', 'extra_head': extra,
+                'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')) or p.get('creative_article') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
         rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
-        if p['id'] == 'projects':
+        if p['id'] in {'projects', 'incremental-game-loop'}:
             # Empty optional head and section-nav slots in the shared layout
-            # otherwise leave indented blank lines on this newly added route.
+            # otherwise leave indented blank lines on these authored routes.
             rendered = re.sub(r'(?m)^[ \t]+$', '', rendered)
         outputs[output_path(p['path'])] = rendered
 

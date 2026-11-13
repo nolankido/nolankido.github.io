@@ -1,0 +1,95 @@
+<section class="section folio-row" aria-labelledby="lab-start">
+  <div class="section-meta"><p class="section-label">One minute / One honest experiment</p></div>
+  <div class="section-content prose">
+    <h2 class="intro" id="lab-start">An incremental game is a series of small decisions about what happens next.</h2>
+    <p>Clicker and idle games can look like simple arithmetic: gather a resource, buy an upgrade, gather faster. The design question is more interesting. When should an upgrade become affordable? Should the player click again, wait for passive production, or make a choice that changes both? A first minute can make those tradeoffs visible.</p>
+    <p>This page includes a <strong>small original teaching game</strong> you can play in your browser, its exact rules, a reproducible worked run, and a blank playtest sheet. It is not a public release of any other game I am building, a claim about real player preferences, or evidence of a completed playtest. The AI Works, Human Decides principle applies here too: a tool may propose rules, but a person still needs to see how those rules feel in play.</p>
+    <nav class="lab-jumps" aria-label="On this game design guide"><a href="#lab-play">Try the demo</a><a href="#lab-rules">Inspect the rules</a><a href="#lab-run">Repeat a sample run</a><a href="#lab-test">Plan a playtest</a><a href="#lab-limits">Read the limits</a></nav>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="lab-play">
+  <div class="section-meta"><p class="section-label">Playable demonstration</p></div>
+  <div class="section-content">
+    <h2 class="section-title" id="lab-play">Try the first-minute loop.</h2>
+    <p class="section-deck">Collect sparks, decide whether to improve each tap or add a passive spark every second, and try to produce 150 sparks in total. Spending reduces your available sparks, but never erases the sparks you already produced toward the goal.</p>
+    <p id="lab-fallback">The optional game requires JavaScript. All upgrade prices, the worked run, and the blank worksheet below are still readable and usable without scripts.</p>
+    <div class="game-lab" id="game-lab" hidden aria-label="Incremental game design demonstration">
+      <div class="lab-scoreboard">
+        <dl class="lab-stat"><dt>Sparks available</dt><dd id="lab-bank">0</dd></dl>
+        <dl class="lab-stat"><dt>Sparks produced this run</dt><dd id="lab-total">0</dd></dl>
+        <dl class="lab-stat"><dt>Per tap</dt><dd id="lab-per-tap">1</dd></dl>
+        <dl class="lab-stat"><dt>Per second</dt><dd id="lab-per-second">0</dd></dl>
+      </div>
+      <label class="lab-progress-label" for="lab-progress">Progress toward 150 total sparks</label>
+      <progress id="lab-progress" max="150" value="0">0 of 150 sparks</progress>
+      <p id="lab-progress-copy" class="small-copy">0 of 150 total sparks produced.</p>
+      <div class="lab-primary-action"><button class="button" id="lab-tap" type="button">Make sparks (+1)</button></div>
+      <div class="lab-upgrades" aria-label="Game upgrades">
+        <article class="lab-upgrade"><h3>Sharper pencil</h3><p>Each purchase adds <strong>+1 spark per tap</strong>. First cost: 10 sparks. Later prices grow by a factor of 1.7, rounded up.</p><p id="lab-pencil-count" class="small-copy">Purchased: 0</p><button id="lab-pencil" type="button">Buy sharper pencil (10 sparks)</button></article>
+        <article class="lab-upgrade"><h3>Daily routine</h3><p>Each purchase adds <strong>+1 spark per second</strong> while the page is visible and passive production is running. First cost: 25 sparks. Each later price doubles.</p><p id="lab-routine-count" class="small-copy">Purchased: 0</p><button id="lab-routine" type="button">Buy daily routine (25 sparks)</button></article>
+      </div>
+      <div class="lab-controls"><button id="lab-pause" type="button">Pause passive production</button><button id="lab-reset" type="button">Start over</button></div>
+      <p id="lab-action-status" role="status" aria-live="polite" aria-atomic="true">Ready. Make a spark to begin.</p>
+      <p class="small-copy">The counter changes silently between actions so screen readers are not interrupted every second. Check the labeled totals whenever you want. If you leave this tab or hide the page, passive production stops without an offline catch-up bonus. Nothing is sent or saved.</p>
+    </div>
+    <p class="small-copy">Use the buttons with a mouse, touch, or keyboard. The native buttons work with Tab, Enter, and Space. No login, account, analytics event, AI model, or stored game progress is required for this demonstration.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="lab-rules">
+  <div class="section-meta"><p class="section-label">Rules you can verify</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="lab-rules">Where the numbers come from.</h2>
+    <p>The demo starts with zero sparks. A tap produces one spark. The <em>available</em> balance is what you can spend. The <em>total produced</em> is a separate number that keeps counting every spark you have earned, including sparks later spent on upgrades. Reach 150 total produced sparks to meet the guide's practice goal. You can keep playing afterward.</p>
+    <div class="lab-table-wrap" role="region" tabindex="0" aria-label="Upgrade rules table, scroll horizontally if needed">
+      <table class="lab-rules-table"><caption>Fixed upgrade prices and effects</caption><thead><tr><th scope="col">Action</th><th scope="col">First price</th><th scope="col">Later price rule</th><th scope="col">Effect</th></tr></thead><tbody>
+        <tr><th scope="row">Tap</th><td>Free</td><td>No price</td><td>Produces 1 + pencil purchases</td></tr>
+        <tr><th scope="row">Sharper pencil</th><td>10</td><td>Ceiling of 10 × 1.7<sup>purchases</sup></td><td>Adds 1 to each tap</td></tr>
+        <tr><th scope="row">Daily routine</th><td>25</td><td>25 × 2<sup>purchases</sup></td><td>Adds 1 per active second</td></tr>
+      </tbody></table>
+    </div>
+    <p>The first three pencil costs are <strong>10, 17, and 29</strong> sparks. The first three routine costs are <strong>25, 50, and 100</strong>. Each upgrade can be purchased at most 15 times in this teaching demo. The purchase button becomes available when you have enough sparks and stops accepting purchases at the limit.</p>
+    <p><strong>Why make the costs different?</strong> A pencil rewards continued tapping immediately. A routine rewards leaving the counter alone for a moment. A more expensive second routine forces a new decision after the first one. That is a design hypothesis built into these rules, not a claim that this progression is balanced or enjoyable for every player.</p>
+    <p>Passive production advances one second at a time while this page is visible. It stops when paused or when the page is hidden. The game does not calculate missed time when you return. This means it is a <strong>small active-page teaching model</strong>, not an offline-progress idle game. The <a href="https://github.com/nolankido/nolankido.github.io/blob/main/assets/incremental-game-loop.js">public source code for the rules and controls</a> can be inspected separately.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="lab-run">
+  <div class="section-meta"><p class="section-label">A reproducible example</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="lab-run">Try a short sequence and check every count.</h2>
+    <ol class="lab-walkthrough">
+      <li>Start from zero. Tap 10 times. You have <strong>10 available</strong> and <strong>10 produced</strong>.</li>
+      <li>Buy one sharper pencil for 10. You have <strong>0 available</strong>, <strong>10 produced</strong>, and <strong>2 per tap</strong>.</li>
+      <li>Tap 13 more times. You produce 26 new sparks. You have <strong>26 available</strong> and <strong>36 produced</strong>.</li>
+      <li>Buy one daily routine for 25. You have <strong>1 available</strong>, <strong>36 produced</strong>, and <strong>1 per second</strong>.</li>
+      <li>Leave the tab visible, with passive production running, for one complete timer tick. You have <strong>2 available</strong> and <strong>37 produced</strong>. This final step depends on a clock tick, so the displayed timing may differ slightly from your wall clock.</li>
+    </ol>
+    <p>The useful lesson is not the number 37. It is that a purchased upgrade spends your balance without erasing your overall progress, and that a cheaper click upgrade can change the path to an idle upgrade. If you want to change the goal, the cost curve, or the time to first purchase, those are new design decisions worth testing.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="lab-test">
+  <div class="section-meta"><p class="section-label">A blank observation protocol</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="lab-test">How I would test the first minute.</h2>
+    <p>Before editing the economy, decide what you want to learn. For example: can a new player tell the difference between <em>total produced</em> and <em>available</em>? When do they notice the passive upgrade? Does waiting feel like a choice, or just a pause in the activity? Those are questions for a future test, not findings from one.</p>
+    <ol class="lab-walkthrough">
+      <li><strong>Pick one question.</strong> For a first pass, ask whether the purchase choices are understandable without explanation.</li>
+      <li><strong>Use the same setup.</strong> Reset the game, start a 60-second stopwatch, and avoid coaching the player. Note whether the tab stays visible.</li>
+      <li><strong>Record what happened.</strong> Note roughly when each upgrade was first noticed and purchased, what the player tried, and which instructions they had to reread. Record counts at 60 seconds, not just whether the goal was reached.</li>
+      <li><strong>Ask one follow-up.</strong> “What did you think would happen when you bought that?” Keep what they say separate from your interpretation.</li>
+      <li><strong>Change only one rule.</strong> Test a different starting cost or goal in a new version, not every variable at once. Repeating the exercise with a few people may reveal more questions, but a small informal test cannot establish universal preferences.</li>
+    </ol>
+    <p><a class="button" href="/downloads/incremental-game-first-minute-playtest.md" download>Download the blank playtest sheet (.md)</a></p>
+    <p class="small-copy">The sheet asks for time to first upgrade, the player's own words, totals and confounding conditions. It has no prefilled user data. Keep completed observations private unless everyone involved has agreed to share them.</p>
+    <p>Once you have an observation, decide whether a change serves the intended experience. A rate that is mathematically faster is not automatically a better game. That is why the practice loop is <strong>rule → player action → observation → one revision</strong>, and not simply increasing the resource number.</p>
+  </div>
+</section>
+<section class="section folio-row" aria-labelledby="lab-limits">
+  <div class="section-meta"><p class="section-label">What this establishes</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="lab-limits">A public demonstration is not a playtest result.</h2>
+    <p>This browser lab demonstrates a reproducible economy, a local interactive interface, and a possible way to observe first-minute decisions. It does <strong>not</strong> demonstrate commercial readiness, retention, game balance, real player satisfaction, a shipped private prototype, or a completed usability study. Its scoring and pacing are authored examples. No external game project or private repository is represented by the demo.</p>
+    <p>The controls run on your device. They do not send button presses or results to Nolan Kido, store a save file, or simulate play while the page is closed. You can read the rules without JavaScript and download the blank worksheet without sharing your answers.</p>
+    <p>If you are interested in the wider creative process, <a href="/creative/">browse my creative work</a>, <a href="/technology/">explore practical software and AI cases</a>, or <a href="/about/#wine-games-and-life">read why games belong among my interests</a>. Finished public projects with evidence are listed separately in the <a href="/projects/">project portfolio</a>.</p>
+    <p class="editorial-note">Prepared with AI assistance. The game, its worked example and the blank protocol are original teaching material. No outside participant data, live search metrics or independent evaluations are claimed.</p>
+  </div>
+</section>

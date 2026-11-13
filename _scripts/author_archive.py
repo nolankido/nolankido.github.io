@@ -114,7 +114,7 @@ def _standalone_records(root):
 
 def is_article(page):
     return not page.get('noindex') and any(page.get(k) for k in
-        ('note', 'poker_entry', 'poker_guide', 'living_well_entry', 'evidence_article', 'worked_guide'))
+        ('note', 'poker_entry', 'poker_guide', 'living_well_entry', 'evidence_article', 'worked_guide', 'creative_article'))
 
 
 def group(page):
@@ -135,6 +135,7 @@ def label(page):
     if page['id'] == 'accounting-research': return 'Published research explanation'
     if page.get('evidence_article'): return 'Recorded case'
     if page.get('worked_guide'): return 'Guide with worked examples'
+    if page.get('creative_article'): return 'Original creative guide'
     if page.get('living_well_kind') == 'experiment': return 'Proposed experiment'
     if page.get('living_well_kind') == 'guide': return 'Practical guide'
     if page.get('note') or page.get('living_well_kind') == 'essay': return 'AI-assisted essay'
