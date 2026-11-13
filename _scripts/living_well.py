@@ -156,7 +156,7 @@ A paper note is enough. No tracking app is required.
 
 def load(root: Path) -> list[dict]:
     entries = []
-    for name in ('launch.json', 'further.json', 'discovery.json', 'expansion.json'):
+    for name in ('launch.json', 'further.json', 'discovery.json', 'expansion.json', 'wine.json'):
         data = json.loads((root / '_source/living-well' / name).read_text(encoding='utf-8'))
         entries.extend(data['entries'])
     extra = root / '_source/living-well/productivity.json'
@@ -241,13 +241,14 @@ def manifest(root: Path) -> list[dict]:
         pages.append({'id': 'living-well' + ('-' + slug if slug else ''), 'path': route,
                       'title': title, 'seo_title': title + ' | Nolan Kido', 'description': description,
                       'kicker': 'Nolan Kido / Living Well', 'source': 'living-well/page.html',
-                      'section': 'living-well', 'living_well_hub': slug or 'home', 'updated': '2026-10-10' if slug in {'', 'guides', 'free-resources'} else '2026-10-09'})
+                      'section': 'living-well', 'living_well_hub': slug or 'home',
+                      'updated': '2026-11-13' if slug in {'', 'guides'} else '2026-10-10' if slug == 'free-resources' else '2026-10-09'})
     for slug, title, description, introduction, sequence in TOPICS:
         pages.append({'id': 'living-well-topic-' + slug, 'path': PREFIX + 'topics/' + slug + '/',
                       'title': title, 'seo_title': title + ' | Living Well | Nolan Kido',
                       'description': description, 'kicker': 'Living Well / Topics',
                       'source': 'living-well/page.html', 'section': 'living-well',
-                      'living_well_topic': slug, 'updated': '2026-10-10'})
+                      'living_well_topic': slug, 'updated': '2026-11-13' if slug == 'attention' else '2026-10-10'})
     for entry in load(root):
         pages.append({'id': 'living-well-' + entry['slug'], 'path': PREFIX + entry['slug'] + '/',
                       'title': entry['title'], 'seo_title': entry.get('seo_title', entry['title'] + ' | Nolan Kido'),

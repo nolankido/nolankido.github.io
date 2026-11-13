@@ -26,7 +26,7 @@
     "description": "Find Nolan Kido’s biography, projects, guides and writing. Search public page titles and section headings locally without sending or saving your search text.",
     "source": "find.html",
     "kicker": "Search the site",
-    "updated": "2026-11-05"
+    "updated": "2026-11-13"
   },
   {
     "id": "follow",
@@ -68,7 +68,7 @@
     "description": "Four selected reading paths through practical AI, thoughtful living, poker decisions, and creative work, with the original general Notes collection.",
     "kicker": "Writing",
     "source": "notes.html",
-    "updated": "2026-11-06"
+    "updated": "2026-11-13"
   },
   {
     "id": "resources",

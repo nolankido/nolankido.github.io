@@ -8,6 +8,14 @@
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
     <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
     <item>
+      <title>How to write useful wine tasting notes without guessing the bottle</title>
+      <link>https://nolankido.com/living-well/wine-tasting-notes/</link>
+      <description>Use a free tasting-note template to record aroma, acidity, body and finish, separate observations from grape guesses, and keep AI in a supporting role.</description>
+      <guid isPermaLink="true">https://nolankido.com/living-well/wine-tasting-notes/</guid>
+      <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/living-well/feed.xml">Nolan Kido Living Well</source>
+    </item>
+    <item>
       <title>How to test an AI workflow before adopting it.</title>
       <link>https://nolankido.com/technology/ai-workflow-pilot/</link>
       <description>Test whether an AI workflow saves real effort at acceptable quality. Compare human review, repairs and setup with a six-case example, free CSV log and offline checker.</description>

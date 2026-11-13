@@ -64,6 +64,7 @@ def main() -> int:
         ('Public RightsReceipt source-backed licensing case', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_rightsreceipt_public_case.py', '-q']),
         ('Published accounting research authorship and findings', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_published_accounting_research.py', '-q']),
         ('Source-linked public biography and fact guide', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_profile_public_fact_guide.py', '-q']),
+        ('Source-linked wine tasting guide and blank worksheet', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_wine_tasting_notes.py', '-q']),
         ('Reproducible AI business workflow pilot and offline audit', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_ai_workflow_pilot.py', '-q']),
         ('Homepage mobile practical shortcut', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn100_mobile_start_shortcut.py', '-q']),
         ('AI task brief one-click quick start', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn101_brief_quick_start.py', '-q']),

@@ -255,7 +255,9 @@ def home(root: Path, entries: list[dict], section, cards, topic_cards) -> str:
         '<p><span>When does technology give us more room to live?</span>'
         '<a href="/living-well/technology-that-helps-you-notice/">A tool that helps you notice more</a></p>'
         '<p><span>Can you grow without treating yourself as a problem?</span>'
-        '<a href="/living-well/growth-without-self-rejection/">Improvement without self-rejection</a></p></div>')
+        '<a href="/living-well/growth-without-self-rejection/">Improvement without self-rejection</a></p>'
+        '<p><span>What can a glass of wine teach you about paying attention?</span>'
+        '<a href="/living-well/wine-tasting-notes/">Write a wine tasting note without guessing</a></p></div>')
     body += section('three-free-starts', 'Read · try · explore', 'A few worthwhile places to go.',
         '<div class="lw-cards lw-three">' + ''.join(resource_card(resources[i], True) for i in ['on-being','ucla-mindful','seek'])
         + '</div><p><a href="/living-well/free-resources/">Browse all ' + str(len(resources)) + ' resources</a> · <a href="/living-well/free-resources/#by-task">Choose an everyday task</a> · <a href="/living-well/find/">Search the directory</a></p>')

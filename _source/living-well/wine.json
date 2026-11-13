@@ -1,0 +1,99 @@
+{
+  "entries": [
+    {
+      "slug": "wine-tasting-notes",
+      "title": "How to write useful wine tasting notes without guessing the bottle",
+      "seo_title": "Wine Tasting Notes: A Practical Beginner's Guide | Nolan Kido",
+      "description": "Use a free tasting-note template to record aroma, acidity, body and finish, separate observations from grape guesses, and keep AI in a supporting role.",
+      "topic": "attention",
+      "kind": "guide",
+      "lead": "I'm learning about wine because it rewards attention. A useful tasting note is not a test of whether I can name an expensive bottle. It is a record of what I noticed, what I might be wrong about, and what I would compare next. This guide offers a repeatable method, an original blank worksheet, and a fictional worked example. It is not a claim that I have tasted the example wine or earned a wine credential.",
+      "sections": [
+        {
+          "heading": "Record the experience before explaining it",
+          "paragraphs": [
+            "There are two different jobs in tasting. The first is noticing what is present: appearance, aromas, the way the wine feels in your mouth, and what stays after swallowing or spitting. The second is interpreting those clues: perhaps a grape, a place, a production method, or how the wine might compare with another. You can do the first job carefully without being able to do the second.",
+            "Write the observation while it is fresh. If a descriptor is uncertain, say so. <em>Something like lemon peel, faintly</em> gives you more useful information than a confident label you chose because it sounds like a tasting note. Ordinary words are allowed. You do not need to identify a specific fruit, flower, or spice when <em>fresh, tart, floral, or hard to place</em> is what you actually perceive.",
+            "The Wine &amp; Spirit Education Trust (WSET) teaches a systematic tasting approach covering appearance, nose, palate, and conclusions. That is a useful framework to learn from, not a reason to reproduce its proprietary grids or to imply this original worksheet is WSET-certified. The <a href=\"https://www.wsetglobal.com/news-insights/insight-opinion/how-to-taste-wine/\">WSET introduction to tasting</a> supplies background; this page develops a simpler personal note-taking method."
+          ]
+        },
+        {
+          "heading": "Make four passes, in the same order",
+          "paragraphs": [
+            "<strong>1. Context and appearance.</strong> Note the date, whether the identity is hidden, and anything that might affect comparison, such as glassware or approximate serving temperature. Look at the color and clarity without deciding what grape it must be. For example, <em>pale lemon, clear</em> is more defensible than <em>obviously young Sauvignon Blanc</em>.",
+            "<strong>2. Nose.</strong> Smell once, pause, and smell again. Record intensity using simple language, followed by two or three descriptions you can defend. A specific aroma can be useful, but resist filling every line with names from a reference chart. An empty description is better than a guessed one. If you cannot place the aroma, <em>light citrus and an unfamiliar herbal note</em> is a valid note.",
+            "<strong>3. Palate.</strong> Notice sweetness, acidity, body, tannin where applicable, flavor character, and finish. You do not need laboratory precision. A shared scale such as low, medium, high is useful if you apply it consistently, and <em>not sure</em> is better than false precision. Compare acidity with how strongly your mouth waters, body with how light or weighty the texture feels, and the finish with what remains after the sip. These are personal sensory descriptions, not measurements.",
+            "<strong>4. A provisional conclusion.</strong> Write one sentence describing the wine without naming it. Then, if you want to practice identification, write separate hypotheses with uncertainty attached. The conclusion might be <em>dry, bright white wine with citrus and pear-like aromas, light body, and a modest finish</em>. It can be a complete note even when the grape is unknown."
+          ]
+        },
+        {
+          "heading": "Use descriptors carefully, including what you did not notice",
+          "paragraphs": [
+            "Aroma terms are comparisons with familiar memories. Two people can describe the same sensation differently, and the same person's vocabulary changes with practice. A short note that you understand later is more useful than a list of ten fashionable descriptors. <em>Green apple and citrus</em> is meaningful if those are the associations you actually noticed; it does not identify a variety by itself.",
+            "Absence is a different kind of observation. <em>I did not detect a buttery aroma</em> is not equivalent to <em>the wine did not undergo malolactic fermentation</em>. The Australian Wine Research Institute discusses diacetyl as one possible contributor to buttery characters and explains how its perception depends on context. A sensory absence cannot establish an entire production history. <a href=\"https://www.awri.com.au/industry_support/winemaking_resources/sensory_assessment/recognition-of-wine-faults-and-taints/wine_faults/\">Read the AWRI's sensory context</a> before making a technical claim.",
+            "When a note says <em>balanced, complex, or elegant</em>, ask what observation supports that judgment. Such terms can express a preference, but they become more useful when paired with specifics: <em>acidity stayed noticeable next to the fruit flavor</em> or <em>the aroma changed after a few minutes</em>. Personal enjoyment is legitimate, even when there is no technical explanation for it."
+          ]
+        },
+        {
+          "heading": "Keep observations, hypotheses, and checks in separate places",
+          "paragraphs": [
+            "<strong>Observed:</strong> pale appearance, a citrus-like aroma, crisp acidity. <strong>Hypothesis:</strong> perhaps a lighter-bodied white variety, served cool. <strong>Independent check:</strong> inspect the bottle's own label or producer information after completing the blind note, if available. One aroma is not a fingerprint for a grape or region, and even a matching label does not prove the inference was well supported.",
+            "Avoid reworking the first observation to fit the answer. When the label is revealed, keep the original text and add a short <em>After checking</em> line. If your description changes, you can distinguish a new impression from a memory rewritten by the revelation. Later, compare what you wrote across several wines instead of counting each guess as a win or loss.",
+            "Treat price and reputation the same way. They may influence expectations, so recording them after your first note can be useful when practical. A lower price is not proof of worse wine, and a famous region does not guarantee you will enjoy a bottle. The purpose of this exercise is clearer attention, not status."
+          ]
+        },
+        {
+          "heading": "A fictional example, with the uncertainty left in",
+          "paragraphs": [
+            "<strong>Fictional example, not Nolan's tasting:</strong> An imagined glass of white wine is clear and pale lemon. On the nose, the learner writes <em>faint lemon peel, pear, maybe a little white flower</em>. On the palate, they record <em>dry, lively acidity, light to medium body, no obvious tannin, pear-like flavor, short to moderate finish</em>. They enjoyed its freshness but found the aroma hard to identify. No brand, vintage, place or grape was provided for this illustration.",
+            "The first draft says: <em>This is definitely a cool-climate wine from a particular grape because it smells of citrus.</em> That sentence is a leap. The repaired version says: <em>The wine seems dry, fresh and relatively light. Citrus and pear are the descriptors I noticed. I do not have enough evidence to name the grape or origin.</em> The repair preserves the observations and removes unsupported certainty.",
+            "Suppose the learner later receives a label. They should record the exact claimed identity separately, then consider whether they would have made the same guess without it. If the label gives no production details, leave those blank. The fictional note cannot establish anything about a real wine, and the exercise is not an AI model test, a blind-tasting performance result, or professional qualification."
+          ]
+        },
+        {
+          "heading": "Use AI for questions, not for a palate it does not have",
+          "paragraphs": [
+            "AI can help structure a note you already wrote, point out where you shifted from description to identification, or suggest what to compare next. It cannot smell your glass, validate a particular aroma, or independently identify a bottle from your text. An eloquent grape guess from an assistant is still a guess. If you use an assistant, keep the original note visible and compare every rewrite against it.",
+            "A bounded optional prompt is: <em>Here are my tasting observations. Put them into three headings: what I sensed, what I inferred, and what remains unknown. Do not add aromas, grapes, regions, vintages or winemaking methods that I did not supply. Ask me three questions that would help me describe the next glass more clearly. If evidence is missing, say so.</em> Use invented or non-sensitive notes to practice. Do not send private photos or another person's identifying details to make the prompt seem realistic.",
+            "The no-AI alternative is a line drawn down a sheet of paper: observation on the left, interpretation on the right. WSET's <a href=\"https://www.wsetglobal.com/news-insights/insight-opinion/how-to-keep-things-fun-when-practising-wine-tasting/\">advice on recording notes and comparing explanations</a> offers a broader learning context. I use <a href=\"/technology/#ai-works-human-decides\">AI Works, Human Decides</a> as the boundary here: a tool may organize language, but the sensory judgment remains with the person."
+          ]
+        },
+        {
+          "heading": "Keep a five-minute note you can revisit",
+          "paragraphs": [
+            "<a href=\"/downloads/living-well-wine-tasting-notes.md\" download>Download the blank wine tasting note (.md)</a>. It is a short original worksheet, not a copy of a certification exam or proprietary tasting grid. This is a learning guide, not a personal tasting log. The worksheet separates blind observations from later identity checks and leaves room for <em>unsure</em>. You can open it as plain text, print it, or copy only the headings that matter.",
+            "If you want to compare two glasses, write a note for each before asking which you prefer. Compare acidity, aroma intensity, texture and finish using the same vocabulary. A comparison is optional and is not a reason to consume more alcohol. Smelling without tasting, choosing a non-alcoholic drink, or reading about a wine are all valid ways to practice observation. For adults who drink, keep it modest and never pair tasting with driving.",
+            "A good note lets your future self understand what you actually noticed, not just what you wanted to know. Write one possible follow-up question, close the file, and enjoy the rest of the evening. You do not need a perfect palate or a leaderboard."
+          ]
+        }
+      ],
+      "practice": "Without buying a special bottle, choose an ordinary aroma or beverage available to you. Write two sensory observations and one uncertain interpretation. Keep them on separate lines. If you later learn its identity, record that independently. This is a writing and attention exercise, not a recommendation to drink alcohol.",
+      "question": "Which words in my note describe something I actually noticed, and which words are a story I added afterwards?",
+      "related": [
+        "technology-that-helps-you-notice",
+        "learning-with-ai-without-skipping-understanding"
+      ],
+      "published": "2026-11-13",
+      "sources": [
+        {
+          "label": "WSET: How to taste wine",
+          "url": "https://www.wsetglobal.com/news-insights/insight-opinion/how-to-taste-wine/",
+          "note": "Public overview of systematic wine tasting. This site's original note template does not reproduce WSET's Systematic Approach to Tasting grid and is not a credential or an endorsed training product.",
+          "checked": "2026-11-13"
+        },
+        {
+          "label": "WSET: How to keep things fun when practising wine tasting",
+          "url": "https://www.wsetglobal.com/news-insights/insight-opinion/how-to-keep-things-fun-when-practising-wine-tasting/",
+          "note": "Supports comparing and retaining written notes while learning. It does not establish that the fictional tasting example took place.",
+          "checked": "2026-11-13"
+        },
+        {
+          "label": "Australian Wine Research Institute: Wine flavours, faults and taints",
+          "url": "https://www.awri.com.au/industry_support/winemaking_resources/sensory_assessment/recognition-of-wine-faults-and-taints/wine_faults/",
+          "note": "Background on buttery aroma and diacetyl. The article does not authorize diagnosing an individual wine's production method from the absence of an aroma.",
+          "checked": "2026-11-13"
+        }
+      ]
+    }
+  ]
+}
