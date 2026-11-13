@@ -86,15 +86,17 @@ class SouthPointVideoDiscoveryTests(unittest.TestCase):
         self.assertEqual(build_player_profile.render(), self.profile)
         manifest = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
         poker = next(page for page in manifest if page["path"] == "/poker/")
-        self.assertEqual(poker["updated"], "2026-11-12")
-        self.assertEqual(player_sitemap.MODIFIED, "2026-11-12")
-        self.assertIn('"dateModified": "2026-11-12"', self.hub)
-        self.assertIn('"dateModified": "2026-11-12"', self.profile)
+        # The original Turn 148 review was November 12. Later reviewed
+        # content must advance, not freeze, current structured-data dates.
+        self.assertGreaterEqual(poker["updated"], "2026-11-12")
+        self.assertGreaterEqual(player_sitemap.MODIFIED, "2026-11-12")
+        self.assertIn('"dateModified": "' + poker["updated"] + '"', self.hub)
+        self.assertIn('"dateModified": "' + player_sitemap.MODIFIED + '"', self.profile)
         self.assertEqual(player_sitemap.record(ROOT), (player_sitemap.URL, player_sitemap.MODIFIED))
         records = {entry.findtext("{*}loc"): entry.findtext("{*}lastmod")
                    for entry in ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))}
-        self.assertEqual(records["https://nolankido.com/poker/"], "2026-11-12")
-        self.assertEqual(records[player_sitemap.URL], "2026-11-12")
+        self.assertEqual(records["https://nolankido.com/poker/"], poker["updated"])
+        self.assertEqual(records[player_sitemap.URL], player_sitemap.MODIFIED)
 
     def test_missing_link_wrong_title_or_unverified_claim_fails(self):
         mutations = (

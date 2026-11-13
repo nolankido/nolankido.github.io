@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "_scripts"))
 
 import build
 import build_player_profile
+import player_sitemap
 
 GALLERY_START = '<section class="poker-public-video-list"'
 CARDS = '<div class="poker-content-grid">'
@@ -45,10 +46,12 @@ def gallery_errors(html: str, css: str) -> list[str]:
         errors.append("source ledger needs one anchored target")
     if 'aria-labelledby="nolanpoker-video-notes-title"' not in area:
         errors.append("source ledger needs an accessible heading")
-    if 'The South Point video title and channel identity were checked' not in area:
+    if 'The South Point video title and channel identity were also checked' not in area:
         errors.append("public metadata boundary was removed")
-    if 'their current titles, cuts and chapter times have not been independently verified' not in area:
+    if 'their current cuts, hand claims and chapter times have not been independently verified' not in area:
         errors.append("archived Portland Meadows caveat was removed")
+    if 'All six video titles, channel names and thumbnail URLs were checked' not in area:
+        errors.append("current public metadata review is missing")
     if 'This upload is not evidence for the separately listed Lucky 300 result' not in area:
         errors.append("South Point videos could be confused with independently listed results")
     if 'href="/poker/nolan-kido/"' not in area:
@@ -59,7 +62,7 @@ def gallery_errors(html: str, css: str) -> list[str]:
         errors.append("video headings lost their readable responsive scale")
     if '.page-poker #watch :is(.poker-content-card h4 a,.poker-video-prompt a):focus-visible' not in css:
         errors.append("focus styling is missing from video titles or source shortcut")
-    if '.page-poker #watch .poker-content-card h4 a { display:inline-block; min-height:44px;' not in css:
+    if '.page-poker #watch .poker-content-card h4 a { display:block; min-height:44px;' not in css:
         errors.append("video title links lost their touch target")
     return errors
 
@@ -88,9 +91,11 @@ class NolanPokerGalleryTests(unittest.TestCase):
                 text = (ROOT / file).read_text(encoding="utf-8")
                 self.assertIn(tag, text)
         pages = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
-        self.assertEqual(next(p["updated"] for p in pages if p["path"] == "/poker/"), "2026-11-12")
-        self.assertIn('"dateModified": "2026-11-12"', self.html)
-        self.assertIn('"dateModified": "2026-11-12"', (ROOT / "poker/nolan-kido/index.html").read_text(encoding="utf-8"))
+        hub_updated = next(p["updated"] for p in pages if p["path"] == "/poker/")
+        self.assertGreaterEqual(hub_updated, "2026-11-12")
+        self.assertIn('"dateModified": "' + hub_updated + '"', self.html)
+        self.assertGreaterEqual(player_sitemap.MODIFIED, "2026-11-12")
+        self.assertIn('"dateModified": "' + player_sitemap.MODIFIED + '"', (ROOT / "poker/nolan-kido/index.html").read_text(encoding="utf-8"))
 
     def test_dead_source_jump_buried_links_and_unstyled_headings_fail(self):
         mutations = (

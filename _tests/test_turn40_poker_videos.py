@@ -64,10 +64,10 @@ class CurrentPokerVideosTests(unittest.TestCase):
         for value in (self.hub_source, self.player_source):
             self.assertIn("/poker/episodes/portland-meadows-ep1/", value)
             self.assertIn("/poker/episodes/portland-meadows-standoff/", value)
-            self.assertIn("not independently", value)
+            self.assertTrue("not independently" in value or "not been independently" in value)
             self.assertNotIn('start=', value)
-        self.assertIn("their current titles, cuts and chapter times have not been independently verified", self.hub_source)
-        self.assertIn("external metadata and availability were not independently verified", self.player_source)
+        self.assertIn("their current cuts, hand claims and chapter times have not been independently verified", self.hub_source)
+        self.assertIn("current video cuts, chapter offsets, or permanent video availability", self.player_source)
         self.assertNotIn('WSOP media credential', self.player_source)
 
     def test_builder_sitemap_and_exact_public_byte_inventory_agree(self):
