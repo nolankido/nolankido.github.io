@@ -132,6 +132,7 @@ def label(page):
         if page['archive_kind'] not in STANDALONE_LABELS:
             raise ValueError('Unknown standalone article label')
         return STANDALONE_LABELS[page['archive_kind']]
+    if page['id'] == 'accounting-research': return 'Published research explanation'
     if page.get('evidence_article'): return 'Recorded case'
     if page.get('worked_guide'): return 'Guide with worked examples'
     if page.get('living_well_kind') == 'experiment': return 'Proposed experiment'

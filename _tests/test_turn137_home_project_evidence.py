@@ -96,10 +96,10 @@ class HomeProjectEvidenceTests(unittest.TestCase):
 
     def test_preserves_public_metadata_and_original_modification_dates(self):
         pages = {p["path"]: p for p in json.loads((ROOT / "_source/pages.json").read_text())}
-        self.assertEqual(pages["/"]["updated"], "2026-11-10")
+        self.assertEqual(pages["/"]["updated"], "2026-11-13")
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text())
         dates = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in sitemap}
-        self.assertEqual(dates["https://nolankido.com/"], "2026-11-10")
+        self.assertEqual(dates["https://nolankido.com/"], "2026-11-13")
         self.assertEqual(self.home.count('rel="canonical" href="https://nolankido.com/"'), 1)
         self.assertIn('"@id": "https://nolankido.com/about/#nolan-kido"', self.home)
 
