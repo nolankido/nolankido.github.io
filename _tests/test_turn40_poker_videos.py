@@ -16,10 +16,10 @@ from reviewed_release import read as reviewed_bytes
 import turn40_poker_video_history as history
 
 VIDEOS = (
-    "qABaiIcvvpU", "I75GOBVXij4", "bxpaM_1mWPE",
+    "-Wm1i70Z3Bs", "qABaiIcvvpU", "I75GOBVXij4", "bxpaM_1mWPE",
     "HE7VDvO9gDU", "edNSD5BjIV8",
 )
-NEW = VIDEOS[2:4]
+NEW = VIDEOS[3:5]
 HUB = re.compile(r'<div class="poker-content-grid">(.*?)</div>\s*<p class="small-copy">', re.S)
 PROFILE = re.compile(r'<h2 id="player-vlog-title">.*?<ul>(.*?)</ul>', re.S)
 
@@ -49,7 +49,7 @@ class CurrentPokerVideosTests(unittest.TestCase):
         cls.player_source = (ROOT / "_source/poker/nolan-kido-profile.html").read_text(encoding="utf-8")
         cls.player = (ROOT / "poker/nolan-kido/index.html").read_text(encoding="utf-8")
 
-    def test_five_user_supplied_published_video_links_on_both_entry_points(self):
+    def test_six_public_video_links_on_both_entry_points(self):
         for value, selector in ((self.hub_source, HUB), (self.hub, HUB),
                                 (self.player_source, PROFILE), (self.player, PROFILE)):
             with self.subTest(page=value[:45]):
@@ -57,8 +57,8 @@ class CurrentPokerVideosTests(unittest.TestCase):
                 for video in NEW:
                     self.assertEqual(value.count('https://www.youtube.com/watch?v=' + video), 1)
                 self.assertNotIn("\u2014", value)
-        self.assertIn("Five public video links", self.hub)
-        self.assertIn("five linked tournament videos", self.player)
+        self.assertIn("Six public video links", self.hub)
+        self.assertIn("six linked tournament videos", self.player)
 
     def test_first_two_companions_remain_separate_from_unchecked_later_cuts(self):
         for value in (self.hub_source, self.player_source):

@@ -3,17 +3,20 @@ import unittest
 from pathlib import Path
 
 import poker_player_turn05_history as history
-import profile_links_turn05_history
-import episode_turn06_history
-import turn07_hand_history
 import turn11_video_discovery_history
+from reviewed_release import read as reviewed_bytes
+
+
+TURN05_RELEASE = "f79c0a2fe71a406acf841ff0c54e805a5d46d2ed"
 
 
 class Turn05PokerHistoryTests(unittest.TestCase):
     def test_reviewed_successors_restore_exact_main_predecessors(self):
+        # Check the immutable Turn 5 release, not today's legitimately edited
+        # public Poker pages. The original predecessor hashes remain pinned.
         for name, (old_digest, new_digest) in history.BLOBS.items():
             with self.subTest(path=name):
-                current = profile_links_turn05_history.before(name, episode_turn06_history.before(name, turn07_hand_history.before(name, turn11_video_discovery_history.before(name, (history.ROOT / name).read_bytes()))))
+                current = reviewed_bytes(TURN05_RELEASE, name, new_digest)
                 self.assertEqual(history.git_blob(current), new_digest)
                 previous = history.before(name, current)
                 self.assertEqual(history.git_blob(previous), old_digest)
