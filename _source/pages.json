@@ -69,6 +69,17 @@
     "updated": "2026-11-06"
   },
   {
+    "id": "projects",
+    "path": "/projects/",
+    "title": "Projects by Nolan Kido",
+    "seo_title": "Nolan Kido Projects | AI Tools, Software & Creative Work",
+    "description": "Explore Nolan Kido's public AI tools, software demonstrations, documented checks and poker storytelling. See what works, what was tested and what remains unverified.",
+    "kicker": "Selected projects / Evidence first",
+    "section": "technology",
+    "source": "projects.html",
+    "updated": "2026-11-13"
+  },
+  {
     "id": "contact",
     "path": "/contact/",
     "title": "Get in touch.",
