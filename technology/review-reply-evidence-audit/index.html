@@ -38,7 +38,7 @@
   <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Practical AI writing" href="/technology/feed.xml">
   <link rel="stylesheet" href="/assets/page-sharing.css?v=2632f6372419">
   <script defer src="/assets/page-sharing.js?v=3c95f5f6edcb"></script>
-  <link rel="stylesheet" href="/assets/visibility-projects.css?v=9bbad7567cf7">
+  <link rel="stylesheet" href="/assets/visibility-projects.css?v=a0849c6d71f2">
   <link rel="stylesheet" href="/assets/practical-discovery.css?v=e98c03c74139">
   <link rel="stylesheet" href="/assets/workflow-evidence.css?v=a70fff8e63b0">
   <link rel="stylesheet" href="/assets/search-visibility.css?v=c5a767619d13">
@@ -105,7 +105,8 @@
     <h2 id="reply-audit-source">Three real model outputs, three fictional customer reviews.</h2>
     <p>The historical evidence is the <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-quality-smoke-2026-10-13.json">pinned public smoke-test JSON</a>, with its <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/REPLY_QUALITY_RESULTS.md">original scope notes</a>. It records three Gemma 3 4B draft responses through Ollama on a GitHub-hosted Ubuntu CPU runner in October 2026. It was <strong>not a run on my MSI gaming laptop</strong>, nor a current-source validation of the application.</p>
     <p>The three inputs describe a fictional café compliment, a fictional café complaint, and a fictional hotel stay with praise and problems. The historical app reported that its automated checks passed, but no customer, business owner or independent human quality assessor evaluated those replies. The output text remained available, so I could examine a narrower set of properties separately without regenerating anything.</p>
-    <div class="project-table-scroll" role="region" aria-label="Three recorded model cases and their bounded checks" tabindex="0">
+    <p class="project-table-hint" id="reply-audit-archive-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Three recorded model cases and their bounded checks" aria-describedby="reply-audit-archive-table-hint" tabindex="0">
       <table>
         <caption>Original archived outputs, not newly generated replies</caption>
         <thead><tr><th scope="col">Historical case</th><th scope="col">Details the independent screen looks for</th><th scope="col">Reported generation case time</th><th scope="col">New screen</th></tr></thead>
@@ -142,7 +143,8 @@
   <div class="section-content prose">
     <h2 id="reply-audit-boundaries">A clean flag report can miss an invented offer.</h2>
     <p>I appended four new, <strong>synthetic</strong> sentences, one at a time, to the same archived fictional complaint reply. Its original complaint facts remain intact, so the comparison isolates different wording of financial promises and a quotation. These sentences are my test cases, not additional model outputs. The expected flag in the table is an editorial judgment about the <em>specific financial-commitment signal</em>, not a decision that the entire reply is safe to send.</p>
-    <div class="project-table-scroll" role="region" aria-label="Boundary probes for the independent reply screen" tabindex="0">
+    <p class="project-table-hint" id="reply-audit-probes-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Boundary probes for the independent reply screen" aria-describedby="reply-audit-probes-table-hint" tabindex="0">
       <table>
         <caption>Four constructed statements, screened against the same fictional reply</caption>
         <thead><tr><th scope="col">Added sentence</th><th scope="col">Expected financial-commitment flag</th><th scope="col">Observed screen</th></tr></thead>
@@ -169,7 +171,8 @@
       <pre><code>py -3 review-reply-independent-audit.py --self-test</code></pre>
     </div>
     <p>On systems with the executable named <code>python3</code>, use <code>python3 review-reply-independent-audit.py --self-test</code> instead. The script emits JSON with three archived results and three labeled controls. Its self-test exits unsuccessfully if an original is unexpectedly flagged or one of the seeded counterexamples is missed. It cannot query the current app, update an approval, contact a customer, or post a reply.</p>
-    <div class="project-table-scroll" role="region" aria-label="Independent audit result and interpretation" tabindex="0">
+    <p class="project-table-hint" id="reply-audit-results-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Independent audit result and interpretation" aria-describedby="reply-audit-results-table-hint" tabindex="0">
       <table>
         <caption>Observed in the offline repeat on November 3, 2026</caption>
         <thead><tr><th scope="col">Check</th><th scope="col">Observed</th><th scope="col">Meaning</th></tr></thead>

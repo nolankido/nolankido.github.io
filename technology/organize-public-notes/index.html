@@ -38,7 +38,7 @@
   <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Practical AI writing" href="/technology/feed.xml">
   <link rel="stylesheet" href="/assets/page-sharing.css?v=2632f6372419">
   <script defer src="/assets/page-sharing.js?v=3c95f5f6edcb"></script>
-  <link rel="stylesheet" href="/assets/visibility-projects.css?v=9bbad7567cf7">
+  <link rel="stylesheet" href="/assets/visibility-projects.css?v=a0849c6d71f2">
   <link rel="stylesheet" href="/assets/practical-discovery.css?v=e98c03c74139">
   <link rel="stylesheet" href="/assets/workflow-evidence.css?v=a70fff8e63b0">
   <link rel="stylesheet" href="/assets/search-visibility.css?v=c5a767619d13">
@@ -57,7 +57,7 @@
   
   <main id="main" class="ledger" tabindex="-1">
 <nav class="search-breadcrumb shell" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/technology/">Technology</a></li><li><span aria-current="page">Using AI to turn source notes into a checked action list.</span></li></ol></nav>
-    <section class="page-hero shell"><p class="page-kicker">Technology / Recorded everyday workflow</p><h1 class="page-title">Using AI to turn source notes into a checked action list.</h1><p class="note-meta">Published <time datetime="2026-10-27">October 27, 2026</time> · Recorded case study · About 6 min read</p><details class="reader-outline"><summary>On this page <span class="reader-outline-count">6 sections</span></summary><nav aria-label="On this page"><ol><li><a href="#notes-task">Turn scattered preparation notes into a usable action list.</a></li><li><a href="#notes-input">Keep the source identifiers attached.</a></li><li><a href="#notes-output">The output kept available work separate from missing material.</a></li><li><a href="#notes-check">Check conditions and unknowns as carefully as the task names.</a></li><li><a href="#notes-repro-title">Can the action list still be traced to what was actually supplied?</a></li><li><a href="#notes-reuse">Ask for traceable actions and an honest status.</a></li></ol></nav></details><p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · <a href="/start-here/#reading-this-site">About this writing</a></p></section>
+    <section class="page-hero shell"><p class="page-kicker">Technology / Recorded everyday workflow</p><h1 class="page-title">Using AI to turn source notes into a checked action list.</h1><p class="note-meta">Published <time datetime="2026-10-27">October 27, 2026</time> · Recorded case study · About 7 min read</p><details class="reader-outline"><summary>On this page <span class="reader-outline-count">6 sections</span></summary><nav aria-label="On this page"><ol><li><a href="#notes-task">Turn scattered preparation notes into a usable action list.</a></li><li><a href="#notes-input">Keep the source identifiers attached.</a></li><li><a href="#notes-output">The output kept available work separate from missing material.</a></li><li><a href="#notes-check">Check conditions and unknowns as carefully as the task names.</a></li><li><a href="#notes-repro-title">Can the action list still be traced to what was actually supplied?</a></li><li><a href="#notes-reuse">Ask for traceable actions and an honest status.</a></li></ol></nav></details><p class="search-author">By <a href="/about/" rel="author">Nolan Kido</a> · <a href="/start-here/#reading-this-site">About this writing</a></p></section>
 <section class="section folio-row" aria-labelledby="notes-task">
   <div class="section-meta"><p class="section-label">Recorded work / Actual input and output</p></div>
   <div class="section-content prose">
@@ -85,7 +85,8 @@
   <div class="section-content prose">
     <h2 id="notes-output">The output kept available work separate from missing material.</h2>
     <p>The complete response contains seven publication or editorial rows, followed by four personal reports requiring source material. These three rows are reproduced word for word; their table formatting has been adapted for this page.</p>
-    <div class="project-table-scroll" role="region" aria-label="Selected unchanged rows from the recorded notes checklist" tabindex="0">
+    <p class="project-table-hint" id="notes-output-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Selected unchanged rows from the recorded notes checklist" aria-describedby="notes-output-table-hint" tabindex="0">
       <table>
         <caption>Selected output, unchanged wording</caption>
         <thead><tr><th scope="col">Task</th><th scope="col">Evidence/input</th><th scope="col">Next action</th><th scope="col">Status</th></tr></thead>
@@ -124,7 +125,8 @@
     <h2 id="notes-repro-title">Can the action list still be traced to what was actually supplied?</h2>
     <p>The <a href="/downloads/public-notes-action-record.txt" download>unchanged October 27 input and output</a> provide a small example of AI used for an everyday organizing problem: deciding what can be prepared from the available notes and what must wait. A separate standard-library checker now reads the recorded response and examines its <strong>eleven checklist rows</strong>. It compares the source identifiers N1–N8, the three permitted preparation statuses, and selected conditions that are easy to lose when a model rewrites a plan.</p>
     <p><strong>Result of this limited comparison:</strong> the archived rows retain the expected note identifiers, status categories and selected explicit limitations. No targeted source-trace issue was identified. This does not independently authenticate the starting notes, show that any item was completed, or establish that the output was useful to someone else.</p>
-    <div class="project-table-scroll" role="region" aria-label="Constructed checklist mistakes and targeted checker responses" tabindex="0">
+    <p class="project-table-hint" id="notes-checker-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Constructed checklist mistakes and targeted checker responses" aria-describedby="notes-checker-table-hint" tabindex="0">
       <table>
         <caption>Four deliberately constructed changes, not mistakes observed in the archived AI response</caption>
         <thead><tr><th scope="col">Constructed change</th><th scope="col">What must not silently change</th><th scope="col">Checker flag</th></tr></thead>

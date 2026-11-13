@@ -108,6 +108,7 @@ def main() -> int:
         ('Scrollable evidence tables explain touch and keyboard navigation', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn144_table_scroll_guidance.py', '-q']),
         ('Review Reply Writer evidence routes to method and limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn145_reply_evidence_paths.py', '-q']),
         ('Technology hub evidence tables explain sideways reading', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn146_technology_hub_table_hints.py', '-q']),
+        ('All Technology evidence tables explain sideways reading', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn147_remaining_table_hints.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),

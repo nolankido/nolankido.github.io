@@ -90,7 +90,7 @@ class TechnologyHubTableHintTests(unittest.TestCase):
 
     def test_guidance_is_scoped_to_hub_not_other_projects(self):
         self.assertIn('.page-technology .project-table-hint {', self.css)
-        self.assertNotIn('.project-table-hint {', self.css.replace('.page-technology .project-table-hint {', ''))
+        self.assertNotRegex(self.css, r'(?m)^\s*\.project-table-hint\s*\{')
         self.assertNotIn('project-table-hint', (ROOT / '_source/technology/dinner-on-time.html').read_text())
         self.assertNotIn('project-table-hint', (ROOT / 'index.html').read_text())
 
