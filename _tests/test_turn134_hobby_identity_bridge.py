@@ -51,7 +51,7 @@ def bridge_errors(about: str, home: str) -> list[str]:
         errors.append("missing unique native About destination")
     if not connection or home.count(HOBBY_LINK) != 1:
         errors.append("homepage lacks the unique native interest route")
-    if hobby.count("<p>") != 2:
+    if hobby.count("<p>") != 3 or hobby.count('href="/living-well/wine-tasting-notes/"') != 1:
         errors.append("About interest section lost its readable scope and limits")
     if not all(phrase in hobby for phrase in HOBBY_GUARDS):
         errors.append("experience, human judgment or honest limits missing")

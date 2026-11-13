@@ -33,8 +33,8 @@ class UtilityTests(unittest.TestCase):
 
     def test_eight_substantive_guides_with_explicit_outcomes(self):
         self.assertEqual(set(self.new), SLUGS)
-        self.assertEqual(len(lw.manifest(ROOT)), 76)
-        self.assertEqual(len(self.entries), 35)
+        self.assertEqual(len(lw.manifest(ROOT)), 77)
+        self.assertEqual(len(self.entries), 36)
         for slug,e in self.new.items():
             with self.subTest(slug=slug):
                 self.assertEqual(e['kind'], 'guide')
@@ -71,14 +71,14 @@ class UtilityTests(unittest.TestCase):
         self.assertLess(guides.index('href="/living-well/technology-for-real-life/"'), guides.index('href="/living-well/meditation-without-buying-a-lifestyle/"'))
 
     def test_original_twenty_six_readings_are_exactly_preserved(self):
-        old = {s:weekly_history.original_entry(e) for s,e in self.entries.items() if s not in SLUGS and s != 'ai-and-personal-productivity'}
+        old = {s:weekly_history.original_entry(e) for s,e in self.entries.items() if s not in SLUGS and s not in {'ai-and-personal-productivity', 'wine-tasting-notes'}}
         self.assertEqual(len(old), 26)
         digest = hashlib.sha256(json.dumps(old, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
         self.assertEqual(digest, OLD_READING_DIGEST)
         feed = ET.fromstring(self.outputs[Path('living-well/feed.xml')])
         items = feed.findall('./channel/item')
-        self.assertEqual(len(items), 32)
-        self.assertEqual(len({i.findtext('guid') for i in items}), 32)
+        self.assertEqual(len(items), 33)
+        self.assertEqual(len({i.findtext('guid') for i in items}), 33)
         field = self.outputs[Path('living-well/field-notes/index.html')]
         self.assertIn('No completed personal field notes are published here yet', field)
         self.assertEqual(sum(e['kind'] == 'experiment' for e in self.entries.values()), 3)

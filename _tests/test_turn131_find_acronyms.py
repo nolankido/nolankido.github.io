@@ -57,7 +57,8 @@ assert.deepEqual(paths('WSOPC'),['/poker/thunder-valley-poker-guide/','/poker/to
 assert.deepEqual(paths('SEO'),['/technology/ai-website-visibility/']);
 assert.deepEqual(paths('GEO'),['/technology/ai-website-visibility/']);
 assert.deepEqual(paths('WSOPC hotel'),['/poker/tournament-trip-budget/']);
-for(const query of ['wine','chess','SEO poker','WSOPC oncology','<script>alert(1)</script>']) assert.deepEqual(paths(query),[],query);
+assert(paths('wine').includes('/living-well/wine-tasting-notes/'));
+for(const query of ['chess','SEO poker','WSOPC oncology','<script>alert(1)</script>']) assert.deepEqual(paths(query),[],query);
 assert(paths('NolanPoker').includes('/poker/nolan-kido/'));
 const example={title:'A trip',description:'Other planning',subjects:'Poker',aliases:'WSOPC',sections:[['hotel','Hotel and travel costs']]};
 assert.deepEqual(matchingSections(example,'WSOPC hotel'),[['hotel','Hotel and travel costs']]);
