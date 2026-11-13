@@ -132,6 +132,16 @@
   min-width: 2em;
   min-height: 2em;
 }
+/* Reveal the sideways-reading affordance on the Technology overview's
+   three source-backed comparisons without repeating it in print. */
+.page-technology .project-table-hint {
+  color: var(--ink-soft);
+  font: .86rem/1.6 var(--sans);
+  margin: 1.2rem 0 -.8rem;
+}
+@media print {
+  .page-technology .project-table-hint {display: none !important;}
+}
 .project-table-scroll {
   max-width: 100%;
   overflow-x: auto;

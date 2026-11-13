@@ -135,7 +135,8 @@ ${everyday_task_cards}
     <h2 class="section-title" id="identity-claim-audit-title">How an AI-assisted audit corrected a public identity claim.</h2>
     <p>On November 4, 2026, an AI-assisted review found role and credential claims in this site's public JSON-LD identity file that the reviewed evidence did not support. The visible <a href="/about/">About page</a> did not make those claims. <a href="https://github.com/nolankido/nolankido.github.io/pull/180">Pull request #180</a> removed them while preserving the Person identifier, scholarly article and existing profile links.</p>
     <p>The revised source and published JSON-LD matched on readback. That verifies the correction, not search-engine use, better rankings, AI citations or visitor trust.</p>
-    <div class="project-table-scroll" role="region" aria-label="Identity metadata before and after publication audit" tabindex="0">
+    <p class="project-table-hint" id="technology-identity-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Identity metadata before and after publication audit" aria-describedby="technology-identity-table-hint" tabindex="0">
       <table>
         <caption>What the public repository records before and after the correction</caption>
         <thead><tr><th scope="col">Claim or data</th><th scope="col">Before</th><th scope="col">Published decision</th></tr></thead>
@@ -197,7 +198,8 @@ py -3 identity-evidence-gate.py --before before.jsonld --after after.jsonld</pre
     <h2 class="section-title" id="poker-vlog-qa-title">How I check an AI-assisted poker vlog edit against the hand record.</h2>
     <p>AI can draft a story or overlay, but it cannot establish missing cards or turn hindsight into a thought I had at the table. The <a href="/poker/episodes/portland-meadows-ep1/">Portland Meadows Episode 1 companion</a> supplies two hands for this proposed release standard. This proposed standard does not establish that earlier uploads passed it.</p>
     <p><a href="/technology/ai-poker-video-evidence/">Read the full AI-and-poker editing case</a> for proposed captions, arithmetic and an offline check. The captions are examples, not graphics verified in the released video.</p>
-    <div class="project-table-scroll" role="region" aria-label="Public poker hand facts and graphics boundaries" tabindex="0">
+    <p class="project-table-hint" id="technology-poker-facts-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Public poker hand facts and graphics boundaries" aria-describedby="technology-poker-facts-table-hint" tabindex="0">
       <table>
         <caption>What a graphics and narration review can use from the published companion</caption>
         <thead><tr><th scope="col">Moment</th><th scope="col">Source-supported facts</th><th scope="col">Do not silently fill in</th></tr></thead>
@@ -224,7 +226,8 @@ py -3 identity-evidence-gate.py --before before.jsonld --after after.jsonld</pre
   <div class="section-content prose">
     <h2 class="section-title" id="poker-vlog-qa-demo-title">Seven constructed edit conflicts. Seven targeted flags.</h2>
     <p>To make the <a href="#poker-vlog-qa">truth-to-screen release gate</a> testable, I wrote a small standard-library Python checker for structured edit claims from the <a href="/poker/episodes/portland-meadows-ep1/">public Portland Meadows Episode 1 record</a>. This is a deterministic audit of text fields, not an AI watching my footage. I constructed four fictional, incorrect scene records and paired each with a corrected record. The checker found the seven expected targeted conflicts in the constructed records and none in the corrected examples.</p>
-    <div class="project-table-scroll" role="region" aria-label="Synthetic poker scene before and after findings" tabindex="0">
+    <p class="project-table-hint" id="technology-poker-scene-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Synthetic poker scene before and after findings" aria-describedby="technology-poker-scene-table-hint" tabindex="0">
       <table>
         <caption>Reproducible demonstrations, not observed defects in a released video</caption>
         <thead><tr><th scope="col">Constructed before edit</th><th scope="col">Targeted flags</th><th scope="col">Corrected after edit</th></tr></thead>
