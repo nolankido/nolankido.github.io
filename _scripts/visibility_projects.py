@@ -14,7 +14,7 @@ CASE_IDS = frozenset({
     'ai-poker-video-evidence', 'ai-website-visibility',
     'rightsreceipt-case',
 })
-SCOPED_IDS = CASE_IDS | {'home', 'technology', 'creative', 'ai-answer-review', 'ai-time-savings', 'ai-workflow-pilot'}
+SCOPED_IDS = CASE_IDS | {'home', 'technology', 'creative', 'ai-answer-review', 'ai-time-savings', 'ai-workflow-pilot', 'accounting-research'}
 IMAGES = {
     'ai-book-continuity-checker': (
         '/assets/projects/preflight-holmes-report.png', 1200, 1349,

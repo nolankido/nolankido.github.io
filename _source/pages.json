@@ -6,7 +6,7 @@
     "seo_title": "Nolan Kido: Practical AI | AI Works, Human Decides",
     "description": "Practical AI projects for everyday life and small business, plus poker and creative work. Nolan Kido's approach: AI Works, Human Decides.",
     "source": "home.html",
-    "updated": "2026-11-10"
+    "updated": "2026-11-13"
   },
   {
     "id": "start-here",
@@ -47,6 +47,18 @@
     "kicker": "About",
     "source": "about.html",
     "updated": "2026-11-13"
+  },
+  {
+    "id": "accounting-research",
+    "section": "about",
+    "path": "/about/accounting-research/",
+    "title": "What my published accounting research found about elections.",
+    "seo_title": "Nolan Kido Research: Elections and Government Accounting | 2012",
+    "description": "Read Nolan Kido's source-linked guide to a 2012 Journal of Accounting Research paper on gubernatorial elections, leave and pension liabilities, and what the findings establish.",
+    "kicker": "Published research / Source-linked explanation",
+    "source": "about/accounting-research.html",
+    "date": "2026-11-13",
+    "evidence_article": true
   },
   {
     "id": "notes",

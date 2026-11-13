@@ -25,6 +25,10 @@ TOOL_IDS = frozenset({'task-brief', 'ai-time-savings'})
 
 def publication_label(page: dict) -> str:
     """Keep authored exercises visibly distinct from historical evidence."""
+    if page['id'] == 'accounting-research':
+        if not page.get('evidence_article') or page.get('section') != 'about':
+            raise ValueError('Research explanation must be a dated About article')
+        return 'Published research explanation'
     if page.get('worked_guide') and page.get('evidence_article'):
         raise ValueError('A worked guide cannot also be a recorded case')
     if page.get('worked_guide'):

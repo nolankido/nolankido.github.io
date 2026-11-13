@@ -459,6 +459,24 @@ def build_outputs() -> dict[Path, str]:
         extra += page_sharing.head(p, ROOT)
         extra += practical_navigation.head(p, ROOT)
         schema, header = search_visibility.decorate(p, pages, site, schema, header, presentation_config)
+        if p['id'] == 'accounting-research':
+            paper = 'https://doi.org/10.1111/j.1475-679X.2012.00447.x'
+            schema['about'] = {
+                '@type': 'ScholarlyArticle', '@id': paper,
+                'name': 'The Influence of Elections on the Accounting Choices of Governmental Entities',
+                'identifier': paper,
+                'datePublished': '2012-02-06', 'pagination': '443-476',
+                'isPartOf': {'@type': 'Periodical', 'name': 'Journal of Accounting Research'},
+                'author': [
+                    {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name']},
+                    {'@type': 'Person', 'name': 'Reining Petacchi'},
+                    {'@type': 'Person', 'name': 'Joseph Weber'},
+                ],
+            }
+            schema['citation'] = [
+                paper,
+                'https://dspace.mit.edu/entities/publication/9e5c8e82-34b0-4931-a8cc-6ea0ae938829',
+            ]
         if p['id'] == 'rightsreceipt-case':
             schema['about'] = {
                 '@type': 'SoftwareSourceCode',
