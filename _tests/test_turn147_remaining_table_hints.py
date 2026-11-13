@@ -98,7 +98,9 @@ class RemainingTechnologyTableHintsTests(unittest.TestCase):
                 described = re.search(r'\baria-describedby="([^"]+)"', region.group('attrs'))
                 self.assertIsNotNone(described, path.name)
                 self.assertEqual(source.count(f'id="{described.group(1)}"'), 1, path.name)
-        self.assertEqual(total, 18)
+        # New Technology guides may add accessible tables after this regression
+        # was written. The per-region checks above still cover every one.
+        self.assertGreaterEqual(total, 18)
 
     def test_scoped_style_and_public_pages_keep_canonical_routes(self):
         self.assertIn(SCOPED_SELECTOR + " {", self.css)

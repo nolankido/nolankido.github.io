@@ -1,0 +1,7 @@
+case_id,manual_minutes,ai_preparation_minutes,ai_review_minutes,ai_repair_minutes,quality_status
+P01,24,6,8,2,accepted
+P02,21,7,9,1,accepted
+P03,26,8,14,6,rejected
+P04,23,6,10,2,accepted
+P05,20,5,8,1,accepted
+P06,25,7,10,2,accepted
