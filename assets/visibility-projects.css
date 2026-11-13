@@ -142,6 +142,16 @@
 @media print {
   .page-technology .project-table-hint {display: none !important;}
 }
+/* Other source-backed Technology articles use the same wide comparisons.
+   Scope their touch and keyboard reading cues to the seven case pages. */
+:is(.page-ai-poker-video-evidence, .page-local-ai-gaming-laptop, .page-ai-website-visibility, .page-organize-public-notes, .page-check-ai-answers, .page-local-ai-test-record, .page-review-reply-evidence-audit) .project-table-hint {
+  color: var(--ink-soft);
+  font: .86rem/1.6 var(--sans);
+  margin: 1.2rem 0 -.8rem;
+}
+@media print {
+  :is(.page-ai-poker-video-evidence, .page-local-ai-gaming-laptop, .page-ai-website-visibility, .page-organize-public-notes, .page-check-ai-answers, .page-local-ai-test-record, .page-review-reply-evidence-audit) .project-table-hint {display: none !important;}
+}
 .project-table-scroll {
   max-width: 100%;
   overflow-x: auto;
