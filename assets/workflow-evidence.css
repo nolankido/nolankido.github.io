@@ -49,6 +49,17 @@
   :is(.page-local-ai-review-replies, .page-ai-book-continuity-checker, .page-dinner-on-time) .project-case-jumps {display: none !important;}
 }
 
+/* Scrollable results look like cropped tables on phones unless their
+   horizontal continuation and keyboard route are made explicit. */
+:is(.page-local-ai-review-replies, .page-ai-book-continuity-checker) .project-table-hint {
+  color: var(--ink-soft);
+  font: .86rem/1.6 var(--sans);
+  margin: 1.2rem 0 -.8rem;
+}
+@media print {
+  :is(.page-local-ai-review-replies, .page-ai-book-continuity-checker) .project-table-hint {display: none !important;}
+}
+
 /* Native jumps and outline stay on the two evidence pages only. */
 .page-ai-time-savings .entry-jumps,.page-ai-website-verification .entry-jumps{display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;margin-top:1.3rem}
 .page-ai-time-savings .entry-jumps a,.page-ai-website-verification .entry-jumps a{display:inline-flex;align-items:center;min-height:44px;font-size:.95rem}
