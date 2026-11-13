@@ -64,7 +64,8 @@
   <div class="section-content prose">
     <h2 id="reply-evaluation-results">The 30-case run returned 29 templates and blocked one.</h2>
     <p>All 30 scenarios reached a final status. The program produced 29 non-AI template drafts. One case, containing an unusually lengthy fictional owner offer, was blocked because the resulting reply exceeded the application's 120-word Google style target. That target is an application setting, not a rule issued by Google. No Ollama calls, execution errors, interruptions, or human operator assessments were recorded.</p>
-    <div class="project-table-scroll" role="region" aria-label="Review Reply Writer offline study summary" tabindex="0">
+    <p class="project-table-hint" id="reply-template-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Review Reply Writer offline study summary" aria-describedby="reply-template-table-hint" tabindex="0">
       <table>
         <caption>October 29, 2026: synthetic offline template evaluation</caption>
         <thead><tr><th scope="col">Recorded measure</th><th scope="col">Count</th></tr></thead>
@@ -103,7 +104,8 @@
   <div class="section-content prose">
     <h2 id="reply-evaluation-gemma">What the archived Gemma tests actually showed.</h2>
     <p>The repository preserves two selected, three-case October 2026 runs using actual Ollama responses from <code>gemma3:4b</code>. These are older experiments, not runs of the source used in the fresh 30-case template evaluation. The first recorded five completed model responses and finished with two model-written replies plus one template fallback. The later recorded three responses and three model-written final replies. Neither contains a human operator assessment.</p>
-    <div class="project-table-scroll" role="region" aria-label="Historical Gemma smoke test comparison" tabindex="0">
+    <p class="project-table-hint" id="reply-model-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Historical Gemma smoke test comparison" aria-describedby="reply-model-table-hint" tabindex="0">
       <table>
         <caption>Two historical three-scenario smoke runs, not a current model benchmark</caption>
         <thead><tr><th scope="col">Recorded outcome</th><th scope="col">First run</th><th scope="col">Later run</th></tr></thead>

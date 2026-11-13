@@ -43,7 +43,8 @@
     <h2 id="continuity-results">Measure the errors the report fails to find.</h2>
     <p>The <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/README.md#what-it-found-in-sherlock-holmes">October 27 project record</a> describes 3,963 extracted facts from six volumes. Alongside Watson's wound and the Hudson/Turner landlady discrepancy, it records two wrong contradiction calls: Holmes's eye description while disguised, and a maiden name mistaken for a conflicting surname. The <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/src/canonkeeper/preflight/samples/sherlock-holmes-reviews.json">stored corrections</a> preserve those reasons.</p>
     <p>A separate benchmark planted 20 changes in later books, ran the pipeline again, and compared findings with the planted record. The same run's original and revised scores are both retained:</p>
-    <div class="project-table-scroll" role="region" aria-label="Recorded continuity benchmark scores" tabindex="0">
+    <p class="project-table-hint" id="continuity-benchmark-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Recorded continuity benchmark scores" aria-describedby="continuity-benchmark-table-hint" tabindex="0">
       <table>
         <caption>Holmes seeded benchmark, October 27, 2026</caption>
         <thead><tr><th scope="col">Scoring record</th><th scope="col">Found / missed</th><th scope="col">False positives</th><th scope="col">Precision / recall</th></tr></thead>
