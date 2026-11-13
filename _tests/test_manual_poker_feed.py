@@ -2,6 +2,7 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
+from email.utils import parsedate_to_datetime
 import shutil
 import unittest
 
@@ -41,7 +42,10 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
         self.assertEqual(combined, self.outputs[follow.OUTPUT])
         self.assertEqual(combined, (ROOT / "writing.xml").read_text(encoding="utf-8"))
         channel = ET.fromstring(combined).find("channel")
-        self.assertEqual(channel.findtext("pubDate"), "Wed, 04 Nov 2026 00:00:00 GMT")
+        # Later unrelated articles legitimately advance the combined feed's
+        # date. The original poker episodes must retain their own dates.
+        dates = [parsedate_to_datetime(item.findtext("pubDate")) for item in channel.findall("item")]
+        self.assertEqual(parsedate_to_datetime(channel.findtext("pubDate")), max(dates))
         new = [item for item in channel.findall("item") if item.findtext("link") == poker_standoff_episode.URL]
         self.assertEqual(len(new), 1)
         self.assertEqual(new[0].findtext("pubDate"), "Wed, 04 Nov 2026 00:00:00 GMT")

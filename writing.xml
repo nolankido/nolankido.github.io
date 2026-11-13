@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>How to test an AI workflow before adopting it.</title>
+      <link>https://nolankido.com/technology/ai-workflow-pilot/</link>
+      <description>Test whether an AI workflow saves real effort at acceptable quality. Compare human review, repairs and setup with a six-case example, free CSV log and offline checker.</description>
+      <guid isPermaLink="true">https://nolankido.com/technology/ai-workflow-pilot/</guid>
+      <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/technology/feed.xml">Nolan Kido | Practical AI writing</source>
+    </item>
     <item>
       <title>Portland Meadows Stand Off: A-K and Two Shoves | Nolan Kido</title>
       <link>https://nolankido.com/poker/episodes/portland-meadows-standoff/</link>

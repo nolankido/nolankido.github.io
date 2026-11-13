@@ -62,6 +62,9 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['downloads/' + name + '.md' for name in ['poker-event-planner', 'poker-hand-capture', 'poker-resource-check']]
     assets += ['assets/search-visibility.css', 'assets/first-steps.css', 'downloads/creative-brief.txt']
     assets += ['assets/workflow-time.js', 'assets/workflow-evidence.css', 'assets/project-fragment-arrivals.js', 'downloads/workflow-time-review.txt', 'downloads/website-check-reproduction.py', 'downloads/website-check-evidence.json']
+    assets += ['downloads/ai-workflow-pilot-blank.csv',
+               'downloads/ai-workflow-pilot-example.csv',
+               'downloads/ai-workflow-pilot-audit.py']
     assets += ['technology/feed.xml', 'assets/practical-discovery.css', 'assets/work/task-brief-preview.png', 'assets/work/ai-time-savings-preview.png']
     assets += ['assets/ai-task-choice.css', 'assets/ai-task-choice.js', 'downloads/should-i-use-ai.txt', 'favicon.png', 'apple-touch-icon.png']
     assets += ['assets/summary-review.css', 'downloads/ai-summary-review.txt']
