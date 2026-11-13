@@ -1,0 +1,52 @@
+/* Scoped presentation for the public, browser-local incremental game lab. */
+.page-incremental-game-loop main { overflow-wrap: anywhere; }
+.page-incremental-game-loop .lab-jumps { display:flex; flex-wrap:wrap; gap:.55rem 1.1rem; margin:1.2rem 0 0; }
+.page-incremental-game-loop .lab-jumps a { display:inline-flex; align-items:center; min-height:44px; font-weight:650; }
+.page-incremental-game-loop h2[id] { scroll-margin-top:7rem; }
+.page-incremental-game-loop h2[id]:target { outline:2px solid var(--red); outline-offset:6px; }
+.page-incremental-game-loop .game-lab { background:var(--paper-light); border:2px solid var(--basalt); padding:clamp(1rem,3vw,1.7rem); margin:1.3rem 0; }
+.page-incremental-game-loop #game-lab[hidden],.page-incremental-game-loop #lab-fallback[hidden] { display:none!important; }
+.page-incremental-game-loop .lab-scoreboard { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.5rem; }
+.page-incremental-game-loop .lab-stat { margin:0; min-width:0; padding:.85rem .75rem; background:var(--panel); }
+.page-incremental-game-loop .lab-stat dt { font-size:.81rem; line-height:1.4; font-weight:650; }
+.page-incremental-game-loop .lab-stat dd { margin:.35rem 0 0; font-family:var(--mono); font-size:clamp(1.35rem,3vw,2rem); line-height:1.2; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.page-incremental-game-loop .lab-progress-label { display:block; margin:1.4rem 0 .3rem; font-size:.95rem; font-weight:700; }
+.page-incremental-game-loop .game-lab progress { display:block; width:100%; height:1.2rem; accent-color:var(--green); }
+.page-incremental-game-loop #lab-progress-copy { margin:.45rem 0 1rem; }
+.page-incremental-game-loop .lab-primary-action { display:flex; justify-content:center; padding:.3rem 0 1rem; }
+.page-incremental-game-loop #lab-tap { min-height:64px; width:min(100%,23rem); font-size:1.08rem; font-weight:750; }
+.page-incremental-game-loop .lab-upgrades { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
+.page-incremental-game-loop .lab-upgrade { display:flex; flex-direction:column; min-width:0; padding:1.1rem; border:1px solid var(--line-dark); background:var(--paper); }
+.page-incremental-game-loop .lab-upgrade h3 { font-size:1.2rem; margin:0 0 .6rem; }
+.page-incremental-game-loop .lab-upgrade p { font-size:.93rem; line-height:1.55; }
+.page-incremental-game-loop .lab-upgrade p.small-copy { margin-top:auto; }
+.page-incremental-game-loop .game-lab button { padding:.7rem 1rem; border:2px solid var(--basalt); font:inherit; font-weight:700; line-height:1.35; cursor:pointer; min-height:48px; border-radius:0; max-width:100%; white-space:normal; }
+.page-incremental-game-loop .game-lab button:not(:disabled) { background:var(--basalt); color:var(--paper-light); }
+.page-incremental-game-loop .game-lab button:not(:disabled):hover { background:var(--green); }
+.page-incremental-game-loop .game-lab button:disabled { opacity:.67; color:var(--basalt); cursor:not-allowed; background:var(--panel); }
+.page-incremental-game-loop .game-lab button:focus-visible,.page-incremental-game-loop .lab-table-wrap:focus-visible { outline:3px solid var(--red); outline-offset:3px; }
+.page-incremental-game-loop .lab-controls { display:flex; flex-wrap:wrap; gap:.7rem; margin:1rem 0; }
+.page-incremental-game-loop .lab-controls button { flex:1 1 12rem; }
+.page-incremental-game-loop #lab-action-status { padding:.75rem 1rem; margin:0 0 1rem; border-left:4px solid var(--green); background:var(--panel); font-weight:600; }
+.page-incremental-game-loop .game-lab>.small-copy { margin:0; }
+.page-incremental-game-loop .lab-table-wrap { overflow-x:auto; margin:1.2rem 0; }
+.page-incremental-game-loop .lab-rules-table { width:100%; min-width:37rem; border-collapse:collapse; text-align:left; font-size:.92rem; }
+.page-incremental-game-loop .lab-rules-table caption { text-align:left; font-weight:700; padding:0 0 .5rem; }
+.page-incremental-game-loop .lab-rules-table th,.page-incremental-game-loop .lab-rules-table td { padding:.8rem .65rem; border-bottom:1px solid var(--line-dark); vertical-align:top; }
+.page-incremental-game-loop .lab-rules-table thead { background:var(--panel); }
+.page-incremental-game-loop .lab-walkthrough { padding-left:1.3rem; }
+.page-incremental-game-loop .lab-walkthrough li { padding:.4rem 0 .5rem .25rem; }
+@media(max-width:760px){
+  .page-incremental-game-loop .lab-scoreboard { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .page-incremental-game-loop .lab-upgrades { grid-template-columns:1fr; }
+  .page-incremental-game-loop .lab-upgrade { padding:.9rem; }
+}
+@media(max-width:370px){
+  .page-incremental-game-loop .lab-scoreboard { gap:.35rem; }
+  .page-incremental-game-loop .lab-stat { padding:.65rem .5rem; }
+}
+@media print {
+  .page-incremental-game-loop .game-lab,.page-incremental-game-loop .lab-jumps { display:none!important; }
+  .page-incremental-game-loop .lab-table-wrap { overflow:visible; }
+  .page-incremental-game-loop .lab-rules-table { min-width:0; }
+}
