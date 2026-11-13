@@ -63,6 +63,7 @@ def main() -> int:
         ('Evidence-linked public project portfolio', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_public_project_portfolio.py', '-q']),
         ('Public RightsReceipt source-backed licensing case', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_rightsreceipt_public_case.py', '-q']),
         ('Published accounting research authorship and findings', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_published_accounting_research.py', '-q']),
+        ('Source-linked public biography and fact guide', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_profile_public_fact_guide.py', '-q']),
         ('Reproducible AI business workflow pilot and offline audit', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_ai_workflow_pilot.py', '-q']),
         ('Homepage mobile practical shortcut', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn100_mobile_start_shortcut.py', '-q']),
         ('AI task brief one-click quick start', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn101_brief_quick_start.py', '-q']),
@@ -140,10 +141,13 @@ def main() -> int:
         if standalone.is_file():
             suites.insert(0, standalone)
         tasks.extend((f'Local browser: {p.stem}', [str(p.relative_to(ROOT))]) for p in suites)
-    successes = [check(label, command) for label, command in tasks]
-    count = sum(successes)
+    results = [(label, check(label, command)) for label, command in tasks]
+    count = sum(passed for _, passed in results)
     print(f'\nLocal release checks: {count}/{len(tasks)} passed. No GitHub Actions were invoked.')
-    return 0 if all(successes) else 1
+    failures = [label for label, passed in results if not passed]
+    if failures:
+        print('Failed release groups: ' + ', '.join(failures))
+    return 0 if not failures else 1
 
 
 if __name__ == '__main__':
