@@ -8,6 +8,7 @@
     "finishing-is-a-decision": ["creative", "living-well"]
   },
   "also_in": {
+    "/projects/": ["poker", "creative"],
     "/technology/ai-book-continuity-checker/": ["creative"],
     "/technology/dinner-on-time/": ["living-well"],
     "/technology/ai-weekly-reset/": ["living-well"],

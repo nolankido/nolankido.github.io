@@ -60,6 +60,7 @@ def main() -> int:
         ('Homepage evidence and provenance', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_home_proof.py', '-q']),
         ('Homepage evidence shortcut', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn39_home_shortcut.py', '-q']),
         ('Homepage practical first choice', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn99_home_useful_first.py', '-q']),
+        ('Evidence-linked public project portfolio', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_public_project_portfolio.py', '-q']),
         ('Homepage mobile practical shortcut', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn100_mobile_start_shortcut.py', '-q']),
         ('AI task brief one-click quick start', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn101_brief_quick_start.py', '-q']),
         ('AI task brief example opening focus', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn102_brief_opening_focus.py', '-q']),

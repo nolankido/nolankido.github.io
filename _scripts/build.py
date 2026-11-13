@@ -295,6 +295,9 @@ def build_outputs() -> dict[Path, str]:
                   'description': p['description'], 'isPartOf': {'@type': 'WebSite', 'name': site['name'], 'url': site['url'] + '/'}}
         if p.get('poker_topic') or p['id'] == 'poker-topics':
             schema['@type'] = 'CollectionPage'
+        if p['id'] == 'projects':
+            schema['@type'] = 'CollectionPage'
+            schema['about'] = {'@id': site['url'] + '/about/#nolan-kido'}
         if p['id'] in {'home', 'about'}:
             person = {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name'], 'url': site['url'] + '/about/', 'description': site['bio_short'], 'sameAs': public_identity.same_as()}
             schema['about'] = person
@@ -478,6 +481,10 @@ def build_outputs() -> dict[Path, str]:
                 'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')) else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
         rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
+        if p['id'] == 'projects':
+            # Empty optional head and section-nav slots in the shared layout
+            # otherwise leave indented blank lines on this newly added route.
+            rendered = re.sub(r'(?m)^[ \t]+$', '', rendered)
         outputs[output_path(p['path'])] = rendered
 
     ET.register_namespace('atom', 'http://www.w3.org/2005/Atom')
