@@ -26,7 +26,8 @@
       "related_guides": [
         "table-etiquette",
         "poker-math",
-        "facing-preflop-raises"
+        "facing-preflop-raises",
+        "blind-defense"
       ],
       "resource_categories": [
         "basics"
@@ -81,7 +82,8 @@
         "choosing-study-tools",
         "getting-started",
         "thunder-valley-poker-guide",
-        "facing-preflop-raises"
+        "facing-preflop-raises",
+        "blind-defense"
       ],
       "resource_categories": [],
       "resource_ids": [
@@ -217,6 +219,7 @@
         "poker-math-reference",
         "reading-preflop-charts",
         "facing-preflop-raises",
+        "blind-defense",
         "poker-under-uncertainty"
       ],
       "related_guides": [

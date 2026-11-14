@@ -967,6 +967,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-blind-defense",
+    "path": "/poker/blind-defense/",
+    "title": "Defending the blinds: price the call, then plan for the players",
+    "seo_title": "Poker Blind Defense: SB vs BB, Button Opens and Squeezes | Nolan Kido",
+    "description": "Compare small- and big-blind defense against button opens, complete-versus-raise decisions, counted squeeze pots and big-blind ante effects.",
+    "kicker": "Poker / Strategy & math",
+    "source": "poker/blind-defense.html",
+    "section": "poker",
+    "date": "2026-11-14",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-rules-and-fair-play",
     "path": "/poker/poker-rules-and-fair-play/",
     "title": "Poker rules and fair play: find the right authority.",
