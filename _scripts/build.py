@@ -360,6 +360,16 @@ def build_outputs() -> dict[Path, str]:
                                     'description': 'Original browser-local teaching game with reproducible click and passive upgrade rules.',
                                     'applicationCategory': 'GameApplication', 'operatingSystem': 'Web browser',
                                     'isAccessibleForFree': True}
+        if p['id'] == 'incremental-upgrade-payback':
+            for asset, kind in [('incremental-upgrade-payback.css', 'style'), ('incremental-upgrade-payback.js', 'script')]:
+                version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style'
+                          else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
+            schema['mainEntity'] = {'@type': 'SoftwareApplication', '@id': canonical + '#payback-form',
+                                    'name': 'Incremental Upgrade Payback Calculator', 'url': canonical,
+                                    'description': 'Original browser-local calculator comparing a click upgrade, an idle upgrade and no purchase under fixed assumptions.',
+                                    'applicationCategory': 'EducationalApplication', 'operatingSystem': 'Web browser',
+                                    'isAccessibleForFree': True}
         if p['id'] == 'contact':
             contact_version = hashlib.sha256((ROOT / 'assets/contact.js').read_bytes()).hexdigest()[:12]
             extra += f'\n  <script src="/assets/contact.js?v={contact_version}" defer></script>'
@@ -529,7 +539,7 @@ def build_outputs() -> dict[Path, str]:
                 'og_type': 'article' if p.get('note') or p.get('poker_entry') or p.get('poker_guide') or p.get('living_well_entry') or (p.get('evidence_article') or p.get('worked_guide')) or p.get('creative_article') else 'website', 'extra_head': extra,
                 'structured_data': json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')}
         rendered = fill(template, data).replace('<html lang="en">', f'<html lang="en">\n{MARKER}', 1)
-        if p['id'] in {'projects', 'incremental-game-loop'}:
+        if p['id'] in {'projects', 'incremental-game-loop', 'incremental-upgrade-payback'}:
             # Empty optional head and section-nav slots in the shared layout
             # otherwise leave indented blank lines on these authored routes.
             rendered = re.sub(r'(?m)^[ \t]+$', '', rendered)
