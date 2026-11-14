@@ -346,6 +346,14 @@
       "keywords": "preflop charts ranges matrix 169 1326 combos mixing frequencies bb gto mtt push fold"
     },
     {
+      "slug": "facing-preflop-raises",
+      "title": "Facing a preflop raise: fold, call, three-bet or four-bet?",
+      "description": "Compare responses to an open and a three-bet through counted six-handed cash hands, legal re-raises, SPR contrasts and self-checks. No invented solver ranges.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "preflop poker opening raise facing open cutoff button three bet 3bet four bet 4bet call fold defense range raiser reraising minimum raise stack to pot ratio SPR 100bb 25bb pot odds squeeze positional response practice"
+    },
+    {
       "slug": "poker-rules-and-fair-play",
       "title": "Poker rules and fair play: find the right authority.",
       "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",

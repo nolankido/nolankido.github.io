@@ -25,7 +25,8 @@
       ],
       "related_guides": [
         "table-etiquette",
-        "poker-math"
+        "poker-math",
+        "facing-preflop-raises"
       ],
       "resource_categories": [
         "basics"
@@ -79,7 +80,8 @@
         "variance-and-results",
         "choosing-study-tools",
         "getting-started",
-        "thunder-valley-poker-guide"
+        "thunder-valley-poker-guide",
+        "facing-preflop-raises"
       ],
       "resource_categories": [],
       "resource_ids": [
@@ -214,6 +216,7 @@
         "range-combinations",
         "poker-math-reference",
         "reading-preflop-charts",
+        "facing-preflop-raises",
         "poker-under-uncertainty"
       ],
       "related_guides": [
