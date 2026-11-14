@@ -82,7 +82,8 @@ class IncrementalUpgradePaybackTests(unittest.TestCase):
         for target in ('payback-form', 'payback-fallback', 'payback-result',
                        'payback-bank', 'payback-taps', 'payback-seconds',
                        'payback-pencil-cost', 'payback-routine-cost', 'payback-feedback',
-                       'payback-preset-20', 'payback-preset-60'):
+                       'payback-preset-20', 'payback-preset-60',
+                       'payback-download', 'payback-report'):
             self.assertEqual(source.count('id="' + target + '"'), 1)
         self.assertIn('class="payback-first-link"', source)
         self.assertIn('href="#payback-compare"', source)
@@ -91,6 +92,13 @@ class IncrementalUpgradePaybackTests(unittest.TestCase):
         self.assertIn('type="button">Try 60 taps', source)
         self.assertIn("result.scrollIntoView({block: 'start', behavior: 'instant'})", script)
         self.assertIn("focus({preventScroll: true})", script)
+        self.assertIn('function formatScenario(values, comparison)', script)
+        self.assertIn("form.addEventListener('input'", script)
+        self.assertIn('download="incremental-upgrade-comparison.md"', source)
+        self.assertIn('readonly spellcheck="false"', source)
+        self.assertIn('View and copy the full calculation', source)
+        self.assertIn('URL.revokeObjectURL', script)
+        self.assertIn('payback-download[hidden]', css)
         self.assertIn('Conditional payback against buying nothing', script)
         self.assertIn('comparison.routineMinusPencil === null', script)
         self.assertIn('scroll-margin-top:9rem', css)
@@ -99,7 +107,7 @@ class IncrementalUpgradePaybackTests(unittest.TestCase):
                        'C - R + T - N', 'T is greater than N + 15',
                        'only one purchase', 'not a report of two people playing',
                        'no offline rewards', 'not a forecast', 'not a player-preference verdict',
-                       'cannot observe them', 'without it'):
+                       'cannot observe them', 'without it', 'filled-in hypothetical comparison'):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase.casefold(), (source + script).casefold())
         for forbidden in ('localStorage', 'sessionStorage', 'fetch(', 'XMLHttpRequest', 'sendBeacon'):
