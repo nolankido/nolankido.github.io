@@ -1,6 +1,33 @@
 /* Resources entry page: reader text enlargement must preserve its navigation. */
 .page-resources .section-meta { overflow-wrap: anywhere; }
 
+/* The four original resource kits need two balanced rows, not the shared
+   three-column portfolio layout, with headings styled at their h4 level. */
+.page-resources .resource-kit-index { margin-block: 2rem 2.25rem; }
+.page-resources .resource-kit-index > h3 { margin-bottom: .6rem; }
+.page-resources .resource-kit-index .identity-readings {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
+  row-gap: 1.8rem;
+  margin: 1.2rem 0 1.4rem;
+}
+.page-resources .resource-kit-index .identity-reading h4 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+}
+.page-resources .resource-kit-index .identity-reading p + p { margin-top: .7rem; }
+.page-resources .resource-kit-index .identity-reading a { overflow-wrap: anywhere; }
+
+@media (max-width: 800px) {
+  /* One column stays readable at narrow sizes and at enlarged browser text. */
+  .page-resources .resource-kit-index .identity-readings {
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 0;
+  }
+}
+
 @media (max-width: 620px) {
   /* The shared three-column mobile grid clips long labels at 200% text. */
   .page-resources .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .4rem .8rem; }
@@ -10,7 +37,8 @@
 
   /* Add to the shared scroll padding so the taller sticky header does not obscure anchors. */
   .page-resources :is(#resources-technology, #resources-living-well,
-    #resources-poker, #resources-creative, #thinking-worksheets, .worksheet[id]) {
+    #resources-poker, #resources-creative, #resource-new-kits,
+    #thinking-worksheets, .worksheet[id]) {
     scroll-margin-top: 4.5rem;
   }
 }

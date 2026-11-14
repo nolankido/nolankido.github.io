@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from html.parser import HTMLParser
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -110,6 +111,27 @@ class ResourceKitsTests(unittest.TestCase):
         for forbidden in ("\u2014", "customer savings increased", "confirmed google ranking",
                           "production client", "private game prototypes"):
             self.assertNotIn(forbidden, body)
+
+    def test_scoped_card_grid_and_heading_layout(self):
+        css = read(ROOT / "assets/resources-reader.css")
+        grid = ".page-resources .resource-kit-index .identity-readings {"
+        self.assertEqual(css.count(grid), 2)
+        wide = css.split(grid, 1)[1].split("}", 1)[0]
+        self.assertIn("grid-template-columns: repeat(2, minmax(0, 1fr))", wide)
+        small = css.split("@media (max-width: 800px)", 1)[1].split("@media (max-width: 620px)", 1)[0]
+        self.assertIn(grid, small)
+        self.assertIn("grid-template-columns: minmax(0, 1fr)", small)
+        self.assertIn(".page-resources .resource-kit-index .identity-reading h4 {", css)
+        self.assertIn(".page-resources .resource-kit-index .identity-reading a { overflow-wrap: anywhere; }", css)
+        self.assertIn("#resource-new-kits,", css)
+        self.assertNotIn("\u2014", css)
+
+    def test_resources_stylesheet_cache_key_matches_current_file(self):
+        stylesheet = read(ROOT / "assets/resources-reader.css")
+        version = hashlib.sha256(stylesheet.encode("utf-8")).hexdigest()[:12]
+        page = read(PAGE)
+        self.assertIn('href="/assets/resources-reader.css?v=' + version + '"', page)
+        self.assertEqual(page.count('/assets/resources-reader.css?v='), 1)
 
     def test_sitemap_and_schema_reflect_real_revision(self):
         pages = json.loads(read(ROOT / "_source/pages.json"))
