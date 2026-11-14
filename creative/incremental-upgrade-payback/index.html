@@ -34,8 +34,8 @@
   <link rel="stylesheet" href="/assets/site-core.css?v=10383d71aabb">
 
   <meta property="article:published_time" content="2026-11-13">
-  <link rel="stylesheet" href="/assets/incremental-upgrade-payback.css?v=78cefefc13b5">
-  <script defer src="/assets/incremental-upgrade-payback.js?v=e49ab5f16683"></script>
+  <link rel="stylesheet" href="/assets/incremental-upgrade-payback.css?v=154430f5d446">
+  <script defer src="/assets/incremental-upgrade-payback.js?v=7e1bd584ae17"></script>
   <link rel="stylesheet" href="/assets/search-visibility.css?v=c5a767619d13">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "name": "Incremental Game Upgrade Payback Calculator | Nolan Kido", "url": "https://nolankido.com/creative/incremental-upgrade-payback/", "description": "Compare click and idle upgrades with a free browser-local payback calculator. Explore the exact break-even math, worked examples, and a blank balancing worksheet.", "isPartOf": {"@type": "WebSite", "@id": "https://nolankido.com/#website", "name": "Nolan Kido", "url": "https://nolankido.com/", "publisher": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}}, "headline": "Which incremental-game upgrade pays back first?", "datePublished": "2026-11-13", "author": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}, "mainEntity": {"@type": "SoftwareApplication", "@id": "https://nolankido.com/creative/incremental-upgrade-payback/#payback-form", "name": "Incremental Upgrade Payback Calculator", "url": "https://nolankido.com/creative/incremental-upgrade-payback/", "description": "Original browser-local calculator comparing a click upgrade, an idle upgrade and no purchase under fixed assumptions.", "applicationCategory": "EducationalApplication", "operatingSystem": "Web browser", "isAccessibleForFree": true}, "@id": "https://nolankido.com/creative/incremental-upgrade-payback/#article", "inLanguage": "en-US", "publisher": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://nolankido.com/creative/incremental-upgrade-payback/#webpage", "url": "https://nolankido.com/creative/incremental-upgrade-payback/", "breadcrumb": {"@type": "BreadcrumbList", "@id": "https://nolankido.com/creative/incremental-upgrade-payback/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nolankido.com/"}, {"@type": "ListItem", "position": 2, "name": "Creative Work", "item": "https://nolankido.com/creative/"}, {"@type": "ListItem", "position": 3, "name": "Which incremental-game upgrade pays back first?", "item": "https://nolankido.com/creative/incremental-upgrade-payback/"}]}}}</script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="51bfd4d7-08ac-4299-924b-621af60fa7f1" data-domains="nolankido.com,www.nolankido.com" data-do-not-track="true" data-exclude-search="true" data-exclude-hash="true"></script>
@@ -103,8 +103,17 @@
       <p id="payback-winner" class="payback-winner"></p>
       <p id="payback-breakeven"></p>
       <p id="payback-assumptions" class="small-copy"></p>
+      <div class="payback-export">
+        <h4>Keep the exact calculation</h4>
+        <p>Download a filled-in Markdown record with the five inputs, three balances, formulas, ties, and limitations. It is created on this device and includes no identifying details. If downloading is unavailable, you can copy the same record below.</p>
+        <p><a id="payback-download" class="button" href="#payback-report" download="incremental-upgrade-comparison.md" hidden>Download this comparison (.md)</a></p>
+        <details><summary>View and copy the full calculation</summary>
+          <label for="payback-report">Read-only Markdown record. Select the text to copy.</label>
+          <textarea id="payback-report" rows="12" readonly spellcheck="false"></textarea>
+        </details>
+      </div>
     </section>
-    <p class="small-copy">These numbers are scenario arithmetic, not a forecast of human tapping speed or an automatic change to the playable game. The form only uses local browser memory and can be reset at any time. It does not upload, save, or transmit the entered values.</p>
+    <p class="small-copy">These numbers are scenario arithmetic, not a forecast of human tapping speed or an automatic change to the playable game. The form only uses local browser memory and can be reset at any time. It does not upload or transmit the entered values. An optional file is saved to your device only if you download it.</p>
   </div>
 </section>
 <section class="section folio-row" aria-labelledby="payback-method">
@@ -143,7 +152,7 @@
   <div class="section-meta"><p class="section-label">Repeat the reasoning</p></div>
   <div class="section-content prose">
     <h2 class="section-title" id="payback-worksheet">Keep a decision record before changing prices.</h2>
-    <p>The blank worksheet records a player's planned actions, the three balances, a hypothesis about pacing, and the questions left unanswered. It also has a quick calculation you can do without this website or a spreadsheet.</p>
+    <p>The blank worksheet records a player's planned actions, the three balances, a hypothesis about pacing, and the questions left unanswered. It also has a quick calculation you can do without this website or a spreadsheet. After you run the calculator, you can separately download its filled-in hypothetical comparison above. Neither file contains actual observations unless you add them yourself.</p>
     <p><a class="button" href="/downloads/incremental-upgrade-payback-worksheet.md" download>Download the blank upgrade payback worksheet (.md)</a></p>
     <p>For a first experiment, keep the same opening balance and 60-second window, then try two planned tap counts. After that, change one price in the calculator to see where the tie moves. If you observe another person playing, record their words and actions separately from the model's predicted balance. The <a href="/downloads/incremental-game-first-minute-playtest.md">first-minute observation sheet</a> gives a private-use template for that part of the work.</p>
   </div>

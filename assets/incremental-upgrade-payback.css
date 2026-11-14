@@ -9,7 +9,7 @@
 .page-incremental-upgrade-payback .payback-first-link span { font-size:.9rem; }
 .page-incremental-upgrade-payback h2[id] { scroll-margin-top:7rem; }
 .page-incremental-upgrade-payback h2[id]:target { outline:2px solid var(--red); outline-offset:5px; }
-.page-incremental-upgrade-payback #payback-form[hidden],.page-incremental-upgrade-payback #payback-fallback[hidden],.page-incremental-upgrade-payback #payback-result[hidden] { display:none!important; }
+.page-incremental-upgrade-payback #payback-form[hidden],.page-incremental-upgrade-payback #payback-fallback[hidden],.page-incremental-upgrade-payback #payback-result[hidden],.page-incremental-upgrade-payback #payback-download[hidden] { display:none!important; }
 .page-incremental-upgrade-payback .payback-form { margin:1.3rem 0; padding:clamp(1rem,3vw,1.6rem); border:2px solid var(--basalt); background:var(--paper-light); }
 .page-incremental-upgrade-payback .payback-presets { margin:0 0 1.2rem; padding:0 0 1rem; border-bottom:1px solid var(--line-dark); }
 .page-incremental-upgrade-payback .payback-presets p { margin:0 0 .6rem; font-size:.95rem; }
@@ -39,6 +39,15 @@
 .page-incremental-upgrade-payback .payback-outcomes dt { font-size:.9rem; line-height:1.45; font-weight:650; }
 .page-incremental-upgrade-payback .payback-outcomes dd { margin:.5rem 0 0; font-family:var(--mono); font-size:clamp(1.1rem,2.6vw,1.65rem); line-height:1.3; font-weight:700; overflow-wrap:anywhere; }
 .page-incremental-upgrade-payback .payback-winner { margin-top:1.1rem; padding:.9rem; border-left:4px solid var(--green); font-weight:700; }
+.page-incremental-upgrade-payback .payback-export { border-top:1px solid var(--line-dark); margin-top:1.1rem; padding-top:1.1rem; }
+.page-incremental-upgrade-payback .payback-export h4 { margin:0 0 .5rem; font-size:1.1rem; }
+.page-incremental-upgrade-payback .payback-export p { margin:.5rem 0 1rem; }
+.page-incremental-upgrade-payback .payback-export .button { display:inline-flex; align-items:center; justify-content:center; max-width:100%; min-height:48px; padding:.7rem 1rem; font-weight:700; background:var(--basalt); color:var(--paper-light); text-decoration:none; }
+.page-incremental-upgrade-payback .payback-export .button:hover { background:var(--green); }
+.page-incremental-upgrade-payback .payback-export .button:focus-visible,.page-incremental-upgrade-payback .payback-export summary:focus-visible,.page-incremental-upgrade-payback #payback-report:focus-visible { outline:3px solid var(--red); outline-offset:3px; }
+.page-incremental-upgrade-payback .payback-export summary { min-height:44px; padding:.7rem 0; font-weight:700; cursor:pointer; }
+.page-incremental-upgrade-payback .payback-export label { display:block; margin:.4rem 0; font-size:.9rem; }
+.page-incremental-upgrade-payback #payback-report { display:block; width:100%; max-width:100%; min-height:12rem; padding:.8rem; border:2px solid var(--line-dark); border-radius:0; resize:vertical; background:white; color:var(--basalt); font: .9rem/1.5 var(--mono); }
 .page-incremental-upgrade-payback .payback-table-wrap { overflow-x:auto; margin:1.2rem 0; }
 .page-incremental-upgrade-payback .payback-table { border-collapse:collapse; width:100%; min-width:38rem; text-align:left; font-size:.94rem; }
 .page-incremental-upgrade-payback .payback-table caption { text-align:left; font-weight:700; padding:0 0 .6rem; }
