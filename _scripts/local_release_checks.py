@@ -60,6 +60,7 @@ def main() -> int:
         ('Homepage evidence and provenance', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_home_proof.py', '-q']),
         ('Homepage evidence shortcut', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn39_home_shortcut.py', '-q']),
         ('Homepage practical first choice', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn99_home_useful_first.py', '-q']),
+        ('Resources hub: discoverable original kits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_resources_hands_on_kits.py', '-q']),
         ('Evidence-linked public project portfolio', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_public_project_portfolio.py', '-q']),
         ('Public RightsReceipt source-backed licensing case', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_rightsreceipt_public_case.py', '-q']),
         ('Published accounting research authorship and findings', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_published_accounting_research.py', '-q']),
