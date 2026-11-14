@@ -2,10 +2,20 @@
 .page-incremental-upgrade-payback main { overflow-wrap:anywhere; }
 .page-incremental-upgrade-payback .payback-jumps { display:flex; flex-wrap:wrap; gap:.5rem 1.1rem; margin:1.2rem 0; }
 .page-incremental-upgrade-payback .payback-jumps a { display:inline-flex; align-items:center; min-height:44px; font-weight:650; }
+.page-incremental-upgrade-payback .payback-first-link { display:flex; align-items:center; flex-wrap:wrap; gap:.4rem 1rem; margin:1.3rem 0; }
+.page-incremental-upgrade-payback .payback-first-link a { display:inline-flex; align-items:center; padding:.7rem 1rem; min-height:48px; background:var(--basalt); color:var(--paper-light); text-decoration:none; font-size:1rem; font-weight:700; }
+.page-incremental-upgrade-payback .payback-first-link a:hover { background:var(--green); }
+.page-incremental-upgrade-payback .payback-first-link a:focus-visible { outline:3px solid var(--red); outline-offset:3px; }
+.page-incremental-upgrade-payback .payback-first-link span { font-size:.9rem; }
 .page-incremental-upgrade-payback h2[id] { scroll-margin-top:7rem; }
 .page-incremental-upgrade-payback h2[id]:target { outline:2px solid var(--red); outline-offset:5px; }
 .page-incremental-upgrade-payback #payback-form[hidden],.page-incremental-upgrade-payback #payback-fallback[hidden],.page-incremental-upgrade-payback #payback-result[hidden] { display:none!important; }
 .page-incremental-upgrade-payback .payback-form { margin:1.3rem 0; padding:clamp(1rem,3vw,1.6rem); border:2px solid var(--basalt); background:var(--paper-light); }
+.page-incremental-upgrade-payback .payback-presets { margin:0 0 1.2rem; padding:0 0 1rem; border-bottom:1px solid var(--line-dark); }
+.page-incremental-upgrade-payback .payback-presets p { margin:0 0 .6rem; font-size:.95rem; }
+.page-incremental-upgrade-payback .payback-preset-actions { display:flex; gap:.5rem; flex-wrap:wrap; }
+.page-incremental-upgrade-payback .payback-preset-actions button { min-height:44px; padding:.65rem 1rem; border:2px solid var(--line-dark); border-radius:0; background:var(--panel); color:var(--basalt); font:inherit; font-weight:700; cursor:pointer; }
+.page-incremental-upgrade-payback .payback-preset-actions button:hover { background:var(--green); color:white; }
 .page-incremental-upgrade-payback .payback-form fieldset { margin:0 0 1rem; padding:1rem; border:1px solid var(--line-dark); min-width:0; }
 .page-incremental-upgrade-payback .payback-form legend { padding:0 .4rem; font-weight:700; font-size:1.07rem; }
 .page-incremental-upgrade-payback .payback-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem 1.1rem; }
@@ -22,6 +32,7 @@
 .page-incremental-upgrade-payback .payback-form :focus-visible,.page-incremental-upgrade-payback .payback-table-wrap:focus-visible,.page-incremental-upgrade-payback #payback-result-title:focus-visible { outline:3px solid var(--red); outline-offset:3px; }
 .page-incremental-upgrade-payback #payback-feedback { padding:.75rem 1rem; margin:1rem 0 0; border-left:4px solid var(--green); background:var(--panel); font-weight:650; }
 .page-incremental-upgrade-payback .payback-result { margin:1.2rem 0; padding:clamp(1rem,3vw,1.5rem); border:2px solid var(--green); background:var(--paper-light); }
+.page-incremental-upgrade-payback #payback-result { scroll-margin-top:9rem; }
 .page-incremental-upgrade-payback .payback-result h3 { margin:.3rem 0 1.1rem; font-size:clamp(1.3rem,3vw,1.7rem); }
 .page-incremental-upgrade-payback .payback-outcomes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.6rem; }
 .page-incremental-upgrade-payback .payback-outcomes dl { margin:0; padding:1rem; background:var(--panel); }
@@ -38,9 +49,11 @@
   .page-incremental-upgrade-payback .payback-outcomes { grid-template-columns:1fr; }
 }
 @media(max-width:570px){
+  .page-incremental-upgrade-payback .payback-first-link a { width:100%; justify-content:center; }
   .page-incremental-upgrade-payback .payback-fields,.page-incremental-upgrade-payback .payback-fields.payback-costs { grid-template-columns:1fr; }
   .page-incremental-upgrade-payback .payback-form fieldset { padding:.75rem; }
   .page-incremental-upgrade-payback .payback-actions button { width:100%; }
+  .page-incremental-upgrade-payback .payback-preset-actions button { width:100%; }
 }
 @media print {
   .page-incremental-upgrade-payback .payback-form,.page-incremental-upgrade-payback .payback-jumps,.page-incremental-upgrade-payback .payback-result { display:none!important; }

@@ -3,6 +3,7 @@
   <div class="section-content prose">
     <h2 class="intro" id="payback-start">An upgrade can make the number grow and still be the wrong purchase for your next minute.</h2>
     <p>Imagine that you have 25 sparks. You can spend 10 on a sharper pencil that adds one spark to every tap, or spend 25 on a daily routine that adds one spark per visible second. Which purchase leaves you with more sparks after a minute? The answer depends on how much you tap and how long you let passive production run.</p>
+    <p class="payback-first-link"><a href="#payback-compare">Try the free comparison calculator</a> <span>No account needed. Start with a ready-made 20-tap or 60-tap example.</span></p>
     <p>This is a companion to my <a href="/creative/incremental-game-loop/">original incremental game teaching lab</a>. You can play that small demo, then use this page to inspect a deliberately simpler choice: <strong>buy one upgrade now, or buy nothing, and compare the resulting balance after the same planned actions.</strong> The calculator and examples use arithmetic, not an AI model, a solver, or observed player behavior.</p>
     <nav class="payback-jumps" aria-label="On this upgrade math guide"><a href="#payback-compare">Compare upgrades</a><a href="#payback-method">Read the math</a><a href="#payback-examples">Check examples</a><a href="#payback-worksheet">Use the worksheet</a><a href="#payback-limits">See the limits</a></nav>
   </div>
@@ -14,6 +15,10 @@
     <p class="section-deck">The defaults match the first pencil and first routine in the sparks demo. You can vary the starting balance, future taps, visible seconds, and the two hypothetical upgrade prices. The bonus stays fixed at +1 per tap or +1 per active second.</p>
     <p id="payback-fallback">The interactive comparison needs JavaScript. The complete formulas, both worked examples, and the blank worksheet below work without it.</p>
     <form class="payback-form" id="payback-form" hidden novalidate aria-label="Incremental game upgrade payback calculator">
+      <div class="payback-presets" role="group" aria-label="Ready-made upgrade comparisons">
+        <p><strong>Try the two outcomes instantly.</strong> Each example restores all five inputs, then shows the result.</p>
+        <div class="payback-preset-actions"><button id="payback-preset-20" type="button">Try 20 taps</button><button id="payback-preset-60" type="button">Try 60 taps</button></div>
+      </div>
       <fieldset>
         <legend>Starting position and future actions</legend>
         <div class="payback-fields">

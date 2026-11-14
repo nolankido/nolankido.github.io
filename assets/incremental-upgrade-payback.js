@@ -54,7 +54,8 @@
   const ids = ['feedback', 'result-title', 'no-buy', 'pencil-final', 'routine-final',
     'winner', 'breakeven', 'assumptions'];
   const parts = Object.fromEntries(ids.map(id => [id, document.getElementById('payback-' + id)]));
-  if ([...Object.values(fields), ...Object.values(parts)].some(element => !element)) return;
+  const presets = [20, 60].map(taps => ({taps, button: document.getElementById('payback-preset-' + taps)}));
+  if ([...Object.values(fields), ...Object.values(parts), ...presets.map(preset => preset.button)].some(element => !element)) return;
 
   const number = value => value.toLocaleString('en-US');
 
@@ -95,17 +96,20 @@
       difference = (comparison.routineMinusPencil > 0 ? 'Routine ends ' : 'Pencil ends ') +
         number(Math.abs(comparison.routineMinusPencil)) + ' sparks ahead of the other purchase.';
     }
-    parts.breakeven.textContent = 'Payback against buying nothing: ' + number(comparison.pencilPaybackTaps) +
+    const threshold = comparison.routineMinusPencil === null ? '' : comparison.routineThresholdSeconds < 0
+      ? ' At these prices and planned taps, routine finishes ahead at every nonnegative duration.'
+      : ' Routine overtakes pencil when visible seconds exceed ' + number(comparison.routineThresholdSeconds) +
+        ' for the same planned taps and these prices.';
+    parts.breakeven.textContent = 'Conditional payback against buying nothing, if purchased now: ' + number(comparison.pencilPaybackTaps) +
       ' additional taps for the pencil; ' + number(comparison.routinePaybackSeconds) +
-      ' active seconds for the routine. ' + difference +
-      ' Routine overtakes pencil when visible seconds exceed ' + number(comparison.routineThresholdSeconds) +
-      ' for the same planned taps and these prices, assuming both are affordable.';
+      ' active seconds for the routine. ' + difference + threshold;
     parts.assumptions.textContent = 'Starting balance ' + number(values.bank) + '; ' + number(values.taps) +
       ' taps; ' + number(values.seconds) + ' visible seconds; pencil cost ' + number(values.pencilCost) +
       '; routine cost ' + number(values.routineCost) + '. Only one purchase happens at the start, with no other upgrades.';
     result.hidden = false;
     parts.feedback.textContent = 'Comparison ready. The three possible balances are listed below.';
-    parts['result-title'].focus();
+    parts['result-title'].focus({preventScroll: true});
+    result.scrollIntoView({block: 'start', behavior: 'instant'});
   }
 
   form.addEventListener('submit', function (event) {
@@ -121,6 +125,15 @@
     result.hidden = true;
     parts.feedback.textContent = 'Example restored. Compare again to see its three balances.';
   });
+  for (const preset of presets) {
+    preset.button.addEventListener('click', function () {
+      const values = {bank: 25, taps: preset.taps, seconds: 60, pencilCost: 10, routineCost: 25};
+      for (const [key, value] of Object.entries(values)) fields[key].value = String(value);
+      clearErrors();
+      result.hidden = true;
+      render(values, calculate(values));
+    });
+  }
 
   form.hidden = false;
   fallback.hidden = true;
