@@ -28,7 +28,8 @@
         "poker-math",
         "facing-preflop-raises",
         "blind-defense",
-        "three-bet-sizing-and-pot-geometry"
+        "three-bet-sizing-and-pot-geometry",
+        "three-bet-pot-flop-decisions"
       ],
       "resource_categories": [
         "basics"
@@ -85,7 +86,8 @@
         "thunder-valley-poker-guide",
         "facing-preflop-raises",
         "blind-defense",
-        "three-bet-sizing-and-pot-geometry"
+        "three-bet-sizing-and-pot-geometry",
+        "three-bet-pot-flop-decisions"
       ],
       "resource_categories": [],
       "resource_ids": [
@@ -223,6 +225,7 @@
         "facing-preflop-raises",
         "blind-defense",
         "three-bet-sizing-and-pot-geometry",
+        "three-bet-pot-flop-decisions",
         "poker-under-uncertainty"
       ],
       "related_guides": [

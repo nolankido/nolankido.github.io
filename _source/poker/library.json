@@ -370,6 +370,14 @@
       "keywords": "poker 3 bet three bet sizing size raise to total 4 bet four bet preflop cutoff button small blind in position out of position pot geometry stack to pot ratio spr 8bb 10bb 12bb minimum raise pot odds no limit holdem cash game"
     },
     {
+      "slug": "three-bet-pot-flop-decisions",
+      "title": "The first flop decision in a three-bet pot",
+      "description": "Work through a 21.5 BB three-bet pot on dry and connected boards, compare 5 BB versus 14 BB c-bets, a check-raise, call prices and next-street SPR.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "three bet pot flop decision 3bet cbet continuation bet check back check raise dry wet board texture ace high rainbow connected two tone range advantage nut advantage cutoff button out of position in position 100bb stack to pot ratio SPR pot odds flop call small bet large bet"
+    },
+    {
       "slug": "poker-rules-and-fair-play",
       "title": "Poker rules and fair play: find the right authority.",
       "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
