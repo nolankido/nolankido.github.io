@@ -354,6 +354,14 @@
       "keywords": "preflop poker opening raise facing open cutoff button three bet 3bet four bet 4bet call fold defense range raiser reraising minimum raise stack to pot ratio SPR 100bb 25bb pot odds squeeze positional response practice"
     },
     {
+      "slug": "blind-defense",
+      "title": "Defending the blinds: price the call, then plan for the players",
+      "description": "Contrast SB and BB prices against a button open, blind-versus-blind options, an open-plus-caller squeeze and tournament big-blind ante accounting, with exercises.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "poker blind defense big blind small blind SB BB button steal open call cost defend preflop three bet squeeze cold call range blind versus blind BBA big blind ante 100bb pot arithmetic"
+    },
+    {
       "slug": "poker-rules-and-fair-play",
       "title": "Poker rules and fair play: find the right authority.",
       "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
