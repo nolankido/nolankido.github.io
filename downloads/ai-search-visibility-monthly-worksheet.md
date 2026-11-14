@@ -56,6 +56,20 @@ Copy this blank row for each prompt and assistant/mode combination. Never replac
 
 Count a completed eligible trial **at most once**, even if it links to three pages. Verify the link destination; a plain-text mention, web-search snippet, made-up URL or self-supplied site URL is not a confirmed citation. Product names, modes, personalization, source selection and location can alter the result.
 
+## Optional offline checker for a complete manual panel
+
+Use the [blank CSV trial log](https://nolankido.com/downloads/ai-citation-panel-blank.csv), [offline standard-library Python checker](https://nolankido.com/downloads/ai-citation-panel-audit.py), and [explicitly fictional 16-trial example](https://nolankido.com/downloads/ai-citation-panel-synthetic.csv). The CSV columns are `date,prompt_id,assistant,mode,status,clickable_link_verified,linked_url,text_only_mention`.
+
+Keep the same eight numbered unbranded prompts and the same assistant/mode combinations across months. For each prompt and assistant/mode, record at most one trial. Allowed `status` values are `completed`, `incomplete` and `not_checked`. For a completed answer, use `clickable_link_verified=yes` only if a human checked an actual clickable HTTPS link to `nolankido.com` or `www.nolankido.com`. If none appeared, set it to `no` and leave `linked_url` empty. Text-only mentions are tracked separately. A script cannot establish that an assistant generated the claimed link.
+
+Run this on the *fictional* sample, from the directory holding the downloaded files:
+
+```powershell
+py -3 .\ai-citation-panel-audit.py --month 2026-10 --expected-trials 16 --csv .\ai-citation-panel-synthetic.csv
+```
+
+Expected fictional result: 16 completed trials, 2 cited trials, a 12.5% sampled fraction, and one text-only mention. Real observations must use your own month and private CSV path. `--expected-trials` is eight times the number of planned assistant/mode combinations. The checker never searches, fetches URLs, writes a report file by itself, or emits raw citation links. Missing and incomplete trials are not scored as negative answers. With no completed trials, its fraction is `null`, not zero. Never commit completed trial logs or other private account data to the website repository.
+
 ## Read and decide
 
 - Pages that received verified citations in this particular sample: ______________

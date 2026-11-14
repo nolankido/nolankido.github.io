@@ -1481,7 +1481,7 @@
     "date": "2026-11-03",
     "updated": "2026-11-14",
     "evidence_article": true,
-    "revision": "Added a no-cost, provider-specific AI citation audit and a private-use worksheet, preserving the historical release evidence and original publication date."
+    "revision": "Added a no-cost provider-specific citation audit, a private-use worksheet, and a tested offline trial-log checker. The historical release evidence and original publication date remain unchanged."
   },
   {
     "id": "ai-poker-video-evidence",
