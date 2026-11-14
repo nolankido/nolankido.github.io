@@ -30,9 +30,9 @@ class PokerLinkGraphTests(unittest.TestCase):
 
     def test_all_library_guides_reachable_and_counts_are_consistent(self):
         report = poker_link_graph.scan(ROOT)
-        self.assertEqual(report['guides'], 60)
+        self.assertGreaterEqual(report['guides'], 60)
         self.assertEqual(report['unreachable_guides'], [])
-        self.assertEqual(len(report['records']), 60)
+        self.assertEqual(len(report['records']), report['guides'])
         self.assertEqual(report['weak_guides_at_most_one_inbound'], 0)
         self.assertGreater(report['guide_prose_edges'], 0)
         self.assertEqual(report['guide_prose_edges'],

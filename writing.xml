@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>Facing a preflop raise: fold, call, three-bet or four-bet?</title>
+      <link>https://nolankido.com/poker/facing-preflop-raises/</link>
+      <description>Learn how to respond to a poker open-raise or three-bet with two counted hands, legal minimum raises, pot odds, stack-to-pot ratios and practice questions.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/facing-preflop-raises/</guid>
+      <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
     <item>
       <title>How to write useful wine tasting notes without guessing the bottle</title>
       <link>https://nolankido.com/living-well/wine-tasting-notes/</link>

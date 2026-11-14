@@ -955,6 +955,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-facing-preflop-raises",
+    "path": "/poker/facing-preflop-raises/",
+    "title": "Facing a preflop raise: fold, call, three-bet or four-bet?",
+    "seo_title": "Facing Preflop Raises: Fold, Call, 3-Bet or 4-Bet? | Nolan Kido",
+    "description": "Learn how to respond to a poker open-raise or three-bet with two counted hands, legal minimum raises, pot odds, stack-to-pot ratios and practice questions.",
+    "kicker": "Poker / Strategy & math",
+    "source": "poker/facing-preflop-raises.html",
+    "section": "poker",
+    "date": "2026-11-14",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-rules-and-fair-play",
     "path": "/poker/poker-rules-and-fair-play/",
     "title": "Poker rules and fair play: find the right authority.",
