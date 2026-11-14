@@ -312,6 +312,9 @@ def build_outputs() -> dict[Path, str]:
         if p['path'].startswith('/poker/'):
             topics_version = hashlib.sha256((ROOT / 'assets/poker-topics.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker-topics.css?v={topics_version}">'
+            if p['path'] == '/poker/library/' or p.get('poker_topic'):
+                journeys_version = hashlib.sha256((ROOT / 'assets/poker-journeys.css').read_bytes()).hexdigest()[:12]
+                extra += f'\n  <link rel="stylesheet" href="/assets/poker-journeys.css?v={journeys_version}">'
             poker_version = hashlib.sha256((ROOT / 'assets/poker.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/poker.css?v={poker_version}">'
             extra += '\n  <link rel="alternate" type="application/rss+xml" title="Nolan Kido Poker" href="/poker/feed.xml">'

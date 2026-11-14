@@ -1,0 +1,33 @@
+/* Curated learning routes only on the guide library and ten topic pages. */
+.topic-journey { border-block:1px solid var(--line-dark); padding:22px 0; margin:20px 0 28px; }
+.topic-journey > h3 { font:700 1.25rem/1.4 var(--sans); margin:0 0 8px; }
+.topic-journey-help { max-width:70ch; font:.95rem/1.65 var(--sans); margin:0; }
+.topic-journey-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; padding:0; margin:22px 0 0; list-style:none; }
+.topic-journey-grid li { min-width:0; padding-top:12px; border-top:2px solid var(--basalt); }
+.topic-journey-stage { font:600 .77rem/1.4 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 9px; }
+.topic-journey-grid h3 { font:700 1.06rem/1.4 var(--sans); margin:0 0 10px; }
+.topic-journey-grid h3 a { color:var(--basalt); }
+.topic-journey-grid li > p:last-child { font:.89rem/1.55 var(--sans); margin:0; }
+.library-subject-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 32px; margin:22px 0; }
+.library-subject { min-width:0; border-top:2px solid var(--basalt); padding:20px 0 12px; }
+.library-subject h3 { font:700 1.25rem/1.35 var(--sans); margin:0 0 12px; }
+.library-subject h3 a { color:var(--basalt); }
+.library-subject > p { font:1rem/1.6 var(--serif); margin:0 0 16px; }
+.library-subject-routes { list-style:none; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:0; padding:0; }
+.library-subject-routes li { min-width:0; border-top:1px solid var(--line-dark); padding-top:9px; }
+.library-subject-routes span { display:block; font:600 .77rem/1.5 var(--sans); color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em; }
+.library-subject-routes a { display:inline-block; font:.92rem/1.6 var(--sans); padding:5px 0; min-height:44px; }
+.topic-journey a,.library-subject a { overflow-wrap:anywhere; text-underline-offset:.17em; }
+.topic-journey a:focus-visible,.library-subject a:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
+@media(max-width:760px) {
+  .topic-journey-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .library-subject-grid { grid-template-columns:minmax(0,1fr); gap:10px; }
+}
+@media(max-width:480px) {
+  .topic-journey-grid,.library-subject-routes { grid-template-columns:minmax(0,1fr); }
+  .topic-journey-grid { gap:14px; }
+}
+@media print {
+  .topic-journey-grid,.library-subject-grid,.library-subject-routes { display:block; }
+  .topic-journey-grid li,.library-subject { break-inside:avoid; margin-bottom:16px; }
+}
