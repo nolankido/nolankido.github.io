@@ -991,6 +991,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-three-bet-pot-flop-decisions",
+    "path": "/poker/three-bet-pot-flop-decisions/",
+    "title": "The first flop decision in a three-bet pot",
+    "seo_title": "3-Bet Pot Flop Strategy: Check, C-Bet, Call or Raise | Nolan Kido",
+    "description": "Compare two three-bet pot flops with fully counted check, c-bet, call and check-raise branches. Learn how pot odds, position and SPR change a decision.",
+    "kicker": "Poker / Strategy & math",
+    "source": "poker/three-bet-pot-flop-decisions.html",
+    "section": "poker",
+    "date": "2026-11-14",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-rules-and-fair-play",
     "path": "/poker/poker-rules-and-fair-play/",
     "title": "Poker rules and fair play: find the right authority.",
