@@ -1,0 +1,17 @@
+date,prompt_id,assistant,mode,status,clickable_link_verified,linked_url,text_only_mention
+2026-10-15,1,ChatGPT Search,Search,completed,no,,no
+2026-10-15,2,ChatGPT Search,Search,completed,yes,https://nolankido.com/technology/task-brief/,no
+2026-10-15,3,ChatGPT Search,Search,completed,no,,yes
+2026-10-15,4,ChatGPT Search,Search,completed,no,,no
+2026-10-15,5,ChatGPT Search,Search,completed,no,,no
+2026-10-15,6,ChatGPT Search,Search,completed,no,,no
+2026-10-15,7,ChatGPT Search,Search,completed,no,,no
+2026-10-15,8,ChatGPT Search,Search,completed,no,,no
+2026-10-15,1,Perplexity,Search,completed,no,,no
+2026-10-15,2,Perplexity,Search,completed,no,,no
+2026-10-15,3,Perplexity,Search,completed,no,,no
+2026-10-15,4,Perplexity,Search,completed,no,,no
+2026-10-15,5,Perplexity,Search,completed,no,,no
+2026-10-15,6,Perplexity,Search,completed,yes,https://nolankido.com/technology/ai-book-continuity-checker/,no
+2026-10-15,7,Perplexity,Search,completed,no,,no
+2026-10-15,8,Perplexity,Search,completed,no,,no
