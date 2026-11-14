@@ -362,6 +362,14 @@
       "keywords": "poker blind defense big blind small blind SB BB button steal open call cost defend preflop three bet squeeze cold call range blind versus blind BBA big blind ante 100bb pot arithmetic"
     },
     {
+      "slug": "three-bet-sizing-and-pot-geometry",
+      "title": "Three-bet sizing: build the pot you can explain",
+      "description": "Compare 8, 10 and 12 BB three-bets against one open, single-raised versus three-bet pots, IP/OOP dead money, four-bet responses and 40 BB stack depth.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "poker 3 bet three bet sizing size raise to total 4 bet four bet preflop cutoff button small blind in position out of position pot geometry stack to pot ratio spr 8bb 10bb 12bb minimum raise pot odds no limit holdem cash game"
+    },
+    {
       "slug": "poker-rules-and-fair-play",
       "title": "Poker rules and fair play: find the right authority.",
       "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
