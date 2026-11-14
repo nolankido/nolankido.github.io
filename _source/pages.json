@@ -979,6 +979,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-three-bet-sizing-and-pot-geometry",
+    "path": "/poker/three-bet-sizing-and-pot-geometry/",
+    "title": "Three-bet sizing: build the pot you can explain",
+    "seo_title": "Poker 3-Bet Sizing: Pot Sizes, Position and SPR | Nolan Kido",
+    "description": "Count three-bet pots for 8, 10 and 12 BB raises, compare position and stack depth, calculate a four-bet response and practice with exact pot ledgers.",
+    "kicker": "Poker / Strategy & math",
+    "source": "poker/three-bet-sizing-and-pot-geometry.html",
+    "section": "poker",
+    "date": "2026-11-14",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-rules-and-fair-play",
     "path": "/poker/poker-rules-and-fair-play/",
     "title": "Poker rules and fair play: find the right authority.",
