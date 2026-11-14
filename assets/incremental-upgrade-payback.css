@@ -1,0 +1,49 @@
+/* Local comparison and reading aid, scoped to one creative article. */
+.page-incremental-upgrade-payback main { overflow-wrap:anywhere; }
+.page-incremental-upgrade-payback .payback-jumps { display:flex; flex-wrap:wrap; gap:.5rem 1.1rem; margin:1.2rem 0; }
+.page-incremental-upgrade-payback .payback-jumps a { display:inline-flex; align-items:center; min-height:44px; font-weight:650; }
+.page-incremental-upgrade-payback h2[id] { scroll-margin-top:7rem; }
+.page-incremental-upgrade-payback h2[id]:target { outline:2px solid var(--red); outline-offset:5px; }
+.page-incremental-upgrade-payback #payback-form[hidden],.page-incremental-upgrade-payback #payback-fallback[hidden],.page-incremental-upgrade-payback #payback-result[hidden] { display:none!important; }
+.page-incremental-upgrade-payback .payback-form { margin:1.3rem 0; padding:clamp(1rem,3vw,1.6rem); border:2px solid var(--basalt); background:var(--paper-light); }
+.page-incremental-upgrade-payback .payback-form fieldset { margin:0 0 1rem; padding:1rem; border:1px solid var(--line-dark); min-width:0; }
+.page-incremental-upgrade-payback .payback-form legend { padding:0 .4rem; font-weight:700; font-size:1.07rem; }
+.page-incremental-upgrade-payback .payback-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem 1.1rem; }
+.page-incremental-upgrade-payback .payback-fields.payback-costs { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.page-incremental-upgrade-payback .payback-fields>div { min-width:0; }
+.page-incremental-upgrade-payback .payback-fields label { display:block; font-size:.96rem; font-weight:700; }
+.page-incremental-upgrade-payback .payback-fields input { display:block; width:100%; max-width:18rem; margin:.35rem 0 .4rem; padding:.65rem; min-height:48px; border:2px solid var(--line-dark); border-radius:0; color:var(--basalt); background:white; font:inherit; font-variant-numeric:tabular-nums; }
+.page-incremental-upgrade-payback .payback-fields .small-copy { font-size:.85rem; line-height:1.4; margin:0; }
+.page-incremental-upgrade-payback .payback-fields input[aria-invalid=true] { border-color:var(--red); }
+.page-incremental-upgrade-payback .payback-actions { display:flex; flex-wrap:wrap; gap:.75rem; }
+.page-incremental-upgrade-payback .payback-actions button { min-height:48px; padding:.7rem 1rem; border:2px solid var(--basalt); border-radius:0; background:var(--basalt); color:var(--paper-light); font:inherit; font-weight:700; cursor:pointer; white-space:normal; }
+.page-incremental-upgrade-payback .payback-actions button[type=reset] { background:transparent; color:var(--basalt); }
+.page-incremental-upgrade-payback .payback-actions button:hover { background:var(--green); color:white; }
+.page-incremental-upgrade-payback .payback-form :focus-visible,.page-incremental-upgrade-payback .payback-table-wrap:focus-visible,.page-incremental-upgrade-payback #payback-result-title:focus-visible { outline:3px solid var(--red); outline-offset:3px; }
+.page-incremental-upgrade-payback #payback-feedback { padding:.75rem 1rem; margin:1rem 0 0; border-left:4px solid var(--green); background:var(--panel); font-weight:650; }
+.page-incremental-upgrade-payback .payback-result { margin:1.2rem 0; padding:clamp(1rem,3vw,1.5rem); border:2px solid var(--green); background:var(--paper-light); }
+.page-incremental-upgrade-payback .payback-result h3 { margin:.3rem 0 1.1rem; font-size:clamp(1.3rem,3vw,1.7rem); }
+.page-incremental-upgrade-payback .payback-outcomes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.6rem; }
+.page-incremental-upgrade-payback .payback-outcomes dl { margin:0; padding:1rem; background:var(--panel); }
+.page-incremental-upgrade-payback .payback-outcomes dt { font-size:.9rem; line-height:1.45; font-weight:650; }
+.page-incremental-upgrade-payback .payback-outcomes dd { margin:.5rem 0 0; font-family:var(--mono); font-size:clamp(1.1rem,2.6vw,1.65rem); line-height:1.3; font-weight:700; overflow-wrap:anywhere; }
+.page-incremental-upgrade-payback .payback-winner { margin-top:1.1rem; padding:.9rem; border-left:4px solid var(--green); font-weight:700; }
+.page-incremental-upgrade-payback .payback-table-wrap { overflow-x:auto; margin:1.2rem 0; }
+.page-incremental-upgrade-payback .payback-table { border-collapse:collapse; width:100%; min-width:38rem; text-align:left; font-size:.94rem; }
+.page-incremental-upgrade-payback .payback-table caption { text-align:left; font-weight:700; padding:0 0 .6rem; }
+.page-incremental-upgrade-payback .payback-table th,.page-incremental-upgrade-payback .payback-table td { padding:.8rem .65rem; border-bottom:1px solid var(--line-dark); vertical-align:top; }
+.page-incremental-upgrade-payback .payback-table thead { background:var(--panel); }
+@media(max-width:850px){
+  .page-incremental-upgrade-payback .payback-fields { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .page-incremental-upgrade-payback .payback-outcomes { grid-template-columns:1fr; }
+}
+@media(max-width:570px){
+  .page-incremental-upgrade-payback .payback-fields,.page-incremental-upgrade-payback .payback-fields.payback-costs { grid-template-columns:1fr; }
+  .page-incremental-upgrade-payback .payback-form fieldset { padding:.75rem; }
+  .page-incremental-upgrade-payback .payback-actions button { width:100%; }
+}
+@media print {
+  .page-incremental-upgrade-payback .payback-form,.page-incremental-upgrade-payback .payback-jumps,.page-incremental-upgrade-payback .payback-result { display:none!important; }
+  .page-incremental-upgrade-payback .payback-table-wrap { overflow:visible; }
+  .page-incremental-upgrade-payback .payback-table { min-width:0; }
+}

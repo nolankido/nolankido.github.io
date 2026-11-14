@@ -341,7 +341,7 @@
     "path": "/creative/",
     "title": "Creative Work",
     "seo_title": "Writing & Visual Storytelling | Nolan Kido",
-    "description": "Nolan Kido's creative work: NolanPoker videos, poker comics, AI-assisted writing, and an original incremental game design lab with a free playtest worksheet.",
+    "description": "Nolan Kido's creative work: poker videos, illustrated explanations, AI-assisted writing, and original incremental-game design guides with free browser tools.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
     "updated": "2026-11-13"
@@ -355,6 +355,18 @@
     "description": "Try a free browser-based incremental game design demo, inspect its click and idle upgrade math, and use a blank first-minute playtest worksheet to test pacing.",
     "kicker": "Game design / Original playable demonstration",
     "source": "creative/incremental-game-loop.html",
+    "date": "2026-11-13",
+    "creative_article": true
+  },
+  {
+    "id": "incremental-upgrade-payback",
+    "section": "creative",
+    "path": "/creative/incremental-upgrade-payback/",
+    "title": "Which incremental-game upgrade pays back first?",
+    "seo_title": "Incremental Game Upgrade Payback Calculator | Nolan Kido",
+    "description": "Compare click and idle upgrades with a free browser-local payback calculator. Explore the exact break-even math, worked examples, and a blank balancing worksheet.",
+    "kicker": "Game design / Upgrade economics",
+    "source": "creative/incremental-upgrade-payback.html",
     "date": "2026-11-13",
     "creative_article": true
   },
