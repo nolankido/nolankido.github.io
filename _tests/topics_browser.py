@@ -33,7 +33,7 @@ def main():
         try:
             for width in (320, 390, 768, 1280):
                 page.set_viewport_size({'width': width, 'height': 900})
-                for route in ('/poker/', '/poker/topics/', '/poker/find/', '/poker/cash-game-study/', '/poker/topics/cash-games/', '/poker/topics/safer-play/'):
+                for route in ('/poker/', '/poker/library/', '/poker/topics/', '/poker/find/', '/poker/cash-game-study/', '/poker/topics/cash-games/', '/poker/topics/safer-play/'):
                     page.goto(origin + route)
                     expect(page.locator('h1')).to_have_count(1)
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (route, width)
@@ -42,14 +42,23 @@ def main():
                     page.add_style_tag(content='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}')
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), ('spacing', route, width)
             page.set_viewport_size({'width': 1280, 'height': 900})
+            page.goto(origin + '/poker/library/')
+            expect(page.locator('.library-subject')).to_have_count(10)
+            expect(page.locator('.library-subject-routes li')).to_have_count(40)
+            page.locator('#subject-routes a[href="/poker/topics/variants/"]').focus()
+            page.keyboard.press('Enter')
+            assert page.url.endswith('/poker/topics/variants/')
             # Every published topic link applies exactly its finite membership.
             for t in TOPICS:
                 page.goto(origin + '/poker/topics/' + t['id'] + '/')
                 group = page.locator('#' + t['id'])
+                expect(group.locator('.topic-journey-grid li')).to_have_count(4)
+                stage_labels = group.locator('.topic-journey-stage').all_text_contents()
+                assert [label.split('. ', 1)[1] for label in stage_labels] == ['Start', 'Deepen', 'Practice', 'Sources']
                 summary = group.locator('.topic-guides > summary')
                 summary.focus(); page.keyboard.press('Enter')
                 expect(group.locator('.topic-guides ul')).to_be_visible()
-                group.locator('a[href$="kind=resource"]').click()
+                group.locator('.topic-journey a[href$="kind=resource"]').click()
                 expect(page.locator('#finder-topic')).to_have_value(t['id'])
                 expect(page.locator('#finder-kind')).to_have_value('resource')
                 page.evaluate('dispatchEvent(new Event("beforeprint"))')
@@ -96,6 +105,10 @@ def main():
             p.locator('h3 a[href="/poker/topics/learn/"]').click()
             expect(p.locator('.topic-source')).to_have_count(3)
             p.locator('#learn .topic-guides > summary').click(); expect(p.locator('#learn .topic-guides ul')).to_be_visible()
+            expect(p.locator('#learn .topic-journey-grid li')).to_have_count(4)
+            p.goto(origin + '/poker/library/')
+            expect(p.locator('.library-subject')).to_have_count(10)
+            expect(p.locator('.library-subject-routes li')).to_have_count(40)
             p.goto(origin + '/poker/find/#topic=learn')
             assert p.locator('[data-finder-card]:visible').count() > 200
             expect(p.locator('#finder-controls')).not_to_be_visible()
@@ -108,5 +121,5 @@ def main():
             assert not errors, errors
         finally:
             browser.close(); server.shutdown(); server.server_close()
-    print('PASS: 10 topic paths; 4 widths; source membership, keyboard disclosures, breadcrumbs, filter deep links, Back/Forward, reload, query privacy, invalid fragments, no-JS map and finder.')
+    print('PASS: 10 four-route topic paths; library subject map; 4 widths; source membership, keyboard links/disclosures, breadcrumbs, filter deep links, Back/Forward, reload, query privacy, invalid fragments, no-JS map and finder.')
 if __name__ == '__main__': main()

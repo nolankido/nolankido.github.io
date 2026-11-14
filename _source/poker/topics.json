@@ -51,6 +51,10 @@
           "label": "Read your hand and the action after the flop"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "no-limit-holdem-guide", "label": "Use the full rules-to-decisions reference"},
+        "practice": {"guide": "beginner-checkpoint", "label": "Check your understanding and follow the repair links"}
+      },
       "glossary_terms": [],
       "overview_routes": [
         "/poker/start-here/",
@@ -115,6 +119,10 @@
           "label": "Understand rake, collections and time charges"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "limped-multiway-pots", "label": "Follow a counted multiway hand with different stacks"},
+        "practice": {"guide": "side-pot-lab", "label": "Reconstruct main and side pots before revealing the answer"}
+      },
       "glossary_terms": [
         "effective-stack",
         "in-position",
@@ -173,6 +181,10 @@
           "label": "Study how prizes change chip decisions"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "short-stack-decisions", "label": "Compare action trees and payout objectives at short stacks"},
+        "practice": {"guide": "tournament-equity", "label": "Work through the chip-value and prize-value example"}
+      },
       "glossary_terms": [
         "ante",
         "bubble",
@@ -240,6 +252,10 @@
           "label": "Read a chart before using its colors"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "range-combinations", "label": "Count possible hands and compare weighted ranges"},
+        "practice": {"guide": "decision-lab", "label": "Pause at a decision and separate facts from assumptions"}
+      },
       "glossary_terms": [
         "range",
         "equity",
@@ -297,6 +313,10 @@
           "label": "Compare stud, razz, deuce-to-seven and Badugi"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "stud-and-lowball-workshop", "label": "Compare street order, exposed cards and lowball rules"},
+        "practice": {"guide": "omaha-hi-lo-workshop", "label": "Check quartering, counterfeiting and legal low hands"}
+      },
       "glossary_terms": [],
       "overview_routes": []
     },
@@ -355,6 +375,10 @@
           "label": "Separate the hand record from the later review"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "choosing-study-tools", "label": "Match a study question to a tool and its limits"},
+        "practice": {"guide": "practice-room", "label": "Try a set of short decision checks with explanations"}
+      },
       "glossary_terms": [
         "reconstruction"
       ],
@@ -405,6 +429,10 @@
           "label": "Understand the room or home-game expectations"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "poker-access-and-protection", "label": "Check the room, source of rules and protections"},
+        "practice": {"guide": "tournament-trip-budget", "label": "Build a full event-cost checklist before attending"}
+      },
       "glossary_terms": [],
       "overview_routes": []
     },
@@ -447,6 +475,10 @@
           "label": "Turn a video or podcast into one useful lesson"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "poker-media-study", "label": "Extract a useful lesson from a video or podcast"},
+        "practice": {"guide": "hand-to-vlog", "label": "Rebuild an honest story from documented hand notes"}
+      },
       "glossary_terms": [
         "hero",
         "cooler",
@@ -487,6 +519,10 @@
           "label": "Check what the evidence actually supports"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "poker-under-uncertainty", "label": "Trace the assumptions behind probabilistic decisions"},
+        "practice": {"guide": "evaluating-poker-advice", "label": "Test a strategy claim against its stated evidence"}
+      },
       "glossary_terms": [],
       "overview_routes": []
     },
@@ -530,6 +566,10 @@
           "label": "Find official operator and player-protection information"
         }
       ],
+      "journey": {
+        "deepen": {"guide": "poker-access-and-protection", "label": "Confirm which protections and rules actually apply"},
+        "practice": {"guide": "table-etiquette", "label": "Answer rule and etiquette scenarios before reading the explanations"}
+      },
       "glossary_terms": [],
       "overview_routes": [
         "/poker/resource-quality/"

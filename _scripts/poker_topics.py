@@ -13,7 +13,7 @@ import poker_resources
 
 FIELDS = {'id', 'title', 'summary', 'primary_guides', 'related_guides',
           'resource_categories', 'resource_ids', 'featured_resources', 'start_label',
-          'steps', 'glossary_terms', 'overview_routes'}
+          'steps', 'journey', 'glossary_terms', 'overview_routes'}
 
 
 def load(root: Path, pages: list[dict], guides: list[dict], resources: list[dict]) -> list[dict]:
@@ -65,6 +65,20 @@ def load(root: Path, pages: list[dict], guides: list[dict], resources: list[dict
                 raise ValueError('Topic step must reference a member guide with a label')
         if len({s['guide'] for s in steps}) != len(steps):
             raise ValueError('Duplicate topic step')
+        journey = topic['journey']
+        if not isinstance(journey, dict) or set(journey) != {'deepen', 'practice'}:
+            raise ValueError('Each Poker topic needs Deepen and Practice reading routes')
+        route_slugs = [steps[0]['guide']]
+        for stage in ('deepen', 'practice'):
+            choice = journey[stage]
+            if (not isinstance(choice, dict) or set(choice) != {'guide', 'label'}
+                    or choice['guide'] not in slugs
+                    or not isinstance(choice['label'], str) or not choice['label'].strip()
+                    or any(ord(c) < 32 or c == '\u2014' for c in choice['label'])):
+                raise ValueError('Topic learning route must describe a distinct member guide')
+            route_slugs.append(choice['guide'])
+        if len(route_slugs) != len(set(route_slugs)):
+            raise ValueError('Topic Start, Deepen and Practice routes must be different guides')
         primary.extend(topic['primary_guides']); covered.update(chosen)
         result.append({**topic, 'guides': [by_slug[s] for s in slugs],
                        'resources': [by_id[i] for i in sorted(chosen)],
@@ -127,8 +141,46 @@ def source_card(source: dict) -> str:
             + '">Full listing</a></p></li>')
 
 
+def learning_routes(topic: dict) -> list[dict[str, str]]:
+    """Curated reader tasks, reusing only approved guide and source memberships."""
+    guides = {guide['slug']: guide for guide in topic['guides']}
+    start = topic['steps'][0]
+    choices = [('Start', start['guide'], start['label'])]
+    choices += [(stage.title(), topic['journey'][stage]['guide'], topic['journey'][stage]['label'])
+                for stage in ('deepen', 'practice')]
+    routes = [{'stage': stage, 'title': guides[slug]['title'],
+               'label': label, 'href': guides[slug]['route']} for stage, slug, label in choices]
+    routes.append({'stage': 'Sources', 'title': f'{len(topic["resources"])} outside sources',
+                   'label': 'Compare published listings with access labels and recorded review limits.',
+                   'href': finder_url(topic, 'resource')})
+    return routes
+
+
+def learning_nav(topic: dict) -> str:
+    routes = learning_routes(topic)
+    cards = ''.join('<li><p class="topic-journey-stage">' + str(index) + '. ' + escape(route['stage']) + '</p>'
+                    '<h3><a href="' + escape(route['href'], quote=True) + '">' + escape(route['title']) + '</a></h3>'
+                    '<p>' + escape(route['label']) + '</p></li>'
+                    for index, route in enumerate(routes, 1))
+    return ('<nav class="topic-journey" aria-label="Learning routes for ' + escape(topic['title'], quote=True) + '">'
+            '<h3>Choose a way into this subject</h3><p class="topic-journey-help">Start here, read deeper, '
+            'try a practical check, or compare external sources. These are options, not a required course.</p>'
+            '<ol class="topic-journey-grid">' + cards + '</ol></nav>')
+
+
+def library_subject(topic: dict) -> str:
+    routes = learning_routes(topic)
+    cards = ''.join('<li><span>' + escape(route['stage']) + '</span><a href="'
+                    + escape(route['href'], quote=True) + '">' + escape(route['title']) + '</a></li>'
+                    for route in routes)
+    return ('<article class="library-subject" aria-labelledby="library-subject-' + topic['id'] + '">'
+            '<h3 id="library-subject-' + topic['id'] + '"><a href="/poker/topics/' + topic['id'] + '/">'
+            + escape(topic['title']) + '</a></h3><p>' + escape(topic['summary']) + '</p>'
+            '<ol class="library-subject-routes">' + cards + '</ol></article>')
+
+
 def supplement(topics: list[dict]) -> dict[str, str]:
-    cards, sections, jumps, options = [], [], [], []
+    cards, sections, jumps, options, subjects = [], [], [], [], []
     for index, topic in enumerate(topics, 1):
         ident, title = topic['id'], escape(topic['title'])
         count = f'{len(topic["guides"])} guides · {len(topic["resources"])} outside sources'
@@ -140,6 +192,7 @@ def supplement(topics: list[dict]) -> dict[str, str]:
                      + escape(topic['start_label']) + '</a></p></article>')
         jumps.append('<a href="' + route + '">' + title + '</a>')
         options.append('<option value="' + ident + '">' + title + '</option>')
+        subjects.append(library_subject(topic))
         steps = ''.join('<li><a href="/poker/' + s['guide'] + '/">' + escape(s['label']) + '</a></li>' for s in topic['steps'])
         guides = ''.join('<li><a href="' + g['route'] + '">' + escape(g['title']) + '</a>'
                          '<span class="topic-meta">' + escape(g['level']) + f' · About {g["minutes"]} min</span></li>'
@@ -157,6 +210,7 @@ def supplement(topics: list[dict]) -> dict[str, str]:
                         '<div class="section-meta"><p class="section-label">Browse / ' + f'{index:02}' + '</p></div>'
                         '<div class="section-content"><h2 class="section-title" id="topic-' + ident + '">' + title + '</h2>'
                         '<p class="section-deck">' + escape(topic['summary']) + '</p>' + support + caution
+                        + learning_nav(topic)
                         + '<div class="topic-columns"><div><h3>Start with a question</h3><ol class="topic-steps">' + steps + '</ol>'
                         + ('<p>Choose your depth: <a href="/poker/no-limit-holdem-guide/">read the complete beginner Hold’em guide</a>, <a href="/poker/free-poker-learning-path/#beginner-practice">follow the six-stage beginner course</a>, or <a href="/poker/beginner-checkpoint/">try the checkpoint with repair links</a>. Use the glossary and rules guides below as references.</p>' if ident == 'learn' else '')
                         + '<details class="poker-details topic-guides"><summary>All ' + str(len(topic['guides'])) + ' guides on this topic</summary>'
@@ -171,7 +225,8 @@ def supplement(topics: list[dict]) -> dict[str, str]:
     return {'poker_topic_cards': '<div class="topic-grid">' + ''.join(cards) + '</div>',
             'poker_topic_sections': '\n'.join(sections), 'poker_topic_count': str(len(topics)),
             'poker_topic_jumps': '<nav class="topic-jumps" aria-label="Poker topics">' + ''.join(jumps) + '</nav>',
-            'poker_topic_options': ''.join(options)}
+            'poker_topic_options': ''.join(options),
+            'poker_library_subject_routes': '<div class="library-subject-grid">' + ''.join(subjects) + '</div>'}
 
 
 def detail(topic: dict) -> str:
