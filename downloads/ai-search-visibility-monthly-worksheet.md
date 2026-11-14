@@ -18,12 +18,12 @@
 
 | Signal | Source and exact filters | Observation | Status (observed / unavailable / not_checked) |
 | --- | --- | --- | --- |
-| Ordinary search clicks | Search Console, Web, full month | ___ | ___ |
+| Overall Google Search clicks | Search Console, Web, full month | ___ | ___ |
 | Google generative AI impressions in Search | Search Console, Generative AI performance (Search) | ___ | ___ |
 | Visible citations in covered Microsoft AI experiences | Bing Webmaster Tools, AI Performance | ___ | ___ |
 | Assistant-referred visits or pageviews | Your own analytics, known referrer domains or campaign parameters | ___ | ___ |
 
-Never add these counts to make an "AI visibility score." If a dashboard is missing, record unavailable, not zero. Bing citations are not ChatGPT citations or clicks. Google AI impressions are not a count of cited links or visits.
+Google's dedicated generative AI impressions are already included in its overall Search reporting. Do not add the two Google reports as if they were disjoint. Never add these counts to make an "AI visibility score." If a dashboard is missing, record unavailable, not zero. Bing citations are not ChatGPT citations or clicks. Google AI impressions are not a count of cited links or visits.
 
 ## Fixed unbranded discovery prompt panel
 
