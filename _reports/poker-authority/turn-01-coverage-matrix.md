@@ -4,21 +4,21 @@
 
 ## Verified source-inventory totals
 
-- **64 original guides** in the library, each with exactly one primary hub.
+- **65 original guides** in the library, each with exactly one primary hub.
 - **10 topic hubs** with derived guide and external-source memberships.
 - **146 reviewed external-resource records**, each mapped to at least one topic. Stored review metadata is not a fresh link recheck.
 - **13 curated resource collections**. Collections are filtered views, not additional unique resources.
-- **36 guides** have at least one secondary topic placement; **37 sources** belong to more than one topic. Overlapping topic counts must not be summed.
-- **Poker Finder** contains all 64 library guide destinations and 146 external-resource records, within 95 on-site guide/page cards, 146 source cards and 48 glossary cards. Finder guide/page cards are not a second original-guide count.
+- **37 guides** have at least one secondary topic placement; **37 sources** belong to more than one topic. Overlapping topic counts must not be summed.
+- **Poker Finder** contains all 65 library guide destinations and 146 external-resource records, within 96 on-site guide/page cards, 146 source cards and 48 glossary cards. Finder guide/page cards are not a second original-guide count.
 
 ## Topic-hub coverage
 
 | Hub | Primary guides | Related guides | Unique guides | External sources | Starter guide slugs |
 | --- | ---: | ---: | ---: | ---: | --- |
-| [learn](https://nolankido.com/poker/topics/learn/) | 16 | 6 | 22 | 6 | `first-decisions`, `starting-hand-decisions`, `first-flop-decisions` |
-| [cash-games](https://nolankido.com/poker/topics/cash-games/) | 6 | 10 | 16 | 15 | `cash-game-study-path`, `first-live-cash-game`, `cash-game-costs` |
+| [learn](https://nolankido.com/poker/topics/learn/) | 16 | 7 | 23 | 6 | `first-decisions`, `starting-hand-decisions`, `first-flop-decisions` |
+| [cash-games](https://nolankido.com/poker/topics/cash-games/) | 6 | 11 | 17 | 15 | `cash-game-study-path`, `first-live-cash-game`, `cash-game-costs` |
 | [tournaments](https://nolankido.com/poker/topics/tournaments/) | 9 | 6 | 15 | 13 | `first-live-tournament`, `choosing-a-tournament`, `tournament-equity` |
-| [strategy](https://nolankido.com/poker/topics/strategy/) | 13 | 5 | 18 | 23 | `poker-math-reference`, `ranges-and-bets`, `reading-preflop-charts` |
+| [strategy](https://nolankido.com/poker/topics/strategy/) | 14 | 5 | 19 | 23 | `poker-math-reference`, `ranges-and-bets`, `reading-preflop-charts` |
 | [variants](https://nolankido.com/poker/topics/variants/) | 3 | 2 | 5 | 21 | `omaha-and-mixed-games`, `omaha-hi-lo-workshop`, `stud-and-lowball-workshop` |
 | [study](https://nolankido.com/poker/topics/study/) | 9 | 6 | 15 | 32 | `poker-books-and-courses`, `choosing-study-tools`, `reviewing-a-hand` |
 | [places-to-play](https://nolankido.com/poker/topics/places-to-play/) | 1 | 7 | 8 | 19 | `choosing-a-tournament`, `table-etiquette` |
@@ -79,6 +79,7 @@ A secondary topic placement is an intentional navigation overlap, not evidence o
 | [/blind-defense/](https://nolankido.com/poker/blind-defense/) | hands | [strategy](https://nolankido.com/poker/topics/strategy/) | [learn](https://nolankido.com/poker/topics/learn/), [cash-games](https://nolankido.com/poker/topics/cash-games/) | Build understanding |
 | [/three-bet-sizing-and-pot-geometry/](https://nolankido.com/poker/three-bet-sizing-and-pot-geometry/) | hands | [strategy](https://nolankido.com/poker/topics/strategy/) | [learn](https://nolankido.com/poker/topics/learn/), [cash-games](https://nolankido.com/poker/topics/cash-games/) | Build understanding |
 | [/three-bet-pot-flop-decisions/](https://nolankido.com/poker/three-bet-pot-flop-decisions/) | hands | [strategy](https://nolankido.com/poker/topics/strategy/) | [learn](https://nolankido.com/poker/topics/learn/), [cash-games](https://nolankido.com/poker/topics/cash-games/) | Build understanding |
+| [/three-bet-pot-turn-decisions/](https://nolankido.com/poker/three-bet-pot-turn-decisions/) | hands | [strategy](https://nolankido.com/poker/topics/strategy/) | [learn](https://nolankido.com/poker/topics/learn/), [cash-games](https://nolankido.com/poker/topics/cash-games/) | Build understanding |
 | [/poker-rules-and-fair-play/](https://nolankido.com/poker/poker-rules-and-fair-play/) | live | [safer-play](https://nolankido.com/poker/topics/safer-play/) | [tournaments](https://nolankido.com/poker/topics/tournaments/) | Start here |
 | [/omaha-hi-lo-workshop/](https://nolankido.com/poker/omaha-hi-lo-workshop/) | variants | [variants](https://nolankido.com/poker/topics/variants/) | None | Build understanding |
 | [/stud-and-lowball-workshop/](https://nolankido.com/poker/stud-and-lowball-workshop/) | variants | [variants](https://nolankido.com/poker/topics/variants/) | None | Build understanding |
@@ -123,9 +124,9 @@ Shared guides are listed to help future editors distinguish a cross-link from a 
 
 | Hub pair | Shared guides | Slugs |
 | --- | ---: | --- |
-| [cash-games](https://nolankido.com/poker/topics/cash-games/) + [strategy](https://nolankido.com/poker/topics/strategy/) | 7 | `blind-defense`, `facing-preflop-raises`, `limped-multiway-pots`, `multiway-pot-workshop`, `position-and-stacks`, `three-bet-pot-flop-decisions`, `three-bet-sizing-and-pot-geometry` |
-| [learn](https://nolankido.com/poker/topics/learn/) + [cash-games](https://nolankido.com/poker/topics/cash-games/) | 5 | `blind-defense`, `facing-preflop-raises`, `getting-started`, `three-bet-pot-flop-decisions`, `three-bet-sizing-and-pot-geometry` |
-| [learn](https://nolankido.com/poker/topics/learn/) + [strategy](https://nolankido.com/poker/topics/strategy/) | 5 | `blind-defense`, `facing-preflop-raises`, `poker-math`, `three-bet-pot-flop-decisions`, `three-bet-sizing-and-pot-geometry` |
+| [cash-games](https://nolankido.com/poker/topics/cash-games/) + [strategy](https://nolankido.com/poker/topics/strategy/) | 8 | `blind-defense`, `facing-preflop-raises`, `limped-multiway-pots`, `multiway-pot-workshop`, `position-and-stacks`, `three-bet-pot-flop-decisions`, `three-bet-pot-turn-decisions`, `three-bet-sizing-and-pot-geometry` |
+| [learn](https://nolankido.com/poker/topics/learn/) + [cash-games](https://nolankido.com/poker/topics/cash-games/) | 6 | `blind-defense`, `facing-preflop-raises`, `getting-started`, `three-bet-pot-flop-decisions`, `three-bet-pot-turn-decisions`, `three-bet-sizing-and-pot-geometry` |
+| [learn](https://nolankido.com/poker/topics/learn/) + [strategy](https://nolankido.com/poker/topics/strategy/) | 6 | `blind-defense`, `facing-preflop-raises`, `poker-math`, `three-bet-pot-flop-decisions`, `three-bet-pot-turn-decisions`, `three-bet-sizing-and-pot-geometry` |
 | [tournaments](https://nolankido.com/poker/topics/tournaments/) + [places-to-play](https://nolankido.com/poker/topics/places-to-play/) | 5 | `choosing-a-tournament`, `first-live-tournament`, `thunder-valley-poker-guide`, `tournament-day`, `tournament-trip-budget` |
 | [cash-games](https://nolankido.com/poker/topics/cash-games/) + [study](https://nolankido.com/poker/topics/study/) | 4 | `cash-game-study-path`, `choosing-study-tools`, `getting-started`, `side-pot-lab` |
 | [places-to-play](https://nolankido.com/poker/topics/places-to-play/) + [safer-play](https://nolankido.com/poker/topics/safer-play/) | 4 | `poker-access-and-protection`, `table-etiquette`, `thunder-valley-poker-guide`, `tournament-trip-budget` |

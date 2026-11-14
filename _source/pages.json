@@ -1003,6 +1003,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-three-bet-pot-turn-decisions",
+    "path": "/poker/three-bet-pot-turn-decisions/",
+    "title": "The turn decision in a three-bet pot: price the next street",
+    "seo_title": "3-Bet Pot Turn Strategy: Second Barrels and Turn Probes | Nolan Kido",
+    "description": "Count delayed turn bets, second barrels, turn probes and check-raises in a 100 BB three-bet pot, with separate board textures, pot odds and river stack geometry.",
+    "kicker": "Poker / Strategy & math",
+    "source": "poker/three-bet-pot-turn-decisions.html",
+    "section": "poker",
+    "date": "2026-11-14",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-rules-and-fair-play",
     "path": "/poker/poker-rules-and-fair-play/",
     "title": "Poker rules and fair play: find the right authority.",

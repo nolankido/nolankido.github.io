@@ -32,6 +32,14 @@
       <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
     </item>
     <item>
+      <title>The turn decision in a three-bet pot: price the next street</title>
+      <link>https://nolankido.com/poker/three-bet-pot-turn-decisions/</link>
+      <description>Count delayed turn bets, second barrels, turn probes and check-raises in a 100 BB three-bet pot, with separate board textures, pot odds and river stack geometry.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/three-bet-pot-turn-decisions/</guid>
+      <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
       <title>Three-bet sizing: build the pot you can explain</title>
       <link>https://nolankido.com/poker/three-bet-sizing-and-pot-geometry/</link>
       <description>Count three-bet pots for 8, 10 and 12 BB raises, compare position and stack depth, calculate a four-bet response and practice with exact pot ledgers.</description>

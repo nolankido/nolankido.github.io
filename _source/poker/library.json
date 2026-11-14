@@ -378,6 +378,14 @@
       "keywords": "three bet pot flop decision 3bet cbet continuation bet check back check raise dry wet board texture ace high rainbow connected two tone range advantage nut advantage cutoff button out of position in position 100bb stack to pot ratio SPR pot odds flop call small bet large bet"
     },
     {
+      "slug": "three-bet-pot-turn-decisions",
+      "title": "The turn decision in a three-bet pot: price the next street",
+      "description": "Follow two fictional three-bet pot turn boards after a flop check-back or 5 BB c-bet and call, with delayed bets, probes, second barrels, check-raises and river SPR.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "poker three bet pot 3bet turn decision second barrel double barrel delayed cbet delayed continuation bet turn probe probe bet turn check raise range advantage nut advantage river geometry geometric betting 12bb 24bb 36bb raise pot odds 100bb cutoff button in position cash game spr stack to pot ratio spades connected board"
+    },
+    {
       "slug": "poker-rules-and-fair-play",
       "title": "Poker rules and fair play: find the right authority.",
       "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",
