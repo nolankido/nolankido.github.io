@@ -1,6 +1,7 @@
 """Ensure the Resources hub links original tools without overstating their evidence."""
 from __future__ import annotations
 
+from html import escape
 from html.parser import HTMLParser
 import hashlib
 import json
@@ -132,6 +133,45 @@ class ResourceKitsTests(unittest.TestCase):
         page = read(PAGE)
         self.assertIn('href="/assets/resources-reader.css?v=' + version + '"', page)
         self.assertEqual(page.count('/assets/resources-reader.css?v='), 1)
+
+    def test_search_entrypoint_and_manifest_metadata_agree(self):
+        pages = json.loads(read(ROOT / "_source/pages.json"))
+        entrypoints = json.loads(read(ROOT / "_source/search-entrypoints.json"))
+        entries = [p for p in pages if p["id"] == "resources"]
+        self.assertEqual(len(entries), 1)
+        resource = entries[0]
+        entry = entrypoints["entries"]["resources"]
+        self.assertEqual(resource["seo_title"], entry["seo_title"])
+        self.assertEqual(resource["description"], entry["description"])
+        self.assertEqual(resource["updated"], entry["updated"])
+        self.assertEqual(entry["updated"], "2026-11-14")
+        self.assertGreaterEqual(len(entry["description"]), 80)
+        self.assertLessEqual(len(entry["description"]), 190)
+
+    def test_public_title_snippets_schema_and_intro_share_one_description(self):
+        entry = json.loads(read(ROOT / "_source/search-entrypoints.json"))["entries"]["resources"]
+        page = read(PAGE)
+        title = escape(entry["seo_title"], quote=True)
+        summary = escape(entry["description"], quote=True)
+        self.assertIn('<title>' + title + '</title>', page)
+        self.assertIn('<meta name="description" content="' + summary + '">', page)
+        self.assertIn('<meta property="og:title" content="' + title + '">', page)
+        self.assertIn('<meta property="og:description" content="' + summary + '">', page)
+        self.assertIn('<meta name="twitter:title" content="' + title + '">', page)
+        self.assertIn('<meta name="twitter:description" content="' + summary + '">', page)
+        self.assertIn('<p class="entry-summary">' + summary + '</p>', page)
+        scripts = re.findall(r'<script type="application/ld\+json">(.*?)</script>', page, flags=re.S)
+        self.assertEqual(len(scripts), 1)
+        schema = json.loads(scripts[0])
+        self.assertEqual(schema["@type"], "CollectionPage")
+        self.assertEqual(schema["name"], entry["seo_title"])
+        self.assertEqual(schema["description"], entry["description"])
+        self.assertEqual(schema["dateModified"], "2026-11-14")
+        self.assertEqual(page.count(entry["description"]), 5)
+        for word in ("workflow", "citation", "game-design", "poker", "wine-tasting"):
+            self.assertIn(word, entry["description"])
+        for unverified in ("increased traffic", "improved rankings", "client results"):
+            self.assertNotIn(unverified, entry["description"].lower())
 
     def test_sitemap_and_schema_reflect_real_revision(self):
         pages = json.loads(read(ROOT / "_source/pages.json"))
