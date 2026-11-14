@@ -59,12 +59,13 @@ class Element {
   addEventListener(event, fn) { this.events[event] = fn; }
   setAttribute(name, value) { this.attributes[name] = value; }
   removeAttribute(name) { delete this.attributes[name]; }
-  focus() { this.focused = true; }
+  focus(options) { this.focused = true; this.focusOptions = options; }
+  scrollIntoView(options) { this.scrollOptions = options; }
   emit(event, payload) { this.events[event]?.(payload); }
 }
 const allIds = ['form', 'fallback', 'result', 'bank', 'taps', 'seconds', 'pencil-cost',
   'routine-cost', 'feedback', 'result-title', 'no-buy', 'pencil-final',
-  'routine-final', 'winner', 'breakeven', 'assumptions'];
+  'routine-final', 'winner', 'breakeven', 'assumptions', 'preset-20', 'preset-60'];
 const elements = new Map(allIds.map(id => ['payback-' + id, new Element()]));
 const get = id => elements.get('payback-' + id);
 get('form').hidden = true;
@@ -85,6 +86,22 @@ assert.equal(get('pencil-final').textContent, '55');
 assert.equal(get('routine-final').textContent, '80');
 assert.match(get('winner').textContent, /Buy daily routine/);
 assert.equal(get('result-title').focused, true);
+assert.equal(get('result-title').focusOptions.preventScroll, true);
+assert.equal(get('result').scrollOptions.block, 'start');
+assert.equal(get('result').scrollOptions.behavior, 'instant');
+
+get('preset-60').emit('click');
+assert.equal(get('taps').value, '60');
+assert.equal(get('routine-final').textContent, '120');
+assert.equal(get('pencil-final').textContent, '135');
+assert.match(get('winner').textContent, /Buy sharper pencil/);
+assert.equal(get('result').hidden, false);
+
+get('preset-20').emit('click');
+assert.equal(get('taps').value, '20');
+assert.equal(get('pencil-final').textContent, '55');
+assert.equal(get('routine-final').textContent, '80');
+assert.match(get('winner').textContent, /Buy daily routine/);
 
 get('taps').value = '60';
 get('form').emit('submit', {preventDefault:()=>{}});
@@ -97,6 +114,8 @@ get('form').emit('submit', {preventDefault:()=>{}});
 assert.equal(get('pencil-final').textContent, 'Not affordable at start');
 assert.equal(get('routine-final').textContent, 'Not affordable at start');
 assert.match(get('breakeven').textContent, /unavailable/);
+assert.match(get('breakeven').textContent, /if purchased now/);
+assert.doesNotMatch(get('breakeven').textContent, /overtakes pencil/);
 
 get('seconds').value = '601';
 get('form').emit('submit', {preventDefault:()=>{}});
@@ -104,6 +123,23 @@ assert.equal(get('result').hidden, true);
 assert.equal(get('seconds').attributes['aria-invalid'], 'true');
 assert.equal(get('seconds').focused, true);
 assert.match(get('feedback').textContent, /whole number/);
+
+get('preset-20').emit('click');
+assert.equal(get('bank').value, '25');
+assert.equal(get('seconds').value, '60');
+assert.equal(get('pencil-cost').value, '10');
+assert.equal(get('routine-cost').value, '25');
+assert.equal(get('seconds').attributes['aria-invalid'], undefined);
+assert.equal(get('result').hidden, false);
+assert.equal(get('routine-final').textContent, '80');
+
+get('taps').value = '1';
+get('seconds').value = '0';
+get('pencil-cost').value = '20';
+get('routine-cost').value = '1';
+get('form').emit('submit', {preventDefault:()=>{}});
+assert.match(get('breakeven').textContent, /every nonnegative duration/);
+assert.match(get('winner').textContent, /Buy nothing/);
 
 get('form').emit('reset');
 assert.equal(get('result').hidden, true);

@@ -81,8 +81,20 @@ class IncrementalUpgradePaybackTests(unittest.TestCase):
             self.assertIn(f'{kind}="/assets/{asset}?v={version}"', html)
         for target in ('payback-form', 'payback-fallback', 'payback-result',
                        'payback-bank', 'payback-taps', 'payback-seconds',
-                       'payback-pencil-cost', 'payback-routine-cost', 'payback-feedback'):
+                       'payback-pencil-cost', 'payback-routine-cost', 'payback-feedback',
+                       'payback-preset-20', 'payback-preset-60'):
             self.assertEqual(source.count('id="' + target + '"'), 1)
+        self.assertIn('class="payback-first-link"', source)
+        self.assertIn('href="#payback-compare"', source)
+        self.assertIn('Each example restores all five inputs', source)
+        self.assertIn('type="button">Try 20 taps', source)
+        self.assertIn('type="button">Try 60 taps', source)
+        self.assertIn("result.scrollIntoView({block: 'start', behavior: 'instant'})", script)
+        self.assertIn("focus({preventScroll: true})", script)
+        self.assertIn('Conditional payback against buying nothing', script)
+        self.assertIn('comparison.routineMinusPencil === null', script)
+        self.assertIn('scroll-margin-top:9rem', css)
+        self.assertIn('.payback-first-link a:focus-visible', css)
         for phrase in ('20 taps', '60 taps', '45', '55', '80', '85', '135', '120',
                        'C - R + T - N', 'T is greater than N + 15',
                        'only one purchase', 'not a report of two people playing',
