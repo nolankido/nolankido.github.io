@@ -386,6 +386,14 @@
       "keywords": "poker three bet pot 3bet turn decision second barrel double barrel delayed cbet delayed continuation bet turn probe probe bet turn check raise range advantage nut advantage river geometry geometric betting 12bb 24bb 36bb raise pot odds 100bb cutoff button in position cash game spr stack to pot ratio spades connected board"
     },
     {
+      "slug": "three-bet-pot-river-decisions",
+      "title": "The river decision in a three-bet pot: value, bluffs and the final price",
+      "description": "Finish a three-bet pot through two independently counted rivers: showdown check-backs, value and bluff hypotheses, river bets, bluff-catching prices, all-ins and check-raises.",
+      "topic": "hands",
+      "level": "Build understanding",
+      "keywords": "poker three bet pot 3bet river decision value bet bluff catch bluff catcher pure bluff fold frequency threshold river shove all in check back river check raise facing a lead 55.5bb 79.5bb 73bb 61bb 100bb cash game cutoff button stack to pot ratio SPR ace king board four spades river raise"
+    },
+    {
       "slug": "poker-rules-and-fair-play",
       "title": "Poker rules and fair play: find the right authority.",
       "description": "Find live and online rule sources, understand minimum raises and software restrictions, and report concerns without unsupported accusations.",

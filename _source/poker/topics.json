@@ -30,7 +30,8 @@
         "blind-defense",
         "three-bet-sizing-and-pot-geometry",
         "three-bet-pot-flop-decisions",
-        "three-bet-pot-turn-decisions"
+        "three-bet-pot-turn-decisions",
+        "three-bet-pot-river-decisions"
       ],
       "resource_categories": [
         "basics"
@@ -89,7 +90,8 @@
         "blind-defense",
         "three-bet-sizing-and-pot-geometry",
         "three-bet-pot-flop-decisions",
-        "three-bet-pot-turn-decisions"
+        "three-bet-pot-turn-decisions",
+        "three-bet-pot-river-decisions"
       ],
       "resource_categories": [],
       "resource_ids": [
@@ -229,6 +231,7 @@
         "three-bet-sizing-and-pot-geometry",
         "three-bet-pot-flop-decisions",
         "three-bet-pot-turn-decisions",
+        "three-bet-pot-river-decisions",
         "poker-under-uncertainty"
       ],
       "related_guides": [
