@@ -154,6 +154,7 @@
         "six-to-ten-bb-tournament-decisions",
         "tournament-equity",
         "satellite-bubble-seat-equity",
+        "bounty-knockout-equity",
         "first-live-tournament",
         "choosing-a-tournament",
         "tournament-trip-budget",
@@ -244,6 +245,7 @@
         "three-to-five-bb-tournament-decisions",
         "six-to-ten-bb-tournament-decisions",
         "satellite-bubble-seat-equity",
+        "bounty-knockout-equity",
         "multiway-pot-workshop",
         "limped-multiway-pots"
       ],

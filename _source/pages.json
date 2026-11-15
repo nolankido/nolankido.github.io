@@ -631,6 +631,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-bounty-knockout-equity",
+    "path": "/poker/bounty-knockout-equity/",
+    "title": "Fixed KO, progressive KO and the bounty you have not won",
+    "seo_title": "Bounty Poker Strategy: KO, PKO and Side-Pot Math | Nolan Kido",
+    "description": "Audit fixed KO and 50/50 progressive knockout payouts, a three-way main and side pot, and conditional bounty cash without confusing chips with dollars.",
+    "kicker": "Poker / Bounty tournament accounting",
+    "source": "poker/bounty-knockout-equity.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-tournament-equity",
     "path": "/poker/tournament-equity/",
     "title": "When more chips are not enough.",

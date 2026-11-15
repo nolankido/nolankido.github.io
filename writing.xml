@@ -8,6 +8,14 @@
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
     <item>
+      <title>Fixed KO, progressive KO and the bounty you have not won</title>
+      <link>https://nolankido.com/poker/bounty-knockout-equity/</link>
+      <description>Audit fixed KO and 50/50 progressive knockout payouts, a three-way main and side pot, and conditional bounty cash without confusing chips with dollars.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/bounty-knockout-equity/</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
       <title>The satellite bubble: why a chip-profitable call can lose a seat</title>
       <link>https://nolankido.com/poker/satellite-bubble-seat-equity/</link>
       <description>A reproducible three-player ICM example shows why a 45% chip call can require 92.14% seat equity on a two-ticket satellite bubble.</description>

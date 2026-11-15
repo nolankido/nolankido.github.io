@@ -210,6 +210,14 @@
       "keywords": "satellite bubble seat qualification ICM independent chip model two identical tickets ticket equity poker payout structure survival risk premium fold versus call 10BB 1BB short stack 3 players 2 seats first second place 45 percent 92.14 percent shove versus call unequal payouts winner take all chip EV 2026 hand for hand"
     },
     {
+      "slug": "bounty-knockout-equity",
+      "title": "Bounty tournaments: cash, PKO markers and side pots",
+      "description": "Keep fixed KO payouts, 50/50 progressive knockout cash, on-head bounty growth and three-way side-pot elimination eligibility in separate ledgers.",
+      "topic": "tournaments",
+      "level": "Go deeper",
+      "keywords": "bounty knockout PKO progressive knockout KO fixed knockout bounty cash on head marker reward elimination main pot side pot relevant pot 50/50 split fifty percent three way all in 4bb 9bb 14bb poker tournament bounty equity 40 percent probability chip EV cash EV mystery bounty conditional payout model"
+    },
+    {
       "slug": "tournament-equity",
       "title": "Chips, prizes and ICM",
       "description": "Audit a small example where gaining chips reduces modeled prize value.",
