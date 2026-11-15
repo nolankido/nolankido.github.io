@@ -595,6 +595,18 @@
     "revision": "Expanded the 10–20 BB action comparisons, clarified ante and coverage conventions, and added a reproducible four-player ICM call with explained checks."
   },
   {
+    "id": "poker-three-to-five-bb-tournament-decisions",
+    "path": "/poker/three-to-five-bb-tournament-decisions/",
+    "title": "Three to five big blinds: count the tournament decision before shoving",
+    "seo_title": "3 to 5 BB Tournament Poker: Shoves, Calls and Antes | Nolan Kido",
+    "description": "Work through 3, 4 and 5 BB tournament stacks with one big-blind ante, different caller seats, short-post refunds, full rejams and short all-in raise rules.",
+    "kicker": "Poker / Short-stack tournaments",
+    "source": "poker/three-to-five-bb-tournament-decisions.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-tournament-equity",
     "path": "/poker/tournament-equity/",
     "title": "When more chips are not enough.",
