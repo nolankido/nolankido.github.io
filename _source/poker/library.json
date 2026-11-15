@@ -354,6 +354,14 @@
       "keywords": "omaha plo plo8 hilo high low stud razz badugi triple draw deuce seven short deck mixed scoop quartered"
     },
     {
+      "slug": "plo-wrap-redraw-blockers",
+      "title": "PLO wraps, redraws and blockers: count the real cards",
+      "description": "Construct exact two-hole three-board Omaha high hands, enumerate a 16-card wrap, remove two exposed blockers, and check eleven opposing river redraws without double counting.",
+      "topic": "variants",
+      "level": "Go deeper",
+      "keywords": "pot limit omaha high plo wrap draw 16 outs king queen nine eight seven blockers card removal exactly two hole cards three board redraw turn river broadway club flush queen 11 of 40 14 of 41 16 of 45 four card omaha hand construction workshop offline enumerator"
+    },
+    {
       "slug": "poker-books-and-courses",
       "title": "Choose a poker book or course you will actually use.",
       "description": "Match prerequisites, format and one study goal before buying; distinguish author descriptions, independent reviews and free course material.",

@@ -951,6 +951,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-plo-wrap-redraw-blockers",
+    "path": "/poker/plo-wrap-redraw-blockers/",
+    "title": "PLO wraps, blockers and redraws: count the actual cards",
+    "seo_title": "Pot-Limit Omaha Wraps, Redraws & Blockers | Nolan Kido Poker",
+    "description": "Learn exact two-plus-three Omaha hand construction with a 16-card wrap, exposed blockers, and a fully enumerated 11-of-40 river redraw example. Includes offline Python check.",
+    "kicker": "Poker / Pot-Limit Omaha high workshop",
+    "source": "poker/plo-wrap-redraw-blockers.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-books-and-courses",
     "path": "/poker/poker-books-and-courses/",
     "title": "Choose a poker book or course you will actually use.",

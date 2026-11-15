@@ -49,6 +49,13 @@
       <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
+      <title>PLO wraps, blockers and redraws: count the actual cards</title>
+      <link>https://nolankido.com/poker/plo-wrap-redraw-blockers/</link>
+      <description>Learn exact two-plus-three Omaha hand construction with a 16-card wrap, exposed blockers, and a fully enumerated 11-of-40 river redraw example. Includes offline Python check.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/plo-wrap-redraw-blockers/</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Fixed KO, progressive KO and the bounty you have not won</title>
       <link>https://nolankido.com/poker/bounty-knockout-equity/</link>
       <description>Audit fixed KO and 50/50 progressive knockout payouts, a three-way main and side pot, and conditional bounty cash without confusing chips with dollars.</description>

@@ -415,7 +415,7 @@ def build_outputs() -> dict[Path, str]:
             if p['id'] == 'poker-tournament-trip-budget':
                 version = hashlib.sha256((ROOT / 'assets/poker-budget.css').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-budget.css?v={version}">'
-            if p['id'] in ('poker-short-stack-decisions', 'poker-three-to-five-bb-tournament-decisions', 'poker-six-to-ten-bb-tournament-decisions', 'poker-satellite-bubble-seat-equity', 'poker-bounty-knockout-equity', 'poker-tournament-entry-prize-pool-ledger'):
+            if p['id'] in ('poker-short-stack-decisions', 'poker-three-to-five-bb-tournament-decisions', 'poker-six-to-ten-bb-tournament-decisions', 'poker-satellite-bubble-seat-equity', 'poker-bounty-knockout-equity', 'poker-tournament-entry-prize-pool-ledger', 'poker-plo-wrap-redraw-blockers'):
                 version = hashlib.sha256((ROOT / 'assets/poker-short-stack.css').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-short-stack.css?v={version}">'
             if p['id'] == 'poker-limped-multiway-pots':
