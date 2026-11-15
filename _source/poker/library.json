@@ -194,6 +194,14 @@
       "keywords": "3bb 4bb 5bb three four five big blinds tournament short stack shove fold push fold big blind ante BBA nine handed cutoff button small blind big blind dead money pot odds call price all in overraise rejam short all in non reopening TDA 2026 minraise uncalled refund chip EV ICM"
     },
     {
+      "slug": "six-to-ten-bb-tournament-decisions",
+      "title": "Six to ten big blinds: the decisions between shove and small raise",
+      "description": "Compare 6, 8 and 10 BB tournament shoves and minraises, flop SPR, big-blind defense, a full rejam, a short four-bet and invented chip EV with fully counted antes.",
+      "topic": "tournaments",
+      "level": "Go deeper",
+      "keywords": "6bb 8bb 10bb six eight ten big blinds tournament short stack push fold shove minraise small raise raise to 2BB 2 blind open stack to pot ratio SPR rejam HJ hijack CO cutoff SB BB BTN blind defense big blind ante BBA all in side pot short fourbet 4bet non reopening TDA 2026 call price ICM chip EV"
+    },
+    {
       "slug": "tournament-equity",
       "title": "Chips, prizes and ICM",
       "description": "Audit a small example where gaining chips reduces modeled prize value.",
