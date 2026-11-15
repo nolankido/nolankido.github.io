@@ -306,6 +306,7 @@
       "summary": "PLO, hi-lo, stud, lowball, short deck and game rotations.",
       "primary_guides": [
         "omaha-and-mixed-games",
+        "plo-wrap-redraw-blockers",
         "omaha-hi-lo-workshop",
         "stud-and-lowball-workshop"
       ],
@@ -332,16 +333,16 @@
           "label": "Check hand construction and low qualifiers"
         },
         {
-          "guide": "omaha-hi-lo-workshop",
-          "label": "Work through counterfeiting and split-pot shares"
+          "guide": "plo-wrap-redraw-blockers",
+          "label": "Count a wrap, exposed blockers and river redraws in Omaha high"
         },
         {
-          "guide": "stud-and-lowball-workshop",
-          "label": "Compare stud, razz, deuce-to-seven and Badugi"
+          "guide": "omaha-hi-lo-workshop",
+          "label": "Work through counterfeiting and split-pot shares"
         }
       ],
       "journey": {
-        "deepen": {"guide": "stud-and-lowball-workshop", "label": "Compare street order, exposed cards and lowball rules"},
+        "deepen": {"guide": "plo-wrap-redraw-blockers", "label": "Enumerate legal Omaha high draws and redraws"},
         "practice": {"guide": "omaha-hi-lo-workshop", "label": "Check quartering, counterfeiting and legal low hands"}
       },
       "glossary_terms": [],

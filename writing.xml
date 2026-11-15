@@ -16,6 +16,14 @@
       <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
     </item>
     <item>
+      <title>PLO wraps, blockers and redraws: count the actual cards</title>
+      <link>https://nolankido.com/poker/plo-wrap-redraw-blockers/</link>
+      <description>Learn exact two-plus-three Omaha hand construction with a 16-card wrap, exposed blockers, and a fully enumerated 11-of-40 river redraw example. Includes offline Python check.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/plo-wrap-redraw-blockers/</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
       <title>The satellite bubble: why a chip-profitable call can lose a seat</title>
       <link>https://nolankido.com/poker/satellite-bubble-seat-equity/</link>
       <description>A reproducible three-player ICM example shows why a 45% chip call can require 92.14% seat equity on a two-ticket satellite bubble.</description>
