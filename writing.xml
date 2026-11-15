@@ -16,6 +16,14 @@
       <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
     </item>
     <item>
+      <title>PLO nut-flush blockers and paired boards: what actually wins?</title>
+      <link>https://nolankido.com/poker/plo-nut-flush-paired-board/</link>
+      <description>Understand ace-of-spades blockers without a made flush, count 148,995 four-card rival holdings, and verify 9-of-40 versus 10-of-40 paired-board redraws.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/plo-nut-flush-paired-board/</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
       <title>PLO wraps, blockers and redraws: count the actual cards</title>
       <link>https://nolankido.com/poker/plo-wrap-redraw-blockers/</link>
       <description>Learn exact two-plus-three Omaha hand construction with a 16-card wrap, exposed blockers, and a fully enumerated 11-of-40 river redraw example. Includes offline Python check.</description>

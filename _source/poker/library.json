@@ -362,6 +362,14 @@
       "keywords": "pot limit omaha high plo wrap draw 16 outs king queen nine eight seven blockers card removal exactly two hole cards three board redraw turn river broadway club flush queen 11 of 40 14 of 41 16 of 45 four card omaha hand construction workshop offline enumerator"
     },
     {
+      "slug": "plo-nut-flush-paired-board",
+      "title": "PLO nut-flush blockers and paired-board redraws",
+      "description": "See why a lone ace of spades blocks a nut flush but cannot make one; count uniform four-card rival flush holdings and complete known-set river redraws.",
+      "topic": "variants",
+      "level": "Go deeper",
+      "keywords": "pot limit omaha high plo nut flush blockers ace spades monotone flop two private spades four card holdings 148995 25830 31185 6699 set redraw paired board river full house quads 9 of 40 10 of 40 0 of 40 exact two hole three board offline enumerator"
+    },
+    {
       "slug": "poker-books-and-courses",
       "title": "Choose a poker book or course you will actually use.",
       "description": "Match prerequisites, format and one study goal before buying; distinguish author descriptions, independent reviews and free course material.",

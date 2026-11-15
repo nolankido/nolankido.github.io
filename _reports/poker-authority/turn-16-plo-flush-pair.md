@@ -1,0 +1,140 @@
+# Poker authority sprint: Turn 16, PLO nut-flush blockers and paired boards
+
+Date: November 15, 2026
+
+## Reader question and distinct scope
+
+**Why can a lone ace of spades block the nut flush without making a flush,
+and how do exact four-card holdings change the value of a paired river?**
+
+New original, source-owned guide:
+[`/poker/plo-nut-flush-paired-board/`](https://nolankido.com/poker/plo-nut-flush-paired-board/).
+
+The Turn 15 article covers PLO wraps, straight-completing cards and a
+straight-versus-flush redraw. Turn 16 tackles suit blockers, *distinct four-card
+opponent deals*, and a nut flush versus a set on a potentially pairing board.
+It keeps standard four-card Omaha high separate from Omaha hi-lo and avoids
+all live-play, opponent-specific, profit and solver claims. Every card holding
+and event probability is entirely fictional.
+
+## Exact mathematical fixtures and independent checks
+
+New self-contained standard-library program:
+`downloads/poker-plo-flush-pair-enumerator.py`, invoked with `--self-test`.
+It selects two of four private cards and three community cards for every
+five-card Omaha high candidate, then independently enumerates complete rival
+holdings or all legal rivers for the specified information set.
+
+### Monotone flop with a lone nut-flush blocker
+
+Three-spade flop `Ts 8s 3s` with exactly four hero private cards known.
+Compare **separate** heroes `As Kh Qd Jc` and `Ah Kh Qd Jc`, changing only
+the ace's suit. Seven known cards leave 45 unidentified physical cards and
+`C(45,4) = 148,995` possible *unordered four-card* opponent holdings.
+
+| Hero information | Unseen spades | At least two rival spades | Rival has `As` plus another spade |
+| --- | ---: | ---: | ---: |
+| `As Kh Qd Jc` | 9 | **25,830 / 148,995 = 17.34%** | **0** |
+| `Ah Kh Qd Jc` | 10 | **31,185 / 148,995 = 20.93%** | **6,699 / 148,995 = 4.50%** |
+
+Proof of first total:
+`C(9,2)C(36,2) + C(9,3)C(36,1) + C(9,4) = 25,830`.
+Proof of second:
+`C(10,2)C(35,2) + C(10,3)C(35,1) + C(10,4) = 31,185`.
+Proof of ace-high rival-flush class when ace not blocked:
+`C(44,3) - C(35,3) = 6,699`.
+
+These count *complete four-card deals before action*, not the number of
+two-card flush pairs, how frequently a PLO player arrives at the flop, or
+whether betting with a blocker is profitable. The ace blocker prevents
+*another player* from having the ace, not all legal lower flushes.
+
+### Nut flush versus a known set on the turn
+
+- Board `Qs 8s 3s 7d`.
+- Hero `As Ks Jh 7h` has a legal ace-high spade flush, using `As Ks`
+  and the three spade board cards.
+- Rival `Qh Qd 2c 4c` has a set of queens using `Qh Qd` plus board `Qs`.
+- Twelve physical cards are exposed, leaving **40** possible rivers.
+- Rival wins on **9 of 40**: `Qc` (quads), `8c 8d 8h`, `3c 3d 3h`,
+  and `7c 7s` (full houses). `7h` is already in the hero's hand.
+- Hero wins on **31 of 40** and there are no ties. These are closed-action,
+  fully exposed showdown outcomes, not pre-turn win rates.
+- A separate hero version replaces `7h` with `Td`. Against the same rival
+  and board, `7h` is available again and the rival wins on **10 of 40**.
+- Against a **different** rival `Qh Jd Tc 9c` on the original hero/board,
+  all 40 rivers leave the ace-high spade flush ahead. A paired river does
+  not make a full house from one private queen plus a board pair.
+
+No new paid services, at-table assistants or personal hand records were used.
+
+## Official rules and citation limits
+
+Primary rule materials reviewed November 15, 2026:
+
+- [PokerStars Omaha rules](https://www.pokerstars.com/poker/games/omaha/)
+  requires exactly two private cards and three community cards.
+- [PokerStars Learn PLO rules](https://www.pokerstars.com/poker/learn/lesson/plo-rules/)
+  states the four-card Omaha format and legal hand construction.
+- [WSOP Online Omaha rules](https://wsoponline.com/mi/learn-to-play-poker/omaha/rules/)
+  describes the Omaha variants and same hand-selection requirement.
+
+None of those sources supplies or endorses the newly fictional hands or
+counts. The original offline enumerator, the independent combinations
+formulae above, and the focused unit tests are the mathematical provenance.
+
+## Reader discovery and accessibility
+
+- One new dated original guide registered in the Poker manifest, guide
+  library and Omaha/mixed-game primary topic. The Strategy topic also links
+  the guide as a related mathematical example.
+- Eight unique inbound prose guide links, from Turn 15 PLO, Omaha overview,
+  Omaha hi-lo, stud/lowball, math reference, range combinations, reading the
+  board and the existing hold'em flush/redraw lab. Nine distinct outbound
+  original-guide links. A dedicated Study desk card adds a public route.
+- Three keyboard-focusable scrollable tables. Eight native no-JS answer
+  panels. One downloadable private blank Markdown sheet.
+- Both downloads registered in the repository's static-file target inventory.
+- Library, Find page, topic pages, RSS feeds and sitemap generated by the
+  existing deterministic build. No Actions, background jobs or paid APIs.
+
+## Static source coverage, not measured search visibility
+
+| Repository measure | Turn 15 | Turn 16 |
+| --- | ---: | ---: |
+| Original Poker guides | 72 | **73** |
+| Distinct guide-to-guide prose links | 447 | **464** |
+| Guides with at most one inbound guide link | 0 | **0** |
+| Guides unreachable from Poker entrypoints | 0 | **0** |
+| New guide's inbound guide prose links | Not present | **8** |
+
+No claim is made about new Google indexing, AI referrals, rankings, organic
+visits, video subscribers or actual reader learning. Static page and link
+counts are leading editorial indicators, not externally measured outcomes.
+
+## Local checks and release boundaries
+
+All **11 new PLO flush/pair tests** and **9 prior PLO wrap tests** passed
+together, including agreement between both independent Omaha high evaluators
+on every exposed river. The offline enumerator `--self-test` passed. Deterministic checks
+passed for 251 generated outputs, Poker coverage matched, Search and internal
+links reported zero issues, and HTML5 parsing passed for 227 pages. The
+historical full-site release checklist and browser visual test are separate
+checks and must be reported exactly as observed. The default historical
+local-release checklist reported **81/92 groups passing**, with eleven
+pre-existing Stand Off, Find and Technology or website-case groups failing
+rigid older counts or contracts. These failures remain open. Do not claim
+full historical suite or browser success from the focused tests. Local
+Chromium visual review was not verified in this sandbox.
+
+This report records the candidate release source and its tests. A main-branch
+merge and live-byte comparison are still required before saying the new
+public route is deployed.
+
+## Next proposed Turn 17
+
+Deepen the Omaha hi-lo track with **legal independent high and low hand
+construction**, counterfeit protection, scoops, ties and quarters. Build a
+small independently checkable split-pot enumerator and multiple fictional
+showdowns with verified total pot conservation. Keep low qualifiers and hand
+ranking conventions explicit; do not lift them into PLO high or 2-7 lowball.
