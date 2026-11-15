@@ -643,6 +643,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-tournament-entry-prize-pool-ledger",
+    "path": "/poker/tournament-entry-prize-pool-ledger/",
+    "title": "Where the $400 poker tournament buy-in goes",
+    "seo_title": "Poker Tournament Buy-Ins, Fees, Guarantees & Bounties | Nolan Kido",
+    "description": "Check a $400 entry split, 120 paid entries versus 100 players, prize-pool guarantees and overlay, an entire payout ladder, separate bounty funding and re-entry costs.",
+    "kicker": "Poker / Entry and prize-pool accounting",
+    "source": "poker/tournament-entry-prize-pool-ledger.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-tournament-equity",
     "path": "/poker/tournament-equity/",
     "title": "When more chips are not enough.",
