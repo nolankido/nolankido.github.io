@@ -202,6 +202,14 @@
       "keywords": "6bb 8bb 10bb six eight ten big blinds tournament short stack push fold shove minraise small raise raise to 2BB 2 blind open stack to pot ratio SPR rejam HJ hijack CO cutoff SB BB BTN blind defense big blind ante BBA all in side pot short fourbet 4bet non reopening TDA 2026 call price ICM chip EV"
     },
     {
+      "slug": "satellite-bubble-seat-equity",
+      "title": "Satellite bubble: chip-profit versus qualification",
+      "description": "Count an all-in, then audit seat ICM for three players fighting over two identical tickets. Compare a 45% chip call with a 92.14% seat threshold and ordinary payout ladders.",
+      "topic": "tournaments",
+      "level": "Go deeper",
+      "keywords": "satellite bubble seat qualification ICM independent chip model two identical tickets ticket equity poker payout structure survival risk premium fold versus call 10BB 1BB short stack 3 players 2 seats first second place 45 percent 92.14 percent shove versus call unequal payouts winner take all chip EV 2026 hand for hand"
+    },
+    {
       "slug": "tournament-equity",
       "title": "Chips, prizes and ICM",
       "description": "Audit a small example where gaining chips reduces modeled prize value.",

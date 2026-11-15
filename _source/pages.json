@@ -619,6 +619,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-satellite-bubble-seat-equity",
+    "path": "/poker/satellite-bubble-seat-equity/",
+    "title": "The satellite bubble: why a chip-profitable call can lose a seat",
+    "seo_title": "Satellite Bubble Strategy and Seat Equity | Nolan Kido Poker",
+    "description": "A reproducible three-player ICM example shows why a 45% chip call can require 92.14% seat equity on a two-ticket satellite bubble.",
+    "kicker": "Poker / Satellite tournament equity",
+    "source": "poker/satellite-bubble-seat-equity.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-tournament-equity",
     "path": "/poker/tournament-equity/",
     "title": "When more chips are not enough.",
