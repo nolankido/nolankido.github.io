@@ -150,6 +150,7 @@
         "tournaments",
         "tournament-formats",
         "short-stack-decisions",
+        "three-to-five-bb-tournament-decisions",
         "tournament-equity",
         "first-live-tournament",
         "choosing-a-tournament",
@@ -238,6 +239,7 @@
         "decision-lab",
         "flush-and-redraw",
         "short-stack-decisions",
+        "three-to-five-bb-tournament-decisions",
         "multiway-pot-workshop",
         "limped-multiway-pots"
       ],

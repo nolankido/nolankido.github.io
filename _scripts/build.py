@@ -415,7 +415,7 @@ def build_outputs() -> dict[Path, str]:
             if p['id'] == 'poker-tournament-trip-budget':
                 version = hashlib.sha256((ROOT / 'assets/poker-budget.css').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-budget.css?v={version}">'
-            if p['id'] == 'poker-short-stack-decisions':
+            if p['id'] in ('poker-short-stack-decisions', 'poker-three-to-five-bb-tournament-decisions'):
                 version = hashlib.sha256((ROOT / 'assets/poker-short-stack.css').read_bytes()).hexdigest()[:12]
                 extra += f'\n  <link rel="stylesheet" href="/assets/poker-short-stack.css?v={version}">'
             if p['id'] == 'poker-limped-multiway-pots':
