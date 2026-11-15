@@ -963,6 +963,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-plo-nut-flush-paired-board",
+    "path": "/poker/plo-nut-flush-paired-board/",
+    "title": "PLO nut-flush blockers and paired boards: what actually wins?",
+    "seo_title": "PLO Nut Flush Blockers, Board Pairs & Redraw Outs | Nolan Kido",
+    "description": "Understand ace-of-spades blockers without a made flush, count 148,995 four-card rival holdings, and verify 9-of-40 versus 10-of-40 paired-board redraws.",
+    "kicker": "Poker / Pot-Limit Omaha high workshop",
+    "source": "poker/plo-nut-flush-paired-board.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-books-and-courses",
     "path": "/poker/poker-books-and-courses/",
     "title": "Choose a poker book or course you will actually use.",

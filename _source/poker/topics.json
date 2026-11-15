@@ -242,6 +242,7 @@
       "related_guides": [
         "decision-lab",
         "flush-and-redraw",
+        "plo-nut-flush-paired-board",
         "short-stack-decisions",
         "three-to-five-bb-tournament-decisions",
         "six-to-ten-bb-tournament-decisions",
@@ -307,6 +308,7 @@
       "primary_guides": [
         "omaha-and-mixed-games",
         "plo-wrap-redraw-blockers",
+        "plo-nut-flush-paired-board",
         "omaha-hi-lo-workshop",
         "stud-and-lowball-workshop"
       ],
@@ -342,7 +344,7 @@
         }
       ],
       "journey": {
-        "deepen": {"guide": "plo-wrap-redraw-blockers", "label": "Enumerate legal Omaha high draws and redraws"},
+        "deepen": {"guide": "plo-nut-flush-paired-board", "label": "Check ace-high flush blockers and paired-board redraws"},
         "practice": {"guide": "omaha-hi-lo-workshop", "label": "Check quartering, counterfeiting and legal low hands"}
       },
       "glossary_terms": [],
