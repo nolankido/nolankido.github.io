@@ -8,6 +8,14 @@
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
     <item>
+      <title>The satellite bubble: why a chip-profitable call can lose a seat</title>
+      <link>https://nolankido.com/poker/satellite-bubble-seat-equity/</link>
+      <description>A reproducible three-player ICM example shows why a 45% chip call can require 92.14% seat equity on a two-ticket satellite bubble.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/satellite-bubble-seat-equity/</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
       <title>Six to ten big blinds: the decisions between shove and small raise</title>
       <link>https://nolankido.com/poker/six-to-ten-bb-tournament-decisions/</link>
       <description>Audit 6, 8 and 10 BB tournament choices with one big-blind ante: first-in shoves, 2 BB opens, blind defense, eight-BB rejams, short four-bets and ICM limits.</description>
