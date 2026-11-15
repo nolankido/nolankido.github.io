@@ -607,6 +607,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-six-to-ten-bb-tournament-decisions",
+    "path": "/poker/six-to-ten-bb-tournament-decisions/",
+    "title": "Six to ten big blinds: the decisions between shove and small raise",
+    "seo_title": "6 to 10 BB Tournament Poker: Shoves, Opens and Rejams | Nolan Kido",
+    "description": "Audit 6, 8 and 10 BB tournament choices with one big-blind ante: first-in shoves, 2 BB opens, blind defense, eight-BB rejams, short four-bets and ICM limits.",
+    "kicker": "Poker / Short-stack action trees",
+    "source": "poker/six-to-ten-bb-tournament-decisions.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-tournament-equity",
     "path": "/poker/tournament-equity/",
     "title": "When more chips are not enough.",
