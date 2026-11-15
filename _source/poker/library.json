@@ -218,6 +218,14 @@
       "keywords": "bounty knockout PKO progressive knockout KO fixed knockout bounty cash on head marker reward elimination main pot side pot relevant pot 50/50 split fifty percent three way all in 4bb 9bb 14bb poker tournament bounty equity 40 percent probability chip EV cash EV mystery bounty conditional payout model"
     },
     {
+      "slug": "tournament-entry-prize-pool-ledger",
+      "title": "Tournament entry fees, guarantees and prize pools",
+      "description": "Reconcile $400 buy-ins, paid attempts versus distinct entrants, ordinary prize pools, organizer overlay, bounties, re-entries and an original ten-place payout ladder.",
+      "topic": "tournaments",
+      "level": "Build understanding",
+      "keywords": "poker tournament buy in entry fee rake administrative costs prize pool guarantee overlay funding contributions paid entries reentry player count 120 100 400 330 70 230 100 knockout bounty prize payouts gross cash profit percentage denominators worksheet field size"
+    },
+    {
       "slug": "tournament-equity",
       "title": "Chips, prizes and ICM",
       "description": "Audit a small example where gaining chips reduces modeled prize value.",

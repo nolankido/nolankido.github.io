@@ -155,6 +155,7 @@
         "tournament-equity",
         "satellite-bubble-seat-equity",
         "bounty-knockout-equity",
+        "tournament-entry-prize-pool-ledger",
         "first-live-tournament",
         "choosing-a-tournament",
         "tournament-trip-budget",
@@ -430,7 +431,8 @@
         "tournament-day",
         "poker-access-and-protection",
         "first-live-cash-game",
-        "tournament-trip-budget"
+        "tournament-trip-budget",
+        "tournament-entry-prize-pool-ledger"
       ],
       "resource_categories": [
         "events",
