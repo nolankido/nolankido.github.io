@@ -1015,6 +1015,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-three-bet-pot-river-decisions",
+    "path": "/poker/three-bet-pot-river-decisions/",
+    "title": "The river decision in a three-bet pot: value, bluffs and the final price",
+    "seo_title": "3-Bet Pot River Strategy: Value Bets, Bluffs and Calls | Nolan Kido",
+    "description": "Follow two three-bet pot river branches with exact stacks and pot odds. Compare checking, value bets, pure-bluff fold math, bluff catches, shoves and raises.",
+    "kicker": "Poker / Strategy & math",
+    "source": "poker/three-bet-pot-river-decisions.html",
+    "section": "poker",
+    "date": "2026-11-14",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-rules-and-fair-play",
     "path": "/poker/poker-rules-and-fair-play/",
     "title": "Poker rules and fair play: find the right authority.",

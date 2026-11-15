@@ -32,6 +32,14 @@
       <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
     </item>
     <item>
+      <title>The river decision in a three-bet pot: value, bluffs and the final price</title>
+      <link>https://nolankido.com/poker/three-bet-pot-river-decisions/</link>
+      <description>Follow two three-bet pot river branches with exact stacks and pot odds. Compare checking, value bets, pure-bluff fold math, bluff catches, shoves and raises.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/three-bet-pot-river-decisions/</guid>
+      <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
+    <item>
       <title>The turn decision in a three-bet pot: price the next street</title>
       <link>https://nolankido.com/poker/three-bet-pot-turn-decisions/</link>
       <description>Count delayed turn bets, second barrels, turn probes and check-raises in a 100 BB three-bet pot, with separate board textures, pot odds and river stack geometry.</description>
