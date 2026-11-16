@@ -139,8 +139,8 @@ class NolanPokerHandStudyBridgeTests(unittest.TestCase):
     def test_broken_hand_guide_pair_and_missing_source_boundary_are_detected(self):
         mutations = (
             self.source.replace('id="nolanpoker-hand-study"', 'id="different-target"', 1),
-            self.source.replace('href="/poker/six-to-ten-bb-tournament-decisions/"',
-                                'href="/poker/not-a-guide/"', 1),
+            self.source.replace('href="/poker/six-to-ten-bb-tournament-decisions/">study 6–10 BB',
+                                'href="/poker/not-a-guide/">study 6–10 BB', 1),
             self.source.replace("approximately 19.5 BB", "approximately 4 BB", 1),
             self.source.replace("These guides do not solve these exact tournament hands.",
                                 "A solver proves every shove.", 1),
