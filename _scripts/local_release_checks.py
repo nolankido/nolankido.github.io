@@ -125,6 +125,7 @@ def main() -> int:
         ('Local NolanPoker thumbnails and checked public titles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn150_nolanpoker_thumbnails.py', '-q']),
         ('NolanPoker first-video choice and accessible card arrivals', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn151_nolanpoker_choices.py', '-q']),
         ('Poker short-stack 3 to 20 BB reader path', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn152_short_stack_route.py', '-q']),
+        ('NolanPoker real-hand to short-stack study links', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn153_poker_hand_study.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
