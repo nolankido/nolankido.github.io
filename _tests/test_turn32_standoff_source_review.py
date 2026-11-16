@@ -52,7 +52,7 @@ def video_cards(text):
     )
     if len(matches) != 1:
         raise AssertionError("Expected one public-video grid")
-    return re.findall(r'<article class="poker-content-card">.*?</article>',
+    return re.findall(r'<article class="poker-content-card"(?: id="[^"]+")?>.*?</article>',
                       matches[0], re.S)
 
 
