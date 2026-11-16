@@ -975,6 +975,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-omaha-hilo-scoop-quarter-counterfeit",
+    "path": "/poker/omaha-hilo-scoop-quarter-counterfeit/",
+    "title": "Omaha hi-lo scoops, quartered pots and counterfeit lows: build both hands",
+    "seo_title": "Omaha Hi-Lo: Scoops, Quartered Pots and Counterfeit Lows | Nolan Kido",
+    "description": "Verify legal Omaha/8 high and low hands, three-way quartered pots, scoops, no qualifying low, and 3-of-40 counterfeit rivers with an offline evaluator.",
+    "kicker": "Poker / Omaha hi-lo eight-or-better workshop",
+    "source": "poker/omaha-hilo-scoop-quarter-counterfeit.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-books-and-courses",
     "path": "/poker/poker-books-and-courses/",
     "title": "Choose a poker book or course you will actually use.",

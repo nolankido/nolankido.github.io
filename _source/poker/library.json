@@ -370,6 +370,14 @@
       "keywords": "pot limit omaha high plo nut flush blockers ace spades monotone flop two private spades four card holdings 148995 25830 31185 6699 set redraw paired board river full house quads 9 of 40 10 of 40 0 of 40 exact two hole three board offline enumerator"
     },
     {
+      "slug": "omaha-hilo-scoop-quarter-counterfeit",
+      "title": "Omaha hi-lo: verify scoops, quartering and counterfeit lows",
+      "description": "Select high and eight-or-better low independently with exactly two hole cards and three board cards, allocate exact three-way pots, and enumerate all 40 counterfeit rivers.",
+      "topic": "variants",
+      "level": "Go deeper",
+      "keywords": "omaha hi lo hilo eight or better O8 PLO8 four card split pot scoop quarter quartered counterfeit low protection wheel ace five low tie high best two private three board chips distribution pot shares 3 of 40 7.5 percent 300 chips offline enumerator worksheet"
+    },
+    {
       "slug": "poker-books-and-courses",
       "title": "Choose a poker book or course you will actually use.",
       "description": "Match prerequisites, format and one study goal before buying; distinguish author descriptions, independent reviews and free course material.",

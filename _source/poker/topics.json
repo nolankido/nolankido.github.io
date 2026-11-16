@@ -243,6 +243,7 @@
         "decision-lab",
         "flush-and-redraw",
         "plo-nut-flush-paired-board",
+        "omaha-hilo-scoop-quarter-counterfeit",
         "short-stack-decisions",
         "three-to-five-bb-tournament-decisions",
         "six-to-ten-bb-tournament-decisions",
@@ -310,6 +311,7 @@
         "plo-wrap-redraw-blockers",
         "plo-nut-flush-paired-board",
         "omaha-hi-lo-workshop",
+        "omaha-hilo-scoop-quarter-counterfeit",
         "stud-and-lowball-workshop"
       ],
       "related_guides": [
@@ -345,7 +347,7 @@
       ],
       "journey": {
         "deepen": {"guide": "plo-nut-flush-paired-board", "label": "Check ace-high flush blockers and paired-board redraws"},
-        "practice": {"guide": "omaha-hi-lo-workshop", "label": "Check quartering, counterfeiting and legal low hands"}
+        "practice": {"guide": "omaha-hilo-scoop-quarter-counterfeit", "label": "Reproduce scoops, quartered pots and every counterfeit river"}
       },
       "glossary_terms": [],
       "overview_routes": []

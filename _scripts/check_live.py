@@ -116,6 +116,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/poker-plo-wrap-enumerator.py', 'downloads/poker-plo-after-play-review.md']
     assets += ['downloads/poker-plo-flush-pair-enumerator.py',
                'downloads/poker-plo-flush-after-play.md']
+    assets += ['downloads/poker-omaha-hilo-split-enumerator.py',
+               'downloads/poker-omaha-hilo-split-review.md']
     assets += ['assets/poker/uncertainty-' + name + '.png' for name in ['precision', 'bayes', 'boundary']]
     assets += ['assets/site-fonts.css', 'assets/page-sharing.css', 'assets/page-sharing.js']
     assets += [entry['path'] for entry in build.font_delivery.local_files(root)]
