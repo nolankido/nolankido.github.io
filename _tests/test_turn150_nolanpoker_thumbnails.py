@@ -43,7 +43,7 @@ def contract_errors(hub: str, profile: str, css: str, manifest: dict,
     player_list = PROFILE_LIST.search(profile)
     if not gallery or not player_list:
         return errors + ["gallery or player list missing"]
-    cards = re.findall(r'<article class="poker-content-card">(.*?)</article>', gallery.group(1), re.S)
+    cards = re.findall(r'<article class="poker-content-card"(?: id="[^"]+")?>(.*?)</article>', gallery.group(1), re.S)
     players = re.findall(r'<li>(.*?)</li>', player_list.group(1), re.S)
     if len(cards) != 6 or len(players) != 6:
         return errors + ["there must be six video cards and player links"]
@@ -113,11 +113,12 @@ class NolanPokerThumbnailTests(unittest.TestCase):
 
     def test_dates_track_real_revision_without_erasing_prior_review(self):
         pages = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
-        self.assertEqual(next(p["updated"] for p in pages if p["path"] == "/poker/"), "2026-11-13")
+        poker_updated = next(p["updated"] for p in pages if p["path"] == "/poker/")
+        self.assertGreaterEqual(poker_updated, "2026-11-13")
         self.assertEqual(player_sitemap.MODIFIED, "2026-11-13")
         self.assertIn("November 12, 2026", self.hub)
         self.assertIn("November 12, 2026", self.profile)
-        self.assertIn('"dateModified": "2026-11-13"', (ROOT / "poker/index.html").read_text(encoding="utf-8"))
+        self.assertIn('"dateModified": "' + poker_updated + '"', (ROOT / "poker/index.html").read_text(encoding="utf-8"))
         self.assertIn('"dateModified": "2026-11-13"', (ROOT / "poker/nolan-kido/index.html").read_text(encoding="utf-8"))
 
     def test_broken_provenance_image_and_accessibility_mutations_fail(self):

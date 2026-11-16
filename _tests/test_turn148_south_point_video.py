@@ -34,7 +34,7 @@ def discovery_errors(hub: str, profile: str) -> list[str]:
     player_list = re.search(r'<h2 id="player-vlog-title">.*?<ul>(.*?)</ul>', profile, re.S)
     if gallery is None or player_list is None:
         return ["one public video list is missing"]
-    cards = re.findall(r'<article class="poker-content-card">(.*?)</article>', gallery.group(1), re.S)
+    cards = re.findall(r'<article class="poker-content-card"(?: id="[^"]+")?>(.*?)</article>', gallery.group(1), re.S)
     list_items = re.findall(r'<li>(.*?)</li>', player_list.group(1), re.S)
     if len(cards) != 6 or len(list_items) != 6:
         errors.append("both visitor lists must contain six entries")
