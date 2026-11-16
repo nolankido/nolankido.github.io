@@ -21,7 +21,7 @@ OUTPUT = ROOT / "poker/episodes/portland-meadows-ep1/index.html"
 ORIGIN = "https://nolankido.com"
 URL = ORIGIN + "/poker/episodes/portland-meadows-ep1/"
 TITLE = "Portland Meadows Ep1: From 6.5 BB to a Trophy | Nolan Kido"
-MODIFIED = "2026-11-04"
+MODIFIED = "2026-11-16"
 DESCRIPTION = ("Nolan Kido's Portland Meadows poker-vlog episode: the short-stack comeback, "
                "6-4 versus A-K, sevens versus A-T, four-way deal and official trophy.")
 OLD_TITLE = "Learn Poker: Free Beginner Course & Resources | Nolan Kido"
