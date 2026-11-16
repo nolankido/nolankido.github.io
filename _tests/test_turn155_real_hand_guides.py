@@ -181,10 +181,10 @@ class RealHandStudyGuideTests(unittest.TestCase):
                                       datetime.min.time(), tzinfo=timezone.utc)
                 self.assertEqual(matching[0].findtext("pubDate"),
                                  format_datetime(dt, usegmt=True))
-        self.assertIn(
-            'datetime="2026-11-04"',
-            (ROOT / "_source/poker/portland-meadows-ep1.html").read_text(encoding="utf-8")
+        ledger = json.loads(
+            (ROOT / "downloads/portland-meadows-ep1-scene-claims.json").read_text(encoding="utf-8")
         )
+        self.assertEqual(ledger["reviewed_record_date"], "2026-11-04")
 
     def test_incorrect_destinations_and_claims_fail_the_focused_contract(self):
         for guide in GUIDES:
