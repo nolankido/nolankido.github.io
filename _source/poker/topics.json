@@ -244,6 +244,7 @@
         "flush-and-redraw",
         "plo-nut-flush-paired-board",
         "omaha-hilo-scoop-quarter-counterfeit",
+        "stud-hilo-razz-hand-reading",
         "short-stack-decisions",
         "three-to-five-bb-tournament-decisions",
         "six-to-ten-bb-tournament-decisions",
@@ -312,6 +313,7 @@
         "plo-nut-flush-paired-board",
         "omaha-hi-lo-workshop",
         "omaha-hilo-scoop-quarter-counterfeit",
+        "stud-hilo-razz-hand-reading",
         "stud-and-lowball-workshop"
       ],
       "related_guides": [
@@ -346,7 +348,7 @@
         }
       ],
       "journey": {
-        "deepen": {"guide": "plo-nut-flush-paired-board", "label": "Check ace-high flush blockers and paired-board redraws"},
+        "deepen": {"guide": "stud-hilo-razz-hand-reading", "label": "Compare seven-card Stud8 qualifiers and razz street mechanics"},
         "practice": {"guide": "omaha-hilo-scoop-quarter-counterfeit", "label": "Reproduce scoops, quartered pots and every counterfeit river"}
       },
       "glossary_terms": [],
