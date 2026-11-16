@@ -4,12 +4,12 @@
 
 ## Verified source-inventory totals
 
-- **73 original guides** in the library, each with exactly one primary hub.
+- **74 original guides** in the library, each with exactly one primary hub.
 - **10 topic hubs** with derived guide and external-source memberships.
 - **146 reviewed external-resource records**, each mapped to at least one topic. Stored review metadata is not a fresh link recheck.
 - **13 curated resource collections**. Collections are filtered views, not additional unique resources.
-- **44 guides** have at least one secondary topic placement; **37 sources** belong to more than one topic. Overlapping topic counts must not be summed.
-- **Poker Finder** contains all 73 library guide destinations and 146 external-resource records, within 104 on-site guide/page cards, 146 source cards and 48 glossary cards. Finder guide/page cards are not a second original-guide count.
+- **45 guides** have at least one secondary topic placement; **37 sources** belong to more than one topic. Overlapping topic counts must not be summed.
+- **Poker Finder** contains all 74 library guide destinations and 146 external-resource records, within 105 on-site guide/page cards, 146 source cards and 48 glossary cards. Finder guide/page cards are not a second original-guide count.
 
 ## Topic-hub coverage
 
@@ -18,8 +18,8 @@
 | [learn](https://nolankido.com/poker/topics/learn/) | 16 | 8 | 24 | 6 | `first-decisions`, `starting-hand-decisions`, `first-flop-decisions` |
 | [cash-games](https://nolankido.com/poker/topics/cash-games/) | 6 | 12 | 18 | 15 | `cash-game-study-path`, `first-live-cash-game`, `cash-game-costs` |
 | [tournaments](https://nolankido.com/poker/topics/tournaments/) | 14 | 6 | 20 | 13 | `first-live-tournament`, `choosing-a-tournament`, `tournament-equity` |
-| [strategy](https://nolankido.com/poker/topics/strategy/) | 15 | 10 | 25 | 23 | `poker-math-reference`, `ranges-and-bets`, `reading-preflop-charts` |
-| [variants](https://nolankido.com/poker/topics/variants/) | 5 | 2 | 7 | 21 | `omaha-and-mixed-games`, `plo-wrap-redraw-blockers`, `omaha-hi-lo-workshop` |
+| [strategy](https://nolankido.com/poker/topics/strategy/) | 15 | 11 | 26 | 23 | `poker-math-reference`, `ranges-and-bets`, `reading-preflop-charts` |
+| [variants](https://nolankido.com/poker/topics/variants/) | 6 | 2 | 8 | 21 | `omaha-and-mixed-games`, `plo-wrap-redraw-blockers`, `omaha-hi-lo-workshop` |
 | [study](https://nolankido.com/poker/topics/study/) | 9 | 6 | 15 | 32 | `poker-books-and-courses`, `choosing-study-tools`, `reviewing-a-hand` |
 | [places-to-play](https://nolankido.com/poker/topics/places-to-play/) | 1 | 8 | 9 | 19 | `choosing-a-tournament`, `table-etiquette` |
 | [poker-world](https://nolankido.com/poker/topics/poker-world/) | 3 | 3 | 6 | 24 | `variance-and-results`, `hand-to-vlog`, `poker-media-study` |
@@ -78,6 +78,7 @@ A secondary topic placement is an intentional navigation overlap, not evidence o
 | [/omaha-and-mixed-games/](https://nolankido.com/poker/omaha-and-mixed-games/) | variants | [variants](https://nolankido.com/poker/topics/variants/) | None | Build understanding |
 | [/plo-wrap-redraw-blockers/](https://nolankido.com/poker/plo-wrap-redraw-blockers/) | variants | [variants](https://nolankido.com/poker/topics/variants/) | None | Go deeper |
 | [/plo-nut-flush-paired-board/](https://nolankido.com/poker/plo-nut-flush-paired-board/) | variants | [variants](https://nolankido.com/poker/topics/variants/) | [strategy](https://nolankido.com/poker/topics/strategy/) | Go deeper |
+| [/omaha-hilo-scoop-quarter-counterfeit/](https://nolankido.com/poker/omaha-hilo-scoop-quarter-counterfeit/) | variants | [variants](https://nolankido.com/poker/topics/variants/) | [strategy](https://nolankido.com/poker/topics/strategy/) | Go deeper |
 | [/poker-books-and-courses/](https://nolankido.com/poker/poker-books-and-courses/) | study | [study](https://nolankido.com/poker/topics/study/) | None | Build understanding |
 | [/poker-research-guide/](https://nolankido.com/poker/poker-research-guide/) | research | [research](https://nolankido.com/poker/topics/research/) | [study](https://nolankido.com/poker/topics/study/) | Go deeper |
 | [/poker-math-reference/](https://nolankido.com/poker/poker-math-reference/) | hands | [strategy](https://nolankido.com/poker/topics/strategy/) | [study](https://nolankido.com/poker/topics/study/) | Build understanding |
@@ -147,6 +148,7 @@ Shared guides are listed to help future editors distinguish a cross-link from a 
 | [cash-games](https://nolankido.com/poker/topics/cash-games/) + [places-to-play](https://nolankido.com/poker/topics/places-to-play/) | 2 | `first-live-cash-game`, `thunder-valley-poker-guide` |
 | [cash-games](https://nolankido.com/poker/topics/cash-games/) + [safer-play](https://nolankido.com/poker/topics/safer-play/) | 2 | `thunder-valley-poker-guide`, `variance-and-results` |
 | [learn](https://nolankido.com/poker/topics/learn/) + [variants](https://nolankido.com/poker/topics/variants/) | 2 | `betting-and-pots`, `hand-rankings` |
+| [strategy](https://nolankido.com/poker/topics/strategy/) + [variants](https://nolankido.com/poker/topics/variants/) | 2 | `omaha-hilo-scoop-quarter-counterfeit`, `plo-nut-flush-paired-board` |
 | [tournaments](https://nolankido.com/poker/topics/tournaments/) + [study](https://nolankido.com/poker/topics/study/) | 2 | `getting-started`, `recording-hands` |
 | [cash-games](https://nolankido.com/poker/topics/cash-games/) + [poker-world](https://nolankido.com/poker/topics/poker-world/) | 1 | `variance-and-results` |
 | [cash-games](https://nolankido.com/poker/topics/cash-games/) + [research](https://nolankido.com/poker/topics/research/) | 1 | `choosing-study-tools` |
@@ -159,7 +161,6 @@ Shared guides are listed to help future editors distinguish a cross-link from a 
 | [poker-world](https://nolankido.com/poker/topics/poker-world/) + [safer-play](https://nolankido.com/poker/topics/safer-play/) | 1 | `variance-and-results` |
 | [strategy](https://nolankido.com/poker/topics/strategy/) + [poker-world](https://nolankido.com/poker/topics/poker-world/) | 1 | `poker-under-uncertainty` |
 | [strategy](https://nolankido.com/poker/topics/strategy/) + [research](https://nolankido.com/poker/topics/research/) | 1 | `poker-under-uncertainty` |
-| [strategy](https://nolankido.com/poker/topics/strategy/) + [variants](https://nolankido.com/poker/topics/variants/) | 1 | `plo-nut-flush-paired-board` |
 | [tournaments](https://nolankido.com/poker/topics/tournaments/) + [poker-world](https://nolankido.com/poker/topics/poker-world/) | 1 | `recording-hands` |
 
 ## Curated resource collections
