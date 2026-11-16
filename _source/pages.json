@@ -592,7 +592,7 @@
     "date": "2026-10-06",
     "updated": "2026-11-16",
     "poker_guide": true,
-    "revision": "Added links to two source-documented Portland Meadows hands, with an explicit distinction between first-person outcomes and modeled decision examples."
+    "revision": "Linked documented Deepstack and Stand Off hands to this decision framework without asserting solver results."
   },
   {
     "id": "poker-three-to-five-bb-tournament-decisions",
