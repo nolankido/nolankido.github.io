@@ -16,7 +16,7 @@ OUTPUT = Path('poker/episodes/portland-meadows-ep1/index.html')
 VIDEO = 'https://www.youtube.com/watch?v=qABaiIcvvpU'
 TITLE = 'Portland Meadows: From 6.5 Big Blinds to a Trophy'
 PUBLISHED = '2026-11-02'
-MODIFIED = '2026-11-04'
+MODIFIED = '2026-11-16'
 PERSON_ID = 'https://nolankido.com/about/#nolan-kido'
 
 

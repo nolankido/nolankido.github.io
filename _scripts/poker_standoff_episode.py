@@ -17,7 +17,7 @@ OUTPUT = Path("poker/episodes/portland-meadows-standoff/index.html")
 VIDEO = "https://www.youtube.com/watch?v=I75GOBVXij4"
 TITLE = "Portland Meadows Stand Off: A-K Facing Two Shoves"
 PUBLISHED = "2026-11-04"
-MODIFIED = "2026-11-04"
+MODIFIED = "2026-11-16"
 PERSON_ID = "https://nolankido.com/about/#nolan-kido"
 
 
