@@ -590,9 +590,9 @@
     "source": "poker/short-stack-decisions.html",
     "section": "poker",
     "date": "2026-10-06",
-    "updated": "2026-10-15",
+    "updated": "2026-11-16",
     "poker_guide": true,
-    "revision": "Expanded the 10–20 BB action comparisons, clarified ante and coverage conventions, and added a reproducible four-player ICM call with explained checks."
+    "revision": "Added links to two source-documented Portland Meadows hands, with an explicit distinction between first-person outcomes and modeled decision examples."
   },
   {
     "id": "poker-three-to-five-bb-tournament-decisions",
@@ -616,6 +616,7 @@
     "source": "poker/six-to-ten-bb-tournament-decisions.html",
     "section": "poker",
     "date": "2026-11-15",
+    "updated": "2026-11-16",
     "poker_guide": true
   },
   {
