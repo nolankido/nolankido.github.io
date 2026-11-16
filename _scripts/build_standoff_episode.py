@@ -27,7 +27,7 @@ DESCRIPTION = (
 HEADLINE = "Portland Meadows Stand Off: A-K Facing Two Shoves"
 LABEL = "Portland Meadows Stand Off"
 PUBLISHED = "2026-11-04"
-MODIFIED = "2026-11-04"
+MODIFIED = "2026-11-16"
 VIDEO = "https://www.youtube.com/watch?v=I75GOBVXij4"
 MARKER = (
     "<!-- Stand Off companion: edit _source/poker/portland-meadows-standoff.html; "
