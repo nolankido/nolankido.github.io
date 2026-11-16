@@ -54,7 +54,7 @@ class StandOffCompanionTests(unittest.TestCase):
         record = poker_standoff_episode.record(ROOT)
         self.assertEqual(record["route"], poker_standoff_episode.ROUTE)
         self.assertEqual(record["date"], "2026-11-04")
-        self.assertEqual(record["modified"], "2026-11-04")
+        self.assertEqual(record["modified"], poker_standoff_episode.MODIFIED)
         self.assertEqual(record["video_url"], poker_standoff_episode.VIDEO)
         self.assertEqual(self.html.count('<link rel="canonical" href="' +
                                          poker_standoff_episode.URL + '">'), 1)
@@ -68,7 +68,7 @@ class StandOffCompanionTests(unittest.TestCase):
         self.assertEqual(schema["@id"], poker_standoff_episode.URL + "#article")
         self.assertEqual(schema["url"], poker_standoff_episode.URL)
         self.assertEqual(schema["datePublished"], "2026-11-04")
-        self.assertEqual(schema["dateModified"], "2026-11-04")
+        self.assertEqual(schema["dateModified"], poker_standoff_episode.MODIFIED)
         self.assertEqual(schema["author"]["@id"], poker_standoff_episode.PERSON_ID)
         self.assertEqual(schema["mainEntityOfPage"]["breadcrumb"]["itemListElement"][-1]["item"],
                          poker_standoff_episode.URL)
@@ -170,7 +170,7 @@ class StandOffCompanionTests(unittest.TestCase):
         items = ET.fromstring(sitemap)
         records = {x.findtext(ns + "loc"): x.findtext(ns + "lastmod")
                    for x in items}
-        self.assertEqual(records[poker_standoff_episode.URL], "2026-11-04")
+        self.assertEqual(records[poker_standoff_episode.URL], poker_standoff_episode.MODIFIED)
         self.assertEqual(list(records).count(poker_standoff_episode.URL), 1)
         self.assertEqual(sitemap, (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         self.assertEqual(records[player_sitemap.URL], player_sitemap.MODIFIED)
