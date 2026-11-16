@@ -987,6 +987,18 @@
     "poker_guide": true
   },
   {
+    "id": "poker-stud-hilo-razz-hand-reading",
+    "path": "/poker/stud-hilo-razz-hand-reading/",
+    "title": "Stud hi-lo versus razz: which five of seven cards count?",
+    "seo_title": "Stud Hi-Lo vs Razz: 7-Card Low Hands, Scoops & Bring-Ins | Nolan Kido",
+    "description": "Compare Stud8 and razz seven-card hand selection, qualifying lows, quartered pots, a nine-low winner, exposed-card counting and opposite bring-in rules.",
+    "kicker": "Poker / Stud hi-lo and razz workshop",
+    "source": "poker/stud-hilo-razz-hand-reading.html",
+    "section": "poker",
+    "date": "2026-11-15",
+    "poker_guide": true
+  },
+  {
     "id": "poker-poker-books-and-courses",
     "path": "/poker/poker-books-and-courses/",
     "title": "Choose a poker book or course you will actually use.",
