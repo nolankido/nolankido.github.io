@@ -67,7 +67,7 @@ Use the [10-20 BB study guide](https://nolankido.com/poker/short-stack-decisions
 
 The button **called with A-T offsuit**, according to the narration. Nolan's **pocket sevens held**. He reports a double-up and taking the chip lead. The complete board and card suits are not established by the public account.
 
-The revealed hand is **one observation from the button's continuing range**, not proof of the entire opening range, the full calling range, or a solved reshove strategy. Winning the pot does **not** establish that the all-in move was the best option.
+The revealed hand is **one observation from the button's continuing range**, not the full calling range, not proof of the entire opening range, and not a solved reshove strategy. Winning the pot does **not** establish that the all-in move was the best option.
 
 Later, at a different blind level, Nolan reports approximately **1.4 million chips at a 60,000 big blind**, or roughly **23.3 BB**, and a subsequent **four-way deal**. He reports receiving **$2,900** in that deal, not the advertised **$5,100** first-place prize. These later events must not be treated as known payouts, stack sizes or guaranteed consequences at the original pocket-sevens decision.
 
