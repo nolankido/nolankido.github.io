@@ -25,7 +25,8 @@ EXAMPLE = "/downloads/poker-hand-review-example-ak.md"
 BLANK = "/downloads/poker-hand-review.md"
 SOURCE = ROOT / "_source/poker/reviewing-a-hand.html"
 PUBLIC = ROOT / "poker/reviewing-a-hand/index.html"
-EXERCISE_LABEL = "Annotated hand review examples"
+EXERCISE_LABEL = "Practice and worked hand reviews"
+PRACTICE = "/downloads/poker-hand-review-practice-01.md"
 BUBBLE_EXAMPLE = "/downloads/poker-hand-review-example-64o.md"
 SEVENS_EXAMPLE = "/downloads/poker-hand-review-example-77.md"
 SHOWDOWN_ANCHOR = "standoff-showdown"
@@ -34,7 +35,8 @@ SHOWDOWN_ANCHOR = "standoff-showdown"
 def exercise_errors(guide: str, example: str, blank: str) -> list[str]:
     failures = []
     nav = ('<nav class="poker-jump" aria-label="' + EXERCISE_LABEL +
-           '"><a href="' + EXAMPLE + '">A-K: two decisions</a>'
+           '"><a href="' + PRACTICE + '">Try a new case</a>'
+           '<a href="' + EXAMPLE + '">A-K: two decisions</a>'
            '<a href="' + BUBBLE_EXAMPLE + '">6-4: bubble shove</a>'
            '<a href="' + SEVENS_EXAMPLE + '">Sevens: four-handed reshove</a></nav>')
     if guide.count(nav) != 1:

@@ -26,10 +26,12 @@ BUBBLE = "/downloads/poker-hand-review-example-64o.md"
 AK = "/downloads/poker-hand-review-example-ak.md"
 SEVENS = "/downloads/poker-hand-review-example-77.md"
 BLANK = "/downloads/poker-hand-review.md"
-LABEL = "Annotated hand review examples"
+LABEL = "Practice and worked hand reviews"
+PRACTICE = "/downloads/poker-hand-review-practice-01.md"
 RESULT = "## 6. Result, recorded only after the decision analysis"
 NAV = ('<nav class="poker-jump" aria-label="' + LABEL +
-       '"><a href="' + AK + '">A-K: two decisions</a>'
+       '"><a href="' + PRACTICE + '">Try a new case</a>'
+       '<a href="' + AK + '">A-K: two decisions</a>'
        '<a href="' + BUBBLE + '">6-4: bubble shove</a>'
        '<a href="' + SEVENS + '">Sevens: four-handed reshove</a></nav>')
 
