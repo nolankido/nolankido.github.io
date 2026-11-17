@@ -21,13 +21,15 @@ import poker_reading
 
 QUESTION = "/downloads/poker-hand-review-practice-01.md"
 KEY = "/downloads/poker-hand-review-practice-01-key.md"
+QUESTION_HTML = "/downloads/poker-hand-review-practice-01.html"
+KEY_HTML = "/downloads/poker-hand-review-practice-01-key.html"
 BLANK = "/downloads/poker-hand-review.md"
 GUIDE_SOURCE = ROOT / "_source/poker/reviewing-a-hand.html"
 GUIDE_PUBLIC = ROOT / "poker/reviewing-a-hand/index.html"
 
 PRACTICE_NAV = (
     '<nav class="poker-jump" aria-label="Practice and worked hand reviews">'
-    '<a href="' + QUESTION + '">Try a new case</a>'
+    '<a href="' + QUESTION_HTML + '">Try a new case</a>'
     '<a href="/downloads/poker-hand-review-example-ak.md">A-K: two decisions</a>'
     '<a href="/downloads/poker-hand-review-example-64o.md">6-4: bubble shove</a>'
     '<a href="/downloads/poker-hand-review-example-77.md">Sevens: four-handed reshove</a>'
@@ -180,11 +182,11 @@ class OutcomeBlindPracticeTests(unittest.TestCase):
                 "| **6,000** |", "| **10,000** |", 1),
              self.guide, self.blank),
             (self.question, self.key, self.guide.replace(
-                'href="' + QUESTION + '"', 'href="' + KEY + '"', 1),
+                'href="' + QUESTION_HTML + '"', 'href="' + KEY_HTML + '"', 1),
              self.blank),
             (self.question, self.key, self.guide, self.blank.replace(
-                "Outcome-blind fictional practice (questions first): ",
-                "Skip the questions: ", 1).replace(QUESTION, KEY, 1)),
+                "Read the fictional practice in your browser: ",
+                "Skip the questions: ", 1).replace(QUESTION_HTML, KEY_HTML, 1)),
         )
         for idx, (question, key, guide, blank) in enumerate(mutations):
             with self.subTest(index=idx):
