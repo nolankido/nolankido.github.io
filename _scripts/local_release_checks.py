@@ -129,6 +129,7 @@ def main() -> int:
         ('Reciprocal study links in both Portland companion pages', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn154_companion_study_routes.py', '-q']),
         ('Real-hand reading links inside 6–10 and 10–20 BB guides', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn155_real_hand_guides.py', '-q']),
         ('Outcome-independent questions in both tournament companions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn156_hand_review_exercises.py', '-q']),
+        ('Responsive hand-review answers and direct lesson links', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn157_hand_review_accessibility.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
