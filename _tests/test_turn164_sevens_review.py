@@ -27,7 +27,7 @@ SEVENS = "/downloads/poker-hand-review-example-77.md"
 AK = "/downloads/poker-hand-review-example-ak.md"
 BUBBLE = "/downloads/poker-hand-review-example-64o.md"
 RESULT = "## 6. Result and later tournament outcome, kept separate"
-PRACTICE = "/downloads/poker-hand-review-practice-01.md"
+PRACTICE = "/downloads/poker-hand-review-practice-01.html"
 NAV = ('<nav class="poker-jump" aria-label="Practice and worked hand reviews">'
        '<a href="' + PRACTICE + '">Try a new case</a>'
        '<a href="' + AK + '">A-K: two decisions</a>'
