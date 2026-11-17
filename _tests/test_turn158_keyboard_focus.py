@@ -100,8 +100,8 @@ class BrowserFocusContractTests(unittest.TestCase):
                               ".poker-details > summary:hover,", 1), self.browser),
             (self.css, self.browser.replace('page.keyboard.press("Shift+Tab")',
                                             'summary.focus()', 1)),
-            (self.css, self.browser.replace("anchor_arrival(page, width, details)",
-                                            "summary.focus()", 1)),
+            (self.css, self.browser.replace("                    anchor_arrival(page, width, details)",
+                                            "                    summary.focus()", 1)),
         )
         for index, (css, browser) in enumerate(mutations):
             with self.subTest(index=index):
