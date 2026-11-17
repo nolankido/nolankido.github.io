@@ -97,6 +97,10 @@ class BubbleHandReviewTests(unittest.TestCase):
                       "About 148,000", "6-4 offsuit", "big blind calls with A-K suited",
                       "The favorable result does not prove the shove was good"):
             self.assertIn(token, archived)
+        self.assertIn('href="' + BUBBLE + '"', archived)
+        published = (ROOT / "poker/episodes/portland-meadows-ep1/index.html").read_text(encoding="utf-8")
+        self.assertIn(archived, published)
+        self.assertIn('href="' + BUBBLE + '"', published)
         self.assertNotIn("A-K suited", self.example.split(RESULT)[0])
 
     def test_blank_sheet_has_both_examples_and_stays_generic_and_private(self):
