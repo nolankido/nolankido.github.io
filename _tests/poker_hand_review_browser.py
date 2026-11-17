@@ -111,6 +111,8 @@ def main() -> None:
                 )
                 for route, target, lesson in CASES:
                     page.goto(BASE + route + "#" + target, wait_until="load")
+                    # Font loading can alter anchor placement after the load event.
+                    page.evaluate("async () => { await document.fonts.ready; }")
                     details = page.locator("#" + target)
                     summary = details.locator("summary")
                     next_link = details.locator("xpath=following-sibling::p[1]/a")
