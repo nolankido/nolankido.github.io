@@ -163,7 +163,7 @@ class BubbleHandReviewTests(unittest.TestCase):
                                  "guaranteed profitable", 1),
             self.example.replace("13 players remain; 10 places paid",
                                  "11 players remain; 10 places paid", 1),
-            self.example.replace("8,000", "7,000", 1),
+            self.example.replace("8,000", "7,000"),
             self.example.replace("/poker/episodes/portland-meadows-ep1/#hand-64o-record",
                                  "/poker/episodes/invalid/#hand-64o-record", 1),
         )
