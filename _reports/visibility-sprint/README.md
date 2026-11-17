@@ -1,5 +1,7 @@
 # Visibility sprint: public work and evidence
 
+> **SEO/GEO Turn 02, November 17, 2026:** [Public indexability and canonical eligibility audit](seo-geo-turn02-public-indexability-audit-2026-11-17.md) reviewed 224 sitemap URLs and five intentional noindex utilities. All 229 live checks and the full internal-link/JSON-LD syntax scan passed, with no confirmed critical public defect. The [manual live audit script](../../_scripts/live_indexability_audit.py) is now reproducible without scheduled jobs. Google/Bing indexed status remains unverified because authenticated inspection access is unavailable; these counts must not be reported as zero.
+
 > **New SEO/GEO baseline, November 17, 2026:** [Turn 01 public live audit](seo-geo-turn01-public-baseline-2026-11-17.md) verifies the current 224-URL sitemap and a 224-page HTTP/metadata scan. The 189-URL October baseline below and the older 200-URL static `search-audit.json` receipt are historical, not current indexation counts. Private GSC, Bing and Umami performance measures remain unverified.
 
 Prepared October 27, 2026, Honolulu. Baseline commit: `2aae4923318c0028d98266d78f6e4aabea295387`.
