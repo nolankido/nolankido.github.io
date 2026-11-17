@@ -8,12 +8,13 @@ An **annotated, after-play example** of the seven-part [blank hand-review worksh
 
 | Item | What the published account supports |
 | --- | --- |
-| Event | Portland Meadows Stand Off tournament, described in a later video narration |
+| Event and payout format | Portland Meadows Stand Off. In the first-person narration, this was a **twelve-round** event; players still holding chips at the end of round 12 were paid according to surviving stacks through an **ICM-based distribution**. The official rules and calculation were not independently verified |
 | Position and hand | Nolan on the button, A-K; card suits were reported in an archived still but not freshly checked against the public video |
-| Big blind and ante | 6,000 live big blind; a separate 6,000 big-blind ante |
+| Stage and source | Archived camera-clock description places the hand in **round 10 of 12, with 17 players remaining from 78 entries**. That is a production-packet source description, not a newly checked public-video timestamp |
+| Blinds and ante | **3,000 / 6,000 / 6,000** (small blind / live big blind / separate big-blind ante) |
 | Hero stack before the first decision | About 61,000 chips, approximately 61,000 / 6,000 = **10.17 BB**, assuming that was the stack before voluntary action |
 | Earlier action | Early position raised **to 15,000 total** and a middle-position player called |
-| Tournament objective | Not established precisely; no complete payout ladder or opponent stack distribution is supplied |
+| Tournament objective | Under the narrated format, holding chips at the round-12 stop was necessary to receive a payout, while stack size influenced the share. The exact payout formula, complete field stacks and any rule exceptions remain unverified; this is not a calculated tournament-value answer |
 
 **Evidence labels:** The action and chip counts above are **reported recollections**, not independently verified electronic hand records. The big-blind conversion and 61,000 minus 15,000 below are **arithmetic derived from those reports**. Opponent opening and reshove frequencies, exact stack conventions, complete pot size, tournament prize equity, side-pot eligibility and unreported cards remain **unknown**.
 
@@ -50,6 +51,8 @@ An **annotated, after-play example** of the seven-part [blank hand-review worksh
 
 The action trees are different. At A, a shove might win through folds. At B, calling **cannot make already all-in opponents fold**. A push/fold chart for one opponent does not settle a multiple-opponent call after a prior flat. Use the [10-20 BB guide's chip-EV/ICM comparison](https://nolankido.com/poker/short-stack-decisions/#icm-call) to learn how the objective changes, not to claim it solves this particular hand.
 
+**Why this tournament format matters:** The account describes a stop after round 12, when players still holding chips would share an ICM-based payout. Folding at B would preserve about 46,000 **at that moment**, not guarantee survival through the remaining rounds. Calling could increase the stack if successful or end the chance of reaching the stop. The decision is not equivalent to a conventional fixed-place payout ladder or a generic final-table ICM chart. Without the actual format rules, field stacks and distribution formula, neither action has a demonstrated prize-value advantage.
+
 ## 4. Thinking reported at the time, as remembered later
 
 Nolan later described worrying that the early-position raiser would call a jam and that the middle-position player might continue. His recorded plan was to flat and move strongly on an ace-high or king-high flop.
@@ -58,13 +61,13 @@ Nolan later described worrying that the early-position raiser would call a jam a
 
 ## 5. Later review and sensitivity questions
 
-The subsequent narration reports that, immediately after elimination, Nolan felt he could not fold A-K. Later, at the hotel, he reconsidered the **second** decision: why did the big blind shove after having the option to complete the original raise for just 9,000 more, and why did the original raiser then reshove?
+The later narration describes Nolan initially viewing the additional A-K call as unavoidable. Still later, at the hotel, he reconsidered the **second** decision: why did the big blind shove after having the option to complete the original raise for just 9,000 more, and why did the original raiser then reshove? These are successive retrospective assessments; the outcome is recorded only in Part 6.
 
 These are useful questions about possible ranges, **not verified range measurements**. A defensible study would test several explicitly stated alternatives:
 
 - What if the big blind squeezes a wide set of hands versus only premium holdings?
 - How does the original raiser's reshove range change after a squeeze?
-- How does the answer change when other players' stacks, payout steps, a bounty, or the objective change?
+- How does the answer change when other players' stacks, the narrated round-12 survivor payout and its ICM-based calculation, or the objective change? Could the actual model represent survival with chips at the scheduled stop rather than a standard placement ladder?
 - Which inputs can be recovered from contemporaneous records, and which must remain unresolved?
 
 **No solver or ICM calculation is claimed here.** If reliable stacks, payouts and ranges cannot be obtained, stop at a conditional comparison instead of publishing a definitive action ranking.
@@ -83,4 +86,4 @@ The revealed hands show what those opponents held **in this showdown**. They do 
 
 Sources: [First decision](https://nolankido.com/poker/episodes/portland-meadows-standoff/#standoff-first-decision), [second decision and evidence exercise](https://nolankido.com/poker/episodes/portland-meadows-standoff/#standoff-second-review), [reported showdown and limits](https://nolankido.com/poker/episodes/portland-meadows-standoff/#standoff-showdown).
 
-*Prepared with AI assistance, November 16, 2026, using only the previously published first-person account. This document neither rechecks the current YouTube edit nor supplies new range data, verified suits, complete hand history, solver outputs, or a gambling recommendation. Keep filled personal worksheets private.*
+*Prepared with AI assistance, November 16, 2026. Audited November 17, 2026 to clarify the narrated round-12 survivor payout and reserve the reported elimination for the result section. This review uses only the previously published first-person account; it neither rechecks the current YouTube edit nor supplies new range data, verified suits, an official payout formula, complete hand history, solver outputs, or a gambling recommendation. Keep filled personal worksheets private.*
