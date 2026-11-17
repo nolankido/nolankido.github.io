@@ -27,6 +27,7 @@ EXERCISES = (
     {
         "section": "hand-64o-record",
         "id": "hand-64o-review",
+        "next": "/poker/six-to-ten-bb-tournament-decisions/#bridge-sb",
         "after": "<h3>Thinking reported in the video</h3>",
         "prompt": "Ignore the winning runout.",
         "evidence": ("9.87 BB", "13 remained and 10 were paid",
@@ -35,6 +36,7 @@ EXERCISES = (
     {
         "section": "hand-77-record",
         "id": "hand-77-review",
+        "next": "/poker/short-stack-decisions/#depths",
         "after": "<h3>Alternatives described in the narration</h3>",
         "prompt": "Set aside the double-up.",
         "evidence": ("calling, a smaller raise and shoving", "A-T offsuit",
@@ -43,6 +45,7 @@ EXERCISES = (
     {
         "section": "standoff-second-decision",
         "id": "standoff-second-review",
+        "next": "/poker/short-stack-decisions/#icm-call",
         "after": "<p>These arithmetic checks explain why the second call",
         "prompt": "Treat the first call and the later decision separately.",
         "evidence": ("15,000 had already gone in", "46,000 remained",
@@ -74,13 +77,17 @@ def exercise_errors(markup: str, record: dict) -> list[str]:
         r'\s*<p><strong>Reader exercise:</strong>(.*?)</p>'
         r'\s*<details class="poker-details" id="' + re.escape(record["id"]) + r'">'
         r'<summary>' + re.escape(DISCLOSURE_SUMMARY) + r'</summary>'
-        r'\s*<p>(.*?)</p>\s*</details>\s*</aside>'
+        r'\s*<p>(.*?)</p>\s*</details>'
+        r'\s*<p class="poker-hand-review-next"><a href="([^"]+)">([^<]+)</a></p>\s*</aside>'
     )
     matches = list(re.finditer(pattern, scope, re.S))
     if len(matches) != 1:
         return errors + ["The visible prompt or collapsed native disclosure is missing"]
     match = matches[0]
     prompt, evidence = match.group(1), match.group(2)
+    next_url, next_label = match.group(3), match.group(4)
+    if next_url != record["next"] or not next_label.startswith("Continue: "):
+        errors.append("The immediate next-study destination is wrong or unclear")
     if record["prompt"] not in prompt:
         errors.append("Outcome-independent question is missing")
     for expected in record["evidence"]:
@@ -185,6 +192,9 @@ class DocumentedHandExerciseTests(unittest.TestCase):
              ), EXERCISES[2]),
             (self.standoff_source.replace(DISCLOSURE_SUMMARY,
                                           "Reveal a solver solution", 1), EXERCISES[2]),
+            (self.ep1_source.replace(
+                'href="/poker/six-to-ten-bb-tournament-decisions/#bridge-sb"',
+                'href="/poker/incorrect-study/#bridge-sb"', 1), EXERCISES[0]),
         )
         for index, (markup, record) in enumerate(bad):
             with self.subTest(index=index):
