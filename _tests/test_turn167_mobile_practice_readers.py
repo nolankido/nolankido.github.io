@@ -173,7 +173,7 @@ class MobilePracticeReaderTests(unittest.TestCase):
             (self.q.replace('overflow-wrap:anywhere', 'overflow-wrap:normal', 1), self.k),
             (self.q.replace("Stop here.", "Read answers above.", 1), self.k),
             (self.q.replace("##", "##", 1).replace("<p>Write the arithmetic", "<p>14,000. Write the arithmetic", 1), self.k),
-            (self.q.replace('href="' + QUESTION_ROUTE + '"', 'href="' + KEY_ROUTE + '"', 1), self.k),
+            (self.q.replace('href="' + KEY_ROUTE + '"', 'href="/downloads/invalid-key.html"', 1), self.k),
             (self.q, self.k.replace('class="audit-card"', 'class="old-wide-row"', 1)),
             (self.q, self.k.replace('href="' + QUESTION_ROUTE + '"',
                                     'href="/downloads/invalid.html"')),
