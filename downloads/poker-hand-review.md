@@ -55,3 +55,4 @@ For a shorter review, complete only the situation and the unanswered question.
 Guide: https://nolankido.com/poker/reviewing-a-hand/
 Annotated two-decision A-K example: https://nolankido.com/downloads/poker-hand-review-example-ak.md
 Annotated 6-4 offsuit near-bubble example: https://nolankido.com/downloads/poker-hand-review-example-64o.md
+Annotated pocket-sevens four-handed reshove: https://nolankido.com/downloads/poker-hand-review-example-77.md
