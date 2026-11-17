@@ -101,9 +101,11 @@ def practice_errors(question: str, key: str, guide: str, blank: str) -> list[str
     if KEY in guide:
         issues.append("Guide must not expose the checking key before the exercise")
     if ("https://nolankido.com" + QUESTION) not in blank:
-        issues.append("Private worksheet must offer the unseen practice")
-    if KEY in blank:
-        issues.append("Private worksheet must not skip the exercise")
+        issues.append("Private worksheet must retain editable practice download")
+    if ("https://nolankido.com" + QUESTION_HTML) not in blank:
+        issues.append("Private worksheet must offer browser-friendly practice first")
+    if KEY in blank or KEY_HTML in blank:
+        issues.append("Private worksheet must not skip straight to the checking key")
     for text in (question, key, guide, blank):
         if any(x in text for x in ("\u2014", "<script", "<iframe", "onclick=", "utm_source=")):
             issues.append("No active markup, tracking or em dashes")
