@@ -29,6 +29,16 @@
   max-width: 75ch;
   overflow-wrap: anywhere;
 }
+/* Reinforce focused hand-review location even when modality heuristics are uncertain. */
+.poker-episode-companion .poker-hand-review-check:focus-within {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+.poker-episode-companion .poker-hand-review-check .poker-details > summary:focus,
+.poker-episode-companion .poker-hand-review-check .poker-hand-review-next a:focus {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
 .poker-episode-companion .poker-hand-review-check .poker-details > summary:focus-visible,
 .poker-episode-companion .poker-hand-review-check .poker-hand-review-next a:focus-visible {
   outline: 3px solid var(--red);
