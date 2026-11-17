@@ -137,6 +137,7 @@ def main() -> int:
         ('Annotated two-decision A-K review and upgraded private worksheet', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn162_two_decision_review.py', '-q']),
         ('Source-limited 6-4 bubble shove review and ICM uncertainty', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn163_64o_bubble_review.py', '-q']),
         ('Four-handed pocket sevens and separate opening/calling ranges', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn164_sevens_review.py', '-q']),
+        ('Cross-review accuracy and Stand Off survivor payout context', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn165_worked_review_consistency.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
