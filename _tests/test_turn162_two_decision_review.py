@@ -43,8 +43,8 @@ def exercise_errors(guide: str, example: str, blank: str) -> list[str]:
     if not all(term in example for term in (
         "61,000 - 15,000 = approximately 46,000",
         "10.17 BB", "9,000", "6,000",
-        "Contested pot", "No solver or ICM calculation",
-        "retrospective description", "not a contemporaneous",
+        "contested pot", "No solver or ICM calculation",
+        "retrospective description", "No contemporaneous at-table note",
     )):
         failures.append("The evidence/stack ledger, unknowns or source limits were lost")
     if "Do not assign an exact pot-odds percentage" not in example:
@@ -61,7 +61,7 @@ def exercise_errors(guide: str, example: str, blank: str) -> list[str]:
         failures.append("Blank sheet must remain seven-part and reusable")
     if not all(term in blank for term in (
         "Decision label and point in the action sequence",
-        "original source", "reported recollection", "after a squeeze",
+        "Original evidence source", "reported recollection", "after a squeeze",
         "already in the pot", "ICM-prize value",
         "Stopping point", "later recollection",
         "poker-hand-review-example-ak.md",
