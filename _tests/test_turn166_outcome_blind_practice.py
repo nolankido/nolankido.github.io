@@ -21,13 +21,15 @@ import poker_reading
 
 QUESTION = "/downloads/poker-hand-review-practice-01.md"
 KEY = "/downloads/poker-hand-review-practice-01-key.md"
+QUESTION_HTML = "/downloads/poker-hand-review-practice-01.html"
+KEY_HTML = "/downloads/poker-hand-review-practice-01-key.html"
 BLANK = "/downloads/poker-hand-review.md"
 GUIDE_SOURCE = ROOT / "_source/poker/reviewing-a-hand.html"
 GUIDE_PUBLIC = ROOT / "poker/reviewing-a-hand/index.html"
 
 PRACTICE_NAV = (
     '<nav class="poker-jump" aria-label="Practice and worked hand reviews">'
-    '<a href="' + QUESTION + '">Try a new case</a>'
+    '<a href="' + QUESTION_HTML + '">Try a new case</a>'
     '<a href="/downloads/poker-hand-review-example-ak.md">A-K: two decisions</a>'
     '<a href="/downloads/poker-hand-review-example-64o.md">6-4: bubble shove</a>'
     '<a href="/downloads/poker-hand-review-example-77.md">Sevens: four-handed reshove</a>'
@@ -99,9 +101,11 @@ def practice_errors(question: str, key: str, guide: str, blank: str) -> list[str
     if KEY in guide:
         issues.append("Guide must not expose the checking key before the exercise")
     if ("https://nolankido.com" + QUESTION) not in blank:
-        issues.append("Private worksheet must offer the unseen practice")
-    if KEY in blank:
-        issues.append("Private worksheet must not skip the exercise")
+        issues.append("Private worksheet must retain editable practice download")
+    if ("https://nolankido.com" + QUESTION_HTML) not in blank:
+        issues.append("Private worksheet must offer browser-friendly practice first")
+    if KEY in blank or KEY_HTML in blank:
+        issues.append("Private worksheet must not skip straight to the checking key")
     for text in (question, key, guide, blank):
         if any(x in text for x in ("\u2014", "<script", "<iframe", "onclick=", "utm_source=")):
             issues.append("No active markup, tracking or em dashes")
@@ -180,11 +184,11 @@ class OutcomeBlindPracticeTests(unittest.TestCase):
                 "| **6,000** |", "| **10,000** |", 1),
              self.guide, self.blank),
             (self.question, self.key, self.guide.replace(
-                'href="' + QUESTION + '"', 'href="' + KEY + '"', 1),
+                'href="' + QUESTION_HTML + '"', 'href="' + KEY_HTML + '"', 1),
              self.blank),
             (self.question, self.key, self.guide, self.blank.replace(
-                "Outcome-blind fictional practice (questions first): ",
-                "Skip the questions: ", 1).replace(QUESTION, KEY, 1)),
+                "Read the fictional practice in your browser: ",
+                "Skip the questions: ", 1).replace(QUESTION_HTML, KEY_HTML, 1)),
         )
         for idx, (question, key, guide, blank) in enumerate(mutations):
             with self.subTest(index=idx):

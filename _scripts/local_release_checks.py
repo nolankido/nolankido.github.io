@@ -139,6 +139,7 @@ def main() -> int:
         ('Four-handed pocket sevens and separate opening/calling ranges', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn164_sevens_review.py', '-q']),
         ('Cross-review accuracy and Stand Off survivor payout context', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn165_worked_review_consistency.py', '-q']),
         ('Unseen fictional review case and separate objective checking key', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn166_outcome_blind_practice.py', '-q']),
+        ('Mobile readable poker practice and separate checking key', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn167_mobile_practice_readers.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),

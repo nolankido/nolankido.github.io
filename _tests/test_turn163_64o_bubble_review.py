@@ -27,7 +27,7 @@ AK = "/downloads/poker-hand-review-example-ak.md"
 SEVENS = "/downloads/poker-hand-review-example-77.md"
 BLANK = "/downloads/poker-hand-review.md"
 LABEL = "Practice and worked hand reviews"
-PRACTICE = "/downloads/poker-hand-review-practice-01.md"
+PRACTICE = "/downloads/poker-hand-review-practice-01.html"
 RESULT = "## 6. Result, recorded only after the decision analysis"
 NAV = ('<nav class="poker-jump" aria-label="' + LABEL +
        '"><a href="' + PRACTICE + '">Try a new case</a>'
