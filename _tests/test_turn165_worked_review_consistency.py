@@ -115,7 +115,7 @@ def review_errors(text_by_hand: dict[str, str]) -> list[str]:
         "immediately after elimination", "after busting", "after he lost",
         "I called the additional amount and lost"
     ):
-        if hindsight in ak_before:
+        if hindsight in ak_before.lower():
             errors.append("ak: narrated outcome disclosed before the result section")
     if "conventional fixed-place payout ladder" not in ak_before:
         errors.append("ak: special survivor-only format was confused with normal payout ladder")
