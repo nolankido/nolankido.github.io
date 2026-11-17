@@ -1,0 +1,77 @@
+/* Source-documented NolanPoker companion exercises only.
+   Keep the shared Poker hubs, library cards and main site unchanged. */
+
+.poker-episode-companion .poker-hand-review-check {
+  min-width: 0;
+  margin: 1.5rem 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border-left: 3px solid var(--red);
+  background: var(--panel);
+  overflow-wrap: anywhere;
+}
+.poker-episode-companion .poker-hand-review-check > p:first-child {
+  margin: 0 0 .85rem;
+}
+.poker-episode-companion .poker-hand-review-check .poker-details {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0 0 .7rem;
+  scroll-margin-top: 10rem;
+}
+.poker-episode-companion .poker-hand-review-check .poker-details > summary {
+  min-height: 44px;
+  padding: 1rem;
+  overflow-wrap: anywhere;
+}
+.poker-episode-companion .poker-hand-review-check .poker-details > p {
+  margin: 0;
+  padding: .1rem 1rem 1rem;
+  max-width: 75ch;
+  overflow-wrap: anywhere;
+}
+.poker-episode-companion .poker-hand-review-check .poker-details > summary:focus-visible,
+.poker-episode-companion .poker-hand-review-check .poker-hand-review-next a:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+.poker-episode-companion .poker-hand-review-check .poker-details:target {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px var(--red);
+}
+.poker-episode-companion .poker-hand-review-check .poker-hand-review-next {
+  margin: 0;
+  font: 600 .93rem/1.5 var(--sans);
+}
+.poker-episode-companion .poker-hand-review-check .poker-hand-review-next a {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 44px;
+  padding: .65rem 0;
+  overflow-wrap: anywhere;
+  text-underline-offset: .2em;
+}
+@media (max-width: 390px) {
+  .poker-episode-companion .poker-hand-review-check {
+    padding: 1rem;
+  }
+  .poker-episode-companion .poker-hand-review-check .poker-details > summary,
+  .poker-episode-companion .poker-hand-review-check .poker-details > p {
+    padding-left: .8rem;
+    padding-right: .8rem;
+  }
+}
+@media print {
+  .poker-episode-companion .poker-hand-review-check {
+    background: white;
+    color: black;
+    break-inside: avoid;
+  }
+  .poker-episode-companion .poker-hand-review-check .poker-details > p {
+    display: block !important;
+  }
+  .poker-episode-companion .poker-hand-review-check .poker-details::details-content {
+    content-visibility: visible !important;
+  }
+}
