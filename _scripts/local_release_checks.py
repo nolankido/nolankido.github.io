@@ -134,6 +134,7 @@ def main() -> int:
         ('In-memory responsive hand-review browser contract', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn159_content_browser.py', '-q']),
         ('Browser root provenance and installed Chromium selection', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn160_browser_provenance.py', '-q']),
         ('Three verified tournament hands in the hand-review method', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn161_hand_review_routes.py', '-q']),
+        ('Annotated two-decision A-K review and upgraded private worksheet', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn162_two_decision_review.py', '-q']),
         ('Two narrated real hand records', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_real_portland_hands.py', '-q']),
         ('Public Poker and combined RSS receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_manual_poker_feed.py', '-q']),
         ('Player sitemap and live-target contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_player_sitemap.py', '-q']),
