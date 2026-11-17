@@ -27,7 +27,9 @@ SEVENS = "/downloads/poker-hand-review-example-77.md"
 AK = "/downloads/poker-hand-review-example-ak.md"
 BUBBLE = "/downloads/poker-hand-review-example-64o.md"
 RESULT = "## 6. Result and later tournament outcome, kept separate"
-NAV = ('<nav class="poker-jump" aria-label="Annotated hand review examples">'
+PRACTICE = "/downloads/poker-hand-review-practice-01.md"
+NAV = ('<nav class="poker-jump" aria-label="Practice and worked hand reviews">'
+       '<a href="' + PRACTICE + '">Try a new case</a>'
        '<a href="' + AK + '">A-K: two decisions</a>'
        '<a href="' + BUBBLE + '">6-4: bubble shove</a>'
        '<a href="' + SEVENS + '">Sevens: four-handed reshove</a></nav>')
