@@ -1,5 +1,7 @@
 # Visibility sprint: public work and evidence
 
+> **New SEO/GEO baseline, November 17, 2026:** [Turn 01 public live audit](seo-geo-turn01-public-baseline-2026-11-17.md) verifies the current 224-URL sitemap and a 224-page HTTP/metadata scan. The 189-URL October baseline below and the older 200-URL static `search-audit.json` receipt are historical, not current indexation counts. Private GSC, Bing and Umami performance measures remain unverified.
+
 Prepared October 27, 2026, Honolulu. Baseline commit: `2aae4923318c0028d98266d78f6e4aabea295387`.
 
 The goal is greater visibility for Nolan Kido's practical use of AI alongside Technology, Living Well, Poker, and Creative Work. This sprint gives existing public projects permanent, source-supported pages and connects them to the site. Publication is an implementation milestone. It does not establish indexing, ranking, AI citations, traffic growth, or usefulness for a reader.
