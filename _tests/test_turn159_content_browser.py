@@ -59,7 +59,7 @@ def validation_issues(source: str) -> list[str]:
             errors.append("Unexpected network, service, or export call: " + forbidden)
     if "320, 390, 768, 1440" not in source:
         errors.append("The four expected viewport widths are missing")
-    if "—" in source:
+    if "\u2014" in source:
         errors.append("Unexpected em dash")
     return errors
 
