@@ -26,7 +26,7 @@ This is an **after-play, source-bounded example** of the seven-part [blank hand-
 - **Decision to review:** before pushing, would shoving, folding, completing the small blind, or using a different raise size best serve the relevant tournament objective? Which branches are actually available depends on reconstructing the complete action.
 - The reported shove is **not** an independently recorded betting slip. The amount wagered and contested pot cannot be reconstructed exactly from the quoted 148,000 stack alone.
 
-**Freeze the decision before the call.** The actual caller's holdings, runout and the eventual win are not inputs available to the small blind when deciding whether to shove.
+**Freeze the decision before the call.** The actual caller's holdings, runout and eventual outcome are not inputs available to the small blind when deciding whether to shove.
 
 ## 3. Compare alternatives under explicit assumptions
 
