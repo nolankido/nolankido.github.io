@@ -126,7 +126,7 @@ def review_errors(text_by_hand: dict[str, str]) -> list[str]:
     if any(word in text_by_hand["64o"].split(RESULT_HEADINGS["64o"])[0]
            for word in ("showed A-K", "actual caller held A-K")):
         errors.append("64o: caller hand disclosed during decision")
-    if "opening and calling" not in text_by_hand["77"]:
+    if "button\'s opening range is not its calling range" not in text_by_hand["77"]:
         errors.append("77: opener/caller range distinction lost")
     return errors
 
