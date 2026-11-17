@@ -45,7 +45,8 @@ def dimensions(page) -> dict:
 
 def main() -> None:
     report = {"sizes": list(WIDTHS), "full_page_layout_checks": 0,
-              "reader_focus_checks": 0, "five_checkbox_checks": 0,
+              "reader_focus_checks": 0, "step_jump_checks": 0, "section_return_checks": 0,
+              "five_checkbox_checks": 0,
               "return_to_questions": 0, "blocked_asset_requests": 0,
               "network_responses": 0, "method": "actual committed HTML, offline in-memory Chromium"}
     with sync_playwright() as pw:
@@ -81,6 +82,20 @@ def main() -> None:
                         width, kind, "horizontal document overflow", layout)
                     assert layout["contentWidth"] <= width + 1, (
                         width, kind, "article not responsive", layout)
+                    # Real in-page navigation, not simulated element.focus().
+                    prefix = "question" if kind == "questions" else "check"
+                    nav = page.locator('.step-nav')
+                    expect(nav).to_be_visible()
+                    expect(nav.locator('a')).to_have_count(8 if kind == "questions" else 7)
+                    jump = nav.locator('a[href="#' + prefix + '-5"]')
+                    jump.click()
+                    target = page.locator('#' + prefix + '-5')
+                    expect(target).to_be_in_viewport()
+                    assert page.evaluate("location.hash") == "#" + prefix + "-5"
+                    assert target.evaluate("e => getComputedStyle(e).outlineStyle") == "solid"
+                    assert dimensions(page)["pageWidth"] <= width + 1
+                    report["step_jump_checks"] += 1
+
                     if kind == "questions":
                         expect(page.locator(".audit-card")).to_have_count(0)
                         expect(page.locator(
@@ -91,6 +106,13 @@ def main() -> None:
                         )).to_have_count(1)
                     else:
                         expect(page.locator(".audit-card")).to_have_count(14)
+                        for step in range(1, 8):
+                            expect(page.locator(
+                                '.compare-question a[href="/downloads/poker-hand-review-practice-01.html#question-' +
+                                str(step) + '"]'
+                            )).to_have_count(1)
+                            expect(page.locator('#check-' + str(step))).to_have_count(1)
+                        report["section_return_checks"] += 7
                         assert layout["maxCardRight"] <= width + 1, (width, kind, layout)
                         assert layout["minCardLeft"] >= -1, (width, kind, layout)
                         expect(page.locator("input[type=checkbox]")).to_have_count(5)
@@ -124,6 +146,8 @@ def main() -> None:
             browser.close()
     assert report["full_page_layout_checks"] == 8, report
     assert report["reader_focus_checks"] == 8, report
+    assert report["step_jump_checks"] == 8, report
+    assert report["section_return_checks"] == 28, report
     assert report["five_checkbox_checks"] == 4, report
     assert report["return_to_questions"] == 4, report
     assert report["network_responses"] == 0, report
