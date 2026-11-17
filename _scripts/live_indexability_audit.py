@@ -160,7 +160,8 @@ def main():
     inbound = defaultdict(set)
     for r in rows:
         for p in r.get("internal_links", []):
-            inbound[p].add(r["path"])
+            if p != r["path"]:
+                inbound[p].add(r["path"])
 
     errors = [r for r in rows if "error" in r or r.get("status") != 200]
     print("CRAWL", len(rows), "ERRORS", len(errors), flush=True)
@@ -186,7 +187,7 @@ def main():
         if r.get("canonical") != [BASE + p]: issues.append([p, "canonical mismatch"])
         if any("noindex" in v.lower() for _, v in r.get("robots", [])) or any("noindex" in v.lower() for v in r.get("x_robots", [])):
             issues.append([p, "unexpected noindex"])
-        if not inbound.get(p): issues.append([p, "no inbound links from all sitemap URLs"])
+        if not inbound.get(p): issues.append([p, "no incoming links from other crawled pages"])
         if r.get("h1") != 1: issues.append([p, "missing or duplicate h1"])
         if r.get("bad_schema_dates"): issues.append([p, "invalid JSON-LD date"])
         if r.get("schema_errors"): issues.append([p, "invalid JSON-LD"])
