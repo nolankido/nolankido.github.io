@@ -181,7 +181,8 @@ class SevensReviewTests(unittest.TestCase):
                                 "585,000 / 30,000 = 12 BB", 1),
             self.sample.replace("/poker/episodes/portland-meadows-ep1/#hand-77-record",
                                 "/poker/episodes/invalid/#hand-77-record", 1),
-            self.sample.replace("The revealed hand is", "A-T offsuit was known in advance. The revealed hand is", 1),
+            self.sample.replace("The button's opening range is not its calling range.",
+                                "A-T offsuit was known in advance. The button's opening range is not its calling range.", 1),
         )
         for idx, sample in enumerate(variants):
             with self.subTest(idx=idx):
