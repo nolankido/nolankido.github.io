@@ -24,12 +24,14 @@ import poker_reading
 GUIDE = "/poker/reviewing-a-hand/"
 BUBBLE = "/downloads/poker-hand-review-example-64o.md"
 AK = "/downloads/poker-hand-review-example-ak.md"
+SEVENS = "/downloads/poker-hand-review-example-77.md"
 BLANK = "/downloads/poker-hand-review.md"
 LABEL = "Annotated hand review examples"
 RESULT = "## 6. Result, recorded only after the decision analysis"
 NAV = ('<nav class="poker-jump" aria-label="' + LABEL +
-       '"><a href="' + AK + '">See a worked A-K review with two separate decisions</a>'
-       '<a href="' + BUBBLE + '">6-4 bubble decision</a></nav>')
+       '"><a href="' + AK + '">A-K: two decisions</a>'
+       '<a href="' + BUBBLE + '">6-4: bubble shove</a>'
+       '<a href="' + SEVENS + '">Sevens: four-handed reshove</a></nav>')
 
 
 def example_problems(document: str) -> list[str]:
@@ -103,7 +105,7 @@ class BubbleHandReviewTests(unittest.TestCase):
         self.assertIn('href="' + BUBBLE + '"', published)
         self.assertNotIn("A-K suited", self.example.split(RESULT)[0])
 
-    def test_blank_sheet_has_both_examples_and_stays_generic_and_private(self):
+    def test_blank_sheet_has_three_examples_and_stays_generic_and_private(self):
         self.assertEqual(len(re.findall(r"(?m)^## [1-7]\. ", self.blank)), 7)
         self.assertIn("A private, editable record", self.blank)
         self.assertIn("Keep other people's identifying information", self.blank)
@@ -111,12 +113,13 @@ class BubbleHandReviewTests(unittest.TestCase):
         self.assertIn("reported recollection", self.blank)
         self.assertIn(AK, self.blank)
         self.assertIn(BUBBLE, self.blank)
+        self.assertIn(SEVENS, self.blank)
         for excluded in ("Nolan", "148,000", "61,000", "A-K suited"):
             self.assertNotIn(excluded, self.blank)
         self.assertIn("### Decision A:", self.ak)
         self.assertIn("### Decision B:", self.ak)
 
-    def test_general_guide_offers_two_examples_without_new_search_prose(self):
+    def test_general_guide_offers_three_examples_without_new_search_prose(self):
         self.assertEqual(self.source.count(NAV), 1)
         self.assertEqual(self.public.count(NAV), 1)
         self.assertIn(self.source, self.public)
@@ -134,14 +137,15 @@ class BubbleHandReviewTests(unittest.TestCase):
         self.assertEqual(build.build_outputs()[Path("poker/reviewing-a-hand/index.html")],
                          self.public)
 
-    def test_both_example_downloads_are_registered_and_resolve(self):
+    def test_all_three_example_downloads_are_registered_and_resolve(self):
         endpoints = check_live.targets()
-        for url in (BLANK, AK, BUBBLE):
+        for url in (BLANK, AK, BUBBLE, SEVENS):
             with self.subTest(url=url):
                 self.assertEqual(endpoints[url],
                                  (200, (ROOT / url.lstrip("/")).read_bytes()))
         self.assertIn('href="' + BUBBLE + '"', self.public)
         self.assertIn('href="' + AK + '"', self.public)
+        self.assertIn('href="' + SEVENS + '"', self.public)
 
     def test_original_dates_and_sitemap_stay_synchronized(self):
         pages = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
