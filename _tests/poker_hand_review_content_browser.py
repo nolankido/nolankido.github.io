@@ -7,10 +7,12 @@ No login, server, CI service, browser extensions or external network calls.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from pathlib import Path
 import re
+import shutil
 from urllib.parse import urlsplit
 
 from playwright.sync_api import expect, sync_playwright
@@ -31,6 +33,47 @@ STYLESHEET = re.compile(
 )
 SCRIPT = re.compile(r'<script\b[^>]*>[\s\S]*?</script>', re.I)
 PRELOAD = re.compile(r'<link\b[^>]*\brel="(?:preload|modulepreload)"[^>]*>', re.I)
+
+
+def repository_identity() -> dict:
+    """Label incomplete fixture roots honestly; validate real manual article ownership."""
+    required = (
+        ROOT / "AGENTS.md",
+        ROOT / "_source/pages.json",
+        ROOT / "_scripts/build.py",
+        ROOT / "_scripts/build_poker_episode.py",
+        ROOT / "_scripts/build_standoff_episode.py",
+    )
+    complete = all(path.is_file() for path in required)
+    if complete:
+        for slug in ("portland-meadows-ep1", "portland-meadows-standoff"):
+            source = (ROOT / "_source/poker" / (slug + ".html")).read_text(encoding="utf-8")
+            page = (ROOT / "poker/episodes" / slug / "index.html").read_text(encoding="utf-8")
+            if not source.strip() or page.count(source) != 1:
+                raise ValueError("Standalone source-to-published mismatch: " + slug)
+    if os.environ.get("POKER_BROWSER_REQUIRE_REPO") == "1" and not complete:
+        raise RuntimeError("Full-checkout verification requested but this is a fixture root: " + str(ROOT))
+    return {
+        "root_type": "checked_out_repository" if complete else "synthetic_or_incomplete_fixture",
+        "source_ownership_checked": complete,
+        "production_deployment_checked": False,
+        "source_pages_sha256": {
+            route: hashlib.sha256((ROOT / route.strip("/") / "index.html").read_bytes()).hexdigest()
+            for route in sorted({*([item[0] for item in CASES]),
+                                 *([urlsplit(item[2]).path for item in CASES])})
+        },
+    }
+
+
+def browser_executable() -> str | None:
+    """Prefer configured Chromium, then a local system browser, then Playwright."""
+    explicit = os.environ.get("CHROMIUM_PATH")
+    if explicit:
+        if not Path(explicit).is_file():
+            raise FileNotFoundError("CHROMIUM_PATH does not exist: " + explicit)
+        return explicit
+    return (shutil.which("chromium") or shutil.which("chromium-browser")
+            or shutil.which("google-chrome") or shutil.which("google-chrome-stable"))
 
 
 def local_document(route: str) -> str:
@@ -104,14 +147,18 @@ def assert_arrival(page, width: int, anchor: str) -> dict:
 
 
 def main() -> None:
+    identity = repository_identity()
     report = {"widths": list(WIDTHS), "complete_page_review_checks": 0,
               "keyboard_paths": 0, "destination_checks": 0,
               "blocked_asset_requests": 0, "network_responses": 0,
               "method": "committed full-page HTML and inlined CSS, no HTTP navigation"}
+    report.update(identity)
     with sync_playwright() as pw:
         launch = {"headless": True}
-        if os.environ.get("CHROMIUM_PATH"):
-            launch["executable_path"] = os.environ["CHROMIUM_PATH"]
+        executable = browser_executable()
+        if executable:
+            launch["executable_path"] = executable
+        report["browser_executable"] = executable or "Playwright-managed default"
         browser = pw.chromium.launch(**launch)
         try:
             for width in WIDTHS:
@@ -188,6 +235,8 @@ def main() -> None:
         "complete_page_review_checks", "keyboard_paths", "destination_checks"
     )), report
     assert report["network_responses"] == 0, report
+    report["status"] = ("checked_out_repository_render_pass"
+                        if identity["source_ownership_checked"] else "synthetic_fixture_smoke_pass")
     print(json.dumps(report, indent=2))
 
 
