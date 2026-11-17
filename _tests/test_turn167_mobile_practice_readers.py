@@ -170,7 +170,7 @@ class MobilePracticeReaderTests(unittest.TestCase):
         bad = (
             (self.q.replace('data-source-blob="' + git_blob(self.q_md) + '"',
                             'data-source-blob="stale"', 1), self.k),
-            (self.q.replace('overflow-wrap:anywhere', 'overflow-wrap:normal', 1), self.k),
+            (self.q.replace('overflow-wrap:anywhere', 'overflow-wrap:normal'), self.k),
             (self.q.replace("Stop here.", "Read answers above.", 1), self.k),
             (self.q.replace("##", "##", 1).replace("<p>Write the arithmetic", "<p>14,000. Write the arithmetic", 1), self.k),
             (self.q.replace('href="' + KEY_ROUTE + '"', 'href="/downloads/invalid-key.html"', 1), self.k),
