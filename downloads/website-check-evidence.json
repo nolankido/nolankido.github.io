@@ -13,6 +13,16 @@
       "tag": "div"
     }
   },
+  "source_closure": {
+    "path": "_source/technology/task-brief.html",
+    "pre_repair_ref": "2bf8908339e06f604cea00f0254494e17171ecf4",
+    "pre_repair_blob_sha": "5d82e36b892d8bb31c325c1afa9ded90cd233712",
+    "pre_repair_last_line": "</div></div></section>",
+    "repaired_ref": "73782caa4697204690c679626b36427c28201234",
+    "repaired_blob_sha": "33dc068bb75bcaf2ac21ec29dfed5d62b4bccf09",
+    "repaired_last_line": "</div></section>",
+    "verification": "Final lines and blob SHAs checked against both pinned public GitHub source files on 2026-11-18. The reduced teaching fixture remains separate."
+  },
   "repaired": {
     "candidate": "73782caa4697204690c679626b36427c28201234",
     "run": 38196825689,
@@ -31,6 +41,7 @@
     "No verified Google indexing or ranking change",
     "Not full security or accessibility certification",
     "Some automated color-contrast checks required human review",
-    "Reduced downloadable fixture is illustrative, not a replay of full site audit"
+    "Reduced downloadable fixture is illustrative, not a replay of full site audit",
+    "Historical suite and release counts are transcribed from archived records, not re-executed by the November 18 source comparison"
   ]
 }
