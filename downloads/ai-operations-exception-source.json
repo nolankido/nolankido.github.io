@@ -1,0 +1,70 @@
+{
+  "schema": "nolankido-synthetic-ai-operations-exception-v1",
+  "title": "Fictional print-shop order exception",
+  "created": "2026-11-18",
+  "fictional": true,
+  "client_or_business_records": false,
+  "model_execution": "not_performed",
+  "draft_provenance": "deliberately_constructed_illustrative_counterexample",
+  "task": "Using only notes S1-S3, draft an internal order status, blockers, next checks, and the human decision needed. Do not promise delivery or imply approval.",
+  "notes": [
+    {
+      "id": "S1",
+      "kind": "request",
+      "text": "A customer requests 120 printed instruction cards for Friday at 4 p.m. No order or pickup has been confirmed.",
+      "quantity_requested": 120,
+      "requested_pickup": "Friday at 4 p.m.",
+      "pickup_confirmed": false
+    },
+    {
+      "id": "S2",
+      "kind": "inventory",
+      "text": "There are 90 blank cards on hand. Another 60 have been requested from a supplier, but arrival is not confirmed.",
+      "on_hand": 90,
+      "supplier_ordered": 60,
+      "supplier_arrival_confirmed": false
+    },
+    {
+      "id": "S3",
+      "kind": "authority",
+      "text": "A manager must authorize any pickup-time promise. A customer must agree before a partial delivery becomes an accepted arrangement.",
+      "manager_approval_recorded": false,
+      "partial_delivery_customer_agreement_recorded": false
+    }
+  ],
+  "illustrative_flawed_draft": "Confirm the order for all 120 cards at 4 p.m. Friday. There is enough stock coming in. If needed, tell the customer 90 cards can be collected first.",
+  "independent_checks": [
+    {
+      "id": "quantity",
+      "references": ["S1", "S2"],
+      "calculation": "120 requested - 90 on hand = 30 cards short",
+      "result": "reject_claim_of_sufficient_stock"
+    },
+    {
+      "id": "supplier",
+      "references": ["S2"],
+      "result": "reject_claim_of_confirmed_arrival"
+    },
+    {
+      "id": "authority",
+      "references": ["S1", "S3"],
+      "result": "reject_promised_pickup_and_unapproved_split"
+    }
+  ],
+  "fictional_reviewer_decision": {
+    "outcome": "reject_and_revise",
+    "needed_checks": [
+      "verify supplier arrival",
+      "verify printing capacity and completion timing",
+      "obtain manager authorization for customer wording",
+      "obtain customer agreement before accepting a partial delivery"
+    ],
+    "revised_internal_status": "120 cards requested for Friday at 4 p.m.; 90 on hand, 30 short. Supplier delivery, completion time, manager approval, and any split-order agreement are unresolved. Confirm those items before making a customer commitment."
+  },
+  "limitations": [
+    "No actual model produced the flawed draft",
+    "No real customer, print shop, manager or order is represented",
+    "No human approval, business outcome, time saving or accuracy rate was measured",
+    "These independent checks do not guarantee safety for other tasks"
+  ]
+}
