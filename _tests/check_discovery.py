@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
+from urllib.robotparser import RobotFileParser
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,8 @@ ROUTES = (
     "/poker/school/",
 )
 POKER_LINKS = ("/poker/hand-rankings/", "/poker/school/")
+SEARCH_CRAWLERS = ("OAI-SearchBot", "bingbot")
+SEARCH_ENTRY_ROUTES = ("/", "/technology/check-ai-answers/", "/poker/")
 
 
 class Parsed(HTMLParser):
@@ -99,6 +102,23 @@ def wildcard_root_blocked(directives):
     return False
 
 
+def blocked_search_entrypoints(directives):
+    """Check public robots rules for search bots, not training or real bot access.
+
+    This is a local standard-library policy approximation. It does not prove
+    that a CDN or host will admit requests from a crawler's published IPs.
+    Intentionally do not assert any GPTBot training policy here.
+    """
+    parser = RobotFileParser()
+    parser.parse(directives)
+    return [
+        (bot, route)
+        for bot in SEARCH_CRAWLERS
+        for route in SEARCH_ENTRY_ROUTES
+        if not parser.can_fetch(bot, ORIGIN + route)
+    ]
+
+
 def check(root=ROOT):
     """Raise ValueError on any broken priority-page discovery invariant."""
     root = Path(root)
@@ -115,6 +135,8 @@ def check(root=ROOT):
         errors.append("robots.txt: missing active canonical sitemap declaration")
     if wildcard_root_blocked(directives):
         errors.append("robots.txt: blanket root Disallow")
+    for bot, route in blocked_search_entrypoints(directives):
+        errors.append("robots.txt: search crawler " + bot + " blocked from " + route)
 
     tree = ET.fromstring((root / "sitemap.xml").read_text(encoding="utf-8"))
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
