@@ -1,0 +1,31 @@
+path,approx_main_words,main_internal_targets,external_main_hosts,evidence_score,firsthand_score,task_score,author_score,links_score,disposition,priority,review_note
+/,1035,29,2,4,4,4,5,5,keep,P2,Identity and proof entry points are already present
+/about/,1447,32,6,5,5,5,5,5,keep,P2,Visible background project and external references
+/start-here/,1143,31,1,4,3,5,5,5,keep,P2,Three clear ways to reach relevant work
+/projects/,1085,24,4,5,5,4,5,5,keep,P2,Project status and inspectable cases are already linked
+/technology/,4736,51,6,4,5,4,5,5,deepen,P1,Test first-screen task routing before adding more links
+/technology/check-ai-answers/,3617,23,3,5,4,5,5,4,keep,P2,Verification sections and worked examples are present
+/technology/ai-time-savings/,1770,15,0,5,4,5,5,4,deepen,P1,Add measured full-workflow evidence only when independently recorded
+/technology/local-ai-gaming-laptop/,3170,10,4,5,5,4,5,4,deepen,P1,Actual local laptop benchmark remains deliberately unmeasured
+/technology/local-ai-review-replies/,2630,13,3,5,5,5,5,4,keep,P2,Archived accepted and rejected outputs support the case
+/technology/review-reply-evidence-audit/,2464,13,1,5,5,5,5,4,keep,P2,Six-case check and limitations are inspectable
+/technology/ai-book-continuity-checker/,1113,14,2,5,5,4,5,4,keep,P2,Sample source-linked report and limitations remain visible
+/technology/organize-public-notes/,1540,16,0,5,5,5,5,4,keep,P2,Original input output and source IDs are foregrounded
+/technology/ai-weekly-reset/,1539,14,1,4,4,4,5,4,leave_untouched,P3,Distinct documented worksheet case without observed demand
+/technology/local-ai-test-record/,949,13,1,5,5,5,5,4,leave_untouched,P3,Preserve historical timing caveats and content dates
+/technology/dinner-on-time/,899,13,1,4,5,4,5,4,leave_untouched,P3,Prototype limits and public demonstration are explicit
+/technology/rightsreceipt-ai-licensing/,1783,13,4,5,5,5,5,4,keep,P2,Test fixture and actual payment distinctions are clear
+/poker/,3163,78,4,4,4,4,5,5,deepen,P1,Check novice choice path within a very large resource hub
+/poker/six-to-ten-bb-tournament-decisions/,4271,24,3,5,4,5,5,4,correct,P1,Identical H1 and first H2 are a confirmed repetition
+/poker/satellite-bubble-seat-equity/,3188,20,3,5,3,5,5,4,keep,P2,Transparent illustrative seat-equity model with assumptions
+/poker/poker-math/,1025,16,2,5,3,5,5,4,keep,P2,Direct 25-percent pot-odds example was spot-checked
+/poker/first-live-tournament/,1422,21,2,4,4,5,5,4,deepen,P1,Add a direct native route to Holdem basics and hand rankings
+/poker/holdem-basics/,1000,17,2,4,2,5,5,4,keep,P2,Fictional round-by-round example and sources are present
+/poker/hand-rankings/,1126,18,2,4,2,5,5,4,keep,P2,Rank list and comparison examples cover the reader task
+/poker/study/,2496,55,0,4,4,5,5,5,keep,P2,Practice and worksheet paths exist with navigation addressed in Turn 168
+/poker/nolan-kido/,1187,11,4,5,5,5,5,4,keep,P2,Independent results links and payout scope caveats visible
+/poker/episodes/portland-meadows-ep1/,2182,17,1,5,5,5,5,4,keep,P2,Two source-bounded hand records with evidence ledger
+/poker/episodes/portland-meadows-standoff/,1763,12,1,5,5,4,5,4,leave_untouched,P3,Archived script limits prevent unsupported current-video updates
+/creative/,1752,24,1,4,4,4,5,4,leave_untouched,P3,Clear portfolio hub without verified opportunity demand
+/living-well/,823,38,0,4,3,4,5,4,leave_untouched,P3,No observed demand supports expansion ahead of AI and Poker
+/living-well/scattered-notes-to-next-step/,1055,14,1,4,4,5,5,4,keep,P2,Distinct approachable task links to deeper Technology source case
