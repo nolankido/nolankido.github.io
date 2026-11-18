@@ -1372,7 +1372,7 @@
     "date": "2026-10-11",
     "evidence_article": true,
     "updated": "2026-11-18",
-    "revision": "Linked the recorded HTML5 failure to the practical claim-by-claim AI answer-checking method."
+    "revision": "Verified pinned pre-repair and repaired source endings, strengthened the offline negative control, and added a reusable release-check runbook."
   },
   {
     "id": "ai-summary-review",
