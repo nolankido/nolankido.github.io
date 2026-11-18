@@ -1370,7 +1370,9 @@
     "kicker": "Technology / Recorded case study",
     "source": "technology/checking-ai-website-changes.html",
     "date": "2026-10-11",
-    "evidence_article": true
+    "evidence_article": true,
+    "updated": "2026-11-18",
+    "revision": "Linked the recorded HTML5 failure to the practical claim-by-claim AI answer-checking method."
   },
   {
     "id": "ai-summary-review",
@@ -1403,14 +1405,14 @@
     "path": "/technology/check-ai-answers/",
     "title": "How to check an AI answer.",
     "seo_title": "How to Check AI Answers: Facts, Math & Code | Nolan Kido",
-    "description": "Check AI answers against sources, recompute calculations, review summaries and test code. Six practical methods, worked examples and a reusable review record.",
+    "description": "Check AI-generated claims before acting. Match six claim types to independent evidence, inspect real project failures, and download a private one-page checklist.",
     "kicker": "Practical AI / Verification",
     "source": "technology/check-ai-answers.html",
     "section": "technology",
     "worked_guide": true,
     "date": "2026-10-12",
-    "updated": "2026-10-27",
-    "revision": "Connected the existing checking method to documented project failures, retaining the original worked exercises and review record."
+    "updated": "2026-11-18",
+    "revision": "Added an answer-first evidence matrix, an offline one-page claim checklist, and a source-pinned review of a polished but incomplete reply."
   },
   {
     "id": "poker-first-decisions",
@@ -1623,7 +1625,9 @@
     "kicker": "Technology / AI for creative work",
     "source": "technology/ai-book-continuity-checker.html",
     "date": "2026-10-27",
-    "evidence_article": true
+    "evidence_article": true,
+    "updated": "2026-11-18",
+    "revision": "Linked the archived false-positive and missed-error record to the independent AI claim-checking guide."
   },
   {
     "id": "dinner-on-time",

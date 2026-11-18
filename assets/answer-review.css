@@ -4,6 +4,11 @@
 .page-ai-answer-review .review-picker a:hover { border-color: var(--red); }
 .page-ai-answer-review .review-kind { font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
 .page-ai-answer-review .review-picker a > span:last-child { font-size: .9rem; color: var(--ink-soft); }
+.page-ai-answer-review .review-quick-action { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin: 1.1rem 0; }
+.page-ai-answer-review .review-quick-action .small-copy { display: inline-block; }
+.page-ai-answer-review .review-evidence-map { min-width: 49rem; }
+.page-ai-answer-review .review-evidence-map th:first-child { min-width: 7.5rem; }
+.page-ai-answer-review .review-evidence-map th:last-child { min-width: 9rem; }
 .page-ai-answer-review .review-boundary { border-left: 3px solid var(--red); padding: .6rem 1rem; }
 .page-ai-answer-review .review-steps { padding-left: 1.5rem; }
 .page-ai-answer-review .review-steps li { margin: .65rem 0; padding-left: .2rem; }
@@ -20,6 +25,8 @@
   html:has(.page-ai-answer-review) { background: white; }
   .page-ai-answer-review .review-picker,
   .page-ai-answer-review .review-download-action { display: none !important; }
+  .page-ai-answer-review .review-quick-action { display: none !important; }
+  .page-ai-answer-review .review-evidence-map { min-width: 0; }
   .page-ai-answer-review .review-example { break-inside: avoid; }
   .page-ai-answer-review .review-sheet { break-inside: auto; }
   .page-ai-answer-review .review-example::details-content,
