@@ -1,8 +1,9 @@
 <section class="section folio-row" aria-labelledby="review-start">
   <div class="section-meta"><p class="section-label">Start with the use</p></div>
   <div class="section-content prose">
-    <h2 class="section-title" id="review-start">What would make this answer worth using?</h2>
-    <p class="intro">To check an AI answer, identify the specific claim you might rely on, find evidence outside the answer, and test whether that evidence supports the claim under the right conditions. Recalculate numbers from the inputs; open citations and read their relevant passages; test code with a case that could fail. Record what remains unresolved before using or sharing the result.</p>
+    <h2 class="section-title" id="review-start">How do you check an AI-generated answer before using it?</h2>
+    <p class="intro">Pick one claim that could change your action. Check it against evidence outside the AI answer: open the cited passage, recalculate from the original inputs, compare with the source text, or run a test with a known expected result. Mark that claim <strong>supported</strong>, <strong>contradicted</strong>, or <strong>unresolved</strong>. Revise or pause the action when its important claims remain unsupported.</p>
+    <p class="review-quick-action"><a class="button" href="/downloads/ai-answer-quick-check.txt" download>Download the one-page checking checklist (.txt)</a> <span class="small-copy">Plain text for private, offline use. Nothing to submit.</span></p>
     <p>Before checking, name what you intend to do with the result. A draft you will edit, a figure you will publish, and code you will run need different evidence. Circle the parts that could change an action: a date, amount, promise, instruction, or conclusion. Start there.</p>
     <p>A second AI answer can suggest questions to investigate. Agreement between answers still leaves you needing evidence outside those answers. This guide gives you six ways to obtain it.</p>
     <h3 id="review-fast-method">A quick first pass: claim, evidence, decision</h3>
@@ -12,6 +13,31 @@
       <li><strong>Compare the exact claim with the evidence.</strong> Look for dates, conditions, units, missing people, uncertainty, and differences between a proposal and a commitment.</li>
       <li><strong>Choose an evidence status before acting.</strong> Mark the claim supported, contradicted, or unresolved; write what was actually checked, and leave consequential work paused when the required evidence is missing.</li>
     </ol>
+    <h3 id="review-claim-map">Which check matches the claim?</h3>
+    <p>The six deliberately flawed examples below are fictional teaching material. They are not captured model answers, measured error rates, or proof that any current system behaves this way. Open the linked method for the full evidence and repair.</p>
+    <p class="project-table-hint" id="answer-check-map-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
+    <div class="project-table-scroll" role="region" aria-label="Claim types, warning signs, independent checks, and unknowns" aria-describedby="answer-check-map-table-hint" tabindex="0">
+      <table class="review-evidence-map">
+        <caption>Six claim types: a warning, a discriminating check, and what remains unknown</caption>
+        <thead><tr><th scope="col">Claim type</th><th scope="col">Flawed claim or warning sign</th><th scope="col">Independent check and narrower response</th><th scope="col">Still unknown</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><a href="#review-research">Facts and citations</a></th><td>“NIST says two agreeing chatbots make an answer 99% reliable.”</td><td>Read NIST AI 600-1, section 2.2. It describes confident errors; it does not support that percentage or rule. Remove them.</td><td>Reliability of this particular answer.</td></tr>
+          <tr><th scope="row"><a href="#review-numbers">Numbers</a></th><td>“Twelve uses save 168 minutes,” counting drafting but omitting setup, review and repair.</td><td>Recompute every listed cost. In the fictional example, estimated savings become 36 minutes.</td><td>Actual task times and real savings.</td></tr>
+          <tr><th scope="row"><a href="#review-summary">Summaries</a></th><td>“Sunday's outdoor meeting is confirmed,” although the source says it may happen if weather allows.</td><td>Compare source conditions. Repair to “A Sunday meeting is possible, weather permitting.”</td><td>Whether the meeting will happen.</td></tr>
+          <tr><th scope="row"><a href="#review-writing">Messages</a></th><td>“Thanks for confirming Tuesday at 10,” when the instruction only asked for possible times.</td><td>Compare the instruction and draft. Ask for two times; do not assert a booking.</td><td>Sam's availability and any agreement.</td></tr>
+          <tr><th scope="row"><a href="#review-code">Code</a></th><td>A discount function passes at 100 with 20% off, but incorrectly subtracts 20 as a fixed amount.</td><td>Test a price of 50: correct output 40, wrong output 30.</td><td>Input validation, rounding and release behavior.</td></tr>
+          <tr><th scope="row"><a href="#review-advice">Advice</a></th><td>“The higher-salary job is clearly better,” without the person's priorities.</td><td>Verify offer terms and compare tradeoffs against stated priorities.</td><td>Which tradeoffs the person will accept.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <nav class="review-picker" aria-label="Choose the kind of AI answer">
+      <a href="#review-research"><span class="review-kind">Facts &amp; citations</span><span>Does the source support the claim?</span></a>
+      <a href="#review-numbers"><span class="review-kind">Numbers &amp; calculations</span><span>Can you reproduce the whole calculation?</span></a>
+      <a href="#review-summary"><span class="review-kind">Summaries</span><span>Did the meaning survive the shortening?</span></a>
+      <a href="#review-writing"><span class="review-kind">Messages &amp; writing</span><span>Does it say something you can stand behind?</span></a>
+      <a href="#review-code"><span class="review-kind">Code &amp; websites</span><span>Does it work beyond one comfortable example?</span></a>
+      <a href="#review-advice"><span class="review-kind">Personal advice</span><span>Whose priorities does the answer assume?</span></a>
+    </nav>
     <section class="review-recorded-cases" aria-labelledby="review-recorded-examples">
       <h3 id="review-recorded-examples">Choose a check that can expose the actual failure.</h3>
       <p>These three public project records show why the check needs to match the claim. They document an earlier model response to a fictional review, a recorded audit of public-domain books, and an actual website defect. None was rerun for this guide.</p>
@@ -40,6 +66,13 @@
         </table>
       </div>
       <p>For your task, name what an error would look like before choosing the check. Keep the original input, the observed output, and the reason for your decision together. A useful check can reveal a mistake while leaving other questions unresolved.</p>
+      <div class="review-boundary" id="review-polished-reply">
+        <h4>A polished reply can pass the checker and still need an edit.</h4>
+        <p><strong>Recorded input, from a fictional customer review:</strong> <q>Cold coffee and a 25 minute wait. The barista ignored my question. Disappointing.</q></p>
+        <p><strong>Recorded accepted retry:</strong> <q>We were very sorry to hear about the cold coffee and the extended wait you experienced.</q> The reply sounds professional, but <q>extended wait</q> loses the supplied duration. The automated findings list was empty for that retry; it does not establish that a person approved it or that it preserves every important detail.</p>
+        <p><strong>Proposed human edit, not a new model output:</strong> <q>We're sorry about the cold coffee and the 25-minute wait you described.</q> Compare the full reply with the original before deciding how to address the unanswered question. Tone, permission to send, and the business's actual response are still unknown.</p>
+        <p class="small-copy">Inspect the <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-smoke-2026-10-13.json">pinned historical run</a>. It contains synthetic input, not a customer conversation or a new evaluation for this page.</p>
+      </div>
     </section>
     <p class="small-copy"><a href="#review-completed-record">See a completed review record</a> that keeps an unresolved claim separate from the decision about what to do next.</p>
     <p><strong>Worked mini-check, fictional:</strong> An AI answer says “The Sunday meetup is confirmed.” The only supplied source says “Send meetup questions to the organizer.” It says nothing about confirmation. The confirmation claim is <strong>unresolved, not contradicted</strong>: the available evidence establishes neither that it is confirmed nor that it is unconfirmed. Ask the organizer or find a current event-status notice before relying on it.</p>
@@ -47,14 +80,6 @@
     <p><strong>A different question: is a summary faithful?</strong> If the source says “We may meet Sunday if the weather allows,” summarizing it as “The Sunday meetup is confirmed” changes a conditional possibility into a commitment. That summary is not faithful to its supplied source and needs correction, regardless of what another source might say. A faithful version is “A Sunday meetup is possible, weather permitting.” The <a href="#review-summary">summary method</a> examines this separate check.</p>
 
     <p class="review-boundary"><strong>Use more than one check when needed.</strong> A summary may also contain facts and calculations. Faithfully summarizing a mistaken source preserves its mistake. A valid calculation may use the wrong inputs. This is a review method, not an automatic accuracy test or permission to act.</p>
-    <nav class="review-picker" aria-label="Choose the kind of AI answer">
-      <a href="#review-research"><span class="review-kind">Facts &amp; citations</span><span>Does the source support the claim?</span></a>
-      <a href="#review-numbers"><span class="review-kind">Numbers &amp; calculations</span><span>Can you reproduce the whole calculation?</span></a>
-      <a href="#review-summary"><span class="review-kind">Summaries</span><span>Did the meaning survive the shortening?</span></a>
-      <a href="#review-writing"><span class="review-kind">Messages &amp; writing</span><span>Does it say something you can stand behind?</span></a>
-      <a href="#review-code"><span class="review-kind">Code &amp; websites</span><span>Does it work beyond one comfortable example?</span></a>
-      <a href="#review-advice"><span class="review-kind">Personal advice</span><span>Whose priorities does the answer assume?</span></a>
-    </nav>
     <p class="small-copy">All six methods, examples, and the blank record work without JavaScript. The examples below are authored teaching scenarios, not captured model output or personal results. There is no answer upload or model connection.</p>
   </div>
 </section>
@@ -230,7 +255,7 @@
       <p><strong><a href="/technology/#ai-works-human-decides">AI Works, Human Decides</a>:</strong> an unresolved finding can still lead to a useful next step. The person can ask a narrower question or leave the claim unused without inventing certainty.</p>
     </section>
 
-    <p class="review-download-action"><a class="button" href="/downloads/ai-answer-review.txt" download>Download the blank review record (.txt)</a></p>
+    <p class="review-download-action"><a class="button" href="/downloads/ai-answer-review.txt" download>Download the complete review record (.txt)</a></p>
     <details class="review-sheet"><summary>Preview the complete blank record</summary><pre>${answer_review_sheet}</pre></details>
     <p class="small-copy">Use the downloaded file privately in your own notes. For a complete printed reading copy, use your browser's Print command. The print version includes all six worked examples and the complete blank record even when those disclosures are closed on screen. This page has no answer-entry field and does not evaluate, store, or upload your answer. The site's existing pageview analytics and font delivery are described in <a href="/privacy/">Privacy</a>.</p>
   </div>

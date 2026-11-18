@@ -1,0 +1,50 @@
+AI ANSWER QUICK CHECK                         Nolan Kido
+https://nolankido.com/technology/check-ai-answers/
+
+Use this one-claim checklist before relying on an AI answer.
+Keep it in your own notes. This file collects or sends nothing.
+
+1. NAME THE ACTION
+   What would I do, send, publish, decide, or run if I believed it?
+2. ISOLATE ONE CHECKABLE CLAIM
+   Copy the exact sentence, number, promise, or code behavior.
+   Keep the source input or original instruction beside it.
+3. CHOOSE INDEPENDENT EVIDENCE
+   Fact: open an original publisher or primary record and passage.
+   Number: repeat the arithmetic from inputs, including all costs.
+   Summary: compare dates, conditions, owners, and certainty.
+   Message: check commitments against what was authorized.
+   Code: test a case with an independently expected outcome.
+   Advice: verify facts and ask whose priorities are assumed.
+   Two agreeing chatbots are not independent confirmation.
+4. RECORD WHAT THE CHECK ACTUALLY SHOWED
+   Note the evidence source, date or version, and exact result.
+   Make a test capable of failing on a plausible wrong answer.
+5. CHOOSE ONE STATUS FOR THIS CLAIM
+   SUPPORTED: the evidence fits this exact claim and conditions.
+   CONTRADICTED: the evidence disagrees with the claim.
+   UNRESOLVED: evidence is missing, limited, or inconclusive.
+   Silence is not proof that an event did not happen.
+6. DECIDE WHAT TO DO NEXT
+   Use only the checked part for the stated purpose, revise it,
+   seek better evidence, or leave the claim unused. Keep the
+   decision with the responsible person. Significant legal,
+   medical, financial, or safety actions need qualified review.
+ONE-CLAIM RECORD
+Intended action: ___________________________________________
+Exact claim: ______________________________________________
+Original input / conditions: ______________________________
+Independent source or test (with date/version): ____________
+Observed result: __________________________________________
+Status (supported / contradicted / unresolved): ___________
+Remaining unknown: ________________________________________
+Next action and responsible person: ________________________
+
+Example: A fictional AI summary says a Sunday meeting is
+confirmed; the source says it may happen if weather allows.
+The summary misstates the source. Revise to "A Sunday meeting
+is possible, weather permitting." The event status is still
+unverified. This exercise is not a recorded model output.
+
+More detail and a complete review record:
+https://nolankido.com/technology/check-ai-answers/
