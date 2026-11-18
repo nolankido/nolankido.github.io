@@ -30,7 +30,7 @@ def check_model_name(model: str) -> str:
     return model
 
 
-def run(model: str, port: int, timeout: int, dry_run: bool = False) -> dict:
+def run(model: str, port: int, timeout: int, dry_run: bool = False, show_output: bool = False) -> dict:
     check_model_name(model)
     if not 1024 <= port <= 65535:
         raise ValueError("Port must be between 1024 and 65535")
@@ -69,6 +69,8 @@ def run(model: str, port: int, timeout: int, dry_run: bool = False) -> dict:
     if not isinstance(data, dict) or not isinstance(data.get("response"), str):
         raise ValueError("Local response did not have a text field")
     result["output_sha256"] = hashlib.sha256(data["response"].encode("utf-8")).hexdigest()
+    if show_output:
+        result["output_text"] = data["response"]
     for key in ("eval_count", "eval_duration"):
         value = data.get(key)
         if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
@@ -84,9 +86,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--port", type=int, default=11434, help="Local-only Ollama port")
     parser.add_argument("--timeout", type=int, default=90)
     parser.add_argument("--dry-run", action="store_true", help="Print null measurements without a model call")
+    parser.add_argument("--show-output", action="store_true", help="Also print the fixed synthetic response for human review; opt-in")
     args = parser.parse_args(argv)
     try:
-        output = run(args.model, args.port, args.timeout, args.dry_run)
+        output = run(args.model, args.port, args.timeout, args.dry_run, args.show_output)
     except (ValueError, OSError, urllib.error.URLError, json.JSONDecodeError) as exc:
         print("Local test could not finish: " + str(exc), file=sys.stderr)
         return 1
