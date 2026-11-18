@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from urllib.robotparser import RobotFileParser
 
 import check_discovery as guard
 
@@ -24,6 +25,27 @@ def blocked(text):
 
 
 class RobotsPolicyContractTests(unittest.TestCase):
+    def test_current_public_policy_allows_search_entrypoints(self):
+        text = (guard.ROOT / 'robots.txt').read_text(encoding='utf-8')
+        self.assertEqual(guard.blocked_search_entrypoints(text.splitlines()), [])
+
+    def test_search_access_is_independent_of_training_opt_out(self):
+        robots = (
+            'User-agent: GPTBot\nDisallow: /\n'
+            'User-agent: OAI-SearchBot\nAllow: /\n'
+            'User-agent: bingbot\nAllow: /\n'
+            'User-agent: *\nAllow: /\n'
+        )
+        parser = RobotFileParser()
+        parser.parse(robots.splitlines())
+        self.assertFalse(parser.can_fetch('GPTBot', guard.ORIGIN + '/'))
+        self.assertEqual(guard.blocked_search_entrypoints(robots.splitlines()), [])
+
+        blocked = robots.replace('User-agent: OAI-SearchBot\nAllow: /',
+                                 'User-agent: OAI-SearchBot\nDisallow: /')
+        self.assertIn(('OAI-SearchBot', '/'),
+                      guard.blocked_search_entrypoints(blocked.splitlines()))
+
     def test_catch_all_forms_include_end_anchored_wildcards(self):
         for path in ('/', '/*', '/**', '/*$', '/**$', '/***$'):
             with self.subTest(path=path):
