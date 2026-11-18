@@ -1,4 +1,4 @@
-"""Turn 26: Technology visitors should see proof, an actual tool, and projects first."""
+"""Technology visitors should see a clear route to projects and useful checks."""
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -15,9 +15,9 @@ import poker_reading
 INTRO = '<section class="section folio-row topic-introduction"'
 HEADING = "AI in real life, with the evidence visible."
 CHOICES = (
-    ('#identity-claim-audit', '01 / Inspect a real correction'),
-    ('/technology/task-brief/', '02 / Use a free tool'),
-    ('#technology-projects', '03 / Explore public projects'),
+    ('#technology-projects', '01 / Explore public projects'),
+    ('/technology/check-ai-answers/', '02 / Check an answer'),
+    ('/technology/ai-time-savings/', '03 / Measure the full task'),
 )
 MORE = (
     "#technology-projects",
@@ -84,9 +84,18 @@ class TechnologyFirstScreenTests(unittest.TestCase):
         self.assertEqual(order, sorted(order))
         self.assertLess(self.intro.index('identity-readings technology-first-routes'),
                         self.intro.index('<details class="technology-more">'))
-        self.assertIn("No search-ranking improvement is claimed.", self.intro)
         self.assertIn("makes no AI call", self.intro)
-        self.assertIn("different evidence and limits", self.intro)
+        self.assertIn("record what remains uncertain", self.intro)
+        self.assertIn('href="/technology/task-brief/"', self.intro)
+        self.assertIn('href="#identity-claim-audit"', self.intro)
+
+    def test_homepage_primary_ai_route_opens_hub_introduction(self):
+        home = (ROOT / "index.html").read_text(encoding="utf-8")
+        source = (ROOT / "_source/home.html").read_text(encoding="utf-8")
+        pattern = r'<a class="button" href="/technology/">Practical AI in real life'
+        self.assertRegex(source, pattern)
+        self.assertRegex(home, pattern)
+        self.assertIn('href="/technology/#technology-projects"', home)
 
     def test_preserved_secondary_navigation_is_native_and_optional(self):
         details = re.search(r'<details class="technology-more"><summary>(.*?)</summary>(.*?)</details>', self.intro, re.S)
@@ -131,10 +140,9 @@ class TechnologyFirstScreenTests(unittest.TestCase):
     def test_unchanged_canonical_projects_and_publication_metadata(self):
         page = self.page
         manifest = next(p for p in build.public_pages() if p["id"] == "technology")
-        self.assertEqual(manifest["updated"], "2026-11-04")
         self.assertEqual(manifest["path"], "/technology/")
         self.assertIn('<link rel="canonical" href="https://nolankido.com/technology/">', page)
-        self.assertIn('"dateModified": "2026-11-04"', page)
+        self.assertIn('"dateModified": "' + manifest["updated"] + '"', page)
         self.assertEqual(page.count('class="project-card"'), 3)
         self.assertIn('id="identity-claim-audit-title"', page)
         for route in ("/technology/local-ai-review-replies/", "/technology/ai-book-continuity-checker/",
