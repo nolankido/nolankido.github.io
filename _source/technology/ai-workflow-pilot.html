@@ -4,7 +4,7 @@
     <h2 class="intro" id="pilot-answer">How do you test whether an AI workflow actually saves time?</h2>
     <p>Pick one repeatable task. Write down what an acceptable result requires. Record the time the usual method needs, then record the <em>whole</em> AI-assisted method on comparable examples: preparing inputs, prompting, reviewing, correcting, retrying, and maintaining the process. Check quality before comparing totals. If a faster result cannot pass the same acceptance standard, it is not an equivalent replacement.</p>
     <p>Below is a proposed small-business pilot method, a completely fictional six-case demonstration, and a free offline audit kit. It is <strong>not</strong> a report that my clients adopted AI, a productivity study, or a measured return on investment. The checker verifies arithmetic and record completeness, not anyone's work or judgment.</p>
-    <nav class="entry-jumps" aria-label="Jump to pilot resources"><a href="#pilot-recorded-gap">Real evidence and missing measures</a><a href="#pilot-protocol">Run a fair pilot</a><a href="#pilot-example">Check the worked example</a><a href="#pilot-kit">Download the offline kit</a><a href="#pilot-decision">Decide what happens next</a></nav>
+    <nav class="entry-jumps" aria-label="Jump to pilot resources"><a href="#pilot-recorded-gap">Real evidence and missing measures</a><a href="#pilot-exception-case">Inspect an operations failure</a><a href="#pilot-protocol">Run a fair pilot</a><a href="#pilot-example">Check the worked example</a><a href="#pilot-kit">Download the offline kit</a><a href="#pilot-decision">Decide what happens next</a></nav>
   </div>
 </section>
 
@@ -14,7 +14,36 @@
     <h2 class="section-title" id="pilot-gap-title">A real model test does not answer the business question.</h2>
     <p>The <a href="/technology/local-ai-test-record/">Review Reply Writer local-model test record</a> preserves machine timing and selected outputs for fictional customer reviews. It also records conditions and errors. But it does not contain the time a person would normally spend on the task, the time a reviewer would need to approve or repair each answer, or a measured customer-service deployment.</p>
     <p>Those missing values are not zero. They prevent a supported claim that this particular AI workflow saved work or delivered better customer outcomes. The <a href="/technology/review-reply-evidence-audit/">independent reply audit</a> demonstrates a narrow checking method, with deliberately corrupted examples, but it also does not measure a complete production workflow.</p>
+    <p>For a narrower model comparison, the <a href="/downloads/local-hosted-ai-comparison-protocol.md" download>local-versus-hosted synthetic-task protocol</a> specifies identical inputs and a human-review rubric. It currently records no actual paired runs. Even a completed model comparison would not replace this pilot's manual baseline and whole-task effort measurements.</p>
     <p><strong>The practical research question:</strong> What would we have to record before saying that AI improved a specific task at an acceptable quality? The pilot below is a way to gather that missing evidence in a future, appropriately authorized trial. No private customer reviews or business records are needed to learn the method.</p>
+  </div>
+</section>
+
+<section class="section folio-row" id="pilot-exception-case" aria-labelledby="pilot-exception-title">
+  <div class="section-meta"><p class="section-label">Fictional operations case / Review before promising</p></div>
+  <div class="section-content prose">
+    <h2 class="section-title" id="pilot-exception-title">A 30-card shortage turns a polished draft into a false promise.</h2>
+    <p><strong>Entirely fictional teaching exercise.</strong> This is an original synthetic print-shop scenario, not an account of a client, a real business, a live model run, a recorded AI failure, or a measured productivity result. I constructed the flawed draft to make a specific checking mistake visible.</p>
+    <h3 id="pilot-exception-sources">Three source notes, before any draft</h3>
+    <ol>
+      <li><strong>S1, request:</strong> A customer asks for 120 printed instruction cards for Friday at 4 p.m. The shop has not confirmed the order or pickup.</li>
+      <li><strong>S2, inventory:</strong> There are 90 blank cards on hand. Another 60 have been requested from a supplier, but arrival is unconfirmed.</li>
+      <li><strong>S3, approval rule:</strong> A manager must authorize any promised pickup time. The customer must agree before the shop proposes a partial delivery as an accepted arrangement.</li>
+    </ol>
+    <p><strong>The bounded AI task if this were tested:</strong> using only S1 to S3, draft an internal status, identify blockers, suggest checks, and tell a human what must be authorized. Do not confirm delivery, invent supplier timing, or grant approval. An actual AI request was <strong>not</strong> made for this example.</p>
+    <h3 id="pilot-exception-flawed">A deliberately flawed illustrative draft</h3>
+    <blockquote><p>Confirm the order for all 120 cards at 4 p.m. Friday. There is enough stock coming in. If needed, tell the customer 90 cards can be collected first.</p></blockquote>
+    <p>The prose sounds decisive. Its decisions are not supported. The shop has only 90 cards in hand, a <strong>30-card shortage</strong> against the 120 requested. The additional 60 are ordered but not received. A requested time is not an authorized promise, and a partial pickup needs customer agreement.</p>
+    <h3 id="pilot-exception-check">Independent check and decision</h3>
+    <ul>
+      <li><strong>Quantity check:</strong> S1 requests 120; S2 confirms 90. 120 minus 90 equals 30. <strong>Reject</strong> “there is enough stock.”</li>
+      <li><strong>Arrival check:</strong> S2 says the incoming 60 have no confirmed arrival. <strong>Reject</strong> a Friday availability claim.</li>
+      <li><strong>Authority check:</strong> S1 says no order or pickup is confirmed; S3 requires manager authorization and customer agreement for any split. <strong>Reject</strong> both promises in the draft.</li>
+    </ul>
+    <p><strong>Fictional human reviewer decision: reject and revise.</strong> Keep the request pending. Ask the manager to verify supplier arrival, printing capacity, and an authorized message. Ask whether the customer would accept a split only after the manager permits that option. Do not tell the customer a pickup date is guaranteed until the necessary facts and approvals exist. This is a <em>simulated</em> choice, not evidence of a real person's approval.</p>
+    <p><strong>Revised internal status:</strong> “120 cards requested for Friday at 4 p.m.; 90 on hand, 30 short. Supplier delivery, completion time, manager approval, and any split-order agreement are unresolved. Confirm those items before making a customer commitment.”</p>
+    <p><a href="/downloads/ai-operations-exception-source.json" download>Download the exact fictional sources, draft and decision (.json)</a> and <a href="/downloads/ai-operations-exception-worksheet.md" download>blank repeatable exception-review worksheet (.md)</a>. They need no account or API call and contain no business or patient records.</p>
+    <p>The point is <strong>not</strong> that an observed model failed. It is that a sentence can be fluent while contradicting inventory arithmetic, source status and approval authority. The independent checks are small enough to reproduce, but reviewing a candidate still needs a person. To apply the method to different AI answers, <a href="/technology/check-ai-answers/">choose an evidence check by claim type</a>.</p>
   </div>
 </section>
 

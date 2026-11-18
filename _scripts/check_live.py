@@ -64,7 +64,9 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/workflow-time.js', 'assets/workflow-evidence.css', 'assets/project-fragment-arrivals.js', 'downloads/workflow-time-review.txt', 'downloads/website-check-reproduction.py', 'downloads/website-check-evidence.json']
     assets += ['downloads/ai-workflow-pilot-blank.csv',
                'downloads/ai-workflow-pilot-example.csv',
-               'downloads/ai-workflow-pilot-audit.py']
+               'downloads/ai-workflow-pilot-audit.py',
+               'downloads/ai-operations-exception-source.json',
+               'downloads/ai-operations-exception-worksheet.md']
     assets += ['downloads/living-well-wine-tasting-notes.md']
     assets += ['assets/incremental-game-loop.css', 'assets/incremental-game-loop.js',
                'downloads/incremental-game-first-minute-playtest.md']
@@ -84,7 +86,10 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/visibility-projects.css', 'assets/projects/preflight-holmes-report.png',
                'assets/projects/preflight-LICENSE.txt', 'assets/projects/dinner-on-time-preview.jpg',
                'assets/projects/rightsreceipt-harbor.svg',
-               'downloads/local-ai-test-record.json', 'downloads/public-notes-action-record.txt']
+               'downloads/local-ai-test-record.json',
+               'downloads/local-hosted-ai-comparison-protocol.md',
+               'downloads/local-hosted-ai-comparison-blank.csv',
+               'downloads/public-notes-action-record.txt']
     assets += ['fad988cb80ec4bc36cf2965cf1c64577.txt']
     assets += ['assets/practical-ai-navigation.css', 'downloads/poker-beginner-study-card.txt', 'assets/poker-beginner-path.css']
     assets += ['downloads/poker-beginner-checkpoint.txt', 'assets/poker-comics.css']
