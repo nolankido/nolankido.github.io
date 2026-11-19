@@ -80,7 +80,7 @@
     "description": "Try free AI workflow and citation audit tools, playable game-design demos, poker study guides, and editable wine-tasting worksheets by Nolan Kido.",
     "kicker": "Resources",
     "source": "resources.html",
-    "updated": "2026-11-18"
+    "updated": "2026-11-19"
   },
   {
     "id": "projects",
@@ -1670,14 +1670,14 @@
     "path": "/technology/ai-website-visibility/",
     "title": "What AI helped change on my website.",
     "seo_title": "AI Website Improvements: A Documented Case | Nolan Kido",
-    "description": "See how Nolan Kido verified an AI-assisted website update from public source to live files, then check search clicks and AI-answer citations separately.",
+    "description": "Did 25 SEO and AI visibility improvements work? Nolan Kido separates verified live files from unmeasured search clicks and citations, with a free follow-up method.",
     "find_aliases": ["SEO", "GEO"],
     "kicker": "Technology / Recorded website case",
     "source": "technology/ai-website-visibility.html",
     "date": "2026-11-03",
-    "updated": "2026-11-18",
+    "updated": "2026-11-19",
     "evidence_article": true,
-    "revision": "Added a source-linked November 18 release example, plus a frozen 25-question AI-answer visibility panel with a no-cost offline checker, distinct from the existing monthly eight-question method."
+    "revision": "Added a 25-turn SEO and AI visibility readout separating verified releases and sitemap discovery inventory from unknown search and assistant outcomes, plus a bounded follow-up measurement plan."
   },
   {
     "id": "ai-poker-video-evidence",
