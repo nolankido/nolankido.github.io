@@ -6,7 +6,7 @@
 
 ## Start with public evidence
 
-- **Review Reply Writer:** [Local-AI customer review drafting](https://nolankido.com/technology/local-ai-review-replies/) with an owner-approval boundary, archived fictional tests, and limitations. [Source code](https://github.com/nolankido/reviewReplyWriter).
+- **Review Reply Writer:** [Can a small business safely use AI for review replies?](https://nolankido.com/technology/local-ai-review-replies/) with owner approval, archived fictional tests, known checker blind spots, and a [free approval checklist](https://nolankido.com/downloads/review-reply-owner-approval-checklist.md). [Source code](https://github.com/nolankido/reviewReplyWriter).
 - **Preflight:** [Can AI catch book-series continuity errors?](https://nolankido.com/technology/ai-book-continuity-checker/) with a source-linked Sherlock Holmes audit, incorrect flags, misses, and a [free editorial decision log](https://nolankido.com/downloads/book-continuity-editorial-review-log.md). [Source code](https://github.com/nolankido/canonKeeper).
 - **Checking AI-assisted work:** [A recorded website release defect and repair](https://nolankido.com/technology/checking-ai-website-changes/), plus [an identity-metadata correction with before-and-after records](https://nolankido.com/technology/#identity-claim-audit).
 - **Verifying AI-assisted publication:** [A four-step public-source-to-live-file example](https://nolankido.com/technology/ai-website-visibility/#site-visibility-recent-release), with the [underlying merged change](https://github.com/nolankido/nolankido.github.io/pull/386), explicit limits on what a release proves, and separate free methods for search and AI-citation measurement.

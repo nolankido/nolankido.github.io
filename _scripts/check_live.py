@@ -80,6 +80,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/incremental-upgrade-payback.css', 'assets/incremental-upgrade-payback.js',
                'downloads/incremental-upgrade-payback-worksheet.md']
     assets += ['downloads/ai-search-visibility-monthly-worksheet.md']
+    assets += ['downloads/review-reply-owner-approval-checklist.md']
     assets += ['downloads/ai-citation-panel-audit.py',
                'downloads/ai-citation-panel-blank.csv',
                'downloads/ai-citation-panel-synthetic.csv']
