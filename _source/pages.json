@@ -1332,10 +1332,11 @@
     "path": "/technology/ai-time-savings/",
     "title": "Does AI actually save you time?",
     "seo_title": "AI Time Savings Calculator: Count the Full Workflow | Nolan Kido",
-    "description": "Compare AI workflow time including setup, prompting, review, repairs, and upkeep. Free calculator with break-even examples and a private-use worksheet.",
+    "description": "Does AI actually save time after review and repairs? Compare full workflow costs with Nolan Kido's free calculator and a source-bounded review-reply example.",
     "kicker": "Technology / A practical calculator",
     "source": "technology/ai-time-savings.html",
-    "updated": "2026-10-27"
+    "updated": "2026-11-18",
+    "revision": "Added a source-linked small-business review-reply time comparison with real historical case timings, missing manual measures and transparent fictional break-even arithmetic."
   },
   {
     "id": "ai-workflow-pilot",
@@ -1616,7 +1617,7 @@
     "date": "2026-10-27",
     "updated": "2026-11-18",
     "evidence_article": true,
-    "revision": "Added an answer-first owner approval guide with source-linked failure modes, a free private-use checklist and native Technology and Resources links."
+    "revision": "Added an answer-first owner approval guide, private-use checklist, and a direct link from its measurement limitations to the bounded review-reply break-even example."
   },
   {
     "id": "ai-book-continuity-checker",
