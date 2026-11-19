@@ -7,6 +7,7 @@
     <p>Before checking, name what you intend to do with the result. A draft you will edit, a figure you will publish, and code you will run need different evidence. Circle the parts that could change an action: a date, amount, promise, instruction, or conclusion. Start there.</p>
     <p>A second AI answer can suggest questions to investigate. Agreement between answers still leaves you needing evidence outside those answers. This guide gives you six ways to obtain it.</p>
     <p class="small-copy"><strong>Want a source-to-claim example?</strong> <a href="#review-search-advice">Check a claim about Google's AI Overviews against Google's published requirements</a>, then decide which parts can be repeated and which remain unproved.</p>
+    <p class="small-copy"><strong>Want a numerical claim check?</strong> <a href="#review-poker-solver-claim">Audit a fictional AI poker answer about a 10 BB tournament bubble call</a>, where a correct pot-odds fraction does not settle the decision.</p>
     <h3 id="review-fast-method">A quick first pass: claim, evidence, decision</h3>
     <ol class="review-steps review-fast-list">
       <li><strong>Name one claim and the intended action.</strong> “The meeting is confirmed” matters differently from “This sounds like a friendly invitation.”</li>
@@ -119,6 +120,21 @@
       </dl>
       <p><strong>Decision about reuse:</strong> it is reasonable to explain Google's stated eligibility requirements with links to those documents and the check date. Do not repeat the required-schema claim, promise an AI citation, or report a citation you did not observe. If Google changes its instructions, reopen this review before using the statement again.</p>
       <p class="small-copy">This example checks one invented statement against two current first-party sources. It is not a general audit of GEO services, a benchmark of AI answers, or evidence that NolanKido.com has gained rankings, impressions, or AI mentions. For the separate publication-versus-performance distinction, <a href="/technology/ai-website-visibility/#site-visibility-recent-release-outcomes">see the site's recorded visibility case</a>.</p>
+    </section>
+    <section class="review-boundary" id="review-poker-solver-claim" aria-labelledby="review-poker-solver-claim-title">
+      <h3 id="review-poker-solver-claim-title">How do you check an AI answer that recommends a 10 BB bubble call?</h3>
+      <p><strong>Short answer:</strong> separate the call price in chips, the prize-equity objective, and the unobserved chance of winning. Verify each against the same hand conditions before repeating a recommendation.</p>
+      <p><strong>Claim to audit, invented for this example:</strong> <q>You need only 45% equity to call a 10 BB shove on the tournament bubble, so call.</q> This is a deliberately incomplete teaching statement, <strong>not</strong> an observed chatbot response, a new solver run, or advice for a live hand.</p>
+      <p><strong>Inputs and reproducible evidence:</strong> in the <a href="/poker/evaluating-poker-advice/#solver-fit-test">fictional 10 BB solver-chart fit check</a>, four players have 40, 30, 20 and 10 BB before posting. Three are paid $50, $30 and $20; fourth receives $0. Blinds are 0.5/1 BB, with no ante, bounty or deal. After folds, the 40 BB small blind shoves into the 10 BB big blind. Compare the <a href="/poker/six-to-ten-bb-tournament-decisions/#bridge-bubble">three modeled outcome branches</a> and reproduce the values with the <a href="/downloads/ten-bb-bubble-icm.py">public exact-fraction ICM checker</a>. These inputs were rechecked <time datetime="2026-11-19">November 19, 2026</time>; this is not a new simulation or measured opponent range.</p>
+      <dl class="review-verdicts">
+        <dt>Supported only for chip EV: “45%.”</dt>
+        <dd>The big blind has 9 BB more to call and would contest a final 20 BB pot, after the unmatched excess is returned. In a closed-action, no-tie chip model, 9 / 20 = 45% is the direct call-price threshold. It is not an estimate of the particular cards' showdown chance.</dd>
+        <dt>Not supported as the tournament prize-equity threshold: “Only 45% is needed.”</dt>
+        <dd>In this specified four-player classic-ICM example, folding retains about $12.286143 modeled prize equity, versus about $21.785714 if the call wins and $0 if it loses. The no-tie break-even prize-equity threshold is approximately 56.40%, not 45%. Different payouts, antes or objectives require a different calculation.</dd>
+        <dt>Unresolved: “So call.”</dt>
+        <dd>No actual hand, opponent range or showdown win probability has been established. The teaching case's invented 50% probability would beat the chip-price threshold but miss the classic-ICM threshold. That contrast is not a call-or-fold verdict for a real tournament, and ICM does not capture all future play.</dd>
+      </dl>
+      <p><strong>Decision about reuse:</strong> repeat the 45% and 56.40% figures only with their different objectives, exact fictional inputs and calculation links. Do not reuse the unconditional instruction to call. Nolan's <a href="/poker/episodes/portland-meadows-ep1/#hand-64o-record">first-person Portland Meadows 6-4 offsuit account</a> has different conditions and no verified solver or ICM decision. The <a href="/about/#nolanpoker-ai-link">NolanPoker and practical AI author evidence</a> connects the two topics without turning either example into a documented playing result.</p>
     </section>
     <p class="review-stop"><strong>Keep as unresolved:</strong> an inaccessible source, a missing supporting passage, or a fact whose current status you cannot establish. Do not turn a plausible explanation into a checked fact.</p>
   </div>

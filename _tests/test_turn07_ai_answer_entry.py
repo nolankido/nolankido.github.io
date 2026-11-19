@@ -81,11 +81,11 @@ class Turn07AnswerEntryTests(unittest.TestCase):
             self.assertIn('href="/technology/check-ai-answers/#review-claim-map"',
                           self.outputs[Path(path)], path)
         self.assertEqual(self.manifest['date'], '2026-10-12')
-        self.assertEqual(self.manifest['updated'], '2026-11-18')
+        self.assertGreaterEqual(self.manifest['updated'], '2026-11-18')
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',
                                       self.html)[1])
         self.assertEqual(schema['datePublished'], '2026-10-12')
-        self.assertEqual(schema['dateModified'], '2026-11-18')
+        self.assertEqual(schema['dateModified'], self.manifest['updated'])
         self.assertEqual(schema['author']['@id'], 'https://nolankido.com/about/#nolan-kido')
         scripts = re.findall(r'<script[^>]+src="([^"]+)"', self.html)
         self.assertEqual(scripts, ['/assets/page-sharing.js?v=' + sha256((ROOT / 'assets/page-sharing.js').read_bytes()).hexdigest()[:12],

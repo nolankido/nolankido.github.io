@@ -337,7 +337,7 @@
     "description": "Explore Nolan Kido's practical AI work: small-business review checks, poker-vlog evidence QA, book continuity, and repeatable tools. AI Works, Human Decides.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-11-18"
+    "updated": "2026-11-19"
   },
   {
     "id": "creative",
@@ -882,14 +882,14 @@
     "path": "/poker/evaluating-poker-advice/",
     "title": "Read poker advice without borrowing its certainty.",
     "seo_title": "How to Evaluate Poker Solver Advice & Charts | Nolan Kido",
-    "description": "Evaluate poker solver charts, videos and tournament advice. Check a 10 BB bubble example where chip pot odds and modeled ICM prize equity differ.",
+    "description": "Evaluate poker solver charts, videos and tournament advice. Check a 10 BB bubble example where chip pot odds and modeled ICM prize equity differ, and audit an AI answer about the call.",
     "kicker": "Poker / Study resources",
     "source": "poker/evaluating-poker-advice.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-11-18",
+    "updated": "2026-11-19",
     "poker_guide": true,
-    "revision": "Added a direct answer about solver-chart fit with a source-linked, independently reproducible four-player bubble call and explicit model limits."
+    "revision": "Linked the independently reproducible four-player bubble example to a new AI-answer claim audit while preserving chip-price, classic-ICM and unknown-hand boundaries."
   },
   {
     "id": "poker-live-tournament-guide",
@@ -1023,13 +1023,14 @@
     "path": "/poker/poker-research-guide/",
     "title": "A map of poker research, without the inflated claims.",
     "seo_title": "A map of poker research, without the inflated claims | Nolan Kido Poker",
-    "description": "Find original research on regret, sampling, poker AI and evaluation, with explicit boundaries between game-solving results and playing strength.",
+    "description": "Find original research on regret, sampling, poker AI and evaluation, with explicit boundaries between game-solving results, playing strength and an AI poker claim check.",
     "kicker": "Poker / Resource collections",
     "source": "poker/poker-research-guide.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-08",
-    "poker_guide": true
+    "updated": "2026-11-19",
+    "poker_guide": true,
+    "revision": "Linked a separately reproducible AI-answer audit of a fictional tournament bubble call without changing the original research claims."
   },
   {
     "id": "poker-resource-collections",
@@ -1413,14 +1414,14 @@
     "path": "/technology/check-ai-answers/",
     "title": "How to check an AI answer.",
     "seo_title": "How to Check AI Answers: Facts, Math & Code | Nolan Kido",
-    "description": "Check AI answers, citations, math and code against independent evidence. Includes a sourced Google AI Overviews example and a private checklist.",
+    "description": "Check AI answers, citations, math and code against independent evidence. Includes a sourced Google AI Overviews example, a fictional poker-call claim audit and a private checklist.",
     "kicker": "Practical AI / Verification",
     "source": "technology/check-ai-answers.html",
     "section": "technology",
     "worked_guide": true,
     "date": "2026-10-12",
-    "updated": "2026-11-18",
-    "revision": "Added a dated primary-source check of AI search visibility advice, separating supported Google eligibility rules from contradicted schema claims and unobserved citations."
+    "updated": "2026-11-19",
+    "revision": "Added a reproducible cross-topic audit of a fictional AI poker call claim beside the existing Google AI Overviews source check, separating chip price, ICM prize equity and unknown showdown odds."
   },
   {
     "id": "poker-first-decisions",
