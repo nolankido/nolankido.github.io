@@ -6,7 +6,8 @@
     "seo_title": "Nolan Kido: Practical AI | AI Works, Human Decides",
     "description": "Practical AI projects for everyday life and small business, plus poker and creative work. Nolan Kido's approach: AI Works, Human Decides.",
     "source": "home.html",
-    "updated": "2026-11-13"
+    "updated": "2026-11-18",
+    "revision": "Added a direct source-linked About answer from the homepage evidence section, without revising project or achievement claims."
   },
   {
     "id": "start-here",
@@ -43,10 +44,11 @@
     "path": "/about/",
     "title": "About Nolan Kido",
     "seo_title": "About Nolan Kido: Practical AI | AI Works, Human Decides",
-    "description": "Nolan Kido applies AI to real-life and business tasks with AI Works, Human Decides. Explore documented projects, published accounting research, and poker.",
+    "description": "Who is Nolan Kido? Explore source-linked practical AI projects, accounting research and tournament poker. AI Works, Human Decides guides the work.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-11-13"
+    "updated": "2026-11-18",
+    "revision": "Added a source-bounded answer to who Nolan Kido is and what he built, separating archived AI work, independent publication and tournament evidence without new credentials."
   },
   {
     "id": "accounting-research",
@@ -109,7 +111,8 @@
     "description": "Copy Nolan Kido's biography and verify his published accounting research, public AI projects, and poker creator activity with original sources.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-11-13"
+    "updated": "2026-11-18",
+    "revision": "Linked the existing reusable biography to the new source-bounded identity answer and retained the original public-fact verification guide."
   },
   {
     "id": "card",
