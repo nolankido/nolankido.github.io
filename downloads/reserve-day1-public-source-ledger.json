@@ -1,11 +1,17 @@
 {
   "record": "NolanPoker Reserve Day 1 Event 1, 2026",
-  "version": 1,
+  "version": 2,
   "edited_utc_date": "2026-11-19",
   "video": {
     "url": "https://www.youtube.com/watch?v=edNSD5BjIV8",
-    "public_title_checked_on": "2026-11-13",
-    "public_title": "7 BB Near the Money... Then a Massive A-K Pot | WSOP Circuit",
+    "public_title_checked_on": "2026-11-18",
+    "public_title": "My Ace-King Reshove in a 3-Way All-In | WSOP Circuit",
+    "previous_public_title_checked_on": "2026-11-13",
+    "previous_public_title": "7 BB Near the Money... Then a Massive A-K Pot | WSOP Circuit",
+    "public_thumbnail_checked_on": "2026-11-18",
+    "public_thumbnail_sha256": "01cb25ef4f2efb238a5180faa478a2275b0e2ded9348c051819d20170c45eb5e",
+    "public_metadata_does_not_verify_current_cut": true,
+    "caption_track_advertised_but_text_unavailable": true,
     "archived_script": "Reserve Day 1 v8, November 3, 2026",
     "current_youtube_cut_compared_with_archive": false,
     "current_youtube_chapter_offsets_verified": false

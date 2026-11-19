@@ -1,5 +1,6 @@
 {
   "checked_on": "2026-11-13",
+  "latest_partial_check_on": "2026-11-18",
   "metadata_source": "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v={video_id}&format=json",
   "source_scope": "Public title, NolanPoker channel identity and thumbnail URL only. No footage, hand, result or chapter verification.",
   "images_are_local_snapshots": true,
@@ -46,11 +47,12 @@
     },
     {
       "video_id": "edNSD5BjIV8",
-      "title": "7 BB Near the Money... Then a Massive A-K Pot | WSOP Circuit",
+      "title": "My Ace-King Reshove in a 3-Way All-In | WSOP Circuit",
+      "checked_on": "2026-11-18",
       "author_name": "NolanPoker",
       "thumbnail_url": "https://i.ytimg.com/vi/edNSD5BjIV8/hqdefault.jpg",
       "local_path": "assets/poker/video-thumbnails/reserve-day-1.jpg",
-      "sha256": "83ddd68755529a9fae4134cd614fe5ca1c6728fe13bb555cad2657a138082b6f"
+      "sha256": "01cb25ef4f2efb238a5180faa478a2275b0e2ded9348c051819d20170c45eb5e"
     }
   ]
 }

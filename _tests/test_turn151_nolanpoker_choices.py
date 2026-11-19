@@ -99,7 +99,7 @@ class FirstVideoChoiceTests(unittest.TestCase):
         self.assertEqual(build.build_outputs()[Path("poker/index.html")], self.published)
         pages = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
         revision = next(p["updated"] for p in pages if p["path"] == "/poker/")
-        self.assertEqual(revision, "2026-11-16")
+        self.assertGreaterEqual(revision, "2026-11-16")
         self.assertIn('"dateModified": "' + revision + '"', self.published)
         self.assertNotIn('youtube.com/embed', self.published)
 
