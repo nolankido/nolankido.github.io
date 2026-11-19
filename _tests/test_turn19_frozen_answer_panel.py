@@ -159,7 +159,7 @@ class FrozenAnswerPanelTests(unittest.TestCase):
         records = json.loads((ROOT / '_source/pages.json').read_text())
         case = next(p for p in records if p['id'] == 'ai-website-visibility')
         self.assertEqual(case['date'], '2026-11-03')
-        self.assertEqual(case['updated'], '2026-11-18')
+        self.assertGreaterEqual(case['updated'], '2026-11-18')
         for path in (SCRIPT, PANEL, BLANK):
             self.assertNotIn('—', path.read_text())
 

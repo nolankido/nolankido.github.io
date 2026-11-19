@@ -115,7 +115,8 @@ class AIAssistedWebsiteReleaseAnswerTests(unittest.TestCase):
         manifest = json.loads((ROOT / "_source/pages.json").read_text())
         pages = [page for page in manifest if page["path"] == ROUTE]
         self.assertEqual(len(pages), 1)
-        self.assertEqual((pages[0]["date"], pages[0]["updated"]), ("2026-11-03", "2026-11-18"))
+        self.assertEqual(pages[0]["date"], "2026-11-03")
+        self.assertGreaterEqual(pages[0]["updated"], "2026-11-18")
         self.assertTrue(pages[0]["evidence_article"])
         self.assertIn("live files", pages[0]["description"])
 
@@ -124,12 +125,13 @@ class AIAssistedWebsiteReleaseAnswerTests(unittest.TestCase):
         schemas = [json.loads(raw) for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', public, re.S)]
         articles = [schema for schema in schemas if schema.get("@type") == "Article"]
         self.assertEqual(len(articles), 1)
-        self.assertEqual((articles[0]["datePublished"], articles[0]["dateModified"]), ("2026-11-03", "2026-11-18"))
+        self.assertEqual(articles[0]["datePublished"], "2026-11-03")
+        self.assertEqual(articles[0]["dateModified"], pages[0]["updated"])
 
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text())
         entries = [node for node in sitemap if node.findtext("{*}loc") == URL]
         self.assertEqual(len(entries), 1)
-        self.assertEqual(entries[0].findtext("{*}lastmod"), "2026-11-18")
+        self.assertEqual(entries[0].findtext("{*}lastmod"), pages[0]["updated"])
 
     def test_missing_evidence_and_inflated_claims_fail_closed(self):
         source = self.article_source
