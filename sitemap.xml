@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nolankido.com/</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://nolankido.com/start-here/</loc>
@@ -31,6 +31,10 @@
   <url>
     <loc>https://nolankido.com/projects/</loc>
     <lastmod>2026-11-18</lastmod>
+  </url>
+  <url>
+    <loc>https://nolankido.com/ai-in-real-life/</loc>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://nolankido.com/contact/</loc>
