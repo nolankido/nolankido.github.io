@@ -1,10 +1,10 @@
 <section class="section folio-row" aria-labelledby="continuity-task">
   <div class="section-meta"><p class="section-label">Public project / Writing with AI</p></div>
   <div class="section-content prose">
-    <h2 id="continuity-task">Find the passages behind a possible continuity error.</h2>
-    <p>Preflight is my book-series continuity project, built on the open-source canonkeeper engine. It uses AI to extract facts from chapters, connect those facts with quotations, and examine possible conflicts across books. Its useful output is a report an author can investigate: what changed, where each version appears, and what might explain the difference.</p>
-    <p>A recorded audit of six Sherlock Holmes volumes provides a concrete example. It found the changing description of Watson's war wound, but it also made wrong calls and missed planted errors in a separate evaluation. Both parts of that record matter when deciding how to use an AI continuity checker.</p>
-    <nav class="entry-jumps project-case-jumps" aria-label="Project shortcuts"><span class="project-case-jumps-title">Explore this case</span><a href="#continuity-example">See the wound example</a><a href="#continuity-method">Follow the method</a><a href="#continuity-results">Read the measured limits</a><a href="#continuity-try">Inspect the project</a></nav>
+    <h2 id="continuity-task">Can AI find continuity errors in a book series?</h2>
+    <p><strong>Yes, but not reliably enough to skip an editor.</strong> Preflight, my book-series continuity project built on the open-source canonkeeper engine, found Watson's changing war-wound description in six Sherlock Holmes volumes. In a separate, imperfect benchmark with 20 planted changes, it found 8, missed 12 and reported 2 false positives after the same output was rescored. Those are results from one recorded test, not an accuracy forecast for your manuscript.</p>
+    <p>The useful role of AI is to extract chapter facts with source quotations, compare possible conflicts, and show an author exactly which passages need attention. A report can be wrong about a disguise, a name change or the meaning of a sentence. The author still decides whether an apparent inconsistency needs a revision.</p>
+    <nav class="entry-jumps project-case-jumps" aria-label="Project shortcuts"><span class="project-case-jumps-title">Explore this case</span><a href="#continuity-example">See the wound example</a><a href="#continuity-decision">Review a flagged passage</a><a href="#continuity-method">Follow the method</a><a href="#continuity-results">Read the measured limits</a><a href="#continuity-try">Inspect the project</a></nav>
     <p><a href="https://preflight-kq1o.onrender.com/sample">Open the published Holmes sample</a> · <a href="https://github.com/nolankido/canonKeeper">Open Preflight and canonkeeper on GitHub</a></p>
   </div>
 </section>
@@ -20,6 +20,22 @@
       <figcaption>Original project screenshot, reproduced unchanged. The counters belong to this archived report; its $0.15 figure covers judging, not the complete reading-and-judging cost. <a href="/assets/projects/preflight-holmes-report.png">Open the full-size image</a>.</figcaption>
     </figure>
     <p>The accompanying series bible makes extracted facts browsable by character and book. In the <a href="https://preflight-kq1o.onrender.com/sample/bible?view=bybook&amp;focus=John%20Watson%7Cwound&amp;book=The%20Sign%20of%20the%20Four">Watson wound view</a>, the reader can follow the changing descriptions and open their source passages.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="continuity-decision">
+  <div class="section-meta"><p class="section-label">An editor's decision / Free review log</p></div>
+  <div class="section-content prose">
+    <h2 id="continuity-decision">What should an author do when an AI checker flags a contradiction?</h2>
+    <p><strong>Short answer:</strong> keep both exact passages, check that they refer to the same person and point in the story, look for an explanation, then record an editorial decision. Treat the AI finding as a question to investigate, not an automatic instruction to rewrite the manuscript.</p>
+    <ol class="evidence-facts">
+      <li><strong>Capture two sources.</strong> Record book, chapter and the exact sentence for each claimed value. If the checker cannot point to both passages, mark the finding as unsupported rather than inventing the missing source.</li>
+      <li><strong>Check context before calling it an error.</strong> A disguise can change an appearance; a maiden name is not necessarily a surname conflict; injuries can occur at different times. In the <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/README.md#what-it-found-in-sherlock-holmes">recorded Holmes audit</a>, the system incorrectly flagged a disguised eye description and a maiden-name example.</li>
+      <li><strong>Decide and document.</strong> Classify the item as a supported error, explained change, unresolved question or unsupported flag. Note whether you will revise a passage, keep it intentionally, or seek more context. Recheck the exact revised sentence against the rest of the series.</li>
+      <li><strong>Look beyond the flagged list.</strong> A checker can miss facts during extraction before comparison even begins. In <a href="https://github.com/nolankido/canonKeeper/blob/947e9c3d7dbc9bfa719579ca1e697d4479567684/evals/results/holmes-seed0-2026-10-27/result.md">the recorded rescored test</a>, 8 of 12 missed plants were lost during extraction and 4 during judgment. An empty findings list is not a clean bill of health.</li>
+    </ol>
+    <p><a href="/downloads/book-continuity-editorial-review-log.md" download>Download the free continuity-finding editorial review log</a>. It includes a source-first worked example, an explained false-positive example, and a blank decision record. The document is a local writing aid, not a manuscript uploader or a model evaluation.</p>
+    <p class="small-copy"><strong>What the numbers mean:</strong> the benchmark contained 20 deliberately planted changes in public-domain Holmes text. Rescoring the same model output yielded 8 found, 12 missed, 2 false positives and 1 separately classified finding that quoted a planted sentence for another reason. Some planted changes were themselves ambiguous or based on a mistaken source fact; no new model run took place during rescoring. <a href="#continuity-results">Read the complete results and limitations</a> before comparing them with another project.</p>
   </div>
 </section>
 

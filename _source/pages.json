@@ -344,7 +344,7 @@
     "description": "Nolan Kido's creative work: poker videos, illustrated explanations, AI-assisted writing, and original incremental-game design guides with free browser tools.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-11-13"
+    "updated": "2026-11-18"
   },
   {
     "id": "incremental-game-loop",
@@ -1622,13 +1622,13 @@
     "path": "/technology/ai-book-continuity-checker/",
     "title": "Using AI to check continuity across a book series.",
     "seo_title": "AI Book Continuity Checker: Preflight Case | Nolan Kido",
-    "description": "Explore Preflight and canonKeeper through a Sherlock Holmes continuity audit, source passages, correct and incorrect findings, and a transparent benchmark.",
+    "description": "Can AI find book continuity errors? Nolan Kido's Preflight test found 8 of 20 planted changes after rescoring. See its misses and a free author review log.",
     "kicker": "Technology / AI for creative work",
     "source": "technology/ai-book-continuity-checker.html",
     "date": "2026-10-27",
     "evidence_article": true,
     "updated": "2026-11-18",
-    "revision": "Linked the archived false-positive and missed-error record to the independent AI claim-checking guide."
+    "revision": "Added an answer-first assessment of the Holmes benchmark and a practical source-first editorial decision log, with links from Technology and Creative Work."
   },
   {
     "id": "dinner-on-time",

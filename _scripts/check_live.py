@@ -91,6 +91,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/standalone-section-arrivals.css']
     assets += ['assets/practical-ai-path.css', 'downloads/practical-ai-workbook.txt']
     assets += ['assets/visibility-projects.css', 'assets/projects/preflight-holmes-report.png',
+               'downloads/book-continuity-editorial-review-log.md',
                'assets/projects/preflight-LICENSE.txt', 'assets/projects/dinner-on-time-preview.jpg',
                'assets/projects/rightsreceipt-harbor.svg',
                'downloads/local-ai-test-record.json',
