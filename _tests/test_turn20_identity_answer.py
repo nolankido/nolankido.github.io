@@ -109,7 +109,8 @@ class SourceBoundedIdentityTests(unittest.TestCase):
     def test_metadata_and_profile_person_do_not_duplicate_identity(self):
         manifest = json.loads((ROOT / '_source/pages.json').read_text())
         page = next(p for p in manifest if p['path'] == ROUTE)
-        self.assertEqual(page['updated'], '2026-11-18')
+        # Turn 23 added a separate NolanPoker-to-AI evidence route on About.
+        self.assertEqual(page['updated'], '2026-11-19')
         self.assertIn('Who is Nolan Kido?', page['description'])
         self.assertIn('AI Works, Human Decides', page['description'])
         for path in ('/', '/bio/', '/projects/'):
@@ -129,7 +130,7 @@ class SourceBoundedIdentityTests(unittest.TestCase):
         sitemap = ET.fromstring((ROOT / 'sitemap.xml').read_text())
         urls = [e for e in sitemap if e.findtext('{*}loc') == URL]
         self.assertEqual(len(urls), 1)
-        self.assertEqual(urls[0].findtext('{*}lastmod'), '2026-11-18')
+        self.assertEqual(urls[0].findtext('{*}lastmod'), '2026-11-19')
 
     def test_claim_inflation_and_link_drift_are_rejected(self):
         source = self.source
