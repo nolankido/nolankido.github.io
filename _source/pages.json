@@ -794,7 +794,8 @@
     "kicker": "Poker / External resources",
     "source": "poker/resources.html",
     "section": "poker",
-    "updated": "2026-10-08"
+    "updated": "2026-11-18",
+    "revision": "Added a direct route to an independently reproducible ten-blind solver-fit check alongside the existing poker advice directory."
   },
   {
     "id": "poker-first-live-tournament",
@@ -880,14 +881,15 @@
     "id": "poker-evaluating-poker-advice",
     "path": "/poker/evaluating-poker-advice/",
     "title": "Read poker advice without borrowing its certainty.",
-    "seo_title": "Read poker advice without borrowing its certainty | Nolan Kido Poker",
-    "description": "Evaluate a video, chart, article or forum answer by its question, evidence and assumptions, then turn it into one checkable study task.",
+    "seo_title": "How to Evaluate Poker Solver Advice & Charts | Nolan Kido",
+    "description": "Evaluate poker solver charts, videos and tournament advice. Check a 10 BB bubble example where chip pot odds and modeled ICM prize equity differ.",
     "kicker": "Poker / Study resources",
     "source": "poker/evaluating-poker-advice.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-08",
-    "poker_guide": true
+    "updated": "2026-11-18",
+    "poker_guide": true,
+    "revision": "Added a direct answer about solver-chart fit with a source-linked, independently reproducible four-player bubble call and explicit model limits."
   },
   {
     "id": "poker-live-tournament-guide",
@@ -1064,8 +1066,9 @@
     "source": "poker/reading-preflop-charts.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-08",
-    "poker_guide": true
+    "updated": "2026-11-18",
+    "poker_guide": true,
+    "revision": "Linked the new solver-fit example that compares a chip-EV call price with a specific payout-sensitive ICM model."
   },
   {
     "id": "poker-facing-preflop-raises",
