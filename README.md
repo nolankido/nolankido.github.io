@@ -6,7 +6,7 @@
 
 ## Start with public evidence
 
-- **Review Reply Writer:** [Can a small business safely use AI for review replies?](https://nolankido.com/technology/local-ai-review-replies/) with owner approval, archived fictional tests, known checker blind spots, and a [free approval checklist](https://nolankido.com/downloads/review-reply-owner-approval-checklist.md). [Source code](https://github.com/nolankido/reviewReplyWriter).
+- **Review Reply Writer:** [Can a small business safely use AI for review replies?](https://nolankido.com/technology/local-ai-review-replies/) with owner approval, archived fictional tests, known checker blind spots, and a [free approval checklist](https://nolankido.com/downloads/review-reply-owner-approval-checklist.md). The [review-reply time comparison](https://nolankido.com/technology/ai-time-savings/#reply-time-break-even) and [blank evidence log](https://nolankido.com/downloads/review-reply-time-break-even.md) distinguish historical model case times from unmeasured human effort and fictional break-even arithmetic. [Source code](https://github.com/nolankido/reviewReplyWriter).
 - **Preflight:** [Can AI catch book-series continuity errors?](https://nolankido.com/technology/ai-book-continuity-checker/) with a source-linked Sherlock Holmes audit, incorrect flags, misses, and a [free editorial decision log](https://nolankido.com/downloads/book-continuity-editorial-review-log.md). [Source code](https://github.com/nolankido/canonKeeper).
 - **Checking AI-assisted work:** [A recorded website release defect and repair](https://nolankido.com/technology/checking-ai-website-changes/), plus [an identity-metadata correction with before-and-after records](https://nolankido.com/technology/#identity-claim-audit).
 - **Verifying AI-assisted publication:** [A four-step public-source-to-live-file example](https://nolankido.com/technology/ai-website-visibility/#site-visibility-recent-release), with the [underlying merged change](https://github.com/nolankido/nolankido.github.io/pull/386), explicit limits on what a release proves, and separate free methods for search and AI-citation measurement.
@@ -358,6 +358,17 @@ setup, review/repair and total upkeep. `assets/workflow-time.js` exposes a pure
 integer calculation tested against independent exact fractions. The script and
 its styles are page-scoped; there is no input collection or browser persistence.
 The blank worksheet is the source for its exact visible preview.
+Turn 18 adds a question-led review-reply example at `#reply-time-break-even`,
+linked from the Technology hub, Resources, and the Review Reply Writer case.
+The pinned historical Gemma smoke record includes three Linux CPU case times,
+but no paired manual baselines or owner review/repair times. The separately
+marked fictional cafe numbers produce a 15-minute loss over 10 replies, an exact
+25-reply break-even and first positive saving at 26. The downloadable
+`downloads/review-reply-time-break-even.md` keeps an empty private-use evidence
+log, and `_scripts/check_live.py` registers the file for read-only publication
+verification. Run `_tests/test_turn18_reply_time_break_even.py` after editing
+this source-linked comparison. Do not portray its example as a measured
+employee, client, or real-world productivity result.
 
 `/technology/checking-ai-website-changes/` documents a historical pre-release HTML
 failure and its correction, with a reduced public reproduction and a bounded
