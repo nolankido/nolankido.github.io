@@ -6,6 +6,7 @@
 
 ## Start with public evidence
 
+- **Nolan Kido / Public identity:** [Who is Nolan Kido, and what has he built?](https://nolankido.com/about/#who-is-nolan-kido) gives a source-linked introduction across practical AI, independently published accounting research and tournament poker, with the limits of each kind of evidence. [Reusable biography and fact-check guide](https://nolankido.com/bio/#profile-fact-check).
 - **Review Reply Writer:** [Can a small business safely use AI for review replies?](https://nolankido.com/technology/local-ai-review-replies/) with owner approval, archived fictional tests, known checker blind spots, and a [free approval checklist](https://nolankido.com/downloads/review-reply-owner-approval-checklist.md). The [review-reply time comparison](https://nolankido.com/technology/ai-time-savings/#reply-time-break-even) and [blank evidence log](https://nolankido.com/downloads/review-reply-time-break-even.md) distinguish historical model case times from unmeasured human effort and fictional break-even arithmetic. [Source code](https://github.com/nolankido/reviewReplyWriter).
 - **Preflight:** [Can AI catch book-series continuity errors?](https://nolankido.com/technology/ai-book-continuity-checker/) with a source-linked Sherlock Holmes audit, incorrect flags, misses, and a [free editorial decision log](https://nolankido.com/downloads/book-continuity-editorial-review-log.md). [Source code](https://github.com/nolankido/canonKeeper).
 - **Checking AI-assisted work:** [A recorded website release defect and repair](https://nolankido.com/technology/checking-ai-website-changes/), plus [an identity-metadata correction with before-and-after records](https://nolankido.com/technology/#identity-claim-audit).
@@ -393,6 +394,17 @@ in actual answers, access Search Console or print raw observed URLs. The
 older monthly eight-question kit remains independent, and their denominators
 must not be combined. Run `_tests/test_turn19_frozen_answer_panel.py` when
 editing these files; the three downloads are read-only live-byte targets.
+
+Turn 20 adds an answer-first `#who-is-nolan-kido` section to the existing
+`/about/` ProfilePage. It connects primary public software source snapshots,
+the independent 2012 accounting paper byline and separately sourced tournament
+results to the exact claims each supports. It does not claim a present faculty
+role, product adoption, poker profit or an SEO outcome. Home, Projects and Bio
+link directly to this section while the existing About evidence and bio fact
+anchors remain intact. `Person` identity and `sameAs` markup are preserved.
+Run `_tests/test_turn20_identity_answer.py` after editing this source chain,
+then deterministic build, search, HTML5 and link checks. Keep the original
+paper and case sources visible when updating the summary.
 
 ## Practical work previews and writing distribution
 
