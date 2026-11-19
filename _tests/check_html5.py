@@ -11,6 +11,7 @@ import build
 import player_sitemap
 import poker_episode
 import poker_standoff_episode
+import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
 
@@ -28,6 +29,7 @@ def publication_paths(root: Path, pages: list[dict]) -> dict[str, Path]:
         (player_sitemap, player_sitemap.ROUTE, player_sitemap.RELATIVE),
         (poker_episode, poker_episode.ROUTE, poker_episode.OUTPUT),
         (poker_standoff_episode, poker_standoff_episode.ROUTE, poker_standoff_episode.OUTPUT),
+        (poker_reserve_day1_episode, poker_reserve_day1_episode.ROUTE, poker_reserve_day1_episode.OUTPUT),
         (local_laptop_case, local_laptop_case.ROUTE, local_laptop_case.OUTPUT),
         (reply_audit_case, reply_audit_case.ROUTE, reply_audit_case.OUTPUT),
     )

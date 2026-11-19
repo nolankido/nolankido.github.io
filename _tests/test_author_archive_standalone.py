@@ -17,6 +17,7 @@ import build
 import local_laptop_case
 import poker_episode
 import poker_standoff_episode
+import poker_reserve_day1_episode
 import reply_audit_case
 
 ORIGIN = 'https://nolankido.com'
@@ -26,6 +27,7 @@ MANUAL = (
     (reply_audit_case, 'review-reply-evidence-audit', '2026-11-03', 'practical-ai', 'Recorded case'),
     (poker_episode, 'poker-portland-meadows-ep1', '2026-11-02', 'poker', 'First-person video companion'),
     (poker_standoff_episode, 'poker-portland-meadows-standoff', '2026-11-04', 'poker', 'First-person video companion'),
+    (poker_reserve_day1_episode, 'poker-reserve-day-1', '2026-11-18', 'poker', 'First-person video companion'),
 )
 
 
@@ -111,6 +113,8 @@ class VisibleArchive(HTMLParser):
 
 def copy_publication(root, registry):
     paths = [registry.SOURCE, registry.OUTPUT]
+    if hasattr(registry, 'LEDGER'):
+        paths.append(registry.LEDGER)
     if hasattr(registry, 'TOOL'):
         paths.extend([registry.TOOL, Path('technology/index.html')])
     for path in paths:
@@ -145,7 +149,7 @@ class StandaloneAuthorArchiveTests(unittest.TestCase):
         cls.about = cls.outputs[Path('about/index.html')]
         cls.visible = VisibleArchive(cls.notes)
 
-    def test_complete_archive_adds_exactly_four_existing_articles(self):
+    def test_complete_archive_adds_the_registered_standalone_articles(self):
         actual_manifest = {page['path'] for page in self.manifest_articles}
         manual_paths = {registry.ROUTE for registry, *_ in MANUAL}
         self.assertEqual(len(self.manifest), len(actual_manifest))

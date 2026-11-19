@@ -10,6 +10,7 @@ from pathlib import Path
 import local_laptop_case
 import poker_episode
 import poker_standoff_episode
+import poker_reserve_day1_episode
 import reply_audit_case
 
 ASSET = Path('assets/author-archive.css')
@@ -28,7 +29,7 @@ STANDALONE_LABELS = {
     'reply-audit': 'Recorded case',
     'poker-companion': 'First-person video companion',
 }
-# These four registered Articles retain their separate builders. The player
+# These five registered Articles retain their separate builders. The player
 # profile, private drafts and unregistered files are deliberately not scanned.
 STANDALONE_ARTICLES = (
     ('local-ai-gaming-laptop', local_laptop_case, 'technology', 'local-ai-guide', ''),
@@ -37,6 +38,8 @@ STANDALONE_ARTICLES = (
      'Based on archived narration; the current video’s scene timing has not been independently checked.'),
     ('poker-portland-meadows-standoff', poker_standoff_episode, 'poker', 'poker-companion',
      'Based on an archived production packet; the current video has not been independently compared with that source.'),
+    ('poker-reserve-day-1', poker_reserve_day1_episode, 'poker', 'poker-companion',
+     'Based on a v8 production packet and independently listed tournament result; current video scene timing is unverified.'),
 )
 
 

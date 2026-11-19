@@ -18,6 +18,7 @@ import public_identity
 import player_sitemap
 import poker_episode
 import poker_standoff_episode
+import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
@@ -78,7 +79,7 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     if manual_profile is not None:
         expected_indexed.add(manual_profile[0])
         totals['manual_player_pages'] += 1
-    for registry in (poker_episode, poker_standoff_episode):
+    for registry in (poker_episode, poker_standoff_episode, poker_reserve_day1_episode):
         try:
             approved_episode = registry.record(root)
         except (OSError, ValueError, KeyError, TypeError) as exc:

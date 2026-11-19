@@ -1,4 +1,4 @@
-"""Current section-search coverage for the five verified standalone pages.
+"""Current section-search coverage for the six verified standalone pages.
 
 Run locally. Fixtures contain only copied public source, public HTML and the
 existing offline tools. No network, private drafts or user queries are read.
@@ -23,6 +23,7 @@ import local_laptop_case
 import player_find
 import player_sitemap
 import poker_episode
+import poker_reserve_day1_episode
 import poker_standoff_episode
 import reply_audit_case
 import search_sections
@@ -32,6 +33,7 @@ PUBLICATIONS = (
     (player_sitemap, player_sitemap.RELATIVE),
     (poker_episode, poker_episode.OUTPUT),
     (poker_standoff_episode, poker_standoff_episode.OUTPUT),
+    (poker_reserve_day1_episode, poker_reserve_day1_episode.OUTPUT),
     (local_laptop_case, local_laptop_case.OUTPUT),
     (reply_audit_case, reply_audit_case.OUTPUT),
 )
@@ -39,6 +41,7 @@ ALLOWED_ROUTES = frozenset({
     '/poker/nolan-kido/',
     '/poker/episodes/portland-meadows-ep1/',
     '/poker/episodes/portland-meadows-standoff/',
+    '/poker/episodes/reserve-day-1/',
     '/technology/local-ai-gaming-laptop/',
     '/technology/review-reply-evidence-audit/',
 })
@@ -48,6 +51,8 @@ SCHEMA_DATA = re.compile(r'<script type="application/ld\+json">(.*?)</script>', 
 
 def copy_publication(root, registry, output):
     paths = [registry.SOURCE, output]
+    if hasattr(registry, 'LEDGER'):
+        paths.append(registry.LEDGER)
     if registry is player_sitemap:
         paths.extend([Path('about/index.html'), Path('poker/index.html')])
     if hasattr(registry, 'TOOL'):
@@ -151,9 +156,9 @@ class StandaloneSearchSectionsTests(unittest.TestCase):
     def test_current_packed_data_decodes_exactly_with_existing_browser_code(self):
         matches = FIND_DATA.findall(self.rendered)
         self.assertEqual(len(matches), 1)
-        # Current baseline is 61,975 bytes before the standalone headings.
-        # This modern budget does not rewrite the older historical snapshot.
-        self.assertLess(len(matches[0].encode('utf-8')), 70000)
+        # Includes the sixth standalone article and its section headings.
+        # This current budget does not rewrite older historical snapshots.
+        self.assertLess(len(matches[0].encode('utf-8')), 96000)
         self.run_node('''
 const assert = require('node:assert/strict');
 const {decodeSections} = require('./assets/site-find.js');

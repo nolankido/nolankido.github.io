@@ -1,0 +1,113 @@
+{
+  "record": "NolanPoker Reserve Day 1 Event 1, 2026",
+  "version": 1,
+  "edited_utc_date": "2026-11-19",
+  "video": {
+    "url": "https://www.youtube.com/watch?v=edNSD5BjIV8",
+    "public_title_checked_on": "2026-11-13",
+    "public_title": "7 BB Near the Money... Then a Massive A-K Pot | WSOP Circuit",
+    "archived_script": "Reserve Day 1 v8, November 3, 2026",
+    "current_youtube_cut_compared_with_archive": false,
+    "current_youtube_chapter_offsets_verified": false
+  },
+  "event": {
+    "type": "independent_public_listing",
+    "official_url": "https://www.wsop.com/tournaments/result/19248/",
+    "title": "WSOP Circuit The Reserve Poker Club Event #1, $400 NLH Double Stack Kick-Off",
+    "calendar_dates": "October 29-30, 2026",
+    "buy_in_usd": 400,
+    "entries": 527,
+    "paid_places": 80,
+    "prize_pool_usd": 173910
+  },
+  "finish": {
+    "type": "independent_public_listing",
+    "place": 63,
+    "gross_cash_usd": 800,
+    "sources": [
+      "https://www.globalpokerindex.com/tournaments/2026/united-states/world-series-of-poker-circuit-wsopc-reserve-poker-club-no-limit-hold-em-double-stak-kick-off-ring-event-1-1629128/",
+      "https://pokerdb.thehendonmob.com/event.php?a=r&n=1439413"
+    ],
+    "net_profit_usd": null,
+    "total_entries_purchased": null,
+    "travel_and_other_costs_usd": null
+  },
+  "narrated_decisions": [
+    {
+      "id": "bubble_97",
+      "type": "first_person_archived_narration",
+      "holding": "9-7 offsuit; suits unknown",
+      "position": "big blind",
+      "stack_bb_approx": 5,
+      "opponent_action": "button raises to approximately 3 BB",
+      "reported_action": "fold",
+      "remaining_to_money_approx": 2,
+      "solver_verdict": null
+    },
+    {
+      "id": "small_blind_j9",
+      "type": "first_person_archived_narration",
+      "holding": "J diamonds, 9 diamonds, per archived graphic",
+      "position": "small blind",
+      "stack_bb_approx_range": [13, 14],
+      "opponent_action": "active early-position player minraises",
+      "reported_action": null,
+      "reported_question": "whether a reshove could produce enough folds",
+      "solver_verdict": null
+    },
+    {
+      "id": "three_way_ak",
+      "type": "first_person_archived_narration",
+      "holding": "ace clubs, king hearts, per archived graphic",
+      "position": "button",
+      "stack_bb_approx": 28,
+      "earlier_action": [
+        "lowjack opens to 2 BB",
+        "hijack calls",
+        "cutoff shoves approximately 18 BB"
+      ],
+      "reported_action": "reshove to approximately 28 BB",
+      "later_action": [
+        "big blind calls all-in for approximately 7 BB",
+        "lowjack folds",
+        "hijack folds"
+      ],
+      "showdown_ranks": ["hero A-K", "cutoff Q-J offsuit", "big blind 9-9"],
+      "opponent_suit_combinations_known": false,
+      "board_description": "flop contains jack and nine, third flop card unknown; no ace or king made by hero",
+      "complete_board_known": false,
+      "reported_result": "hero loses both main and side pots and retains approximately 10 BB from uncalled amount",
+      "pot_stacks_are_approximate": true,
+      "illustrative_layer_bb": {
+        "three_way_matched_per_player": 7,
+        "two_way_extra_matched_per_larger_player": 11,
+        "hero_uncalled_return": 10,
+        "excluded_from_layer_arithmetic": "folded players, blinds, ante, exact post conventions"
+      },
+      "solver_verdict": null
+    },
+    {
+      "id": "last_call_t9",
+      "type": "first_person_archived_narration",
+      "holding": "9 diamonds, 10 diamonds, per archived graphic",
+      "position": "big blind",
+      "stack_bb_approx": 4.5,
+      "opponent_action": "button opens to approximately 4 BB",
+      "reported_action": "call all-in",
+      "reported_result": "hero eliminated, 63rd",
+      "opponent_hole_cards_known": false,
+      "complete_board_known": false,
+      "solver_verdict": null
+    }
+  ],
+  "open_questions": [
+    "Exact comeback hands from about five to twenty-eight blinds",
+    "Whether the archived 7-7 image was Nolan's hand",
+    "Complete board cards and opponent suits for the A-K and final hands",
+    "Exact blind, big-blind-ante and remaining-stack timing",
+    "Exact opponent stacks, ranges and prize-equity parameters",
+    "Current YouTube narration, graphics and chapter offsets",
+    "Complete costs and net tournament or trip results"
+  ],
+  "scope": "Public-safe editorial evidence summary only. The source packet is private, no third-party player identities are published, and no optimal strategy is claimed."
+}

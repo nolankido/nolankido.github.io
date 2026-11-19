@@ -11,8 +11,10 @@ from xml.etree import ElementTree as ET
 
 import build_poker_episode
 import build_standoff_episode
+import build_reserve_day1_episode
 import poker_episode
 import poker_standoff_episode
+import poker_reserve_day1_episode
 
 
 def _add_one(feed: str, root: Path, registry, title: str, desc: str) -> str:
@@ -59,5 +61,7 @@ def _add_one(feed: str, root: Path, registry, title: str, desc: str) -> str:
 def add(feed: str, root: Path) -> str:
     first = _add_one(feed, root, poker_episode,
                      build_poker_episode.TITLE, build_poker_episode.DESCRIPTION)
-    return _add_one(first, root, poker_standoff_episode,
-                    build_standoff_episode.TITLE, build_standoff_episode.DESCRIPTION)
+    second = _add_one(first, root, poker_standoff_episode,
+                      build_standoff_episode.TITLE, build_standoff_episode.DESCRIPTION)
+    return _add_one(second, root, poker_reserve_day1_episode,
+                    build_reserve_day1_episode.TITLE, build_reserve_day1_episode.DESCRIPTION)

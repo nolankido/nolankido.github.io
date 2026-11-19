@@ -9,6 +9,7 @@ import build
 import player_sitemap
 import poker_episode
 import poker_standoff_episode
+import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
 import time
@@ -46,6 +47,12 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
         if route in result:
             raise ValueError('Stand Off episode conflicts with a manifest or manual route')
         result[route] = (200, (root / poker_standoff_episode.OUTPUT).read_bytes())
+    reserve_episode = poker_reserve_day1_episode.record(root)
+    if reserve_episode is not None:
+        route = reserve_episode['route']
+        if route in result:
+            raise ValueError('Reserve companion conflicts with a manifest or manual route')
+        result[route] = (200, (root / poker_reserve_day1_episode.OUTPUT).read_bytes())
     laptop = local_laptop_case.record(root)
     if laptop is not None:
         if laptop['path'] in result:
@@ -106,6 +113,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/poker-vlog-truth-to-screen-qa.md']
     assets += ['downloads/portland-meadows-standoff-ak-source-ledger.json',
                'downloads/portland-meadows-standoff-ak-gate.py']
+    assets += ['downloads/reserve-day1-public-source-ledger.json']
     assets += ['downloads/source-notes-audit.py',
                'downloads/identity-evidence-gate.py',
                'downloads/identity-evidence-case-workbook.md',

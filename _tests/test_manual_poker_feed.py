@@ -12,6 +12,7 @@ import manual_poker_feed
 import poker_content
 import poker_episode
 import poker_standoff_episode
+import poker_reserve_day1_episode
 
 
 class PublishedEpisodeFeedTests(unittest.TestCase):
@@ -28,8 +29,12 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
         items = ET.fromstring(actual).findall("./channel/item")
         relevant = [item for item in items if item.findtext("link") == poker_episode.URL]
         self.assertEqual(len(relevant), 1)
-        self.assertEqual(items[0].findtext("link"), poker_standoff_episode.URL)
-        self.assertEqual(items[1].findtext("link"), poker_episode.URL)
+        self.assertEqual(items[0].findtext("link"), poker_reserve_day1_episode.URL)
+        self.assertEqual(items[1].findtext("link"), poker_standoff_episode.URL)
+        self.assertEqual(items[2].findtext("link"), poker_episode.URL)
+        reserve = [item for item in items if item.findtext("link") == poker_reserve_day1_episode.URL]
+        self.assertEqual(len(reserve), 1)
+        self.assertEqual(reserve[0].findtext("pubDate"), "Wed, 18 Nov 2026 00:00:00 GMT")
         new = [item for item in items if item.findtext("link") == poker_standoff_episode.URL]
         self.assertEqual(len(new), 1)
         self.assertEqual(new[0].findtext("pubDate"), "Wed, 04 Nov 2026 00:00:00 GMT")
@@ -62,7 +67,9 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
             self.assertEqual(manual_poker_feed.add(old, Path(directory)), old)
             root = Path(directory)
             for path in (poker_episode.SOURCE, poker_episode.OUTPUT,
-                         poker_standoff_episode.SOURCE, poker_standoff_episode.OUTPUT):
+                         poker_standoff_episode.SOURCE, poker_standoff_episode.OUTPUT,
+                         poker_reserve_day1_episode.SOURCE, poker_reserve_day1_episode.OUTPUT,
+                         poker_reserve_day1_episode.LEDGER):
                 target = root / path
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / path, target)
@@ -74,6 +81,10 @@ class PublishedEpisodeFeedTests(unittest.TestCase):
                 manual_poker_feed.add(old, root)
             shutil.copyfile(ROOT / poker_episode.SOURCE, root / poker_episode.SOURCE)
             (root / poker_standoff_episode.SOURCE).unlink()
+            with self.assertRaises(ValueError):
+                manual_poker_feed.add(old, root)
+            shutil.copyfile(ROOT / poker_standoff_episode.SOURCE, root / poker_standoff_episode.SOURCE)
+            (root / poker_reserve_day1_episode.SOURCE).unlink()
             with self.assertRaises(ValueError):
                 manual_poker_feed.add(old, root)
 
