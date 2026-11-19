@@ -18,6 +18,8 @@ GitHub Pages may independently run GitHub-managed deployment jobs even when ther
 4. For full verification, run `python -m unittest discover -s _tests -p 'test_*.py' -v` and browser suites locally with the installed Playwright dependencies. Use direct public GETs to verify deployed URLs and expected source bytes.
 5. Report test scope precisely. Do not claim that the full suite or browsers passed unless they actually ran. Never reenable GitHub Actions as a shortcut.
 
+For a single-release download receipt, use `python _scripts/check_live.py --only /downloads/gsc-period-compare.py --attempts 3 --interval 5` from a complete checked-out repository. The route must be present in the explicit public inventory. The default with no `--only` still tests all targets. `URLError`/DNS failures are inconclusive; do not call them 404s or proven deployment failures. Successful exact bytes prove serving, not search visibility.
+
 ### Complete local release coverage
 
 Install `requirements-test.txt` in a local virtual environment, then run `python _scripts/local_release_checks.py`. The default checklist includes the two Portland Meadows companion builders, the Reserve Day 1 companion builder, the search audit, and HTML5 parsing of all manifest pages plus the six source-validated standalone pages. `--full` additionally runs the historical unit suite; `--browser` additionally runs the local browser scripts. A failed standalone build must fail the checklist.
