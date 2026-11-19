@@ -6,6 +6,7 @@
     <p class="review-quick-action"><a class="button" href="/downloads/ai-answer-quick-check.txt" download>Download the one-page checking checklist (.txt)</a> <span class="small-copy">Plain text for private, offline use. Nothing to submit.</span></p>
     <p>Before checking, name what you intend to do with the result. A draft you will edit, a figure you will publish, and code you will run need different evidence. Circle the parts that could change an action: a date, amount, promise, instruction, or conclusion. Start there.</p>
     <p>A second AI answer can suggest questions to investigate. Agreement between answers still leaves you needing evidence outside those answers. This guide gives you six ways to obtain it.</p>
+    <p class="small-copy"><strong>Want a source-to-claim example?</strong> <a href="#review-search-advice">Check a claim about Google's AI Overviews against Google's published requirements</a>, then decide which parts can be repeated and which remain unproved.</p>
     <h3 id="review-fast-method">A quick first pass: claim, evidence, decision</h3>
     <ol class="review-steps review-fast-list">
       <li><strong>Name one claim and the intended action.</strong> “The meeting is confirmed” matters differently from “This sounds like a friendly invitation.”</li>
@@ -101,6 +102,24 @@
       <p><strong>Review result:</strong> the source is authentic, but this passage does not support the claim. Remove the unsupported number and rule. A supported statement is narrower: NIST describes how generated explanations and citations can accompany an incorrect answer and encourage misplaced trust.</p>
       <p>That is a finding about this claim and passage, not proof that every statement in the answer is wrong. Search the actual document for the alleged result before deciding whether another passage supports it.</p>
     </details>
+    <section class="review-boundary" id="review-search-advice" aria-labelledby="review-search-advice-title">
+      <h3 id="review-search-advice-title">When can I repeat an AI claim about search visibility?</h3>
+      <p><strong>Short answer:</strong> repeat only the part the original source supports for your stated use. Check the source's current wording and conditions, not the plausibility of the AI answer or the presence of a link. A claim can be supported, contradicted, or unresolved independently of the other claims beside it.</p>
+      <p><strong>Claim to audit, invented for this example:</strong> <q>Google requires special GEO schema to appear in AI Overviews, and adding it guarantees your site will be cited.</q> This is a deliberately flawed teaching statement, <strong>not</strong> an observed chatbot answer, a vendor quotation, or a test of current search results.</p>
+      <p><strong>Independent sources checked <time datetime="2026-11-18">November 18, 2026</time>:</strong> Google's <a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a> requirements and its <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">generative AI search optimization guide</a>. These are primary Google Search documents about <em>Google's</em> features, not proof of how other search engines or chatbots select citations.</p>
+      <dl class="review-verdicts">
+        <dt>Contradicted: “Special GEO schema is required.”</dt>
+        <dd>Google says ordinary Search eligibility rules apply to AI Overviews and AI Mode, without extra technical requirements or a special schema.org type. Structured data that matches visible content can still help conventional Search features, but a new GEO-only markup requirement is not supported.</dd>
+        <dt>Supported, with conditions: “A page can be eligible as a supporting link.”</dt>
+        <dd>Google's stated threshold is that the page is indexed and eligible to appear in Google Search with a snippet. Crawl access, useful visible content, and internal discovery links remain sensible fundamentals. Eligibility is not a promise of a link in any particular answer.</dd>
+        <dt>Contradicted: “Adding markup guarantees a citation.”</dt>
+        <dd>Google explicitly says meeting its requirements does not guarantee indexing or serving. The cited documentation gives no guaranteed citation outcome from markup.</dd>
+        <dt>Unresolved: “This site will be cited for a specific question.”</dt>
+        <dd>Neither Google documentation nor a successful site build measures a future AI answer. That requires an actual, dated observation of the question and its displayed links. The <a href="/technology/ai-website-visibility/#ai-answer-sprint-panel">frozen 25-question observation panel</a> is a repeatable method, not a completed visibility result.</dd>
+      </dl>
+      <p><strong>Decision about reuse:</strong> it is reasonable to explain Google's stated eligibility requirements with links to those documents and the check date. Do not repeat the required-schema claim, promise an AI citation, or report a citation you did not observe. If Google changes its instructions, reopen this review before using the statement again.</p>
+      <p class="small-copy">This example checks one invented statement against two current first-party sources. It is not a general audit of GEO services, a benchmark of AI answers, or evidence that NolanKido.com has gained rankings, impressions, or AI mentions. For the separate publication-versus-performance distinction, <a href="/technology/ai-website-visibility/#site-visibility-recent-release-outcomes">see the site's recorded visibility case</a>.</p>
+    </section>
     <p class="review-stop"><strong>Keep as unresolved:</strong> an inaccessible source, a missing supporting passage, or a fact whose current status you cannot establish. Do not turn a plausible explanation into a checked fact.</p>
   </div>
 </section>
