@@ -195,14 +195,32 @@ def check(route: str, expected: tuple[int, bytes]) -> tuple[bool, str]:
         return False, type(error).__name__
 
 
+
+def selected_targets(available: dict[str, tuple[int, bytes]], only: list[str] | None) -> dict[str, tuple[int, bytes]]:
+    """Keep only explicitly registered public routes; no arbitrary URLs or redirects."""
+    if not only:
+        return available
+    if len(only) != len(set(only)):
+        raise ValueError('Duplicate --only route')
+    unknown = [route for route in only if route not in available]
+    if unknown:
+        raise ValueError('Unknown release target: ' + ', '.join(unknown))
+    return {route: available[route] for route in only}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--attempts', type=int, default=1)
     parser.add_argument('--interval', type=int, default=10)
+    parser.add_argument('--only', action='append', metavar='/PATH',
+                        help='Verify only this registered public route; repeat for multiple routes')
     args = parser.parse_args()
     if not 1 <= args.attempts <= 12 or not 0 <= args.interval <= 30:
         parser.error('attempts must be 1..12 and interval must be 0..30 seconds')
-    pending = targets()
+    try:
+        pending = selected_targets(targets(), args.only)
+    except ValueError as error:
+        parser.error(str(error))
     total = len(pending)
     failures = {}
     for attempt in range(args.attempts):

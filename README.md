@@ -208,6 +208,14 @@ After a main-branch update, the following command manually checks public respons
 python _scripts/check_live.py --attempts 10 --interval 10
 ```
 
+To verify only the new private Search Console comparator after a release, use this scoped read-only GET and exact-byte check from a complete local repository checkout:
+
+```sh
+python _scripts/check_live.py --only /downloads/gsc-period-compare.py --attempts 3 --interval 5
+```
+
+Repeat `--only /downloads/another-file` for additional registered targets. The `--only` filter rejects unknown, duplicated, off-origin, or unregistered paths and leaves the original full-inventory command unchanged. A `PASS` result verifies the HTTP status and byte-for-byte content for that route at that moment, not Google indexing or an increase in search traffic. Network or DNS errors are **inconclusive**. A browser preview that cannot render a Python or CSV download is not a definitive HTTP-status check.
+
 The live verifier only requests public site pages, assets, downloads and the intended 404 response. It does not submit form messages. A failed or timed-out public check should trigger investigation of deployment state, not an automatic rewrite or rollback. GitHub Pages may run provider-managed deployment tasks independent of repository-authored workflow files.
 
 Earlier historical review reports sometimes link jobs from a period when a workflow existed. Those records are evidence of past checks, not current automation or permission to reactivate it. See [SITE_REVIEW.md](SITE_REVIEW.md) for the October 5 historical audit.
