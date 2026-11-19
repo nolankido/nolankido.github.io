@@ -94,8 +94,12 @@ class CrossInterestArticleTests(unittest.TestCase):
             ("_source/about.html", "about/index.html"),
         ):
             source = (ROOT / relative).read_text(encoding="utf-8")
-            self.assertEqual(source.count('href="' + ROUTE + '"'), 1, relative)
-            self.assertIn('href="' + ROUTE + '"', (ROOT / published).read_text(encoding="utf-8"))
+            # Later navigation added a second legitimate Technology-hub route.
+            # Retain a native entry point, and require generated parity.
+            count = source.count('href="' + ROUTE + '"')
+            self.assertGreaterEqual(count, 1, relative)
+            self.assertEqual((ROOT / published).read_text(encoding="utf-8").count(
+                'href="' + ROUTE + '"'), count)
 
     def test_generated_article_and_discovery_files_are_deterministic(self):
         expected = build.build_outputs()
@@ -155,9 +159,14 @@ class CrossInterestHistoryTests(unittest.TestCase):
             self.assertTrue(history.is_added_file(name, release))
             self.assertFalse(history.is_added_file(name, release + b"UNREVIEWED"))
             self.assertFalse(history.is_added_file("other/" + name, release))
-        page = next(p for p in build.public_pages() if p["id"] == "ai-poker-video-evidence")
-        self.assertEqual(page, history.records()["page"])
+        # The archival rewinder recognizes only the original release record.
+        # Later source-checked descriptions and revision dates remain visible.
+        page = history.records()["page"]
+        current = next(p for p in build.public_pages() if p["id"] == "ai-poker-video-evidence")
+        for key in ("id", "path", "date", "source", "section", "worked_guide", "title"):
+            self.assertEqual(current[key], page[key])
         self.assertEqual(history.pages([page]), [])
+        self.assertEqual(history.pages([current]), [current])
         changed = dict(page, title="Unreviewed change")
         self.assertEqual(history.pages([changed]), [changed])
 

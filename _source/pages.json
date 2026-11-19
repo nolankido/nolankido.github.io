@@ -47,8 +47,8 @@
     "description": "Who is Nolan Kido? Explore source-linked practical AI projects, accounting research and tournament poker. AI Works, Human Decides guides the work.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-11-18",
-    "revision": "Added a source-bounded answer to who Nolan Kido is and what he built, separating archived AI work, independent publication and tournament evidence without new credentials."
+    "updated": "2026-11-19",
+    "revision": "Added a direct source-bounded answer connecting the NolanPoker channel and practical AI work through a narrated hand record, proposed captions and an offline checker, without claiming current-video verification."
   },
   {
     "id": "accounting-research",
@@ -215,7 +215,7 @@
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
-    "updated": "2026-11-18"
+    "updated": "2026-11-19"
   },
   {
     "id": "poker-school",
@@ -1684,11 +1684,13 @@
     "path": "/technology/ai-poker-video-evidence/",
     "title": "What AI can draft for my poker vlog, and what it cannot verify.",
     "seo_title": "AI and Poker Video Editing: Evidence Before Graphics | Nolan Kido",
-    "description": "A real poker hand record becomes three proposed video captions, with checked chip math, an offline fact gate, and human review limits.",
+    "description": "How Nolan Kido connects NolanPoker tournament hands to an AI-assisted caption draft, checked chip math, an offline fact gate and explicit human review limits.",
     "kicker": "Technology / AI and poker video editing",
     "source": "technology/ai-poker-video-evidence.html",
     "date": "2026-11-04",
-    "worked_guide": true
+    "updated": "2026-11-19",
+    "worked_guide": true,
+    "revision": "Linked the documented poker-caption exercise to a specific NolanPoker and Nolan Kido identity answer while retaining the original evidence limits and publication date."
   },
   {
     "id": "organize-public-notes",

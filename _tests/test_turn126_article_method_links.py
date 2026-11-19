@@ -16,7 +16,8 @@ TAGLINE = "AI Works, Human Decides"
 TARGET = "/technology/#ai-works-human-decides"
 LINK = '<a href="' + TARGET + '">' + TAGLINE + "</a>"
 
-# Last-modified dates established before this editorial cross-link pass.
+# Historical lower bounds from the original method-link pass. Later substantive
+# edits may advance dates, but the sitemap must reflect the current manifest.
 CASES = {
     "ai-book-continuity-checker": "2026-10-27",
     "ai-poker-video-evidence": "2026-11-04",
@@ -60,17 +61,18 @@ class ArticleMethodLinksTests(unittest.TestCase):
                 if slug not in STANDALONE:
                     self.assertEqual(self.outputs[relative], public)
 
-    def test_article_dates_remain_their_prior_public_values(self):
+    def test_article_dates_never_backdate_and_match_current_manifest(self):
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         lastmods = {entry.findtext("{*}loc"): entry.findtext("{*}lastmod") for entry in sitemap}
         for slug, expected in CASES.items():
             with self.subTest(article=slug):
-                self.assertEqual(lastmods["https://nolankido.com/technology/" + slug + "/"], expected)
+                self.assertGreaterEqual(lastmods["https://nolankido.com/technology/" + slug + "/"], expected)
         manifest = {page["path"]: page for page in json.loads((ROOT / "_source/pages.json").read_text())}
         for slug in CASES.keys() - STANDALONE:
             with self.subTest(article=slug):
                 page = manifest["/technology/" + slug + "/"]
-                self.assertEqual(page.get("updated", page.get("date")), CASES[slug])
+                self.assertEqual(lastmods["https://nolankido.com/technology/" + slug + "/"],
+                                 page.get("updated", page.get("date")))
 
     def test_supporting_section_labels_and_the_primary_method_are_consistent(self):
         self.assertIn('<h2 class="section-title" id="ai-works-human-decides-title">' + TAGLINE + "</h2>", self.method_page)

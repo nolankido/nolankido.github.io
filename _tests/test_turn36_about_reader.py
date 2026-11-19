@@ -19,6 +19,8 @@ RELEASE = "8171c33bdaf354654bd1c1e0920e14d44b38974c"
 NAV_PATTERN = re.compile(r'<nav class="about-jump-nav" aria-label="([^"]+)">(.*?)</nav>', re.S)
 SCHEMA_PATTERN = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
 LINKS = [
+    ("who-is-nolan-kido", "Who is Nolan?"),
+    ("nolanpoker-ai-link", "NolanPoker and AI"),
     ("about-evidence-title", "Evidence"),
     ("what-matters-in-the-work", "My approach"),
     ("about-interests", "Other interests"),
@@ -72,13 +74,14 @@ class AboutReaderTests(unittest.TestCase):
         ], cwd=ROOT).decode("utf-8")
         original_schema = json.loads(SCHEMA_PATTERN.search(old).group(1))
         current_schema = json.loads(SCHEMA_PATTERN.search(self.html).group(1))
-        # Turn 125 restores punctuation in the canonical brand line only.
-        # Compare all remaining metadata, including the stable public Person ID.
-        self.assertEqual(original_schema, json.loads(
-            json.dumps(current_schema).replace(
-                "AI Works, Human Decides", "AI Works Human Decides"
-            )
-        ))
+        # Subsequent substantive revisions advance the About modification date
+        # and copy, without replacing the canonical Person or external identity.
+        self.assertEqual(current_schema["@type"], "ProfilePage")
+        self.assertEqual(current_schema["url"], "https://nolankido.com/about/")
+        self.assertEqual(current_schema["mainEntity"]["@id"],
+                         original_schema["mainEntity"]["@id"])
+        self.assertEqual(current_schema["mainEntity"]["sameAs"],
+                         original_schema["mainEntity"]["sameAs"])
         self.assertIn('<h1 class="page-title">About Nolan Kido</h1>', self.html)
         self.assertIn('<link rel="canonical" href="https://nolankido.com/about/">', self.html)
         self.assertIn('"@id": "https://nolankido.com/about/#nolan-kido"', self.html)

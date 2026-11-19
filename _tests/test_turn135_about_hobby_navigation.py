@@ -14,6 +14,8 @@ import build
 NAV_PATTERN = re.compile(r'<nav class="about-jump-nav"[^>]*>(.*?)</nav>', re.S)
 HEADING = '<h2 id="wine-games-and-life">Wine, games, and the rest of life</h2>'
 EXPECTED_LINKS = [
+    ("who-is-nolan-kido", "Who is Nolan?"),
+    ("nolanpoker-ai-link", "NolanPoker and AI"),
     ("about-evidence-title", "Evidence"),
     ("what-matters-in-the-work", "My approach"),
     ("about-interests", "Other interests"),
@@ -30,7 +32,7 @@ def nav_errors(html: str) -> list[str]:
         return ["About profile menu is missing"]
     links = re.findall(r'<a href="#([^"#]+)">([^<]+)</a>', match.group(1))
     if links != EXPECTED_LINKS:
-        errors.append("About menu must expose six ordered, readable native anchors")
+        errors.append("About menu must expose eight ordered, readable native anchors")
     if html.count(HEADING) != 1 or html.count('id="wine-games-and-life"') != 1:
         errors.append("Wine and games heading must be a unique native destination")
     if not (html.find('href="#wine-games-and-life"') < html.find(HEADING)):
