@@ -1,11 +1,11 @@
 <section class="section folio-row" aria-labelledby="reply-task">
   <div class="section-meta"><p class="section-label">Public project / Local AI</p></div>
   <div class="section-content prose">
-    <h2 id="reply-task">Use AI to draft a customer reply, with the owner's policy beside it.</h2>
-    <p>Review Reply Writer is my open-source project for independent cafes and small hospitality businesses. It connects a local Gemma model to a browser workspace where an owner can compare a customer review with a draft, edit the wording, and approve the exact saved reply before copying it for manual posting. The practical task is specific: acknowledge what the customer said without inventing what the business will do.</p>
+    <h2 id="reply-task">Can a small business safely use AI to answer customer reviews?</h2>
+    <p><strong>Only with a human approval step.</strong> Review Reply Writer is my open-source project for independent cafes and small hospitality businesses. It connects a local Gemma model to a browser workspace where an owner can compare a customer review with a draft, edit the wording, and approve the exact saved reply before copying it for manual posting. A customer can report a problem or request a refund, but cannot authorize a business promise. A passing automated check is not permission to publish.</p>
     <p>The application also has a clearly labeled template mode. That makes the review-and-approval workflow available before installing a model, while keeping template text distinct from an AI-generated answer.</p>
     <p><strong>New independent evidence exercise:</strong> <a href="/technology/review-reply-evidence-audit/">Recheck three recorded Gemma replies against the source</a>, with three purposefully damaged control texts and a downloadable offline checker. No new model run or business approval is implied.</p>
-    <nav class="entry-jumps project-case-jumps" aria-label="Project shortcuts"><span class="project-case-jumps-title">Explore this case</span><a href="#reply-example">Follow one review</a><a href="#reply-failure">Inspect an actual model failure</a><a href="#reply-try">Try the workflow</a><a href="#reply-sources">Open the evidence</a></nav>
+    <nav class="entry-jumps project-case-jumps" aria-label="Project shortcuts"><span class="project-case-jumps-title">Explore this case</span><a href="#reply-example">Follow one review</a><a href="#reply-owner-gate">Use the approval checklist</a><a href="#reply-failure">Inspect an actual model failure</a><a href="#reply-try">Try the workflow</a><a href="#reply-sources">Open the evidence</a></nav>
     <p><a href="https://share.descript.com/view/n1ZTnZpfNyB">Watch the historical Gemma demonstration</a> · <a href="https://github.com/nolankido/reviewReplyWriter">Open Review Reply Writer on GitHub</a></p>
   </div>
 </section>
@@ -19,6 +19,22 @@
     <p>A useful reply has three details to preserve: the praise, the reported duplicate charge, and the unanswered question. A pleasant apology about “billing” can lose the distinction between an incorrect amount and being charged twice. Offering a refund adds a business decision that the customer's words cannot authorize.</p>
     <p>The editor places the saved review and owner policy beside the reply. Its <strong>Details to keep</strong> panel connects recognized concerns with the customer's original wording. The indicator says <strong>Mention detected</strong>, which describes a limited wording check. The owner still has to decide whether the response addresses the concern.</p>
     <p>The source and recorded <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/REVIEW_EVIDENCE_PASS.md">review-evidence checks</a> distinguish a specific double-charge acknowledgment from a generic apology. They also keep an ignored question visible when other topics compete for space. These are inspectable implementation choices, not feedback from a real cafe.</p>
+  </div>
+</section>
+
+<section class="section folio-row" aria-labelledby="reply-owner-gate">
+  <div class="section-meta"><p class="section-label">Small-business operations / Human authorization</p></div>
+  <div class="section-content prose">
+    <h2 id="reply-owner-gate">What should an owner check before approving an AI-written review reply?</h2>
+    <p><strong>Short answer:</strong> compare four things separately: what the customer actually wrote, what the owner authorized, what the saved draft claims, and whether a person has approved that exact text. The safest next step may be manual handling, not a public reply.</p>
+    <ol class="evidence-facts">
+      <li><strong>Keep the customer's facts in view.</strong> For the <a href="#reply-example">fictional double-billing example</a>, a useful draft must address both the reported duplicate charge and the unanswered question, without losing the positive coffee comment. A vague apology for <em>billing trouble</em> does not preserve all three details.</li>
+      <li><strong>Read the authorized policy, not the customer's demands.</strong> A request for a refund, an instruction hidden in a review, or a previous model reply does not establish that the business approved compensation. The <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/docs/OWNER_FIRST_WORKFLOW.md">recorded owner workflow</a> keeps the policy beside the editable draft and separates saved text from approval.</li>
+      <li><strong>Check promises and missing details by eye.</strong> The <a href="/technology/review-reply-evidence-audit/#reply-audit-boundaries">independent offline screen's deliberate counterexamples</a> show why a green status is insufficient. It missed constructed offers to <q>reimburse the charge</q> and <q>send a gift card</q>, while flagging a quoted warning about refunds. Those were synthetic probes, not new model mistakes or a production error rate.</li>
+      <li><strong>Approve only the saved wording and post manually.</strong> Check tone, claims and any actual owner commitment, then save and recheck after edits. The application requires a new approval when the saved wording changes and exposes approved text for copying. It does not automatically send a response to a review platform.</li>
+    </ol>
+    <p><a href="/downloads/review-reply-owner-approval-checklist.md" download>Download the free owner approval checklist</a>. It includes the fictional duplicate-charge case, a blank review-and-policy decision record, and the known checker blind spots. Keep completed copies private and stop for manual handling when the complaint is serious or the available policy is unclear.</p>
+    <p class="small-copy"><strong>Evidence boundary:</strong> this is a method derived from public source code, archived fictional outputs and deliberately altered local controls. It is not evidence of real cafe adoption, customer satisfaction, reduced staff time, fresh Gemma accuracy, or permission to reply for another business. <a href="#reply-evaluation-limits">Read the measured limitations</a>.</p>
   </div>
 </section>
 

@@ -1610,11 +1610,13 @@
     "path": "/technology/local-ai-review-replies/",
     "title": "Building a local AI review reply tool.",
     "seo_title": "Local AI Review Replies with Gemma & Ollama | Nolan Kido",
-    "description": "Inspect Review Reply Writer, a local AI drafting application for customer reviews. Follow its historical demo, saved-text approval, source records, and limitations.",
+    "description": "Can AI safely draft customer review replies? Nolan Kido's Review Reply Writer separates customer details, owner policy and final approval. Free checklist.",
     "kicker": "Technology / Local AI project",
     "source": "technology/local-ai-review-replies.html",
     "date": "2026-10-27",
-    "evidence_article": true
+    "updated": "2026-11-18",
+    "evidence_article": true,
+    "revision": "Added an answer-first owner approval guide with source-linked failure modes, a free private-use checklist and native Technology and Resources links."
   },
   {
     "id": "ai-book-continuity-checker",
