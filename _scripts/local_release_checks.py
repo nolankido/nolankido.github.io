@@ -54,6 +54,8 @@ def main() -> int:
         ('Portland video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_portland_episode.py', '-q']),
         ('Stand Off video companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn33_standoff_companion.py', '-q']),
         ('Reserve Day 1 companion contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn13_reserve_companion.py', '-q']),
+        ('Reserve video listing offline agreement', ['_scripts/check_reserve_video_listing.py']),
+        ('Reserve video listing drift negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn14_reserve_listing_alignment.py', '-q']),
         ('Release integrity regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn34_release_integrity.py', '-q']),
         ('AI and poker evidence article', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn35_ai_poker_case.py', '-q']),
         ('About reader navigation and proof', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn36_about_reader.py', '-q']),

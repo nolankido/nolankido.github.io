@@ -228,6 +228,8 @@ for the temporary-fixture publishing and reader-flow checks.
 
 The third original episode companion covers the [Reserve Day 1 bubble and A-K pot](poker/episodes/reserve-day-1/index.html). It is built independently with `python _scripts/build_reserve_day1_episode.py` and checked with `--check`. It is source-validated in the existing sitemap, local Find, Poker RSS and combined writing feed. The published [evidence ledger](downloads/reserve-day1-public-source-ledger.json) separates official result listings, archived first-person narration, rounded pot arithmetic and unknown inputs. The current public video cut has not been verified against the archived script, and no private production file is included. The [Turn 13 review](_reports/visibility-sprint/seo-geo-turn13-reserve-day1-2026-11-18.md) records the exact release scope.
 
+Turn 14 refreshed the [current Reserve video listing](https://www.youtube.com/watch?v=edNSD5BjIV8) and locally hosted gallery thumbnail, keeping its revised A-K title synchronized across the Poker hub, player profile, companion and dated public ledger. Run `python _scripts/check_reserve_video_listing.py` to verify the offline source match; add `--live` for an optional read-only YouTube title/channel/thumbnail drift check. This is a packaging check, not footage or transcript verification, and uses no automation or paid API. See the [Turn 14 review](_reports/visibility-sprint/seo-geo-turn14-reserve-video-listing-2026-11-18.md).
+
 ## Poker viewer library
 
 The beginner directory is `/poker/start-here/#viewer-library`. See

@@ -115,11 +115,11 @@ class NolanPokerThumbnailTests(unittest.TestCase):
         pages = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
         poker_updated = next(p["updated"] for p in pages if p["path"] == "/poker/")
         self.assertGreaterEqual(poker_updated, "2026-11-13")
-        self.assertEqual(player_sitemap.MODIFIED, "2026-11-13")
+        self.assertEqual(player_sitemap.MODIFIED, "2026-11-18")
         self.assertIn("November 12, 2026", self.hub)
         self.assertIn("November 12, 2026", self.profile)
         self.assertIn('"dateModified": "' + poker_updated + '"', (ROOT / "poker/index.html").read_text(encoding="utf-8"))
-        self.assertIn('"dateModified": "2026-11-13"', (ROOT / "poker/nolan-kido/index.html").read_text(encoding="utf-8"))
+        self.assertIn('"dateModified": "2026-11-18"', (ROOT / "poker/nolan-kido/index.html").read_text(encoding="utf-8"))
 
     def test_broken_provenance_image_and_accessibility_mutations_fail(self):
         original = self.manifest["videos"][0]

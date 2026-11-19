@@ -49,7 +49,7 @@ class PokerVideoDiscoveryTests(unittest.TestCase):
         html = PROFILE.read_text(encoding="utf-8")
         source = PROFILE_SOURCE.read_text(encoding="utf-8")
         self.assertIn(source, html)
-        self.assertIn("Results &amp; Videos", html)
+        self.assertIn("NolanPoker Videos &amp; Tournament Results", html)
         self.assertNotIn("Vlog Plans", html)
         match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
         self.assertIsNotNone(match)
@@ -57,7 +57,7 @@ class PokerVideoDiscoveryTests(unittest.TestCase):
         self.assertEqual(data["dateModified"], player_sitemap.MODIFIED)
         self.assertEqual(data["url"], "https://nolankido.com/poker/nolan-kido/")
         find = (ROOT / "find/index.html").read_text(encoding="utf-8")
-        self.assertIn('data-search-title="Nolan Kido: Tournament Poker Player | Results &amp; Videos"', find)
+        self.assertIn('data-search-title="Nolan Kido: NolanPoker Videos &amp; Tournament Results"', find)
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
         self.assertRegex(sitemap, r'<loc>https://nolankido.com/poker/nolan-kido/</loc>\s*<lastmod>' +
                          player_sitemap.MODIFIED + r'</lastmod>')
