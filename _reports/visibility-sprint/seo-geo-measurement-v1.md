@@ -79,6 +79,19 @@ py -3 .\gsc-monthly-local-audit.py --month 2026-10 --pages .\gsc-synthetic-pages
 
 Expect `chart_export.days=31`, `property_web_clicks=62`, and `property_web_impressions=3100`. The three visible sample Pages rows total just 22 clicks (12 Technology, 7 Poker, 3 Other). That difference is intentionally constructed to demonstrate why summed Pages rows must not be presented as exact property totals. Queries and Query + Page measures remain unavailable, not zero, because those optional input files are absent. The tool still prints its ordinary private-data warning, which applies to **real** exports; these labeled test fixtures are the only public inputs in this example. The present script only recognizes `nolankido.com` URLs, using section paths designed for this website. It needs code review and adaptation before analyzing another domain.
 
+
+## Comparing two private reporting months (Turn 26, November 19, 2026)
+
+Use the free [GSC period comparator](../../downloads/gsc-period-compare.py) **after** creating two private JSON summaries with the existing monthly export tool. The comparator does not connect to Search Console, collect private data, write files or replace the official Search Console interface. Keep all input JSON and output JSON outside this public repository.
+
+```powershell
+py -3 .\downloads\gsc-period-compare.py --baseline "$env:USERPROFILE\Documents\gsc-2026-10-private.json" --followup "$env:USERPROFILE\Documents\gsc-2026-12-private.json" --property "sc-domain:nolankido.com" --same-filters-confirmed > "$env:USERPROFILE\Documents\gsc-oct-dec-private-comparison.json"
+```
+
+Run this example only after December 2026 is complete and reporting has settled. Confirm the **same Search Console property, Web search type, country/device, filters, and reporting scope** in the owner's Search Console UI before including `--same-filters-confirmed`. That flag is an operator attestation, not machine verification. The program rejects incomplete or future calendar months and inconsistent JSON summaries. If the daily chart is missing, property Web totals and their changes remain unavailable. Visible Pages and Queries rows are different aggregations and can be truncated; those observed values are labeled separately and are not substitutes for property totals. Missing metrics stay `null`, and a zero baseline does not produce a percentage increase. Monthly totals and per-day averages are reported separately. No delta is attributed causally to the sprint.
+
+For the evidence boundary and tests, see the [Turn 26 implementation report](seo-geo-turn26-gsc-period-comparison-2026-11-19.md). The November 2026 mixed transition month should not be called an untreated baseline, and the December 2026 follow-up cannot be observed before January 2027.
+
 ## Assistant answer panel v1.0
 
 **Monthly unbranded practical-AI discovery prompts**, unchanged across months:
