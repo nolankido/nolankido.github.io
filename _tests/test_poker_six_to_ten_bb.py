@@ -44,13 +44,13 @@ class SixToTenBBTests(unittest.TestCase):
                        'Prepared with AI assistance'):
             self.assertIn(phrase.lower(), self.article.lower())
         self.assertEqual(self.article.count('class="poker-details viewer-question"'), 9)
-        self.assertEqual(self.article.count('class="short-stack-table" role="region" tabindex="0"'), 3)
-        self.assertEqual(self.article.count('class="short-stack-scroll-hint"'), 3)
+        self.assertEqual(self.article.count('class="short-stack-table" role="region" tabindex="0"'), 4)
+        self.assertEqual(self.article.count('class="short-stack-scroll-hint"'), 4)
         self.assertIn('poker-short-stack.css?v=', self.article)
         self.assertNotIn('\N{EM DASH}', self.article)
         for fragment in ('#bridge-ledger', '#bridge-shoves', '#bridge-opens',
                          '#bridge-rejam', '#bridge-defense', '#bridge-sb',
-                         '#bridge-short-raise', '#bridge-ev', '#bridge-practice'):
+                         '#bridge-short-raise', '#bridge-ev', '#bridge-bubble', '#bridge-practice'):
             self.assertIn(fragment, self.article)
 
     def test_pot_has_exactly_one_ante(self):
