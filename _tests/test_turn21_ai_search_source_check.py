@@ -106,7 +106,7 @@ class AiSearchClaimCheckTests(unittest.TestCase):
     def test_metadata_dates_and_article_identity_stay_consistent(self):
         manifest = json.loads((ROOT / '_source/pages.json').read_text())
         page = next(x for x in manifest if x['path'] == ROUTE)
-        self.assertEqual((page['date'], page['updated']), ('2026-10-12', '2026-11-18'))
+        self.assertEqual((page['date'], page['updated']), ('2026-10-12', '2026-11-19'))
         self.assertIn('Check AI answers, citations, math and code', page['description'])
         self.assertIn('sourced Google AI Overviews example', page['description'])
         self.assertIn('not a completed visibility result', receipt(self.public))
@@ -117,12 +117,12 @@ class AiSearchClaimCheckTests(unittest.TestCase):
         self.assertNotIn('FAQPage', [x.get('@type') for x in schemas])
         article = next(x for x in schemas if x.get('@type') == 'Article')
         self.assertEqual(article['datePublished'], '2026-10-12')
-        self.assertEqual(article['dateModified'], '2026-11-18')
+        self.assertEqual(article['dateModified'], '2026-11-19')
         self.assertEqual(article['author']['@id'], 'https://nolankido.com/about/#nolan-kido')
         sitemap = ET.fromstring((ROOT / 'sitemap.xml').read_text())
         matches = [x for x in sitemap if x.findtext('{*}loc') == URL]
         self.assertEqual(len(matches), 1)
-        self.assertEqual(matches[0].findtext('{*}lastmod'), '2026-11-18')
+        self.assertEqual(matches[0].findtext('{*}lastmod'), '2026-11-19')
 
     def test_negative_mutations_reject_unsupported_markup_promise(self):
         source = self.source

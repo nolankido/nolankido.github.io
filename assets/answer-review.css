@@ -10,6 +10,7 @@
 .page-ai-answer-review .review-evidence-map th:first-child { min-width: 7.5rem; }
 .page-ai-answer-review .review-evidence-map th:last-child { min-width: 9rem; }
 .page-ai-answer-review .review-boundary { border-left: 3px solid var(--red); padding: .6rem 1rem; }
+.page-ai-answer-review .review-boundary + .review-boundary { margin-top: 1.5rem; }
 .page-ai-answer-review .review-steps { padding-left: 1.5rem; }
 .page-ai-answer-review .review-steps li { margin: .65rem 0; padding-left: .2rem; }
 .page-ai-answer-review .review-example { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: .9rem 0; margin: 1.3rem 0; }

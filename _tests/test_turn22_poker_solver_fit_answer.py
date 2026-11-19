@@ -122,7 +122,7 @@ class PokerSolverFitTests(unittest.TestCase):
                 self.assertEqual(Nodes((ROOT / path).read_text()).links.count(target), 1)
         manifest = json.loads((ROOT / '_source/pages.json').read_text())
         record = next(p for p in manifest if p['path'] == ROUTE)
-        self.assertEqual((record['date'], record['updated']), ('2026-10-08', '2026-11-18'))
+        self.assertEqual((record['date'], record['updated']), ('2026-10-08', '2026-11-19'))
         self.assertIn('How to Evaluate Poker Solver Advice', record['seo_title'])
         self.assertIn('10 BB bubble example', record['description'])
         self.assertIn('<link rel="canonical" href="' + URL + '">', self.public)
@@ -131,12 +131,12 @@ class PokerSolverFitTests(unittest.TestCase):
         self.assertNotIn('FAQPage', [x.get('@type') for x in schemas])
         article = next(x for x in schemas if x.get('@type') == 'Article')
         self.assertEqual(article['datePublished'], '2026-10-08')
-        self.assertEqual(article['dateModified'], '2026-11-18')
+        self.assertEqual(article['dateModified'], '2026-11-19')
         self.assertEqual(article['author']['@id'], 'https://nolankido.com/about/#nolan-kido')
         sitemap = ET.fromstring((ROOT / 'sitemap.xml').read_text())
         matches = [x for x in sitemap if x.findtext('{*}loc') == URL]
         self.assertEqual(len(matches), 1)
-        self.assertEqual(matches[0].findtext('{*}lastmod'), '2026-11-18')
+        self.assertEqual(matches[0].findtext('{*}lastmod'), '2026-11-19')
 
     def test_negative_mutations_catch_unjustified_solver_verdicts(self):
         source = self.source
