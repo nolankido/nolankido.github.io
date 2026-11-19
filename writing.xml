@@ -6,7 +6,15 @@
     <description>Published writing from Notes, Living Well, Poker, and Technology. Original dates and links, in one feed. Proposed experiments and directory changes are not included.</description>
     <language>en-us</language>
     <atom:link href="https://nolankido.com/writing.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+    <item>
+      <title>WSOP Circuit Reserve Day 1: 7 BB and a Three-Way A-K Pot | Nolan Kido</title>
+      <link>https://nolankido.com/poker/episodes/reserve-day-1/</link>
+      <description>Nolan Kido's source-bounded Reserve Poker Club WSOP Circuit Day 1 account: seven big blinds near the money, an A-K three-way pot and 63rd for $800.</description>
+      <guid isPermaLink="true">https://nolankido.com/poker/episodes/reserve-day-1/</guid>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+      <source url="https://nolankido.com/poker/feed.xml">Nolan Kido Poker</source>
+    </item>
     <item>
       <title>Fixed KO, progressive KO and the bounty you have not won</title>
       <link>https://nolankido.com/poker/bounty-knockout-equity/</link>

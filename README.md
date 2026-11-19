@@ -226,6 +226,8 @@ episode companions, hand reviews, chapter links, and Poker feed. The main landin
 page remains the Technology-first baseline. Run `python _tests/poker_browser.py`
 for the temporary-fixture publishing and reader-flow checks.
 
+The third original episode companion covers the [Reserve Day 1 bubble and A-K pot](poker/episodes/reserve-day-1/index.html). It is built independently with `python _scripts/build_reserve_day1_episode.py` and checked with `--check`. It is source-validated in the existing sitemap, local Find, Poker RSS and combined writing feed. The published [evidence ledger](downloads/reserve-day1-public-source-ledger.json) separates official result listings, archived first-person narration, rounded pot arithmetic and unknown inputs. The current public video cut has not been verified against the archived script, and no private production file is included. The [Turn 13 review](_reports/visibility-sprint/seo-geo-turn13-reserve-day1-2026-11-18.md) records the exact release scope.
+
 ## Poker viewer library
 
 The beginner directory is `/poker/start-here/#viewer-library`. See

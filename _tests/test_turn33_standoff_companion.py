@@ -154,14 +154,14 @@ class StandOffCompanionTests(unittest.TestCase):
         for page in (hub, player, find):
             self.assertIn('href="' + poker_standoff_episode.ROUTE + '"', page)
         self.assertIn("archived v9", hub)
-        self.assertIn("Public video from the Reserve stop; no source-checked companion here yet.", player)
+        self.assertIn('href="/poker/episodes/reserve-day-1/"', player)
         entries = player_find.add(ROOT, site_find.entries(ROOT, self.pages))
         manual = [e for e in entries if e["path"] == poker_standoff_episode.ROUTE]
         self.assertEqual(len(manual), 1)
         self.assertEqual(manual[0]["kind"], "episode")
         self.assertEqual(manual[0]["interests"], ["poker"])
         self.assertEqual(manual[0]["date"], "2026-11-04")
-        self.assertIn('id="browse-poker"><summary>Poker <span class="find-group-count" hidden>(95)</span>', find)
+        self.assertIn('id="browse-poker"><summary>Poker <span class="find-group-count" hidden>(111)</span>', find)
         self.assertEqual(find, (ROOT / "find/index.html").read_text(encoding="utf-8"))
 
     def test_sitemap_live_targets_and_feeds_have_one_public_article_each(self):
@@ -187,7 +187,7 @@ class StandOffCompanionTests(unittest.TestCase):
             self.assertEqual(self.outputs[Path(name)],
                              (ROOT / name).read_text(encoding="utf-8"))
         first = ET.fromstring(self.outputs[Path("poker/feed.xml")]).find("./channel/item")
-        self.assertEqual(first.findtext("link"), poker_standoff_episode.URL)
+        self.assertEqual(first.findtext("link"), "https://nolankido.com/poker/episodes/reserve-day-1/")
         combined = follow.combined(self.outputs, self.pages,
                                    "https://nolankido.com", ROOT)
         self.assertEqual(combined, self.outputs[Path("writing.xml")])

@@ -35,10 +35,10 @@ class PlayerFindTests(unittest.TestCase):
         self.assertEqual(entry['date'], '')
         self.assertIn('WSOP', entry['description'])
         self.assertIn('tournament poker', entry['description'])
-        self.assertEqual(len(self.items), len(self.manifest_items) + 5)
+        self.assertEqual(len(self.items), len(self.manifest_items) + 6)
         self.assertNotIn(player_sitemap.ROUTE, {p['path'] for p in self.pages})
         self.assertEqual({p['path'] for p in self.items},
-                         {p['path'] for p in self.manifest_items} | {player_sitemap.ROUTE, '/poker/episodes/portland-meadows-ep1/', '/poker/episodes/portland-meadows-standoff/', '/technology/local-ai-gaming-laptop/', '/technology/review-reply-evidence-audit/'})
+                         {p['path'] for p in self.manifest_items} | {player_sitemap.ROUTE, '/poker/episodes/portland-meadows-ep1/', '/poker/episodes/portland-meadows-standoff/', '/poker/episodes/reserve-day-1/', '/technology/local-ai-gaming-laptop/', '/technology/review-reply-evidence-audit/'})
 
     def test_existing_find_groups_and_progressive_filter_remain(self):
         html = self.rendered
@@ -47,7 +47,8 @@ class PlayerFindTests(unittest.TestCase):
         self.assertEqual(links.count(player_sitemap.ROUTE), 1)
         self.assertEqual(len([d for d in parsed.tags('details')
                               if d.get('class') == 'find-group']), 5)
-        self.assertIn('id="browse-poker"><summary>Poker <span class="find-group-count" hidden>(95)</span>', html)
+        poker_count = sum(item['home'] == 'poker' for item in self.items)
+        self.assertIn(f'id="browse-poker"><summary>Poker <span class="find-group-count" hidden>({poker_count})</span>', html)
         self.assertIn('<option value="profile">Player profiles</option>', html)
         self.assertIn('data-kind="profile" data-interests="poker"', html)
         self.assertIn('id="find-section-data"', html)

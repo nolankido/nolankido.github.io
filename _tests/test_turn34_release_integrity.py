@@ -70,7 +70,7 @@ class ReleaseIntegrityTests(unittest.TestCase):
     def test_both_companions_are_in_the_real_search_inventory(self):
         result = check_search.audit(ROOT, self.pages, ORIGIN)
         self.assertEqual(result["errors"], [])
-        self.assertEqual(result["manual_episode_pages"], 2)
+        self.assertEqual(result["manual_episode_pages"], 3)
         self.assertEqual(result["manual_laptop_guides"], 1)
 
     def test_standoff_sitemap_rejects_missing_duplicate_and_unknown_routes(self):
@@ -104,7 +104,7 @@ class ReleaseIntegrityTests(unittest.TestCase):
 
     def test_html_parser_covers_every_source_owned_page(self):
         paths = check_html5.publication_paths(ROOT, self.pages)
-        self.assertEqual(len(paths), len(self.pages) + 5)
+        self.assertEqual(len(paths), len(self.pages) + 6)
         for route in ("/poker/nolan-kido/", "/poker/episodes/portland-meadows-ep1/",
                       standoff.ROUTE, "/technology/local-ai-gaming-laptop/",
                       "/technology/review-reply-evidence-audit/"):

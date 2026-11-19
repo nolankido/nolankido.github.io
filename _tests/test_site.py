@@ -113,6 +113,9 @@ class SiteTests(unittest.TestCase):
         standoff = build.player_sitemap.poker_standoff_episode.record(ROOT)
         if standoff is not None:
             expected.add(standoff['url'])
+        reserve = build.player_sitemap.poker_reserve_day1_episode.record(ROOT)
+        if reserve is not None:
+            expected.add(reserve['url'])
         laptop = build.local_laptop_case.record(ROOT)
         if laptop is not None:
             expected.add(laptop['url'])
@@ -145,10 +148,14 @@ class SiteTests(unittest.TestCase):
             allowed[Path('poker/beginner-practice/index.html')] = '/assets/poker-beginner-practice.js'
             allowed[Path('poker/school/index.html')] = '/assets/poker-school-interest.js'
             allowed[Path('poker/study/index.html')] = '/assets/poker-progress.js'
+            allowed[Path('creative/incremental-game-loop/index.html')] = '/assets/incremental-game-loop.js'
+            allowed[Path('creative/incremental-upgrade-payback/index.html')] = '/assets/incremental-upgrade-payback.js'
             expected_scripts = [allowed[path]] if path in allowed else []
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.outputs[path], re.S)[1])
-            if schema.get('@type') == 'Article' or path in {Path('technology/task-brief/index.html'), Path('technology/ai-time-savings/index.html'), Path('poker/comics/learn-no-limit-holdem/index.html'), Path('poker/comics/poker-hand-rankings/index.html'), Path('poker/comics/one-hand-four-streets/index.html'), Path('poker/comics/best-five-cards-win/index.html'), Path('poker/comics/why-acting-last-helps/index.html'), Path('poker/comics/good-decision-bad-river/index.html')}:
+            if (schema.get('@type') == 'Article' and not path.as_posix().startswith('creative/incremental-')) or path in {Path('technology/task-brief/index.html'), Path('technology/ai-time-savings/index.html'), Path('poker/comics/learn-no-limit-holdem/index.html'), Path('poker/comics/poker-hand-rankings/index.html'), Path('poker/comics/one-hand-four-streets/index.html'), Path('poker/comics/best-five-cards-win/index.html'), Path('poker/comics/why-acting-last-helps/index.html'), Path('poker/comics/good-decision-bad-river/index.html')}:
                 expected_scripts.append('/assets/page-sharing.js')
+            if path in {Path('technology/local-ai-review-replies/index.html'), Path('technology/dinner-on-time/index.html'), Path('technology/ai-book-continuity-checker/index.html')}:
+                expected_scripts.append('/assets/project-fragment-arrivals.js')
             if path == Path('poker/free-poker-learning-path/index.html'):
                 expected_scripts.append('/assets/poker-course.js')
                 expected_scripts.append('/assets/poker-hand-lab.js')
