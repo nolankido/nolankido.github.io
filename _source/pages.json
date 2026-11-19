@@ -1660,14 +1660,14 @@
     "path": "/technology/ai-website-visibility/",
     "title": "What AI helped change on my website.",
     "seo_title": "AI Website Improvements: A Documented Case | Nolan Kido",
-    "description": "Follow Nolan Kido's documented AI website changes and learn to audit Search Console clicks, ChatGPT citations, and AI-answer links with a free offline checker.",
+    "description": "See how Nolan Kido verified an AI-assisted website update from public source to live files, then check search clicks and AI-answer citations separately.",
     "find_aliases": ["SEO", "GEO"],
     "kicker": "Technology / Recorded website case",
     "source": "technology/ai-website-visibility.html",
     "date": "2026-11-03",
-    "updated": "2026-11-14",
+    "updated": "2026-11-18",
     "evidence_article": true,
-    "revision": "Clarified the published citation-audit and offline checker in the page's search summary while preserving its historical case and original publication date."
+    "revision": "Added a source-linked November 18 release example with four distinct verification steps, direct answers and explicit search-outcome limits; preserved the original publication date."
   },
   {
     "id": "ai-poker-video-evidence",
