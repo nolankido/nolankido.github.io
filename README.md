@@ -9,7 +9,7 @@
 - **Review Reply Writer:** [Can a small business safely use AI for review replies?](https://nolankido.com/technology/local-ai-review-replies/) with owner approval, archived fictional tests, known checker blind spots, and a [free approval checklist](https://nolankido.com/downloads/review-reply-owner-approval-checklist.md). The [review-reply time comparison](https://nolankido.com/technology/ai-time-savings/#reply-time-break-even) and [blank evidence log](https://nolankido.com/downloads/review-reply-time-break-even.md) distinguish historical model case times from unmeasured human effort and fictional break-even arithmetic. [Source code](https://github.com/nolankido/reviewReplyWriter).
 - **Preflight:** [Can AI catch book-series continuity errors?](https://nolankido.com/technology/ai-book-continuity-checker/) with a source-linked Sherlock Holmes audit, incorrect flags, misses, and a [free editorial decision log](https://nolankido.com/downloads/book-continuity-editorial-review-log.md). [Source code](https://github.com/nolankido/canonKeeper).
 - **Checking AI-assisted work:** [A recorded website release defect and repair](https://nolankido.com/technology/checking-ai-website-changes/), plus [an identity-metadata correction with before-and-after records](https://nolankido.com/technology/#identity-claim-audit).
-- **Verifying AI-assisted publication:** [A four-step public-source-to-live-file example](https://nolankido.com/technology/ai-website-visibility/#site-visibility-recent-release), with the [underlying merged change](https://github.com/nolankido/nolankido.github.io/pull/386), explicit limits on what a release proves, and separate free methods for search and AI-citation measurement.
+- **Verifying AI-assisted publication:** [A four-step public-source-to-live-file example](https://nolankido.com/technology/ai-website-visibility/#site-visibility-recent-release), with the [underlying merged change](https://github.com/nolankido/nolankido.github.io/pull/386), explicit limits on what a release proves, and separate free methods for search and AI-citation measurement. The [frozen 25-question assistant-answer panel](https://nolankido.com/technology/ai-website-visibility/#ai-answer-sprint-panel) now has an offline audit kit that keeps branded and nonbranded observations separate.
 - **Research:** [A coauthored 2012 accounting paper](https://doi.org/10.1111/j.1475-679X.2012.00447.x), evidence of scholarly authorship, not of AI-product performance or a current university appointment.
 - **Outside AI:** [Tournament poker](https://nolankido.com/poker/nolan-kido/), [writing](https://nolankido.com/notes/), and [creative work](https://nolankido.com/creative/). These are distinct interests with their own primary evidence.
 
@@ -377,6 +377,22 @@ updated to current counts. Run `python downloads/website-check-reproduction.py`
 with `html5lib==1.1`, and `python _tests/workflow_evidence_browser.py` for the new
 reader and calculator journeys. Both can be run locally; the earlier 21 browser suites remain documented. See `_reports/workflow-evidence-release.md` for scope and the
 Search Console property-access limitation.
+
+## AI search and answer visibility measurement
+
+Turn 19 extends `/technology/ai-website-visibility/#ai-answer-sprint-panel`
+with a no-cost, manually observed 25-prompt visibility kit. Its exact prompt
+file, `downloads/ai-answer-sprint-25-prompts.csv`, is byte-identical to the
+November 17 frozen sprint panel in `_reports/visibility-sprint/`. The blank
+private-use observation template and `downloads/ai-answer-sprint-25-audit.py`
+validate that frozen checksum, trial IDs, dates, same-domain HTTPS link syntax,
+quality labels and duplicates. The tool prints aggregate JSON separated into
+20 nonbranded and five branded prompts; it reports missing trials without
+turning them into citation failures. It does not run assistants, verify links
+in actual answers, access Search Console or print raw observed URLs. The
+older monthly eight-question kit remains independent, and their denominators
+must not be combined. Run `_tests/test_turn19_frozen_answer_panel.py` when
+editing these files; the three downloads are read-only live-byte targets.
 
 ## Practical work previews and writing distribution
 

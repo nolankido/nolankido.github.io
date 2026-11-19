@@ -1,0 +1,26 @@
+prompt_id,segment,cluster,exact_prompt,expected_url_path
+NB01,nonbranded,ai_checking,How do I verify an AI-written answer before relying on it?,/technology/check-ai-answers/
+NB02,nonbranded,ai_customer_replies,How can I prevent an AI-generated customer review reply from making promises my business cannot keep?,/technology/local-ai-review-replies/
+NB03,nonbranded,ai_evidence_audit,What does a source-based audit of an AI review reply look like when wording gets rejected?,/technology/review-reply-evidence-audit/
+NB04,nonbranded,local_ai,What language-model tasks can I realistically run on a gaming laptop without a cloud service?,/technology/local-ai-gaming-laptop/
+NB05,nonbranded,ai_time_savings,How do I estimate whether an AI tool really saves time after review and corrections?,/technology/ai-time-savings/
+NB06,nonbranded,writing_verification,How can I check AI-detected inconsistencies in a manuscript against its source text?,/technology/ai-book-continuity-checker/
+NB07,nonbranded,note_workflow,How can AI organize messy notes without adding tasks that were never requested?,/technology/organize-public-notes/
+NB08,nonbranded,weekly_workflow,How can I turn a week's notes into a plan while preserving which decisions came from the notes?,/technology/ai-weekly-reset/
+NB09,nonbranded,local_ai_tests,What should I record to make a local language-model test reproducible?,/technology/local-ai-test-record/
+NB10,nonbranded,ai_prototype,What can a small AI dinner-planning prototype demonstrate and what remains untested?,/technology/dinner-on-time/
+NB11,nonbranded,poker_short_stack,How should I think through a 6 to 10 big blind tournament stack near the money bubble?,/poker/six-to-ten-bb-tournament-decisions/
+NB12,nonbranded,poker_icm,Why can a shove with positive chip expected value still be bad near a tournament payout jump?,/poker/six-to-ten-bb-tournament-decisions/
+NB13,nonbranded,poker_satellites,Why does seat equity change poker decisions on a satellite bubble?,/poker/satellite-bubble-seat-equity/
+NB14,nonbranded,poker_mathematics,How do I calculate pot odds and compare them with my chance of winning a poker hand?,/poker/poker-math/
+NB15,nonbranded,poker_first_event,What should I prepare for my first live poker tournament?,/poker/first-live-tournament/
+NB16,nonbranded,poker_rules,What are the Texas Hold'em hand rankings from strongest to weakest?,/poker/hand-rankings/
+NB17,nonbranded,poker_basics,How do positions and blinds work in Texas Hold'em?,/poker/holdem-basics/
+NB18,nonbranded,poker_hand_review,How should I separate tournament hand results from the quality of a decision in a real hand review?,/poker/episodes/portland-meadows-ep1/
+NB19,nonbranded,poker_live_example,How can a tournament player rebuild a short stack without getting called in a showdown?,/poker/episodes/portland-meadows-ep1/
+NB20,nonbranded,poker_study_resources,Where should an improving tournament poker player start with study tools and learning resources?,/poker/study/
+BR01,branded,person_identity,Who is Nolan Kido and what is his professional background?,/about/
+BR02,branded,project_evidence,Which public AI projects has Nolan Kido built or tested with inspectable evidence?,/projects/
+BR03,branded,author_philosophy,What does Nolan Kido mean by AI Works Human Decides?,/about/
+BR04,branded,poker_person,What firsthand poker tournament results has Nolan Kido documented publicly?,/poker/nolan-kido/
+BR05,branded,poker_creator,Which Nolan Poker tournament videos have written hand companions on nolankido.com?,/poker/
