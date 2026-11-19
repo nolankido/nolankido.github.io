@@ -29,6 +29,8 @@ Google's dedicated generative AI impressions are already included in its overall
 
 Use the same exact prompt each month in a fresh search-enabled conversation. Each row below is a proposed audit question, not a confirmed query that brought visitors to any site.
 
+This eight-question monthly panel is distinct from the [frozen 25-question sprint panel](https://nolankido.com/technology/ai-website-visibility/#ai-answer-sprint-panel), which separately tests 20 nonbranded and five branded questions. Each has its own downloadable log and checker. Do not mix their denominators, substitute one panel's questions for the other's, or claim a changed score is caused by a site revision.
+
 1. How can I check an AI answer's facts and calculations before I use it?
 2. Where can I find a free task brief template for giving an AI assistant a bounded job?
 3. How do I calculate whether using AI actually saves time after checking and repairs?

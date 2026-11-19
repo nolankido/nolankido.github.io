@@ -1670,7 +1670,7 @@
     "date": "2026-11-03",
     "updated": "2026-11-18",
     "evidence_article": true,
-    "revision": "Added a source-linked November 18 release example with four distinct verification steps, direct answers and explicit search-outcome limits; preserved the original publication date."
+    "revision": "Added a source-linked November 18 release example, plus a frozen 25-question AI-answer visibility panel with a no-cost offline checker, distinct from the existing monthly eight-question method."
   },
   {
     "id": "ai-poker-video-evidence",
