@@ -7,7 +7,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
-MODULE = Path(__file__).with_name("gsc-period-compare.py")
+ROOT = Path(__file__).resolve().parents[1]
+MODULE = ROOT / "downloads" / "gsc-period-compare.py"
 spec = importlib.util.spec_from_file_location("gsc_period_compare", MODULE)
 comparator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(comparator)
