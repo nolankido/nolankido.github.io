@@ -50,7 +50,9 @@ def main():
                 expect(page.locator('h1')).to_contain_text('Six to ten big blinds')
                 expect(page.locator('details.viewer-question')).to_have_count(9)
                 expect(page.locator('details.viewer-question[open]')).to_have_count(0)
-                expect(page.locator('div.short-stack-table[role="region"]')).to_have_count(3)
+                expect(page.locator('div.short-stack-table[role="region"]')).to_have_count(4)
+                expect(page.locator('h2#bridge-bubble')).to_contain_text('Ten big blinds near the money')
+                expect(page.locator('a[href="/downloads/ten-bb-bubble-study-sheet.md"]')).to_have_count(1)
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), ('initial', width)
                 if shots and width in (390, 1440):
                     page.screenshot(path=str(shots / f'six-to-ten-bb-{width}.png'))
@@ -79,6 +81,12 @@ def main():
                 expect(page.locator('h1')).to_contain_text('Six to ten big blinds')
                 assert urlsplit(page.url).path == ROUTE, (source, page.url)
                 results['linked_arrivals'] += 1
+            page.goto(origin + '/poker/')
+            page.locator('main a[href="' + ROUTE + '#bridge-bubble"]').first.click()
+            expect(page.locator('h2#bridge-bubble')).to_be_visible()
+            assert urlsplit(page.url).path == ROUTE and urlsplit(page.url).fragment == 'bridge-bubble'
+            response = page.goto(origin + '/downloads/ten-bb-bubble-study-sheet.md')
+            assert response and response.status == 200
             assert context.cookies() == []
             assert page.evaluate('localStorage.length === 0 && sessionStorage.length === 0')
             offline = browser.new_context(java_script_enabled=False,
