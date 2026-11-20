@@ -36,7 +36,7 @@ class PortlandRulesAndInquiryTests(unittest.TestCase):
         self.assertEqual(html, build_poker_episode.render())
         self.assertEqual(html.count(body), 1)
         self.assertIn("Two unusual Wild West rules, and why they matter for hand review.", body)
-        self.assertIn("an <strong>under-the-gun live straddle for twice the big blind</strong>", body)
+        self.assertIn("An <strong>under-the-gun live straddle for twice the big blind</strong>", body)
         self.assertIn("No source establishes that a straddle or the card-showing permission was used", body)
         self.assertIn("do not change", body.lower())
         self.assertIn('href="/downloads/portland-meadows-aug20-event-results-confirmation-request.md" download', body)
