@@ -39,6 +39,8 @@ class ResultSourceAuditTests(unittest.TestCase):
         self.assertEqual(claims["advertised_first_prize_usd"],5100)
         self.assertEqual(claims["post_deal_personal_gross_share_usd"],2900)
         self.assertFalse(claims["independently_verified_for_specific_event"])
+        self.assertEqual(record["venue_confirmation_request"]["status"], "prepared_not_sent")
+        self.assertFalse(record["venue_confirmation_request"]["organizer_reply_received"])
         flags=record["verification_flags"]
         self.assertTrue(flags["schedule_independently_confirmed"])
         for name,value in flags.items():

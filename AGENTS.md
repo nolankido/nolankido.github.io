@@ -152,6 +152,26 @@ the standalone manual builder and source parity, and existing RSS item
 dates. See `_tests/test_portland_organizer_schedule.py` for regression
 checks. No GitHub Actions, paid APIs or scheduled jobs.
 
+### Festival-specific rules and prepared records request
+
+The August 2026 Wild West program, page 2, allows players in a
+heads-up pot to discuss/show cards and permits an under-the-gun live
+straddle for twice the big blind. This is a festival-wide printed
+rule, NOT proof either permission was used in Nolan's two reported
+hands. Never add a straddle to chip arithmetic, infer shown cards,
+or apply these rules to unrelated tournaments.
+
+A public [confirmation request](https://nolankido.com/downloads/portland-meadows-aug20-event-results-confirmation-request.md)
+has been drafted, NOT sent. The official venue's public poker room
+phone 503-309-3087 and contact page may be listed, but do not invent
+an event-records email address, claim an inquiry was sent, or post
+unredacted financial, tax, identity or third-party participant data.
+Do not promote any results or payment claims to independent facts
+until an actual dated, independently inspectable event-specific
+source is obtained. Preserve historical scene unknowns and keep the
+November 2 publication and November 20 revision dates. No GitHub
+Actions, scheduled jobs or externally dispatched messages.
+
 ## Portland Meadows August 20 result verification boundary
 
 The standalone Episode 1 companion now publishes a bounded results-source

@@ -31,6 +31,9 @@ class OrganizerScheduleTests(unittest.TestCase):
         self.assertEqual(event["level_minutes"],15)
         self.assertEqual(event["poker_variant"],"No-Limit Hold'em")
         self.assertTrue(event["reentry_permitted"])
+        self.assertEqual(record["festival_wide_published_rules"]["source_page"], 2)
+        self.assertFalse(record["festival_wide_published_rules"]["under_the_gun_live_straddle"]["applies_to_narrated_hands_confirmed"])
+        self.assertFalse(record["festival_wide_published_rules"]["heads_up_pot_speech_and_card_showing"]["applies_to_narrated_hands_confirmed"])
         for key,value in record["evidence_boundaries"].items():
             if key=="confirms_scheduled_event_and_published_structure":
                 self.assertTrue(value)
