@@ -1,0 +1,68 @@
+{
+  "schema": "portland-meadows-event-specific-result-source-audit-v1",
+  "checked_on": "2026-11-20",
+  "event": "The High Noon Deepstack",
+  "scheduled_local_date": "2026-08-20",
+  "scope": "Four named source locations, not an exhaustive search of all result records.",
+  "result": "No independently published event-specific winner, field or actual deal payout was confirmed in the sources inspected.",
+  "interpretation": "A documentation gap is not evidence that the participant's account is false.",
+  "sources": [
+    {
+      "name": "Portland Meadows official Wild West schedule",
+      "url": "https://img1.wsimg.com/blobby/go/d6503eb7-9b1f-4048-b895-1b68f9534a37/Wild%20West%20Schedule%202026.pdf",
+      "type": "organizer_schedule",
+      "supports": "August 20 at noon, $200, 50,000 starting chips, 15-minute levels.",
+      "does_not_support": "Event actually held, entries, winner, deal or payout."
+    },
+    {
+      "name": "Portland Meadows Tournament Results directory",
+      "url": "https://portlandmeadows.com/schedule",
+      "type": "venue_results_directory",
+      "linked_result_destination": "https://pokerdb.thehendonmob.com/festival.php?a=r&n=48425",
+      "supports": "Organizer links to a third-party result database.",
+      "does_not_support": "No event-specific August 20 final result table on the venue's schedule page."
+    },
+    {
+      "name": "Card Player 2026 Wild West Poker Tour",
+      "url": "https://www.cardplayer.com/poker-tournaments/1732464-2026-wild-west-poker-tour",
+      "type": "independent_festival_schedule",
+      "supports": "August 20 $200 no-limit hold'em Deep Stack scheduled.",
+      "does_not_support": "No event winner or payout displayed in inspected festival schedule."
+    },
+    {
+      "name": "The Hendon Mob 2026 Portland Meadows tournaments",
+      "url": "https://pokerdb.thehendonmob.com/festival.php?a=r&n=67809",
+      "type": "search_indexed_event_archive",
+      "supports": "A 2026 Portland Meadows archive exists; search-indexed preview listed six January-April events.",
+      "does_not_support": "No August 20 High Noon result was visible in inspected indexed listing.",
+      "limitation": "Direct archive fetch blocked. Listing is not exhaustive evidence of whether another result record exists."
+    }
+  ],
+  "first_person_narration": {
+    "entries": 88,
+    "reported_prize_pool_usd": 17600,
+    "advertised_first_prize_usd": 5100,
+    "post_deal_personal_gross_share_usd": 2900,
+    "described_finish": "official winner as chip leader when four-way agreement was reached",
+    "independently_verified_for_specific_event": false
+  },
+  "verification_flags": {
+    "schedule_independently_confirmed": true,
+    "event_played_as_announced_confirmed": false,
+    "entries_independently_confirmed": false,
+    "prize_pool_independently_confirmed": false,
+    "finish_independently_confirmed": false,
+    "official_trophy_independently_confirmed": false,
+    "advertised_first_prize_independently_confirmed": false,
+    "reported_personal_payment_independently_confirmed": false,
+    "net_profit_independently_confirmed": false,
+    "audio_and_video_frames_independently_confirmed": false
+  },
+  "independent_confirmation_needed": [
+    "Venue-issued dated result sheet identifying High Noon Deepstack and winner",
+    "Event-specific credible public results posting stating finish and field",
+    "Organizer-confirmed four-way deal or payout record verifying the participant's gross cash, redacted to protect privacy"
+  ],
+  "database_limits": "The Hendon Mob's own general site caveat notes that database winnings may not reflect deals and are not reliable as net profit.",
+  "avoid": "Do not treat the missing indexed result as a disproof, do not convert a schedule into results evidence, and do not equate $5,100 advertised first with $2,900 reported deal share."
+}
