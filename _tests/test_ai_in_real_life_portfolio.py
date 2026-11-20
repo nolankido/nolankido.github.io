@@ -179,7 +179,7 @@ class AIRealLifeTests(unittest.TestCase):
                     "human_release_approval: false",
                     "148000 / 15000",
                     "585000 / 30000",
-                    "a proposed",
+                    "three proposed labels",
                     "https://www.youtube.com/watch?v=qABaiIcvvpU"):
             self.assertIn(key, ledger)
         self.assertIn("downloads/nolanpoker-content-production-evidence-ledger.md",
