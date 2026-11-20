@@ -121,7 +121,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/poker-vlog-truth-to-screen-qa.md',
                'downloads/nolanpoker-content-production-evidence-ledger.md',
                'downloads/portland-meadows-public-transcript-audit-2026-11-20.json',
-               'downloads/nolanpoker-local-video-qa.html']
+               'downloads/nolanpoker-local-video-qa.html',
+               'downloads/nolanpoker-public-youtube-review.html']
     assets += ['downloads/portland-meadows-standoff-ak-source-ledger.json',
                'downloads/portland-meadows-standoff-ak-gate.py']
     assets += ['downloads/reserve-day1-public-source-ledger.json']

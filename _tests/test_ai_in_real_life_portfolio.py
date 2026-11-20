@@ -328,6 +328,48 @@ class AIRealLifeTests(unittest.TestCase):
                                capture_output=True, text=True, check=False)
             self.assertEqual(p.returncode, 0, p.stderr)
 
+    def test_public_youtube_video_review_does_not_require_mp4(self):
+        import shutil
+        import subprocess
+        html = read("downloads/nolanpoker-public-youtube-review.html")
+        source = read("_source/ai-in-real-life.html")
+        output = read("ai-in-real-life/index.html")
+        self.assertTrue(html.startswith("<!doctype html>"))
+        self.assertIn("nolanpoker-public-youtube-qa-v1", html)
+        self.assertIn("qABaiIcvvpU", html)
+        self.assertIn("frame-src 'none'", html)
+        self.assertIn("connect-src 'none'", html)
+        self.assertIn("noindex,nofollow", html)
+        self.assertEqual(html.count('<article class="checkpoint" data-scene='), 6)
+        for sec in (31,260,387,432,488,532):
+            self.assertIn('https://www.youtube.com/watch?v=qABaiIcvvpU&t='+str(sec)+'s', html)
+        self.assertIn("archived_v12_metadata_unverified_in_current_cut", html)
+        self.assertIn("public_video_frames_independently_verified_by_tool:false", html)
+        self.assertIn("independent_external_certification:false", html)
+        self.assertIn("function validateSaved(raw)", html)
+        for forbidden in ("fetch(", "XMLHttpRequest", "sendBeacon", "localStorage", "sessionStorage"):
+            self.assertNotIn(forbidden, html)
+        self.assertIn('id="real-life-creator-public-youtube"', source)
+        self.assertIn('href="/downloads/nolanpoker-public-youtube-review.html"', source)
+        self.assertEqual(source.count("<h2 "), 9)
+        begin = '<section class="section folio-row" id="real-life-creator"'
+        end = '<section class="section folio-row" id="real-life-everyday"'
+        self.assertEqual(source.split(begin,1)[1].split(end,1)[0],
+                         output.split(begin,1)[1].split(end,1)[0])
+        self.assertIn("downloads/nolanpoker-public-youtube-review.html",
+                      read("_scripts/check_live.py"))
+        self.assertIn("## J. Source-linked public YouTube viewing path",
+                      read("downloads/nolanpoker-content-production-evidence-ledger.md"))
+        original = json.loads(read("downloads/portland-meadows-ep1-scene-claims.json"))
+        for key in ("current_public_cut_timestamps_checked",
+                    "current_public_cut_graphics_checked", "human_release_approval"):
+            self.assertFalse(original[key])
+        self.assertNotIn(chr(0x2014), source)
+        if shutil.which("node"):
+            r = subprocess.run(["node", str(ROOT / "_tests/nolanpoker_public_youtube_qa_smoke.cjs")],
+                               capture_output=True, text=True, check=False)
+            self.assertEqual(r.returncode, 0, r.stderr)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",
