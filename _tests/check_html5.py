@@ -14,6 +14,7 @@ import poker_standoff_episode
 import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
+import book_pages
 
 
 def parse_errors(document: str) -> list:
@@ -39,6 +40,11 @@ def publication_paths(root: Path, pages: list[dict]) -> dict[str, Path]:
         if route in paths:
             raise ValueError('Standalone HTML duplicates a manifest route: ' + route)
         paths[route] = output
+    for book in book_pages.published(root):
+        route = book_pages.route(book)
+        if route in paths:
+            raise ValueError('Standalone book duplicates a manifest or manual route: ' + route)
+        paths[route] = Path('books') / book['slug'] / 'index.html'
     return paths
 
 

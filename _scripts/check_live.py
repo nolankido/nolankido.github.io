@@ -12,6 +12,7 @@ import poker_standoff_episode
 import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
+import book_pages
 import time
 import urllib.error
 import urllib.request
@@ -65,6 +66,12 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
             raise ValueError('Independent reply case duplicates a manifest route')
         result[reply_case['path']] = (200, (root / reply_audit_case.OUTPUT).read_bytes())
         result['/' + reply_audit_case.TOOL.as_posix()] = (200, (root / reply_audit_case.TOOL).read_bytes())
+    for book in book_pages.published(root):
+        route = book_pages.route(book)
+        if route in result:
+            raise ValueError('Standalone book duplicates a manifest or manual route: ' + route)
+        relative = Path('books') / book['slug'] / 'index.html'
+        result[route] = (200, (root / relative).read_bytes())
     assets = ['downloads/poker-cash-study.md', 'assets/poker-topics.css', 'assets/poker-journeys.css', 'assets/poker-study-tools.css', 'assets/poker-study-tools.js', 'assets/poker-finder.css', 'assets/poker-finder.js', 'downloads/poker-math-reference.md', 'downloads/poker-resource-directory.md', 'downloads/poker-resource-directory.json', 'assets/poker-fieldguide.css', 'assets/poker-resources.css', 'assets/poker-resources.js', 'assets/poker-reader.css', 'assets/poker-library.js', 'downloads/poker-short-stack-record.md', 'downloads/poker-study-cycle.md', 'downloads/poker-results-review.md', 'downloads/poker-episode-plan.md', 'downloads/poker-watch-along.md', 'downloads/poker-viewer-reference.md', 'assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'downloads/poker-hand-review-example-ak.md', 'downloads/poker-hand-review-example-64o.md', 'downloads/poker-hand-review-example-77.md', 'downloads/poker-hand-review-practice-01.md', 'downloads/poker-hand-review-practice-01-key.md', 'downloads/poker-hand-review-practice-01.html', 'downloads/poker-hand-review-practice-01-key.html', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['poker-event-planner', 'poker-hand-capture', 'poker-resource-check']]
     assets += ['assets/search-visibility.css', 'assets/first-steps.css', 'downloads/creative-brief.txt']
@@ -96,6 +103,12 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/answer-review.css', 'downloads/ai-answer-review.txt', 'downloads/ai-answer-quick-check.txt']
     assets += ['assets/search-entrypoints.css', 'assets/author-archive.css', 'assets/resources-reader.css', 'assets/living-well-reader.css']
     assets += ['assets/standalone-section-arrivals.css']
+    # Exact release checks for the original worksheets and social topic
+    # cards linked from the two separately published book pages.
+    assets += ['downloads/one-workflow-ai-pilot-worksheet.md',
+               'downloads/holdem-river-call-check-worksheet.md',
+               'assets/social/ai-time-savings.png',
+               'assets/social/reader-poker-no-limit-holdem-guide.png']
     assets += ['assets/practical-ai-path.css', 'downloads/practical-ai-workbook.txt']
     assets += ['assets/visibility-projects.css', 'assets/projects/preflight-holmes-report.png',
                'downloads/book-continuity-editorial-review-log.md',

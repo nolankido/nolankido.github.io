@@ -21,6 +21,7 @@ import poker_standoff_episode
 import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
+import book_pages
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -104,6 +105,20 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     if reply_audit is not None:
         expected_indexed.add(reply_audit['url'])
         totals['independent_reply_cases'] += 1
+    # Standalone books are source-verified and indexed by the main sitemap.
+    # The old search audit ignored them and therefore rejected the legitimate
+    # book URLs as unapproved sitemap additions.
+    try:
+        books = book_pages.published(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append('Standalone book pages: ' + str(exc))
+        books = []
+    for book in books:
+        canonical = book_pages.ORIGIN + book_pages.route(book)
+        if canonical in expected_indexed:
+            errors.append('Standalone book duplicates an indexed canonical: ' + canonical)
+        expected_indexed.add(canonical)
+        totals['manual_book_pages'] += 1
     sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
     actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):
