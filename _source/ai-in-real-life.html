@@ -43,12 +43,23 @@
   </div>
 </section>
 <section class="section folio-row" id="real-life-business" aria-labelledby="real-life-business-title">
-  <div class="section-meta"><p class="section-label">02 / Bounded prototype</p></div>
+  <div class="section-meta"><p class="section-label">02 / Measured model stage, unmeasured productivity</p></div>
   <div class="section-content prose">
     <h2 class="section-title" id="real-life-business-title">Drafting customer replies without giving AI authority.</h2>
-    <p><a href="/technology/local-ai-review-replies/">Review Reply Writer</a> explores a small-business task: respond to a customer reporting a duplicate charge. The workflow separates the customer's allegation, the actual owner policy, and the exact AI-produced wording. A person must check and approve the reply.</p>
-<p><strong>Demonstrated:</strong> Archived fictional examples, a local-AI drafting workflow, an approval checklist, and <a href="/technology/review-reply-evidence-audit/">an audit of example replies</a>. <strong>Not demonstrated:</strong> Production deployment at a cafe, a representative error rate, actual customer satisfaction, or measured client time savings.</p>
-<p class="small-copy">Read <a href="/technology/local-ai-review-replies/#reply-owner-gate">the owner approval gate</a> or inspect <a href="https://github.com/nolankido/reviewReplyWriter">the source code</a>.</p>
+    <p><a href="/technology/local-ai-review-replies/">Review Reply Writer</a> explores a small-business task: draft a customer reply while keeping the owner responsible for what is actually posted. The local Gemma tool distinguishes a customer's reported experience from verified policy and the exact wording requiring human approval.</p>
+    <h3 id="real-life-business-measured">What a real local model test actually measured.</h3>
+    <p>On <time datetime="2026-10-13">October 13, 2026</time> Hawaii time, a retained three-case evaluation ran <code>gemma3:4b</code> through Ollama on a GitHub-hosted Ubuntu CPU runner, not on my Windows laptop. The reviews were fictional, developer-written fixtures. The <code>case_elapsed_ms</code> values in the <a href="https://github.com/nolankido/reviewReplyWriter/blob/1c5e0487c331d5202410c9f342557d9355951c3a/examples/evaluation/live-quality-smoke-2026-10-13.json">pinned raw results</a> were:</p>
+    <ol class="evidence-facts">
+      <li><strong>Cafe praise:</strong> 19.536 seconds, one model attempt.</li>
+      <li><strong>Cafe complaint:</strong> 18.157 seconds, one model attempt.</li>
+      <li><strong>Mixed hotel stay:</strong> 19.325 seconds, one model attempt.</li>
+    </ol>
+    <p>The arithmetic mean of these three selected case elapsed times was <strong>19.006 seconds</strong>. All three passed that historical version's automated checks on the first attempt. These are real recorded machine-stage timings, <strong>not measured human time saved</strong>, a representative benchmark, or an owner quality approval. The <a href="/technology/local-ai-test-record/">full model test record</a> details the machine and limitations, and the <a href="/technology/review-reply-evidence-audit/">separate source audit</a> illustrates why automated passes need human review.</p>
+    <h3 id="real-life-business-pilot">What would prove that the full task became more productive?</h3>
+    <p>Conduct a new paired trial: draft each review manually and using AI, test both against the same acceptance standard, and log preparation, blocked waiting, checking, failed attempts, repairs, setup, upkeep, and an actual human quality decision. The three historical machine times cannot substitute for new matched manual and AI task observations.</p>
+    <p><strong>Reproducible starting point:</strong> <a href="/downloads/review-reply-paired-pilot-instructions.md" download>Download the six-case pilot instructions</a> and <a href="/downloads/review-reply-paired-pilot-blank.csv" download>blank timing and quality CSV</a>. The inputs are fictional, and all measurement fields remain empty. After a real trial, run the <a href="/technology/ai-workflow-pilot/#pilot-kit">existing offline workflow auditor</a>. It checks arithmetic and reviewer-entered labels, not the truth of those labels.</p>
+    <p><strong>Current evidence status:</strong> Historical model case execution was recorded. Comparable manual effort, human review and repairs, current model behavior, owner approval, recurring setup and upkeep, and total business cost remain <strong>unmeasured</strong>. No actual client deployment, time saving, error rate, or return on investment is claimed.</p>
+    <p class="small-copy">Inspect <a href="https://github.com/nolankido/reviewReplyWriter">the source repository</a> or read the <a href="/technology/local-ai-review-replies/#reply-owner-gate">owner approval checklist</a>. Do not enter real customer or private business material into the public exercises.</p>
   </div>
 </section>
 <section class="section folio-row" id="real-life-publishing" aria-labelledby="real-life-publishing-title">

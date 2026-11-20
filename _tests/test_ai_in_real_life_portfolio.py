@@ -54,6 +54,34 @@ class AIRealLifeTests(unittest.TestCase):
         self.assertIn("Not established:", source)
         self.assertIn("not the full archived release", source)
 
+    def test_real_machine_measurements_and_unmeasured_pilot(self):
+        from csv import DictReader
+        from io import StringIO
+        observed = json.loads(read("downloads/local-ai-test-record.json"))
+        self.assertEqual([r["case_elapsed_ms"] for r in observed["results"]], [19536, 18157, 19325])
+        self.assertEqual(observed["human_assessments_recorded"], 0)
+        self.assertIsNone(observed["unmeasured"]["manual_baseline_minutes"])
+        source = read("_source/ai-in-real-life.html")
+        page = read("ai-in-real-life/index.html")
+        for fragment in ('id="real-life-business-measured"', 'id="real-life-business-pilot"',
+                         "19.536 seconds", "18.157 seconds", "19.325 seconds", "19.006 seconds",
+                         "not measured human time saved", "remain <strong>unmeasured</strong>"):
+            self.assertIn(fragment, source)
+            self.assertIn(fragment, page)
+        for name in ("review-reply-paired-pilot-instructions.md", "review-reply-paired-pilot-blank.csv"):
+            self.assertIn('/downloads/' + name, source)
+        records = list(DictReader(StringIO(read("downloads/review-reply-paired-pilot-blank.csv"))))
+        self.assertEqual([r["case_id"] for r in records],
+                         ["RP01", "RP02", "RP03", "RP04", "RP05", "RP06"])
+        for row in records:
+            for key in ("manual_minutes", "ai_preparation_minutes", "ai_review_minutes",
+                        "ai_repair_minutes", "quality_status"):
+                self.assertEqual(row[key], "")
+        instructions = read("downloads/review-reply-paired-pilot-instructions.md")
+        self.assertIn("no paired observations", instructions)
+        self.assertIn("NOT been run", instructions)
+        self.assertNotIn(chr(0x2014), instructions)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",
