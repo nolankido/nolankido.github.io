@@ -199,6 +199,32 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## Standalone author book pages
+
+The two public standalone pages at `/books/one-workflow-at-a-time/`
+and `/books/how-to-play-no-limit-texas-holdem/` have full HTML
+sources in `_source/books/` with byte-identical outputs in `books/`.
+Edit the full source HTML, run `python _scripts/build_books.py`,
+then `python _scripts/build_books.py --check`. The book builder
+does not replace the main site generator, use GitHub Actions, or
+make any external API calls.
+
+`_scripts/book_pages.py` source-validates the pages before
+registering their canonical URLs in the existing main sitemap
+and the local Find directory. It requires native links from
+Home and Creative, a unique canonical and matching OG URL,
+the same author Person identifier, one H1, indexability and
+Book JSON-LD without unsupported retailer claims. Keep those
+requirements and `_tests/test_book_pages.py` in sync.
+Run `python _scripts/build.py` and the documented local
+release checks after any navigation or discovery change.
+
+The owner describes the two books as newly published. Exact
+retailer URLs, ASINs, ISBNs, publication dates, formats and
+prices have not been independently verified in this release.
+Do not add invented offers, dates, seller links, reviews,
+ratings or sales evidence. Never restore GitHub Actions.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.

@@ -62,6 +62,7 @@ import case_evidence
 import time_examples
 import visibility_projects
 import player_sitemap
+import book_pages
 import local_laptop_case
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -534,19 +535,19 @@ def build_outputs() -> dict[Path, str]:
                 'itemListElement': [
                     {'@type': 'ListItem', 'position': 1, 'item': {
                         '@type': 'Book',
-                        '@id': site['url'] + '/creative/#book-one-workflow-at-a-time',
+                        '@id': site['url'] + '/books/one-workflow-at-a-time/#book',
                         'name': 'One Workflow at a Time',
                         'alternateName': 'One Workflow at a Time: How Small Business Owners Can Test AI Before Spending More Time or Money',
                         'author': {'@id': site['url'] + '/about/#nolan-kido'},
                         'description': 'A practical guide to testing a bounded AI workflow in a small business, checking results, and measuring the whole task.',
-                        'url': site['url'] + '/creative/#book-one-workflow-at-a-time'}},
+                        'url': site['url'] + '/books/one-workflow-at-a-time/'}},
                     {'@type': 'ListItem', 'position': 2, 'item': {
                         '@type': 'Book',
-                        '@id': site['url'] + '/creative/#book-how-to-play-no-limit-texas-holdem',
+                        '@id': site['url'] + '/books/how-to-play-no-limit-texas-holdem/#book',
                         'name': 'How to Play No-Limit Texas Hold’em',
                         'author': {'@id': site['url'] + '/about/#nolan-kido'},
                         'description': 'An introduction to no-limit Texas Hold’em, from rules and betting to ranges, pot odds, and decision review.',
-                        'url': site['url'] + '/creative/#book-how-to-play-no-limit-texas-holdem'}}
+                        'url': site['url'] + '/books/how-to-play-no-limit-texas-holdem/'}}
                 ],
             }
         schema = author_archive.schema(p, schema, pages, site, ROOT)
@@ -599,6 +600,7 @@ def build_outputs() -> dict[Path, str]:
             ET.SubElement(item, 'loc').text = site['url'] + p['path']
             if p.get('updated') or p.get('date'):
                 ET.SubElement(item, 'lastmod').text = p.get('updated', p.get('date'))
+    book_pages.add_to_sitemap(sitemap, ROOT)
     player_sitemap.add_to_sitemap(sitemap, ROOT)
     local_laptop_case.add_to_sitemap(sitemap, ROOT)
     reply_audit_case.add_to_sitemap(sitemap, ROOT)
