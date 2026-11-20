@@ -302,13 +302,33 @@ minimum temporary-site semantics: when both source and public page for a book
 are absent, it is not an approved publication; if only one is present,
 the audit must fail closed. Never add GitHub Actions.
 
-The older `_reports/search-audit.json` is a historical snapshot, not an
-up-to-date ranking or current crawl measurement. Do not infer that the
+The search-audit report is a static source inventory, not actual ranking,
+indexing or traffic measurement. Do not infer that the
 snapshot's old page count is the current sitemap. Regenerate the audit
 using `python _scripts/check_search.py --json _reports/search-audit.json`
 on a complete local checkout and check all reported errors before describing
 it as a passing current run. Book metadata still must not invent seller,
 edition, datePublished, ISBN, rating, sale or official cover claims.
+
+## Current SEO audit inventory and provenance, November 20, 2026
+
+The formerly committed search-audit snapshot described only 200 pages and
+was no longer representative of the published 228-URL sitemap. This
+release reconciles the canonical inventory: 225 manifest-backed pages,
+five excluded utility routes within those pages, six other published
+standalone pages, and two separately published books. Its current
+`_reports/search-audit.json` values are reconstructed from the published
+manifests, checked-in HTML metadata and the sitemap. The complete Python
+release suite could not be executed inside the GitHub connector session.
+
+Do not portray a rebuilt source snapshot as independently confirmed
+Google Search Console indexing, search ranking, traffic or citations
+by ChatGPT or other assistants. On a local checkout, run
+`python _scripts/check_search.py --json _reports/search-audit.json`
+and compare the newly generated report to the committed snapshot,
+then run `python _scripts/local_release_checks.py`. Investigate
+every discrepancy rather than lowering assertions or omitting books.
+No GitHub Actions, alternative cron jobs or paid service required.
 
 ## Editorial and privacy standards
 

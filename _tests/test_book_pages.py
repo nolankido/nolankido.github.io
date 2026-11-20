@@ -8,6 +8,7 @@ from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
+sys.path.insert(0, str(ROOT / "_tests"))
 import book_pages
 
 
