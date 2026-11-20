@@ -343,6 +343,11 @@ def build_outputs() -> dict[Path, str]:
         if p['id'] in {'home', 'creative'}:
             starts_version = hashlib.sha256((ROOT / 'assets/first-steps.css').read_bytes()).hexdigest()[:12]
             extra += f'\n  <link rel="stylesheet" href="/assets/first-steps.css?v={starts_version}">'
+        if p['id'] == 'ai-in-real-life':
+            for asset, kind in [('review-reply-pilot.css', 'style'), ('review-reply-pilot.js', 'script')]:
+                version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]
+                extra += (f'\n  <link rel="stylesheet" href="/assets/{asset}?v={version}">' if kind == 'style'
+                          else f'\n  <script defer src="/assets/{asset}?v={version}"></script>')
         if p['id'] == 'task-brief':
             for asset, kind in [('task-brief.css', 'style'), ('task-brief.js', 'script')]:
                 version = hashlib.sha256((ROOT / 'assets' / asset).read_bytes()).hexdigest()[:12]

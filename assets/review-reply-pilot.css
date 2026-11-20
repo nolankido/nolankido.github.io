@@ -1,0 +1,42 @@
+/* Browser-only measured workflow journal. Scoped to the practical AI portfolio. */
+.page-ai-in-real-life .rr-pilot { margin: 30px 0; padding: clamp(14px, 3vw, 28px); border: 1px solid var(--line-dark); background: var(--paper-light); overflow-wrap: anywhere; }
+.page-ai-in-real-life .rr-pilot > h3 { margin-bottom: 12px; }
+.page-ai-in-real-life .rr-pilot-note { border-left: 3px solid var(--red); background: var(--paper); padding: 14px 18px; }
+.page-ai-in-real-life .rr-pilot-case { margin: 12px 0; border: 1px solid var(--line-dark); background: var(--paper); }
+.page-ai-in-real-life .rr-pilot-case > summary { cursor: pointer; padding: 14px 16px; font: 600 1rem/1.5 var(--sans); }
+.page-ai-in-real-life .rr-pilot-case[open] > summary { border-bottom: 1px solid var(--line-dark); }
+.page-ai-in-real-life .rr-pilot-case-body { padding: 18px; }
+.page-ai-in-real-life .rr-pilot-review { margin: 10px 0 20px; padding: 14px 16px; border-left: 3px solid var(--green); background: var(--paper-light); font: 1.06rem/1.55 var(--serif); }
+.page-ai-in-real-life .rr-pilot-review p { margin: 0; }
+.page-ai-in-real-life .rr-pilot-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin: 16px 0; }
+.page-ai-in-real-life .rr-pilot-field { display: grid; min-width: 0; gap: 6px; font: 600 .92rem/1.5 var(--sans); }
+.page-ai-in-real-life .rr-pilot-field input,
+.page-ai-in-real-life .rr-pilot-field select { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--line-dark); border-radius: 0; background: var(--paper-light); color: var(--basalt); padding: 10px 12px; font: 1rem/1.4 var(--sans); }
+.page-ai-in-real-life .rr-pilot-field input::placeholder { color: var(--ink-soft); opacity: 1; }
+.page-ai-in-real-life .rr-pilot-field input[aria-invalid="true"] { border: 2px solid var(--red); }
+.page-ai-in-real-life .rr-pilot input:focus-visible,
+.page-ai-in-real-life .rr-pilot select:focus-visible,
+.page-ai-in-real-life .rr-pilot summary:focus-visible,
+.page-ai-in-real-life .rr-pilot button:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+.page-ai-in-real-life .rr-pilot-quality { margin: 18px 0; padding: 14px; border: 1px solid var(--line-dark); min-width: 0; }
+.page-ai-in-real-life .rr-pilot-quality legend { padding: 0 5px; font: 600 .95rem/1.4 var(--sans); }
+.page-ai-in-real-life .rr-pilot-confirm { display: flex; align-items: flex-start; gap: 10px; font: .94rem/1.55 var(--sans); }
+.page-ai-in-real-life .rr-pilot-confirm input { flex: 0 0 auto; width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--green); }
+.page-ai-in-real-life .rr-pilot-overhead { margin: 26px 0 20px; padding-top: 18px; border-top: 1px solid var(--line-dark); }
+.page-ai-in-real-life .rr-pilot-actions[hidden] { display: none !important; }
+.page-ai-in-real-life .rr-pilot-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 20px 0; }
+.page-ai-in-real-life .rr-pilot button { min-height: 44px; max-width: 100%; cursor: pointer; padding: 10px 16px; border: 1px solid var(--line-dark); border-radius: 0; background: var(--paper); color: var(--basalt); font: 600 .94rem/1.4 var(--sans); }
+.page-ai-in-real-life .rr-pilot button.rr-pilot-primary { background: var(--basalt); color: var(--paper-light); border-color: var(--basalt); }
+.page-ai-in-real-life .rr-pilot-status { min-height: 1.5rem; font: .9rem/1.5 var(--sans); }
+.page-ai-in-real-life .rr-pilot-summary { padding: 14px 16px; background: var(--panel); font: .94rem/1.6 var(--sans); }
+.page-ai-in-real-life .rr-pilot-command { padding: 12px; background: var(--paper); white-space: pre-wrap; overflow-wrap: anywhere; font: .82rem/1.6 var(--mono); }
+#real-life-pilot-workspace { scroll-margin-top: 6rem; }
+@media (max-width: 680px) {
+  .page-ai-in-real-life .rr-pilot-grid { grid-template-columns: minmax(0,1fr); }
+  .page-ai-in-real-life .rr-pilot-case-body { padding: 12px; }
+  .page-ai-in-real-life .rr-pilot-actions button { width: 100%; }
+}
+@media print {
+  .page-ai-in-real-life .rr-pilot form { display: none !important; }
+  .page-ai-in-real-life .rr-pilot { border: 0; background: white; padding: 0; }
+}

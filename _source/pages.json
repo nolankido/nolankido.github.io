@@ -103,7 +103,7 @@
     "section": "technology",
     "source": "ai-in-real-life.html",
     "updated": "2026-11-19",
-    "revision": "Added three historically observed local model case timings and an unfilled six-case paired productivity pilot to separate machine latency from human benefit."
+    "revision": "Added a browser-local six-case trial logger with human judgments, quality-gated comparison and CSV export. No productivity gain is claimed."
   },
   {
     "id": "contact",

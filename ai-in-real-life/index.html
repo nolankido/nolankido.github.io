@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="/assets/site-core.css?v=10383d71aabb">
 
   <link rel="alternate" type="application/rss+xml" title="Nolan Kido | Practical AI writing" href="/technology/feed.xml">
+  <link rel="stylesheet" href="/assets/review-reply-pilot.css?v=92b2e26a21b9">
+  <script defer src="/assets/review-reply-pilot.js?v=28bfdb2c0e29"></script>
   <link rel="stylesheet" href="/assets/search-visibility.css?v=c5a767619d13">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "AI in Real Life: Practical AI Case Studies | Nolan Kido", "url": "https://nolankido.com/ai-in-real-life/", "description": "Explore practical AI case studies from Nolan Kido: verified website work, bounded business prototypes, publishing checks and creator workflows, with evidence and limits.", "isPartOf": {"@type": "WebSite", "@id": "https://nolankido.com/#website", "name": "Nolan Kido", "url": "https://nolankido.com/", "publisher": {"@type": "Person", "@id": "https://nolankido.com/about/#nolan-kido", "name": "Nolan Kido", "url": "https://nolankido.com/about/"}}, "about": {"@id": "https://nolankido.com/about/#nolan-kido"}, "dateModified": "2026-11-19", "@id": "https://nolankido.com/ai-in-real-life/#webpage", "inLanguage": "en-US", "breadcrumb": {"@type": "BreadcrumbList", "@id": "https://nolankido.com/ai-in-real-life/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nolankido.com/"}, {"@type": "ListItem", "position": 2, "name": "AI in Real Life: Projects and Evidence", "item": "https://nolankido.com/ai-in-real-life/"}]}}</script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="51bfd4d7-08ac-4299-924b-621af60fa7f1" data-domains="nolankido.com,www.nolankido.com" data-do-not-track="true" data-exclude-search="true" data-exclude-hash="true"></script>
@@ -112,6 +114,161 @@
     <p>Conduct a new paired trial: draft each review manually and using AI, test both against the same acceptance standard, and log preparation, blocked waiting, checking, failed attempts, repairs, setup, upkeep, and an actual human quality decision. The three historical machine times cannot substitute for new matched manual and AI task observations.</p>
     <p><strong>Reproducible starting point:</strong> <a href="/downloads/review-reply-paired-pilot-instructions.md" download>Download the six-case pilot instructions</a> and <a href="/downloads/review-reply-paired-pilot-blank.csv" download>blank timing and quality CSV</a>. The inputs are fictional, and all measurement fields remain empty. After a real trial, run the <a href="/technology/ai-workflow-pilot/#pilot-kit">existing offline workflow auditor</a>. It checks arithmetic and reviewer-entered labels, not the truth of those labels.</p>
     <p><strong>Current evidence status:</strong> Historical model case execution was recorded. Comparable manual effort, human review and repairs, current model behavior, owner approval, recurring setup and upkeep, and total business cost remain <strong>unmeasured</strong>. No actual client deployment, time saving, error rate, or return on investment is claimed.</p>
+    <div class="rr-pilot" id="real-life-pilot-workspace" aria-labelledby="rr-pilot-title">
+      <h3 id="rr-pilot-title">Record an actual paired trial in this browser.</h3>
+      <p>Work through six frozen fictional reviews. Enter observed manual and AI-assisted times, inspect both drafts, and make separate human quality decisions. This worksheet then exports the existing offline auditor's exact six-column CSV format. <strong>It does not generate AI replies, time your work, or verify your inputs.</strong></p>
+      <p class="rr-pilot-note"><strong>Privacy:</strong> Your entered values stay in this browser tab. This tool makes no API calls and does not store, transmit or automatically publish your observations. Export before leaving. The site's existing pageview analytics do not collect these field values. Do not enter real customer information or confidential policies.</p>
+      <details><summary>Read the fixed fictional owner policy and acceptance criteria</summary>
+        <p>Draft a professional 50- to 100-word public reply. Acknowledge the customer's reported positives and negatives, but do not invent verified facts. No refund, gift, credit, investigation, operational change, deadline or follow-up is authorized. Request no private or payment information in public. A human must approve the exact wording. Apply the same five checks to both manual and assisted drafts: accurate details, no unverified factual upgrades, no unauthorized commitments, no personal-data requests, and appropriate tone and length.</p>
+      </details>
+      <form id="rr-pilot-form" novalidate aria-describedby="rr-pilot-instructions">
+        <p id="rr-pilot-instructions" class="small-copy">Open each case to enter the minutes you actually observed. Leave unknowns blank rather than entering zero. Manual task time must be greater than zero; a truly measured zero is allowed for an AI stage. Use up to two decimal places.</p>
+          <details class="rr-pilot-case" data-rr-case="RP01">
+            <summary>RP01: Cafe praise</summary>
+            <div class="rr-pilot-case-body">
+              <p class="small-copy">Demo Cafe, 5 stars. Suggested first method: Manual. This is an alternating suggestion, not randomized.</p>
+              <blockquote class="rr-pilot-review"><p>The oat milk latte was perfect and the service was quick.</p></blockquote>
+              <div class="rr-pilot-grid">
+                <div class="rr-pilot-field"><label for="rr-RP01-manual_minutes">Manual drafting and checking, minutes</label><input id="rr-RP01-manual_minutes" type="text" inputmode="decimal" data-rr-field="manual_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP01-ai_preparation_minutes">AI preparation and blocked waiting, minutes</label><input id="rr-RP01-ai_preparation_minutes" type="text" inputmode="decimal" data-rr-field="ai_preparation_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP01-ai_review_minutes">Human review of AI draft, minutes</label><input id="rr-RP01-ai_review_minutes" type="text" inputmode="decimal" data-rr-field="ai_review_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP01-ai_repair_minutes">AI retries and repairs, minutes</label><input id="rr-RP01-ai_repair_minutes" type="text" inputmode="decimal" data-rr-field="ai_repair_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+              </div>
+              <fieldset class="rr-pilot-quality">
+                <legend>Human reviewer: evaluate both final drafts</legend>
+                <div class="rr-pilot-grid">
+                  <div class="rr-pilot-field"><label for="rr-RP01-manual_quality">Manual final draft</label><select id="rr-RP01-manual_quality" data-rr-field="manual_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                  <div class="rr-pilot-field"><label for="rr-RP01-ai_quality">AI-assisted final draft</label><select id="rr-RP01-ai_quality" data-rr-field="ai_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                </div>
+                <label class="rr-pilot-confirm" for="rr-RP01-confirmed"><input id="rr-RP01-confirmed" data-rr-field="confirmed" type="checkbox">I reviewed both final drafts against the fixed approval rubric.</label>
+              </fieldset>
+            </div>
+          </details>
+          <details class="rr-pilot-case" data-rr-case="RP02">
+            <summary>RP02: Cafe complaint</summary>
+            <div class="rr-pilot-case-body">
+              <p class="small-copy">Demo Cafe, 2 stars. Suggested first method: AI. This is an alternating suggestion, not randomized.</p>
+              <blockquote class="rr-pilot-review"><p>Cold coffee and a 25 minute wait. The barista ignored my question. Disappointing.</p></blockquote>
+              <div class="rr-pilot-grid">
+                <div class="rr-pilot-field"><label for="rr-RP02-manual_minutes">Manual drafting and checking, minutes</label><input id="rr-RP02-manual_minutes" type="text" inputmode="decimal" data-rr-field="manual_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP02-ai_preparation_minutes">AI preparation and blocked waiting, minutes</label><input id="rr-RP02-ai_preparation_minutes" type="text" inputmode="decimal" data-rr-field="ai_preparation_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP02-ai_review_minutes">Human review of AI draft, minutes</label><input id="rr-RP02-ai_review_minutes" type="text" inputmode="decimal" data-rr-field="ai_review_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP02-ai_repair_minutes">AI retries and repairs, minutes</label><input id="rr-RP02-ai_repair_minutes" type="text" inputmode="decimal" data-rr-field="ai_repair_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+              </div>
+              <fieldset class="rr-pilot-quality">
+                <legend>Human reviewer: evaluate both final drafts</legend>
+                <div class="rr-pilot-grid">
+                  <div class="rr-pilot-field"><label for="rr-RP02-manual_quality">Manual final draft</label><select id="rr-RP02-manual_quality" data-rr-field="manual_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                  <div class="rr-pilot-field"><label for="rr-RP02-ai_quality">AI-assisted final draft</label><select id="rr-RP02-ai_quality" data-rr-field="ai_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                </div>
+                <label class="rr-pilot-confirm" for="rr-RP02-confirmed"><input id="rr-RP02-confirmed" data-rr-field="confirmed" type="checkbox">I reviewed both final drafts against the fixed approval rubric.</label>
+              </fieldset>
+            </div>
+          </details>
+          <details class="rr-pilot-case" data-rr-case="RP03">
+            <summary>RP03: Mixed stay</summary>
+            <div class="rr-pilot-case-body">
+              <p class="small-copy">Demo Stay, 3 stars. Suggested first method: Manual. This is an alternating suggestion, not randomized.</p>
+              <blockquote class="rr-pilot-review"><p>Beautiful room and ocean view, but check-in took forever and the shower was weak.</p></blockquote>
+              <div class="rr-pilot-grid">
+                <div class="rr-pilot-field"><label for="rr-RP03-manual_minutes">Manual drafting and checking, minutes</label><input id="rr-RP03-manual_minutes" type="text" inputmode="decimal" data-rr-field="manual_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP03-ai_preparation_minutes">AI preparation and blocked waiting, minutes</label><input id="rr-RP03-ai_preparation_minutes" type="text" inputmode="decimal" data-rr-field="ai_preparation_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP03-ai_review_minutes">Human review of AI draft, minutes</label><input id="rr-RP03-ai_review_minutes" type="text" inputmode="decimal" data-rr-field="ai_review_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP03-ai_repair_minutes">AI retries and repairs, minutes</label><input id="rr-RP03-ai_repair_minutes" type="text" inputmode="decimal" data-rr-field="ai_repair_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+              </div>
+              <fieldset class="rr-pilot-quality">
+                <legend>Human reviewer: evaluate both final drafts</legend>
+                <div class="rr-pilot-grid">
+                  <div class="rr-pilot-field"><label for="rr-RP03-manual_quality">Manual final draft</label><select id="rr-RP03-manual_quality" data-rr-field="manual_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                  <div class="rr-pilot-field"><label for="rr-RP03-ai_quality">AI-assisted final draft</label><select id="rr-RP03-ai_quality" data-rr-field="ai_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                </div>
+                <label class="rr-pilot-confirm" for="rr-RP03-confirmed"><input id="rr-RP03-confirmed" data-rr-field="confirmed" type="checkbox">I reviewed both final drafts against the fixed approval rubric.</label>
+              </fieldset>
+            </div>
+          </details>
+          <details class="rr-pilot-case" data-rr-case="RP04">
+            <summary>RP04: Billing complaint</summary>
+            <div class="rr-pilot-case-body">
+              <p class="small-copy">Demo Cafe, 1 stars. Suggested first method: AI. This is an alternating suggestion, not randomized.</p>
+              <blockquote class="rr-pilot-review"><p>My receipt shows two charges for one iced tea. I asked at the counter but nobody could explain it.</p></blockquote>
+              <div class="rr-pilot-grid">
+                <div class="rr-pilot-field"><label for="rr-RP04-manual_minutes">Manual drafting and checking, minutes</label><input id="rr-RP04-manual_minutes" type="text" inputmode="decimal" data-rr-field="manual_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP04-ai_preparation_minutes">AI preparation and blocked waiting, minutes</label><input id="rr-RP04-ai_preparation_minutes" type="text" inputmode="decimal" data-rr-field="ai_preparation_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP04-ai_review_minutes">Human review of AI draft, minutes</label><input id="rr-RP04-ai_review_minutes" type="text" inputmode="decimal" data-rr-field="ai_review_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP04-ai_repair_minutes">AI retries and repairs, minutes</label><input id="rr-RP04-ai_repair_minutes" type="text" inputmode="decimal" data-rr-field="ai_repair_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+              </div>
+              <fieldset class="rr-pilot-quality">
+                <legend>Human reviewer: evaluate both final drafts</legend>
+                <div class="rr-pilot-grid">
+                  <div class="rr-pilot-field"><label for="rr-RP04-manual_quality">Manual final draft</label><select id="rr-RP04-manual_quality" data-rr-field="manual_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                  <div class="rr-pilot-field"><label for="rr-RP04-ai_quality">AI-assisted final draft</label><select id="rr-RP04-ai_quality" data-rr-field="ai_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                </div>
+                <label class="rr-pilot-confirm" for="rr-RP04-confirmed"><input id="rr-RP04-confirmed" data-rr-field="confirmed" type="checkbox">I reviewed both final drafts against the fixed approval rubric.</label>
+              </fieldset>
+            </div>
+          </details>
+          <details class="rr-pilot-case" data-rr-case="RP05">
+            <summary>RP05: Ingredient uncertainty</summary>
+            <div class="rr-pilot-case-body">
+              <p class="small-copy">Demo Cafe, 2 stars. Suggested first method: Manual. This is an alternating suggestion, not randomized.</p>
+              <blockquote class="rr-pilot-review"><p>I asked whether the soup contained dairy. The server was not sure and the ingredient list was unclear.</p></blockquote>
+              <div class="rr-pilot-grid">
+                <div class="rr-pilot-field"><label for="rr-RP05-manual_minutes">Manual drafting and checking, minutes</label><input id="rr-RP05-manual_minutes" type="text" inputmode="decimal" data-rr-field="manual_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP05-ai_preparation_minutes">AI preparation and blocked waiting, minutes</label><input id="rr-RP05-ai_preparation_minutes" type="text" inputmode="decimal" data-rr-field="ai_preparation_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP05-ai_review_minutes">Human review of AI draft, minutes</label><input id="rr-RP05-ai_review_minutes" type="text" inputmode="decimal" data-rr-field="ai_review_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP05-ai_repair_minutes">AI retries and repairs, minutes</label><input id="rr-RP05-ai_repair_minutes" type="text" inputmode="decimal" data-rr-field="ai_repair_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+              </div>
+              <fieldset class="rr-pilot-quality">
+                <legend>Human reviewer: evaluate both final drafts</legend>
+                <div class="rr-pilot-grid">
+                  <div class="rr-pilot-field"><label for="rr-RP05-manual_quality">Manual final draft</label><select id="rr-RP05-manual_quality" data-rr-field="manual_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                  <div class="rr-pilot-field"><label for="rr-RP05-ai_quality">AI-assisted final draft</label><select id="rr-RP05-ai_quality" data-rr-field="ai_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                </div>
+                <label class="rr-pilot-confirm" for="rr-RP05-confirmed"><input id="rr-RP05-confirmed" data-rr-field="confirmed" type="checkbox">I reviewed both final drafts against the fixed approval rubric.</label>
+              </fieldset>
+            </div>
+          </details>
+          <details class="rr-pilot-case" data-rr-case="RP06">
+            <summary>RP06: Refund request</summary>
+            <div class="rr-pilot-case-body">
+              <p class="small-copy">Demo Stay, 2 stars. Suggested first method: AI. This is an alternating suggestion, not randomized.</p>
+              <blockquote class="rr-pilot-review"><p>My room was not ready at check-in. I want to know when I will receive a refund.</p></blockquote>
+              <div class="rr-pilot-grid">
+                <div class="rr-pilot-field"><label for="rr-RP06-manual_minutes">Manual drafting and checking, minutes</label><input id="rr-RP06-manual_minutes" type="text" inputmode="decimal" data-rr-field="manual_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP06-ai_preparation_minutes">AI preparation and blocked waiting, minutes</label><input id="rr-RP06-ai_preparation_minutes" type="text" inputmode="decimal" data-rr-field="ai_preparation_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP06-ai_review_minutes">Human review of AI draft, minutes</label><input id="rr-RP06-ai_review_minutes" type="text" inputmode="decimal" data-rr-field="ai_review_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+                <div class="rr-pilot-field"><label for="rr-RP06-ai_repair_minutes">AI retries and repairs, minutes</label><input id="rr-RP06-ai_repair_minutes" type="text" inputmode="decimal" data-rr-field="ai_repair_minutes" autocomplete="off" spellcheck="false" maxlength="10" placeholder="Not measured"></div>
+              </div>
+              <fieldset class="rr-pilot-quality">
+                <legend>Human reviewer: evaluate both final drafts</legend>
+                <div class="rr-pilot-grid">
+                  <div class="rr-pilot-field"><label for="rr-RP06-manual_quality">Manual final draft</label><select id="rr-RP06-manual_quality" data-rr-field="manual_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                  <div class="rr-pilot-field"><label for="rr-RP06-ai_quality">AI-assisted final draft</label><select id="rr-RP06-ai_quality" data-rr-field="ai_quality"><option value="">Not reviewed</option><option value="accepted">Accepted</option><option value="rejected">Rejected</option></select></div>
+                </div>
+                <label class="rr-pilot-confirm" for="rr-RP06-confirmed"><input id="rr-RP06-confirmed" data-rr-field="confirmed" type="checkbox">I reviewed both final drafts against the fixed approval rubric.</label>
+              </fieldset>
+            </div>
+          </details>
+        <div class="rr-pilot-overhead">
+          <h3>Whole-trial setup and upkeep</h3>
+          <p>Record time across this same six-case comparison window. These two figures are separate command-line arguments, not columns in the exported CSV. Copy the displayed command into your private notes before leaving.</p>
+          <div class="rr-pilot-grid">
+            <div class="rr-pilot-field"><label for="rr-pilot-setup">One-time setup, minutes</label><input id="rr-pilot-setup" type="text" inputmode="decimal" autocomplete="off" maxlength="10" placeholder="Not measured"></div>
+            <div class="rr-pilot-field"><label for="rr-pilot-upkeep">Total upkeep, minutes</label><input id="rr-pilot-upkeep" type="text" inputmode="decimal" autocomplete="off" maxlength="10" placeholder="Not measured"></div>
+          </div>
+        </div>
+        <div class="rr-pilot-actions" id="rr-pilot-actions" hidden>
+          <button id="rr-pilot-export" class="rr-pilot-primary" type="button">Download CSV, even if incomplete</button>
+          <button id="rr-pilot-reset" type="button">Clear all entries</button>
+        </div>
+        <p class="rr-pilot-status" id="rr-pilot-status" role="status" aria-live="polite"></p>
+        <p class="rr-pilot-summary" id="rr-pilot-summary" aria-live="polite">No comparison is available. No observations have been entered.</p>
+        <p class="small-copy"><strong>Existing offline auditor command:</strong> This is filled in only when you supply setup and upkeep values. The existing auditor refuses incomplete CSV rows and never independently approves the quality labels.</p>
+        <pre class="rr-pilot-command" id="rr-pilot-command">Record setup and upkeep to prepare the offline audit command.</pre>
+      </form>
+      <noscript><p>Browser scripting is disabled. Use the original <a href="/downloads/review-reply-paired-pilot-instructions.md">six-case pilot protocol</a> and <a href="/downloads/review-reply-paired-pilot-blank.csv">blank CSV</a> to record your measurements offline.</p></noscript>
+      <p class="small-copy"><strong>Evidence boundary:</strong> This is an empty data-entry tool, not the result of an experiment. Six synthetic cases are an exploratory sample, not proof of general business productivity. The recorded October model timings elsewhere on this page are not prefilled into this worksheet.</p>
+    </div>
     <p class="small-copy">Inspect <a href="https://github.com/nolankido/reviewReplyWriter">the source repository</a> or read the <a href="/technology/local-ai-review-replies/#reply-owner-gate">owner approval checklist</a>. Do not enter real customer or private business material into the public exercises.</p>
   </div>
 </section>

@@ -1,0 +1,27 @@
+'use strict';
+const assert = require('node:assert/strict');
+const {IDS, HEADER, checkMinutes, quality, csv, summarize} = require('../assets/review-reply-pilot.js');
+assert.deepEqual(IDS, ['RP01','RP02','RP03','RP04','RP05','RP06']);
+assert.deepEqual(HEADER, ['case_id','manual_minutes','ai_preparation_minutes','ai_review_minutes','ai_repair_minutes','quality_status']);
+assert.equal(checkMinutes('',true).missing,true);
+assert.equal(checkMinutes('0',true).valid,false);
+assert.equal(checkMinutes('0',false).valid,true);
+assert.equal(checkMinutes('1.25',true).hundredths,125);
+for(const invalid of ['-1','1e3','2.333','100000.01','=1','not recorded'])
+  assert.equal(checkMinutes(invalid).valid,false,invalid);
+const blank = Object.fromEntries(IDS.map(id=>[id,{}]));
+assert.equal(summarize(blank,'','').ready,false);
+assert.equal(csv(blank).split('\n').length,8);
+assert.equal(csv(blank).split('\n')[1],'RP01,,,,,');
+const one={manual_minutes:'20',ai_preparation_minutes:'6',ai_review_minutes:'7',ai_repair_minutes:'2',manual_quality:'accepted',ai_quality:'accepted',confirmed:true};
+const rows=Object.fromEntries(IDS.map(id=>[id,{...one}]));
+assert.equal(quality({...one,confirmed:false}),'unreviewed');
+assert.equal(quality(one),'accepted');
+assert.equal(summarize(rows,'10','5').ready,true);
+assert.equal(summarize(rows,'10','5').difference,1500);
+assert.equal(summarize(rows,'10','5').qualityGateMet,true);
+rows.RP06.ai_quality='rejected';
+assert.equal(quality(rows.RP06),'rejected');
+assert.equal(summarize(rows,'10','5').qualityGateMet,false);
+assert.equal(csv(rows).split('\n')[6].endsWith(',rejected'),true);
+console.log('Review reply browser-pilot logic: PASS');

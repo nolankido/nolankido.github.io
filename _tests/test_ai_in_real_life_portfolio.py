@@ -82,6 +82,35 @@ class AIRealLifeTests(unittest.TestCase):
         self.assertIn("NOT been run", instructions)
         self.assertNotIn(chr(0x2014), instructions)
 
+    def test_browser_pilot_requires_real_measurements(self):
+        import hashlib
+        import shutil
+        import subprocess
+        source = read("_source/ai-in-real-life.html")
+        built = read("ai-in-real-life/index.html")
+        self.assertEqual(source.count('id="real-life-pilot-workspace"'), 1)
+        self.assertEqual(built.count('id="real-life-pilot-workspace"'), 1)
+        self.assertEqual(source.count('data-rr-case="RP'), 6)
+        self.assertEqual(source.count('data-rr-field="manual_minutes"'), 6)
+        self.assertEqual(source.count('data-rr-field="confirmed"'), 6)
+        self.assertIn('id="rr-pilot-actions" hidden', source)
+        self.assertIn("does not generate AI replies", source)
+        for asset in ("review-reply-pilot.css", "review-reply-pilot.js"):
+            expected = hashlib.sha256((ROOT / "assets" / asset).read_bytes()).hexdigest()[:12]
+            self.assertIn("/assets/" + asset + "?v=" + expected, built)
+            self.assertNotIn("/assets/" + asset, read("index.html"))
+            self.assertIn("assets/" + asset, read("_scripts/check_live.py"))
+        script = read("assets/review-reply-pilot.js")
+        for forbidden in ("fetch(", "localStorage", "sessionStorage", "sendBeacon"):
+            self.assertNotIn(forbidden, script)
+        self.assertIn("Missing is not zero", script)
+        self.assertIn("qualityGateMet", script)
+        self.assertIn("review-reply-paired-observations.csv", script)
+        if shutil.which("node"):
+            result = subprocess.run(["node", str(ROOT / "_tests/review_reply_pilot_smoke.cjs")],
+                                    capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",
