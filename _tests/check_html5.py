@@ -45,6 +45,11 @@ def publication_paths(root: Path, pages: list[dict]) -> dict[str, Path]:
         if route in paths:
             raise ValueError('Standalone book duplicates a manifest or manual route: ' + route)
         paths[route] = Path('books') / book['slug'] / 'index.html'
+    hub = book_pages.hub_record(root)
+    if hub is not None:
+        if hub['route'] in paths:
+            raise ValueError('Books catalog duplicates a manifest or manual HTML page')
+        paths[hub['route']] = book_pages.HUB_OUTPUT
     return paths
 
 
