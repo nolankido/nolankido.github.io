@@ -138,8 +138,7 @@
       if (url) window.setTimeout(() => URL.revokeObjectURL(url), 2000);
     }
   });
-  resetButton.addEventListener('click', () => {
-    if (!window.confirm('Clear all six cases and overhead minutes? Download your CSV first if you need these observations.')) return;
+  function clearEntries() {
     for (const node of cases) {
       for (const key of relevant) {
         const input = getField(node,key);
@@ -150,9 +149,21 @@
     }
     overheadSetup.value = ''; overheadUpkeep.value = '';
     overheadSetup.removeAttribute('aria-invalid'); overheadUpkeep.removeAttribute('aria-invalid');
-    refresh(); status.textContent = 'All entries cleared. No observations have been saved or transmitted.';
+    refresh();
+  }
+  resetButton.addEventListener('click', () => {
+    if (!window.confirm('Clear all six cases and overhead minutes? Download your CSV first if you need these observations.')) return;
+    clearEntries();
+    status.textContent = 'All entries cleared. No observations have been saved or transmitted.';
+  });
+  // Browsers can restore form fields across reloads or back/forward cache.
+  // Clear on page exit and arrival without writing to persistent storage.
+  window.addEventListener('pagehide', clearEntries);
+  window.addEventListener('pageshow', () => {
+    clearEntries();
+    status.textContent = 'No observations entered. This page does not retain trial values across visits.';
   });
   actions.hidden = false;
-  refresh();
+  clearEntries();
   status.textContent = 'No observations entered. No data is stored or transmitted. Export before leaving the page.';
 })();

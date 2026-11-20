@@ -105,6 +105,9 @@ class AIRealLifeTests(unittest.TestCase):
             self.assertNotIn(forbidden, script)
         self.assertIn("Missing is not zero", script)
         self.assertIn("qualityGateMet", script)
+        self.assertIn("window.addEventListener(\'pagehide\'", script)
+        self.assertIn("window.addEventListener(\'pageshow\'", script)
+        self.assertIn(\'autocomplete="off"\', built)
         self.assertIn("review-reply-paired-observations.csv", script)
         if shutil.which("node"):
             result = subprocess.run(["node", str(ROOT / "_tests/review_reply_pilot_smoke.cjs")],
