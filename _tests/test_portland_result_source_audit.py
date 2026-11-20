@@ -58,7 +58,7 @@ class ResultSourceAuditTests(unittest.TestCase):
         self.assertEqual(source.count('id="episode-result-source-status"'),1)
         self.assertEqual(source.count('id="episode-result-source-status-title"'),1)
         self.assertIn('href="/downloads/portland-meadows-result-source-audit-2026-11-20.json" download',source)
-        self.assertIn("participant",source.lower())
+        self.assertIn("first-person reports",source.lower())
         self.assertIn("Missing external documentation does not mean the account is false",source)
         self.assertIn("January-April",source)
         self.assertIn("Direct access to the archive was restricted",source)
