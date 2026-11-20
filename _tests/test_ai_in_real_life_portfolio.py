@@ -226,6 +226,44 @@ class AIRealLifeTests(unittest.TestCase):
         self.assertEqual(source.count("<h2 "), 9)
         self.assertNotIn(chr(0x2014), source)
 
+    def test_offline_current_cut_qa_workstation_is_private_and_fail_closed(self):
+        tool = read("downloads/nolanpoker-local-video-qa.html")
+        source = read("_source/ai-in-real-life.html")
+        built = read("ai-in-real-life/index.html")
+        self.assertTrue(tool.startswith("<!doctype html>"))
+        self.assertIn('content="noindex,nofollow"', tool)
+        self.assertIn("connect-src 'none'", tool)
+        self.assertIn("media-src blob:", tool)
+        self.assertIn('<input id="local-file" type="file"', tool)
+        self.assertEqual(tool.count('<article class="checkpoint" data-scene='), 5)
+        self.assertEqual(tool.count('<option value="unreviewed">Not reviewed</option>'), 5)
+        self.assertIn("A PASS requires a readable local video", tool)
+        self.assertIn("current_video_independently_verified_by_tool:false", tool)
+        self.assertIn("identity_independently_proven_by_tool:false", tool)
+        self.assertIn("reviewer_reported_checklist_complete", tool)
+        for item in ("fetch(", "XMLHttpRequest", "localStorage", "sessionStorage",
+                     "sendBeacon", "<script src=", "<iframe"):
+            self.assertNotIn(item, tool)
+        self.assertEqual(source.count('id="real-life-creator-local-mp4-qa"'), 1)
+        start = '<section class="section folio-row" id="real-life-creator"'
+        end = '<section class="section folio-row" id="real-life-everyday"'
+        self.assertEqual(source.split(start, 1)[1].split(end, 1)[0],
+                         built.split(start, 1)[1].split(end, 1)[0])
+        self.assertIn('href="/downloads/nolanpoker-local-video-qa.html"', source)
+        self.assertIn("downloads/nolanpoker-local-video-qa.html", read("_scripts/check_live.py"))
+        self.assertEqual(source.count("<h2 "), 9)
+        historical = json.loads(read("downloads/portland-meadows-ep1-scene-claims.json"))
+        for key in ("current_public_cut_timestamps_checked",
+                    "current_public_cut_graphics_checked", "human_release_approval"):
+            self.assertFalse(historical[key])
+        transcript = json.loads(read("downloads/portland-meadows-public-transcript-audit-2026-11-20.json"))
+        self.assertFalse(transcript["current_public_cut_audio_audited"])
+        self.assertFalse(transcript["current_public_cut_frames_audited"])
+        self.assertIn("## G. Offline current-cut audiovisual QA workstation",
+                      read("downloads/nolanpoker-content-production-evidence-ledger.md"))
+        self.assertNotIn(chr(0x2014), source)
+        self.assertNotIn(chr(0x2014), tool)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",

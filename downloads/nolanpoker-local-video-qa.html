@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; media-src blob:; img-src blob: data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>NolanPoker: Local Current-Cut Audio and Video QA</title>
+<style>
+:root {color-scheme: light;--ink:#1b2822;--muted:#485950;--line:#b6c0b9;--paper:#fbfaf6;--pale:#eef2ed;--accent:#8c182b;--green:#275c43}
+* {box-sizing:border-box}
+body {margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,"Segoe UI",sans-serif}
+main,header,footer {width:min(1100px,calc(100% - 36px));margin:auto}
+header {padding:35px 0 22px;border-bottom:2px solid var(--ink)}
+h1 {font-size:clamp(1.7rem,3.8vw,2.7rem);line-height:1.16;max-width:780px;margin:10px 0}
+h2 {font-size:clamp(1.3rem,2.5vw,1.75rem);margin:0 0 15px}
+h3 {font-size:1.18rem;margin:0 0 12px}
+p {max-width:840px;margin:10px 0 16px}
+a {color:#184d3b;text-underline-offset:3px}
+a:hover {color:var(--accent)}
+small,.muted {color:var(--muted)}
+.eyebrow {font:700 .78rem/1.5 system-ui;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+section {margin:28px 0;padding:22px;border:1px solid var(--line);background:white}
+fieldset {border:1px solid var(--line);padding:15px;margin:18px 0;min-width:0}
+legend {font-weight:650;padding:0 7px}
+label {display:block;font-weight:550;margin:10px 0 7px}
+input[type=file],input[type=text],input[type=date],select,textarea {width:100%;padding:11px 12px;color:var(--ink);background:white;border:1px solid #819287;border-radius:3px;font:inherit;max-width:100%}
+input[type=checkbox] {width:19px;height:19px;accent-color:var(--green);flex:0 0 auto;margin:3px 0 0}
+textarea {min-height:75px;resize:vertical}
+button {font:600 .94rem/1.25 system-ui;padding:11px 15px;min-height:44px;border:1px solid var(--ink);background:var(--ink);color:white;border-radius:3px;cursor:pointer}
+button.secondary {background:white;color:var(--ink)}
+button:hover:not(:disabled) {background:var(--accent);border-color:var(--accent);color:white}
+button:disabled {opacity:.43;cursor:not-allowed}
+button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,select:focus-visible {outline:3px solid var(--accent);outline-offset:3px}
+.notice {background:#f7efe8;border-left:4px solid var(--accent);padding:14px 18px;margin:18px 0}
+.good {background:var(--pale);border-left:4px solid var(--green);padding:12px 16px}
+.grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tools {display:flex;flex-wrap:wrap;gap:12px;margin:15px 0}
+.status {font-weight:600;min-height:24px}
+.check {display:flex;align-items:flex-start;gap:11px;font-weight:450;margin:13px 0}
+.check span {flex:1}
+#player {display:block;width:100%;max-height:540px;background:#121a15;margin:16px 0;border:1px solid var(--line)}
+#player[hidden],.hidden[hidden] {display:none}
+.checkpoint {margin:16px 0;padding:18px;border:1px solid var(--line);background:#fff}
+.checkpoint:nth-child(even) {background:#f5f6f3}
+.checkpoint-header {display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.checkpoint header {width:auto;margin:0;padding:0;border:0}
+.checkpoint p {margin:8px 0}
+.checkpoint .prompt {color:var(--muted)}
+.checkpoint-status {font-weight:650;margin:12px 0}
+#summary {padding:16px;background:var(--pale);border-left:4px solid var(--green);font-weight:600}
+#export-status,#media-status {min-height:26px}
+footer {padding:18px 0 55px;color:var(--muted);border-top:1px solid var(--line)}
+#report-controls {border:2px solid var(--ink)}
+.nowrap {white-space:nowrap}
+pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space:pre-wrap}
+@media(max-width:660px){main,header,footer {width:min(100% - 22px,1100px)}section{padding:15px}.grid{grid-template-columns:1fr}.checkpoint-header{display:block}.checkpoint{padding:14px}.tools button{width:100%}}
+@media print{.tools,#player,input[type=file],#media-picker {display:none!important}section,.checkpoint{break-inside:avoid}body{font:11pt/1.5 Georgia,serif}}
+</style>
+</head>
+<body>
+<header>
+<p class="eyebrow">NolanPoker / Current-cut review workstation / No upload</p>
+<h1>Check what the released video actually shows and says.</h1>
+<p>This self-contained reviewer loads a video file from your own computer, offers five starting points from the November 20 public YouTube transcript, and records audio and frame checks separately. It does not analyze the video or grant a pass automatically.</p>
+<p><a href="https://nolankido.com/ai-in-real-life/#real-life-creator">Back to the source-linked case</a> | <a href="https://www.youtube.com/watch?v=qABaiIcvvpU">Open the public episode separately</a></p>
+<div class="notice"><strong>Evidence boundary:</strong> The five timestamps are transcript observations from the current YouTube watch page, not verified positions in a different local export. Confirm you have the same current cut. The earlier public scene claims still mark graphics, timestamps, and release approval as unverified. A manually entered pass is an operator claim, not independent certification.</div>
+</header>
+<main>
+<section aria-labelledby="media-title">
+<h2 id="media-title">1. Select the actual MP4 and confirm provenance</h2>
+<p id="media-picker">Nothing is uploaded, transmitted or stored by this page. You may open this HTML file offline. Select the MP4 you intend to audit, not an older edit just because it has a similar name.</p>
+<label for="local-file">Video file stored on this device</label>
+<input id="local-file" type="file" accept="video/mp4,video/*,.mp4" autocomplete="off" aria-describedby="media-picker">
+<p id="media-status" role="status" aria-live="polite">No video file selected. Review and pass controls are disabled.</p>
+<video id="player" controls playsinline preload="metadata" hidden aria-label="Locally selected video for human audiovisual review"></video>
+<div class="tools"><button id="save-frame" type="button" class="secondary" disabled>Save displayed frame as PNG</button><button id="unload" type="button" class="secondary" disabled>Unload video and clear review</button></div>
+<fieldset>
+<legend>Does this exact file match the public released cut?</legend>
+<label class="check"><input type="checkbox" id="same-cut"><span>I personally checked that the selected file represents the current public upload, not just a historical v7 or v12 export. This is my assertion, not an automatic identity check.</span></label>
+<label for="identity-method">How was the match established? Required for a completed reviewer signoff.</label>
+<textarea id="identity-method" rows="2" maxlength="500" placeholder="For example: source file downloaded from YouTube Studio for video qABaiIcvvpU and compared with the current watch page. Do not invent a check." autocomplete="off"></textarea>
+</fieldset>
+</section>
+<section aria-labelledby="scenes-title">
+<h2 id="scenes-title">2. Listen, inspect, and record five current-cut checkpoints</h2>
+<p>Use each button to seek near a timestamp from the public transcript. Then watch and listen around the scene, check the exact cards and money labels, and record your own decision. Use the player scrubber if a different cut places the scene elsewhere. A pass requires checking both audio and video at that checkpoint.</p>
+<div id="scenes">
+<article class="checkpoint" data-scene="hand_64o" data-second="260" data-time="04:20">
+<div class="checkpoint-header"><h3>04:20 | 6-4 offsuit shove</h3><button type="button" class="jump secondary" disabled>Seek to transcript anchor</button></div>
+<p class="prompt">Listen for the small-blind 6-4 offsuit shove and A-K suited call. Inspect whether displayed hole cards, individual suits and board streets are supported. The archived source reports about 148,000 at 15,000 BB, approximately 9.87 BB. That arithmetic alone does not establish strategy.</p>
+<div class="grid"><label class="check"><input type="checkbox" class="audio"><span>I heard the actual audio around this checkpoint.</span></label><label class="check"><input type="checkbox" class="visual"><span>I inspected actual video frames and any cards or overlays.</span></label></div>
+<div class="grid"><div><label>Reviewer decision<select class="decision"><option value="unreviewed">Not reviewed</option><option value="pass">Pass observed material</option><option value="revise">Revise discrepancy</option><option value="hold">Hold, evidence missing</option></select></label></div><div><label>Observed player position<input type="text" class="observed" readonly value="Not captured" aria-label="Locally observed video timestamp"></label><button type="button" class="capture secondary" disabled>Record current player time</button></div></div>
+<label>Evidence and needed corrections<textarea class="notes" maxlength="1500" placeholder="Record exactly what you heard and saw, or why a judgment remains on hold."></textarea></label>
+</article>
+<article class="checkpoint" data-scene="hand_77_context" data-second="387" data-time="06:27">
+<div class="checkpoint-header"><h3>06:27 | Pocket sevens decision</h3><button type="button" class="jump secondary" disabled>Seek to transcript anchor</button></div>
+<p class="prompt">Check the actual narration about pocket sevens and decision to call or reshove. The earlier record says approximately 585,000 at 30,000 BB (19.5 BB) and a button open to 75,000 (2.5 BB). Distinguish a retrospective read from table-time facts.</p>
+<div class="grid"><label class="check"><input type="checkbox" class="audio"><span>I heard the actual audio around this checkpoint.</span></label><label class="check"><input type="checkbox" class="visual"><span>I inspected actual video frames and any cards or overlays.</span></label></div>
+<div class="grid"><div><label>Reviewer decision<select class="decision"><option value="unreviewed">Not reviewed</option><option value="pass">Pass observed material</option><option value="revise">Revise discrepancy</option><option value="hold">Hold, evidence missing</option></select></label></div><div><label>Observed player position<input type="text" class="observed" readonly value="Not captured" aria-label="Locally observed video timestamp"></label><button type="button" class="capture secondary" disabled>Record current player time</button></div></div>
+<label>Evidence and needed corrections<textarea class="notes" maxlength="1500" placeholder="Record exact words, card overlays, units, and any mismatch."></textarea></label>
+</article>
+<article class="checkpoint" data-scene="hand_77_result" data-second="432" data-time="07:12">
+<div class="checkpoint-header"><h3>07:12 | Pocket sevens hold</h3><button type="button" class="jump secondary" disabled>Seek to transcript anchor</button></div>
+<p class="prompt">Check that the current spoken outcome matches any shown result graphics. The historical source reports sevens winning against A-T offsuit. Do not infer suits or the full board from a short transcript.</p>
+<div class="grid"><label class="check"><input type="checkbox" class="audio"><span>I heard the actual audio around this checkpoint.</span></label><label class="check"><input type="checkbox" class="visual"><span>I inspected actual video frames and any cards or overlays.</span></label></div>
+<div class="grid"><div><label>Reviewer decision<select class="decision"><option value="unreviewed">Not reviewed</option><option value="pass">Pass observed material</option><option value="revise">Revise discrepancy</option><option value="hold">Hold, evidence missing</option></select></label></div><div><label>Observed player position<input type="text" class="observed" readonly value="Not captured" aria-label="Locally observed video timestamp"></label><button type="button" class="capture secondary" disabled>Record current player time</button></div></div>
+<label>Evidence and needed corrections<textarea class="notes" maxlength="1500" placeholder="Describe what was actually seen or heard."></textarea></label>
+</article>
+<article class="checkpoint" data-scene="payout_first" data-second="488" data-time="08:08">
+<div class="checkpoint-header"><h3>08:08 | Four-way deal and reported payout</h3><button type="button" class="jump secondary" disabled>Seek to transcript anchor</button></div>
+<p class="prompt">Listen for the $2,900 post-deal share. Inspect whether captions and result graphics identify it as reported gross proceeds. The $5,100 amount is a separate, advertised pre-deal first prize and must not be presented as the actual received amount.</p>
+<div class="grid"><label class="check"><input type="checkbox" class="audio"><span>I heard the actual audio around this checkpoint.</span></label><label class="check"><input type="checkbox" class="visual"><span>I inspected actual video frames and any cards or overlays.</span></label></div>
+<div class="grid"><div><label>Reviewer decision<select class="decision"><option value="unreviewed">Not reviewed</option><option value="pass">Pass observed material</option><option value="revise">Revise discrepancy</option><option value="hold">Hold, evidence missing</option></select></label></div><div><label>Observed player position<input type="text" class="observed" readonly value="Not captured" aria-label="Locally observed video timestamp"></label><button type="button" class="capture secondary" disabled>Record current player time</button></div></div>
+<label>Evidence and needed corrections<textarea class="notes" maxlength="1500" placeholder="Check gross payout, deal wording and graphic consistency."></textarea></label>
+</article>
+<article class="checkpoint" data-scene="payout_repeat" data-second="532" data-time="08:52">
+<div class="checkpoint-header"><h3>08:52 | Final payout recap</h3><button type="button" class="jump secondary" disabled>Seek to transcript anchor</button></div>
+<p class="prompt">Check the repeated $2,900 statement and any final-result overlay. Search the entire export for a displayed $5,100 advertised amount. Absence of that number from the transcript does not establish absence from the picture.</p>
+<div class="grid"><label class="check"><input type="checkbox" class="audio"><span>I heard the actual audio around this checkpoint.</span></label><label class="check"><input type="checkbox" class="visual"><span>I inspected actual video frames and any cards or overlays.</span></label></div>
+<div class="grid"><div><label>Reviewer decision<select class="decision"><option value="unreviewed">Not reviewed</option><option value="pass">Pass observed material</option><option value="revise">Revise discrepancy</option><option value="hold">Hold, evidence missing</option></select></label></div><div><label>Observed player position<input type="text" class="observed" readonly value="Not captured" aria-label="Locally observed video timestamp"></label><button type="button" class="capture secondary" disabled>Record current player time</button></div></div>
+<label>Evidence and needed corrections<textarea class="notes" maxlength="1500" placeholder="Record actual on-screen result, gross/net wording and remaining unknowns."></textarea></label>
+</article>
+</div>
+</section>
+<section aria-labelledby="release-title">
+<h2 id="release-title">3. Whole-cut and release checks</h2>
+<p>Five excerpts cannot certify an entire video. Mark each only after reviewing the complete current export or the relevant published interface. The end-screen check requires opening YouTube Studio separately because clickable elements cannot be inferred from a rendered MP4.</p>
+<fieldset>
+<legend>Human review gates</legend>
+<label class="check"><input id="full-watch" type="checkbox"><span>I watched and listened through the full selected export, including the opening and ending.</span></label>
+<label class="check"><input id="all-cards" type="checkbox"><span>I checked every consequential card, suit, board, stack, pot and payout graphic against trustworthy source records or explicit illustrative labels.</span></label>
+<label class="check"><input id="rights" type="checkbox"><span>I checked music, footage, image permissions and participant privacy for this release.</span></label>
+<label class="check"><input id="payout" type="checkbox"><span>I checked every advertised versus actual payout reference and did not mistake $5,100 advertised for $2,900 reported gross.</span></label>
+<label class="check"><input id="end-screen" type="checkbox"><span>I separately checked that the final public YouTube end-screen elements are clickable and correctly positioned in YouTube Studio.</span></label>
+</fieldset>
+<div class="grid"><div><label for="reviewer">Reviewer identifier</label><input type="text" id="reviewer" maxlength="100" autocomplete="off" placeholder="Reviewer name or private ID"></div><div><label for="date">Review date</label><input id="date" type="date" autocomplete="off"></div></div>
+<label for="global-notes">Global findings and corrections</label><textarea id="global-notes" maxlength="2500" placeholder="Describe any remaining HOLD or REVISE items, exact evidence, and release decision."></textarea>
+<p id="summary" role="status" aria-live="polite">NO LOCAL VIDEO LOADED. No video, audio, graphics or release decisions have been verified by this tool.</p>
+</section>
+<section id="report-controls" aria-labelledby="report-title">
+<h2 id="report-title">4. Export a reproducible review record</h2>
+<p>Exports describe the file you selected, the transcript anchors and your own decisions. The report always distinguishes an actual file observation from an unchecked claim. It is stored only in your browser's downloads.</p>
+<div class="tools"><button id="json" type="button" class="secondary">Export report as JSON</button><button id="markdown" type="button" class="secondary">Export edit and QA report as Markdown</button></div>
+<p id="export-status" role="status" aria-live="polite"></p>
+<p class="muted">Schema: <code>nolanpoker-local-current-cut-qa-v1</code>. Recorded source: <a href="https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json">November 20 public transcript audit</a>. No full-cut approval, media matches or new test results are prefilled.</p>
+</section>
+</main>
+<footer>AI Works, Human Decides. Offline first. No credentials, upload, trackers or external media libraries. Use a local copy of the actual video to assess its picture and sound. Copyright and privacy remain the editor's responsibility.</footer>
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const video = $('player'), fileInput = $('local-file'), status = $('media-status'), summary = $('summary');
+  const cards = Array.from(document.querySelectorAll('.checkpoint'));
+  let objectURL = null, loadedFile = null, metadataReady = false;
+  const fmt = n => Number.isFinite(n) ? String(Math.floor(n / 60)).padStart(2,'0') + ':' + String(Math.floor(n % 60)).padStart(2,'0') : 'not known';
+  function note(message) {status.textContent = message;}
+  function clearReview() {
+    for (const card of cards) {
+      card.querySelector('.audio').checked = false;
+      card.querySelector('.visual').checked = false;
+      card.querySelector('.decision').value = 'unreviewed';
+      card.querySelector('.notes').value = '';
+      card.querySelector('.observed').value = 'Not captured';
+      delete card.dataset.actualTime;
+    }
+    for(const id of ['same-cut','full-watch','all-cards','rights','payout','end-screen']) $(id).checked=false;
+    for(const id of ['identity-method','reviewer','date','global-notes']) $(id).value='';
+    refresh();
+  }
+  function unload() {
+    video.pause();
+    video.removeAttribute('src'); video.load();
+    video.hidden = true;
+    if (objectURL) URL.revokeObjectURL(objectURL);
+    objectURL = null; loadedFile=null;metadataReady=false;fileInput.value='';
+    $('save-frame').disabled = true; $('unload').disabled = true;
+    for(const card of cards){card.querySelector('.jump').disabled=true;card.querySelector('.capture').disabled=true;}
+    clearReview();note('No video file selected. Review and pass controls are disabled.');
+  }
+  function determine() {
+    const hasFile = !!loadedFile && metadataReady && Number.isFinite(video.duration) && video.duration > 0;
+    const identity = $('same-cut').checked && $('identity-method').value.trim().length >= 15;
+    const decisions=cards.map(c=>c.querySelector('.decision').value);
+    const unresolved=decisions.filter(d=>d!=='pass').length;
+    const allSceneChecks=cards.every(c=>c.querySelector('.audio').checked&&c.querySelector('.visual').checked&&c.dataset.actualTime!==undefined);
+    const gates=['full-watch','all-cards','rights','payout','end-screen'].every(k=>$(k).checked);
+    const signed=$('reviewer').value.trim().length>0 && /^\d{4}-\d{2}-\d{2}$/.test($('date').value);
+    const allComplete=hasFile&&identity&&unresolved===0&&allSceneChecks&&gates&&signed;
+    const statusLabel=!hasFile?'NO SOURCE FILE':allComplete?'REVIEWER-REPORTED CHECKLIST COMPLETE':decisions.some(d=>d==='revise'||d==='hold')?'ISSUES OR HOLDS RECORDED':'INCOMPLETE REVIEW';
+    return {statusLabel,allComplete,hasFile,identity,unresolved,allSceneChecks,gates,signed};
+  }
+  function refresh() {
+    const d=determine();
+    const pass=cards.filter(c=>c.querySelector('.decision').value==='pass').length;
+    summary.textContent = d.statusLabel + '. ' + pass + ' of 5 transcript checkpoints marked PASS. ' +
+      (d.allComplete ? 'Every gate was asserted by the named reviewer. This is a human-entered report, not independently verified video equivalence or a public release certification.' :
+      'No full current-cut approval has been established. File identity, audio, frame checks, whole-cut review and unresolved issues must be checked separately.');
+  }
+  function report() {
+    const d=determine();
+    return {
+      schema:'nolanpoker-local-current-cut-qa-v1',exported_at_utc:new Date().toISOString(),
+      public_video_url:'https://www.youtube.com/watch?v=qABaiIcvvpU',
+      public_transcript_audit:'https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json',
+      file:loadedFile ? {name:loadedFile.name,size_bytes:loadedFile.size,last_modified_ms:loadedFile.lastModified,
+        duration_seconds:metadataReady&&Number.isFinite(video.duration)?Number(video.duration.toFixed(3)):null,
+        width:video.videoWidth||null,height:video.videoHeight||null} : null,
+      file_same_as_public_cut_attested:$('same-cut').checked,
+      file_equivalence_method:$('identity-method').value.trim(),
+      identity_independently_proven_by_tool:false,
+      transcript_positions_guaranteed_for_selected_file:false,
+      scenes:cards.map(c=>({id:c.dataset.scene,transcript_timecode:c.dataset.time,
+        transcript_seconds:Number(c.dataset.second),observed_local_time_seconds:c.dataset.actualTime!==undefined?Number(c.dataset.actualTime):null,
+        listened_to_audio:c.querySelector('.audio').checked,inspected_frames:c.querySelector('.visual').checked,
+        reviewer_decision:c.querySelector('.decision').value,notes:c.querySelector('.notes').value.trim()})),
+      full_cut_watched_and_listened:$('full-watch').checked,
+      all_consequential_graphics_checked:$('all-cards').checked,
+      media_rights_and_privacy_checked:$('rights').checked,
+      payout_distinction_checked:$('payout').checked,
+      youtube_studio_clickable_end_screen_checked:$('end-screen').checked,
+      reviewer:$('reviewer').value.trim(),review_date:$('date').value||null,
+      global_notes:$('global-notes').value.trim(),
+      reviewer_reported_status:d.statusLabel,
+      reviewer_reported_checklist_complete:d.allComplete,
+      current_video_independently_verified_by_tool:false,
+      no_automatic_audio_visual_assessment:true
+    };
+  }
+  function asMarkdown(r) {
+    const safe = s => String(s===null?'unknown':s).replace(/\r?\n/g,' ').replace(/\|/g,'/');
+    const f=r.file;
+    const lines=['# NolanPoker current-cut audiovisual QA',
+      '', '**Status:** '+safe(r.reviewer_reported_status),
+      '**Public video:** '+r.public_video_url,
+      '**Selected local file:** '+(f?safe(f.name)+' ('+f.size_bytes+' bytes, '+f.duration_seconds+' seconds)':'not selected'),
+      '**File/public cut equivalence:** '+(r.file_same_as_public_cut_attested?'reviewer attests':'not attested'),
+      '**Method:** '+safe(r.file_equivalence_method||'not supplied'),
+      '**Tool itself verified file identity:** no',
+      '**Audio/video automatically checked:** no',
+      '', '## Five transcript-anchored checks',
+      '', '| Transcript | Local position | Audio heard | Frames inspected | Decision | Reviewer notes |',
+      '| --- | --- | --- | --- | --- | --- |'];
+    for(const s of r.scenes){
+      const local = s.observed_local_time_seconds===null?'not recorded':fmt(s.observed_local_time_seconds);
+      lines.push('| '+s.transcript_timecode+' | '+local+' | '+(s.listened_to_audio?'yes':'no')+' | '+
+        (s.inspected_frames?'yes':'no')+' | '+s.reviewer_decision+' | '+safe(s.notes)+' |');
+    }
+    lines.push('', '## Human release gates',
+      '', '- Entire cut watched and heard: '+(r.full_cut_watched_and_listened?'yes':'no'),
+      '- All graphics checked: '+(r.all_consequential_graphics_checked?'yes':'no'),
+      '- Rights and privacy checked: '+(r.media_rights_and_privacy_checked?'yes':'no'),
+      '- $5,100 advertised versus $2,900 gross checked: '+(r.payout_distinction_checked?'yes':'no'),
+      '- Actual clickable YouTube Studio end screen checked: '+(r.youtube_studio_clickable_end_screen_checked?'yes':'no'),
+      '- Reviewer: '+safe(r.reviewer||'not supplied'),
+      '- Date: '+safe(r.review_date||'not supplied'),
+      '- Notes: '+safe(r.global_notes||'none'),
+      '', '## Interpretation', '',
+      'This file records manual observations against a locally selected video, not an automated video audit.',
+      'Transcript anchor timestamps may not match a different export. The tool cannot prove the selected MP4 is the same as the public YouTube upload.',
+      'PASS values were selected by a human and do not establish a solver verdict, verified event accounting, or production quality beyond recorded checks.',
+      'No website input storage or media uploads were used by this file. Exported notes stay on the reviewer device.', '');
+    return lines.join('\n');
+  }
+  function download(content,name,type){
+    const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+    window.setTimeout(()=>URL.revokeObjectURL(url),3000);
+    $('export-status').textContent='Download requested: '+name+'. Confirm that it appears in your browser downloads.';
+  }
+  fileInput.addEventListener('change',()=>{
+    const file=fileInput.files&&fileInput.files[0];if(!file){unload();return;}
+    if(!(file.type.startsWith('video/') || /\.(mp4|m4v|mov|webm)$/i.test(file.name))){
+      unload();note('Please select a supported video file. No data was uploaded.');return;
+    }
+    if(objectURL)URL.revokeObjectURL(objectURL);
+    loadedFile=file;metadataReady=false;objectURL=URL.createObjectURL(file);
+    video.src=objectURL;video.hidden=false;video.load();$('unload').disabled=false; $('save-frame').disabled=true;
+    for(const card of cards){card.querySelector('.jump').disabled=true;card.querySelector('.capture').disabled=true;}
+    clearReview();note('Reading local metadata. Video is not uploaded.');
+  });
+  video.addEventListener('loadedmetadata',()=>{
+    if(!loadedFile)return;
+    metadataReady=Number.isFinite(video.duration)&&video.duration>0;
+    $('save-frame').disabled=!metadataReady;for(const card of cards){card.querySelector('.jump').disabled=!metadataReady;card.querySelector('.capture').disabled=!metadataReady;}
+    const short=metadataReady && video.duration<536;
+    note('Local file: '+loadedFile.name+'; '+loadedFile.size+' bytes; duration '+(metadataReady?fmt(video.duration):'unknown')+
+      '; frame '+(video.videoWidth||'?')+' x '+(video.videoHeight||'?')+'. '+
+      (short?'This file ends before a transcript checkpoint. It may be an older or incomplete export.':'File identity is still unverified.'));
+    refresh();
+  });
+  video.addEventListener('error',()=>{metadataReady=false;$('save-frame').disabled=true;for(const c of cards){c.querySelector('.jump').disabled=true;c.querySelector('.capture').disabled=true;}note('Browser could not decode this video file. No audiovisual review is possible here.');refresh();});
+  for(const card of cards){
+    card.querySelector('.jump').addEventListener('click',()=>{
+      const seconds=Number(card.dataset.second);
+      if(!metadataReady)return;
+      if(seconds>=video.duration){note('This local export ends before '+card.dataset.time+'. Choose the actual complete cut or inspect the scene manually.');return;}
+      video.currentTime=Math.max(0,seconds-4);video.pause();
+      note('Sought near transcript '+card.dataset.time+'. This anchor may differ in another cut. Play and inspect the actual scene.');
+    });
+    card.querySelector('.capture').addEventListener('click',()=>{
+      if(!metadataReady||!Number.isFinite(video.currentTime))return;
+      card.dataset.actualTime=video.currentTime.toFixed(2);
+      card.querySelector('.observed').value=fmt(video.currentTime)+' ('+video.currentTime.toFixed(2)+' s)';refresh();
+    });
+    card.querySelector('.decision').addEventListener('change',e=>{
+      if(e.target.value==='pass'&&(!metadataReady||!card.querySelector('.audio').checked||!card.querySelector('.visual').checked||card.dataset.actualTime===undefined||card.querySelector('.notes').value.trim().length<12)){
+        e.target.value='unreviewed'; note('A PASS requires a readable local video, audio and frame inspection, a recorded player position, and a specific evidence note of at least 12 characters.');
+      }
+      refresh();
+    });
+    for(const element of card.querySelectorAll('input,select,textarea'))element.addEventListener('input',refresh);
+  }
+  for(const id of ['same-cut','identity-method','full-watch','all-cards','rights','payout','end-screen','reviewer','date','global-notes'])$(id).addEventListener('input',refresh);
+  $('json').addEventListener('click',()=>download(JSON.stringify(report(),null,2)+'\n','nolanpoker-current-cut-qa-report.json','application/json;charset=utf-8'));
+  $('markdown').addEventListener('click',()=>download(asMarkdown(report()),'nolanpoker-current-cut-qa-report.md','text/markdown;charset=utf-8'));
+  $('save-frame').addEventListener('click',()=>{
+    if(!metadataReady||!video.videoWidth||!video.videoHeight){note('Cannot capture a frame before video metadata loads.');return;}
+    const canvas=document.createElement('canvas');canvas.width=video.videoWidth;canvas.height=video.videoHeight;
+    try{
+      canvas.getContext('2d').drawImage(video,0,0);
+      canvas.toBlob(blob=>{
+        if(!blob){note('Frame capture was not supported by this browser.');return;}
+        const url=URL.createObjectURL(blob),a=document.createElement('a');
+        a.href=url;a.download='nolanpoker-frame-'+fmt(video.currentTime).replace(':','m')+'s.png';
+        document.body.appendChild(a);a.click();a.remove();window.setTimeout(()=>URL.revokeObjectURL(url),3000);
+        note('Current frame PNG download requested. Confirm it saved. One frame does not prove an entire scene is correct.');
+      },'image/png');
+    }catch(_){note('Frame capture unavailable. No image was saved.');}
+  });
+  $('unload').addEventListener('click',unload);
+  window.addEventListener('pagehide',unload);
+  window.addEventListener('pageshow',event=>{if(event.persisted)unload();});
+  refresh();
+})();
+</script>
+</body>
+</html>

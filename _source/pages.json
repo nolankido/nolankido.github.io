@@ -103,7 +103,7 @@
     "section": "technology",
     "source": "ai-in-real-life.html",
     "updated": "2026-11-20",
-    "revision": "Added November 20 viewer-visible transcript checkpoints for the published Portland Meadows video, preserving blocked audiovisual checks and unapproved overlay status."
+    "revision": "Added a self-contained local MP4 audiovisual QA workstation with five transcript anchors, manual audio/frame checks, PNG capture and private JSON/Markdown reports while preserving unverified current-video claims."
   },
   {
     "id": "contact",
