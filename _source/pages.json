@@ -27,7 +27,7 @@
     "description": "Find Nolan Kido’s biography, projects, guides and writing. Search public page titles and section headings locally without sending or saving your search text.",
     "source": "find.html",
     "kicker": "Search the site",
-    "updated": "2026-11-13"
+    "updated": "2026-11-20"
   },
   {
     "id": "follow",
@@ -47,7 +47,7 @@
     "description": "Who is Nolan Kido? Explore source-linked practical AI projects, accounting research and tournament poker. AI Works, Human Decides guides the work.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-11-19",
+    "updated": "2026-11-20",
     "revision": "Added a direct source-bounded answer connecting the NolanPoker channel and practical AI work through a narrated hand record, proposed captions and an offline checker, without claiming current-video verification."
   },
   {
@@ -227,7 +227,7 @@
     "kicker": "Nolan Kido / Poker",
     "source": "poker/home.html",
     "section": "poker",
-    "updated": "2026-11-19"
+    "updated": "2026-11-20"
   },
   {
     "id": "poker-school",
@@ -349,7 +349,7 @@
     "description": "Explore Nolan Kido's practical AI work: small-business review checks, poker-vlog evidence QA, book continuity, and repeatable tools. AI Works, Human Decides.",
     "kicker": "Nolan Kido / Technology",
     "source": "technology/home.html",
-    "updated": "2026-11-19"
+    "updated": "2026-11-20"
   },
   {
     "id": "creative",
@@ -359,7 +359,7 @@
     "description": "Nolan Kido's creative work: poker videos, illustrated explanations, AI-assisted writing, and original incremental-game design guides with free browser tools.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-11-18"
+    "updated": "2026-11-20"
   },
   {
     "id": "incremental-game-loop",
