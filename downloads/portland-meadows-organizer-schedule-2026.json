@@ -39,5 +39,18 @@
     "verifies_final_result_or_payout": false,
     "verifies_hand_histories_or_card_runouts": false
   },
-  "caution": "A published schedule independently establishes the announced event and format, not field size, attendance, actual date played, result, prize payments or net profit."
+  "caution": "A published schedule independently establishes the announced event and format, not field size, attendance, actual date played, result, prize payments or net profit.",
+  "festival_wide_published_rules": {
+    "source_page": 2,
+    "scoped_to": "Rules published for the 2026 Wild West festival, not proof they were invoked in any particular hand.",
+    "heads_up_pot_speech_and_card_showing": {
+      "printed_rule": "When heads up in a pot, players may discuss their own hands and show cards if they choose. Abusive or foul language is not permitted.",
+      "applies_to_narrated_hands_confirmed": false
+    },
+    "under_the_gun_live_straddle": {
+      "printed_rule": "When under the gun, a player may straddle for twice the big blind.",
+      "applies_to_narrated_hands_confirmed": false
+    },
+    "strategic_interpretation": "An actual straddle could affect preflop price and action, but no such straddle has been identified in the two published hand recollections. Do not alter the stated blind levels or calculate implied straddle pots without contemporaneous evidence."
+  }
 }

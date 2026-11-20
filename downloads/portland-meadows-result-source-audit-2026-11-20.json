@@ -64,5 +64,21 @@
     "Organizer-confirmed four-way deal or payout record verifying the participant's gross cash, redacted to protect privacy"
   ],
   "database_limits": "The Hendon Mob's own general site caveat notes that database winnings may not reflect deals and are not reliable as net profit.",
-  "avoid": "Do not treat the missing indexed result as a disproof, do not convert a schedule into results evidence, and do not equate $5,100 advertised first with $2,900 reported deal share."
+  "avoid": "Do not treat the missing indexed result as a disproof, do not convert a schedule into results evidence, and do not equate $5,100 advertised first with $2,900 reported deal share.",
+  "venue_confirmation_request": {
+    "artifact_url": "https://nolankido.com/downloads/portland-meadows-aug20-event-results-confirmation-request.md",
+    "prepared_date": "2026-11-20",
+    "status": "prepared_not_sent",
+    "verified_contact_method": "The venue's public poker-room phone 503-309-3087, shown on its official location page.",
+    "official_contact_page": "https://portlandmeadows.com/hours-%26-location",
+    "organizer_reply_received": false,
+    "organizer_verified_result_or_payment": false,
+    "requests": [
+      "Event held, final entries and actual prize pool",
+      "Winner or official placing after final-table deal",
+      "Advertised first prize versus actual gross post-deal personal payment",
+      "Stable public result reference or permission to quote"
+    ],
+    "private_player_data_to_publish": false
+  }
 }

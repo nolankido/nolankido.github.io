@@ -141,3 +141,11 @@ and cannot be treated as net profit.
 [Read the dated results-source audit](https://nolankido.com/downloads/portland-meadows-result-source-audit-2026-11-20.json)
 and [the source-bounded public companion](https://nolankido.com/poker/episodes/portland-meadows-ep1/#episode-result-source-status).
 The earlier audiovisual and human-approval flags remain false.
+
+## L. Venue records request and festival-specific rule verification (November 20)
+
+The organizer's original [Wild West Poker Tour program](https://img1.wsimg.com/blobby/go/d6503eb7-9b1f-4048-b895-1b68f9534a37/Wild%20West%20Schedule%202026.pdf), page 2, published two unusual festival-wide rules: in a heads-up pot players could discuss their hand and show cards if they chose, and an under-the-gun live straddle could be made for twice the big blind. These rules provide useful decision-context for studying a hand, but no evidence establishes that either permission was used in the 6-4 or pocket-sevens hand. The [organizer schedule JSON](https://nolankido.com/downloads/portland-meadows-organizer-schedule-2026.json) distinguishes official rule text from unverified in-hand application.
+
+The independently verified poker-room contact page is [Portland Meadows hours and location](https://portlandmeadows.com/hours-%26-location), listing the poker-room phone **503-309-3087**. Since the targeted public result search did not locate a definitive outcome record, the site now provides an [event-specific, prepared but unsent request](https://nolankido.com/downloads/portland-meadows-aug20-event-results-confirmation-request.md) addressed generically to the tournament team. It requests confirmation of the event, entries, official placing and exact advertised versus post-deal payment, without demanding or exposing private data. No request was sent, reply obtained, or payout verified in this turn.
+
+The existing November 2 publication, November 20 Article modification, source-to-HTML ownership, sitemap, on-site Find and Poker RSS are unchanged. There is no automated venue contact or scheduled data collection.
