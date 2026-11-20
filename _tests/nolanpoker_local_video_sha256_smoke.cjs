@@ -1,0 +1,31 @@
+'use strict';
+const assert=require('node:assert/strict');
+const crypto=require('node:crypto');
+const fs=require('node:fs');
+const path=require('node:path');
+const htmlPath=process.argv[2]||path.resolve(__dirname,'../downloads/nolanpoker-local-video-qa.html');
+const source=fs.readFileSync(htmlPath,'utf8');
+const begin=source.indexOf('  function makeSHA256() {'),end=source.indexOf('  const fmt =',begin);
+assert.ok(begin>=0&&end>begin,'incremental SHA function is present');
+const makeSHA256=new Function(source.slice(begin,end)+'\nreturn makeSHA256;')();
+function compare(input,chunk){
+ const sha=makeSHA256();
+ for(let i=0;i<input.length;i+=chunk)sha.update(input.subarray(i,i+chunk));
+ const actual=sha.finish(),expected=crypto.createHash('sha256').update(input).digest('hex');
+ assert.equal(actual,expected,'SHA mismatch for '+input.length+' bytes, chunks '+chunk);
+ assert.match(actual,/^[a-f0-9]{64}$/);
+ assert.throws(()=>sha.update(Buffer.from('x')),/finalized/);
+}
+compare(Buffer.from(''),1);
+compare(Buffer.from('abc'),1);
+compare(Buffer.alloc(1000000,97),7);
+compare(Buffer.alloc(1000000,97),65536);
+const patterned=Buffer.allocUnsafe(4*1024*1024+13);
+for(let i=0;i<patterned.length;i++)patterned[i]=(i*37+(i>>>7))&255;
+for(const chunk of [1,63,64,65,4093,2*1024*1024])compare(patterned,chunk);
+assert.ok(source.includes("connect-src 'none'"));
+assert.ok(source.includes('sha256_match_to_public_file_independently_verified:false'));
+assert.ok(source.includes('const allComplete=hasFile&&checksumReady&&coversTranscript&&identity'));
+assert.ok(source.includes("c.querySelector('.notes').value.trim().length>=12"));
+assert.ok(!/(fetch\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage)/.test(source));
+console.log('PASS: browser SHA-256 against independent Node crypto, streaming boundaries and fail-closed evidence gate');

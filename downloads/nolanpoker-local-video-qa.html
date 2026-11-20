@@ -70,12 +70,13 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
 <main>
 <section aria-labelledby="media-title">
 <h2 id="media-title">1. Select the actual MP4 and confirm provenance</h2>
-<p id="media-picker">Nothing is uploaded, transmitted or stored by this page. You may open this HTML file offline. Select the MP4 you intend to audit, not an older edit just because it has a similar name.</p>
+<p id="media-picker">Nothing is uploaded, transmitted or stored by this page. You may open this HTML file offline. Select the MP4 you intend to audit, not an older edit just because it has a similar name. The optional local SHA-256 button reads the file in bounded chunks without a server request. A complete reviewer report requires this fingerprint, but it is still not proof of a match to YouTube.</p>
 <label for="local-file">Video file stored on this device</label>
 <input id="local-file" type="file" accept="video/mp4,video/*,.mp4" autocomplete="off" aria-describedby="media-picker">
 <p id="media-status" role="status" aria-live="polite">No video file selected. Review and pass controls are disabled.</p>
 <video id="player" controls playsinline preload="metadata" hidden aria-label="Locally selected video for human audiovisual review"></video>
-<div class="tools"><button id="save-frame" type="button" class="secondary" disabled>Save displayed frame as PNG</button><button id="unload" type="button" class="secondary" disabled>Unload video and clear review</button></div>
+<div class="tools"><button id="save-frame" type="button" class="secondary" disabled>Save displayed frame as PNG</button><button id="hash-file" type="button" class="secondary" disabled>Compute local SHA-256</button><button id="unload" type="button" class="secondary" disabled>Unload video and clear review</button></div>
+<p id="file-fingerprint" class="muted" role="status" aria-live="polite">SHA-256 not computed. A fingerprint identifies local bytes; it cannot prove those bytes match the public YouTube upload without a trusted comparison file.</p>
 <fieldset>
 <legend>Does this exact file match the public released cut?</legend>
 <label class="check"><input type="checkbox" id="same-cut"><span>I personally checked that the selected file represents the current public upload, not just a historical v7 or v12 export. This is my assertion, not an automatic identity check.</span></label>
@@ -141,10 +142,10 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
 </section>
 <section id="report-controls" aria-labelledby="report-title">
 <h2 id="report-title">4. Export a reproducible review record</h2>
-<p>Exports describe the file you selected, the transcript anchors and your own decisions. The report always distinguishes an actual file observation from an unchecked claim. It is stored only in your browser's downloads.</p>
+<p>Exports describe the local video file, its SHA-256 checksum if computed, the transcript anchors and your own decisions. The report always distinguishes a reviewer attestation from an independently verified claim. The report is stored only in your browser's downloads. To compare a local file with another independently obtained file on Windows, run <code>Get-FileHash -Algorithm SHA256 -LiteralPath 'C:\path\to\video.mp4'</code> on that other file and compare all 64 hexadecimal characters. Two matching digests establish byte identity between those two files, not that either is the current public YouTube cut.</p>
 <div class="tools"><button id="json" type="button" class="secondary">Export report as JSON</button><button id="markdown" type="button" class="secondary">Export edit and QA report as Markdown</button></div>
 <p id="export-status" role="status" aria-live="polite"></p>
-<p class="muted">Schema: <code>nolanpoker-local-current-cut-qa-v1</code>. Recorded source: <a href="https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json">November 20 public transcript audit</a>. No full-cut approval, media matches or new test results are prefilled.</p>
+<p class="muted">Schema: <code>nolanpoker-local-current-cut-qa-v2</code>. Recorded source: <a href="https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json">November 20 public transcript audit</a>. No full-cut approval, media matches or new test results are prefilled.</p>
 </section>
 </main>
 <footer>AI Works, Human Decides. Offline first. No credentials, upload, trackers or external media libraries. Use a local copy of the actual video to assess its picture and sound. Copyright and privacy remain the editor's responsibility.</footer>
@@ -155,6 +156,63 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
   const video = $('player'), fileInput = $('local-file'), status = $('media-status'), summary = $('summary');
   const cards = Array.from(document.querySelectorAll('.checkpoint'));
   let objectURL = null, loadedFile = null, metadataReady = false;
+  let sha256Digest = null, hashing = false, fileGeneration = 0;
+  const fingerprint = $('file-fingerprint'), hashButton = $('hash-file');
+  /* Streaming FIPS 180-4 SHA-256, without loading an entire video into RAM.
+     The test suite compares against independent hashlib vectors and real file bytes. */
+  function makeSHA256() {
+    const constants = [],initial = [];
+    for (let n=2;constants.length<64;n++) {
+      let prime=true;
+      for(let d=2;d*d<=n;d++) if(n%d===0){prime=false;break;}
+      if(prime) {
+        if(initial.length<8) initial.push(Math.floor(Math.sqrt(n)%1*4294967296)>>>0);
+        constants.push(Math.floor(Math.cbrt(n)%1*4294967296)>>>0);
+      }
+    }
+    const state=initial,block=new Uint8Array(64),words=new Uint32Array(64);
+    let used=0,bytesRead=0,finished=false;
+    const rr=(x,n)=>((x>>>n)|(x<<(32-n)))>>>0;
+    function compress() {
+      for(let i=0;i<16;i++) words[i]=((block[i*4]<<24)|(block[i*4+1]<<16)|(block[i*4+2]<<8)|block[i*4+3])>>>0;
+      for(let i=16;i<64;i++) {
+        const a=words[i-15],b=words[i-2];
+        words[i]=(words[i-16]+(rr(a,7)^rr(a,18)^(a>>>3))+words[i-7]+(rr(b,17)^rr(b,19)^(b>>>10)))>>>0;
+      }
+      let [a,b,c,d,e,f,g,h]=state;
+      for(let i=0;i<64;i++) {
+        const t1=(h+(rr(e,6)^rr(e,11)^rr(e,25))+((e&f)^(~e&g))+constants[i]+words[i])>>>0;
+        const t2=((rr(a,2)^rr(a,13)^rr(a,22))+((a&b)^(a&c)^(b&c)))>>>0;
+        h=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0;
+      }
+      const values=[a,b,c,d,e,f,g,h];
+      for(let i=0;i<8;i++) state[i]=(state[i]+values[i])>>>0;
+    }
+    function update(data) {
+      if(finished) throw new Error('SHA-256 already finalized');
+      const bytes=data instanceof Uint8Array?data:new Uint8Array(data);
+      bytesRead+=bytes.length;
+      if(!Number.isSafeInteger(bytesRead)) throw new Error('Unsupported file length');
+      for(let offset=0;offset<bytes.length;) {
+        const amount=Math.min(64-used,bytes.length-offset);
+        block.set(bytes.subarray(offset,offset+amount),used);
+        used+=amount;offset+=amount;
+        if(used===64){compress();used=0;}
+      }
+    }
+    function finish() {
+      const bitLength=BigInt(bytesRead)*8n;
+      update(Uint8Array.of(128));
+      while(used!==56) update(Uint8Array.of(0));
+      const length=new Uint8Array(8);
+      for(let i=7;i>=0;i--) length[i]=Number((bitLength>>BigInt((7-i)*8))&255n);
+      update(length);
+      finished=true;
+      return state.map(x=>x.toString(16).padStart(8,'0')).join('');
+    }
+    return {update,finish};
+  }
+  if(typeof module!=='undefined' && module.exports) module.exports.makeSHA256=makeSHA256;
   const fmt = n => Number.isFinite(n) ? String(Math.floor(n / 60)).padStart(2,'0') + ':' + String(Math.floor(n % 60)).padStart(2,'0') : 'not known';
   function note(message) {status.textContent = message;}
   function clearReview() {
@@ -171,6 +229,10 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
     refresh();
   }
   function unload() {
+    fileGeneration++;
+    hashing=false;sha256Digest=null;
+    hashButton.disabled=true;
+    fingerprint.textContent='SHA-256 not computed. No local video is loaded.';
     video.pause();
     video.removeAttribute('src'); video.load();
     video.hidden = true;
@@ -182,35 +244,51 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
   }
   function determine() {
     const hasFile = !!loadedFile && metadataReady && Number.isFinite(video.duration) && video.duration > 0;
+    const checksumReady=hasFile && /^[a-f0-9]{64}$/.test(sha256Digest||'') && !hashing;
+    // The public transcript contains a checkpoint at 8:52. A shorter file
+    // cannot be approved as that same complete cut by this worksheet.
+    const coversTranscript=hasFile && video.duration>=536;
     const identity = $('same-cut').checked && $('identity-method').value.trim().length >= 15;
     const decisions=cards.map(c=>c.querySelector('.decision').value);
     const unresolved=decisions.filter(d=>d!=='pass').length;
-    const allSceneChecks=cards.every(c=>c.querySelector('.audio').checked&&c.querySelector('.visual').checked&&c.dataset.actualTime!==undefined);
+    const allSceneChecks=cards.every(c=>{
+      const position=Number(c.dataset.actualTime);
+      return c.querySelector('.decision').value==='pass' &&
+        c.querySelector('.audio').checked && c.querySelector('.visual').checked &&
+        c.querySelector('.notes').value.trim().length>=12 &&
+        c.dataset.actualTime!==undefined && Number.isFinite(position) &&
+        position>=0 && position<video.duration;
+    });
     const gates=['full-watch','all-cards','rights','payout','end-screen'].every(k=>$(k).checked);
     const signed=$('reviewer').value.trim().length>0 && /^\d{4}-\d{2}-\d{2}$/.test($('date').value);
-    const allComplete=hasFile&&identity&&unresolved===0&&allSceneChecks&&gates&&signed;
+    const allComplete=hasFile&&checksumReady&&coversTranscript&&identity&&unresolved===0&&allSceneChecks&&gates&&signed;
     const statusLabel=!hasFile?'NO SOURCE FILE':allComplete?'REVIEWER-REPORTED CHECKLIST COMPLETE':decisions.some(d=>d==='revise'||d==='hold')?'ISSUES OR HOLDS RECORDED':'INCOMPLETE REVIEW';
-    return {statusLabel,allComplete,hasFile,identity,unresolved,allSceneChecks,gates,signed};
+    return {statusLabel,allComplete,hasFile,checksumReady,coversTranscript,identity,unresolved,allSceneChecks,gates,signed};
   }
   function refresh() {
     const d=determine();
     const pass=cards.filter(c=>c.querySelector('.decision').value==='pass').length;
     summary.textContent = d.statusLabel + '. ' + pass + ' of 5 transcript checkpoints marked PASS. ' +
       (d.allComplete ? 'Every gate was asserted by the named reviewer. This is a human-entered report, not independently verified video equivalence or a public release certification.' :
-      'No full current-cut approval has been established. File identity, audio, frame checks, whole-cut review and unresolved issues must be checked separately.');
+      'No full current-cut approval has been established. File fingerprint, identity, scene notes, audio, frame checks, whole-cut review and unresolved issues must be checked separately.');
   }
   function report() {
     const d=determine();
     return {
-      schema:'nolanpoker-local-current-cut-qa-v1',exported_at_utc:new Date().toISOString(),
+      schema:'nolanpoker-local-current-cut-qa-v2',exported_at_utc:new Date().toISOString(),
       public_video_url:'https://www.youtube.com/watch?v=qABaiIcvvpU',
       public_transcript_audit:'https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json',
       file:loadedFile ? {name:loadedFile.name,size_bytes:loadedFile.size,last_modified_ms:loadedFile.lastModified,
-        duration_seconds:metadataReady&&Number.isFinite(video.duration)?Number(video.duration.toFixed(3)):null,
+         sha256_local:sha256Digest, sha256_fingerprint_source:sha256Digest?'browser_local_chunked_sha256':null,
+         sha256_match_to_public_file_independently_verified:false,
+         duration_seconds:metadataReady&&Number.isFinite(video.duration)?Number(video.duration.toFixed(3)):null,
         width:video.videoWidth||null,height:video.videoHeight||null} : null,
       file_same_as_public_cut_attested:$('same-cut').checked,
       file_equivalence_method:$('identity-method').value.trim(),
       identity_independently_proven_by_tool:false,
+      checksum_required_for_reviewer_checklist:true,
+      local_file_reaches_transcript_end:d.coversTranscript,
+      local_sha256_computed:d.checksumReady,
       transcript_positions_guaranteed_for_selected_file:false,
       scenes:cards.map(c=>({id:c.dataset.scene,transcript_timecode:c.dataset.time,
         transcript_seconds:Number(c.dataset.second),observed_local_time_seconds:c.dataset.actualTime!==undefined?Number(c.dataset.actualTime):null,
@@ -236,6 +314,8 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
       '', '**Status:** '+safe(r.reviewer_reported_status),
       '**Public video:** '+r.public_video_url,
       '**Selected local file:** '+(f?safe(f.name)+' ('+f.size_bytes+' bytes, '+f.duration_seconds+' seconds)':'not selected'),
+       '**Local file SHA-256:** '+(f&&f.sha256_local?f.sha256_local:'not computed'),
+       '**Independent public file hash comparison:** not performed by this tool',
       '**File/public cut equivalence:** '+(r.file_same_as_public_cut_attested?'reviewer attests':'not attested'),
       '**Method:** '+safe(r.file_equivalence_method||'not supplied'),
       '**Tool itself verified file identity:** no',
@@ -257,6 +337,7 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
       '- Reviewer: '+safe(r.reviewer||'not supplied'),
       '- Date: '+safe(r.review_date||'not supplied'),
       '- Notes: '+safe(r.global_notes||'none'),
+       '- Local file checksum computed: '+(r.local_sha256_computed?'yes':'no'),
       '', '## Interpretation', '',
       'This file records manual observations against a locally selected video, not an automated video audit.',
       'Transcript anchor timestamps may not match a different export. The tool cannot prove the selected MP4 is the same as the public YouTube upload.',
@@ -270,8 +351,12 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
     window.setTimeout(()=>URL.revokeObjectURL(url),3000);
     $('export-status').textContent='Download requested: '+name+'. Confirm that it appears in your browser downloads.';
   }
-  fileInput.addEventListener('change',()=>{
-    const file=fileInput.files&&fileInput.files[0];if(!file){unload();return;}
+   fileInput.addEventListener('change',()=>{
+     fileGeneration++;
+     hashing=false;sha256Digest=null;
+     hashButton.disabled=true;
+     fingerprint.textContent='SHA-256 not computed for this selected file.';
+     const file=fileInput.files&&fileInput.files[0];if(!file){unload();return;}
     if(!(file.type.startsWith('video/') || /\.(mp4|m4v|mov|webm)$/i.test(file.name))){
       unload();note('Please select a supported video file. No data was uploaded.');return;
     }
@@ -284,14 +369,16 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
   video.addEventListener('loadedmetadata',()=>{
     if(!loadedFile)return;
     metadataReady=Number.isFinite(video.duration)&&video.duration>0;
-    $('save-frame').disabled=!metadataReady;for(const card of cards){card.querySelector('.jump').disabled=!metadataReady;card.querySelector('.capture').disabled=!metadataReady;}
+     $('save-frame').disabled=!metadataReady;
+     hashButton.disabled=!metadataReady;
+     for(const card of cards){card.querySelector('.jump').disabled=!metadataReady;card.querySelector('.capture').disabled=!metadataReady;}
     const short=metadataReady && video.duration<536;
     note('Local file: '+loadedFile.name+'; '+loadedFile.size+' bytes; duration '+(metadataReady?fmt(video.duration):'unknown')+
       '; frame '+(video.videoWidth||'?')+' x '+(video.videoHeight||'?')+'. '+
       (short?'This file ends before a transcript checkpoint. It may be an older or incomplete export.':'File identity is still unverified.'));
     refresh();
   });
-  video.addEventListener('error',()=>{metadataReady=false;$('save-frame').disabled=true;for(const c of cards){c.querySelector('.jump').disabled=true;c.querySelector('.capture').disabled=true;}note('Browser could not decode this video file. No audiovisual review is possible here.');refresh();});
+   video.addEventListener('error',()=>{metadataReady=false;sha256Digest=null;hashButton.disabled=true;$('save-frame').disabled=true;for(const c of cards){c.querySelector('.jump').disabled=true;c.querySelector('.capture').disabled=true;}note('Browser could not decode this video file. No audiovisual review is possible here.');refresh();});
   for(const card of cards){
     card.querySelector('.jump').addEventListener('click',()=>{
       const seconds=Number(card.dataset.second);
@@ -314,7 +401,33 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
     for(const element of card.querySelectorAll('input,select,textarea'))element.addEventListener('input',refresh);
   }
   for(const id of ['same-cut','identity-method','full-watch','all-cards','rights','payout','end-screen','reviewer','date','global-notes'])$(id).addEventListener('input',refresh);
-  $('json').addEventListener('click',()=>download(JSON.stringify(report(),null,2)+'\n','nolanpoker-current-cut-qa-report.json','application/json;charset=utf-8'));
+   hashButton.addEventListener('click',async()=>{
+     if(!loadedFile||!metadataReady||hashing)return;
+     const file=loadedFile,generation=fileGeneration;
+     hashing=true;sha256Digest=null;hashButton.disabled=true;
+     fingerprint.textContent='Reading local file chunks and computing SHA-256. No bytes leave this browser.';
+     refresh();
+     try {
+       const sha=makeSHA256(),step=1024*1024*2;
+       for(let offset=0;offset<file.size;offset+=step) {
+         if(generation!==fileGeneration||loadedFile!==file)return;
+         sha.update(new Uint8Array(await file.slice(offset,Math.min(offset+step,file.size)).arrayBuffer()));
+         if(generation!==fileGeneration||loadedFile!==file)return;
+         fingerprint.textContent='Computing SHA-256 locally: '+Math.min(100,Math.round(100*Math.min(offset+step,file.size)/file.size))+'% of this file read.';
+         await new Promise(done=>window.setTimeout(done,0));
+       }
+       const result=sha.finish();
+       if(generation!==fileGeneration||loadedFile!==file)return;
+       sha256Digest=result;
+       fingerprint.textContent='Local SHA-256: '+result+'. This identifies local bytes, not the current YouTube upload.';
+       note('Local SHA-256 calculated for '+file.name+'. Compare with a separately verified reference file, not a guessed checksum.');
+     } catch (_) {
+       if(generation===fileGeneration){sha256Digest=null;fingerprint.textContent='Could not compute SHA-256 in this browser. Reviewer completion remains blocked.';}
+     } finally {
+       if(generation===fileGeneration){hashing=false;hashButton.disabled=false;refresh();}
+     }
+   });
+   $('json').addEventListener('click',()=>download(JSON.stringify(report(),null,2)+'\n','nolanpoker-current-cut-qa-report.json','application/json;charset=utf-8'));
   $('markdown').addEventListener('click',()=>download(asMarkdown(report()),'nolanpoker-current-cut-qa-report.md','text/markdown;charset=utf-8'));
   $('save-frame').addEventListener('click',()=>{
     if(!metadataReady||!video.videoWidth||!video.videoHeight){note('Cannot capture a frame before video metadata loads.');return;}

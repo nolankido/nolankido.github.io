@@ -264,6 +264,39 @@ class AIRealLifeTests(unittest.TestCase):
         self.assertNotIn(chr(0x2014), source)
         self.assertNotIn(chr(0x2014), tool)
 
+    def test_local_video_qa_v2_fingerprint_and_continuous_scene_evidence(self):
+        import shutil
+        import subprocess
+        html = read("downloads/nolanpoker-local-video-qa.html")
+        self.assertIn("nolanpoker-local-current-cut-qa-v2", html)
+        self.assertIn('id="hash-file"', html)
+        self.assertIn('id="file-fingerprint"', html)
+        self.assertIn("connect-src 'none'", html)
+        self.assertIn("media-src blob:", html)
+        self.assertIn("function makeSHA256()", html)
+        self.assertIn("BigInt(bytesRead)*8n", html)
+        self.assertIn("sha256_local:sha256Digest", html)
+        self.assertIn("sha256_match_to_public_file_independently_verified:false", html)
+        self.assertIn("identity_independently_proven_by_tool:false", html)
+        self.assertIn("const allComplete=hasFile&&checksumReady&&coversTranscript&&identity", html)
+        self.assertIn("c.querySelector('.notes').value.trim().length>=12", html)
+        self.assertIn("position<video.duration", html)
+        self.assertIn("fileGeneration++", html)
+        for forbidden in ("fetch(", "XMLHttpRequest", "localStorage",
+                          "sessionStorage", "sendBeacon", "<script src="):
+            self.assertNotIn(forbidden, html)
+        self.assertIn("Verification upgrade:", read("_source/ai-in-real-life.html"))
+        self.assertIn("## H. Local media fingerprint and continuous evidence gate",
+                      read("downloads/nolanpoker-content-production-evidence-ledger.md"))
+        for key in ("current_public_cut_timestamps_checked",
+                    "current_public_cut_graphics_checked", "human_release_approval"):
+            old_record = json.loads(read("downloads/portland-meadows-ep1-scene-claims.json"))
+            self.assertFalse(old_record[key])
+        if shutil.which("node"):
+            result = subprocess.run(["node", str(ROOT / "_tests/nolanpoker_local_video_sha256_smoke.cjs")],
+                                    capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",
