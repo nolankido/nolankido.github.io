@@ -20,12 +20,12 @@ class AIRealLifeTests(unittest.TestCase):
         record = matches[0]
         self.assertEqual(record["source"], "ai-in-real-life.html")
         self.assertEqual(record["section"], "technology")
-        self.assertEqual(record["updated"], "2026-11-19")
+        self.assertEqual(record["updated"], "2026-11-20")
         self.assertNotIn("date", record)
         self.assertFalse(record.get("noindex"))
         self.assertFalse(record.get("evidence_article"))
         source = read("_source/ai-in-real-life.html")
-        self.assertEqual(source.count("<h2 "), 8)
+        self.assertEqual(source.count("<h2 "), 9)
         self.assertNotIn(chr(0x2014), source)
         for link in ("/technology/checking-ai-website-changes/", "/technology/local-ai-review-replies/",
                      "/technology/ai-book-continuity-checker/", "/technology/ai-poker-video-evidence/",
@@ -107,12 +107,37 @@ class AIRealLifeTests(unittest.TestCase):
         self.assertIn("qualityGateMet", script)
         self.assertIn("window.addEventListener(\'pagehide\'", script)
         self.assertIn("window.addEventListener(\'pageshow\'", script)
-        self.assertIn(\'autocomplete="off"\', built)
+        self.assertIn('autocomplete="off"', built)
         self.assertIn("review-reply-paired-observations.csv", script)
         if shutil.which("node"):
             result = subprocess.run(["node", str(ROOT / "_tests/review_reply_pilot_smoke.cjs")],
                                     capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_rightsreceipt_submission_and_human_authority_are_bounded(self):
+        source = read("_source/ai-in-real-life.html")
+        html = read("ai-in-real-life/index.html")
+        start = '<section class="section folio-row" id="real-life-rightsreceipt"'
+        after = '<section class="section folio-row" id="real-life-business"'
+        self.assertEqual(source.count(start), 1)
+        self.assertEqual(source.split(start, 1)[1].split(after, 1)[0],
+                         html.split(start, 1)[1].split(after, 1)[0])
+        for marker in (
+            "https://devpost.com/software/rightsreceipt",
+            "https://www.youtube.com/watch?v=AzUeM4lXyuA",
+            "646182a95faf6ab5448f10927ded1650ff38bdf5",
+            'paymentEvidence: "simulated_only"',
+            "24 rights-field comparisons",
+            "USD 425.00",
+            "not independently rerun",
+            "do <strong>not</strong> establish",
+            "/technology/rightsreceipt-ai-licensing/",
+            "real PayPal Sandbox payment",
+        ):
+            self.assertIn(marker, source)
+        self.assertIn('href="/ai-in-real-life/#real-life-rightsreceipt"', read("index.html"))
+        self.assertEqual(source.count('id="real-life-rightsreceipt-title"'), 1)
+        self.assertIn('"real-life-rightsreceipt-title"', read("find/index.html"))
 
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()

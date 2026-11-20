@@ -6,8 +6,8 @@
     "seo_title": "Nolan Kido: Practical AI | AI Works, Human Decides",
     "description": "Practical AI projects for everyday life and small business, plus poker and creative work. Nolan Kido's approach: AI Works, Human Decides.",
     "source": "home.html",
-    "updated": "2026-11-19",
-    "revision": "Added a prominent link to the AI in Real Life portfolio while preserving the research and poker records."
+    "updated": "2026-11-20",
+    "revision": "Linked the evidence-backed RightsReceipt hackathon submission from the homepage without changing the three existing case cards."
   },
   {
     "id": "start-here",
@@ -102,8 +102,8 @@
     "kicker": "Practical AI / Public case portfolio",
     "section": "technology",
     "source": "ai-in-real-life.html",
-    "updated": "2026-11-19",
-    "revision": "Added a browser-local six-case trial logger with human judgments, quality-gated comparison and CSV export. No productivity gain is claimed."
+    "updated": "2026-11-20",
+    "revision": "Added RightsReceipt as a second flagship case, distinguishing public submission, local AI proof, simulated payment checks and human approvals."
   },
   {
     "id": "contact",
