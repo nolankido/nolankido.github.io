@@ -247,6 +247,24 @@ HTML and run `python _scripts/build_books.py --check`,
 `python -m unittest _tests.test_book_pages` and the documented
 local release checks, without adding GitHub Actions.
 
+## Book subject metadata and contextual guide links
+
+Both standalone book pages use existing 1200-by-630 topic graphics from
+`assets/social/` for social sharing. These are **not official cover art**;
+keep the exact image URL and honest alternative text aligned. The
+`WebPage.about` Book identifier must match its `mainEntity.Book.@id`,
+while `Book.author` continues to point to the shared Nolan Kido Person
+identifier. The `Book.mainEntityOfPage` links back to the canonical
+WebPage. Do not add unsupported retail edition, pricing or sales claims.
+
+The AI workflow pilot guide, poker books and courses guide, and
+long-form no-limit Hold'em guide provide contextual outbound links
+to the two book pages and publicly free worksheets. Preserve original
+article publication dates and only advance actual modification dates,
+together with XML sitemap lastmod and generated Article metadata.
+Run the standalone book test and full local build checks. No GitHub
+Actions or scheduled background jobs.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
