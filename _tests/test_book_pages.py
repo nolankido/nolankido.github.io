@@ -33,6 +33,27 @@ class BookPublicationTests(unittest.TestCase):
                 for forbidden in ("isbn", "offers", "bookFormat", "datePublished", "aggregateRating"):
                     self.assertNotIn(forbidden, record["mainEntity"])
 
+    def test_companion_files_links_arithmetic_and_image_alt(self):
+        companions = {
+            "one-workflow-at-a-time": ("downloads/one-workflow-ai-pilot-worksheet.md",
+                                       "4 + 3 + 7 + 1 = 15 minutes"),
+            "how-to-play-no-limit-texas-holdem": ("downloads/holdem-river-call-check-worksheet.md",
+                                                   "10 / 40 = 25%"),
+        }
+        creative = (ROOT / "_source/creative/home.html").read_text(encoding="utf-8")
+        for item in book_pages.BOOKS:
+            with self.subTest(slug=item["slug"]):
+                path, example = companions[item["slug"]]
+                worksheet = (ROOT / path).read_text(encoding="utf-8")
+                page = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
+                self.assertGreater(len(worksheet), 1500)
+                self.assertIn("Free companion resource", worksheet)
+                self.assertIn('href="/' + path + '"', page)
+                self.assertIn('href="/' + path + '"', creative)
+                self.assertIn(example, worksheet.replace("**", ""))
+                self.assertIn("not an official cover of this book", page)
+                self.assertNotIn(chr(0x2014), worksheet)
+
     def test_sitemap_and_find_link_each_book_once(self):
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")

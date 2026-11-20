@@ -225,6 +225,28 @@ prices have not been independently verified in this release.
 Do not add invented offers, dates, seller links, reviews,
 ratings or sales evidence. Never restore GitHub Actions.
 
+## Book reader companion exercises, November 20, 2026
+
+Two original public worksheets have been added:
+`downloads/one-workflow-ai-pilot-worksheet.md` and
+`downloads/holdem-river-call-check-worksheet.md`. They are clearly
+fictional instructional material, not official KDP excerpts, actual
+client outcomes, real tournament hands, or verified solver outputs.
+Their short examples appear on the respective source-backed book pages
+and are linked from Creative Work. Do not replace these download
+destinations with new names without updating all sources and tests.
+
+The book landing pages still inherit the Creative Work sharing graphic.
+Their alt text now explicitly says it is not an official book cover.
+When legitimate edition artwork is available, replace both image URL
+and alt text, and verify the artwork against an exact public edition.
+Do not claim social cards are retail covers.
+
+For changes, preserve byte-identical standalone source and output
+HTML and run `python _scripts/build_books.py --check`,
+`python -m unittest _tests.test_book_pages` and the documented
+local release checks, without adding GitHub Actions.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
