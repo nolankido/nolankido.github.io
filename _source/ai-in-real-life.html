@@ -8,14 +8,38 @@
   </div>
 </section>
 <section class="section folio-row" id="real-life-software" aria-labelledby="real-life-software-title">
-  <div class="section-meta"><p class="section-label">01 / Recorded public work</p></div>
+  <div class="section-meta"><p class="section-label">01 / Flagship recorded case</p></div>
   <div class="section-content prose">
     <h2 class="section-title" id="real-life-software-title">Building and checking a real website.</h2>
+    <p class="section-deck"><strong>The problem:</strong> An AI-assisted website release appeared ready after its build, search audit, and 347 unit and content tests passed. An independent HTML5 parser found a malformed closing tag. The correction was made before the release went public.</p>
     <div class="identity-readings">
-  <article class="identity-reading"><p class="note-category">Documented defect and repair</p><h3><a href="/technology/checking-ai-website-changes/">When a passing build missed invalid HTML.</a></h3><p><strong>The task:</strong> Improve a public website with AI-assisted edits. <strong>The human check:</strong> An independent HTML5 parser found an extra closing tag that earlier checks missed, and the defect was repaired. <strong>Limit:</strong> One recorded release, not a controlled study of developer productivity.</p></article>
-  <article class="identity-reading"><p class="note-category">Verified releases, unknown search impact</p><h3><a href="/technology/ai-website-visibility/#site-visibility-sprint-outcome">What a 25-turn visibility sprint established.</a></h3><p>Public source changes and deployment checks document what was published. Rankings, search traffic, and AI-assistant citations are different outcomes and have not yet been measured in that sprint record.</p></article>
-</div>
-<p class="small-copy">Inspect the <a href="https://github.com/nolankido/nolankido.github.io">public source repository</a>. Released code is evidence of work completed, not a guarantee that the work increased traffic.</p>
+      <article class="identity-reading">
+        <p class="note-category">Task / A real public website</p>
+        <h3>Improve a site without losing its integrity.</h3>
+        <p>The change concerned public search presentation, authorship, breadcrumbs, and an explanation of the AI Task Brief Builder. A useful release had to preserve working pages and accurate public claims, not merely produce plausible markup.</p>
+      </article>
+      <article class="identity-reading">
+        <p class="note-category">Failure / A different check disagreed</p>
+        <h3>The build passed, but the HTML was malformed.</h3>
+        <p>On <a href="/technology/task-brief/">the task-brief page</a>, the HTML5 parser identified <code>end-tag-too-early</code> for <code>div</code>. A browser may recover from a mismatched closing tag, so apparently normal rendering and other passing tests were insufficient evidence.</p>
+      </article>
+      <article class="identity-reading">
+        <p class="note-category">Outcome / Recorded release</p>
+        <h3>Corrected source, checked delivery.</h3>
+        <p>The historical repaired candidate passed 347 unit and content tests and 21 browser suites. After publication, 235 sampled public GET targets matched the expected release responses. These are recorded checks, not measurements rerun for this portfolio.</p>
+      </article>
+    </div>
+    <h3 id="real-life-software-evidence">Follow the original evidence from failure to release.</h3>
+    <ol class="evidence-facts">
+      <li><strong>Before the repair:</strong> At <a href="https://github.com/nolankido/nolankido.github.io/blob/2bf8908339e06f604cea00f0254494e17171ecf4/_source/technology/task-brief.html">pinned source revision 2bf8908</a>, the actual final closing sequence was <code>&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;</code>. The extra closing container is visible in the archived file.</li>
+      <li><strong>After the repair:</strong> At <a href="https://github.com/nolankido/nolankido.github.io/blob/73782caa4697204690c679626b36427c28201234/_source/technology/task-brief.html">pinned revision 73782ca</a>, the sequence was <code>&lt;/div&gt;&lt;/section&gt;</code>. The <a href="https://github.com/nolankido/nolankido.github.io/compare/2bf8908339e06f604cea00f0254494e17171ecf4...73782caa4697204690c679626b36427c28201234">commit comparison</a> includes other work too; this is the specific source difference checked for this case.</li>
+      <li><strong>Release verification:</strong> <a href="https://github.com/nolankido/nolankido.github.io/pull/40">Merged release PR #40</a> and its referenced check records document the repaired candidate, browser suite, deployed release, and public-byte comparison. The <a href="/downloads/website-check-evidence.json" download>compact evidence record</a> preserves the identifiers and the limits of those historical results.</li>
+    </ol>
+    <h3 id="real-life-software-conclusion">What this proves, and what it does not.</h3>
+    <p><strong>Established:</strong> An AI-assisted real-world change contained a structural HTML error; a different check exposed it; a source correction was made; and the recorded release checks covered the corrected site. <strong>Not established:</strong> How much time AI saved, improved search rankings, increased business revenue, complete accessibility or security, or error-free future releases.</p>
+    <p><strong>Transferable lesson:</strong> Match independent checks to different risks. A deterministic build verifies consistency, an HTML5 parser checks document structure, functional browser tests sample behavior, and a public response comparison checks what was actually served. No single check covers the whole task.</p>
+    <p class="small-copy"><strong>Use the evidence yourself:</strong> <a href="/technology/checking-ai-website-changes/">Read the full historical case and reduced reproduction</a>, <a href="/downloads/website-check-offline-runbook.md" download>download the free offline release-check runbook</a>, or <a href="/downloads/website-check-reproduction.py" download>inspect the small parser example</a>. The example reproduces the failure class, not the full archived release.</p>
+    <p class="small-copy"><strong>A separate, later question:</strong> Did the site's <a href="/technology/ai-website-visibility/#site-visibility-sprint-outcome">25-turn search-visibility sprint</a> improve discovery? Its public change ledger confirms releases, but Google performance and assistant citations were not measured in the sprint. These outcomes must not be inferred from a clean deployment.</p>
   </div>
 </section>
 <section class="section folio-row" id="real-life-business" aria-labelledby="real-life-business-title">

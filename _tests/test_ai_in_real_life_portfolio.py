@@ -32,6 +32,28 @@ class AIRealLifeTests(unittest.TestCase):
                      "/technology/dinner-on-time/", "/technology/ai-workflow-pilot/"):
             self.assertIn('href="' + link + '"', source)
 
+    def test_flagship_website_case_is_source_verified(self):
+        source = read("_source/ai-in-real-life.html")
+        output = read("ai-in-real-life/index.html")
+        evidence = json.loads(read("downloads/website-check-evidence.json"))
+        start = '<section class="section folio-row" id="real-life-software"'
+        end = '<section class="section folio-row" id="real-life-business"'
+        self.assertIn(start, source)
+        self.assertEqual(source.split(start, 1)[1].split(end, 1)[0],
+                         output.split(start, 1)[1].split(end, 1)[0])
+        self.assertEqual(source.count('id="real-life-software-evidence"'), 1)
+        self.assertIn(str(evidence["pre_repair"]["unit_content_tests_passed"]), source)
+        self.assertIn(str(evidence["repaired"]["browser_suites_passed"]), source)
+        self.assertIn(str(evidence["published"]["matched_targets"]), source)
+        for key in ("pre_repair_ref", "repaired_ref"):
+            self.assertIn(evidence["source_closure"][key], source)
+        for link in ("/downloads/website-check-evidence.json",
+                     "/downloads/website-check-offline-runbook.md",
+                     "/technology/checking-ai-website-changes/"):
+            self.assertIn('href="' + link, source)
+        self.assertIn("Not established:", source)
+        self.assertIn("not the full archived release", source)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",
