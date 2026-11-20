@@ -103,7 +103,7 @@
     "section": "technology",
     "source": "ai-in-real-life.html",
     "updated": "2026-11-20",
-    "revision": "Hardened the offline NolanPoker QA tool with a locally computed, exported SHA-256 video fingerprint and continuously enforced scene-evidence requirements, without claiming video release equivalence."
+    "revision": "Added checksum-bound offline v2/v3 report resumption to the NolanPoker video QA workstation, restoring notes only and clearing every prior approval."
   },
   {
     "id": "contact",

@@ -297,6 +297,37 @@ class AIRealLifeTests(unittest.TestCase):
                                     capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_v3_report_resume_never_restores_previous_approvals(self):
+        import shutil
+        import subprocess
+        tool = read("downloads/nolanpoker-local-video-qa.html")
+        self.assertIn("nolanpoker-local-current-cut-qa-v3", tool)
+        self.assertIn('id="resume-report"', tool)
+        self.assertIn("function validateSavedReview(", tool)
+        self.assertIn("resumeInput.addEventListener('change'", tool)
+        self.assertIn("raw.file.sha256_local !== currentSHA", tool)
+        self.assertIn("raw.file.size_bytes !== currentSize", tool)
+        self.assertIn("c.querySelector('.decision').value='unreviewed'", tool)
+        self.assertIn("c.querySelector('.audio').checked=false", tool)
+        self.assertIn("c.querySelector('.visual').checked=false", tool)
+        self.assertIn("resume_prior_pass_and_release_approvals_cleared", tool)
+        self.assertIn("checksumReady", tool)
+        self.assertIn("connect-src 'none'", tool)
+        for forbidden in ("fetch(", "XMLHttpRequest", "localStorage", "sessionStorage",
+                          "sendBeacon", "<script src="):
+            self.assertNotIn(forbidden, tool)
+        self.assertIn("Resume an unfinished review:", read("_source/ai-in-real-life.html"))
+        self.assertIn("## I. Checksum-bound review resumption",
+                      read("downloads/nolanpoker-content-production-evidence-ledger.md"))
+        for k in ("current_public_cut_timestamps_checked",
+                  "current_public_cut_graphics_checked", "human_release_approval"):
+            scene_record = json.loads(read("downloads/portland-meadows-ep1-scene-claims.json"))
+            self.assertFalse(scene_record[k])
+        if shutil.which("node"):
+            p = subprocess.run(["node", str(ROOT / "_tests/nolanpoker_qa_resume_smoke.cjs")],
+                               capture_output=True, text=True, check=False)
+            self.assertEqual(p.returncode, 0, p.stderr)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",

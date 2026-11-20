@@ -34,6 +34,9 @@ button:hover:not(:disabled) {background:var(--accent);border-color:var(--accent)
 button:disabled {opacity:.43;cursor:not-allowed}
 button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,select:focus-visible {outline:3px solid var(--accent);outline-offset:3px}
 .notice {background:#f7efe8;border-left:4px solid var(--accent);padding:14px 18px;margin:18px 0}
+#resume-workspace {margin:18px 0;padding:14px 18px;background:var(--pale);border:1px solid var(--line)}
+#resume-workspace p {margin:8px 0 12px}
+#file-fingerprint,#resume-status {overflow-wrap:anywhere;word-break:break-word}
 .good {background:var(--pale);border-left:4px solid var(--green);padding:12px 16px}
 .grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .tools {display:flex;flex-wrap:wrap;gap:12px;margin:15px 0}
@@ -77,6 +80,13 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
 <video id="player" controls playsinline preload="metadata" hidden aria-label="Locally selected video for human audiovisual review"></video>
 <div class="tools"><button id="save-frame" type="button" class="secondary" disabled>Save displayed frame as PNG</button><button id="hash-file" type="button" class="secondary" disabled>Compute local SHA-256</button><button id="unload" type="button" class="secondary" disabled>Unload video and clear review</button></div>
 <p id="file-fingerprint" class="muted" role="status" aria-live="polite">SHA-256 not computed. A fingerprint identifies local bytes; it cannot prove those bytes match the public YouTube upload without a trusted comparison file.</p>
+<div id="resume-workspace" aria-labelledby="resume-title">
+<h3 id="resume-title">Continue from an exported review report</h3>
+<p>Select your actual local video and compute its SHA-256 first. Then choose a JSON report exported by this workstation (v2 or v3). The report must have the <strong>same file checksum and size</strong>. Previous scene notes will be restored, but all audio, frame, Pass, file-identity and final-release approvals are cleared for fresh inspection. No file or report is uploaded.</p>
+<label for="resume-report">Saved QA report (.json)</label>
+<input id="resume-report" type="file" accept=".json,application/json" autocomplete="off" disabled>
+<p id="resume-status" role="status" aria-live="polite">Resume is unavailable until a local video is loaded and its checksum is computed.</p>
+</div>
 <fieldset>
 <legend>Does this exact file match the public released cut?</legend>
 <label class="check"><input type="checkbox" id="same-cut"><span>I personally checked that the selected file represents the current public upload, not just a historical v7 or v12 export. This is my assertion, not an automatic identity check.</span></label>
@@ -142,10 +152,10 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
 </section>
 <section id="report-controls" aria-labelledby="report-title">
 <h2 id="report-title">4. Export a reproducible review record</h2>
-<p>Exports describe the local video file, its SHA-256 checksum if computed, the transcript anchors and your own decisions. The report always distinguishes a reviewer attestation from an independently verified claim. The report is stored only in your browser's downloads. To compare a local file with another independently obtained file on Windows, run <code>Get-FileHash -Algorithm SHA256 -LiteralPath 'C:\path\to\video.mp4'</code> on that other file and compare all 64 hexadecimal characters. Two matching digests establish byte identity between those two files, not that either is the current public YouTube cut.</p>
+<p>Exports describe the local video file, its SHA-256 checksum if computed, the transcript anchors, any imported notes, and your own current decisions. The report always distinguishes a reviewer attestation from an independently verified claim. The report is stored only in your browser's downloads. To compare a local file with another independently obtained file on Windows, run <code>Get-FileHash -Algorithm SHA256 -LiteralPath 'C:\path\to\video.mp4'</code> on that other file and compare all 64 hexadecimal characters. Two matching digests establish byte identity between those two files, not that either is the current public YouTube cut.</p>
 <div class="tools"><button id="json" type="button" class="secondary">Export report as JSON</button><button id="markdown" type="button" class="secondary">Export edit and QA report as Markdown</button></div>
 <p id="export-status" role="status" aria-live="polite"></p>
-<p class="muted">Schema: <code>nolanpoker-local-current-cut-qa-v2</code>. Recorded source: <a href="https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json">November 20 public transcript audit</a>. No full-cut approval, media matches or new test results are prefilled.</p>
+<p class="muted">Schema: <code>nolanpoker-local-current-cut-qa-v3</code>. Resumed reports are working notes only; imported approvals are always reset. Recorded source: <a href="https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json">November 20 public transcript audit</a>. No full-cut approval, media matches or new test results are prefilled.</p>
 </section>
 </main>
 <footer>AI Works, Human Decides. Offline first. No credentials, upload, trackers or external media libraries. Use a local copy of the actual video to assess its picture and sound. Copyright and privacy remain the editor's responsibility.</footer>
@@ -158,6 +168,8 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
   let objectURL = null, loadedFile = null, metadataReady = false;
   let sha256Digest = null, hashing = false, fileGeneration = 0;
   const fingerprint = $('file-fingerprint'), hashButton = $('hash-file');
+  const resumeInput = $('resume-report'), resumeStatus = $('resume-status');
+  let resumedSourceSchema = null;
   /* Streaming FIPS 180-4 SHA-256, without loading an entire video into RAM.
      The test suite compares against independent hashlib vectors and real file bytes. */
   function makeSHA256() {
@@ -213,6 +225,64 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
     return {update,finish};
   }
   if(typeof module!=='undefined' && module.exports) module.exports.makeSHA256=makeSHA256;
+  const EXPECTED_SCENES = Object.freeze([
+    ['hand_64o', '04:20', 260],
+    ['hand_77_context', '06:27', 387],
+    ['hand_77_result', '07:12', 432],
+    ['payout_first', '08:08', 488],
+    ['payout_repeat', '08:52', 532]
+  ]);
+  function validateSavedReview(raw, currentSize, currentSHA, currentDuration) {
+    const invalid = reason => { throw new Error(reason); };
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) invalid('Not a valid report object.');
+    if (!['nolanpoker-local-current-cut-qa-v2', 'nolanpoker-local-current-cut-qa-v3'].includes(raw.schema)) {
+      invalid('Unsupported report version. Only v2 and v3 JSON reports can be resumed.');
+    }
+    if (raw.public_video_url !== 'https://www.youtube.com/watch?v=qABaiIcvvpU' ||
+        raw.public_transcript_audit !== 'https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json') {
+      invalid('Report belongs to a different video or transcript source.');
+    }
+    if (!raw.file || typeof raw.file !== 'object' || Array.isArray(raw.file) ||
+        !/^[a-f0-9]{64}$/.test(currentSHA || '') ||
+        raw.file.sha256_local !== currentSHA || raw.file.size_bytes !== currentSize ||
+        !Number.isFinite(raw.file.duration_seconds) ||
+        Math.abs(raw.file.duration_seconds - currentDuration) > 0.25) {
+      invalid('Saved report does not match the loaded video checksum, size, or duration. Nothing was imported.');
+    }
+    if (raw.current_video_independently_verified_by_tool !== false ||
+        raw.no_automatic_audio_visual_assessment !== true) {
+      invalid('Not a compatible unverified local QA report.');
+    }
+    if (!Array.isArray(raw.scenes) || raw.scenes.length !== EXPECTED_SCENES.length) {
+      invalid('Report does not contain the expected five review checkpoints.');
+    }
+    const scenes=raw.scenes.map((scene,i) => {
+      const [id,time,seconds]=EXPECTED_SCENES[i];
+      if (!scene || typeof scene !== 'object' || Array.isArray(scene) ||
+          scene.id !== id || scene.transcript_timecode !== time || scene.transcript_seconds !== seconds ||
+          typeof scene.notes !== 'string' || scene.notes.length > 1500 ||
+          typeof scene.listened_to_audio !== 'boolean' || typeof scene.inspected_frames !== 'boolean' ||
+          !['pass','revise','hold','unreviewed'].includes(scene.reviewer_decision)) {
+        invalid('Invalid or mismatched scene ' + id + '.');
+      }
+      const previous=scene.observed_local_time_seconds;
+      if (previous !== null && (!Number.isFinite(previous) || previous < 0 || previous >= currentDuration)) {
+        invalid('Invalid local timestamp for ' + id + '.');
+      }
+      return {id,notes:scene.notes,previous};
+    });
+    const words=[['file_equivalence_method',500],['reviewer',100],['global_notes',2500]];
+    for(const [key,limit] of words) {
+      if(typeof raw[key] !== 'string' || raw[key].length > limit) invalid('Invalid ' + key + ' in saved report.');
+    }
+    if(raw.review_date !== null &&
+       (typeof raw.review_date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(raw.review_date))) {
+      invalid('Invalid saved review date.');
+    }
+    return {schema:raw.schema, scenes, method:raw.file_equivalence_method,
+      reviewer:raw.reviewer, globalNotes:raw.global_notes};
+  }
+  if (typeof module !== 'undefined' && module.exports) module.exports.validateSavedReview=validateSavedReview;
   const fmt = n => Number.isFinite(n) ? String(Math.floor(n / 60)).padStart(2,'0') + ':' + String(Math.floor(n % 60)).padStart(2,'0') : 'not known';
   function note(message) {status.textContent = message;}
   function clearReview() {
@@ -226,6 +296,9 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
     }
     for(const id of ['same-cut','full-watch','all-cards','rights','payout','end-screen']) $(id).checked=false;
     for(const id of ['identity-method','reviewer','date','global-notes']) $(id).value='';
+    resumedSourceSchema=null;
+    resumeInput.value='';
+    resumeStatus.textContent='Resume is unavailable until a local video is loaded and its checksum is computed.';
     refresh();
   }
   function unload() {
@@ -267,6 +340,7 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
   }
   function refresh() {
     const d=determine();
+    resumeInput.disabled=!d.checksumReady;
     const pass=cards.filter(c=>c.querySelector('.decision').value==='pass').length;
     summary.textContent = d.statusLabel + '. ' + pass + ' of 5 transcript checkpoints marked PASS. ' +
       (d.allComplete ? 'Every gate was asserted by the named reviewer. This is a human-entered report, not independently verified video equivalence or a public release certification.' :
@@ -275,7 +349,10 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
   function report() {
     const d=determine();
     return {
-      schema:'nolanpoker-local-current-cut-qa-v2',exported_at_utc:new Date().toISOString(),
+      schema:'nolanpoker-local-current-cut-qa-v3',exported_at_utc:new Date().toISOString(),
+       resume_imported_from_schema:resumedSourceSchema,
+       resume_previous_review_notes_only:!!resumedSourceSchema,
+       resume_prior_pass_and_release_approvals_cleared:!!resumedSourceSchema,
       public_video_url:'https://www.youtube.com/watch?v=qABaiIcvvpU',
       public_transcript_audit:'https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json',
       file:loadedFile ? {name:loadedFile.name,size_bytes:loadedFile.size,last_modified_ms:loadedFile.lastModified,
@@ -316,6 +393,7 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
       '**Selected local file:** '+(f?safe(f.name)+' ('+f.size_bytes+' bytes, '+f.duration_seconds+' seconds)':'not selected'),
        '**Local file SHA-256:** '+(f&&f.sha256_local?f.sha256_local:'not computed'),
        '**Independent public file hash comparison:** not performed by this tool',
+       '**Resumed from saved report:** '+(r.resume_imported_from_schema ? safe(r.resume_imported_from_schema)+'; previous approvals cleared' : 'no'),
       '**File/public cut equivalence:** '+(r.file_same_as_public_cut_attested?'reviewer attests':'not attested'),
       '**Method:** '+safe(r.file_equivalence_method||'not supplied'),
       '**Tool itself verified file identity:** no',
@@ -427,6 +505,44 @@ pre {padding:10px 14px;background:var(--pale);overflow-wrap:anywhere;white-space
        if(generation===fileGeneration){hashing=false;hashButton.disabled=false;refresh();}
      }
    });
+  resumeInput.addEventListener('change', async () => {
+    const saved=resumeInput.files && resumeInput.files[0];
+    if(!saved) return;
+    const generation=fileGeneration, selected=loadedFile, digest=sha256Digest;
+    try {
+      if(!selected || !metadataReady || hashing || !/^[a-f0-9]{64}$/.test(digest || '')) {
+        throw new Error('Load the matching video and compute SHA-256 before importing.');
+      }
+      if(saved.size===0 || saved.size>512*1024) throw new Error('Saved JSON report must be between 1 byte and 512 KiB.');
+      const parsed=JSON.parse(await saved.text());
+      if(generation!==fileGeneration || selected!==loadedFile || digest!==sha256Digest || hashing) {
+        throw new Error('The selected video changed during import. Nothing was imported.');
+      }
+      const data=validateSavedReview(parsed,selected.size,digest,video.duration);
+      // All validation happens before any UI mutation. Prior conclusions are never restored as fresh approval.
+      for(let i=0;i<cards.length;i++) {
+        const c=cards[i], entry=data.scenes[i];
+        c.querySelector('.notes').value=entry.notes;
+        c.querySelector('.decision').value='unreviewed';
+        c.querySelector('.audio').checked=false;
+        c.querySelector('.visual').checked=false;
+        delete c.dataset.actualTime;
+        c.querySelector('.observed').value=entry.previous===null?'Not captured':
+          'Prior '+fmt(entry.previous)+'; recapture current position';
+      }
+      for(const id of ['same-cut','full-watch','all-cards','rights','payout','end-screen']) $(id).checked=false;
+      $('identity-method').value=data.method;
+      $('reviewer').value=data.reviewer;
+      $('date').value='';
+      $('global-notes').value=data.globalNotes;
+      resumedSourceSchema=data.schema;
+      resumeStatus.textContent='Imported five notes from a matching local file ('+data.schema+'). All decisions, audio/frame checks, captured positions, public-cut attestation, release gates and review date were reset. Recheck the current video before any PASS.';
+      note('Saved notes imported for the matching local SHA-256 only. Previous approvals were not carried forward.');
+      refresh();
+    }catch(error){
+      resumeStatus.textContent='Report not imported: '+(error instanceof SyntaxError?'Invalid JSON.':error.message);
+    }finally{resumeInput.value='';}
+  });
    $('json').addEventListener('click',()=>download(JSON.stringify(report(),null,2)+'\n','nolanpoker-current-cut-qa-report.json','application/json;charset=utf-8'));
   $('markdown').addEventListener('click',()=>download(asMarkdown(report()),'nolanpoker-current-cut-qa-report.md','text/markdown;charset=utf-8'));
   $('save-frame').addEventListener('click',()=>{
