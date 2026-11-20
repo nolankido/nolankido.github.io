@@ -187,6 +187,45 @@ class AIRealLifeTests(unittest.TestCase):
         self.assertNotIn(chr(0x2014), ledger)
         self.assertNotIn(chr(0x2014), source)
 
+    def test_public_transcript_checkpoint_is_limited_to_text(self):
+        audit = json.loads(read("downloads/portland-meadows-public-transcript-audit-2026-11-20.json"))
+        source = read("_source/ai-in-real-life.html")
+        built = read("ai-in-real-life/index.html")
+        historical = json.loads(read("downloads/portland-meadows-ep1-scene-claims.json"))
+        self.assertEqual(audit["video_url"], historical["video_url"])
+        self.assertEqual(audit["audit_date_hawaii"], "2026-11-20")
+        self.assertEqual([item["timecode"] for item in audit["observations"]],
+                         ["04:20", "06:27", "07:12", "08:08", "08:52"])
+        self.assertEqual([item["seconds"] for item in audit["observations"]],
+                         [260, 387, 432, 488, 532])
+        self.assertTrue(audit["viewer_transcript_available"])
+        self.assertTrue(audit["current_public_transcript_passages_inspected"])
+        for key in ("current_public_cut_audio_audited",
+                    "current_public_cut_frames_audited",
+                    "current_public_cut_graphics_audited",
+                    "current_public_cut_full_runtime_confirmed",
+                    "current_public_cut_human_release_approval",
+                    "transcript_timecodes_cross_checked_against_playing_media"):
+            self.assertFalse(audit[key], key)
+        for key in ("current_public_cut_timestamps_checked",
+                    "current_public_cut_graphics_checked", "human_release_approval"):
+            self.assertFalse(historical[key])
+        self.assertEqual(source.count('id="real-life-creator-transcript"'), 1)
+        begin = '<section class="section folio-row" id="real-life-creator"'
+        end = '<section class="section folio-row" id="real-life-everyday"'
+        self.assertEqual(source.split(begin, 1)[1].split(end, 1)[0],
+                         built.split(begin, 1)[1].split(end, 1)[0])
+        for marker in ("4:20", "6:27", "7:12", "8:08", "8:52",
+                       "sign-in verification prompt", "not scene positions independently checked",
+                       "/downloads/portland-meadows-public-transcript-audit-2026-11-20.json"):
+            self.assertIn(marker, source)
+        self.assertIn("## F. November 20 read-only transcript checkpoint",
+                      read("downloads/nolanpoker-content-production-evidence-ledger.md"))
+        self.assertIn("downloads/portland-meadows-public-transcript-audit-2026-11-20.json",
+                      read("_scripts/check_live.py"))
+        self.assertEqual(source.count("<h2 "), 9)
+        self.assertNotIn(chr(0x2014), source)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",
