@@ -152,6 +152,33 @@ the standalone manual builder and source parity, and existing RSS item
 dates. See `_tests/test_portland_organizer_schedule.py` for regression
 checks. No GitHub Actions, paid APIs or scheduled jobs.
 
+## Portland Meadows August 20 result verification boundary
+
+The standalone Episode 1 companion now publishes a bounded results-source
+check at `#episode-result-source-status` and the dated,
+machine-readable source receipt
+`downloads/portland-meadows-result-source-audit-2026-11-20.json`.
+The organizer's public tournament schedule independently establishes
+the planned High Noon event. Card Player's festival listing confirms
+its scheduled August 20 $200 Deep Stack, but the inspected festival
+page did not supply results. The venue links to The Hendon Mob as
+a results directory, and the checked search-indexed 2026 Portland
+Meadows event listing displayed six January-April events with no
+matching August 20 result; direct full archive access was blocked.
+
+**Do not infer that no event occurred, or that the narrator's account
+was false, from the limitations of these public sources.** The
+reported 88 entries, $17,600 prize pool, $5,100 advertised top prize,
+first-place finish and $2,900 gross post-deal personal payment are
+still attributed to the first-person narrator. An organizer-issued
+dated results sheet could verify the finish, while a venue-confirmed
+deal or payout record would be needed to independently verify actual
+post-deal proceeds. Do not publicly upload private payout or
+participant information. No automatic monitoring or scheduled
+verification is authorized. Maintain the original November 2
+publication date, November 20 revision, source-to-output parity,
+search heading and pre-existing RSS publication date.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.

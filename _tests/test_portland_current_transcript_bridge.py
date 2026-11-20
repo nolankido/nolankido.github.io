@@ -26,6 +26,7 @@ class PublicTranscriptBridgeTests(unittest.TestCase):
         self.assertIn('"datePublished": "2026-11-02"',page)
         self.assertIn('"dateModified": "2026-11-20"',page)
         self.assertEqual(source.count('id="episode-current-transcript"'),1)
+        self.assertEqual(source.count('id="episode-result-source-status"'),1)
         self.assertEqual(source.count('id="episode-organizer-schedule"'),1)
         self.assertIn('href="/downloads/portland-meadows-organizer-schedule-2026.json"',source)
         self.assertEqual(source.count('id="episode-current-transcript-title"'),1)

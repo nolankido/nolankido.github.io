@@ -114,3 +114,30 @@ Five positions (4:20, 6:27, 7:12, 8:08, 8:52) come from the November 20 **curren
 A Pass requires a reviewer to report listening, actual visual inspection, a manually observed player time, and a specific note. A six-scene checklist additionally requires explicit whole-video, payout, rights, end-screen and named-reviewer gates. The resulting report always identifies itself as **reviewer-reported, not independently verified by the tool**. Note import is constrained to this specific public video, restores notes and time hints only, and resets past Pass decisions and checkboxes. The page uses no storage or outgoing API calls.
 
 **Current QA conclusion:** The previously checked public transcript remains narrow evidence. A separate attempted automated viewing session did not yield a complete trustworthy audiovisual review. No specific public frames, card suits, runouts, published payouts, audio quality or clickable end screens are now certified. The original unverified flags remain unchanged. The MP4-based SHA-256 tool continues to exist as an optional higher-provenance local alternative.
+
+## K. Independent results-source coverage for Portland Meadows (November 20)
+
+Following the organizer-schedule documentation, a second targeted
+public-source check examined the venue's [Tournament Results link](https://portlandmeadows.com/schedule),
+[Card Player's August 2026 festival listing](https://www.cardplayer.com/poker-tournaments/1732464-2026-wild-west-poker-tour),
+and the [indexed 2026 Portland Meadows tournament archive](https://pokerdb.thehendonmob.com/festival.php?a=r&n=67809).
+
+The venue points readers to a third-party result database but did not
+display a High Noon winner or payout on its schedule page. The inspected
+Card Player listing named the August 20 $200 Deep Stack, but did not
+supply a finish or payout in its event row. The indexed 2026 Portland
+Meadows archive displayed six events through April, not this August
+event. Direct database access was restricted and the result could
+exist elsewhere. This is a bounded *failure to confirm the event-specific
+result*, not independent disproof of the player's account.
+
+The narrator's claimed first-place trophy, 88 entries, $17,600 prize
+pool, $5,100 advertised top prize and $2,900 gross post-deal share
+remain self-reported. A venue-issued final-results record or separate
+deal confirmation can strengthen those distinct claims. General
+tournament databases warn that reported winnings may not reflect chops
+and cannot be treated as net profit.
+
+[Read the dated results-source audit](https://nolankido.com/downloads/portland-meadows-result-source-audit-2026-11-20.json)
+and [the source-bounded public companion](https://nolankido.com/poker/episodes/portland-meadows-ep1/#episode-result-source-status).
+The earlier audiovisual and human-approval flags remain false.

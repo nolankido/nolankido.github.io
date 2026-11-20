@@ -46,6 +46,8 @@ class OrganizerScheduleTests(unittest.TestCase):
         self.assertEqual(page.count(source),1)
         self.assertEqual(source.count('id="episode-organizer-schedule"'),1)
         self.assertEqual(source.count('id="episode-organizer-schedule-title"'),1)
+        self.assertIn('id="episode-result-source-status"',source)
+        self.assertIn('href="/downloads/portland-meadows-result-source-audit-2026-11-20.json"',source)
         for phrase in ("Thursday, August 20, 2026 at noon","15-minute levels",
                        "registration closing at","re-entry permitted",
                        "not a post-event results sheet",
