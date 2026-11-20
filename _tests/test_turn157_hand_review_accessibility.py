@@ -115,10 +115,10 @@ class PokerHandReviewAccessibilityTests(unittest.TestCase):
 
     def test_standalone_pages_match_manual_builders_and_versioned_css(self):
         stylesheet = versioned_style()
-        for published in (self.ep1_page, self.standoff_page):
+        for published, modified in ((self.ep1_page, poker_episode.MODIFIED), (self.standoff_page, poker_standoff_episode.MODIFIED)):
             self.assertEqual(published.count('href="' + stylesheet + '"'), 1)
             self.assertEqual(published.count('<h1 '), 1)
-            self.assertIn('article:modified_time" content="2026-11-16"', published)
+            self.assertIn(f'article:modified_time" content="{modified}"', published)
         self.assertEqual(build_poker_episode.render(), self.ep1_page)
         self.assertEqual(build_standoff_episode.render(), self.standoff_page)
         for path in ("poker/index.html", "poker/library/index.html"):
@@ -145,7 +145,7 @@ class PokerHandReviewAccessibilityTests(unittest.TestCase):
             with self.subTest(route=registry.ROUTE):
                 record = registry.record(ROOT)
                 self.assertEqual(record["date"], published)
-                self.assertEqual(record["modified"], "2026-11-16")
+                self.assertEqual(record["modified"], registry.MODIFIED)
                 self.assertIn(f'datetime="{published}"', source)
         ledger = json.loads(
             (ROOT / "downloads/portland-meadows-ep1-scene-claims.json").read_text(encoding="utf-8")
@@ -155,7 +155,7 @@ class PokerHandReviewAccessibilityTests(unittest.TestCase):
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         sitemap = {item.findtext(ns + "loc"): item.findtext(ns + "lastmod") for item in document}
         for registry in (poker_episode, poker_standoff_episode):
-            self.assertEqual(sitemap[registry.URL], "2026-11-16")
+            self.assertEqual(sitemap[registry.URL], registry.MODIFIED)
         for feed in ("poker/feed.xml", "writing.xml"):
             feed_xml = ET.fromstring((ROOT / feed).read_text(encoding="utf-8"))
             links = [item.findtext("link") for item in feed_xml.findall("./channel/item")]

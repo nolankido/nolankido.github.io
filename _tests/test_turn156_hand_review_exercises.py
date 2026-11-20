@@ -141,15 +141,15 @@ class DocumentedHandExerciseTests(unittest.TestCase):
             with self.subTest(route=registry.ROUTE):
                 info = registry.record(ROOT)
                 self.assertEqual(info["date"], published_date)
-                self.assertEqual(info["modified"], "2026-11-16")
+                self.assertEqual(info["modified"], registry.MODIFIED)
                 self.assertEqual(public.count("<h1 "), 1)
                 self.assertEqual(public.count('aria-label="Breadcrumb"'), 1)
-                self.assertIn('article:modified_time" content="2026-11-16"', public)
+                self.assertIn(f'article:modified_time" content="{registry.MODIFIED}"', public)
                 schema = json.loads(re.search(
                     r'<script type="application/ld\+json">(.*?)</script>', public, re.S
                 ).group(1))
                 self.assertEqual(schema["datePublished"], published_date)
-                self.assertEqual(schema["dateModified"], "2026-11-16")
+                self.assertEqual(schema["dateModified"], registry.MODIFIED)
                 self.assertEqual(schema["url"], registry.URL)
                 self.assertNotIn("—", public)
 
@@ -168,7 +168,7 @@ class DocumentedHandExerciseTests(unittest.TestCase):
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         mod = {r.findtext(ns + "loc"): r.findtext(ns + "lastmod") for r in sitemap}
         for record in (poker_episode, poker_standoff_episode):
-            self.assertEqual(mod[record.URL], "2026-11-16")
+            self.assertEqual(mod[record.URL], record.MODIFIED)
         for feed in ("poker/feed.xml", "writing.xml"):
             document = ET.fromstring((ROOT / feed).read_text(encoding="utf-8"))
             for registry in (poker_episode, poker_standoff_episode):

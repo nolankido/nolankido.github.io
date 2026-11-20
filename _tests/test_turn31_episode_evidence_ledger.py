@@ -168,7 +168,7 @@ class EpisodeEvidenceLedgerTests(unittest.TestCase):
         self.assertEqual(info["date"], "2026-11-02")
         self.assertEqual(info["modified"], poker_episode.MODIFIED)
         self.assertIn('property="article:published_time" content="2026-11-02"', self.html)
-        self.assertIn('property="article:modified_time" content="2026-11-16"', self.html)
+        self.assertIn('property="article:modified_time" content="2026-11-20"', self.html)
         match = re.search(r'<script type="application/ld\+json">(.*?)</script>',
                           self.html, re.S)
         self.assertIsNotNone(match)

@@ -160,14 +160,14 @@ class SevensReviewTests(unittest.TestCase):
         self.assertEqual(guide["date"], "2026-10-05")
         self.assertEqual(guide["updated"], "2026-11-16")
         self.assertIn('"dateModified": "2026-11-16"', self.public)
-        self.assertIn('"dateModified": "2026-11-16"', self.episode_public)
+        self.assertIn('"dateModified": "2026-11-20"', self.episode_public)
 
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         lastmods = {item.findtext(ns + "loc"): item.findtext(ns + "lastmod") for item in sitemap}
         self.assertEqual(lastmods["https://nolankido.com" + GUIDE], "2026-11-16")
         self.assertEqual(lastmods["https://nolankido.com/poker/episodes/portland-meadows-ep1/"],
-                         "2026-11-16")
+                         "2026-11-20")
 
     def test_hindsight_and_invalid_range_assumptions_are_caught(self):
         variants = (

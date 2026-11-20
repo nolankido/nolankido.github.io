@@ -97,20 +97,20 @@ class CompanionStudyRoutesTests(unittest.TestCase):
             with self.subTest(route=registry.ROUTE):
                 info = registry.record(ROOT)
                 self.assertEqual(info["date"], published)
-                self.assertEqual(info["modified"], "2026-11-16")
-                meta = 'property="article:modified_time" content="2026-11-16"'
+                self.assertEqual(info["modified"], registry.MODIFIED)
+                meta = f'property="article:modified_time" content="{registry.MODIFIED}"'
                 self.assertIn(meta, page)
                 match = re.search(r'<script type="application/ld\+json">(.*?)</script>', page, re.S)
                 self.assertIsNotNone(match)
                 schema = json.loads(match.group(1))
                 self.assertEqual(schema["datePublished"], published)
-                self.assertEqual(schema["dateModified"], "2026-11-16")
+                self.assertEqual(schema["dateModified"], registry.MODIFIED)
                 self.assertEqual(schema["url"], registry.URL)
                 self.assertEqual(schema["author"]["@id"],
                                  "https://nolankido.com/about/#nolan-kido")
         self.assertIn('datetime="2026-11-02">November 2, 2026', self.ep1)
         self.assertIn('datetime="2026-11-04">November 4, 2026', self.standoff)
-        self.assertIn('datetime="2026-11-16">November 16, 2026', self.ep1)
+        self.assertIn('datetime="2026-11-20">November 20, 2026', self.ep1)
         self.assertIn('datetime="2026-11-16">November 16, 2026', self.standoff)
         ledger = json.loads((ROOT / "downloads/portland-meadows-ep1-scene-claims.json").read_text(encoding="utf-8"))
         self.assertEqual(ledger["reviewed_record_date"], "2026-11-04")
