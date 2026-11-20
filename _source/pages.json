@@ -1027,7 +1027,7 @@
     "source": "poker/poker-books-and-courses.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-08",
+    "updated": "2026-11-20",
     "poker_guide": true
   },
   {
@@ -1367,6 +1367,7 @@
     "kicker": "Technology / Reproducible pilot guide",
     "source": "technology/ai-workflow-pilot.html",
     "date": "2026-11-13",
+    "updated": "2026-11-20",
     "worked_guide": true
   },
   {
@@ -1543,7 +1544,7 @@
     "source": "poker/no-limit-holdem-guide.html",
     "section": "poker",
     "date": "2026-10-14",
-    "updated": "2026-10-14",
+    "updated": "2026-11-20",
     "poker_guide": true
   },
   {

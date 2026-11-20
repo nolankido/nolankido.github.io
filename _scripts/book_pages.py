@@ -48,6 +48,8 @@ def published(root: Path) -> list[dict]:
         if (schema.get("@type") != "WebPage" or schema.get("url") != url or schema.get("dateModified") != UPDATED
             or entity.get("@type") != "Book" or entity.get("@id") != url + "#book"
             or entity.get("author", {}).get("@id") != PERSON
+            or schema.get("about", {}).get("@id") != url + "#book"
+            or entity.get("mainEntityOfPage", {}).get("@id") != url + "#webpage"
             or entity.get("isbn") is not None or entity.get("offers") is not None or entity.get("datePublished") is not None):
             raise ValueError("Book identity or provenance schema invalid")
         for link in ("index.html", "creative/index.html"):

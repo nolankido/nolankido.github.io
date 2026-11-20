@@ -54,6 +54,44 @@ class BookPublicationTests(unittest.TestCase):
                 self.assertIn("not an official cover of this book", page)
                 self.assertNotIn(chr(0x2014), worksheet)
 
+    def test_book_topic_social_cards_and_entity_links(self):
+        cards = {
+            "one-workflow-at-a-time": "ai-time-savings.png",
+            "how-to-play-no-limit-texas-holdem": "reader-poker-no-limit-holdem-guide.png",
+        }
+        for book in book_pages.BOOKS:
+            with self.subTest(slug=book["slug"]):
+                route = book_pages.route(book)
+                canonical = book_pages.ORIGIN + route
+                page = (ROOT / route.lstrip("/") / "index.html").read_text(encoding="utf-8")
+                asset = "assets/social/" + cards[book["slug"]]
+                self.assertTrue((ROOT / asset).is_file())
+                self.assertIn('<meta property="og:image" content="' + book_pages.ORIGIN + "/" + asset + '">', page)
+                self.assertIn('<meta name="twitter:image" content="' + book_pages.ORIGIN + "/" + asset + '">', page)
+                self.assertIn("not an official cover of this book", page)
+                raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', page, re.S)
+                self.assertIsNotNone(raw)
+                schema = json.loads(raw.group(1))
+                self.assertEqual(schema["about"]["@id"], canonical + "#book")
+                self.assertEqual(schema["mainEntity"]["mainEntityOfPage"]["@id"], canonical + "#webpage")
+                self.assertEqual(schema["mainEntity"]["author"]["@id"], book_pages.PERSON)
+
+    def test_topic_guides_link_back_to_books_without_backdating(self):
+        context = {
+            "technology/ai-workflow-pilot/index.html": "/books/one-workflow-at-a-time/",
+            "poker/poker-books-and-courses/index.html": "/books/how-to-play-no-limit-texas-holdem/",
+            "poker/no-limit-holdem-guide/index.html": "/books/how-to-play-no-limit-texas-holdem/",
+        }
+        for path, route in context.items():
+            with self.subTest(path=path):
+                doc = (ROOT / path).read_text(encoding="utf-8")
+                self.assertEqual(doc.count('href="' + route + '"'), 1)
+                self.assertIn('<meta property="article:modified_time" content="2026-11-20">', doc)
+                raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', doc, re.S)
+                self.assertIsNotNone(raw)
+                schema = json.loads(raw.group(1))
+                self.assertEqual(schema["dateModified"], "2026-11-20")
+
     def test_sitemap_and_find_link_each_book_once(self):
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")
