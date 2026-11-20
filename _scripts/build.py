@@ -525,6 +525,30 @@ def build_outputs() -> dict[Path, str]:
                 'https://github.com/nolankido/rightsreceipt-hackathon/tree/646182a95faf6ab5448f10927ded1650ff38bdf5',
                 'https://developer.paypal.com/api/rest/webhooks/rest/',
             ]
+        if p['id'] == 'creative':
+            # Represent the books by their on-page descriptions. Retailer
+            # availability, publication dates, formats and ISBNs need evidence.
+            schema['mainEntity'] = {
+                '@type': 'ItemList',
+                'name': 'Books by Nolan Kido',
+                'itemListElement': [
+                    {'@type': 'ListItem', 'position': 1, 'item': {
+                        '@type': 'Book',
+                        '@id': site['url'] + '/creative/#book-one-workflow-at-a-time',
+                        'name': 'One Workflow at a Time',
+                        'alternateName': 'One Workflow at a Time: How Small Business Owners Can Test AI Before Spending More Time or Money',
+                        'author': {'@id': site['url'] + '/about/#nolan-kido'},
+                        'description': 'A practical guide to testing a bounded AI workflow in a small business, checking results, and measuring the whole task.',
+                        'url': site['url'] + '/creative/#book-one-workflow-at-a-time'}},
+                    {'@type': 'ListItem', 'position': 2, 'item': {
+                        '@type': 'Book',
+                        '@id': site['url'] + '/creative/#book-how-to-play-no-limit-texas-holdem',
+                        'name': 'How to Play No-Limit Texas Hold’em',
+                        'author': {'@id': site['url'] + '/about/#nolan-kido'},
+                        'description': 'An introduction to no-limit Texas Hold’em, from rules and betting to ranges, pot odds, and decision review.',
+                        'url': site['url'] + '/creative/#book-how-to-play-no-limit-texas-holdem'}}
+                ],
+            }
         schema = author_archive.schema(p, schema, pages, site, ROOT)
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
         schema = visibility_projects.schema(p, schema, body, ROOT, site['url'])
