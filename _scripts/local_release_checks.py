@@ -43,6 +43,7 @@ def main() -> int:
 
     tasks = [
         ('Deterministic build', ['_scripts/build.py', '--check']),
+        ('Book pages source/output build', ['_scripts/build_books.py', '--check']),
         ('Player profile build', ['_scripts/build_player_profile.py', '--check']),
         ('Portland video companion build', ['_scripts/build_poker_episode.py', '--check']),
         ('Stand Off video companion build', ['_scripts/build_standoff_episode.py', '--check']),
@@ -153,6 +154,7 @@ def main() -> int:
         ('Standalone reader arrival contracts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_standalone_reader_arrivals.py', '-q']),
         ('Public profile and topical search', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_site_find.py', '-q']),
         ('Complete author archive and standalone articles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_author_archive_standalone.py', '-q']),
+        ('Standalone book publication and release coverage', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_pages.py', '-q']),
         ('SEO and metadata', ['_scripts/check_search.py']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]

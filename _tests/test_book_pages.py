@@ -133,6 +133,45 @@ class BookPublicationTests(unittest.TestCase):
         self.assertEqual(len(bio_rows), 1)
         self.assertEqual(bio_rows[0].findtext("{*}lastmod"), "2026-11-20")
 
+    def test_website_audit_counts_the_two_standalone_book_canonicals(self):
+        import build
+        import check_search
+        report = check_search.audit(ROOT, build.public_pages(), book_pages.ORIGIN)
+        self.assertEqual(report.get('manual_book_pages'), len(book_pages.BOOKS))
+        self.assertEqual(report['sitemap_urls'], len(set(
+            item.text for item in ElementTree.parse(ROOT / 'sitemap.xml').iter()
+            if item.tag.endswith('}loc'))))
+        self.assertFalse(any('Sitemap must contain each indexable canonical exactly once'
+                             in error for error in report['errors']))
+
+    def test_live_byte_targets_cover_both_books_and_original_worksheets(self):
+        import check_live
+        targets = check_live.targets(ROOT)
+        for item in book_pages.BOOKS:
+            with self.subTest(slug=item['slug']):
+                route = book_pages.route(item)
+                public = ROOT / route.lstrip('/') / 'index.html'
+                self.assertEqual(targets[route], (200, public.read_bytes()))
+        for filename in ('one-workflow-ai-pilot-worksheet.md',
+                         'holdem-river-call-check-worksheet.md'):
+            path = ROOT / 'downloads' / filename
+            self.assertEqual(targets['/downloads/' + filename], (200, path.read_bytes()))
+
+    def test_html5_inventory_includes_both_book_pages(self):
+        import check_html5
+        import build
+        paths = check_html5.publication_paths(ROOT, build.public_pages())
+        for item in book_pages.BOOKS:
+            with self.subTest(slug=item['slug']):
+                route = book_pages.route(item)
+                self.assertEqual(paths[route], Path(route.lstrip('/')) / 'index.html')
+                self.assertEqual(check_html5.parse_errors((ROOT / paths[route]).read_text()), [])
+
+    def test_book_release_is_mandatory_in_the_local_checklist(self):
+        local = (ROOT / '_scripts/local_release_checks.py').read_text()
+        self.assertIn("['_scripts/build_books.py', '--check']", local)
+        self.assertIn("'test_book_pages.py'", local)
+
     def test_sitemap_and_find_link_each_book_once(self):
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")

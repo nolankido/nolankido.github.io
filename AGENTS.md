@@ -287,6 +287,29 @@ When modifying `/bio/`, update its manifest metadata, rendered file,
 existing Find result and sitemap lastmod consistently. Run the related
 book and identity tests along with the local release checks.
 
+## Search audit and local release verification for standalone books
+
+Standalone book publication is now a required release check, not an optional
+out-of-band page. The site search audit must register the two exact canonical
+`Book` pages before comparing the existing XML sitemap. The HTML5 inventory
+must parse both public book pages, and `_scripts/check_live.py` must compare
+exact served bytes for both HTML routes, both original companion Markdown
+worksheets, and their two existing subject-image cards.
+
+The local release runner now checks `_scripts/build_books.py --check`
+and the standalone `test_book_pages.py` contracts without CI. Preserve the
+minimum temporary-site semantics: when both source and public page for a book
+are absent, it is not an approved publication; if only one is present,
+the audit must fail closed. Never add GitHub Actions.
+
+The older `_reports/search-audit.json` is a historical snapshot, not an
+up-to-date ranking or current crawl measurement. Do not infer that the
+snapshot's old page count is the current sitemap. Regenerate the audit
+using `python _scripts/check_search.py --json _reports/search-audit.json`
+on a complete local checkout and check all reported errors before describing
+it as a passing current run. Book metadata still must not invent seller,
+edition, datePublished, ISBN, rating, sale or official cover claims.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
