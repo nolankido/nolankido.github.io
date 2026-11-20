@@ -120,11 +120,11 @@
     "path": "/bio/",
     "title": "A brief introduction.",
     "seo_title": "Nolan Kido | Short Biography & Public Introductions",
-    "description": "Copy Nolan Kido's biography and verify his published accounting research, public AI projects, and poker creator activity with original sources.",
+    "description": "Copy Nolan Kido's biography and find his practical AI projects, two nonfiction books, accounting research and NolanPoker videos with source notes.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-11-18",
-    "revision": "Linked the existing reusable biography to the new source-bounded identity answer and retained the original public-fact verification guide."
+    "updated": "2026-11-20",
+    "revision": "Added an author bibliography and source-bounded verification guidance for two nonfiction book works, while retaining the reusable biography."
   },
   {
     "id": "card",

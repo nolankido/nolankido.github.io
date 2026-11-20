@@ -92,6 +92,47 @@ class BookPublicationTests(unittest.TestCase):
                 schema = json.loads(raw.group(1))
                 self.assertEqual(schema["dateModified"], "2026-11-20")
 
+    def test_author_bibliography_links_to_exact_books_and_shared_identity(self):
+        from html import unescape
+        source = (ROOT / "_source/bio.html").read_text(encoding="utf-8")
+        public = (ROOT / "bio/index.html").read_text(encoding="utf-8")
+        finder = (ROOT / "find/index.html").read_text(encoding="utf-8")
+        rich_source = json.loads((ROOT / "_source/person-schema.jsonld").read_text(encoding="utf-8"))
+        rich_public = json.loads((ROOT / "assets/nolan-kido-identity.jsonld").read_text(encoding="utf-8"))
+        self.assertEqual(rich_source, rich_public)
+        self.assertIn('id="profile-books"', source)
+        self.assertIn('href="#profile-books"', source)
+        self.assertIn("not independent confirmation of Amazon listing status", public)
+        self.assertIn("two nonfiction books", unescape(finder))
+        books = [node for node in rich_public["@graph"] if node["@type"] == "Book"]
+        self.assertEqual(len(books), 2)
+        ids = [node["@id"] for node in rich_public["@graph"]]
+        self.assertEqual(len(ids), len(set(ids)))
+        for book in book_pages.BOOKS:
+            with self.subTest(slug=book["slug"]):
+                url = book_pages.ORIGIN + book_pages.route(book)
+                self.assertIn('href="' + book_pages.route(book) + '"', public)
+                node = next(node for node in books if node["url"] == url)
+                self.assertEqual(node["@id"], url + "#book")
+                self.assertEqual(node["author"]["@id"], book_pages.PERSON)
+                page = (ROOT / book_pages.route(book).lstrip("/") / "index.html").read_text(encoding="utf-8")
+                actual = json.loads(re.search(
+                    r'<script type="application/ld\+json">(.*?)</script>', page, re.S).group(1))["mainEntity"]
+                self.assertEqual(node["name"], actual["name"])
+                self.assertEqual(node["description"], actual["description"])
+                self.assertEqual(node["mainEntityOfPage"], actual["mainEntityOfPage"])
+                for unverified in ("offers", "isbn", "datePublished", "bookFormat", "aggregateRating"):
+                    self.assertNotIn(unverified, node)
+        meta = json.loads(re.search(
+            r'<script type="application/ld\+json">(.*?)</script>', public, re.S).group(1))
+        self.assertEqual(meta["dateModified"], "2026-11-20")
+        self.assertIn("two nonfiction books", meta["description"])
+        sitemap = ElementTree.parse(ROOT / "sitemap.xml")
+        bio_rows = [item for item in sitemap.findall(".//{*}url")
+                    if item.findtext("{*}loc") == "https://nolankido.com/bio/"]
+        self.assertEqual(len(bio_rows), 1)
+        self.assertEqual(bio_rows[0].findtext("{*}lastmod"), "2026-11-20")
+
     def test_sitemap_and_find_link_each_book_once(self):
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")

@@ -72,6 +72,33 @@
       },
       "pageStart": "443",
       "pageEnd": "476"
+    },
+    {
+      "@type": "Book",
+      "@id": "https://nolankido.com/books/one-workflow-at-a-time/#book",
+      "url": "https://nolankido.com/books/one-workflow-at-a-time/",
+      "name": "One Workflow at a Time",
+      "alternateName": "One Workflow at a Time: How Small Business Owners Can Test AI Before Spending More Time or Money",
+      "description": "A practical guide to testing one bounded AI workflow, checking outputs and deciding whether it is useful after the full cost of review.",
+      "author": {
+        "@id": "https://nolankido.com/about/#nolan-kido"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nolankido.com/books/one-workflow-at-a-time/#webpage"
+      }
+    },
+    {
+      "@type": "Book",
+      "@id": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/#book",
+      "url": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/",
+      "name": "How to Play No-Limit Texas Hold’em",
+      "description": "A beginner guide to no-limit Texas Hold’em covering hand construction, betting, position, pot odds, ranges and review of decisions.",
+      "author": {
+        "@id": "https://nolankido.com/about/#nolan-kido"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/#webpage"
+      }
     }
   ]
 }
