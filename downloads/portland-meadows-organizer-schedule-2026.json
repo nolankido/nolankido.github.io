@@ -1,0 +1,43 @@
+{
+  "schema": "portland-meadows-high-noon-organizer-schedule-v1",
+  "reviewed_on": "2026-11-20",
+  "event_name": "The High Noon Deepstack",
+  "scheduled_festival": "Wild West Poker Tour",
+  "source": {
+    "publisher": "Portland Meadows Poker Room",
+    "title": "Wild West Schedule 2026",
+    "url": "https://img1.wsimg.com/blobby/go/d6503eb7-9b1f-4048-b895-1b68f9534a37/Wild%20West%20Schedule%202026.pdf",
+    "schedule_page": 1,
+    "event_description_page": 2
+  },
+  "scheduled_event": {
+    "date": "2026-08-20",
+    "local_start_time": "12:00",
+    "local_registration_close": "14:15",
+    "buy_in_usd": 200,
+    "starting_chips": 50000,
+    "level_minutes": 15,
+    "poker_variant": "No-Limit Hold'em",
+    "reentry_permitted": true
+  },
+  "secondary_schedule": {
+    "publisher": "Card Player",
+    "url": "https://www.cardplayer.com/poker-tournaments/1732464-2026-wild-west-poker-tour",
+    "corroborated_facts": [
+      "Festival dates August 19-23, 2026",
+      "August 20 $200 No-Limit Hold'em Deep Stack event"
+    ]
+  },
+  "evidence_boundaries": {
+    "confirms_scheduled_event_and_published_structure": true,
+    "verifies_event_was_held_as_listed": false,
+    "verifies_specific_player_attendance": false,
+    "verifies_reported_88_entries": false,
+    "verifies_reported_17600_prize_pool": false,
+    "verifies_advertised_5100_top_prize": false,
+    "verifies_reported_2900_post_deal_share": false,
+    "verifies_final_result_or_payout": false,
+    "verifies_hand_histories_or_card_runouts": false
+  },
+  "caution": "A published schedule independently establishes the announced event and format, not field size, attendance, actual date played, result, prize payments or net profit."
+}
