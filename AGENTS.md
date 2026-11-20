@@ -128,6 +128,30 @@ The public `/technology/review-reply-evidence-audit/` article is owned separatel
 
 The article appears once in the existing sitemap, Technology RSS, combined writing feed and browser-local Find directory. Any changes to these must be generated from the verified source. Run the local release checklist, not GitHub Actions. Do not publish private reviews, business policy text, client records, usernames, credentials, current unreleased model results, or personal filesystem paths.
 
+## Public High Noon Deepstack organizer-schedule source
+
+The Portland Meadows 2026 Wild West schedule independently establishes the
+**scheduled** Thursday August 20 noon High Noon Deepstack event, $200 buy-in,
+50,000 starting chips, 15-minute levels, 2:15 PM registration close, and
+re-entry permitted. The PDF is publicly hosted by the organizer at
+`https://img1.wsimg.com/blobby/go/d6503eb7-9b1f-4048-b895-1b68f9534a37/Wild%20West%20Schedule%202026.pdf`
+and the source-limited parsed record is
+`downloads/portland-meadows-organizer-schedule-2026.json`.
+Card Player's 2026 Wild West festival schedule separately lists an August 20
+$200 NLH Deep Stack event.
+
+This **does not independently verify** Nolan's participation, actual date
+played, 88 reported entries, $17,600 reported prize pool, $5,100
+advertised top prize, $2,900 reported post-deal gross share, win, or
+the details of any hand. The pre-existing scene proposal retains
+`event_calendar_date_independently_verified: false` because the poster
+is not a timestamped attendance or results record. Do not infer from
+"re-entry permitted" that the player re-entered. Preserve the
+companion's November 2 publication and November 20 modification dates,
+the standalone manual builder and source parity, and existing RSS item
+dates. See `_tests/test_portland_organizer_schedule.py` for regression
+checks. No GitHub Actions, paid APIs or scheduled jobs.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
