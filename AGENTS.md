@@ -265,6 +265,28 @@ together with XML sitemap lastmod and generated Article metadata.
 Run the standalone book test and full local build checks. No GitHub
 Actions or scheduled background jobs.
 
+## Author biography and book entity relationship
+
+The public `/bio/` page identifies the two nonfiction book works with
+first-party descriptions, author-provided companion resources, and a
+specific source limitation: retail editions and ASINs remain unverified.
+Do not convert an author book description into independent proof of
+publication date, format, retailer availability, ratings or sales.
+
+The separate `_source/person-schema.jsonld` identity graph now includes
+two abstract `Book` work nodes that repeat only the identities, author
+and descriptions from the exact standalone book pages. Regenerate its
+public mirror at `assets/nolan-kido-identity.jsonld` using the existing
+main builder. Preserve the pre-existing WebSite, Person and scholarly
+article nodes, with the same Person `@id`. Do not embed the larger
+standalone graph in Home, About, Bio or Poker pages merely to solicit
+a rich result. Book actions require a separate Google provider feed
+and do not follow from a personal author site's `Book` JSON-LD.
+
+When modifying `/bio/`, update its manifest metadata, rendered file,
+existing Find result and sitemap lastmod consistently. Run the related
+book and identity tests along with the local release checks.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.
