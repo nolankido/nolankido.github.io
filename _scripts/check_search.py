@@ -119,6 +119,16 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             errors.append('Standalone book duplicates an indexed canonical: ' + canonical)
         expected_indexed.add(canonical)
         totals['manual_book_pages'] += 1
+    try:
+        book_hub = book_pages.hub_record(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append('Books author catalog: ' + str(exc))
+        book_hub = None
+    if book_hub is not None:
+        if book_hub['url'] in expected_indexed:
+            errors.append('Books author catalog duplicates an indexed canonical')
+        expected_indexed.add(book_hub['url'])
+        totals['manual_book_hubs'] += 1
     sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
     actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):

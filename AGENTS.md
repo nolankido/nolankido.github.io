@@ -330,6 +330,35 @@ then run `python _scripts/local_release_checks.py`. Investigate
 every discrepancy rather than lowering assertions or omitting books.
 No GitHub Actions, alternative cron jobs or paid service required.
 
+## Books catalog source and approval boundary
+
+The first-party author catalog at `/books/` is a static,
+source-backed CollectionPage with an ItemList referencing the exact two
+existing Book work IDs. Its owner files are
+`_source/books/index.html` and `books/index.html`.
+The standalone book builder copies and checks this source alongside
+both individual Book pages. The registry `_scripts/book_pages.py`
+validates the catalog's canonical URL, shared Person identity, exact
+two-book membership, indexability, source parity, and native links
+from Home, About, Bio and Creative before approving it for the
+sitemap and Find directory.
+
+The new catalog is one more independently owned public page, not a
+third Book and not an additional title with unverified retail metadata.
+The expected static source inventory is now 229 canonical sitemap
+URLs: 225 manifest-backed pages including five noindex utilities,
+six other standalone pages, two Book pages, and one catalog page.
+The HTML5 inventory includes nine standalone pages. Source-only
+book descriptions and free worksheets remain clearly distinguished
+from confirmed publisher or Amazon/KDP edition information.
+
+Keep the catalog and two Book pages bidirectionally connected. For
+a publication update, update the exact HTML source and output copies,
+then regenerate `find/index.html` and `sitemap.xml` from the
+main builder and rerun the non-CI local checks. Never add scheduled
+web jobs, GitHub Actions, paid APIs, unverified publication details
+or manufactured search-ranking claims.
+
 ## Editorial and privacy standards
 
 - No fabricated achievements, professional credentials, current residence claims, or performance figures.

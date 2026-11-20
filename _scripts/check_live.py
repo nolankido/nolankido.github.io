@@ -72,6 +72,11 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
             raise ValueError('Standalone book duplicates a manifest or manual route: ' + route)
         relative = Path('books') / book['slug'] / 'index.html'
         result[route] = (200, (root / relative).read_bytes())
+    hub = book_pages.hub_record(root)
+    if hub is not None:
+        if hub['route'] in result:
+            raise ValueError('Books catalog duplicates a manifest or manual route')
+        result[hub['route']] = (200, (root / book_pages.HUB_OUTPUT).read_bytes())
     assets = ['downloads/poker-cash-study.md', 'assets/poker-topics.css', 'assets/poker-journeys.css', 'assets/poker-study-tools.css', 'assets/poker-study-tools.js', 'assets/poker-finder.css', 'assets/poker-finder.js', 'downloads/poker-math-reference.md', 'downloads/poker-resource-directory.md', 'downloads/poker-resource-directory.json', 'assets/poker-fieldguide.css', 'assets/poker-resources.css', 'assets/poker-resources.js', 'assets/poker-reader.css', 'assets/poker-library.js', 'downloads/poker-short-stack-record.md', 'downloads/poker-study-cycle.md', 'downloads/poker-results-review.md', 'downloads/poker-episode-plan.md', 'downloads/poker-watch-along.md', 'downloads/poker-viewer-reference.md', 'assets/poker.css', 'poker/feed.xml', 'downloads/poker-session-debrief.md', 'assets/hubs.css', 'downloads/poker-hand-review.md', 'downloads/poker-hand-review-example-ak.md', 'downloads/poker-hand-review-example-64o.md', 'downloads/poker-hand-review-example-77.md', 'downloads/poker-hand-review-practice-01.md', 'downloads/poker-hand-review-practice-01-key.md', 'downloads/poker-hand-review-practice-01.html', 'downloads/poker-hand-review-practice-01-key.html', 'assets/contact.js', 'assets/site.css', 'styles.css', 'favicon.svg', 'robots.txt', 'feed.xml', 'sitemap.xml', 'nolan-kido.vcf', 'card/qr.svg', '.well-known/security.txt']
     assets += ['downloads/' + name + '.md' for name in ['poker-event-planner', 'poker-hand-capture', 'poker-resource-check']]
     assets += ['assets/search-visibility.css', 'assets/first-steps.css', 'downloads/creative-brief.txt']
