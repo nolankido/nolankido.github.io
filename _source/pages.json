@@ -7,7 +7,7 @@
     "description": "Practical AI projects for everyday life and small business, plus poker and creative work. Nolan Kido's approach: AI Works, Human Decides.",
     "source": "home.html",
     "updated": "2026-11-20",
-    "revision": "Linked the evidence-backed RightsReceipt hackathon submission from the homepage without changing the three existing case cards."
+    "revision": "Linked the completed NolanPoker episode and its source-to-screen evidence chain from the homepage showcase without changing the three existing evidence categories."
   },
   {
     "id": "start-here",
@@ -103,7 +103,7 @@
     "section": "technology",
     "source": "ai-in-real-life.html",
     "updated": "2026-11-20",
-    "revision": "Added RightsReceipt as a second flagship case, distinguishing public submission, local AI proof, simulated payment checks and human approvals."
+    "revision": "Documented a published NolanPoker video-to-companion workflow with sourced scene claims, AI-assisted caption proposals, deterministic checks, a metadata release trail and explicit current-cut review limits."
   },
   {
     "id": "contact",

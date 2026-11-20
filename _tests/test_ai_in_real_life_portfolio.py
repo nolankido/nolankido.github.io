@@ -139,6 +139,54 @@ class AIRealLifeTests(unittest.TestCase):
         self.assertEqual(source.count('id="real-life-rightsreceipt-title"'), 1)
         self.assertIn('"real-life-rightsreceipt-title"', read("find/index.html"))
 
+    def test_creator_source_to_screen_publication_chain(self):
+        source = read("_source/ai-in-real-life.html")
+        html = read("ai-in-real-life/index.html")
+        record = json.loads(read("downloads/portland-meadows-ep1-scene-claims.json"))
+        a = '<section class="section folio-row" id="real-life-creator"'
+        b = '<section class="section folio-row" id="real-life-everyday"'
+        self.assertEqual(source.count(a), 1)
+        self.assertEqual(source.split(a, 1)[1].split(b, 1)[0],
+                         html.split(a, 1)[1].split(b, 1)[0])
+        self.assertEqual(source.count("<h2 "), 9)
+        self.assertEqual(record["video_url"], "https://www.youtube.com/watch?v=qABaiIcvvpU")
+        self.assertEqual(record["companion_url"], "https://nolankido.com/poker/episodes/portland-meadows-ep1/")
+        self.assertFalse(record["current_public_cut_graphics_checked"])
+        self.assertFalse(record["current_public_cut_timestamps_checked"])
+        self.assertFalse(record["human_release_approval"])
+        self.assertEqual(len(record["scenes"]), 3)
+        self.assertAlmostEqual(record["scenes"][0]["reported_stack_chips"] /
+                               record["scenes"][0]["big_blind_chips"], 9.8666667, places=5)
+        self.assertEqual(record["scenes"][1]["reported_stack_chips"] /
+                         record["scenes"][1]["big_blind_chips"], 19.5)
+        self.assertEqual(record["scenes"][2]["received_after_deal_usd"], 2900)
+        for required in (
+            'id="real-life-creator-chain"',
+            'id="real-life-creator-numbers"',
+            'id="real-life-creator-distribution"',
+            "not establish that AI edited the final video",
+            "seven deliberately seeded conflicts",
+            "not</strong> errors observed in the upload",
+            "/downloads/nolanpoker-content-production-evidence-ledger.md",
+            "/downloads/poker-vlog-truth-to-screen-qa.md",
+            "/downloads/reserve-day1-public-source-ledger.json",
+            "/technology/ai-poker-video-evidence/#poker-ai-draft",
+        ):
+            self.assertIn(required, source)
+        self.assertIn('href="/ai-in-real-life/#real-life-creator"', read("index.html"))
+        ledger = read("downloads/nolanpoker-content-production-evidence-ledger.md")
+        for key in ("current_public_cut_graphics_checked: false",
+                    "human_release_approval: false",
+                    "148000 / 15000",
+                    "585000 / 30000",
+                    "a proposed",
+                    "https://www.youtube.com/watch?v=qABaiIcvvpU"):
+            self.assertIn(key, ledger)
+        self.assertIn("downloads/nolanpoker-content-production-evidence-ledger.md",
+                      read("_scripts/check_live.py"))
+        self.assertNotIn(chr(0x2014), ledger)
+        self.assertNotIn(chr(0x2014), source)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",
