@@ -173,6 +173,99 @@ class BookPublicationTests(unittest.TestCase):
         self.assertIn("['_scripts/build_books.py', '--check']", local)
         self.assertIn("'test_book_pages.py'", local)
 
+    def test_standalone_books_catalog_is_verified_and_discoverable(self):
+        """The public Books landing page has its own canonical and only two works."""
+        hub = book_pages.hub_record(ROOT)
+        self.assertIsNotNone(hub)
+        self.assertEqual(hub["url"], "https://nolankido.com/books/")
+        public = (ROOT / book_pages.HUB_OUTPUT).read_text(encoding="utf-8")
+        source = (ROOT / book_pages.HUB_SOURCE).read_text(encoding="utf-8")
+        self.assertEqual(public, source)
+        self.assertNotIn(chr(0x2014), public)
+        self.assertEqual(len(re.findall(r"<h1\b", public)), 1)
+        match = re.search(r'<script type="application/ld\+json">(.*?)</script>',
+                          public, re.S)
+        self.assertIsNotNone(match)
+        schema = json.loads(match.group(1))
+        self.assertEqual(schema["@type"], "CollectionPage")
+        self.assertEqual(schema["url"], hub["url"])
+        self.assertEqual(schema["about"]["@id"], book_pages.PERSON)
+        self.assertEqual(schema["mainEntity"]["@type"], "ItemList")
+        items = schema["mainEntity"]["itemListElement"]
+        self.assertEqual(len(items), 2)
+        for order, book in enumerate(book_pages.BOOKS, start=1):
+            item = items[order - 1]
+            self.assertEqual(item["position"], order)
+            self.assertEqual(item["item"]["@id"],
+                             book_pages.ORIGIN + book_pages.route(book) + "#book")
+            self.assertEqual(item["item"]["author"]["@id"], book_pages.PERSON)
+            for field in ("datePublished", "offers", "isbn", "bookFormat",
+                          "aggregateRating"):
+                self.assertNotIn(field, item["item"])
+        finder = (ROOT / "find/index.html").read_text(encoding="utf-8")
+        self.assertEqual(finder.count('href="/books/"'), 1)
+        packed = json.loads(re.search(
+            r'<script type="application/json" id="find-section-data">(.*?)</script>',
+            finder, re.S).group(1))
+        self.assertIn("", packed["pages"]["books"])
+        self.assertIn("books-catalog-verification", packed["pages"]["books"][""])
+        xml = ElementTree.parse(ROOT / "sitemap.xml")
+        locs = [node.text for node in xml.iter() if node.tag.endswith("}loc")]
+        self.assertEqual(locs.count(hub["url"]), 1)
+        for path in ("index.html", "creative/index.html", "about/index.html",
+                     "bio/index.html"):
+            self.assertIn('href="/books/"',
+                          (ROOT / path).read_text(encoding="utf-8"))
+
+    def test_books_catalog_is_a_required_release_target(self):
+        import check_live
+        import check_html5
+        import build
+        expected = (ROOT / book_pages.HUB_OUTPUT).read_bytes()
+        self.assertEqual(check_live.targets(ROOT)["/books/"], (200, expected))
+        self.assertEqual(check_html5.publication_paths(
+            ROOT, build.public_pages())["/books/"], book_pages.HUB_OUTPUT)
+        self.assertEqual(check_html5.parse_errors(expected.decode("utf-8")), [])
+        import check_search
+        report = check_search.audit(ROOT, build.public_pages(), book_pages.ORIGIN)
+        self.assertEqual(report["manual_book_hubs"], 1)
+        self.assertEqual(report["manual_book_pages"], 2)
+        self.assertEqual(report["sitemap_urls"], 229)
+        self.assertEqual(report["errors"], [])
+
+    def test_books_catalog_fails_closed_on_partial_or_altered_sources(self):
+        from tempfile import TemporaryDirectory
+        import shutil
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            required = [
+                book_pages.HUB_SOURCE, book_pages.HUB_OUTPUT,
+                Path("index.html"), Path("creative/index.html"),
+                Path("about/index.html"), Path("bio/index.html"),
+            ]
+            for book in book_pages.BOOKS:
+                required.extend((Path("_source/books") / (book["slug"] + ".html"),
+                                 Path("books") / book["slug"] / "index.html"))
+            for path in required:
+                target = root / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / path, target)
+            self.assertIsNotNone(book_pages.hub_record(root))
+            source = root / book_pages.HUB_SOURCE
+            source.unlink()
+            with self.assertRaisesRegex(ValueError, "requires source"):
+                book_pages.hub_record(root)
+            shutil.copyfile(ROOT / book_pages.HUB_SOURCE, source)
+            target = root / book_pages.HUB_OUTPUT
+            original = target.read_text(encoding="utf-8")
+            altered = original.replace(
+                '<link rel="canonical" href="https://nolankido.com/books/">',
+                '<link rel="canonical" href="https://example.invalid/books/">', 1)
+            self.assertNotEqual(original, altered)
+            target.write_text(altered, encoding="utf-8")
+            with self.assertRaises(ValueError):
+                book_pages.hub_record(root)
+
     def test_sitemap_and_find_link_each_book_once(self):
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")
