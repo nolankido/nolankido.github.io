@@ -87,7 +87,7 @@ class TopicBookLinks(unittest.TestCase):
     def test_book_identity_and_unknown_retail_editions_preserved(self):
         for slug in ("one-workflow-at-a-time", "how-to-play-no-limit-texas-holdem"):
             doc = file("books/" + slug + "/index.html")
-            match = re.search(r'<script type="application/ld\\+json">(.*?)</script>', doc, re.S)
+            match = re.search(r'<script type="application/ld\+json">(.*?)</script>', doc, re.S)
             self.assertIsNotNone(match)
             book = json.loads(match.group(1))["mainEntity"]
             self.assertEqual(book["author"]["@id"], "https://nolankido.com/about/#nolan-kido")
