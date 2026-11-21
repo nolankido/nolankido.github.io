@@ -66,6 +66,7 @@ class Turn67WrittenPlaybook(unittest.TestCase):
             self.assertIn("<summary>Show answer and reasoning</summary>", match.group())
         self.assertNotIn("one-hour tournament course", self.page)
         self.assertNotIn("Find the lesson in the video", self.page)
+        self.assertIn("same three-player ICM fixture with different assumed win chances", self.page)
         self.assertNotRegex(self.page, r'\b[0-9]:[0-9]{2}:[0-9]{2}\b')
         self.assertNotIn(chr(0x2014), self.page)
 
