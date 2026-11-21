@@ -36,7 +36,8 @@ class PrivateScorecardTests(unittest.TestCase):
     def test_dashboard_observations_keep_sources_separate(self):
         data = {'month': self.MONTH, 'metrics': {
             'gsc_ai_search_impressions': {'status': 'observed', 'value': 0,
-               'property': 'sc-domain:nolankido.com', 'period_verified': True},
+               'property': 'sc-domain:nolankido.com', 'period_verified': True,
+               'display_zero_confirmed': True},
             'bing_ai_citations': {'status': 'observed', 'value': 3,
                'property': 'https://nolankido.com/', 'period_verified': True},
             'umami_ai_referral_pageviews': {'status': 'unavailable'},
@@ -48,6 +49,53 @@ class PrivateScorecardTests(unittest.TestCase):
         self.assertEqual(result['bing_ai_citations']['value'], 3)
         self.assertIsNone(result['umami_ai_referral_pageviews']['value'])
         self.assertEqual(result['gsc_ai_discover_impressions']['status'], 'not_collected')
+
+    def test_google_ai_zero_requires_exact_numeric_dashboard_display(self):
+        for metric in ('gsc_ai_search_impressions', 'gsc_ai_discover_impressions'):
+            item = {'status': 'observed', 'value': 0,
+                    'property': 'sc-domain:nolankido.com', 'period_verified': True}
+            with self.subTest(metric=metric, scenario='no UI proof'), self.assertRaises(scorecard.IntakeError):
+                scorecard.read_dashboard(self.write_json(
+                    {'month': self.MONTH, 'metrics': {metric: item}}), self.MONTH)
+            for invalid in (False, 'true', 0, None):
+                with self.subTest(metric=metric, confirmation=invalid), self.assertRaises(scorecard.IntakeError):
+                    scorecard.read_dashboard(self.write_json({
+                        'month': self.MONTH, 'metrics': {
+                            metric: {**item, 'display_zero_confirmed': invalid}}}), self.MONTH)
+            confirmed = {**item, 'display_zero_confirmed': True}
+            observed = scorecard.read_dashboard(self.write_json({
+                'month': self.MONTH, 'metrics': {metric: confirmed}}), self.MONTH)
+            score = scorecard.make_scorecard(self.MONTH, observed, None, None, False)
+            self.assertEqual(score['metrics'][metric],
+                             {'value': 0, 'status': 'observed_operator_confirmed'})
+            # A positive value needs source and period confirmation, not a zero flag.
+            positive = {**item, 'value': 11}
+            got = scorecard.read_dashboard(self.write_json({
+                'month': self.MONTH, 'metrics': {metric: positive}}), self.MONTH)
+            self.assertEqual(got[metric]['value'], 11)
+            with self.subTest(metric=metric, scenario='surplus zero flag'), self.assertRaises(scorecard.IntakeError):
+                scorecard.read_dashboard(self.write_json({
+                    'month': self.MONTH, 'metrics': {
+                        metric: {**positive, 'display_zero_confirmed': True}}}), self.MONTH)
+            missing = scorecard.read_dashboard(self.write_json({
+                'month': self.MONTH, 'metrics': {metric: {'status': 'unavailable'}}}), self.MONTH)
+            self.assertIsNone(scorecard.make_scorecard(
+                self.MONTH, missing, None, None, False)['metrics'][metric]['value'])
+
+    def test_bing_and_umami_zero_counts_do_not_claim_google_display_proof(self):
+        for metric, property_name in (
+            ('bing_ai_citations', 'https://nolankido.com/'),
+            ('umami_ai_referral_pageviews', 'nolankido.com'),
+        ):
+            entry = {'status': 'observed', 'value': 0, 'property': property_name,
+                     'period_verified': True}
+            data = {'month': self.MONTH, 'metrics': {metric: entry}}
+            self.assertEqual(scorecard.read_dashboard(
+                self.write_json(data), self.MONTH)[metric]['value'], 0)
+            # Unknown extra fields still fail closed to avoid storing private evidence.
+            data['metrics'][metric]['display_zero_confirmed'] = True
+            with self.assertRaises(scorecard.IntakeError):
+                scorecard.read_dashboard(self.write_json(data), self.MONTH)
 
     def test_boolean_and_negative_counts_fail(self):
         for bad in (True, -1, '0', 1.5, None):
