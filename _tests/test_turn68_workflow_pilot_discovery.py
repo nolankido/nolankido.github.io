@@ -140,7 +140,9 @@ class Turn68WorkflowPilotDiscovery(unittest.TestCase):
         for source, label in ((self.home_source, HOME_CLASS), (self.start_source, START_CLASS)):
             for bad in (
                 source.replace(PILOT, "/technology/unknown-pilot/#missing", 1),
-                source.replace("fictional", "independently measured", 1),
+                source.replace(contextual_block(source, label),
+                               contextual_block(source, label).replace(
+                                   "fictional", "independently measured", 1), 1),
                 source.replace('class="small-copy ' + label + '"',
                                'class="small-copy deleted-pilot"', 1),
                 source + contextual_block(source, label),
