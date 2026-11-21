@@ -62,6 +62,7 @@ import case_evidence
 import time_examples
 import visibility_projects
 import player_sitemap
+import tenbb_companion
 import book_pages
 import local_laptop_case
 
@@ -604,6 +605,7 @@ def build_outputs() -> dict[Path, str]:
     player_sitemap.add_to_sitemap(sitemap, ROOT)
     local_laptop_case.add_to_sitemap(sitemap, ROOT)
     reply_audit_case.add_to_sitemap(sitemap, ROOT)
+    tenbb_companion.add_to_sitemap(sitemap, ROOT)
     ET.indent(sitemap, space='  ')
     outputs[Path('sitemap.xml')] = '<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(sitemap, encoding='unicode') + '\n'
     outputs.update(poker_collections.exports(resource_entries))
