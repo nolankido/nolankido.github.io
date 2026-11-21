@@ -75,6 +75,9 @@ def failures(document):
         "not the current published video's audio and graphics",
         "workflow time calculator", "six-case reply productivity pilot has not been run",
         "green, narrow test is not authorization",
+        "REVISE the source", "HOLD unsupported promises",
+        "HOLD licensing and payment claims", "HOLD unverified overlays",
+        "Approve only the human-reviewed exact saved text",
     ):
         if token.lower() not in section.lower():
             errors.append("Missing evidence scope: " + token)
