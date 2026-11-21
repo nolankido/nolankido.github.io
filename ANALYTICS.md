@@ -37,6 +37,8 @@ on November 1, 2026. Do not restore, dispatch or rely on it, any other CI
 workflow or a scheduled substitute. Verify deployed bytes with direct
 public GETs after publication.
 
+The private, zero-network monthly visibility scorecard at `downloads/visibility-private-scorecard.py` keeps Search Console Web clicks, Google AI appearances, Bing AI citations, and Umami assistant pageviews in separate measures. It outputs null for uncollected sources; an observed count requires a source-specific report, property and period confirmation. Store inputs and results outside GitHub, not in `_reports/`. See `_reports/visibility-sprint/seo-geo-turn39-first-party-baseline-2026-11-20.md` for the dated access limitations.
+
 After Pages deployment, open the Umami dashboard for `nolankido.com`,
 visit a public page and check that a pageview appears. Browser blockers
 or Do Not Track may exclude a test visit. Successful publication and a
