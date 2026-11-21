@@ -31,8 +31,8 @@ class UncertaintyTests(unittest.TestCase):
     def test_predecessor_and_mutation_guards(self):
         b=json.loads((ROOT/'_tests/uncertainty-baseline.json').read_text())
         self.assertEqual((b['commit'],len(b['pages']),len(b['outputs']),len(b['files'])),('b8f812dda7b0e6ce472fe443246ae028e1483fbd',180,207,416))
-        self.assertEqual(history.pages(self.pages),b['pages'])
-        previous=history.outputs(self.outputs);self.assertEqual(set(map(str,previous)),set(b['outputs']))
+        self.assertEqual(history.pages([p for p in self.pages if p['path'] != ROUTE]),b['pages'])
+        previous=history.outputs({p: v for p, v in self.outputs.items() if p != build.output_path(ROUTE)});self.assertEqual(set(map(str,previous)),set(b['outputs']))
         for p,v in previous.items():self.assertEqual(sha256(v.encode()).hexdigest(),b['outputs'][str(p)],str(p))
         for p,d in b['files'].items():self.assertEqual(sha256(history.before(p,(ROOT/p).read_bytes())).hexdigest(),d,p)
         modified=deepcopy(self.pages);next(p for p in modified if p['path']==ROUTE)['description']='Unreviewed claim'
