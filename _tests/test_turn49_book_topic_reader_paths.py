@@ -157,7 +157,7 @@ class BookTopicReaderPathsTests(unittest.TestCase):
                 self.assertEqual(s.count('href="' + worksheet + '"'), 1)
                 self.assertIn(evidence.lower(), paragraph.lower())
                 self.assertIn("free", paragraph.lower())
-                self.assertIn("not", paragraph.lower())
+                self.assertIn("neither is a verified", paragraph.lower())
                 self.assertNotIn(chr(0x2014), paragraph)
 
     def test_home_has_only_one_books_overview_destination(self):
