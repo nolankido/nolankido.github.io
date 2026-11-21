@@ -115,6 +115,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     # cards linked from the two separately published book pages.
     assets += ['downloads/one-workflow-ai-pilot-worksheet.md',
                'downloads/holdem-river-call-check-worksheet.md',
+               'downloads/nolan-kido-book-edition-verification.md',
+               'downloads/nolan-kido-book-edition-evidence.json',
                'assets/social/ai-time-savings.png',
                'assets/social/reader-poker-no-limit-holdem-guide.png']
     assets += ['assets/practical-ai-path.css', 'downloads/practical-ai-workbook.txt']

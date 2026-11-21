@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "scope": "Source-limited public identity audit for the two existing Nolan Kido author book pages. Searches and first-party publisher guidance do not establish whether a book does not exist. No private KDP Bookshelf or verified retailer product page was accessible in this audit.",
+  "author_name": "Nolan Kido",
+  "verification_state_definition": {
+    "not_verified": "No exact retailer edition evidence has been authenticated. This is not evidence of nonpublication or unavailability.",
+    "verified": "Reserved for an exact publicly retrievable retailer detail page matching author, title, edition format, ASIN, and print ISBN when applicable, with the observation recorded separately."
+  },
+  "publisher_primary_guidance": {
+    "kdp_find_exact_detail": "https://kdp.amazon.com/en_US/help/topic/GPYDJ3SECAVVPNVG",
+    "kdp_book_status": "https://kdp.amazon.com/en_US/help/topic/G200627450",
+    "kdp_asin_url": "https://kdp.amazon.com/en_US/help/topic/G200652190",
+    "kdp_isbn_requirements": "https://kdp.amazon.com/en_US/help/topic/G7DMSKCM9DVS65TC",
+    "kdp_format_linking": "https://kdp.amazon.com/en_US/help/topic/GTQGN866DSS6XBD2",
+    "kdp_timing": "https://kdp.amazon.com/en_US/help/topic/G202173620"
+  },
+  "works": [
+    {
+      "slug": "one-workflow-at-a-time",
+      "author_title": "One Workflow at a Time",
+      "described_subtitle": "How Small Business Owners Can Test AI Before Spending More Time or Money",
+      "canonical": "https://nolankido.com/books/one-workflow-at-a-time/",
+      "author_site_identity": "first_party_description",
+      "retail_verification_status": "not_verified",
+      "formats": [
+        {
+          "format": "kindle_ebook",
+          "status": "not_verified",
+          "verified_retailer_title": null,
+          "verified_retailer_author": null,
+          "retailer_product_url": null,
+          "retailer_asin": null,
+          "print_isbn13": null,
+          "retailer_publication_date": null,
+          "official_retailer_cover_url": null,
+          "public_evidence_url": null,
+          "observed_on": null
+        },
+        {
+          "format": "paperback",
+          "status": "not_verified",
+          "verified_retailer_title": null,
+          "verified_retailer_author": null,
+          "retailer_product_url": null,
+          "retailer_asin": null,
+          "print_isbn13": null,
+          "retailer_publication_date": null,
+          "official_retailer_cover_url": null,
+          "public_evidence_url": null,
+          "observed_on": null
+        },
+        {
+          "format": "hardcover",
+          "status": "not_verified",
+          "verified_retailer_title": null,
+          "verified_retailer_author": null,
+          "retailer_product_url": null,
+          "retailer_asin": null,
+          "print_isbn13": null,
+          "retailer_publication_date": null,
+          "official_retailer_cover_url": null,
+          "public_evidence_url": null,
+          "observed_on": null
+        }
+      ]
+    },
+    {
+      "slug": "how-to-play-no-limit-texas-holdem",
+      "author_title": "How to Play No-Limit Texas Hold’em",
+      "described_subtitle": null,
+      "canonical": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/",
+      "author_site_identity": "first_party_description",
+      "retail_verification_status": "not_verified",
+      "formats": [
+        {
+          "format": "kindle_ebook",
+          "status": "not_verified",
+          "verified_retailer_title": null,
+          "verified_retailer_author": null,
+          "retailer_product_url": null,
+          "retailer_asin": null,
+          "print_isbn13": null,
+          "retailer_publication_date": null,
+          "official_retailer_cover_url": null,
+          "public_evidence_url": null,
+          "observed_on": null
+        },
+        {
+          "format": "paperback",
+          "status": "not_verified",
+          "verified_retailer_title": null,
+          "verified_retailer_author": null,
+          "retailer_product_url": null,
+          "retailer_asin": null,
+          "print_isbn13": null,
+          "retailer_publication_date": null,
+          "official_retailer_cover_url": null,
+          "public_evidence_url": null,
+          "observed_on": null
+        },
+        {
+          "format": "hardcover",
+          "status": "not_verified",
+          "verified_retailer_title": null,
+          "verified_retailer_author": null,
+          "retailer_product_url": null,
+          "retailer_asin": null,
+          "print_isbn13": null,
+          "retailer_publication_date": null,
+          "official_retailer_cover_url": null,
+          "public_evidence_url": null,
+          "observed_on": null
+        }
+      ]
+    }
+  ]
+}
