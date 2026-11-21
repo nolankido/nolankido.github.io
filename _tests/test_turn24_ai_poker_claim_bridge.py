@@ -147,11 +147,12 @@ class AiPokerClaimBridgeTests(unittest.TestCase):
         ):
             with self.subTest(path=path):
                 record = records[path]
-                self.assertEqual(record['updated'], '2026-11-19')
+                expected_update = '2026-11-20' if path == ROUTE else '2026-11-19'
+                self.assertEqual(record['updated'], expected_update)
                 url = 'https://nolankido.com' + path
                 found = [node for node in sitemap if node.findtext('{*}loc') == url]
                 self.assertEqual(len(found), 1)
-                self.assertEqual(found[0].findtext('{*}lastmod'), '2026-11-19')
+                self.assertEqual(found[0].findtext('{*}lastmod'), expected_update)
                 public = (ROOT / path.strip('/') / 'index.html').read_text()
                 self.assertIn('<link rel="canonical" href="' + url + '">', public)
                 if original:
@@ -161,7 +162,7 @@ class AiPokerClaimBridgeTests(unittest.TestCase):
                     self.assertNotIn('FAQPage', [schema.get('@type') for schema in schemas])
                     article = next(schema for schema in schemas if schema.get('@type') == 'Article')
                     self.assertEqual(article['datePublished'], original)
-                    self.assertEqual(article['dateModified'], '2026-11-19')
+                    self.assertEqual(article['dateModified'], expected_update)
                     self.assertEqual(article['author']['@id'],
                                      'https://nolankido.com/about/#nolan-kido')
 
