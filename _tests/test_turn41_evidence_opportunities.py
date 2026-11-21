@@ -93,7 +93,7 @@ class Turn41OpportunityTests(unittest.TestCase):
         self.assertIn('href="https://nolankido.com' + PATH + '"', public)
         source = SOURCE.read_text(encoding="utf-8")
         self.assertIn("https://www.pokertda.com/view-poker-tda-rules/", source)
-        self.assertIn("The examples are fictional", source.replace("Examples are fictional", "The examples are fictional"))
+        self.assertIn("Examples are fictional", source)
 
     def test_ledger_reflects_specific_executed_change_not_search_impressions(self):
         _, rows = ledger()
