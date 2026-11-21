@@ -106,6 +106,14 @@ def make_scorecard(month: str, dashboard: dict, gsc: dict | None,
         raise IntakeError("cannot confirm GSC filters without a summary and property")
     if gsc is not None and (gsc_property is None or gsc["month"] != month):
         raise IntakeError("GSC summary and named property are required and must match month")
+    # Preserve the zero-evidence invariant even if a caller bypasses the CLI
+    # reader and calls make_scorecard directly with its own in-memory records.
+    for name in GOOGLE_AI_METRICS:
+        item = dashboard.get(name)
+        if (item is not None and item.get("status") == "observed"
+                and type(item.get("value")) is int and item["value"] == 0
+                and item.get("display_zero_confirmed") is not True):
+            raise IntakeError("Google AI numeric zero requires confirmation from the original display")
     out = {}
     for name in WEB_METRICS:
         raw = None
