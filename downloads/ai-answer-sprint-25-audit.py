@@ -32,6 +32,7 @@ OBSERVATION_FIELDS = (
     'date', 'prompt_id', 'assistant', 'mode', 'status', 'clickable_link_verified',
     'linked_url', 'text_only_mention', 'answer_correctness', 'task_completed',
 )
+ROSTER_FIELDS = ('assistant', 'mode')
 SEGMENT_SIZES = {'nonbranded': 20, 'branded': 5}
 HOSTS = {'nolankido.com', 'www.nolankido.com'}
 STATUSES = {'completed', 'incomplete', 'not_checked'}
@@ -102,6 +103,38 @@ def on_expected_page(url: str, expected_path: str) -> bool:
         return False
     observed_path = urlsplit(url).path or '/'
     return observed_path.rstrip('/') + '/' == expected_path.rstrip('/') + '/'
+
+
+
+def load_roster(path: Path) -> list[tuple[str, str]]:
+    """Load the assistant/search modes frozen before running the prompt panel.
+
+    This is a design check, not proof that a public assistant answer was seen.
+    Keep the filled roster private. The public blank template has no results.
+    """
+    try:
+        with path.open('r', encoding='utf-8-sig', newline='') as handle:
+            reader = csv.DictReader(handle)
+            if reader.fieldnames != list(ROSTER_FIELDS):
+                raise InvalidPanel('Mode roster needs assistant,mode columns.')
+            rows = []
+            seen = set()
+            for lineno, raw in enumerate(reader, start=2):
+                if None in raw or any(value is None for value in raw.values()):
+                    raise InvalidPanel(f'Roster row {lineno}: incorrect number of columns.')
+                assistant, mode = (raw[field].strip() for field in ROSTER_FIELDS)
+                if not LABEL.fullmatch(assistant) or not LABEL.fullmatch(mode):
+                    raise InvalidPanel(f'Roster row {lineno}: invalid assistant or mode label.')
+                key = (assistant.casefold(), mode.casefold())
+                if key in seen:
+                    raise InvalidPanel(f'Roster row {lineno}: duplicate assistant and mode.')
+                seen.add(key)
+                rows.append((assistant, mode))
+    except UnicodeError as exc:
+        raise InvalidPanel('Roster file must be UTF-8.') from exc
+    if not 1 <= len(rows) <= 20:
+        raise InvalidPanel('Roster requires 1 to 20 named assistant/mode combinations.')
+    return rows
 
 
 def load_observations(path: Path, month: str, prompts: dict[str, dict[str, str]]) -> list[dict[str, str]]:
@@ -186,9 +219,21 @@ def segment_metrics(rows: list[dict[str, str]], expected: int,
 
 
 def summarize(rows: list[dict[str, str]], month: str, modes: int,
-              prompts: dict[str, dict[str, str]]) -> dict:
+              prompts: dict[str, dict[str, str]],
+              roster: list[tuple[str, str]] | None = None) -> dict:
     if not 1 <= modes <= 20:
         raise InvalidPanel('Expected modes must be 1 to 20 preselected assistant/mode combinations.')
+    if roster is not None:
+        if len(roster) != modes:
+            raise InvalidPanel('Expected modes must equal the predeclared roster length.')
+        planned = {(assistant.casefold(), mode.casefold()): (assistant, mode)
+                   for assistant, mode in roster}
+        if len(planned) != modes:
+            raise InvalidPanel('Predeclared roster contains repeated assistant/mode combinations.')
+        for row in rows:
+            key = (row['assistant'].casefold(), row['mode'].casefold())
+            if key not in planned or planned[key] != (row['assistant'], row['mode']):
+                raise InvalidPanel('Observation assistant/mode is not an exact roster entry.')
     expected = modes * len(prompts)
     if len(rows) > expected:
         raise InvalidPanel('More recorded rows than planned trials.')
@@ -201,12 +246,28 @@ def summarize(rows: list[dict[str, str]], month: str, modes: int,
         for name, size in SEGMENT_SIZES.items()
     }
     completed = sum(d['completed_trials'] for d in segments.values())
+    per_mode = None
+    if roster is not None:
+        per_mode = []
+        for assistant, mode in roster:
+            trials = [row for row in rows if row['assistant'] == assistant and row['mode'] == mode]
+            finished = sum(row['status'] == 'completed' for row in trials)
+            per_mode.append({
+                'assistant': assistant, 'mode': mode,
+                'planned_trials': len(prompts), 'recorded_rows': len(trials),
+                'completed_trials': finished, 'missing_rows': len(prompts) - len(trials),
+                'uncompleted_or_missing': len(prompts) - finished,
+                'verified_link_trials': sum(row['status'] == 'completed'
+                    and row['clickable_link_verified'] == 'yes' for row in trials),
+            })
     return {
         'site': 'nolankido.com',
         'month': month,
         'panel': 'frozen 2026-11-17 v1, 20 nonbranded and 5 branded exact prompts',
         'panel_sha256': PANEL_SHA256,
         'expected_assistant_mode_combinations': modes,
+        'roster_predeclared': roster is not None,
+        'per_mode_coverage': per_mode,
         'status': ('no_completed_trials' if completed == 0 else
                    'complete' if completed == expected else 'partial'),
         'coverage': {
@@ -226,6 +287,7 @@ def summarize(rows: list[dict[str, str]], month: str, modes: int,
             'A same-domain link on a different page is not an expected-page citation.',
             'This is a fixed observational sample, not traffic, platform-wide ranking or causal uplift.',
             'The older eight-prompt monthly panel is a different method and cannot be pooled with this panel.',
+            'An optional predeclared mode roster prevents mode substitutions, but cannot certify a genuine answer.',
             'Raw answers, URLs, user data and first-party analytics must remain private.',
         ],
     }
@@ -240,13 +302,19 @@ def main(argv: list[str] | None = None) -> int:
                         help='Exact frozen 25-prompt CSV downloaded from the public site')
     parser.add_argument('--csv', required=True, type=Path,
                         help='Your privately completed observation log')
+    parser.add_argument('--roster', type=Path,
+                        help='Predeclared private assistant,mode CSV; enforces exactly the planned modes')
     args = parser.parse_args(argv)
     try:
         month_check(args.month)
         prompts = load_prompts(args.prompts)
+        roster = load_roster(args.roster) if args.roster else None
         rows = load_observations(args.csv, args.month, prompts)
-        report = summarize(rows, args.month, args.expected_modes, prompts)
-    except (InvalidPanel, OSError) as exc:
+        report = summarize(rows, args.month, args.expected_modes, prompts, roster)
+    except OSError:
+        print('Invalid 25-prompt panel: cannot read a required local file.', file=sys.stderr)
+        return 2
+    except InvalidPanel as exc:
         print('Invalid 25-prompt panel: ' + str(exc), file=sys.stderr)
         return 2
     print(json.dumps(report, indent=2, sort_keys=True))
