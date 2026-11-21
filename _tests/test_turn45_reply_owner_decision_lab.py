@@ -109,7 +109,6 @@ class OwnerDecisionLabTests(unittest.TestCase):
         self.assertIn("19.536, 18.157 and 19.325 seconds", doc)
         self.assertIn("GitHub-hosted Ubuntu CPU runner", doc)
         self.assertIn("cannot estimate general accuracy", doc)
-        self.assertIn("not a 96.7% safety rate", doc.lower()) if False else None
 
     def test_no_relabeling_of_model_vs_synthetic_evidence(self):
         for phrase in ("29 non-AI template drafts",
@@ -128,7 +127,7 @@ class OwnerDecisionLabTests(unittest.TestCase):
         self.assertIn('"dateModified": "2026-11-18"', self.output)
         self.assertIn("About 14 min read", self.output)
         self.assertIn('<link rel="canonical" href="https://nolankido.com' + ROUTE + '">', self.output)
-        self.assertEqual(self.source.count('<h2'), 14)
+        self.assertEqual(self.source.count('<h2'), 13)
         root = ElementTree.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         matching = [x for x in root.findall("{*}url/{*}loc")
                     if x.text == "https://nolankido.com" + ROUTE]
