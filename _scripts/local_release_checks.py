@@ -161,6 +161,7 @@ def main() -> int:
         ('Private GSC/Bing/Umami scorecard evidence and zero/null safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_private_scorecard.py', '-q']),
         ('Turn 41 evidence-prioritized canonical routes and beginner prerequisites', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn41_evidence_opportunities.py', '-q']),
         ('Turn 42 source-backed website repair proof path', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn42_repair_proof_path.py', '-q']),
+        ('Turn 43 published content receipt and video approval limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn43_published_content_receipt.py', '-q']),
         ('Live diagnostic result classification and priority scope', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_live_evidence.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
