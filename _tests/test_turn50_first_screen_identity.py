@@ -113,9 +113,9 @@ class FirstScreenIdentityTests(unittest.TestCase):
         self.assertIn("AI Works, Human Decides", home)
         self.assertIn("AI Works, Human Decides", about)
 
-    def test_manifest_dates_not_changed_for_same_day_navigation(self):
+    def test_home_update_reflects_new_pilot_route_and_about_date_is_preserved(self):
         pages = {p["path"]: p for p in json.loads(text("_source/pages.json"))}
-        self.assertEqual(pages["/"]["updated"], "2026-11-20")
+        self.assertEqual(pages["/"]["updated"], "2026-11-21")
         self.assertEqual(pages["/about/"]["updated"], "2026-11-20")
 
     def test_existing_shared_accessible_link_style_without_custom_js(self):
