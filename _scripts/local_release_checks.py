@@ -69,6 +69,8 @@ def main() -> int:
         ('Evidence-linked public project portfolio', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_public_project_portfolio.py', '-q']),
         ('Public RightsReceipt source-backed licensing case', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_rightsreceipt_public_case.py', '-q']),
         ('Turn 44 RightsReceipt local software proof and acceptance boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn44_rightsreceipt_software_proof.py', '-q']),
+        ('Turn 45 project hub routes to pinned RightsReceipt evidence', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn45_project_proof_navigation.py', '-q']),
+        ('Turn 45 Review Reply Writer owner decisions and synthetic checker misses', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn45_reply_owner_decision_lab.py', '-q']),
         ('Published accounting research authorship and findings', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_published_accounting_research.py', '-q']),
         ('Source-linked public biography and fact guide', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_profile_public_fact_guide.py', '-q']),
         ('Source-linked wine tasting guide and blank worksheet', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_wine_tasting_notes.py', '-q']),
