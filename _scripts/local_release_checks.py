@@ -174,6 +174,7 @@ def main() -> int:
         ('Turn 42 source-backed website repair proof path', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn42_repair_proof_path.py', '-q']),
         ('Turn 43 published content receipt and video approval limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn43_published_content_receipt.py', '-q']),
         ('Turn 53 real published companion revision and open audiovisual QA', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn53_poker_published_revision.py', '-q']),
+        ('Turn 54 featured NolanPoker public video-title and companion link agreement', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn54_nolanpoker_listing_accuracy.py', '-q']),
         ('Live diagnostic result classification and priority scope', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_live_evidence.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
