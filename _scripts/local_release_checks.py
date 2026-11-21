@@ -165,6 +165,7 @@ def main() -> int:
         ('Turn 50 first-screen practical AI proof and task routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn50_first_screen_identity.py', '-q']),
         ('Turn 51 practical AI topic ownership and guide-to-calculator distinction', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn51_topic_ownership.py', '-q']),
         ('Turn 52 standalone 10 BB ICM audit and sitemap registration', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn52_10bb_playbook.py', '-q']),
+        ('Turn 65 10 BB site Find reader discovery and section routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn65_tenbb_find.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),

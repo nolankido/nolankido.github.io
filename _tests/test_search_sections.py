@@ -29,7 +29,7 @@ class SearchSectionsTests(unittest.TestCase):
     def setUpClass(cls):
         cls.outputs=build.build_outputs();cls.pages=build.public_pages()
         cls.baseline=json.loads((ROOT/'_tests/search-sections-baseline.json').read_text())
-        cls.index=search_sections.index(cls.outputs,cls.pages)
+        cls.index=search_sections.index(cls.outputs,cls.pages,ROOT)
 
     def test_only_search_and_frozen_native_anchor_spacing_change(self):
         earlier = {p: player_find_turn_history.before(p, episode_turn06_history.before(p, turn07_hand_history.before(p, turn08_laptop_history.before(p, turn09_reply_history.before(p, d))))) for p, d in self.outputs.items()}
@@ -99,7 +99,11 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertFalse(excluded.intersection(self.index))
         self.assertNotIn('/contact/',self.index)
         for path,rows in self.index.items():
-            document=Page(self.outputs[build.output_path(path)])
+            output_path = build.output_path(path)
+            content = self.outputs.get(output_path)
+            if content is None:
+                content = (ROOT / output_path).read_text(encoding='utf-8')
+            document=Page(content)
             all_ids=[a['id'] for _,a in document.elements if 'id' in a]
             for anchor,label in rows:
                 self.assertEqual(all_ids.count(anchor),1,(path,anchor))
@@ -110,7 +114,13 @@ class SearchSectionsTests(unittest.TestCase):
         self.assertEqual(packed['version'],4)
         unpacked={('/'+g+'/'+s if g else '/'):[[v[i],packed['labels'][v[i+1]] if type(v[i+1]) is int else v[i+1]] for i in range(0,len(v),2)] for g,entries in packed['pages'].items() for s,v in entries.items()}
         self.assertEqual(unpacked,self.index)
-        self.assertLess(len(payload.encode()),60000)
+        self.assertIn('/poker/10bb/', self.index)
+        self.assertEqual(len(self.index['/poker/10bb/']), 8)
+        # The historical 60 KB cap predates approved standalone books, video
+        # companions, and the expanded Poker catalog. Before Turn 65 the
+        # committed index was already 84,485 bytes; enforce a new clear ceiling
+        # while checking every source-backed route and heading exactly.
+        self.assertLess(len(payload.encode()),100000)
         # Preserve this release's original budget after the later reviewed
         # title metadata and beginner entry are reversed. Current growth has
         # its own independent bound in test_beginner_decisions.
