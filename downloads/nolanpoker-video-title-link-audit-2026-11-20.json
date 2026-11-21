@@ -1,0 +1,90 @@
+{
+  "schema": "nolanpoker-public-watch-metadata-audit-v1",
+  "checked_on_hawaii": "2026-11-20",
+  "scope": "Six previously featured NolanPoker video IDs, not all uploads on the channel",
+  "current_source_method": "Read-only public YouTube watch-page title, canonical URL and description metadata returned for exact video IDs",
+  "prior_source_method": "Site thumbnail snapshot records oEmbed title, channel and image review from November 13, with Reserve artwork/title update November 18",
+  "title_comparison": "All six current public watch-page titles matched the six existing on-site stored titles on this check",
+  "not_claimed": [
+    "new thumbnail-byte retrieval",
+    "live channel-byline reauthentication",
+    "successful video playback",
+    "current video-frame or audio inspection",
+    "current-cut chapter offsets for archived companions",
+    "independent hand or poker result confirmation",
+    "search ranking, AI citations or viewer conversion"
+  ],
+  "local_thumbnail_snapshots_replaced": false,
+  "public_video_page_metadata_observed": true,
+  "public_video_playback_verified": false,
+  "companion_pages_publicly_retrievable_on_check": 3,
+  "current_cut_video_visuals_verified": 0,
+  "videos": [
+    {
+      "video_id": "-Wm1i70Z3Bs",
+      "public_title_on_check": "I Went for $1.50 Hot Dogs... Then Entered a $120 Poker Tournament",
+      "public_watch_url": "https://www.youtube.com/watch?v=-Wm1i70Z3Bs",
+      "canonical_watch_url_observed": "https://www.youtube.com/watch?v=-Wm1i70Z3Bs",
+      "video_title_matches_existing_gallery": true,
+      "companion_route": null,
+      "current_cut_timestamp_evidence": "none_checked_for_current_cut",
+      "current_video_frames_checked": false,
+      "current_audio_checked": false
+    },
+    {
+      "video_id": "qABaiIcvvpU",
+      "public_title_on_check": "I Had 6.5 Big Blinds... Then Won a Trophy",
+      "public_watch_url": "https://www.youtube.com/watch?v=qABaiIcvvpU",
+      "canonical_watch_url_observed": "https://www.youtube.com/watch?v=qABaiIcvvpU",
+      "video_title_matches_existing_gallery": true,
+      "companion_route": "/poker/episodes/portland-meadows-ep1/",
+      "current_cut_timestamp_evidence": "viewer_transcript_start_positions_only_not_video_frames",
+      "current_video_frames_checked": false,
+      "current_audio_checked": false
+    },
+    {
+      "video_id": "I75GOBVXij4",
+      "public_title_on_check": "I Had A-K With 10 Big Blinds. Then TWO Players Shoved.",
+      "public_watch_url": "https://www.youtube.com/watch?v=I75GOBVXij4",
+      "canonical_watch_url_observed": "https://www.youtube.com/watch?v=I75GOBVXij4",
+      "video_title_matches_existing_gallery": true,
+      "companion_route": "/poker/episodes/portland-meadows-standoff/",
+      "current_cut_timestamp_evidence": "archived_v9_offsets_not_current_cut_verified",
+      "current_video_frames_checked": false,
+      "current_audio_checked": false
+    },
+    {
+      "video_id": "bxpaM_1mWPE",
+      "public_title_on_check": "I Won Yesterday. Today I Had One Bullet. | Portland Meadows Poker",
+      "public_watch_url": "https://www.youtube.com/watch?v=bxpaM_1mWPE",
+      "canonical_watch_url_observed": "https://www.youtube.com/watch?v=bxpaM_1mWPE",
+      "video_title_matches_existing_gallery": true,
+      "companion_route": null,
+      "current_cut_timestamp_evidence": "none_checked_for_current_cut",
+      "current_video_frames_checked": false,
+      "current_audio_checked": false
+    },
+    {
+      "video_id": "HE7VDvO9gDU",
+      "public_title_on_check": "I Busted... Then Flipped Into a Final Table | Portland Meadows",
+      "public_watch_url": "https://www.youtube.com/watch?v=HE7VDvO9gDU",
+      "canonical_watch_url_observed": "https://www.youtube.com/watch?v=HE7VDvO9gDU",
+      "video_title_matches_existing_gallery": true,
+      "companion_route": null,
+      "current_cut_timestamp_evidence": "none_checked_for_current_cut",
+      "current_video_frames_checked": false,
+      "current_audio_checked": false
+    },
+    {
+      "video_id": "edNSD5BjIV8",
+      "public_title_on_check": "My Ace-King Reshove in a 3-Way All-In | WSOP Circuit",
+      "public_watch_url": "https://www.youtube.com/watch?v=edNSD5BjIV8",
+      "canonical_watch_url_observed": "https://www.youtube.com/watch?v=edNSD5BjIV8",
+      "video_title_matches_existing_gallery": true,
+      "companion_route": "/poker/episodes/reserve-day-1/",
+      "current_cut_timestamp_evidence": "archived_v8_offsets_not_current_cut_verified",
+      "current_video_frames_checked": false,
+      "current_audio_checked": false
+    }
+  ]
+}
