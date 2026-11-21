@@ -140,7 +140,6 @@ class CrossCaseStopRulesTests(unittest.TestCase):
                        "Full task cost", "approval for this exact saved version"):
             self.assertIn(phrase.lower(), text.lower())
         self.assertIn("paired six-case review-reply study is **not completed**", text)
-        self.assertIn("not a current-version check", text.lower()) if False else None
         self.assertIn("historical website and model checks", text)
         self.assertIn("private decision receipt", text.lower())
         self.assertNotIn(chr(0x2014), text)
@@ -149,13 +148,12 @@ class CrossCaseStopRulesTests(unittest.TestCase):
     def test_four_evidence_sources_and_version_caveats_in_worksheet(self):
         for path in CASE_LINKS:
             self.assertIn("nolankido.com" + path, self.worksheet)
-        for assertion in ("347 unit/content tests", "two missed unsupported financial offers",
+        for assertion in ("347 unit/content tests", "missed reimbursement and gift-card offers",
                           "Germany only", "current",
                           "synthetic", "simulated", "human", "unverified",
-                          "not a combined", "no new model inference"):
+                          "not supply a combined", "no new model inference"):
             with self.subTest(assertion=assertion):
                 self.assertIn(assertion.lower(), self.worksheet.lower())
-        self.assertIn("not a new", self.worksheet.lower()) if False else None
 
     def test_historical_article_identity_and_revised_lastmod(self):
         pages = json.loads((ROOT / "_source/pages.json").read_text(encoding="utf-8"))
@@ -186,7 +184,8 @@ class CrossCaseStopRulesTests(unittest.TestCase):
                         "review-poker-solver-claim", "review-completed-record"):
                 self.assertEqual(document.count('id="' + id_ + '"'), 1)
             self.assertEqual(document.count('<details class="review-example" id="'), 6)
-            self.assertEqual(len(re.findall(r'<h2\b', document)), 9)
+        self.assertEqual(len(re.findall(r'<h2\\b', self.source)), 9)
+        self.assertEqual(len(re.findall(r'<h2\\b', self.public)), 10)
         self.assertIn("not a completed visibility result", self.source)
         self.assertIn("No actual hand, opponent range or showdown win probability",
                       self.source)
