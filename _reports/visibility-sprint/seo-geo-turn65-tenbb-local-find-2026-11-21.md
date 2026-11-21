@@ -20,7 +20,7 @@ This defect affects **on-site discovery and reader task completion**. A Find res
 3. Rebuild the embedded version-4 public section index content to include the eight named, visible H2 headings on the Playbook, while excluding H3 practice-question headings and hidden exercise content. Other pages, their canonical headings and the compressed index format are preserved. These are in-page navigation targets, not copied full text.
 4. `_tests/test_turn65_tenbb_find.py`: add public metadata, one-result, generated parity, eight-section, local Node search-match, tampering, duplicate and noindex/sitemap boundary regressions. Register with the existing manual release runner.
 5. `_tests/test_player_find.py`: reconcile an obsolete historical six-extra-only assumption with the independently registered three book/catalog records and the new Playbook. Keep the list of expected source-checked routes explicit and retain historical profile checks.
-6. `_tests/test_search_sections.py`: compare current output with the **actual** manual-page-inclusive index and inspect source HTML for the manual routes. Its older manifest-only comparison and 60 KB payload ceiling were already out of date: the untouched pre-Turn-65 compressed section index was **84,485 bytes**. The new limit is 100,000 bytes, but exact index-to-source comparisons, required anchors and negative controls still apply. This is an acknowledged changed scale, not claimed payload reduction.
+6. `_tests/test_search_sections.py`: compare current output with the **actual** manual-page-inclusive index and inspect source HTML for the manual routes. Its older manifest-only comparison and 60 KB payload ceiling were already out of date: the untouched pre-Turn-65 compressed section index was **84,485 characters**. The new limit is 100,000 bytes, but exact index-to-source comparisons, required anchors and negative controls still apply. This is an acknowledged changed scale, not claimed payload reduction.
 7. `AGENTS.md` documents builder ownership, source limitations, local checks and the unchanged indexability rules.
 
 ## Independently checked source-level evidence
@@ -30,13 +30,13 @@ This defect affects **on-site discovery and reader task completion**. A Find res
 | Find result link for `/poker/10bb/` | 0 | 1 | One native internal discovery route |
 | Visible Poker Find cards | 112 | 113 | One new item, no duplicated Poker cards |
 | Searchable Playbook named H2 sections | 0 | 8 | Direct results may lead to the original visible content |
-| Embedded section JSON bytes | 84,485 | 85,052 | The increase is bounded; not a claimed performance gain |
-| Complete generated Find HTML source characters | 222,809 | 224,032 | No new external runtime package or network search |
+| Embedded section JSON UTF-8 bytes | 84,543 | 85,110 | The increase is bounded; not a claimed performance gain |
+| Complete generated Find HTML UTF-8 bytes | 222,979 | 224,202 | No new external runtime package or network search |
 | Existing sitemap count | 230 URLs | 230 URLs unchanged | New navigation, not duplicate canonical publication |
 | Playbook original Article publication | Nov 19, 2026 | Unchanged | No fabricated freshness or modification |
 | Read-only local search privacy | No query transport | Unchanged | Search stays in browser memory |
 
-The before-state section JSON was unpacked, re-pooled and serialized with the same source format, returning **identical bytes** to the existing 84,485-byte string. The eight new headings were extracted from the original 10 BB public page, not guessed, and the updated decoded heading pairs matched the eight published named H2s. Source-level structural checks found exactly one new card, correct sorted Poker order, no duplicated target link, unchanged Find noindex setting and a valid complete version-4 JSON payload.
+The before-state section JSON was unpacked, re-pooled and serialized with the same source format, returning **identical bytes** to the existing 84,485-character string. The eight new headings were extracted from the original 10 BB public page, not guessed, and the updated decoded heading pairs matched the eight published named H2s. Source-level structural checks found exactly one new card, correct sorted Poker order, no duplicated target link, unchanged Find noindex setting and a valid complete version-4 JSON payload.
 
 The correct scope of the HTML card change is **site search**, not a new indexable page. Search results still depend on the existing local JavaScript when filtering; the cards remain browsable without JavaScript. No external search service is called and no private queries are logged.
 
