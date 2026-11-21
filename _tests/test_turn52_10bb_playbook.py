@@ -59,7 +59,7 @@ class Turn52TenBB(unittest.TestCase):
         self.assertTrue(all(r["icm_call_minus_fold_dollars"] < 0 for r in rows[:3]))
         self.assertGreater(rows[-1]["icm_call_minus_fold_dollars"], 0)
 
-    def test_public_math_is_honest_and_video_original_chapters_stay(self):
+    def test_public_math_and_written_course_stay(self):
         for required in (
             'id="icm-reproduce"', '/downloads/ten-bb-playbook-icm-verify.py',
             '63/107, approximately 58.88%', '13.88 percentage points',
@@ -67,23 +67,27 @@ class Turn52TenBB(unittest.TestCase):
             '60% (changed assumption)', '$58.34', '−$5.66', '$64.46', '+$0.46',
             '/poker/six-to-ten-bb-tournament-decisions/#bridge-bubble',
             'different ICM threshold of about 56.40%', 'not a solver verdict',
-            'Video 58:58', '44:09', 'Published <time datetime="2026-11-19"',
+            'Choose a written lesson', 'No video is required.',
+            'Published <time datetime="2026-11-19"',
         ):
             self.assertIn(required, self.page)
         self.assertEqual(self.page.count('id="icm-reproduce"'), 1)
         self.assertEqual(self.page.count('href="/downloads/ten-bb-playbook-icm-verify.py"'), 1)
+        self.assertNotIn('Select the matching point in the YouTube player', self.page)
+        self.assertNotRegex(self.page, r'Video [0-9]{2}:[0-9]{2}')
+        self.assertEqual(self.page.count('id="chapter-map-title"'), 1)
         self.assertNotIn(chr(0x2014), self.page)
 
     def test_manual_registration_is_fail_closed_and_keeps_dates(self):
         record = tenbb_companion.record(ROOT)
         self.assertEqual(record["url"], "https://nolankido.com/poker/10bb/")
-        self.assertEqual(record["lastmod"], "2026-11-20")
+        self.assertEqual(record["lastmod"], "2026-11-21")
         self.assertEqual(self.page.count('<meta property="article:published_time" content="2026-11-19">'), 1)
-        self.assertEqual(self.page.count('<meta property="article:modified_time" content="2026-11-20">'), 1)
+        self.assertEqual(self.page.count('<meta property="article:modified_time" content="2026-11-21">'), 1)
         for tamper in (
             self.page.replace('id="icm-reproduce"', 'id="unapproved"', 1),
             self.page.replace('rel="canonical"', 'rel="alternate"', 1),
-            self.page.replace('"dateModified":"2026-11-20"', '"dateModified":"2026-11-19"', 1),
+            self.page.replace('"dateModified":"2026-11-21"', '"dateModified":"2026-11-19"', 1),
         ):
             with self.subTest(change=tamper != self.page):
                 self.assertNotEqual(tamper, self.page)
@@ -94,7 +98,7 @@ class Turn52TenBB(unittest.TestCase):
         root = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         matches = [x for x in root if x.findtext("{*}loc") == tenbb_companion.ORIGIN + tenbb_companion.ROUTE]
         self.assertEqual(len(matches), 1)
-        self.assertEqual(matches[0].findtext("{*}lastmod"), "2026-11-20")
+        self.assertEqual(matches[0].findtext("{*}lastmod"), "2026-11-21")
         import check_live
         targets = check_live.targets(ROOT)
         self.assertEqual(targets["/poker/10bb/"], (200, self.page.encode("utf-8")))

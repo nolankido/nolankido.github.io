@@ -91,7 +91,7 @@ class Turn66TenBBReaderPaths(unittest.TestCase):
         pages = {p["path"]: p for p in self.pages}
         for route in ('/poker/', '/poker/six-to-ten-bb-tournament-decisions/'):
             self.assertEqual(pages[route]["updated"], "2026-11-20")
-        self.assertEqual(tenbb_companion.record(ROOT)["lastmod"], "2026-11-20")
+        self.assertEqual(tenbb_companion.record(ROOT)["lastmod"], "2026-11-21")
         root = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         locs = [e.findtext("{*}loc") for e in root]
         self.assertEqual(len(locs), 230)

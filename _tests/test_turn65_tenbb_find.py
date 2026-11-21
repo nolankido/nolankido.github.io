@@ -30,10 +30,10 @@ class Turn65TenBBFind(unittest.TestCase):
         cls.html = (ROOT / "find/index.html").read_text(encoding="utf-8")
         cls.course = (ROOT / tenbb_companion.OUTPUT).read_text(encoding="utf-8")
 
-    def test_existing_canonical_appears_once_as_verifiable_episode(self):
+    def test_existing_canonical_appears_once_as_written_study_guide(self):
         self.assertIsNotNone(self.entry)
         self.assertEqual(self.entry["path"], tenbb_companion.ROUTE)
-        self.assertEqual(self.entry["kind"], "episode")
+        self.assertEqual(self.entry["kind"], "guide")
         self.assertEqual(self.entry["home"], "poker")
         self.assertEqual(self.entry["interests"], ["poker"])
         self.assertEqual(self.entry["title"], "The 10 Big Blind Tournament Playbook")
@@ -42,7 +42,7 @@ class Turn65TenBBFind(unittest.TestCase):
         self.assertNotIn(tenbb_companion.ROUTE, {p["path"] for p in build.public_pages()})
         self.assertEqual([x["path"] for x in self.extras].count(tenbb_companion.ROUTE), 1)
         self.assertEqual(self.html.count('href="/poker/10bb/"'), 1)
-        self.assertIn('data-kind="episode" data-interests="poker"', self.html)
+        self.assertIn('data-kind="guide" data-interests="poker"', self.html)
 
     def test_published_index_matches_deterministic_generator(self):
         self.assertEqual(build.build_outputs()[Path("find/index.html")], self.html)
