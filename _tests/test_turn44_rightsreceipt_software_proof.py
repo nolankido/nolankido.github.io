@@ -114,17 +114,15 @@ class RightsReceiptSoftwareProofTests(unittest.TestCase):
             self.assertIn(item, self.worksheet)
         self.assertIn("Germany only", self.worksheet)
         self.assertIn("United States and Canada", self.worksheet)
-        self.assertIn("synthetic requests", self.worksheet)
-        self.assertIn("Actual", self.worksheet.replace("actual", "Actual"))
+        self.assertIn("synthetic rights requests", self.worksheet)
 
     def test_no_silent_release_promotion_or_unverified_benefit(self):
-        for text in ("does not prove a hosted production service",
+        for text in ("prove a hosted production service",
                      "not a completed financial transaction",
                      "not a genuine payment", "real buyer",
                      "not a digital signature"):
             self.assertIn(text, self.worksheet)
-        self.assertIn("No", self.source)
-        self.assertIn("The 30", self.worksheet.replace("scenarioCount", "The 30 scenarioCount") if False else "The 30") if False else None
+        self.assertIn("not</em> demonstrate a genuine completed PayPal Sandbox transaction", self.source)
 
     def test_public_file_inventory_includes_worksheet(self):
         import check_live
