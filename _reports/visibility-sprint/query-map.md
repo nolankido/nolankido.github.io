@@ -1,5 +1,7 @@
 # Practical questions and destination pages
 
+> **November 20, 2026, SEO/GEO Turn 41:** See the [evidence-prioritized follow-on ranking](seo-geo-turn41-opportunity-triage-2026-11-20.md) and [12-row canonical ledger](seo-geo-turn41-priority-ledger-2026-11-20.csv). The priorities use actual published source content, verified paths, recorded shortcomings and feasible work. Google impressions, query demand and eligible assistant-citation rates remain **unavailable**, not zero. One old documented reader-route gap was resolved by adding two direct beginner-prerequisite links to the first-live-tournament guide. Its original article publication and modification dates were preserved because this was a small navigation-only edit, not a material rewrite.
+
 > **November 17, 2026, SEO/GEO Turn 04:** The [dated 12-opportunity query-to-page map](seo-geo-turn04-query-opportunity-map-2026-11-17.md) and [frozen 25-question assistant panel](assistant-answer-panel-v1-2026-11-17.csv) extend these original editorial hypotheses into AI checking, short-stack poker, beginner poker, author identity and documented projects. All 22 distinct target paths were present in the live 224-URL sitemap. Search Console and Bing query counts, rankings and assistant citation observations remain **unavailable, not zero**; the new priority order is editorial judgment, not measured demand.
 
 These are candidate reader questions for editorial planning. They are not claimed search queries, keyword volumes, ranking opportunities, or measurements from Search Console.
