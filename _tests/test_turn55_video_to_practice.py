@@ -52,14 +52,13 @@ def video_card(hub,vid):
 
 def journey_errors(hub,ep,stand,res):
     issues=[]
-    hubLinks=Anchors(hub).hrefs
     episode={"qABaiIcvvpU":ep,"I75GOBVXij4":stand,"edNSD5BjIV8":res}
     for video,source,practice in JOURNEYS:
         card=video_card(hub,video)
         links=Anchors(card).hrefs
         if "https://www.youtube.com/watch?v="+video not in links:
             issues.append("video card no longer opens the verified upload")
-        if source not in links and not(video=="qABaiIcvvpU" and source in links):
+        if source not in links:
             issues.append("video card lacks direct source-backed practice route: "+video)
         if practice not in Anchors(episode[video]).hrefs:
             issues.append("companion lacks distinct external practice: "+video)
@@ -140,7 +139,7 @@ class NolanPokerAfterWatchTests(unittest.TestCase):
         self.assertEqual(len(videos),6)
         self.assertEqual(len(re.findall('<article class="poker-content-card"',hub)),6)
         for v in videos:
-            self.assertEqual(Anchors(hub).hrefs.count(
+            self.assertEqual(Anchors(video_card(hub,v["video_id"])).hrefs.count(
                 "https://www.youtube.com/watch?v="+v["video_id"]),1)
             self.assertIn(v["title"],hub)
         pages={p["path"]:p for p in json.loads(read("_source/pages.json"))}
