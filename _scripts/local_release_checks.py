@@ -159,6 +159,7 @@ def main() -> int:
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
         ('SEO snapshot drift negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_snapshot.py', '-q']),
         ('Private GSC/Bing/Umami scorecard evidence and zero/null safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_private_scorecard.py', '-q']),
+        ('Turn 41 evidence-prioritized canonical routes and beginner prerequisites', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn41_evidence_opportunities.py', '-q']),
         ('Live diagnostic result classification and priority scope', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_live_evidence.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
