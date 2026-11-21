@@ -8,6 +8,7 @@
     <p>A second AI answer can suggest questions to investigate. Agreement between answers still leaves you needing evidence outside those answers. This guide gives you six ways to obtain it.</p>
     <p class="small-copy"><strong>Want a source-to-claim example?</strong> <a href="#review-search-advice">Check a claim about Google's AI Overviews against Google's published requirements</a>, then decide which parts can be repeated and which remain unproved.</p>
     <p class="small-copy"><strong>Want a numerical claim check?</strong> <a href="#review-poker-solver-claim">Audit a fictional AI poker answer about a 10 BB tournament bubble call</a>, where a correct pot-odds fraction does not settle the decision.</p>
+    <p class="small-copy"><strong>Should you proceed or stop?</strong> <a href="#review-stop-rules">Compare four source-backed AI stop rules</a> before using a checked claim, publishing a draft, or approving a tool's action.</p>
     <h3 id="review-fast-method">A quick first pass: claim, evidence, decision</h3>
     <ol class="review-steps review-fast-list">
       <li><strong>Name one claim and the intended action.</strong> “The meeting is confirmed” matters differently from “This sounds like a friendly invitation.”</li>
@@ -15,6 +16,25 @@
       <li><strong>Compare the exact claim with the evidence.</strong> Look for dates, conditions, units, missing people, uncertainty, and differences between a proposal and a commitment.</li>
       <li><strong>Choose an evidence status before acting.</strong> Mark the claim supported, contradicted, or unresolved; write what was actually checked, and leave consequential work paused when the required evidence is missing.</li>
     </ol>
+    <section class="review-boundary" id="review-stop-rules" aria-labelledby="review-stop-rules-title">
+      <h3 id="review-stop-rules-title">When should an AI-assisted task proceed, be revised, or stop?</h3>
+      <p><strong>Rule:</strong> <strong>PROCEED IN SCOPE</strong> only when the exact claim and output have the necessary source checks, independent tests and human or provider approval. <strong>REVISE AND RECHECK</strong> a fixable mismatch. <strong>HOLD</strong> for missing evidence, permission or current-version review. <strong>STOP USING AI FOR THIS TASK</strong> if reliable checking is infeasible, unsafe, or costs more effort than a suitable manual alternative. A green, narrow test is not authorization.</p>
+      <p class="project-table-hint" id="review-stop-rules-table-hint"><strong>Reading this comparison:</strong> On a narrow screen, swipe within the table. On a keyboard, focus it and use the arrow keys.</p>
+      <div class="project-table-scroll" role="region" aria-label="Four source-backed AI stop-rule examples" aria-describedby="review-stop-rules-table-hint" tabindex="0">
+        <table>
+          <caption>Four different failures and their appropriate release gates</caption>
+          <thead><tr><th scope="col">Original case</th><th scope="col">What the evidence shows</th><th scope="col">Stop or release condition</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/technology/checking-ai-website-changes/#case-source-diff">Website repair</a></th><td>Historical 347-test pass missed a malformed closing tag; a separate HTML5 parse found it.</td><td>REVISE the source, recheck structural HTML and deployed files. A successful release does not establish search gains.</td></tr>
+            <tr><th scope="row"><a href="/technology/local-ai-review-replies/#reply-operator-decision">Customer replies</a></th><td>Four constructed probes included two missed financial offers and one quotation overflag. These were not new model outputs.</td><td>HOLD unsupported promises. Approve only the human-reviewed exact saved text for manual posting.</td></tr>
+            <tr><th scope="row"><a href="/technology/rightsreceipt-ai-licensing/#rightsreceipt-software-proof">RightsReceipt</a></th><td>Real local-model inference conflicted with a Germany-only synthetic request; payment responses were simulated.</td><td>HOLD licensing and payment claims until rights, people and authoritative provider status are verified.</td></tr>
+            <tr><th scope="row"><a href="/technology/ai-poker-video-evidence/#poker-ai-approval">Poker-video captions</a></th><td>A structured claim screen covered proposed labels, not the current published video's audio and graphics.</td><td>HOLD unverified overlays until the current footage, voiceover, rights and editor approval are checked.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Effort is a separate gate:</strong> count briefing, review, repairs, setup and upkeep against an equally acceptable manual result. The <a href="/technology/ai-time-savings/">workflow time calculator</a> illustrates how to compare costs; the six-case reply productivity pilot has not been run. Do not invent a savings estimate.</p>
+      <p><a href="/downloads/ai-stop-rules-field-guide.md" download>Download the four-case stop-rule worksheet and private decision receipt</a>. Its examples distinguish observed historical checks, constructed failures, unknown facts and authority that still belongs to a person.</p>
+    </section>
     <h3 id="review-claim-map">Which check matches the claim?</h3>
     <p>The six deliberately flawed examples below are fictional teaching material. They are not captured model answers, measured error rates, or proof that any current system behaves this way. Open the linked method for the full evidence and repair.</p>
     <p class="project-table-hint" id="answer-check-map-table-hint"><strong>Reading this table:</strong> On a narrow screen, swipe sideways within the table to see all columns. With a keyboard, focus the table and use the left or right arrow key.</p>
