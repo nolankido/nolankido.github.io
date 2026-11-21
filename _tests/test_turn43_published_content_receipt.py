@@ -71,12 +71,12 @@ class PublishedContentWorkflowTests(unittest.TestCase):
         self.assertEqual(len(matched), 1)
         self.assertEqual(matched[0]["id"], "ai-poker-video-evidence")
         self.assertEqual((matched[0]["date"], matched[0]["updated"]),
-                         ("2026-11-04", "2026-11-19"))
+                         ("2026-11-04", "2026-11-20"))
         self.assertEqual(self.public.count(
             '<link rel="canonical" href="https://nolankido.com' + ROUTE + '">'), 1)
         self.assertIn('"datePublished": "2026-11-04"', self.public)
-        self.assertIn('"dateModified": "2026-11-19"', self.public)
-        self.assertIn("About 9 min read", self.public)
+        self.assertIn('"dateModified": "2026-11-20"', self.public)
+        self.assertIn("About 10 min read", self.public)
         self.assertIn('datetime="2026-11-02"', self.companion)
 
     def test_receipt_is_a_real_stage_by_stage_publishing_account(self):
