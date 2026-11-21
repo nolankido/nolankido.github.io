@@ -46,7 +46,7 @@ These six content anchors were checked in source and generated repository HTML. 
 
 ## Roadmap gate reconciliation
 
-The original [Turns 37 to 61 roadmap](../../../../../NolanKido_Website_Next_25_Improvement_Turns_37-61_2026-11-20.md) was a planning artifact outside this repository. Relevant dated reports in this folder document actual work, which sometimes differs from the planned turn labels.
+The original Turns 37 to 61 roadmap (November 20, 2026, planning artifact stored outside this public repository) was a planning artifact outside this repository. Relevant dated reports in this folder document actual work, which sometimes differs from the planned turn labels.
 
 | Planned gate | Actual evidence | Disposition |
 | --- | --- | --- |
@@ -76,7 +76,7 @@ No user-authored GitHub Actions, scheduled CI, paid API, new tracking or fabrica
 
 ### Source ledger
 
-- Current committed [search audit](../../search-audit.json), [sitemap](../../sitemap.xml), and [robots.txt](../../robots.txt). Links are repository-relative only; the live versions are at `https://nolankido.com/sitemap.xml` and `https://nolankido.com/robots.txt`.
+- Current committed [search audit](../search-audit.json), [sitemap](../../sitemap.xml), and [robots.txt](../../robots.txt). Links are repository-relative only; the live versions are at `https://nolankido.com/sitemap.xml` and `https://nolankido.com/robots.txt`.
 - [Turn 37 source qualification](seo-geo-turn37-release-parity-2026-11-20.md), [Turn 38 live smoke](seo-geo-turn38-live-verification-2026-11-20.md), [Turn 39 data access](seo-geo-turn39-first-party-baseline-2026-11-20.md), [Turn 40 prompt panel](seo-geo-turn40-answer-panel-protocol-2026-11-20.md).
 - [Turn 47 edition verification](seo-geo-turn47-book-edition-verification-2026-11-20.md), [Turn 50 mobile-first-screen review](seo-geo-turn50-first-screen-identity-2026-11-20.md), [Turn 54 video links](seo-geo-turn54-nolanpoker-video-links-2026-11-20.md).
 - [Turn 58](seo-geo-turn58-shortstack-action-tree-2026-11-20.md), [Turn 59](seo-geo-turn59-payout-example-consistency-2026-11-20.md), [Turn 60](seo-geo-turn60-bayesian-range-update-2026-11-20.md), merged as [PR #432](https://github.com/nolankido/nolankido.github.io/pull/432), [PR #433](https://github.com/nolankido/nolankido.github.io/pull/433) and [PR #434](https://github.com/nolankido/nolankido.github.io/pull/434).
