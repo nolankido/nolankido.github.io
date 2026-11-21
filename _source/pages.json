@@ -6,8 +6,8 @@
     "seo_title": "Nolan Kido: Practical AI | AI Works, Human Decides",
     "description": "Practical AI projects for everyday life and small business, plus poker and creative work. Nolan Kido's approach: AI Works, Human Decides.",
     "source": "home.html",
-    "updated": "2026-11-20",
-    "revision": "Linked the completed NolanPoker episode and its source-to-screen evidence chain from the homepage showcase without changing the three existing evidence categories."
+    "updated": "2026-11-21",
+    "revision": "Linked the existing six-case AI workflow pilot from the homepage's practical choices, with explicit fictional-data and productivity-evidence limits; preserved the three primary user paths."
   },
   {
     "id": "start-here",
@@ -17,7 +17,7 @@
     "description": "Choose a useful task or explore Nolan Kido's AI projects: customer replies, book continuity, and a cooking planner. Follow interests in life, poker, and creativity.",
     "kicker": "New here?",
     "source": "start-here.html",
-    "updated": "2026-11-04"
+    "updated": "2026-11-21"
   },
   {
     "id": "find",
