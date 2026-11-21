@@ -147,7 +147,7 @@ class NolanPokerAfterWatchTests(unittest.TestCase):
         pages={p["path"]:p for p in json.loads(read("_source/pages.json"))}
         self.assertEqual(pages["/poker/"]["updated"],"2026-11-20")
         self.assertIn('"dateModified": "2026-11-20"',hub)
-        self.assertEqual(pages["/poker/six-to-ten-bb-tournament-decisions/"]["updated"],"2026-11-18")
+        self.assertEqual(pages["/poker/six-to-ten-bb-tournament-decisions/"]["updated"],"2026-11-20")
         for p in self.generated:
             self.assertNotIn("youtube.com/embed",p)
 
