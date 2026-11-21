@@ -161,6 +161,7 @@ def main() -> int:
         ('Complete author archive and standalone articles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_author_archive_standalone.py', '-q']),
         ('Standalone book publication and release coverage', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_pages.py', '-q']),
         ('Turn 48 book reader routes, native exercises and narrow-screen keyboard support', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_book_reader_journeys.py', '-q']),
+        ('Turn 49 topic-to-book reader paths and duplicate referral checks', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_topic_reader_paths.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
         ('SEO snapshot drift negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_snapshot.py', '-q']),
