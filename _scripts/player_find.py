@@ -177,7 +177,7 @@ def tenbb_entry(root: Path) -> dict | None:
         raise ValueError("10 BB Find needs exactly one public description")
     description = meta.description[0]
     if (title != "The 10 Big Blind Tournament Playbook"
-            or not seo_title.startswith("The 10 BB Tournament Playbook:")
+            or seo_title != "The 10 BB Tournament Playbook: Written Poker Study Guide | Nolan Kido"
             or not 80 <= len(description) <= 190):
         raise ValueError("10 BB Find public title or description has changed")
     schemas = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
@@ -187,12 +187,12 @@ def tenbb_entry(root: Path) -> dict | None:
     if (schema.get("@type") != "Article"
             or schema.get("url") != approved["url"]
             or schema.get("description") != description
-            or "10 BB" not in schema.get("headline", "")
+            or schema.get("headline") != "The 10 BB Tournament Playbook: written tournament poker study guide"
             or schema.get("datePublished") != "2026-11-19"):
         raise ValueError("10 BB Find must agree with published Article metadata")
     return {"path": approved["route"], "title": title,
             "search_title": seo_title, "description": description,
-            "interests": ["poker"], "home": "poker", "kind": "episode",
+            "interests": ["poker"], "home": "poker", "kind": "guide",
             "date": schema["datePublished"]}
 
 
