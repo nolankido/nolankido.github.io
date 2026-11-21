@@ -16,6 +16,7 @@ import local_laptop_case
 import reply_audit_case
 import book_pages
 import tenbb_companion
+import check_live
 
 
 def parse_errors(document: str) -> list:
@@ -60,6 +61,30 @@ def publication_paths(root: Path, pages: list[dict]) -> dict[str, Path]:
     return paths
 
 
+def public_html_download_paths(root: Path = ROOT) -> dict[str, Path]:
+    """Include full HTML downloads registered for read-only production checks.
+
+    The canonical sitemap pages are validated by publication_paths. Some
+    downloadable noindex resources are complete browser-facing HTML documents
+    with interactive controls. They must receive the same HTML5 parse, without
+    treating them as indexable canonical pages.
+    """
+    result = {}
+    for route, (status, expected) in check_live.targets(root).items():
+        if not (route.startswith('/downloads/') and route.endswith('.html')):
+            continue
+        relative = Path(route.lstrip('/'))
+        if '..' in relative.parts or status != 200:
+            raise ValueError('Invalid public HTML download target: ' + route)
+        path = root / relative
+        if not path.is_file() or path.read_bytes() != expected:
+            raise ValueError('Public HTML download bytes disagree with release inventory: ' + route)
+        if not expected.lstrip().lower().startswith(b'<!doctype html'):
+            raise ValueError('Public HTML download is not a complete HTML5 document: ' + route)
+        result[route] = relative
+    return result
+
+
 def main() -> int:
     # Verify that the parser catches the exact class of release regression.
     good = '<!doctype html><html lang="en"><head><title>Check</title></head><body><section><div><p>Text</p></div></section></body></html>'
@@ -67,13 +92,19 @@ def main() -> int:
     if parse_errors(good) or not parse_errors(bad):
         raise RuntimeError('HTML5 checker self-test failed')
     pages = publication_paths(ROOT, build.public_pages())
+    downloads = public_html_download_paths(ROOT)
+    overlapping = set(pages) & set(downloads)
+    if overlapping:
+        raise ValueError('HTML download conflicts with canonical route: ' + ', '.join(sorted(overlapping)))
+    documents = {**pages, **downloads}
     failures = []
-    for route, relative in pages.items():
+    for route, relative in documents.items():
         errors = parse_errors((ROOT / relative).read_text(encoding='utf-8'))
         if errors:
             failures.append({'path': route, 'errors': errors})
     print(json.dumps({'status': 'fail' if failures else 'pass',
-                      'pages': len(pages), 'self_test': 'pass',
+                      'pages': len(pages), 'html_downloads': len(downloads),
+                      'html_documents': len(documents), 'self_test': 'pass',
                       'failures': failures}, indent=2))
     return 1 if failures else 0
 
