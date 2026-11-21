@@ -14,7 +14,8 @@ GitHub Pages may independently run GitHub-managed deployment jobs even when ther
 
 1. Edit `_source/` files, then generate their committed public outputs on a local machine with `python _scripts/build.py` (Python 3.10+).
 2. Verify deterministic output with `python _scripts/build.py --check`.
-3. Run `python _scripts/check_search.py` and `python _tests/check_html5.py` locally. Install `requirements-test.txt` only in a local environment when needed.
+3. Run `python _scripts/check_search.py --verify-snapshot _reports/search-audit.json` and `python _tests/check_html5.py` locally. This flags stale committed SEO reports in addition to real site defects. Install `requirements-test.txt` only in a local environment when needed.
+   If the report legitimately changes after a content release, regenerate it with `python _scripts/check_search.py --json _reports/search-audit.json`, review the committed diff and rerun `--verify-snapshot`. Never hand-edit its counts.
 4. For full verification, run `python -m unittest discover -s _tests -p 'test_*.py' -v` and browser suites locally with the installed Playwright dependencies. Use direct public GETs to verify deployed URLs and expected source bytes.
 5. Report test scope precisely. Do not claim that the full suite or browsers passed unless they actually ran. Never reenable GitHub Actions as a shortcut.
 
