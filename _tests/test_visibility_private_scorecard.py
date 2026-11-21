@@ -82,6 +82,17 @@ class PrivateScorecardTests(unittest.TestCase):
             self.assertIsNone(scorecard.make_scorecard(
                 self.MONTH, missing, None, None, False)['metrics'][metric]['value'])
 
+    def test_direct_scorecard_caller_cannot_bypass_google_ai_zero_proof(self):
+        for name in ('gsc_ai_search_impressions', 'gsc_ai_discover_impressions'):
+            raw = {'status': 'observed', 'value': 0,
+                   'property': 'sc-domain:nolankido.com', 'period_verified': True}
+            with self.subTest(name=name), self.assertRaises(scorecard.IntakeError):
+                scorecard.make_scorecard(self.MONTH, {name: raw}, None, None, False)
+            safe = scorecard.make_scorecard(
+                self.MONTH, {name: {**raw, 'display_zero_confirmed': True}},
+                None, None, False)
+            self.assertEqual(safe['metrics'][name]['value'], 0)
+
     def test_bing_and_umami_zero_counts_do_not_claim_google_display_proof(self):
         for metric, property_name in (
             ('bing_ai_citations', 'https://nolankido.com/'),
