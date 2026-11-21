@@ -3,3 +3,9 @@ __pycache__/
 .venv/
 _test-artifacts/
 .DS_Store
+
+# First-party SEO/GEO exports, internal scorecards and account data belong outside this public repo.
+/_private/
+/private-analytics/
+/.local-visibility/
+/visibility-private-*.json
