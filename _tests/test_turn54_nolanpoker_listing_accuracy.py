@@ -122,7 +122,7 @@ class NolanPokerListingAccuracyTests(unittest.TestCase):
         self.assertEqual(
             next(r for r in self.audit["videos"] if r["video_id"]=="qABaiIcvvpU")["current_cut_timestamp_evidence"],
             "viewer_transcript_start_positions_only_not_video_frames")
-        self.assertIn("not current", self.audit["videos"][2]["current_cut_timestamp_evidence"])
+        self.assertIn("not_current_cut_verified", self.audit["videos"][2]["current_cut_timestamp_evidence"])
 
     def test_audited_titles_are_not_companion_editorial_or_thumbnail_claims(self):
         for row in self.audit["videos"]:
