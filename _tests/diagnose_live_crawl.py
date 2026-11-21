@@ -2,7 +2,8 @@
 """Bounded public GET diagnostics for priority routes or the full release.
 
 This supplements the frozen production verifier. It never submits forms or
-uses private credentials. Network failures remain failures, not inferred 404s.
+uses private credentials. Network errors are inconclusive and must never
+be reported as observed HTTP 404s. Only public GET responses are checked.
 """
 from __future__ import annotations
 
@@ -20,11 +21,17 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import check_live
 
 PRIORITY = (
-    '/', '/about/', '/bio/', '/technology/', '/poker/',
+    '/', '/about/', '/bio/', '/technology/', '/ai-in-real-life/', '/poker/',
+    '/poker/10bb/', '/books/', '/books/one-workflow-at-a-time/',
+    '/books/how-to-play-no-limit-texas-holdem/',
     '/technology/local-ai-review-replies/',
     '/technology/ai-book-continuity-checker/',
     '/technology/dinner-on-time/',
     '/technology/task-brief/', '/technology/check-ai-answers/',
+    '/downloads/one-workflow-ai-pilot-worksheet.md',
+    '/downloads/holdem-river-call-check-worksheet.md',
+    '/downloads/gsc-period-compare.py',
+    '/downloads/gsc-download-verify.py',
     '/robots.txt', '/sitemap.xml',
     '/assets/social/nolan-kido-ai.png',
     '/review-no-such-page-20261005/',
@@ -52,8 +59,27 @@ def inspect_transport(route: str) -> str:
         return type(error).__name__ + ': ' + reason[:160]
 
 
+def classify_failure(message: str) -> str:
+    """Only actual HTTP errors or byte differences establish a release mismatch.
+
+    DNS, TLS, timeout and unrecognized tool failures remain inconclusive.
+    A later diagnostic GET is not an exact-byte comparison of the failed GET.
+    """
+    if message.startswith('HTTP ') or message == 'Response bytes do not match the checked-out release':
+        return 'observed_mismatch'
+    return 'inconclusive'
+
+
+def exit_code(report: dict) -> int:
+    return {'pass': 0, 'fail': 1, 'inconclusive': 2}[report['status']]
+
+
 def audit(scope: str, attempts: int, interval: int, workers: int) -> dict:
     all_targets = check_live.targets()
+    if scope == 'priority':
+        missing = [route for route in PRIORITY if route not in all_targets]
+        if missing:
+            raise ValueError('Priority release targets are not registered: ' + ', '.join(missing))
     targets = {route: all_targets[route] for route in PRIORITY} if scope == 'priority' else all_targets
     pending = dict(targets)
     failures = {}
@@ -74,8 +100,16 @@ def audit(scope: str, attempts: int, interval: int, workers: int) -> dict:
     for route, message in failures.items():
         if message in {'URLError', 'OSError'}:
             diagnostics[route] = inspect_transport(route)
-    return {'scope': scope, 'total': len(targets), 'passed': len(targets) - len(pending),
-            'failed': len(pending), 'failures': failures, 'transport_diagnostics': diagnostics,
+    observed = sorted(route for route, message in failures.items()
+                      if classify_failure(message) == 'observed_mismatch')
+    inconclusive = sorted(route for route, message in failures.items()
+                          if classify_failure(message) == 'inconclusive')
+    state = 'fail' if observed else ('inconclusive' if inconclusive else 'pass')
+    return {'scope': scope, 'status': state, 'total': len(targets),
+            'passed': len(targets) - len(pending), 'failed': len(pending),
+            'observed_failed': len(observed), 'inconclusive_count': len(inconclusive),
+            'observed_failure_routes': observed, 'inconclusive_routes': inconclusive,
+            'failures': failures, 'transport_diagnostics': diagnostics,
             'read_only': True, 'exact_byte_comparison': True}
 
 
@@ -86,9 +120,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--interval', type=int, choices=range(0, 11), default=2)
     parser.add_argument('--workers', type=int, choices=range(1, 5), default=2)
     args = parser.parse_args(argv)
-    report = audit(args.scope, args.attempts, args.interval, args.workers)
+    try:
+        report = audit(args.scope, args.attempts, args.interval, args.workers)
+    except ValueError as exc:
+        parser.error(str(exc))
     print(json.dumps(report, sort_keys=True, indent=2))
-    return 1 if report['failed'] else 0
+    return exit_code(report)
 
 
 if __name__ == '__main__':
