@@ -43,7 +43,7 @@ The original November 13, 2026 publication date and seven-section outline remain
 
 ## Verification and remaining acceptance
 
-Source and generated article are expected to differ from the base release by **only the added proof paragraph and native jump**. The existing article's source claims, public Devpost identity, pinned code files, schema, date and canonical have not been otherwise changed. The worksheet is an original new public download; it is not represented as a signed acceptance receipt for a real buyer or payee.
+Source and generated article **were compared to the starting main Git blobs** and both differ by exactly the same added proof paragraph and native navigation jump, with no other article bytes changed. The original source claims, public Devpost identity, pinned code files, schema, date, seven headings and canonical remain unchanged. The eight-minute reading estimate is also preserved. The worksheet is an original new public download; it is not represented as a signed acceptance receipt for a real buyer or payee.
 
 **Execution distinction:** This turn read the real public source and scripts via the GitHub connector and checked the public Devpost page. The model's working shell still lacks reliable external DNS to obtain a full checkout. The new ten-test Python module, Node judge smoke, standalone model run, full static generator, HTML5/browser suites and live response-byte comparison were **not executed** in this session. Static source-level assertions and GitHub diff inspection are separate from a successful runtime acceptance. Do not report historical local test counts as fresh Turn 44 results.
 
