@@ -179,6 +179,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/poker-multiway.css', 'downloads/poker-multiway-review.md']
     assets += ['assets/poker-short-stack.css', 'downloads/short-stack-icm-example.py',
                'downloads/tournament-equity-three-player-verify.py',
+               'downloads/eight-bb-shove-branch-verify.py',
                'downloads/ten-bb-bubble-icm.py', 'downloads/ten-bb-bubble-study-sheet.md',
                'downloads/poker-tournament-prize-pool-ledger.md',
                'downloads/poker-plo-wrap-enumerator.py', 'downloads/poker-plo-after-play-review.md']

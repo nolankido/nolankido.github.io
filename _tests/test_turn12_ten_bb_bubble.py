@@ -119,9 +119,10 @@ class TenBigBlindBubbleTests(unittest.TestCase):
         pages = json.loads((ROOT / '_source/pages.json').read_text(encoding='utf-8'))
         entry = next(p for p in pages if p['id'] == 'poker-six-to-ten-bb-tournament-decisions')
         self.assertEqual(entry['date'], '2026-11-15')
-        self.assertEqual(entry['updated'], '2026-11-18')
+        self.assertEqual(entry['updated'], '2026-11-20')
         self.assertIn('bubble ICM', entry['description'])
-        self.assertIn('2026-11-18', self.public)
+        self.assertIn('2026-11-18', self.public)  # historical bubble ICM release
+        self.assertIn('article:modified_time" content="2026-11-20"', self.public)
         self.assertIn('2026-11-15', self.public)
         library = json.loads((ROOT / '_source/poker/library.json').read_text(encoding='utf-8'))
         cards = library['entries'] if isinstance(library, dict) else library

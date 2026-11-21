@@ -631,9 +631,9 @@
     "source": "poker/six-to-ten-bb-tournament-decisions.html",
     "section": "poker",
     "date": "2026-11-15",
-    "updated": "2026-11-18",
+    "updated": "2026-11-20",
     "poker_guide": true,
-    "revision": "Added a separate ten-big-blind bubble ICM example, printable source-labeled review sheet and independent arithmetic checker; the published Portland Meadows hand remains unsolved."
+    "revision": "Audited the exact 8 BB cutoff shove fold and called-win thresholds against the BB call price, with an offline checker. The earlier 10 BB bubble ICM model remains a separate fictional fixture; the recorded Portland Meadows hand remains unsolved."
   },
   {
     "id": "poker-satellite-bubble-seat-equity",
