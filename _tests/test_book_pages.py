@@ -230,7 +230,8 @@ class BookPublicationTests(unittest.TestCase):
         report = check_search.audit(ROOT, build.public_pages(), book_pages.ORIGIN)
         self.assertEqual(report["manual_book_hubs"], 1)
         self.assertEqual(report["manual_book_pages"], 2)
-        self.assertEqual(report["sitemap_urls"], 229)
+        # Includes the separately registered standalone 10 BB companion.
+        self.assertEqual(report["sitemap_urls"], 230)
         self.assertEqual(report["errors"], [])
 
     def test_books_catalog_fails_closed_on_partial_or_altered_sources(self):
