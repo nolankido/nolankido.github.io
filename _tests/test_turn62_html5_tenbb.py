@@ -33,10 +33,13 @@ class Turn62TenBBHTML5(unittest.TestCase):
 
     def test_all_live_registered_canonical_html_routes_reach_html5_check(self):
         # The live inventory is the independent release target registry.
-        # Restrict comparison to public page routes, not .html worksheets.
+        # Keep canonical slash routes and .html pages such as /404.html,
+        # but exclude downloadable .html worksheets from page coverage.
         live_pages = {
             route for route, (status, body) in check_live.targets(ROOT).items()
-            if status == 200 and route.endswith("/")
+            if status == 200
+            and (route.endswith("/") or
+                 (route.endswith(".html") and not route.startswith("/downloads/")))
             and body.lstrip().lower().startswith(b"<!doctype html")
         }
         self.assertEqual(set(self.paths), live_pages)
