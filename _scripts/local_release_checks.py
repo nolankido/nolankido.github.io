@@ -155,7 +155,8 @@ def main() -> int:
         ('Public profile and topical search', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_site_find.py', '-q']),
         ('Complete author archive and standalone articles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_author_archive_standalone.py', '-q']),
         ('Standalone book publication and release coverage', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_pages.py', '-q']),
-        ('SEO and metadata', ['_scripts/check_search.py']),
+        ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
+        ('SEO snapshot drift negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_snapshot.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
     if args.full:
