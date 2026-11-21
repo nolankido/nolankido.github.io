@@ -35,7 +35,7 @@ Previously, `_tests/check_html5.py` enumerated 225 manifest pages plus ten stand
 - Complete current `_scripts/check_live.py` code showed the four named HTML downloads in its fixed asset inventory.
 - Complete current `_tests/check_html5.py` omitted downloadable HTML altogether.
 - All four public files were fetched from GitHub through the authenticated connector and inspected. The minimal lexical preflight detected the existing doctypes, preserved robots meta, and matched opening/closing counts and nesting for common block-level tags after excluding script/style text. It reported **no block-level nesting discrepancy in this narrow scan**. This is **not** a successful HTML5 parse.
-- A public content extractor and a generic web fetcher could not independently supply status-bearing direct download responses. This is **inconclusive** for live download status, not evidence of an HTTP 404.
+- A fresh read-only public content retrieval **successfully extracted all four live download pages** at their exact URLs and reported their matching original noindex policies. This confirms content-level reachability for these four files, but the extractor did not provide response status codes or raw bytes, so **HTTP/byte-exact release verification remains unproven**. A different prior attempt to read Python code downloads was inconclusive and is not used as evidence about these HTML files.
 - There are no observed Search Console, AI citation, Bing AI or Umami changes attributable to this repository-only release hardening.
 
 ## Execution status and risks
