@@ -16,6 +16,7 @@ from xml.etree import ElementTree as ET
 import build
 import public_identity
 import player_sitemap
+import tenbb_companion
 import poker_episode
 import poker_standoff_episode
 import poker_reserve_day1_episode
@@ -129,6 +130,16 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             errors.append('Books author catalog duplicates an indexed canonical')
         expected_indexed.add(book_hub['url'])
         totals['manual_book_hubs'] += 1
+    try:
+        playbook = tenbb_companion.record(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append('Standalone 10 BB playbook: ' + str(exc))
+        playbook = None
+    if playbook is not None:
+        if playbook['url'] in expected_indexed:
+            errors.append('10 BB playbook duplicates a published canonical')
+        expected_indexed.add(playbook['url'])
+        totals['manual_tenbb_pages'] += 1
     sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
     actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):

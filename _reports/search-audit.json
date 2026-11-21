@@ -10,9 +10,10 @@
   "breadcrumb_pages": 223,
   "noindex_pages": 5,
   "articles": 133,
-  "sitemap_urls": 229,
+  "sitemap_urls": 230,
   "unique_titles": 225,
   "unique_descriptions": 225,
   "errors": [],
-  "manual_book_hubs": 1
+  "manual_book_hubs": 1,
+  "manual_tenbb_pages": 1
 }
