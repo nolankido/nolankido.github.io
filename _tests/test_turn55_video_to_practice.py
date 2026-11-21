@@ -137,7 +137,9 @@ class NolanPokerAfterWatchTests(unittest.TestCase):
         hub=self.generated[0]
         videos=json.loads(read("_source/poker/nolanpoker-video-thumbnails.json"))["videos"]
         self.assertEqual(len(videos),6)
-        self.assertEqual(len(re.findall('<article class="poker-content-card"',hub)),6)
+        video_gallery=hub.split('<section class="poker-public-video-list"',1)[1].split(
+            '<section class="poker-video-source-note"',1)[0]
+        self.assertEqual(len(re.findall('<article class="poker-content-card"',video_gallery)),6)
         for v in videos:
             self.assertEqual(Anchors(video_card(hub,v["video_id"])).hrefs.count(
                 "https://www.youtube.com/watch?v="+v["video_id"]),1)
