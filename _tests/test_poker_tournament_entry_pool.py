@@ -104,12 +104,12 @@ class TournamentEntryPoolTests(unittest.TestCase):
     def test_personal_net_prizes_are_not_the_event_pool(self):
         entry_total = 2 * 400
         trip = 60
-        winnings = 950
-        self.assertEqual(winnings - entry_total - trip, 90)
+        winnings = 1000
+        self.assertEqual(winnings - entry_total - trip, 140)
         self.assertEqual(0 - entry_total - trip, -860)
-        self.assertEqual(winnings - 400 - trip, 490)
-        self.assertIn('$950 − $800 − $60 = +$90', self.source)
-        self.assertIn('$950 − $400 − $60 = +$490', self.source)
+        self.assertEqual(winnings - 400 - trip, 540)
+        self.assertIn('$1,000 − $800 − $60 = +$140', self.source)
+        self.assertIn('$1,000 − $400 − $60 = +$540', self.source)
         self.assertIn('private finances', self.source)
 
     def test_accessible_reveals_tables_and_source_boundaries(self):
