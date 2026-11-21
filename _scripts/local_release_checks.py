@@ -73,6 +73,7 @@ def main() -> int:
         ('Source-linked wine tasting guide and blank worksheet', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_wine_tasting_notes.py', '-q']),
         ('Original incremental game lab, upgrade logic and playtest protocol', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_incremental_game_loop.py', '-q']),
         ('AI answer citation panel offline checker and synthetic controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_ai_citation_panel.py', '-q']),
+        ('Turn 40: frozen 25-prompt mode roster and exact question evidence', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn40_frozen_observation_integrity.py', '-q']),
         ('AI citation guide discoverability in local site search', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_ai_citation_find_discovery.py', '-q']),
         ('Incremental upgrade payback calculator and source-linked teaching guide', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_incremental_upgrade_payback.py', '-q']),
         ('Reproducible AI business workflow pilot and offline audit', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_ai_workflow_pilot.py', '-q']),

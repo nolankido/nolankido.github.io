@@ -416,6 +416,8 @@ older monthly eight-question kit remains independent, and their denominators
 must not be combined. Run `_tests/test_turn19_frozen_answer_panel.py` when
 editing these files; the three downloads are read-only live-byte targets.
 
+Turn 40 adds a **strict, predeclared assistant-mode audit option** without changing any of those 25 prompts. Copy `downloads/ai-answer-sprint-25-roster-blank.csv` into a private folder and record the exact assistant/search modes **before** running prompts. For completed answers, copy the actual submitted wording, not just the planned question, into a private copy of `downloads/ai-answer-sprint-25-submitted-prompts-blank.csv`. Supply both files using `--roster` and `--submitted-prompts`. A different assistant mode or even one missing word from the frozen prompt causes a strict audit failure; missing trials remain unknown, not misses. The checker still cannot prove the browser showed a clickable citation, so keep screenshots or conversation records privately. Details: `_reports/visibility-sprint/seo-geo-turn40-answer-panel-protocol-2026-11-20.md`.
+
 Turn 20 adds an answer-first `#who-is-nolan-kido` section to the existing
 `/about/` ProfilePage. It connects primary public software source snapshots,
 the independent 2012 accounting paper byline and separately sourced tournament
