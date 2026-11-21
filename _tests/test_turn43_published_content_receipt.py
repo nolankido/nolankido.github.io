@@ -125,8 +125,8 @@ class PublishedContentWorkflowTests(unittest.TestCase):
         inventory = check_live.targets(ROOT)
         self.assertIn(RECEIPT_ROUTE, inventory)
         self.assertEqual(inventory[RECEIPT_ROUTE], (200, RECEIPT.read_bytes()))
-        self.assertNotIn("—", self.receipt)
-        self.assertNotIn("—", arrival_paragraph(self.source))
+        self.assertNotIn(chr(0x2014), self.receipt)
+        self.assertNotIn(chr(0x2014), arrival_paragraph(self.source))
 
     def test_existing_fact_gate_reprotection_is_not_weakened(self):
         self.assertIn("/downloads/poker-vlog-fact-gate.py", self.receipt)
