@@ -400,6 +400,8 @@ with `html5lib==1.1`, and `python _tests/workflow_evidence_browser.py` for the n
 reader and calculator journeys. Both can be run locally; the earlier 21 browser suites remain documented. See `_reports/workflow-evidence-release.md` for scope and the
 Search Console property-access limitation.
 
+Turn 42 surfaces a four-link evidence path near the start of the same case: exact pinned source before and after the repair, the historical release record, and the small offline parser reproduction. The source comparison verifies an unnecessary closing tag; historical suite totals are still archived reports, not newly rerun tests. The added path introduces no new article, changes no canonical URL or publication date, and does not change the six-section outline. Run `_tests/test_turn42_repair_proof_path.py` and the standard offline release checks. See `_reports/visibility-sprint/seo-geo-turn42-repair-proof-path-2026-11-20.md`.
+
 ## AI search and answer visibility measurement
 
 Turn 19 extends `/technology/ai-website-visibility/#ai-answer-sprint-panel`
