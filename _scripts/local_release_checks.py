@@ -168,6 +168,7 @@ def main() -> int:
         ('Turn 65 10 BB site Find reader discovery and section routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn65_tenbb_find.py', '-q']),
         ('Turn 66 playbook contextual reader paths', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn66_tenbb_reader_paths.py', '-q']),
         ('Turn 67 standalone written Playbook status and section navigation', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn67_playbook_standalone.py', '-q']),
+        ('Turn 68 practical AI workflow pilot discovery from Home and Start Here', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn68_workflow_pilot_discovery.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
