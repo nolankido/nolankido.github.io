@@ -19,7 +19,7 @@ This is a confirmed **test coverage defect**, not evidence that the currently pu
 
 1. **`_tests/check_html5.py`:** Call the existing `tenbb_companion.record(root)` fail-closed publication validator, reject a duplicate canonical route, and include its exact `tenbb_companion.OUTPUT` in `publication_paths()`. No second registry or content authoring was added.
 2. **`_tests/test_turn34_release_integrity.py`:** Update the static HTML5 page inventory assertion from `len(manifest) + 9` to `len(manifest) + 10` and explicitly parse the 10 BB page as part of the existing regression.
-3. **`_tests/test_turn62_html5_tenbb.py`:** Add a focused contract verifying complete inventory, the public page's HTML5 parsing, negative detection of an extra closing tag, rejection of duplicate 10 BB routes, and registration in the local release runner.
+3. **`_tests/test_turn62_html5_tenbb.py`:** Add a focused contract verifying complete inventory, independent route equality with canonical HTML in the production target registry, the public page's HTML5 parsing, negative detection of an extra closing tag, rejection of duplicate 10 BB routes, and registration in the local release runner.
 4. **`_scripts/local_release_checks.py`:** Run the new focused test during the default local checklist, followed by the existing full HTML5 checker. No remote CI or schedule.
 5. **`AGENTS.md`:** Correct the stale standalone count and document the actual ten standalone pages covered by HTML5 checking.
 
@@ -30,7 +30,7 @@ This is a confirmed **test coverage defect**, not evidence that the currently pu
 - Repository `main` was pinned to `f3c82e4fa30d04fe62306c59bb7b626a55a9b428` before the fix.
 - Read-only full recursive Git tree was retrieved, not truncated. No repository-authored GitHub Actions workflows were added.
 - Prechange `_tests/check_html5.py` lacked any `tenbb_companion` import or registration, while `_scripts/check_live.py` did contain it. Historical test code expected only nine extra HTML documents.
-- Prechange public `poker/10bb/index.html` is a single manually authored HTML document with one `<main>` and one `</main>`, and the existing Turn 52 evidence check preserves its route. This superficial structure check does not replace an HTML5 parser.
+- Prechange public `poker/10bb/index.html` is a single manually authored HTML document with one `<main>` and one `</main>`, and the existing Turn 52 evidence check preserves its route. A separate source-level lexical scan found balanced and correctly nested tracked block tags on the 10 BB public file (including main, article, section, table and div). This narrow check does not replace an HTML5 parser.
 - A bounded separate Git-tree link-target audit examined **22 selected public HTML pages** (Home, About, Technology, AI portfolio, three book pages, Poker, 10 BB, three current poker study pages, Contact, a video companion, website-repair case, Start Here, Resources, Projects, Poker Library, two topic indexes and Bio). It processed **1,992 internal-anchor references**, checked target-path presence in the committed Git tree, and checked same-document hash IDs. No missing target or same-document fragment was found in this sample. This static regex check does **not** cover cross-document fragment IDs, runtime navigation, actual HTTP status or all site pages; `_scripts/check_internal_links.py` is the authoritative full offline check.
 
 ## Verification status and limitations
