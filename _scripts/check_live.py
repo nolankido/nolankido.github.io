@@ -154,6 +154,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/nolan-kido-public-profile-kit.md']
     assets += ['downloads/gsc-monthly-local-audit.py',
                'downloads/gsc-period-compare.py',
+               'downloads/visibility-private-scorecard.py',
                'downloads/gsc-download-verify.py',
                'downloads/gsc-synthetic-dates.csv',
                'downloads/gsc-synthetic-pages.csv']
