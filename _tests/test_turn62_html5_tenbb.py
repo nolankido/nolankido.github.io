@@ -48,7 +48,7 @@ class Turn62TenBBHTML5(unittest.TestCase):
     def test_manual_runner_invokes_this_regression_and_html5_parser(self):
         runner = (ROOT / "_scripts/local_release_checks.py").read_text(encoding="utf-8")
         self.assertIn("'test_turn62_html5_tenbb.py'", runner)
-        self.assertIn("('_tests/check_html5.py'", runner)
+        self.assertIn("['_tests/check_html5.py']", runner)
         # These checks remain local. No repository-authored Actions workflows.
         forbidden = ROOT / ".github" / "workflows"
         self.assertFalse(forbidden.exists() and any(
