@@ -184,8 +184,8 @@ class CrossCaseStopRulesTests(unittest.TestCase):
                         "review-poker-solver-claim", "review-completed-record"):
                 self.assertEqual(document.count('id="' + id_ + '"'), 1)
             self.assertEqual(document.count('<details class="review-example" id="'), 6)
-        self.assertEqual(len(re.findall(r'<h2\\b', self.source)), 9)
-        self.assertEqual(len(re.findall(r'<h2\\b', self.public)), 10)
+        self.assertEqual(len(re.findall(r'<h2\b', self.source)), 9)
+        self.assertEqual(len(re.findall(r'<h2\b', self.public)), 10)
         self.assertIn("not a completed visibility result", self.source)
         self.assertIn("No actual hand, opponent range or showdown win probability",
                       self.source)
