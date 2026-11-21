@@ -25,7 +25,7 @@ For a bounded production smoke check after a release, use `python _tests/diagnos
 
 ### Complete local release coverage
 
-Install `requirements-test.txt` in a local virtual environment, then run `python _scripts/local_release_checks.py`. The default checklist includes the two Portland Meadows companion builders, the Reserve Day 1 companion builder, the search audit, and HTML5 parsing of all manifest pages plus the six source-validated standalone pages. `--full` additionally runs the historical unit suite; `--browser` additionally runs the local browser scripts. A failed standalone build must fail the checklist.
+Install `requirements-test.txt` in a local virtual environment, then run `python _scripts/local_release_checks.py`. The default checklist includes the two Portland Meadows companion builders, the Reserve Day 1 companion builder, the search audit, and HTML5 parsing of all manifest pages plus ten independently registered standalone HTML pages: six non-book manual pages, two author book pages, the Books catalog and the 10 BB Playbook. `--full` additionally runs the historical unit suite; `--browser` additionally runs the local browser scripts. A failed standalone build must fail the checklist.
 
 `_scripts/search_entrypoints.py` must preserve the later of a page's actual content revision and its search-copy revision. An older search-description record must not backdate a later content change in structured data or the sitemap. Do not advance dates merely because a build ran.
 
