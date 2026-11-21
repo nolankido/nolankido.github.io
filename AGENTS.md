@@ -254,6 +254,10 @@ prices have not been independently verified in this release.
 Do not add invented offers, dates, seller links, reviews,
 ratings or sales evidence. Never restore GitHub Actions.
 
+## Turn 49 topic-to-book navigation
+
+The free `/technology/ai-workflow-pilot/`, `/poker/no-limit-holdem-guide/` and `/poker/poker-books-and-courses/` articles have a single unfragmented author book link, one direct original website-example link and the existing free worksheet. Keep the poker books comparison clearly first-person, not an independent review. The book pages link back to `#pilot-protocol` and `#choose-your-route` in the free canonical guides. No genuine book excerpts or retail offers are verified. Home, About, Bio, Creative and Books catalog were audited but not changed in Turn 49. Keep current Book Person IDs, publication metadata and canonical URLs, and avoid duplicate promotional blocks. Run `test_turn49_topic_book_paths.py` with the full local build/search/HTML5/link/browser checks. Do not reactivate GitHub Actions.
+
 ## Turn 48 reader-first book pages and mobile/keyboard boundaries
 
 The existing two standalone author book pages at `/books/one-workflow-at-a-time/` and `/books/how-to-play-no-limit-texas-holdem/` now include one named `nav.shell.book-reader-jumps` after the page hero with four native destinations: who the book serves, the original teaching example, free practice, and the existing edition-evidence section. Each page also has one `details.book-sample-answer` with a native `summary`, a site-original fictional practice question, and an answer that distinguishes arithmetic from missing evidence. These are **independent website exercises**, NOT book chapter excerpts or examples asserted to match the final owned retail edition. Do not claim an excerpt, purchase availability, customer/sales result or poker profit without verification.
