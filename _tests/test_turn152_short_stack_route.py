@@ -23,6 +23,15 @@ ROUTES = (
     ("/poker/short-stack-decisions/", "10–20 BB: context and ICM"),
 )
 
+SUPPORTING = (
+    ("/poker/six-to-ten-bb-tournament-decisions/#bridge-bubble",
+     "Compare chip value and payout value in a worked bubble call"),
+    ("/poker/10bb/#practice-title",
+     "try the 10 BB Playbook's answered exercises"),
+    ("/poker/evaluating-poker-advice/#solver-fit-test",
+     "check whether a ten-blind solver recommendation actually fits the hand"),
+)
+
 
 def route_errors(content):
     errors = []
@@ -33,11 +42,11 @@ def route_errors(content):
         return ["unclosed navigation paragraph"]
     fragment = match.group(1)
     links = re.findall(r'<a href="([^"]+)">([^<]+)</a>', fragment)
-    if links != list(ROUTES):
-        errors.append("stack ranges, destinations or order differ from source guides")
+    if links != [*ROUTES, *SUPPORTING]:
+        errors.append("stack ranges, contextual destinations or order differ from source guides")
     if "Short-stacked in a tournament?" not in fragment:
         errors.append("the intended reader context is missing")
-    if "not universal shove charts" not in fragment:
+    if "None is a universal shove chart." not in fragment:
         errors.append("a strategy limitation is missing")
     if any(token in fragment for token in ("—", "<script", "onclick=", "utm_", "youtube.com")):
         errors.append("unexpected punctuation, scripting or tracking")
@@ -78,8 +87,8 @@ class ShortStackNavigationTests(unittest.TestCase):
                 self.assertTrue((ROOT / url.lstrip("/") / "index.html").is_file())
                 self.assertIn(label, self.public)
         poker = next(p for p in pages if p["path"] == "/poker/")
-        self.assertEqual(poker["updated"], "2026-11-16")
-        self.assertIn('"dateModified": "2026-11-16"', self.public)
+        self.assertEqual(poker["updated"], "2026-11-20")
+        self.assertIn('"dateModified": "2026-11-20"', self.public)
 
     def test_current_poker_source_rebuilds_to_exact_committed_html(self):
         self.assertEqual(build.build_outputs()[Path("poker/index.html")], self.public)
@@ -88,7 +97,8 @@ class ShortStackNavigationTests(unittest.TestCase):
         mutations = (
             self.source.replace("/poker/three-to-five-bb-tournament-decisions/", "/poker/missing-guide/", 1),
             self.source.replace("6–10 BB: opens and rejams", "8–20 BB: shoves", 1),
-            self.source.replace("These examples are not universal shove charts.", "These are guaranteed shoves.", 1),
+            self.source.replace("None is a universal shove chart.", "These are guaranteed shoves.", 1),
+            self.source.replace('/poker/10bb/#practice-title', '/poker/10bb/#missing-anchor', 1),
             self.source.replace(MARKER, MARKER + MARKER, 1),
         )
         for index, altered in enumerate(mutations):
