@@ -90,10 +90,11 @@ class Turn67WrittenPlaybook(unittest.TestCase):
         self.assertEqual(self.entry["path"], "/poker/10bb/")
         self.assertEqual(self.entry["home"], "poker")
         self.assertEqual(self.find.count('href="/poker/10bb/"'), 1)
-        match = re.search(r'<li class="find-item"[^>]*>.*?<h3><a href="/poker/10bb/">.*?</li>',
-                          self.find, re.S)
-        self.assertIsNotNone(match)
-        card = match.group()
+        cards = [match.group() for match in re.finditer(
+            r'<li class="find-item"[^>]*>.*?</li>', self.find, re.S)
+            if 'href="/poker/10bb/"' in match.group()]
+        self.assertEqual(len(cards), 1)
+        card = cards[0]
         self.assertIn('data-kind="guide"', card)
         self.assertIn(escape(self.entry["description"], quote=True), card)
         self.assertNotIn("Video companion", card)
@@ -121,7 +122,8 @@ class Turn67WrittenPlaybook(unittest.TestCase):
     def test_missing_disclaimer_false_video_claim_and_broken_anchor_fail(self):
         bad_versions = [
             self.page.replace("No video is required.", "Watch the complete course now.", 1),
-            self.page.replace('href="#practice"', 'href="#missing-lesson"', 1),
+            self.page.replace('<li><a href="#practice">Six answered questions</a></li>',
+                              '<li><a href="#missing-lesson">Six answered questions</a></li>', 1),
             self.page.replace('id="icm-reproduce"', 'id="unknown"', 1),
             self.page.replace("matching public NolanPoker course-video URL and synchronized chapter times have not been verified", "The complete video is published", 1),
             self.page.replace('id="practice"', 'id="icm"', 1),
