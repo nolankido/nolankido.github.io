@@ -1165,9 +1165,9 @@
     "source": "poker/poker-rules-and-fair-play.html",
     "section": "poker",
     "date": "2026-10-08",
-    "updated": "2026-10-16",
+    "updated": "2026-11-20",
     "poker_guide": true,
-    "revision": "Corrected the TDA rules reference and rechecked its current edition; other source-review dates and teaching examples are unchanged."
+    "revision": "Added the player-specific 2026 Poker TDA Rule 49 reopening example, preserving the earlier rules-directory source review date."
   },
   {
     "id": "poker-find",
