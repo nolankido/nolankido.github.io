@@ -40,6 +40,12 @@ class Turn38LiveEvidenceTests(unittest.TestCase):
         }
         self.assertTrue(expected.issubset(routes))
 
+    def test_current_inventory_registers_all_priority_targets(self):
+        # This is deliberately a full-checkout source inventory test, not HTTP.
+        inventory = diagnostics.check_live.targets(ROOT)
+        missing = sorted(set(diagnostics.PRIORITY) - set(inventory))
+        self.assertEqual(missing, [])
+
     def test_priority_scope_requires_every_registered_target(self):
         with patch.object(diagnostics.check_live, "targets", return_value={"/": (200, b"ok")}):
             with self.assertRaisesRegex(ValueError, "Priority release targets are not registered"):
@@ -48,9 +54,10 @@ class Turn38LiveEvidenceTests(unittest.TestCase):
     def test_priority_scope_complete_synthetic_pass(self):
         inventory = {route: (200, b"same") for route in diagnostics.PRIORITY}
         inventory["/review-no-such-page-20261005/"] = (404, b"known-404")
+        observed = [(True, f"HTTP {status}; exact release bytes")
+                    for status, _ in inventory.values()]
         result, calls, probes = self.run_cases(
-            [(True, "HTTP 200; exact release bytes")] * len(inventory),
-            inventory=inventory, scope="priority")
+            observed, inventory=inventory, scope="priority")
         self.assertEqual(calls, len(inventory))
         self.assertEqual(probes, 0)
         self.assertEqual((result["status"], result["passed"], result["failed"]),
@@ -103,7 +110,7 @@ class Turn38LiveEvidenceTests(unittest.TestCase):
         self.assertEqual(result["inconclusive_routes"], ["/books/"])
         self.assertEqual(diagnostics.exit_code(result), 1)
 
-    def test_expected_negative_control_404_is_accepted_only_on_exact_bytes(self):
+    def test_expected_negative_control_404_can_pass_when_checker_verifies_bytes(self):
         route = "/review-no-such-page-20261005/"
         result, _, _ = self.run_cases(
             [(True, "HTTP 404; exact release bytes")],
