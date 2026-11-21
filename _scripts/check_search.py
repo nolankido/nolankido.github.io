@@ -235,10 +235,38 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             'unique_descriptions': len(descriptions), 'errors': errors}
 
 
+
+def snapshot_differences(result: dict, path: Path) -> list[str]:
+    """Fail closed when a committed search report no longer matches the generated audit.
+
+    This compares every field, not just the sitemap count or pass status.
+    It does not rewrite the report, which requires an explicit reviewed update.
+    """
+    try:
+        recorded = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        return [f'Cannot read committed search audit snapshot: {exc}']
+    if not isinstance(recorded, dict):
+        return ['Committed search audit snapshot must be a JSON object']
+    differences = []
+    for key in sorted(set(result) | set(recorded)):
+        if key not in result:
+            differences.append(f'{key}: field no longer exists in generated audit')
+        elif key not in recorded:
+            differences.append(f'{key}: missing from committed snapshot')
+        elif result[key] != recorded[key]:
+            differences.append(f'{key}: committed={recorded[key]!r}, generated={result[key]!r}')
+    return differences
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--json', type=Path, help='Optionally write the deterministic audit report')
+    parser.add_argument('--verify-snapshot', type=Path,
+                        help='Fail if the existing report differs from the current deterministic audit')
     args = parser.parse_args()
+    if args.json and args.verify_snapshot:
+        parser.error('--json and --verify-snapshot cannot be used together')
     site = json.loads((ROOT/'_source/site.json').read_text(encoding='utf-8'))
     result = audit(ROOT, build.public_pages(), site['url'])
     rendered = json.dumps(result, indent=2) + '\n'
@@ -246,6 +274,18 @@ def main():
         args.json.parent.mkdir(parents=True, exist_ok=True)
         args.json.write_text(rendered, encoding='utf-8')
     print(rendered, end='')
+    if args.verify_snapshot:
+        path = args.verify_snapshot
+        if not path.is_absolute():
+            path = ROOT / path
+        differences = snapshot_differences(result, path)
+        if differences:
+            print('Committed search audit snapshot does not match:', file=sys.stderr)
+            for difference in differences:
+                print('  ' + difference, file=sys.stderr)
+        else:
+            print('Committed search audit snapshot: MATCH')
+        return bool(result['errors'] or differences)
     return bool(result['errors'])
 
 
