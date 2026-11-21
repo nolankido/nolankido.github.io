@@ -1433,8 +1433,8 @@
     "section": "technology",
     "worked_guide": true,
     "date": "2026-10-12",
-    "updated": "2026-11-19",
-    "revision": "Added a reproducible cross-topic audit of a fictional AI poker call claim beside the existing Google AI Overviews source check, separating chip price, ICM prize equity and unknown showdown odds."
+    "updated": "2026-11-20",
+    "revision": "Added a source-linked four-case AI reliability and stop-rule matrix with a downloadable decision worksheet, separating repairable flaws, missing authority, and manual alternatives."
   },
   {
     "id": "poker-first-decisions",

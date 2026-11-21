@@ -107,7 +107,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['technology/feed.xml', 'assets/practical-discovery.css', 'assets/work/task-brief-preview.png', 'assets/work/ai-time-savings-preview.png']
     assets += ['assets/ai-task-choice.css', 'assets/ai-task-choice.js', 'downloads/should-i-use-ai.txt', 'favicon.png', 'apple-touch-icon.png']
     assets += ['assets/summary-review.css', 'downloads/ai-summary-review.txt']
-    assets += ['assets/answer-review.css', 'downloads/ai-answer-review.txt', 'downloads/ai-answer-quick-check.txt']
+    assets += ['assets/answer-review.css', 'downloads/ai-answer-review.txt',
+               'downloads/ai-answer-quick-check.txt', 'downloads/ai-stop-rules-field-guide.md']
     assets += ['assets/search-entrypoints.css', 'assets/author-archive.css', 'assets/resources-reader.css', 'assets/living-well-reader.css']
     assets += ['assets/standalone-section-arrivals.css']
     # Exact release checks for the original worksheets and social topic
