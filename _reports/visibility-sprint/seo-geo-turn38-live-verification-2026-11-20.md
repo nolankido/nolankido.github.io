@@ -50,7 +50,7 @@ The existing manual diagnostic `_tests/diagnose_live_crawl.py` was preserved as 
    - `status=fail`, exit **1**: at least one observed HTTP/status or byte mismatch, even if other routes are also inconclusive.
    - `status=inconclusive`, exit **2**: one or more unresolved transport-only outcomes and no observed mismatch.
 
-A new `_tests/test_turn38_live_evidence.py` supplies 10 offline negative-control scenarios for current priority scope, missing registration, HTTP 404 versus DNS, response bytes, retry recovery, mixed outcomes and the intentional 404 route. It is now registered in the local release checklist. `AGENTS.md` gives the exact manual command and the evidence interpretation.
+A new `_tests/test_turn38_live_evidence.py` supplies 11 offline regression scenarios, including a full-checkout test that all priority routes are actually registered, and synthetic negative controls for current priority scope, missing registration, HTTP 404 versus DNS, response bytes, retry recovery, mixed outcomes and the intentional 404 route. It is now registered in the local release checklist. `AGENTS.md` gives the exact manual command and the evidence interpretation.
 
 **Complete checkout command (network-capable machine):**
 
