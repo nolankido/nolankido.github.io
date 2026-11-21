@@ -33,6 +33,7 @@ OBSERVATION_FIELDS = (
     'linked_url', 'text_only_mention', 'answer_correctness', 'task_completed',
 )
 ROSTER_FIELDS = ('assistant', 'mode')
+PROMPT_EVIDENCE_FIELDS = ('prompt_id', 'assistant', 'mode', 'submitted_prompt')
 SEGMENT_SIZES = {'nonbranded': 20, 'branded': 5}
 HOSTS = {'nolankido.com', 'www.nolankido.com'}
 STATUSES = {'completed', 'incomplete', 'not_checked'}
@@ -197,6 +198,44 @@ def load_observations(path: Path, month: str, prompts: dict[str, dict[str, str]]
         raise InvalidPanel('Observation file must be UTF-8.') from exc
 
 
+
+def verify_submitted_prompts(path: Path, rows: list[dict[str, str]],
+                             prompts: dict[str, dict[str, str]]) -> int:
+    """Check copied question text against the frozen panel, one per completed row.
+
+    The tool can compare the supplied text, not independently prove what
+    appeared in a third-party assistant's prompt box. Preserve screenshots
+    and conversation URLs privately to establish observation provenance.
+    """
+    completed = {(r['prompt_id'], r['assistant'], r['mode'])
+                 for r in rows if r['status'] == 'completed'}
+    seen = set()
+    try:
+        with path.open('r', encoding='utf-8-sig', newline='') as handle:
+            reader = csv.DictReader(handle)
+            if reader.fieldnames != list(PROMPT_EVIDENCE_FIELDS):
+                raise InvalidPanel('Prompt evidence file needs prompt_id,assistant,mode,submitted_prompt columns.')
+            for lineno, raw in enumerate(reader, start=2):
+                if None in raw or any(value is None for value in raw.values()):
+                    raise InvalidPanel(f'Prompt evidence row {lineno}: wrong number of columns.')
+                ident = raw['prompt_id'].strip()
+                assistant = raw['assistant'].strip()
+                mode = raw['mode'].strip()
+                key = (ident, assistant, mode)
+                if key not in completed:
+                    raise InvalidPanel(f'Prompt evidence row {lineno}: trial is not a completed observation.')
+                if key in seen:
+                    raise InvalidPanel(f'Prompt evidence row {lineno}: repeated trial.')
+                seen.add(key)
+                if raw['submitted_prompt'] != prompts[ident]['exact_prompt']:
+                    raise InvalidPanel(f'Prompt evidence row {lineno}: submitted text differs from frozen prompt.')
+    except UnicodeError as exc:
+        raise InvalidPanel('Prompt evidence file must be UTF-8.') from exc
+    if completed != seen:
+        raise InvalidPanel('Every completed observation needs exact submitted prompt evidence.')
+    return len(seen)
+
+
 def segment_metrics(rows: list[dict[str, str]], expected: int,
                     prompts: dict[str, dict[str, str]]) -> dict:
     completed = [r for r in rows if r['status'] == 'completed']
@@ -220,7 +259,8 @@ def segment_metrics(rows: list[dict[str, str]], expected: int,
 
 def summarize(rows: list[dict[str, str]], month: str, modes: int,
               prompts: dict[str, dict[str, str]],
-              roster: list[tuple[str, str]] | None = None) -> dict:
+              roster: list[tuple[str, str]] | None = None,
+              submitted_prompt_count: int | None = None) -> dict:
     if not 1 <= modes <= 20:
         raise InvalidPanel('Expected modes must be 1 to 20 preselected assistant/mode combinations.')
     if roster is not None:
@@ -234,6 +274,9 @@ def summarize(rows: list[dict[str, str]], month: str, modes: int,
             key = (row['assistant'].casefold(), row['mode'].casefold())
             if key not in planned or planned[key] != (row['assistant'], row['mode']):
                 raise InvalidPanel('Observation assistant/mode is not an exact roster entry.')
+    if submitted_prompt_count is not None:
+        if submitted_prompt_count != sum(r['status'] == 'completed' for r in rows):
+            raise InvalidPanel('Submitted prompt evidence count disagrees with completed trials.')
     expected = modes * len(prompts)
     if len(rows) > expected:
         raise InvalidPanel('More recorded rows than planned trials.')
@@ -267,6 +310,7 @@ def summarize(rows: list[dict[str, str]], month: str, modes: int,
         'panel_sha256': PANEL_SHA256,
         'expected_assistant_mode_combinations': modes,
         'roster_predeclared': roster is not None,
+        'submitted_prompt_text_checked': submitted_prompt_count is not None,
         'per_mode_coverage': per_mode,
         'status': ('no_completed_trials' if completed == 0 else
                    'complete' if completed == expected else 'partial'),
@@ -287,7 +331,8 @@ def summarize(rows: list[dict[str, str]], month: str, modes: int,
             'A same-domain link on a different page is not an expected-page citation.',
             'This is a fixed observational sample, not traffic, platform-wide ranking or causal uplift.',
             'The older eight-prompt monthly panel is a different method and cannot be pooled with this panel.',
-            'An optional predeclared mode roster prevents mode substitutions, but cannot certify a genuine answer.',
+            'A predeclared roster prevents mode substitutions; a supplied exact-prompt record detects wording drift.',
+            'Prompt-text equality is checked only against operator-supplied evidence; the tool cannot authenticate the assistant UI.',
             'Raw answers, URLs, user data and first-party analytics must remain private.',
         ],
     }
@@ -304,13 +349,19 @@ def main(argv: list[str] | None = None) -> int:
                         help='Your privately completed observation log')
     parser.add_argument('--roster', type=Path,
                         help='Predeclared private assistant,mode CSV; enforces exactly the planned modes')
+    parser.add_argument('--submitted-prompts', type=Path,
+                        help='Private CSV of exact text visibly submitted for each completed trial')
     args = parser.parse_args(argv)
     try:
         month_check(args.month)
+        if bool(args.roster) != bool(args.submitted_prompts):
+            raise InvalidPanel('Strict mode requires both --roster and --submitted-prompts.')
         prompts = load_prompts(args.prompts)
         roster = load_roster(args.roster) if args.roster else None
         rows = load_observations(args.csv, args.month, prompts)
-        report = summarize(rows, args.month, args.expected_modes, prompts, roster)
+        verified_count = (verify_submitted_prompts(args.submitted_prompts, rows, prompts)
+                          if args.submitted_prompts else None)
+        report = summarize(rows, args.month, args.expected_modes, prompts, roster, verified_count)
     except OSError:
         print('Invalid 25-prompt panel: cannot read a required local file.', file=sys.stderr)
         return 2
