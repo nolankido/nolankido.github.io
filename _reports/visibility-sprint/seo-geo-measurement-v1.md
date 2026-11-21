@@ -1,6 +1,6 @@
 # SEO and GEO Measurement Protocol
 
-Version 1.0 | October 29, 2026 | Site: https://nolankido.com/
+Version 1.1 | Updated November 21, 2026 | First issued October 29, 2026 | Site: https://nolankido.com/
 
 ## Purpose and ownership
 
@@ -139,7 +139,19 @@ Calculated columns:
 - `brand_accuracy_rate = brand_accurate / brand_trials` if trials > 0.
 - `month_over_month_change = (current - previous) / previous` if both exist and previous > 0.
 - Never average rates across months without weighting by their trial counts.
-- Keep direct export links, screenshot evidence, date ranges, engine/product versions, and data gaps in a **private** supporting log. A measured zero is entered as `0`; missing remains blank.
+- Keep direct export links, screenshot evidence, date ranges, engine/product versions, and data gaps in a **private** supporting log. A measured zero is entered as `0` only when the underlying dashboard actually displayed a numeric zero; missing, hidden or unavailable counts remain blank. The Google AI CSV-zero guard below supplies an additional machine-checked attestation.
+
+### Safeguard against false zero AI impressions in CSV exports
+
+Google's [Generative AI performance report (Search) documentation](https://support.google.com/webmasters/answer/16984139) warns that an unavailable chart or table value rendered as `~` or `-` becomes **0 in the downloaded file**. A zero in that export alone is therefore **ambiguous**. It is not evidence that the site received exactly zero AI impressions.
+
+For a monthly private `downloads/visibility-private-scorecard.py` dashboard JSON intake, Google AI Search and Google AI Discover metrics should use these rules:
+
+- **Report missing, insufficient data, or displayed `~` / `-`:** record `{"status":"unavailable"}` without a numeric value. The output remains `null`.
+- **Confirmed positive numeric count:** record `{"status":"observed","value":N,"property":"sc-domain:nolankido.com","period_verified":true}` with an actual nonnegative integer `N` greater than zero, using the exact verified original property and reporting month.
+- **Genuine displayed numeric 0:** use the same observed record with `"value":0`, and also supply `"display_zero_confirmed":true` **only after inspecting the original dashboard**, not merely its CSV export. If that inspection cannot be performed, use `unavailable`, not an observed zero. The scorecard rejects a Google AI zero without the explicit flag; the flag is not used for positive counts or other providers.
+
+These are operator attestations, not authenticated screen checks performed by the offline program. Keep dashboard screenshots, exact dates, properties and exports in private owner storage. Do not put this evidence or personal traffic data in the public repository. Avoid interpreting an absent report as proof of no citations, and keep Google AI, traditional Web Search, Bing citations and assistant referrals separate.
 
 ## Initial public technical baseline, October 29, 2026
 

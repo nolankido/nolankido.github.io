@@ -23,6 +23,7 @@ SOURCES = {
     "umami_ai_referral_pageviews": {"nolankido.com"},
 }
 WEB_METRICS = ("gsc_web_clicks", "gsc_web_impressions", "technology_exported_page_clicks")
+GOOGLE_AI_METRICS = frozenset({"gsc_ai_search_impressions", "gsc_ai_discover_impressions"})
 
 
 class IntakeError(ValueError):
@@ -60,11 +61,20 @@ def read_dashboard(path: Path | None, month: str) -> dict:
             if set(item) != {"status"}:
                 raise IntakeError("unavailable dashboard metric cannot have a value")
             continue
-        if (set(item) != {"status", "value", "property", "period_verified"}
+        # Search Console can export unavailable (~ or -) display values as 0.
+        # A CSV zero therefore cannot by itself justify an observed AI zero.
+        # Keep the confirmation on the owner's private input, not the public site.
+        google_ai_zero = (name in GOOGLE_AI_METRICS and
+                          type(item.get("value")) is int and item["value"] == 0)
+        expected = {"status", "value", "property", "period_verified"}
+        if google_ai_zero:
+            expected.add("display_zero_confirmed")
+        if (set(item) != expected
                 or not count(item["value"])
                 or item["property"] not in SOURCES[name]
-                or item["period_verified"] is not True):
-            raise IntakeError("observed dashboard metrics require validated count, property and period confirmation")
+                or item["period_verified"] is not True
+                or (google_ai_zero and item["display_zero_confirmed"] is not True)):
+            raise IntakeError("observed dashboard counts require verified property, period and genuine numeric zero display")
     return metrics
 
 
@@ -96,6 +106,14 @@ def make_scorecard(month: str, dashboard: dict, gsc: dict | None,
         raise IntakeError("cannot confirm GSC filters without a summary and property")
     if gsc is not None and (gsc_property is None or gsc["month"] != month):
         raise IntakeError("GSC summary and named property are required and must match month")
+    # Preserve the zero-evidence invariant even if a caller bypasses the CLI
+    # reader and calls make_scorecard directly with its own in-memory records.
+    for name in GOOGLE_AI_METRICS:
+        item = dashboard.get(name)
+        if (item is not None and item.get("status") == "observed"
+                and type(item.get("value")) is int and item["value"] == 0
+                and item.get("display_zero_confirmed") is not True):
+            raise IntakeError("Google AI numeric zero requires confirmation from the original display")
     out = {}
     for name in WEB_METRICS:
         raw = None
@@ -124,7 +142,7 @@ def make_scorecard(month: str, dashboard: dict, gsc: dict | None,
         "tool_checked_dashboard_authentication": False,
         "limitations": [
             "Private aggregates only. Never publish this scorecard or underlying exports to GitHub.",
-            "A missing source is not a measured zero. A reported zero may originate in a dashboard export's unavailable display values.",
+            "A missing source is not a measured zero. Google AI zero counts require confirmation that the original report displayed a numeric zero, not ~ or - converted by CSV export.",
             "The operator must confirm original property, dates, reporting filters and data maturity.",
             "Google Search, Google AI Search, Google AI Discover, Bing AI citations and Umami referrer pageviews are separate series, never additive.",
             "A Bing AI citation is not a click or ranking. A referrer pageview is not a unique visitor or conversion.",
