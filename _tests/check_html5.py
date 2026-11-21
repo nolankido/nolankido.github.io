@@ -15,6 +15,7 @@ import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
 import book_pages
+import tenbb_companion
 
 
 def parse_errors(document: str) -> list:
@@ -50,6 +51,12 @@ def publication_paths(root: Path, pages: list[dict]) -> dict[str, Path]:
         if hub['route'] in paths:
             raise ValueError('Books catalog duplicates a manifest or manual HTML page')
         paths[hub['route']] = book_pages.HUB_OUTPUT
+    # The separately authored 10 BB guide has its own validated registration.
+    # Excluding it here leaves a public sitemap page outside HTML5 checking.
+    tenbb = tenbb_companion.record(root)
+    if tenbb['route'] in paths:
+        raise ValueError('Standalone 10 BB Playbook duplicates a manifest or manual HTML page')
+    paths[tenbb['route']] = tenbb_companion.OUTPUT
     return paths
 
 
