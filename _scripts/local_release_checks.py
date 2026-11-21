@@ -182,6 +182,7 @@ def main() -> int:
         ('Turn 59 personal cash versus fictional payout ladder and quiz', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn59_payout_consistency.py', '-q']),
         ('Turn 60 complete card-filtered Bayes range update, exact source and blocker checks', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn60_bayes_update.py', '-q']),
         ('Live diagnostic result classification and priority scope', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_live_evidence.py', '-q']),
+        ('Turn 62 10 BB HTML5 publication coverage and fail-closed guards', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn62_html5_tenbb.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
     if args.full:

@@ -104,13 +104,14 @@ class ReleaseIntegrityTests(unittest.TestCase):
 
     def test_html_parser_covers_every_source_owned_page(self):
         paths = check_html5.publication_paths(ROOT, self.pages)
-        self.assertEqual(len(paths), len(self.pages) + 9)
+        self.assertEqual(len(paths), len(self.pages) + 10)
         for route in ("/poker/nolan-kido/", "/poker/episodes/portland-meadows-ep1/",
                       standoff.ROUTE, "/books/",
                       "/books/one-workflow-at-a-time/",
                       "/books/how-to-play-no-limit-texas-holdem/",
                       "/technology/local-ai-gaming-laptop/",
-                      "/technology/review-reply-evidence-audit/"):
+                      "/technology/review-reply-evidence-audit/",
+                      "/poker/10bb/"):
             self.assertIn(route, paths)
             self.assertEqual(check_html5.parse_errors((ROOT / paths[route]).read_text()), [])
 
