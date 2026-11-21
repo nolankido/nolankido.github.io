@@ -177,6 +177,7 @@ def main() -> int:
         ('Turn 54 featured NolanPoker public video-title and companion link agreement', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn54_nolanpoker_listing_accuracy.py', '-q']),
         ('Turn 55 featured video to source-limited question and fictional practice', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn55_video_to_practice.py', '-q']),
         ('Turn 56 official TDA 2026 short all-in reopen scope and player history', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn56_tda_reopening.py', '-q']),
+        ('Turn 57 independent three-player ICM and payout sensitivity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn57_icm_prize_audit.py', '-q']),
         ('Live diagnostic result classification and priority scope', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_live_evidence.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
