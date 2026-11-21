@@ -12,7 +12,7 @@ This public case separates what was actually published from archived first-perso
 | Item | Public artifact | What it establishes |
 | --- | --- | --- |
 | Portland Meadows Episode 1 | https://www.youtube.com/watch?v=qABaiIcvvpU | A publicly accessible NolanPoker video exists |
-| Written companion | https://nolankido.com/poker/episodes/portland-meadows-ep1/ | A first-person written account with a November 2, 2026 publication date, revised November 16 |
+| Written companion | https://nolankido.com/poker/episodes/portland-meadows-ep1/ | A first-person written account with a November 2, 2026 publication date, revised November 20 |
 | Source-bounded editorial exercise | https://nolankido.com/technology/ai-poker-video-evidence/ | Three candidate captions and narrowly stated evidence rules, not current-video transcription |
 | Structured scene claims | https://nolankido.com/downloads/portland-meadows-ep1-scene-claims.json | A public JSON proposal whose unresolved facts and review status are explicit |
 | Offline fact checker | https://nolankido.com/downloads/poker-vlog-fact-gate.py | An independent deterministic check of selected fields and constructed negative controls |
@@ -149,3 +149,20 @@ The organizer's original [Wild West Poker Tour program](https://img1.wsimg.com/b
 The independently verified poker-room contact page is [Portland Meadows hours and location](https://portlandmeadows.com/hours-%26-location), listing the poker-room phone **503-309-3087**. Since the targeted public result search did not locate a definitive outcome record, the site now provides an [event-specific, prepared but unsent request](https://nolankido.com/downloads/portland-meadows-aug20-event-results-confirmation-request.md) addressed generically to the tournament team. It requests confirmation of the event, entries, official placing and exact advertised versus post-deal payment, without demanding or exposing private data. No request was sent, reply obtained, or payout verified in this turn.
 
 The existing November 2 publication, November 20 Article modification, source-to-HTML ownership, sitemap, on-site Find and Poker RSS are unchanged. There is no automated venue contact or scheduled data collection.
+
+
+## M. Public written-companion revision: a genuine before-and-after (Turn 53)
+
+This is a source-checked revision of a **published written page**, not a claim that the current YouTube video, captions or graphics were edited or approved using AI. It is distinct from the constructed before/after negative controls in the offline fact checker.
+
+| Checkpoint | Dated evidence | What it establishes |
+| --- | --- | --- |
+| Before | [Public companion at parent commit 788e3f4](https://github.com/nolankido/nolankido.github.io/blob/788e3f44e09d0fc5a93a38bec138867fca492637/poker/episodes/portland-meadows-ep1/index.html) | The earlier written companion linked the public video but had no `#episode-current-transcript` section or current-viewer-transcript checkpoints for the hands and payout. |
+| Source check | [November 20 transcript observation JSON](https://nolankido.com/downloads/portland-meadows-public-transcript-audit-2026-11-20.json) | Viewer text indicated the 6-4 shove at 4:20, sevens at 6:27 and 7:12, and the reported $2,900 gross deal payment at 8:08 and 8:52. YouTube blocked playback, so the audio and frames were not inspected. |
+| After | [Public companion at commit 4f3449c](https://github.com/nolankido/nolankido.github.io/blob/4f3449cd40cf5b165b756d2c4c2fce9aa3827c67/poker/episodes/portland-meadows-ep1/index.html) and [the actual diff](https://github.com/nolankido/nolankido.github.io/commit/4f3449cd40cf5b165b756d2c4c2fce9aa3827c67) | The written companion gained `#episode-current-transcript` and direct YouTube starting points with explicit limits on auto-transcription, unidentified cards and reported gross winnings versus the $5,100 advertised first prize. Its original November 2 publication date remained intact. |
+| Current public delivery | [Live written companion's transcript section](https://nolankido.com/poker/episodes/portland-meadows-ep1/#episode-current-transcript) | A fresh public HTML fetch confirmed the new section actually serves the 4:20 and 6:27 cues and $2,900. This is a successful **written-site** publication check only. |
+| Unresolved video review | [Existing truth-to-screen worksheet](https://nolankido.com/downloads/poker-vlog-truth-to-screen-qa.md) | No verified frame-by-frame, listening, on-screen card and overlay, rights or human-approval record was completed here. The current video remains public but its proposed AI captions are not certified. |
+
+The separate [AI-assisted editing proposal](https://nolankido.com/technology/ai-poker-video-evidence/#poker-ai-draft) describes proposed captions, not a transcript of actual final graphics. The original scene JSON still records `current_public_cut_timestamps_checked: false`, `current_public_cut_graphics_checked: false`, and `human_release_approval: false`. The present public source cannot establish a new video cut, changes to its player experience, audience retention, faster editing, net profit, solver correctness or improved search visibility.
+
+No unpublished production assets were exposed and no current video edit, YouTube change, automatic post, or new editorial claim about those assets was made in this turn.
