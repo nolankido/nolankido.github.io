@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "_tests"))
 
 import build
 import check_html5
+import check_live
 import tenbb_companion
 
 
@@ -29,6 +30,16 @@ class Turn62TenBBHTML5(unittest.TestCase):
         self.assertEqual(len(self.paths), len(self.pages) + 10)
         self.assertEqual(self.paths[tenbb_companion.ROUTE], tenbb_companion.OUTPUT)
         self.assertEqual(tenbb_companion.record(ROOT)["route"], tenbb_companion.ROUTE)
+
+    def test_all_live_registered_canonical_html_routes_reach_html5_check(self):
+        # The live inventory is the independent release target registry.
+        # Restrict comparison to public page routes, not .html worksheets.
+        live_pages = {
+            route for route, (status, body) in check_live.targets(ROOT).items()
+            if status == 200 and route.endswith("/")
+            and body.lstrip().lower().startswith(b"<!doctype html")
+        }
+        self.assertEqual(set(self.paths), live_pages)
 
     def test_published_playbook_parses_as_html5(self):
         self.assertTrue(self.page.lstrip().lower().startswith("<!doctype html"))
