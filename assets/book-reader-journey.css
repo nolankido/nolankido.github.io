@@ -1,0 +1,83 @@
+/* Turn 48: reader-first routes and answer-reveal exercises on two book pages.
+   Standalone book CSS only. Native links, details and summary work without JS. */
+:where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-reader-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem 1.15rem;
+  margin-block: .5rem 1.4rem;
+}
+:where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-reader-jumps a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .4rem .2rem;
+  color: var(--basalt);
+  font: 600 .9rem/1.45 var(--sans);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+  overflow-wrap: anywhere;
+}
+:where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-reader-jumps a:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+:where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer {
+  max-width: 68ch;
+  margin: 1rem 0 1.5rem;
+  padding: .4rem 1rem;
+  border: 1px solid var(--line-dark);
+  border-left: 3px solid var(--red);
+  background: var(--paper-light);
+  overflow-wrap: anywhere;
+}
+:where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer summary {
+  display: list-item;
+  min-height: 44px;
+  padding: .65rem .15rem;
+  cursor: pointer;
+  font: 600 1rem/1.5 var(--sans);
+  overflow-wrap: anywhere;
+}
+:where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer summary:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+:where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer[open] > p {
+  margin-block: .5rem .85rem;
+}
+@media (max-width: 480px) {
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-reader-jumps {
+    gap: 0;
+  }
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-reader-jumps a {
+    flex: 1 1 100%;
+    padding-block: .55rem;
+  }
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer {
+    max-width: 100%;
+    padding-inline: .7rem;
+  }
+}
+@media (forced-colors: active) {
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer {
+    border-color: CanvasText;
+  }
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-reader-jumps a:focus-visible,
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer summary:focus-visible {
+    outline-color: Highlight;
+  }
+}
+@media print {
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-reader-jumps {
+    display: none;
+  }
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer {
+    break-inside: avoid;
+    background: white;
+    color: black;
+  }
+  :where(.page-book-one-workflow-at-a-time, .page-book-how-to-play-no-limit-texas-holdem) .book-sample-answer:not([open]) > :not(summary) {
+    display: block !important;
+  }
+}
