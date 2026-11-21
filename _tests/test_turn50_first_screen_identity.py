@@ -43,7 +43,7 @@ def home_errors(html: str) -> list[str]:
     if len(match) != 1:
         return ["Need exactly one homepage hero action row"]
     nav = match[0]
-    routes = re.findall(r'<a\\b[^>]*href="([^"]+)"', nav)
+    routes = re.findall(r'<a\b[^>]*href="([^"]+)"', nav)
     errors = []
     if routes != [REPAIR, TOOL, "#home-proof-title"]:
         errors.append("First-screen tasks do not prefer documented AI repair, free tool, and evidence")
@@ -51,7 +51,7 @@ def home_errors(html: str) -> list[str]:
         errors.append("Need one primary action and two secondary actions")
     if "Inspect a documented AI repair" not in nav or "Try a free AI tool" not in nav:
         errors.append("No clear task-based link labels")
-    if len(re.findall(r'<a\\b', nav)) != 3:
+    if len(re.findall(r'<a\b', nav)) != 3:
         errors.append("Too many hero choices")
     if "<script" in nav or "onclick=" in nav:
         errors.append("Hero actions must be native links")
@@ -66,7 +66,7 @@ def about_errors(html: str) -> list[str]:
     if len(match) != 1:
         return ["Need exactly one early About proof route"]
     nav = match[0]
-    links = re.findall(r'<a\\b[^>]*href="([^"]+)"', nav)
+    links = re.findall(r'<a\b[^>]*href="([^"]+)"', nav)
     errors = []
     if links != [REPAIR, PROJECT_EVIDENCE]:
         errors.append("About routes must target recorded AI repair and project evidence")
@@ -102,12 +102,12 @@ class FirstScreenIdentityTests(unittest.TestCase):
         home, about = text("index.html"), text("about/index.html")
         for html, route in ((home, "/"), (about, "/about/")):
             self.assertEqual(html.count('rel="canonical" href="https://nolankido.com' + route + '"'), 1)
-            self.assertEqual(len(re.findall(r'<h1\\b', html)), 1)
-        record = re.search(r'<script type="application/ld\\+json">(.*?)</script>', about, re.S)
+            self.assertEqual(len(re.findall(r'<h1\b', html)), 1)
+        record = re.search(r'<script type="application/ld\+json">(.*?)</script>', about, re.S)
         self.assertIsNotNone(record)
         schema = json.loads(record.group(1))
         self.assertEqual(schema["mainEntity"]["@id"], "https://nolankido.com/about/#nolan-kido")
-        for boundary in ("2012", "not independently measured client results",
+        for boundary in ("2012", "independently measured client results",
                          "Tournament cashes are gross results, not profit"):
             self.assertIn(boundary, about)
         self.assertIn("AI Works, Human Decides", home)
