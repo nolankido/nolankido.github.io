@@ -19,6 +19,7 @@ import local_laptop_case
 import reply_audit_case
 import site_find
 import book_pages
+import tenbb_companion
 
 
 class _PublicMetadata(HTMLParser):
@@ -159,9 +160,45 @@ def reserve_day1_entry(root: Path) -> dict | None:
             'kind': 'episode', 'date': poker_reserve_day1_episode.PUBLISHED}
 
 
+def tenbb_entry(root: Path) -> dict | None:
+    """Find the separately published course companion from verified public metadata."""
+    page = root / tenbb_companion.OUTPUT
+    checker = root / tenbb_companion.CODE
+    if not page.exists() and not checker.exists():
+        return None
+    # Reject a partially published page or invented title. This is the same
+    # fail-closed registry used by the sitemap and exact-byte release inventory.
+    approved = tenbb_companion.record(root)
+    html = page.read_text(encoding="utf-8")
+    meta = _PublicMetadata(html)
+    title = ' '.join(''.join(meta.h1_parts).split())
+    seo_title = ' '.join(''.join(meta.title_parts).split())
+    if len(meta.description) != 1:
+        raise ValueError("10 BB Find needs exactly one public description")
+    description = meta.description[0]
+    if (title != "The 10 Big Blind Tournament Playbook"
+            or not seo_title.startswith("The 10 BB Tournament Playbook:")
+            or not 80 <= len(description) <= 190):
+        raise ValueError("10 BB Find public title or description has changed")
+    schemas = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+    if len(schemas) != 1:
+        raise ValueError("10 BB Find requires one Article record")
+    schema = json.loads(schemas[0])
+    if (schema.get("@type") != "Article"
+            or schema.get("url") != approved["url"]
+            or schema.get("description") != description
+            or "10 BB" not in schema.get("headline", "")
+            or schema.get("datePublished") != "2026-11-19"):
+        raise ValueError("10 BB Find must agree with published Article metadata")
+    return {"path": approved["route"], "title": title,
+            "search_title": seo_title, "description": description,
+            "interests": ["poker"], "home": "poker", "kind": "episode",
+            "date": schema["datePublished"]}
+
+
 def add(root: Path, manifest_items: list[dict]) -> list[dict]:
     """Include exactly the separately validated manual Poker pages."""
-    extras = [item for item in (entry(root), episode_entry(root), standoff_episode_entry(root), reserve_day1_entry(root), local_laptop_case.find_entry(root), reply_audit_case.find_entry(root)) if item is not None] + book_pages.find_entries(root)
+    extras = [item for item in (entry(root), episode_entry(root), standoff_episode_entry(root), reserve_day1_entry(root), tenbb_entry(root), local_laptop_case.find_entry(root), reply_audit_case.find_entry(root)) if item is not None] + book_pages.find_entries(root)
     if not extras:
         return manifest_items
     seen = {item['path'] for item in manifest_items}
