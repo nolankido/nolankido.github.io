@@ -669,7 +669,9 @@
     "source": "poker/tournament-entry-prize-pool-ledger.html",
     "section": "poker",
     "date": "2026-11-15",
-    "poker_guide": true
+    "updated": "2026-11-20",
+    "poker_guide": true,
+    "revision": "Reconciled the two-entry and one-entry personal cash examples with the fictional payout ladder\u0027s $1,000 lowest prize."
   },
   {
     "id": "poker-tournament-equity",
