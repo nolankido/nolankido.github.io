@@ -147,7 +147,8 @@ class AiPokerClaimBridgeTests(unittest.TestCase):
         ):
             with self.subTest(path=path):
                 record = records[path]
-                expected_update = '2026-11-20' if path == ROUTE else '2026-11-19'
+                expected_update = ('2026-11-20' if path in (ROUTE, '/technology/')
+                                   else '2026-11-19')
                 self.assertEqual(record['updated'], expected_update)
                 url = 'https://nolankido.com' + path
                 found = [node for node in sitemap if node.findtext('{*}loc') == url]
