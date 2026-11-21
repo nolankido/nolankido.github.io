@@ -14,6 +14,8 @@ from test_site import ROOT, Page, build
 import site_find
 import player_find
 import player_sitemap
+import book_pages
+import tenbb_companion
 
 
 class PlayerFindTests(unittest.TestCase):
@@ -35,10 +37,18 @@ class PlayerFindTests(unittest.TestCase):
         self.assertEqual(entry['date'], '')
         self.assertIn('WSOP', entry['description'])
         self.assertIn('tournament poker', entry['description'])
-        self.assertEqual(len(self.items), len(self.manifest_items) + 6)
+        # The original six manual routes now share Find with three book
+        # catalog/work routes and the independently registered 10 BB course.
+        books = {record['path'] for record in book_pages.find_entries(ROOT)}
+        self.assertEqual(len(books), 3)
+        self.assertEqual(len(self.items), len(self.manifest_items) + 7 + len(books))
         self.assertNotIn(player_sitemap.ROUTE, {p['path'] for p in self.pages})
         self.assertEqual({p['path'] for p in self.items},
-                         {p['path'] for p in self.manifest_items} | {player_sitemap.ROUTE, '/poker/episodes/portland-meadows-ep1/', '/poker/episodes/portland-meadows-standoff/', '/poker/episodes/reserve-day-1/', '/technology/local-ai-gaming-laptop/', '/technology/review-reply-evidence-audit/'})
+                         {p['path'] for p in self.manifest_items} | books |
+                         {player_sitemap.ROUTE, '/poker/episodes/portland-meadows-ep1/',
+                          '/poker/episodes/portland-meadows-standoff/', '/poker/episodes/reserve-day-1/',
+                          tenbb_companion.ROUTE, '/technology/local-ai-gaming-laptop/',
+                          '/technology/review-reply-evidence-audit/'})
 
     def test_existing_find_groups_and_progressive_filter_remain(self):
         html = self.rendered
