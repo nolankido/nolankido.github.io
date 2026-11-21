@@ -121,6 +121,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/book-continuity-editorial-review-log.md',
                'assets/projects/preflight-LICENSE.txt', 'assets/projects/dinner-on-time-preview.jpg',
                'assets/projects/rightsreceipt-harbor.svg',
+               'downloads/rightsreceipt-local-software-acceptance.md',
                'downloads/local-ai-test-record.json',
                'downloads/local-hosted-ai-comparison-protocol.md',
                'downloads/local-hosted-ai-comparison-blank.csv',
