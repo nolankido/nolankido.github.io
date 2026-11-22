@@ -19,7 +19,7 @@ This is a real internal discovery gap. It is not evidence of bad Google rankings
 3. In `_scripts/poker_topics.py`, render the paragraph from one named literal, `TOURNAMENT_STANDALONE`, **only** for the `tournaments` detail route. Before adding it, call the already implemented `tenbb_companion.record(root)` approval gate to validate the real published page, Article/canonical, checker and worksheet. Reject a missing or unexpected manual publication rather than presenting a dead or spoofed resource. All other topic pages bypass this gate and retain their existing rendering.
 4. Pass the real project root to `poker_topics.detail(topic, ROOT)` in `_scripts/build.py` to avoid accidental validation against an unrelated checkout.
 5. Apply exactly the 487-character paragraph to `poker/topics/tournaments/index.html` without regenerating other pages by hand.
-6. Add nine offline regressions in `_tests/test_turn87_tournament_topic_companion.py`; register the module in the original local-only release runner; document ownership and evidence limitations in `AGENTS.md`.
+6. Add nine offline regressions in `_tests/test_turn87_tournament_topic_companion.py`; register the module in the original local-only release runner; document ownership and evidence limitations in `AGENTS.md`. Strengthen the existing local Playwright Poker Finder test with explicit source-type selection, exact zero-result count and real hidden-attribute assertions to prevent another inconclusive filter report.
 
 ## Verified source observations
 
