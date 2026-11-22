@@ -547,3 +547,38 @@ rankings, Web Vitals or mobile touch behavior. The new test must actually
 run with a local Chromium before its checks may be marked passed.
 Use `python _scripts/local_release_checks.py --full --browser` from a
 complete checkout; no user-authored GitHub Actions, cron or paid service.
+
+## Turn 72 three-journey live-verification and worksheet boundary
+
+The existing manually authored `/poker/10bb/` written guide has two public
+teaching downloads: `downloads/ten-bb-playbook-icm-verify.py` and
+`downloads/ten-bb-tournament-checklist.md`. Treat both as required
+release assets. `_scripts/tenbb_companion.py` must reject a missing
+worksheet file or removed worksheet link; `_scripts/check_live.py`
+must register both for status-bearing exact-byte comparison.
+
+The priority `_tests/diagnose_live_crawl.py` now includes Start Here,
+the original source-checked AI repair, the dated site-visibility case,
+the free AI pilot, and the actual three reader-journey downloads.
+This diagnostic classifies unreachable network/DNS paths as inconclusive,
+not false HTTP 404s. Only an exact-byte GET against the matching checkout
+can certify a public release.
+
+`_tests/visibility_three_reader_journeys_browser.py` tests keyboard
+activation at 320, 390 and 1440 CSS pixels, with JavaScript both enabled
+and disabled. It follows Home or Start Here to real AI repair evidence,
+the Books catalog to an author book worksheet, and the Poker hub to
+the standalone 10 BB worksheet. A local 127.0.0.1 server serves actual
+checked-in HTML, CSS and downloads; all other browser hosts are blocked.
+A local successful download or DOM route is not live deployment proof.
+Run it with installed Playwright/Chromium where loopback HTTP is permitted.
+An execution environment that blocks loopback navigation is **not run**
+or **inconclusive**, never a passing local browser result.
+
+Run `_tests/test_turn72_reader_release_coverage.py`,
+`_tests/test_turn38_live_evidence.py`, `_tests/test_turn52_10bb_playbook.py`,
+the main builder, search snapshot, HTML5 and internal-link checks.
+The existing manual release runner discovers the new browser script
+only with `--browser`. After merge, run status-bearing priority
+diagnostics with matching source bytes from a full checkout.
+No GitHub Actions, paid verification provider, new tracking or cron.

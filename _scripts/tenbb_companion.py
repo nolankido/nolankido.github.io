@@ -14,6 +14,7 @@ ORIGIN = "https://nolankido.com"
 ROUTE = "/poker/10bb/"
 OUTPUT = Path("poker/10bb/index.html")
 CODE = "downloads/ten-bb-playbook-icm-verify.py"
+WORKSHEET = "downloads/ten-bb-tournament-checklist.md"
 
 
 def inspect(html: str) -> dict:
@@ -27,6 +28,8 @@ def inspect(html: str) -> dict:
     ):
         if html.count(marker) != 1:
             raise ValueError("10 BB Playbook missing or duplicates " + label)
+    if 'href="/' + WORKSHEET + '"' not in html:
+        raise ValueError("10 BB Playbook missing its written six-check worksheet")
     match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
     if not match or html.count('<script type="application/ld+json">') != 1:
         raise ValueError("10 BB Playbook requires exactly one Article identity")
@@ -48,8 +51,8 @@ def inspect(html: str) -> dict:
 
 
 def record(root: Path):
-    if not (root / OUTPUT).is_file() or not (root / CODE).is_file():
-        raise ValueError("10 BB Playbook or its required checker is missing")
+    if not (root / OUTPUT).is_file() or not (root / CODE).is_file() or not (root / WORKSHEET).is_file():
+        raise ValueError("10 BB Playbook, checker or written worksheet is missing")
     return inspect((root / OUTPUT).read_text(encoding="utf-8"))
 
 
