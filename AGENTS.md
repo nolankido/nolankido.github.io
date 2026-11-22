@@ -904,3 +904,45 @@ or source-to-live byte receipt. The full checkout has remained
 unavailable in this container due GitHub DNS restrictions.
 Preserve the existing no-Actions/no-scheduler policy and honest
 search measurement boundaries.
+
+## Turn 84: make the separately published 10 BB Playbook visible in Poker discovery
+
+Two main poker learning discovery surfaces lacked a direct path to the
+separately published original `/poker/10bb/` Playbook: the curated
+`/poker/library/` page and the `/poker/study/` tournament study route.
+The separately validated Playbook already contains six decision checks,
+answered practice questions and a fictional three-player ICM example,
+and it has a real free Markdown download
+`/downloads/ten-bb-tournament-checklist.md`.
+
+The `poker_library` filtered inventory is deliberately manifest-owned
+and counts exactly 75 guide cards. The standalone 10 BB guide does
+**not** belong to that inventory. Do not inflate the 75-card count or
+fake a `data-library-card` entry for the manual guide. Instead retain
+one explicitly labeled standalone companion paragraph directly after
+the library's original four long-read cards, before `#all-guides`.
+The note offers native links to the original 10 BB guide's `#six-checks`
+anchor and the original free worksheet and explains that this
+separately published resource is outside the filtered catalog.
+
+The Study Desk's existing four tournament-study steps remain unchanged.
+One concise follow-up paragraph inside the tournament-study article
+points to the same verified Playbook section and worksheet. Both
+destinations are for after-play study only; the model is fictional
+and is not a solver range for an actual opponent.
+
+Edit both `_source/poker/library.html` and the committed
+`poker/library/index.html`, plus `_source/poker/study.html` and
+`poker/study/index.html`, in source/public pairs. Keep the catalog
+generated placeholders, live search/filter JS, counted guide cards,
+existing article headings/canonicals, and historical editorial dates
+untouched; this is a navigational addition, not a new research claim.
+
+`_tests/test_turn84_standalone_poker_discovery.py` protects native
+paragraph/link placement, exact source/public markup, 75-card inventory,
+original four tournament tasks, destination/worksheet, builder parity
+and adversarial path/claim changes. The existing manual release runner
+registers the module. Browser/mobile and source-to-live byte checks
+must be performed from a full current checkout; a GitHub merge
+or content extraction alone cannot certify them.
+No GitHub Actions, paid service, new canonical URL or tracking.
