@@ -118,6 +118,11 @@ def annotate(items: list[dict], topics: list[dict]) -> list[dict]:
         for topic in topics:
             member = (item['kind'] == 'guide' and item['url'] in
                       {g['route'] for g in topic['guides']} | set(topic['overview_routes']) | {'/poker/topics/' + topic['id'] + '/'} )
+            # The separate, registered written 10 BB guide is not a
+            # manifest or 75-card Library record, but it belongs to these
+            # two native Finder topic filters after source validation.
+            member |= (item['kind'] == 'guide' and item['url'] == '/poker/10bb/'
+                       and topic['id'] in {'tournaments', 'strategy'})
             member |= (item['kind'] == 'resource' and item['id'].removeprefix('external-') in
                        {r['id'] for r in topic['resources']})
             member |= (item['kind'] == 'glossary' and (topic['id'] == 'learn' or

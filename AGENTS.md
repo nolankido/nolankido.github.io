@@ -946,3 +946,54 @@ registers the module. Browser/mobile and source-to-live byte checks
 must be performed from a full current checkout; a GitHub merge
 or content extraction alone cannot certify them.
 No GitHub Actions, paid service, new canonical URL or tracking.
+
+## Turn 85: index the validated standalone 10 BB Playbook in native Poker Find
+
+Poker Find's previous 300 entries included 106 manifest-owned on-site
+pages, 146 external resources and 48 glossary definitions. The
+separately published written `/poker/10bb/` Playbook was absent, even
+though the general `/find/` index and current site sitemap already
+registered it. This was a real gap for poker readers using the native
+topic and query filters rather than the site's general search.
+
+`_scripts/poker_finder.py` now reuses `player_find.tenbb_entry(root)`
+to approve the manual page from its actual public HTML, canonical,
+Article metadata, worksheet and fixed-input offline checker. If any
+required public file is missing, do not silently index or invent the
+resource. It adds one `standalone-tenbb` guide result directly after
+the manifest-owned guide records, before external resources. Native
+`_scripts/poker_topics.py` assigns only the existing Tournaments and
+Strategy & math filters to this separate record. The current Poker
+Finder result count is 301: 107 on-site results, 146 outside resources
+and 48 glossary definitions. The manifest-owned 75-card Poker Library
+is a different catalog and must stay at 75.
+
+Eight source-verified public H2 headings from
+`search_sections.headings()` are indexed as native deep-linkable
+passages. The separate guide deliberately searches **headings only**,
+not unreleased videos, hypothetical opponent ranges, or hidden
+question answers. Its result note discloses fictional ICM assumptions
+and after-play study. The on-page search coverage explanation and
+the separate card's summary state that scope explicitly.
+
+The generated `poker/find/index.html` is approximately 1.28 MB and
+cannot be fetched as content through the bounded `fetch_file` API.
+It was read in full through the authenticated GitHub contents fetch
+and updated in place with a single source-consistent card and two
+count statements. Always edit `_scripts/poker_finder.py` and generated
+`poker/find/index.html` together and check with `build.py --check`
+before claiming deterministic parity. Preserve the client-side
+`assets/poker-finder.js` query privacy, native no-JS text index,
+external resource review notes, all glossary definitions and noindex
+policy. Do not introduce search queries in URLs or analytics.
+
+The existing `_tests/test_poker_finder.py` manifest-only assumption
+was updated to allow exactly one separately verified manual page.
+`_tests/test_turn85_poker_finder_manual.py` adds eleven source/section,
+category, count, duplicate, negative-control and builder-parity tests.
+`_tests/finder_browser.py` now includes query, Tournaments/Strategy
+topic, and external-resource exclusion checks. This is browser
+test code, not an executed 320px test in the restricted container.
+The existing manual release runner includes the new static test.
+Do not add GitHub Actions, paid services, scheduling or fabricated
+search-position / AI-citation outcomes.

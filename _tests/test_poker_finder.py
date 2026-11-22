@@ -32,12 +32,12 @@ class FinderTests(unittest.TestCase):
 
     def test_index_is_exactly_the_published_poker_destinations_and_sources(self):
         pages = {p['path'] for p in self.pages if p['path'].startswith('/poker/') and not p.get('noindex') and p['path'] != '/poker/find/'}
-        self.assertEqual({i['url'] for i in self.items if i['kind'] == 'guide'}, pages)
+        self.assertEqual({i['url'] for i in self.items if i['kind'] == 'guide'}, pages | {'/poker/10bb/'})
         self.assertEqual({i['url'] for i in self.items if i['kind'] == 'resource'}, {e['url'] for e in self.resources})
         definitions = poker_finder.Glossary((ROOT / '_source/poker/glossary.html').read_text()).entries
         self.assertEqual(len(definitions), 48)
         self.assertEqual({i['url'] for i in self.items if i['kind'] == 'glossary'}, {'/poker/glossary/#' + d['id'] for d in definitions})
-        self.assertEqual(len(self.items), len(pages) + len(self.resources) + 48)
+        self.assertEqual(len(self.items), len(pages) + 1 + len(self.resources) + 48)
         self.assertEqual(len({i['id'] for i in self.items}), len(self.items))
 
     def test_new_pages_are_not_fictional_personal_accounts(self):

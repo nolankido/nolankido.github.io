@@ -11,6 +11,9 @@ import poker_beginner_path
 import poker_checkpoint
 import poker_course
 import poker_practice
+import player_find
+import search_sections
+import tenbb_companion
 
 
 class Glossary(HTMLParser):
@@ -163,6 +166,36 @@ def entries(root: Path, pages: list[dict], guides: list[dict], resources: list[d
                        'url': page['path'], 'access': 'Free', 'meta': 'On this site · ' + label,
                        'keywords': (g['keywords'] + ' ' + g['level']) if g else page.get('kicker', ''),
                        'notes': '', 'context': '', 'reviewed': '', 'sections': guide_sections(root, page, catalog)})
+    # Manual pages do not enter the manifest guide inventory. Reuse the
+    # already validated public metadata, canonical URL and publication gate
+    # rather than silently omitting the written 10 BB Playbook from Poker Find.
+    tenbb = player_find.tenbb_entry(root)
+    if tenbb is not None:
+        if tenbb['path'] in {item['url'] for item in result}:
+            raise ValueError('Standalone 10 BB guide duplicates manifest Finder route')
+        guide_html = (root / tenbb_companion.OUTPUT).read_text(encoding='utf-8')
+        headings = search_sections.headings(guide_html)
+        if (len(headings) != 8 or headings[0][0] != 'six-checks-title'
+                or headings[-1][0] != 'sources-title'):
+            raise ValueError('Standalone 10 BB Finder headings changed')
+        result.append({
+            'id': 'standalone-tenbb',
+            'kind': 'guide',
+            'title': tenbb['title'],
+            'description': tenbb['description'],
+            'search_title': tenbb['search_title'],
+            'url': tenbb['path'],
+            'access': 'Free',
+            'meta': 'On this site · Standalone written tournament guide',
+            'keywords': '10 BB 10BB ten big blinds short stack ICM prize equity chip EV tournament practice call price',
+            'notes': 'Fictional ICM example; not a real-hand solver verdict. Study away from play.',
+            'context': '',
+            'reviewed': '',
+            # Only eight visible H2 headings are searchable as section links.
+            # Never index answers hidden in question H3 or details panels.
+            'sections': [{'anchor': anchor, 'title': title, 'text': title}
+                         for anchor, title in headings],
+        })
     for r in resources:
         result.append({'id': 'external-' + r['id'], 'kind': 'resource', 'title': r['title'], 'description': r['description'],
                        'url': r['url'], 'access': r['access'],
@@ -194,12 +227,12 @@ def render(items: list[dict]) -> dict[str, str]:
                      f'<p class="reader-eyebrow">{escape(e["meta"])}</p>'
                      f'<h3><a href="{escape(e["url"], quote=True)}"' + (' rel="external"' if e['kind'] == 'resource' else '') + f'>{title}</a></h3>'
                      f'<p>{escape(e["description"])}</p>'
-                     + ('<p class="finder-excerpt" hidden></p><p class="finder-jump" hidden><a href="' + escape(e['url'], quote=True) + '">Read matching section</a></p><details class="finder-text"><summary>Searchable article text, without exercise answers</summary><div>' + passages + '</div></details>' if sections else '')
+                     + ('<p class="finder-excerpt" hidden></p><p class="finder-jump" hidden><a href="' + escape(e['url'], quote=True) + '">Read matching section</a></p><details class="finder-text"><summary>' + ('Eight visible section headings; read full guide for explanations' if e['id'] == 'standalone-tenbb' else 'Searchable article text, without exercise answers') + '</summary><div>' + passages + '</div></details>' if sections else '')
                      + (f'<p class="small-copy"><strong>Before you use it:</strong> {escape(e["notes"])}</p>' if e['notes'] else '')
                      + (f'<p class="small-copy">{escape(e["method"])} · <time datetime="{e["reviewed"]}">{e["reviewed"]}</time>'
                         f' · <a href="{e["context"]}">Full directory listing</a></p>' if e['context'] else '') + '<button type="button" class="finder-save" aria-pressed="false" hidden>Add to study list</button></article>')
     counts = {k: sum(e['kind'] == k for e in items) for k in ('guide', 'resource', 'glossary')}
     return {'poker_finder_cards': '\n'.join(cards), 'poker_finder_count': str(len(items)),
             'poker_finder_scope': f'{counts["guide"]} on-site pages, {counts["resource"]} external resources and {counts["glossary"]} glossary entries. '
-            'Guide prose and section headings are searchable; exercise answers, navigation and external article bodies are excluded. ' +
+            'Manifest guide prose and section headings are searchable. The standalone 10 BB Playbook provides its eight visible section headings only; exercise answers, navigation and external article bodies are excluded. ' +
             'An overview or glossary entry is not an additional guide.'}

@@ -447,6 +447,21 @@ def main():
             expect(page.locator('#finder-controls')).to_be_visible()
             page.wait_for_timeout(200)
             initial_traffic=list(traffic);initial_url=page.url
+            # The separately published guide is genuinely searchable, not
+            # just linked from an unfiltered sidebar. Topic filtering still
+            # distinguishes tournaments/strategy from external sources.
+            search.fill('10 BB Playbook');search.press('Enter')
+            manual=page.locator('[data-finder-card][data-id="standalone-tenbb"]')
+            expect(manual).to_be_visible()
+            expect(manual.locator('h3 a')).to_have_attribute('href','/poker/10bb/')
+            assert manual.locator('[data-finder-passage]').count()==8
+            page.locator('#finder-topic').select_option('tournaments')
+            expect(manual).to_be_visible()
+            page.locator('#finder-topic').select_option('strategy')
+            expect(manual).to_be_visible()
+            page.locator('#finder-kind').select_option('resource')
+            expect(manual).not_to_be_visible()
+            page.locator('#finder-reset').click()
             # Real failed question, changed wording, spelling recovery and exact
             # short abbreviations use the same core as the declared benchmark.
             for question, target in [
