@@ -79,12 +79,12 @@
   "metrics": {
     "google_web_poker_clicks": null,
     "google_web_poker_impressions": null,
-    "google_ai_search_citations": null,
     "bing_poker_search_clicks": null,
     "book_pageviews": null,
     "amazon_outbound_click_events": null,
     "kdp_book_orders": null,
-    "ai_panel_cited_urls": null
+    "ai_panel_cited_urls": null,
+    "google_ai_search_impressions": null
   },
   "metric_status": "not_collected",
   "warning": "Null means unmeasured, not an observed zero; static links do not prove indexing, click events, book purchases, rankings or model citations."
