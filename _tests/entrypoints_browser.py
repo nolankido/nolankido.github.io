@@ -93,6 +93,17 @@ try:
                 expect(page).to_have_url(base + target)
                 expect(page.locator('h1')).to_be_visible()
                 task_routes += 1
+            # Two reader-level poker routes sit beneath the unchanged
+            # four-task list. Test native keyboard activation with and
+            # without JavaScript, not a simulated click on invented cards.
+            for target in ['/poker/free-poker-learning-path/', '/poker/10bb/']:
+                page.goto(base + '/start-here/')
+                link = page.locator('.start-poker-learning-route a[href="' + target + '"]')
+                expect(link).to_be_visible()
+                link.focus(); page.keyboard.press('Enter')
+                expect(page).to_have_url(base + target)
+                expect(page.locator('h1')).to_be_visible()
+                task_routes += 1
             for parent, selector, target in [
                 ('/find/', '.section-deck a[href="/start-here/#start-tasks-title"]', '/start-here/#start-tasks-title'),
                 ('/find/', '.section-deck a[href="/resources/"]', '/resources/'),
@@ -181,7 +192,7 @@ try:
                 assert context.cookies() == []
                 assert page.evaluate('document.documentElement.scrollWidth') <= width, ('study-interest',width,javascript)
                 study_interest_cases += 1
-            results.append({'javascript': javascript, 'keyboard_routes': 28, 'downloads': 3, 'task_routes': task_routes, 'role_routes': role_routes, 'quick_downloads': quick_downloads, 'tool_routes': tool_routes, 'study_interest_cases': study_interest_cases})
+            results.append({'javascript': javascript, 'keyboard_routes': 30, 'downloads': 3, 'task_routes': task_routes, 'role_routes': role_routes, 'quick_downloads': quick_downloads, 'tool_routes': tool_routes, 'study_interest_cases': study_interest_cases})
             context.close()
         context = browser.new_context()
         context.route('**/*', lambda r: r.continue_() if urlsplit(r.request.url).hostname == '127.0.0.1' else r.abort())

@@ -708,3 +708,29 @@ browser checks from a complete checkout. The standalone five-case
 presence-predicate smoke is not a full repository unittest or live GET.
 No new canonical pages, altered publication dates, GitHub Actions,
 automations, paid services or measured discovery claims.
+
+## Turn 78 first-visit Poker learning and short-stack study handoff
+
+Start Here retains the exact existing four native task-list items and
+the separately tested AI workflow pilot. A new paragraph immediately
+below that task list directs a first-time reader either to the already
+published six-lesson `/poker/free-poker-learning-path/` course or to the
+written `/poker/10bb/` Playbook with fictional, reproducible ICM work.
+It does not promise outcomes or substitute a real-hand solver result.
+
+Edit `_source/start-here.html` and the paired `start-here/index.html`
+together; preserve the original four tasks, the single source-proof
+paragraph, the Start Here canonical and its November 21 revision date.
+The two destinations are existing canonical pages. The Playbook's
+worksheet and checker retain their own manual publishing gates. Do not
+add new SEO pages, hidden duplicate sections or claimed search uplift.
+
+`_tests/test_turn78_poker_reader_handoff.py` checks source/public copy,
+native route placement, original first-visit task count, published target
+facts, metadata, deterministic build and negative controls. The existing
+`_tests/entrypoints_browser.py` now verifies both new links through
+keyboard Enter with JavaScript enabled and disabled. It is a local-only
+test, not real-world user analytics. Run build/check, HTML5, links, manual
+browser suite and exact production GET after a complete checkout.
+Do not claim an unexecuted Playwright run passed. GitHub Actions and paid
+SEO subscriptions remain prohibited.
