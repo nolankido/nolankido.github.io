@@ -32,12 +32,23 @@ class AnalyticsTests(unittest.TestCase):
                 head = content.split('</head>', 1)[0]
                 self.assertEqual(sum(a.get('src') == SRC for a in Page(head).tags('script')), 1)
 
-    def test_future_pages_inherit_the_shared_tracker(self):
+    def test_generated_pages_inherit_tracker_manual_books_have_single_copy(self):
         layout = (ROOT / '_source/layout.html').read_text(encoding='utf-8')
         self.assertEqual(layout.count(SRC), 1)
+        manual_books = {
+            '_source/books/index.html',
+            '_source/books/one-workflow-at-a-time.html',
+            '_source/books/how-to-play-no-limit-texas-holdem.html',
+        }
         for path in (ROOT / '_source').rglob('*.html'):
-            if path.name != 'layout.html':
-                self.assertNotIn(SRC, path.read_text(encoding='utf-8'), str(path))
+            name = path.relative_to(ROOT).as_posix()
+            if path.name == 'layout.html':
+                continue
+            count = path.read_text(encoding='utf-8').count(SRC)
+            if name in manual_books:
+                self.assertEqual(count, 1, name)
+            else:
+                self.assertEqual(count, 0, name)
 
     def test_only_explicit_book_click_events_without_form_or_reader_tracking(self):
         approved = {
