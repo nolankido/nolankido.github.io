@@ -184,8 +184,8 @@
         "What should I check before registering for a tournament?"
       ],
       "intent_type": "prepare",
-      "primary": "/poker/live-tournament-guide/",
-      "secondary": "/poker/getting-started/",
+      "primary": "/poker/first-live-tournament/",
+      "secondary": "/poker/live-tournament-guide/",
       "reason": "Tournament-specific registration, travel and rule preparation rather than general hand rules.",
       "priority": "medium",
       "measured_search_clicks": null,
