@@ -161,6 +161,7 @@ def main() -> int:
         ('Complete author archive and standalone articles', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_author_archive_standalone.py', '-q']),
         ('Standalone book publication and release coverage', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_pages.py', '-q']),
         ('Turn 48 book reader routes, native exercises and narrow-screen keyboard support', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn48_book_reader_journeys.py', '-q']),
+        ('PBG-03 poker book first-screen conversion, free preview and exact ASIN safeguards', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg03_poker_book_landing.py', '-q']),
         ('Turn 49 topic-to-book exercises and reciprocal free-guide paths', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_topic_book_paths.py', '-q']),
         ('Turn 50 first-screen practical AI proof and task routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn50_first_screen_identity.py', '-q']),
         ('Turn 51 practical AI topic ownership and guide-to-calculator distinction', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn51_topic_ownership.py', '-q']),
