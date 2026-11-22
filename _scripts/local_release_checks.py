@@ -171,6 +171,7 @@ def main() -> int:
         ('Turn 68 practical AI workflow pilot discovery from Home and Start Here', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn68_workflow_pilot_discovery.py', '-q']),
         ('Turn 69 recorded AI source-check crosslinks and evidence limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn69_ai_source_case_links.py', '-q']),
         ('Turn 70 dated website visibility follow-up and original 25-turn evidence', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn70_visibility_case_current_status.py', '-q']),
+        ('Turn 71 source-linked AI repair and core mobile journey contract', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn71_start_here_release_navigation.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
