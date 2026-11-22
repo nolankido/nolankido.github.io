@@ -159,7 +159,7 @@ def audit(root: Path = ROOT) -> dict:
                         failures.append(path + ": invalid event or link metadata for " + slug)
                         continue
                     details["valid_link_contracts"] += 1
-                if any("umami.track(" in html for _ in [0]):
+                if "umami.track(" in html:
                     failures.append(path + ": duplicate explicit analytics call")
             except (OSError, UnicodeError, ValueError) as exc:
                 failures.append(path + ": " + type(exc).__name__)
