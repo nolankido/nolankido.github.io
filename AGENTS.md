@@ -274,6 +274,34 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-01 Kindle eBook purchase link (current, November 22, 2026)
+
+The owner directly supplied the Amazon Kindle product URL
+`https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324` (ASIN `B0HSB98324`)
+for *How to Play No-Limit Texas Hold’em*. The exact URL now appears as a
+visibly **author-supplied** Kindle destination on the poker book page
+and Books catalog. Prior instructions and reports saying that no
+Amazon link was available describe an earlier state, not a prohibition
+on this specifically authorized URL. Keep the two source/public HTML
+pairs exactly aligned and the `data-umami-event="poker-book-kindle-amazon-click"`
+event present at each external call to action. Do not introduce
+duplicate URLs, automatic redirects, unrelated affiliate codes or
+paid tracking services without authorization. The authoritative
+author-supplied URL and ASIN are recorded in
+`downloads/nolan-kido-book-edition-evidence.json` with independent
+retailer verification status still `not_verified`.
+
+The public Amazon page was not independently inspectable on this turn.
+Do not assert an official retailer cover, exact public title/subtitle,
+release date, live availability, Kindle Unlimited, price, rating,
+retailer-side ownership, or print-edition ISBN on this evidence alone.
+The first-party author archive separately identifies the 2027 Edition
+and subtitle. Preserve distinct metadata provenance. See
+`_reports/poker-book-growth/pbg-01-amazon-link-2026-11-22.md`.
+No GitHub Actions. Use the standard local checks and a separate
+deployment byte check; a source commit alone is not proof of live
+publication or search performance.
+
 ## Standalone author book pages
 
 The two public standalone pages at `/books/one-workflow-at-a-time/`
