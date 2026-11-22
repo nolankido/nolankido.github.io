@@ -53,7 +53,7 @@ The last command is a **limited** verification of the two connected learning pag
 
 ## Sprint assessment
 
-**Advanced:** the two useful, free Poker learning levels now connect in both directions. The transition has a clear educational prerequisite and honest ICM limitations. Canonical page count and site scope do not grow through duplicate content.
+**Advanced:** the two useful, free Poker learning levels now connect in both directions. The optional post-course transition has an explicit 'After the basics' label and an honest real-hand-solver limitation. Canonical page count and site scope do not grow through duplicate content.
 
 **Still open:** executable full current-source tests; 320px reader journeys; source-to-public exact byte verification; authenticated GSC and Bing page/query performance; the frozen AI answer citation panel; representative measured Lighthouse/performance data; verified book retail edition metadata. December 2026 remains the first potential complete postsprint month, not yet elapsed.
 
