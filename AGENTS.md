@@ -660,3 +660,28 @@ build/check, HTML5, internal links and applicable local browser suites.
 Do not mark mobile browser or source-to-live byte checks passed until
 executed from a complete local checkout. No new GitHub Actions or
 paid search service.
+
+## Turn 76: keep historical 10 BB Find fixtures aligned with required assets
+
+Turn 72 made the free `downloads/ten-bb-tournament-checklist.md` worksheet a
+required publication dependency alongside `poker/10bb/index.html` and
+`downloads/ten-bb-playbook-icm-verify.py`. The historical temporary-site
+test in `_tests/test_turn65_tenbb_find.py` had continued to copy only the
+page and Python checker before asserting successful registration. That
+assertion contradicts the current release validator.
+
+The test fixture now copies all three published assets before expecting
+`player_find.tenbb_entry(root)` to succeed, and explicitly checks that
+removing the worksheet after successful registration fails closed.
+Do not weaken `tenbb_companion.record()` just to satisfy old fixtures.
+Historical recorded Turn 65 results remain unchanged; this test is a
+current-contract correction, not a retroactive rewrite of that release.
+
+The isolated `tenbb_companion.py` module, copied byte-for-byte from GitHub
+blob `1dacc7d910a140cf8194965270f545b1ee0c1e69`, was tested against
+four constructed temporary-file states (all behaved as expected). That is
+not a full `unittest`, site build, browser or production GET pass.
+Run the already-registered `test_turn65_tenbb_find.py` together with
+`test_turn72_reader_release_coverage.py`, deterministic build, HTML5,
+internal links and the optional manual browser suite from a complete
+checkout before claiming release-wide verification. No Actions or paid tools.

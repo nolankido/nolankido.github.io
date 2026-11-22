@@ -97,7 +97,18 @@ assert.equal(score(record, 'unrelatedinventedstring'), -1);
             checker = root / tenbb_companion.CODE
             checker.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / tenbb_companion.CODE, checker)
+            # Turn 72 requires the free worksheet as well as the Python checker.
+            # Copying only the two original files is intentionally incomplete.
+            with self.assertRaisesRegex(ValueError, 'written worksheet is missing'):
+                player_find.tenbb_entry(root)
+            worksheet = root / tenbb_companion.WORKSHEET
+            worksheet.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / tenbb_companion.WORKSHEET, worksheet)
             self.assertEqual(player_find.tenbb_entry(root)["path"], tenbb_companion.ROUTE)
+            worksheet.unlink()
+            with self.assertRaisesRegex(ValueError, 'written worksheet is missing'):
+                player_find.tenbb_entry(root)
+            shutil.copyfile(ROOT / tenbb_companion.WORKSHEET, worksheet)
             corrupted = self.course.replace(
                 '<meta name="description" content="',
                 '<meta name="description" content="Unsupported marketing claim. ', 1)
