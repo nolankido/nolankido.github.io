@@ -227,12 +227,12 @@ def render(items: list[dict]) -> dict[str, str]:
                      f'<p class="reader-eyebrow">{escape(e["meta"])}</p>'
                      f'<h3><a href="{escape(e["url"], quote=True)}"' + (' rel="external"' if e['kind'] == 'resource' else '') + f'>{title}</a></h3>'
                      f'<p>{escape(e["description"])}</p>'
-                     + ('<p class="finder-excerpt" hidden></p><p class="finder-jump" hidden><a href="' + escape(e['url'], quote=True) + '">Read matching section</a></p><details class="finder-text"><summary>Searchable article text, without exercise answers</summary><div>' + passages + '</div></details>' if sections else '')
+                     + ('<p class="finder-excerpt" hidden></p><p class="finder-jump" hidden><a href="' + escape(e['url'], quote=True) + '">Read matching section</a></p><details class="finder-text"><summary>' + ('Eight visible section headings; read full guide for explanations' if e['id'] == 'standalone-tenbb' else 'Searchable article text, without exercise answers') + '</summary><div>' + passages + '</div></details>' if sections else '')
                      + (f'<p class="small-copy"><strong>Before you use it:</strong> {escape(e["notes"])}</p>' if e['notes'] else '')
                      + (f'<p class="small-copy">{escape(e["method"])} · <time datetime="{e["reviewed"]}">{e["reviewed"]}</time>'
                         f' · <a href="{e["context"]}">Full directory listing</a></p>' if e['context'] else '') + '<button type="button" class="finder-save" aria-pressed="false" hidden>Add to study list</button></article>')
     counts = {k: sum(e['kind'] == k for e in items) for k in ('guide', 'resource', 'glossary')}
     return {'poker_finder_cards': '\n'.join(cards), 'poker_finder_count': str(len(items)),
             'poker_finder_scope': f'{counts["guide"]} on-site pages, {counts["resource"]} external resources and {counts["glossary"]} glossary entries. '
-            'Guide prose and section headings are searchable; exercise answers, navigation and external article bodies are excluded. ' +
+            'Manifest guide prose and section headings are searchable. The standalone 10 BB Playbook provides its eight visible section headings only; exercise answers, navigation and external article bodies are excluded. ' +
             'An overview or glossary entry is not an additional guide.'}
