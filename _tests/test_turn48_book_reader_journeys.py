@@ -15,7 +15,10 @@ from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "assets/book-reader-journey.css"
-CSS_URL = "/assets/book-reader-journey.css?v=20261120"
+CSS_URLS = {
+    "one-workflow-at-a-time": "/assets/book-reader-journey.css?v=20261122",
+    "how-to-play-no-limit-texas-holdem": "/assets/book-reader-journey.css?v=20261122-pbg03",
+}
 PAGES = (
     {"slug": "one-workflow-at-a-time", "class": "page-book-one-workflow-at-a-time",
      "reader": "ai-book-reader", "example": "ai-book-first-exercise",
@@ -76,7 +79,7 @@ class BookReaderJourneyTests(unittest.TestCase):
                 source = (ROOT / "_source/books" / (item["slug"] + ".html")).read_text(encoding="utf-8")
                 public = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
                 self.assertEqual(source, public)
-                self.assertEqual(source.count('href="' + CSS_URL + '"'), 1)
+                self.assertEqual(source.count('href="' + CSS_URLS[item["slug"]] + '"'), 1)
                 self.assertNotIn(chr(0x2014), public)
         self.assertEqual({p["slug"] for p in book_pages.published(ROOT)},
                          {p["slug"] for p in PAGES})
@@ -91,7 +94,7 @@ class BookReaderJourneyTests(unittest.TestCase):
                 self.assertEqual([ref for ref, _ in Elements(nav).anchors],
                                  ["#" + x for x in expected])
                 self.assertTrue(all(parser.ids.count(x) == 1 for x in expected))
-                self.assertLess(html.index('class="page-hero shell"'),
+                self.assertLess(html.index('class="page-hero shell'),
                                 html.index('class="shell book-reader-jumps"'))
                 self.assertLess(html.index('class="shell book-reader-jumps"'),
                                 html.index('id="' + item["reader"] + '"'))
