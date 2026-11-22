@@ -789,3 +789,36 @@ Run it with the existing full build, HTML5/internal links, mobile
 browser and production release audits from a complete checkout.
 Local isolated sentence-level tests cannot certify the complete
 repository or live deployment. No GitHub Actions or paid services.
+
+## Turn 81: a self-contained exact-fraction ICM teaching worksheet
+
+The public `downloads/ten-bb-tournament-checklist.md` remains the
+existing six-step Playbook companion at the same permanent download URL.
+An expanded optional calculation and practice section, dated November 21,
+2026, now independently explains the original fictional no-ante,
+three-player, three-paid stack and payout example. It prints hero finishing
+probabilities for folding and winning, the exact $64 fold value,
+$1696/21 call-win value, $40 third-place loss payout, 9/20 chip price,
+and 63/107 ICM calling threshold. At 55% assumed wins, a call earns
++2 BB of chip EV but loses about $1.58 in modeled prize value; at 60%,
+it earns +3 BB and about $0.46 more modeled prize value than folding.
+
+All values are conditional, after-play **teaching assumptions**. Do not
+turn them into an actual tournament range or solver verdict. No tie,
+bounty, prize deal, future-action or different-player-count model is
+calculated by this script. The published
+`downloads/ten-bb-playbook-icm-verify.py` retains the authoritative
+fixed-input executable reproduction; no changes to its inputs, solver
+status or output contract were authorized. Leave the original six
+worksheet checks, original Playbook HTML, canonicals and release asset
+URL untouched.
+
+`_tests/test_turn81_10bb_worksheet_math.py` performs independent
+Fraction/permutation ICM probability and payout checks, compares
+the local published checker, validates the answer key, original six
+steps, language boundaries, public release registration, and negative
+controls. The manual release runner includes the new module. Verify
+the actual worksheet bytes against production in the already
+registered exact-byte priority audit. A mathematical source-level test
+does not establish live publication or user learning outcomes.
+No new GitHub Actions, paid services or automated monitoring.
