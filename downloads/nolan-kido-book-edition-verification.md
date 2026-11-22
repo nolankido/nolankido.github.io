@@ -13,6 +13,8 @@ This is a source and identity audit for the two book descriptions on [nolankido.
 
 **"Not independently verified" means unknown, not unavailable or nonexistent.** The author site confirms only the described subject and the author's own asserted association. Targeted public title/author searches available to this audit did not establish exact product detail pages for these titles. A search-result absence and an unanswered retailer check are not negative publication evidence. Retailer ISBNs, ASINs, price, edition dates, print availability, publisher imprint and official cover remain unconfirmed here.
 
+**November 22 author-archive update:** The archived 2027 Edition of *How to Play No-Limit Texas Hold’em* identifies the subtitle as *A Beginner’s Guide for Live Tournaments and Cash Games*. These are author-provided manuscript details, not an authenticated KDP `Live` status or confirmation of any public Amazon format. Retail identifiers and official retailer cover remain unverified.
+
 The matching structured [six-format public evidence ledger](https://nolankido.com/downloads/nolan-kido-book-edition-evidence.json) deliberately uses `null` for all unknown edition details, not `0`, fabricated product IDs or other authors' similarly named books.
 
 ## Publisher-first steps for each exact format
