@@ -21,8 +21,11 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import check_live
 
 PRIORITY = (
-    '/', '/about/', '/bio/', '/technology/', '/ai-in-real-life/', '/poker/',
-    '/poker/10bb/', '/books/', '/books/one-workflow-at-a-time/',
+    '/', '/about/', '/bio/', '/start-here/', '/technology/',
+    '/technology/checking-ai-website-changes/',
+    '/technology/ai-website-visibility/', '/technology/ai-workflow-pilot/',
+    '/ai-in-real-life/', '/poker/', '/poker/10bb/', '/books/',
+    '/books/one-workflow-at-a-time/',
     '/books/how-to-play-no-limit-texas-holdem/',
     '/technology/local-ai-review-replies/',
     '/technology/ai-book-continuity-checker/',
@@ -30,6 +33,9 @@ PRIORITY = (
     '/technology/task-brief/', '/technology/check-ai-answers/',
     '/downloads/one-workflow-ai-pilot-worksheet.md',
     '/downloads/holdem-river-call-check-worksheet.md',
+    '/downloads/website-check-offline-runbook.md',
+    '/downloads/ten-bb-tournament-checklist.md',
+    '/downloads/ten-bb-playbook-icm-verify.py',
     '/downloads/gsc-period-compare.py',
     '/downloads/gsc-download-verify.py',
     '/robots.txt', '/sitemap.xml',
