@@ -190,6 +190,9 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/poker-omaha-hilo-split-review.md']
     assets += ['downloads/poker-stud8-razz-seven-card-check.py',
                'downloads/poker-stud8-razz-seven-card-review.md']
+    # PBG-10: real public downloads used by the exact clean-outs turn lesson.
+    assets += ['downloads/holdem-clean-outs-turn-study.md',
+               'downloads/holdem-clean-outs-turn-verify.py']
     assets += ['assets/poker/uncertainty-' + name + '.png' for name in ['precision', 'bayes', 'boundary']]
     assets += ['assets/site-fonts.css', 'assets/page-sharing.css', 'assets/page-sharing.js']
     assets += [entry['path'] for entry in build.font_delivery.local_files(root)]
