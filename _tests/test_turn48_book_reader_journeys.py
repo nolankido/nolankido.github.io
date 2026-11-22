@@ -159,10 +159,12 @@ class BookReaderJourneyTests(unittest.TestCase):
         dates = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in root}
         for route in ("/books/", *(f"/books/{item['slug']}/" for item in PAGES)):
             with self.subTest(route=route):
-                self.assertEqual(dates["https://nolankido.com" + route], "2026-11-20")
+                expected = "2026-11-22" if route == "/books/how-to-play-no-limit-texas-holdem/" else "2026-11-20"
+                self.assertEqual(dates["https://nolankido.com" + route], expected)
         for item in PAGES:
             html = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
-            self.assertIn('"dateModified": "2026-11-20"', html)
+            expected = "2026-11-22" if item["slug"] == "how-to-play-no-limit-texas-holdem" else "2026-11-20"
+            self.assertIn('"dateModified": "' + expected + '"', html)
 
     def test_public_css_and_two_worksheets_in_live_inventory(self):
         import check_live
