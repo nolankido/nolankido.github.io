@@ -274,6 +274,60 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-06 beginner query-intent canonical ownership (November 22, 2026)
+
+The source-backed editorial map at
+`_reports/poker-book-growth/pbg-06-intent-to-canonical-map-2026-11-22.json`
+assigns **18 separate candidate search intents** to 18 distinct primary
+existing first-party canonical routes. Their primary/support union is
+19 existing URLs, including a broad tournament hub used only as a
+secondary reference. These questions are editorial hypotheses, never
+observed GSC, Bing, AI search prompts, keyword volumes, rankings or
+traffic. Keep those performance fields `null` until source-specific,
+authenticated reporting is available and reviewed.
+
+Ownership boundary: the full no-limit guide is a long reference,
+Poker Foundations is the free sequenced course, the specialized
+betting/position/math/hand-rank pages own their narrower answers,
+`/poker/poker-books-and-courses/` owns how to **choose learning
+materials**, and `/books/how-to-play-no-limit-texas-holdem/`
+owns the **Nolan Kido title and author-supplied Kindle link**.
+For first live tournament registration questions, prefer
+`/poker/first-live-tournament/`, with
+`/poker/live-tournament-guide/` as a wider hub.
+
+The existing book/course comparison page's
+`#choose-the-job` paragraph now gives five distinct free answers
+before readers consider buying. Its source is
+`_source/poker/poker-books-and-courses.html`, with matching changed
+paragraph in `poker/poker-books-and-courses/index.html`. Preserve
+exactly one unfragmented author book link, one free-example deep link,
+the author disclosure, and its free worksheet. The navigational
+paragraph adds roughly six source words and stays inside the existing
+four-minute editorial reading band. Its prior modification date was
+not artificially advanced for a small route adjustment.
+
+Offline audit: `python _scripts/poker_beginner_intent_map.py`.
+Twelve authored test cases are in
+`_tests/test_pbg06_beginner_intent_map.py`. Both are in the manual
+`_scripts/local_release_checks.py` list. Validate the source and
+compiled HTML route, one canonical/H1 per primary, unique ownership,
+question integrity and strictly nullable unobserved metrics.
+The 18 primary HTML routes passed authenticated GitHub static checks.
+The live public book-comparison page showed an earlier version of
+the fifth (tournament) route after the precision edit, so **do not
+claim latest source-to-live byte parity** until deployment catches up
+and independent retrieval verifies it. The complete Python tests,
+local deterministic build and actual responsive browser checks are
+not yet confirmed.
+
+The dated implementation report is
+`_reports/poker-book-growth/pbg-06-beginner-intent-ownership-2026-11-22.md`.
+Next PBG-07 should improve substance, accuracy and navigability of
+the full free no-limit guide without replicating the focused page
+owners, adding fake keywords or creating a new duplicate guide.
+Do not add GitHub Actions, fake traffic or paid keyword APIs.
+
 ## PBG-05 Amazon click-path verification (November 22, 2026)
 
 The canonical author-book pages `/books/`,
