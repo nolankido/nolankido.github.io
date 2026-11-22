@@ -25,7 +25,7 @@ PRIORITY = (
     '/', '/about/', '/bio/', '/start-here/', '/technology/',
     '/technology/checking-ai-website-changes/',
     '/technology/ai-website-visibility/', '/technology/ai-workflow-pilot/',
-    '/ai-in-real-life/', '/poker/', '/poker/10bb/', '/books/',
+    '/ai-in-real-life/', '/poker/', '/poker/free-poker-learning-path/', '/poker/10bb/', '/books/',
     '/books/one-workflow-at-a-time/',
     '/books/how-to-play-no-limit-texas-holdem/',
     '/technology/local-ai-review-replies/',
