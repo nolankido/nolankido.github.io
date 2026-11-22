@@ -3,7 +3,11 @@
 **Sprint:** POKER-BOOK-GROWTH
 **Turn:** PBG-01
 **Review date:** 2026-11-22
-**Decision:** PARTIAL IMPLEMENTATION; HOLD ON BUY LINKS
+**Original decision:** PARTIAL IMPLEMENTATION; HOLD ON BUY LINKS (superseded for the author-provided Kindle destination by the November 22 follow-up).
+
+## November 22 follow-up after the author supplied a Kindle URL
+
+The owner then supplied `https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324` (ASIN `B0HSB98324`). The book page and catalog now display a clearly labeled author-supplied Amazon Kindle link and a `poker-book-kindle-amazon-click` event. The dedicated [integration report](pbg-01-amazon-link-2026-11-22.md) is the latest source state. Earlier statements below about a missing link were true before this new author evidence and are retained only as historical context. Independent Amazon detail-page verification and validation of the live site remain open.
 
 ## Objective
 
