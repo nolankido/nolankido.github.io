@@ -96,6 +96,11 @@ class Turn79CompletionToTenBB(unittest.TestCase):
             build.build_outputs()[Path('poker/free-poker-learning-path/index.html')],
             self.public)
 
+    def test_course_is_required_by_the_priority_live_byte_audit(self):
+        import diagnose_live_crawl
+        self.assertIn('/poker/free-poker-learning-path/', diagnose_live_crawl.PRIORITY)
+        self.assertIn('/poker/10bb/', diagnose_live_crawl.PRIORITY)
+
     def test_mobile_offline_contract_now_includes_free_course(self):
         browser = (ROOT / '_tests/visibility_core_journeys_browser.py').read_text(
             encoding='utf-8')
