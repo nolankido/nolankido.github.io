@@ -13,7 +13,7 @@ Start Here now points directly to both the free six-lesson Poker Foundations cou
 1. Preserve those four original completion options and add one **optional** fifth choice at the end of the existing `#course-finish` list. It points to `/poker/10bb/#six-checks`, an existing section of the written Playbook, and says to use it after a reader can explain the cards, action and call price. The linked three-player ICM example is fictional, not a solver verdict for a real hand. No financial or competitive results are claimed.
 2. Update the real owner source `_source/poker/beginner-learning-path.html` and the paired rendered `poker/free-poker-learning-path/index.html` with the **same literal menu block**. Preserve the core six lessons, browser practice tools, actual page identities, October 8 publication date, October 16 last substantive revision metadata, and the original reading estimate. This is a supplemental navigation handoff, not a rewritten lesson.
 3. Extend the offline `_tests/visibility_core_journeys_browser.py` from five to **six important routes**, adding `/poker/free-poker-learning-path/` at 320, 390, 768 and 1440 CSS pixels and 200% enlarged-text checks at the two narrow widths. The planned visual assessment count rises from 30 to 36. Check the course-to-Playbook link and the destination's actual section ID before running those viewports.
-4. Add `_tests/test_turn79_course_to_tenbb.py` with eight static, builder-parity, source-provenance, real-resource and adversarial negative-control tests. Register it with the existing manual `_scripts/local_release_checks.py` and explain the source ownership in AGENTS.md.
+4. Add `_tests/test_turn79_course_to_tenbb.py` with eight static, builder-parity, source-provenance, real-resource and adversarial negative-control tests. Register it with the existing manual `_scripts/local_release_checks.py` and explain the source ownership in AGENTS.md. Extend the existing live priority route inventory with the changed free-course page and update its original Turn 38 scope contract.
 
 ## Evidence completed
 
@@ -46,10 +46,10 @@ py -3 _scripts/check_search.py --verify-snapshot _reports/search-audit.json
 py -3 _tests/check_html5.py
 py -3 _scripts/check_internal_links.py
 py -3 _scripts/local_release_checks.py --full --browser
-py -3 _tests/diagnose_live_crawl.py --scope priority --only /poker/10bb/ --attempts 2 --interval 2
+py -3 _tests/diagnose_live_crawl.py --scope priority --only /poker/free-poker-learning-path/ --only /poker/10bb/ --attempts 2 --interval 2
 ```
 
-The last command is a **limited** verification of the written Playbook only; it does not certify the generated beginner course, which requires the full or appropriately selected registered release inventory. If a real mobile failure or output mismatch is observed, fix it before claiming completion. Do not weaken existing checks to get a passing count. No GitHub Actions, paid tool or scheduled background task is authorized.
+The last command is a **limited** verification of the two connected learning pages. It does not certify the site's full registered release inventory. If a real mobile failure or output mismatch is observed, fix it before claiming completion. Do not weaken existing checks to get a passing count. No GitHub Actions, paid tool or scheduled background task is authorized.
 
 ## Sprint assessment
 
