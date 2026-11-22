@@ -864,3 +864,43 @@ network-capable full checkout. New unit tests in
 `_tests/test_turn82_publication_retry_window.py` are synthetic until
 executed from that checkout. No repository-authored GitHub Actions
 workflow, payment, page-count change, or passive monitor was added.
+
+## Turn 83: retain observed live release mismatches across transport errors
+
+The manually run `_tests/diagnose_live_crawl.py` now preserves two distinct
+facts per pending registered route: its **strongest observed release
+failure** (`failures`) and its **most recent failed attempt**
+(`latest_failures`). This closes a misleading failure path: a direct
+HTTP or exact-byte mismatch could previously be overwritten by a
+subsequent DNS, timeout or TLS error, thereby downgrading the result
+to `inconclusive` despite observed contrary publication evidence.
+
+When a route has shown any direct HTTP or byte mismatch and has not
+subsequently obtained a complete exact-byte success, classify it as
+`observed_mismatch` and fail the targeted release. Retain the most
+recent raw error in `latest_failures`, with any separate transport
+diagnostic plainly labeled as a different request whose bytes were
+**not** compared. A later genuine exact-byte match clears both
+failure histories for that route and establishes a pass at its
+actual `verified_attempt`. An all-network-error sequence remains
+`inconclusive`; a registered expected 404 can still pass if the
+status, final canonical path and expected 404 bytes match.
+
+Direct Python callers of `audit()` must obey the CLI limits
+(priority or all; 1 to 8 attempts; 0 to 30 second interval; 1 to 4
+workers), and an empty final registered target set must raise rather
+than claim an unobserved 0/0 PASS. Only explicit `--only` routes
+establish a *selected-route* result, not a complete release check.
+
+The new `_tests/test_turn83_observed_mismatch_retention.py` module
+contains eleven synthetic regression methods, registered by the
+existing manual release runner. An isolated extraction of the
+relevant current Python function bodies was checked against the
+authenticated GitHub branch with matching 4,874-character length
+and FNV32 checksum `bb7349d1`. Twelve isolated function-level
+tests passed on that extraction. This is **not** a complete
+repository unittest, local browser acceptance, production GET
+or source-to-live byte receipt. The full checkout has remained
+unavailable in this container due GitHub DNS restrictions.
+Preserve the existing no-Actions/no-scheduler policy and honest
+search measurement boundaries.
