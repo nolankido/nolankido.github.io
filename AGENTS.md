@@ -1604,6 +1604,10 @@ count and visible state in the targeted repeat do **not** reproduce
 that bug. Do not change filter code without independently reproducible
 evidence. The browser agent's contradictory DOM-presence descriptions
 do not establish whether hidden versus detached node semantics changed;
-the current site's source uses the `hidden` property.
+the current site's source uses the `hidden` property. The local
+`_tests/finder_browser.py` now explicitly verifies the selected
+`finder-kind=resource`, the 0-of-0 live match count, and the on-site
+Playbook card's `hidden` attribute; these assertions remain unexecuted
+until the full matching checkout runs Playwright.
 No full mobile viewport audit, exact-byte publication receipt,
 owner Search Console data or AI assistant visibility result is claimed.
