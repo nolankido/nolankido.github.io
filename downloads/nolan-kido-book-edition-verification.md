@@ -2,22 +2,25 @@
 
 **Public author-book edition checklist | Updated November 22, 2026**
 
-This is a source and identity audit for the two book descriptions on [nolankido.com/books/](https://nolankido.com/books/). It is not a sales catalog, publisher dashboard, KDP account snapshot, manuscript release certificate, or assurance that a book has or has not been published.
+This is a source and identity audit for two full author book pages plus a third linked Kindle title on [nolankido.com/books/](https://nolankido.com/books/). It is not a sales catalog, publisher dashboard, KDP account snapshot, manuscript release certificate, or assurance that a book has or has not been published.
 
 ## Current edition evidence
 
 | Author-described work | Kindle eBook | Paperback | Hardcover |
 | --- | --- | --- | --- |
-| [One Workflow at a Time](https://nolankido.com/books/one-workflow-at-a-time/) | Not independently verified | Not independently verified | Not independently verified |
+| [One Workflow at a Time](https://nolankido.com/books/one-workflow-at-a-time/) | Author-supplied Amazon URL (retail content not independently verified) | Not independently verified | Not independently verified |
 | [How to Play No-Limit Texas Hold’em](https://nolankido.com/books/how-to-play-no-limit-texas-holdem/) | Author-supplied Amazon URL (retail content not independently verified) | Not independently verified | Not independently verified |
+| AI Works, Human Decides (additional Kindle link; no dedicated first-party page yet) | Author-supplied Amazon URL (retail content not independently verified) | Not independently verified | Not independently verified |
 
 **November 22 author-provided Kindle link:** The author supplied [this Amazon Kindle URL](https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324) with ASIN `B0HSB98324` for *How to Play No-Limit Texas Hold’em*. This link can now serve readers. Retailer title, byline, format selection, official cover, price, publication date and live purchasing status could not be independently inspected, so the URL and ASIN are recorded separately from verified retail evidence. No print-format availability is implied by the Kindle URL.
+
+**Additional author-provided Kindle links (November 22):** [One Workflow at a Time](https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y) has author-supplied ASIN `B0HRQNCP7Y`, while [AI Works, Human Decides](https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R) has author-supplied ASIN `B0HSF8K76R`. The latter is recorded in the ledger's supplementary titles list, not represented as a complete three-format source-backed work. Amazon returned a shopping continuation page rather than readable product detail text for both URLs. These links are suitable as labeled destinations, but no Amazon availability, edition metadata, pricing, publisher imprint or official cover has been independently verified.
 
 **"Not independently verified" means unknown, not unavailable or nonexistent.** The author site confirms only the described subject and the author's own asserted association. Targeted public title/author searches available to this audit did not establish exact product detail pages for these titles. A search-result absence and an unanswered retailer check are not negative publication evidence. Retailer ISBNs, ASINs, price, edition dates, print availability, publisher imprint and official cover remain unconfirmed here.
 
 **November 22 author-archive update:** The archived 2027 Edition of *How to Play No-Limit Texas Hold’em* identifies the subtitle as *A Beginner’s Guide for Live Tournaments and Cash Games*. These are author-provided manuscript details, not an authenticated KDP `Live` status or confirmation of any public Amazon format. Retail identifiers and official retailer cover remain unverified.
 
-The matching structured [six-format public evidence ledger](https://nolankido.com/downloads/nolan-kido-book-edition-evidence.json) deliberately uses `null` for all unknown edition details, not `0`, fabricated product IDs or other authors' similarly named books.
+The matching [public evidence ledger](https://nolankido.com/downloads/nolan-kido-book-edition-evidence.json) retains six format slots for the two fully described author works and separately records the additional Kindle title. It uses `null` for unverified retailer fields, not fabricated identifiers or another author's similarly titled book.
 
 ## Publisher-first steps for each exact format
 
