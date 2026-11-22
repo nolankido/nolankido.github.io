@@ -235,8 +235,15 @@ def check(route: str, expected: tuple[int, bytes]) -> tuple[bool, str]:
             response = error
         with response:
             status, body = response.code, response.read(LIMIT + 1)
+            final_url = urlsplit(response.geturl())
         if status != expected[0]:
             return False, 'HTTP ' + str(status) + ', expected ' + str(expected[0])
+        # Same-origin redirects may still serve identical bytes from another
+        # route. For SEO and downloads, those bytes do not verify the requested
+        # canonical URL. A query-only rewrite is harmless; a path hop is not.
+        if (final_url.scheme != 'https' or final_url.netloc != 'nolankido.com'
+                or final_url.path != route):
+            return False, 'HTTP ' + str(status) + '; final URL changed registered route'
         if body != expected[1]:
             return False, 'Response bytes do not match the checked-out release'
         return True, 'HTTP ' + str(status) + '; exact release bytes'
