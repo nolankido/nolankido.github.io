@@ -191,3 +191,118 @@
     display: none;
   }
 }
+
+/* PBG-03: reader-first poker book path, scoped to one canonical page. */
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-lead {
+  max-width: 64ch;
+  margin-block: .75rem 1rem;
+  font-size: clamp(1.05rem, 1rem + .35vw, 1.24rem);
+  line-height: 1.55;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem 1.3rem;
+  max-width: 58rem;
+  align-items: start;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-actions > p {
+  margin: 0;
+  min-width: 0;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-actions .small-copy {
+  display: block;
+  flex: none;
+  max-width: 38ch;
+  line-height: 1.55;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .45rem;
+  overflow-wrap: anywhere;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: .65rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: .35rem;
+  color: var(--basalt);
+  font: 700 1rem/1.4 var(--sans);
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start a:hover {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start a:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .65rem 1rem;
+  max-width: 62rem;
+  margin-block: 1.2rem .35rem;
+  padding: 0;
+  list-style: none;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-outcomes li {
+  min-width: 0;
+  padding-top: .7rem;
+  border-top: 1px solid var(--line-dark);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-evidence {
+  max-width: 68ch;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-study-steps {
+  display: grid;
+  gap: .6rem;
+  padding-left: 1.5rem;
+}
+.page-book-how-to-play-no-limit-texas-holdem .poker-book-study-steps li {
+  padding-left: .2rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-actions,
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-outcomes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start a {
+    width: 100%;
+  }
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-actions {
+    gap: .8rem;
+  }
+}
+@media (forced-colors: active) {
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start a {
+    color: LinkText;
+    border-color: LinkText;
+    background: Canvas;
+  }
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-hero-outcomes li {
+    border-color: CanvasText;
+  }
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start a:focus-visible {
+    outline-color: Highlight;
+  }
+}
+@media print {
+  .page-book-how-to-play-no-limit-texas-holdem .poker-book-free-start {
+    display: none;
+  }
+}
