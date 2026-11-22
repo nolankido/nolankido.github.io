@@ -83,6 +83,12 @@ def exit_code(report: dict) -> int:
 
 def audit(scope: str, attempts: int, interval: int, workers: int,
           only: list[str] | None = None) -> dict:
+    # CLI argument choices do not protect callers that invoke audit() directly.
+    # A zero-target audit must never certify an empty release as a 0/0 pass.
+    if scope not in ('priority', 'all'):
+        raise ValueError('Release scope must be priority or all')
+    if not 1 <= attempts <= 8 or not 0 <= interval <= 30 or not 1 <= workers <= 4:
+        raise ValueError('Invalid bounded release retry settings')
     all_targets = check_live.targets()
     if scope == 'priority':
         missing = [route for route in PRIORITY if route not in all_targets]
@@ -96,8 +102,14 @@ def audit(scope: str, attempts: int, interval: int, workers: int,
         if unknown:
             raise ValueError('Unknown selected release route: ' + ', '.join(unknown))
         targets = {route: targets[route] for route in only}
+    if not targets:
+        raise ValueError('Release audit has no registered targets to verify')
     pending = dict(targets)
+    # The strongest failure is the evidence used for classification.
+    # A later transport error cannot erase an earlier observed HTTP/byte
+    # mismatch. The most recent result is separately preserved for diagnosis.
     failures = {}
+    latest_failures = {}
     verified = {}
     for index in range(attempts):
         with ThreadPoolExecutor(max_workers=workers) as pool:
@@ -115,14 +127,19 @@ def audit(scope: str, attempts: int, interval: int, workers: int,
                 }
                 pending.pop(route)
                 failures.pop(route, None)
+                latest_failures.pop(route, None)
             else:
-                failures[route] = message
+                latest_failures[route] = message
+                if (route not in failures
+                        or classify_failure(message) == 'observed_mismatch'
+                        or classify_failure(failures[route]) != 'observed_mismatch'):
+                    failures[route] = message
         if not pending:
             break
         if index + 1 < attempts:
             time.sleep(interval)
     diagnostics = {}
-    for route, message in failures.items():
+    for route, message in latest_failures.items():
         if message in {'URLError', 'OSError'}:
             diagnostics[route] = inspect_transport(route)
     observed = sorted(route for route, message in failures.items()
@@ -138,7 +155,9 @@ def audit(scope: str, attempts: int, interval: int, workers: int,
             'verified_routes': {route: verified[route] for route in sorted(verified)},
             'observed_failed': len(observed), 'inconclusive_count': len(inconclusive),
             'observed_failure_routes': observed, 'inconclusive_routes': inconclusive,
-            'failures': failures, 'transport_diagnostics': diagnostics,
+            'failures': failures,
+            'latest_failures': {route: latest_failures[route] for route in sorted(latest_failures)},
+            'transport_diagnostics': diagnostics,
             'read_only': True, 'exact_byte_comparison': True}
 
 
