@@ -191,6 +191,17 @@ class CleanOutsPBG10Tests(unittest.TestCase):
             self.assertIn("C(7,5) = 21", doc)
         self.assertIn("not an official", read("books/how-to-play-no-limit-texas-holdem/index.html"))
 
+    def test_pot_odds_workshop_distinguishes_47_and_44_card_models(self):
+        href = "/poker/poker-math-reference/#clean-outs-turn-check"
+        for path in ("_source/poker/pot-odds-workshop.html",
+                     "poker/pot-odds-workshop/index.html"):
+            doc = read(path)
+            self.assertEqual(doc.count('href="' + href + '"'), 1)
+            self.assertIn("seven winning hearts", doc)
+            self.assertIn("nine flush completions among 44 rivers", doc)
+            self.assertIn('href="/poker/plo-wrap-redraw-blockers/#plo-wrap"', doc)
+        self.assertIn("About 6 min read", read("poker/pot-odds-workshop/index.html"))
+
     def test_reading_time_remains_five_minutes(self):
         self.assertEqual(poker_library.minutes(self.source), 5)
         self.assertIn("About 5 min read", self.public)
