@@ -274,6 +274,59 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-07 comprehensive no-limit Hold'em guide exercise (November 22, 2026)
+
+The canonical long guide `/poker/no-limit-holdem-guide/` is compiled
+from `_source/poker/no-limit-holdem-guide.html`. This turn adds one
+native `<details>` exercise with
+`id="guide-check-bluff-mix"` inside the existing worked river-review
+section, and one early table row linking to
+`/poker/starting-hand-decisions/`. The same new HTML fragments must
+be present in `poker/no-limit-holdem-guide/index.html`. Do not create
+an alternative indexable duplicate or add an H2/H3 that would change
+the generated outline without rebuilding all references.
+
+The fictional, equal-weight river model has a $60 pot before a $30
+opponent bet, $90 after it, a $30 call, a $120 final pot and a 25%
+break-even share. For a pure bluff-catcher that beats every bluff and
+loses to every value bet with no ties, fees or side pots:
+- 2 bluff weights / 10 value weights gives EV(call) = -$10.
+- 3 bluff weights / 9 value weights gives zero EV.
+- 4 bluff weights / 8 value weights gives EV(call) = +$10.
+These weights are educational assumptions, **not** legal card
+combination counts, opponent statistics, solver solutions or evidence
+that any player should call in a live hand. Preserve the full range,
+blocker, prior betting action and fee caveats. The native answer
+links to the existing specialist
+`/poker/turn-and-river-decisions/#catching-a-bluff`.
+
+Keep the existing exact book-page link to
+`/books/how-to-play-no-limit-texas-holdem/`, its separate free
+site-only exercise and worksheet, the guide's original examples, its
+13 H2/62 H3 source headings, and its approximately 49-minute editorial
+reading time. Because the added study example did not entail a full
+reverification of the legacy rule sources, the prior publication and
+review dates were not advanced; this dated report records what changed
+on November 22. A future full material revision should update
+metadata and generated derivatives together.
+
+Run `python -m unittest discover -s _tests -p
+test_pbg07_no_limit_guide.py -v`, then the existing local release
+runner, HTML5, internal link and browser checks. The new module has
+12 tests of exact fraction arithmetic, source/public parity, route
+and source boundaries, older practice preservation, author-book links
+and negative controls. It is registered in
+`_scripts/local_release_checks.py`, but full test execution was
+not available during this turn. A read-only public retrieval
+confirmed the new EV text, two specialist links and preserved book
+destination, not full source-byte or browser QA.
+
+See `_reports/poker-book-growth/pbg-07-no-limit-guide-range-decision-2026-11-22.md`.
+Next is PBG-08, improving focused beginner rule/hand understanding
+without duplicating the comprehensive guide or fabricating rankings,
+search traffic, reader outcomes or book sales. Do not add
+GitHub Actions, automated fake visits or a second analytics tracker.
+
 ## PBG-06 beginner query-intent canonical ownership (November 22, 2026)
 
 The source-backed editorial map at
