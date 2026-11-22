@@ -274,6 +274,75 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-10 clean outs, face-up turn enumeration (November 22, 2026)
+
+The existing `/poker/poker-math-reference/` reference now includes
+one original no-wager `#clean-outs-turn-check` aside with native
+`#clean-outs-turn-answer` disclosure. Its exact public teaching inputs
+are Hero `Ah Jh`, villain `7d Qc`, turn board `Kh 7h 7c 2d`,
+pot-before-bet 60, and villain turn all-in bet 20. A call closes
+betting and makes a 100-chip final pot. These are **face-up fictional
+study inputs**. Do not treat the opponent's cards as information a
+player would normally know, or claim a real action or solver verdict.
+
+With eight known cards there are **44** legal river cards, not 46.
+Nine hearts complete Hero's flush, but the 2h and Qh complete
+villain's full house, yielding only **seven winning rivers**:
+3h, 4h, 5h, 6h, 8h, 9h and Th. Every other river loses, none
+ties. The winning fraction is 7/44 = 15.91%, compared with the
+20/100 = 20% call price. Relative to folding with no rake,
+side pots, future bets or tournament payout effects, the exact
+chip EV is (7*80 - 37*20)/44 = -45/11, about -4.09 chips.
+Counting all nine heart completions incorrectly gives
+(9*80 - 35*20)/44 = +5/11, about +0.45 chips and reverses
+the sign. The full teaching and case assumptions are in
+`_reports/poker-book-growth/pbg-10-clean-outs-one-card-turn-2026-11-22.md`.
+
+Preserve the numeric `data-hero`, `data-villain`,
+`data-board`, `data-pot-before-bet` and
+`data-opponent-bet` attributes in both
+`_source/poker/poker-math-reference.html` and
+`poker/poker-math-reference/index.html`. Their new aside
+must match exactly. The site-original worksheet
+`downloads/holdem-clean-outs-turn-study.md` and
+zero-network executable
+`downloads/holdem-clean-outs-turn-verify.py` are linked as
+native downloads and registered in `_scripts/check_live.py`.
+The same exercise is linked from the `#draws` section of
+`_source/poker/pot-odds-workshop.html`, with an equivalent
+generated paragraph in `poker/pot-odds-workshop/index.html`.
+The workshop keeps its existing Omaha wrap route and explains
+why a 47-unseen flop information set differs from this fully
+specified eight-known-card turn model.
+
+The math reference's source copy was condensed to keep its original
+**five-minute** editorial reading estimate while preserving the
+three `viewer-question` controls, existing independent math table,
+PLO/hi-lo/stud example links and the single first-party author-book
+link. The pot-odds workshop retains its six-minute estimate. Do not
+replace the author book with an Amazon direct link or block free study
+behind a purchase; no analytics tags were added.
+
+The standalone Python verifier **was executed locally**, reported
+44 rivers, seven wins, two dirty heart completions, exact
+`-45/11` chip EV, and failed when the opponent or bet was
+tampered with. The SHA of that executed file matched the committed
+verifier blob after its audit argument fix. The new test module
+`_tests/test_pbg10_clean_outs_turn.py` has 15 authored offline
+regressions registered along with the verifier in
+`_scripts/local_release_checks.py`. Whole-repository tests,
+deterministic full build, HTML5, internal-link and browser
+acceptance suites remain unexecuted due to unavailable complete
+checkout. The live reference section and Markdown worksheet were
+retrieved, while independent exact public .py download retrieval
+was inconclusive. Do not mislabel code existence as verified
+browser download. Preserve no GitHub Actions.
+
+Next PBG-11: strengthen the beginner practice/checkpoint flow and
+first-session cost information using a source-backed, testable
+learner task, not another near-duplicate guide or unverified
+search-volume and book-sales claim.
+
 ## PBG-09 AJs on the button: raised versus unopened (November 22, 2026)
 
 The existing six-lesson Poker Foundations sequence includes exactly
