@@ -144,7 +144,8 @@
     "description": "How nolankido.com handles website visits and contact-form messages.",
     "kicker": "Privacy",
     "source": "privacy.html",
-    "updated": "2026-10-16"
+    "updated": "2026-11-22",
+    "revision": "Clarified the three named Amazon book-link click events and their limits without changing the tracker or collecting reader input."
   },
   {
     "id": "404",
