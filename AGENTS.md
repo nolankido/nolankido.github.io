@@ -582,3 +582,31 @@ The existing manual release runner discovers the new browser script
 only with `--browser`. After merge, run status-bearing priority
 diagnostics with matching source bytes from a full checkout.
 No GitHub Actions, paid verification provider, new tracking or cron.
+
+## Turn 73 source-pinned public release receipts
+
+`_tests/diagnose_live_crawl.py` now records which registered URLs actually
+passed the existing status-bearing exact-byte `check_live.check()` verifier.
+Each `verified_routes` entry is added only after a successful public GET
+comparison, with the expected HTTP status, SHA-256 of the matching checked-out
+source bytes, attempt number, and the verifier's success message.
+An expected 404 negative-control document may legitimately have a successful
+receipt if its exact release error-body is returned. `observed_failure_routes`
+and `inconclusive_routes` remain separate; never describe DNS failures,
+text extraction, merged GitHub commits, or a source SHA alone as a verified
+public-byte match.
+
+Use bounded `--only` selections for a recent release, e.g.:
+
+`python _tests/diagnose_live_crawl.py --scope priority --only /start-here/ --only /poker/10bb/ --only /downloads/ten-bb-tournament-checklist.md`
+
+Only existing registered priority routes may be selected in priority mode.
+Duplicates and unknown routes must fail closed. The full default priority
+inventory remains intact. The dated proof of a live page's **content**
+retrievability is distinct from this checker, because a content extractor
+does not provide status-bearing, original-response bytes.
+
+Run `_tests/test_turn73_live_byte_receipts.py` for synthetic pass, expected
+404, retries, mixed failures and false-positive safeguards. The existing
+`_scripts/local_release_checks.py` runs it locally; no GitHub Actions,
+scheduled service or additional subscription is authorized.
