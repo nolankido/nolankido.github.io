@@ -133,6 +133,8 @@ class BookReaderJourneyTests(unittest.TestCase):
                 self.assertIn('data-umami-event="poker-book-kindle-amazon-click"', page)
             else:
                 self.assertNotIn("B0HSB98324", page)
+                self.assertIn("https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y", page)
+                self.assertIn('data-umami-event="one-workflow-kindle-amazon-click"', page)
             self.assertIn("not an official cover of this book", page)
 
     def test_css_has_responsive_320px_routes_and_keyboard_focus(self):
@@ -164,11 +166,11 @@ class BookReaderJourneyTests(unittest.TestCase):
         dates = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in root}
         for route in ("/books/", *(f"/books/{item['slug']}/" for item in PAGES)):
             with self.subTest(route=route):
-                expected = "2026-11-22" if route in ("/books/", "/books/how-to-play-no-limit-texas-holdem/") else "2026-11-20"
+                expected = "2026-11-22"
                 self.assertEqual(dates["https://nolankido.com" + route], expected)
         for item in PAGES:
             html = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
-            expected = "2026-11-22" if item["slug"] == "how-to-play-no-limit-texas-holdem" else "2026-11-20"
+            expected = "2026-11-22"
             self.assertIn('"dateModified": "' + expected + '"', html)
 
     def test_public_css_and_two_worksheets_in_live_inventory(self):
