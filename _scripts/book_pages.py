@@ -13,12 +13,12 @@ BOOKS = [
     {"slug": "one-workflow-at-a-time", "title": "One Workflow at a Time",
      "seo": "One Workflow at a Time: Practical AI Book | Nolan Kido",
      "description": "Nolan Kido's One Workflow at a Time examines small-business AI pilots, complete workflow costs, verification, and human approvals. Read free companion methods.",
-     "interest": "technology"},
+     "interest": "technology", "modified": "2026-11-20"},
     {"slug": "how-to-play-no-limit-texas-holdem",
      "title": "How to Play No-Limit Texas Hold’em",
      "seo": "How to Play No-Limit Texas Hold’em: Book | Nolan Kido",
      "description": "About How to Play No-Limit Texas Hold’em by Nolan Kido: a beginner poker book covering rules, position, betting, ranges and decision review, with free practice.",
-     "interest": "poker"},
+     "interest": "poker", "modified": "2026-11-22"},
 ]
 
 HUB_ROUTE = "/books/"
@@ -54,7 +54,7 @@ def published(root: Path) -> list[dict]:
             raise ValueError("Book must have one schema record")
         schema = json.loads(match.group(1))
         entity = schema.get("mainEntity", {})
-        if (schema.get("@type") != "WebPage" or schema.get("url") != url or schema.get("dateModified") != UPDATED
+        if (schema.get("@type") != "WebPage" or schema.get("url") != url or schema.get("dateModified") != item["modified"]
             or entity.get("@type") != "Book" or entity.get("@id") != url + "#book"
             or entity.get("author", {}).get("@id") != PERSON
             or schema.get("about", {}).get("@id") != url + "#book"
@@ -127,7 +127,7 @@ def add_to_sitemap(root_sitemap: ET.Element, root: Path) -> None:
     for book in published(root):
         url = ET.SubElement(root_sitemap, "url")
         ET.SubElement(url, "loc").text = ORIGIN + route(book)
-        ET.SubElement(url, "lastmod").text = UPDATED
+        ET.SubElement(url, "lastmod").text = book["modified"]
 
 def find_entries(root: Path) -> list[dict]:
     entries = [{"path": route(b), "title": b["title"], "search_title": b["seo"],
