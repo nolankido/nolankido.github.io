@@ -92,7 +92,7 @@ def enumerate_rivers(
 
 
 def audit() -> dict[str, object]:
-    count = enumerate_rivers()
+    count = enumerate_rivers(hero=HERO, villain=VILLAIN, board=TURN_BOARD)
     unknown = count["unknown"]
     win = len(count["wins"])
     lose = len(count["losses"])
