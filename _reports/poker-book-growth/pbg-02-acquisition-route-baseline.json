@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "audited_on": "2026-11-22",
+  "sprint": "POKER-BOOK-GROWTH",
+  "turn": "PBG-02",
+  "scope": "Selected eleven pre-existing canonical poker learning pages, not the whole website and not search impressions or visits",
+  "book_page": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/",
+  "amazon_asin": "B0HSB98324",
+  "site_source": "Authenticated GitHub main repository path audits for committed HTML; no authenticated search/analytics reports",
+  "summary": {
+    "selected_pages": 11,
+    "pages_with_exact_direct_book_link": 3,
+    "pages_without_exact_direct_book_link": 8
+  },
+  "routes": [
+    {
+      "route": "/poker/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/no-limit-holdem-guide/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 1
+    },
+    {
+      "route": "/poker/poker-books-and-courses/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 1
+    },
+    {
+      "route": "/poker/free-poker-learning-path/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/holdem-basics/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/library/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/study/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/starting-hand-decisions/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/poker-math-reference/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/betting-and-pots/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    },
+    {
+      "route": "/poker/beginner-practice/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0
+    }
+  ],
+  "tracking": {
+    "book_page_event": "poker-book-kindle-amazon-click",
+    "book_page_source": "book-page-hero",
+    "catalog_source": "books-catalog",
+    "configured": true,
+    "verified_events_received": false
+  },
+  "metrics": {
+    "google_web_poker_clicks": null,
+    "google_web_poker_impressions": null,
+    "google_ai_search_citations": null,
+    "bing_poker_search_clicks": null,
+    "book_pageviews": null,
+    "amazon_outbound_click_events": null,
+    "kdp_book_orders": null,
+    "ai_panel_cited_urls": null
+  },
+  "metric_status": "not_collected",
+  "warning": "Null means unmeasured, not an observed zero; static links do not prove indexing, click events, book purchases, rankings or model citations."
+}
