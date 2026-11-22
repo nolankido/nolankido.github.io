@@ -274,6 +274,46 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-04 contextual poker-book links (November 22, 2026)
+
+Six high-fit poker learning pages now include a single optional
+`<p class="poker-book-bridge">` leading to the existing canonical
+`/books/how-to-play-no-limit-texas-holdem/`. Their pairs of reviewed
+`_source/poker/{slug}.html` bodies and generated
+`poker/{slug}/index.html` retain an exactly matching new paragraph.
+The six slugs are `free-poker-learning-path`, `holdem-basics`,
+`starting-hand-decisions`, `betting-and-pots`,
+`beginner-practice`, and `poker-math-reference`.
+
+Each link follows relevant free teaching and identifies the book as the
+site author's. These six articles must remain complete and usable
+without buying the book. Do not turn them into Amazon redirects, add
+external advertising links or analytics events, fabricate chapter
+excerpts or winning promises, or displace the free lesson controls.
+No timestamps were advanced for this bounded navigational improvement.
+Use the existing generator, not a new build job, to regenerate outputs
+if the source body changes again. Keep the read-time estimates in sync;
+concise wording was used here to avoid threshold crossings.
+
+The original 11-route comparison is in
+`_reports/poker-book-growth/pbg-02-acquisition-route-baseline.json`,
+and the PBG-04 follow-up in
+`_reports/poker-book-growth/pbg-04-contextual-link-coverage.json`
+records 9 linked pages, 2 unlinked. The two not changed are
+`/poker/library/` and `/poker/study/`, broad free-resource hubs that
+do not need a generic book promotion without additional evidence.
+The [detailed report](_reports/poker-book-growth/pbg-04-contextual-book-discovery-2026-11-22.md)
+documents the six links, live retrieval evidence and limits.
+
+`_tests/test_pbg04_poker_book_contextual_links.py` has ten new
+offline tests registered in `_scripts/local_release_checks.py`.
+Static readback passed 47 focused checks. Live content extraction
+showed a link to the book on all six changed pages, but no full local
+Python/HTML5/browser suite, exact source-to-live byte comparison, or
+observed Google/AI/Amazon results was produced on this turn.
+Do not claim any search visibility or book-sales lift solely from
+the increase from 3/11 to 9/11. Never add GitHub Actions.
+
 ## PBG-03 poker book reader-first landing page (November 22, 2026)
 
 The exact book page `/books/how-to-play-no-limit-texas-holdem/` retains
