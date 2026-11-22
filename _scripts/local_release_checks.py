@@ -165,6 +165,8 @@ def main() -> int:
         ('PBG-04 contextual beginner-book links and frozen 11-page coverage', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg04_poker_book_contextual_links.py', '-q']),
         ('PBG-05 read-only Amazon click-path contract audit', ['_scripts/poker_book_click_path_audit.py']),
         ('PBG-05 Amazon href/event provenance and mutation controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg05_book_click_path_audit.py', '-q']),
+        ('PBG-06 canonical question and beginner-intent map audit', ['_scripts/poker_beginner_intent_map.py']),
+        ('PBG-06 beginner intent owner and free study routing regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg06_beginner_intent_map.py', '-q']),
         ('Turn 49 topic-to-book exercises and reciprocal free-guide paths', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_topic_book_paths.py', '-q']),
         ('Turn 50 first-screen practical AI proof and task routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn50_first_screen_identity.py', '-q']),
         ('Turn 51 practical AI topic ownership and guide-to-calculator distinction', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn51_topic_ownership.py', '-q']),
