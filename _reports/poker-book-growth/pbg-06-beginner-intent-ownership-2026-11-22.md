@@ -59,7 +59,7 @@ This paragraph is exactly matching in `_source/poker/poker-books-and-courses.htm
 
 **Precision refinement:** The first live tournament question has a more focused published answer at `/poker/first-live-tournament/`; the broader `/poker/live-tournament-guide/` remains a supporting hub. The reader chooser now points to the focused first-event guide.
 
-**Reading-time check:** The original source had approximately **807** text words; the revised source approximately **813**, a net six. Both are within the 4-minute bucket at the existing 225-words/minute editorial estimate. The published page still says about four minutes, so the changed paragraph does not require a known reading-time update.
+**Reading-time check:** The original source had approximately **807** text words; the revised source approximately **812**, a net five. Both are within the 4-minute bucket at the existing 225-words/minute editorial estimate. The published page still says about four minutes, so the changed paragraph does not require a known reading-time update.
 
 ## New quality gate
 
