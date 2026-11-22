@@ -274,6 +274,37 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## Three author-supplied Kindle destinations (November 22, 2026)
+
+The user supplied these exact Amazon links for their existing books:
+- `https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324` for *How to Play No-Limit Texas Hold’em*
+- `https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y` for *One Workflow at a Time*
+- `https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R` for *AI Works, Human Decides*
+
+The [Books catalog](/books/) includes three links and an author-linked
+structured-data mention of *AI Works, Human Decides*. The two previously
+registered standalone book pages retain exactly one matching Kindle CTA
+each, plus `data-umami-event` attributes. The additional *AI Works,
+Human Decides* title is **not yet** a third registered `_scripts/book_pages.py`
+book page or part of the original two-work/six-edition verification
+matrix. Its author-supplied Kindle destination is separately recorded
+in `downloads/nolan-kido-book-edition-evidence.json` under
+`supplementary_author_supplied_titles`.
+
+A public fetch reached Amazon's shopping interstitial for the two new
+links, not inspectable book details. Treat all three as
+**author-provided** links, not independently verified retailer pages.
+Do not synthesize offers, prices, publication dates, formats, ISBNs,
+stock claims, cover art, ratings, affiliate parameters or a fake
+standalone third-book canonical page. Keep the existing Book catalog's
+two canonical source-backed work entries and its third `mentions` Book
+entry consistent until a deliberate full third-page migration updates
+the builders, sitemap, Find and regression suites together. Maintain
+source/output HTML parity; do not introduce GitHub Actions.
+
+The release handoff is documented at
+`_reports/book-discovery/three-kindle-destinations-2026-11-22.md`.
+
 ## PBG-01 Kindle eBook purchase link (current, November 22, 2026)
 
 The owner directly supplied the Amazon Kindle product URL
