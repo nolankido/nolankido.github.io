@@ -37,7 +37,7 @@ Three-player no-ante ICM exercise: payouts $100/$60/$40; initial BTN/SB/BB stack
 
 ### Reproduce the prize-value comparison
 
-Expanded November 21, 2026. This is a fixed, fictional **three-player, three-paid, no-ante** example. It assumes ordinary ICM chip shares, no ties, no bounties or deals, and no further betting. It does not supply a real opponent range or a universal calling threshold.
+Expanded November 21, 2026. This is a fixed, fictional **three-player, three-paid, no-ante** example. It assumes ordinary ICM chip shares, no ties, no bounties or deals, and no further betting. It does not supply a real opponent range or a universal calling threshold. It is not a solver verdict for any actual hand.
 
 The stack order below is **hero (big blind), small blind, button**. Total chips stay at 35 BB.
 
