@@ -1,6 +1,6 @@
 # Verify a Nolan Kido book edition before linking to a retailer
 
-**Public author-book edition checklist | November 20, 2026**
+**Public author-book edition checklist | Updated November 22, 2026**
 
 This is a source and identity audit for the two book descriptions on [nolankido.com/books/](https://nolankido.com/books/). It is not a sales catalog, publisher dashboard, KDP account snapshot, manuscript release certificate, or assurance that a book has or has not been published.
 
@@ -9,7 +9,9 @@ This is a source and identity audit for the two book descriptions on [nolankido.
 | Author-described work | Kindle eBook | Paperback | Hardcover |
 | --- | --- | --- | --- |
 | [One Workflow at a Time](https://nolankido.com/books/one-workflow-at-a-time/) | Not independently verified | Not independently verified | Not independently verified |
-| [How to Play No-Limit Texas Hold’em](https://nolankido.com/books/how-to-play-no-limit-texas-holdem/) | Not independently verified | Not independently verified | Not independently verified |
+| [How to Play No-Limit Texas Hold’em](https://nolankido.com/books/how-to-play-no-limit-texas-holdem/) | Author-supplied Amazon URL (retail content not independently verified) | Not independently verified | Not independently verified |
+
+**November 22 author-provided Kindle link:** The author supplied [this Amazon Kindle URL](https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324) with ASIN `B0HSB98324` for *How to Play No-Limit Texas Hold’em*. This link can now serve readers. Retailer title, byline, format selection, official cover, price, publication date and live purchasing status could not be independently inspected, so the URL and ASIN are recorded separately from verified retail evidence. No print-format availability is implied by the Kindle URL.
 
 **"Not independently verified" means unknown, not unavailable or nonexistent.** The author site confirms only the described subject and the author's own asserted association. Targeted public title/author searches available to this audit did not establish exact product detail pages for these titles. A search-result absence and an unanswered retailer check are not negative publication evidence. Retailer ISBNs, ASINs, price, edition dates, print availability, publisher imprint and official cover remain unconfirmed here.
 
@@ -69,4 +71,4 @@ This site can provide the author's book descriptions and related **free original
 - [KDP: Link edition formats](https://kdp.amazon.com/en_US/help/topic/GTQGN866DSS6XBD2)
 - [KDP: Publication and listing timelines](https://kdp.amazon.com/en_US/help/topic/G202173620)
 
-**Provenance:** This guide is a November 20, 2026 limited public verification audit. No authenticated KDP Bookshelf view or exact matched Amazon product page for either of these two works was established in the available sources. No ISBN, ASIN, sales number, author rank, marketplace price, hardcover, Kindle Unlimited entitlement or official retail cover was inferred from the author descriptions.
+**Provenance:** This guide began with a November 20, 2026 limited public verification audit and was updated November 22 with an author-provided Kindle URL. No authenticated KDP Bookshelf view or independently inspected matching Amazon product detail content for either work was established in the available sources. No ISBN, ASIN, sales number, author rank, marketplace price, hardcover, Kindle Unlimited entitlement or official retail cover was inferred from the author descriptions.
