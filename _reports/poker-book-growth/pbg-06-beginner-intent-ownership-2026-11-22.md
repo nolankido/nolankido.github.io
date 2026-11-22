@@ -31,7 +31,7 @@ The [frozen 18-intent machine-readable map](pbg-06-intent-to-canonical-map-2026-
 | Calculate pot odds | `/poker/poker-math-reference/` | Exact fractions and distinct thresholds |
 | Practice decisions without wagering | `/poker/beginner-practice/` | Worked examples, varied exercises |
 | Prepare for a first session | `/poker/getting-started/` | Format, full costs and boundaries |
-| Prepare for first tournament logistics | `/poker/live-tournament-guide/` | Tournament-day preparation |
+| Prepare for first tournament logistics | `/poker/first-live-tournament/` | Registration and procedure; the broad live guide remains supporting material |
 | Review a hand after play | `/poker/reviewing-a-hand/` | Uncertainty labels and review worksheet |
 | Study 10 to 20 big blind decisions | `/poker/short-stack-decisions/` | Tournament depth and action options |
 | Understand ICM and payout equity | `/poker/tournament-equity/` | Checkable prize-equity models |
@@ -51,11 +51,13 @@ In the existing `/poker/poker-books-and-courses/` article's `#choose-the-job` se
 2. `/poker/starting-hand-decisions/`: starting hands and position.
 3. `/poker/poker-math-reference/`: pot odds.
 4. `/poker/free-poker-learning-path/`: six-lesson beginner course.
-5. `/poker/live-tournament-guide/`: tournament preparation.
+5. `/poker/first-live-tournament/`: first-event registration and procedure.
 
 The message invites comparison shopping only when free resources do not answer the reader's question. It does not send a student straight to Amazon, add a tracking event, promise poker success or imply independent evaluation of the author's book.
 
 This paragraph is exactly matching in `_source/poker/poker-books-and-courses.html` and `poker/poker-books-and-courses/index.html`. The existing unfragmented author-book link remains once, its original free example deep link remains once, and the free worksheet, author disclosure and other substantial content remain unchanged. No additional H1, new canonical route, false `datePublished`, or marketing schema was added. The change is navigational, so the existing page modification date was not artificially advanced.
+
+**Precision refinement:** The first live tournament question has a more focused published answer at `/poker/first-live-tournament/`; the broader `/poker/live-tournament-guide/` remains a supporting hub. The reader chooser now points to the focused first-event guide.
 
 **Reading-time check:** The original source had approximately **807** text words; the revised source approximately **813**, a net six. Both are within the 4-minute bucket at the existing 225-words/minute editorial estimate. The published page still says about four minutes, so the changed paragraph does not require a known reading-time update.
 
