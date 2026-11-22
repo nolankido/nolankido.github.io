@@ -81,7 +81,7 @@ class Turn69SourceCaseLinks(unittest.TestCase):
                 self.assertEqual(source.count('href="' + data["destination"] + '"'), 1)
                 self.assertEqual(page.count('href="' + data["destination"] + '"'), 1)
         self.assertIn("fictional source", self.texts["summary"]["source"])
-        self.assertIn("eight public source notes", self.texts["notes"]["source"])
+        self.assertIn("an assistant organized eight working notes into a publication checklist", self.texts["notes"]["source"])
 
     def test_target_has_distinct_recorded_source_and_checks_sections(self):
         for data in ROUTES.values():
@@ -116,10 +116,10 @@ class Turn69SourceCaseLinks(unittest.TestCase):
         self.assertIn("Six problems, each tied to the source.", summary)
         self.assertIn("A review sequence for your own summary.", summary)
         self.assertIn("${summary_review_sheet}", summary)
-        self.assertIn("not a claim about anyone's real", summary) if "not a claim about anyone's real" in summary else self.assertIn("fictional", summary.lower())
-        self.assertIn("actual AI-generated", notes)
+        self.assertIn("fictional", summary.lower())
+        self.assertIn("This page preserves the actual instruction", notes)
         self.assertIn("No timing", notes)
-        self.assertIn("no private", excerpt(notes).lower()) if "no private" in excerpt(notes).lower() else self.assertIn("client data", excerpt(notes))
+        self.assertIn("client data", excerpt(notes))
 
     def test_generator_matches_both_committed_article_outputs(self):
         outputs = build.build_outputs()
