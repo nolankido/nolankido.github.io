@@ -164,7 +164,10 @@ def tenbb_entry(root: Path) -> dict | None:
     """Find the separately published course companion from verified public metadata."""
     page = root / tenbb_companion.OUTPUT
     checker = root / tenbb_companion.CODE
-    if not page.exists() and not checker.exists():
+    worksheet = root / tenbb_companion.WORKSHEET
+    # Every required file is part of this manually published guide. An
+    # orphaned worksheet must not be silently omitted from local Find.
+    if not any(path.exists() for path in (page, checker, worksheet)):
         return None
     # Reject a partially published page or invented title. This is the same
     # fail-closed registry used by the sitemap and exact-byte release inventory.

@@ -116,6 +116,20 @@ assert.equal(score(record, 'unrelatedinventedstring'), -1);
             with self.assertRaises(ValueError):
                 player_find.tenbb_entry(root)
 
+    def test_orphan_worksheet_without_playbook_cannot_silently_disappear(self):
+        # Turn 72 made the worksheet a required publication asset. A
+        # worksheet-only partial release is not an unpublished empty site.
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.assertIsNone(player_find.tenbb_entry(root))
+            worksheet = root / tenbb_companion.WORKSHEET
+            worksheet.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / tenbb_companion.WORKSHEET, worksheet)
+            with self.assertRaisesRegex(ValueError, 'written worksheet is missing'):
+                player_find.tenbb_entry(root)
+            worksheet.unlink()
+            self.assertIsNone(player_find.tenbb_entry(root))
+
     def test_duplicates_and_site_publishing_boundaries(self):
         with self.assertRaises(ValueError):
             player_find.add(ROOT, [*self.manifest, self.entry])
