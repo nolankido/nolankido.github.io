@@ -1552,3 +1552,62 @@ Use `_tests/finder_browser.py` for the separate interactive filter anomaly
 and `_tests/diagnose_live_crawl.py` for deployed exact bytes. Never
 add GitHub Actions, another scheduled process, a paid service, or
 fabricated ranking/citation metrics.
+
+## Turn 87: surface the independently published 10 BB Playbook in tournament topics
+
+The canonical `/poker/topics/tournaments/` showed 20 manifest-owned
+tournament guides and 13 outside sources but not the separately published
+written `/poker/10bb/` Playbook. This was a navigation gap, not another
+missing SEO page. The Poker Home, Library, Study Desk, general Find, Poker
+Finder and tournament viewer primer already link to this original guide.
+
+`_scripts/poker_topics.py` now declares one constant
+`TOURNAMENT_STANDALONE` and inserts it **only** in the Tournaments topic
+detail after the existing learning journey and before the topic columns.
+`poker_topics.detail(topic, root)` calls `tenbb_companion.record(root)`
+for that specific topic. The pre-existing manual publication gate checks
+the actual public Article canonical, structured identity, ICM checker and
+written six-check worksheet. A missing or invalid companion raises rather
+than silently promoting an unverified resource; other topics do not call
+the gate. `_scripts/build.py` passes the actual root into `detail()`.
+
+Update only `poker/topics/tournaments/index.html` with the matching
+author-rendered paragraph. The note links once to
+`/poker/10bb/#six-checks-title` and once to
+`/downloads/ten-bb-tournament-checklist.md`; it explicitly discloses
+fictional model inputs, after-play use and that the separate page does
+not increase the catalog guide count. Keep the existing 20 tournament
+catalog guides, 13 outside sources, old learning-route cards, source
+reviews, full topic map, 75-card Poker Library and 301-card Poker Finder
+intact. Do not add this manual page to the manifest topic JSON without
+a separate validated ownership migration. Do not add a second canonical,
+duplicate Article, new tracking or a GitHub Actions workflow.
+
+This is a bounded contextual navigation update. Preserve the
+tournament-topic 2026-10-08 metadata/revision date and its existing
+canonical/sitemap entry, not a fabricated new article or new recheck
+of published outside resources. `_tests/test_turn87_tournament_topic_companion.py`
+checks actual registered public targets, unique authored/public block,
+scope isolation, no inflation, unexpected/missing publication gate,
+metadata, output parity, runner registration and no Actions. Register it
+in `_scripts/local_release_checks.py`. Run it, the original Poker
+topic/browser tests, the deterministic build check, SEO snapshot,
+HTML5 and internal-link checks in a complete checkout.
+
+On November 22, a fresh public read confirmed Turn 86's tournament
+overview links are live and the Playbook heading is present.
+A second read-only desktop browser test verified the Poker Finder
+`finder-kind=resource` selection, its reported **0 of 0 matches** for
+the on-site Playbook and the card not being visually displayed. Earlier
+UI automation had reported a lingering card, but the observed result
+count and visible state in the targeted repeat do **not** reproduce
+that bug. Do not change filter code without independently reproducible
+evidence. The browser agent's contradictory DOM-presence descriptions
+do not establish whether hidden versus detached node semantics changed;
+the current site's source uses the `hidden` property. The local
+`_tests/finder_browser.py` now explicitly verifies the selected
+`finder-kind=resource`, the 0-of-0 live match count, and the on-site
+Playbook card's `hidden` attribute; these assertions remain unexecuted
+until the full matching checkout runs Playwright.
+No full mobile viewport audit, exact-byte publication receipt,
+owner Search Console data or AI assistant visibility result is claimed.

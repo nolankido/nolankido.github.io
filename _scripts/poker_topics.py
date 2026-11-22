@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import re
 import poker_resources
+import tenbb_companion
 
 FIELDS = {'id', 'title', 'summary', 'primary_guides', 'related_guides',
           'resource_categories', 'resource_ids', 'featured_resources', 'start_label',
@@ -234,12 +235,32 @@ def supplement(topics: list[dict]) -> dict[str, str]:
             'poker_library_subject_routes': '<div class="library-subject-grid">' + ''.join(subjects) + '</div>'}
 
 
-def detail(topic: dict) -> str:
+TOURNAMENT_STANDALONE = (
+    '<p class="topic-support" id="tournament-written-playbook">'
+    '<strong>Study at ten big blinds.</strong> Use the separate '
+    '<a href="/poker/10bb/#six-checks-title">written 10 BB Tournament Playbook</a> and '
+    '<a href="/downloads/ten-bb-tournament-checklist.md" download>blank six-check worksheet</a> '
+    'to review decisions away from play. The examples use fictional chip and ICM assumptions, '
+    'not a real-hand solver verdict. This standalone companion is not counted among the catalog guides below.</p>'
+)
+
+
+def detail(topic: dict, root: Path | None = None) -> str:
     """One bounded topic per page, rather than thirty source cards in one index."""
     markup = supplement([topic])['poker_topic_sections']
     # The shared page header already contains this subject's name.
     markup = markup.replace('Browse / 01', 'Read / Compare / Continue')
     markup = markup.replace('>' + escape(topic['title']) + '</h2>', '>A useful starting point.</h2>', 1)
+    if topic['id'] == 'tournaments':
+        # Unlike the manifest-owned guide catalog, this standalone
+        # companion must pass its own page/worksheet/code publication gate.
+        checked = tenbb_companion.record(root or Path(__file__).resolve().parents[1])
+        if checked['route'] != tenbb_companion.ROUTE:
+            raise ValueError('Tournament standalone companion changed canonical route')
+        marker = '<div class="topic-columns">'
+        if markup.count(marker) != 1:
+            raise ValueError('Tournament topic companion placement changed')
+        markup = markup.replace(marker, TOURNAMENT_STANDALONE + marker, 1)
     return markup
 
 

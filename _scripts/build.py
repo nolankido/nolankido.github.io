@@ -249,7 +249,7 @@ def build_outputs() -> dict[Path, str]:
             page_values = values
             if p.get('poker_topic'):
                 topic = next(t for t in topics if t['id'] == p['poker_topic'])
-                page_values = {**values, 'poker_topic_detail': poker_topics.detail(topic)}
+                page_values = {**values, 'poker_topic_detail': poker_topics.detail(topic, ROOT)}
             if p.get('worked_guide') and p.get('revision'):
                 page_values = {**page_values,
                                'worked_guide_updated': text(p['updated']),
