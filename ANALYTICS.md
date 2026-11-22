@@ -33,6 +33,46 @@ do not describe this as collecting no information at all. The public
 privacy page discloses analytics separately from hosting, fonts and forms.
 This implementation is not a blanket legal-compliance certification.
 
+## PBG-05: read-only Kindle link audit
+
+Run `python _scripts/poker_book_click_path_audit.py` from a complete local
+checkout before releasing changes to any book page, Amazon href or
+Umami event. This command checks five native Amazon anchors across
+the three first-party book pages, each `data-umami-event` and
+`data-umami-event-source`, exact author-supplied URLs from the public
+edition ledger, source/output HTML parity, one tracker with existing
+privacy flags, and the public disclosure. It emits JSON and exits
+nonzero on mismatch. It does not load Amazon, send a click, emit an
+Umami event, collect traffic or write any private file.
+
+The checker has twelve source/mutation unit tests in
+`_tests/test_pbg05_book_click_path_audit.py` and is part of
+`_scripts/local_release_checks.py`. A separate
+`_reports/poker-book-growth/pbg-05-live-click-path-observation-2026-11-22.json`
+freezes one **read-only** observation: all three public pages showed
+all five expected links, while Amazon returned a shopping interstitial
+for all three user-supplied product URLs. Those observations do not
+authenticate actual Amazon product metadata, Umami event ingestion,
+purchasing availability or sales. No test clicks were generated.
+
+For actual outcome data, use the owner-approved Umami **Events**
+report, break down by the fixed `source` property and a matching
+month's pageviews, and feed only operator-confirmed private aggregates
+to `_scripts/poker_book_growth_scorecard.py`. KDP Orders and Royalties
+reports are **separate total-book measures**, not proof of website
+attribution. Amazon Attribution may be an eligible KDP option through
+the Amazon Ads console, but do not invent tags or change Amazon URLs
+without an actual account-generated tag and owner approval. Store
+authenticated real event, KDP and Attribution reports privately.
+This revision does not install another tracker or change the Privacy
+page; it documents the existing behavior.
+
+References:
+- https://docs.umami.is/docs/track-events
+- https://docs.umami.is/docs/event-data
+- https://advertising.amazon.com/solutions/products/amazon-attribution
+- https://kdp.amazon.com/en_US/help/topic/GVTTXHKHVPAPBEDQ
+
 ## Verification and maintenance
 
 Build and test locally with `python _scripts/local_release_checks.py`,
