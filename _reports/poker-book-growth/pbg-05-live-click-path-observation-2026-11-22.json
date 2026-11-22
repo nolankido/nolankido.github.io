@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "sprint": "POKER-BOOK-GROWTH",
+  "turn": "PBG-05",
+  "observed_on": "2026-11-22",
+  "scope": "Read-only public page extraction and authenticated GitHub source verification. No automated click sent, no analytics event emitted.",
+  "book_pages": [
+    {
+      "canonical": "https://nolankido.com/books/",
+      "site_content_returned": true,
+      "amazon_hrefs_found": 3
+    },
+    {
+      "canonical": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/",
+      "site_content_returned": true,
+      "amazon_hrefs_found": 1
+    },
+    {
+      "canonical": "https://nolankido.com/books/one-workflow-at-a-time/",
+      "site_content_returned": true,
+      "amazon_hrefs_found": 1
+    }
+  ],
+  "expected_contracts": [
+    {
+      "asin": "B0HSB98324",
+      "event": "poker-book-kindle-amazon-click",
+      "sources": [
+        "books-catalog",
+        "book-page-hero"
+      ],
+      "firstparty_page": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/",
+      "amazon_url": "https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324"
+    },
+    {
+      "asin": "B0HRQNCP7Y",
+      "event": "one-workflow-kindle-amazon-click",
+      "sources": [
+        "books-catalog",
+        "book-page-hero"
+      ],
+      "firstparty_page": "https://nolankido.com/books/one-workflow-at-a-time/",
+      "amazon_url": "https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y"
+    },
+    {
+      "asin": "B0HSF8K76R",
+      "event": "ai-works-human-decides-kindle-amazon-click",
+      "sources": [
+        "books-catalog"
+      ],
+      "firstparty_page": null,
+      "amazon_url": "https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R"
+    }
+  ],
+  "amazon_public_fetches": {
+    "B0HSB98324": {
+      "final_url_matched": true,
+      "result": "Amazon Continue shopping interstitial",
+      "listing_page_inspected": false
+    },
+    "B0HRQNCP7Y": {
+      "final_url_matched": true,
+      "result": "Amazon Continue shopping interstitial",
+      "listing_page_inspected": false
+    },
+    "B0HSF8K76R": {
+      "final_url_matched": true,
+      "result": "Amazon Continue shopping interstitial",
+      "listing_page_inspected": false
+    }
+  },
+  "verified_from_existing_public_html": {
+    "expected_anchors": 5,
+    "plain_href_navigation": true,
+    "umami_event_source_attributes_present": true
+  },
+  "outcome_data": {
+    "umami_events_received": null,
+    "amazon_detail_page_views": null,
+    "kdp_orders": null,
+    "kdp_royalties": null,
+    "attribution_orders": null
+  },
+  "private_dashboard_access": "not_accessible_in_this_turn",
+  "note": "HTML link presence proves the destination is wired on the site but not that Amazon offers the book, that click events are ingested, that the Amazon page is displayed, or that a sale occurred. Interstitial content is not a 404 or proof of an order."
+}
