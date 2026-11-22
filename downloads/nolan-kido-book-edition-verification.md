@@ -28,11 +28,11 @@ The matching structured [six-format public evidence ledger](https://nolankido.co
 5. **Compare every format instead of assuming they are linked.** KDP [links formats when metadata matches](https://kdp.amazon.com/en_US/help/topic/GTQGN866DSS6XBD2), but linking can take time. Do not infer that an eBook listing proves a paperback is also available. A product listing may have several format selections with distinct identifiers.
 6. **Inspect actual cover and publisher details.** Record the cover image displayed for that format, the publisher/imprint stated by its listing, and the edition publication date only where explicitly shown. The social topic graphics on this site are **not official book covers**.
 7. **Record the exact public evidence and observation date.** Retailer URL, its selected format, ASIN, print ISBN, byline and cover must all correspond to the **same work and edition**. KDP [notes publication and search-index timing differences](https://kdp.amazon.com/en_US/help/topic/G202173620). Search invisibility alone is not proof that a title is absent.
-8. **Update the site only after evidence matches.** Add the matching format-specific verified URL and identifiers to its existing first-party book page, then check any proposed `Book` structured data, Books catalog, biography and local Find item. Do not mark a product `InStock`, add a price, review rating or cover, or assert Kindle Unlimited enrollment without evidence for that exact marketplace and format.
+8. **Separate author-provided links from verified retailer details.** A product link supplied directly by the author may be displayed as an explicitly author-supplied reader destination. Do not label it independently verified unless its public product page has been inspected and the exact work and format matched. Add verified identifiers and any supported `Book` structured data only after that inspection. Do not mark a product `InStock`, add a price, review rating or official cover, or assert Kindle Unlimited enrollment without evidence for the exact marketplace and format.
 
 ## Reviewer decision record, one copy per format
 
-Keep private KDP account information, invoices, email headers and screenshots outside the public GitHub repository. Publish only information also supported by the public retailer listing.
+Keep private KDP account information, invoices, email headers and screenshots outside the public GitHub repository. Publicly repeat an author-provided product link only with that provenance labeled; restrict retailer-verified claims to independently inspected public listing facts.
 
 | Field | Verified value or unresolved reason |
 | --- | --- |
@@ -60,7 +60,7 @@ Keep private KDP account information, invoices, email headers and screenshots ou
 
 Amazon describes a book's product detail page as the place where the cover, title, author and description appear. Its own status and timing pages distinguish a book under review from a live product, and a live product from later indexing in Amazon search. A legitimate first-party author page may therefore describe a book before exact public format availability is independently established.
 
-This site can provide the author's book descriptions and related **free original exercises now**. It should add purchase buttons, retailer identifiers, a publisher name, verified book-cover art or pricing only when an exact independent source supports the claim. Keeping those boundaries visible strengthens public author attribution and prevents wrong-edition shopping links.
+This site can provide the author's book descriptions, related **free original exercises**, and a specifically labeled author-provided Kindle link. It should only describe retailer identifiers as independently verified, or add a publisher name, official book-cover art, availability or price, after inspecting matching public retail evidence. Keeping those boundaries visible strengthens public author attribution and prevents wrong-edition shopping links.
 
 ## Source registry
 
