@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-11-20",
-  "scope": "Source-limited public identity audit for the two existing Nolan Kido author book pages. Searches and first-party publisher guidance do not establish whether a book does not exist. No private KDP Bookshelf or verified retailer product page was accessible in this audit.",
+  "reviewed_on": "2026-11-22",
+  "scope": "Author-provided Kindle URL and ASIN were added on 2026-11-22 for the poker book. Direct Amazon page contents were not independently retrievable in this review. No private KDP Bookshelf was accessed, no retailer-listed price, publication date, edition identity, official cover, ratings or other formats were authenticated. An author-supplied link is usable as a reader destination but is not an independently verified retailer record.",
   "author_name": "Nolan Kido",
   "verification_state_definition": {
     "not_verified": "No exact retailer edition evidence has been authenticated. This is not evidence of nonpublication or unavailability.",
-    "verified": "Reserved for an exact publicly retrievable retailer detail page matching author, title, edition format, ASIN, and print ISBN when applicable, with the observation recorded separately."
+    "verified": "Reserved for an exact publicly retrievable retailer detail page matching author, title, edition format, ASIN, and print ISBN when applicable, with the observation recorded separately.",
+    "author_supplied_link": "The author provided a direct product URL containing an ASIN. Independent retailer page identity, availability, pricing and format details have not been inspected; the edition remains not_verified."
   },
   "publisher_primary_guidance": {
     "kdp_find_exact_detail": "https://kdp.amazon.com/en_US/help/topic/GPYDJ3SECAVVPNVG",
@@ -84,7 +85,11 @@
           "retailer_publication_date": null,
           "official_retailer_cover_url": null,
           "public_evidence_url": null,
-          "observed_on": null
+          "observed_on": null,
+          "author_supplied_product_url": "https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324",
+          "author_supplied_asin": "B0HSB98324",
+          "supplied_on": "2026-11-22",
+          "source_type": "author_direct"
         },
         {
           "format": "paperback",
