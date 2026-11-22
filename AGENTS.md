@@ -734,3 +734,30 @@ test, not real-world user analytics. Run build/check, HTML5, links, manual
 browser suite and exact production GET after a complete checkout.
 Do not claim an unexecuted Playwright run passed. GitHub Actions and paid
 SEO subscriptions remain prohibited.
+
+## Turn 79: optional progression from six lesson Poker Foundations to written 10 BB study
+
+The free beginner course is editorially complete after its six lessons
+and the separate beginner checkpoint. Its existing four course-finish
+options stay in place. An optional fifth advanced-study item in
+`_source/poker/beginner-learning-path.html` now points specifically to
+`/poker/10bb/#six-checks`, a section on the already published written
+tournament Playbook. It is only suggested after a reader can explain
+the cards, action and call price. The ICM example uses fictional inputs,
+not a solver verdict for an actual tournament hand.
+
+The source is assembled into `poker/free-poker-learning-path/index.html`
+through the existing deterministic beginner-course builder. Keep its
+source and generated public section byte-for-byte identical and preserve
+the existing publication metadata, no-wager guidance, lesson order,
+original four finish choices and source citations. There is no new
+paid course, video claim or standalone canonical URL.
+
+`_tests/test_turn79_course_to_tenbb.py` checks this exact one-way
+optional bridge, original menu, target anchor, workbook, negative controls
+and build output. The offline core mobile browser gate adds the
+Poker Foundations course as a sixth route at 320, 390, 768 and 1440
+CSS pixels, including enlarged text at the two narrow widths. These
+additional checks are authored, but have not run against a complete
+checkout in this environment. Running the script requires Playwright
+and installed Chromium. No new GitHub Actions, cron or tracking.

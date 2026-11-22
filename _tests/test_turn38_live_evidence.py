@@ -32,7 +32,7 @@ class Turn38LiveEvidenceTests(unittest.TestCase):
             "/technology/ai-website-visibility/", "/technology/ai-workflow-pilot/",
             "/books/", "/books/one-workflow-at-a-time/",
             "/books/how-to-play-no-limit-texas-holdem/",
-            "/poker/10bb/",
+            "/poker/free-poker-learning-path/", "/poker/10bb/",
             "/downloads/one-workflow-ai-pilot-worksheet.md",
             "/downloads/holdem-river-call-check-worksheet.md",
             "/downloads/website-check-offline-runbook.md",

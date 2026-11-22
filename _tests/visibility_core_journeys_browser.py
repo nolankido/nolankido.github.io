@@ -14,7 +14,7 @@ from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ROUTES = ('/', '/start-here/', '/technology/', '/books/', '/poker/10bb/')
+ROUTES = ('/', '/start-here/', '/technology/', '/books/', '/poker/free-poker-learning-path/', '/poker/10bb/')
 WIDTHS = (320, 390, 768, 1440)
 LARGE_TEXT = ('html{font-size:200%!important}'
               '*{line-height:1.5!important;letter-spacing:.12em!important;'
@@ -122,6 +122,9 @@ def check_reader_paths():
     case = page_file('/technology/checking-ai-website-changes/').read_text(encoding='utf-8')
     books = page_file('/books/').read_text(encoding='utf-8')
     playbook = page_file('/poker/10bb/').read_text(encoding='utf-8')
+    beginner = page_file('/poker/free-poker-learning-path/').read_text(encoding='utf-8')
+    assert 'href="/poker/10bb/#six-checks"' in beginner, 'beginner course missing optional tournament study handoff'
+    assert 'id="six-checks"' in playbook, 'advanced study handoff has no real section'
     proof_url = '/technology/checking-ai-website-changes/'
     workbook_url = '/downloads/website-check-offline-runbook.md'
     for html in (source, published, home):
