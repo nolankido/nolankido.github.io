@@ -118,7 +118,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/standalone-section-arrivals.css']
     # Exact release checks for the original worksheets and social topic
     # cards linked from the two separately published book pages.
-    assets += ['downloads/ten-bb-playbook-icm-verify.py']
+    assets += ['downloads/ten-bb-playbook-icm-verify.py',
+               'downloads/ten-bb-tournament-checklist.md']
     assets += ['downloads/one-workflow-ai-pilot-worksheet.md',
                'downloads/holdem-river-call-check-worksheet.md',
                'assets/book-reader-journey.css',
