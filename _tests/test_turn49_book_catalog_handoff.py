@@ -182,7 +182,7 @@ class BookCatalogPracticeHandoffTests(unittest.TestCase):
         for route in ("/books/", *(f"/books/{slug}/" for slug, _, _ in BOOKS)):
             hits = [date for url, date in urls
                     if url == "https://nolankido.com" + route]
-            expected = "2026-11-22" if route in ("/books/", "/books/how-to-play-no-limit-texas-holdem/") else "2026-11-20"
+            expected = "2026-11-22"
             self.assertEqual(hits, [expected])
 
     def test_offline_release_coverage_no_github_actions(self):
