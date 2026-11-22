@@ -25,7 +25,7 @@ FREE_ROUTES = (
     "/poker/starting-hand-decisions/",
     "/poker/poker-math-reference/",
     "/poker/free-poker-learning-path/",
-    "/poker/live-tournament-guide/",
+    "/poker/first-live-tournament/",
 )
 EXPECTED_OWNERS = {
     "beginner-course": "/poker/free-poker-learning-path/",
@@ -33,6 +33,7 @@ EXPECTED_OWNERS = {
     "pot-odds-math": "/poker/poker-math-reference/",
     "book-course-selection": "/poker/poker-books-and-courses/",
     "nolan-book-navigation": "/books/how-to-play-no-limit-texas-holdem/",
+    "tournament-preparation": "/poker/first-live-tournament/",
     "comprehensive-reference": "/poker/no-limit-holdem-guide/",
 }
 OBSERVED_FIELDS = ("gsc_impressions", "gsc_clicks", "search_volume",
