@@ -274,6 +274,44 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-03 poker book reader-first landing page (November 22, 2026)
+
+The exact book page `/books/how-to-play-no-limit-texas-holdem/` retains
+one author-supplied Kindle href and one
+`data-umami-event="poker-book-kindle-amazon-click"` event with
+`data-umami-event-source="book-page-hero"`. It now includes an early
+native `#poker-book-first-exercise` free alternative to the external CTA,
+three author-described learning outcomes, adult reader-fit guidance,
+and a no-wager three-step study route using existing canonical pages.
+
+Do not misdescribe the site-original learning plan or fictional
+pot-odds examples as verified retail book excerpts. Preserve the
+original 20 + 10 + 10 = 40 counter example and 25% simplified threshold,
+the answer's assumed 20% equity disclaimer, and the existing companion
+worksheet. Preserve the author-vs-independent-retailer distinction
+and do not invent an official Amazon cover, live price, edition status,
+print identifier, sales claim, ratings or performance claims.
+
+The book's source of truth is
+`_source/books/how-to-play-no-limit-texas-holdem.html`, with a
+byte-identical public copy at
+`books/how-to-play-no-limit-texas-holdem/index.html`.
+Its CSS cache key is `20261122-pbg03`, scoped to this page. The other
+One Workflow book uses its existing `20261122` cache key.
+When modifying either, update
+`_tests/test_turn48_book_reader_journeys.py` and the new
+`_tests/test_pbg03_poker_book_landing.py`, which are registered in
+`_scripts/local_release_checks.py`. Preserve four real navigation
+fragments and the first-screen choice, native anchor behavior,
+mobile reflow, keyboard focus, forced colors and print handling.
+
+Source readback passed 33 static consistency checks, but the complete
+Python suite and actual 320px browser QA were **not** run in this turn;
+public live-content retrieval was also inconclusive.
+Refer to `_reports/poker-book-growth/pbg-03-reader-first-landing-2026-11-22.md`.
+Next growth turn is PBG-04, adding measured contextual internal links
+from the frozen 11-route poker study cohort. Do not revive GitHub Actions.
+
 ## PBG-02 poker book baseline, privacy and local scorecard (November 22, 2026)
 
 The dated public baseline is
