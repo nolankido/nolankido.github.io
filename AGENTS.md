@@ -335,7 +335,9 @@ deterministic full build, HTML5, internal-link and browser
 acceptance suites remain unexecuted due to unavailable complete
 checkout. The live reference section and Markdown worksheet were
 retrieved, while independent exact public .py download retrieval
-was inconclusive. Do not mislabel code existence as verified
+was inconclusive. A GitHub source-viewer fallback is linked from
+the exercise and worksheet so readers can inspect the verifier
+without depending on the direct .py download. Do not mislabel code existence as verified
 browser download. Preserve no GitHub Actions.
 
 Next PBG-11: strengthen the beginner practice/checkpoint flow and
