@@ -189,6 +189,7 @@ def main() -> int:
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
         ('SEO snapshot drift negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_snapshot.py', '-q']),
         ('Private GSC/Bing/Umami scorecard evidence and zero/null safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_private_scorecard.py', '-q']),
+        ('PBG-02 book click scorecard and privacy/ASIN boundaries', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg02_poker_book_growth_scorecard.py', '-q']),
         ('Turn 41 evidence-prioritized canonical routes and beginner prerequisites', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn41_evidence_opportunities.py', '-q']),
         ('Turn 42 source-backed website repair proof path', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn42_repair_proof_path.py', '-q']),
         ('Turn 43 published content receipt and video approval limits', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn43_published_content_receipt.py', '-q']),
