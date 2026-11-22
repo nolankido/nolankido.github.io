@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-22",
+  "sprint": "POKER-BOOK-GROWTH",
+  "turn": "PBG-06",
+  "description": "Editorial intent-to-canonical routing for beginner no-limit Texas Hold'em queries. Candidate questions, not user search terms or Search Console data.",
+  "source_of_truth": "Existing _source/pages.json, published HTML canonicals and sitemap.xml, with a small qualitative public SERP sample. All proposed primary and support URLs are published before this turn.",
+  "definitions": {
+    "primary": "The preferred first-party answer for this reader's specific task. Different intents intentionally have different owners. One primary does not suppress other useful references.",
+    "support": "An adjacent, narrower or broader public educational route; not a second claimed ranking target for the same exact task.",
+    "editorial_priority": "Subjective usefulness of fixing reader pathways without measured keyword volumes."
+  },
+  "measurement": {
+    "gsc_property": "sc-domain:nolankido.com",
+    "gsc_impressions": null,
+    "gsc_clicks": null,
+    "search_volume": null,
+    "average_rank": null,
+    "bing_clicks": null,
+    "assistant_citation_rate": null,
+    "status": "not_collected"
+  },
+  "book_asin": "B0HSB98324",
+  "external_context": {
+    "sampled_on": "2026-11-22",
+    "qualitative_only": true,
+    "examples": [
+      "https://pokerleap.app/learn",
+      "https://pokerschool.org/guides",
+      "https://www.pokerskill.com/blog/best-poker-books-for-beginners/"
+    ],
+    "limits": "Public competitor examples illustrate distinct tasks, not a rank, paid keyword difficulty, volume, or proof of first-party impressions."
+  },
+  "clusters": [
+    {
+      "id": "beginner-course",
+      "editorial_order": 1,
+      "candidate_questions": [
+        "How should I start learning Texas Hold'em as a complete beginner?",
+        "How can I learn poker step by step for free?"
+      ],
+      "intent_type": "learn",
+      "primary": "/poker/free-poker-learning-path/",
+      "secondary": "/poker/no-limit-holdem-guide/",
+      "reason": "Six connected free lessons and card-practice tasks; use this for a sequenced course, not one lookup.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "rules-hand-flow",
+      "editorial_order": 2,
+      "candidate_questions": [
+        "How does a Texas Hold'em hand work from deal to showdown?",
+        "What are the preflop, flop, turn and river rules?"
+      ],
+      "intent_type": "learn",
+      "primary": "/poker/holdem-basics/",
+      "secondary": "/poker/no-limit-holdem-guide/",
+      "reason": "A focused deal-to-showdown walkthrough, unlike the broader all-subject guide.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "hand-rankings",
+      "editorial_order": 3,
+      "candidate_questions": [
+        "What beats what in Texas Hold'em?",
+        "What is a kicker and how do shared boards affect a tie?"
+      ],
+      "intent_type": "reference",
+      "primary": "/poker/hand-rankings/",
+      "secondary": "/poker/free-poker-learning-path/",
+      "reason": "Hand comparison and kicker lookup, not a cash-game strategy lesson.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "betting-actions",
+      "editorial_order": 4,
+      "candidate_questions": [
+        "What does call, raise or check mean in no-limit Hold'em?",
+        "How do side pots and minimum raises work?"
+      ],
+      "intent_type": "learn",
+      "primary": "/poker/betting-and-pots/",
+      "secondary": "/poker/poker-rules-and-fair-play/",
+      "reason": "Focused action, chip and side-pot explanations; venue-specific disputes belong with rule authorities.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "preflop-starting-hands",
+      "editorial_order": 5,
+      "candidate_questions": [
+        "Which Texas Hold'em starting hands should a beginner consider?",
+        "How does position change my preflop decision?"
+      ],
+      "intent_type": "learn",
+      "primary": "/poker/starting-hand-decisions/",
+      "secondary": "/poker/position-and-stacks/",
+      "reason": "Eight changed-input exercises, not a universal chart or profitable-play prescription.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "position-stack-depth",
+      "editorial_order": 6,
+      "candidate_questions": [
+        "What is position in poker and who acts last?",
+        "How do effective stacks change a Hold'em hand?"
+      ],
+      "intent_type": "learn",
+      "primary": "/poker/position-and-stacks/",
+      "secondary": "/poker/starting-hand-decisions/",
+      "reason": "Action order, effective stacks, and stack-to-pot relationship rather than hand-chart memorization.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "pot-odds-math",
+      "editorial_order": 7,
+      "candidate_questions": [
+        "How do I calculate the pot odds of a river call?",
+        "What is the difference between bluff odds and call price?"
+      ],
+      "intent_type": "reference",
+      "primary": "/poker/poker-math-reference/",
+      "secondary": "/books/how-to-play-no-limit-texas-holdem/",
+      "reason": "Exact fractions and distinct betting percentages; book page adds a separate free hypothetical call exercise.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "practice-no-wager",
+      "editorial_order": 8,
+      "candidate_questions": [
+        "Where can I practice Hold'em decisions without wagering money?",
+        "Are there free poker practice questions for beginners?"
+      ],
+      "intent_type": "practice",
+      "primary": "/poker/beginner-practice/",
+      "secondary": "/poker/free-poker-learning-path/",
+      "reason": "Worked scenarios and 18 varied practice questions, not book advertising.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "first-session",
+      "editorial_order": 9,
+      "candidate_questions": [
+        "What should I know before my first live Texas Hold'em session?",
+        "How do poker buy-ins, rake and formats affect a beginner's first visit?"
+      ],
+      "intent_type": "prepare",
+      "primary": "/poker/getting-started/",
+      "secondary": "/poker/table-etiquette/",
+      "reason": "First-session format choice, full costs, rules rehearsal, limits and month-one plan.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "tournament-preparation",
+      "editorial_order": 10,
+      "candidate_questions": [
+        "How do I prepare for my first live poker tournament?",
+        "What should I check before registering for a tournament?"
+      ],
+      "intent_type": "prepare",
+      "primary": "/poker/live-tournament-guide/",
+      "secondary": "/poker/getting-started/",
+      "reason": "Tournament-specific registration, travel and rule preparation rather than general hand rules.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "hand-review",
+      "editorial_order": 11,
+      "candidate_questions": [
+        "How can I review a poker hand without hindsight bias?",
+        "What information should I write down after a tournament decision?"
+      ],
+      "intent_type": "practice",
+      "primary": "/poker/reviewing-a-hand/",
+      "secondary": "/poker/beginner-practice/",
+      "reason": "Record context, unknowns and reasoning rather than using a hand's outcome as a verdict.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "short-stack-tournaments",
+      "editorial_order": 12,
+      "candidate_questions": [
+        "How do I study a 10 to 20 big-blind tournament stack?",
+        "Are push fold charts enough with 15 big blinds?"
+      ],
+      "intent_type": "learn",
+      "primary": "/poker/short-stack-decisions/",
+      "secondary": "/poker/tournament-equity/",
+      "reason": "Antes, depth and action options before a solver or payout-dependent claim.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "tournament-prize-equity",
+      "editorial_order": 13,
+      "candidate_questions": [
+        "What is ICM in a poker tournament?",
+        "Why can gaining chips fail to increase expected tournament prize money?"
+      ],
+      "intent_type": "learn",
+      "primary": "/poker/tournament-equity/",
+      "secondary": "/poker/short-stack-decisions/",
+      "reason": "Checkable prize-equity model with explicit assumptions, not a universal call range.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "book-course-selection",
+      "editorial_order": 14,
+      "candidate_questions": [
+        "How should I choose a poker book or paid course?",
+        "What is the best way to evaluate a beginner poker book before buying?"
+      ],
+      "intent_type": "compare",
+      "primary": "/poker/poker-books-and-courses/",
+      "secondary": "/poker/free-poker-learning-path/",
+      "reason": "Evaluation criteria and independent-vs-author disclosure, not the retailer landing page for one book.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "nolan-book-navigation",
+      "editorial_order": 15,
+      "candidate_questions": [
+        "Where can I find Nolan Kido's beginner Texas Hold'em book?",
+        "What does How to Play No-Limit Texas Hold'em by Nolan Kido cover?"
+      ],
+      "intent_type": "navigate",
+      "primary": "/books/how-to-play-no-limit-texas-holdem/",
+      "secondary": "/poker/poker-books-and-courses/",
+      "reason": "First-party author identity, sample and supplied Kindle link, not an independent best-books review.",
+      "priority": "high",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "comprehensive-reference",
+      "editorial_order": 16,
+      "candidate_questions": [
+        "Is there a comprehensive free no-limit Texas Hold'em reference?",
+        "Where can I study rules, pot odds, ranges and tournaments in one guide?"
+      ],
+      "intent_type": "reference",
+      "primary": "/poker/no-limit-holdem-guide/",
+      "secondary": "/poker/free-poker-learning-path/",
+      "reason": "Long-form integrated study reference; individual tutorials handle narrowly scoped questions.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "rule-authority",
+      "editorial_order": 17,
+      "candidate_questions": [
+        "Where can I find official poker rules and at-table assistance restrictions?",
+        "What is the authority for a tournament minimum-raise ruling?"
+      ],
+      "intent_type": "reference",
+      "primary": "/poker/poker-rules-and-fair-play/",
+      "secondary": "/poker/betting-and-pots/",
+      "reason": "Rule sources and venue authority, not a site-only legal verdict.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    },
+    {
+      "id": "live-table-etiquette",
+      "editorial_order": 18,
+      "candidate_questions": [
+        "What should a first-time player know about live poker etiquette?",
+        "When should I call a floor and how should I protect my hand?"
+      ],
+      "intent_type": "prepare",
+      "primary": "/poker/table-etiquette/",
+      "secondary": "/poker/getting-started/",
+      "reason": "Specific live-table conduct and floor procedure, not overall hand strategy.",
+      "priority": "medium",
+      "measured_search_clicks": null,
+      "measured_impressions": null,
+      "measured_ai_citations": null
+    }
+  ],
+  "specific_policy": {
+    "buyer_vs_learner": "/poker/poker-books-and-courses/ owns choosing or evaluating materials. /books/how-to-play-no-limit-texas-holdem/ owns author-described title and direct author-supplied Amazon destination.",
+    "course_vs_reference": "/poker/free-poker-learning-path/ owns step-by-step beginner learning. /poker/no-limit-holdem-guide/ owns complete integrated reference.",
+    "betting_vs_math": "/poker/betting-and-pots/ owns actions, raise amounts and side pots. /poker/poker-math-reference/ owns explicit price, bluff and defense fraction lookups.",
+    "first_visit_vs_etiquette": "/poker/getting-started/ owns first-session planning and costs. /poker/table-etiquette/ owns live table procedure."
+  },
+  "site_changes_this_turn": {
+    "route": "/poker/poker-books-and-courses/",
+    "intent": "Enable book shoppers to reach existing free subject-specific guides without duplicating author book links or claiming rankings.",
+    "implementation": "Replace one existing overview paragraph with concise five-destination question routing; no new page or Article URL; source/compiled output match."
+  }
+}
