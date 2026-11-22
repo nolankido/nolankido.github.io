@@ -116,7 +116,7 @@ class BookReaderJourneyTests(unittest.TestCase):
                 self.assertIn('href="' + item["worksheet"] + '" download', html)
                 self.assertTrue((ROOT / item["worksheet"].lstrip("/")).is_file())
 
-    def test_kindle_paperback_hardcover_stay_unknown_not_buy_links(self):
+    def test_author_supplied_kindle_link_does_not_imply_verified_print_or_offer(self):
         for item in PAGES:
             page = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
             record = re.search(r'<script type="application/ld\+json">(.*?)</script>', page, re.S)
@@ -128,6 +128,11 @@ class BookReaderJourneyTests(unittest.TestCase):
             for bad in ("isbn", "offers", "datePublished", "bookFormat", "aggregateRating"):
                 self.assertNotIn(bad, schema["mainEntity"])
             self.assertNotIn('href="https://www.amazon.com/dp/', page)
+            if item["slug"] == "how-to-play-no-limit-texas-holdem":
+                self.assertIn("https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324", page)
+                self.assertIn('data-umami-event="poker-book-kindle-amazon-click"', page)
+            else:
+                self.assertNotIn("B0HSB98324", page)
             self.assertIn("not an official cover of this book", page)
 
     def test_css_has_responsive_320px_routes_and_keyboard_focus(self):
@@ -159,7 +164,7 @@ class BookReaderJourneyTests(unittest.TestCase):
         dates = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in root}
         for route in ("/books/", *(f"/books/{item['slug']}/" for item in PAGES)):
             with self.subTest(route=route):
-                expected = "2026-11-22" if route == "/books/how-to-play-no-limit-texas-holdem/" else "2026-11-20"
+                expected = "2026-11-22" if route in ("/books/", "/books/how-to-play-no-limit-texas-holdem/") else "2026-11-20"
                 self.assertEqual(dates["https://nolankido.com" + route], expected)
         for item in PAGES:
             html = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
