@@ -685,3 +685,26 @@ Run the already-registered `test_turn65_tenbb_find.py` together with
 `test_turn72_reader_release_coverage.py`, deterministic build, HTML5,
 internal links and the optional manual browser suite from a complete
 checkout before claiming release-wide verification. No Actions or paid tools.
+
+## Turn 77: do not treat an orphaned public worksheet as an absent Playbook
+
+All three 10 BB Playbook assets are required together: the manually
+published `/poker/10bb/` HTML page, the exact-fraction Python ICM checker,
+and the free `downloads/ten-bb-tournament-checklist.md` worksheet.
+`_scripts/player_find.py` previously returned `None` when the page and
+checker were missing, even if the worksheet was present. This silently
+treated a partial manual release as an unpublished resource in the
+site's local Find discovery. The `tenbb_entry` presence guard now checks
+all three required assets. An entirely absent publication still returns
+`None`; any nonempty but incomplete asset set must go through
+`tenbb_companion.record(root)` and fail closed.
+
+`_tests/test_turn65_tenbb_find.py` exercises the worksheet-only case
+and ensures it becomes genuinely absent again when the orphaned worksheet
+is deleted. Keep the preceding Turn 76 three-file fixture correction and
+the original Find card count/metadata constraints. Run that existing
+test module, Turn 72 release coverage, source builder, HTML5 and manual
+browser checks from a complete checkout. The standalone five-case
+presence-predicate smoke is not a full repository unittest or live GET.
+No new canonical pages, altered publication dates, GitHub Actions,
+automations, paid services or measured discovery claims.
