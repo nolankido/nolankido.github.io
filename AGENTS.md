@@ -274,6 +274,63 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-08 straight on the board and best-five comparisons (November 22, 2026)
+
+The established `/poker/hand-rankings/` guide now includes one native
+two-part teaching aside, `#board-straight-check`, between its kicker
+rules and its **four original graphical showdowns**. Its fixed
+machine-readable card attributes are `data-board="6s 7h 8d 9c Ts"`,
+`data-a="Jd 2c"`, `data-b="Ac Kd"` and
+`data-b-variant="Jc Kd"`. The first case gives Player A a
+jack-high straight against Player B's ten-high board straight.
+Replacing B's ace with the different-suit jack makes the comparison
+a jack-high **tie**. Never imply that suits break a tie or that an
+ace automatically extends a 6-to-10 board straight.
+
+The exercise uses a native `<details>` with a keyboard-focusable
+summary. Its class is `poker-details`, **not**
+`poker-details viewer-question`, deliberately preserving the current
+sitewide viewer-question fixture count of 26 used by
+`_tests/test_viewer_guides.py`. Also preserve the ten
+`data-rank-cards` ranking samples, four `viewer-matchup`
+sections, four `data-winner` cases and eight original
+player best-five group objects. Avoid adding a fifth visual showdown
+without updating the independent evaluator and its graphics assertions.
+
+Source of truth: `_source/poker/hand-rankings.html` with the same
+new aside and navigation change in
+`poker/hand-rankings/index.html`. Related short rules guide:
+`_source/poker/holdem-basics.html`, with its matching generated
+`poker/holdem-basics/index.html`. The in-article link now targets
+`/poker/hand-rankings/#board-straight-check`, but the original
+general Hand Rankings continuation link remains present.
+
+The Hand Rankings page simplifies overlapping explanatory/practice
+copy without removing the free card-building lesson, the fictional
+hand follow-along or private study-card download. Its reader
+estimate remains five minutes and Hold'em Basics remains four.
+Previous author-review dates were not falsely advanced for this
+bounded new exercise. Do not add new trackers, fake solver claims,
+paywalls, ranking promises or GitHub Actions.
+
+Run `python -m unittest discover -s _tests -p
+test_pbg08_straight_board_hand_rankings.py -v`, the existing
+`test_viewer_guides.py` test, the deterministic build and the
+HTML5/internal link/browser suites from the complete checkout.
+Those two test modules were registered in the manual
+`_scripts/local_release_checks.py` but were not executed here.
+Static readback passed 28 consistency checks and independently
+recomputed 11-high vs 10-high, then 11-high vs 11-high.
+A targeted read-only public extraction confirmed the new exercise's
+actual rendered source and both answers, and Hold'em Basics exposed
+the deep link. This is **not** measured search, click, book-sale or
+full browser accessibility evidence.
+
+See `_reports/poker-book-growth/pbg-08-shared-board-straight-2026-11-22.md`.
+The next improvement in this separate book-growth sprint is
+PBG-09, addressing the starting-hands and position route with a
+new verifiable decision example rather than an invented preflop chart.
+
 ## PBG-07 comprehensive no-limit Hold'em guide exercise (November 22, 2026)
 
 The canonical long guide `/poker/no-limit-holdem-guide/` is compiled
