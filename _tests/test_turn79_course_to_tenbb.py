@@ -32,10 +32,10 @@ def defects(document: str) -> list[str]:
     except ValueError as error:
         return [str(error)]
     issues = []
-    for marker in ('href="' + ROUTE + '"', 'written 10 BB Playbook',
-                   'fictional stacks and payouts',
-                   'not a solver recommendation for a real hand',
-                   'after you can explain the cards, action and call price'):
+    for marker in ('href="' + ROUTE + '"', 'Written 10 BB Playbook: six fictional ICM checks',
+                   'six fictional ICM checks',
+                   'not a real-hand solver verdict',
+                   'After the basics:'):
         if section.count(marker) != 1:
             issues.append('Missing or duplicated safe optional next step: ' + marker)
     if section.count('<li>') != 5:
@@ -116,9 +116,9 @@ class Turn79CompletionToTenBB(unittest.TestCase):
         original = course_finish(self.source)
         altered = (
             original.replace(ROUTE, '/poker/10bb/#unpublished-lesson', 1),
-            original.replace('not a solver recommendation for a real hand',
+            original.replace('not a real-hand solver verdict',
                              'a solver-approved real-money play', 1),
-            original.replace('fictional stacks and payouts', 'verified tournament winnings', 1),
+            original.replace('six fictional ICM checks', 'verified tournament winnings', 1),
             original.replace('</li></ul>', '</li><li>Duplicate.</li></ul>', 1),
             original + original,
         )
