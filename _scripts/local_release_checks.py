@@ -170,6 +170,8 @@ def main() -> int:
         ('PBG-07 no-limit guide worked river range EV and reader choices', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg07_no_limit_guide.py', '-q']),
         ('PBG-08 two-case straight board practice and authentic guide hand ratings', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg08_straight_board_hand_rankings.py', '-q']),
         ('PBG-09 button AJs raised-vs-unopened pot math and lesson continuity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg09_button_action_contrast.py', '-q']),
+        ('PBG-10 exact 44-river clean-outs verifier with no network', ['downloads/holdem-clean-outs-turn-verify.py', '--json']),
+        ('PBG-10 exact clean outs, worksheet and poker math page regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_pbg10_clean_outs_turn.py', '-q']),
         ('Viewer guide four-showdown independent evaluator regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_viewer_guides.py', '-q']),
         ('Turn 49 topic-to-book exercises and reciprocal free-guide paths', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_topic_book_paths.py', '-q']),
         ('Turn 50 first-screen practical AI proof and task routes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn50_first_screen_identity.py', '-q']),
