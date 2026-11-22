@@ -303,7 +303,7 @@ before readers consider buying. Its source is
 paragraph in `poker/poker-books-and-courses/index.html`. Preserve
 exactly one unfragmented author book link, one free-example deep link,
 the author disclosure, and its free worksheet. The navigational
-paragraph adds roughly six source words and stays inside the existing
+paragraph adds roughly five source words and stays inside the existing
 four-minute editorial reading band. Its prior modification date was
 not artificially advanced for a small route adjustment.
 
