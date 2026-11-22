@@ -67,7 +67,7 @@ which **reverses the sign** of the conclusion. Neither calculation establishes w
 
 ## Independent reproduction
 
-Download or run the standard-library-only [exact river enumeration](https://nolankido.com/downloads/holdem-clean-outs-turn-verify.py):
+Download or run the standard-library-only [exact river enumeration](https://nolankido.com/downloads/holdem-clean-outs-turn-verify.py). The same script can be [inspected directly in GitHub](https://github.com/nolankido/nolankido.github.io/blob/main/downloads/holdem-clean-outs-turn-verify.py) if your browser does not display the Python download:
 
 ```powershell
 py -3 holdem-clean-outs-turn-verify.py --json
