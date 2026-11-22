@@ -11,6 +11,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '_scripts'))
+sys.path.insert(0, str(ROOT / '_tests'))
 SOURCE = ROOT / '_source/poker/beginner-learning-path.html'
 PUBLIC = ROOT / 'poker/free-poker-learning-path/index.html'
 SHORT = ROOT / 'poker/10bb/index.html'
