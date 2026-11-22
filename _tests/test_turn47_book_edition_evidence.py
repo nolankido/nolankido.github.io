@@ -44,7 +44,7 @@ def evidence_problems(data: dict) -> list[str]:
     explicit reviewed policy/test update are required.
     """
     errors = []
-    if data.get("schema_version") != 1 or data.get("reviewed_on") != "2026-11-20":
+    if data.get("schema_version") != 1 or data.get("reviewed_on") != "2026-11-22":
         errors.append("Unexpected evidence version or review date")
     if data.get("author_name") != "Nolan Kido":
         errors.append("Author mismatch")
@@ -73,6 +73,21 @@ def evidence_problems(data: dict) -> list[str]:
                 continue
             if any(edition.get(key, "__MISSING__") is not None for key in UNKNOWN_FIELDS):
                 errors.append("Unverified edition contains fabricated or missing retailer data")
+    # The author-provided URL is not proof of independently verified product metadata.
+    poker_work = work_by_slug["how-to-play-no-limit-texas-holdem"]
+    kindle = next((e for e in poker_work["formats"] if e.get("format") == "kindle_ebook"), {})
+    if (kindle.get("author_supplied_product_url") != "https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324"
+            or kindle.get("author_supplied_asin") != "B0HSB98324"
+            or kindle.get("source_type") != "author_direct"
+            or kindle.get("supplied_on") != "2026-11-22"):
+        errors.append("Author-provided Kindle destination mismatch")
+    for row in data["works"]:
+        for edition in row["formats"]:
+            if row is poker_work and edition is kindle:
+                continue
+            if any(key in edition for key in ("author_supplied_product_url",
+                                            "author_supplied_asin", "source_type")):
+                errors.append("Unexpected author-provided destination on another format")
     if set(data.get("publisher_primary_guidance", {}).values()) != set(PRIMARY_HELP):
         errors.append("Publisher guidance source set changed without review")
     return errors
@@ -97,6 +112,9 @@ class BookEditionAuditTests(unittest.TestCase):
         self.assertTrue(evidence_problems(data))
         data = json.loads(json.dumps(self.data))
         data["works"][0]["formats"][0]["status"] = "verified"
+        self.assertTrue(evidence_problems(data))
+        data = json.loads(json.dumps(self.data))
+        data["works"][1]["formats"][0]["author_supplied_asin"] = "B0INVENTED"
         self.assertTrue(evidence_problems(data))
         data = json.loads(json.dumps(self.data))
         data["works"][1]["canonical"] = "https://www.amazon.com/dp/B0INVENTED"
@@ -130,6 +148,8 @@ class BookEditionAuditTests(unittest.TestCase):
             self.assertEqual(source.count('href="' + book_pages.route(book) + '"'), 1)
         self.assertIn("not independently verified", source)
         self.assertIn("not unpublished or unavailable", source)
+        self.assertIn("https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324", source)
+        self.assertEqual(source.count('data-umami-event="poker-book-kindle-amazon-click"'), 1)
         self.assertIn('href="/downloads/nolan-kido-book-edition-verification.md" download',
                       source)
         self.assertIn('href="/downloads/nolan-kido-book-edition-evidence.json" download',
@@ -152,6 +172,11 @@ class BookEditionAuditTests(unittest.TestCase):
                     self.assertIn('href="/downloads/' + doc + '" download', s)
                 self.assertIn("not independently verified", s)
                 self.assertIn("not an official cover of this book", s)
+                if item["slug"] == "how-to-play-no-limit-texas-holdem":
+                    self.assertEqual(s.count("https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324"), 1)
+                    self.assertIn('id="poker-book-amazon-cta"', s)
+                else:
+                    self.assertNotIn("B0HSB98324", s)
                 raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
                 schema = json.loads(raw.group(1))
                 for field in ("isbn", "offers", "bookFormat", "datePublished",
