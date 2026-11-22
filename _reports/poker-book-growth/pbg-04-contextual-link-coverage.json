@@ -61,7 +61,7 @@
       "route": "/poker/holdem-basics/",
       "canonical_book_links_in_committed_html": 1,
       "book_deep_links": 0,
-      "published_blob_sha": "ace8d1fb502b9eccf2aae6e3be159b360b94e49f",
+      "published_blob_sha": "d39ab35eda197e630157e85946730a1b84b56afc",
       "contains_pbg04_bridge": true
     },
     {
@@ -82,7 +82,7 @@
       "route": "/poker/starting-hand-decisions/",
       "canonical_book_links_in_committed_html": 1,
       "book_deep_links": 0,
-      "published_blob_sha": "0f64cc8f345214a15979940fd16101e3eb97afa6",
+      "published_blob_sha": "568ddaaaebc477df438719c5b3b5ce71e08673fe",
       "contains_pbg04_bridge": true
     },
     {
@@ -103,7 +103,7 @@
       "route": "/poker/beginner-practice/",
       "canonical_book_links_in_committed_html": 1,
       "book_deep_links": 0,
-      "published_blob_sha": "e2b09727a8d34326360ba3fb9cfb857b667acc61",
+      "published_blob_sha": "4d38f7e42ce1889ad7e37208c4affba66b37e310",
       "contains_pbg04_bridge": true
     }
   ]
