@@ -53,12 +53,30 @@ def load(route):
     parser = LocalStyles()
     parser.feed(html)
     assert parser.paths, (route, 'no local stylesheets discovered')
-    css = [p.read_text(encoding='utf-8') for p in parser.paths]
-    # Keep semantic HTML and inline layout CSS, but block scripts and requests.
-    # Reinject local styles in their original sequence, including the base CSS.
-    html = re.sub(r'<link\b[^>]*>', '', html, flags=re.I)
+    # Insert each local stylesheet at the original <link> position. This keeps
+    # cascade order relative to page-specific inline <style> rules.
+    inlined = [0]
+
+    def replace_link(match):
+        tag = match.group(0)
+        rel = re.search(r'\brel="([^"]+)"', tag, flags=re.I)
+        href = re.search(r'\bhref="([^"]+)"', tag, flags=re.I)
+        if not rel or 'stylesheet' not in rel.group(1).lower().split() or not href:
+            return ''
+        url = urlsplit(href.group(1))
+        if url.scheme or url.netloc or not url.path.startswith('/'):
+            return ''
+        if url.path == '/styles.css' or url.path.startswith('/assets/'):
+            path = ROOT / url.path.lstrip('/')
+            assert path.is_file(), ('missing local stylesheet', route, path)
+            inlined[0] += 1
+            return '<style>\n' + path.read_text(encoding='utf-8') + '\n</style>'
+        return ''
+
+    html = re.sub(r'<link\b[^>]*>', replace_link, html, flags=re.I)
+    assert inlined[0] == len(parser.paths), (route, 'CSS coverage mismatch')
     html = re.sub(r'<script\b[^>]*>.*?</script\s*>', '', html, flags=re.I | re.S)
-    return html, css
+    return html
 
 
 def inspect(page, route, width, enlarged):
@@ -132,13 +150,11 @@ def main():
         page = context.new_page()
         try:
             for route in ROUTES:
-                html, css = load(route)
+                html = load(route)
                 for width in WIDTHS:
                     for enlarged in ((False, True) if width in (320, 390) else (False,)):
                         page.set_viewport_size({'width': width, 'height': 900})
                         page.set_content(html, wait_until='domcontentloaded')
-                        for part in css:
-                            page.add_style_tag(content=part)
                         if enlarged:
                             page.add_style_tag(content=LARGE_TEXT)
                         inspect(page, route, width, enlarged)
