@@ -78,7 +78,7 @@ These new Python tests were authored and registered. They were **not executed** 
 - Fetched the frozen map, source manifest, sitemap, new validator, 12 tests, release runner and both changed article files from authenticated GitHub. The source-level map audit passed **18** recorded consistency assertions.
 - Inspected the canonical metadata for each of the **18** mapped primary public HTML files, in two repository fetch batches. Each had one canonical matching its intended URL, one H1 and no noindex meta.
 - Confirmed the book-selection article's new paragraph contains precisely **five** intended free guide links; its original book and original free-example deep links were retained separately.
-- Read-only public website retrieval confirmed the current `/poker/poker-books-and-courses/` page **already exposes the five free learning URLs and original author-book URL**. This confirms live navigational availability, not exact source-byte deployment parity.
+- Read-only public retrieval confirmed the original author-book link and four of the five current focused free-answer routes on `/poker/poker-books-and-courses/`. The public page still showed the earlier `/poker/live-tournament-guide/` fifth link rather than the newly committed `/poker/first-live-tournament/` link at the latest check. Both guides are live, and the broader fifth link remains useful, but **the latest committed paragraph has not yet been verified as deployed**. Treat this as a cache/deployment parity issue until an exact new-route response is observed.
 - Existing source-backed author book Kindle ASIN `B0HSB98324` and its Umami event were not modified.
 - No new paid tools, GitHub Actions, new tracking scripts, redirects or site-promotion banners were created.
 
