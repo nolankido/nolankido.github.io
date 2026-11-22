@@ -173,7 +173,7 @@ class CleanOutsPBG10Tests(unittest.TestCase):
         sheet = read(WORKSHEET)
         checker = read(CHECKER)
         self.assertIn("7 wins, 37 losses and no ties", sheet)
-        self.assertIn("−4.09", sheet)
+        self.assertIn("-4.09", sheet)
         self.assertIn("2♥", sheet)
         self.assertIn("Q♥", sheet)
         self.assertIn('def enumerate_rivers(', checker)
