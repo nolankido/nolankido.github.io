@@ -314,10 +314,12 @@ Twelve authored test cases are in
 compiled HTML route, one canonical/H1 per primary, unique ownership,
 question integrity and strictly nullable unobserved metrics.
 The 18 primary HTML routes passed authenticated GitHub static checks.
-The live public book-comparison page showed an earlier version of
-the fifth (tournament) route after the precision edit, so **do not
-claim latest source-to-live byte parity** until deployment catches up
-and independent retrieval verifies it. The complete Python tests,
+The live public book-comparison page initially showed the prior
+broad tournament guide in the fifth link, then a subsequent read-only
+public retrieval showed the newly committed focused First Live Tournament
+route, all other four free answer routes, and the author book link.
+This verifies public anchor availability, **not** exact source-to-live
+byte parity or an executed mobile/browser suite. The complete Python tests,
 local deterministic build and actual responsive browser checks are
 not yet confirmed.
 
