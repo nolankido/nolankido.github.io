@@ -13,7 +13,7 @@ BOOKS = [
     {"slug": "one-workflow-at-a-time", "title": "One Workflow at a Time",
      "seo": "One Workflow at a Time: Practical AI Book | Nolan Kido",
      "description": "Nolan Kido's One Workflow at a Time examines small-business AI pilots, complete workflow costs, verification, and human approvals. Read free companion methods.",
-     "interest": "technology", "modified": "2026-11-20"},
+     "interest": "technology", "modified": "2026-11-22"},
     {"slug": "how-to-play-no-limit-texas-holdem",
      "title": "How to Play No-Limit Texas Hold’em",
      "seo": "How to Play No-Limit Texas Hold’em: Book | Nolan Kido",
