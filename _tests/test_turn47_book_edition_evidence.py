@@ -73,21 +73,37 @@ def evidence_problems(data: dict) -> list[str]:
                 continue
             if any(edition.get(key, "__MISSING__") is not None for key in UNKNOWN_FIELDS):
                 errors.append("Unverified edition contains fabricated or missing retailer data")
-    # The author-provided URL is not proof of independently verified product metadata.
-    poker_work = work_by_slug["how-to-play-no-limit-texas-holdem"]
-    kindle = next((e for e in poker_work["formats"] if e.get("format") == "kindle_ebook"), {})
-    if (kindle.get("author_supplied_product_url") != "https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324"
-            or kindle.get("author_supplied_asin") != "B0HSB98324"
-            or kindle.get("source_type") != "author_direct"
-            or kindle.get("supplied_on") != "2026-11-22"):
-        errors.append("Author-provided Kindle destination mismatch")
-    for row in data["works"]:
-        for edition in row["formats"]:
-            if row is poker_work and edition is kindle:
-                continue
-            if any(key in edition for key in ("author_supplied_product_url",
-                                            "author_supplied_asin", "source_type")):
-                errors.append("Unexpected author-provided destination on another format")
+    # Author-provided product URLs are distinct from independently verified retailer data.
+    expected_author_links = {
+        "one-workflow-at-a-time": (
+            "https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y", "B0HRQNCP7Y"),
+        "how-to-play-no-limit-texas-holdem": (
+            "https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324", "B0HSB98324"),
+    }
+    for slug, (expected_url, expected_asin) in expected_author_links.items():
+        work = work_by_slug[slug]
+        kindle = next((e for e in work["formats"] if e.get("format") == "kindle_ebook"), {})
+        if (kindle.get("author_supplied_product_url") != expected_url
+                or kindle.get("author_supplied_asin") != expected_asin
+                or kindle.get("source_type") != "author_direct"
+                or kindle.get("supplied_on") != "2026-11-22"):
+            errors.append("Author-provided Kindle destination mismatch: " + slug)
+        for edition in work["formats"]:
+            if edition is not kindle and any(
+                    key in edition for key in ("author_supplied_product_url", "author_supplied_asin", "source_type")):
+                errors.append("Unexpected author-provided URL on a print edition")
+    supplemental = data.get("supplementary_author_supplied_titles")
+    if (not isinstance(supplemental, list) or len(supplemental) != 1
+            or supplemental[0].get("title") != "AI Works, Human Decides"
+            or supplemental[0].get("author") != "Nolan Kido"
+            or supplemental[0].get("format") != "kindle_ebook"
+            or supplemental[0].get("author_supplied_product_url") != "https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R"
+            or supplemental[0].get("author_supplied_asin") != "B0HSF8K76R"
+            or supplemental[0].get("source_type") != "author_direct"
+            or supplemental[0].get("retailer_verification_status") != "not_verified"
+            or supplemental[0].get("retail_page_inspected") is not False
+            or supplemental[0].get("canonical_author_page") is not None):
+        errors.append("Supplementary third Kindle link identity invalid")
     if set(data.get("publisher_primary_guidance", {}).values()) != set(PRIMARY_HELP):
         errors.append("Publisher guidance source set changed without review")
     return errors
@@ -115,6 +131,12 @@ class BookEditionAuditTests(unittest.TestCase):
         self.assertTrue(evidence_problems(data))
         data = json.loads(json.dumps(self.data))
         data["works"][1]["formats"][0]["author_supplied_asin"] = "B0INVENTED"
+        self.assertTrue(evidence_problems(data))
+        data = json.loads(json.dumps(self.data))
+        data["works"][0]["formats"][0]["author_supplied_asin"] = "B0INVENTED"
+        self.assertTrue(evidence_problems(data))
+        data = json.loads(json.dumps(self.data))
+        data["supplementary_author_supplied_titles"][0]["author_supplied_asin"] = "B0INVENTED"
         self.assertTrue(evidence_problems(data))
         data = json.loads(json.dumps(self.data))
         data["works"][1]["canonical"] = "https://www.amazon.com/dp/B0INVENTED"
@@ -150,6 +172,11 @@ class BookEditionAuditTests(unittest.TestCase):
         self.assertIn("not unpublished or unavailable", source)
         self.assertIn("https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324", source)
         self.assertEqual(source.count('data-umami-event="poker-book-kindle-amazon-click"'), 1)
+        self.assertIn("https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y", source)
+        self.assertIn("https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R", source)
+        self.assertEqual(source.count('data-umami-event="one-workflow-kindle-amazon-click"'), 1)
+        self.assertEqual(source.count('data-umami-event="ai-works-human-decides-kindle-amazon-click"'), 1)
+        self.assertEqual(source.count('id="book-ai-works-human-decides"'), 1)
         self.assertIn('href="/downloads/nolan-kido-book-edition-verification.md" download',
                       source)
         self.assertIn('href="/downloads/nolan-kido-book-edition-evidence.json" download',
@@ -177,6 +204,9 @@ class BookEditionAuditTests(unittest.TestCase):
                     self.assertIn('id="poker-book-amazon-cta"', s)
                 else:
                     self.assertNotIn("B0HSB98324", s)
+                    self.assertEqual(s.count("https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y"), 1)
+                    self.assertIn('id="one-workflow-amazon-cta"', s)
+                    self.assertNotIn("B0HSF8K76R", s)
                 raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
                 schema = json.loads(raw.group(1))
                 for field in ("isbn", "offers", "bookFormat", "datePublished",
