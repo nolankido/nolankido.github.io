@@ -637,3 +637,26 @@ live-byte receipt. Use `python _scripts/local_release_checks.py --full
 --browser` from a complete checkout with installed dependencies,
 then the priority exact-byte diagnostic from a network-capable
 environment. No GitHub Actions, cron, paid services or new tracking.
+
+## Turn 75 case-to-checklist reader handoff
+
+The documented AI website repair article at
+`/technology/checking-ai-website-changes/` must keep the original pinned
+pre-repair and repaired source links, its October 11 original publication
+date, its November 18 substantive modification date and its single
+documented release fact record. The original free Markdown runbook at
+`/downloads/website-check-offline-runbook.md` is now linked immediately
+after the early evidence note and before the reader jump navigation,
+rather than only near the end of the long case.
+
+Edit `_source/technology/checking-ai-website-changes.html` and generated
+`technology/checking-ai-website-changes/index.html` together. This turn
+moves an existing paragraph, with no new H2 or factual assertion, and
+deliberately leaves the same reading estimate and article dates intact.
+Keep the runbook link once in this case, with its existing `download`
+attribute, and leave the pinned historical proof note byte-identical.
+Run `test_turn75_early_case_checklist.py`, the Turn 42 repair-proof tests,
+build/check, HTML5, internal links and applicable local browser suites.
+Do not mark mobile browser or source-to-live byte checks passed until
+executed from a complete local checkout. No new GitHub Actions or
+paid search service.
