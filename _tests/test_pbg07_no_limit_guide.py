@@ -146,7 +146,7 @@ class PokerGuidePBG07Tests(unittest.TestCase):
             self.assertEqual(html.count(
                 'href="' + BOOK + '#poker-book-first-exercise"'), 1)
             self.assertIn('href="/downloads/holdem-river-call-check-worksheet.md"', html)
-            self.assertIn("not a verified retail excerpt", html)
+            self.assertIn("Neither is a verified retail excerpt", html)
             self.assertNotIn('href="https://www.amazon.com/dp/', html)
 
     def test_section_heading_outline_and_original_dates_are_stable(self):
