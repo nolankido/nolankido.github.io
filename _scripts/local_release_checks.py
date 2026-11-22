@@ -178,6 +178,7 @@ def main() -> int:
         ('Turn 75 first-screen source-backed website release checklist', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn75_early_case_checklist.py', '-q']),
         ('Turn 78 direct beginner-to-short-stack poker learning route', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn78_poker_reader_handoff.py', '-q']),
         ('Turn 79 optional course-finish to 10 BB educational guide', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn79_course_to_tenbb.py', '-q']),
+        ('Turn 80 About identity and educational Poker proof boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn80_about_poker_teaching.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
