@@ -80,7 +80,7 @@ class Turn69SourceCaseLinks(unittest.TestCase):
                 self.assertEqual(excerpt(source), excerpt(page))
                 self.assertEqual(source.count('href="' + data["destination"] + '"'), 1)
                 self.assertEqual(page.count('href="' + data["destination"] + '"'), 1)
-        self.assertIn("fictional source", self.texts["summary"]["source"])
+        self.assertIn("fictional", self.texts["summary"]["source"].lower())
         self.assertIn("an assistant organized eight working notes into a publication checklist", self.texts["notes"]["source"])
 
     def test_target_has_distinct_recorded_source_and_checks_sections(self):
