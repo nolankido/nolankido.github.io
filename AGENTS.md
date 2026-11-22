@@ -1508,3 +1508,47 @@ test code, not an executed 320px test in the restricted container.
 The existing manual release runner includes the new static test.
 Do not add GitHub Actions, paid services, scheduling or fabricated
 search-position / AI-citation outcomes.
+
+## Turn 86: point tournament-overview readers to published written 10 BB practice
+
+The existing canonical `/poker/tournaments/` viewer primer described blinds,
+ante, chip-versus-prize value and the bubble but had no direct continuation
+to the separately published `/poker/10bb/` Playbook. In its existing
+`aria-label="Continue learning"` navigation, add exactly one labeled
+after-play link to `/poker/10bb/#six-checks-title` and exactly one download
+link to `/downloads/ten-bb-tournament-checklist.md`. Do not imply that
+fictional ICM calculations or a written exercise determine live-hand plays.
+
+Keep `_source/poker/tournaments.html` and generated
+`poker/tournaments/index.html` navigation identical. Preserve all original
+navigation, the October 5, 2026 Article publication/modified dates, SEO
+title/description, canonical, source disclaimers, and sitemap route. This
+is a bounded navigation improvement, not newly authored tournament analysis.
+`poker_finder.GuideText` excludes `<nav>` text from article search; do not
+inflate its 301-result native Poker Find index or add exercise answers.
+`_tests/test_turn86_tournament_overview_handoff.py` checks the real
+targets, source-to-public nav parity, no search-spoiler change, original
+identity, and deterministic generator output on a full local checkout.
+`_scripts/local_release_checks.py` runs the new tests offline.
+
+A November 22 read-only public fetch and desktop browser search confirmed
+the previous Turn 85 Playbook card, its eight searchable headings, the
+two topic filters, and the reset interaction. The browser agent separately
+reported the on-site guide still visible after selecting "External
+resources", but the current JS source explicitly filters `data-kind`
+against the selection, so this is an **unconfirmed interaction anomaly**,
+not a justified production bug fix. Reproduce in the project's existing
+Playwright suite with a verified selected filter value and updated match
+count before editing the filter logic. Mobile 390px and exact-byte live
+release checks remain unexecuted. Source fetches and live presence do not
+prove byte parity, Google indexing, ranking or AI citation activity.
+
+Run `python -m unittest discover -s _tests -p 'test_turn86_tournament_overview_handoff.py' -v`,
+`python _scripts/build.py --check`,
+`python _scripts/check_search.py --verify-snapshot _reports/search-audit.json`,
+`python _tests/check_html5.py` and
+`python _scripts/check_internal_links.py` in a complete local checkout.
+Use `_tests/finder_browser.py` for the separate interactive filter anomaly
+and `_tests/diagnose_live_crawl.py` for deployed exact bytes. Never
+add GitHub Actions, another scheduled process, a paid service, or
+fabricated ranking/citation metrics.
