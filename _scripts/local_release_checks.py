@@ -174,6 +174,7 @@ def main() -> int:
         ('Turn 71 source-linked AI repair and core mobile journey contract', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn71_start_here_release_navigation.py', '-q']),
         ('Turn 72 source-to-live coverage of three reader paths and 10 BB download', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn72_reader_release_coverage.py', '-q']),
         ('Turn 73 selected-route exact-byte receipts and no-false-success controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn73_live_byte_receipts.py', '-q']),
+        ('Turn 74 final canonical URL and redirect integrity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn74_final_route_guard.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
