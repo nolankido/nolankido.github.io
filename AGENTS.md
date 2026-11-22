@@ -274,6 +274,44 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-02 poker book baseline, privacy and local scorecard (November 22, 2026)
+
+The dated public baseline is
+`_reports/poker-book-growth/pbg-02-search-click-baseline-2026-11-22.md`.
+Its machine-readable companion freezes a **selected** 11-page source audit:
+three direct links into the canonical poker book page, eight selected
+poker learning pages without that exact link, and no observed search,
+Amazon, KDP or AI citation counts. `null` means uncollected, not zero.
+Twenty nonbranded and five branded question texts form a fixed future
+AI search panel; it has **not** been run or measured in this turn.
+Do not claim the static source audit proves indexing, traffic, referral
+clicks, attributable purchases, or AI assistant citations.
+
+The author-authorized Amazon links have three fixed Umami event names
+and the `source` property from the book page or catalog. The current
+`_source/privacy.html`, `privacy/index.html`,
+`_source/pages.json`, `ANALYTICS.md` and `_tests/test_analytics.py`
+disclose and limit those existing click events. Preserve this accuracy.
+Do not add personal data, contact-form or reading-progress event
+properties, a second tracker, paid analytics, or automated event
+generation to test ingestion. Neither an event attribute nor an
+HTTP page fetch proves Umami received an event.
+
+The standard-library-only private operator helper is
+`_scripts/poker_book_growth_scorecard.py`. Its exact input schema is
+in PBG-02's report and is verified by
+`_tests/test_pbg02_poker_book_growth_scorecard.py`, registered with
+`_scripts/local_release_checks.py`. It prints a nullable aggregate
+report without networking or writing a file. Operator-owned real
+metrics must stay outside public GitHub; never commit downloaded
+Search Console/Bing/Umami exports or filled scorecards.
+
+Future link campaigns should compare the same 11 source pages before
+and after changes, then evaluate actual GSC and Umami reports only
+after their property and date ranges are independently confirmed.
+No GitHub Actions or scheduled bot. Local build, HTML5, full test suite
+and live-byte parity remain separate acceptance gates.
+
 ## Three author-supplied Kindle destinations (November 22, 2026)
 
 The user supplied these exact Amazon links for their existing books:
