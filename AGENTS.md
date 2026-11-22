@@ -822,3 +822,45 @@ the actual worksheet bytes against production in the already
 registered exact-byte priority audit. A mathematical source-level test
 does not establish live publication or user learning outcomes.
 No new GitHub Actions, paid services or automated monitoring.
+
+## Turn 82 manual deployment propagation and release receipts
+
+GitHub Pages may finish a build before a newly changed public asset is
+observed by all readers. A successful GitHub Pages build/deploy check
+is not the same as an exact-byte response proof. On November 21, 2026
+(Honolulu time), the Turn 81 worksheet was initially retrieved with
+its previous shorter body, then a fresh cache-busted content retrieval
+showed the expanded exact-ICM calculations. That sequence proves a
+transient observed content difference; it does not establish whether
+the cause was a CDN cache, Pages propagation or an extractor cache.
+
+The manually invoked `_tests/diagnose_live_crawl.py` still defaults to
+two attempts, two seconds apart, with two workers. For an intentional
+publication-window check, it now allows at most eight attempts and
+30 seconds between attempts. The maximum requested wait is seven
+30-second intervals, plus bounded public GET time. No polling runs
+in the background, no scheduled checks or external service were added.
+Example targeted manual check:
+
+`python _tests/diagnose_live_crawl.py --scope priority --only /downloads/ten-bb-tournament-checklist.md --attempts 8 --interval 15 --workers 1`
+
+That checks only a single explicitly selected registered route, not the
+entire release. The JSON now includes `attempts_configured`,
+`attempts_used` and `retry_interval_seconds`, and each verified route
+still has its matching checked-out source SHA-256 and
+`verified_attempt`. An early byte mismatch followed by an exact-byte
+pass may be reported as a pass **for that route at that later time**.
+A persistent mismatch remains an observed failure. Transport failures
+remain inconclusive, never inferred as HTTP 404 or a missing page.
+Use the unfiltered priority audit and full registered inventory when
+release-wide evidence is required.
+
+The November 21 public content checks for `/about/`,
+`/poker/free-poker-learning-path/` and the expanded worksheet confirm
+that their new wording is **retrievable content**, not exact source-byte
+parity, fixed-size mobile reflow or Google/Bing indexing. For raw-byte
+parity run the existing status-bearing checker from a matching,
+network-capable full checkout. New unit tests in
+`_tests/test_turn82_publication_retry_window.py` are synthetic until
+executed from that checkout. No repository-authored GitHub Actions
+workflow, payment, page-count change, or passive monitor was added.

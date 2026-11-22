@@ -132,6 +132,8 @@ def audit(scope: str, attempts: int, interval: int, workers: int,
     state = 'fail' if observed else ('inconclusive' if inconclusive else 'pass')
     return {'scope': scope, 'selection': 'explicit' if only else scope,
             'status': state, 'total': len(targets),
+            'attempts_configured': attempts, 'attempts_used': index + 1,
+            'retry_interval_seconds': interval,
             'passed': len(verified), 'failed': len(pending),
             'verified_routes': {route: verified[route] for route in sorted(verified)},
             'observed_failed': len(observed), 'inconclusive_count': len(inconclusive),
@@ -143,8 +145,12 @@ def audit(scope: str, attempts: int, interval: int, workers: int,
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--scope', choices=('priority', 'all'), default='priority')
-    parser.add_argument('--attempts', type=int, choices=range(1, 5), default=2)
-    parser.add_argument('--interval', type=int, choices=range(0, 11), default=2)
+    # Manual long-window checks can outlast GitHub Pages propagation after
+    # a successful build. Keep the original fast defaults and a hard ceiling.
+    parser.add_argument('--attempts', type=int, choices=range(1, 9), default=2,
+                        help='Attempts per remaining target, 1..8 (default: 2)')
+    parser.add_argument('--interval', type=int, choices=range(0, 31), default=2,
+                        help='Seconds between attempts, 0..30 (default: 2)')
     parser.add_argument('--workers', type=int, choices=range(1, 5), default=2)
     parser.add_argument('--only', action='append', metavar='/PATH',
                         help='Check only named registered routes; repeat to select multiple')
