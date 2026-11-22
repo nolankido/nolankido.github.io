@@ -196,6 +196,7 @@ def main() -> int:
         ('Turn 83 preserve observed mismatch evidence across network retries', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn83_observed_mismatch_retention.py', '-q']),
         ('Turn 84 discover separately published 10 BB teaching without false library counts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn84_standalone_poker_discovery.py', '-q']),
         ('Turn 85 standalone Playbook native Poker Finder search and filters', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn85_poker_finder_manual.py', '-q']),
+        ('Turn 86 tournament overview into verified 10 BB written study', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn86_tournament_overview_handoff.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
