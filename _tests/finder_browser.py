@@ -460,8 +460,14 @@ def main():
             page.locator('#finder-topic').select_option('strategy')
             expect(manual).to_be_visible()
             page.locator('#finder-kind').select_option('resource')
+            expect(page.locator('#finder-kind')).to_have_value('resource')
+            expect(page.locator('#finder-count')).to_contain_text('Showing 0 of 0 matches.')
             expect(manual).not_to_be_visible()
+            # A filtered card remains a real local index node; the JavaScript
+            # marks it hidden rather than sending the query to a server.
+            assert manual.get_attribute('hidden') is not None
             page.locator('#finder-reset').click()
+            expect(page.locator('#finder-kind')).to_have_value('all')
             # Real failed question, changed wording, spelling recovery and exact
             # short abbreviations use the same core as the declared benchmark.
             for question, target in [
