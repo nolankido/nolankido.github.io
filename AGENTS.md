@@ -761,3 +761,31 @@ CSS pixels, including enlarged text at the two narrow widths. These
 additional checks are authored, but have not run against a complete
 checkout in this environment. Running the script requires Playwright
 and installed Chromium. No new GitHub Actions, cron or tracking.
+
+## Turn 80: About distinguishes original poker teaching from playing records
+
+The About page's public identity evidence section already links
+independent event records and first-person NolanPoker videos. It now
+also points to the site's existing original poker teaching materials:
+the six-lesson free `/poker/free-poker-learning-path/` course and the
+fictional ICM `/poker/10bb/#six-checks` guide. Keep these as distinct
+evidence types. A tutorial or reproducible fictional computation is
+not proof of tournament profit, solver accuracy on real hands, official
+credentials or independent business results.
+
+Edit `_source/about.html` and the paired generated `about/index.html`
+together. Keep the original identity answer, publication and research
+links, NolanPoker videos, first-screen proof navigation, 2026-11-20
+last substantive revision and existing canonical/schema. The
+new `about-poker-study-proof` paragraph must appear exactly once
+directly after the identity evidence cards and before the evidence
+types explanation. Do not create new canonical pages, claims or tracking.
+
+`_tests/test_turn80_about_poker_teaching.py` checks source/public
+identity, genuine destinations, the 10 BB section and downloads,
+original independent-results boundaries, metadata, builder parity,
+and adverse edits. The manual release runner has registered the test.
+Run it with the existing full build, HTML5/internal links, mobile
+browser and production release audits from a complete checkout.
+Local isolated sentence-level tests cannot certify the complete
+repository or live deployment. No GitHub Actions or paid services.
