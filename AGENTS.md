@@ -274,6 +274,68 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-09 AJs on the button: raised versus unopened (November 22, 2026)
+
+The existing six-lesson Poker Foundations sequence includes exactly
+eight `poker-details viewer-question` questions in
+`/poker/starting-hand-decisions/`. The final native Exercise 8 remains
+`id="check-record"` under `#study-record`; it is now a two-scene
+changed-input comparison using A♠ J♠ on the button, blinds 1/2,
+no ante or fees, and starting stacks of hero 150, cutoff 60, small
+blind 200 and big blind 400. The first two seats fold in both scenes.
+
+Scene A: cutoff opens to 6, giving a current pot 6 + 1 + 2 = 9.
+Hero's call is 6, so the pot becomes 15 before either blind
+responds. Scene B: cutoff folds, making the pot 1 + 2 = 3.
+Matching the live big blind costs 2 and makes the pot 5 before
+either blind responds. Hero starts with 150 / 2 = 75 BB. In A,
+the starting effective depths are 30 BB against cutoff and
+75 BB against either blind; in B, only the blind comparisons
+remain because cutoff folded. Neither call guarantees a flop
+for that price, and the calculations do not prescribe an action.
+An unopened reference cannot be applied directly to a raised pot.
+
+Source and public pages:
+`_source/poker/starting-hand-decisions.html` and
+`poker/starting-hand-decisions/index.html`. The answer's numeric
+`data-*` attributes are teaching constants for offline checks,
+not visitor or opponent data. The contextual source/public link in
+`_source/poker/position-and-stacks.html` and
+`poker/position-and-stacks/index.html` goes to the existing
+`/poker/starting-hand-decisions/#study-record` fragment. The
+preflop-response workshop is a real free follow-up route.
+
+Preserve all eight existing exercise IDs, especially
+`check-record`, and the browser regression's
+`150 / 2 = 75 BB` assertion. The old numbered final exercise
+was **replaced**, not followed by a ninth viewer-question.
+Keep the six-stage course navigation, preflop practice,
+study-template and original single first-party author book link,
+without a purchase gate or new tracking. The scoped changes
+remove roughly 14 words from the longer beginner article; a
+read-only compiled-body word-count check gave 3,816 to 3,802
+words and the **17-minute** reading tier remains correct.
+The position-and-stacks reading estimate stays **5 minutes**.
+The existing historical full-source review dates were not
+advanced for this bounded example; the dated PBG-09 report
+records the precise change.
+
+Twelve focused offline tests live in
+`_tests/test_pbg09_button_action_contrast.py`, registered in
+`_scripts/local_release_checks.py`. The standard
+`--browser` option discovers `_tests/preflop_browser.py`
+automatically. Static source-level checks passed 32 assertions,
+and public read-only retrieval verified the two numerical
+cases and the crosslink; actual local test execution, the full
+build, HTML5, keyboard and narrow-screen checks remain open.
+See `_reports/poker-book-growth/pbg-09-same-hand-different-preflop-action-2026-11-22.md`.
+Do not invent solver ranges, live opponent observations,
+increased click-through rates, GitHub Actions or book sales.
+
+Next in this 25-turn growth sprint: PBG-10, improve
+pot-odds/clean-outs teaching without duplicating the full
+no-limit reference or creating paywalled education.
+
 ## PBG-08 straight on the board and best-five comparisons (November 22, 2026)
 
 The established `/poker/hand-rankings/` guide now includes one native
