@@ -7,8 +7,15 @@ pages inherit it. Do not paste another copy into individual page bodies.
 
 ## Scope and privacy
 
-- Pageviews only; no advertising pixels, session recordings, user IDs,
-  custom event properties, or form-field instrumentation are added.
+- Originally pageviews only at installation. On November 22, the author
+  approved exact Kindle product links with three named, click-only Umami
+  events for the Books catalog and two existing standalone book pages.
+  The events use a fixed `source` property of `books-catalog` or
+  `book-page-hero`; no reader-supplied properties, user IDs, email,
+  form fields or session recordings are sent. They represent outbound
+  link clicks, not Amazon product views, book orders or verified receipts.
+- No advertising pixels or automatic affiliate/attribution redirects.
+  Existing Do Not Track and domain restrictions remain in effect.
 - `data-domains` permits `nolankido.com` and `www.nolankido.com`; local
   previews and alternate development hostnames do not send pageviews.
 - `data-do-not-track="true"` respects the browser Do Not Track preference.
@@ -45,9 +52,18 @@ or Do Not Track may exclude a test visit. Successful publication and a
 valid script tag do not by themselves prove ingestion into the private
 dashboard. Do not claim ingestion is verified without observing it.
 
+The three already-installed Amazon book-click events are:
+`poker-book-kindle-amazon-click`, `one-workflow-kindle-amazon-click`,
+and `ai-works-human-decides-kindle-amazon-click`. For baseline work,
+use the Umami Events report by event name and fixed source to count
+outbound book-link clicks, without interpreting them as orders or even
+proof that Amazon loaded. The tracker code is configured, but live event
+ingestion and actual counts remain unverified until the owner's dashboard
+confirms them. Do not sum unique visitors or sessions across pages as
+though they were one independent audience.
 YouTube clicks, downloads, contact acceptance events and Google Search
-Console are not configured by this initial installation. Add only
-explicitly named, non-personal events when they have a defined use, and
+Console are not automatically configured by this original tracker installation.
+Add only explicitly named, non-personal events with a defined use, and
 update the public notice and regression tests at the same time.
 
 References:
