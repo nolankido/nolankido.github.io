@@ -112,7 +112,15 @@
           "public_evidence_url": null,
           "observed_on": null
         }
-      ]
+      ],
+      "author_archive_metadata": {
+        "title": "How to Play No-Limit Texas Hold'em",
+        "subtitle": "A Beginner's Guide for Live Tournaments and Cash Games",
+        "edition_label": "2027 Edition",
+        "checked_on": "2026-11-22",
+        "provenance": "Author-controlled production archive, not a verified retail record or KDP Bookshelf status",
+        "retailer_identity_confirmed": false
+      }
     }
   ]
 }
