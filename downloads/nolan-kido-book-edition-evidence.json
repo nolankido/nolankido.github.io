@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "reviewed_on": "2026-11-22",
-  "scope": "Author-provided Kindle URL and ASIN were added on 2026-11-22 for the poker book. Direct Amazon page contents were not independently retrievable in this review. No private KDP Bookshelf was accessed, no retailer-listed price, publication date, edition identity, official cover, ratings or other formats were authenticated. An author-supplied link is usable as a reader destination but is not an independently verified retailer record.",
+  "scope": "Two first-party book pages each retain a three-format retail evidence matrix. On November 22, 2026 the author directly supplied product URLs for their Kindle editions, plus a separate Kindle URL for AI Works, Human Decides, which is recorded under supplementary_author_supplied_titles until that work has a canonical first-party page. Amazon returned a shopping interstitial rather than independently inspectable listing content. No retailer-side title, author, prices, publication dates, stock, official cover, ratings or print edition identifiers have been authenticated. No private KDP Bookshelf was accessed.",
   "author_name": "Nolan Kido",
   "verification_state_definition": {
     "not_verified": "No exact retailer edition evidence has been authenticated. This is not evidence of nonpublication or unavailability.",
@@ -36,7 +36,11 @@
           "retailer_publication_date": null,
           "official_retailer_cover_url": null,
           "public_evidence_url": null,
-          "observed_on": null
+          "observed_on": null,
+          "author_supplied_product_url": "https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y",
+          "author_supplied_asin": "B0HRQNCP7Y",
+          "supplied_on": "2026-11-22",
+          "source_type": "author_direct"
         },
         {
           "format": "paperback",
@@ -126,6 +130,20 @@
         "provenance": "Author-controlled production archive, not a verified retail record or KDP Bookshelf status",
         "retailer_identity_confirmed": false
       }
+    }
+  ],
+  "supplementary_author_supplied_titles": [
+    {
+      "title": "AI Works, Human Decides",
+      "author": "Nolan Kido",
+      "format": "kindle_ebook",
+      "author_supplied_product_url": "https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R",
+      "author_supplied_asin": "B0HSF8K76R",
+      "supplied_on": "2026-11-22",
+      "source_type": "author_direct",
+      "retailer_verification_status": "not_verified",
+      "canonical_author_page": null,
+      "retail_page_inspected": false
     }
   ]
 }
