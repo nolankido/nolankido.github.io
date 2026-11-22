@@ -610,3 +610,30 @@ Run `_tests/test_turn73_live_byte_receipts.py` for synthetic pass, expected
 404, retries, mixed failures and false-positive safeguards. The existing
 `_scripts/local_release_checks.py` runs it locally; no GitHub Actions,
 scheduled service or additional subscription is authorized.
+
+## Turn 74 canonical route integrity for exact-byte release checks
+
+The read-only `check_live.check()` verifier must not accept matching bytes
+from a different URL path. The existing `SameOriginRedirect` allows
+safe same-origin redirects, but `check()` now verifies that
+`response.geturl()` has the original HTTPS origin and registered route.
+A query-only rewrite such as stripping `?release-check` is permitted
+when the route path remains unchanged. A redirect to another page, an
+`index.html` alias, a changed host or a changed scheme fails as an observed
+HTTP release mismatch even when the response body has the expected bytes.
+
+Expected 404 negative-control routes are checked against their original
+requested path with the same rule. Keep the HTTP status and byte checks
+separate. The new message begins `HTTP ` so the existing
+`_tests/diagnose_live_crawl.py` classifies it as a confirmed mismatch
+rather than a transport error. DNS, TLS and blocked environments still
+remain inconclusive, never assumed HTTP 404.
+
+Run `_tests/test_turn74_final_route_guard.py` for local mock-response
+positive and negative controls and the prior Turn 38/73 release tests.
+Nine independently run isolated checks demonstrated the guard behavior
+on November 21, 2026, but that is not a full checkout test or a public
+live-byte receipt. Use `python _scripts/local_release_checks.py --full
+--browser` from a complete checkout with installed dependencies,
+then the priority exact-byte diagnostic from a network-capable
+environment. No GitHub Actions, cron, paid services or new tracking.
