@@ -138,12 +138,12 @@ class NotesReceiptGateTests(unittest.TestCase):
     def test_updated_publication_metadata_and_find_are_consistent(self):
         page = next(p for p in build.public_pages() if p["id"] == "organize-public-notes")
         self.assertEqual(page["date"], "2026-10-27")
-        self.assertEqual(page["updated"], "2026-11-04")
+        self.assertEqual(page["updated"], "2026-11-21")
         schema_text = re.search(r'<script type="application/ld\+json">(.*?)</script>', self.html).group(1)
         schema = json.loads(schema_text)
         self.assertEqual(schema["datePublished"], "2026-10-27")
-        self.assertEqual(schema["dateModified"], "2026-11-04")
-        self.assertEqual(self.html.count('property="article:modified_time" content="2026-11-04"'), 1)
+        self.assertEqual(schema["dateModified"], "2026-11-21")
+        self.assertEqual(self.html.count('property="article:modified_time" content="2026-11-21"'), 1)
         self.assertIn('<link rel="canonical" href="https://nolankido.com/technology/organize-public-notes/">', self.html)
         index_html = (ROOT / "find/index.html").read_text(encoding="utf-8")
         data = json.loads(re.search(r'<script type="application/json" id="find-section-data">(.*?)</script>', index_html).group(1))
@@ -158,7 +158,7 @@ class NotesReceiptGateTests(unittest.TestCase):
             e.findtext("{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")
             for e in xml
         }
-        self.assertEqual(dates[loc], "2026-11-04")
+        self.assertEqual(dates[loc], "2026-11-21")
         self.assertEqual(list(dates).count(loc), 1)
 
     def test_build_owned_outputs_match_the_committed_release(self):
