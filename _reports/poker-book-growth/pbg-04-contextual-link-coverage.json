@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "audited_on": "2026-11-22",
+  "sprint": "POKER-BOOK-GROWTH",
+  "turn": "PBG-04",
+  "baseline_reference": "_reports/poker-book-growth/pbg-02-acquisition-route-baseline.json",
+  "book_page": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/",
+  "source": "Authenticated GitHub source/published HTML checks, exact canonical href matches only",
+  "scope": "The exact same eleven preselected canonical poker education routes used in the PBG-02 baseline, not the whole site",
+  "summary": {
+    "selected_pages": 11,
+    "pages_with_exact_direct_book_link": 9,
+    "pages_without_exact_direct_book_link": 2,
+    "newly_linked_pages": 6,
+    "original_direct_link_pages": 3,
+    "net_linked_page_change": 6
+  },
+  "excluded_for_this_turn": {
+    "/poker/library/": "Large general directory; avoid a generic book pitch within the search interface without measured reader intent",
+    "/poker/study/": "General study desk; avoid promotional saturation before evidence on learner paths"
+  },
+  "measurement": {
+    "status": "not_collected",
+    "google_web_clicks": null,
+    "google_web_impressions": null,
+    "amazon_outbound_click_events": null,
+    "kdp_book_orders": null,
+    "ai_citation_events": null
+  },
+  "caveat": "Counts only exact canonical hrefs in the selected committed HTML set, not the total number of site links, Google-indexed pages, traffic, AI citations, Amazon page loads or sales.",
+  "routes": [
+    {
+      "route": "/poker/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0,
+      "published_blob_sha": "0944f40ea0be4c6f93707dc0cb1772677c600dab",
+      "contains_pbg04_bridge": false
+    },
+    {
+      "route": "/poker/no-limit-holdem-guide/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 1,
+      "published_blob_sha": "7ca8e0eef6de4c70e3a732ea0c9c3aea824ab373",
+      "contains_pbg04_bridge": false
+    },
+    {
+      "route": "/poker/poker-books-and-courses/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 1,
+      "published_blob_sha": "906b497654990116ba4e93f1f9f454a6a04f7b25",
+      "contains_pbg04_bridge": false
+    },
+    {
+      "route": "/poker/free-poker-learning-path/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0,
+      "published_blob_sha": "5566c75b227086f3230d6138da40964b510c7f67",
+      "contains_pbg04_bridge": true
+    },
+    {
+      "route": "/poker/holdem-basics/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0,
+      "published_blob_sha": "ace8d1fb502b9eccf2aae6e3be159b360b94e49f",
+      "contains_pbg04_bridge": true
+    },
+    {
+      "route": "/poker/library/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0,
+      "published_blob_sha": "7c66f8243360e2563843e86c566264f614733419",
+      "contains_pbg04_bridge": false
+    },
+    {
+      "route": "/poker/study/",
+      "canonical_book_links_in_committed_html": 0,
+      "book_deep_links": 0,
+      "published_blob_sha": "af6dd89c10e6c8eb954739a612147bf4407b2d35",
+      "contains_pbg04_bridge": false
+    },
+    {
+      "route": "/poker/starting-hand-decisions/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0,
+      "published_blob_sha": "0f64cc8f345214a15979940fd16101e3eb97afa6",
+      "contains_pbg04_bridge": true
+    },
+    {
+      "route": "/poker/poker-math-reference/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0,
+      "published_blob_sha": "f6ad26db587494c0f9a0f5c845453e1123f88a40",
+      "contains_pbg04_bridge": true
+    },
+    {
+      "route": "/poker/betting-and-pots/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0,
+      "published_blob_sha": "9d28e483594c3e3a7aa8c9fecb84b3c171ad80c9",
+      "contains_pbg04_bridge": true
+    },
+    {
+      "route": "/poker/beginner-practice/",
+      "canonical_book_links_in_committed_html": 1,
+      "book_deep_links": 0,
+      "published_blob_sha": "e2b09727a8d34326360ba3fb9cfb857b667acc61",
+      "contains_pbg04_bridge": true
+    }
+  ]
+}
