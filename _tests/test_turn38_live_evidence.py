@@ -27,12 +27,17 @@ class Turn38LiveEvidenceTests(unittest.TestCase):
         routes = diagnostics.PRIORITY
         self.assertEqual(len(routes), len(set(routes)))
         expected = {
-            "/", "/about/", "/technology/", "/ai-in-real-life/",
+            "/", "/about/", "/start-here/", "/technology/", "/ai-in-real-life/",
+            "/technology/checking-ai-website-changes/",
+            "/technology/ai-website-visibility/", "/technology/ai-workflow-pilot/",
             "/books/", "/books/one-workflow-at-a-time/",
             "/books/how-to-play-no-limit-texas-holdem/",
             "/poker/10bb/",
             "/downloads/one-workflow-ai-pilot-worksheet.md",
             "/downloads/holdem-river-call-check-worksheet.md",
+            "/downloads/website-check-offline-runbook.md",
+            "/downloads/ten-bb-tournament-checklist.md",
+            "/downloads/ten-bb-playbook-icm-verify.py",
             "/downloads/gsc-period-compare.py",
             "/downloads/gsc-download-verify.py",
             "/robots.txt", "/sitemap.xml",
