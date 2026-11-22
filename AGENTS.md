@@ -522,3 +522,28 @@ or manufactured search-ranking claims.
 - Do not incur paid API charges or use new automation services without explicit permission.
 
 The active 50-hour visibility sprint document lives in the owner's private ChatGPT Library, not this public repository. Keep private plans and authenticated analytics out of source control.
+
+## Turn 71 first-visit evidence route and offline mobile checks
+
+The existing `/start-here/` projects section includes one link to the
+source-checked historical website repair at
+`/technology/checking-ai-website-changes/`. Edit the owner source
+`_source/start-here.html` and regenerate `start-here/index.html` together.
+The link is evidence of one independently detected markup defect and a
+reusable release checklist, not proof of faster AI work, search gains,
+client outcomes or a newly executed parser run. Preserve the existing
+2026-11-21 modification date, canonical route and project list.
+
+Run `_tests/test_turn71_start_here_release_navigation.py` for direct
+source/public consistency, evidence availability and negative controls.
+The new manual browser suite
+`_tests/visibility_core_journeys_browser.py` tests Home, Start Here,
+Technology, Books and Poker 10 BB at 320, 390, 768 and 1440 CSS pixels,
+including 200 percent text at narrow widths, with scripts and network
+disabled. Its stylesheet loader includes `/styles.css` and `/assets/`
+stylesheets at their original positions relative to inline CSS.
+It cannot establish real-user task completion, live deployment, search
+rankings, Web Vitals or mobile touch behavior. The new test must actually
+run with a local Chromium before its checks may be marked passed.
+Use `python _scripts/local_release_checks.py --full --browser` from a
+complete checkout; no user-authored GitHub Actions, cron or paid service.
