@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 
 ORIGIN = "https://nolankido.com"
 PERSON = ORIGIN + "/about/#nolan-kido"
-UPDATED = "2026-11-20"
+UPDATED = "2026-11-22"
 BOOKS = [
     {"slug": "one-workflow-at-a-time", "title": "One Workflow at a Time",
      "seo": "One Workflow at a Time: Practical AI Book | Nolan Kido",
