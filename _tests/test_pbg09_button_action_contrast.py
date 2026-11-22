@@ -218,7 +218,8 @@ class ButtonActionContrastTests(unittest.TestCase):
     def test_manual_release_includes_regression_and_no_actions(self):
         runner = read("_scripts/local_release_checks.py")
         self.assertIn("test_pbg09_button_action_contrast.py", runner)
-        self.assertIn("preflop_browser.py", runner)
+        self.assertIn("glob('*_browser.py')", runner)
+        self.assertTrue((ROOT / "_tests/preflop_browser.py").is_file())
         self.assertIn("['_scripts/build.py', '--check']", runner)
         folder = ROOT / ".github/workflows"
         self.assertFalse(folder.exists() and any(
