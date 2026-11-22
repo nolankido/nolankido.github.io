@@ -274,6 +274,43 @@ verification is authorized. Maintain the original November 2
 publication date, November 20 revision, source-to-output parity,
 search heading and pre-existing RSS publication date.
 
+## PBG-05 Amazon click-path verification (November 22, 2026)
+
+The canonical author-book pages `/books/`,
+`/books/how-to-play-no-limit-texas-holdem/` and
+`/books/one-workflow-at-a-time/` expose exactly five Amazon
+Kindle link anchors for three author-supplied titles. The ASINs are
+`B0HSB98324`, `B0HRQNCP7Y`, and `B0HSF8K76R`. Each
+link must use the direct author-supplied URL, the existing
+`data-umami-event` name and approved `data-umami-event-source`
+value from either `books-catalog` or `book-page-hero`.
+
+Before any edit to these book links or analytics markup, run
+`python _scripts/poker_book_click_path_audit.py`, plus
+`python -m unittest discover -s _tests -p
+test_pbg05_book_click_path_audit.py -v` locally. The audit is
+standard-library-only, read-only, no-network and checks the public
+edition ledger, source/output exact equality, Umami event attributes,
+tracker privacy settings and public disclosure. The existing manual
+release checklist registers both. Do not enable GitHub Actions,
+automated fake events, external purchase redirects, affiliate codes,
+handwritten Amazon Attribution tags, or personal analytics fields.
+
+Public read-only retrieval confirmed all five anchored destinations,
+while the three Amazon URLs showed a generic Continue shopping
+interstitial. This is not proof of current listing identity, prices,
+availability or sales. Neither code-based event attributes nor manual
+test clicks measure real conversions. The owner Umami, KDP Orders,
+Royalties and any Amazon Ads Attribution dashboards were not
+authenticated in this session. Preserve `null` for unavailable counts,
+and put actual private reports outside this public repository.
+
+See `_reports/poker-book-growth/pbg-05-amazon-click-path-validation-2026-11-22.md`
+and the associated
+`_reports/poker-book-growth/pbg-05-live-click-path-observation-2026-11-22.json`.
+Next is PBG-06, real beginner query-intent mapping without fabricated
+volume or self-citations.
+
 ## PBG-04 contextual poker-book links (November 22, 2026)
 
 Six high-fit poker learning pages now include a single optional
