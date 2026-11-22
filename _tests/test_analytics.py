@@ -40,15 +40,15 @@ class AnalyticsTests(unittest.TestCase):
             '_source/books/one-workflow-at-a-time.html',
             '_source/books/how-to-play-no-limit-texas-holdem.html',
         }
-        for path in (ROOT / '_source').rglob('*.html'):
+        # Only manifest-owned pages inherit layout.html. Standalone manual
+        # pages have their own builders and tracker contracts.
+        for page in build.public_pages():
+            path = ROOT / '_source' / page['source']
             name = path.relative_to(ROOT).as_posix()
-            if path.name == 'layout.html':
-                continue
-            count = path.read_text(encoding='utf-8').count(SRC)
-            if name in manual_books:
-                self.assertEqual(count, 1, name)
-            else:
-                self.assertEqual(count, 0, name)
+            self.assertNotIn(SRC, path.read_text(encoding='utf-8'), name)
+        for name in manual_books:
+            path = ROOT / name
+            self.assertEqual(path.read_text(encoding='utf-8').count(SRC), 1, name)
 
     def test_only_explicit_book_click_events_without_form_or_reader_tracking(self):
         approved = {
