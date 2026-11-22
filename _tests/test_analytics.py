@@ -1,5 +1,6 @@
 """Umami installation contracts; these checks never contact analytics servers."""
 from pathlib import Path
+import re
 import unittest
 from test_site import Page, ROOT, build
 
@@ -38,23 +39,46 @@ class AnalyticsTests(unittest.TestCase):
             if path.name != 'layout.html':
                 self.assertNotIn(SRC, path.read_text(encoding='utf-8'), str(path))
 
-    def test_pageviews_only_without_form_or_custom_event_instrumentation(self):
+    def test_only_explicit_book_click_events_without_form_or_reader_tracking(self):
+        approved = {
+            'books/index.html': (
+                'one-workflow-kindle-amazon-click',
+                'poker-book-kindle-amazon-click',
+                'ai-works-human-decides-kindle-amazon-click',
+            ),
+            'books/one-workflow-at-a-time/index.html': (
+                'one-workflow-kindle-amazon-click',
+            ),
+            'books/how-to-play-no-limit-texas-holdem/index.html': (
+                'poker-book-kindle-amazon-click',
+            ),
+        }
         for path, content in self.html.items():
             with self.subTest(path=str(path)):
-                self.assertNotIn('data-umami-event', content)
+                found = re.findall(r'data-umami-event="([^"]+)"', content)
+                self.assertCountEqual(found, approved.get(path.as_posix(), ()))
                 self.assertNotIn('umami.track(', content)
                 self.assertNotIn('umami.identify(', content)
                 self.assertNotIn('data-replay', content)
+        for filename, expected in approved.items():
+            with self.subTest(book_page=filename):
+                html = (ROOT / filename).read_text(encoding='utf-8')
+                found = re.findall(r'data-umami-event="([^"]+)"', html)
+                self.assertCountEqual(found, expected)
+                for event in found:
+                    self.assertNotIn('email', event)
+                    self.assertNotIn('user', event)
+                self.assertNotIn('umami.track(', html)
         contact = (ROOT / 'assets/contact.js').read_text(encoding='utf-8')
         self.assertNotIn('umami', contact.lower())
 
     def test_privacy_notice_matches_the_installation(self):
         content = self.outputs[Path('privacy/index.html')]
-        for expected in ('Updated October 16, 2026', 'Umami Cloud', 'pageviews only', 'Do Not Track', 'https://umami.is/privacy', 'Optional Poker Foundations progress', 'without progress events'):
+        for expected in ('Updated November 22, 2026', 'Umami Cloud', 'limited Amazon book-link click events', 'A click is not proof of an Amazon purchase', 'Do Not Track', 'https://umami.is/privacy', 'Optional Poker Foundations progress', 'without progress events'):
             self.assertIn(expected, content)
         self.assertNotIn('does not add advertising pixels, behavioral analytics', content)
         privacy = next(page for page in build.public_pages() if page['path'] == '/privacy/')
-        self.assertEqual(privacy['updated'], '2026-10-16')
+        self.assertEqual(privacy['updated'], '2026-11-22')
 
 if __name__ == '__main__':
     unittest.main()
