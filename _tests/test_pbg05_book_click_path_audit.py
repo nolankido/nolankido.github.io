@@ -98,8 +98,8 @@ class BookClickPathAuditTests(unittest.TestCase):
         for original, forged in (
             ('data-umami-event="poker-book-kindle-amazon-click"',
              'data-umami-event="non-approved-event"'),
-            ('data-umami-event-source="books-catalog"',
-             'data-umami-event-source="user-email"'),
+            ('data-umami-event="poker-book-kindle-amazon-click" data-umami-event-source="books-catalog"',
+             'data-umami-event="poker-book-kindle-amazon-click" data-umami-event-source="user-email"'),
         ):
             with self.subTest(forged=forged):
                 tmp, root = fixture()
