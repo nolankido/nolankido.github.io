@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+from hashlib import sha256
 import json
 from pathlib import Path
 import sys
@@ -80,20 +81,38 @@ def exit_code(report: dict) -> int:
     return {'pass': 0, 'fail': 1, 'inconclusive': 2}[report['status']]
 
 
-def audit(scope: str, attempts: int, interval: int, workers: int) -> dict:
+def audit(scope: str, attempts: int, interval: int, workers: int,
+          only: list[str] | None = None) -> dict:
     all_targets = check_live.targets()
     if scope == 'priority':
         missing = [route for route in PRIORITY if route not in all_targets]
         if missing:
             raise ValueError('Priority release targets are not registered: ' + ', '.join(missing))
     targets = {route: all_targets[route] for route in PRIORITY} if scope == 'priority' else all_targets
+    if only:
+        if len(only) != len(set(only)):
+            raise ValueError('Duplicate --only route')
+        unknown = [route for route in only if route not in targets]
+        if unknown:
+            raise ValueError('Unknown selected release route: ' + ', '.join(unknown))
+        targets = {route: targets[route] for route in only}
     pending = dict(targets)
     failures = {}
+    verified = {}
     for index in range(attempts):
         with ThreadPoolExecutor(max_workers=workers) as pool:
             results = list(pool.map(lambda item: (item[0], *check_live.check(*item)), pending.items()))
         for route, passed, message in results:
             if passed:
+                # This is a completed status-bearing GET and exact-byte
+                # comparison from check_live.check(), not a cached HTML extract.
+                expected_status, expected_body = targets[route]
+                verified[route] = {
+                    'http_status': expected_status,
+                    'source_sha256': sha256(expected_body).hexdigest(),
+                    'verified_attempt': index + 1,
+                    'evidence': message,
+                }
                 pending.pop(route)
                 failures.pop(route, None)
             else:
@@ -111,8 +130,10 @@ def audit(scope: str, attempts: int, interval: int, workers: int) -> dict:
     inconclusive = sorted(route for route, message in failures.items()
                           if classify_failure(message) == 'inconclusive')
     state = 'fail' if observed else ('inconclusive' if inconclusive else 'pass')
-    return {'scope': scope, 'status': state, 'total': len(targets),
-            'passed': len(targets) - len(pending), 'failed': len(pending),
+    return {'scope': scope, 'selection': 'explicit' if only else scope,
+            'status': state, 'total': len(targets),
+            'passed': len(verified), 'failed': len(pending),
+            'verified_routes': {route: verified[route] for route in sorted(verified)},
             'observed_failed': len(observed), 'inconclusive_count': len(inconclusive),
             'observed_failure_routes': observed, 'inconclusive_routes': inconclusive,
             'failures': failures, 'transport_diagnostics': diagnostics,
@@ -125,9 +146,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--attempts', type=int, choices=range(1, 5), default=2)
     parser.add_argument('--interval', type=int, choices=range(0, 11), default=2)
     parser.add_argument('--workers', type=int, choices=range(1, 5), default=2)
+    parser.add_argument('--only', action='append', metavar='/PATH',
+                        help='Check only named registered routes; repeat to select multiple')
     args = parser.parse_args(argv)
     try:
-        report = audit(args.scope, args.attempts, args.interval, args.workers)
+        report = audit(args.scope, args.attempts, args.interval, args.workers,
+                       only=args.only)
     except ValueError as exc:
         parser.error(str(exc))
     print(json.dumps(report, sort_keys=True, indent=2))
