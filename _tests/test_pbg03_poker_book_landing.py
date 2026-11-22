@@ -84,7 +84,9 @@ class PokerBookLandingTests(unittest.TestCase):
         self.assertEqual(audit_problems(html), [])
         for token in ("poker-book-hero-lead", "poker-book-hero-actions",
                       "poker-book-hero-outcomes", "poker-book-hero-evidence"):
-            self.assertEqual(html.count('class="' + token + '"'), 1)
+            self.assertEqual(
+                len(re.findall(r'class="[^"]*\\b' + re.escape(token) + r'\\b[^"]*"', html)),
+                1)
         self.assertLess(html.index('class="page-hero shell poker-book-hero"'),
                         html.index('class="shell book-reader-jumps"'))
         self.assertLess(html.index('id="poker-book-amazon-cta"'),
