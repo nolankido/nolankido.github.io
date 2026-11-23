@@ -1611,3 +1611,45 @@ Playbook card's `hidden` attribute; these assertions remain unexecuted
 until the full matching checkout runs Playwright.
 No full mobile viewport audit, exact-byte publication receipt,
 owner Search Console data or AI assistant visibility result is claimed.
+
+## Turn 88: test an AI-written public notice without transferring human approval
+
+The existing `/books/` catalog now gives the author-supplied third title,
+*AI Works, Human Decides*, one original case at
+`#ai-works-decision-lab` and an accessible answer reveal at
+`#ai-works-decision-answer`. The case is a constructed, not actual,
+AI-written notice with five independent review faults: wrong Friday
+start time; inflated seats available; unapproved walk-in assumption;
+unverified wheelchair-accessibility guarantee; and unauthorized
+automatic publication. The only arithmetic is **24 capacity minus 18
+confirmed = six unreserved places at the Tuesday 2:00 p.m. snapshot**.
+The count is not guaranteed to be current when the text is read.
+The answer explicitly retains an authorized organizer's final review
+and prohibits private attendee data in unapproved tools.
+
+The matching blank original worksheet lives at
+`downloads/ai-human-decision-review-worksheet.md`. It is registered
+as an exact-byte public GET target in `_scripts/check_live.py`.
+The existing Technology hub `#ai-works-human-decides` also links to
+the exercise and worksheet. Keep `_source/books/index.html` byte-identical
+to `books/index.html` and the specific Technology paragraph identical
+in `_source/technology/home.html` and `technology/index.html`.
+These changes are current-day (November 22, 2026) original teaching
+additions. Preserve the existing Books catalog canonical and modification
+date, 2-item Book schema, 2 full author book pages, supplementary third
+author-provided Kindle link and all retailer verification caveats.
+Never claim this is a verified book passage, actual AI model test,
+measured productivity trial, real workshop, authorization to publish
+or an independently validated Amazon retail listing.
+
+Run `_tests/test_turn88_ai_human_decision_lab.py`, the original Books
+retailer-provenance and exercise tests, `_scripts/build_books.py --check`,
+`_scripts/build.py --check`, search snapshot, HTML5 and internal link
+checks from a complete local checkout. The Turn 88 test module is in
+`_scripts/local_release_checks.py`, with ten static/regression methods
+plus a deterministic Technology output parity assertion. Test browser
+reveal, keyboard, mobile layout and the public exact-byte resources
+separately before calling the release fully verified. An authenticated
+source readback proves file provenance, not real search impressions or
+live deployment. No Github Actions, cron, paid model call, or
+outside monitoring dependency.
