@@ -2052,3 +2052,51 @@ cannot clone the complete GitHub repository. Use a matching checkout
 and existing build, HTML5, search snapshot, link and exact deployed
 byte receipt check. Never add GitHub Actions, CI/CD, cron, paid
 services, or unsupported SEO/GEO rankings.
+
+## Turn 97: eliminate optimization-dependent false PASS in fixed frequency verifier
+
+The original public fixed-case `downloads/poker-opponent-frequency-verify.py`
+was verified **byte-for-byte** against the authenticated GitHub blob
+`1e9bff30a40c0481ecf182692adb2400c162ab2a` in a local
+Python 3.13 fixture. Its old `self_test()` relied on 27 Python
+`assert` statements. Python drops these statements under `-O`
+and `-OO`. This is an observed release-check defect, not a
+hypothetical style concern: an intentionally corrupted Wilson
+expected value failed in ordinary Python but incorrectly printed
+`PASS` with `python -O`.
+
+In Turn 97, replace exactly those 27 optimization-elidable
+assertions with `require(condition, expression)` calls. The
+helper explicitly raises `AssertionError` when a fixed model
+invariant fails, regardless of Python optimization flags, and
+identifies the failing expression in its message. Preserve the
+original expected values, original output JSON schema, rejection
+of invalid success/opportunity counts, and the existing no-input
+`--self-test` / `--json` CLI. No new mathematical case, user
+input, solver, external dependency, network, storage, tracking,
+page, sitemap or canonical is needed.
+
+The exact tested new Git blob is
+`5d89ae2404caad80005e71dd508ba6498fdef690`. A local
+regression suite matching `_tests/test_turn97_optimized_frequency_self_test.py`
+at blob `002609e6a58160ca66bb14b5e5aaa99fe0845764`
+has seven executable standalone checks, all **passed**:
+ordinary/`-O`/`-OO` fixed CLI self-tests; JSON parity; two
+independently corrupted expected-value mutations that fail
+under every optimization mode; AST inspection proving no
+optimization-elidable `assert`; direct helper failure; and
+existing safe standard-library imports. Three further full-site
+integration checks were authored but NOT executed without the
+complete repository checkout. Preserve Turn 95 and Turn 96 test
+registrations, add Turn 97 to the existing manual-only runner,
+and run the original exact bytes in a complete checkout before
+claiming all repository checks pass.
+
+This is a program correctness and provenance fix, not an SEO
+outcome: the prior guide and workbook were already available
+at their original URLs; the previously unreliable Python
+download fetch must not be called a confirmed HTTP 404 without
+an HTTP-status-bearing observation. The GitHub Pages public
+code release and full exact-byte live GET receipt remain
+distinct from the GitHub merge. No GitHub Actions, cron,
+CI service, paid API or unattended automation may be added.
