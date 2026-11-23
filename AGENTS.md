@@ -2214,3 +2214,65 @@ Stud8/Razz runtime conservation guard next. Source parity
 and a GitHub merge do not prove that the public downloadable
 file is serving its new bytes. Use existing exact-byte
 public checks and no Actions.
+
+## Turn 100: optimized Stud8 and Razz awards must conserve every eligible pot
+
+The existing free `downloads/poker-stud8-razz-seven-card-check.py`
+fixed seven-card Stud eight-or-better and Razz examples previously
+used `assert sum(results.values()) == pot` in each of its two
+**runtime award functions**. Under Python `-O` and `-OO`,
+those checks were skipped, as were 25 independent fixed-card,
+low-qualifier, scoop, quarter, tie, bring-in and card-removal
+assertions in `verify()`. The original exact GitHub blob
+`f191ea8134cfc2b6d515b59221b57695e06cc642` was reconstructed
+and authenticated with a local Git blob hash before any changes.
+
+Turn 100 replaces both runtime pot-conservation assertions with
+explicit `ArithmeticError` checks on the sum of rational awards.
+A modified function cannot return nonconserving split shares merely
+because the caller uses optimized Python or imports the module.
+It replaces the other 25 assertions with labelled
+`require(condition, case)` calls that raise `AssertionError`.
+The corrected Git blob
+`9c9f3386097445946c9b76a79c6e7b6848edf7b2`
+preserves all original card scoring, showdowns, `Fraction`
+accounting, validation, no-network standard-library dependencies,
+CLI options, URL and displayed outputs. No cards, ranges or
+real opponent information were added.
+
+Eleven standalone tests in
+`_tests/test_turn100_stud8_razz_optimized.py`, source Git blob
+`31ac262a1b8c9aeea81e3b9ff377010895adec6f`,
+were executed and passed against those exact source bytes.
+The unchanged standard CLI output and self-test output are
+verified by SHA-256 snapshots against the original published
+program. Normal, `-O` and `-OO` all pass the valid cases.
+Three deliberately corrupted cases, a wheel rank and both
+independent award functions, each fail under all modes. The
+award mutations were exercised through imported function
+calls, not just the `__main__` self-test path. Odd-value
+pots continue to conserve exact `Fraction` shares. The AST
+contains zero `ast.Assert` nodes; the 25 fixed checks remain
+present.
+
+Three additional site-integration checks are authored but
+not run in the isolated container, which lacks a complete
+GitHub checkout. They verify the original guide's link and
+canonical, a single registered public download target,
+the unchanged sitemap and the no-GitHub-Actions rule.
+Register the tests in the existing manual-only
+`_scripts/local_release_checks.py`. Retain the original
+`_tests/test_poker_stud8_razz.py` module, and do not
+claim the full original module or site builder passed
+until they run in a matching complete checkout.
+The page and workbook content, sitemap, Poker Finder and
+other releases stay unchanged.
+
+The only unresolved optimizer-elidable poker enumerator
+fixtures in the earlier audit are
+`poker-plo-flush-pair-enumerator.py` and
+`poker-plo-wrap-enumerator.py`; address them independently
+with failure-injection and optimized interpreter tests.
+A merged GitHub blob proves repository state, not the exact
+publicly served download bytes or any search-traffic outcome.
+Do not add GitHub Actions, cron, CI providers or paid APIs.
