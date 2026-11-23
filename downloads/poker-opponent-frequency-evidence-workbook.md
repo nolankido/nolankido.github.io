@@ -36,6 +36,7 @@ This invented record does not show position, action sequence details, stack dept
 5. A different *fictional* sample has 8 reraises in 40 eligible opportunities. What is its observed rate? Which sample should generally give a narrower binomial-model interval? _______________________.
 6. If the player has zero reraises in 12 eligible opportunities, is their true rate proved to be zero? _______________________.
 7. Under the explicitly assumed Beta(6,24) prior below, how does observing 3 successes and 9 failures change the prior? _______________________.
+8. In the two-player position-mix example below, which fictional player has the higher observed 3-bet rate within each position group, and which has the higher overall rate? Explain the reversal. _______________________.
 
 ## 3. An interval is not a player read
 
@@ -65,7 +66,28 @@ Under that stipulated convention, the conditional continuation-bet observation i
 
 A statistic also needs its **time window**, **eligibility rule**, **position or action conditioning**, **data source**, and **permission to collect or use that data**. Do not record identifying third-party information just to complete this worksheet. Treat missing opportunity counts as unknown rather than substituting dealt hands.
 
-## 6. Blank, private evidence record
+## 6. The aggregate can reverse: a fictional position-mix trap
+
+Even correctly defined **eligible opportunities** can be distributed differently across situations. Suppose two entirely **fictional** players have these observed 3-bet counts. Both use the same conditional opportunity definition within each position group, but the groups are not distributed equally across the players. The group names describe where the hypothetical player was seated when the opportunity arose, not the opener's position.
+
+| Eligible opportunity group | Fictional player A | Fictional player B | Who has the higher observed rate? |
+| --- | ---: | ---: | --- |
+| Earlier-position opportunity | 3 / 30 = **10%** | 1 / 20 = **5%** | A |
+| Later-position opportunity | 8 / 20 = **40%** | 21 / 60 = **35%** | A |
+| All eligible opportunities pooled | 11 / 50 = **22%** | 22 / 80 = **27.5%** | B |
+
+This is an example of **Simpson's paradox**, a reversal that can arise when data from distinct groups are combined. Player A has a higher *observed sample rate* in **both** position groups, yet Player B has a higher *pooled observed sample rate*. There is no arithmetic contradiction. A encountered 30 earlier-position opportunities and 20 later ones; B encountered only 20 earlier-position opportunities but 60 later ones. The players faced different mixes.
+
+For a separate, clearly hypothetical **equal-position-mix comparison**, give each group's observed sample rate 50% weight for each player:
+
+- A: (10% + 40%) / 2 = **25% standardized observed rate**.
+- B: (5% + 35%) / 2 = **20% standardized observed rate**.
+
+The ordering reverses again under this *chosen* common weighting. Neither the pooled nor the standardized calculation estimates an actual opponent's true chance to 3-bet in the next hand. A 50/50 mixture is just a teaching choice, not a verified real-world position distribution or an adjustment that establishes causality. Other factors such as opponent opening position, stack depth, tournament stage, bet sizing and selection into the observed opportunities remain unmeasured. The sample counts are also small enough that neither within-group difference is proof of a true behavioral difference.
+
+**Practice:** Before looking at the answers, compute 11/50 and 22/80 from the four cells. Then compute the two 50/50 weighted comparisons. What happens if the opponent or event changes the composition of future eligible opportunities? The aggregate sample percentage need not travel with it. Preserve denominators **and** relevant conditioning labels.
+
+## 7. Blank, private evidence record
 
 | Question | Your post-session notes |
 | --- | --- |
@@ -84,7 +106,7 @@ A statistic also needs its **time window**, **eligibility rule**, **position or 
 
 Leave fields blank when unknown. Use this only for authorized post-session study; the worksheet contains no submission fields and never requires a real opponent's identity.
 
-## 7. Reveal and audit the fixed example answers
+## 8. Reveal and audit the fixed example answers
 
 1. **3 / 12 = 25%.** The denominator is eligible 3-bet opportunities.
 2. **3 / 50 = 6%** counts reraises per dealt hand, not per eligible reraise opportunity.
@@ -93,7 +115,8 @@ Leave fields blank when unknown. Use this only for authorized post-session study
 5. **8 / 40 = 20%**. Under the common-probability binomial model, its Wilson interval, about **10.5% to 34.8%**, is narrower than the **8.9% to 53.2%** interval for 3 / 12.
 6. **No.** Even **0 / 12** has a Wilson upper endpoint of roughly **24.2%** under the stipulated model.
 7. Beta(6+3, 24+9) = **Beta(9,33)**. Posterior mean = 9/42 = **21.43%**. The alternative Beta(1,1) prior gives Beta(4,10) with mean **28.57%**.
+8. **Within each fictional position group A has the higher observed rate**: 10% versus 5% earlier, and 40% versus 35% later. **Overall B is higher**, 27.5% versus 22%, because B had many more later-position opportunities. With a *hypothetical* 50/50 group weighting, A is 25% and B is 20%. This is a composition effect in the constructed data, not proof about real players, causal position effects or future hands.
 
-**Further check:** Run the [fixed-case Python verifier](https://nolankido.com/downloads/poker-opponent-frequency-verify.py) with \`python poker-opponent-frequency-verify.py --self-test\` or \`--json\`. It uses only Python's standard library; it does not request data or advise on real hands. The verifier reports the same fictional Wilson and Beta results and rejects invalid counts.
+**Further check:** Run the [fixed-case Python verifier](https://nolankido.com/downloads/poker-opponent-frequency-verify.py) with `python poker-opponent-frequency-verify.py --self-test` or `--json`. It uses only Python's standard library; it does not request data or advise on real hands. The verifier reports the same fictional Wilson and Beta results, the stratified-rate reversal and its 50/50 standardized comparison, and rejects invalid counts.
 
 **Editorial boundary:** This is a separate, original companion to the already published [Poker Under Uncertainty](https://nolankido.com/poker/poker-under-uncertainty/#frequencies) guide, not a copied book chapter, real HUD export, population statistic or strategy recommendation. Prepared with AI assistance. The mathematical method is conditional on the model, and the underlying game information remains unknown.
