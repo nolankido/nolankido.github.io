@@ -29,6 +29,46 @@ def observed_rate(successes: int, eligible: int) -> Fraction:
     return Fraction(successes, eligible)
 
 
+
+def opportunity_mix_report() -> dict:
+    """One fictional Simpson reversal, with independently counted position groups."""
+    counts = {
+        "A": {"earlier": (3, 30), "later": (8, 20)},
+        "B": {"earlier": (1, 20), "later": (21, 60)},
+    }
+    raw = {}
+    for player, groups in counts.items():
+        a, b = groups["earlier"], groups["later"]
+        early = observed_rate(*a)
+        late = observed_rate(*b)
+        overall = observed_rate(a[0] + b[0], a[1] + b[1])
+        equal_mix = (early + late) / 2
+        raw[player] = {
+            "earlier": {"successes": a[0], "opportunities": a[1], "observed_rate": percent(float(early))},
+            "later": {"successes": b[0], "opportunities": b[1], "observed_rate": percent(float(late))},
+            "pooled": {
+                "successes": a[0] + b[0],
+                "opportunities": a[1] + b[1],
+                "observed_rate": percent(float(overall)),
+            },
+            "equal_position_mix_observed_rate": percent(float(equal_mix)),
+        }
+    a_earlier, b_earlier = (observed_rate(*counts[player]["earlier"]) for player in ("A", "B"))
+    a_later, b_later = (observed_rate(*counts[player]["later"]) for player in ("A", "B"))
+    a_pooled = observed_rate(11, 50)
+    b_pooled = observed_rate(22, 80)
+    if not (a_earlier > b_earlier and a_later > b_later
+            and a_pooled < b_pooled
+            and (a_earlier + a_later) / 2 > (b_earlier + b_later) / 2):
+        raise AssertionError("The fixed opportunity mix must demonstrate a genuine reversal")
+    return {
+        "scope": "Constructed two-group observation; no real players, causal inference or future rate",
+        "A": raw["A"],
+        "B": raw["B"],
+        "interpretation": "A higher observed rate in each group, B higher pooled, A higher under a hypothetical 50/50 common mix",
+    }
+
+
 def wilson_interval(successes: int, eligible: int) -> tuple[float, float]:
     p = float(observed_rate(successes, eligible))
     d = 1 + Z * Z / eligible
@@ -121,6 +161,7 @@ def report() -> dict:
             "conditional_rate": percent(float(observed_rate(7, 8))),
             "invalid_as_conditional_rate": percent(float(Fraction(7, 30))),
         },
+        "position_mix_reversal": opportunity_mix_report(),
         "limitations": [
             "Opportunity definitions and eligibility may vary by tracker",
             "Observations may differ by position, stack, prior action and game",
@@ -148,6 +189,18 @@ def self_test() -> None:
     assert r["fictional_beta_prior"]["alternative_posterior_mean"] == "28.57%"
     assert r["other_denominator_trap"]["conditional_rate"] == "87.5%"
     assert r["other_denominator_trap"]["invalid_as_conditional_rate"] == "23.3%"
+    mix = r["position_mix_reversal"]
+    assert mix["A"]["earlier"]["observed_rate"] == "10.0%"
+    assert mix["B"]["earlier"]["observed_rate"] == "5.0%"
+    assert mix["A"]["later"]["observed_rate"] == "40.0%"
+    assert mix["B"]["later"]["observed_rate"] == "35.0%"
+    assert mix["A"]["pooled"] == {"successes": 11, "opportunities": 50, "observed_rate": "22.0%"}
+    assert mix["B"]["pooled"] == {"successes": 22, "opportunities": 80, "observed_rate": "27.5%"}
+    assert mix["A"]["equal_position_mix_observed_rate"] == "25.0%"
+    assert mix["B"]["equal_position_mix_observed_rate"] == "20.0%"
+    assert observed_rate(3, 30) > observed_rate(1, 20)
+    assert observed_rate(8, 20) > observed_rate(21, 60)
+    assert observed_rate(11, 50) < observed_rate(22, 80)
     assert abs(beta_cdf(beta_quantile(0.025, 9, 33), 9, 33) - 0.025) < 1e-10
     assert abs(beta_cdf(beta_quantile(0.975, 9, 33), 9, 33) - 0.975) < 1e-10
     for invalid in ((4, 3), (-1, 12), (1, 0), (1.5, 12), (True, 12)):
@@ -181,7 +234,7 @@ def main() -> int:
         data = report()
         print("Small-sample poker evidence workbook: all data are fictional")
         for key in ("initial_opportunities", "comparison", "zero_successes",
-                    "fictional_beta_prior", "other_denominator_trap"):
+                    "fictional_beta_prior", "other_denominator_trap", "position_mix_reversal"):
             print(key + ": " + json.dumps(data[key], sort_keys=True))
         print("Not a live opponent model, eligible-hand tracking tool or action recommendation.")
     return 0
