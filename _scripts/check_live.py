@@ -145,7 +145,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['assets/practical-ai-navigation.css', 'downloads/poker-beginner-study-card.txt', 'assets/poker-beginner-path.css']
     assets += ['downloads/poker-beginner-checkpoint.txt', 'assets/poker-comics.css']
     assets += [p.relative_to(root).as_posix() for p in sorted((root / 'assets/poker/comics').glob('*')) if p.is_file()]
-    assets += ['assets/poker-uncertainty.css', 'downloads/poker-under-uncertainty-reproduce.py', 'downloads/poker-under-uncertainty-evidence.json']
+    assets += ['assets/poker-uncertainty.css', 'downloads/poker-under-uncertainty-reproduce.py', 'downloads/poker-under-uncertainty-evidence.json',
+               'downloads/poker-opponent-frequency-evidence-workbook.md', 'downloads/poker-opponent-frequency-verify.py']
     assets += ['assets/poker-session.css', 'downloads/poker-first-session.md']
     assets += ['assets/poker-budget.css', 'downloads/poker-tournament-trip-budget.md']
     assets += ['assets/poker-discovery.css']
