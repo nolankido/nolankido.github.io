@@ -77,8 +77,11 @@ def omaha_high(holes: tuple[str, ...], board: tuple[str, ...]) -> tuple[int, ...
 
 def four_card_flush_holdings(hero: tuple[str, ...]) -> dict[str, int]:
     """Count uniform four-card rival deals on a three-spade flop."""
+    if len(hero) != 4:
+        raise ValueError('PLO blocker count needs exactly four private cards')
     unseen = remaining(hero, MONOTONE_FLOP)
-    assert len(unseen) == 45
+    if len(unseen) != 45:
+        raise ArithmeticError('PLO flop fixture must leave exactly 45 unseen cards')
     flush_hands = 0
     ace_flush_hands = 0
     for rival in combinations(unseen, 4):
@@ -101,34 +104,40 @@ def faceup_rivers(hero: tuple[str, ...], rival: tuple[str, ...]) -> dict[str, tu
     return {key: tuple(cards) for key, cards in outcomes.items()}
 
 
+def require(condition: bool, case: str) -> None:
+    """Preserve fixed-case checks when Python runs with -O or -OO."""
+    if not condition:
+        raise AssertionError('PLO flush/pair fixed check failed: ' + case)
+
+
 def verify() -> None:
     # Two-hole restriction prevents an ace-spade-only flush on the monotone flop.
-    assert omaha_high(ACE_BLOCKER_HERO, MONOTONE_FLOP)[0] != 5
-    assert omaha_high(SET_HERO, TURN_BOARD) == (5, 14, 13, 12, 8, 3)
-    assert omaha_high(SET_RIVAL, TURN_BOARD)[0] == 3
-    assert high_five(('As', '2h', '3d', '4c', '5s')) == (4, 5)
-    assert high_five(('As', '2s', '3s', '4s', '5s')) == (8, 5)
-    assert high_five(('Qh', 'Qd', 'Qs', '8s', '8d'))[0] == 6
+    require((omaha_high(ACE_BLOCKER_HERO, MONOTONE_FLOP)[0] != 5), 'one private spade cannot form Omaha flush')
+    require((omaha_high(SET_HERO, TURN_BOARD) == (5, 14, 13, 12, 8, 3)), 'hero nut flush rank on turn')
+    require((omaha_high(SET_RIVAL, TURN_BOARD)[0] == 3), 'set rival hand rank on turn')
+    require((high_five(('As', '2h', '3d', '4c', '5s')) == (4, 5)), 'wheel straight high')
+    require((high_five(('As', '2s', '3s', '4s', '5s')) == (8, 5)), 'wheel straight flush high')
+    require((high_five(('Qh', 'Qd', 'Qs', '8s', '8d'))[0] == 6), 'paired board full house rank')
     blocker = four_card_flush_holdings(ACE_BLOCKER_HERO)
     no_blocker = four_card_flush_holdings(NO_SPADE_HERO)
-    assert blocker == {'all': 148995, 'flush': 25830, 'ace_flush': 0}
-    assert no_blocker == {'all': 148995, 'flush': 31185, 'ace_flush': 6699}
-    assert len([card for card in remaining(ACE_BLOCKER_HERO, MONOTONE_FLOP) if card[1] == 's']) == 9
-    assert len([card for card in remaining(NO_SPADE_HERO, MONOTONE_FLOP) if card[1] == 's']) == 10
+    require((blocker == {'all': 148995, 'flush': 25830, 'ace_flush': 0}), 'ace blocker exact flush deal counts')
+    require((no_blocker == {'all': 148995, 'flush': 31185, 'ace_flush': 6699}), 'no spade blocker exact flush deal counts')
+    require((len([card for card in remaining(ACE_BLOCKER_HERO, MONOTONE_FLOP) if card[1] == 's']) == 9), 'ace blocker remaining spades')
+    require((len([card for card in remaining(NO_SPADE_HERO, MONOTONE_FLOP) if card[1] == 's']) == 10), 'no blocker remaining spades')
 
     set_case = faceup_rivers(SET_HERO, SET_RIVAL)
-    assert len(set_case['rival']) == 9 and len(set_case['hero']) == 31 and not set_case['tie']
-    assert set(set_case['rival']) == {'Qc', '8c', '8d', '8h', '3c', '3d', '3h', '7c', '7s'}
+    require((len(set_case['rival']) == 9 and len(set_case['hero']) == 31 and not set_case['tie']), 'set rival nine winning rivers')
+    require((set(set_case['rival']) == {'Qc', '8c', '8d', '8h', '3c', '3d', '3h', '7c', '7s'}), 'set rival exact nine winning river cards')
     baseline = faceup_rivers(NO_SEVEN_BLOCK_HERO, SET_RIVAL)
-    assert len(baseline['rival']) == 10 and len(baseline['hero']) == 30 and not baseline['tie']
-    assert set(baseline['rival']) - set(set_case['rival']) == {'7h'}
+    require((len(baseline['rival']) == 10 and len(baseline['hero']) == 30 and not baseline['tie']), 'unblocked rival ten winning rivers')
+    require((set(baseline['rival']) - set(set_case['rival']) == {'7h'}), 'seven blocker removes exactly one river')
     pair_case = faceup_rivers(SET_HERO, ONE_QUEEN_RIVAL)
-    assert len(pair_case['rival']) == 0 and len(pair_case['hero']) == 40 and not pair_case['tie']
+    require((len(pair_case['rival']) == 0 and len(pair_case['hero']) == 40 and not pair_case['tie']), 'single queen rival has no winning river')
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--self-test', action='store_true', help='Assert every published fictional count')
+    parser.add_argument('--self-test', action='store_true', help='Verify every published fictional count')
     args = parser.parse_args()
     verify()
     for label, hero in (('Ace-spade blocker', ACE_BLOCKER_HERO),
