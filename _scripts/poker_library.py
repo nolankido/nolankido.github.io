@@ -1,7 +1,6 @@
 """Static Poker discovery and reader metadata. No third-party dependencies."""
 from html import escape
-from html.parser import HTMLParser
-from math import ceil
+from poker_read_time import PlainText, minutes
 from pathlib import Path
 from datetime import datetime
 import json
@@ -14,23 +13,6 @@ import poker_resources
 TOPICS = {'study': 'Learning resources', 'cash': 'Cash-game study', 'variants': 'Other poker games', 'research': 'Poker research', 'basics': 'Learn the basics', 'hands': 'Read a hand', 'tournaments': 'Tournament study',
           'live': 'Live tournament preparation', 'practice': 'Try a decision', 'results': 'Results and review', 'creative': 'Make a vlog'}
 LEVELS = {'Start here', 'Build understanding', 'Go deeper', 'Practice', 'Creator workflow'}
-
-class PlainText(HTMLParser):
-    def __init__(self, source):
-        super().__init__(convert_charrefs=True)
-        self.parts = []; self.ignored = 0
-        self.feed(source)
-    def handle_starttag(self, tag, attrs):
-        if tag in ('script', 'style'): self.ignored += 1
-    def handle_endtag(self, tag):
-        if tag in ('script', 'style'): self.ignored = max(0, self.ignored - 1)
-    def handle_data(self, value):
-        if not self.ignored: self.parts.append(value)
-
-def minutes(source):
-    """Editorial estimate, not a measured reader speed; include disclosure answers."""
-    clean = re.sub(r'\$\{[a-z_]+\}', '', ' '.join(PlainText(source).parts))
-    return max(1, ceil(len(clean.split()) / 225))
 
 def load(root, pages):
     data = json.loads((root / '_source/poker/library.json').read_text(encoding='utf-8'))

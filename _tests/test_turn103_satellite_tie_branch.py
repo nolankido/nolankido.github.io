@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source/poker/satellite-bubble-seat-equity.html'
 PUBLIC = ROOT / 'poker/satellite-bubble-seat-equity/index.html'
 NAV_LINK = '<a href="#sat-tie-branch">Include split pots</a>'
-BRANCH = re.compile(r'<details class="poker-details" id="sat-tie-branch">.*?</details>', re.S)
+BRANCH = re.compile(r'<details class="poker-details" id="sat-tie-branch" data-reading-optional="true">.*?</details>', re.S)
 FOLD = (11, 9, 1)
 WIN = (0, 20, 1)
 TIE = (10, 10, 1)

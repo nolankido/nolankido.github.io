@@ -2469,3 +2469,39 @@ site suite, three new site-integration checks, complete builder,
 search snapshot, and public exact-byte receipt remain outstanding.
 Register the module in the existing manual-only release runner.
 No new Actions, CI, tracking, scheduled automation or paid service.
+
+## Turn 105: multiway side-pot ICM worksheet and explicit optional reading time
+
+The existing `/poker/tournament-equity/` guide links the original
+`downloads/poker-multiway-icm-workbook.md` and its standalone standard-library
+`downloads/poker-multiway-icm-verify.py`. The fixed fictional 4/14/9 BB,
+$70/$30/$0 case compares an additional 5 BB call with folding after 4 BB
+is already committed. The joint rank distribution is 10% H > Y > X,
+30% X > H > Y and 60% X > Y > H; other ranks have zero mass here.
+Fold/refund and call/main/side ledgers conserve 27 BB. The stipulated
+simultaneous-bust ordering awards Y second and X third when H wins
+everything. This is an assumption of the toy event. H's expected
+remaining chips increase from 10 to 51/5, but ordinary modeled
+prize equity decreases from $11312/297 to $5366/153, a difference
+of -$15226/5049. No real-hand or universal calling recommendation.
+
+The Turn 103 satellite tie and Turn 104 mystery-bounty examples remain
+intact. Their native disclosures now use `data-reading-optional="true"`
+and visible extra-reading-time labels. The dependency-free
+`_scripts/poker_read_time.py` estimator, imported by the existing
+poker_library module, counts ordinary disclosure answers but excludes
+only explicitly marked optional details, including nested content.
+Keep the existing 225 words/minute convention and the library's visible
+policy explanation. Do not exclude ordinary answers or unmarked core
+prose merely to preserve stale metadata. The existing guide core
+estimates are 7, 14 and 15 minutes respectively.
+
+Thirteen standalone tests in
+`_tests/test_turn105_multiway_icm_workbook.py` executed and passed.
+The exact four new tested source files match GitHub. Four new site
+integration methods, complete build/search/browser checks and exact
+public byte receipts remain pending a complete checkout. Both downloads
+are registered in the existing local release inventory. Retain the
+prior Turn 103/104 regression tests, with their disclosure patterns
+updated to recognize the optional attribute. No new indexed page,
+sitemap entry, Actions, network dependency, tracking or paid service.
