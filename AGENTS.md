@@ -2437,3 +2437,35 @@ Register the new tests in the existing manual release runner.
 The original full-site build, search snapshot, integration tests,
 complete browser suite and exact live byte receipt remain
 pending until performed on a complete matching checkout.
+
+## Turn 104: conditional mystery-bounty inventory, not advertised jackpot
+
+The existing `/poker/bounty-knockout-equity/` guide now includes one native
+`details.poker-details#bounty-mystery-draw` advanced example, linked by
+"Mystery draw inventory" in its existing navigation. Insert identical markup
+before `#bounty-practice` in the authored and generated HTML. The scenario
+assumes six equally likely fictional envelopes, active bounty phase,
+one immediate cash draw per eligible elimination, and sampling without
+replacement. Awards: $50, $50, $50, $100, $100, $650. The total is $1,000
+and the conditional mean is $500/3. The artificial 2/5 draw-eligibility
+probability gives $200/3 expected cash and 1/15 jackpot chance. After the
+$650, $50, or $100 award is drawn, the next conditional mean is $70,
+$190, or $180 respectively. Two already-guaranteed draws have a $1,000/3
+expected total and a 1/3 chance to include the unique jackpot. Do not
+generalize to real event rules, unknown inventories, actual future
+eliminations, hand ranges, or a complete action EV.
+
+The existing eight practice questions, four tables, article dates,
+canonical, and index/sitemap files remain unchanged. Finder excludes
+nav and details elements; do not introduce another indexable article.
+The new static content uses no JavaScript, form, remote asset, or
+data collection. `_tests/test_turn104_mystery_bounty_inventory.py`
+contains six executed exact-math tests and three full-site tests.
+Its Git blob `8eb4263260fac871047898e55fa0e2391d0c54d8` matches
+the local test fixture. Six math tests passed, the fragment markup
+check passed, and eight isolated Chromium viewport/JS-mode checks
+passed for keyboard access and zero requests/errors. The original
+site suite, three new site-integration checks, complete builder,
+search snapshot, and public exact-byte receipt remain outstanding.
+Register the module in the existing manual-only release runner.
+No new Actions, CI, tracking, scheduled automation or paid service.
