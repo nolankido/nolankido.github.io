@@ -53,9 +53,9 @@ def content_problems(html):
                                or a.get("min") != "0" or a.get("max") != "100"
                                or a.get("step") != ("0.5" if a.get("id") == "bluff-fold" else "1") for a in inputs):
         errors.append("Range control policy")
-    if len({x.get("for") for x in labels}) != 4 or (
-            {x.get("for") for x in labels} != {x.get("id") for x in inputs}):
-        errors.append("Input labels")
+    if len(labels) != 5 or (
+            {x.get("for") for x in labels} != {x.get("id") for x in inputs} | {"study-record"}):
+        errors.append("Input and read-only study record labels")
     if len([a for tag, a in tags if tag == "output"]) != 4:
         errors.append("Missing output labels")
     if len([a for tag, a in tags if a.get("role") == "status"]) != 3:
