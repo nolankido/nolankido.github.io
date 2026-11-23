@@ -2335,3 +2335,50 @@ Turn 98 through Turn 101 optimized-assert audit is
 contains 15 optimization-dependent checks. Address
 it separately with normal/optimized execution,
 fixed output preservation, and deliberate failures.
+
+## Turn 102: close the six-script optimized-Python poker verifier audit
+
+The final remaining script from the Turn 98 targeted audit,
+`downloads/poker-plo-wrap-enumerator.py`, had 15 ordinary
+Python `assert` statements inside `run_checks()`.
+The original source was reconstructed byte-for-byte from Git
+blob `efdc5d2e3f23d3428b9b9cee4e18e4201699789b`.
+Changing the original 14-completion blocker expectation to 13
+failed under ordinary Python, but incorrectly printed PASS under
+both `-O` and `-OO`. The exported `five_card_high()` helper
+also accepted impossible suits when called directly, returning
+a wheel straight flush for Ax, 2x, 3x, 4x, 5x.
+
+The exact replacement blob
+`e86b7281cc7ec3faa78ea2976164366f35003912` replaces all 15
+removable assertions with labelled `require(condition, case)`
+checks and invokes the existing physical-deck validation inside
+the five-card scorer. No original valid ranking, deck arithmetic,
+CLI output, function signature, dependency, URL, article source,
+sitemap, Finder entry, personal data use, or network access changes.
+Wrong rank, blocker-count and redraw-count expectations now
+fail under normal, `-O` and `-OO`, with named errors.
+
+`_tests/test_turn102_plo_wrap_optimized.py`, exact tested Git
+blob `68f46ccefc1efc506d86e97744dd6f0b4d69da79`, has ten
+PLO wrap standalone tests and two cross-script audit tests.
+All twelve executed and passed in the local matching fixture.
+The six audited scripts contain no AST Assert nodes; all six
+execute their self-tests successfully in ordinary Python,
+`-O` and `-OO`, with identical output within each script's
+three execution modes. This means the six-script targeted
+audit is closed at source and local-test level, not that
+every website download or all possible poker decisions are
+verified. The cross-evaluator check compares the wrap and
+flush/pair high scorers for both players on all 40 legal rivers.
+Register the new regression module in the existing manual
+release runner and retain previous individual tests.
+
+Three additional site-integration tests are authored but not
+run in the isolated local fixture. The original full PLO unit
+suite, full deterministic site build, links, browser checks,
+search snapshot and live exact-byte receipts remain pending
+until executed in a complete matching checkout. Keep the
+no-GitHub-Actions and no-new-paid-services constraints.
+Do not infer public deployment, SEO ranking or real-player
+performance from the successful standalone audit.
