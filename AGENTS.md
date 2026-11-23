@@ -1846,3 +1846,57 @@ Actual deployment must still be read on the live site and full
 source-to-live byte validation done with the manual release tools.
 Source parity and a zero-request local browser smoke alone do not
 establish real search traffic or measured study improvements.
+
+## Turn 93: full printable study record without a clipped textarea
+
+The existing `/downloads/poker-pot-odds-sensitivity-lab.html`
+has a real print defect in Turn 92: the read-only `#study-record`
+textarea contains 22 authored lines and wraps to about 1,223
+scroll pixels at 390px width, but its printed form-control box is only
+about 391 pixels tall. A local Chromium print PDF of the old exact
+HTML omitted the final `3. PURE BLUFF` study record and
+`UNVERIFIED` explanation. This is a verified reader problem,
+not an SEO hypothesis.
+
+For Turn 93 retain that same read-only, selectable textarea on
+screen and add **one** screen-hidden printable
+`<pre class="study-print" id="study-print" aria-hidden="true">`
+containing the exact same original static fictional note. The
+existing local `render()` assigns only `textContent` from the
+`#study-record` value to this mirror after every control or
+preset update. Do not use `innerHTML`, a clipboard API, storage,
+user inputs for real hands, network requests or any new tracking.
+With JavaScript disabled, the original static note and static
+print mirror remain identical. CSS hides the mirror on screen;
+print CSS hides the clipped textarea, shows a wrapping full-text
+mirror and allows the study section to span pages. Avoid clipping
+all printable content with a `break-inside:avoid` panel rule.
+
+Keep `_source/poker/pot-odds-sensitivity-lab.html` and public
+`downloads/poker-pot-odds-sensitivity-lab.html` identical; both
+should have Git blob SHA
+`d08b7b868a351a41bcd3ab603290e149fd6b4277` after this
+turn. The authoring and public HTML have the same original
+noindex policy, CSP, four fictional range inputs, four boundary
+presets, three announced model outputs, human study warnings,
+and source/worksheet links. Do not change the canonical Pot Odds
+Workshop, sitemap, Finder, published dates or registered download
+routes. No GitHub Actions, new CI, cron or external API.
+
+`_tests/test_turn93_full_print_record.py` includes eight new
+standalone tests, **all eight executed and passed locally** with
+the exact candidate HTML alongside eight existing Turn 92
+standalone tests. Three additional site-integrated checks require
+a complete local checkout; do not claim they passed. The local
+Chromium/PyMuPDF PDF reproduction verified a before/after:
+old print did not contain the final bluff/evidence lines, whereas
+new print contained the complete current note on four widths
+(320, 390, 768 and 1280 px) and with JavaScript disabled.
+A separate direct visual inspection confirmed that the study note
+spans page 3 and 4 without clipping and the final
+`UNVERIFIED` warning and footer remain readable.
+The existing `_tests/pot_odds_sensitivity_browser.py`
+must assert screen/print visibility, full note parity and no-JS
+fallback in the full checkout's Playwright suite.
+Complete local release tests and exact public byte checks remain
+pending if this site checkout is unavailable.
