@@ -121,6 +121,7 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += ['downloads/ten-bb-playbook-icm-verify.py',
                'downloads/ten-bb-tournament-checklist.md']
     assets += ['downloads/one-workflow-ai-pilot-worksheet.md',
+               'downloads/ai-human-decision-review-worksheet.md',
                'downloads/holdem-river-call-check-worksheet.md',
                'assets/book-reader-journey.css',
                'downloads/nolan-kido-book-edition-verification.md',
