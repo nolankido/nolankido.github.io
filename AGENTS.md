@@ -2004,3 +2004,51 @@ public GET byte targets in `_scripts/check_live.py`.
 No new GitHub Actions, CI, cron, paid API, tracker or scheduled service.
 Use source/output nav parity, the existing full deterministic build
 and search snapshot plus a live publication check after merge.
+
+## Turn 96: distinguish pooled opponent rates from position-conditioned rates
+
+The existing Turn 95 free workbook
+`downloads/poker-opponent-frequency-evidence-workbook.md`
+and its standard-library-only exact arithmetic companion
+`downloads/poker-opponent-frequency-verify.py`
+now include an original, fixed-case example of Simpson's paradox.
+For two *invented* players A and B with eligible 3-bet opportunities
+defined identically within each of two broad position groups:
+A earlier = 3/30 (10%), later = 8/20 (40%), pooled = 11/50 (22%);
+B earlier = 1/20 (5%), later = 21/60 (35%), pooled = 22/80 (27.5%).
+Thus A has a higher observed rate in each group, yet B has a higher
+pooled observed rate because the proportions of earlier and later
+opportunities differ. A chosen equal 50/50 group weighting gives A
+25% and B 20%. These are exact conditional arithmetic and do not
+establish causal position effects, the next-hand action, a true
+population tendency, or statistical significance. In particular,
+a standardization is not a verified real future opportunity mix.
+Never apply these conclusions to actual identifiable players,
+other game formats, in-play HUD tools or unmeasured opponent ranges.
+
+The workbook adds one explanatory section before its existing blank
+private evidence form, one new reader question and a fully reasoned
+answer. Existing source definitions, original 3/12 Wilson limits,
+Bayesian prior assumptions and the separate flop c-bet denominator
+trap are preserved. The new fixed-case verifier function
+`opportunity_mix_report()` uses `fractions.Fraction` for within-group,
+pooled and equal-mixture rates, rejecting a failure to obtain the
+intended reversal. Its fixed data are included in `--json` output,
+and additional exact assertions run from `--self-test`.
+No new imports, data entry, network, tracking, storage, solver,
+canonical page, sitemap entry or search-index content is introduced.
+No new or changed files occur in `_source/` or any generated HTML.
+The original public guide's two download links already went live
+on November 22.
+
+`_tests/test_turn96_position_mix_reversal.py` adds ten tests:
+seven script/worksheet/unit tests and three site-integration checks.
+It is registered in the existing manual-only
+`_scripts/local_release_checks.py` alongside Turn 95's earlier
+suite. The exact mathematical fractions were independently checked
+in a local Python runtime. This does **not** mean the full new
+verifier script or integration tests have run, because this runtime
+cannot clone the complete GitHub repository. Use a matching checkout
+and existing build, HTML5, search snapshot, link and exact deployed
+byte receipt check. Never add GitHub Actions, CI/CD, cron, paid
+services, or unsupported SEO/GEO rankings.

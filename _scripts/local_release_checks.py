@@ -206,6 +206,7 @@ def main() -> int:
         ('Turn 93 complete print record without clipped form controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn93_full_print_record.py', '-q']),
         ('Turn 94 restore the four original fictional poker lab settings', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn94_restore_lab_baseline.py', '-q']),
         ('Turn 95 fixed poker opponent-frequency denominators and uncertainty', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn95_poker_opponent_frequency.py', '-q']),
+        ('Turn 96 stratified 3-bet Simpson reversal and equal-mix evidence boundaries', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn96_position_mix_reversal.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
