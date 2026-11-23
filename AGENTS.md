@@ -1953,3 +1953,54 @@ build, exact live release bytes, rankings, traffic or real poker
 strategy. Use the existing manual
 `_scripts/local_release_checks.py --full --browser` plus public
 byte comparison from a complete checkout after merge.
+
+## Turn 95: original opponent-frequency denominator and sample-size practice
+
+The indexed `/poker/poker-under-uncertainty/` essay already explains
+eligible opportunity denominators, Wilson score intervals and a
+constructed Beta prior. The new separately authored,
+non-indexed-format `downloads/poker-opponent-frequency-evidence-workbook.md`
+turns the existing `#frequencies` worked example into a private,
+after-play worksheet, with a new standard-library-only verifier at
+`downloads/poker-opponent-frequency-verify.py`. The guide source and
+generated HTML now contain exactly one `nav.poker-jump` immediately
+after its original Wilson-interval statement, linking to both resources.
+No other article prose, CSS, publication/revision dates, structured
+metadata, sitemap or search records change. The native Poker Finder
+skips `<nav>`, so no 301-card index count or snippet should change.
+
+The **fictional** sample has 3 observed 3-bets / 12 eligible reraise
+opportunities = 25%, *not* 3 / 50 hands dealt = 6% as a conditional
+3-bet rate. The two-sided 95% Wilson interval is about 8.9% to
+53.2% for 3/12 and 10.5% to 34.8% for a separate 8/40 sample.
+With a purely illustrative Beta(6,24) prior, 3 successes and 9
+failures give Beta(9,33), posterior mean 21.43%, and an equal-tailed
+95% interval about 10.6% to 34.9%. A Beta(1,1) alternative yields
+Beta(4,10), mean 28.57%. These are **conditional statistical
+models**, not measured population tendencies, HUD output, ranges,
+win rates, software test results or action recommendations.
+Never claim that a Wilson confidence interval implies a 95%
+posterior probability, or omit the prior when stating the Bayesian
+credible interval. Do not replace unknown opportunity counts with
+all dealt hands, and do not apply the model when different actions,
+positions, stacks or selection rules make a single probability
+unreasonable. The worksheet also illustrates 7 c-bets / 8 eligible
+opportunities versus 7 / 30 flops seen, with explicit eligibility.
+
+`downloads/poker-opponent-frequency-verify.py` uses only standard
+library `argparse`, `fractions`, `math`, `statistics` and
+`json`; it accepts `--self-test` and `--json`, with fixed
+invented inputs only, no user data entry, filesystem IO, internet
+requests, solver, or at-table feedback. The results were
+independently recomputed with Python math before release, but
+**the new script and full regression suite must still be executed
+from a matching complete checkout** before claiming release tests
+passed. `_tests/test_turn95_poker_opponent_frequency.py`
+contains eleven source/integration checks, including a real
+subprocess test of both CLI modes and publishing/missing data
+boundaries. Register the test in the existing manual
+`_scripts/local_release_checks.py` and both downloads as exact
+public GET byte targets in `_scripts/check_live.py`.
+No new GitHub Actions, CI, cron, paid API, tracker or scheduled service.
+Use source/output nav parity, the existing full deterministic build
+and search snapshot plus a live publication check after merge.
