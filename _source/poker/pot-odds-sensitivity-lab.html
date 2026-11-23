@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Private, offline-capable after-play poker practice for three fixed fictional call, raise and bluff sensitivity models. No hand data is collected.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'">
+<title>Pot Odds Sensitivity Lab | Nolan Kido</title>
+<style>
+:root{color-scheme:light;--ink:#15231b;--muted:#3f5546;--red:#9d2535;--paper:#eef2ec;--white:#fff;--line:#b4c3b7;--soft:#f5f8f3}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-padding-top:1.5rem}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--ink);text-underline-offset:.21em}a:hover{color:var(--red)}a:focus-visible,input:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.skip{position:absolute;transform:translateY(-160%);left:10px;top:0;z-index:2;background:var(--ink);color:white;padding:10px}.skip:focus{transform:none}
+header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,footer{width:min(100% - 32px,920px);margin-inline:auto}
+.head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-block:14px}.brand{font-weight:800;text-decoration:none;letter-spacing:-.02em}.head nav{display:flex;gap:12px 20px;flex-wrap:wrap}.head a{min-height:42px;display:inline-flex;align-items:center}
+.wrap{padding-block:32px 55px}.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}h1,h2,h3{line-height:1.22;letter-spacing:-.025em;overflow-wrap:anywhere}h1{font-size:clamp(1.9rem,5vw,2.85rem);margin:.35rem 0 .75rem}h2{font-size:clamp(1.32rem,3vw,1.7rem);margin:0 0 12px}h3{font-size:1.07rem;margin:12px 0 8px}p{margin:0 0 14px}.intro{max-width:78ch}.limits{border-left:4px solid var(--red);padding:14px 18px;background:var(--white);margin:24px 0 30px}.limits p:last-child{margin-bottom:0}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:clamp(18px,4vw,28px);margin-block:16px;min-width:0}.model{color:var(--muted);font-size:.92rem}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr));gap:10px;margin:18px 0}.fact{padding:10px 12px;background:var(--soft);border:1px solid var(--line)}.fact dt{font-size:.77rem;color:var(--muted);font-weight:700}.fact dd{margin:1px 0 0;font-weight:800;font-variant-numeric:tabular-nums}
+.inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:18px}.input-row{min-width:0}.input-row label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-weight:650;margin-bottom:5px}.input-row output{font-weight:800;font-variant-numeric:tabular-nums}.input-row input{width:100%;height:32px;accent-color:var(--red);cursor:pointer}.input-row p{font-size:.82rem;color:var(--muted);margin:0}.result{margin:20px 0 0;border-top:2px solid var(--line);padding-top:15px;font-variant-numeric:tabular-nums}.result strong{font-size:1.08rem}.note{font-size:.89rem;color:var(--muted)}.reference{margin:22px 0 0;padding:16px;background:var(--soft);border:1px solid var(--line)}.reference summary{cursor:pointer;font-weight:800;min-height:38px}.reference p{margin-top:12px}ul{padding-left:1.25rem}li{margin-bottom:.55rem}footer{border-top:1px solid var(--line);padding-block:22px 38px;color:var(--muted);font-size:.87rem}
+@media(max-width:400px){.head,.wrap,footer{width:min(100% - 24px,920px)}.panel{padding:16px}.head{display:block}.head nav{margin-top:8px}.result strong{font-size:1rem}}
+@media print{body{background:white}.skip,.head nav,.inputs{display:none!important}.panel{break-inside:avoid;border-color:#999}.reference{background:white}.wrap{padding-top:0}.result{color:black}footer{padding:10px 0}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header><div class="head"><a class="brand" href="/poker/">Nolan Kido | Poker learning</a><nav aria-label="Related teaching"><a href="/poker/pot-odds-workshop/">Read the workshop</a><a href="/downloads/poker-pot-odds-sensitivity-workbook.md">Download the workbook</a></nav></div></header>
+<main id="main" class="wrap" tabindex="-1">
+<p class="eyebrow">Free after-play practice / Fixed fictional examples</p>
+<h1>Pot odds sensitivity lab</h1>
+<p class="intro">Change a hypothetical equity or fold-rate input and watch the conditional chip value move. The pot sizes are fixed from the original <a href="/poker/pot-odds-workshop/">Pot Odds Workshop</a>, so you can focus on one assumption at a time. Every calculation happens in this browser, with no external services or account.</p>
+<div class="limits"><p><strong>Scope:</strong> These three scenarios are fictional, heads-up, matched-pot chip models. They omit rake, future betting, side pots, bounties and payout-sensitive ICM. Equity and fold rates are <em>assumptions</em>, not opponent estimates or solved ranges. This tool is for study away from play, not at-table assistance.</p><p><strong>Privacy:</strong> No real hands are entered. No forms, analytics, storage, cookies, remote scripts or requests are used by this page. The worked models remain readable without JavaScript.</p></div>
+<noscript><p class="limits"><strong>Interactive controls are unavailable:</strong> JavaScript is disabled. The original fixed examples and formulas remain readable below, and the linked workbook explains how to recalculate them by hand.</p></noscript>
+<section class="panel" aria-labelledby="river-heading">
+<h2 id="river-heading">1. River call: an uncertain equity band</h2>
+<p class="model">A 20 BB pot faces a 10 BB bet. A call ends action with no deductions. Equity includes shares of tied pots.</p>
+<dl class="facts"><div class="fact"><dt>Pot when facing action</dt><dd>30 BB</dd></div><div class="fact"><dt>Additional call</dt><dd>10 BB</dd></div><div class="fact"><dt>Final matched pot</dt><dd>40 BB</dd></div><div class="fact"><dt>Break-even equity</dt><dd>25%</dd></div></dl>
+<div class="inputs">
+<div class="input-row"><label for="river-low">Lower assumed equity <output id="river-low-label" for="river-low">22%</output></label><input id="river-low" type="range" min="0" max="100" step="1" value="22" disabled aria-describedby="river-help"><p id="river-help">Move in 1 percentage point steps.</p></div>
+<div class="input-row"><label for="river-high">Upper assumed equity <output id="river-high-label" for="river-high">29%</output></label><input id="river-high" type="range" min="0" max="100" step="1" value="29" disabled></div>
+</div>
+<p class="result" id="river-result" role="status" aria-live="polite" aria-atomic="true"><strong>22% to 29%:</strong> modeled call EV -1.20 to +1.60 BB. The band crosses break-even.</p>
+<p class="note" id="river-order-note">Each equity point changes call EV by 0.40 BB. Lower and upper bounds may be reversed; the calculation sorts them.</p>
+<details class="reference"><summary>Show the fixed call formula</summary><p>Current pot P = 20 + 10 = 30 BB. Additional call C = 10 BB. Final pot F = P + C = 40 BB. Call EV against folding is <strong>(assumed equity / 100) × 40 - 10 BB</strong>. The break-even equity is 10 / 40 = 25%. This is not a recommendation to call without an evidenced range.</p></details>
+</section>
+<section class="panel" aria-labelledby="raise-heading">
+<h2 id="raise-heading">2. Facing a raise to 14 BB</h2>
+<p class="model">Start with 10 BB. You bet 4 BB. An opponent raises <em>to</em> 14 BB total on the street. Assume a call ends action.</p>
+<dl class="facts"><div class="fact"><dt>Current pot</dt><dd>28 BB</dd></div><div class="fact"><dt>Additional call</dt><dd>10 BB, not 14 BB</dd></div><div class="fact"><dt>Final matched pot</dt><dd>38 BB</dd></div><div class="fact"><dt>Break-even equity</dt><dd>5/19 ≈ 26.32%</dd></div></dl>
+<div class="inputs"><div class="input-row"><label for="raise-equity">Assumed showdown equity <output id="raise-label" for="raise-equity">25%</output></label><input id="raise-equity" type="range" min="0" max="100" value="25" step="1" disabled><p>Not a known or observed opponent range.</p></div></div>
+<p class="result" id="raise-result" role="status" aria-live="polite" aria-atomic="true"><strong>25%:</strong> modeled call EV -0.50 BB, below break-even.</p>
+<details class="reference"><summary>Show the raise-to ledger</summary><p>Current pot = 10 + 4 + 14 = 28 BB. Additional call = 14 - 4 = 10 BB. Final pot = 38 BB. Call EV is <strong>(assumed equity / 100) × 38 - 10 BB</strong>. The old 4 BB already committed is not paid again.</p></details>
+</section>
+<section class="panel" aria-labelledby="bluff-heading">
+<h2 id="bluff-heading">3. Pure bluff: the bettor and caller have different prices</h2>
+<p class="model">A zero-showdown-equity bettor risks 6 BB into a 10 BB pot. The opponent folds or calls, never raises. Checking is assigned zero chip EV.</p>
+<dl class="facts"><div class="fact"><dt>Bet size</dt><dd>6 BB</dd></div><div class="fact"><dt>Pot before bet</dt><dd>10 BB</dd></div><div class="fact"><dt>Bettor's break-even folds</dt><dd>37.5%</dd></div><div class="fact"><dt>Caller's break-even equity</dt><dd>3/11 ≈ 27.27%</dd></div></dl>
+<div class="inputs"><div class="input-row"><label for="bluff-fold">Assumed fold frequency <output id="bluff-label" for="bluff-fold">40%</output></label><input id="bluff-fold" type="range" min="0" max="100" value="40" step="1" disabled><p>This does not estimate how frequently any real opponent folds.</p></div></div>
+<p class="result" id="bluff-result" role="status" aria-live="polite" aria-atomic="true"><strong>40% folds:</strong> modeled pure-bluff EV +0.40 BB, above break-even.</p>
+<details class="reference"><summary>Show the separate actor prices</summary><p>The bettor breaks even with folds at 6 / (10 + 6) = 37.5%. Bluff EV is <strong>(fold probability / 100) × 10 - (1 - fold probability / 100) × 6 BB</strong>. The caller is offered 6 to call into a final pot of 10 + 6 + 6 = 22 BB, requiring 6 / 22 = 3/11 or about 27.27% showdown equity. These thresholds belong to different players.</p></details>
+</section>
+<section class="panel" aria-labelledby="next-heading"><h2 id="next-heading">Before drawing any conclusion</h2><ul><li>Write the exact information known at the decision and identify which range weights were invented.</li><li>Check whether another action, player or street changes the eligible pot or objective.</li><li>Try at least two plausible assumptions. If modeled EV changes sign, report the sensitivity instead of declaring an action solved.</li><li>Do not use this tool during live play when the event restricts assistance.</li></ul><p>For the original four additional exercises and full answers, <a href="/downloads/poker-pot-odds-sensitivity-workbook.md">open the Markdown workbook</a>. For exact fractional reproduction, <a href="/downloads/poker-pot-odds-sensitivity-verify.py">review the standard-library Python checker</a>.</p></section>
+</main>
+<footer>Original educational material. No model calls, live hand inputs or publication of private data. <a href="/poker/">Back to Nolan Kido Poker</a>.</footer>
+<script>
+(() => {
+  'use strict';
+  const el = id => document.getElementById(id);
+  const money = value => {
+    const n = Math.abs(value) < 1e-9 ? 0 : value;
+    return (n > 0 ? '+' : '') + n.toFixed(2) + ' BB';
+  };
+  const relation = (value, threshold) => value > threshold ? 'above break-even' : value < threshold ? 'below break-even' : 'at break-even';
+  function render() {
+    const low = Number(el('river-low').value), high = Number(el('river-high').value);
+    const a = Math.min(low, high), b = Math.max(low, high);
+    const loEV = (a / 100) * 40 - 10, hiEV = (b / 100) * 40 - 10;
+    el('river-low-label').textContent = low + '%';
+    el('river-high-label').textContent = high + '%';
+    const crosses = a < 25 && b > 25 ? 'The band crosses break-even.' : a <= 25 && b >= 25 ? 'The band includes break-even.' : b < 25 ? 'The full band is below break-even.' : 'The full band is above break-even.';
+    el('river-result').textContent = a + '% to ' + b + '%: modeled call EV ' + money(loEV) + ' to ' + money(hiEV) + '. ' + crosses;
+    el('river-order-note').textContent = 'Each equity point changes call EV by 0.40 BB. ' + (low > high ? 'You reversed the bounds; results are sorted.' : 'These percentages are assumptions, not measured equity.');
+    const q = Number(el('raise-equity').value);
+    el('raise-label').textContent = q + '%';
+    el('raise-result').textContent = q + '%: modeled call EV ' + money(q / 100 * 38 - 10) + ', ' + relation(q / 100, 5 / 19) + '.';
+    const f = Number(el('bluff-fold').value);
+    el('bluff-label').textContent = f + '%';
+    el('bluff-result').textContent = f + '% folds: modeled pure-bluff EV ' + money(f / 100 * 10 - (1 - f / 100) * 6) + ', ' + relation(f / 100, 3 / 8) + '.';
+  }
+  for (const input of document.querySelectorAll('input[type="range"]')) { input.disabled = false; input.addEventListener('input', render); }
+  render();
+})();
+</script>
+</body>
+</html>

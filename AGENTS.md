@@ -1698,3 +1698,59 @@ plus a 320px/browser check before declaring the release fully
 verified. The standalone checker and math tests do not prove
 live-byte publication, real search results or strategic correctness
 of unmeasured opponent ranges. No GitHub Actions or scheduled tasks.
+
+## Turn 90: fixed-scenario, browser-local pot-odds sensitivity lab
+
+The independently authored, entirely self-contained
+`_source/poker/pot-odds-sensitivity-lab.html` is copied **byte-for-byte**
+to `downloads/poker-pot-odds-sensitivity-lab.html` and linked once
+from the existing canonical `/poker/pot-odds-workshop/` end navigation.
+It uses four native, labeled sliders to vary hypothetical equity bands
+or fold rate across three fixed fictional models: 20/10 BB river call,
+10+4 versus raise-to-14 BB call, and a zero-equity bet 6 BB into 10 BB.
+The lab correctly separates bettor fold threshold (37.5%) from caller
+break-even equity (3/11). Equity and fold rates are invented inputs,
+not a range solver or real opponent model. This tool is strictly
+for study away from play and not real-time assistance.
+
+The HTML is standalone, noindex, and excluded from all XML sitemaps
+and the 301-card Poker Finder. It makes no AI call, stores nothing,
+submits no form, has no analytics or third-party assets, and uses a
+restrictive CSP: default, connect, form, object, frame and base requests
+are blocked; only in-document script and CSS are allowed. JavaScript
+writes only to `textContent` and never serializes inputs into the URL.
+All four sliders are disabled before JavaScript initializes; the
+`noscript` block and static model facts remain readable without JS.
+Do not change this into a real-hand input tool or introduce stored
+player profiles, opponent ranges, network calls or external scripts.
+
+`_scripts/check_live.py` registers the complete downloaded HTML as
+an exact-byte public route. The existing
+`_tests/test_turn63_public_html_downloads.py` inventory now covers
+five HTML downloads, not four; its parser and source-byte validation
+must apply to this page without weakening earlier guards.
+`_tests/test_turn90_offline_sensitivity_lab.py` has ten static/negative
+and mathematical model checks, registered in the manual release suite.
+`_tests/pot_odds_sensitivity_browser.py` checks the full standalone
+HTML through local Chromium using `page.set_content`; the standard
+local `--browser` release suite discovers it automatically.
+
+A separate local Chromium run with the final, source-identical HTML
+passed at 320, 390, 768 and 1280 CSS pixels: zero horizontal overflow,
+no JavaScript page errors or network requests; 22%-29% river band
+and reversed 15%-35% band; raise equity change to 30%; bluff fold
+probability change to 30%; clear no-JavaScript fallback. This
+**does not** establish a complete repository deterministic build,
+HTML5 pass, current public deployment or exact-byte live receipt.
+
+Preserve `/poker/pot-odds-workshop/` original source prose, October 6
+2026 publication/modified metadata, canonical and all old links;
+only add one native `/downloads/poker-pot-odds-sensitivity-lab.html`
+study link to its current end navigation. Keep both authored and
+generated workshop files in parity. Run the new static regression,
+original pot odds workbook tests, updated Turn 63 HTML inventory,
+`_scripts/build.py --check`, metadata snapshot, local HTML5 and
+internal link checker, explicit browser test and full public exact
+byte verification from a complete matching checkout before calling
+the overall release verified. No GitHub Actions, cron, paid service,
+new canonical route, tracking or invented search performance claim.

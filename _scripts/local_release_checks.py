@@ -200,6 +200,7 @@ def main() -> int:
         ('Turn 87 source-verified Playbook in tournament topic directory', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn87_tournament_topic_companion.py', '-q']),
         ('Turn 88 original AI Works Human Decides public draft review and worksheet', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn88_ai_human_decision_lab.py', '-q']),
         ('Turn 89 exact poker call/bluff sensitivity and publication boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn89_pot_odds_sensitivity.py', '-q']),
+        ('Turn 90 static offline pot-odds sensitivity lab release and noindex boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn90_offline_sensitivity_lab.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
