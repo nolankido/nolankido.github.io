@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '_source/poker/bounty-knockout-equity.html'
 PUBLIC = ROOT / 'poker/bounty-knockout-equity/index.html'
 NAV_LINK = '<a href="#bounty-mystery-draw">Mystery draw inventory</a>'
-BRANCH = re.compile(r'<details class="poker-details" id="bounty-mystery-draw">.*?</details>', re.S)
+BRANCH = re.compile(r'<details class="poker-details" id="bounty-mystery-draw" data-reading-optional="true">.*?</details>', re.S)
 ENVELOPES = (50, 50, 50, 100, 100, 650)
 
 
