@@ -30,13 +30,14 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
 <h1>Pot odds sensitivity lab</h1>
 <p class="intro">Change a hypothetical equity or fold-rate input and watch the conditional chip value move. The pot sizes are fixed from the original <a href="/poker/pot-odds-workshop/">Pot Odds Workshop</a>, so you can focus on one assumption at a time. Every calculation happens in this browser, with no external services or account.</p>
 <div class="limits"><p><strong>Scope:</strong> These three scenarios are fictional, heads-up, matched-pot chip models. They omit rake, future betting, side pots, bounties and payout-sensitive ICM. Equity and fold rates are <em>assumptions</em>, not opponent estimates or solved ranges. This tool is for study away from play, not at-table assistance.</p><p><strong>Privacy:</strong> No real hands are entered. No forms, analytics, storage, cookies, remote scripts or requests are used by this page. The worked models remain readable without JavaScript.</p></div>
+<noscript><p class="limits"><strong>Interactive controls are unavailable:</strong> JavaScript is disabled. The original fixed examples and formulas remain readable below, and the linked workbook explains how to recalculate them by hand.</p></noscript>
 <section class="panel" aria-labelledby="river-heading">
 <h2 id="river-heading">1. River call: an uncertain equity band</h2>
 <p class="model">A 20 BB pot faces a 10 BB bet. A call ends action with no deductions. Equity includes shares of tied pots.</p>
 <dl class="facts"><div class="fact"><dt>Pot when facing action</dt><dd>30 BB</dd></div><div class="fact"><dt>Additional call</dt><dd>10 BB</dd></div><div class="fact"><dt>Final matched pot</dt><dd>40 BB</dd></div><div class="fact"><dt>Break-even equity</dt><dd>25%</dd></div></dl>
 <div class="inputs">
-<div class="input-row"><label for="river-low">Lower assumed equity <output id="river-low-label" for="river-low">22%</output></label><input id="river-low" type="range" min="0" max="100" step="1" value="22" aria-describedby="river-help"><p id="river-help">Move in 1 percentage point steps.</p></div>
-<div class="input-row"><label for="river-high">Upper assumed equity <output id="river-high-label" for="river-high">29%</output></label><input id="river-high" type="range" min="0" max="100" step="1" value="29"></div>
+<div class="input-row"><label for="river-low">Lower assumed equity <output id="river-low-label" for="river-low">22%</output></label><input id="river-low" type="range" min="0" max="100" step="1" value="22" disabled aria-describedby="river-help"><p id="river-help">Move in 1 percentage point steps.</p></div>
+<div class="input-row"><label for="river-high">Upper assumed equity <output id="river-high-label" for="river-high">29%</output></label><input id="river-high" type="range" min="0" max="100" step="1" value="29" disabled></div>
 </div>
 <p class="result" id="river-result" role="status" aria-live="polite" aria-atomic="true"><strong>22% to 29%:</strong> modeled call EV -1.20 to +1.60 BB. The band crosses break-even.</p>
 <p class="note" id="river-order-note">Each equity point changes call EV by 0.40 BB. Lower and upper bounds may be reversed; the calculation sorts them.</p>
@@ -46,7 +47,7 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
 <h2 id="raise-heading">2. Facing a raise to 14 BB</h2>
 <p class="model">Start with 10 BB. You bet 4 BB. An opponent raises <em>to</em> 14 BB total on the street. Assume a call ends action.</p>
 <dl class="facts"><div class="fact"><dt>Current pot</dt><dd>28 BB</dd></div><div class="fact"><dt>Additional call</dt><dd>10 BB, not 14 BB</dd></div><div class="fact"><dt>Final matched pot</dt><dd>38 BB</dd></div><div class="fact"><dt>Break-even equity</dt><dd>5/19 ≈ 26.32%</dd></div></dl>
-<div class="inputs"><div class="input-row"><label for="raise-equity">Assumed showdown equity <output id="raise-label" for="raise-equity">25%</output></label><input id="raise-equity" type="range" min="0" max="100" value="25" step="1"><p>Not a known or observed opponent range.</p></div></div>
+<div class="inputs"><div class="input-row"><label for="raise-equity">Assumed showdown equity <output id="raise-label" for="raise-equity">25%</output></label><input id="raise-equity" type="range" min="0" max="100" value="25" step="1" disabled><p>Not a known or observed opponent range.</p></div></div>
 <p class="result" id="raise-result" role="status" aria-live="polite" aria-atomic="true"><strong>25%:</strong> modeled call EV -0.50 BB, below break-even.</p>
 <details class="reference"><summary>Show the raise-to ledger</summary><p>Current pot = 10 + 4 + 14 = 28 BB. Additional call = 14 - 4 = 10 BB. Final pot = 38 BB. Call EV is <strong>(assumed equity / 100) × 38 - 10 BB</strong>. The old 4 BB already committed is not paid again.</p></details>
 </section>
@@ -54,7 +55,7 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
 <h2 id="bluff-heading">3. Pure bluff: the bettor and caller have different prices</h2>
 <p class="model">A zero-showdown-equity bettor risks 6 BB into a 10 BB pot. The opponent folds or calls, never raises. Checking is assigned zero chip EV.</p>
 <dl class="facts"><div class="fact"><dt>Bet size</dt><dd>6 BB</dd></div><div class="fact"><dt>Pot before bet</dt><dd>10 BB</dd></div><div class="fact"><dt>Bettor's break-even folds</dt><dd>37.5%</dd></div><div class="fact"><dt>Caller's break-even equity</dt><dd>3/11 ≈ 27.27%</dd></div></dl>
-<div class="inputs"><div class="input-row"><label for="bluff-fold">Assumed fold frequency <output id="bluff-label" for="bluff-fold">40%</output></label><input id="bluff-fold" type="range" min="0" max="100" value="40" step="1"><p>This does not estimate how frequently any real opponent folds.</p></div></div>
+<div class="inputs"><div class="input-row"><label for="bluff-fold">Assumed fold frequency <output id="bluff-label" for="bluff-fold">40%</output></label><input id="bluff-fold" type="range" min="0" max="100" value="40" step="1" disabled><p>This does not estimate how frequently any real opponent folds.</p></div></div>
 <p class="result" id="bluff-result" role="status" aria-live="polite" aria-atomic="true"><strong>40% folds:</strong> modeled pure-bluff EV +0.40 BB, above break-even.</p>
 <details class="reference"><summary>Show the separate actor prices</summary><p>The bettor breaks even with folds at 6 / (10 + 6) = 37.5%. Bluff EV is <strong>(fold probability / 100) × 10 - (1 - fold probability / 100) × 6 BB</strong>. The caller is offered 6 to call into a final pot of 10 + 6 + 6 = 22 BB, requiring 6 / 22 = 3/11 or about 27.27% showdown equity. These thresholds belong to different players.</p></details>
 </section>
@@ -86,7 +87,7 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
     el('bluff-label').textContent = f + '%';
     el('bluff-result').textContent = f + '% folds: modeled pure-bluff EV ' + money(f / 100 * 10 - (1 - f / 100) * 6) + ', ' + relation(f / 100, 3 / 8) + '.';
   }
-  for (const input of document.querySelectorAll('input[type="range"]')) input.addEventListener('input', render);
+  for (const input of document.querySelectorAll('input[type="range"]')) { input.disabled = false; input.addEventListener('input', render); }
   render();
 })();
 </script>
