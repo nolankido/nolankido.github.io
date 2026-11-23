@@ -1794,3 +1794,55 @@ for a complete site build, full original browser suite, all-unit
 run or public source-byte receipt. The source file's SHA-1 Git blob
 hash was independently matched in the local runtime and GitHub.
 Use `_scripts/local_release_checks.py` from a complete checkout.
+
+## Turn 92: retain current fictional sensitivity checks in a private study note
+
+The existing standalone, noindex Pot Odds Sensitivity Lab at
+`/downloads/poker-pot-odds-sensitivity-lab.html` adds a fifth
+`#study-record-panel`, not a new page or search-indexed guide.
+The new `#study-record` is one labelled, read-only native
+`<textarea>` containing a **fictional example only**. Its default
+value displays the original 22% to 29% river band, 25% raise-call
+equity and 40% fold rate, all three fixed pots and call prices,
+conditional EVs, model omissions, and unverified-opponent assumptions.
+The original inline, local `render()` now reconstructs that note
+whenever a slider is moved or a boundary preset is selected, including
+a reversed but sorted river band. Do not add a writable real-hand,
+opponent range or personal data field. Never present these percentages
+as observations, solver outputs, or decisions for real play.
+
+The lone new `#study-select` button is disabled without JavaScript.
+After user activation it focuses the read-only note and selects its
+text for a normal native Copy command. It **does not copy** text to the
+clipboard, create a Blob/download, store data, transmit network
+requests or claim that the browser saved the note. The static default
+record remains useful in no-JavaScript mode. Print output omits the
+selection button but preserves existing model results. No new
+analytics, iframe, external script, CSP exception, cookies, API, CI,
+cron, or GitHub Actions.
+
+Preserve exact-byte parity between
+`_source/poker/pot-odds-sensitivity-lab.html` and the public
+`downloads/poker-pot-odds-sensitivity-lab.html`; the expected Git
+blob SHA for both source/output revisions is
+`86529a8849610e23ef45a516f3db2666b1282168`.
+Keep the canonical Pot Odds Workshop, original topic numbers, lab
+noindex, fixed four range controls, four boundary presets, three
+live results, 301-card native Finder and sitemap untouched.
+Update Turn 90's HTML label-count guard to expect the four sliders
+plus one read-only note label, and Turn 91's four-preset guard to
+distinguish the separately controlled Select button. Extend the
+existing `_tests/pot_odds_sensitivity_browser.py` to test record
+updates, user-driven full-text selection, no-script state, print
+control suppression, zero network requests, and mobile widths.
+
+`_tests/test_turn92_private_study_record.py` adds eleven checks.
+Its **eight standalone checks** were executed and passed against the
+exact source/output fixture; **three full-site integration checks**
+are authored but not run without the full matching checkout.
+An independent local Chromium smoke ran on the same exact HTML at
+320, 390, 768 and 1280 pixels, including keyboard, print and no-JS.
+Actual deployment must still be read on the live site and full
+source-to-live byte validation done with the manual release tools.
+Source parity and a zero-request local browser smoke alone do not
+establish real search traffic or measured study improvements.
