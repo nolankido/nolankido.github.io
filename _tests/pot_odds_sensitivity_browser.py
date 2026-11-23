@@ -45,6 +45,24 @@ def main():
                 page.keyboard.press("ArrowRight")
                 assert page.locator("#raise-equity").input_value() == "26"
                 assert "26%:" in page.locator("#raise-result").inner_text()
+                # Test the independently calculated threshold drill with real controls.
+                assert page.locator("#boundary-heading").is_visible()
+                assert page.locator("[data-drill]").count() == 4
+                assert page.locator("#bluff-fold").get_attribute("step") == "0.5"
+                page.locator('[data-drill="river"]').click()
+                assert page.locator("#river-low").input_value() == "24"
+                assert page.locator("#river-high").input_value() == "26"
+                assert "-0.40 BB to +0.40 BB" in page.locator("#river-result").inner_text()
+                page.locator('[data-drill="raise-low"]').click()
+                assert "-0.12 BB" in page.locator("#raise-result").inner_text()
+                page.locator('[data-drill="raise-high"]').click()
+                assert "+0.26 BB" in page.locator("#raise-result").inner_text()
+                page.locator('[data-drill="bluff-zero"]').click()
+                assert page.locator("#bluff-fold").input_value() == "37.5"
+                assert "0.00 BB, at break-even" in page.locator("#bluff-result").inner_text()
+                page.locator("#bluff-fold").press("ArrowRight")
+                assert page.locator("#bluff-fold").input_value() == "38"
+                assert "+0.08 BB" in page.locator("#bluff-result").inner_text()
                 assert not errors, (width, errors)
                 assert not requests, (width, requests)
                 page.close()
@@ -53,6 +71,8 @@ def main():
             page = context.new_page()
             page.set_content(html, wait_until="load")
             assert not page.locator("#river-low").is_enabled()
+            assert page.locator('[data-drill="bluff-zero"]').is_disabled()
+            assert page.locator("#boundary-heading").is_visible()
             assert page.locator("noscript").is_visible()
             assert "Interactive controls are unavailable" in page.locator("noscript").inner_text()
             assert "22% to 29%" in page.locator("#river-result").inner_text()

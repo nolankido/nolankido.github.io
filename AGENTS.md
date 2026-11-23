@@ -1754,3 +1754,43 @@ internal link checker, explicit browser test and full public exact
 byte verification from a complete matching checkout before calling
 the overall release verified. No GitHub Actions, cron, paid service,
 new canonical route, tracking or invented search performance claim.
+
+## Turn 91: exact threshold calibration on the offline sensitivity lab
+
+The previously merged and live `/downloads/poker-pot-odds-sensitivity-lab.html`
+now includes a reader-facing `#boundary-drill` section with three
+fixed mathematical crosschecks and four keyboard-accessible local presets.
+River call 24/25/26% equity yields -0.40/0/+0.40 BB;
+facing the raise to 14 yields -0.12/0/+0.26 BB at 26%, exactly 5/19,
+and 27%; pure bluff 37/37.5/38% folds yields -0.08/0/+0.08 BB.
+The middle fractional threshold for the raise cannot be selected by
+its existing 1-point slider and is disclosed as an exact mathematical
+reference, not a forged user-selected slider state. The bluff slider
+alone moves in half-point steps to permit the actual 37.5% model
+break-even. Every probability is fictional, not an opponent estimate.
+
+Keep the source `_source/poker/pot-odds-sensitivity-lab.html` and
+downloaded HTML exact-byte identical. No new canonical, sitemap,
+Finder entry, input fields for real hands, AI call, remote fetch,
+tracking, cookies, data storage or GitHub Actions are allowed.
+Buttons are disabled until the inline local script is ready,
+`type=button`, and move keyboard focus to the affected range
+on activation. With JavaScript absent, the disabled buttons and
+static threshold proofs remain safe and readable. Print output
+retains the proofs and omits the inert controls. The lab remains
+noindex and registered as one exact-byte public HTML download.
+Existing article dates and pot-odds source material do not change.
+
+Update `_tests/test_turn90_offline_sensitivity_lab.py` for the single
+bluff 0.5% step, and extend
+`_tests/pot_odds_sensitivity_browser.py` for the presets, 37.5%
+zero, ArrowRight to 38%, and no-script disabled preset.
+`_tests/test_turn91_threshold_boundary_drill.py` adds ten tests,
+seven of which were run in an isolated exact-source/output fixture.
+A local Chromium smoke test ran at 320, 390, 768 and 1280 pixels,
+including keyboard focus, printing, no-JS fallback, zero network
+requests and no horizontal scrolling. These checks do not substitute
+for a complete site build, full original browser suite, all-unit
+run or public source-byte receipt. The source file's SHA-1 Git blob
+hash was independently matched in the local runtime and GitHub.
+Use `_scripts/local_release_checks.py` from a complete checkout.

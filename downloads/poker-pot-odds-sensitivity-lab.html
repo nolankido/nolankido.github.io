@@ -11,15 +11,15 @@
 <style>
 :root{color-scheme:light;--ink:#15231b;--muted:#3f5546;--red:#9d2535;--paper:#eef2ec;--white:#fff;--line:#b4c3b7;--soft:#f5f8f3}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-padding-top:1.5rem}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
-a{color:var(--ink);text-underline-offset:.21em}a:hover{color:var(--red)}a:focus-visible,input:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+a{color:var(--ink);text-underline-offset:.21em}a:hover{color:var(--red)}a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .skip{position:absolute;transform:translateY(-160%);left:10px;top:0;z-index:2;background:var(--ink);color:white;padding:10px}.skip:focus{transform:none}
 header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,footer{width:min(100% - 32px,920px);margin-inline:auto}
 .head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-block:14px}.brand{font-weight:800;text-decoration:none;letter-spacing:-.02em}.head nav{display:flex;gap:12px 20px;flex-wrap:wrap}.head a{min-height:42px;display:inline-flex;align-items:center}
 .wrap{padding-block:32px 55px}.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}h1,h2,h3{line-height:1.22;letter-spacing:-.025em;overflow-wrap:anywhere}h1{font-size:clamp(1.9rem,5vw,2.85rem);margin:.35rem 0 .75rem}h2{font-size:clamp(1.32rem,3vw,1.7rem);margin:0 0 12px}h3{font-size:1.07rem;margin:12px 0 8px}p{margin:0 0 14px}.intro{max-width:78ch}.limits{border-left:4px solid var(--red);padding:14px 18px;background:var(--white);margin:24px 0 30px}.limits p:last-child{margin-bottom:0}
 .panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:clamp(18px,4vw,28px);margin-block:16px;min-width:0}.model{color:var(--muted);font-size:.92rem}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr));gap:10px;margin:18px 0}.fact{padding:10px 12px;background:var(--soft);border:1px solid var(--line)}.fact dt{font-size:.77rem;color:var(--muted);font-weight:700}.fact dd{margin:1px 0 0;font-weight:800;font-variant-numeric:tabular-nums}
-.inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:18px}.input-row{min-width:0}.input-row label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-weight:650;margin-bottom:5px}.input-row output{font-weight:800;font-variant-numeric:tabular-nums}.input-row input{width:100%;height:32px;accent-color:var(--red);cursor:pointer}.input-row p{font-size:.82rem;color:var(--muted);margin:0}.result{margin:20px 0 0;border-top:2px solid var(--line);padding-top:15px;font-variant-numeric:tabular-nums}.result strong{font-size:1.08rem}.note{font-size:.89rem;color:var(--muted)}.reference{margin:22px 0 0;padding:16px;background:var(--soft);border:1px solid var(--line)}.reference summary{cursor:pointer;font-weight:800;min-height:38px}.reference p{margin-top:12px}ul{padding-left:1.25rem}li{margin-bottom:.55rem}footer{border-top:1px solid var(--line);padding-block:22px 38px;color:var(--muted);font-size:.87rem}
+.inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:18px}.input-row{min-width:0}.input-row label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-weight:650;margin-bottom:5px}.input-row output{font-weight:800;font-variant-numeric:tabular-nums}.input-row input{width:100%;height:32px;accent-color:var(--red);cursor:pointer}.input-row p{font-size:.82rem;color:var(--muted);margin:0}.result{margin:20px 0 0;border-top:2px solid var(--line);padding-top:15px;font-variant-numeric:tabular-nums}.result strong{font-size:1.08rem}.note{font-size:.89rem;color:var(--muted)}.reference{margin:22px 0 0;padding:16px;background:var(--soft);border:1px solid var(--line)}.reference summary{cursor:pointer;font-weight:800;min-height:38px}.reference p{margin-top:12px}.drill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:12px;margin:16px 0}.drill-case{padding:15px;border:1px solid var(--line);background:var(--soft);min-width:0}.drill-case h3{margin-top:0}.drill-case p{font-size:.92rem}.drill-actions{display:flex;flex-wrap:wrap;gap:8px}.drill-actions button{min-height:44px;border:1px solid var(--ink);border-radius:5px;background:var(--white);color:var(--ink);padding:8px 12px;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer;text-align:left}.drill-actions button:hover:not(:disabled){background:var(--ink);color:var(--white)}.drill-actions button:disabled{cursor:not-allowed;opacity:.6}ul{padding-left:1.25rem}li{margin-bottom:.55rem}footer{border-top:1px solid var(--line);padding-block:22px 38px;color:var(--muted);font-size:.87rem}
 @media(max-width:400px){.head,.wrap,footer{width:min(100% - 24px,920px)}.panel{padding:16px}.head{display:block}.head nav{margin-top:8px}.result strong{font-size:1rem}}
-@media print{body{background:white}.skip,.head nav,.inputs{display:none!important}.panel{break-inside:avoid;border-color:#999}.reference{background:white}.wrap{padding-top:0}.result{color:black}footer{padding:10px 0}}
+@media print{body{background:white}.skip,.head nav,.inputs,.drill-actions{display:none!important}.panel{break-inside:avoid;border-color:#999}.reference{background:white}.wrap{padding-top:0}.result{color:black}footer{padding:10px 0}}
 </style>
 </head>
 <body>
@@ -55,9 +55,19 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
 <h2 id="bluff-heading">3. Pure bluff: the bettor and caller have different prices</h2>
 <p class="model">A zero-showdown-equity bettor risks 6 BB into a 10 BB pot. The opponent folds or calls, never raises. Checking is assigned zero chip EV.</p>
 <dl class="facts"><div class="fact"><dt>Bet size</dt><dd>6 BB</dd></div><div class="fact"><dt>Pot before bet</dt><dd>10 BB</dd></div><div class="fact"><dt>Bettor's break-even folds</dt><dd>37.5%</dd></div><div class="fact"><dt>Caller's break-even equity</dt><dd>3/11 ≈ 27.27%</dd></div></dl>
-<div class="inputs"><div class="input-row"><label for="bluff-fold">Assumed fold frequency <output id="bluff-label" for="bluff-fold">40%</output></label><input id="bluff-fold" type="range" min="0" max="100" value="40" step="1" disabled><p>This does not estimate how frequently any real opponent folds.</p></div></div>
+<div class="inputs"><div class="input-row"><label for="bluff-fold">Assumed fold frequency <output id="bluff-label" for="bluff-fold">40%</output></label><input id="bluff-fold" type="range" min="0" max="100" value="40" step="0.5" disabled><p>Move in 0.5 percentage point steps, including the exact 37.5% break-even rate. This is not an opponent estimate.</p></div></div>
 <p class="result" id="bluff-result" role="status" aria-live="polite" aria-atomic="true"><strong>40% folds:</strong> modeled pure-bluff EV +0.40 BB, above break-even.</p>
 <details class="reference"><summary>Show the separate actor prices</summary><p>The bettor breaks even with folds at 6 / (10 + 6) = 37.5%. Bluff EV is <strong>(fold probability / 100) × 10 - (1 - fold probability / 100) × 6 BB</strong>. The caller is offered 6 to call into a final pot of 10 + 6 + 6 = 22 BB, requiring 6 / 22 = 3/11 or about 27.27% showdown equity. These thresholds belong to different players.</p></details>
+</section>
+<section class="panel" aria-labelledby="boundary-heading" id="boundary-drill">
+<h2 id="boundary-heading">4. Boundary drill: test both sides, not just one estimate</h2>
+<p class="model">These fixed, fictional model inputs illustrate how small changes in an assumed percentage can reverse an arithmetic conclusion. The results do not reveal the actual opponent's range or prescribe any poker action. Select a preset to load its assumptions above, or compare the exact figures without JavaScript.</p>
+<div class="drill-grid">
+<article class="drill-case"><h3>River call around 25%</h3><p>At <strong>24%</strong> equity, call EV is <strong>-0.40 BB</strong>. At <strong>25%</strong>, it is <strong>0 BB</strong>. At <strong>26%</strong>, it is <strong>+0.40 BB</strong>.</p><div class="drill-actions"><button type="button" data-drill="river" aria-controls="river-low river-high river-result" disabled>Load 24% to 26% equity</button></div></article>
+<article class="drill-case"><h3>Raise-to price around 5/19</h3><p>At <strong>26%</strong> equity, call EV is <strong>-0.12 BB</strong>. At exactly <strong>5/19 (about 26.3158%)</strong>, it is <strong>0 BB</strong>. At <strong>27%</strong>, it is <strong>+0.26 BB</strong>. The whole-point slider brackets but cannot select that exact fraction.</p><div class="drill-actions"><button type="button" data-drill="raise-low" aria-controls="raise-equity raise-result" disabled>Try 26%</button><button type="button" data-drill="raise-high" aria-controls="raise-equity raise-result" disabled>Try 27%</button></div></article>
+<article class="drill-case"><h3>Bluff folds around 37.5%</h3><p>At <strong>37%</strong> folds, bluff EV is <strong>-0.08 BB</strong>. At exactly <strong>37.5%</strong>, it is <strong>0 BB</strong>. At <strong>38%</strong>, it is <strong>+0.08 BB</strong>. The half-point slider can reach break-even.</p><div class="drill-actions"><button type="button" data-drill="bluff-zero" aria-controls="bluff-fold bluff-result" disabled>Try exactly 37.5%</button></div></article>
+</div>
+<p class="note">A near-zero model EV is not a confident call, bluff or raise recommendation. The evidence needed to estimate a real opponent's response is still absent, and changes to game format, payout goals or future betting can invalidate these chip-only models.</p>
 </section>
 <section class="panel" aria-labelledby="next-heading"><h2 id="next-heading">Before drawing any conclusion</h2><ul><li>Write the exact information known at the decision and identify which range weights were invented.</li><li>Check whether another action, player or street changes the eligible pot or objective.</li><li>Try at least two plausible assumptions. If modeled EV changes sign, report the sensitivity instead of declaring an action solved.</li><li>Do not use this tool during live play when the event restricts assistance.</li></ul><p>For the original four additional exercises and full answers, <a href="/downloads/poker-pot-odds-sensitivity-workbook.md">open the Markdown workbook</a>. For exact fractional reproduction, <a href="/downloads/poker-pot-odds-sensitivity-verify.py">review the standard-library Python checker</a>.</p></section>
 </main>
@@ -88,6 +98,22 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
     el('bluff-result').textContent = f + '% folds: modeled pure-bluff EV ' + money(f / 100 * 10 - (1 - f / 100) * 6) + ', ' + relation(f / 100, 3 / 8) + '.';
   }
   for (const input of document.querySelectorAll('input[type="range"]')) { input.disabled = false; input.addEventListener('input', render); }
+  const drills = {
+    river: [['river-low', 24], ['river-high', 26]],
+    'raise-low': [['raise-equity', 26]],
+    'raise-high': [['raise-equity', 27]],
+    'bluff-zero': [['bluff-fold', 37.5]]
+  };
+  for (const button of document.querySelectorAll('[data-drill]')) {
+    const preset = drills[button.dataset.drill];
+    if (!preset) continue;
+    button.disabled = false;
+    button.addEventListener('click', () => {
+      for (const [id, value] of preset) el(id).value = String(value);
+      render();
+      el(preset[0][0]).focus();
+    });
+  }
   render();
 })();
 </script>

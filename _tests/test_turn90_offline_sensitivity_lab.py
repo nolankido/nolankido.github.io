@@ -51,7 +51,7 @@ def content_problems(html):
         errors.append("Missing offline CSP")
     if len(inputs) != 4 or any(a.get("type") != "range" or "disabled" not in a
                                or a.get("min") != "0" or a.get("max") != "100"
-                               or a.get("step") != "1" for a in inputs):
+                               or a.get("step") != ("0.5" if a.get("id") == "bluff-fold" else "1") for a in inputs):
         errors.append("Range control policy")
     if len({x.get("for") for x in labels}) != 4 or (
             {x.get("for") for x in labels} != {x.get("id") for x in inputs}):
@@ -97,7 +97,7 @@ class Turn90SensitivityLab(unittest.TestCase):
         self.assertIn("input.disabled = false", self.source)
         for default in ['value="22" disabled', 'value="29" disabled',
                         'value="25" step="1" disabled',
-                        'value="40" step="1" disabled']:
+                        'value="40" step="0.5" disabled']:
             self.assertIn(default, self.source)
 
     def test_fixed_examples_reproduce_exact_fraction_math(self):
