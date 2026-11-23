@@ -65,6 +65,10 @@ def percent(p: float) -> str:
     return f"{100 * p:.1f}%"
 
 
+def percent_two(p: float) -> str:
+    return f"{100 * p:.2f}%"
+
+
 def interval_percent(pair: tuple[float, float]) -> list[str]:
     return [percent(pair[0]), percent(pair[1])]
 
@@ -101,14 +105,14 @@ def report() -> dict:
             "prior_shapes": list(prior),
             "prior_mean": percent(prior[0] / sum(prior)),
             "posterior_shapes": list(posterior),
-            "posterior_mean": percent(posterior[0] / sum(posterior)),
+            "posterior_mean": percent_two(posterior[0] / sum(posterior)),
             "equal_tailed_credible_95": [
                 percent(beta_quantile(0.025, *posterior)),
                 percent(beta_quantile(0.975, *posterior)),
             ],
             "alternative_prior_shapes": [1, 1],
             "alternative_posterior_shapes": list(alternate),
-            "alternative_posterior_mean": percent(alternate[0] / sum(alternate)),
+            "alternative_posterior_mean": percent_two(alternate[0] / sum(alternate)),
         },
         "other_denominator_trap": {
             "observed_flop_cbet": 7,
@@ -139,9 +143,9 @@ def self_test() -> None:
     assert r["comparison"]["wilson_95"] == ["10.5%", "34.8%"]
     assert r["zero_successes"]["wilson_95"] == ["0.0%", "24.2%"]
     assert r["fictional_beta_prior"]["posterior_shapes"] == [9, 33]
-    assert r["fictional_beta_prior"]["posterior_mean"] == "21.4%"
+    assert r["fictional_beta_prior"]["posterior_mean"] == "21.43%"
     assert r["fictional_beta_prior"]["equal_tailed_credible_95"] == ["10.6%", "34.9%"]
-    assert r["fictional_beta_prior"]["alternative_posterior_mean"] == "28.6%"
+    assert r["fictional_beta_prior"]["alternative_posterior_mean"] == "28.57%"
     assert r["other_denominator_trap"]["conditional_rate"] == "87.5%"
     assert r["other_denominator_trap"]["invalid_as_conditional_rate"] == "23.3%"
     assert abs(beta_cdf(beta_quantile(0.025, 9, 33), 9, 33) - 0.025) < 1e-10
