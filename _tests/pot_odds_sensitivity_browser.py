@@ -73,7 +73,25 @@ def main():
                 assert page.locator("#study-select").is_enabled()
                 page.locator("#study-select").click()
                 assert record.evaluate("(e) => document.activeElement === e && e.selectionStart === 0 && e.selectionEnd === e.value.length")
+                # Reset restores the original HTML defaults, all three results,
+                # both copies of the study record and keyboard focus.
+                reset = page.locator("#study-reset")
+                assert reset.is_enabled()
+                reset.click()
+                for ident, expected in (
+                    ("river-low", "22"), ("river-high", "29"),
+                    ("raise-equity", "25"), ("bluff-fold", "40")):
+                    assert page.locator("#" + ident).input_value() == expected
+                assert page.locator("#river-low").is_focused()
+                assert "-1.20 BB to +1.60 BB" in page.locator("#river-result").inner_text()
+                assert "-0.50 BB" in page.locator("#raise-result").inner_text()
+                assert "+0.40 BB" in page.locator("#bluff-result").inner_text()
+                assert "Selected lower 22%, upper 29%" in record.input_value()
+                assert "Selected hypothetical showdown equity 25%" in record.input_value()
+                assert "Selected hypothetical fold rate 40%" in record.input_value()
+                assert page.locator("#study-print").text_content() == record.input_value()
                 page.emulate_media(media="print")
+                assert reset.is_hidden()
                 assert page.locator("#study-select").is_hidden()
                 assert page.locator("#river-result").is_visible()
                 # The scrollable textarea clips later lines in Chromium print.
@@ -99,6 +117,7 @@ def main():
             assert not page.locator("#river-low").is_enabled()
             assert page.locator('[data-drill="bluff-zero"]').is_disabled()
             assert page.locator("#study-select").is_disabled()
+            assert page.locator("#study-reset").is_disabled()
             assert page.locator("#study-record").get_attribute("readonly") is not None
             assert "Selected lower 22%, upper 29%" in page.locator("#study-record").input_value()
             assert page.locator("#study-print").text_content() == page.locator("#study-record").input_value()
