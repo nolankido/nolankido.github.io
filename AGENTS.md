@@ -2382,3 +2382,58 @@ until executed in a complete matching checkout. Keep the
 no-GitHub-Actions and no-new-paid-services constraints.
 Do not infer public deployment, SEO ranking or real-player
 performance from the successful standalone audit.
+
+## SEO/GEO Turn 103: split-pot outcomes in the existing satellite bubble lesson
+
+The existing three-player, two-identical-seat example in
+`/poker/satellite-bubble-seat-equity/` stipulated no ties.
+The supplemental exercise `#sat-tie-branch` now allows an equal
+heads-up split of the original 20 BB called pot, preserving the
+10/10/1 BB starting stacks, 9 BB incremental call, no ante,
+one eligible pot and original finish rules. The original article,
+its eight independent practice questions, its three accessible
+scrolling tables, and its no-tie results remain unchanged.
+
+For this extension, the four terminal or continuation states
+(A, B, C) are fold = (11,9,1), win = (0,20,1),
+tie = (10,10,1), loss = (20,0,1), all totaling 21 BB.
+Under the conventional finish-order ICM, B's seat value after
+a fold is 129/140; a tie leaves all three alive and gives B
+431/462, not one-half or an immediate qualification. With
+conditional probabilities w, t, l for win, tie, loss, respectively,
+chip equity is w+t/2 and seat value is w+t*(431/462).
+Two expressly invented distributions, (90%,0%,10%) and
+(85%,10%,5%), both give 90% chip equity and 18 BB expected
+chips. Their modeled seat values are 90% and 2179/2310
+(94.33%); relative to folding they differ by -3/140 and
++101/4620 seat units, respectively. At a stipulated 10%
+tie probability the break-even outright win rate is
+1913/2310, and chip equity is 4057/4620. These are
+conditional model results, not real ranges or general
+calling thresholds.
+
+The optional native details element and the new jump link
+are identical in authored and published HTML, and all old
+bytes are preserved outside those insertions. The disclosure
+starts closed as an optional advanced exercise, so the main
+lesson and answer-reveal workflow remain intact.
+Poker Finder's existing GuideText policy excludes nav and
+details; keep its search snapshot and all original article
+metadata/routes unchanged. The supplement includes its own
+November 23, 2026 date and explicit fictional scope. No
+new downloadable code, data collection, client script, paid
+service or GitHub Actions.
+
+`_tests/test_turn103_satellite_tie_branch.py` (tested blob
+`49c507367d6a45ed751ec728b11804d690476c9f`) adds five
+independent standard-library Fraction/permutation tests and
+three full-site integration tests. The five mathematical tests
+passed locally; the exact HTML disclosure passed its markup
+contract and eight isolated Chromium fragment smoke runs at
+320, 390, 768, 1440 pixels with JavaScript on and off,
+using simple local test CSS, not the full site CSS.
+Do not call those fragment runs full-page browser validation.
+Register the new tests in the existing manual release runner.
+The original full-site build, search snapshot, integration tests,
+complete browser suite and exact live byte receipt remain
+pending until performed on a complete matching checkout.
