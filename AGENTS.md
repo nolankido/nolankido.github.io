@@ -2100,3 +2100,58 @@ an HTTP-status-bearing observation. The GitHub Pages public
 code release and full exact-byte live GET receipt remain
 distinct from the GitHub merge. No GitHub Actions, cron,
 CI service, paid API or unattended automation may be added.
+
+## Turn 98: fail-closed fixed pot-odds self-tests in optimized Python
+
+The free, separately authored pot-odds study verifier
+`downloads/poker-pot-odds-sensitivity-verify.py` previously used
+ten `assert` statements for its published chip-value checkpoints.
+Python silently drops those under `-O` and `-OO`. A reproducible
+deliberate wrong call-price assertion failed normally but incorrectly
+printed PASS under `-O` and `-OO` in the original exact GitHub
+blob `36b51d423f3aa8b05b377513a9f818986d4a96a4`.
+This mirrors the earlier Turn 97 fix in the unrelated statistical
+frequency verifier, but is a distinct confirmed defect.
+
+Use the exact, tested corrected source at Git blob
+`1bc54d052346e0498a075a2e0b4723925c6ce043`.
+It replaces all ten elidable assertions with explicit
+`require(condition, explanation)` failures and identifies the
+failed model expression. No original price, EV, probability, input
+validation, fractional report, CLI mode, import, URL, source prose,
+site canonical, sitemap or Finder entry changes. The tool stays
+fixed-case, offline, standard-library only and not an at-table aid.
+No new GitHub Actions or CI is allowed.
+
+The exact local fixture includes unchanged original Turn 89
+worksheet and the new verifier. All **six** Turn 89 standalone
+tests passed, along with **eight** new standalone tests in
+`_tests/test_turn98_optimized_pot_odds.py` (confirmed blob
+`9a121bf9e360b78afc9d4fa5b4f73ca60300a2bb`).
+Normal, `-O`, `-OO` and JSON parity passed; two deliberately
+corrupted expressions each failed under all three interpreter
+modes. All ten self-test requirements are represented by ordinary
+function calls, and the new AST test rejects `ast.Assert` nodes.
+Three full-site integration tests in that module are authored
+but were not run without a complete checkout. Register the
+module in `_scripts/local_release_checks.py` and retain all
+previous release tests.
+
+The targeted code audit also identified **four other** published,
+fixed-example variant-game scripts containing ordinary Python
+assertions that can be dropped under optimization:
+`poker-omaha-hilo-split-enumerator.py` (22),
+`poker-plo-flush-pair-enumerator.py` (16),
+`poker-plo-wrap-enumerator.py` (15), and
+`poker-stud8-razz-seven-card-check.py` (27).
+Some include runtime pot-conservation guards, not merely final
+demonstration checks. These are a **known unresolved audit backlog**,
+not verified repairs in Turn 98. Treat optimized execution of those
+scripts as unverified; next turns should separately replace their
+invariants with always-executed validation and run both regular
+and optimized checks before merging. Do not falsely mark those
+unexamined calculations as passing under `-O`.
+
+The source-to-live exact GET check and full deterministic site
+tests must be performed separately. A GitHub merge and a content
+fetch do not establish deployed byte identity or SEO results.
