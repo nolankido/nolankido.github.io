@@ -489,6 +489,26 @@ def main():
                 if target=='/poker/tournament-equity/':
                     expect(first.locator('h3 a')).to_have_text('When more chips are not enough.')
                     expect(first.locator('.finder-excerpt')).to_be_visible()
+            # Optional advanced examples are searchable by visible title only.
+            # Match the guide and its precise existing disclosure, not an answer.
+            for question, target, anchor, title_word, forbidden in [
+                ('satellite split pots and ties', '/poker/satellite-bubble-seat-equity/',
+                 'sat-tie-branch', 'satellite split pots and ties', '2179 / 2310'),
+                ('satellite chip equity different seat values', '/poker/satellite-bubble-seat-equity/',
+                 'sat-tie-branch', 'same chip equity', '2179 / 2310'),
+                ('mystery bounty draw inventory', '/poker/bounty-knockout-equity/',
+                 'bounty-mystery-draw', 'mystery bounty draw inventory', '$1,000 / 3'),
+                ('mystery bounty jackpot drawn', '/poker/bounty-knockout-equity/',
+                 'bounty-mystery-draw', 'jackpot has been drawn', '$1,000 / 3')]:
+                search.fill(question);search.press('Enter')
+                first=page.locator('[data-finder-card]:visible').first
+                expect(first.locator('h3 a')).to_have_attribute('href',target)
+                expect(first.locator('.finder-jump a')).to_have_attribute('href',target+'#'+anchor)
+                expect(first.locator('.finder-jump a')).to_contain_text(title_word)
+                passage=first.locator('[data-finder-passage][data-anchor="'+anchor+'"]')
+                expect(passage).to_have_count(1)
+                assert passage.text_content()==passage.get_attribute('data-heading')
+                assert forbidden not in first.text_content()
             search.fill('two pair football');search.press('Enter')
             expect(page.locator('#finder-empty')).to_be_visible()
             page.locator('#finder-reset').click()
