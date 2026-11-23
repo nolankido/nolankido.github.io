@@ -31,9 +31,11 @@ def errors(html):
     copy_buttons = [attrs for tag, attrs in tags if tag == 'button' and 'data-drill' not in attrs]
     inputs = {attrs['id']: attrs for tag, attrs in tags if tag == 'input' and 'id' in attrs}
     reasons = []
-    if len(copy_buttons) != 1 or copy_buttons[0].get('id') != 'study-select' or (
-        copy_buttons[0].get('type') != 'button' or 'disabled' not in copy_buttons[0]):
-        reasons.append('Study record select button not controlled')
+    controlled = {b.get('id'): b for b in copy_buttons}
+    if (len(copy_buttons) != 2 or set(controlled) != {'study-select', 'study-reset'}
+        or any(b.get('type') != 'button' or 'disabled' not in b or not b.get('aria-controls')
+               for b in copy_buttons)):
+        reasons.append('Study record select and reset buttons not controlled')
     expected = {'river', 'raise-low', 'raise-high', 'bluff-zero'}
     if len(buttons) != 4 or {b.get('data-drill') for b in buttons} != expected:
         reasons.append('Boundary preset coverage changed')
