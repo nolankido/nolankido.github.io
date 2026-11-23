@@ -2505,3 +2505,34 @@ are registered in the existing local release inventory. Retain the
 prior Turn 103/104 regression tests, with their disclosure patterns
 updated to recognize the optional attribute. No new indexed page,
 sitemap entry, Actions, network dependency, tracking or paid service.
+
+## Turn 106: compare identical called states with different counterfactual folds
+
+Extend the existing three-way side-pot ICM workbook and verifier, not a new
+indexed article. Keep the 27 BB and $100 prize-pool example from Turn 105.
+The two invented distributions have the same main win 1/5, side win 9/20,
+called-state distribution and call ICM 17638/459. Both gain 19/10 BB relative
+to folding. A gives H > X > Y probability 1/5, B gives H > Y > X that
+probability instead. Both give X > H > Y 1/4 and X > Y > H 11/20.
+Thus the fold prize values are 11090/297 and 11534/297; call minus fold
+is 5488/5049 in A and -2060/5049 in B. Neither distribution is a measured
+range or established real-card distribution. Keep that limitation.
+The original fixed report is preserved with an added
+`fold_baseline_sensitivity` record. Reject duplicate ranking rows.
+
+The existing bounty guide gains only an identical three-word worksheet link
+in authored and generated jump navigation. No article date, practice question,
+table, canonical, search index or sitemap change. Static authored-text counts
+are consistent with the unchanged 15-minute bounty, 14-minute satellite and
+7-minute tournament-equity core estimates. The new link stays in the
+navigation excluded by Finder. Do not equate this with a complete site build.
+
+Nine new standalone tests and thirteen prior Turn 105 standalone tests passed.
+The revised worksheet, verifier and test match exact local Git blobs
+`b76486401d37366fbbf7a9cdef169f3d124897a8`,
+`97d364ae308045e3045200fc0a2f1eb0d82abcf7`, and
+`0bb7191a3e22d6988d35d34f110b0d62123ddd1d`.
+The manual runner includes the new regression. Two new site integration
+checks and the complete website, browser, search and deployment suite
+remain pending. No GitHub Actions, scheduled job, paid service or new
+dependency. See the Turn 106 report for exact scope.

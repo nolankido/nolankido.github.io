@@ -83,13 +83,15 @@ def prize_values(stacks):
     return tuple(values)
 
 
-def branch_report():
-    require(sum(weight for _, weight in RANK_WEIGHTS) == 1 and all(weight >= 0 for _, weight in RANK_WEIGHTS),
+def _report_for_weights(rank_weights):
+    require(sum(weight for _, weight in rank_weights) == 1 and all(weight >= 0 for _, weight in rank_weights),
             'ranking probabilities form a distribution')
+    require(len({order for order, _ in rank_weights}) == len(rank_weights),
+            'each strict ranking appears at most once')
     rows = []
     chips = {choice: F(0) for choice in ('fold', 'call')}
     expected = {choice: [F(0)] * 3 for choice in ('fold', 'call')}
-    for ranking, weight in RANK_WEIGHTS:
+    for ranking, weight in rank_weights:
         row = {'ranking': ' > '.join(ranking), 'probability': str(weight)}
         for choice in ('fold', 'call'):
             stacks = settle(ranking, choice == 'call')
@@ -101,8 +103,8 @@ def branch_report():
                            'prize_equities_X_H_Y': [str(p) for p in prizes]}
         rows.append(row)
     require(all(sum(values) == 100 for values in expected.values()), 'expected prize pool conservation')
-    main_win = sum(w for order, w in RANK_WEIGHTS if order[0] == 'H')
-    side_win = sum(w for order, w in RANK_WEIGHTS if order.index('H') < order.index('Y'))
+    main_win = sum(w for order, w in rank_weights if order[0] == 'H')
+    side_win = sum(w for order, w in rank_weights if order.index('H') < order.index('Y'))
     require(chips['call'] - chips['fold'] == 12 * main_win + 10 * side_win - EXTRA,
             'eligible-pot chip EV agrees with branch ledger')
     return {'scope': 'Fictional closed-action after-play study only; no actual ranges or strategy',
@@ -114,6 +116,38 @@ def branch_report():
             'expected_prizes_X_H_Y': {k: [str(v) for v in vals] for k, vals in expected.items()},
             'hero_call_minus_fold_chips': str(chips['call'] - chips['fold']),
             'hero_call_minus_fold_prizes': str(expected['call'][1] - expected['fold'][1])}
+
+
+
+def branch_report():
+    return _report_for_weights(RANK_WEIGHTS)
+
+
+def fold_baseline_sensitivity():
+    """Two fixed distributions with the same call outcomes but different folds."""
+    common = ((('X', 'H', 'Y'), F(1, 4)),
+              (('X', 'Y', 'H'), F(11, 20)))
+    x_survives = _report_for_weights(((('H', 'X', 'Y'), F(1, 5)),) + common)
+    y_eliminates_x = _report_for_weights(((('H', 'Y', 'X'), F(1, 5)),) + common)
+    for case in (x_survives, y_eliminates_x):
+        require(case['main_win_probability'] == '1/5' and
+                case['side_win_probability'] == '9/20', 'same main and side win probabilities')
+        require(case['hero_expected_chips'] == {'fold': '10', 'call': '119/10'},
+                'same expected chips in both alternatives')
+        require(case['hero_call_minus_fold_chips'] == '19/10', 'same chip gain')
+        require(F(case['expected_prizes_X_H_Y']['call'][1]) == F(17638, 459),
+                'same called prize equity')
+    require(x_survives['expected_prizes_X_H_Y']['call'] ==
+            y_eliminates_x['expected_prizes_X_H_Y']['call'], 'same all-player call prize values')
+    require(F(x_survives['expected_prizes_X_H_Y']['fold'][1]) == F(11090, 297),
+            'X-survives fold baseline')
+    require(F(y_eliminates_x['expected_prizes_X_H_Y']['fold'][1]) == F(11534, 297),
+            'Y-eliminates-X fold baseline')
+    require(x_survives['hero_call_minus_fold_prizes'] == '5488/5049' and
+            y_eliminates_x['hero_call_minus_fold_prizes'] == '-2060/5049',
+            'opposite counterfactual prize comparisons')
+    return {'scope': 'Two constructed joint ranking distributions, not measured or solved ranges',
+            'x_survives': x_survives, 'y_eliminates_x': y_eliminates_x}
 
 
 def verify():
@@ -131,6 +165,7 @@ def verify():
     require(report['hero_call_minus_fold_chips'] == '1/5' and
             report['hero_call_minus_fold_prizes'] == '-15226/5049', 'opposite objective comparisons')
     require(prize_values((0, 27, 0)) == (F(0), F(70), F(30)), 'stipulated simultaneous elimination order')
+    report['fold_baseline_sensitivity'] = fold_baseline_sensitivity()
     return report
 
 
