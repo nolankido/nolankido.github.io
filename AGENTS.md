@@ -1653,3 +1653,48 @@ separately before calling the release fully verified. An authenticated
 source readback proves file provenance, not real search impressions or
 live deployment. No Github Actions, cron, paid model call, or
 outside monitoring dependency.
+
+## Turn 89: original pot-odds sensitivity workbook and exact fractional checker
+
+The existing canonical `/poker/pot-odds-workshop/` has two new
+links **inside its original Continue studying nav only**:
+`/downloads/poker-pot-odds-sensitivity-workbook.md` and
+`/downloads/poker-pot-odds-sensitivity-verify.py`. They are free,
+original, separate from the Article, do not carry a canonical or
+search-result entry, and are for study away from live poker. The
+workbook includes an unfilled source/assumption record, three fully
+specified fictional heads-up models, equity/fold-rate sensitivity,
+four independent new questions and their answer key. Do not present
+assumed equity or fold rates as observed or solver-backed, or apply
+one-pot formulas to an unmodeled multiway, all-in side-pot, rake, ICM,
+future betting, bounty or other action-incomplete scenario.
+
+The companion Python script uses only standard-library `argparse`,
+`fractions.Fraction`, and `json`. It has no file reads, writes,
+player inputs, remote service or solver dependency. `--self-test`
+checks fixed rational outputs and invalid input bounds; `--json`
+renders those same fictional cases as exact rational strings.
+Do not add live-play helpers or an opponent-model interface.
+
+Preserve the original 2026-10-06 publication/revision, Article
+canonical, source prose, existing reader links, and all original
+workshop sections. The new links appear only in a nav that
+`poker_finder.GuideText` omits from on-site search content, so do
+not regenerate the Finder index to include worksheet answers or
+increase the 301 entry count. Edit
+`_source/poker/pot-odds-workshop.html` and its generated
+`poker/pot-odds-workshop/index.html` together. Register both
+downloads as exact-byte GET targets in `_scripts/check_live.py`.
+
+`_tests/test_turn89_pot_odds_sensitivity.py` includes six
+standalone exact-math/script/workbook tests, which were independently
+executed and passed in a matching three-file local fixture, plus five
+full-site integration checks which were authored but not executed
+without a complete GitHub checkout. The existing offline runner
+registers the new module. A matching complete checkout must run it,
+`test_workshops.py`, `build.py --check`, the search snapshot,
+HTML5 and internal link audits and public exact-byte release checks,
+plus a 320px/browser check before declaring the release fully
+verified. The standalone checker and math tests do not prove
+live-byte publication, real search results or strategic correctness
+of unmeasured opponent ranges. No GitHub Actions or scheduled tasks.
