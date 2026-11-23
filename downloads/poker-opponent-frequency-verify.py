@@ -173,36 +173,42 @@ def report() -> dict:
     }
 
 
+def require(condition: bool, expression: str) -> None:
+    """Check fixed report invariants even under Python -O / -OO."""
+    if not condition:
+        raise AssertionError("Fixed example self-test failed: " + expression)
+
+
 def self_test() -> None:
     r = report()
-    assert observed_rate(3, 12) == Fraction(1, 4)
-    assert observed_rate(8, 40) == Fraction(1, 5)
-    assert observed_rate(0, 12) == 0
-    assert r["initial_opportunities"]["ineligible_hands"] == 38
-    assert r["initial_opportunities"]["wrong_dealt_hand_denominator_rate"] == "6.0%"
-    assert r["initial_opportunities"]["wilson_95"] == ["8.9%", "53.2%"]
-    assert r["comparison"]["wilson_95"] == ["10.5%", "34.8%"]
-    assert r["zero_successes"]["wilson_95"] == ["0.0%", "24.2%"]
-    assert r["fictional_beta_prior"]["posterior_shapes"] == [9, 33]
-    assert r["fictional_beta_prior"]["posterior_mean"] == "21.43%"
-    assert r["fictional_beta_prior"]["equal_tailed_credible_95"] == ["10.6%", "34.9%"]
-    assert r["fictional_beta_prior"]["alternative_posterior_mean"] == "28.57%"
-    assert r["other_denominator_trap"]["conditional_rate"] == "87.5%"
-    assert r["other_denominator_trap"]["invalid_as_conditional_rate"] == "23.3%"
+    require(observed_rate(3, 12) == Fraction(1, 4), "observed_rate(3, 12) == Fraction(1, 4)")
+    require(observed_rate(8, 40) == Fraction(1, 5), "observed_rate(8, 40) == Fraction(1, 5)")
+    require(observed_rate(0, 12) == 0, "observed_rate(0, 12) == 0")
+    require(r["initial_opportunities"]["ineligible_hands"] == 38, "r[\"initial_opportunities\"][\"ineligible_hands\"] == 38")
+    require(r["initial_opportunities"]["wrong_dealt_hand_denominator_rate"] == "6.0%", "r[\"initial_opportunities\"][\"wrong_dealt_hand_denominator_rate\"] == \"6.0%\"")
+    require(r["initial_opportunities"]["wilson_95"] == ["8.9%", "53.2%"], "r[\"initial_opportunities\"][\"wilson_95\"] == [\"8.9%\", \"53.2%\"]")
+    require(r["comparison"]["wilson_95"] == ["10.5%", "34.8%"], "r[\"comparison\"][\"wilson_95\"] == [\"10.5%\", \"34.8%\"]")
+    require(r["zero_successes"]["wilson_95"] == ["0.0%", "24.2%"], "r[\"zero_successes\"][\"wilson_95\"] == [\"0.0%\", \"24.2%\"]")
+    require(r["fictional_beta_prior"]["posterior_shapes"] == [9, 33], "r[\"fictional_beta_prior\"][\"posterior_shapes\"] == [9, 33]")
+    require(r["fictional_beta_prior"]["posterior_mean"] == "21.43%", "r[\"fictional_beta_prior\"][\"posterior_mean\"] == \"21.43%\"")
+    require(r["fictional_beta_prior"]["equal_tailed_credible_95"] == ["10.6%", "34.9%"], "r[\"fictional_beta_prior\"][\"equal_tailed_credible_95\"] == [\"10.6%\", \"34.9%\"]")
+    require(r["fictional_beta_prior"]["alternative_posterior_mean"] == "28.57%", "r[\"fictional_beta_prior\"][\"alternative_posterior_mean\"] == \"28.57%\"")
+    require(r["other_denominator_trap"]["conditional_rate"] == "87.5%", "r[\"other_denominator_trap\"][\"conditional_rate\"] == \"87.5%\"")
+    require(r["other_denominator_trap"]["invalid_as_conditional_rate"] == "23.3%", "r[\"other_denominator_trap\"][\"invalid_as_conditional_rate\"] == \"23.3%\"")
     mix = r["position_mix_reversal"]
-    assert mix["A"]["earlier"]["observed_rate"] == "10.0%"
-    assert mix["B"]["earlier"]["observed_rate"] == "5.0%"
-    assert mix["A"]["later"]["observed_rate"] == "40.0%"
-    assert mix["B"]["later"]["observed_rate"] == "35.0%"
-    assert mix["A"]["pooled"] == {"successes": 11, "opportunities": 50, "observed_rate": "22.0%"}
-    assert mix["B"]["pooled"] == {"successes": 22, "opportunities": 80, "observed_rate": "27.5%"}
-    assert mix["A"]["equal_position_mix_observed_rate"] == "25.0%"
-    assert mix["B"]["equal_position_mix_observed_rate"] == "20.0%"
-    assert observed_rate(3, 30) > observed_rate(1, 20)
-    assert observed_rate(8, 20) > observed_rate(21, 60)
-    assert observed_rate(11, 50) < observed_rate(22, 80)
-    assert abs(beta_cdf(beta_quantile(0.025, 9, 33), 9, 33) - 0.025) < 1e-10
-    assert abs(beta_cdf(beta_quantile(0.975, 9, 33), 9, 33) - 0.975) < 1e-10
+    require(mix["A"]["earlier"]["observed_rate"] == "10.0%", "mix[\"A\"][\"earlier\"][\"observed_rate\"] == \"10.0%\"")
+    require(mix["B"]["earlier"]["observed_rate"] == "5.0%", "mix[\"B\"][\"earlier\"][\"observed_rate\"] == \"5.0%\"")
+    require(mix["A"]["later"]["observed_rate"] == "40.0%", "mix[\"A\"][\"later\"][\"observed_rate\"] == \"40.0%\"")
+    require(mix["B"]["later"]["observed_rate"] == "35.0%", "mix[\"B\"][\"later\"][\"observed_rate\"] == \"35.0%\"")
+    require(mix["A"]["pooled"] == {"successes": 11, "opportunities": 50, "observed_rate": "22.0%"}, "mix[\"A\"][\"pooled\"] == {\"successes\": 11, \"opportunities\": 50, \"observed_rate\": \"22.0%\"}")
+    require(mix["B"]["pooled"] == {"successes": 22, "opportunities": 80, "observed_rate": "27.5%"}, "mix[\"B\"][\"pooled\"] == {\"successes\": 22, \"opportunities\": 80, \"observed_rate\": \"27.5%\"}")
+    require(mix["A"]["equal_position_mix_observed_rate"] == "25.0%", "mix[\"A\"][\"equal_position_mix_observed_rate\"] == \"25.0%\"")
+    require(mix["B"]["equal_position_mix_observed_rate"] == "20.0%", "mix[\"B\"][\"equal_position_mix_observed_rate\"] == \"20.0%\"")
+    require(observed_rate(3, 30) > observed_rate(1, 20), "observed_rate(3, 30) > observed_rate(1, 20)")
+    require(observed_rate(8, 20) > observed_rate(21, 60), "observed_rate(8, 20) > observed_rate(21, 60)")
+    require(observed_rate(11, 50) < observed_rate(22, 80), "observed_rate(11, 50) < observed_rate(22, 80)")
+    require(abs(beta_cdf(beta_quantile(0.025, 9, 33), 9, 33) - 0.025) < 1e-10, "abs(beta_cdf(beta_quantile(0.025, 9, 33), 9, 33) - 0.025) < 1e-10")
+    require(abs(beta_cdf(beta_quantile(0.975, 9, 33), 9, 33) - 0.975) < 1e-10, "abs(beta_cdf(beta_quantile(0.975, 9, 33), 9, 33) - 0.975) < 1e-10")
     for invalid in ((4, 3), (-1, 12), (1, 0), (1.5, 12), (True, 12)):
         try:
             observed_rate(*invalid)
