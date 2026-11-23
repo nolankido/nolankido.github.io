@@ -117,19 +117,25 @@ def make_report() -> dict:
     }
 
 
+def require(condition: bool, explanation: str) -> None:
+    """Retain fixed-case checks when Python runs with -O or -OO."""
+    if not condition:
+        raise AssertionError("Fixed pot-odds check failed: " + explanation)
+
+
 def self_test() -> None:
     # Independent literal checkpoints, not a solver or estimate of an opponent.
-    assert call_price(F(30), F(10)) == F(1, 4)
-    assert [call_ev(F(30), F(10), q) for q in (F(1, 5), F(1, 4), F(3, 10))] == [F(-2), F(0), F(2)]
-    assert [call_ev(F(30), F(10), q) for q in (F(11, 50), F(29, 100))] == [F(-6, 5), F(8, 5)]
-    assert (F(30) + F(10)) / 100 == F(2, 5)
+    require(call_price(F(30), F(10)) == F(1, 4), "call_price(F(30), F(10)) == F(1, 4)")
+    require([call_ev(F(30), F(10), q) for q in (F(1, 5), F(1, 4), F(3, 10))] == [F(-2), F(0), F(2)], "[call_ev(F(30), F(10), q) for q in (F(1, 5), F(1, 4), F(3, 10))] == [F(-2), F(0), F(2)]")
+    require([call_ev(F(30), F(10), q) for q in (F(11, 50), F(29, 100))] == [F(-6, 5), F(8, 5)], "[call_ev(F(30), F(10), q) for q in (F(11, 50), F(29, 100))] == [F(-6, 5), F(8, 5)]")
+    require((F(30) + F(10)) / 100 == F(2, 5), "(F(30) + F(10)) / 100 == F(2, 5)")
     p, c, final = facing_raise_to(F(10), F(4), F(14))
-    assert (p, c, final) == (F(28), F(10), F(38))
-    assert call_price(p, c) == F(5, 19)
-    assert [call_ev(p, c, q) for q in (F(1, 4), F(3, 10))] == [F(-1, 2), F(7, 5)]
-    assert pure_bluff_fold_price(F(10), F(6)) == F(3, 8)
-    assert caller_price_against_bet(F(10), F(6)) == F(3, 11)
-    assert [pure_bluff_ev(F(10), F(6), q) for q in (F(3, 10), F(3, 8), F(2, 5), F(1, 2))] == [F(-6, 5), F(0), F(2, 5), F(2)]
+    require((p, c, final) == (F(28), F(10), F(38)), "(p, c, final) == (F(28), F(10), F(38))")
+    require(call_price(p, c) == F(5, 19), "call_price(p, c) == F(5, 19)")
+    require([call_ev(p, c, q) for q in (F(1, 4), F(3, 10))] == [F(-1, 2), F(7, 5)], "[call_ev(p, c, q) for q in (F(1, 4), F(3, 10))] == [F(-1, 2), F(7, 5)]")
+    require(pure_bluff_fold_price(F(10), F(6)) == F(3, 8), "pure_bluff_fold_price(F(10), F(6)) == F(3, 8)")
+    require(caller_price_against_bet(F(10), F(6)) == F(3, 11), "caller_price_against_bet(F(10), F(6)) == F(3, 11)")
+    require([pure_bluff_ev(F(10), F(6), q) for q in (F(3, 10), F(3, 8), F(2, 5), F(1, 2))] == [F(-6, 5), F(0), F(2, 5), F(2)], "[pure_bluff_ev(F(10), F(6), q) for q in (F(3, 10), F(3, 8), F(2, 5), F(1, 2))] == [F(-6, 5), F(0), F(2, 5), F(2)]")
     for operation in (lambda: call_ev(F(30), F(10), F(101, 100)),
                       lambda: pure_bluff_ev(F(10), F(6), F(-1, 10)),
                       lambda: facing_raise_to(F(10), F(4), F(3)),
