@@ -34,6 +34,7 @@ def five_card_high(cards: tuple[str, ...]) -> tuple[int, ...]:
     """Return a comparable high-hand tuple, including ace-low straights."""
     if len(cards) != 5 or len(set(cards)) != 5:
         raise ValueError("High-hand evaluator requires five unique cards")
+    validate(cards)
     ranks = [RANK_VALUE[card[0]] for card in cards]
     counts = Counter(ranks)
     groups = sorted(((n, rank) for rank, n in counts.items()), reverse=True)
@@ -104,28 +105,34 @@ def redraw_river_outcomes() -> dict[str, tuple[str, ...]]:
     return {key: tuple(cards) for key, cards in result.items()}
 
 
+def require(condition: bool, case: str) -> None:
+    """Keep fixed study checks active in every Python optimization mode."""
+    if not condition:
+        raise AssertionError("PLO wrap fixed check failed: " + case)
+
+
 def run_checks() -> None:
-    assert five_card_high(("Ac", "2h", "3s", "4d", "5c")) == (4, 5)
-    assert five_card_high(("Ac", "2c", "3c", "4c", "5c")) == (8, 5)
-    assert five_card_high(("Kh", "Kd", "Kc", "2h", "2d"))[0] == 6
-    assert five_card_high(("As", "Ah", "Ad", "Ac", "2h"))[0] == 7
-    assert best_omaha_high(("As", "Kd", "Qc", "Jh"), ("2s", "7s", "9s", "Js", "3d"))[0] != 5
+    require((five_card_high(("Ac", "2h", "3s", "4d", "5c")) == (4, 5)), 'wheel straight')
+    require((five_card_high(("Ac", "2c", "3c", "4c", "5c")) == (8, 5)), 'wheel straight flush')
+    require((five_card_high(("Kh", "Kd", "Kc", "2h", "2d"))[0] == 6), 'full house rank')
+    require((five_card_high(("As", "Ah", "Ad", "Ac", "2h"))[0] == 7), 'four of a kind rank')
+    require((best_omaha_high(("As", "Kd", "Qc", "Jh"), ("2s", "7s", "9s", "Js", "3d"))[0] != 5), 'exactly two private cards for flush')
     first = wrap_next_card_completions()
-    assert len(remaining_cards(WRAP_HERO, WRAP_FLOP)) == 45
-    assert Counter(card[0] for card in first) == {"K": 4, "Q": 3, "9": 3, "8": 3, "7": 3}
+    require((len(remaining_cards(WRAP_HERO, WRAP_FLOP)) == 45), '45 unseen cards')
+    require((Counter(card[0] for card in first) == {"K": 4, "Q": 3, "9": 3, "8": 3, "7": 3}), 'wrap completion ranks')
     blocked = wrap_next_card_completions(BLOCKER_OPPONENT)
-    assert len(remaining_cards(WRAP_HERO, WRAP_FLOP, BLOCKER_OPPONENT)) == 41
-    assert len(blocked) == 14
-    assert set(first) - set(blocked) == {"Kd", "Qd"}
-    assert best_omaha_high(WRAP_HERO, REDRAW_TURN) == (4, 12)
+    require((len(remaining_cards(WRAP_HERO, WRAP_FLOP, BLOCKER_OPPONENT)) == 41), '41 unseen after blocker hand')
+    require((len(blocked) == 14), '14 completions after blockers')
+    require((set(first) - set(blocked) == {"Kd", "Qd"}), 'two removed completion cards')
+    require((best_omaha_high(WRAP_HERO, REDRAW_TURN) == (4, 12)), 'turn queen-high straight')
     outcome = redraw_river_outcomes()
-    assert len(outcome["opponent"]) == 11, outcome
-    assert len(outcome["hero"]) == 29, outcome
-    assert not outcome["tie"]
-    assert set(outcome["opponent"]) == {
+    require((len(outcome["opponent"]) == 11), '11 rival-winning rivers')
+    require((len(outcome["hero"]) == 29), '29 hero-winning rivers')
+    require((not outcome["tie"]), 'no tied rivers')
+    require((set(outcome["opponent"]) == {
         card for card in remaining_cards(WRAP_HERO, REDRAW_TURN, REDRAW_OPPONENT)
         if card[1] == "c" or card[0] == "Q"
-    }
+    }), 'rival river card identities')
 
 
 def main() -> None:
