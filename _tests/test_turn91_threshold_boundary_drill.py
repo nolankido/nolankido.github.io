@@ -27,9 +27,13 @@ class Elements(HTMLParser):
 
 def errors(html):
     tags = Elements(html).start_tags
-    buttons = [attrs for tag, attrs in tags if tag == 'button']
+    buttons = [attrs for tag, attrs in tags if tag == 'button' and 'data-drill' in attrs]
+    copy_buttons = [attrs for tag, attrs in tags if tag == 'button' and 'data-drill' not in attrs]
     inputs = {attrs['id']: attrs for tag, attrs in tags if tag == 'input' and 'id' in attrs}
     reasons = []
+    if len(copy_buttons) != 1 or copy_buttons[0].get('id') != 'study-select' or (
+        copy_buttons[0].get('type') != 'button' or 'disabled' not in copy_buttons[0]):
+        reasons.append('Study record select button not controlled')
     expected = {'river', 'raise-low', 'raise-high', 'bluff-zero'}
     if len(buttons) != 4 or {b.get('data-drill') for b in buttons} != expected:
         reasons.append('Boundary preset coverage changed')

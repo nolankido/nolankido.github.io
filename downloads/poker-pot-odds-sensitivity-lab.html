@@ -18,8 +18,9 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
 .wrap{padding-block:32px 55px}.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}h1,h2,h3{line-height:1.22;letter-spacing:-.025em;overflow-wrap:anywhere}h1{font-size:clamp(1.9rem,5vw,2.85rem);margin:.35rem 0 .75rem}h2{font-size:clamp(1.32rem,3vw,1.7rem);margin:0 0 12px}h3{font-size:1.07rem;margin:12px 0 8px}p{margin:0 0 14px}.intro{max-width:78ch}.limits{border-left:4px solid var(--red);padding:14px 18px;background:var(--white);margin:24px 0 30px}.limits p:last-child{margin-bottom:0}
 .panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:clamp(18px,4vw,28px);margin-block:16px;min-width:0}.model{color:var(--muted);font-size:.92rem}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr));gap:10px;margin:18px 0}.fact{padding:10px 12px;background:var(--soft);border:1px solid var(--line)}.fact dt{font-size:.77rem;color:var(--muted);font-weight:700}.fact dd{margin:1px 0 0;font-weight:800;font-variant-numeric:tabular-nums}
 .inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:18px}.input-row{min-width:0}.input-row label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-weight:650;margin-bottom:5px}.input-row output{font-weight:800;font-variant-numeric:tabular-nums}.input-row input{width:100%;height:32px;accent-color:var(--red);cursor:pointer}.input-row p{font-size:.82rem;color:var(--muted);margin:0}.result{margin:20px 0 0;border-top:2px solid var(--line);padding-top:15px;font-variant-numeric:tabular-nums}.result strong{font-size:1.08rem}.note{font-size:.89rem;color:var(--muted)}.reference{margin:22px 0 0;padding:16px;background:var(--soft);border:1px solid var(--line)}.reference summary{cursor:pointer;font-weight:800;min-height:38px}.reference p{margin-top:12px}.drill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:12px;margin:16px 0}.drill-case{padding:15px;border:1px solid var(--line);background:var(--soft);min-width:0}.drill-case h3{margin-top:0}.drill-case p{font-size:.92rem}.drill-actions{display:flex;flex-wrap:wrap;gap:8px}.drill-actions button{min-height:44px;border:1px solid var(--ink);border-radius:5px;background:var(--white);color:var(--ink);padding:8px 12px;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer;text-align:left}.drill-actions button:hover:not(:disabled){background:var(--ink);color:var(--white)}.drill-actions button:disabled{cursor:not-allowed;opacity:.6}ul{padding-left:1.25rem}li{margin-bottom:.55rem}footer{border-top:1px solid var(--line);padding-block:22px 38px;color:var(--muted);font-size:.87rem}
+.study-record-label{display:block;font-weight:800;margin:18px 0 7px}.study-record-box{width:100%;min-height:325px;resize:vertical;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--ink);padding:14px;font:0.89rem/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2;overflow-wrap:anywhere}.study-record-box:focus-visible{outline:3px solid var(--red);outline-offset:3px}.study-actions{margin-top:12px}.study-actions button{min-height:44px;border:1px solid var(--ink);border-radius:5px;background:var(--white);color:var(--ink);padding:9px 14px;font:inherit;font-size:.94rem;font-weight:750;cursor:pointer}.study-actions button:hover:not(:disabled){background:var(--ink);color:var(--white)}.study-actions button:disabled{cursor:not-allowed;opacity:.6}
 @media(max-width:400px){.head,.wrap,footer{width:min(100% - 24px,920px)}.panel{padding:16px}.head{display:block}.head nav{margin-top:8px}.result strong{font-size:1rem}}
-@media print{body{background:white}.skip,.head nav,.inputs,.drill-actions{display:none!important}.panel{break-inside:avoid;border-color:#999}.reference{background:white}.wrap{padding-top:0}.result{color:black}footer{padding:10px 0}}
+@media print{body{background:white}.skip,.head nav,.inputs,.drill-actions,.study-actions{display:none!important}.panel{break-inside:avoid;border-color:#999}.reference{background:white}.wrap{padding-top:0}.result{color:black}footer{padding:10px 0}}
 </style>
 </head>
 <body>
@@ -69,6 +70,35 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
 </div>
 <p class="note">A near-zero model EV is not a confident call, bluff or raise recommendation. The evidence needed to estimate a real opponent's response is still absent, and changes to game format, payout goals or future betting can invalidate these chip-only models.</p>
 </section>
+<section class="panel" aria-labelledby="study-record-heading" id="study-record-panel">
+<h2 id="study-record-heading">5. Capture your current study assumptions</h2>
+<p class="model">Move the sliders or load a boundary preset above. This read-only note updates with the current fictional inputs, eligible pots, modeled chip values and unresolved evidence. You can select it and copy it into your own private notes. No account, storage, clipboard access, data upload or network request is used.</p>
+<label class="study-record-label" for="study-record">Current fictional study record (read only)</label>
+<textarea id="study-record" class="study-record-box" rows="17" readonly spellcheck="false" aria-describedby="study-record-help">POT ODDS SENSITIVITY LAB | FICTIONAL STUDY RECORD
+Not a real hand, opponent estimate, solver output, or action recommendation.
+All values below are chip-only examples with no rake, side pots, future betting, bounties, or ICM.
+
+1. RIVER CALL | Action closes, heads-up
+Pot before bet 20 BB; bet 10 BB; current pot 30 BB; incremental call 10 BB; final pot 40 BB.
+Break-even equity 25%. Selected lower 22%, upper 29%; evaluated band 22% to 29%.
+Modeled call EV versus folding: -1.20 BB to +1.60 BB. The band crosses break-even.
+
+2. RAISE TO 14 BB | Action closes, heads-up
+Starting pot 10 BB; prior hero bet 4 BB; opponent raises to 14 BB.
+Current pot 28 BB; incremental call 10 BB; final pot 38 BB; break-even equity 5/19 (about 26.3158%).
+Selected hypothetical showdown equity 25%. Modeled call EV versus folding -0.50 BB, below break-even.
+
+3. PURE BLUFF | Opponent folds or calls, no raises
+Pot before bet 10 BB; zero-equity bluff risks 6 BB; checking modeled as zero chip EV.
+Bettor break-even fold rate 37.5%; caller break-even equity 3/11 (about 27.27%).
+Selected hypothetical fold rate 40%. Modeled bluff EV versus checking +0.40 BB, above break-even.
+
+UNVERIFIED: No evidence for assumed opponent equity/fold rates; no actual hand or payout data.
+Next review: Record the source of assumptions and check whether any omitted game condition changes the model.
+This text stays in your browser only. Nothing is saved, transmitted, or copied automatically.</textarea>
+<div class="study-actions"><button id="study-select" type="button" aria-controls="study-record" disabled>Select full record to copy</button></div>
+<p class="note" id="study-record-help">After selecting, use your device's regular Copy command, such as Ctrl+C or the mobile selection menu. Selecting does not copy or save anything automatically. Do not treat hypothetical percentages as evidence about a real opponent.</p>
+</section>
 <section class="panel" aria-labelledby="next-heading"><h2 id="next-heading">Before drawing any conclusion</h2><ul><li>Write the exact information known at the decision and identify which range weights were invented.</li><li>Check whether another action, player or street changes the eligible pot or objective.</li><li>Try at least two plausible assumptions. If modeled EV changes sign, report the sensitivity instead of declaring an action solved.</li><li>Do not use this tool during live play when the event restricts assistance.</li></ul><p>For the original four additional exercises and full answers, <a href="/downloads/poker-pot-odds-sensitivity-workbook.md">open the Markdown workbook</a>. For exact fractional reproduction, <a href="/downloads/poker-pot-odds-sensitivity-verify.py">review the standard-library Python checker</a>.</p></section>
 </main>
 <footer>Original educational material. No model calls, live hand inputs or publication of private data. <a href="/poker/">Back to Nolan Kido Poker</a>.</footer>
@@ -96,6 +126,32 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
     const f = Number(el('bluff-fold').value);
     el('bluff-label').textContent = f + '%';
     el('bluff-result').textContent = f + '% folds: modeled pure-bluff EV ' + money(f / 100 * 10 - (1 - f / 100) * 6) + ', ' + relation(f / 100, 3 / 8) + '.';
+
+    const lines = [
+      'POT ODDS SENSITIVITY LAB | FICTIONAL STUDY RECORD',
+      'Not a real hand, opponent estimate, solver output, or action recommendation.',
+      'All values below are chip-only examples with no rake, side pots, future betting, bounties, or ICM.',
+      '',
+      '1. RIVER CALL | Action closes, heads-up',
+      'Pot before bet 20 BB; bet 10 BB; current pot 30 BB; incremental call 10 BB; final pot 40 BB.',
+      'Break-even equity 25%. Selected lower ' + low + '%, upper ' + high + '%; evaluated band ' + a + '% to ' + b + '%.',
+      'Modeled call EV versus folding: ' + money(loEV) + ' to ' + money(hiEV) + '. ' + crosses,
+      '',
+      '2. RAISE TO 14 BB | Action closes, heads-up',
+      'Starting pot 10 BB; prior hero bet 4 BB; opponent raises to 14 BB.',
+      'Current pot 28 BB; incremental call 10 BB; final pot 38 BB; break-even equity 5/19 (about 26.3158%).',
+      'Selected hypothetical showdown equity ' + q + '%. Modeled call EV versus folding ' + money(q / 100 * 38 - 10) + ', ' + relation(q / 100, 5 / 19) + '.',
+      '',
+      '3. PURE BLUFF | Opponent folds or calls, no raises',
+      'Pot before bet 10 BB; zero-equity bluff risks 6 BB; checking modeled as zero chip EV.',
+      'Bettor break-even fold rate 37.5%; caller break-even equity 3/11 (about 27.27%).',
+      'Selected hypothetical fold rate ' + f + '%. Modeled bluff EV versus checking ' + money(f / 100 * 10 - (1 - f / 100) * 6) + ', ' + relation(f / 100, 3 / 8) + '.',
+      '',
+      'UNVERIFIED: No evidence for assumed opponent equity/fold rates; no actual hand or payout data.',
+      'Next review: Record the source of assumptions and check whether any omitted game condition changes the model.',
+      'This text stays in your browser only. Nothing is saved, transmitted, or copied automatically.'
+    ];
+    el('study-record').value = lines.join('\n');
   }
   for (const input of document.querySelectorAll('input[type="range"]')) { input.disabled = false; input.addEventListener('input', render); }
   const drills = {
@@ -114,6 +170,13 @@ header{background:var(--white);border-bottom:1px solid var(--line)}.head,.wrap,f
       el(preset[0][0]).focus();
     });
   }
+  const selectButton = el('study-select');
+  selectButton.disabled = false;
+  selectButton.addEventListener('click', () => {
+    const record = el('study-record');
+    record.focus();
+    record.select();
+  });
   render();
 })();
 </script>
