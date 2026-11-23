@@ -145,7 +145,8 @@ def stud8_awards(players: dict[str, tuple[str, ...]], pot: int = 300) -> dict[st
         low_winners = [name for name, score in scores.items() if score[1] == best_low]
         for name in low_winners:
             results[name] += Fraction(pot, 2 * len(low_winners))
-    assert sum(results.values()) == pot
+    if sum(results.values()) != Fraction(pot):
+        raise ArithmeticError('Stud8 awards do not conserve the eligible pot')
     return results
 
 
@@ -156,7 +157,8 @@ def razz_awards(players: dict[str, tuple[str, ...]], pot: int = 300) -> dict[str
     winners = [name for name, score in scores.items() if score == best_low]
     results = {name: Fraction(pot, len(winners)) if name in winners else Fraction(0)
                for name in players}
-    assert sum(results.values()) == pot
+    if sum(results.values()) != Fraction(pot):
+        raise ArithmeticError('Razz awards do not conserve the eligible pot')
     return results
 
 
@@ -218,40 +220,46 @@ def exposed_rank_count(hero: tuple[str, ...], other_upcards: tuple[str, ...],
     return len(unseen), sum(card[0] == rank for card in unseen)
 
 
+def require(condition: bool, case: str) -> None:
+    """Preserve fixed fixture checks under Python -O and -OO."""
+    if not condition:
+        raise AssertionError('Stud8/Razz fixed check failed: ' + case)
+
+
 def verify() -> None:
-    assert rank_high_five(('As', '2s', '3s', '4s', '5s')) == (8, 5)
-    assert ace_five_five(('As', '2s', '3s', '4s', '5s')) == (0, 5, 4, 3, 2, 1)
-    assert ace_five_five(('As', '2s', '3d', '4h', '9c')) == (0, 9, 4, 3, 2, 1)
-    assert ace_five_five(('Ac', 'Ad', 'Th', '9s', '8c')) < ace_five_five(('2c', '2d', '7s', '6h', '5c'))
-    assert ace_five_five(('Kc', 'Qc', 'Jc', 'Tc', '9c')) < ace_five_five(('2c', '2d', '7s', '6h', '5c'))
+    require((rank_high_five(('As', '2s', '3s', '4s', '5s')) == (8, 5)), 'wheel straight flush high')
+    require((ace_five_five(('As', '2s', '3s', '4s', '5s')) == (0, 5, 4, 3, 2, 1)), 'ace-to-five wheel low')
+    require((ace_five_five(('As', '2s', '3d', '4h', '9c')) == (0, 9, 4, 3, 2, 1)), 'nine-high low')
+    require((ace_five_five(('Ac', 'Ad', 'Th', '9s', '8c')) < ace_five_five(('2c', '2d', '7s', '6h', '5c'))), 'paired ace low order')
+    require((ace_five_five(('Kc', 'Qc', 'Jc', 'Tc', '9c')) < ace_five_five(('2c', '2d', '7s', '6h', '5c'))), 'king-high versus ace low order')
 
     high_a, low_a, _ = seven_scores(QUARTER_PLAYERS['A'])
     high_b, low_b, _ = seven_scores(QUARTER_PLAYERS['B'])
     high_c, low_c, _ = seven_scores(QUARTER_PLAYERS['C'])
-    assert high_a == (5, 14, 7, 4, 3, 2) and low_a == (0, 5, 4, 3, 2, 1)
-    assert high_b == (4, 5) and low_b == (0, 5, 4, 3, 2, 1)
-    assert high_c[0] == 3 and low_c is None
-    assert stud8_awards(QUARTER_PLAYERS, 300) == {
-        'A': Fraction(225), 'B': Fraction(75), 'C': Fraction(0)}
+    require((high_a == (5, 14, 7, 4, 3, 2) and low_a == (0, 5, 4, 3, 2, 1)), 'quarter player A high and low')
+    require((high_b == (4, 5) and low_b == (0, 5, 4, 3, 2, 1)), 'quarter player B high and low')
+    require((high_c[0] == 3 and low_c is None), 'quarter player C no low')
+    require((stud8_awards(QUARTER_PLAYERS, 300) == {
+        'A': Fraction(225), 'B': Fraction(75), 'C': Fraction(0)}), 'Stud8 quarter split 225/75/0')
 
-    assert seven_scores(SCOOP_PLAYERS['A'])[:2] == ((8, 5), (0, 5, 4, 3, 2, 1))
-    assert seven_scores(SCOOP_PLAYERS['B'])[1] is None
-    assert stud8_awards(SCOOP_PLAYERS, 200) == {'A': Fraction(200), 'B': Fraction(0)}
+    require((seven_scores(SCOOP_PLAYERS['A'])[:2] == ((8, 5), (0, 5, 4, 3, 2, 1))), 'scoop player A high and low')
+    require((seven_scores(SCOOP_PLAYERS['B'])[1] is None), 'scoop player B has no low')
+    require((stud8_awards(SCOOP_PLAYERS, 200) == {'A': Fraction(200), 'B': Fraction(0)}), 'Stud8 scoop award')
 
-    assert seven_scores(VARIANT_PLAYERS['A'])[1] is None
-    assert seven_scores(VARIANT_PLAYERS['B'])[1] is None
-    assert seven_scores(VARIANT_PLAYERS['A'])[0] == (6, 13, 12)
-    assert seven_scores(VARIANT_PLAYERS['B'])[2] == (0, 9, 4, 3, 2, 1)
-    assert stud8_awards(VARIANT_PLAYERS, 200) == {'A': Fraction(200), 'B': Fraction(0)}
-    assert razz_awards(VARIANT_PLAYERS, 200) == {'A': Fraction(0), 'B': Fraction(200)}
+    require((seven_scores(VARIANT_PLAYERS['A'])[1] is None), 'variant player A no qualifying low')
+    require((seven_scores(VARIANT_PLAYERS['B'])[1] is None), 'variant player B no qualifying low')
+    require((seven_scores(VARIANT_PLAYERS['A'])[0] == (6, 13, 12)), 'variant A full house high')
+    require((seven_scores(VARIANT_PLAYERS['B'])[2] == (0, 9, 4, 3, 2, 1)), 'variant B nine-low razz score')
+    require((stud8_awards(VARIANT_PLAYERS, 200) == {'A': Fraction(200), 'B': Fraction(0)}), 'Stud8 variant high award')
+    require((razz_awards(VARIANT_PLAYERS, 200) == {'A': Fraction(0), 'B': Fraction(200)}), 'Razz variant low award')
 
-    assert razz_awards(RAZZ_TIE_PLAYERS, 200) == {'A': Fraction(100), 'B': Fraction(100)}
-    assert bring_in(THIRD_UPCARDS, 'stud8') == 'A'
-    assert bring_in(THIRD_UPCARDS, 'razz') == 'B'
-    assert fourth_street_first(FOURTH_UPCARDS, 'stud8') == 'B'
-    assert fourth_street_first(FOURTH_UPCARDS, 'razz') == 'A'
-    assert exposed_rank_count(KNOWN_HERO, OTHER_UPCARDS) == (46, 3)
-    assert exposed_rank_count(KNOWN_HERO, OTHER_UPCARDS_MORE_THREES) == (46, 2)
+    require((razz_awards(RAZZ_TIE_PLAYERS, 200) == {'A': Fraction(100), 'B': Fraction(100)}), 'Razz wheel tie payout')
+    require((bring_in(THIRD_UPCARDS, 'stud8') == 'A'), 'Stud8 third-street bring-in')
+    require((bring_in(THIRD_UPCARDS, 'razz') == 'B'), 'Razz third-street bring-in')
+    require((fourth_street_first(FOURTH_UPCARDS, 'stud8') == 'B'), 'Stud8 fourth-street first')
+    require((fourth_street_first(FOURTH_UPCARDS, 'razz') == 'A'), 'Razz fourth-street first')
+    require((exposed_rank_count(KNOWN_HERO, OTHER_UPCARDS) == (46, 3)), 'six visible cards leave three threes')
+    require((exposed_rank_count(KNOWN_HERO, OTHER_UPCARDS_MORE_THREES) == (46, 2)), 'additional third exposed leaves two threes')
 
 
 def main() -> None:
