@@ -2155,3 +2155,62 @@ unexamined calculations as passing under `-O`.
 The source-to-live exact GET check and full deterministic site
 tests must be performed separately. A GitHub merge and a content
 fetch do not establish deployed byte identity or SEO results.
+
+## Turn 99: Omaha Hi-Lo pot conservation survives Python optimization
+
+The existing download `downloads/poker-omaha-hilo-split-enumerator.py`
+supports fixed, fictional four-card Omaha eight-or-better
+high/low examples and exact rational pot-award fractions. The
+original authenticated Git blob is
+`a627ffd72c51a039462dd6baf1fcdd768d70d55c`.
+In `awards()`, the original runtime check
+`assert sum(result.values()) == pot` is removed by Python
+`-O` / `-OO`. Its `verify()` also had 21 optimization-elidable
+assertions covering hand ranks, quarter/scoop/no-low outcomes,
+counterfeit rivers and pot conservation. This is not merely
+style: changing the no-low pot award to omit one chip caused the
+original `--self-test` to falsely print PASS under both optimized
+modes. Changing a fixed wheel rank produced the same false PASS.
+Both corruptions correctly failed under regular Python.
+
+The replacement at exact Git blob
+`523239d89674ea5c71f35dacf53cd24cb13013aa`
+changes `awards()` to raise `ArithmeticError` on a
+nonconserving award in **all** interpreter modes, even when the
+function is called by an importer rather than `--self-test`.
+A separate explicit `require(condition, case)` raises a labelled
+`AssertionError` for each of the original 21 fixed examples.
+The original tests and default CLI printouts remain identical
+under normal, `-O` and `-OO` for valid inputs. The new script
+does not add dependencies, any hand input prompt, network access,
+tracking, player data, a solver, an indexed article, a sitemap URL,
+new HTML or repository-authored GitHub Actions.
+
+The regression suite
+`_tests/test_turn99_omaha_hilo_optimized.py`, authenticated
+blob `d3aa5f7edb7b65dbbc1e973c69bee06e17841e7d`,
+has nine standalone tests, all of which were executed and passed
+against the exact published script bytes in a matching isolated
+fixture. They cover three Python modes, identical original
+printouts, AST absence of `assert`, both deliberately broken
+rank and pot mutations, pot conservation on odd amounts,
+duplicate/invalid cards, and import safety. Three additional
+site-integration tests validate existing links, canonical,
+public inventory, sitemap and local runner in a **complete
+repository checkout**, which was not available and was not run.
+Retain the original `test_poker_omaha_hilo_split.py` tests
+and run them with the complete site build before declaring
+full release acceptance. Register the new test in the
+manual-only `_scripts/local_release_checks.py`.
+
+The prior Turn 98 audit's remaining uncorrected downloaded
+variant scripts are `poker-plo-flush-pair-enumerator.py`,
+`poker-plo-wrap-enumerator.py` and
+`poker-stud8-razz-seven-card-check.py`. These still contain
+optimization-elidable assertions, so do not call the wider
+variant suite optimized-safe. Address each separately with
+actual normal/optimized/corruption checks; prioritize the
+Stud8/Razz runtime conservation guard next. Source parity
+and a GitHub merge do not prove that the public downloadable
+file is serving its new bytes. Use existing exact-byte
+public checks and no Actions.

@@ -131,7 +131,8 @@ def awards(players: dict[str, tuple[str, ...]], board: tuple[str, ...],
         high_pool = Fraction(pot)
     for name in high_winners:
         result[name] += high_pool / len(high_winners)
-    assert sum(result.values()) == pot
+    if sum(result.values()) != Fraction(pot):
+        raise ArithmeticError('Omaha/8 awarded shares do not conserve the contested pot')
     return result
 
 
@@ -154,38 +155,44 @@ def faceup_low_rivers(hero: tuple[str, ...], rival: tuple[str, ...]
     return {key: tuple(cards) for key, cards in outcomes.items()}
 
 
-def verify() -> None:
-    assert high_five(('As', '2h', '3d', '4c', '5s')) == (4, 5)
-    assert high_five(('As', '2s', '3s', '4s', '5s')) == (8, 5)
-    assert low_five(('As', '2s', '3s', '4s', '5s')) == (5, 4, 3, 2, 1)
-    assert low_five(('As', '2s', '3d', '4c', '2h')) is None
-    assert low_five(('As', '2s', '3d', '4c', '9h')) is None
+def require(condition: bool, case: str) -> None:
+    """Keep all fixed example checks active even under Python -O and -OO."""
+    if not condition:
+        raise AssertionError('Omaha/8 fixed case failed: ' + case)
 
-    assert omaha_scores(QUARTER_PLAYERS['A'], QUARTER_BOARD) == ((7, 14, 13), (5, 4, 3, 2, 1))
-    assert omaha_scores(QUARTER_PLAYERS['B'], QUARTER_BOARD)[1] == (5, 4, 3, 2, 1)
-    assert omaha_scores(QUARTER_PLAYERS['C'], QUARTER_BOARD)[1] is None
-    assert awards(QUARTER_PLAYERS, QUARTER_BOARD, 300) == {
-        'A': Fraction(225), 'B': Fraction(75), 'C': Fraction(0)}
-    assert awards(SCOOP_PLAYERS, SCOOP_BOARD, 240) == {
-        'A': Fraction(240), 'B': Fraction(0)}
-    assert awards(NO_LOW_PLAYERS, NO_LOW_BOARD, 240) == {
-        'A': Fraction(240), 'B': Fraction(0)}
-    assert all(omaha_scores(holes, NO_LOW_BOARD)[1] is None for holes in NO_LOW_PLAYERS.values())
+
+def verify() -> None:
+    require((high_five(('As', '2h', '3d', '4c', '5s')) == (4, 5)), 'high-hand wheel straight')
+    require((high_five(('As', '2s', '3s', '4s', '5s')) == (8, 5)), 'high-hand wheel straight flush')
+    require((low_five(('As', '2s', '3s', '4s', '5s')) == (5, 4, 3, 2, 1)), 'eight-or-better ace low')
+    require((low_five(('As', '2s', '3d', '4c', '2h')) is None), 'paired low excluded')
+    require((low_five(('As', '2s', '3d', '4c', '9h')) is None), 'nine-high low excluded')
+
+    require((omaha_scores(QUARTER_PLAYERS['A'], QUARTER_BOARD) == ((7, 14, 13), (5, 4, 3, 2, 1))), 'quarter winner best high and low')
+    require((omaha_scores(QUARTER_PLAYERS['B'], QUARTER_BOARD)[1] == (5, 4, 3, 2, 1)), 'quarter second-player low')
+    require((omaha_scores(QUARTER_PLAYERS['C'], QUARTER_BOARD)[1] is None), 'third player no qualifying low')
+    require((awards(QUARTER_PLAYERS, QUARTER_BOARD, 300) == {
+        'A': Fraction(225), 'B': Fraction(75), 'C': Fraction(0)}), 'three-player pot quarters')
+    require((awards(SCOOP_PLAYERS, SCOOP_BOARD, 240) == {
+        'A': Fraction(240), 'B': Fraction(0)}), 'scoop pot')
+    require((awards(NO_LOW_PLAYERS, NO_LOW_BOARD, 240) == {
+        'A': Fraction(240), 'B': Fraction(0)}), 'no qualifying low entire high pot')
+    require((all(omaha_scores(holes, NO_LOW_BOARD)[1] is None for holes in NO_LOW_PLAYERS.values())), 'no-low board excludes all lows')
 
     before_a = omaha_scores(TURN_A, TURN_BOARD)[1]
     before_b = omaha_scores(TURN_B, TURN_BOARD)[1]
-    assert before_a == (7, 5, 3, 2, 1) and before_b == (7, 5, 4, 3, 1)
+    require((before_a == (7, 5, 3, 2, 1) and before_b == (7, 5, 4, 3, 1)), 'fourth-street low comparison')
     river_board = TURN_BOARD + (COUNTERFEIT_RIVER,)
-    assert omaha_scores(TURN_A, river_board)[1] == (7, 5, 3, 2, 1)
-    assert omaha_scores(TURN_B, river_board)[1] == (5, 4, 3, 2, 1)
-    assert awards({'A': TURN_A, 'B': TURN_B}, river_board) == {'A': Fraction(0), 'B': Fraction(240)}
-    assert omaha_scores(TURN_A_PROTECTED, river_board)[1] == (5, 4, 3, 2, 1)
-    assert awards({'A': TURN_A_PROTECTED, 'B': TURN_B}, river_board) == {
-        'A': Fraction(120), 'B': Fraction(120)}
+    require((omaha_scores(TURN_A, river_board)[1] == (7, 5, 3, 2, 1)), 'counterfeited hero low')
+    require((omaha_scores(TURN_B, river_board)[1] == (5, 4, 3, 2, 1)), 'counterfeiting opponent low')
+    require((awards({'A': TURN_A, 'B': TURN_B}, river_board) == {'A': Fraction(0), 'B': Fraction(240)}), 'counterfeited pot awarded')
+    require((omaha_scores(TURN_A_PROTECTED, river_board)[1] == (5, 4, 3, 2, 1)), 'protected low remaining tied')
+    require((awards({'A': TURN_A_PROTECTED, 'B': TURN_B}, river_board) == {
+        'A': Fraction(120), 'B': Fraction(120)}), 'protected low tied award')
     results = faceup_low_rivers(TURN_A, TURN_B)
-    assert len(results['rival']) == 3 and set(results['rival']) == {'2c', '2d', '2h'}
-    assert len(results['hero']) == 37 and not results['tie'] and not results['neither']
-    assert sum(len(cards) for cards in results.values()) == 40
+    require((len(results['rival']) == 3 and set(results['rival']) == {'2c', '2d', '2h'}), 'three counterfeit rivers')
+    require((len(results['hero']) == 37 and not results['tie'] and not results['neither']), '37 other winning low rivers')
+    require((sum(len(cards) for cards in results.values()) == 40), '40 face-up river outcomes')
 
 
 def main() -> None:

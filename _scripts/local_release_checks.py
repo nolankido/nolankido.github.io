@@ -209,6 +209,7 @@ def main() -> int:
         ('Turn 96 stratified 3-bet Simpson reversal and equal-mix evidence boundaries', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn96_position_mix_reversal.py', '-q']),
         ('Turn 97 optimization-safe fixed statistical self-test with false-pass mutations', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn97_optimized_frequency_self_test.py', '-q']),
         ('Turn 98 optimization-safe pot-odds self-test and corrupted-expectation probes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn98_optimized_pot_odds.py', '-q']),
+        ('Turn 99 Omaha Hi-Lo optimized pot-conservation and card-ranking safeguards', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn99_omaha_hilo_optimized.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
