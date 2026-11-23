@@ -53,7 +53,13 @@ def contract_problems(html):
     if len(select_buttons) != 1 or not all(x in select_buttons[0] for x in ('disabled',)) or (
         select_buttons[0].get('type') != 'button' or select_buttons[0].get('aria-controls') != 'study-record'):
         problems.append('Select control must be an initially disabled non-submitting button')
-    if len(buttons) != 5 or len([a for a in buttons if a.get('data-drill')]) != 4:
+    reset_buttons = [a for a in buttons if a.get('id') == 'study-reset']
+    if (len(reset_buttons) != 1 or 'disabled' not in reset_buttons[0]
+        or reset_buttons[0].get('type') != 'button' or
+        reset_buttons[0].get('aria-controls') !=
+            'river-low river-high raise-equity bluff-fold study-record'):
+        problems.append('Reset must be a controlled initially disabled button')
+    if len(buttons) != 6 or len([a for a in buttons if a.get('data-drill')]) != 4:
         problems.append('Original four boundary controls must be preserved')
     if len([a for tag, a in parsed if tag == 'input']) != 4:
         problems.append('Only the four fictional model inputs are permitted')
