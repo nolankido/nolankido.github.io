@@ -20,11 +20,12 @@ DOWNLOADS = {
     "/downloads/poker-hand-review-practice-01-key.html",
     "/downloads/nolanpoker-local-video-qa.html",
     "/downloads/nolanpoker-public-youtube-review.html",
+    "/downloads/poker-pot-odds-sensitivity-lab.html",
 }
 
 
 class PublicDownloadHtml5Tests(unittest.TestCase):
-    def test_four_registered_public_html_downloads_have_full_html5_coverage(self):
+    def test_registered_public_html_downloads_have_full_html5_coverage(self):
         paths = check_html5.public_html_download_paths(ROOT)
         self.assertEqual(set(paths), DOWNLOADS)
         for route, relative in paths.items():
