@@ -2276,3 +2276,62 @@ with failure-injection and optimized interpreter tests.
 A merged GitHub blob proves repository state, not the exact
 publicly served download bytes or any search-traffic outcome.
 Do not add GitHub Actions, cron, CI providers or paid APIs.
+
+## Turn 101: optimizer-safe PLO flush blocker and paired-board counts
+
+The original fixed-example public download
+`downloads/poker-plo-flush-pair-enumerator.py` at Git blob
+`45454ddd30792776c39bf30ae5962402ce89850d`
+was reproduced **byte-for-byte** locally, including its original
+regular and optimized CLI output. It used `assert len(unseen) == 45`
+inside the imported `four_card_flush_holdings()` function,
+and 15 further `assert` checks in the fixed `verify()`.
+Under Python `-O` and `-OO`, a deliberately corrupted
+expected 25,830 flush deal count still reported PASS. The
+runtime input check also vanished, allowing a three-card or
+five-card hero to produce invalid four-card-rival statistics.
+
+The repaired script Git blob is
+`9eaee08148b73c4cc384cf91c5b495ca39a3092c`.
+It explicitly requires **exactly four private cards** before
+counting opposing four-card deals. Its 45-unseen-card model
+invariant now raises `ArithmeticError` regardless of optimization.
+All 15 originally asserted high-hand, flush blocker, deck-count,
+paired-board and river checks now use explicitly raising
+`require(condition, case)` calls. It retains all original
+fixed fictional PLO scoring, printed numerator/denominator
+counts, source URL, CLI flags, and standard-library imports.
+The calculated counts are 25,830 of 148,995 versus 31,185 of
+148,995 flush-holding opponent deals with and without the
+ace-spade blocker; 6,699 contain the ace of spades plus another
+spade when it is unblocked. Face-up rival-winning river counts
+stay 9 of 40, 10 of 40, and 0 of 40 in their original fixtures.
+These are not live-player statistics or recommended actions.
+
+The exact new regression source
+`_tests/test_turn101_plo_flush_pair_optimized.py` has
+Git blob `91f8bfc20f3f8a9565d095900d45f2e973f5aa02`.
+Ten standalone unittest methods passed against the exact
+script and test fixture, including regular/`-O`/`-OO`
+byte-identical original default/self-test output SHA-256,
+deliberately wrong flush and paired-river counts failing
+in all three modes, the newly explicit invalid hand-size
+rejection in all modes, independent binomial counts,
+card uniqueness, and the no-network import surface.
+Three further site integration methods are authored,
+but they were not run without a complete repository checkout.
+Register this test in the existing manual-only
+`_scripts/local_release_checks.py`, retain the previous
+`_tests/test_poker_plo_flush_pair.py` module and its
+original guide, source dates, sitemap, canonical,
+Poker Finder, and exact public GET inventory unchanged.
+A GitHub merge does not prove live exact-byte release.
+No GitHub Actions, external dependencies, analytics,
+new player inputs, user tracking or cron are permitted.
+
+The only still-unrepaired poker enumerator from the
+Turn 98 through Turn 101 optimized-assert audit is
+`downloads/poker-plo-wrap-enumerator.py`, which still
+contains 15 optimization-dependent checks. Address
+it separately with normal/optimized execution,
+fixed output preservation, and deliberate failures.
