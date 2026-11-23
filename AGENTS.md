@@ -1900,3 +1900,56 @@ must assert screen/print visibility, full note parity and no-JS
 fallback in the full checkout's Playwright suite.
 Complete local release tests and exact public byte checks remain
 pending if this site checkout is unavailable.
+
+## Turn 94: restore original, fictional sensitivity-lab assumptions with one action
+
+Turn 93's complete `/downloads/poker-pot-odds-sensitivity-lab.html`
+print mirror was independently observed live before this turn. The
+reader could change all four controls and load four boundary presets,
+but could not return to the original baseline without manually
+resetting four inputs. Turn 94 adds a second, labelled native
+`type="button"` in the existing `.study-actions`:
+`#study-reset` ("Restore original example settings"). It starts
+disabled in the static HTML, is enabled only after the existing
+inline script initializes, and restores each range input from its own
+`defaultValue`, rather than duplicating literal assumptions in JS.
+It calls the **existing** `render()` once to recompute the three EV
+results, copyable `#study-record`, and full `#study-print` mirror.
+Focus moves to `#river-low` so keyboard users can continue studying.
+The action does not erase or copy clipboard content, retain a prior
+trial, request an HTTP resource, collect a real poker hand, or claim
+strategic results. The reset and selection buttons are not printed,
+and without JavaScript both remain disabled while the original
+static facts, results and print mirror remain readable.
+
+The four original slider defaults are 22%, 29%, 25% and 40%; the
+four existing boundary presets and bluff 0.5 percentage point step
+are unchanged. Preserve the existing noindex, CSP, zero network,
+zero personal data, strict no-GitHub-Actions rule, and one exact
+download inventory route. Edit
+`_source/poker/pot-odds-sensitivity-lab.html` and
+`downloads/poker-pot-odds-sensitivity-lab.html` identically.
+Their expected new Git blob SHA is
+`cb466935dfc3f13fffa8113ef2d507b17c819c2d`.
+Keep all canonical Article metadata, searchable Poker Finder entries,
+sitemap and standalone workbook/verification sources unchanged.
+
+`_tests/test_turn91_threshold_boundary_drill.py` now requires
+the two distinct, initially disabled study action buttons in
+addition to the four preset buttons.
+`_tests/test_turn92_private_study_record.py` requires six total
+buttons, with a fully scoped reset and only four range controls.
+`_tests/pot_odds_sensitivity_browser.py` checks the reset and
+default results, copyable/print note, keyboard focus, mobile widths,
+no-JS disabled state, and zero network/error behavior.
+`_tests/test_turn94_restore_lab_baseline.py` adds 11 checks:
+eight standalone tests passed in an exact-source local fixture and
+three integration tests remain unexecuted without a full checkout.
+The previous Turn 92 and Turn 93 standalone suites also passed,
+for 24 total tests. Chromium was run against the exact local HTML
+at 320, 390, 768, and 1280 pixels with a no-JS fallback and print
+media. Do not claim that an isolated suite proves a full site
+build, exact live release bytes, rankings, traffic or real poker
+strategy. Use the existing manual
+`_scripts/local_release_checks.py --full --browser` plus public
+byte comparison from a complete checkout after merge.
