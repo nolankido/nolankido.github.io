@@ -202,6 +202,7 @@ def main() -> int:
         ('Turn 89 exact poker call/bluff sensitivity and publication boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn89_pot_odds_sensitivity.py', '-q']),
         ('Turn 90 static offline pot-odds sensitivity lab release and noindex boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn90_offline_sensitivity_lab.py', '-q']),
         ('Turn 91 exact modeled break-even boundary drill and keyboard presets', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn91_threshold_boundary_drill.py', '-q']),
+        ('Turn 92 private copyable fixed-scenario study note and no-data safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn92_private_study_record.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
