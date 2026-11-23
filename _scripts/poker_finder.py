@@ -14,6 +14,7 @@ import poker_practice
 import player_find
 import search_sections
 import tenbb_companion
+from poker_optional_summary import optional_summary_sections
 
 
 class Glossary(HTMLParser):
@@ -71,6 +72,11 @@ class GuideText(HTMLParser):
         self.course_heading = False
         self.feed(re.sub(r'\$\{[a-z_]+\}', '', source))
         self.finish()
+        optional = optional_summary_sections(source)
+        existing = {section['anchor'] for section in self.sections}
+        if any(section['anchor'] in existing for section in optional):
+            raise ValueError('Optional study anchor duplicates a guide section')
+        self.sections.extend(optional)
 
     def finish(self):
         text = ' '.join(' '.join(self.current['parts']).split())
@@ -235,4 +241,5 @@ def render(items: list[dict]) -> dict[str, str]:
     return {'poker_finder_cards': '\n'.join(cards), 'poker_finder_count': str(len(items)),
             'poker_finder_scope': f'{counts["guide"]} on-site pages, {counts["resource"]} external resources and {counts["glossary"]} glossary entries. '
             'Manifest guide prose and section headings are searchable. The standalone 10 BB Playbook provides its eight visible section headings only; exercise answers, navigation and external article bodies are excluded. ' +
+            'Labelled optional study summaries are searchable; their answer bodies remain excluded. '
             'An overview or glossary entry is not an additional guide.'}

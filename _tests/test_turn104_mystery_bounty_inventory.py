@@ -162,12 +162,15 @@ class MysteryBountySiteIntegration(unittest.TestCase):
             self.assertLess(content.index('id="bounty-mystery-draw"'), content.index('id="bounty-practice"'))
         self.assertIn('<link rel="canonical" href="https://nolankido.com/poker/bounty-knockout-equity/">', self.public)
 
-    def test_finder_does_not_index_the_collapsed_exercise_answer(self):
+    def test_finder_indexes_only_the_optional_title_without_answers(self):
         sys.path.insert(0, str(ROOT/'_scripts'))
         import poker_finder
         before = BRANCH.sub('', self.source, count=1).replace(NAV_LINK, '', 1)
-        self.assertEqual(poker_finder.GuideText(before).sections,
-                         poker_finder.GuideText(self.source).sections)
+        title = 'Advanced example (extra reading time): mystery bounty draw inventory. What is a mystery bounty worth after the jackpot has been drawn?'
+        expected = {'anchor':'bounty-mystery-draw', 'title':title, 'text':title}
+        sections = poker_finder.GuideText(self.source).sections
+        self.assertEqual(sections, poker_finder.GuideText(before).sections + [expected])
+        self.assertNotIn('$1,000 / 3', repr(sections))
 
     def test_build_parity_manual_registration_and_no_actions(self):
         sys.path.insert(0, str(ROOT/'_scripts'))

@@ -164,12 +164,15 @@ class SatelliteTieSiteIntegration(unittest.TestCase):
             self.assertLess(content.index('id="sat-tie-branch"'),content.index('id="sat-payouts"'))
         self.assertIn('<link rel="canonical" href="https://nolankido.com/poker/satellite-bubble-seat-equity/">',self.public)
 
-    def test_native_finder_keeps_exercise_answers_out_of_existing_snippets(self):
+    def test_native_finder_indexes_only_the_optional_title_without_answers(self):
         sys.path.insert(0,str(ROOT/'_scripts'))
         import poker_finder
         prior = BRANCH.sub('',self.source,count=1).replace(NAV_LINK,'',1)
-        self.assertEqual(poker_finder.GuideText(prior).sections,
-                         poker_finder.GuideText(self.source).sections)
+        title = 'Advanced example (extra reading time): satellite split pots and ties. Can two calls with the same chip equity have different seat values?'
+        expected = {'anchor':'sat-tie-branch', 'title':title, 'text':title}
+        sections = poker_finder.GuideText(self.source).sections
+        self.assertEqual(sections, poker_finder.GuideText(prior).sections + [expected])
+        self.assertNotIn('2179 / 2310', repr(sections))
 
     def test_generated_article_manual_registration_and_no_actions(self):
         sys.path.insert(0,str(ROOT/'_scripts'))

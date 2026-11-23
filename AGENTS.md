@@ -2536,3 +2536,34 @@ The manual runner includes the new regression. Two new site integration
 checks and the complete website, browser, search and deployment suite
 remain pending. No GitHub Actions, scheduled job, paid service or new
 dependency. See the Turn 106 report for exact scope.
+
+## Turn 107: discover optional study summaries without answer spoilers
+
+Poker Finder now appends the visible plain-text summary of an explicitly
+marked optional study disclosure as a summary-only passage. Use
+`_scripts/poker_optional_summary.py` from GuideText; keep ordinary core
+sections unchanged. Normal practice details, their answers, hidden and
+nested disclosures, and navigation remain excluded. Reject unsafe,
+duplicate or missing anchors, empty/hidden summaries and malformed marked
+markup. Do not add answer paragraphs or private data to Finder.
+
+The two existing advanced summaries identify satellite split pots and ties
+(`#sat-tie-branch`) and mystery bounty draw inventory
+(`#bounty-mystery-draw`). Keep their optional-reading markers and original
+answer bodies. The authored and generated guide titles must match. Finder
+still contains 301 entries; only two new summary-only passages in existing
+cards and the scope note change. No new indexed pages, sitemap changes,
+tracking, or network behavior.
+
+Eight standalone parser and GuideText extraction tests passed in the
+matching isolated fixture. The exact helper and new test blobs are
+`960df62fcbd58afb60ecf3384b5bd791706cad92` and
+`295e3a6940f5eaedad835c352deced73efb65be7`. Targeted checks using all
+301 generated cards and source-matched Finder ranking functions place the
+intended guide first for all four new queries, selecting the precise
+disclosure anchor. This is not the full browser suite. Register the new
+test module; retain the earlier mathematical tests, adapting their Finder
+expectations to unchanged core passages plus one summary-only passage.
+The new full-site integration and browser tests, complete generator,
+search snapshot and exact live verification remain outstanding. No Actions
+or paid dependencies.
