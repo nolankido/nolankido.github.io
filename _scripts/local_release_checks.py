@@ -222,6 +222,7 @@ def main() -> int:
         ('Turn 109 exact-title catalog and source-bounded third book entity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn109_catalog_identity.py', '-q']),
         ('Turn 110 staged author page and public evidence handoff', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn110_staged_author_page.py', '-q']),
         ('Turn 111 canonical third book migration and discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn111_book_migration.py', '-q']),
+        ('Turn 112 fail-closed release preparation and rollback', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn112_prepare_local_release.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
