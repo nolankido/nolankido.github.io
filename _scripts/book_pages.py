@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 
 ORIGIN = "https://nolankido.com"
 PERSON = ORIGIN + "/about/#nolan-kido"
-UPDATED = "2026-11-23"
+UPDATED = "2026-11-24"
 BOOKS = [
     {"slug": "one-workflow-at-a-time", "title": "One Workflow at a Time",
      "seo": "One Workflow at a Time: Practical AI Book | Nolan Kido",
@@ -19,6 +19,10 @@ BOOKS = [
      "seo": "How to Play No-Limit Texas Hold’em: Book | Nolan Kido",
      "description": "About How to Play No-Limit Texas Hold’em by Nolan Kido: a beginner poker book covering rules, position, betting, ranges and decision review, with free practice.",
      "interest": "poker", "modified": "2026-11-22"},
+    {"slug": "ai-works-human-decides", "title": "AI Works, Human Decides",
+     "seo": "AI Works, Human Decides: Book by Nolan Kido",
+     "description": "Explore Nolan Kido's book AI Works, Human Decides, on delegating work, checking evidence and keeping responsibility. Try a free decision-review exercise.",
+     "interest": "technology", "modified": "2026-11-24"},
 ]
 
 HUB_ROUTE = "/books/"
@@ -30,11 +34,12 @@ HUB_DESCRIPTION = ("Explore three books by Nolan Kido: AI Works, Human Decides; 
                    "and How to Play No-Limit Texas Hold’em. Free companion exercises.")
 THIRD_BOOK = {
     "@type": "Book",
-    "@id": HUB_URL + "#book-ai-works-human-decides",
+    "@id": ORIGIN + "/books/ai-works-human-decides/#book",
     "name": "AI Works, Human Decides",
-    "url": HUB_URL + "#book-ai-works-human-decides",
+    "url": ORIGIN + "/books/ai-works-human-decides/",
     "description": "A book about using AI for practical tasks while retaining human judgment, verification, and responsibility.",
     "author": {"@id": PERSON},
+    "mainEntityOfPage": {"@id": ORIGIN + "/books/ai-works-human-decides/#webpage"},
 }
 
 
@@ -69,6 +74,10 @@ def published(root: Path) -> list[dict]:
             or entity.get("mainEntityOfPage", {}).get("@id") != url + "#webpage"
             or entity.get("isbn") is not None or entity.get("offers") is not None or entity.get("datePublished") is not None):
             raise ValueError("Book identity or provenance schema invalid")
+        if item["slug"] == "ai-works-human-decides" and (entity != THIRD_BOOK
+                or schema.get("name") != item["seo"]
+                or schema.get("description") != item["description"]):
+            raise ValueError("Third book page differs from reviewed identity")
         for link in ("index.html", "creative/index.html"):
             if 'href="' + route(item) + '"' not in (root / link).read_text(encoding="utf-8"):
                 raise ValueError("Book needs inbound link from " + link)
@@ -108,8 +117,8 @@ def hub_record(root: Path) -> dict | None:
             or collection.get("@id") != HUB_URL + "#book-list"
             or len(items) != len(expected)):
         raise ValueError("Books catalog must list the exact published author works")
-    # A catalog work, not a new independently indexed author-book page.
-    if (data.get("mentions") != THIRD_BOOK
+    # Keep the original reader fragment, not a duplicate structured identity.
+    if ("mentions" in data or items[-1].get("item") != THIRD_BOOK
             or html.count('id="book-ai-works-human-decides"') != 1
             or THIRD_BOOK["description"] not in html):
         raise ValueError("Books catalog third-title provenance or anchor mismatch")

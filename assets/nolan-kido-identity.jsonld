@@ -117,12 +117,15 @@
     },
     {
       "@type": "Book",
-      "@id": "https://nolankido.com/books/#book-ai-works-human-decides",
+      "@id": "https://nolankido.com/books/ai-works-human-decides/#book",
       "name": "AI Works, Human Decides",
-      "url": "https://nolankido.com/books/#book-ai-works-human-decides",
+      "url": "https://nolankido.com/books/ai-works-human-decides/",
       "description": "A book about using AI for practical tasks while retaining human judgment, verification, and responsibility.",
       "author": {
         "@id": "https://nolankido.com/about/#nolan-kido"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nolankido.com/books/ai-works-human-decides/#webpage"
       }
     }
   ]
