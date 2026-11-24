@@ -169,7 +169,7 @@ class BookReaderJourneyTests(unittest.TestCase):
         dates = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in root}
         for route in ("/books/", *(f"/books/{item['slug']}/" for item in PAGES)):
             with self.subTest(route=route):
-                expected = "2026-11-22"
+                expected = book_pages.UPDATED if route == "/books/" else "2026-11-22"
                 self.assertEqual(dates["https://nolankido.com" + route], expected)
         for item in PAGES:
             html = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
