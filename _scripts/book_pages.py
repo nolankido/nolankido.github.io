@@ -1,6 +1,7 @@
 """Source-backed public book pages for sitemap and local Find discovery."""
 from __future__ import annotations
 from html.parser import HTMLParser
+import book_metadata
 import json
 from pathlib import Path
 import re
@@ -66,6 +67,8 @@ def published(root: Path) -> list[dict]:
         if not match or len(re.findall(r'<script type="application/ld\+json">', html)) != 1:
             raise ValueError("Book must have one schema record")
         schema = json.loads(match.group(1))
+        book_metadata.validate(html, title=item["seo"], heading=item["title"],
+                               description=item["description"], url=url, schema=schema)
         entity = schema.get("mainEntity", {})
         if (schema.get("@type") != "WebPage" or schema.get("url") != url or schema.get("dateModified") != item["modified"]
             or entity.get("@type") != "Book" or entity.get("@id") != url + "#book"
@@ -107,6 +110,8 @@ def hub_record(root: Path) -> dict | None:
     if len(schemas) != 1:
         raise ValueError("Books catalog requires one JSON-LD record")
     data = json.loads(schemas[0])
+    book_metadata.validate(html, title=HUB_TITLE, heading="Books by Nolan Kido",
+                           description=HUB_DESCRIPTION, url=HUB_URL, schema=data)
     collection = data.get("mainEntity", {})
     items = collection.get("itemListElement", [])
     expected = published(root)

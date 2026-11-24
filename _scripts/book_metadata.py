@@ -1,0 +1,71 @@
+"""Keep standalone book discovery metadata tied to visible, reviewed content."""
+from html.parser import HTMLParser
+import re
+
+
+class Metadata(HTMLParser):
+    def __init__(self, document):
+        super().__init__(convert_charrefs=True)
+        self.values = {'title': [], 'h1': []}
+        self.capture = None
+        self.parts = []
+        self.canonicals = []
+        self.meta = {}
+        self.feed(document)
+        self.close()
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag in self.values:
+            self.capture = tag
+            self.parts = []
+        elif tag == 'link':
+            if 'canonical' in (attributes.get('rel') or '').lower().split():
+                self.canonicals.append(attributes.get('href'))
+        elif tag == 'meta':
+            for key in ('name', 'property'):
+                name = (attributes.get(key) or '').lower()
+                if name:
+                    self.meta.setdefault(name, []).append(attributes.get('content'))
+
+    def handle_data(self, data):
+        if self.capture:
+            self.parts.append(data)
+
+    def handle_endtag(self, tag):
+        if tag == self.capture:
+            self.values[tag].append(' '.join(''.join(self.parts).split()))
+            self.capture = None
+
+
+def validate(document, *, title, heading, description, url, schema):
+    """Reject missing, duplicated or conflicting search and sharing signals.
+
+    The caller separately checks exact source/output equality and Book
+    provenance. This parser checks the actual visible title and metadata,
+    including escaped text and differently ordered HTML attributes.
+    """
+    doc = Metadata(document)
+    if doc.values['title'] != [title] or doc.values['h1'] != [heading]:
+        raise ValueError('Book title or visible heading differs from reviewed metadata: ' + url)
+    if doc.canonicals != [url]:
+        raise ValueError('Book must have one exact canonical: ' + url)
+    expected = {'description': description, 'og:title': title,
+                'og:description': description, 'og:url': url,
+                'twitter:title': title, 'twitter:description': description}
+    for name, value in expected.items():
+        if doc.meta.get(name) != [value]:
+            raise ValueError('Book search/share metadata mismatch (' + name + '): ' + url)
+    for name, values in doc.meta.items():
+        if name == 'robots' or 'bot' in name:
+            for value in values:
+                directives = set(re.split(r'[,\s]+', (value or '').lower()))
+                if directives.intersection({'noindex', 'none'}):
+                    raise ValueError('Book must remain indexable (' + name + '): ' + url)
+    if (not isinstance(schema, dict)
+            or schema.get('name') != title
+            or schema.get('description') != description
+            or schema.get('url') != url
+            or not isinstance(schema.get('mainEntity'), dict)
+            or schema['mainEntity'].get('name') != heading):
+        raise ValueError('Book structured identity differs from reviewed metadata: ' + url)
