@@ -94,7 +94,7 @@ class Turn66TenBBReaderPaths(unittest.TestCase):
         self.assertEqual(tenbb_companion.record(ROOT)["lastmod"], "2026-11-21")
         root = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
         locs = [e.findtext("{*}loc") for e in root]
-        self.assertEqual(len(locs), 230)
+        self.assertEqual((len(locs), len(set(locs))), (231, 231))
         self.assertEqual(locs.count("https://nolankido.com/poker/10bb/"), 1)
         for changed in (self.home_source, self.guide_source):
             self.assertNotIn(chr(0x2014), changed)

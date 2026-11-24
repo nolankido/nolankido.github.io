@@ -117,7 +117,7 @@ class Turn67WrittenPlaybook(unittest.TestCase):
         matches = [node for node in locs if node.findtext("{*}loc") == approval["url"]]
         self.assertEqual(len(matches), 1)
         self.assertEqual(matches[0].findtext("{*}lastmod"), "2026-11-21")
-        self.assertEqual(len(list(locs)), 230)
+        self.assertEqual(len(list(locs)), 231)
         self.assertIn('href="/' + tenbb_companion.CODE + '"', self.page)
 
     def test_missing_disclaimer_false_video_claim_and_broken_anchor_fail(self):

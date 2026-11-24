@@ -147,7 +147,7 @@ class PokerBookLandingTests(unittest.TestCase):
 
     def test_320px_reflow_and_accessible_focus_are_supported_by_css(self):
         self.assertEqual(
-            self.html.count('href="/assets/book-reader-journey.css?v=20261122-pbg03"'),
+            self.html.count('href="/assets/book-reader-journey.css?v=20261124-turn111"'),
             1)
         for token in (".page-book-how-to-play-no-limit-texas-holdem",
                       ".poker-book-free-start a:focus-visible",
@@ -158,11 +158,11 @@ class PokerBookLandingTests(unittest.TestCase):
             self.assertIn(token, self.css)
         self.assertNotIn(chr(0x2014), self.css)
 
-    def test_other_book_page_keeps_original_cta_and_unchanged_css_version(self):
+    def test_other_book_page_keeps_original_cta_and_shared_css_version(self):
         other = read("books/one-workflow-at-a-time/index.html")
         self.assertNotIn("poker-book-hero-actions", other)
         self.assertIn("B0HRQNCP7Y", other)
-        self.assertIn('href="/assets/book-reader-journey.css?v=20261122"', other)
+        self.assertIn('href="/assets/book-reader-journey.css?v=20261124-turn111"', other)
 
     def test_negative_controls_detect_bad_amazon_link_and_missing_example(self):
         self.assertTrue(audit_problems(self.html.replace(AMAZON, "https://example.invalid/", 1)))

@@ -148,7 +148,7 @@ class Turn85ManualPokerFinder(unittest.TestCase):
         self.assertIn('test_turn85_poker_finder_manual.py', manual_runner)
         locs = re.findall(r'<loc>([^<]+)</loc>',
                           (ROOT / 'sitemap.xml').read_text(encoding='utf-8'))
-        self.assertEqual((len(locs), len(set(locs))), (230, 230))
+        self.assertEqual((len(locs), len(set(locs))), (231, 231))
         self.assertEqual(locs.count('https://nolankido.com/poker/10bb/'), 1)
         actions = ROOT / '.github/workflows'
         self.assertFalse(actions.exists() and any(

@@ -45,7 +45,11 @@ class ThreeTitleIdentityTests(unittest.TestCase):
         dates = {el.findtext("{*}loc"): el.findtext("{*}lastmod") for el in sitemap}
         for _, dest, route, _ in PAIRS:
             schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', read(dest), re.S).group(1))
-            self.assertEqual(schema["dateModified"], manifest[route]["updated"])
+            if route == "/about/":
+                self.assertEqual(schema["@type"], "ProfilePage")
+                self.assertNotIn("dateModified", schema)
+            else:
+                self.assertEqual(schema["dateModified"], manifest[route]["updated"])
             self.assertEqual(dates["https://nolankido.com"+route], manifest[route]["updated"])
     def test_retailer_evidence_boundary(self):
         for _, dest, _, _ in PAIRS:

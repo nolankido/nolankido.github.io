@@ -10,6 +10,7 @@ from collections import Counter
 from copy import deepcopy
 from html.parser import HTMLParser
 import json
+import re
 from pathlib import Path
 import sys
 from xml.etree import ElementTree as ET
@@ -230,6 +231,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
                 check('"' + key + '"' not in identity_json, 'Unsupported identity claim: ' + key)
             if page['id'] == 'about':
                 check(schema.get('@type') == 'ProfilePage', 'About must remain the profile page')
+                check(not re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(schema.get('dateModified', ''))),
+                      'ProfilePage modification time must not be an invented day-only timestamp')
                 check(schema.get('mainEntity', {}).get('@id') == person_id, 'Profile must own the shared Person identity')
             if page['id'] == 'task-brief':
                 app = schema.get('mainEntity', {})

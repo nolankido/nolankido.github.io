@@ -173,7 +173,7 @@ class Turn84PokerDiscovery(unittest.TestCase):
         runner = (ROOT / '_scripts/local_release_checks.py').read_text(encoding='utf-8')
         self.assertIn('test_turn84_standalone_poker_discovery.py', runner)
         sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
-        self.assertEqual(sitemap.count('<loc>'), 230)
+        self.assertEqual(sitemap.count('<loc>'), 231)
         self.assertEqual(sitemap.count('https://nolankido.com/poker/10bb/'), 1)
         workflow = ROOT / '.github/workflows'
         self.assertFalse(workflow.exists() and any(

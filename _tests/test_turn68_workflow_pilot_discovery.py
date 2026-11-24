@@ -118,15 +118,16 @@ class Turn68WorkflowPilotDiscovery(unittest.TestCase):
         by_path = {page["path"]: page for page in manifest}
         for route, public in (("/", self.home_public), ("/start-here/", self.start_public)):
             with self.subTest(route=route):
-                self.assertEqual(by_path[route]["updated"], "2026-11-21")
-                self.assertIn('"dateModified": "2026-11-21"', public)
+                expected = "2026-11-24" if route == "/" else "2026-11-21"
+                self.assertEqual(by_path[route]["updated"], expected)
+                self.assertIn('"dateModified": "' + expected + '"', public)
                 self.assertEqual(public.count('rel="canonical" href="https://nolankido.com' + route + '"'), 1)
         xml = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
-        self.assertEqual(len(list(xml)), 230)
+        self.assertEqual(len(list(xml)), 231)
         for route in ("/", "/start-here/"):
             rows = [node for node in xml if node.findtext("{*}loc") == "https://nolankido.com" + route]
             self.assertEqual(len(rows), 1)
-            self.assertEqual(rows[0].findtext("{*}lastmod"), "2026-11-21")
+            self.assertEqual(rows[0].findtext("{*}lastmod"), by_path[route]["updated"])
         self.assertEqual(by_path["/technology/ai-workflow-pilot/"]["updated"], "2026-11-20")
 
     def test_current_generator_produces_both_unchanged_public_shapes(self):
