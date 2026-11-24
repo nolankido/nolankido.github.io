@@ -1,0 +1,9 @@
+# SEO/GEO Turn 108: three-title author identity consistency
+
+Base: c17f50ef23ae0ebf9fb1d47c6edd7c9323c5a03a (Turn 107). Date: 2026-11-23.
+
+The Books catalog already lists three author-supplied Kindle destinations, with two independently registered standalone author-book pages and a third existing catalog anchor. Home and Bio retained outdated two-title language; Creative retained an obsolete retailer-URL policy. About omitted the third title.
+
+Align Home, About, Bio and Creative with the existing catalog, using /books/#book-ai-works-human-decides for the third title. Preserve both original book page links and the catalog root links. Bio description and generated Find result now describe three nonfiction book titles. Manifest, page JSON-LD modification dates and sitemap lastmod agree. Preserve the existing two-book canonical registry and catalog schema mention, retailer evidence ledger, ASINs, tracker, original book page dates and all canonical paths. No new URL, publication claim, retailer metadata, ratings, or review is created.
+
+Targeted connector-side checks: all exact old text replacements matched once per intended page; source/public inserted text agreement; expected native third-title and catalog root link counts; existing unique catalog anchor and author-supplied ASIN; catalog source parity; JSON-LD parsing and dates; manifest parsing and dates; unchanged sitemap URL count; stale biography search description removed; no new em dash. New manual regression authored. Full deterministic generator, unit/browser suite, HTML5 and search snapshot remain unexecuted because a full local checkout was unavailable. Review this branch with those checks before release. Live exact-byte deployment, search impressions, ranking changes, and assistant citations are not established. No GitHub Actions or paid services added.

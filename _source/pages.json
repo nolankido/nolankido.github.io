@@ -6,8 +6,8 @@
     "seo_title": "Nolan Kido: Practical AI | AI Works, Human Decides",
     "description": "Practical AI projects for everyday life and small business, plus poker and creative work. Nolan Kido's approach: AI Works, Human Decides.",
     "source": "home.html",
-    "updated": "2026-11-21",
-    "revision": "Linked the existing six-case AI workflow pilot from the homepage's practical choices, with explicit fictional-data and productivity-evidence limits; preserved the three primary user paths."
+    "updated": "2026-11-23",
+    "revision": "Aligned the three-title author bibliography with the existing catalog and its author-supplied Kindle provenance; preserved the original identity and evidence boundaries."
   },
   {
     "id": "start-here",
@@ -47,8 +47,8 @@
     "description": "Who is Nolan Kido? Explore source-linked practical AI projects, accounting research and tournament poker. AI Works, Human Decides guides the work.",
     "kicker": "About",
     "source": "about.html",
-    "updated": "2026-11-20",
-    "revision": "Added a direct source-bounded answer connecting the NolanPoker channel and practical AI work through a narrated hand record, proposed captions and an offline checker, without claiming current-video verification."
+    "updated": "2026-11-23",
+    "revision": "Aligned the three-title author bibliography with the existing catalog and its author-supplied Kindle provenance; preserved the original identity and evidence boundaries."
   },
   {
     "id": "accounting-research",
@@ -120,11 +120,11 @@
     "path": "/bio/",
     "title": "A brief introduction.",
     "seo_title": "Nolan Kido | Short Biography & Public Introductions",
-    "description": "Copy Nolan Kido's biography and find his practical AI projects, two nonfiction books, accounting research and NolanPoker videos with source notes.",
+    "description": "Copy Nolan Kido's biography and explore his practical AI projects, three nonfiction book titles, accounting research and NolanPoker videos with source notes.",
     "kicker": "Biography",
     "source": "bio.html",
-    "updated": "2026-11-20",
-    "revision": "Added an author bibliography and source-bounded verification guidance for two nonfiction book works, while retaining the reusable biography."
+    "updated": "2026-11-23",
+    "revision": "Aligned the three-title author bibliography with the existing catalog and its author-supplied Kindle provenance; preserved the original identity and evidence boundaries."
   },
   {
     "id": "card",
@@ -360,7 +360,7 @@
     "description": "Nolan Kido's creative work: poker videos, illustrated explanations, AI-assisted writing, and original incremental-game design guides with free browser tools.",
     "kicker": "Nolan Kido / Creative Work",
     "source": "creative/home.html",
-    "updated": "2026-11-20"
+    "updated": "2026-11-23"
   },
   {
     "id": "incremental-game-loop",
