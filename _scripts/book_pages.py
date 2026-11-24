@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 
 ORIGIN = "https://nolankido.com"
 PERSON = ORIGIN + "/about/#nolan-kido"
-UPDATED = "2026-11-22"
+UPDATED = "2026-11-23"
 BOOKS = [
     {"slug": "one-workflow-at-a-time", "title": "One Workflow at a Time",
      "seo": "One Workflow at a Time: Practical AI Book | Nolan Kido",
@@ -26,8 +26,16 @@ HUB_URL = ORIGIN + HUB_ROUTE
 HUB_SOURCE = Path("_source/books/index.html")
 HUB_OUTPUT = Path("books/index.html")
 HUB_TITLE = "Books by Nolan Kido | Practical AI and Texas Hold’em"
-HUB_DESCRIPTION = ("Explore Nolan Kido's books on practical small-business AI and no-limit "
-                   "Texas Hold’em, compare their subjects, and access original free worksheets and study guides.")
+HUB_DESCRIPTION = ("Explore three books by Nolan Kido: AI Works, Human Decides; One Workflow at a Time; "
+                   "and How to Play No-Limit Texas Hold’em. Free companion exercises.")
+THIRD_BOOK = {
+    "@type": "Book",
+    "@id": HUB_URL + "#book-ai-works-human-decides",
+    "name": "AI Works, Human Decides",
+    "url": HUB_URL + "#book-ai-works-human-decides",
+    "description": "A book about using AI for practical tasks while retaining human judgment, verification, and responsibility.",
+    "author": {"@id": PERSON},
+}
 
 
 def route(item):
@@ -100,6 +108,11 @@ def hub_record(root: Path) -> dict | None:
             or collection.get("@id") != HUB_URL + "#book-list"
             or len(items) != len(expected)):
         raise ValueError("Books catalog must list the exact published author works")
+    # A catalog work, not a new independently indexed author-book page.
+    if (data.get("mentions") != THIRD_BOOK
+            or html.count('id="book-ai-works-human-decides"') != 1
+            or THIRD_BOOK["description"] not in html):
+        raise ValueError("Books catalog third-title provenance or anchor mismatch")
     for position, (entry, book) in enumerate(zip(items, expected), start=1):
         item = entry.get("item", {})
         url = ORIGIN + route(book)

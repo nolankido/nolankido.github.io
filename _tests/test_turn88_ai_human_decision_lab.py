@@ -141,7 +141,7 @@ class Turn88HumanDecisionLab(unittest.TestCase):
         schema = json.loads(re.search(
             r'<script type="application/ld\+json">(.*?)</script>',
             self.books, re.S).group(1))
-        self.assertEqual(schema['dateModified'], '2026-11-22')
+        self.assertEqual(schema['dateModified'], book_pages.UPDATED)
         self.assertEqual(len(schema['mainEntity']['itemListElement']), 2)
         self.assertEqual(schema['mentions']['name'], 'AI Works, Human Decides')
         self.assertEqual(self.books.count('id="books-retailer-evidence"'), 1)

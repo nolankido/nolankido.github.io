@@ -219,6 +219,7 @@ def main() -> int:
         ('Turn 106 multiway ICM counterfactual fold and same-call outcome checks', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn106_icm_fold_counterfactual.py', '-q']),
         ('Turn 107 discover optional poker study titles without exercise answers', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn107_optional_finder_summaries.py', '-q']),
         ('Turn 108 three-title identity bibliography and metadata agreement', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn108_three_title_identity.py', '-q']),
+        ('Turn 109 exact-title catalog and source-bounded third book entity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn109_catalog_identity.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),

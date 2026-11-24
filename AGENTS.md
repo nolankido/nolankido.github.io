@@ -2567,3 +2567,7 @@ expectations to unchanged core passages plus one summary-only passage.
 The new full-site integration and browser tests, complete generator,
 search snapshot and exact live verification remain outstanding. No Actions
 or paid dependencies.
+
+## Turn 109: exact-title catalog and shared third-work identity
+
+The /books/ catalog retains two registered standalone author-book pages and its existing `#book-ai-works-human-decides` fragment. Catalog metadata, Find description and registry name all three titles. The third Book mentions record and the authored/generated standalone identity graph share the fragment ID, title, bounded description and Person author. The linked /notes/keep-the-judgment/ essay is separate related writing, not an excerpt. No new indexed route or independent edition claims. Keep the original two-work edition ledger and supplementary author-supplied link. Catalog lastmod is 2026-11-23; the original standalone books retain their dates. Run the manual regression and full release checks before merging the Turn 108/109 draft. No GitHub Actions, paid services or new tracking.

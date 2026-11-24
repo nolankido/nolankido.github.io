@@ -104,9 +104,12 @@ class BookPublicationTests(unittest.TestCase):
         self.assertIn('id="profile-books"', source)
         self.assertIn('href="#profile-books"', source)
         self.assertIn("not independent confirmation of Amazon listing status", public)
-        self.assertIn("two nonfiction books", unescape(finder))
+        self.assertIn("three nonfiction book titles", unescape(finder))
         books = [node for node in rich_public["@graph"] if node["@type"] == "Book"]
-        self.assertEqual(len(books), 2)
+        self.assertEqual(len(books), 3)
+        third = next(node for node in books if node["@id"] == book_pages.THIRD_BOOK["@id"])
+        self.assertEqual(third, book_pages.THIRD_BOOK)
+        self.assertIn('href="/books/#book-ai-works-human-decides"', public)
         ids = [node["@id"] for node in rich_public["@graph"]]
         self.assertEqual(len(ids), len(set(ids)))
         for book in book_pages.BOOKS:
@@ -126,13 +129,14 @@ class BookPublicationTests(unittest.TestCase):
                     self.assertNotIn(unverified, node)
         meta = json.loads(re.search(
             r'<script type="application/ld\+json">(.*?)</script>', public, re.S).group(1))
-        self.assertEqual(meta["dateModified"], "2026-11-20")
-        self.assertIn("two nonfiction books", meta["description"])
+        bio = next(p for p in json.loads((ROOT / "_source/pages.json").read_text()) if p["id"] == "bio")
+        self.assertEqual(meta["dateModified"], bio["updated"])
+        self.assertIn("three nonfiction book titles", meta["description"])
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")
         bio_rows = [item for item in sitemap.findall(".//{*}url")
                     if item.findtext("{*}loc") == "https://nolankido.com/bio/"]
         self.assertEqual(len(bio_rows), 1)
-        self.assertEqual(bio_rows[0].findtext("{*}lastmod"), "2026-11-20")
+        self.assertEqual(bio_rows[0].findtext("{*}lastmod"), bio["updated"])
 
     def test_website_audit_counts_the_two_standalone_book_canonicals(self):
         import build
