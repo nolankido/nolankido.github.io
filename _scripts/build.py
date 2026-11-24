@@ -548,7 +548,8 @@ def build_outputs() -> dict[Path, str]:
                         'name': 'How to Play No-Limit Texas Hold’em',
                         'author': {'@id': site['url'] + '/about/#nolan-kido'},
                         'description': 'An introduction to no-limit Texas Hold’em, from rules and betting to ranges, pot odds, and decision review.',
-                        'url': site['url'] + '/books/how-to-play-no-limit-texas-holdem/'}}
+                        'url': site['url'] + '/books/how-to-play-no-limit-texas-holdem/'}},
+                    {'@type': 'ListItem', 'position': 3, 'item': book_pages.THIRD_BOOK},
                 ],
             }
         schema = author_archive.schema(p, schema, pages, site, ROOT)
