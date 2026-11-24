@@ -42,7 +42,7 @@ class BookPublicationTests(unittest.TestCase):
                                                    "10 / 40 = 25%"),
         }
         creative = (ROOT / "_source/creative/home.html").read_text(encoding="utf-8")
-        for item in book_pages.BOOKS:
+        for item in book_pages.BOOKS[:2]:
             with self.subTest(slug=item["slug"]):
                 path, example = companions[item["slug"]]
                 worksheet = (ROOT / path).read_text(encoding="utf-8")
@@ -59,6 +59,7 @@ class BookPublicationTests(unittest.TestCase):
         cards = {
             "one-workflow-at-a-time": "ai-time-savings.png",
             "how-to-play-no-limit-texas-holdem": "reader-poker-no-limit-holdem-guide.png",
+            "ai-works-human-decides": "keep-the-judgment.png",
         }
         for book in book_pages.BOOKS:
             with self.subTest(slug=book["slug"]):
@@ -109,7 +110,7 @@ class BookPublicationTests(unittest.TestCase):
         self.assertEqual(len(books), 3)
         third = next(node for node in books if node["@id"] == book_pages.THIRD_BOOK["@id"])
         self.assertEqual(third, book_pages.THIRD_BOOK)
-        self.assertIn('href="/books/#book-ai-works-human-decides"', public)
+        self.assertIn('href="/books/ai-works-human-decides/"', public)
         ids = [node["@id"] for node in rich_public["@graph"]]
         self.assertEqual(len(ids), len(set(ids)))
         for book in book_pages.BOOKS:
@@ -196,7 +197,7 @@ class BookPublicationTests(unittest.TestCase):
         self.assertEqual(schema["about"]["@id"], book_pages.PERSON)
         self.assertEqual(schema["mainEntity"]["@type"], "ItemList")
         items = schema["mainEntity"]["itemListElement"]
-        self.assertEqual(len(items), 2)
+        self.assertEqual(len(items), 3)
         for order, book in enumerate(book_pages.BOOKS, start=1):
             item = items[order - 1]
             self.assertEqual(item["position"], order)
@@ -233,9 +234,9 @@ class BookPublicationTests(unittest.TestCase):
         import check_search
         report = check_search.audit(ROOT, build.public_pages(), book_pages.ORIGIN)
         self.assertEqual(report["manual_book_hubs"], 1)
-        self.assertEqual(report["manual_book_pages"], 2)
+        self.assertEqual(report["manual_book_pages"], 3)
         # Includes the separately registered standalone 10 BB companion.
-        self.assertEqual(report["sitemap_urls"], 230)
+        self.assertEqual(report["sitemap_urls"], 231)
         self.assertEqual(report["errors"], [])
 
     def test_books_catalog_fails_closed_on_partial_or_altered_sources(self):

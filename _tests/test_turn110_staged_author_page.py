@@ -54,15 +54,16 @@ class StagedAuthorPageTests(unittest.TestCase):
         self.assertIn("$480 + $36", html)
         self.assertEqual(480 + 36 - 500, 16)
 
-    def test_catalog_evidence_handoff_and_no_premature_route(self):
+    def test_catalog_evidence_handoff_and_integrated_route(self):
         source = (ROOT / "_source/books/index.html").read_text(encoding="utf-8")
         public = (ROOT / "books/index.html").read_text(encoding="utf-8")
         self.assertEqual(source, public)
         self.assertIn('href="/technology/local-ai-review-replies/#reply-failure"', public)
         self.assertIn('href="/technology/checking-ai-website-changes/#case-evidence"', public)
-        self.assertIn("A dedicated author-book page is not yet available", public)
-        self.assertNotIn(URL, (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
-        self.assertFalse((ROOT / "books/ai-works-human-decides/index.html").exists())
+        self.assertIn('href="/books/ai-works-human-decides/"', public)
+        self.assertIn(URL, (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+        self.assertEqual((ROOT / "books/ai-works-human-decides/index.html").read_text(encoding="utf-8"),
+                         (ROOT / "_source/books/ai-works-human-decides.html").read_text(encoding="utf-8"))
 
 if __name__ == "__main__":
     unittest.main()

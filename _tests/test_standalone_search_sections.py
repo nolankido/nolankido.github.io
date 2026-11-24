@@ -44,6 +44,11 @@ ALLOWED_ROUTES = frozenset({
     '/poker/episodes/reserve-day-1/',
     '/technology/local-ai-gaming-laptop/',
     '/technology/review-reply-evidence-audit/',
+    '/poker/10bb/',
+    '/books/',
+    '/books/one-workflow-at-a-time/',
+    '/books/how-to-play-no-limit-texas-holdem/',
+    '/books/ai-works-human-decides/',
 })
 FIND_DATA = re.compile(r'<script type="application/json" id="find-section-data">(.*?)</script>', re.S)
 SCHEMA_DATA = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)

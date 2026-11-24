@@ -37,13 +37,14 @@ class CatalogIdentityTests(unittest.TestCase):
         authored = json.loads(read("_source/person-schema.jsonld"))
         public = json.loads(read("assets/nolan-kido-identity.jsonld"))
         self.assertEqual(authored, public)
-        self.assertEqual(schema(page)["mentions"], expected)
+        self.assertEqual(schema(page)["mainEntity"]["itemListElement"][2]["item"], expected)
+        self.assertNotIn("mentions", schema(page))
         self.assertEqual([n for n in public["@graph"] if n["@id"] == expected["@id"]], [expected])
         self.assertEqual(len([n for n in public["@graph"] if n["@type"] == "Book"]), 3)
-        self.assertEqual(len(book_pages.BOOKS), 2)
+        self.assertEqual(len(book_pages.BOOKS), 3)
         self.assertEqual(page.count('id="book-ai-works-human-decides"'), 1)
         self.assertIn(expected["description"], page)
-        for field in ("isbn", "offers", "datePublished", "bookFormat", "aggregateRating", "sameAs", "mainEntityOfPage"):
+        for field in ("isbn", "offers", "datePublished", "bookFormat", "aggregateRating", "sameAs"):
             self.assertNotIn(field, expected)
 
     def test_canonical_and_separate_essay(self):
@@ -51,12 +52,12 @@ class CatalogIdentityTests(unittest.TestCase):
         self.assertIn('href="/notes/keep-the-judgment/"', page)
         self.assertIn("The essay is not a book excerpt.", page)
         self.assertIn('<link rel="canonical" href="https://nolankido.com/notes/keep-the-judgment/">', read("notes/keep-the-judgment/index.html"))
-        self.assertEqual(len(schema(page)["mainEntity"]["itemListElement"]), 2)
+        self.assertEqual(len(schema(page)["mainEntity"]["itemListElement"]), 3)
         rows = ET.fromstring(read("sitemap.xml"))
         urls = [(r.findtext("{*}loc"), r.findtext("{*}lastmod")) for r in rows]
         self.assertEqual([d for u,d in urls if u == book_pages.HUB_URL], [book_pages.UPDATED])
         self.assertEqual(len(urls), len(set(u for u,d in urls)))
-        self.assertNotIn("https://nolankido.com/books/ai-works-human-decides/", [u for u,d in urls])
+        self.assertEqual([d for u,d in urls if u == "https://nolankido.com/books/ai-works-human-decides/"], [book_pages.UPDATED])
 
     def test_registry_rejects_unverified_third_work_claims(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -73,7 +74,7 @@ class CatalogIdentityTests(unittest.TestCase):
                 shutil.copyfile(ROOT / path, target)
             self.assertIsNotNone(book_pages.hub_record(root))
             original = read("books/index.html")
-            changed = original.replace('"mentions": {"@type": "Book",', '"mentions": {"@type": "Book", "offers": {"price": "1.00"},', 1)
+            changed = original.replace('"position": 3, "item": {"@type": "Book",', '"position": 3, "item": {"@type": "Book", "offers": {"price": "1.00"},', 1)
             self.assertNotEqual(changed, original)
             for path in (book_pages.HUB_SOURCE, book_pages.HUB_OUTPUT):
                 (root / path).write_text(changed, encoding="utf-8")

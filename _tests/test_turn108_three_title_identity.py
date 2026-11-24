@@ -12,7 +12,7 @@ PAIRS = (
     ("_source/bio.html", "bio/index.html", "/bio/", 2),
     ("_source/creative/home.html", "creative/index.html", "/creative/", 1),
 )
-THIRD = '/books/#book-ai-works-human-decides'
+THIRD = '/books/ai-works-human-decides/'
 
 def read(path):
     return (ROOT / path).read_text(encoding="utf-8")
@@ -30,7 +30,7 @@ class ThreeTitleIdentityTests(unittest.TestCase):
                     self.assertEqual(page.count('href="' + THIRD + '"'), count)
                     self.assertEqual(page.count('href="/books/"'), 1)
                     self.assertIn('<cite>AI Works, Human Decides</cite>', page)
-                    self.assertNotIn('/books/ai-works-human-decides/', page)
+                    self.assertNotIn('href="/books/#book-ai-works-human-decides"', page)
     def test_bio_search_metadata_agrees(self):
         manifest = {p["id"]: p for p in json.loads(read("_source/pages.json"))}
         desc = manifest["bio"]["description"]

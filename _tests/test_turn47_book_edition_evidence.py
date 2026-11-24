@@ -51,10 +51,10 @@ def evidence_problems(data: dict) -> list[str]:
     if not isinstance(data.get("works"), list) or len(data["works"]) != 2:
         return errors + ["Expected precisely two author book works"]
     work_by_slug = {w.get("slug"): w for w in data["works"] if isinstance(w, dict)}
-    expected_slugs = {w["slug"] for w in book_pages.BOOKS}
+    expected_slugs = {w["slug"] for w in book_pages.BOOKS[:2]}
     if len(work_by_slug) != 2 or set(work_by_slug) != expected_slugs:
         return errors + ["Duplicate or unexpected work"]
-    for work in book_pages.BOOKS:
+    for work in book_pages.BOOKS[:2]:
         row = work_by_slug[work["slug"]]
         expected = book_pages.ORIGIN + book_pages.route(work)
         if row.get("author_title") != work["title"] or row.get("canonical") != expected:
@@ -102,7 +102,7 @@ def evidence_problems(data: dict) -> list[str]:
             or supplemental[0].get("source_type") != "author_direct"
             or supplemental[0].get("retailer_verification_status") != "not_verified"
             or supplemental[0].get("retail_page_inspected") is not False
-            or supplemental[0].get("canonical_author_page") is not None):
+            or supplemental[0].get("canonical_author_page") != "https://nolankido.com/books/ai-works-human-decides/"):
         errors.append("Supplementary third Kindle link identity invalid")
     if set(data.get("publisher_primary_guidance", {}).values()) != set(PRIMARY_HELP):
         errors.append("Publisher guidance source set changed without review")
@@ -186,6 +186,7 @@ class BookEditionAuditTests(unittest.TestCase):
         anchor = {
             "one-workflow-at-a-time": "ai-book-edition-evidence",
             "how-to-play-no-limit-texas-holdem": "poker-book-edition-evidence",
+            "ai-works-human-decides": "human-decides-edition-evidence",
         }
         for item in book_pages.BOOKS:
             with self.subTest(slug=item["slug"]):
@@ -202,6 +203,11 @@ class BookEditionAuditTests(unittest.TestCase):
                 if item["slug"] == "how-to-play-no-limit-texas-holdem":
                     self.assertEqual(s.count("https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324"), 1)
                     self.assertIn('id="poker-book-amazon-cta"', s)
+                elif item["slug"] == "ai-works-human-decides":
+                    self.assertEqual(s.count("https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R"), 1)
+                    self.assertIn('id="human-decides-amazon-cta"', s)
+                    self.assertNotIn("B0HRQNCP7Y", s)
+                    self.assertNotIn("B0HSB98324", s)
                 else:
                     self.assertNotIn("B0HSB98324", s)
                     self.assertEqual(s.count("https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y"), 1)
@@ -216,7 +222,7 @@ class BookEditionAuditTests(unittest.TestCase):
 
     def test_existing_books_build_and_sitemap_contract_preserved(self):
         self.assertIsNotNone(book_pages.hub_record(ROOT))
-        self.assertEqual(len(book_pages.published(ROOT)), 2)
+        self.assertEqual(len(book_pages.published(ROOT)), 3)
         xml = ElementTree.parse(ROOT / "sitemap.xml")
         urls = [x.text for x in xml.findall("{*}url/{*}loc")]
         for route in ("/books/", *(book_pages.route(p) for p in book_pages.BOOKS)):

@@ -28,6 +28,7 @@ PRIORITY = (
     '/ai-in-real-life/', '/poker/', '/poker/free-poker-learning-path/', '/poker/10bb/', '/books/',
     '/books/one-workflow-at-a-time/',
     '/books/how-to-play-no-limit-texas-holdem/',
+    '/books/ai-works-human-decides/',
     '/technology/local-ai-review-replies/',
     '/technology/ai-book-continuity-checker/',
     '/technology/dinner-on-time/',
