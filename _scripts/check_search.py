@@ -24,6 +24,7 @@ import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
 import book_pages
+from book_discovery_audit import discovery_errors
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -115,8 +116,11 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     except (OSError, ValueError, KeyError, TypeError) as exc:
         errors.append('Standalone book pages: ' + str(exc))
         books = []
+    book_discovery_records = []
     for book in books:
         canonical = book_pages.ORIGIN + book_pages.route(book)
+        book_discovery_records.append({'url': canonical, 'title': book['seo'],
+                                       'description': book['description'], 'modified': book['modified']})
         if canonical in expected_indexed:
             errors.append('Standalone book duplicates an indexed canonical: ' + canonical)
         expected_indexed.add(canonical)
@@ -131,6 +135,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             errors.append('Books author catalog duplicates an indexed canonical')
         expected_indexed.add(book_hub['url'])
         totals['manual_book_hubs'] += 1
+        book_discovery_records.append({'url': book_hub['url'], 'title': book_pages.HUB_TITLE,
+                                       'description': book_pages.HUB_DESCRIPTION, 'modified': book_hub['modified']})
     try:
         playbook = tenbb_companion.record(root)
     except (OSError, ValueError, KeyError, TypeError) as exc:
@@ -241,6 +247,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             totals['pages'] += 1
         except (OSError, ValueError, KeyError, TypeError) as exc:
             errors.append(path + ': ' + str(exc))
+    errors.extend(discovery_errors(book_discovery_records, sitemap,
+                                   titles.elements(), descriptions.elements()))
     for label, counts in [('titles', titles), ('descriptions', descriptions)]:
         if not all(value and count == 1 for value, count in counts.items()):
             errors.append('Empty or duplicated ' + label)

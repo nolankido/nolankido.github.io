@@ -2611,3 +2611,7 @@ The read-only live indexability audit must require and request Bio, the Books ca
 ## Turn 119: contextual author-book reader paths
 
 The practical AI hub's AI Works, Human Decides section and the separate Keep the Judgment essay link directly to the dedicated author page using the exact title. The book links back to both the essay and the three-rule practical method section. Retain the existing public-notice exercise and worksheet paths; keep original site teaching distinct from verified book excerpts and independent reviews. This is link-only editorial maintenance: no new content claims, schema, retailer data, tracking, publication dates or sitemap timestamps. Keep the existing full release gate and draft status.
+
+## Turn 120: cross-inventory book search metadata and revision dates
+
+The whole-site search audit now compares the reviewed standalone book/catalog titles and descriptions with observed generated public-page metadata and with each other, and checks their sitemap URL and lastmod record cardinality and exact reviewed dates. Preserve the existing generated-page counter meanings and snapshot; do not hand-edit audit results. No new public content, indexing claims, tracking, Actions or costs. The complete real release gate remains mandatory.
