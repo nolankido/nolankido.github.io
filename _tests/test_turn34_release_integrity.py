@@ -17,22 +17,27 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "_scripts"))
 import build
+import book_pages
 import check_live
 import check_search
 import local_release_checks
 import poker_standoff_episode as standoff
 import search_entrypoints
+import tenbb_companion
 import check_html5
 
 ORIGIN = "https://nolankido.com"
 
 
 def companion_fixture(root, urls):
-    for relative in (standoff.SOURCE, standoff.OUTPUT):
+    # The 10 BB Playbook is mandatory in the current search audit. Keep it
+    # complete in isolated Stand Off fixtures instead of weakening that gate.
+    for relative in (standoff.SOURCE, standoff.OUTPUT, tenbb_companion.OUTPUT,
+                     tenbb_companion.CODE, tenbb_companion.WORKSHEET):
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / relative, target)
-    sitemap_fixture(root, urls)
+    sitemap_fixture(root, [*urls, ORIGIN + tenbb_companion.ROUTE])
 
 
 def sitemap_fixture(root, urls):
@@ -77,18 +82,47 @@ class ReleaseIntegrityTests(unittest.TestCase):
         with TemporaryDirectory() as temp:
             root = Path(temp)
             companion_fixture(root, [standoff.URL])
-            self.assertEqual(check_search.audit(root, [], ORIGIN)["status"], "pass")
-            for urls in ([], [standoff.URL, standoff.URL], [standoff.URL, ORIGIN + "/unknown/"]):
+            baseline = check_search.audit(root, [], ORIGIN)
+            self.assertEqual(baseline["errors"], [])
+            self.assertEqual(baseline["status"], "pass")
+            self.assertEqual(baseline["manual_episode_pages"], 1)
+            self.assertEqual(baseline["manual_tenbb_pages"], 1)
+            playbook_url = ORIGIN + tenbb_companion.ROUTE
+            for urls in ([playbook_url],
+                         [playbook_url, standoff.URL, standoff.URL],
+                         [playbook_url, standoff.URL, ORIGIN + "/unknown/"],
+                         [standoff.URL],
+                         [playbook_url, playbook_url, standoff.URL]):
                 with self.subTest(urls=urls):
                     sitemap_fixture(root, urls)
                     result = check_search.audit(root, [], ORIGIN)
+                    self.assertEqual(result["status"], "fail")
                     self.assertIn("Sitemap must contain each indexable canonical exactly once",
                                   result["errors"])
+
+    def test_missing_mandatory_playbook_files_cannot_pass_the_search_audit(self):
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            companion_fixture(root, [standoff.URL])
+            self.assertEqual(check_search.audit(root, [], ORIGIN)["errors"], [])
+            for relative in (tenbb_companion.OUTPUT, tenbb_companion.CODE,
+                             tenbb_companion.WORKSHEET):
+                with self.subTest(relative=relative):
+                    target = root / relative
+                    target.unlink()
+                    try:
+                        result = check_search.audit(root, [], ORIGIN)
+                        self.assertEqual(result["status"], "fail")
+                        self.assertTrue(any("Standalone 10 BB playbook" in e
+                                            for e in result["errors"]))
+                    finally:
+                        shutil.copyfile(ROOT / relative, target)
 
     def test_missing_source_or_invalid_canonical_cannot_pass_the_search_audit(self):
         with TemporaryDirectory() as temp:
             root = Path(temp)
             companion_fixture(root, [standoff.URL])
+            self.assertEqual(check_search.audit(root, [], ORIGIN)["errors"], [])
             source = root / standoff.SOURCE
             source.unlink()
             result = check_search.audit(root, [], ORIGIN)
@@ -104,16 +138,18 @@ class ReleaseIntegrityTests(unittest.TestCase):
 
     def test_html_parser_covers_every_source_owned_page(self):
         paths = check_html5.publication_paths(ROOT, self.pages)
-        self.assertEqual(len(paths), len(self.pages) + 10)
-        for route in ("/poker/nolan-kido/", "/poker/episodes/portland-meadows-ep1/",
-                      standoff.ROUTE, "/books/",
-                      "/books/one-workflow-at-a-time/",
-                      "/books/how-to-play-no-limit-texas-holdem/",
-                      "/technology/local-ai-gaming-laptop/",
-                      "/technology/review-reply-evidence-audit/",
-                      "/poker/10bb/"):
-            self.assertIn(route, paths)
-            self.assertEqual(check_html5.parse_errors((ROOT / paths[route]).read_text()), [])
+        manifest_routes = {page["path"] for page in self.pages}
+        manual_routes = {"/poker/nolan-kido/", "/poker/episodes/portland-meadows-ep1/",
+                         standoff.ROUTE, "/poker/episodes/reserve-day-1/", "/books/",
+                         "/technology/local-ai-gaming-laptop/",
+                         "/technology/review-reply-evidence-audit/", tenbb_companion.ROUTE}
+        manual_routes.update(book_pages.route(book) for book in book_pages.BOOKS)
+        self.assertFalse(manifest_routes & manual_routes)
+        self.assertEqual(set(paths), manifest_routes | manual_routes)
+        for route in sorted(manual_routes):
+            with self.subTest(route=route):
+                self.assertEqual(check_html5.parse_errors(
+                    (ROOT / paths[route]).read_text(encoding="utf-8")), [])
 
     def test_html_inventory_rejects_partial_and_duplicate_manual_publication(self):
         with TemporaryDirectory() as temp:
