@@ -210,6 +210,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += [str(path) for path in build.living_well.utility.worksheet_exports(build.living_well.load(root))]
     assets += ['assets/everyday-tasks.css', 'assets/site-core.css', 'assets/public-profile.css', 'assets/public-profile.js', 'assets/about-reader.css']
     assets += [str(path) for path in build.public_profile.EXPORTS.values()]
+    # Verify the public machine-readable author/book graph as an exact release asset.
+    assets += ['assets/nolan-kido-identity.jsonld']
     sharing = build.presentation.load(root, pages)
     assets += sorted({card['src'].lstrip('/') for card in [sharing['default'], *sharing['pages'].values()]})
     catalog = build.poker_content.load(root)

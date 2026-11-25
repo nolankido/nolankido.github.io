@@ -166,6 +166,12 @@ class PublishedEntityTests(unittest.TestCase):
         books.validate_identity_graph(public)
         self.assertIsNotNone(books.hub_record(ROOT))
 
+    def test_public_identity_graph_is_registered_for_exact_live_verification(self):
+        import check_live
+        path = 'assets/nolan-kido-identity.jsonld'
+        self.assertEqual(check_live.targets(ROOT)['/' + path],
+                         (200, (ROOT / path).read_bytes()))
+
 
 if __name__ == '__main__':
     unittest.main()
