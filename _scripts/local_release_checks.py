@@ -272,6 +272,7 @@ def main() -> int:
         ('Turn 58 cutoff shove versus big blind call price and omitted actions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn58_shove_branch.py', '-q']),
         ('Turn 59 personal cash versus fictional payout ladder and quiz', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn59_payout_consistency.py', '-q']),
         ('Turn 60 complete card-filtered Bayes range update, exact source and blocker checks', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn60_bayes_update.py', '-q']),
+        ('Book discovery release priority and sharing assets', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_release_priority.py', '-q']),
         ('Live diagnostic result classification and priority scope', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_live_evidence.py', '-q']),
         ('Turn 62 10 BB HTML5 publication coverage and fail-closed guards', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn62_html5_tenbb.py', '-q']),
         ('Turn 63 public noindex HTML download safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn63_public_html_downloads.py', '-q']),

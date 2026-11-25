@@ -130,7 +130,9 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/nolan-kido-book-edition-verification.md',
                'downloads/nolan-kido-book-edition-evidence.json',
                'assets/social/ai-time-savings.png',
-               'assets/social/reader-poker-no-limit-holdem-guide.png']
+               'assets/social/reader-poker-no-limit-holdem-guide.png',
+               'assets/social/reader-creative.png',
+               'assets/social/keep-the-judgment.png']
     assets += ['assets/practical-ai-path.css', 'downloads/practical-ai-workbook.txt']
     assets += ['assets/visibility-projects.css', 'assets/projects/preflight-holmes-report.png',
                'downloads/book-continuity-editorial-review-log.md',
