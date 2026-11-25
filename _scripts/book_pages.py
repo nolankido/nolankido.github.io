@@ -14,15 +14,19 @@ BOOKS = [
     {"slug": "one-workflow-at-a-time", "title": "One Workflow at a Time",
      "seo": "One Workflow at a Time: Practical AI Book | Nolan Kido",
      "description": "Nolan Kido's One Workflow at a Time examines small-business AI pilots, complete workflow costs, verification, and human approvals. Read free companion methods.",
+     "book_description": "A practical guide to testing one bounded AI workflow, checking outputs and deciding whether it is useful after the full cost of review.",
+     "alternate_name": "One Workflow at a Time: How Small Business Owners Can Test AI Before Spending More Time or Money",
      "interest": "technology", "modified": "2026-11-22"},
     {"slug": "how-to-play-no-limit-texas-holdem",
      "title": "How to Play No-Limit Texas Hold’em",
      "seo": "How to Play No-Limit Texas Hold’em: Book | Nolan Kido",
      "description": "About How to Play No-Limit Texas Hold’em by Nolan Kido: a beginner poker book covering rules, position, betting, ranges and decision review, with free practice.",
+     "book_description": "A beginner guide to no-limit Texas Hold’em covering hand construction, betting, position, pot odds, ranges and review of decisions.",
      "interest": "poker", "modified": "2026-11-22"},
     {"slug": "ai-works-human-decides", "title": "AI Works, Human Decides",
      "seo": "AI Works, Human Decides: Book by Nolan Kido",
      "description": "Explore Nolan Kido's book AI Works, Human Decides, on delegating work, checking evidence and keeping responsibility. Try a free decision-review exercise.",
+     "book_description": "A book about using AI for practical tasks while retaining human judgment, verification, and responsibility.",
      "interest": "technology", "modified": "2026-11-24"},
 ]
 
@@ -33,19 +37,43 @@ HUB_OUTPUT = Path("books/index.html")
 HUB_TITLE = "Books by Nolan Kido | Practical AI and Texas Hold’em"
 HUB_DESCRIPTION = ("Explore three books by Nolan Kido: AI Works, Human Decides; One Workflow at a Time; "
                    "and How to Play No-Limit Texas Hold’em. Free companion exercises.")
-THIRD_BOOK = {
-    "@type": "Book",
-    "@id": ORIGIN + "/books/ai-works-human-decides/#book",
-    "name": "AI Works, Human Decides",
-    "url": ORIGIN + "/books/ai-works-human-decides/",
-    "description": "A book about using AI for practical tasks while retaining human judgment, verification, and responsibility.",
-    "author": {"@id": PERSON},
-    "mainEntityOfPage": {"@id": ORIGIN + "/books/ai-works-human-decides/#webpage"},
-}
 
 
 def route(item):
     return "/books/" + item["slug"] + "/"
+
+
+def book_entity(item: dict) -> dict:
+    """One reviewed work identity, separate from page copy and retail editions."""
+    url = ORIGIN + route(item)
+    entity = {"@type": "Book", "@id": url + "#book", "name": item["title"],
+              "url": url, "description": item["book_description"],
+              "author": {"@id": PERSON}}
+    if item.get("alternate_name"):
+        entity["alternateName"] = item["alternate_name"]
+    entity["mainEntityOfPage"] = {"@id": url + "#webpage"}
+    return entity
+
+
+def entity_list() -> list[dict]:
+    return [{"@type": "ListItem", "position": position, "item": book_entity(item)}
+            for position, item in enumerate(BOOKS, start=1)]
+
+
+def validate_identity_graph(document: dict) -> None:
+    """Check the complete authored graph's Book nodes, not other person claims."""
+    if not isinstance(document, dict) or not isinstance(document.get("@graph"), list):
+        raise ValueError("Author identity graph must contain a graph list")
+    works = [node for node in document["@graph"]
+             if isinstance(node, dict) and node.get("@type") == "Book"]
+    expected = [book_entity(item) for item in BOOKS]
+    if len(works) != len(expected) or any(works.count(entity) != 1 for entity in expected):
+        raise ValueError("Author identity graph must match all reviewed book entities")
+
+
+# Preserve the named third-work contract for existing callers and historical tests.
+THIRD_BOOK = book_entity(BOOKS[-1])
+
 
 def published(root: Path) -> list[dict]:
     items = []
@@ -77,10 +105,8 @@ def published(root: Path) -> list[dict]:
             or entity.get("mainEntityOfPage", {}).get("@id") != url + "#webpage"
             or entity.get("isbn") is not None or entity.get("offers") is not None or entity.get("datePublished") is not None):
             raise ValueError("Book identity or provenance schema invalid")
-        if item["slug"] == "ai-works-human-decides" and (entity != THIRD_BOOK
-                or schema.get("name") != item["seo"]
-                or schema.get("description") != item["description"]):
-            raise ValueError("Third book page differs from reviewed identity")
+        if entity != book_entity(item):
+            raise ValueError("Book page differs from reviewed identity: " + item["slug"])
         for link in ("index.html", "creative/index.html"):
             if 'href="' + route(item) + '"' not in (root / link).read_text(encoding="utf-8"):
                 raise ValueError("Book needs inbound link from " + link)
@@ -128,12 +154,7 @@ def hub_record(root: Path) -> dict | None:
             or THIRD_BOOK["description"] not in html):
         raise ValueError("Books catalog third-title provenance or anchor mismatch")
     for position, (entry, book) in enumerate(zip(items, expected), start=1):
-        item = entry.get("item", {})
-        url = ORIGIN + route(book)
-        if (entry.get("position") != position or item.get("@type") != "Book"
-                or item.get("@id") != url + "#book" or item.get("url") != url
-                or item.get("name") != book["title"] or item.get("author", {}).get("@id") != PERSON
-                or any(key in item for key in ("isbn", "offers", "datePublished", "bookFormat", "aggregateRating"))
+        if (entry != {"@type": "ListItem", "position": position, "item": book_entity(book)}
                 or html.count('href="' + route(book) + '"') != 1):
             raise ValueError("Books catalog contains unsupported or duplicate work data")
         book_html = (root / "books" / book["slug"] / "index.html").read_text(encoding="utf-8")
