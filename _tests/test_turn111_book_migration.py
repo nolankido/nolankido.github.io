@@ -72,5 +72,27 @@ class BookMigrationTests(unittest.TestCase):
         self.assertEqual(check_live.targets(ROOT)[ROUTE], (200, (ROOT / "books/ai-works-human-decides/index.html").read_bytes()))
         self.assertEqual(check_html5.publication_paths(ROOT, build.public_pages())[ROUTE], Path("books/ai-works-human-decides/index.html"))
 
+
+    def test_practical_ai_hub_and_essay_have_reciprocal_author_book_paths(self):
+        for source, public, boundary in (
+            ("_source/technology/home.html", "technology/index.html",
+             "The exercise is an original site resource, not a verified book excerpt."),
+            ("_source/notes/keep-the-judgment.html", "notes/keep-the-judgment/index.html",
+             "This essay is not a book excerpt."),
+        ):
+            for path in (source, public):
+                with self.subTest(path=path):
+                    text = read(path)
+                    self.assertEqual(text.count('href="' + ROUTE + '"'), 1)
+                    self.assertIn('<a href="' + ROUTE + '"><cite>AI Works, Human Decides</cite></a>', text)
+                    self.assertIn(boundary, text)
+        technology = read("technology/index.html")
+        self.assertIn('id="ai-works-human-decides"', technology)
+        self.assertIn('href="/books/#ai-works-decision-lab"', technology)
+        book = read("books/ai-works-human-decides/index.html")
+        self.assertEqual(book.count('href="/technology/#ai-works-human-decides"'), 1)
+        self.assertEqual(book.count('href="/notes/keep-the-judgment/"'), 1)
+        self.assertEqual(book, read("_source/books/ai-works-human-decides.html"))
+
 if __name__ == "__main__":
     unittest.main()

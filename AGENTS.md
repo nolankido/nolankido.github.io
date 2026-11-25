@@ -2607,3 +2607,7 @@ The PBG-05 read-only auditor now covers six exact author-supplied links across t
 ## Turn 118: required live author discovery routes
 
 The read-only live indexability audit must require and request Bio, the Books catalog and all three canonical author pages even if omitted from the live sitemap. Reject malformed/duplicate sitemap locations, missing or redirected responses, unexpected noindex/none, invalid HTML/schema responses and unsupported inbound evidence. Preserve the separate exact-byte live verification and the local release gate. The nine offline controls do not constitute live verification. Do not add scheduled jobs, trackers, paid APIs or assume indexing/ranking gains.
+
+## Turn 119: contextual author-book reader paths
+
+The practical AI hub's AI Works, Human Decides section and the separate Keep the Judgment essay link directly to the dedicated author page using the exact title. The book links back to both the essay and the three-rule practical method section. Retain the existing public-notice exercise and worksheet paths; keep original site teaching distinct from verified book excerpts and independent reviews. This is link-only editorial maintenance: no new content claims, schema, retailer data, tracking, publication dates or sitemap timestamps. Keep the existing full release gate and draft status.
