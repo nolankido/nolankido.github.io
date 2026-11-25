@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copy and validate standalone book pages. No GitHub Actions."""
+"""Copy and validate exact standalone book source bytes. No GitHub Actions."""
 import argparse
 from pathlib import Path
 import sys
@@ -8,38 +8,47 @@ import book_pages
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true")
-    check = parser.parse_args().check
-    hub_source, hub_output = ROOT / book_pages.HUB_SOURCE, ROOT / book_pages.HUB_OUTPUT
-    hub_html = hub_source.read_text(encoding="utf-8")
-    if check:
-        if not hub_output.is_file() or hub_output.read_text(encoding="utf-8") != hub_html:
-            print("Books catalog differs from reviewed source", file=sys.stderr)
+def build(root: Path, *, check: bool = False) -> int:
+    pairs = [(book_pages.HUB_SOURCE, book_pages.HUB_OUTPUT)]
+    pairs.extend((Path('_source/books') / (item['slug'] + '.html'),
+                  Path('books') / item['slug'] / 'index.html')
+                 for item in book_pages.BOOKS)
+    # Read and decode every source before any output can be overwritten.
+    # Preserve source bytes, including line endings, rather than relying on
+    # read_text()'s universal-newline conversion to certify exact parity.
+    reviewed = []
+    for source, target in pairs:
+        try:
+            data = (root / source).read_bytes()
+            data.decode('utf-8')
+        except (OSError, UnicodeError) as exc:
+            print('Cannot read reviewed book source: ' + str(source) + ': ' + str(exc), file=sys.stderr)
             return 1
-    else:
-        hub_output.parent.mkdir(parents=True, exist_ok=True)
-        hub_output.write_text(hub_html, encoding="utf-8", newline="")
-    print(("Checked " if check else "Built ") + str(book_pages.HUB_OUTPUT))
-    for item in book_pages.BOOKS:
-        source = ROOT / ("_source/books/" + item["slug"] + ".html")
-        target = ROOT / ("books/" + item["slug"] + "/index.html")
-        data = source.read_text(encoding="utf-8")
+        reviewed.append((target, data))
+    for relative, data in reviewed:
+        target = root / relative
         if check:
-            if not target.exists() or target.read_text(encoding="utf-8") != data:
-                print("Book page not in sync: " + str(target), file=sys.stderr)
+            if not target.is_file() or target.read_bytes() != data:
+                message = ('Books catalog differs from reviewed source' if relative == book_pages.HUB_OUTPUT
+                           else 'Book page not in sync: ' + str(target))
+                print(message, file=sys.stderr)
                 return 1
         else:
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(data, encoding="utf-8", newline="")
-        print(("Checked " if check else "Built ") + str(target.relative_to(ROOT)))
-    book_pages.published(ROOT)
-    if book_pages.hub_record(ROOT) is None:
+            target.write_bytes(data)
+        print(('Checked ' if check else 'Built ') + str(relative))
+    book_pages.published(root)
+    if book_pages.hub_record(root) is None:
         print('Books catalog is not published', file=sys.stderr)
         return 1
     return 0
 
 
-if __name__ == "__main__":
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check', action='store_true')
+    return build(ROOT, check=parser.parse_args().check)
+
+
+if __name__ == '__main__':
     raise SystemExit(main())

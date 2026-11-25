@@ -83,9 +83,12 @@ def published(root: Path) -> list[dict]:
         source, target = root / src, root / path
         if not source.exists() and not target.exists():
             continue
-        if not source.is_file() or not target.is_file() or source.read_text(encoding="utf-8") != target.read_text(encoding="utf-8"):
+        if not source.is_file() or not target.is_file():
             raise ValueError("Book page must match exact public source: " + item["slug"])
-        html = target.read_text(encoding="utf-8")
+        raw = target.read_bytes()
+        if source.read_bytes() != raw:
+            raise ValueError("Book page must match exact public source: " + item["slug"])
+        html = raw.decode("utf-8")
         url = ORIGIN + route(item)
         if html.count('<link rel="canonical" href="' + url + '">') != 1 or html.count('<meta property="og:url" content="' + url + '">') != 1:
             raise ValueError("Book canonical and Open Graph URL must match")
@@ -121,9 +124,10 @@ def hub_record(root: Path) -> dict | None:
         return None
     if not source.is_file() or not target.is_file():
         raise ValueError("Books catalog requires source and published HTML")
-    html = target.read_text(encoding="utf-8")
-    if not html or source.read_text(encoding="utf-8") != html:
+    raw = target.read_bytes()
+    if not raw or source.read_bytes() != raw:
         raise ValueError("Books catalog published HTML differs from source")
+    html = raw.decode("utf-8")
     if (html.count('<link rel="canonical" href="' + HUB_URL + '">') != 1
             or html.count('<meta property="og:url" content="' + HUB_URL + '">') != 1
             or len(re.findall(r'<h1\b', html)) != 1
