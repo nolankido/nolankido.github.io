@@ -3,9 +3,28 @@
 import argparse
 from pathlib import Path
 import sys
+from tempfile import TemporaryDirectory
 import book_pages
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def validate_staged(root: Path, reviewed: list[tuple[Path, Path, bytes]]) -> None:
+    """Validate the exact candidate bytes and real inbound-link context before publishing."""
+    with TemporaryDirectory(prefix='book-release-preflight-') as directory:
+        stage = Path(directory)
+        for source, target, data in reviewed:
+            for relative in (source, target):
+                path = stage / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(data)
+        # These are the existing public inbound-link dependencies of the registry.
+        for relative in ('index.html', 'creative/index.html', 'about/index.html', 'bio/index.html'):
+            path = stage / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((root / relative).read_bytes())
+        if book_pages.hub_record(stage) is None:
+            raise ValueError('Books catalog is not staged')
 
 
 def build(root: Path, *, check: bool = False) -> int:
@@ -24,8 +43,12 @@ def build(root: Path, *, check: bool = False) -> int:
         except (OSError, UnicodeError) as exc:
             print('Cannot read reviewed book source: ' + str(source) + ': ' + str(exc), file=sys.stderr)
             return 1
-        reviewed.append((target, data))
-    for relative, data in reviewed:
+        reviewed.append((source, target, data))
+    if not check:
+        # Reuse the production registry instead of maintaining a second set of
+        # SEO and identity rules. No public targets have been touched yet.
+        validate_staged(root, reviewed)
+    for _, relative, data in reviewed:
         target = root / relative
         if check:
             if not target.is_file() or target.read_bytes() != data:
@@ -35,7 +58,8 @@ def build(root: Path, *, check: bool = False) -> int:
                 return 1
         else:
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(data)
+            if not target.is_file() or target.read_bytes() != data:
+                target.write_bytes(data)
         print(('Checked ' if check else 'Built ') + str(relative))
     book_pages.published(root)
     if book_pages.hub_record(root) is None:

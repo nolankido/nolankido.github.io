@@ -146,6 +146,63 @@ class ByteParityControls(unittest.TestCase):
             self.run_build(check=True)
 
 
+    def test_invalid_final_book_metadata_preserves_every_output(self):
+        before = self.outputs()
+        self.write(books.HUB_SOURCE, (self.root / books.HUB_SOURCE).read_bytes() + b'\n')
+        source, _ = pairs()[-1]
+        self.write(source, (self.root / source).read_bytes().replace(b'rel="canonical"', b'rel="alternate"'))
+        with self.assertRaisesRegex(ValueError, 'canonical'):
+            self.run_build()
+        self.assertEqual(self.outputs(), before)
+
+    def test_invalid_catalog_metadata_preserves_every_output(self):
+        before = self.outputs()
+        source, _ = pairs()[1]
+        self.write(source, (self.root / source).read_bytes() + b'\n')
+        self.write(books.HUB_SOURCE, (self.root / books.HUB_SOURCE).read_bytes().replace(b'rel="canonical"', b'rel="alternate"'))
+        with self.assertRaisesRegex(ValueError, 'canonical'):
+            self.run_build()
+        self.assertEqual(self.outputs(), before)
+
+    def test_missing_inbound_link_preserves_every_output(self):
+        before = self.outputs()
+        self.write(books.HUB_SOURCE, (self.root / books.HUB_SOURCE).read_bytes() + b'\n')
+        self.write('creative/index.html', b'<p>No reviewed links</p>')
+        with self.assertRaisesRegex(ValueError, 'inbound link'):
+            self.run_build()
+        self.assertEqual(self.outputs(), before)
+
+    def test_missing_inbound_page_preserves_every_output(self):
+        before = self.outputs()
+        self.write(books.HUB_SOURCE, (self.root / books.HUB_SOURCE).read_bytes() + b'\n')
+        (self.root / 'bio/index.html').unlink()
+        with self.assertRaises(FileNotFoundError):
+            self.run_build()
+        self.assertEqual(self.outputs(), before)
+
+    def test_invalid_first_build_creates_no_public_outputs(self):
+        for _, target in pairs():
+            (self.root / target).unlink()
+        source, _ = pairs()[-1]
+        self.write(source, (self.root / source).read_bytes().replace(b'rel="canonical"', b'rel="alternate"'))
+        with self.assertRaisesRegex(ValueError, 'canonical'):
+            self.run_build()
+        self.assertTrue(all(not (self.root / target).exists() for _, target in pairs()))
+
+    def test_valid_revision_changes_only_the_intended_output(self):
+        before = self.outputs()
+        timestamps = {target: (self.root / target).stat().st_mtime_ns for _, target in pairs()}
+        source, target = pairs()[-1]
+        revised = (self.root / source).read_bytes() + b'\n'
+        self.write(source, revised)
+        self.assertEqual(self.run_build(), 0)
+        self.assertEqual((self.root / target).read_bytes(), revised)
+        for _, untouched in pairs()[:-1]:
+            self.assertEqual((self.root / untouched).read_bytes(), before[untouched])
+            self.assertEqual((self.root / untouched).stat().st_mtime_ns, timestamps[untouched])
+        self.assertEqual(self.run_build(check=True), 0)
+
+
 class PublishedBookByteCoverage(unittest.TestCase):
     def test_all_actual_book_sources_match_public_bytes(self):
         for source, target in pairs():
