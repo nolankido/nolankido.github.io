@@ -224,6 +224,7 @@ def main() -> int:
         ('Turn 111 canonical third book migration and discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn111_book_migration.py', '-q']),
         ('Turn 112 fail-closed release preparation and rollback', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn112_prepare_local_release.py', '-q']),
         ('Turn 114 standalone book search/share metadata parity and negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_book_metadata.py', '-q']),
+        ('Turn 115 isolated local release candidate rebuild', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_rebuild_release_candidate.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),

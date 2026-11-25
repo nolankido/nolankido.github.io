@@ -2591,3 +2591,7 @@ The About ProfilePage intentionally omits day-only `dateModified`, matching `_sc
 ## Turn 114: standalone book discovery metadata agreement
 
 The book registry now uses `_scripts/book_metadata.py` to require the exact browser/visible/structured title, description and canonical, consistent Open Graph and Twitter metadata, and indexable robots policy on all three author-book pages and their catalog. Keep the existing source parity and edition evidence rules. The negative-control suite runs in the local release runner. No changes to canonical routes, public content, audit snapshot, trackers or deployment policy. The complete release must still pass in a full checkout.
+
+## Turn 115: isolated deterministic candidate rebuild
+
+If connector-side changes leave generated files stale, run `python _scripts/rebuild_release_candidate.py --worktree ../nolankido-release-candidate` from a complete checkout of the intended committed draft. Choose a new sibling directory. The tool pins HEAD, leaves local edits in the original checkout, regenerates the candidate using the existing builders and invokes the full existing release preparation gate. Retain the worktree for review on success or failure. It performs no fetch, push, commit, merge or deployment. Preserve the original publication dates and source-bounded identity tests while checking current reviewed revision dates against the manifest and sitemap. The exact real release suite must pass before merge; no hand-edited audit counts, Actions or paid dependencies.
