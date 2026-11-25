@@ -1,0 +1,9 @@
+# SEO/GEO Turn 117: complete native book-link audit
+
+November 24, 2026. Parent: a1d1532553e0cbb2dbeda4a81534c35458bbd674.
+
+Extended the existing PBG-05 audit from five to six author-supplied Kindle anchors across four routes. Three catalog anchors and two older author-page anchors retain their existing approved Umami events. The third dedicated author-page link is intentionally untracked, and must have the exact author-supplied URL, safe rel attributes, no event handler, no analytics attributes and no executable script. Inert local JSON-LD is permitted. The report distinguishes tracked and untracked link contract counts, and preserves null analytics, retailer-verification and attributed-order outcomes. No page copy, tracking, sales claims, canonical URL, retailer ledger or sitemap changed. Historical PBG-05 observations remain historical.
+
+Executed eight new fixture tests in normal Python and again under -OO (16/16). The test and auditor blob hashes match locally tested files: 8216ca2808bb9b05eec6d886ddb609197bcbe2e6 and c4549611123e67343682e54a467db50e5e0d54b4. Fixture tests use the exact author-supplied URLs and the approved scorecard event map; the other page documents and ledger are synthetic. A separate mixed-fixture test replaced the third page with its exact committed HTML (blob bfda8721d2c1b54b44c58129bf94ac77696b2aa4), which passed the native untracked-link check. The older current-checkout PBG-05 assertions were updated and the new test is registered in the existing local runner.
+
+The local Git client still cannot resolve github.com; web archive retrieval also failed. No complete-site checkout, build, real search-audit snapshot generation, historical/browser suite, live Amazon GET or production verification was performed. No added cost, Actions or tracker. The consolidated pull request remains draft and must pass real local release validation before merge.

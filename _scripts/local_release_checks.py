@@ -226,6 +226,7 @@ def main() -> int:
         ('Turn 114 standalone book search/share metadata parity and negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_book_metadata.py', '-q']),
         ('Turn 115 isolated local release candidate rebuild', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_rebuild_release_candidate.py', '-q']),
         ('Turn 116 canonical Book entity parity across all author surfaces', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn116_book_entity_parity.py', '-q']),
+        ('Turn 117 all six book links and untracked third author-page boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn117_untracked_book_link.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),

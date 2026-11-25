@@ -2599,3 +2599,7 @@ If connector-side changes leave generated files stale, run `python _scripts/rebu
 ## Turn 116: canonical Book entity consolidation
 
 The book registry is the reviewed source of all three work identities (`book_entity`, `entity_list`). Keep individual Book page entities, catalog ListItems, Creative Work ListItems and authored/public identity graph Book nodes semantically identical. The generator builds Creative's items from the registry and validates the authored graph before export. Preserve the exact already-reviewed work descriptions, known subtitle and mainEntityOfPage links, with no unverified retail data. The existing page metadata and source/output parity guards remain. The new negative controls must pass; the full release gate still applies. No routes, public prose, trackers, prices, audit snapshot or deployment changes.
+
+## Turn 117: full native Kindle link coverage without new tracking
+
+The PBG-05 read-only auditor now covers six exact author-supplied links across the catalog and all three canonical author pages. Keep the five existing tracked links and the third page's single untracked native link distinct. Do not add analytics attributes, executable scripts or new events to the third page. Check safe anchor metadata and source/output parity; retain null analytics-ingestion, retail verification and attributed-order values. The full release gate still applies, with no Actions, new costs, or fabricated evidence.
