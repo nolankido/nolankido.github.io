@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import subprocess
 import sys
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -245,6 +247,7 @@ def main() -> int:
         ('Turn 111 canonical third book migration and discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn111_book_migration.py', '-q']),
         ('Turn 112 fail-closed release preparation and rollback', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn112_prepare_local_release.py', '-q']),
         ('Turn 114 standalone book search/share metadata parity and negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_book_metadata.py', '-q']),
+        ('Turn 137 exact full release unit inventory without duplicate runs', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn137_full_unit_plan.py', '-q']),
         ('Turn 136 commit-pinned local release receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn136_release_receipt.py', '-q']),
         ('Turn 115 isolated local release candidate rebuild', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_rebuild_release_candidate.py', '-q']),
         ('Turn 116 canonical Book entity parity across all author surfaces', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn116_book_entity_parity.py', '-q']),
@@ -283,13 +286,27 @@ def main() -> int:
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
     if args.full:
-        tasks.extend([
-            ('Full historical unit suite (bounded)', [
-                '_scripts/check_historical_batches.py', '--all', '--timeout-seconds', '90']),
-        ])
-    else:
-        tasks.append(('Poker evidence regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_poker_player*.py', '-q']))
-    if args.browser:
+        from release_unit_plan import full_unit_plan
+        try:
+            retained, inventory, groups, covered = full_unit_plan(tasks, ROOT / '_tests')
+        except (OSError, ValueError) as exc:
+            print('BLOCKED: ' + str(exc), file=sys.stderr)
+            return 2
+        print(f'Full unit coverage: {len(inventory)} modules include {covered} focused '
+              f'modules from {groups} registered groups. Run each module once.', flush=True)
+        with TemporaryDirectory(prefix='local-release-inventory-') as directory:
+            pin = Path(directory) / 'inventory.json'
+            pin.write_text(json.dumps(inventory), encoding='utf-8')
+            retained.append(('Full historical unit suite (bounded)', [
+                '_scripts/check_historical_batches.py', '--all', '--timeout-seconds', '90',
+                '--expected-inventory', str(pin)]))
+            return run_tasks(retained, browser=args.browser)
+    tasks.append(('Poker evidence regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_poker_player*.py', '-q']))
+    return run_tasks(tasks, browser=args.browser)
+
+
+def run_tasks(tasks, *, browser: bool) -> int:
+    if browser:
         suites = sorted((ROOT / '_tests').glob('*_browser.py'))
         standalone = ROOT / '_tests' / 'browser.py'
         if standalone.is_file():

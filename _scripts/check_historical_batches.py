@@ -16,6 +16,7 @@ from pathlib import Path
 
 from local_release_checks import forbid_workflows
 from run_unit_module import RESULT_PREFIX, outcome, valid_record
+from release_unit_plan import check_inventory
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -95,6 +96,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="Run all matching modules from the start index")
     parser.add_argument("--timeout-seconds", type=float, default=90,
                         help="Hard per-module timeout (default: 90 seconds)")
+    parser.add_argument("--expected-inventory", type=Path,
+                        help="Exact sorted module list for a full release invocation")
     parser.add_argument("--json-output", type=Path,
                         help="Optional local checkpoint, updated after every module")
     parser.add_argument("--failure-lines", type=int, default=14,
@@ -106,7 +109,11 @@ def main(argv: list[str] | None = None) -> int:
     try:
         forbid_workflows()
         filenames = discover(args.pattern)
-    except (RuntimeError, ValueError) as exc:
+        if args.expected_inventory is not None:
+            if not args.all or args.start_index != 0 or args.pattern != "test_*.py":
+                raise ValueError("Expected inventory requires an unfiltered full unit run")
+            check_inventory(args.expected_inventory, filenames)
+    except (OSError, RuntimeError, ValueError) as exc:
         print(f"BLOCKED: {exc}", file=sys.stderr, flush=True)
         return 2
     if not filenames or args.start_index >= len(filenames):
@@ -149,6 +156,12 @@ def main(argv: list[str] | None = None) -> int:
         print("Interrupted: completed module results are preserved; rest NOT RUN.",
               file=sys.stderr, flush=True)
         return 130
+    if args.expected_inventory is not None:
+        try:
+            check_inventory(args.expected_inventory, discover(args.pattern))
+        except (OSError, ValueError) as exc:
+            print(f"BLOCKED: {exc}", file=sys.stderr, flush=True)
+            return 2
     receipt["completed"] = True
     if args.json_output:
         checkpoint(args.json_output, receipt)
