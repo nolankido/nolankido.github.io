@@ -100,6 +100,27 @@ class ReleaseIntegrityTests(unittest.TestCase):
                     self.assertIn("Sitemap must contain each indexable canonical exactly once",
                                   result["errors"])
 
+    def test_matching_location_counts_cannot_hide_invalid_sitemap_structure(self):
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            companion_fixture(root, [standoff.URL])
+            self.assertEqual(check_search.audit(root, [], ORIGIN)["errors"], [])
+            path = root / "sitemap.xml"
+            valid = path.read_text(encoding="utf-8")
+            malformed = valid.replace("<url>", "<wrapper>", 1).replace("</url>", "</wrapper>", 1)
+            wrong_namespace = valid.replace("http://www.sitemaps.org/schemas/sitemap/0.9",
+                                            "https://example.invalid/")
+            for changed in (malformed, wrong_namespace, "<urlset>"):
+                with self.subTest(changed=changed):
+                    self.assertNotEqual(changed, valid)
+                    path.write_text(changed, encoding="utf-8")
+                    result = check_search.audit(root, [], ORIGIN)
+                    self.assertEqual(result["status"], "fail")
+                    self.assertTrue(any(error.startswith(("Sitemap", "Cannot read sitemap XML"))
+                                        for error in result["errors"]))
+            path.write_text(valid, encoding="utf-8")
+            self.assertEqual(check_search.audit(root, [], ORIGIN)["errors"], [])
+
     def test_missing_mandatory_playbook_files_cannot_pass_the_search_audit(self):
         with TemporaryDirectory() as temp:
             root = Path(temp)

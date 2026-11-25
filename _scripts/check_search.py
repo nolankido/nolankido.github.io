@@ -13,7 +13,6 @@ import json
 import re
 from pathlib import Path
 import sys
-from xml.etree import ElementTree as ET
 import build
 import public_identity
 import player_sitemap
@@ -26,6 +25,7 @@ import reply_audit_case
 import book_pages
 from book_discovery_audit import discovery_errors
 from search_metadata_contract import inspect_metadata
+from sitemap_contract import inspect_sitemap
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -148,8 +148,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             errors.append('10 BB playbook duplicates a published canonical')
         expected_indexed.add(playbook['url'])
         totals['manual_tenbb_pages'] += 1
-    sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
-    actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
+    sitemap, actual_indexed, sitemap_errors = inspect_sitemap(root / 'sitemap.xml')
+    errors.extend(sitemap_errors)
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):
         errors.append('Sitemap must contain each indexable canonical exactly once')
     for page in pages:
