@@ -2615,3 +2615,7 @@ The practical AI hub's AI Works, Human Decides section and the separate Keep the
 ## Turn 120: cross-inventory book search metadata and revision dates
 
 The whole-site search audit now compares the reviewed standalone book/catalog titles and descriptions with observed generated public-page metadata and with each other, and checks their sitemap URL and lastmod record cardinality and exact reviewed dates. Preserve the existing generated-page counter meanings and snapshot; do not hand-edit audit results. No new public content, indexing claims, tracking, Actions or costs. The complete real release gate remains mandatory.
+
+## Turn 122: preserve the dated November 21 visibility inventory
+
+The 230-URL count belongs to the November 21 follow-up, not every subsequent sitemap. The exact historical sitemap is preserved under `_tests/fixtures/turn70-sitemap-2026-11-21.xml` from PR 443's merge commit. The current regression checks its immutable Git blob, 230 distinct historical routes, current uniqueness, historical-route preservation and presence of the reviewed third author-book route; the deterministic current build check remains mandatory. A deliberate removal of a historical route requires an explicit reviewed migration. Only the dated wording changed to "then listed"; the original article dates, reading estimate, and outcome caveats remain. No invented current ranking or indexing data. Keep the existing full release gate and no-Actions rule.
