@@ -245,6 +245,7 @@ def main() -> int:
         ('Turn 111 canonical third book migration and discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn111_book_migration.py', '-q']),
         ('Turn 112 fail-closed release preparation and rollback', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn112_prepare_local_release.py', '-q']),
         ('Turn 114 standalone book search/share metadata parity and negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_book_metadata.py', '-q']),
+        ('Turn 136 commit-pinned local release receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn136_release_receipt.py', '-q']),
         ('Turn 115 isolated local release candidate rebuild', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_rebuild_release_candidate.py', '-q']),
         ('Turn 116 canonical Book entity parity across all author surfaces', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn116_book_entity_parity.py', '-q']),
         ('Turn 117 all six book links and untracked third author-page boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn117_untracked_book_link.py', '-q']),
