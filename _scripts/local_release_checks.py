@@ -248,6 +248,7 @@ def main() -> int:
         ('Turn 112 fail-closed release preparation and rollback', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn112_prepare_local_release.py', '-q']),
         ('Turn 114 standalone book search/share metadata parity and negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_book_metadata.py', '-q']),
         ('Turn 137 exact full release unit inventory without duplicate runs', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn137_full_unit_plan.py', '-q']),
+        ('Turn 139 committed unit and browser test inventory', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn139_release_test_inventory.py', '-q']),
         ('Turn 136 commit-pinned local release receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn136_release_receipt.py', '-q']),
         ('Turn 115 isolated local release candidate rebuild', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_rebuild_release_candidate.py', '-q']),
         ('Turn 116 canonical Book entity parity across all author surfaces', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn116_book_entity_parity.py', '-q']),
@@ -285,10 +286,13 @@ def main() -> int:
         ('Turn 63 public noindex HTML download safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn63_public_html_downloads.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
+    tasks.append(('Poker evidence regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_poker_player*.py', '-q']))
     if args.full:
         from release_unit_plan import full_unit_plan
+        from release_test_inventory import verify_tracked_units
         try:
             retained, inventory, groups, covered = full_unit_plan(tasks, ROOT / '_tests')
+            verify_tracked_units(ROOT, inventory)
         except (OSError, ValueError) as exc:
             print('BLOCKED: ' + str(exc), file=sys.stderr)
             return 2
@@ -301,18 +305,28 @@ def main() -> int:
                 '_scripts/check_historical_batches.py', '--all', '--timeout-seconds', '90',
                 '--expected-inventory', str(pin)]))
             return run_tasks(retained, browser=args.browser)
-    tasks.append(('Poker evidence regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_poker_player*.py', '-q']))
     return run_tasks(tasks, browser=args.browser)
 
 
 def run_tasks(tasks, *, browser: bool) -> int:
+    tasks = list(tasks)
     if browser:
-        suites = sorted((ROOT / '_tests').glob('*_browser.py'))
-        standalone = ROOT / '_tests' / 'browser.py'
-        if standalone.is_file():
-            suites.insert(0, standalone)
-        tasks.extend((f'Local browser: {p.stem}', [str(p.relative_to(ROOT))]) for p in suites)
+        from release_test_inventory import browser_inventory
+        try:
+            suites = browser_inventory(ROOT)
+        except (OSError, ValueError) as exc:
+            print('BLOCKED: ' + str(exc), file=sys.stderr, flush=True)
+            return 2
+        print(f'Local browser coverage: {len(suites)} scripts, including all committed suites.', flush=True)
+        tasks.extend((f'Local browser: {Path(name).stem}', [str(Path('_tests') / name)]) for name in suites)
     results = [(label, check(label, command)) for label, command in tasks]
+    if browser:
+        try:
+            if browser_inventory(ROOT) != suites:
+                raise ValueError('Browser test inventory changed during release validation')
+        except (OSError, ValueError) as exc:
+            print('BLOCKED: ' + str(exc), file=sys.stderr, flush=True)
+            return 2
     count = sum(passed for _, passed in results)
     print(f'\nLocal release checks: {count}/{len(tasks)} passed. No GitHub Actions were invoked.')
     failures = [label for label, passed in results if not passed]
