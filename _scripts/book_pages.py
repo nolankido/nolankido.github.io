@@ -97,6 +97,7 @@ def published(root: Path) -> list[dict]:
         schema = json.loads(match.group(1))
         book_metadata.validate(html, title=item["seo"], heading=item["title"],
                                description=item["description"], url=url, schema=schema)
+        book_metadata.validate_page_identity(schema, url=url, origin=ORIGIN, author_id=PERSON)
         entity = schema.get("mainEntity", {})
         if (schema.get("@type") != "WebPage" or schema.get("url") != url or schema.get("dateModified") != item["modified"]
             or entity.get("@type") != "Book" or entity.get("@id") != url + "#book"
@@ -138,6 +139,7 @@ def hub_record(root: Path) -> dict | None:
     data = json.loads(schemas[0])
     book_metadata.validate(html, title=HUB_TITLE, heading="Books by Nolan Kido",
                            description=HUB_DESCRIPTION, url=HUB_URL, schema=data)
+    book_metadata.validate_page_identity(data, url=HUB_URL, origin=ORIGIN, author_id=PERSON)
     collection = data.get("mainEntity", {})
     items = collection.get("itemListElement", [])
     expected = published(root)

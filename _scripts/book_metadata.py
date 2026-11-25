@@ -69,3 +69,21 @@ def validate(document, *, title, heading, description, url, schema):
             or not isinstance(schema.get('mainEntity'), dict)
             or schema['mainEntity'].get('name') != heading):
         raise ValueError('Book structured identity differs from reviewed metadata: ' + url)
+
+
+def validate_page_identity(schema, *, url, origin, author_id):
+    """Resolve the reviewed page and publisher identities, not just their references."""
+    if not isinstance(schema, dict) or schema.get('@id') != url + '#webpage':
+        raise ValueError('Book page must define its canonical WebPage identity: ' + url)
+    website = schema.get('isPartOf')
+    if (not isinstance(website, dict)
+            or website.get('@type') != 'WebSite'
+            or website.get('@id') != origin + '/#website'
+            or website.get('url') != origin + '/'):
+        raise ValueError('Book page must belong to the canonical WebSite: ' + url)
+    publisher = website.get('publisher')
+    if (not isinstance(publisher, dict)
+            or publisher.get('@type') != 'Person'
+            or publisher.get('@id') != author_id
+            or publisher.get('url') != author_id.split('#', 1)[0]):
+        raise ValueError('Book page must identify the reviewed Person publisher: ' + url)

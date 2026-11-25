@@ -24,6 +24,13 @@ def replace_schema(html, data):
 
 
 def render(title, heading, desc, url, data, body):
+    # Use the actual canonical page and shared website/publisher contract.
+    data = deepcopy(data)
+    data['@id'] = url + '#webpage'
+    data['isPartOf'] = {'@type': 'WebSite', '@id': books.ORIGIN + '/#website',
+                        'url': books.ORIGIN + '/',
+                        'publisher': {'@type': 'Person', '@id': books.PERSON,
+                                      'url': books.ORIGIN + '/about/'}}
     fields = [('name', 'description', desc), ('property', 'og:title', title),
               ('property', 'og:description', desc), ('property', 'og:url', url),
               ('name', 'twitter:title', title), ('name', 'twitter:description', desc)]
@@ -98,6 +105,26 @@ class EntityFixtureTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'differs from reviewed identity'):
                     books.published(self.root)
                 self.book_pair(item, original)
+
+    def test_book_and_catalog_registries_reject_disconnected_page_graphs(self):
+        for item in books.BOOKS:
+            path = self.root / books.route(item).strip('/') / 'index.html'
+            original = path.read_text(encoding='utf-8')
+            for field in ('@id', 'isPartOf'):
+                with self.subTest(slug=item['slug'], field=field):
+                    data = schema(original)
+                    del data[field]
+                    self.book_pair(item, replace_schema(original, data))
+                    with self.assertRaisesRegex(ValueError, 'canonical Web(Page|Site)'):
+                        books.published(self.root)
+                    self.book_pair(item, original)
+        data = schema(self.hub)
+        data['isPartOf']['publisher']['@id'] = 'https://example.invalid/#person'
+        self.hub_pair(replace_schema(self.hub, data))
+        with self.assertRaisesRegex(ValueError, 'Person publisher'):
+            books.hub_record(self.root)
+        self.hub_pair(self.hub)
+        self.assertEqual(books.hub_record(self.root)['url'], books.HUB_URL)
 
     def test_catalog_rejects_omitted_fields_and_wrong_descriptions_for_every_work(self):
         for position in range(len(books.BOOKS)):

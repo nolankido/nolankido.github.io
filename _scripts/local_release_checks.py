@@ -250,6 +250,7 @@ def main() -> int:
         ('Turn 117 all six book links and untracked third author-page boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn117_untracked_book_link.py', '-q']),
         ('Turn 118 offline live author-crawl failure controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn118_live_author_crawl.py', '-q']),
         ('Turn 120 cross-inventory book discovery metadata and sitemap dates', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn120_book_discovery_audit.py', '-q']),
+        ('Canonical book WebPage and publisher identity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_webpage_identity.py', '-q']),
         ('Turn 124 shared book catalog breadcrumb hierarchy', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn124_book_breadcrumbs.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
