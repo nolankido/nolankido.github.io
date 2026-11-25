@@ -21,6 +21,7 @@ import presentation
 import search_visibility as search
 import visibility_discovery_history
 import turn12_cross_platform_history
+from search_audit_fixture import complete_audit_fixture
 
 
 class SearchVisibilityTests(unittest.TestCase):
@@ -195,12 +196,20 @@ class SearchVisibilityTests(unittest.TestCase):
         page=next(p for p in self.pages if p['id']=='home')
         with TemporaryDirectory() as tmp:
             root=Path(tmp)
-            (root/'sitemap.xml').write_text('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://nolankido.com/</loc></url></urlset>')
-            raw=self.outputs[Path('index.html')]
-            changed=raw.replace('rel="canonical" href="https://nolankido.com/"','rel="canonical" href="https://example.com/"')
-            (root/'index.html').write_text(changed)
-            report=check_search.audit(root,[page],self.site['url'])
-            self.assertEqual(report['status'],'fail')
-            self.assertTrue(any('canonical' in e for e in report['errors']))
+            complete_audit_fixture(root, ROOT, [self.site['url'] + page['path']])
+            raw = self.outputs[Path('index.html')]
+            (root/'index.html').write_text(raw, encoding='utf-8')
+            baseline = check_search.audit(root, [page], self.site['url'])
+            self.assertEqual(baseline['errors'], [])
+            self.assertEqual(baseline['status'], 'pass')
+            self.assertEqual(baseline['manual_tenbb_pages'], 1)
+            changed = raw.replace('rel="canonical" href="https://nolankido.com/"',
+                                  'rel="canonical" href="https://example.com/"')
+            self.assertNotEqual(changed, raw)
+            (root/'index.html').write_text(changed, encoding='utf-8')
+            report = check_search.audit(root, [page], self.site['url'])
+            self.assertEqual(report['status'], 'fail')
+            self.assertEqual(report['errors'], [
+                '/: Need one canonical on the approved HTTPS host'])
 
 if __name__=='__main__':unittest.main()

@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / '_scripts'))
 import build
 import check_search
 import public_identity
+from search_audit_fixture import complete_audit_fixture
 
 
 class IdentityJsonLdTests(unittest.TestCase):
@@ -122,21 +123,24 @@ class IdentityJsonLdTests(unittest.TestCase):
                 if change:
                     content = change(page['id'], content)
                 (root / path).parent.mkdir(parents=True, exist_ok=True)
-                (root / path).write_text(content)
-            (root / 'sitemap.xml').write_text(
-                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-                '<url><loc>https://nolankido.com/</loc></url>'
-                '<url><loc>https://nolankido.com/about/</loc></url></urlset>'
-            )
+                (root / path).write_text(content, encoding='utf-8')
+            complete_audit_fixture(root, ROOT, [
+                'https://nolankido.com' + page['path']
+                for page in pages if not page.get('noindex')])
             return check_search.audit(root, pages, 'https://nolankido.com')
 
     def test_search_audit_accepts_supported_links_and_rejects_unverified_identity(self):
-        self.assertEqual(self.audit_profile_pair()['errors'], [])
+        baseline = self.audit_profile_pair()
+        self.assertEqual(baseline['errors'], [])
+        self.assertEqual(baseline['status'], 'pass')
+        self.assertEqual(baseline['manual_tenbb_pages'], 1)
+        self.assertEqual(baseline['sitemap_urls'], 3)
         def change(page_id, content):
             return content.replace('https://dev.to/kidon', 'https://dev.to/someone-else')
         report = self.audit_profile_pair(change)
         self.assertEqual(report['status'], 'fail')
         self.assertTrue(any('exactly the verified public-work profiles' in e for e in report['errors']))
+        self.assertTrue(all('verified public-work profiles' in e for e in report['errors']))
 
     def test_search_audit_rejects_identity_links_outside_the_two_person_nodes(self):
         def change(page_id, content):
@@ -146,7 +150,8 @@ class IdentityJsonLdTests(unittest.TestCase):
             return content.replace(match.group(1), json.dumps(schema), 1)
         report = self.audit_profile_pair(change)
         self.assertEqual(report['status'], 'fail')
-        self.assertTrue(any('Unsupported identity claim: sameAs' in e for e in report['errors']))
+        self.assertTrue(report['errors'])
+        self.assertTrue(all('Unsupported identity claim: sameAs' in e for e in report['errors']))
 
     def test_search_audit_rejects_a_missing_visible_profile_link(self):
         def change(page_id, content):
@@ -155,7 +160,8 @@ class IdentityJsonLdTests(unittest.TestCase):
             return content
         report = self.audit_profile_pair(change)
         self.assertEqual(report['status'], 'fail')
-        self.assertTrue(any('visibly link to the same verified public-work profiles' in e for e in report['errors']))
+        self.assertEqual(report['errors'], [
+            '/about/: About must visibly link to the same verified public-work profiles'])
 
 
 if __name__ == '__main__':
