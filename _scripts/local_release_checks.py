@@ -258,6 +258,7 @@ def main() -> int:
         ('Focused release groups require real test passes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_focused_unit_groups.py', '-q']),
         ('Historical release results count real passes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_historical_result_contract.py', '-q']),
         ('Minimal search audit fixtures and mandatory Playbook registration', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_fixture.py', '-q']),
+        ('Generated search metadata and crawler directive conflicts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_metadata_contract.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
         ('SEO snapshot drift negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_snapshot.py', '-q']),
         ('Private GSC/Bing/Umami scorecard evidence and zero/null safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_private_scorecard.py', '-q']),

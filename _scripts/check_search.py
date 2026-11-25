@@ -25,6 +25,7 @@ import local_laptop_case
 import reply_audit_case
 import book_pages
 from book_discovery_audit import discovery_errors
+from search_metadata_contract import inspect_metadata
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -165,7 +166,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             for tag in ['title', 'h1', 'main']:
                 check(len(doc.tags(tag)) == 1, 'Need exactly one ' + tag)
             meta = doc.tags('meta')
-            values = {a.get('name', a.get('property')): a.get('content') for a in meta}
+            values, noindex, metadata_errors = inspect_metadata(meta, expected_noindex=bool(page.get('noindex')))
+            errors.extend(path + ': ' + message for message in metadata_errors)
             descriptions[values.get('description', '')] += 1
             check(values.get('description') == page['description'], 'Description disagrees with manifest')
             canonicals = [a.get('href') for a in doc.tags('link') if a.get('rel') == 'canonical']
@@ -173,9 +175,9 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             check(values.get('og:url') == url, 'Share URL must match canonical')
             check(values.get('og:title') == doc.title, 'Share title must match search title')
             check(values.get('og:description') == values.get('description'), 'Share summary must match search summary')
-            check(values.get('twitter:image') == values.get('og:image'), 'Sharing images must agree')
-            noindex = 'noindex' in values.get('robots', '').lower().split(',')
-            check(noindex == bool(page.get('noindex')), 'Robots directive disagrees with explicit crawl policy')
+            check(bool(values.get('og:image')) and values.get('twitter:image') == values.get('og:image'), 'Sharing images must agree')
+            check(values.get('twitter:title') == doc.title, 'Twitter title must match search title')
+            check(values.get('twitter:description') == values.get('description'), 'Twitter summary must match search summary')
             check(bool(page.get('noindex')) == (page['id'] in UTILITY_IDS or page['id'] == '404'), 'Unexpected indexing exclusion')
             if noindex:
                 totals['noindex_pages'] += 1

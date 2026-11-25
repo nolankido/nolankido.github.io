@@ -212,4 +212,33 @@ class SearchVisibilityTests(unittest.TestCase):
             self.assertEqual(report['errors'], [
                 '/: Need one canonical on the approved HTTPS host'])
 
+
+    def test_search_audit_rejects_hidden_metadata_conflicts(self):
+        page = next(p for p in self.pages if p['id'] == 'home')
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            complete_audit_fixture(root, ROOT, [self.site['url'] + page['path']])
+            raw = self.outputs[Path('index.html')]
+            target = root / 'index.html'
+            target.write_text(raw, encoding='utf-8')
+            self.assertEqual(check_search.audit(root, [page], self.site['url'])['errors'], [])
+            mutations = (
+                ('<meta name="robots" content="noindex"><meta name="robots" content="index,follow">',
+                 'Duplicate search metadata (robots)'),
+                ('<meta name="Googlebot" content="noindex">', 'crawl policy (googlebot)'),
+                ('<meta property="og:title" content="Unreviewed title">', 'Duplicate search metadata (og:title)'),
+            )
+            for added, expected in mutations:
+                with self.subTest(added=added):
+                    target.write_text(raw.replace('</head>', added + '</head>', 1), encoding='utf-8')
+                    report = check_search.audit(root, [page], self.site['url'])
+                    self.assertEqual(report['status'], 'fail')
+                    self.assertTrue(any(expected in error for error in report['errors']), report['errors'])
+            changed = re.sub(r'(<meta name="twitter:title" content=")[^"]+(">)',
+                             r'\g<1>Unreviewed title\g<2>', raw, count=1)
+            self.assertNotEqual(changed, raw)
+            target.write_text(changed, encoding='utf-8')
+            self.assertIn('/: Twitter title must match search title',
+                          check_search.audit(root, [page], self.site['url'])['errors'])
+
 if __name__=='__main__':unittest.main()
