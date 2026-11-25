@@ -2603,3 +2603,7 @@ The book registry is the reviewed source of all three work identities (`book_ent
 ## Turn 117: full native Kindle link coverage without new tracking
 
 The PBG-05 read-only auditor now covers six exact author-supplied links across the catalog and all three canonical author pages. Keep the five existing tracked links and the third page's single untracked native link distinct. Do not add analytics attributes, executable scripts or new events to the third page. Check safe anchor metadata and source/output parity; retain null analytics-ingestion, retail verification and attributed-order values. The full release gate still applies, with no Actions, new costs, or fabricated evidence.
+
+## Turn 118: required live author discovery routes
+
+The read-only live indexability audit must require and request Bio, the Books catalog and all three canonical author pages even if omitted from the live sitemap. Reject malformed/duplicate sitemap locations, missing or redirected responses, unexpected noindex/none, invalid HTML/schema responses and unsupported inbound evidence. Preserve the separate exact-byte live verification and the local release gate. The nine offline controls do not constitute live verification. Do not add scheduled jobs, trackers, paid APIs or assume indexing/ranking gains.
