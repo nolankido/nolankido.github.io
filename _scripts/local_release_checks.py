@@ -19,12 +19,33 @@ def forbid_workflows() -> None:
 
 def check(label: str, args: list[str]) -> bool:
     print(f'\n=== {label} ===', flush=True)
-    if '-s' in args and '-p' in args:
-        folder = ROOT / args[args.index('-s') + 1]
-        pattern = args[args.index('-p') + 1]
-        if not any(folder.glob(pattern)):
+    if args[:3] == ['-m', 'unittest', 'discover']:
+        # All registered discovery groups use this exact command shape. Run
+        # each matched module through the same real-result gate as --full.
+        from check_historical_batches import discover, run_file
+        if len(args) != 8 or args[3:6] != ['-s', '_tests', '-p'] or args[7] != '-q':
+            print(f'{label}: FAIL (unsupported unittest discovery command)', flush=True)
+            return False
+        pattern = args[6]
+        try:
+            modules = discover(pattern, folder=ROOT / '_tests')
+        except ValueError as exc:
+            print(f'{label}: FAIL ({exc})', flush=True)
+            return False
+        if not modules:
             print(f'{label}: FAIL (no tests match {pattern})', flush=True)
             return False
+        results = []
+        for module in modules:
+            result = run_file(module, 90, root=ROOT)
+            results.append(result)
+            print(f"{module}: {result['status']} ({result['passed']} passed, "
+                  f"{result['skipped']} skipped, {result['expected_failures']} expected failures)", flush=True)
+            if result['status'] != 'PASS' and result['output']:
+                print(result['output'][-4000:], flush=True)
+        passed = all(result['status'] == 'PASS' for result in results)
+        print(f'{label}: {"PASS" if passed else "FAIL"}', flush=True)
+        return passed
     result = subprocess.run([sys.executable, *args], cwd=ROOT, check=False)
     print(f'{label}: {"PASS" if result.returncode == 0 else "FAIL"}', flush=True)
     return result.returncode == 0
@@ -232,6 +253,7 @@ def main() -> int:
         ('Turn 124 shared book catalog breadcrumb hierarchy', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn124_book_breadcrumbs.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
+        ('Focused release groups require real test passes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_focused_unit_groups.py', '-q']),
         ('Historical release results count real passes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_historical_result_contract.py', '-q']),
         ('Minimal search audit fixtures and mandatory Playbook registration', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_fixture.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),

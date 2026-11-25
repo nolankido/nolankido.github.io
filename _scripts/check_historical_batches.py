@@ -22,24 +22,25 @@ ROOT = Path(__file__).resolve().parents[1]
 TESTS = ROOT / "_tests"
 
 
-def discover(pattern: str) -> list[str]:
+def discover(pattern: str, *, folder: Path | None = None) -> list[str]:
     """Select only repository test-module filenames in deterministic order."""
     if (not pattern.startswith("test_") or "/" in pattern or "\\" in pattern
             or ".." in pattern or not pattern.endswith(".py")):
         raise ValueError("Pattern must match test_*.py names, not paths")
-    return sorted(p.name for p in TESTS.glob(pattern)
+    folder = TESTS if folder is None else folder
+    return sorted(p.name for p in folder.glob(pattern)
                   if p.is_file() and p.name.startswith("test_") and p.suffix == ".py")
 
 
-def run_file(filename: str, timeout_seconds: float) -> dict:
+def run_file(filename: str, timeout_seconds: float, *, root: Path | None = None) -> dict:
     """Return a faithful module outcome, including import errors and timeouts."""
     command = [sys.executable, str(Path(__file__).with_name("run_unit_module.py")), filename]
     started = time.monotonic()
     try:
-        done = subprocess.run(command, cwd=ROOT, stdout=subprocess.PIPE,
+        done = subprocess.run(command, cwd=ROOT if root is None else root, stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT, encoding="utf-8",
                               errors="replace", timeout=timeout_seconds, check=False)
-        output = done.stdout or ""
+        output = getattr(done, "stdout", None) or ""
         records = [line[len(RESULT_PREFIX):] for line in output.splitlines()
                    if line.startswith(RESULT_PREFIX)]
         try:
