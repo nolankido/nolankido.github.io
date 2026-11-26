@@ -45,6 +45,64 @@ class LiveAuthorCrawlTests(unittest.TestCase):
         paths = ['/', *audit.BOOK_ROUTES]
         self.assertEqual(audit.assess(paths, [row(p) for p in paths], priority=paths, excluded=[])[0], [])
 
+    def test_research_portfolio_and_six_case_records_are_required(self):
+        expected = {
+            '/about/accounting-research/', '/ai-in-real-life/',
+            '/technology/checking-ai-website-changes/',
+            '/technology/rightsreceipt-ai-licensing/',
+            '/technology/local-ai-review-replies/',
+            '/technology/ai-book-continuity-checker/',
+            '/technology/ai-poker-video-evidence/',
+            '/technology/dinner-on-time/',
+        }
+        self.assertEqual(set(audit.EVIDENCE_ROUTES), expected)
+        self.assertEqual(len(audit.EVIDENCE_ROUTES), len(expected))
+        self.assertTrue(expected.issubset(audit.SAMPLE))
+        self.assertEqual(len(audit.SAMPLE), len(set(audit.SAMPLE)))
+        for path in expected:
+            with self.subTest(path=path):
+                paths = [p for p in audit.SAMPLE if p != path]
+                issues, _ = audit.assess(paths, [row(p) for p in paths], excluded=[])
+                self.assertIn([path, 'priority sample missing from sitemap'], issues)
+                self.assertIn([path, 'non-200 or fetch error'], issues)
+
+    def test_live_parser_captures_normalized_search_crawler_meta(self):
+        for name in ('OAI-SearchBot', ' Googlebot-News ', ' BINGBOT ', 'GPTBot'):
+            with self.subTest(name=name):
+                parser = audit.PageParser()
+                parser.feed(f'<meta name="{name}" content="NONE">')
+                parser.close()
+                self.assertEqual(parser.robots, [(name.strip().lower(), 'NONE')])
+                self.assertTrue(audit.blocks_indexing({'robots': parser.robots}))
+
+    def test_live_parser_retains_duplicate_directives_and_property_variant(self):
+        for html in (
+            '<meta name="robots" content="noindex"><meta name="ROBOTS" content="index">',
+            '<meta name="robots" content="index"><meta name="robots" content="noindex">',
+            '<meta property="robots" content="noindex">',
+        ):
+            with self.subTest(html=html):
+                parser = audit.PageParser()
+                parser.feed(html)
+                parser.close()
+                self.assertTrue(audit.blocks_indexing({'robots': parser.robots}))
+                if 'property' not in html:
+                    self.assertEqual(len(parser.robots), 2)
+
+    def test_live_preview_directives_and_unrelated_metadata_not_indexing_blocks(self):
+        for value in ('max-image-preview:none', 'max-image-preview: none',
+                      'max-snippet:0', 'nofollow'):
+            with self.subTest(value=value):
+                parser = audit.PageParser()
+                parser.feed(f'<meta name="robots" content="{value}">'
+                            '<meta name="description" content="noindex">')
+                parser.close()
+                self.assertFalse(audit.blocks_indexing({'robots': parser.robots}))
+                self.assertFalse(audit.blocks_indexing({'x_robots': [value]}))
+        for value in ('OAI-SearchBot: noindex', 'Googlebot-News: none',
+                      'GPTBot:NOINDEX', 'robots: noindex'):
+            self.assertTrue(audit.blocks_indexing({'x_robots': [value]}), value)
+
     def test_missing_priority_never_disappears_or_crashes(self):
         missing = audit.BOOK_ROUTES[-1]
         paths = ['/', *audit.BOOK_ROUTES[:-1]]

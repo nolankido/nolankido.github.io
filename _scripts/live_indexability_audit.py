@@ -15,16 +15,25 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from html.parser import HTMLParser
+from search_metadata_contract import crawler_field, directives
 
 BASE = "https://nolankido.com"
 BOOK_ROUTES = ("/books/", "/books/one-workflow-at-a-time/",
                "/books/how-to-play-no-limit-texas-holdem/", "/books/ai-works-human-decides/")
+EVIDENCE_ROUTES = (
+    "/about/accounting-research/", "/ai-in-real-life/",
+    "/technology/checking-ai-website-changes/",
+    "/technology/rightsreceipt-ai-licensing/",
+    "/technology/local-ai-review-replies/",
+    "/technology/ai-book-continuity-checker/",
+    "/technology/ai-poker-video-evidence/",
+    "/technology/dinner-on-time/",
+)
 SAMPLE = [
-    "/", "/about/", "/bio/", *BOOK_ROUTES,
+    "/", "/about/", "/bio/", *BOOK_ROUTES, *EVIDENCE_ROUTES,
     "/technology/", "/technology/check-ai-answers/",
-    "/technology/local-ai-review-replies/", "/technology/local-ai-gaming-laptop/",
-    "/technology/review-reply-evidence-audit/", "/technology/ai-book-continuity-checker/",
-    "/technology/rightsreceipt-ai-licensing/", "/poker/", "/poker/library/",
+    "/technology/local-ai-gaming-laptop/",
+    "/technology/review-reply-evidence-audit/", "/poker/", "/poker/library/",
     "/poker/resources/", "/poker/start-here/", "/poker/holdem-basics/",
     "/poker/six-to-ten-bb-tournament-decisions/", "/poker/satellite-bubble-seat-equity/",
     "/poker/poker-math/", "/poker/nolan-kido/",
@@ -79,8 +88,11 @@ class PageParser(HTMLParser):
         a = dict(attrs)
         if tag == "link" and "canonical" in (a.get("rel") or "").lower().split():
             self.canonicals.append(a.get("href", ""))
-        if tag == "meta" and (a.get("name") or "").lower() in ("robots", "googlebot", "bingbot"):
-            self.robots.append((a["name"].lower(), a.get("content") or ""))
+        if tag == "meta":
+            for attribute in ("name", "property"):
+                name = (a.get(attribute) or "").strip().lower()
+                if crawler_field(name):
+                    self.robots.append((name, a.get("content") or ""))
         if tag == "a" and a.get("href"):
             self.links.append(a["href"])
         if tag == "h1":
@@ -182,13 +194,14 @@ def fetch(path):
 def blocks_indexing(row):
     values = [value for _, value in row.get("robots", [])] + row.get("x_robots", [])
     for value in values:
-        # A crawler-qualified directive is still a blocking directive, but
-        # max-image-preview:none is an image setting, not a noindex rule.
-        tokens = re.split(r"[,\s]+", re.sub(r"\s*:\s*", ":", value.lower()))
-        if any(token in {"noindex", "none"} or
-               re.fullmatch(r"[a-z0-9_-]*bot(?:-[a-z0-9_-]+)?:(?:noindex|none)", token)
-               for token in tokens):
-            return True
+        # Use the generated-page directive parser on live responses too.
+        # A bot-qualified exclusion counts; image-preview:none does not.
+        for token in directives(value):
+            if token in {"noindex", "none"}:
+                return True
+            name, sep, directive = token.partition(":")
+            if sep and crawler_field(name) and directive in {"noindex", "none"}:
+                return True
     return False
 
 
