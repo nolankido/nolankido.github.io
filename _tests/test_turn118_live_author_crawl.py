@@ -198,6 +198,33 @@ class LiveAuthorCrawlTests(unittest.TestCase):
         self.assertIn(['/find/', 'excluded utility fetch/status failure'],
                       audit.assess([], [missing], priority=[], excluded=['/find/'])[0])
 
+    def test_excluded_utility_requires_global_noindex(self):
+        path = '/find/'
+        for directives in (
+            {'robots': [('googlebot', 'noindex')]},
+            {'robots': [('oai-searchbot', 'none')]},
+            {'x_robots': ['Googlebot: noindex']},
+            {'x_robots': ['Googlebot: nofollow, noindex']},
+            {'x_robots': ['SomeAgent: noindex, nofollow']},
+            {'x_robots': ['max-image-preview: none']},
+        ):
+            with self.subTest(directives=directives):
+                candidate = row(path, **directives)
+                self.assertFalse(audit.has_global_noindex(candidate))
+                issues, _ = audit.assess([], [candidate], priority=[], excluded=[path])
+                self.assertIn([path, 'excluded utility missing noindex'], issues)
+        for directives in (
+            {'robots': [('robots', 'NOINDEX, follow')]},
+            {'robots': [('robots', 'none')]},
+            {'x_robots': ['noindex']},
+            {'x_robots': ['max-image-preview: none, noindex']},
+            {'x_robots': ['Googlebot: noindex', 'noindex']},
+        ):
+            with self.subTest(directives=directives):
+                candidate = row(path, **directives)
+                self.assertTrue(audit.has_global_noindex(candidate))
+                self.assertEqual(audit.assess([], [candidate], priority=[], excluded=[path])[0], [])
+
     def test_fetch_preserves_real_http_status_and_parser_failure(self):
         url = audit.BASE+'/404.html'
         headers = Message()

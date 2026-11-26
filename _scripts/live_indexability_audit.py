@@ -205,6 +205,27 @@ def blocks_indexing(row):
     return False
 
 
+def has_global_noindex(row):
+    """A crawler-specific exclusion does not establish global utility noindex.
+
+    Accept explicit global noindex/none in HTML or an unqualified HTTP header.
+    Treat unknown colon prefixes in headers conservatively as possible scopes.
+    """
+    blocked = {"noindex", "none"}
+    for name, value in row.get("robots", []):
+        if name == "robots" and directives(value) & blocked:
+            return True
+    value_directives = {"max-image-preview", "max-snippet", "max-video-preview"}
+    for value in row.get("x_robots", []):
+        tokens = directives(value)
+        if any(":" in token and token.partition(":")[0] not in value_directives
+               for token in tokens):
+            continue
+        if tokens & blocked:
+            return True
+    return False
+
+
 def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
     """Return explicit failures even when an expected route is wholly absent."""
     sitemap_set = set(paths)
@@ -260,7 +281,7 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
         if r.get("final_url") != BASE + p: issues.append([p, "excluded utility redirect or final URL differs"])
         if r.get("html_parser_error") or r.get("mime", "").split(";", 1)[0].strip().lower() != "text/html":
             issues.append([p, "excluded utility HTML response failure"])
-        if not blocks_indexing(r): issues.append([p, "excluded utility missing noindex"])
+        if not has_global_noindex(r): issues.append([p, "excluded utility missing noindex"])
     return issues, inbound
 
 
