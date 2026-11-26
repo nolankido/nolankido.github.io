@@ -16,8 +16,9 @@ from xml.etree import ElementTree
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "assets/book-reader-journey.css"
 CSS_URLS = {
-    "one-workflow-at-a-time": "/assets/book-reader-journey.css?v=20261122",
-    "how-to-play-no-limit-texas-holdem": "/assets/book-reader-journey.css?v=20261122-pbg03",
+    "one-workflow-at-a-time": "/assets/book-reader-journey.css?v=20261124-turn111",
+    "how-to-play-no-limit-texas-holdem": "/assets/book-reader-journey.css?v=20261124-turn111",
+    "ai-works-human-decides": "/assets/book-reader-journey.css?v=20261124-turn111",
 }
 PAGES = (
     {"slug": "one-workflow-at-a-time", "class": "page-book-one-workflow-at-a-time",
@@ -32,6 +33,12 @@ PAGES = (
      "answer": "poker-book-sample-answer",
      "worksheet": "/downloads/holdem-river-call-check-worksheet.md",
      "math": ("20%", "25%", "hypothetical", "not an observed range")},
+    {"slug": "ai-works-human-decides", "class": "page-book-ai-works-human-decides",
+     "reader": "human-decides-reader", "example": "human-decides-exercise",
+     "worksheet_section": "human-decides-evidence", "edition": "human-decides-edition-evidence",
+     "answer": "human-decides-exercise-answer",
+     "worksheet": "/downloads/ai-human-decision-review-worksheet.md",
+     "math": ("$480 + $36", "$516", "$16", "hold the order")},
 )
 sys.path.insert(0, str(ROOT / "_scripts"))
 import book_pages
@@ -134,6 +141,10 @@ class BookReaderJourneyTests(unittest.TestCase):
             if item["slug"] == "how-to-play-no-limit-texas-holdem":
                 self.assertIn("https://www.amazon.com/Play-Limit-Texas-Holdem-Poker-ebook/dp/B0HSB98324", page)
                 self.assertIn('data-umami-event="poker-book-kindle-amazon-click"', page)
+            elif item["slug"] == "ai-works-human-decides":
+                self.assertIn("https://www.amazon.com/Works-Human-Decides-Nolan-Kido-ebook/dp/B0HSF8K76R", page)
+                self.assertNotIn("B0HSB98324", page)
+                self.assertNotIn("B0HRQNCP7Y", page)
             else:
                 self.assertNotIn("B0HSB98324", page)
                 self.assertIn("https://www.amazon.com/One-Workflow-Time-Nolan-Kido-ebook/dp/B0HRQNCP7Y", page)
@@ -169,11 +180,11 @@ class BookReaderJourneyTests(unittest.TestCase):
         dates = {node.findtext("{*}loc"): node.findtext("{*}lastmod") for node in root}
         for route in ("/books/", *(f"/books/{item['slug']}/" for item in PAGES)):
             with self.subTest(route=route):
-                expected = "2026-11-22"
+                expected = book_pages.UPDATED if route in ("/books/", "/books/ai-works-human-decides/") else "2026-11-22"
                 self.assertEqual(dates["https://nolankido.com" + route], expected)
         for item in PAGES:
             html = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
-            expected = "2026-11-22"
+            expected = book_pages.UPDATED if item["slug"] == "ai-works-human-decides" else "2026-11-22"
             self.assertIn('"dateModified": "' + expected + '"', html)
 
     def test_public_css_and_two_worksheets_in_live_inventory(self):

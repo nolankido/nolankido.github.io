@@ -1,0 +1,9 @@
+# SEO/GEO Turn 124: consistent book catalog breadcrumbs
+
+Parent: 999e7eaaeb35813618c5ec69356f6cf242df25d0.
+
+The two older author-book pages used Creative Work as their visible and structured breadcrumb parent, while the third used the dedicated Books catalog. All three now have Home > Books > exact book title. The older two retain their explicit cross-book body links, now targeting the existing comparison section. The catalog's own hierarchy is unchanged. Only the two older paired source/public HTML files, release checklist, new regression module, instructions and this report change. The canonical URLs, dates, reading content, all retailer links, tracking and other structured data are unchanged.
+
+Five local tests passed normally and under -OO (10 executions): synthetic positive and mutation controls, plus the exact unchanged third-book document (Git blob 80a502aa4c555be4fead45e30f8df137124c1008). Its separate HTML5 parse with vendored html5lib found no errors. The tested regression module's Git blob is ba208a02325265441fc6e17af0ffac7cda31a592. The full-checkout test verifies all three source/public pairs and contextual return anchors; it has not run here. 37 connector-side checks verified the actual old and proposed breadcrumb records, exact source parity, the existing unique comparison anchor, unchanged retailer destinations, and exact edit boundaries. A separate static inventory review of 12 changed public HTML documents found 1,067 internal anchors with existing committed file destinations; external-page fragment checking was incomplete.
+
+Git ls-remote again returned exit 128: Could not resolve host: github.com. No complete checkout, generated audit, full historical/browser suite, merge, or live byte verification has been performed. Keep the draft unmerged until the real release gate passes. No paid services, GitHub Actions, tracking changes, or claimed SEO/GEO gains.

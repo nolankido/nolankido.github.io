@@ -21,6 +21,7 @@ import presentation
 import search_visibility as search
 import visibility_discovery_history
 import turn12_cross_platform_history
+from search_audit_fixture import complete_audit_fixture
 
 
 class SearchVisibilityTests(unittest.TestCase):
@@ -195,12 +196,49 @@ class SearchVisibilityTests(unittest.TestCase):
         page=next(p for p in self.pages if p['id']=='home')
         with TemporaryDirectory() as tmp:
             root=Path(tmp)
-            (root/'sitemap.xml').write_text('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://nolankido.com/</loc></url></urlset>')
-            raw=self.outputs[Path('index.html')]
-            changed=raw.replace('rel="canonical" href="https://nolankido.com/"','rel="canonical" href="https://example.com/"')
-            (root/'index.html').write_text(changed)
-            report=check_search.audit(root,[page],self.site['url'])
-            self.assertEqual(report['status'],'fail')
-            self.assertTrue(any('canonical' in e for e in report['errors']))
+            complete_audit_fixture(root, ROOT, [self.site['url'] + page['path']])
+            raw = self.outputs[Path('index.html')]
+            (root/'index.html').write_text(raw, encoding='utf-8')
+            baseline = check_search.audit(root, [page], self.site['url'])
+            self.assertEqual(baseline['errors'], [])
+            self.assertEqual(baseline['status'], 'pass')
+            self.assertEqual(baseline['manual_tenbb_pages'], 1)
+            changed = raw.replace('rel="canonical" href="https://nolankido.com/"',
+                                  'rel="canonical" href="https://example.com/"')
+            self.assertNotEqual(changed, raw)
+            (root/'index.html').write_text(changed, encoding='utf-8')
+            report = check_search.audit(root, [page], self.site['url'])
+            self.assertEqual(report['status'], 'fail')
+            self.assertEqual(report['errors'], [
+                '/: Need one canonical on the approved HTTPS host'])
+
+
+    def test_search_audit_rejects_hidden_metadata_conflicts(self):
+        page = next(p for p in self.pages if p['id'] == 'home')
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            complete_audit_fixture(root, ROOT, [self.site['url'] + page['path']])
+            raw = self.outputs[Path('index.html')]
+            target = root / 'index.html'
+            target.write_text(raw, encoding='utf-8')
+            self.assertEqual(check_search.audit(root, [page], self.site['url'])['errors'], [])
+            mutations = (
+                ('<meta name="robots" content="noindex"><meta name="robots" content="index,follow">',
+                 'Duplicate search metadata (robots)'),
+                ('<meta name="Googlebot" content="noindex">', 'crawl policy (googlebot)'),
+                ('<meta property="og:title" content="Unreviewed title">', 'Duplicate search metadata (og:title)'),
+            )
+            for added, expected in mutations:
+                with self.subTest(added=added):
+                    target.write_text(raw.replace('</head>', added + '</head>', 1), encoding='utf-8')
+                    report = check_search.audit(root, [page], self.site['url'])
+                    self.assertEqual(report['status'], 'fail')
+                    self.assertTrue(any(expected in error for error in report['errors']), report['errors'])
+            changed = re.sub(r'(<meta name="twitter:title" content=")[^"]+(">)',
+                             r'\g<1>Unreviewed title\g<2>', raw, count=1)
+            self.assertNotEqual(changed, raw)
+            target.write_text(changed, encoding='utf-8')
+            self.assertIn('/: Twitter title must match search title',
+                          check_search.audit(root, [page], self.site['url'])['errors'])
 
 if __name__=='__main__':unittest.main()

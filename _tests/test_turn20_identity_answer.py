@@ -109,13 +109,13 @@ class SourceBoundedIdentityTests(unittest.TestCase):
     def test_metadata_and_profile_person_do_not_duplicate_identity(self):
         manifest = json.loads((ROOT / '_source/pages.json').read_text())
         page = next(p for p in manifest if p['path'] == ROUTE)
-        # Turn 23 added a separate NolanPoker-to-AI evidence route on About.
-        self.assertEqual(page['updated'], '2026-11-19')
+        # Later reviewed revisions may change the calendar date, not identity or evidence.
+        self.assertGreaterEqual(page['updated'], '2026-11-19')
         self.assertIn('Who is Nolan Kido?', page['description'])
         self.assertIn('AI Works, Human Decides', page['description'])
         for path in ('/', '/bio/', '/projects/'):
             record = next(p for p in manifest if p['path'] == path)
-            self.assertEqual(record['updated'], '2026-11-18')
+            self.assertGreaterEqual(record['updated'], '2026-11-18')
         self.assertEqual(LinksAndIds(self.public).ids.count(ID), 1)
         self.assertIn('<link rel="canonical" href="' + URL + '">', self.public)
         schemas = [json.loads(raw) for raw in re.findall(
@@ -130,7 +130,12 @@ class SourceBoundedIdentityTests(unittest.TestCase):
         sitemap = ET.fromstring((ROOT / 'sitemap.xml').read_text())
         urls = [e for e in sitemap if e.findtext('{*}loc') == URL]
         self.assertEqual(len(urls), 1)
-        self.assertEqual(urls[0].findtext('{*}lastmod'), '2026-11-19')
+        self.assertEqual(urls[0].findtext('{*}lastmod'), page['updated'])
+        for path in ('/', '/bio/', '/projects/'):
+            record = next(p for p in manifest if p['path'] == path)
+            matches = [e for e in sitemap if e.findtext('{*}loc') == 'https://nolankido.com' + path]
+            self.assertEqual(len(matches), 1, path)
+            self.assertEqual(matches[0].findtext('{*}lastmod'), record['updated'], path)
 
     def test_claim_inflation_and_link_drift_are_rejected(self):
         source = self.source

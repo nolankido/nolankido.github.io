@@ -1,0 +1,9 @@
+# SEO/GEO Turn 116: canonical book identity consolidation
+
+November 24, 2026. Parent 0b3a80cc6c289208e641c8f8bfe8499cdbfe7229.
+
+The dedicated author-book pages and identity graph already agreed on all three work identities. The Creative Work ItemList used different descriptions for the first two books and lacked their mainEntityOfPage references. The catalog omitted those references and the known subtitle of One Workflow at a Time. This turn makes the three reviewed Book entities canonical in book_pages.py, generates Creative Work's ItemList directly from them, and validates all authored graph Book nodes before export. Both generated public records and the catalog source are aligned. All 12 Book records across four discovery surfaces now agree semantically. Visible prose, canonical URLs, sitemap, retail evidence, and identity graph content are unchanged.
+
+Six real Python fixture test methods passed, both normally and under -OO (12 executions). The tested registry blob is 6e5c7790fff0776020647c21a30a5dacad7f2779 and the new test blob is a13c2729a1c7a4090ec09eaa4fbbfbe1a4b84827. Fixtures exercise the actual registry against synthetic complete book/catalog HTML, all three work records, missing fields, extra retail data, and corrupted/duplicated graph records. 29 connector-side precommit checks verified the actual source records, graph, exact replacements, and unchanged non-schema HTML. The full-site integration method is registered but has not been run locally. This is not a complete-site release validation.
+
+The current Git client still cannot resolve github.com; the archive/raw retrieval alternatives were also unavailable. The complete actual site rebuild, generated audit, regression/browser suite and live-byte checks remain pending. Keep the existing PR as a draft. No GitHub Actions, paid services, additional pages, unverified edition claims or measured ranking/citation improvement.

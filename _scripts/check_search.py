@@ -10,9 +10,9 @@ from collections import Counter
 from copy import deepcopy
 from html.parser import HTMLParser
 import json
+import re
 from pathlib import Path
 import sys
-from xml.etree import ElementTree as ET
 import build
 import public_identity
 import player_sitemap
@@ -23,6 +23,9 @@ import poker_reserve_day1_episode
 import local_laptop_case
 import reply_audit_case
 import book_pages
+from book_discovery_audit import discovery_errors
+from search_metadata_contract import inspect_metadata
+from sitemap_contract import inspect_sitemap
 from search_visibility import UTILITY_IDS, BreadcrumbLinks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -114,8 +117,11 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
     except (OSError, ValueError, KeyError, TypeError) as exc:
         errors.append('Standalone book pages: ' + str(exc))
         books = []
+    book_discovery_records = []
     for book in books:
         canonical = book_pages.ORIGIN + book_pages.route(book)
+        book_discovery_records.append({'url': canonical, 'title': book['seo'],
+                                       'description': book['description'], 'modified': book['modified']})
         if canonical in expected_indexed:
             errors.append('Standalone book duplicates an indexed canonical: ' + canonical)
         expected_indexed.add(canonical)
@@ -130,6 +136,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             errors.append('Books author catalog duplicates an indexed canonical')
         expected_indexed.add(book_hub['url'])
         totals['manual_book_hubs'] += 1
+        book_discovery_records.append({'url': book_hub['url'], 'title': book_pages.HUB_TITLE,
+                                       'description': book_pages.HUB_DESCRIPTION, 'modified': book_hub['modified']})
     try:
         playbook = tenbb_companion.record(root)
     except (OSError, ValueError, KeyError, TypeError) as exc:
@@ -140,8 +148,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             errors.append('10 BB playbook duplicates a published canonical')
         expected_indexed.add(playbook['url'])
         totals['manual_tenbb_pages'] += 1
-    sitemap = ET.fromstring((root/'sitemap.xml').read_text(encoding='utf-8'))
-    actual_indexed = [e.text for e in sitemap.iter() if e.tag.endswith('}loc')]
+    sitemap, actual_indexed, sitemap_errors = inspect_sitemap(root / 'sitemap.xml')
+    errors.extend(sitemap_errors)
     if set(actual_indexed) != expected_indexed or len(actual_indexed) != len(expected_indexed):
         errors.append('Sitemap must contain each indexable canonical exactly once')
     for page in pages:
@@ -158,7 +166,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             for tag in ['title', 'h1', 'main']:
                 check(len(doc.tags(tag)) == 1, 'Need exactly one ' + tag)
             meta = doc.tags('meta')
-            values = {a.get('name', a.get('property')): a.get('content') for a in meta}
+            values, noindex, metadata_errors = inspect_metadata(meta, expected_noindex=bool(page.get('noindex')))
+            errors.extend(path + ': ' + message for message in metadata_errors)
             descriptions[values.get('description', '')] += 1
             check(values.get('description') == page['description'], 'Description disagrees with manifest')
             canonicals = [a.get('href') for a in doc.tags('link') if a.get('rel') == 'canonical']
@@ -166,9 +175,9 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             check(values.get('og:url') == url, 'Share URL must match canonical')
             check(values.get('og:title') == doc.title, 'Share title must match search title')
             check(values.get('og:description') == values.get('description'), 'Share summary must match search summary')
-            check(values.get('twitter:image') == values.get('og:image'), 'Sharing images must agree')
-            noindex = 'noindex' in values.get('robots', '').lower().split(',')
-            check(noindex == bool(page.get('noindex')), 'Robots directive disagrees with explicit crawl policy')
+            check(bool(values.get('og:image')) and values.get('twitter:image') == values.get('og:image'), 'Sharing images must agree')
+            check(values.get('twitter:title') == doc.title, 'Twitter title must match search title')
+            check(values.get('twitter:description') == values.get('description'), 'Twitter summary must match search summary')
             check(bool(page.get('noindex')) == (page['id'] in UTILITY_IDS or page['id'] == '404'), 'Unexpected indexing exclusion')
             if noindex:
                 totals['noindex_pages'] += 1
@@ -230,6 +239,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
                 check('"' + key + '"' not in identity_json, 'Unsupported identity claim: ' + key)
             if page['id'] == 'about':
                 check(schema.get('@type') == 'ProfilePage', 'About must remain the profile page')
+                check(not re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(schema.get('dateModified', ''))),
+                      'ProfilePage modification time must not be an invented day-only timestamp')
                 check(schema.get('mainEntity', {}).get('@id') == person_id, 'Profile must own the shared Person identity')
             if page['id'] == 'task-brief':
                 app = schema.get('mainEntity', {})
@@ -238,6 +249,8 @@ def audit(root: Path, pages: list[dict], origin: str) -> dict:
             totals['pages'] += 1
         except (OSError, ValueError, KeyError, TypeError) as exc:
             errors.append(path + ': ' + str(exc))
+    errors.extend(discovery_errors(book_discovery_records, sitemap,
+                                   titles.elements(), descriptions.elements()))
     for label, counts in [('titles', titles), ('descriptions', descriptions)]:
         if not all(value and count == 1 for value, count in counts.items()):
             errors.append('Empty or duplicated ' + label)

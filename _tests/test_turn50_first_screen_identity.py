@@ -113,10 +113,11 @@ class FirstScreenIdentityTests(unittest.TestCase):
         self.assertIn("AI Works, Human Decides", home)
         self.assertIn("AI Works, Human Decides", about)
 
-    def test_home_update_reflects_new_pilot_route_and_about_date_is_preserved(self):
+    def test_home_and_about_keep_reviewed_bibliography_revision(self):
         pages = {p["path"]: p for p in json.loads(text("_source/pages.json"))}
-        self.assertEqual(pages["/"]["updated"], "2026-11-21")
-        self.assertEqual(pages["/about/"]["updated"], "2026-11-20")
+        # The pilot-route and original proof dates were superseded by Turn 108.
+        self.assertEqual(pages["/"]["updated"], "2026-11-24")
+        self.assertEqual(pages["/about/"]["updated"], "2026-11-24")
 
     def test_existing_shared_accessible_link_style_without_custom_js(self):
         css = text("assets/site-core.css")

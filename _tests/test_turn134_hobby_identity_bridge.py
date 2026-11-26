@@ -118,7 +118,8 @@ class HobbyIdentityBridgeTests(unittest.TestCase):
         pages = {p["path"]: p for p in json.loads((ROOT / "_source/pages.json").read_text())}
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text())
         dates = {n.findtext("{*}loc"): n.findtext("{*}lastmod") for n in sitemap}
-        for route, previous in (("/", "2026-11-13"), ("/about/", "2026-11-13")):
+        # The later Turn 108 bibliography revision is the reviewed current baseline.
+        for route, previous in (("/", "2026-11-24"), ("/about/", "2026-11-24")):
             self.assertEqual(pages[route]["updated"], previous)
             self.assertEqual(dates["https://nolankido.com" + route], previous)
             self.assertIn('rel="canonical" href="https://nolankido.com' + route + '"',

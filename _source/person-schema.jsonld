@@ -6,14 +6,18 @@
       "@id": "https://nolankido.com/#website",
       "url": "https://nolankido.com/",
       "name": "Nolan Kido",
-      "publisher": { "@id": "https://nolankido.com/about/#nolan-kido" },
+      "publisher": {
+        "@id": "https://nolankido.com/about/#nolan-kido"
+      },
       "inLanguage": "en-US"
     },
     {
       "@type": "Person",
       "@id": "https://nolankido.com/about/#nolan-kido",
       "name": "Nolan Kido",
-      "alternateName": ["Nolan Y. Kido"],
+      "alternateName": [
+        "Nolan Y. Kido"
+      ],
       "url": "https://nolankido.com/about/",
       "description": "Nolan Kido builds and examines practical AI workflows for everyday life and small-business work. AI Works, Human Decides: people verify important results and retain responsibility. Former Chief Operating Officer of Hawaii Dental Clinic and Affiliates. Tournament poker player.",
       "identifier": {
@@ -56,9 +60,17 @@
       },
       "headline": "The Influence of Elections on the Accounting Choices of Governmental Entities",
       "author": [
-        { "@id": "https://nolankido.com/about/#nolan-kido" },
-        { "@type": "Person", "name": "Reining Petacchi" },
-        { "@type": "Person", "name": "Joseph Weber" }
+        {
+          "@id": "https://nolankido.com/about/#nolan-kido"
+        },
+        {
+          "@type": "Person",
+          "name": "Reining Petacchi"
+        },
+        {
+          "@type": "Person",
+          "name": "Joseph Weber"
+        }
       ],
       "datePublished": "2012",
       "isPartOf": {
@@ -67,7 +79,10 @@
         "isPartOf": {
           "@type": "PublicationVolume",
           "volumeNumber": "50",
-          "isPartOf": { "@type": "Periodical", "name": "Journal of Accounting Research" }
+          "isPartOf": {
+            "@type": "Periodical",
+            "name": "Journal of Accounting Research"
+          }
         }
       },
       "pageStart": "443",
@@ -98,6 +113,19 @@
       },
       "mainEntityOfPage": {
         "@id": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/#webpage"
+      }
+    },
+    {
+      "@type": "Book",
+      "@id": "https://nolankido.com/books/ai-works-human-decides/#book",
+      "name": "AI Works, Human Decides",
+      "url": "https://nolankido.com/books/ai-works-human-decides/",
+      "description": "A book about using AI for practical tasks while retaining human judgment, verification, and responsibility.",
+      "author": {
+        "@id": "https://nolankido.com/about/#nolan-kido"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nolankido.com/books/ai-works-human-decides/#webpage"
       }
     }
   ]

@@ -130,7 +130,9 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
                'downloads/nolan-kido-book-edition-verification.md',
                'downloads/nolan-kido-book-edition-evidence.json',
                'assets/social/ai-time-savings.png',
-               'assets/social/reader-poker-no-limit-holdem-guide.png']
+               'assets/social/reader-poker-no-limit-holdem-guide.png',
+               'assets/social/reader-creative.png',
+               'assets/social/keep-the-judgment.png']
     assets += ['assets/practical-ai-path.css', 'downloads/practical-ai-workbook.txt']
     assets += ['assets/visibility-projects.css', 'assets/projects/preflight-holmes-report.png',
                'downloads/book-continuity-editorial-review-log.md',
@@ -210,6 +212,8 @@ def targets(root: Path = ROOT) -> dict[str, tuple[int, bytes]]:
     assets += [str(path) for path in build.living_well.utility.worksheet_exports(build.living_well.load(root))]
     assets += ['assets/everyday-tasks.css', 'assets/site-core.css', 'assets/public-profile.css', 'assets/public-profile.js', 'assets/about-reader.css']
     assets += [str(path) for path in build.public_profile.EXPORTS.values()]
+    # Verify the public machine-readable author/book graph as an exact release asset.
+    assets += ['assets/nolan-kido-identity.jsonld']
     sharing = build.presentation.load(root, pages)
     assets += sorted({card['src'].lstrip('/') for card in [sharing['default'], *sharing['pages'].values()]})
     catalog = build.poker_content.load(root)

@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "_scripts"))
 sys.path.insert(0, str(ROOT / "_tests"))
 
 import build
+import book_pages
 import check_html5
 import check_live
 import tenbb_companion
@@ -25,9 +26,11 @@ class Turn62TenBBHTML5(unittest.TestCase):
         cls.page = (ROOT / tenbb_companion.OUTPUT).read_text(encoding="utf-8")
 
     def test_playbook_is_part_of_the_full_html5_release_inventory(self):
-        # There are six other manual standalone pages, two book pages,
-        # a book catalog, and the separately authored 10 BB Playbook.
-        self.assertEqual(len(self.paths), len(self.pages) + 10)
+        # Six non-book manual pages, the catalog, the Playbook and all registered books.
+        self.assertEqual(len(self.paths), len(self.pages) + 8 + len(book_pages.BOOKS))
+        for book in book_pages.BOOKS:
+            route = book_pages.route(book)
+            self.assertEqual(self.paths[route], Path('books') / book['slug'] / 'index.html')
         self.assertEqual(self.paths[tenbb_companion.ROUTE], tenbb_companion.OUTPUT)
         self.assertEqual(tenbb_companion.record(ROOT)["route"], tenbb_companion.ROUTE)
 

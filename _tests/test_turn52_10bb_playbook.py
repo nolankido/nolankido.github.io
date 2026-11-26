@@ -104,7 +104,8 @@ class Turn52TenBB(unittest.TestCase):
         self.assertEqual(targets["/poker/10bb/"], (200, self.page.encode("utf-8")))
         self.assertEqual(targets["/" + tenbb_companion.CODE], (200, self.script.read_bytes()))
         snapshot = json.loads((ROOT / "_reports/search-audit.json").read_text(encoding="utf-8"))
-        self.assertEqual(snapshot["sitemap_urls"], 230)
+        self.assertEqual(snapshot["sitemap_urls"], len(list(root)))
+        self.assertEqual(len(list(root)), 231)
         self.assertEqual(snapshot["manual_tenbb_pages"], 1)
 
     def test_private_hands_and_out_of_scope_tool_behaviors_are_absent(self):

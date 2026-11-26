@@ -114,6 +114,19 @@
       "mainEntityOfPage": {
         "@id": "https://nolankido.com/books/how-to-play-no-limit-texas-holdem/#webpage"
       }
+    },
+    {
+      "@type": "Book",
+      "@id": "https://nolankido.com/books/ai-works-human-decides/#book",
+      "name": "AI Works, Human Decides",
+      "url": "https://nolankido.com/books/ai-works-human-decides/",
+      "description": "A book about using AI for practical tasks while retaining human judgment, verification, and responsibility.",
+      "author": {
+        "@id": "https://nolankido.com/about/#nolan-kido"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://nolankido.com/books/ai-works-human-decides/#webpage"
+      }
     }
   ]
 }

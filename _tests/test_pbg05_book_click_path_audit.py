@@ -40,12 +40,14 @@ def replace_once(path: Path, before: str, after: str) -> None:
 
 
 class BookClickPathAuditTests(unittest.TestCase):
-    def test_live_checkout_has_all_five_exact_link_contracts(self):
+    def test_live_checkout_has_all_six_exact_link_contracts(self):
         data = audit.audit(ROOT)
         self.assertEqual(data["status"], "pass", data["errors"])
-        self.assertEqual(data["link_contracts_expected"], 5)
-        self.assertEqual(data["link_contracts_verified"], 5)
-        self.assertEqual(len(data["routes"]), 3)
+        self.assertEqual(data["link_contracts_expected"], 6)
+        self.assertEqual(data["link_contracts_verified"], 6)
+        self.assertEqual(data["tracked_link_contracts_verified"], 5)
+        self.assertEqual(data["untracked_link_contracts_verified"], 1)
+        self.assertEqual(len(data["routes"]), 4)
         self.assertTrue(all(x["public_source_equal"] for x in data["routes"]))
 
     def test_three_distinct_author_supplied_asins_not_invented(self):
@@ -62,7 +64,10 @@ class BookClickPathAuditTests(unittest.TestCase):
                 self.assertNotIn("umami.track(", content)
                 self.assertNotIn("onclick=", content)
                 self.assertNotIn("window.location=", content)
-                self.assertEqual(content.count("https://cloud.umami.is/script.js"), 1)
+                tracked = any(event is not None for _, event, _ in audit.ROUTES[relative])
+                self.assertEqual(content.count("https://cloud.umami.is/script.js"), int(tracked))
+                if not tracked:
+                    self.assertNotIn("data-umami-", content)
 
     def test_no_measured_clicks_purchases_or_attribution_claims(self):
         data = audit.audit(ROOT)
@@ -151,7 +156,7 @@ class BookClickPathAuditTests(unittest.TestCase):
         self.assertEqual(rc, 0)
         report = json.loads(out.getvalue())
         self.assertEqual(report["scope"], "read_only_local_link_contracts")
-        self.assertEqual(report["link_contracts_verified"], 5)
+        self.assertEqual(report["link_contracts_verified"], 6)
 
     def test_manual_release_suite_registers_audit(self):
         runner = (ROOT / "_scripts/local_release_checks.py").read_text(encoding="utf-8")

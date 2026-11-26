@@ -109,11 +109,14 @@ class Turn80AboutTeaching(unittest.TestCase):
         record = next(p for p in json.loads(
             (ROOT / '_source/pages.json').read_text(encoding='utf-8'))
             if p['id'] == 'about')
-        self.assertEqual(record['updated'], '2026-11-20')
+        self.assertGreaterEqual(record['updated'], '2026-11-20')
         self.assertIn(
             '<link rel="canonical" href="https://nolankido.com/about/">',
             self.public)
-        self.assertIn('"dateModified": "2026-11-20"', self.public)
+        schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', self.public, re.S).group(1))
+        self.assertNotIn('dateModified', schema)
+        self.assertIn('<loc>https://nolankido.com/about/</loc>\n    <lastmod>' + record['updated'] + '</lastmod>',
+                      (ROOT / 'sitemap.xml').read_text(encoding='utf-8'))
         self.assertEqual(len(re.findall(r'<h1\b', self.public)), 1)
 
     def test_deterministic_generator_reproduces_committed_about(self):

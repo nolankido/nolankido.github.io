@@ -10,10 +10,12 @@ from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 TAGLINE = "AI Works, Human Decides"
+# Exact current reviewed dates; the Turn 125 copyedit did not itself republish pages.
+# Later bibliography and practical-AI revisions legitimately superseded older dates.
 ROUTES = {
-    "/": ("index.html", "2026-11-13"),
-    "/about/": ("about/index.html", "2026-11-13"),
-    "/technology/": ("technology/index.html", "2026-11-13"),
+    "/": ("index.html", "2026-11-24"),
+    "/about/": ("about/index.html", "2026-11-24"),
+    "/technology/": ("technology/index.html", "2026-11-20"),
     "/notes/keep-the-judgment/": ("notes/keep-the-judgment/index.html", "2026-11-06"),
 }
 
@@ -70,7 +72,7 @@ class PrimaryBrandLanguageTests(unittest.TestCase):
             self.assertIn('content="Nolan Kido. ' + TAGLINE + '. Practical AI for real life. nolankido.com."', self.public[route])
             self.assertIn('content="https://nolankido.com/assets/social/nolan-kido-ai.png"', self.public[route])
 
-    def test_copyedit_does_not_republish_existing_pages(self):
+    def test_reviewed_revision_dates_match_manifest_and_sitemap(self):
         sitemap = ET.fromstring((ROOT / "sitemap.xml").read_text())
         modified = {entry.findtext("{*}loc"): entry.findtext("{*}lastmod") for entry in sitemap}
         for route, (_, prior_date) in ROUTES.items():

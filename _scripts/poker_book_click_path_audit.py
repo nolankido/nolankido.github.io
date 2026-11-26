@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only validation of three first-party Amazon Kindle click paths.
+"""Read-only validation of tracked and untracked author-supplied Kindle links.
 
 No network, analytics calls, purchases, redirects or emitted events.
 Checks exact author-provided links against the public edition ledger.
@@ -38,12 +38,17 @@ ROUTES = {
     "books/how-to-play-no-limit-texas-holdem/index.html": (
         ("how-to-play-no-limit-texas-holdem", "poker-book-kindle-amazon-click", "book-page-hero"),
     ),
+    # The third author page deliberately introduces no tracking.
+    "books/ai-works-human-decides/index.html": (
+        ("ai-works-human-decides", None, None),
+    ),
 }
 SOURCE_FILES = {
     "books/index.html": "_source/books/index.html",
     "books/one-workflow-at-a-time/index.html": "_source/books/one-workflow-at-a-time.html",
     "books/how-to-play-no-limit-texas-holdem/index.html":
         "_source/books/how-to-play-no-limit-texas-holdem.html",
+    "books/ai-works-human-decides/index.html": "_source/books/ai-works-human-decides.html",
 }
 
 
@@ -51,11 +56,17 @@ class Anchors(HTMLParser):
     def __init__(self, doc: str):
         super().__init__(convert_charrefs=True)
         self.links: list[dict] = []
+        self.scripts: list[dict] = []
+        self.has_analytics_attributes = False
         self.feed(doc)
 
     def handle_starttag(self, tag, attrs):
+        if any(key.startswith("data-umami-") for key, _ in attrs):
+            self.has_analytics_attributes = True
         if tag == "a":
             self.links.append(dict(attrs))
+        elif tag == "script":
+            self.scripts.append(dict(attrs))
 
 
 def text_file(root: Path, path: str) -> str:
@@ -121,26 +132,34 @@ def audit(root: Path = ROOT) -> dict:
         for path, expectations in ROUTES.items():
             details = {"route": "/" + path.replace("index.html", ""),
                        "expected_book_links": len(expectations),
-                       "valid_link_contracts": 0, "public_source_equal": False}
+                       "valid_link_contracts": 0, "public_source_equal": False,
+                       "expected_tracked_links": sum(event is not None for _, event, _ in expectations),
+                       "verified_tracked_links": 0, "verified_untracked_links": 0}
             try:
                 html = text_file(root, path)
                 source = text_file(root, SOURCE_FILES[path])
                 details["public_source_equal"] = html == source
                 if not details["public_source_equal"]:
                     failures.append(path + ": source and published HTML differ")
+                parser = Anchors(html)
                 tracker = re.findall(
                     r'<script\b[^>]*src="https://cloud\.umami\.is/script\.js"[^>]*>',
                     html)
-                if len(tracker) != 1 or not all(
-                    f'data-{key}="true"' in tracker[0]
-                    for key in ("do-not-track", "exclude-search", "exclude-hash")
-                ):
-                    failures.append(path + ": missing or duplicated approved tracker")
-                elements = Anchors(html).links
+                if details["expected_tracked_links"]:
+                    if len(tracker) != 1 or not all(
+                        f'data-{key}="true"' in tracker[0]
+                        for key in ("do-not-track", "exclude-search", "exclude-hash")
+                    ):
+                        failures.append(path + ": missing or duplicated approved tracker")
+                elif ("cloud.umami.is" in html.lower() or parser.has_analytics_attributes
+                      or any(script.get("type") != "application/ld+json" or "src" in script
+                             for script in parser.scripts)):
+                    failures.append(path + ": untracked author page must not introduce analytics or executable scripts")
+                elements = parser.links
                 tagged = [link for link in elements if "data-umami-event" in link]
                 destinations = [link for link in elements
                                 if (link.get("href") or "").startswith("https://www.amazon.com/")]
-                if len(tagged) != len(expectations) or len(destinations) != len(expectations):
+                if len(tagged) != details["expected_tracked_links"] or len(destinations) != len(expectations):
                     failures.append(path + ": unexpected tracking or Amazon anchor count")
                 for slug, event, source_name in expectations:
                     matches = [link for link in destinations if link.get("href") == urls[slug]]
@@ -148,18 +167,23 @@ def audit(root: Path = ROOT) -> dict:
                         failures.append(path + ": wrong or missing destination for " + slug)
                         continue
                     link = matches[0]
-                    if (link.get("data-umami-event") != event
-                            or link.get("data-umami-event-source") != source_name
-                            or event not in EVENTS
-                            or source_name not in EVENTS[event]
-                            or len(event) > 50
+                    if event is None:
+                        event_ok = not any(key.startswith("data-umami-") for key in link)
+                    else:
+                        event_ok = (link.get("data-umami-event") == event
+                                    and link.get("data-umami-event-source") == source_name
+                                    and event in EVENTS
+                                    and source_name in EVENTS[event]
+                                    and len(event) <= 50)
+                    if (not event_ok
                             or not {"noopener", "noreferrer"}.issubset(
                                 set((link.get("rel") or "").split()))
-                            or "onclick" in link):
+                            or any(key.startswith("on") for key in link)):
                         failures.append(path + ": invalid event or link metadata for " + slug)
                         continue
                     details["valid_link_contracts"] += 1
-                if "umami.track(" in html:
+                    details["verified_tracked_links" if event is not None else "verified_untracked_links"] += 1
+                if re.search(r"\bumami\s*\.\s*track\s*\(", html, re.I):
                     failures.append(path + ": duplicate explicit analytics call")
             except (OSError, UnicodeError, ValueError) as exc:
                 failures.append(path + ": " + type(exc).__name__)
@@ -175,18 +199,22 @@ def audit(root: Path = ROOT) -> dict:
         "status": "pass" if not failures else "fail",
         "scope": "read_only_local_link_contracts",
         "routes": checked,
-        "link_contracts_expected": 5,
+        "link_contracts_expected": sum(len(expectations) for expectations in ROUTES.values()),
         "link_contracts_verified": sum(x["valid_link_contracts"] for x in checked),
+        "tracked_link_contracts_expected": sum(event is not None for expectations in ROUTES.values() for _, event, _ in expectations),
+        "tracked_link_contracts_verified": sum(x["verified_tracked_links"] for x in checked),
+        "untracked_link_contracts_expected": sum(event is None for expectations in ROUTES.values() for _, event, _ in expectations),
+        "untracked_link_contracts_verified": sum(x["verified_untracked_links"] for x in checked),
         "author_supplied_asins": dict(ASINS),
         "analytics_events_received": None,
         "amazon_detail_page_verified": None,
         "attribution_tag_available": None,
         "kdp_attributed_orders": None,
-        "errors": failures,
         "interpretation": (
-            "The direct href works independently of the optional Umami script. "
+            "The intended third author-page link is untracked. Direct hrefs are checked independently of any approved optional Umami script. "
             "This local audit does not click the link, load Amazon or collect sales evidence."
         ),
+        "errors": failures,
     }
 
 

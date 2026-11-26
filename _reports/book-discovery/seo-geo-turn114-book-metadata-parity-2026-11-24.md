@@ -1,0 +1,9 @@
+# SEO/GEO Turn 114: enforce standalone book search metadata parity
+
+November 24, 2026. Parent: 6080493542efdceb15450cfafbf148c7f313b3ea.
+
+Integrated a shared HTMLParser-based discovery metadata validator into the existing book publication registry. All three canonical book pages and the book catalog now require one exact browser title and visible H1, one canonical URL, matching search description, Open Graph and Twitter titles/descriptions, and matching JSON-LD page and main-entity identity. Duplicate metadata and noindex/none directives in robots/crawler meta tags fail the registry before sitemap or Find registration. Existing source/output parity and retailer provenance checks are unchanged.
+
+Actual local validation: 8 unittest methods passed in normal Python and 8 under -OO, including the current third-book HTML (Git blob bfda8721d2c1b54b44c58129bf94ac77696b2aa4). The synthetic controls cover missing and wrong metadata, duplication, robot directives and structured identity drift. The tested helper blob is 265f6b4a3a15e4c8fdf0774a5d370ee96eaa6218 and the test blob is 0ab8106a8e9eac3e5f3b680991f0479146add88e. Connector inspection confirmed current titles, descriptions, canonicals and heading text on the four book routes, and exact agreement between 19 visible H2 headings and the book-related packed Find rows. These connector checks are not a full Python suite or a browser test.
+
+Local git ls-remote still fails with Could not resolve host: github.com. The full deterministic build, generated audit snapshot, regression/browser checks and production verification remain outstanding. No public content or canonical changes, new tracking, paid services, or GitHub Actions were introduced. No search traffic/ranking/citation gain is claimed. The draft remains unmerged. Existing release command: python _scripts/prepare_local_release.py --apply in an isolated complete checkout.

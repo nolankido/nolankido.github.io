@@ -136,10 +136,10 @@ class NolanPokerAiIdentityBridgeTests(unittest.TestCase):
         self.assertIn('/assets/about-reader.css?v=' + sha256(css).hexdigest()[:12], self.public)
 
     def test_canonical_dates_person_and_existing_channel_identity(self):
-        self.assertEqual(self.manifest['/about/']['updated'], '2026-11-19')
-        self.assertEqual(self.manifest['/poker/']['updated'], '2026-11-19')
+        self.assertGreaterEqual(self.manifest['/about/']['updated'], '2026-11-19')
+        self.assertGreaterEqual(self.manifest['/poker/']['updated'], '2026-11-19')
         self.assertEqual(self.manifest['/technology/ai-poker-video-evidence/']['date'], '2026-11-04')
-        self.assertEqual(self.manifest['/technology/ai-poker-video-evidence/']['updated'], '2026-11-19')
+        self.assertGreaterEqual(self.manifest['/technology/ai-poker-video-evidence/']['updated'], '2026-11-19')
         about = schema(self.public)
         self.assertEqual(about['@type'], 'ProfilePage')
         self.assertEqual(about['url'], ABOUT)
@@ -150,7 +150,7 @@ class NolanPokerAiIdentityBridgeTests(unittest.TestCase):
         article = schema(case_html)
         self.assertEqual(article['@type'], 'Article')
         self.assertEqual(article['datePublished'], '2026-11-04')
-        self.assertEqual(article['dateModified'], '2026-11-19')
+        self.assertEqual(article['dateModified'], self.manifest['/technology/ai-poker-video-evidence/']['updated'])
         self.assertEqual(article['author']['@id'], PERSON)
         self.assertNotIn('FAQPage', (about['@type'], article['@type']))
         for url, html in ((ABOUT, self.public), (CASE, case_html)):
@@ -159,7 +159,8 @@ class NolanPokerAiIdentityBridgeTests(unittest.TestCase):
         for url in (ABOUT, CASE, 'https://nolankido.com/poker/'):
             matches = [e for e in sitemap if e.findtext('{*}loc') == url]
             self.assertEqual(len(matches), 1, url)
-            self.assertEqual(matches[0].findtext('{*}lastmod'), '2026-11-19')
+            path = url.removeprefix('https://nolankido.com')
+            self.assertEqual(matches[0].findtext('{*}lastmod'), self.manifest[path]['updated'])
 
     def test_mutations_catch_unsupported_claims_and_broken_sources(self):
         for changed in (

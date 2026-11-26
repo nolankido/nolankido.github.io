@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import subprocess
 import sys
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,12 +21,33 @@ def forbid_workflows() -> None:
 
 def check(label: str, args: list[str]) -> bool:
     print(f'\n=== {label} ===', flush=True)
-    if '-s' in args and '-p' in args:
-        folder = ROOT / args[args.index('-s') + 1]
-        pattern = args[args.index('-p') + 1]
-        if not any(folder.glob(pattern)):
+    if args[:3] == ['-m', 'unittest', 'discover']:
+        # All registered discovery groups use this exact command shape. Run
+        # each matched module through the same real-result gate as --full.
+        from check_historical_batches import discover, run_file
+        if len(args) != 8 or args[3:6] != ['-s', '_tests', '-p'] or args[7] != '-q':
+            print(f'{label}: FAIL (unsupported unittest discovery command)', flush=True)
+            return False
+        pattern = args[6]
+        try:
+            modules = discover(pattern, folder=ROOT / '_tests')
+        except ValueError as exc:
+            print(f'{label}: FAIL ({exc})', flush=True)
+            return False
+        if not modules:
             print(f'{label}: FAIL (no tests match {pattern})', flush=True)
             return False
+        results = []
+        for module in modules:
+            result = run_file(module, 90, root=ROOT)
+            results.append(result)
+            print(f"{module}: {result['status']} ({result['passed']} passed, "
+                  f"{result['skipped']} skipped, {result['expected_failures']} expected failures)", flush=True)
+            if result['status'] != 'PASS' and result['output']:
+                print(result['output'][-4000:], flush=True)
+        passed = all(result['status'] == 'PASS' for result in results)
+        print(f'{label}: {"PASS" if passed else "FAIL"}', flush=True)
+        return passed
     result = subprocess.run([sys.executable, *args], cwd=ROOT, check=False)
     print(f'{label}: {"PASS" if result.returncode == 0 else "FAIL"}', flush=True)
     return result.returncode == 0
@@ -218,8 +241,31 @@ def main() -> int:
         ('Turn 105 three-way main and side pot ICM and optional reading estimates', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn105_multiway_icm_workbook.py', '-q']),
         ('Turn 106 multiway ICM counterfactual fold and same-call outcome checks', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn106_icm_fold_counterfactual.py', '-q']),
         ('Turn 107 discover optional poker study titles without exercise answers', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn107_optional_finder_summaries.py', '-q']),
+        ('Turn 108 three-title identity bibliography and metadata agreement', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn108_three_title_identity.py', '-q']),
+        ('Turn 109 exact-title catalog and source-bounded third book entity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn109_catalog_identity.py', '-q']),
+        ('Turn 110 staged author page and public evidence handoff', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn110_staged_author_page.py', '-q']),
+        ('Turn 111 canonical third book migration and discovery', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn111_book_migration.py', '-q']),
+        ('Turn 112 fail-closed release preparation and rollback', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn112_prepare_local_release.py', '-q']),
+        ('Turn 114 standalone book search/share metadata parity and negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_book_metadata.py', '-q']),
+        ('Turn 137 exact full release unit inventory without duplicate runs', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn137_full_unit_plan.py', '-q']),
+        ('Turn 139 committed unit and browser test inventory', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn139_release_test_inventory.py', '-q']),
+        ('Turn 140 local browser preflight and execution policy', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn140_browser_gate.py', '-q']),
+        ('Turn 136 commit-pinned local release receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn136_release_receipt.py', '-q']),
+        ('Turn 115 isolated local release candidate rebuild', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_rebuild_release_candidate.py', '-q']),
+        ('Turn 116 canonical Book entity parity across all author surfaces', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn116_book_entity_parity.py', '-q']),
+        ('Turn 117 all six book links and untracked third author-page boundary', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn117_untracked_book_link.py', '-q']),
+        ('Turn 118 offline live author-crawl failure controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn118_live_author_crawl.py', '-q']),
+        ('Turn 120 cross-inventory book discovery metadata and sitemap dates', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn120_book_discovery_audit.py', '-q']),
+        ('Exact reviewed book source and generated output bytes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_source_bytes.py', '-q']),
+        ('Canonical book WebPage and publisher identity', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_webpage_identity.py', '-q']),
+        ('Turn 124 shared book catalog breadcrumb hierarchy', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn124_book_breadcrumbs.py', '-q']),
         ('Turn 49 catalog choice-to-practice handoff and Home overview deduplication', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn49_book_catalog_handoff.py', '-q']),
         ('Turn 47: unknown-versus-verified book edition provenance and ISBN/ASIN safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn47_book_edition_evidence.py', '-q']),
+        ('Focused release groups require real test passes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_focused_unit_groups.py', '-q']),
+        ('Historical release results count real passes', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_historical_result_contract.py', '-q']),
+        ('Minimal search audit fixtures and mandatory Playbook registration', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_fixture.py', '-q']),
+        ('Canonical sitemap document structure', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_sitemap_contract.py', '-q']),
+        ('Generated search metadata and crawler directive conflicts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_metadata_contract.py', '-q']),
         ('SEO, metadata and snapshot parity', ['_scripts/check_search.py', '--verify-snapshot', '_reports/search-audit.json']),
         ('SEO snapshot drift negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_search_audit_snapshot.py', '-q']),
         ('Private GSC/Bing/Umami scorecard evidence and zero/null safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_private_scorecard.py', '-q']),
@@ -235,27 +281,62 @@ def main() -> int:
         ('Turn 58 cutoff shove versus big blind call price and omitted actions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn58_shove_branch.py', '-q']),
         ('Turn 59 personal cash versus fictional payout ladder and quiz', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn59_payout_consistency.py', '-q']),
         ('Turn 60 complete card-filtered Bayes range update, exact source and blocker checks', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn60_bayes_update.py', '-q']),
+        ('Book discovery release priority and sharing assets', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_book_release_priority.py', '-q']),
         ('Live diagnostic result classification and priority scope', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn38_live_evidence.py', '-q']),
         ('Turn 62 10 BB HTML5 publication coverage and fail-closed guards', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn62_html5_tenbb.py', '-q']),
         ('Turn 63 public noindex HTML download safety', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn63_public_html_downloads.py', '-q']),
         ('HTML5 parsing including standalone pages', ['_tests/check_html5.py']),
     ]
+    tasks.append(('Poker evidence regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_poker_player*.py', '-q']))
     if args.full:
-        tasks.extend([
-            ('Full historical unit suite (bounded)', [
-                '_scripts/check_historical_batches.py', '--all', '--timeout-seconds', '90']),
-        ])
-    else:
-        tasks.append(('Poker evidence regressions', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_visibility_poker_player*.py', '-q']))
-    if args.browser:
-        suites = sorted((ROOT / '_tests').glob('*_browser.py'))
-        standalone = ROOT / '_tests' / 'browser.py'
-        if standalone.is_file():
-            suites.insert(0, standalone)
-        tasks.extend((f'Local browser: {p.stem}', [str(p.relative_to(ROOT))]) for p in suites)
+        from release_unit_plan import full_unit_plan
+        from release_test_inventory import verify_tracked_units
+        try:
+            retained, inventory, groups, covered = full_unit_plan(tasks, ROOT / '_tests')
+            verify_tracked_units(ROOT, inventory)
+        except (OSError, ValueError) as exc:
+            print('BLOCKED: ' + str(exc), file=sys.stderr)
+            return 2
+        print(f'Full unit coverage: {len(inventory)} modules include {covered} focused '
+              f'modules from {groups} registered groups. Run each module once.', flush=True)
+        with TemporaryDirectory(prefix='local-release-inventory-') as directory:
+            pin = Path(directory) / 'inventory.json'
+            pin.write_text(json.dumps(inventory), encoding='utf-8')
+            retained.append(('Full historical unit suite (bounded)', [
+                '_scripts/check_historical_batches.py', '--all', '--timeout-seconds', '90',
+                '--expected-inventory', str(pin)]))
+            return run_tasks(retained, browser=args.browser)
+    return run_tasks(tasks, browser=args.browser)
+
+
+def run_tasks(tasks, *, browser: bool) -> int:
+    tasks = list(tasks)
+    if browser:
+        from release_test_inventory import browser_inventory
+        from release_browser_gate import preflight, run_browser
+        try:
+            suites = browser_inventory(ROOT)
+        except (OSError, ValueError) as exc:
+            print('BLOCKED: ' + str(exc), file=sys.stderr, flush=True)
+            return 2
+        print(f'Local browser coverage: {len(suites)} scripts, including all committed suites.', flush=True)
+        if not preflight(ROOT):
+            print('BLOCKED: local browser capability check failed before release tasks', file=sys.stderr, flush=True)
+            return 2
     results = [(label, check(label, command)) for label, command in tasks]
+    if browser:
+        for name in suites:
+            label = f'Local browser: {Path(name).stem}'
+            print(f'\n=== {label} ===', flush=True)
+            results.append((label, run_browser(ROOT, str(Path('_tests') / name))))
+        try:
+            if browser_inventory(ROOT) != suites:
+                raise ValueError('Browser test inventory changed during release validation')
+        except (OSError, ValueError) as exc:
+            print('BLOCKED: ' + str(exc), file=sys.stderr, flush=True)
+            return 2
     count = sum(passed for _, passed in results)
-    print(f'\nLocal release checks: {count}/{len(tasks)} passed. No GitHub Actions were invoked.')
+    print(f'\nLocal release checks: {count}/{len(results)} passed. No GitHub Actions were invoked.')
     failures = [label for label, passed in results if not passed]
     if failures:
         print('Failed release groups: ' + ', '.join(failures))

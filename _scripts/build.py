@@ -533,23 +533,7 @@ def build_outputs() -> dict[Path, str]:
             schema['mainEntity'] = {
                 '@type': 'ItemList',
                 'name': 'Books by Nolan Kido',
-                'itemListElement': [
-                    {'@type': 'ListItem', 'position': 1, 'item': {
-                        '@type': 'Book',
-                        '@id': site['url'] + '/books/one-workflow-at-a-time/#book',
-                        'name': 'One Workflow at a Time',
-                        'alternateName': 'One Workflow at a Time: How Small Business Owners Can Test AI Before Spending More Time or Money',
-                        'author': {'@id': site['url'] + '/about/#nolan-kido'},
-                        'description': 'A practical guide to testing a bounded AI workflow in a small business, checking results, and measuring the whole task.',
-                        'url': site['url'] + '/books/one-workflow-at-a-time/'}},
-                    {'@type': 'ListItem', 'position': 2, 'item': {
-                        '@type': 'Book',
-                        '@id': site['url'] + '/books/how-to-play-no-limit-texas-holdem/#book',
-                        'name': 'How to Play No-Limit Texas Hold’em',
-                        'author': {'@id': site['url'] + '/about/#nolan-kido'},
-                        'description': 'An introduction to no-limit Texas Hold’em, from rules and betting to ranges, pot odds, and decision review.',
-                        'url': site['url'] + '/books/how-to-play-no-limit-texas-holdem/'}}
-                ],
+                'itemListElement': book_pages.entity_list(),
             }
         schema = author_archive.schema(p, schema, pages, site, ROOT)
         schema = practical_path.schema(p, schema, pages, ROOT, site['url'])
@@ -618,6 +602,7 @@ def build_outputs() -> dict[Path, str]:
     outputs[Path('nolan-kido.vcf')] = 'BEGIN:VCARD\nVERSION:3.0\nFN:Nolan Kido\nN:Kido;Nolan;;;\nURL:https://nolankido.com/\nEND:VCARD\n'
     outputs.update(public_profile.exports(site))
     identity_document = json.loads((SOURCE / 'person-schema.jsonld').read_text(encoding='utf-8'))
+    book_pages.validate_identity_graph(identity_document)
     outputs[Path('assets/nolan-kido-identity.jsonld')] = json.dumps(identity_document, ensure_ascii=False, indent=2) + '\n'
     outputs[practical_path.WORKBOOK] = practical_path.workbook(pages, ROOT)
     return search_sections.apply(font_delivery.apply(core_styles.apply(outputs, ROOT), ROOT), pages, ROOT)

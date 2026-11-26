@@ -28,11 +28,14 @@ class HistoricalBatchRunnerTests(unittest.TestCase):
 
     @patch.object(batches.subprocess, "run")
     def test_success_requires_a_real_nonempty_unittest_result(self, run):
-        run.return_value = subprocess.CompletedProcess([], 0, "Ran 3 tests in 0.001s\n\nOK\n")
+        receipt = dict(tests=3, passed=3, skipped=0, expected_failures=0,
+                       failures=0, errors=0, unexpected_successes=0)
+        run.return_value = subprocess.CompletedProcess([], 0, batches.RESULT_PREFIX + json.dumps(receipt) + "\n")
         result = batches.run_file("test_later_release_history.py", 3)
         self.assertEqual((result["status"], result["tests"]), ("PASS", 3))
         self.assertEqual(run.call_args.kwargs["timeout"], 3)
-        run.return_value = subprocess.CompletedProcess([], 0, "Ran 0 tests in 0.000s\n\nOK\n")
+        receipt.update(tests=0, passed=0)
+        run.return_value = subprocess.CompletedProcess([], 2, batches.RESULT_PREFIX + json.dumps(receipt) + "\n")
         self.assertEqual(batches.run_file("test_empty.py", 3)["status"], "ERROR")
         run.return_value = subprocess.CompletedProcess([], 0, "Nothing actually ran")
         self.assertEqual(batches.run_file("test_invalid.py", 3)["status"], "ERROR")

@@ -79,7 +79,7 @@ class Turn88HumanDecisionLab(unittest.TestCase):
     def test_books_catalog_source_public_parity_and_identity(self):
         self.assertEqual(BOOKS_SOURCE.read_text(encoding='utf-8'), self.books)
         self.assertIsNotNone(book_pages.hub_record(ROOT))
-        self.assertEqual(len(book_pages.BOOKS), 2)
+        self.assertEqual(len(book_pages.BOOKS), 3)
         self.assertEqual(lab_problems(self.books), [])
         self.assertEqual(self.books.count(LAB), 1)
 
@@ -89,7 +89,7 @@ class Turn88HumanDecisionLab(unittest.TestCase):
                         self.books.index('href="#ai-works-decision-lab"'))
         self.assertLess(self.books.index('href="#ai-works-decision-lab"'),
                         self.books.index(LAB))
-        self.assertIn('A dedicated author-book page is not yet available', self.books)
+        self.assertIn('href="/books/ai-works-human-decides/"', self.books)
         self.assertEqual(self.books.count('href="' + DOWNLOAD + '" download'), 1)
 
     def test_worksheet_is_blank_and_consequentially_useful(self):
@@ -141,9 +141,9 @@ class Turn88HumanDecisionLab(unittest.TestCase):
         schema = json.loads(re.search(
             r'<script type="application/ld\+json">(.*?)</script>',
             self.books, re.S).group(1))
-        self.assertEqual(schema['dateModified'], '2026-11-22')
-        self.assertEqual(len(schema['mainEntity']['itemListElement']), 2)
-        self.assertEqual(schema['mentions']['name'], 'AI Works, Human Decides')
+        self.assertEqual(schema['dateModified'], book_pages.UPDATED)
+        self.assertEqual(len(schema['mainEntity']['itemListElement']), 3)
+        self.assertEqual(schema['mainEntity']['itemListElement'][2]['item'], book_pages.THIRD_BOOK)
         self.assertEqual(self.books.count('id="books-retailer-evidence"'), 1)
         self.assertIn('not independently verified', self.books)
         sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')

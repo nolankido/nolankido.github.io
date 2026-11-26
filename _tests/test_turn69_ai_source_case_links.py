@@ -92,7 +92,7 @@ class Turn69SourceCaseLinks(unittest.TestCase):
 
     def test_original_canonicals_and_article_dates_are_preserved(self):
         xml = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
-        self.assertEqual(len(list(xml)), 230)
+        self.assertEqual(len(list(xml)), 231)
         for kind, data in ROUTES.items():
             with self.subTest(kind=kind):
                 page = self.texts[kind]["published"]

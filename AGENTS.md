@@ -2567,3 +2567,59 @@ expectations to unchanged core passages plus one summary-only passage.
 The new full-site integration and browser tests, complete generator,
 search snapshot and exact live verification remain outstanding. No Actions
 or paid dependencies.
+
+## Turn 109: exact-title catalog and shared third-work identity
+
+The /books/ catalog retains two registered standalone author-book pages and its existing `#book-ai-works-human-decides` fragment. Catalog metadata, Find description and registry name all three titles. The third Book mentions record and the authored/generated standalone identity graph share the fragment ID, title, bounded description and Person author. The linked /notes/keep-the-judgment/ essay is separate related writing, not an excerpt. No new indexed route or independent edition claims. Keep the original two-work edition ledger and supplementary author-supplied link. Catalog lastmod is 2026-11-23; the original standalone books retain their dates. Run the manual regression and full release checks before merging the Turn 108/109 draft. No GitHub Actions, paid services or new tracking.
+
+## Turn 110: staged AI Works, Human Decides author page
+
+The candidate is stored under `_reports/book-discovery/ai-works-human-decides-author-page-candidate.html`, not a public route or builder input. The existing third-title catalog card now links two existing evidence cases, retaining the original schema, dates, exercise, anchor and edition caveats. The staged page includes a distinct fictional purchase-approval example, six original review checks and a source-bounded evidence section. It is not a book excerpt or independently verified retailer record. Do not register or link the new canonical before the complete coordinated migration documented in `_reports/book-discovery/seo-geo-turn110-author-page-migration-2026-11-23.md`. Register the new offline regression and preserve old two-work evidence. No GitHub Actions, added trackers or paid services.
+
+## Turn 111: integrated third canonical author page (draft release)
+
+Turn 111 supersedes the Turn 109/110 staging-only policy. The draft branch registers `/books/ai-works-human-decides/` in the existing standalone book registry. Source and output are byte-identical, with one shared Person ID and canonical Book ID. Preserve the original catalog reader fragment. The third title remains supplementary in the two-work retailer ledger; only canonical_author_page changes, no retail claim is upgraded. The draft sitemap has 231 unique URLs and Find has one new Book result and six headings. CSS is scoped to all three classes. Existing source, retailer and practice safeguards remain. Full checkout build, regenerated search audit snapshot, manual tests, browser tests and production byte checks remain mandatory before merge. Do not hand-edit the audit snapshot or introduce Actions, tracking or paid services.
+
+## Turn 112: safe manual release preparation
+
+Run `python _scripts/prepare_local_release.py --apply` only in an isolated complete checkout with the existing test dependencies. It executes the current book/site deterministic checks, HTML5 parser, real search audit and independent snapshot parity check; it installs the generated passing report only for full regression/browser validation, restoring the previous report on failure when safe. Without `--apply` it is read-only (exit 2 means verified snapshot drift, 0 means parity only). No hand-edited audit counts, GitHub Actions, auto-merges, or deployment. Preserve failures and do not mark the draft ready until the complete real suite succeeds.
+
+## Turn 113: profile metadata parity and current inventory regressions
+
+The About ProfilePage intentionally omits day-only `dateModified`, matching `_scripts/search_visibility.py`. Preserve the actual calendar revision in the manifest and sitemap, and do not manufacture a timestamp. The search audit now rejects day-only ProfilePage modification values. The consolidated book release contains three registered books, 231 unique sitemap URLs, and eleven separately registered HTML pages (six other manual pages, three books, the catalog and the 10 BB Playbook). Existing poker proof, edition and content safeguards remain. Older current-inventory assertions and PBG-03 stylesheet expectations have been aligned; historical dated evidence records remain untouched. A full local checkout and generated audit snapshot are still required. Do not treat targeted structural checks as full-suite passes, use GitHub Actions or merge before the real release validation succeeds.
+
+## Turn 114: standalone book discovery metadata agreement
+
+The book registry now uses `_scripts/book_metadata.py` to require the exact browser/visible/structured title, description and canonical, consistent Open Graph and Twitter metadata, and indexable robots policy on all three author-book pages and their catalog. Keep the existing source parity and edition evidence rules. The negative-control suite runs in the local release runner. No changes to canonical routes, public content, audit snapshot, trackers or deployment policy. The complete release must still pass in a full checkout.
+
+## Turn 115: isolated deterministic candidate rebuild
+
+If connector-side changes leave generated files stale, run `python _scripts/rebuild_release_candidate.py --worktree ../nolankido-release-candidate` from a complete checkout of the intended committed draft. Choose a new sibling directory. The tool pins HEAD, leaves local edits in the original checkout, regenerates the candidate using the existing builders and invokes the full existing release preparation gate. Retain the worktree for review on success or failure. It performs no fetch, push, commit, merge or deployment. Preserve the original publication dates and source-bounded identity tests while checking current reviewed revision dates against the manifest and sitemap. The exact real release suite must pass before merge; no hand-edited audit counts, Actions or paid dependencies.
+
+## Turn 116: canonical Book entity consolidation
+
+The book registry is the reviewed source of all three work identities (`book_entity`, `entity_list`). Keep individual Book page entities, catalog ListItems, Creative Work ListItems and authored/public identity graph Book nodes semantically identical. The generator builds Creative's items from the registry and validates the authored graph before export. Preserve the exact already-reviewed work descriptions, known subtitle and mainEntityOfPage links, with no unverified retail data. The existing page metadata and source/output parity guards remain. The new negative controls must pass; the full release gate still applies. No routes, public prose, trackers, prices, audit snapshot or deployment changes.
+
+## Turn 117: full native Kindle link coverage without new tracking
+
+The PBG-05 read-only auditor now covers six exact author-supplied links across the catalog and all three canonical author pages. Keep the five existing tracked links and the third page's single untracked native link distinct. Do not add analytics attributes, executable scripts or new events to the third page. Check safe anchor metadata and source/output parity; retain null analytics-ingestion, retail verification and attributed-order values. The full release gate still applies, with no Actions, new costs, or fabricated evidence.
+
+## Turn 118: required live author discovery routes
+
+The read-only live indexability audit must require and request Bio, the Books catalog and all three canonical author pages even if omitted from the live sitemap. Reject malformed/duplicate sitemap locations, missing or redirected responses, unexpected noindex/none, invalid HTML/schema responses and unsupported inbound evidence. Preserve the separate exact-byte live verification and the local release gate. The nine offline controls do not constitute live verification. Do not add scheduled jobs, trackers, paid APIs or assume indexing/ranking gains.
+
+## Turn 119: contextual author-book reader paths
+
+The practical AI hub's AI Works, Human Decides section and the separate Keep the Judgment essay link directly to the dedicated author page using the exact title. The book links back to both the essay and the three-rule practical method section. Retain the existing public-notice exercise and worksheet paths; keep original site teaching distinct from verified book excerpts and independent reviews. This is link-only editorial maintenance: no new content claims, schema, retailer data, tracking, publication dates or sitemap timestamps. Keep the existing full release gate and draft status.
+
+## Turn 120: cross-inventory book search metadata and revision dates
+
+The whole-site search audit now compares the reviewed standalone book/catalog titles and descriptions with observed generated public-page metadata and with each other, and checks their sitemap URL and lastmod record cardinality and exact reviewed dates. Preserve the existing generated-page counter meanings and snapshot; do not hand-edit audit results. No new public content, indexing claims, tracking, Actions or costs. The complete real release gate remains mandatory.
+
+## Turn 122: preserve the dated November 21 visibility inventory
+
+The 230-URL count belongs to the November 21 follow-up, not every subsequent sitemap. The exact historical sitemap is preserved under `_tests/fixtures/turn70-sitemap-2026-11-21.xml` from PR 443's merge commit. The current regression checks its immutable Git blob, 230 distinct historical routes, current uniqueness, historical-route preservation and presence of the reviewed third author-book route; the deterministic current build check remains mandatory. A deliberate removal of a historical route requires an explicit reviewed migration. Only the dated wording changed to "then listed"; the original article dates, reading estimate, and outcome caveats remain. No invented current ranking or indexing data. Keep the existing full release gate and no-Actions rule.
+
+## Turn 124: consistent author-book breadcrumb parent
+
+All three dedicated author-book pages must present Home > Books > exact book title, with the visible Books link and corresponding BreadcrumbList item targeting the canonical `/books/` catalog. The two older books now use that same parent; their existing body-level catalog return links target the unique comparison section instead of duplicating the root link. Retain source/output parity, original content dates, all author/retail provenance and canonical routes. The catalog's own Creative Work parent remains unchanged. Run the registered breadcrumb controls and full existing release gate. No new tracking, paid services, workflows or ranking claims.

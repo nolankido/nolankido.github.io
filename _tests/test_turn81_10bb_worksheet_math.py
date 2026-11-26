@@ -153,7 +153,7 @@ class Turn81SelfContainedICM(unittest.TestCase):
     def test_no_new_canonical_page_and_manual_release_only(self):
         sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
         self.assertNotIn('<loc>https://nolankido.com' + ROUTE + '</loc>', sitemap)
-        self.assertEqual(sitemap.count('<loc>'), 230)
+        self.assertEqual(sitemap.count('<loc>'), 231)
         runner = (ROOT / '_scripts/local_release_checks.py').read_text(encoding='utf-8')
         self.assertIn('test_turn81_10bb_worksheet_math.py', runner)
         actions = ROOT / '.github/workflows'
