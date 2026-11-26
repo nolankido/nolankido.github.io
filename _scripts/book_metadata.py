@@ -1,6 +1,6 @@
 """Keep standalone book discovery metadata tied to visible, reviewed content."""
 from html.parser import HTMLParser
-import re
+from search_metadata_contract import inspect_metadata
 
 
 class Metadata(HTMLParser):
@@ -10,7 +10,7 @@ class Metadata(HTMLParser):
         self.capture = None
         self.parts = []
         self.canonicals = []
-        self.meta = {}
+        self.meta = []
         self.feed(document)
         self.close()
 
@@ -23,10 +23,7 @@ class Metadata(HTMLParser):
             if 'canonical' in (attributes.get('rel') or '').lower().split():
                 self.canonicals.append(attributes.get('href'))
         elif tag == 'meta':
-            for key in ('name', 'property'):
-                name = (attributes.get(key) or '').lower()
-                if name:
-                    self.meta.setdefault(name, []).append(attributes.get('content'))
+            self.meta.append(attributes)
 
     def handle_data(self, data):
         if self.capture:
@@ -53,15 +50,15 @@ def validate(document, *, title, heading, description, url, schema):
     expected = {'description': description, 'og:title': title,
                 'og:description': description, 'og:url': url,
                 'twitter:title': title, 'twitter:description': description}
+    values, _, errors = inspect_metadata(doc.meta, expected_noindex=False)
+    blocking = [error for error in errors if 'crawl policy' in error]
+    if blocking:
+        raise ValueError('Book must remain indexable: ' + url + ': ' + '; '.join(blocking))
+    if errors:
+        raise ValueError('Book search/share metadata mismatch: ' + url + ': ' + '; '.join(errors))
     for name, value in expected.items():
-        if doc.meta.get(name) != [value]:
+        if values.get(name) != value:
             raise ValueError('Book search/share metadata mismatch (' + name + '): ' + url)
-    for name, values in doc.meta.items():
-        if name == 'robots' or 'bot' in name:
-            for value in values:
-                directives = set(re.split(r'[,\s]+', (value or '').lower()))
-                if directives.intersection({'noindex', 'none'}):
-                    raise ValueError('Book must remain indexable (' + name + '): ' + url)
     if (not isinstance(schema, dict)
             or schema.get('name') != title
             or schema.get('description') != description

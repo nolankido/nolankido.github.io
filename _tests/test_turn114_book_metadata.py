@@ -69,6 +69,40 @@ class BookMetadataTests(unittest.TestCase):
                 verify(fixture().replace('</head>', f'<meta content="{value}" name="{name}"></head>'), schema())
         verify(fixture().replace('</head>', '<meta name="robots" content="index,follow"></head>'), schema())
 
+    def test_duplicate_normalized_robots_fields_fail(self):
+        for name in ('robots', 'googlebot', 'Googlebot-News', 'OAI-SearchBot'):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'Duplicate search metadata'):
+                meta = (f'<meta name="{name}" content="index,follow">'
+                        f'<meta name=" {name.upper()} " content="index,follow">')
+                verify(fixture().replace('</head>', meta + '</head>'), schema())
+
+    def test_duplicate_sharing_images_fail(self):
+        for kind, name in (('property', 'og:image'), ('name', 'twitter:image')):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'Duplicate search metadata'):
+                meta = (f'<meta {kind}="{name}" content="first.png">'
+                        f'<meta {kind}="{name.upper()}" content="second.png">')
+                verify(fixture().replace('</head>', meta + '</head>'), schema())
+
+    def test_normalized_search_field_duplicates_fail(self):
+        for field in ('description', 'twitter:title', 'og:description'):
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, 'Duplicate search metadata'):
+                meta = f'<meta name=" {field.upper()} " content="Different text">'
+                verify(fixture().replace('</head>', meta + '</head>'), schema())
+
+    def test_preview_none_does_not_block_indexability(self):
+        for name in ('robots', 'googlebot', 'OAI-SearchBot'):
+            for value in ('max-image-preview: none, index, follow', 'max-image-preview:none', 'max-snippet: 0'):
+                with self.subTest(name=name, value=value):
+                    meta = f'<meta name="{name}" content="{value}">'
+                    verify(fixture().replace('</head>', meta + '</head>'), schema())
+
+    def test_normalized_crawler_exclusions_still_fail(self):
+        for name in (' ROBOTS ', ' Googlebot-News ', ' BingBot ', ' OAI-SearchBot '):
+            for value in ('none', 'follow, NOINDEX', 'max-image-preview: none, noindex'):
+                with self.subTest(name=name, value=value), self.assertRaisesRegex(ValueError, 'remain indexable'):
+                    meta = f'<meta name="{name}" content="{value}">'
+                    verify(fixture().replace('</head>', meta + '</head>'), schema())
+
     def test_schema_identity_mismatch_fails(self):
         for key in ('name', 'description', 'url', 'mainEntity'):
             record = deepcopy(schema())
