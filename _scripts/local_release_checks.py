@@ -249,6 +249,7 @@ def main() -> int:
         ('Turn 114 standalone book search/share metadata parity and negative controls', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn114_book_metadata.py', '-q']),
         ('Turn 137 exact full release unit inventory without duplicate runs', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn137_full_unit_plan.py', '-q']),
         ('Turn 139 committed unit and browser test inventory', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn139_release_test_inventory.py', '-q']),
+        ('Turn 140 local browser preflight and execution policy', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn140_browser_gate.py', '-q']),
         ('Turn 136 commit-pinned local release receipts', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn136_release_receipt.py', '-q']),
         ('Turn 115 isolated local release candidate rebuild', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn115_rebuild_release_candidate.py', '-q']),
         ('Turn 116 canonical Book entity parity across all author surfaces', ['-m', 'unittest', 'discover', '-s', '_tests', '-p', 'test_turn116_book_entity_parity.py', '-q']),
@@ -312,15 +313,22 @@ def run_tasks(tasks, *, browser: bool) -> int:
     tasks = list(tasks)
     if browser:
         from release_test_inventory import browser_inventory
+        from release_browser_gate import preflight, run_browser
         try:
             suites = browser_inventory(ROOT)
         except (OSError, ValueError) as exc:
             print('BLOCKED: ' + str(exc), file=sys.stderr, flush=True)
             return 2
         print(f'Local browser coverage: {len(suites)} scripts, including all committed suites.', flush=True)
-        tasks.extend((f'Local browser: {Path(name).stem}', [str(Path('_tests') / name)]) for name in suites)
+        if not preflight(ROOT):
+            print('BLOCKED: local browser capability check failed before release tasks', file=sys.stderr, flush=True)
+            return 2
     results = [(label, check(label, command)) for label, command in tasks]
     if browser:
+        for name in suites:
+            label = f'Local browser: {Path(name).stem}'
+            print(f'\n=== {label} ===', flush=True)
+            results.append((label, run_browser(ROOT, str(Path('_tests') / name))))
         try:
             if browser_inventory(ROOT) != suites:
                 raise ValueError('Browser test inventory changed during release validation')
@@ -328,7 +336,7 @@ def run_tasks(tasks, *, browser: bool) -> int:
             print('BLOCKED: ' + str(exc), file=sys.stderr, flush=True)
             return 2
     count = sum(passed for _, passed in results)
-    print(f'\nLocal release checks: {count}/{len(tasks)} passed. No GitHub Actions were invoked.')
+    print(f'\nLocal release checks: {count}/{len(results)} passed. No GitHub Actions were invoked.')
     failures = [label for label, passed in results if not passed]
     if failures:
         print('Failed release groups: ' + ', '.join(failures))
