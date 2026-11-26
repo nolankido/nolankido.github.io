@@ -26,7 +26,7 @@ class PublicProjectPortfolioTests(unittest.TestCase):
         self.assertEqual(record['id'], 'projects')
         self.assertEqual(record['source'], 'projects.html')
         self.assertEqual(record['section'], 'technology')
-        self.assertEqual(record['updated'], '2026-11-13')
+        self.assertEqual(record['updated'], '2026-11-18')
         self.assertNotIn('date', record)
         self.assertFalse(record.get('noindex'))
 
@@ -42,11 +42,12 @@ class PublicProjectPortfolioTests(unittest.TestCase):
         self.assertEqual(schema['url'], 'https://nolankido.com/projects/')
         self.assertEqual(schema['about']['@id'], PERSON_ID)
         self.assertNotIn('datePublished', schema)
+        self.assertEqual(schema['dateModified'], record['updated'])
 
         entries = ET.fromstring(read('sitemap.xml')).findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')
         matches = [x for x in entries if x.findtext('{http://www.sitemaps.org/schemas/sitemap/0.9}loc') == 'https://nolankido.com/projects/']
         self.assertEqual(len(matches), 1)
-        self.assertEqual(matches[0].findtext('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod'), '2026-11-13')
+        self.assertEqual(matches[0].findtext('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod'), record['updated'])
 
     def test_evidence_navigation_connects_projects_biography_and_practical_method(self):
         case_index = '/ai-in-real-life/#real-life-case-index'

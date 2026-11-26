@@ -105,11 +105,31 @@ class PublishedAccountingResearchTests(unittest.TestCase):
     def test_modified_dates_follow_content_changes_only(self):
         pages = {p['path']: p for p in json.loads(read('_source/pages.json'))}
         sitemap = ET.fromstring(read('sitemap.xml'))
-        dated = {url.findtext('{*}loc'): url.findtext('{*}lastmod') for url in sitemap}
-        for route in ('/', '/about/', '/projects/'):
-            self.assertEqual(pages[route]['updated'], '2026-11-13')
-            self.assertEqual(dated['https://nolankido.com' + route], '2026-11-13')
-        self.assertNotIn('date', pages['/about/'])
+        # November 13 is the research explanation's publication date, not
+        # the permanent revision date of every page that links to it.
+        reviewed = (
+            ('/', 'index.html', '2026-11-24'),
+            ('/about/', 'about/index.html', '2026-11-24'),
+            ('/projects/', 'projects/index.html', '2026-11-18'),
+        )
+        for route, path, modified in reviewed:
+            with self.subTest(route=route):
+                self.assertEqual(pages[route]['updated'], modified)
+                self.assertNotIn('date', pages[route])
+                rows = [url for url in sitemap
+                        if url.findtext('{*}loc') == 'https://nolankido.com' + route]
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0].findtext('{*}lastmod'), modified)
+                schema = json.loads(re.search(
+                    r'<script type="application/ld\+json">(.*?)</script>',
+                    read(path), re.S).group(1))
+                self.assertNotIn('datePublished', schema)
+                if route == '/about/':
+                    # The ProfilePage has no verified modification timestamp.
+                    self.assertEqual(schema['@type'], 'ProfilePage')
+                    self.assertNotIn('dateModified', schema)
+                else:
+                    self.assertEqual(schema['dateModified'], modified)
 
 
 if __name__ == '__main__':
