@@ -162,12 +162,52 @@ class LiveAuthorCrawlTests(unittest.TestCase):
             requested.append(path)
             return {'path': path, 'error': 'fixture DNS'} if path == audit.BOOK_ROUTES[-1] else row(path)
         def open_url(url, **kwargs):
-            return Response(sitemap([audit.BASE + p for p in paths]) if url.endswith('sitemap.xml') else b'User-agent: *\nAllow: /', url)
+            return Response(sitemap([audit.BASE + p for p in paths]) if url.endswith('sitemap.xml') else b'User-agent: *\nAllow: /\nSitemap: https://nolankido.com/sitemap.xml\n', url)
         with patch.object(audit.urllib.request, 'urlopen', side_effect=open_url), patch.object(audit, 'fetch', side_effect=fetch), redirect_stdout(StringIO()) as output:
             self.assertEqual(audit.main(), 1)
         self.assertIn(audit.BOOK_ROUTES[-1], requested)
         line = next(line for line in output.getvalue().splitlines() if line.startswith('ALL_ISSUES '))
         self.assertIn([audit.BOOK_ROUTES[-1], 'priority sample missing from sitemap'], json.loads(line.split(' ', 1)[1]))
+        self.assertIn('RESULT FAIL', output.getvalue())
+
+    def test_committed_robots_policy_and_formatting(self):
+        good = (ROOT / 'robots.txt').read_text(encoding='utf-8')
+        self.assertEqual(audit.robots_policy_issues(good), [])
+        self.assertEqual(audit.robots_policy_issues(
+            '\ufeff# comment\r\n USER-AGENT : * \r\n ALLOW: / # comment\r\n'
+            'SITEMAP: https://nolankido.com/sitemap.xml\r\n'), [])
+
+    def test_robots_policy_drift_and_invalid_sitemap_declarations(self):
+        good = 'User-agent: *\nAllow: /\n\nSitemap: https://nolankido.com/sitemap.xml\n'
+        for text in (good.replace('Allow: /', 'Disallow: /'),
+                     good + '\nUser-agent: OAI-SearchBot\nDisallow: /\n',
+                     good + 'Crawl-delay: 5\n', '', '<html>access denied</html>',
+                     good + 'Allow /\n'):
+            with self.subTest(text=text):
+                self.assertTrue(audit.robots_policy_issues(text))
+        for text in (good.split('\n\n')[0],
+                     good.replace('https://nolankido.com/sitemap.xml',
+                                  'https://example.invalid/sitemap.xml'),
+                     good + 'Sitemap: https://nolankido.com/sitemap.xml\n'):
+            with self.subTest(text=text):
+                self.assertIn(['/robots.txt', 'expected exactly one canonical sitemap declaration'],
+                              audit.robots_policy_issues(text))
+        self.assertEqual(audit.robots_policy_issues(
+            good + '\nUser-agent: GPTBot\nDisallow: /\n'),
+            [['/robots.txt', 'crawl rules differ from reviewed allow-all policy; review required']])
+
+    def test_live_main_stops_before_page_fetch_on_robots_policy_drift(self):
+        def open_url(url, **kwargs):
+            return Response(
+                sitemap([audit.BASE + p for p in audit.SAMPLE])
+                if url.endswith('sitemap.xml') else
+                b'User-agent: *\nDisallow: /\nSitemap: https://nolankido.com/sitemap.xml\n', url)
+        with patch.object(audit.urllib.request, 'urlopen', side_effect=open_url), patch.object(audit, 'fetch') as fetch, redirect_stdout(StringIO()) as output:
+            self.assertEqual(audit.main(), 1)
+        fetch.assert_not_called()
+        line = next(line for line in output.getvalue().splitlines() if line.startswith('ALL_ISSUES '))
+        self.assertIn(['/robots.txt', 'crawl rules differ from reviewed allow-all policy; review required'],
+                      json.loads(line.split(' ', 1)[1]))
         self.assertIn('RESULT FAIL', output.getvalue())
 
     def test_sitemap_transport_failure_reports_fail(self):

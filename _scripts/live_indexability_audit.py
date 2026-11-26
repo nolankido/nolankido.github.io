@@ -243,6 +243,34 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
     return issues, inbound
 
 
+def robots_policy_issues(document):
+    """Audit the reviewed simple site policy; do not infer arbitrary REP rules.
+
+    A policy change is a review requirement, not proof that a crawler is
+    blocked. Search and model-training crawler permissions are independent.
+    Ignore comments and formatting, but never silently accept new rules.
+    """
+    rules, sitemaps, issues = [], [], []
+    for number, line in enumerate(document.removeprefix("\ufeff").splitlines(), 1):
+        line = line.partition("#")[0].strip()
+        if not line:
+            continue
+        field, separator, value = line.partition(":")
+        if not separator or not field.strip():
+            issues.append(["/robots.txt", f"malformed directive on line {number}"])
+            continue
+        field, value = field.strip().lower(), value.strip()
+        if field == "sitemap":
+            sitemaps.append(value)
+        else:
+            rules.append((field, value.lower() if field == "user-agent" else value))
+    if rules != [("user-agent", "*"), ("allow", "/")]:
+        issues.append(["/robots.txt", "crawl rules differ from reviewed allow-all policy; review required"])
+    if sitemaps != [BASE + "/sitemap.xml"]:
+        issues.append(["/robots.txt", "expected exactly one canonical sitemap declaration"])
+    return issues
+
+
 def main():
     try:
         with urllib.request.urlopen(BASE + "/sitemap.xml", timeout=25) as response:
@@ -265,6 +293,12 @@ def main():
     sitemap_set = set(paths)
     print("SITEMAP", len(paths), "UNIQUE", len(sitemap_set), flush=True)
     print("ROBOTS", repr(robots_txt[:1500]), flush=True)
+    robots_issues = robots_policy_issues(robots_txt)
+    if robots_issues:
+        issues.extend(robots_issues)
+        print("ALL_ISSUES", json.dumps(issues), flush=True)
+        print("RESULT FAIL", flush=True)
+        return 1
     all_paths = sorted(sitemap_set | set(SAMPLE) | set(EXCLUDED))
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
         rows = list(pool.map(fetch, all_paths))
