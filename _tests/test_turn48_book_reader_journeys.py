@@ -91,6 +91,24 @@ class BookReaderJourneyTests(unittest.TestCase):
         self.assertEqual({p["slug"] for p in book_pages.published(ROOT)},
                          {p["slug"] for p in PAGES})
 
+    def test_each_book_has_a_linked_first_screen_author(self):
+        for item in PAGES:
+            with self.subTest(slug=item["slug"]):
+                document = (ROOT / "books" / item["slug"] / "index.html").read_text(encoding="utf-8")
+                hero = re.search(r'<section class="page-hero shell[^"]*"[^>]*>(.*?)</section>', document, re.S)
+                self.assertIsNotNone(hero)
+                self.assertIn('By <a href="/about/">Nolan Kido</a>.', hero.group(1))
+                self.assertTrue((ROOT / "about/index.html").is_file())
+
+    def test_related_ai_books_link_to_the_actual_free_method_and_exercise(self):
+        workflow = (ROOT / "books/one-workflow-at-a-time/index.html").read_text(encoding="utf-8")
+        judgment = (ROOT / "books/ai-works-human-decides/index.html").read_text(encoding="utf-8")
+        self.assertIn('href="/books/ai-works-human-decides/#human-decides-method"', workflow)
+        self.assertIn('href="/books/one-workflow-at-a-time/#ai-book-first-exercise"', judgment)
+        self.assertIn('href="#human-decides-method"', judgment)
+        self.assertEqual(Elements(workflow).ids.count("ai-book-first-exercise"), 1)
+        self.assertEqual(Elements(judgment).ids.count("human-decides-method"), 1)
+
     def test_reader_navigation_links_to_four_true_destinations(self):
         for item in PAGES:
             with self.subTest(slug=item["slug"]):
