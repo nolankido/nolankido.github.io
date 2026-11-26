@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 ROUTE = '/about/accounting-research/'
 DOI = 'https://doi.org/10.1111/j.1475-679X.2012.00447.x'
 MIT = 'https://dspace.mit.edu/entities/publication/9e5c8e82-34b0-4931-a8cc-6ea0ae938829'
+SSRN = 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1753198'
+DISCUSSION = 'https://doi.org/10.1111/j.1475-679X.2012.00446.x'
+DISCUSSION_SSRN = 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1980697'
 
 
 def read(path: str) -> str:
@@ -52,7 +55,9 @@ class PublishedAccountingResearchTests(unittest.TestCase):
         self.assertEqual(paper['isPartOf']['name'], 'Journal of Accounting Research')
         self.assertEqual([a['name'] for a in paper['author']], ['Nolan Kido', 'Reining Petacchi', 'Joseph Weber'])
         self.assertEqual(paper['author'][0]['@id'], schema['author']['@id'])
-        self.assertEqual(set(schema['citation']), {DOI, MIT})
+        self.assertEqual(schema['citation'], [DOI, MIT, SSRN, DISCUSSION, DISCUSSION_SSRN])
+        self.assertNotIn(DISCUSSION, json.dumps(paper))
+        self.assertNotIn(DISCUSSION_SSRN, json.dumps(paper))
 
     def test_bounded_public_source_and_result_language(self):
         text = read('_source/about/accounting-research.html')
@@ -101,6 +106,34 @@ class PublishedAccountingResearchTests(unittest.TestCase):
                 html = read(path)
                 self.assertEqual(html.count(f'href="{target}"'), 1)
                 self.assertIn('The earlier working-paper citation uses my name Nolan Y. Kido', html)
+
+    def test_independent_discussion_is_linked_without_changing_research_authorship(self):
+        for path in ('_source/about/accounting-research.html',
+                     'about/accounting-research/index.html'):
+            with self.subTest(path=path):
+                document = read(path)
+                items = re.findall(r'<li><strong>Independent scholarly discussion:</strong>.*?</li>',
+                                   document, re.S)
+                self.assertEqual(len(items), 1)
+                for phrase in ('Laurence van Lent (2012)', '477–494',
+                               'changes in state employment',
+                               'separately authored discussion',
+                               'not another publication of mine',
+                               'not another publication of mine or a replication performed here'):
+                    self.assertIn(phrase, items[0])
+                self.assertEqual(re.findall(r'href="([^"]+)"', items[0]),
+                                 [DISCUSSION, DISCUSSION_SSRN])
+                self.assertEqual(document.count(f'href="{DISCUSSION}"'), 1)
+                self.assertEqual(document.count(f'href="{DISCUSSION_SSRN}"'), 1)
+        schema = json.loads(re.search(
+            r'<script type="application/ld\+json">(.*?)</script>',
+            read('about/accounting-research/index.html'), re.S).group(1))
+        self.assertEqual(schema['about']['@id'], DOI)
+        self.assertEqual([a['name'] for a in schema['about']['author']],
+                         ['Nolan Kido', 'Reining Petacchi', 'Joseph Weber'])
+        self.assertEqual(schema['citation'], [DOI, MIT, SSRN, DISCUSSION, DISCUSSION_SSRN])
+        self.assertEqual(schema['datePublished'], '2026-11-13')
+        self.assertNotIn('dateModified', schema)
 
     def test_modified_dates_follow_content_changes_only(self):
         pages = {p['path']: p for p in json.loads(read('_source/pages.json'))}
