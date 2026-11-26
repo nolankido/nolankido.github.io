@@ -134,6 +134,63 @@ class LiveAuthorCrawlTests(unittest.TestCase):
             issues, _ = audit.assess(['/', target], [bad, row(target, internal_links=[])], priority=[], excluded=[])
             self.assertIn([target, 'no incoming links from other crawled pages'], issues)
 
+    def test_disconnected_cycle_is_not_homepage_discovery(self):
+        rows = [row('/', internal_links=['/about/']),
+                row('/about/', internal_links=['/']),
+                row('/a/', internal_links=['/b/']),
+                row('/b/', internal_links=['/a/'])]
+        paths = [r['path'] for r in rows]
+        issues, inbound = audit.assess(paths, rows, priority=paths, excluded=[])
+        self.assertEqual(inbound['/a/'], {'/b/'})
+        for path in ('/a/', '/b/'):
+            self.assertIn([path, 'no internal link path from the homepage through eligible canonical pages'], issues)
+
+    def test_connected_nested_pages_have_no_discovery_errors(self):
+        rows = [row('/', internal_links=['/about/']),
+                row('/about/', internal_links=['/', '/books/']),
+                row('/books/', internal_links=['/about/', '/book/']),
+                row('/book/', internal_links=['/books/'])]
+        paths = [r['path'] for r in rows]
+        self.assertEqual(audit.assess(paths, rows, priority=paths, excluded=[])[0], [])
+
+    def test_invalid_source_pages_cannot_bridge_discovery(self):
+        for overrides in (
+            dict(status=404),
+            dict(final_url=audit.BASE + '/other/'),
+            dict(canonical=[audit.BASE + '/other/']),
+            dict(canonical=[]),
+            dict(mime='application/json'),
+            dict(mime='text/htmlfake'),
+            dict(html_parser_error='truncated'),
+            dict(robots=[('robots', 'noindex')]),
+            dict(x_robots=['OAI-SearchBot: noindex']),
+        ):
+            with self.subTest(overrides=overrides):
+                rows = [row('/', internal_links=['/bridge/']),
+                        row('/bridge/', internal_links=['/', '/target/'], **overrides),
+                        row('/target/', internal_links=['/'])]
+                paths = [r['path'] for r in rows]
+                issues, inbound = audit.assess(paths, rows, priority=paths, excluded=[])
+                self.assertFalse(inbound.get('/target/'))
+                self.assertIn(['/target/', 'no incoming links from other crawled pages'], issues)
+                self.assertIn(['/target/', 'no internal link path from the homepage through eligible canonical pages'], issues)
+
+    def test_valid_preview_and_charset_remain_eligible(self):
+        rows = [row('/', internal_links=['/target/'], mime=' Text/HTML ; charset=utf-8',
+                    robots=[('robots', 'max-image-preview: none')]),
+                row('/target/', internal_links=['/'])]
+        paths = [r['path'] for r in rows]
+        self.assertEqual(audit.assess(paths, rows, priority=paths, excluded=[])[0], [])
+
+    def test_missing_home_does_not_allow_a_detached_cycle_to_pass(self):
+        rows = [row('/a/', internal_links=['/b/']), row('/b/', internal_links=['/a/'])]
+        paths = ['/a/', '/b/']
+        issues, _ = audit.assess(paths, rows, priority=['/', *paths], excluded=[])
+        self.assertIn(['/', 'priority sample missing from sitemap'], issues)
+        for path in paths:
+            self.assertIn([path, 'no internal link path from the homepage through eligible canonical pages'], issues)
+        self.assertEqual(audit.assess(paths, rows, priority=paths, excluded=[])[0], [])
+
     def test_excluded_utility_needs_actual_response_and_noindex(self):
         good = row('/404.html', status=404, robots=[('robots', 'noindex,follow')])
         self.assertEqual(audit.assess([], [good], priority=[], excluded=['/404.html'])[0], [])

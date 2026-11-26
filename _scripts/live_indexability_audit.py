@@ -210,12 +210,31 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
     sitemap_set = set(paths)
     by_path = {r["path"]: r for r in rows}
     inbound = defaultdict(set)
-    for r in rows:
-        if (r.get("status") == 200 and r.get("final_url") == BASE + r["path"]
-                and r["path"] in sitemap_set and not r.get("html_parser_error")):
-            for p in r.get("internal_links", []):
-                if p != r["path"]:
-                    inbound[p].add(r["path"])
+    # This is a conservative internal discovery graph, not a search-engine
+    # simulation. A detached cycle of pages is not a path from the homepage.
+    eligible = {p for p, r in by_path.items()
+                if p in sitemap_set and r.get("status") == 200
+                and r.get("final_url") == BASE + p
+                and r.get("canonical") == [BASE + p]
+                and r.get("mime", "").split(";", 1)[0].strip().lower() == "text/html"
+                and not r.get("html_parser_error") and not blocks_indexing(r)}
+    graph = {}
+    for source in eligible:
+        destinations = {p for p in by_path[source].get("internal_links", [])
+                        if p != source and p in sitemap_set}
+        graph[source] = destinations & eligible
+        for p in destinations:
+            inbound[p].add(source)
+    # Partial unit-test inventories may omit the homepage on purpose.
+    require_home_path = "/" in sitemap_set or "/" in priority
+    reachable = set()
+    pending = ["/"] if "/" in eligible else []
+    while pending:
+        p = pending.pop()
+        if p in reachable:
+            continue
+        reachable.add(p)
+        pending.extend(graph[p] - reachable)
     issues = []
     for p in sorted(sitemap_set | set(priority)):
         r = by_path.get(p, {})
@@ -224,9 +243,11 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
         if r.get("final_url") != BASE + p: issues.append([p, "redirect or final URL differs"])
         if r.get("canonical") != [BASE + p]: issues.append([p, "canonical mismatch"])
         if blocks_indexing(r): issues.append([p, "unexpected noindex"])
-        if not r.get("mime", "").lower().startswith("text/html"): issues.append([p, "not HTML"])
+        if r.get("mime", "").split(";", 1)[0].strip().lower() != "text/html": issues.append([p, "not HTML"])
         if r.get("html_parser_error"): issues.append([p, "HTML parsing or response size error"])
         if not inbound.get(p): issues.append([p, "no incoming links from other crawled pages"])
+        if require_home_path and p in eligible and p not in reachable:
+            issues.append([p, "no internal link path from the homepage through eligible canonical pages"])
         if r.get("h1") != 1: issues.append([p, "missing or duplicate h1"])
         if not r.get("title"): issues.append([p, "missing title"])
         if r.get("bad_schema_dates"): issues.append([p, "invalid JSON-LD date"])
@@ -237,7 +258,7 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
         if r.get("status") not in ({200, 404} if p == "/404.html" else {200}):
             issues.append([p, "excluded utility fetch/status failure"])
         if r.get("final_url") != BASE + p: issues.append([p, "excluded utility redirect or final URL differs"])
-        if r.get("html_parser_error") or not r.get("mime", "").lower().startswith("text/html"):
+        if r.get("html_parser_error") or r.get("mime", "").split(";", 1)[0].strip().lower() != "text/html":
             issues.append([p, "excluded utility HTML response failure"])
         if not blocks_indexing(r): issues.append([p, "excluded utility missing noindex"])
     return issues, inbound
