@@ -48,6 +48,31 @@ class PublicProjectPortfolioTests(unittest.TestCase):
         self.assertEqual(len(matches), 1)
         self.assertEqual(matches[0].findtext('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod'), '2026-11-13')
 
+    def test_evidence_navigation_connects_projects_biography_and_practical_method(self):
+        case_index = '/ai-in-real-life/#real-life-case-index'
+        method = '/technology/#practical-ai-path'
+        tools = '/projects/#projects-try'
+        for path, hrefs in (
+            ('_source/projects.html', (case_index,)),
+            ('projects/index.html', (case_index,)),
+            ('_source/bio.html', (case_index,)),
+            ('bio/index.html', (case_index,)),
+            ('_source/ai-in-real-life.html', (method, tools)),
+            ('ai-in-real-life/index.html', (method, tools)),
+        ):
+            with self.subTest(path=path):
+                for href in hrefs:
+                    self.assertEqual(read(path).count(f'href="{href}"'), 1)
+        for path, anchor in (
+            ('ai-in-real-life/index.html', 'real-life-case-index'),
+            ('technology/index.html', 'practical-ai-path'),
+            ('projects/index.html', 'projects-try'),
+        ):
+            self.assertEqual(read(path).count(f'id="{anchor}"'), 1)
+        for path in ('_source/bio.html', 'bio/index.html'):
+            self.assertIn('rather than treating this biography as proof of measured results',
+                          read(path))
+
     def test_methods_and_caveats_are_visible_to_readers(self):
         content = read('_source/projects.html')
         html = read('projects/index.html')
