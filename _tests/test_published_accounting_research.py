@@ -77,6 +77,31 @@ class PublishedAccountingResearchTests(unittest.TestCase):
         self.assertIn('href="' + MIT + '"', home)
         self.assertIn('Published research explanation', read('notes/index.html'))
 
+    def test_earlier_working_paper_distinguishes_name_version_and_author_order(self):
+        ssrn = 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1753198'
+        target = '/about/accounting-research/#research-sources'
+        for path in ('_source/about/accounting-research.html',
+                     'about/accounting-research/index.html'):
+            with self.subTest(path=path):
+                html = read(path)
+                self.assertEqual(html.count('id="research-sources"'), 1)
+                records = re.findall(r'<li><strong>Earlier working-paper record:</strong>.*?</li>',
+                                     html, re.S)
+                self.assertEqual(len(records), 1)
+                for phrase in (f'href="{ssrn}"', 'Nolan Y. Kido',
+                               'different author order from the journal',
+                               'not a second peer-reviewed publication',
+                               'journal citation and DOI above',
+                               'SSRN citation checked November 26, 2026'):
+                    self.assertIn(phrase, records[0])
+                self.assertIn(f'href="{DOI}"', html)
+                self.assertIn(f'href="{MIT}"', html)
+        for path in ('_source/about.html', 'about/index.html'):
+            with self.subTest(path=path):
+                html = read(path)
+                self.assertEqual(html.count(f'href="{target}"'), 1)
+                self.assertIn('The earlier working-paper citation uses my name Nolan Y. Kido', html)
+
     def test_modified_dates_follow_content_changes_only(self):
         pages = {p['path']: p for p in json.loads(read('_source/pages.json'))}
         sitemap = ET.fromstring(read('sitemap.xml'))
