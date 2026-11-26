@@ -83,6 +83,28 @@ class BookCatalogPracticeHandoffTests(unittest.TestCase):
         self.assertIsNotNone(book_pages.hub_record(ROOT))
         self.assertNotIn(chr(0x2014), source)
 
+    def test_catalog_comparison_links_to_three_exact_study_destinations(self):
+        page = read("books/index.html")
+        comparison = section(page, "books-catalog-comparison")
+        matches = re.findall(r'<p id="books-catalog-ai-choice">(.*?)</p>', comparison, re.S)
+        self.assertEqual(len(matches), 1)
+        block = matches[0]
+        for phrase in ("Which of the two practical AI books should I start with?",
+                       "recurring task is worth doing with AI",
+                       "particular AI-assisted result is ready to use",
+                       "authorized person"):
+            self.assertIn(phrase, block)
+        destinations = (
+            ("one-workflow-at-a-time", "ai-book-free"),
+            ("ai-works-human-decides", "human-decides-method"),
+            ("how-to-play-no-limit-texas-holdem", "poker-book-study-sequence"),
+        )
+        self.assertEqual(re.findall(r'href="([^"]+)"', block),
+                         ["/books/" + slug + "/#" + anchor for slug, anchor in destinations])
+        for slug, anchor in destinations:
+            with self.subTest(slug=slug):
+                self.assertEqual(read("books/" + slug + "/index.html").count('id="' + anchor + '"'), 1)
+
     def test_each_work_unique_in_comparison_then_practice_and_download(self):
         page = read("books/index.html")
         compare = section(page, "books-catalog-comparison")
