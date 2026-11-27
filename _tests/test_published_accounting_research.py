@@ -135,6 +135,24 @@ class PublishedAccountingResearchTests(unittest.TestCase):
         self.assertEqual(schema['datePublished'], '2026-11-13')
         self.assertNotIn('dateModified', schema)
 
+    def test_research_evidence_map_and_ai_verification_guide_cross_link(self):
+        research = '/about/accounting-research/#research-claims'
+        method = '/technology/check-ai-answers/#review-research'
+        for path in ('_source/technology/check-ai-answers.html',
+                     'technology/check-ai-answers/index.html'):
+            with self.subTest(path=path):
+                html = read(path)
+                self.assertEqual(html.count(f'href="{research}"'), 1)
+                self.assertIn('Check the passage supporting each claim;', html)
+                self.assertEqual(html.count('id="review-research"'), 1)
+        for path in ('_source/about/accounting-research.html',
+                     'about/accounting-research/index.html'):
+            with self.subTest(path=path):
+                html = read(path)
+                self.assertEqual(html.count(f'href="{method}"'), 1)
+                self.assertEqual(html.count('id="research-claims"'), 1)
+                self.assertIn('not an additional empirical result from the 2012 study', html)
+
     def test_modified_dates_follow_content_changes_only(self):
         pages = {p['path']: p for p in json.loads(read('_source/pages.json'))}
         sitemap = ET.fromstring(read('sitemap.xml'))
