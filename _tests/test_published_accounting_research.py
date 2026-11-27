@@ -51,13 +51,35 @@ class PublishedAccountingResearchTests(unittest.TestCase):
         paper = schema['about']
         self.assertEqual(paper['@type'], 'ScholarlyArticle')
         self.assertEqual(paper['@id'], DOI)
-        self.assertEqual(paper['datePublished'], '2012-02-06')
+        self.assertEqual(paper['datePublished'], '2012-03-23')
         self.assertEqual(paper['isPartOf']['name'], 'Journal of Accounting Research')
         self.assertEqual([a['name'] for a in paper['author']], ['Nolan Kido', 'Reining Petacchi', 'Joseph Weber'])
         self.assertEqual(paper['author'][0]['@id'], schema['author']['@id'])
         self.assertEqual(schema['citation'], [DOI, MIT, SSRN, DISCUSSION, DISCUSSION_SSRN])
         self.assertNotIn(DISCUSSION, json.dumps(paper))
         self.assertNotIn(DISCUSSION_SSRN, json.dumps(paper))
+
+    def test_version_of_record_date_is_consistent_with_public_identity(self):
+        source = read('_source/about/accounting-research.html')
+        public = read('about/accounting-research/index.html')
+        history = ('Wiley records the accepted manuscript online February 6, 2012, '
+                   'the version of record online March 23, 2012, '
+                   'and the issue dated May 2012.')
+        self.assertIn(history, source)
+        self.assertIn(history, public)
+        graph = read('_source/person-schema.jsonld')
+        self.assertEqual(graph, read('assets/nolan-kido-identity.jsonld'))
+        papers = [node for node in json.loads(graph)['@graph'] if node['@id'] == DOI]
+        self.assertEqual(len(papers), 1)
+        paper = papers[0]
+        schema = json.loads(re.search(
+            r'<script type="application/ld\+json">(.*?)</script>', public, re.S).group(1))
+        self.assertEqual(paper['datePublished'], '2012-03-23')
+        self.assertEqual(schema['about']['datePublished'], paper['datePublished'])
+        self.assertEqual(schema['about']['name'], paper['headline'])
+        self.assertEqual(schema['about']['author'][0]['@id'], paper['author'][0]['@id'])
+        self.assertEqual(schema['about']['pagination'], paper['pageStart'] + '-' + paper['pageEnd'])
+        self.assertEqual(schema['datePublished'], '2026-11-13')
 
     def test_bounded_public_source_and_result_language(self):
         text = read('_source/about/accounting-research.html')
