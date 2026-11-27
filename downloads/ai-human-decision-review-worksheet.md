@@ -97,3 +97,25 @@ After finishing, return to https://nolankido.com/books/#ai-works-decision-lab an
 You should identify: a wrong time, a false seat-availability claim, a contradiction of the registration deadline, an unsupported accessibility guarantee, and an unauthorized publishing step. Even a corrected draft remains unpublished until the designated person approves it.
 
 Use the linked, original website lesson as a study tool, not as permission to automate real-world communications.
+
+## Second practice case: can an AI draft authorize a purchase?
+
+Added November 27, 2026. Start with the fictional purchase example at https://nolankido.com/books/ai-works-human-decides/#human-decides-exercise. Use the source record there before opening its answer. This is a separate original website exercise, not an observed transaction, model response or book excerpt.
+
+### Purchase decision record (blank)
+
+| Check | Your private evidence or decision |
+| --- | --- |
+| Quoted item ($480) plus delivery ($36) | |
+| Difference from the coordinator's $500 limit | |
+| Delivery status: confirmed or provisional? | |
+| Person authorized to approve the total | |
+| Which draft claims must change? | |
+| Which external action must remain on hold? | |
+
+**Decision before approval:** ________  
+**Missing evidence or approval:** ________  
+**Revised private draft (not an order):** ________  
+**Actual authorization record (leave blank unless granted):** ________
+
+Open the answer on the book page to check your calculation and proposed decision. Correcting the amount and wording does not authorize sending an order. The fictional policy requires manager approval above the limit. A real purchase would require the actual applicable policy, current quote and authorized decision owner. No purchase or approval has occurred in this exercise.
