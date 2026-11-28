@@ -15,16 +15,25 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from html.parser import HTMLParser
+from search_metadata_contract import crawler_field, directives
 
 BASE = "https://nolankido.com"
 BOOK_ROUTES = ("/books/", "/books/one-workflow-at-a-time/",
                "/books/how-to-play-no-limit-texas-holdem/", "/books/ai-works-human-decides/")
+EVIDENCE_ROUTES = (
+    "/about/accounting-research/", "/ai-in-real-life/",
+    "/technology/checking-ai-website-changes/",
+    "/technology/rightsreceipt-ai-licensing/",
+    "/technology/local-ai-review-replies/",
+    "/technology/ai-book-continuity-checker/",
+    "/technology/ai-poker-video-evidence/",
+    "/technology/dinner-on-time/",
+)
 SAMPLE = [
-    "/", "/about/", "/bio/", *BOOK_ROUTES,
+    "/", "/about/", "/bio/", *BOOK_ROUTES, *EVIDENCE_ROUTES,
     "/technology/", "/technology/check-ai-answers/",
-    "/technology/local-ai-review-replies/", "/technology/local-ai-gaming-laptop/",
-    "/technology/review-reply-evidence-audit/", "/technology/ai-book-continuity-checker/",
-    "/technology/rightsreceipt-ai-licensing/", "/poker/", "/poker/library/",
+    "/technology/local-ai-gaming-laptop/",
+    "/technology/review-reply-evidence-audit/", "/poker/", "/poker/library/",
     "/poker/resources/", "/poker/start-here/", "/poker/holdem-basics/",
     "/poker/six-to-ten-bb-tournament-decisions/", "/poker/satellite-bubble-seat-equity/",
     "/poker/poker-math/", "/poker/nolan-kido/",
@@ -79,8 +88,11 @@ class PageParser(HTMLParser):
         a = dict(attrs)
         if tag == "link" and "canonical" in (a.get("rel") or "").lower().split():
             self.canonicals.append(a.get("href", ""))
-        if tag == "meta" and (a.get("name") or "").lower() in ("robots", "googlebot", "bingbot"):
-            self.robots.append((a["name"].lower(), a.get("content") or ""))
+        if tag == "meta":
+            for attribute in ("name", "property"):
+                name = (a.get(attribute) or "").strip().lower()
+                if crawler_field(name):
+                    self.robots.append((name, a.get("content") or ""))
         if tag == "a" and a.get("href"):
             self.links.append(a["href"])
         if tag == "h1":
@@ -182,12 +194,34 @@ def fetch(path):
 def blocks_indexing(row):
     values = [value for _, value in row.get("robots", [])] + row.get("x_robots", [])
     for value in values:
-        # A crawler-qualified directive is still a blocking directive, but
-        # max-image-preview:none is an image setting, not a noindex rule.
-        tokens = re.split(r"[,\s]+", re.sub(r"\s*:\s*", ":", value.lower()))
-        if any(token in {"noindex", "none"} or
-               re.fullmatch(r"[a-z0-9_-]*bot(?:-[a-z0-9_-]+)?:(?:noindex|none)", token)
+        # Use the generated-page directive parser on live responses too.
+        # A bot-qualified exclusion counts; image-preview:none does not.
+        for token in directives(value):
+            if token in {"noindex", "none"}:
+                return True
+            name, sep, directive = token.partition(":")
+            if sep and crawler_field(name) and directive in {"noindex", "none"}:
+                return True
+    return False
+
+
+def has_global_noindex(row):
+    """A crawler-specific exclusion does not establish global utility noindex.
+
+    Accept explicit global noindex/none in HTML or an unqualified HTTP header.
+    Treat unknown colon prefixes in headers conservatively as possible scopes.
+    """
+    blocked = {"noindex", "none"}
+    for name, value in row.get("robots", []):
+        if name == "robots" and directives(value) & blocked:
+            return True
+    value_directives = {"max-image-preview", "max-snippet", "max-video-preview"}
+    for value in row.get("x_robots", []):
+        tokens = directives(value)
+        if any(":" in token and token.partition(":")[0] not in value_directives
                for token in tokens):
+            continue
+        if tokens & blocked:
             return True
     return False
 
@@ -197,12 +231,31 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
     sitemap_set = set(paths)
     by_path = {r["path"]: r for r in rows}
     inbound = defaultdict(set)
-    for r in rows:
-        if (r.get("status") == 200 and r.get("final_url") == BASE + r["path"]
-                and r["path"] in sitemap_set and not r.get("html_parser_error")):
-            for p in r.get("internal_links", []):
-                if p != r["path"]:
-                    inbound[p].add(r["path"])
+    # This is a conservative internal discovery graph, not a search-engine
+    # simulation. A detached cycle of pages is not a path from the homepage.
+    eligible = {p for p, r in by_path.items()
+                if p in sitemap_set and r.get("status") == 200
+                and r.get("final_url") == BASE + p
+                and r.get("canonical") == [BASE + p]
+                and r.get("mime", "").split(";", 1)[0].strip().lower() == "text/html"
+                and not r.get("html_parser_error") and not blocks_indexing(r)}
+    graph = {}
+    for source in eligible:
+        destinations = {p for p in by_path[source].get("internal_links", [])
+                        if p != source and p in sitemap_set}
+        graph[source] = destinations & eligible
+        for p in destinations:
+            inbound[p].add(source)
+    # Partial unit-test inventories may omit the homepage on purpose.
+    require_home_path = "/" in sitemap_set or "/" in priority
+    reachable = set()
+    pending = ["/"] if "/" in eligible else []
+    while pending:
+        p = pending.pop()
+        if p in reachable:
+            continue
+        reachable.add(p)
+        pending.extend(graph[p] - reachable)
     issues = []
     for p in sorted(sitemap_set | set(priority)):
         r = by_path.get(p, {})
@@ -211,9 +264,11 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
         if r.get("final_url") != BASE + p: issues.append([p, "redirect or final URL differs"])
         if r.get("canonical") != [BASE + p]: issues.append([p, "canonical mismatch"])
         if blocks_indexing(r): issues.append([p, "unexpected noindex"])
-        if not r.get("mime", "").lower().startswith("text/html"): issues.append([p, "not HTML"])
+        if r.get("mime", "").split(";", 1)[0].strip().lower() != "text/html": issues.append([p, "not HTML"])
         if r.get("html_parser_error"): issues.append([p, "HTML parsing or response size error"])
         if not inbound.get(p): issues.append([p, "no incoming links from other crawled pages"])
+        if require_home_path and p in eligible and p not in reachable:
+            issues.append([p, "no internal link path from the homepage through eligible canonical pages"])
         if r.get("h1") != 1: issues.append([p, "missing or duplicate h1"])
         if not r.get("title"): issues.append([p, "missing title"])
         if r.get("bad_schema_dates"): issues.append([p, "invalid JSON-LD date"])
@@ -224,10 +279,38 @@ def assess(paths, rows, priority=SAMPLE, excluded=EXCLUDED):
         if r.get("status") not in ({200, 404} if p == "/404.html" else {200}):
             issues.append([p, "excluded utility fetch/status failure"])
         if r.get("final_url") != BASE + p: issues.append([p, "excluded utility redirect or final URL differs"])
-        if r.get("html_parser_error") or not r.get("mime", "").lower().startswith("text/html"):
+        if r.get("html_parser_error") or r.get("mime", "").split(";", 1)[0].strip().lower() != "text/html":
             issues.append([p, "excluded utility HTML response failure"])
-        if not blocks_indexing(r): issues.append([p, "excluded utility missing noindex"])
+        if not has_global_noindex(r): issues.append([p, "excluded utility missing noindex"])
     return issues, inbound
+
+
+def robots_policy_issues(document):
+    """Audit the reviewed simple site policy; do not infer arbitrary REP rules.
+
+    A policy change is a review requirement, not proof that a crawler is
+    blocked. Search and model-training crawler permissions are independent.
+    Ignore comments and formatting, but never silently accept new rules.
+    """
+    rules, sitemaps, issues = [], [], []
+    for number, line in enumerate(document.removeprefix("\ufeff").splitlines(), 1):
+        line = line.partition("#")[0].strip()
+        if not line:
+            continue
+        field, separator, value = line.partition(":")
+        if not separator or not field.strip():
+            issues.append(["/robots.txt", f"malformed directive on line {number}"])
+            continue
+        field, value = field.strip().lower(), value.strip()
+        if field == "sitemap":
+            sitemaps.append(value)
+        else:
+            rules.append((field, value.lower() if field == "user-agent" else value))
+    if rules != [("user-agent", "*"), ("allow", "/")]:
+        issues.append(["/robots.txt", "crawl rules differ from reviewed allow-all policy; review required"])
+    if sitemaps != [BASE + "/sitemap.xml"]:
+        issues.append(["/robots.txt", "expected exactly one canonical sitemap declaration"])
+    return issues
 
 
 def main():
@@ -252,6 +335,12 @@ def main():
     sitemap_set = set(paths)
     print("SITEMAP", len(paths), "UNIQUE", len(sitemap_set), flush=True)
     print("ROBOTS", repr(robots_txt[:1500]), flush=True)
+    robots_issues = robots_policy_issues(robots_txt)
+    if robots_issues:
+        issues.extend(robots_issues)
+        print("ALL_ISSUES", json.dumps(issues), flush=True)
+        print("RESULT FAIL", flush=True)
+        return 1
     all_paths = sorted(sitemap_set | set(SAMPLE) | set(EXCLUDED))
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
         rows = list(pool.map(fetch, all_paths))

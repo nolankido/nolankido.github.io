@@ -62,7 +62,48 @@ class Images(HTMLParser):
             self.sources.add(dict(attrs).get('src'))
 
 
+REAL_LIFE_CASES = (
+    ('/technology/checking-ai-website-changes/', 'AI-assisted website repair'),
+    ('/technology/rightsreceipt-ai-licensing/', 'RightsReceipt licensing prototype'),
+    ('/technology/local-ai-review-replies/', 'Review Reply Writer customer-reply case'),
+    ('/technology/ai-book-continuity-checker/', 'Preflight manuscript continuity audit'),
+    ('/technology/ai-poker-video-evidence/', 'AI-assisted poker-caption review'),
+    ('/technology/dinner-on-time/', 'Dinner on Time cooking-planner simulation'),
+)
+CASE_INDEX_ID = 'real-life-case-index'
+CASE_INDEX_NAME = 'Detailed practical AI case records'
+
+
+def real_life_case_markup():
+    links = '; '.join(f'<a href="{route}">{label}</a>'
+                      for route, label in REAL_LIFE_CASES)
+    return f'<p id="{CASE_INDEX_ID}"><strong>{CASE_INDEX_NAME}:</strong> {links}.</p>'
+
+
+def real_life_case_schema(record, body, origin):
+    """Only describe the six visible, reviewed case links on the portfolio."""
+    canonical = origin + '/ai-in-real-life/'
+    if (record.get('@type') != 'CollectionPage' or record.get('url') != canonical
+            or 'mainEntity' in record):
+        raise ValueError('Expected the canonical AI portfolio collection without an existing main entity')
+    if (body.count(f'id="{CASE_INDEX_ID}"') != 1
+            or body.count(real_life_case_markup()) != 1):
+        raise ValueError('AI portfolio case index must match its six visible reviewed links')
+    result = deepcopy(record)
+    result['mainEntity'] = {
+        '@type': 'ItemList', '@id': canonical + '#' + CASE_INDEX_ID,
+        'name': CASE_INDEX_NAME, 'numberOfItems': len(REAL_LIFE_CASES),
+        'itemListElement': [
+            {'@type': 'ListItem', 'position': i, 'name': label, 'url': origin + route}
+            for i, (route, label) in enumerate(REAL_LIFE_CASES, 1)
+        ],
+    }
+    return result
+
+
 def schema(page, record, body, root, origin):
+    if page['id'] == 'ai-in-real-life':
+        return real_life_case_schema(record, body, origin)
     image = IMAGES.get(page['id'])
     if image is None:
         return record

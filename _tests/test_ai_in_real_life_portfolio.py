@@ -370,6 +370,52 @@ class AIRealLifeTests(unittest.TestCase):
                                capture_output=True, text=True, check=False)
             self.assertEqual(r.returncode, 0, r.stderr)
 
+    def test_case_index_matches_visible_links_and_collection_schema(self):
+        import re
+        from visibility_projects import REAL_LIFE_CASES, real_life_case_markup, real_life_case_schema
+        origin = 'https://nolankido.com'
+        canonical = origin + '/ai-in-real-life/'
+        source = read('_source/ai-in-real-life.html')
+        output = read('ai-in-real-life/index.html')
+        block = real_life_case_markup()
+        for document in (source, output):
+            self.assertEqual(document.count(block), 1)
+            self.assertEqual(document.count('id="real-life-case-index"'), 1)
+        record = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',
+                                      output, re.S).group(1))
+        seed = {key: value for key, value in record.items() if key != 'mainEntity'}
+        self.assertEqual(real_life_case_schema(seed, source, origin), record)
+        self.assertNotIn('mainEntity', seed)
+        items = record['mainEntity']['itemListElement']
+        self.assertEqual(len(items), 6)
+        self.assertEqual([item['position'] for item in items], list(range(1, 7)))
+        self.assertEqual([(item['url'].removeprefix(origin), item['name']) for item in items],
+                         list(REAL_LIFE_CASES))
+        manifest = json.loads(read('_source/pages.json'))
+        for path, label in REAL_LIFE_CASES:
+            with self.subTest(path=path):
+                pages = [p for p in manifest if p['path'] == path and not p.get('noindex')]
+                self.assertEqual(len(pages), 1)
+                self.assertIn(f'<link rel="canonical" href="{origin + path}">',
+                              read(path.lstrip('/') + 'index.html'))
+
+    def test_case_index_rejects_missing_conflicting_and_hidden_records(self):
+        from visibility_projects import real_life_case_markup, real_life_case_schema
+        origin = 'https://nolankido.com'
+        record = {'@type': 'CollectionPage', 'url': origin + '/ai-in-real-life/'}
+        block = real_life_case_markup()
+        for mutated in ('', block + block,
+                        block.replace('/technology/dinner-on-time/', '/technology/missing/'),
+                        block.replace('cooking-planner simulation', 'proven productivity'),
+                        block.replace('<p id=', '<p hidden id=')):
+            with self.subTest(mutated=mutated), self.assertRaises(ValueError):
+                real_life_case_schema(record, mutated, origin)
+        for wrong in ({**record, '@type': 'Article'},
+                      {**record, 'url': origin + '/projects/'},
+                      {**record, 'mainEntity': {}}):
+            with self.subTest(wrong=wrong), self.assertRaises(ValueError):
+                real_life_case_schema(wrong, block, origin)
+
     def test_generated_outputs_and_discovery(self):
         outputs = build.build_outputs()
         for path in ("index.html", "technology/index.html", "ai-in-real-life/index.html",

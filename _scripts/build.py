@@ -501,7 +501,7 @@ def build_outputs() -> dict[Path, str]:
                 '@type': 'ScholarlyArticle', '@id': paper,
                 'name': 'The Influence of Elections on the Accounting Choices of Governmental Entities',
                 'identifier': paper,
-                'datePublished': '2012-02-06', 'pagination': '443-476',
+                'datePublished': '2012-03-23', 'pagination': '443-476',
                 'isPartOf': {'@type': 'Periodical', 'name': 'Journal of Accounting Research'},
                 'author': [
                     {'@type': 'Person', '@id': site['url'] + '/about/#nolan-kido', 'name': site['name']},
@@ -512,6 +512,9 @@ def build_outputs() -> dict[Path, str]:
             schema['citation'] = [
                 paper,
                 'https://dspace.mit.edu/entities/publication/9e5c8e82-34b0-4931-a8cc-6ea0ae938829',
+                'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1753198',
+                'https://doi.org/10.1111/j.1475-679X.2012.00446.x',
+                'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1980697',
             ]
         if p['id'] == 'rightsreceipt-case':
             schema['about'] = {

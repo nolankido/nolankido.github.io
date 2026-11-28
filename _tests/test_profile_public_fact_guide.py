@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 import unittest
 from xml.etree import ElementTree as ET
 
@@ -61,14 +62,25 @@ class PublicBioFactGuideTests(unittest.TestCase):
         self.assertIn('href="/projects/#projects-checks"', read('bio/index.html'))
         self.assertIn('href="/projects/#projects-apps"', read('bio/index.html'))
         pages = {item['path']: item for item in json.loads(read('_source/pages.json'))}
-        self.assertEqual(pages['/bio/']['updated'], '2026-11-13')
-        self.assertEqual(pages['/about/']['updated'], '2026-11-13')
         self.assertEqual(pages['/about/accounting-research/']['date'], '2026-11-13')
         sitemap = ET.fromstring(read('sitemap.xml'))
-        urls = [node for node in sitemap.findall('{*}url')
-                if node.findtext('{*}loc') == 'https://nolankido.com/bio/']
-        self.assertEqual(len(urls), 1)
-        self.assertEqual(urls[0].findtext('{*}lastmod'), '2026-11-13')
+        # The identity pages were substantively revised after November 13.
+        for route, modified in (('/bio/', '2026-11-24'), ('/about/', '2026-11-24')):
+            with self.subTest(route=route):
+                self.assertEqual(pages[route]['updated'], modified)
+                self.assertNotIn('date', pages[route])
+                urls = [node for node in sitemap.findall('{*}url')
+                        if node.findtext('{*}loc') == 'https://nolankido.com' + route]
+                self.assertEqual(len(urls), 1)
+                self.assertEqual(urls[0].findtext('{*}lastmod'), modified)
+        research = [node for node in sitemap.findall('{*}url')
+                    if node.findtext('{*}loc') == 'https://nolankido.com/about/accounting-research/']
+        self.assertEqual(len(research), 1)
+        self.assertEqual(research[0].findtext('{*}lastmod'), '2026-11-13')
+        schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',
+                                      read('bio/index.html'), re.S).group(1))
+        self.assertEqual(schema['dateModified'], '2026-11-24')
+        self.assertNotIn('datePublished', schema)
 
 
 if __name__ == '__main__':

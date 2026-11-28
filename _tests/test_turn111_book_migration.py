@@ -65,6 +65,24 @@ class BookMigrationTests(unittest.TestCase):
         self.assertIn("human-decides-exercise", sections)
         self.assertIn("human-decides-evidence", sections)
 
+    def test_existing_ai_guides_and_essay_link_to_exact_book_exercises(self):
+        workflow = '/books/one-workflow-at-a-time/#ai-book-free'
+        exercise = ROUTE + '#human-decides-exercise'
+        for paths, links in (
+            (('_source/technology/home.html', 'technology/index.html'), (workflow, exercise)),
+            (('_source/notes/keep-the-judgment.html', 'notes/keep-the-judgment/index.html'), (exercise,)),
+            (('_source/technology/check-ai-answers.html', 'technology/check-ai-answers/index.html'), (exercise,)),
+        ):
+            for path in paths:
+                with self.subTest(path=path):
+                    for link in links:
+                        self.assertEqual(read(path).count(f'href="{link}"'), 1)
+        self.assertEqual(read('books/one-workflow-at-a-time/index.html').count('id="ai-book-free"'), 1)
+        self.assertEqual(read('books/ai-works-human-decides/index.html').count('id="human-decides-exercise"'), 1)
+        self.assertIn('This essay is not a book excerpt.', read('notes/keep-the-judgment/index.html'))
+        self.assertIn('The exercise is an original site resource, not a verified book excerpt.',
+                      read('technology/index.html'))
+
     def test_release_inventory(self):
         import check_live
         import check_html5

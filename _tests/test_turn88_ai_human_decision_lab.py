@@ -104,6 +104,26 @@ class Turn88HumanDecisionLab(unittest.TestCase):
         self.assertGreaterEqual(self.sheet.count('| |'), 10)
         self.assertNotIn(chr(0x2014), self.sheet)
 
+    def test_purchase_practice_extension_stays_blank_and_links_to_the_book(self):
+        marker = '## Second practice case: can an AI draft authorize a purchase?'
+        self.assertEqual(self.sheet.count(marker), 1)
+        practice = self.sheet.split(marker, 1)[1]
+        target = 'https://nolankido.com/books/ai-works-human-decides/#human-decides-exercise'
+        self.assertEqual(practice.count(target), 1)
+        self.assertEqual(sum(line.endswith('| |') for line in practice.splitlines()), 6)
+        self.assertEqual(480 + 36, 516)
+        self.assertEqual(480 + 36 - 500, 16)
+        for token in ('$480', '$36', '$500',
+                      'Actual authorization record (leave blank unless granted):** ________',
+                      'not an observed transaction, model response or book excerpt',
+                      'Correcting the amount and wording does not authorize sending an order.',
+                      'No purchase or approval has occurred in this exercise.'):
+            self.assertIn(token, practice)
+        page = (ROOT / 'books/ai-works-human-decides/index.html').read_text(encoding='utf-8')
+        self.assertEqual(page.count('id="human-decides-exercise"'), 1)
+        self.assertIn('free human-decision review worksheet for both scenarios', page)
+        self.assertEqual(page, (ROOT / '_source/books/ai-works-human-decides.html').read_text(encoding='utf-8'))
+
     def test_snapshot_arithmetic_and_release_decisions_are_explicit(self):
         self.assertEqual(24 - 18, 6)
         self.assertIn('24 minus 18 equals <strong>6 unreserved places', self.books)

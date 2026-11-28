@@ -18,6 +18,8 @@ BOOKS = (
     ("how-to-play-no-limit-texas-holdem", "poker-book-first-exercise",
      "holdem-river-call-check-worksheet.md"),
 )
+THIRD = ("ai-works-human-decides", "human-decides-exercise",
+         "ai-human-decision-review-worksheet.md")
 TOPICS = (
     ("_source/technology/ai-workflow-pilot.html",
      "technology/ai-workflow-pilot/index.html", BOOKS[0]),
@@ -54,7 +56,9 @@ def route_errors(catalog: str) -> list[str]:
     errors = []
     if compare.count('href="#books-catalog-free-learning"') != 2:
         errors.append("Two book cards must point to one practice section")
-    for slug, sample_id, worksheet in BOOKS:
+    if compare.count('href="#ai-works-decision-lab"') != 1 or free.count('id="ai-works-decision-lab"') != 1:
+        errors.append("Third book must point to the original catalog decision lab")
+    for slug, sample_id, worksheet in (*BOOKS, THIRD):
         root = "/books/" + slug + "/"
         resource = "/downloads/" + worksheet
         if catalog.count('href="' + root + '"') != 1:
@@ -69,7 +73,8 @@ def route_errors(catalog: str) -> list[str]:
             errors.append("A free worksheet is missing or repeated")
     for phrase in ("not copies of book chapters",
                    "neither example is a verified retail excerpt",
-                   "not a recorded hand or verified book excerpt"):
+                   "not a recorded hand or verified book excerpt",
+                   "not a real model test, a measured time saving or a verified excerpt from the book"):
         if phrase.lower() not in catalog.lower():
             errors.append("Missing site-only teaching disclaimer")
     return errors
@@ -83,12 +88,34 @@ class BookCatalogPracticeHandoffTests(unittest.TestCase):
         self.assertIsNotNone(book_pages.hub_record(ROOT))
         self.assertNotIn(chr(0x2014), source)
 
+    def test_catalog_comparison_links_to_three_exact_study_destinations(self):
+        page = read("books/index.html")
+        comparison = section(page, "books-catalog-comparison")
+        matches = re.findall(r'<p id="books-catalog-ai-choice">(.*?)</p>', comparison, re.S)
+        self.assertEqual(len(matches), 1)
+        block = matches[0]
+        for phrase in ("Which of the two practical AI books should I start with?",
+                       "recurring task is worth doing with AI",
+                       "particular AI-assisted result is ready to use",
+                       "authorized person"):
+            self.assertIn(phrase, block)
+        destinations = (
+            ("one-workflow-at-a-time", "ai-book-free"),
+            ("ai-works-human-decides", "human-decides-method"),
+            ("how-to-play-no-limit-texas-holdem", "poker-book-study-sequence"),
+        )
+        self.assertEqual(re.findall(r'href="([^"]+)"', block),
+                         ["/books/" + slug + "/#" + anchor for slug, anchor in destinations])
+        for slug, anchor in destinations:
+            with self.subTest(slug=slug):
+                self.assertEqual(read("books/" + slug + "/index.html").count('id="' + anchor + '"'), 1)
+
     def test_each_work_unique_in_comparison_then_practice_and_download(self):
         page = read("books/index.html")
         compare = section(page, "books-catalog-comparison")
         free = section(page, "books-catalog-free-learning")
         self.assertEqual(compare.count('href="#books-catalog-free-learning"'), 2)
-        for slug, sample, worksheet in BOOKS:
+        for slug, sample, worksheet in (*BOOKS, THIRD):
             with self.subTest(work=slug):
                 self.assertEqual(compare.count('href="/books/' + slug + '/"'), 1)
                 self.assertNotIn('href="/downloads/' + worksheet + '"', compare)
@@ -101,6 +128,7 @@ class BookCatalogPracticeHandoffTests(unittest.TestCase):
     def test_bad_links_duplication_and_false_retail_excerpts_fail_closed(self):
         page = read("_source/books/index.html")
         first_slug, first_sample, first_sheet = BOOKS[0]
+        third_slug, third_sample, third_sheet = THIRD
         mutations = [
             page.replace('href="#books-catalog-free-learning"',
                          'href="#not-a-books-section"', 1),
@@ -110,6 +138,11 @@ class BookCatalogPracticeHandoffTests(unittest.TestCase):
                          'href="/downloads/' + first_sheet + '"', 1),
             page.replace('neither example is a verified retail excerpt',
                          'these are verified retail excerpts', 1),
+            page.replace('href="/books/' + third_slug + '/#' + third_sample + '"',
+                         'href="#missing"', 1),
+            page.replace('href="/downloads/' + third_sheet + '" download',
+                         'href="/downloads/' + third_sheet + '"', 1),
+            page.replace('href="#ai-works-decision-lab"', 'href="#missing"', 1),
         ]
         for mutated in mutations:
             with self.subTest(mutated=mutated != page):

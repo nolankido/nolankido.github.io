@@ -61,6 +61,26 @@ class TopicBookLinks(unittest.TestCase):
                 self.assertIn(guide + "#" + fragment, Page(file(book.lstrip("/") + "index.html")).hrefs)
                 self.assertEqual(Page(file(guide.lstrip("/") + "index.html")).ids.count(fragment), 1)
 
+    def test_beginner_book_routes_to_free_tournament_study(self):
+        study = POKER + '#poker-book-study-sequence'
+        for path in ('_source/poker/home.html', 'poker/index.html'):
+            with self.subTest(path=path):
+                page = Page(file(path))
+                self.assertEqual(page.hrefs.count(POKER), 1)
+                self.assertEqual(page.hrefs.count(study), 1)
+        book = file('books/how-to-play-no-limit-texas-holdem/index.html')
+        self.assertEqual(book, file('_source/books/how-to-play-no-limit-texas-holdem.html'))
+        self.assertEqual(Page(book).ids.count('poker-book-study-sequence'), 1)
+        for guide, anchor in (
+            ('/poker/tournament-equity/', 'toy-model'),
+            ('/poker/10bb/', 'six-checks-title'),
+        ):
+            with self.subTest(guide=guide):
+                self.assertEqual(Page(book).hrefs.count(guide + '#' + anchor), 1)
+                self.assertEqual(Page(file(guide.lstrip('/') + 'index.html')).ids.count(anchor), 1)
+        self.assertIn('not universal instructions for playing a hand', book)
+        self.assertIn('outside live play', book)
+
     def test_source_and_committed_output_stay_in_sync(self):
         for slug in ("one-workflow-at-a-time", "how-to-play-no-limit-texas-holdem"):
             self.assertEqual(file("_source/books/" + slug + ".html"),
